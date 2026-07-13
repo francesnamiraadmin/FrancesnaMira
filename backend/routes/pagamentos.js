@@ -5,7 +5,10 @@ const Pedido = require("../models/pedido");
 const User = require("../models/user");
 const Turma = require("../models/turma");
 const Matricula = require("../models/matricula");
+const PagamentoMatricula = require("../models/pagamentoMatricula");
 const { exigirAuth } = require("../middleware/auth");
+const { transmitir } = require("../utils/sse");
+const { confirmarMatricula, rejeitarMatricula } = require("./pagamentoMatricula");
 
 const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
 const payment = new Payment(client);
@@ -205,6 +208,9 @@ router.get("/status/:mercadoPagoId", exigirAuth, async (req, res) => {
 });
 
 // WEBHOOK — Mercado Pago avisa aqui quando o status do pagamento muda (confirma Pix/Boleto)
+// Único URL de notificação cadastrado no Mercado Pago para toda a conta: trata tanto os
+// pagamentos de curso/plano (Pedido) quanto os de matrícula (PagamentoMatricula), já que o
+// Mercado Pago só permite configurar uma URL de webhook por aplicação.
 router.post("/webhook", async (req, res) => {
   try {
     const { type, data } = req.body;
@@ -219,8 +225,21 @@ router.post("/webhook", async (req, res) => {
         { new: true }
       );
 
-      if (pedido && novoStatus === "aprovado") {
-        await ativarPlano(pedido.userId, pedido.curso, pedido.plano, pedido.metodoPagamento, pedido.cartaoFinal, pedido.turmaId);
+      if (pedido) {
+        if (novoStatus === "aprovado") {
+          await ativarPlano(pedido.userId, pedido.curso, pedido.plano, pedido.metodoPagamento, pedido.cartaoFinal, pedido.turmaId);
+        }
+      } else {
+        const pagamentoMatricula = await PagamentoMatricula.findOneAndUpdate(
+          { mercadoPagoId: String(data.id) },
+          { status: novoStatus },
+          { new: true }
+        );
+        if (pagamentoMatricula) {
+          transmitir("pagamento-atualizado", { pagamentoId: pagamentoMatricula._id, matriculaId: pagamentoMatricula.matriculaId, status: novoStatus });
+          if (novoStatus === "aprovado") await confirmarMatricula(pagamentoMatricula);
+          else if (novoStatus === "rejeitado") await rejeitarMatricula(pagamentoMatricula);
+        }
       }
     }
 

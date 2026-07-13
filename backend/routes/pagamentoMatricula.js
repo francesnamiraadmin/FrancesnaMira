@@ -224,3 +224,8 @@ router.post("/webhook", async (req, res) => {
 });
 
 module.exports = router;
+// Exportados à parte para o webhook único em routes/pagamentos.js poder
+// tratar também os pagamentos de matrícula (o Mercado Pago só aceita uma
+// URL de notificação por aplicação).
+module.exports.confirmarMatricula = confirmarMatricula;
+module.exports.rejeitarMatricula = rejeitarMatricula;
