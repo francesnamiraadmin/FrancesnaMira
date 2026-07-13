@@ -1,0 +1,116 @@
+/* ===================== SISTEMA DE TEMA — SITE (glass escuro / claro) =====================
+   Variáveis compartilhadas pelas páginas com a identidade "glass" (gradiente azul/dourado).
+   Trocar data-theme="light|dark" na <html> alterna a paleta inteira. */
+
+:root,
+:root[data-theme="dark"] {
+  --bg-gradient: linear-gradient(60deg, #0a0460, #1fa2ff, #efe59f);
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.78);
+
+  --accent: #ffeb3b;
+  --accent-hover: #ffd600;
+  --accent-text: #08203e;
+
+  /* hierarquia de containers, do mais sutil ao mais evidente */
+  --glass-bg-2: rgba(255, 255, 255, 0.05);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-input: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.16);
+  --glass-strong: rgba(255, 255, 255, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-border-strong: rgba(255, 255, 255, 0.35);
+
+  --recessed: rgba(0, 0, 0, 0.22);
+  --recessed-2: rgba(0, 0, 0, 0.15);
+  --header-bg: rgba(0, 0, 0, 0.25);
+  --footer-bg: rgba(0, 0, 0, 0.3);
+  --overlay: rgba(0, 0, 0, 0.5);
+  --overlay-strong: rgba(0, 0, 0, 0.95);
+
+  --success-bg: rgba(74, 222, 128, 0.16);
+  --success-text: #4ade80;
+  --danger-bg: rgba(255, 107, 107, 0.16);
+  --danger-text: #ff6b6b;
+  --warning-bg: rgba(255, 235, 59, 0.16);
+  --warning-text: #ffeb3b;
+  --warning-border: rgba(255, 235, 59, 0.35);
+
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+:root[data-theme="light"] {
+  --bg-gradient: linear-gradient(60deg, #b9cdec, #8fc2ec, #ecd493);
+  --text: #16213a;
+  --text-muted: rgba(22, 33, 58, 0.75);
+
+  --accent: #d9a300;
+  --accent-hover: #b98700;
+  --accent-text: #16213a;
+
+  --glass-bg-2: rgba(255, 255, 255, 0.36);
+  --glass-bg: rgba(255, 255, 255, 0.52);
+  --glass-input: rgba(255, 255, 255, 0.62);
+  --glass-hover: rgba(255, 255, 255, 0.78);
+  --glass-strong: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(22, 33, 58, 0.2);
+  --glass-border-strong: rgba(22, 33, 58, 0.3);
+
+  --recessed: rgba(22, 33, 58, 0.1);
+  --recessed-2: rgba(22, 33, 58, 0.065);
+  --header-bg: rgba(22, 33, 58, 0.14);
+  --footer-bg: rgba(22, 33, 58, 0.16);
+  --overlay: rgba(22, 33, 58, 0.5);
+  --overlay-strong: rgba(235, 240, 250, 0.96);
+
+  --success-bg: rgba(22, 163, 74, 0.16);
+  --success-text: #15803d;
+  --danger-bg: rgba(220, 38, 38, 0.14);
+  --danger-text: #b91c1c;
+  --warning-bg: rgba(217, 119, 6, 0.16);
+  --warning-text: #92400e;
+  --warning-border: rgba(217, 119, 6, 0.35);
+
+  --shadow: 0 8px 30px rgba(22, 33, 58, 0.2);
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text);
+}
+
+/* ---------- TÍTULOS DOS CARDS "price-card-new" (bronze/prata/ouro) ----------
+   As cores originais (#f0b27a/#f2f2f2/#ffe680) foram pensadas para o fundo
+   escuro; no modo claro o card fica bem mais pálido e essas cores somem. */
+:root[data-theme="light"] .tier-bronze h3 { color: #7a3f10; }
+:root[data-theme="light"] .tier-prata h3 { color: #4b5563; }
+:root[data-theme="light"] .tier-ouro h3 { color: #92400e; }
+
+/* ---------- BOTÃO DE ALTERNAR TEMA (injetado por theme-toggle.js) ---------- */
+#themeToggleBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-strong);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+#themeToggleBtn:hover { transform: scale(1.08); }
+#themeToggleBtn:active { transform: scale(0.96); }
+
+@media (max-width: 600px) {
+  #themeToggleBtn { bottom: 14px; right: 14px; width: 42px; height: 42px; font-size: 1.05rem; }
+}

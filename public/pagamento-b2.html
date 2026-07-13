@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assinar Francês B2 - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+<style>
+
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+:root {
+  --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  --glass-blur: blur(18px);
+}
+
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; }
+
+header { font-family: 'Playfair Display', serif; font-size: 3.8rem; text-align: center; padding: 35px; background: var(--header-bg); }
+header a { color: inherit; text-decoration: none; }
+
+nav {
+  position: relative; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 40px; background: var(--glass-strong); backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border); width: 100%;
+}
+.nav-item { position: relative; flex: 1; text-align: center; }
+nav a { position: relative; color: var(--text); text-decoration: none; font-weight: 600; padding: 10px 0; display: inline-block; cursor: pointer; transition: color 0.3s ease; }
+nav a:hover { color: #3b96ff; }
+nav a::after { content: ""; position: absolute; left: 0; bottom: -0.5px; height: 4px; width: 0%; background: var(--accent); transition: width 0.3s ease; }
+nav a:hover::after { width: 100%; }
+
+.dropdown {
+  position: absolute; top: 100%; left: 50%; transform: translate(-50%, 10px); background: var(--overlay-strong);
+  border-radius: 18px; min-width: 240px; opacity: 0; pointer-events: none; transition: 0.3s ease; z-index: 2000;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+.dropdown.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+.dropdown a { padding: 14px 20px; font-size: 1rem; text-align: left; }
+.dropdown-cursos { display: flex; gap: 10px; min-width: 190px; padding: 10px 10px; }
+.dropdown-cursos .coluna { display: flex; flex-direction: column; }
+.dropdown-cursos strong { margin-bottom: 10px; font-weight: 700; color: var(--accent); }
+
+.login { background: var(--accent); color: var(--accent-text); padding: 10px 28px; border-radius: 30px; font-weight: 700; flex: 0 0 auto; margin-left: 20px; }
+
+.carousel { position: relative; z-index: 1; width: 100%; height: 380px; overflow: hidden; }
+.carousel-slide {
+  position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0;
+  display: flex; align-items: center; justify-content: center; transform: scale(1.05);
+  transition: opacity 0.8s ease, transform 6s ease;
+}
+.carousel-slide::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+.carousel-slide span {
+  position: relative; font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.55);
+  z-index: 2; text-align: center; padding: 0 20px;
+}
+.carousel-slide.active { opacity: 1; transform: scale(1); }
+
+.exam-section { padding: 60px 4% 20px; text-align: center; }
+.exam-section h1 { font-size: 3.2rem; margin-bottom: 10px; font-family: 'Playfair Display', serif; }
+.exam-section p { font-size: 1.25rem; opacity: 0.95; max-width: 800px; margin: 0 auto; }
+
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
+
+.feature-row { display: flex; flex-direction: column; align-items: center; padding: 50px 6% 90px; max-width: 1200px; margin: 0 auto; }
+.feature-container {
+  display: flex; flex-direction: column; align-items: center; gap: 40px; width: 100%; padding: 50px 5%;
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 32px; box-shadow: var(--glass-shadow);
+}
+.feature-title { width: 100%; font-family: 'Playfair Display', serif; font-size: 2.6rem; text-align: center; }
+.feature-price { display: flex; justify-content: center; width: 100%; }
+
+.excellence-note {
+  max-width: 700px; margin: 0 auto; text-align: center; font-size: 1.1rem;
+  background: var(--warning-bg); border: 1px solid var(--warning-border); border-radius: 16px; padding: 18px 24px;
+}
+.excellence-note strong { color: var(--accent); }
+
+.price-carousel { position: relative; width: 100%; max-width: 460px; display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+.price-nav {
+  flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--glass-border-strong);
+  background: var(--glass-strong); color: var(--text); font-size: 1.3rem; cursor: pointer; transition: 0.3s;
+}
+.price-nav:hover { background: var(--accent); color: var(--accent-text); }
+.price-track { position: relative; flex: 1; height: 520px; }
+
+.price-card-new {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 36px 28px; border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  color: #ffffff;
+  opacity: 0; pointer-events: none; transform: scale(0.94); transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.price-card-new.active { opacity: 1; pointer-events: auto; transform: scale(1); }
+
+.price-card-new.tier-bronze { background: linear-gradient(160deg, rgba(205,127,50,0.45), rgba(205,127,50,0.12)); border-color: rgba(205,127,50,0.7); }
+.price-card-new.tier-prata { background: linear-gradient(160deg, rgba(200,200,200,0.4), rgba(200,200,200,0.1)); border-color: rgba(220,220,220,0.7); }
+.price-card-new.tier-ouro { background: linear-gradient(160deg, rgba(255,215,0,0.4), rgba(255,215,0,0.1)); border-color: rgba(255,215,0,0.75); }
+
+.price-card-new h3 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 12px; }
+.tier-bronze h3 { color: #f0b27a; }
+.tier-prata h3 { color: #f2f2f2; }
+.tier-ouro h3 { color: #ffe680; }
+
+.price-value { font-size: 2.6rem; font-weight: 700; margin-bottom: 20px; }
+.price-value span { font-size: 1rem; font-weight: 400; opacity: 0.8; }
+
+.price-card-new ul { list-style: none; width: 100%; margin-bottom: auto; }
+.price-card-new li { display: flex; align-items: center; gap: 10px; padding: 9px 0; font-size: 1.05rem; border-top: 1px solid var(--glass-strong); text-align: left; }
+.price-card-new li:first-child { border-top: none; }
+.price-card-new li.feature-hours { justify-content: center; font-weight: 700; font-size: 1.1rem; }
+
+.feature-icon { font-size: 1.5rem; font-weight: 900; flex-shrink: 0; line-height: 1; }
+.price-card-new li.feature-yes { color: var(--text); font-weight: 600; }
+.price-card-new li.feature-yes .feature-icon { color: #4ade80; }
+.price-card-new li.feature-no { color: #ff8080; font-weight: 500; }
+.price-card-new li.feature-no .feature-icon { color: #ff5252; }
+
+.price-card-new a {
+  display: inline-block; margin-top: 20px; padding: 12px 26px; background: var(--accent); color: var(--accent-text);
+  font-weight: 700; font-size: 1.05rem; border-radius: 8px; text-decoration: none; transition: 0.3s;
+}
+.price-card-new a:hover { background: var(--accent-hover); }
+
+.price-dots { position: absolute; bottom: -24px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; }
+.price-dots .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--glass-border-strong); cursor: pointer; transition: 0.3s; }
+.price-dots .dot.active { background: var(--accent); width: 22px; border-radius: 6px; }
+
+.excellence-badge {
+  position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: var(--accent-text); padding: 5px 16px; border-radius: 20px;
+  font-size: 0.82rem; font-weight: 800; white-space: nowrap; box-shadow: 0 4px 14px rgba(0,0,0,0.4); z-index: 5;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 rgba(255,235,59,0); }
+  50% { box-shadow: 0 0 18px rgba(255,235,59,0.6); }
+  100% { box-shadow: 0 0 0 rgba(255,235,59,0); }
+}
+.price-card-new a, .cta-btn { animation: pulseGlow 3s infinite ease-in-out; }
+
+.cta-btn {
+  display: inline-block; margin-top: 10px; padding: 16px 40px; background: var(--accent); color: var(--accent-text);
+  font-weight: 700; font-size: 1.2rem; border-radius: 30px; text-decoration: none; border: none; cursor: pointer; transition: 0.3s;
+}
+.cta-btn:hover { background: var(--accent-hover); }
+
+/* TABELA COMPARATIVA */
+.compare-wrap { width: 100%; margin-top: 20px; }
+.compare-table-scroll { width: 100%; overflow-x: auto; border-radius: 20px; }
+.compare-table { width: 100%; min-width: 640px; border-collapse: collapse; background: var(--recessed); }
+.compare-table thead th {
+  background: var(--glass-strong); font-family: 'Playfair Display', serif; font-size: 1.15rem;
+  padding: 16px 18px; text-align: center; position: sticky; top: 0;
+}
+.compare-table thead th:first-child { text-align: left; }
+.compare-table thead th.col-excellence { color: var(--accent); }
+.compare-table tbody td { padding: 14px 18px; text-align: center; border-bottom: 1px solid var(--glass-border); font-size: 0.98rem; }
+.compare-table tbody td:first-child { text-align: left; font-weight: 600; }
+.compare-table tbody tr:hover { background: var(--glass-bg-2); }
+.compare-table td.yes { color: var(--success-text); font-weight: 900; font-size: 1.25rem; }
+.compare-table td.no { color: var(--danger-text); font-weight: 900; font-size: 1.25rem; }
+
+/* PAGAMENTO */
+.payment-summary { text-align: center; font-size: 1.1rem; margin-bottom: 10px; }
+.payment-summary strong { color: var(--accent); }
+
+.payment-tabs { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; width: 100%; }
+.payment-tab {
+  padding: 12px 22px; border-radius: 30px; border: 1px solid var(--glass-border-strong); background: var(--glass-bg);
+  color: var(--text); font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Poppins', sans-serif; font-size: 0.98rem;
+}
+.payment-tab:hover { background: var(--glass-hover); }
+.payment-tab.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+
+.payment-panel { display: none; width: 100%; max-width: 480px; margin: 30px auto 0; text-align: center; }
+.payment-panel.active { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+.payment-form { width: 100%; display: flex; flex-direction: column; gap: 14px; }
+.payment-form input, .payment-form select {
+  width: 100%; padding: 13px 16px; border-radius: 10px; border: 1px solid var(--glass-border-strong);
+  background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 1rem;
+}
+.payment-form input::placeholder { color: var(--text-muted); }
+.payment-form input:focus, .payment-form select:focus { outline: none; border-color: var(--accent); }
+.payment-row { display: flex; gap: 14px; }
+.payment-row input { flex: 1; }
+.payment-form select option { color: var(--accent-text); }
+
+.pix-box {
+  width: 200px; height: 200px; border-radius: 16px; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.15), rgba(255,255,255,0.15) 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px);
+  display: flex; align-items: center; justify-content: center; font-weight: 700; text-align: center; padding: 10px;
+  border: 1px solid var(--glass-border);
+}
+.pix-key {
+  display: flex; align-items: center; gap: 10px; background: var(--glass-input); border: 1px solid var(--glass-border);
+  border-radius: 12px; padding: 12px 18px; font-weight: 600; flex-wrap: wrap; justify-content: center;
+}
+.pix-key button {
+  padding: 8px 16px; border-radius: 8px; border: none; background: var(--accent); color: var(--accent-text); font-weight: 700; cursor: pointer;
+}
+.payment-note { font-size: 0.9rem; opacity: 0.75; max-width: 440px; }
+.payment-result { font-weight: 600; min-height: 20px; max-width: 440px; }
+.boleto-info { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 20px; text-align: left; width: 100%; }
+.boleto-info p { margin-bottom: 8px; }
+.boleto-info strong { color: var(--accent); }
+
+@media(max-width: 700px) {
+  .feature-title { font-size: 2rem; }
+  .exam-section h1 { font-size: 2.3rem; }
+}
+
+</style>
+</head>
+
+<body>
+
+<header><a href="index.html">Francês na Mira</a></header>
+
+<nav>
+  <div class="nav-item"><a href="blog.html">Blog</a></div>
+  <div class="nav-item">
+    <a href="correcoes.html">Correções</a>
+    <div class="dropdown">
+      <a href="producao-oral.html">Produção Oral</a>
+      <a href="producao-escrita.html">Produção Escrita</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a href="cursos.html">Cursos</a>
+    <div class="dropdown dropdown-cursos">
+      <div class="coluna">
+        <strong>Específicos</strong>
+        <a href="tcf.html">TCF</a>
+        <a href="delf.html">DELF</a>
+        <a href="dalf.html">DALF</a>
+        <a href="tef.html">TEF</a>
+      </div>
+      <div class="coluna">
+        <strong>Gerais</strong>
+        <a href="a1.html">A1</a>
+        <a href="a2.html">A2</a>
+        <a href="b1.html">B1</a>
+        <a href="b2.html">B2</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a href="academia.html">Academia</a>
+    <div class="dropdown">
+      <a href="plataforma.html">Plataforma de Questões</a>
+      <a href="aulas.html">Aulas Especializadas</a>
+    </div>
+  </div>
+  <div class="nav-item"><a href="cadastro.html">Cadastrar</a></div>
+  <a href="login.html" class="login">Entrar</a>
+</nav>
+
+<section class="carousel">
+  <div class="carousel-slide active" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Front_of_the_Palace_of_Versailles.jpg?width=1400')">
+    <span>Assinar Francês B2</span>
+  </div>
+</section>
+
+<section class="exam-section">
+  <h1>Assinar Francês B2</h1>
+  <p>Escolha o plano ideal e finalize sua assinatura do curso de Francês B2.</p>
+</section>
+
+<div class="feature-row">
+ <div class="feature-container">
+  <h2 class="feature-title">Escolha seu plano</h2>
+  <p class="excellence-note">O plano <strong>Excellence</strong> inclui acompanhamento particular, curso gravado, plataforma de questões e suporte prioritário — a forma mais completa de chegar preparado.</p>
+  <div class="feature-price">
+    <div class="price-carousel">
+      <button class="price-nav price-prev" aria-label="Plano anterior">‹</button>
+      <div class="price-track">
+        <div class="price-card-new tier-bronze">
+          
+          <h3>Essentiel</h3>
+          <p class="price-value">R$119<span>/mês</span></p>
+          <ul>
+            <li class="feature-hours">Horas semanais: 4h</li>
+            <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
+            <li class="feature-no"><span class="feature-icon">✗</span>Acompanhamento particular</li>
+            <li class="feature-no"><span class="feature-icon">✗</span>Curso gravado disponível</li>
+            <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
+          </ul>
+        </div>
+        <div class="price-card-new tier-prata">
+          
+          <h3>Avancé</h3>
+          <p class="price-value">R$149<span>/mês</span></p>
+          <ul>
+            <li class="feature-hours">Horas semanais: 5h</li>
+            <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
+            <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
+            <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
+            <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
+          </ul>
+        </div>
+        <div class="price-card-new tier-ouro active">
+          <span class="excellence-badge">⭐ Mais escolhido</span>
+          <h3>Excellence</h3>
+          <p class="price-value">R$179<span>/mês</span></p>
+          <ul>
+            <li class="feature-hours">Horas semanais: 6h</li>
+            <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
+            <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
+            <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
+            <li class="feature-yes"><span class="feature-icon">✓</span>Plataforma de questões</li>
+          </ul>
+        </div>
+      </div>
+      <button class="price-nav price-next" aria-label="Próximo plano">›</button>
+      <div class="price-dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot active"></span>
+      </div>
+    </div>
+  </div>
+  <div class="compare-wrap">
+  <h2 class="feature-title" style="margin-bottom:24px;">O que cada plano oferece</h2>
+  <div class="compare-table-scroll">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Cursos</th>
+          <th>Essentiel</th>
+          <th>Avancé</th>
+          <th class="col-excellence">Excellence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Correção de textos ilimitada</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Material didático digital incluso</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Simulados completos no formato oficial</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Certificado de conclusão</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Acompanhamento particular com professor</td>
+          <td class="no">✗</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Aulas ao vivo semanais</td>
+          <td class="no">✗</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Curso 100% gravado disponível</td>
+          <td class="no">✗</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Grupo exclusivo de alunos</td>
+          <td class="no">✗</td>
+          <td class="yes">✓</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Acesso à plataforma de questões (500+ questões)</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Suporte prioritário via WhatsApp</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Sessões de conversação em grupo</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+          <td class="yes">✓</td>
+        </tr>
+        <tr>
+          <td>Revisão de redação por especialista</td>
+          <td class="no">✗</td>
+          <td class="no">✗</td>
+          <td class="yes">✓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+ </div>
+</div>
+<div class="feature-row" style="padding-top:0;">
+ <div class="feature-container">
+  <h2 class="feature-title">Forma de pagamento</h2>
+  <p class="payment-summary" id="planSummary"></p>
+  <p id="loginNotice" style="display:none; text-align:center; background:var(--danger-bg); border:1px solid rgba(255,82,82,0.4); border-radius:14px; padding:14px 20px; max-width:480px;">
+    Você precisa <a href="login.html" style="color:var(--accent); font-weight:700;">entrar na sua conta</a> para finalizar a compra.
+  </p>
+
+  <button type="button" class="cta-btn" id="btnIrParaMatricula" style="max-width:360px;">Continuar para pagamento</button>
+ </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script>
+const COURSE_TITLE = "Francês B2";
+const NIVEL_TURMA = "B2";
+
+document.querySelectorAll('.nav-item').forEach(item => {
+  const dropdown = item.querySelector('.dropdown');
+  if (!dropdown) return;
+  let timeout;
+  item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown.classList.add('show'); });
+  item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown.classList.remove('show'); }, 150); });
+});
+
+
+function updatePlanSummary() {
+  const carousel = document.querySelector('.price-carousel');
+  const summary = document.getElementById('planSummary');
+  if (!carousel || !summary) return;
+  const activeCard = carousel.querySelector('.price-card-new.active');
+  if (!activeCard) return;
+  const label = activeCard.querySelector('h3').textContent;
+  const price = activeCard.querySelector('.price-value').textContent;
+  summary.innerHTML = 'Plano selecionado: <strong>' + label + '</strong> — <strong>' + price + '</strong>';
+}
+
+document.querySelectorAll('.price-carousel').forEach(carousel => {
+  const cards = carousel.querySelectorAll('.price-card-new');
+  const dots = carousel.querySelectorAll('.dot');
+  let tierIndex = Array.from(cards).findIndex(c => c.classList.contains('active'));
+  if (tierIndex < 0) tierIndex = 0;
+
+  function showTier(i) {
+    cards.forEach(c => c.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    cards[i].classList.add('active');
+    dots[i].classList.add('active');
+    tierIndex = i;
+    updatePlanSummary();
+  }
+
+  carousel.querySelector('.price-prev').addEventListener('click', () => {
+    showTier((tierIndex - 1 + cards.length) % cards.length);
+  });
+  carousel.querySelector('.price-next').addEventListener('click', () => {
+    showTier((tierIndex + 1) % cards.length);
+  });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => showTier(i)));
+});
+updatePlanSummary();
+
+
+function checarLogin() {
+  const banner = document.getElementById('loginNotice');
+  const logado = !!localStorage.getItem('token');
+  if (banner) banner.style.display = logado ? 'none' : 'block';
+  return logado;
+}
+checarLogin();
+
+function getActivePlan() {
+  const activeCard = document.querySelector('.price-card-new.active');
+  const label = activeCard.querySelector('h3').textContent;
+  const valor = parseFloat(activeCard.querySelector('.price-value').childNodes[0].textContent.replace('R$', '').replace(',', '.').trim());
+  return { label, valor };
+}
+
+document.getElementById('btnIrParaMatricula').addEventListener('click', () => {
+  if (!checarLogin()) return;
+  const plan = getActivePlan();
+  const params = new URLSearchParams({ curso: NIVEL_TURMA, plano: plan.label, valor: plan.valor });
+  window.location.href = 'matricula.html?' + params.toString();
+});
+
+</script>
+
+<script src="js/main.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

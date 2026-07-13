@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matrícula — Francês na Mira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/matricula.css">
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+</head>
+<body class="mira-theme">
+<div class="bg-target"></div>
+
+<div class="mira-topbar">
+  <a href="index.html" class="voltar">← Voltar ao site</a>
+</div>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">Matrícula</div>
+    <h1 class="brand">Francês na Mira<span class="dot"></span></h1>
+    <p class="sub">Alguns passos rápidos para acertar o alvo: falar francês com confiança. Preencha com calma — cada etapa leva menos de um minuto.</p>
+  </header>
+
+  <div class="mira-track" id="miraTrack"></div>
+
+  <form id="formCard" class="card" novalidate onsubmit="return false;">
+
+    <div class="top-error" id="topError"></div>
+    <div class="top-ok" id="topOk"></div>
+
+    <!-- ===================== STEP: TIPO ===================== -->
+    <section class="step" data-step="tipo">
+      <h2 class="step-title">O que você procura?</h2>
+      <p class="step-hint">Escolha o formato que combina mais com seu momento.</p>
+      <div class="field" id="f-tipo">
+        <div class="option-grid" id="tipoGrid">
+          <label class="option" for="tipo-turma">
+            <input type="radio" name="tipo" id="tipo-turma" value="turma">
+            <span class="opt-text"><span class="opt-title">Turma</span><br><span class="opt-sub">Aulas em grupo, com outros alunos do mesmo nível, em dias e horários fixos.</span></span>
+          </label>
+          <label class="option" for="tipo-particular">
+            <input type="radio" name="tipo" id="tipo-particular" value="particular">
+            <span class="opt-text"><span class="opt-title">Aula particular</span><br><span class="opt-sub">Aulas individuais, no seu ritmo, com horários escolhidos por você.</span></span>
+          </label>
+        </div>
+        <div class="field-error">Escolha turma ou aula particular para continuar.</div>
+      </div>
+    </section>
+
+    <!-- ===================== STEP: DADOS PESSOAIS ===================== -->
+    <section class="step" data-step="dados" style="display:none;">
+      <h2 class="step-title">Quem está na mira?</h2>
+      <p class="step-hint">Comece pelo básico — como te chamamos e como te encontramos.</p>
+
+      <div class="field" id="f-nome">
+        <label>Nome completo <span class="req">*</span></label>
+        <input type="text" id="nome" placeholder="Ex.: Marie Dubois Silva">
+        <div class="field-error">Digite seu nome completo.</div>
+      </div>
+
+      <div class="field" id="f-email">
+        <label>E-mail <span class="req">*</span></label>
+        <input type="email" id="email" placeholder="voce@email.com">
+        <div class="help">É para lá que vai a confirmação da sua matrícula.</div>
+        <div class="field-error">Digite um e-mail válido.</div>
+      </div>
+
+      <div class="field" id="f-telefone">
+        <label>Telefone / WhatsApp <span class="req">*</span></label>
+        <input type="tel" id="telefone" placeholder="(DDD) 00000-0000">
+        <div class="field-error">Digite um telefone de contato.</div>
+      </div>
+
+      <div id="camposParticular">
+        <div class="field" id="f-objetivo">
+          <label>Objetivo principal <span class="req">*</span></label>
+          <select id="objetivo">
+            <option value="">Selecione…</option>
+            <option>Negócios</option>
+            <option>Turismo</option>
+            <option>Preparação para exame de proficiência</option>
+            <option>Uso acadêmico</option>
+            <option>Outro</option>
+          </select>
+          <div class="field-error">Selecione um objetivo.</div>
+        </div>
+
+        <div class="field" id="f-nivelAtual">
+          <label>Nível atual <span class="req">*</span></label>
+          <select id="nivelAtual">
+            <option value="">Selecione…</option>
+            <option>Iniciante (nunca estudei)</option>
+            <option>A1</option><option>A2</option><option>B1</option>
+            <option>B2</option><option>C1</option><option>C2</option>
+          </select>
+          <div class="field-error">Selecione seu nível atual.</div>
+        </div>
+
+        <div class="field" id="f-nivelPretendido">
+          <label>Nível pretendido <span class="req">*</span></label>
+          <select id="nivelPretendido">
+            <option value="">Selecione…</option>
+            <option>A1</option><option>A2</option><option>B1</option>
+            <option>B2</option><option>C1</option><option>C2</option>
+            <option>Fluência total</option>
+          </select>
+          <div class="field-error">Selecione o nível que você quer alcançar.</div>
+        </div>
+
+        <div class="field" id="f-prova" style="display:none;">
+          <label>Qual prova de proficiência? <span class="req">*</span></label>
+          <select id="prova">
+            <option value="">Selecione…</option>
+            <option>TCF</option><option>TCF Canada</option>
+            <option>DELF</option><option>DALF</option><option>TEF</option>
+          </select>
+          <div class="field-error">Selecione a prova pretendida.</div>
+        </div>
+
+        <div class="field" id="f-dataExame" style="display:none;">
+          <label>Data prevista do exame</label>
+          <input type="date" id="dataExame">
+          <div class="help">Se ainda não souber a data exata, deixe em branco.</div>
+        </div>
+
+        <div class="field">
+          <label>Quer dizer ou perguntar algo? (opcional)</label>
+          <textarea id="mensagem" placeholder="Fique à vontade…"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== STEP: TURMA ===================== -->
+    <section class="step" data-step="turma" style="display:none;">
+      <h2 class="step-title">Escolha sua turma</h2>
+      <p class="step-hint">Turmas com vagas abertas no momento.</p>
+      <div class="field" id="f-turma">
+        <div class="option-grid" id="turmaGrid"></div>
+        <div class="field-error">Escolha uma turma disponível.</div>
+      </div>
+    </section>
+
+    <!-- ===================== STEP: PACOTE ===================== -->
+    <section class="step" data-step="pacote" style="display:none;">
+      <h2 class="step-title">Escolha seu pacote</h2>
+      <p class="step-hint">Selecione o formato de horas que combina com sua rotina.</p>
+      <div class="field" id="f-pacote">
+        <div class="option-grid" id="pacoteGrid"></div>
+        <div class="field-error">Escolha um pacote.</div>
+      </div>
+    </section>
+
+    <!-- ===================== STEP: HORÁRIOS ===================== -->
+    <section class="step" data-step="horarios" style="display:none;">
+      <h2 class="step-title">Seus horários no alvo</h2>
+      <p class="step-hint" id="horariosHint">Escolha os horários com o professor. A disponibilidade é atualizada em tempo real.</p>
+
+      <div class="field" id="f-professor">
+        <label>Professor <span class="req">*</span></label>
+        <select id="professorSelect"></select>
+      </div>
+
+      <div class="field" id="f-horarios">
+        <div id="horariosContainer"></div>
+        <div class="field-error">Selecione a quantidade de horários exigida pelo pacote.</div>
+      </div>
+    </section>
+
+    <!-- ===================== STEP: RESUMO ===================== -->
+    <section class="step" data-step="resumo" style="display:none;">
+      <h2 class="step-title">Resumo da matrícula</h2>
+      <p class="step-hint">Confira os dados antes de seguir para o pagamento.</p>
+
+      <div id="resumoConteudo"></div>
+
+      <div class="field" id="campoCupom" style="margin-top:20px;">
+        <label>Cupom de desconto (opcional)</label>
+        <div class="cupom-row">
+          <input type="text" id="cupomInput" placeholder="Ex.: BIENVENUE10">
+          <button type="button" class="btn-outline btn-small" id="btnAplicarCupom">Aplicar</button>
+        </div>
+        <div class="cupom-msg" id="cupomMsg"></div>
+      </div>
+
+      <div class="resumo-total">
+        <span class="label">Total</span>
+        <span class="valor" id="resumoTotalValor">R$ 0</span>
+      </div>
+    </section>
+
+    <!-- ===================== STEP: PAGAMENTO ===================== -->
+    <section class="step" data-step="pagamento" style="display:none;">
+      <h2 class="step-title">Forma de pagamento</h2>
+      <p class="step-hint">Pagamento processado com segurança pelo Mercado Pago.</p>
+
+      <div class="field" id="f-metodoPagamento">
+        <div class="option-grid" id="metodoPagamentoGrid">
+          <label class="option" for="metodo-pix">
+            <input type="radio" name="metodoPagamento" id="metodo-pix" value="pix">
+            <span class="opt-text"><span class="opt-title">Pix</span><br><span class="opt-sub">Confirmação automática e mais rápida</span></span>
+          </label>
+          <label class="option" for="metodo-cartao">
+            <input type="radio" name="metodoPagamento" id="metodo-cartao" value="cartao">
+            <span class="opt-text"><span class="opt-title">Cartão de crédito ou débito</span><br><span class="opt-sub">Aprovação imediata</span></span>
+          </label>
+          <label class="option" for="metodo-boleto">
+            <input type="radio" name="metodoPagamento" id="metodo-boleto" value="boleto">
+            <span class="opt-text"><span class="opt-title">Boleto</span><br><span class="opt-sub">Compensação em até 2 dias úteis</span></span>
+          </label>
+        </div>
+      </div>
+
+      <div id="painelPagamento"></div>
+    </section>
+
+    <!-- ===================== SUCCESS ===================== -->
+    <section class="step success" data-step="success" style="display:none;">
+      <div class="bull-big"></div>
+      <h2>Alvo atingido! 🎯</h2>
+      <p id="successMsg">Sua matrícula foi confirmada. Em instantes você recebe um e-mail de confirmação. À bientôt!</p>
+      <div style="margin-top:20px;">
+        <a href="minhas-matriculas.html" id="successLink" class="btn-primary" style="display:inline-block;text-decoration:none;">Ver minha matrícula</a>
+      </div>
+    </section>
+
+    <div class="actions" id="actions">
+      <button type="button" class="btn-ghost" id="btnBack">← Voltar</button>
+      <button type="button" class="btn-primary" id="btnNext">Continuar <span class="arrow">→</span></button>
+    </div>
+  </form>
+
+  <footer class="note">Seus dados são usados apenas para organizar sua matrícula em Francês na Mira.</footer>
+</div>
+
+<script src="js/matricula.js"></script>
+</body>
+</html>

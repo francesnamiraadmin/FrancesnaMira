@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minhas Matrículas — Francês na Mira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/matricula.css">
+</head>
+<body class="mira-theme">
+<div class="bg-target"></div>
+
+<div class="mira-topbar">
+  <a href="minha-conta.html" class="voltar">← Minha conta</a>
+</div>
+
+<div class="wrap wide">
+  <header class="top">
+    <div class="eyebrow">Área do aluno</div>
+    <h1 class="brand">Minhas matrículas<span class="dot"></span></h1>
+    <p class="sub">Acompanhe suas turmas, aulas particulares e pagamentos.</p>
+  </header>
+
+  <div style="text-align:center;margin-bottom:24px;">
+    <a href="matricula.html" class="btn-primary" style="display:inline-block;text-decoration:none;">+ Nova matrícula</a>
+  </div>
+
+  <div id="listaMatriculas"></div>
+</div>
+
+<div class="modal-overlay" id="modalRemarcar">
+  <div class="modal-box">
+    <h3>Remarcar aula</h3>
+    <p class="step-hint" style="margin-bottom:14px;">Escolha o novo horário disponível com o mesmo professor.</p>
+    <div id="remarcarHorarios"></div>
+    <div class="modal-close-row">
+      <button type="button" class="btn-ghost" id="btnFecharRemarcar">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/minhas-matriculas.js"></script>
+</body>
+</html>

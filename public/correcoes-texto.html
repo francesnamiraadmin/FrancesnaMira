@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Correções de Texto - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+
+<style>
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  --glass-blur: blur(18px);
+  --verde: #4ade80;
+  --verde-bg: rgba(74,222,128,0.18);
+  --amarelo: #ffd54f;
+  --amarelo-bg: rgba(255,213,79,0.18);
+  --vermelho: #ff5252;
+  --vermelho-bg: rgba(255,82,82,0.18);
+  --radius: 16px;
+}
+
+body { font-family: 'Poppins', sans-serif; min-height: 100vh; }
+
+header { font-family: 'Playfair Display', serif; font-size: 2.2rem; text-align: center; padding: 22px; background: var(--header-bg); }
+header a { color: inherit; text-decoration: none; }
+
+nav {
+  position: relative; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 40px; background: var(--glass-strong); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border); width: 100%;
+}
+.nav-item { position: relative; flex: 1; text-align: center; }
+nav a { position: relative; color: var(--text); text-decoration: none; font-weight: 600; padding: 10px 0; display: inline-block; cursor: pointer; transition: color 0.2s ease; font-size: 0.95rem; }
+nav a:hover { color: var(--accent); }
+.dropdown {
+  position: absolute; top: 100%; left: 50%; transform: translate(-50%, 10px); background: var(--overlay-strong);
+  border-radius: 14px; min-width: 220px; opacity: 0; pointer-events: none;
+  transition: 0.25s ease; z-index: 2000; box-shadow: var(--glass-shadow);
+}
+.dropdown.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+.dropdown a { padding: 12px 20px; font-size: 0.92rem; text-align: left; color: var(--text); }
+.dropdown a:hover { background: var(--warning-bg); color: var(--accent); }
+.dropdown-cursos { display: flex; gap: 6px; min-width: 190px; padding: 8px; }
+.dropdown-cursos .coluna { display: flex; flex-direction: column; }
+.dropdown-cursos strong { margin: 6px 12px; font-weight: 700; color: var(--accent); font-size: 0.85rem; text-transform: uppercase; }
+.login { background: var(--accent); color: var(--accent-text) !important; padding: 9px 24px; border-radius: 30px; font-weight: 700; flex: 0 0 auto; margin-left: 20px; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 30px 4% 100px; }
+
+/* ===== CABEÇALHO DO MÓDULO ===== */
+.modulo-header {
+  display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+  background: linear-gradient(145deg, var(--glass-strong), var(--glass-bg-2)); color: var(--text); border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 26px; box-shadow: var(--glass-shadow);
+}
+.modulo-header h1 { font-family: 'Playfair Display', serif; font-size: 1.9rem; margin-bottom: 6px; }
+.modulo-header p { opacity: 0.92; font-size: 0.95rem; max-width: 520px; }
+.creditos-box { background: var(--glass-strong); border: 1px solid var(--glass-border-strong); border-radius: 14px; padding: 14px 24px; text-align: center; }
+.creditos-box .valor { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--accent); }
+.creditos-box .rotulo { font-size: 0.78rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.top-tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.top-tab {
+  padding: 10px 22px; border-radius: 30px; border: 1px solid var(--glass-border); background: var(--glass-bg);
+  color: var(--text); font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.92rem; transition: 0.2s;
+}
+.top-tab:hover { background: var(--glass-hover); }
+.top-tab.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+
+/* ===== FILTROS ===== */
+.filtros-card {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2)); border: 1px solid var(--glass-border);
+  border-radius: var(--radius); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur);
+  padding: 20px 24px; margin-bottom: 24px; display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end;
+}
+.campo-filtro { display: flex; flex-direction: column; gap: 6px; min-width: 150px; }
+.campo-filtro label { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+.campo-filtro select, .campo-filtro input, .filtro-select {
+  padding: 10px 12px; border-radius: 10px; border: 1px solid var(--glass-border-strong); background: var(--glass-input);
+  color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.92rem;
+}
+.campo-filtro select option, .filtro-select option { color: var(--accent-text); }
+.campo-filtro select:focus, .campo-filtro input:focus { outline: none; border-color: var(--accent); }
+.campo-filtro.busca { flex: 1; min-width: 200px; }
+
+/* ===== CARDS DE TEMA ===== */
+.temas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.tema-card {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2)); border: 1px solid var(--glass-border);
+  border-radius: var(--radius); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur);
+  padding: 22px; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; gap: 10px; position: relative;
+}
+.tema-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+.tema-card .fav-btn { position: absolute; top: 18px; right: 18px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); }
+.tema-card .fav-btn.ativo { color: var(--accent); }
+.tema-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.3px; }
+.tag.exame { background: rgba(255,235,59,0.18); color: var(--accent); }
+.tag.nivel { background: var(--glass-strong); color: var(--text); }
+.tag.dificuldade-facil { background: var(--verde-bg); color: var(--verde); }
+.tag.dificuldade-medio { background: var(--amarelo-bg); color: var(--amarelo); }
+.tag.dificuldade-dificil { background: var(--vermelho-bg); color: var(--vermelho); }
+.tema-card h3 { font-size: 1.1rem; color: var(--text); line-height: 1.35; padding-right: 24px; }
+.tema-card .desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.tema-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--glass-strong); padding-top: 12px; margin-top: 4px; }
+.tema-meta strong { color: var(--text); }
+.creditos-pill { background: var(--accent); color: var(--accent-text); padding: 3px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; }
+
+.vazio-box { text-align: center; padding: 60px 20px; color: var(--text-muted); background: var(--glass-bg-2); border-radius: var(--radius); border: 1px dashed var(--glass-border-strong); }
+
+/* ===== BOTÕES ===== */
+.btn { padding: 12px 26px; border-radius: 30px; border: none; background: var(--accent); color: var(--accent-text); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.92rem; transition: 0.2s; }
+.btn:hover { background: var(--accent-hover); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn.secundario { background: var(--glass-input); color: var(--text); border: 1px solid var(--glass-border-strong); }
+.btn.secundario:hover { border-color: var(--accent); color: var(--accent); }
+.btn.perigo { background: var(--vermelho); color: white; }
+.btn.pequeno { padding: 8px 18px; font-size: 0.85rem; }
+.voltar-link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-bottom: 18px; cursor: pointer; }
+
+/* ===== DETALHE DO TEMA ===== */
+.card { background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2)); border: 1px solid var(--glass-border); border-radius: var(--radius); box-shadow: var(--glass-shadow); backdrop-filter: var(--glass-blur); padding: 28px 30px; margin-bottom: 22px; }
+.card h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 16px; color: var(--text); }
+.tema-detalhe-head h1 { font-family: 'Playfair Display', serif; font-size: 1.9rem; margin-bottom: 10px; color: var(--text); }
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin: 18px 0; }
+.info-item { background: var(--recessed); border-radius: 12px; padding: 14px 16px; }
+.info-item .rotulo { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-muted); font-weight: 700; margin-bottom: 4px; }
+.info-item .valor { font-size: 1.05rem; font-weight: 700; color: var(--accent); }
+.lista-objetivos { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.lista-objetivos li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+.lista-objetivos li::before { content: "✓"; color: var(--verde); font-weight: 900; flex-shrink: 0; }
+.instrucoes-box { background: var(--recessed); border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 18px 22px; font-size: 0.98rem; line-height: 1.7; color: var(--text); font-style: italic; }
+.competencias-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.competencia-chip { background: var(--glass-input); color: var(--text); padding: 6px 14px; border-radius: 14px; font-size: 0.82rem; font-weight: 600; }
+
+/* ===== COLETÂNEA ===== */
+.doc-lista { display: flex; flex-direction: column; gap: 14px; }
+.doc-item { border: 1px solid var(--glass-border); border-radius: 14px; overflow: hidden; }
+.doc-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; background: var(--recessed); cursor: pointer; flex-wrap: wrap; }
+.doc-head:hover { background: var(--glass-hover); }
+.doc-titulo-wrap { display: flex; flex-direction: column; gap: 4px; }
+.doc-tipo-tag { font-size: 0.7rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.4px; }
+.doc-head h4 { font-size: 1rem; color: var(--text); }
+.doc-meta { font-size: 0.8rem; color: var(--text-muted); }
+.doc-corpo { display: none; padding: 20px; border-top: 1px solid var(--glass-border); font-size: 0.95rem; line-height: 1.7; color: var(--text-muted); }
+.doc-corpo.show { display: block; }
+.doc-chart-wrap { margin-top: 14px; background: white; border-radius: 10px; padding: 10px; overflow-x: auto; }
+
+/* ===== ENVIO ===== */
+.resumo-envio { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.resumo-item { background: var(--recessed); border-radius: 12px; padding: 12px 16px; }
+.resumo-item .rotulo { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+.resumo-item .valor { font-weight: 700; color: var(--text); font-size: 0.95rem; }
+
+.modo-toggle { display: flex; gap: 10px; margin-bottom: 20px; }
+.modo-btn { flex: 1; padding: 14px; border-radius: 12px; border: 2px solid var(--glass-border); background: var(--glass-bg-2); cursor: pointer; font-weight: 700; color: var(--text); font-family: 'Poppins', sans-serif; }
+.modo-btn.active { border-color: var(--accent); background: var(--warning-bg); color: var(--accent); }
+
+.dropzone {
+  border: 2px dashed var(--glass-border-strong); border-radius: 16px; padding: 40px 20px; text-align: center; cursor: pointer;
+  transition: 0.2s; background: var(--recessed-2);
+}
+.dropzone.dragover { border-color: var(--accent); background: var(--warning-bg); }
+.dropzone .icone { font-size: 2.4rem; margin-bottom: 10px; }
+.dropzone p { color: var(--text); font-size: 0.95rem; }
+.dropzone .formatos { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
+.arquivo-selecionado { display: flex; align-items: center; justify-content: space-between; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 14px 18px; margin-top: 14px; }
+.arquivo-selecionado .nome { font-weight: 700; color: var(--text); font-size: 0.92rem; }
+.arquivo-selecionado .tamanho { font-size: 0.8rem; color: var(--text-muted); }
+.arquivo-selecionado button { background: none; border: none; color: var(--vermelho); cursor: pointer; font-weight: 700; }
+
+.progress-bar-wrap { height: 8px; background: var(--glass-strong); border-radius: 6px; overflow: hidden; margin-top: 14px; display: none; }
+.progress-bar-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.2s; }
+
+textarea.texto-producao { width: 100%; min-height: 260px; padding: 16px; border-radius: 12px; border: 1px solid var(--glass-border-strong); background: var(--recessed); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.98rem; line-height: 1.7; resize: vertical; }
+textarea.texto-producao:focus { outline: none; border-color: var(--accent); }
+.contador-palavras { text-align: right; font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; }
+.contador-palavras.ok { color: var(--verde); }
+.contador-palavras.erro { color: var(--vermelho); }
+
+textarea.obs-input { width: 100%; min-height: 90px; padding: 14px; border-radius: 12px; border: 1px solid var(--glass-border-strong); background: var(--recessed); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.92rem; resize: vertical; }
+
+.aviso-creditos { display: flex; gap: 12px; align-items: flex-start; background: var(--amarelo-bg); border: 1px solid rgba(217,119,6,0.4); border-radius: 12px; padding: 14px 18px; margin: 18px 0; font-size: 0.9rem; color: var(--amarelo); }
+
+/* ===== HISTÓRICO ===== */
+.historico-filtros { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+.producao-item {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2)); border: 1px solid var(--glass-border); border-radius: 14px; padding: 18px 22px;
+  margin-bottom: 12px; cursor: pointer; transition: 0.2s; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center;
+}
+.producao-item:hover { border-color: var(--accent); box-shadow: var(--glass-shadow); }
+.producao-info h4 { font-size: 1rem; color: var(--text); margin-bottom: 4px; }
+.producao-info .meta { font-size: 0.82rem; color: var(--text-muted); }
+.status-badge { font-size: 0.78rem; font-weight: 700; padding: 5px 14px; border-radius: 14px; white-space: nowrap; }
+.status-badge.em_fila, .status-badge.aguardando_envio, .status-badge.rascunho { background: var(--glass-strong); color: var(--text); }
+.status-badge.em_correcao, .status-badge.aguardando_revisao, .status-badge.enviado { background: var(--warning-bg); color: var(--accent); }
+.status-badge.corrigido, .status-badge.devolvido { background: var(--verde-bg); color: var(--verde); }
+.status-badge.cancelado, .status-badge.arquivado { background: var(--vermelho-bg); color: var(--vermelho); }
+.nota-pill { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--accent); font-size: 1.1rem; }
+
+/* ===== FEEDBACK ===== */
+.feedback-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.nota-grande { text-align: center; background: var(--warning-bg); border: 1px solid var(--warning-border); color: var(--accent); border-radius: var(--radius); padding: 24px 34px; }
+.nota-grande .num { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; }
+.nota-grande .nivel { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; color: var(--text); }
+.arquivos-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+.arquivo-download-card { flex: 1; min-width: 220px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 18px 20px; display: flex; align-items: center; gap: 14px; }
+.arquivo-download-card .icone { font-size: 1.8rem; }
+.arquivo-download-card .info { flex: 1; }
+.arquivo-download-card .nome { font-weight: 700; font-size: 0.9rem; color: var(--text); }
+.arquivo-download-card .tipo { font-size: 0.78rem; color: var(--text-muted); }
+
+.criterio-row { border: 1px solid var(--glass-border); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; }
+.criterio-row .criterio-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.criterio-row .criterio-nome { font-weight: 700; color: var(--text); }
+.estrelas { color: var(--glass-border-strong); font-size: 1.1rem; letter-spacing: 2px; }
+.estrelas .cheia { color: var(--accent); }
+.criterio-row .comentario { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+.comentario-geral-box { background: var(--recessed); border-radius: 12px; padding: 18px 20px; font-size: 0.95rem; line-height: 1.7; color: var(--text); }
+
+/* ===== MENSAGENS ===== */
+.mensagens-lista { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; max-height: 340px; overflow-y: auto; }
+.mensagem-bubble { max-width: 75%; padding: 12px 16px; border-radius: 14px; font-size: 0.9rem; line-height: 1.5; }
+.mensagem-bubble.aluno { align-self: flex-end; background: var(--accent); color: var(--accent-text); border-bottom-right-radius: 4px; }
+.mensagem-bubble.professor { align-self: flex-start; background: var(--glass-strong); color: var(--text); border-bottom-left-radius: 4px; }
+.mensagem-bubble .data { font-size: 0.7rem; opacity: 0.75; margin-top: 4px; }
+.mensagens-form { display: flex; gap: 10px; }
+.mensagens-form input { flex: 1; padding: 12px 16px; border-radius: 30px; border: 1px solid var(--glass-border-strong); background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; }
+
+.msg-inline { padding: 12px 16px; border-radius: 10px; font-size: 0.9rem; margin-top: 14px; }
+.msg-inline.sucesso { background: var(--verde-bg); color: var(--verde); }
+.msg-inline.erro { background: var(--vermelho-bg); color: var(--vermelho); }
+
+footer { text-align: center; padding: 24px; background: var(--footer-bg); margin-top: 30px; font-size: 0.85rem; color: var(--text-muted); }
+
+@media(max-width: 700px) {
+  .modulo-header { flex-direction: column; align-items: flex-start; }
+  .arquivos-row { flex-direction: column; }
+}
+</style>
+</head>
+
+<body style="visibility:hidden;">
+<script>
+(async function protegerPagina() {
+  const featureKey = 'correcoes';
+  const token = localStorage.getItem('token');
+
+  function bloquear() {
+    document.body.innerHTML = `
+      <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; font-family:'Poppins',sans-serif; background:var(--bg-gradient); color:var(--text);">
+        <h1 style="font-family:'Playfair Display',serif; font-size:2.5rem; margin-bottom:16px;">Conteúdo exclusivo</h1>
+        <p style="font-size:1.2rem; max-width:520px; margin-bottom:28px; opacity:0.95;">Esta página é liberada de acordo com o plano da sua assinatura. Entre na sua conta ou assine um plano que inclua este recurso para continuar.</p>
+        <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
+          <a href="login.html" style="padding:14px 28px; background:var(--glass-strong); border:1px solid var(--glass-border-strong); border-radius:30px; color:var(--text); text-decoration:none; font-weight:700;">Entrar</a>
+          <a href="cursos.html" style="padding:14px 28px; background:var(--accent); color:var(--accent-text); border-radius:30px; text-decoration:none; font-weight:700;">Ver planos</a>
+        </div>
+      </div>`;
+    document.body.style.visibility = 'visible';
+  }
+
+  if (!token) return bloquear();
+
+  try {
+    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return bloquear();
+    const data = await res.json();
+    const tier = data.plano && data.plano.tier;
+    const ativo = data.plano && data.plano.ativo;
+    const entitlements = {
+      correcoes: ['Essentiel', 'Avancé', 'Excellence'].includes(tier),
+      gravado: ['Avancé', 'Excellence'].includes(tier),
+      plataforma: tier === 'Excellence'
+    };
+    if (!ativo || !entitlements[featureKey]) return bloquear();
+    window.__creditosCorrecao = data.creditosCorrecao || 0;
+    window.__nomeUsuario = data.nome;
+    document.body.style.visibility = 'visible';
+  } catch (err) {
+    bloquear();
+  }
+})();
+</script>
+
+<header><a href="index.html">Francês na Mira</a></header>
+
+<nav>
+  <div class="nav-item"><a href="blog.html">Blog</a></div>
+  <div class="nav-item">
+    <a href="correcoes.html">Correções</a>
+    <div class="dropdown">
+      <a href="producao-oral.html">Produção Oral</a>
+      <a href="producao-escrita.html">Produção Escrita</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a href="cursos.html">Cursos</a>
+    <div class="dropdown dropdown-cursos">
+      <div class="coluna">
+        <strong>Específicos</strong>
+        <a href="tcf.html">TCF</a>
+        <a href="delf.html">DELF</a>
+        <a href="dalf.html">DALF</a>
+        <a href="tef.html">TEF</a>
+      </div>
+      <div class="coluna">
+        <strong>Gerais</strong>
+        <a href="a1.html">A1</a>
+        <a href="a2.html">A2</a>
+        <a href="b1.html">B1</a>
+        <a href="b2.html">B2</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a href="academia.html">Academia</a>
+    <div class="dropdown">
+      <a href="plataforma.html">Plataforma de Questões</a>
+      <a href="aulas.html">Aulas Especializadas</a>
+    </div>
+  </div>
+  <div class="nav-item"><a href="cadastro.html">Cadastrar</a></div>
+  <a href="login.html" class="login">Entrar</a>
+</nav>
+
+<div class="wrap">
+  <div class="modulo-header">
+    <div>
+      <h1>Correções de Texto</h1>
+      <p>Escolha um tema no estilo TCF, TEF, DELF ou DALF, leia a coletânea de apoio, escreva sua produção e receba uma correção detalhada de um professor.</p>
+    </div>
+    <div class="creditos-box">
+      <div class="valor" id="creditosValor">0</div>
+      <div class="rotulo">créditos disponíveis</div>
+    </div>
+  </div>
+
+  <div class="top-tabs">
+    <button class="top-tab active" data-view="catalogo">📚 Temas</button>
+    <button class="top-tab" data-view="historico">🗂️ Meu Histórico</button>
+  </div>
+
+  <!-- ===================== CATÁLOGO ===================== -->
+  <div id="viewCatalogo">
+    <div class="filtros-card">
+      <div class="campo-filtro">
+        <label for="filtroExame">Exame</label>
+        <select id="filtroExame"><option value="">Todos</option><option>TCF</option><option>TEF</option><option>DELF</option><option>DALF</option></select>
+      </div>
+      <div class="campo-filtro">
+        <label for="filtroNivel">Nível CECRL</label>
+        <select id="filtroNivel"><option value="">Todos</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option></select>
+      </div>
+      <div class="campo-filtro">
+        <label for="filtroDificuldade">Dificuldade</label>
+        <select id="filtroDificuldade"><option value="">Todas</option><option value="facil">Fácil</option><option value="medio">Médio</option><option value="dificil">Difícil</option></select>
+      </div>
+      <div class="campo-filtro busca">
+        <label for="filtroBusca">Buscar por palavra-chave</label>
+        <input type="text" id="filtroBusca" placeholder="Ex.: télétravail, environnement...">
+      </div>
+    </div>
+    <div class="temas-grid" id="temasGrid"></div>
+  </div>
+
+  <!-- ===================== DETALHE DO TEMA ===================== -->
+  <div id="viewTema" style="display:none;">
+    <span class="voltar-link" id="voltarCatalogoBtn">← Voltar ao catálogo</span>
+    <div class="card tema-detalhe-head" id="temaDetalheHead"></div>
+    <div class="card" id="temaObjetivosCard"></div>
+    <div class="card" id="temaColetaneaCard"></div>
+    <div style="text-align:center; margin-top:26px;">
+      <button class="btn" id="iniciarProducaoBtn" style="padding:16px 40px; font-size:1rem;">Iniciar Produção ✍️</button>
+    </div>
+  </div>
+
+  <!-- ===================== ENVIO ===================== -->
+  <div id="viewEnvio" style="display:none;">
+    <span class="voltar-link" id="voltarTemaBtn">← Voltar ao tema</span>
+    <div class="card">
+      <h2 id="envioTitulo">Enviar produção</h2>
+      <div class="resumo-envio" id="envioResumo"></div>
+
+      <div class="modo-toggle">
+        <button class="modo-btn active" data-modo="arquivo">📎 Enviar arquivo</button>
+        <button class="modo-btn" data-modo="texto">⌨️ Digitar texto</button>
+      </div>
+
+      <div id="modoArquivoWrap">
+        <div class="dropzone" id="dropzone">
+          <div class="icone">📄</div>
+          <p><strong>Arraste seu arquivo aqui</strong> ou clique para selecionar</p>
+          <div class="formatos">Formatos aceitos: PDF, DOCX, ODT — máximo 10 MB</div>
+        </div>
+        <input type="file" id="arquivoInput" accept=".pdf,.docx,.odt" style="display:none;">
+        <div class="arquivo-selecionado" id="arquivoSelecionado" style="display:none;">
+          <div><div class="nome" id="arquivoNome"></div><div class="tamanho" id="arquivoTamanho"></div></div>
+          <button id="removerArquivoBtn">Remover</button>
+        </div>
+        <div class="progress-bar-wrap" id="progressWrap"><div class="progress-bar-fill" id="progressFill"></div></div>
+      </div>
+
+      <div id="modoTextoWrap" style="display:none;">
+        <textarea class="texto-producao" id="textoProducao" placeholder="Escreva sua produção em francês aqui..."></textarea>
+        <div class="contador-palavras" id="contadorPalavras">0 palavras</div>
+      </div>
+
+      <div class="campo-filtro" style="margin-top:20px; width:100%;">
+        <label for="obsInput">Observações para o professor (opcional)</label>
+        <textarea class="obs-input" id="obsInput" placeholder="Alguma dúvida específica ou contexto que o professor deva saber?"></textarea>
+      </div>
+
+      <div class="aviso-creditos" id="avisoCreditos"></div>
+
+      <div style="text-align:center;">
+        <button class="btn" id="enviarProducaoBtn" style="padding:14px 36px;">Confirmar e enviar</button>
+      </div>
+      <div class="msg-inline" id="envioMsg" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ===================== HISTÓRICO ===================== -->
+  <div id="viewHistorico" style="display:none;">
+    <div class="historico-filtros">
+      <select class="filtro-select" id="histStatus">
+        <option value="">Todos os status</option>
+        <option value="em_fila">Em fila</option>
+        <option value="em_correcao">Em correção</option>
+        <option value="corrigido">Corrigido</option>
+        <option value="devolvido">Devolvido</option>
+        <option value="cancelado">Cancelado</option>
+      </select>
+      <input type="text" class="campo-filtro" id="histBusca" placeholder="Buscar por tema ou protocolo..." style="padding:10px 14px; border-radius:10px; border:1px solid var(--cinza-300); flex:1; min-width:220px;">
+    </div>
+    <div id="historicoLista"></div>
+  </div>
+
+  <!-- ===================== DETALHE DA PRODUÇÃO ===================== -->
+  <div id="viewProducao" style="display:none;">
+    <span class="voltar-link" id="voltarHistoricoBtn">← Voltar ao histórico</span>
+    <div id="producaoConteudo"></div>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/correcoes-texto.js"></script>
+<script src="js/main.js"></script>
+<script src="js/theme-toggle.js"></script>
+
+</body>
+</html>

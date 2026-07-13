@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francês na Mira</title>
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-strong: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  --glass-blur: blur(18px);
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 18px;
+}
+
+.flores-decorativas {
+  display: flex;
+  justify-content: center;
+  margin: 60px 0;
+  pointer-events: none; /* não interfere em cliques */
+}
+
+.flores-decorativas img {
+  max-width: 1200px;
+  width: 100%;
+  opacity: 0.9;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+    html {
+  scroll-behavior: smooth;
+}
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(60deg, #0a0460, #1fa2ff, #efe59f);
+    color: white;
+  }
+
+  header {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.8rem;
+    text-align: center;
+    padding: 35px;
+    background: rgba(0,0,0,0.25);
+  }
+
+  /* NAVBAR */
+  nav {
+    position: relative;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: var(--glass-strong);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+    width: 100%;
+  }
+  .nav-item { position: relative; flex: 1; text-align: center; }
+  nav a { 
+  position: relative;
+  color: white; 
+  text-decoration: none; 
+  font-weight: 600; 
+  padding: 10px 0; 
+  display: inline-block; /* ← muda aqui */
+  cursor: pointer; 
+   transition: color 0.3s ease;
+}
+nav a:hover {
+  color: #3b96ff;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5px;
+  height: 4px;
+  width: 0%;
+  background: #ffeb3b;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    background: rgba(0,0,0,0.95);
+    border-radius: 18px;
+    min-width: 240px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+    z-index: 2000;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+  .dropdown.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+  .dropdown a { padding: 14px 20px; font-size: 1rem; text-align: left; }
+  .dropdown a:hover { background: rgba(255,255,255,0.0); }
+  
+  .dropdown-cursos {
+  display: flex;
+  gap: 10px;
+  min-width: 190px;
+  padding: 10px 10px
+}
+
+.dropdown-cursos .coluna {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-cursos strong {
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #ffeb3b;
+}
+
+  .login { background: #ffeb3b; color: #08203e; padding: 10px 28px; border-radius: 30px; font-weight: 700; flex: 0 0 auto; margin-left: 20px; }
+
+  /* CARROSSEL */
+  .carousel { position: relative; z-index: 1; width: 100%; height: 420px; overflow: hidden; }
+  .carousel-slide {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1.05);
+  transition: opacity 0.8s ease, transform 6s ease;
+  }
+  .carousel-slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+  }
+  .carousel-slide a {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    color: white;
+    text-decoration: none;
+    z-index: 2;
+    transition: transform 0.3s, color 0.3s;
+  }
+  .carousel-slide a:hover { transform: scale(1.05); color: #ffeb3b; }
+  .carousel-slide.active { opacity: 1;  transform: scale(1)}
+  .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); border: none; color: white; font-size: 3rem; padding: 10px 18px; cursor: pointer; border-radius: 50%; z-index: 3; }
+  .carousel-btn.prev { left: 25px; }
+  .carousel-btn.next { right: 25px; }
+
+  /* EXAM SECTION */
+  .exam-section {
+    padding: 80px 4%;
+    border-radius: 24px;
+    background: rgba(244, 240, 7, 0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  .exam-section h1 { font-size: 4rem; margin-bottom: 10px; text-align: center; }
+  .exam-section p { font-size: 2rem; margin-bottom: 40px; text-align: center; }
+  
+
+  /* PLANOS DISPONIVEIS */
+  .plan-title {
+    font-size: 3rem;
+    font-family: 'Playfair Display', serif;
+    text-align: left;
+    margin-bottom: 40px;
+  }
+
+ .plan-section {
+  display: flex;
+  flex-wrap: wrap; /* permite quebrar linha em telas pequenas */
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.plan {
+  display: flex;
+  height: 100%;
+   background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}
+
+.plan {
+  flex: 0 0 320px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  border-radius: 24px;
+  padding: 20px;
+  transition: transform 0.5s cubic-bezier(.16,.8,.25,1),
+              box-shadow 0.5s ease;
+  box-shadow:
+    8px 8px 20px rgba(0,0,0,0.5),
+    -8px -8px 20px rgba(255,255,255,0.05);
+}
+
+.plan:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow:
+    12px 12px 30px rgba(0,0,0,0.6),
+    -12px -12px 30px rgba(255,255,255,0.08),
+    0 0 20px rgba(255,235,59,0.5);
+}
+
+.plan-left {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+}
+
+
+.plan-left img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+}
+
+.plan-left img:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 25px rgba(0,0,0,0.5);
+}
+
+.plan-left h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.plan-left p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.plan-left a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 22px;
+  background: #ffeb3b;
+  color: #08203e;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.plan-left a:hover { background: #ffd600; }
+
+
+
+
+/* RESPONSIVO */
+@media(max-width: 1024px) {
+  .plan {
+    flex: 0 0 45%;
+  }
+}
+@media(max-width: 700px) {
+  .plan {
+    flex: 0 0 90%;
+  }
+}
+
+
+  footer { text-align: center; padding: 28px; background: rgba(0,0,0,0.3); margin-top: 40px; }
+
+  /* RESPONSIVE */
+  @media(max-width:1100px) { 
+    .plan { flex-direction: column; }
+    .plan-left, .plan-right { flex: none; padding: 0; margin-bottom: 15px; }
+    .plan-left h2 { font-size: 2.2rem; }
+    .plan-left p { font-size: 1.1rem; }
+    .plan-title { font-size: 3rem; }
+  }
+
+  /* BLOCO */
+
+.bloco {
+  display: flex;
+  gap: 48px;
+  padding: 48px 5%;
+  align-items: stretch;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  margin: 80px auto;
+  max-width: 1400px;
+  box-shadow: var(--glass-shadow);
+  transition: 0.4s ease;
+}
+
+.bloco-left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.bloco-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.bloco-left img {
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.bloco-left p {
+  font-size: 1.4rem;
+  text-align: left;
+  line-height: 1.6;
+  margin-bottom: auto; /* força o botão "saiba mais" para baixo */
+}
+
+.bloco-left a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: #ffeb3b;
+  color: #08203e;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: 0.3s;
+}
+
+.bloco-left a:hover {
+  background: #ffd600;
+  transform: scale(1.50);
+}
+
+/* DIREITA - CARTÕES DE PREÇO LADO A LADO */
+.bloco-right {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center;    /* centraliza verticalmente */
+  gap: 30px; /* espaçamento entre os cards */
+  flex-wrap: nowrap; /* evita quebra de linha */
+}
+
+.card-preco {
+  width: 180px;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+   transition: transform 0.5s cubic-bezier(.16,.8,.25,1),
+              box-shadow 0.5s ease;
+  cursor: pointer;
+}
+
+.card-preco h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card-preco p {
+  margin: 6px 0;
+  font-size: 1rem;
+}
+
+.card-preco a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: #08203e;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.card-preco a:hover {
+  background: #000;
+}
+
+
+/* EFEITO HOVER 3D + ZOOM */
+.card-preco:hover {
+  transform: scale(1.15);
+  z-index: 10;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+}
+
+
+/* RESPONSIVO */
+@media(max-width:1100px) {
+  .bloco {
+    flex-direction: column;
+  }
+  .bloco-left, .bloco-right {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .bloco-left a {
+    align-self: center;
+  }
+  .bloco-right {
+    flex-direction: row; /* cards continuam lado a lado */
+    justify-content: space-around;
+  }
+
+}
+
+.bloco:hover {
+  transform: scale(1.03);
+  box-shadow:
+    12px 12px 30px rgba(0,0,0,0.6),
+    -12px -12px 30px rgba(255,255,255,0.08),
+    0 0 20px rgba(255,235,59,0.5);
+}
+.bloco:hover .bloco-left h2,
+.bloco:hover .bloco-left p {
+  color: #ffeb3b;
+  transition: color 0.3s ease;
+}
+
+/* BLOG */
+
+.blog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centraliza os cards */
+  gap: 120px;
+  width: 100%;
+}
+
+.blog-card {
+  width: 100%;
+  max-width: 900px;   /* largura elegante centralizada */
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,1);
+  box-shadow:
+    8px 8px 20px rgba(0,0,0,0.5),
+    -8px -8px 20px rgba(255,255,255,0.05);
+  padding-bottom: 20px;
+  transition: transform 0.5s cubic-bezier(.16,.8,.25,1),
+              box-shadow 0.5s ease;
+}
+
+.blog-card img {
+  width: 100%;
+  height: 550px; /* maior */
+  object-fit: cover;
+}
+
+.blog-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow:
+    12px 12px 30px rgba(0,0,0,0.6),
+    -12px -12px 30px rgba(255,255,255,0.08),
+    0 0 20px rgba(255,235,59,0.5);
+}
+
+
+.blog-card:hover img {
+  transform: translateY(-12px) scale(1.02);
+}
+
+.blog-content {
+  padding: 20px;
+}
+
+.blog-date {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.blog-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.blog-card:hover .blog-title {
+  color: #ffeb3b;
+}
+
+.blog-preview {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  padding: 0 20px;
+  margin-top: 15px;   /* ↓ desce uma linha visualmente */
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  transition: 0.3s ease;
+}
+
+/* ADMIN */
+
+.blog-admin {
+  margin-top: 50px;
+  padding: 20px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+  display: none; /* oculto por padrão */
+  flex-direction: column;
+  gap: 10px;
+}
+
+.blog-admin input,
+.blog-admin textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-family: Poppins;
+}
+
+.blog-admin button {
+  padding: 10px;
+  background: #ffeb3b;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.blog-card:hover .blog-preview {
+  color: #ffeb3b;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 rgba(255,235,59,0); }
+  50% { box-shadow: 0 0 18px rgba(255,235,59,0.6); }
+  100% { box-shadow: 0 0 0 rgba(255,235,59,0); }
+}
+
+.plan-left a,
+.bloco-left a,
+.card-preco a {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+</style>
+
+</head>
+
+<body>
+<header>Francês na Mira</header>
+
+<nav>
+  <!-- BLOG -->
+  <div class="nav-item">
+    <a href="blog.html">Blog</a>
+  </div>
+
+  <!-- CORREÇÕES -->
+  <div class="nav-item">
+    <a href="correcoes.html">Correções</a>
+    <div class="dropdown">
+      <a href="producao-oral.html">Produção Oral</a>
+      <a href="producao-escrita.html">Produção Escrita</a>
+    </div>
+  </div>
+
+  <!-- CURSOS -->
+  <div class="nav-item">
+    <a href="cursos.html">Cursos</a>
+    <div class="dropdown dropdown-cursos">
+
+      <div class="coluna">
+        <strong>Específicos</strong>
+        <a href="tcf.html">TCF</a>
+        <a href="delf.html">DELF</a>
+        <a href="dalf.html">DALF</a>
+        <a href="tef.html">TEF</a>
+      </div>
+
+      <div class="coluna">
+        <strong>Gerais</strong>
+        <a href="a1.html">A1</a>
+        <a href="a2.html">A2</a>
+        <a href="b1.html">B1</a>
+        <a href="b2.html">B2</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ACADEMIA -->
+  <div class="nav-item">
+    <a href="academia.html">Academia</a>
+    <div class="dropdown">
+      <a href="plataforma.html">Plataforma de Questões</a>
+      <a href="aulas.html">Aulas Especializadas</a>
+    </div>
+  </div>
+
+  <!-- MEMBRO -->
+  <div class="nav-item">
+    <a href="cadastro.html">Se torne um membro</a>
+  </div>
+
+  <!-- LOGIN -->
+  <a href="login.html" class="login">Entrar</a>
+
+</nav>
+
+<section class="carousel">
+  <div class="carousel-slide active" style="background-image:url('https://picsum.photos/1400/500?1')">
+    <a href="outra-pagina.html">TCF – Canadá</a>
+  </div>
+  <div class="carousel-slide" style="background-image:url('https://picsum.photos/1400/500?2')">
+    <a href="outra-pagina.html">DELF – França</a>
+  </div>
+  <div class="carousel-slide" style="background-image:url('https://picsum.photos/1400/500?3')">
+    <a href="outra-pagina.html">TEF – França</a>
+  </div>
+  <div class="carousel-slide" style="background-image:url('https://picsum.photos/1400/500?4')">
+    <a href="outra-pagina.html">DALF – França</a>
+  </div>
+  <div class="carousel-slide" style="background-image:url('https://picsum.photos/1400/500?5')">
+    <a href="outra-pagina.html">Correções de Texto</a>
+  </div>
+  <div class="carousel-slide" style="background-image:url('https://picsum.photos/1400/500?6')">
+    <a href="outra-pagina.html">Plataforma de Questões</a>
+  </div>
+
+  <button class="carousel-btn prev">‹</button>
+  <button class="carousel-btn next">›</button>
+</section>
+
+<section class="exam-section">
+  <h1>Preparação Completa</h1>
+  <p>Do A1 ao C2 · Exames oficiais e prática guiada</p>
+
+  <!-- PLANOS DISPONIVEIS -->
+  <h2 class="plan-title">Planos Disponíveis</h2>
+
+<div class="plan-section">
+
+  <div class="plan">
+    <div class="plan-left">
+      <h2>TCF – Canadá</h2>
+      <img src="https://picsum.photos/400/200?random=1" alt="TCF Canadá">
+      <p>Aulas específicas e especializadas para a prova do TCF, simulando situações reais e correções detalhadas, com foco em compreensão escrita, oral e estratégias de exame.</p>
+      <a href="#tcf">Saiba mais</a>
+    </div>
+  </div>
+
+  <div class="plan">
+    <div class="plan-left">
+      <h2>DELF – França</h2>
+      <img src="https://picsum.photos/400/200?random=2" alt="DELF França">
+      <p>Preparação guiada do A1 ao B2, focando compreensão, escrita e conversação para exames oficiais, com aulas práticas e exercícios detalhados, curso extremamente detalhado.</p>
+      <a href="#delf">Saiba mais</a>
+    </div>
+  </div>
+
+  <div class="plan">
+    <div class="plan-left">
+      <h2>TEF – França</h2>
+      <img src="https://picsum.photos/400/200?random=3" alt="TEF França">
+      <p>Treinamento completo para o TEF, incluindo simulados, estratégias de pontuação e acompanhamento pedagógico personalizado para todos os níveis.</p>
+      <a href="#tef">Saiba mais</a>
+    </div>
+  </div>
+
+  <div class="plan">
+    <div class="plan-left">
+      <h2>DALF – França</h2>
+      <img src="https://picsum.photos/400/200?random=4" alt="DALF França">
+      <p>Preparação avançada C1 e C2 com foco em redação, compreensão oral e escrita para exames oficiais, incluindo simulados e correções detalhadas.</p>
+      <a href="#dalf">Saiba mais</a>
+    </div>
+  </div>
+
+  <div class="plan">
+    <div class="plan-left">
+      <h2>Correções de Texto</h2>
+      <img src="https://picsum.photos/400/200?random=5" alt="Correções de Texto">
+      <p>Envie seus textos e receba correções detalhadas, com comentários, sugestões de melhoria e acompanhamento do progresso.</p>
+      <a href="#correcoes">Saiba mais</a>
+    </div>
+  </div>
+
+  <div class="plan">
+    <div class="plan-left">
+      <h2>Plataforma de Questões</h2>
+      <img src="https://picsum.photos/400/200?random=6" alt="Plataforma de Questões">
+      <p>Mais de 500 questões comentadas, simulando provas oficiais, ideal para reforçar o aprendizado e praticar todos os níveis de exames.</p>
+      <a href="#plataforma">Saiba mais</a>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- BLOG SECTION -->
+<section class="">
+  <h2 class="plan-title">Últimas do Blog</h2>
+
+  <div class="blog-container" id="blogContainer"></div>
+
+  <!-- PAINEL DESENVOLVEDOR (oculto por padrão) -->
+  <div class="blog-admin" id="blogAdmin">
+  <h3>Nova Postagem (Área do Desenvolvedor)</h3>
+
+  <input type="text" id="blogTitle" placeholder="Título">
+  <input type="text" id="blogLink" placeholder="Link da página da postagem">
+  <textarea id="blogPreview" placeholder="Prévia do texto"></textarea>
+
+  <input type="text" id="blogImageLink" placeholder="URL da imagem (opcional)">
+  <input type="file" id="blogImageUpload" accept="image/*">
+
+  <button onclick="addPost()">Publicar</button>
+</div>
+</section>
+
+<!-- BLOCO TCF -->
+<div class="bloco" id="tcf">
+  <div class="bloco-left">
+    <h2>TCF – Canadá</h2>
+    <img src="https://picsum.photos/500/300?random=1" alt="TCF Canadá">
+    <p>Aulas especializadas para a prova do TCF, simulando situações reais e correções detalhadas. Foco em compreensão escrita, oral e estratégias de exame para obter o melhor resultado.</p>
+  </div>
+  <div class="bloco-right">
+    <div class="card-preco" style="background:#cd7f32;">
+      <h3>Bronze</h3>
+      <p>Horas semanais: 4h</p>
+      <p>Produções horais e escritas: 2</p>
+      <p>Valor: R$149</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#c0c0c0; color:#08203e;">
+      <h3>Prata</h3>
+      <p>Horas semanais: 5h</p>
+      <p>Produções horais e escritas: 3</p>
+      <p>Valor: R$199</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#ffd700; color:#08203e;">
+      <h3>Ouro</h3>
+      <p>Horas semanais: 6h</p>
+      <p>Produções horais e escritas: 4</p>
+      <p>Valor: R$249</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCO DELF -->
+<div class="bloco" id="delf">
+  <div class="bloco-left">
+    <h2>DELF – França</h2>
+    <img src="https://picsum.photos/500/300?random=2" alt="DELF França">
+    <p>Preparação guiada do A1 ao B2, focando compreensão, escrita e conversação. Exercícios detalhados e simulados de provas oficiais para reforçar o aprendizado.</p>
+
+  </div>
+  <div class="bloco-right">
+    <div class="card-preco" style="background:#cd7f32;">
+      <h3>Bronze</h3>
+      <p>Horas semanais: 4h</p>
+      <p>Produções horais e escritas: 2</p>
+      <p>Valor: R$159</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#c0c0c0; color:#08203e;">
+      <h3>Prata</h3>
+      <p>Horas semanais: 5h</p>
+      <p>Produções horais e escritas: 3</p>
+      <p>Valor: R$209</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#ffd700; color:#08203e;">
+      <h3>Ouro</h3>
+      <p>Horas semanais: 6h</p>
+      <p>Produções horais e escritas: 4</p>
+      <p>Valor: R$269</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCO TEF -->
+<div class="bloco" id="tef">
+  <div class="bloco-left">
+    <h2>TEF – França</h2>
+    <img src="https://picsum.photos/500/300?random=3" alt="TEF França">
+    <p>Treinamento completo para o TEF, incluindo simulados e estratégias de pontuação. Acompanhamento pedagógico personalizado e foco em resultados.</p>
+
+  </div>
+  <div class="bloco-right">
+    <div class="card-preco" style="background:#cd7f32;">
+      <h3>Bronze</h3>
+      <p>Horas semanais: 4h</p>
+      <p>Produções horais e escritas: 2</p>
+      <p>Valor: R$169</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#c0c0c0; color:#08203e;">
+      <h3>Prata</h3>
+      <p>Horas semanais: 5h</p>
+      <p>Produções horais e escritas: 3</p>
+      <p>Valor: R$219</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#ffd700; color:#08203e;">
+      <h3>Ouro</h3>
+      <p>Horas semanais: 6h</p>
+      <p>Produções horais e escritas: 4</p>
+      <p>Valor: R$279</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCO DALF -->
+<div class="bloco" id="dalf">
+  <div class="bloco-left">
+    <h2>DALF – França</h2>
+    <img src="https://picsum.photos/500/300?random=4" alt="DALF França">
+    <p>Preparação avançada C1 e C2 com foco em redação, compreensão oral e escrita para exames oficiais, incluindo simulados e exercícios complexos.</p>
+ 
+  </div>
+  <div class="bloco-right">
+    <div class="card-preco" style="background:#cd7f32;">
+      <h3>Bronze</h3>
+      <p>Horas semanais: 4h</p>
+      <p>Produções horais e escritas: 2</p>
+      <p>Valor: R$179</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#c0c0c0; color:#08203e;">
+      <h3>Prata</h3>
+      <p>Horas semanais: 5h</p>
+      <p>Produções horais e escritas: 3</p>
+      <p>Valor: R$229</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#ffd700; color:#08203e;">
+      <h3>Ouro</h3>
+      <p>Horas semanais: 6h</p>
+      <p>Produções horais e escritas: 4</p>
+      <p>Valor: R$289</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCO Correções -->
+<div class="bloco" id="correcoes">
+  <div class="bloco-left">
+    <h2>Correções de Texto</h2>
+    <img src="https://picsum.photos/500/300?random=5" alt="Correções de Texto">
+    <p>Envie seus textos e receba correções detalhadas com comentários pedagógicos, sugestões de melhoria e acompanhamento do progresso.</p>
+   
+  </div>
+  <div class="bloco-right">
+    <div class="card-preco" style="background:#cd7f32;">
+      <h3>Bronze</h3>
+      <p>Horas semanais: 2h</p>
+      <p>Produções horais e escritas: 2</p>
+      <p>Valor: R$59</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#c0c0c0; color:#08203e;">
+      <h3>Prata</h3>
+      <p>Horas semanais: 3h</p>
+      <p>Produções horais e escritas: 3</p>
+      <p>Valor: R$99</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#ffd700; color:#08203e;">
+      <h3>Ouro</h3>
+      <p>Horas semanais: 4h</p>
+      <p>Produções horais e escritas: 4</p>
+      <p>Valor: R$149</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCO Plataforma -->
+<div class="bloco" id="plataforma">
+  <div class="bloco-left">
+    <h2>Plataforma de Questões</h2>
+    <img src="https://picsum.photos/500/300?random=6" alt="Plataforma de Questões">
+    <p>Mais de 500 questões comentadas, simulando provas oficiais, ideal para reforçar o aprendizado e praticar todos os níveis.</p>
+
+  </div>
+  <div class="bloco-right">
+    <div class="card-preco" style="background:#cd7f32;">
+      <h3>Bronze</h3>
+      <p>Autogerenciado</p>
+      <p>200 questões</p>
+      <p>R$129</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#c0c0c0; color:#08203e;">
+      <h3>Prata</h3>
+      <p>Autogerenciado</p>
+      <p>350 questões</p>
+      <p>R$179</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+    <div class="card-preco" style="background:#ffd700; color:#08203e;">
+      <h3>Ouro</h3>
+      <p>Autogerenciado</p>
+      <p>500 questões</p>
+      <p>R$229</p>
+      <a href="pagina-compras.html">Assine o plano</a>
+    </div>
+  </div>
+</div>
+
+</section>
+
+
+
+<!-- AULAS ESPECIALIZADAS -->
+<section class="exam-section">
+  <h2 class="plan-title">Aulas Especializadas</h2>
+  <div class="plan" style="flex-direction: column; align-items: center; text-align: center;">
+    <!-- VIDEO -->
+    <iframe width="800" height="450" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+      title="Aula Especializada" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+      style="border-radius: 12px; margin-bottom: 20px;"></iframe>
+
+    <!-- BOTÃO -->
+    <a href="https://www.youtube.com/" target="_blank" style="
+      display: inline-block;
+      padding: 12px 28px;
+      background: #ffeb3b;
+      color: #08203e;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: 0.3s;
+    ">Assistir no YouTube</a>
+  </div>
+</section>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script>
+  // DROPDOWN
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const dropdown = item.querySelector('.dropdown');
+    let timeout;
+    item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown.classList.add('show'); });
+    item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown.classList.remove('show'); }, 150); });
+  });
+
+  // CARROSSEL
+  const slides = document.querySelectorAll('.carousel-slide');
+  const next = document.querySelector('.next');
+  const prev = document.querySelector('.prev');
+  let index = 0;
+  function showSlide(i) { slides.forEach(s => s.classList.remove('active')); slides[i].classList.add('active'); }
+  next.onclick = () => { index = (index + 1) % slides.length; showSlide(index); };
+  prev.onclick = () => { index = (index - 1 + slides.length) % slides.length; showSlide(index); };
+  setInterval(() => { index = (index + 1) % slides.length; showSlide(index); }, 5000);
+
+ const blogContainer = document.getElementById("blogContainer");
+const blogAdmin = document.getElementById("blogAdmin");
+
+const DEV_PASSWORD = "FrancesAdmin2026";
+let devMode = false;
+
+function ativarDev() {
+  const senha = prompt("Digite a senha de desenvolvedor:");
+  if (senha === DEV_PASSWORD) {
+    blogAdmin.style.display = "flex";
+    devMode = true;
+    alert("Modo desenvolvedor ativado.");
+    loadPosts();
+  } else {
+    alert("Senha incorreta.");
+  }
+}
+
+// ===== CARREGAR POSTS =====
+function loadPosts() {
+  const posts = JSON.parse(localStorage.getItem("blogPosts")) || [];
+  blogContainer.innerHTML = "";
+
+  posts.slice(-3).reverse().forEach((post) => {
+    blogContainer.innerHTML += `
+      <div class="blog-card">
+        <div class="blog-content">
+          <div class="blog-title" onclick="window.location='${post.link}'">${post.title}</div>
+          <div class="blog-date">${post.date}</div>
+        </div>
+        <img src="${post.image}" onclick="window.location='${post.link}'">
+        <div class="blog-preview">${post.preview}</div>
+        ${devMode ? `<button class="delete-post" onclick="deletePost('${post.id}')" style="margin:20px;">Apagar Post</button>` : ""}
+      </div>
+    `;
+  });
+}
+
+// ===== ADICIONAR POST =====
+function addPost() {
+  const title = document.getElementById("blogTitle").value;
+  const link = document.getElementById("blogLink").value;
+  const preview = document.getElementById("blogPreview").value;
+
+  const imageLink = document.getElementById("blogImageLink").value;
+  const imageUpload = document.getElementById("blogImageUpload").files[0];
+
+  if (!title || !link || !preview) {
+    alert("Preencha todos os campos obrigatórios.");
+    return;
+  }
+
+  if (imageUpload) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      savePost(title, link, preview, e.target.result);
+    };
+    reader.readAsDataURL(imageUpload);
+  } else if (imageLink) {
+    savePost(title, link, preview, imageLink);
+  } else {
+    alert("Adicione uma imagem por link ou upload.");
+  }
+}
+
+function savePost(title, link, preview, image) {
+  const posts = JSON.parse(localStorage.getItem("blogPosts")) || [];
+
+  const newPost = {
+    id: Date.now().toString(), // ID único
+    title,
+    link,
+    preview,
+    image,
+    date: new Date().toLocaleDateString("pt-BR")
+  };
+
+  posts.push(newPost);
+
+  if (posts.length > 3) {
+    posts.shift();
+  }
+
+  localStorage.setItem("blogPosts", JSON.stringify(posts));
+  loadPosts();
+}
+
+// ===== APAGAR POST =====
+function deletePost(id) {
+  let posts = JSON.parse(localStorage.getItem("blogPosts")) || [];
+  posts = posts.filter(post => post.id !== id);
+  localStorage.setItem("blogPosts", JSON.stringify(posts));
+  loadPosts();
+}
+
+loadPosts();
+
+const reveals = document.querySelectorAll('.bloco, .plan, .blog-card');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('reveal', 'active');
+    }
+  });
+}, { threshold: 0.1 });
+
+reveals.forEach(el => {
+  el.classList.add('reveal');
+  observer.observe(el);
+});
+
+document.querySelectorAll('.card-preco').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = -(y - centerY) / 12;
+    const rotateY = (x - centerX) / 12;
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+  });
+});
+
+</script>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

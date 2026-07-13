@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel de Matrículas — Francês na Mira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/matricula.css">
+</head>
+<body class="mira-theme">
+<div class="bg-target"></div>
+
+<div class="mira-topbar">
+  <a href="minha-conta.html" class="voltar">← Minha conta</a>
+</div>
+
+<div class="wrap wide">
+  <header class="top" style="text-align:left;margin-bottom:10px;">
+    <div class="eyebrow">Painel administrativo</div>
+    <h1 class="brand" style="font-size:30px;">Matrículas &amp; Turmas<span class="dot"></span></h1>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="tab-btn" data-tab="turmas">Turmas</button>
+    <button class="tab-btn" data-tab="professores">Professores</button>
+    <button class="tab-btn" data-tab="cupons">Cupons</button>
+    <button class="tab-btn" data-tab="pagamentos">Pagamentos</button>
+  </div>
+
+  <!-- ===================== DASHBOARD ===================== -->
+  <div class="tab-content" data-tab-content="dashboard">
+    <div class="kpi-grid" id="kpiGrid"></div>
+    <div class="card tight">
+      <h2 class="step-title" style="font-size:18px;">Receita confirmada por mês</h2>
+      <div id="receitaGrafico" style="margin-top:10px;"></div>
+    </div>
+  </div>
+
+  <!-- ===================== TURMAS ===================== -->
+  <div class="tab-content" data-tab-content="turmas" style="display:none;">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+      <button type="button" class="btn-primary btn-small" id="btnNovaTurma">+ Nova turma</button>
+    </div>
+    <div class="table-wrap">
+      <table class="mira-table">
+        <thead><tr><th>Turma</th><th>Nível</th><th>Dias / horário</th><th>Professor</th><th>Vagas</th><th>Preço</th><th>Status</th><th></th></tr></thead>
+        <tbody id="turmasTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== PROFESSORES ===================== -->
+  <div class="tab-content" data-tab-content="professores" style="display:none;">
+    <div class="table-wrap">
+      <table class="mira-table">
+        <thead><tr><th>Nome</th><th>E-mail</th><th>Idiomas</th><th>Cor da agenda</th><th>Ativo p/ aulas</th><th></th></tr></thead>
+        <tbody id="professoresTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== CUPONS ===================== -->
+  <div class="tab-content" data-tab-content="cupons" style="display:none;">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+      <button type="button" class="btn-primary btn-small" id="btnNovoCupom">+ Novo cupom</button>
+    </div>
+    <div class="table-wrap">
+      <table class="mira-table">
+        <thead><tr><th>Código</th><th>Tipo</th><th>Valor</th><th>Válido até</th><th>Usos</th><th>Status</th><th></th></tr></thead>
+        <tbody id="cuponsTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== PAGAMENTOS ===================== -->
+  <div class="tab-content" data-tab-content="pagamentos" style="display:none;">
+    <div class="table-wrap">
+      <table class="mira-table">
+        <thead><tr><th>Data</th><th>Aluno</th><th>Método</th><th>Valor</th><th>Status</th></tr></thead>
+        <tbody id="pagamentosTbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL TURMA ===================== -->
+<div class="modal-overlay" id="modalTurma">
+  <div class="modal-box">
+    <h3 id="modalTurmaTitulo">Nova turma</h3>
+    <input type="hidden" id="turmaId">
+    <div class="field"><label>Nome</label><input type="text" id="turmaNome"></div>
+    <div class="field"><label>Nível</label>
+      <select id="turmaNivel"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option></select>
+    </div>
+    <div class="field"><label>Professor</label><select id="turmaProfessor"></select></div>
+    <div class="field"><label>Dias (separados por vírgula)</label><input type="text" id="turmaDias" placeholder="Segunda, Quarta"></div>
+    <div class="field"><label>Horário</label><input type="text" id="turmaHorario" placeholder="19:00"></div>
+    <div class="field"><label>Data de início</label><input type="date" id="turmaDataInicio"></div>
+    <div class="field"><label>Máximo de alunos</label><input type="number" id="turmaMaxAlunos" value="8"></div>
+    <div class="field"><label>Preço (R$)</label><input type="number" id="turmaPreco"></div>
+    <div class="field"><label>Descrição</label><textarea id="turmaDescricao"></textarea></div>
+    <div class="field"><label>Link do Zoom</label><input type="text" id="turmaZoom"></div>
+    <div class="field"><label>Link do material</label><input type="text" id="turmaMaterial"></div>
+    <p class="field-error" id="turmaErro" style="display:none;"></p>
+    <div class="modal-close-row">
+      <button type="button" class="btn-ghost" id="btnFecharTurma">Cancelar</button>
+      <button type="button" class="btn-primary" id="btnSalvarTurma">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL PROFESSOR ===================== -->
+<div class="modal-overlay" id="modalProfessor">
+  <div class="modal-box">
+    <h3>Editar perfil de agenda</h3>
+    <input type="hidden" id="profId">
+    <div class="field"><label>Bio</label><textarea id="profBio"></textarea></div>
+    <div class="field"><label>Idiomas (separados por vírgula)</label><input type="text" id="profIdiomas"></div>
+    <div class="field"><label>Cor da agenda</label><input type="text" id="profCor" placeholder="#4F6B4A"></div>
+    <div class="field">
+      <div class="accept-row"><input type="checkbox" id="profAtivo"><label for="profAtivo">Ativo para aulas particulares</label></div>
+    </div>
+    <div class="modal-close-row">
+      <button type="button" class="btn-ghost" id="btnFecharProf">Cancelar</button>
+      <button type="button" class="btn-primary" id="btnSalvarProf">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL CUPOM ===================== -->
+<div class="modal-overlay" id="modalCupom">
+  <div class="modal-box">
+    <h3>Novo cupom</h3>
+    <div class="field"><label>Código</label><input type="text" id="cupomCodigo" placeholder="BIENVENUE10"></div>
+    <div class="field"><label>Tipo</label>
+      <select id="cupomTipo"><option value="percentual">Percentual (%)</option><option value="valor_fixo">Valor fixo (R$)</option></select>
+    </div>
+    <div class="field"><label>Valor</label><input type="number" id="cupomValor"></div>
+    <div class="field"><label>Válido até (opcional)</label><input type="date" id="cupomValidoAte"></div>
+    <div class="field"><label>Uso máximo (opcional)</label><input type="number" id="cupomUsoMaximo"></div>
+    <p class="field-error" id="cupomErro" style="display:none;"></p>
+    <div class="modal-close-row">
+      <button type="button" class="btn-ghost" id="btnFecharCupom">Cancelar</button>
+      <button type="button" class="btn-primary" id="btnSalvarCupom">Criar cupom</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL MATRICULADOS ===================== -->
+<div class="modal-overlay" id="modalMatriculados">
+  <div class="modal-box">
+    <h3>Alunos matriculados</h3>
+    <div id="matriculadosLista"></div>
+    <div class="modal-close-row">
+      <button type="button" class="btn-ghost" id="btnFecharMatriculados">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/admin-matriculas.js"></script>
+</body>
+</html>

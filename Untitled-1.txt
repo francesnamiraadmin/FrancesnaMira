@@ -1,0 +1,44 @@
+<!-- AULAS ESPECIALIZADAS -->
+<section class="exam-section">
+  <h2 class="plan-title">Aulas Especializadas</h2>
+  <div class="plan" style="flex-direction: column; align-items: center; text-align: center;">
+    <!-- VIDEO -->
+    <iframe width="800" height="450" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+      title="Aula Especializada" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+      style="border-radius: 12px; margin-bottom: 20px;"></iframe>
+
+    <!-- BOTÃO -->
+    <a href="https://www.youtube.com/" target="_blank" style="
+      display: inline-block;
+      padding: 12px 28px;
+      background: #ffeb3b;
+      color: #08203e;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: 0.3s;
+    ">Assistir no YouTube</a>
+  </div>
+</section>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script>
+  // DROPDOWN
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const dropdown = item.querySelector('.dropdown');
+    let timeout;
+    item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown.classList.add('show'); });
+    item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown.classList.remove('show'); }, 150); });
+  });
+
+  // CARROSSEL
+  const slides = document.querySelectorAll('.carousel-slide');
+  const next = document.querySelector('.next');
+  const prev = document.querySelector('.prev');
+  let index = 0;
+  function showSlide(i) { slides.forEach(s => s.classList.remove('active')); slides[i].classList.add('active'); }
+  next.onclick = () => { index = (index + 1) % slides.length; showSlide(index); };
+  prev.onclick = () => { index = (index - 1 + slides.length) % slides.length; showSlide(index); };
+  setInterval(() => { index = (index + 1) % slides.length; showSlide(index); }, 5000);
+</script>

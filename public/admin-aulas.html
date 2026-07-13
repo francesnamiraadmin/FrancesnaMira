@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Administrativo - Aulas Especializadas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --azul: #2563eb; --azul-escuro: #1e40af; --azul-claro: #eff6ff; --azul-hover: #1d4ed8;
+  --cinza-50: #f8fafc; --cinza-100: #f1f5f9; --cinza-200: #e2e8f0; --cinza-300: #cbd5e1;
+  --cinza-400: #94a3b8; --cinza-600: #475569; --cinza-800: #1e293b; --branco: #ffffff;
+  --verde: #16a34a; --verde-bg: #f0fdf4; --vermelho: #dc2626; --vermelho-bg: #fef2f2;
+  --sombra: 0 1px 3px rgba(15,23,42,0.08), 0 8px 24px rgba(15,23,42,0.06); --radius: 16px;
+}
+[data-theme="dark"] {
+  --branco: #1e2433; --cinza-50: #161b28; --cinza-100: #232a3b; --cinza-200: #2d3548;
+  --cinza-300: #3a4358; --cinza-400: #4b5568; --cinza-600: #9aa5bd; --cinza-800: #e8ecf5;
+  --azul: #3b82f6; --azul-escuro: #2563eb; --azul-claro: rgba(59,130,246,0.18); --azul-hover: #60a5fa;
+  --verde: #22c55e; --verde-bg: rgba(34,197,94,0.16); --vermelho: #f87171; --vermelho-bg: rgba(248,113,113,0.16);
+}
+body { font-family: 'Poppins', sans-serif; background: var(--cinza-50); color: var(--cinza-800); min-height: 100vh; }
+header { font-family: 'Playfair Display', serif; font-size: 2.2rem; text-align: center; padding: 22px; background: var(--branco); border-bottom: 1px solid var(--cinza-200); }
+header a { color: var(--azul-escuro); text-decoration: none; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 30px 3% 100px; }
+.painel-header { background: linear-gradient(135deg, var(--azul-escuro), var(--azul)); color: white; border-radius: var(--radius); padding: 26px 32px; margin-bottom: 24px; box-shadow: var(--sombra); }
+.painel-header h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+.painel-header p { opacity: 0.9; font-size: 0.9rem; margin-top: 4px; }
+
+.top-tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.top-tab { padding: 10px 22px; border-radius: 30px; border: 1px solid var(--cinza-200); background: var(--branco); color: var(--cinza-600); font-weight: 600; cursor: pointer; font-size: 0.9rem; }
+.top-tab.active { background: var(--azul); color: white; border-color: var(--azul); }
+
+.card { background: var(--branco); border: 1px solid var(--cinza-200); border-radius: var(--radius); box-shadow: var(--sombra); padding: 24px 26px; margin-bottom: 20px; }
+.card h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 16px; }
+.card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 10px; flex-wrap: wrap; }
+.card-head h2 { margin-bottom: 0; }
+
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.campo label { font-size: 0.8rem; font-weight: 700; color: var(--cinza-600); }
+.campo input, .campo select, .campo textarea { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--cinza-300); font-family: 'Poppins', sans-serif; font-size: 0.9rem; background: var(--branco); color: var(--cinza-800); }
+.campo textarea { min-height: 70px; resize: vertical; }
+.campo-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.checks-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.checks-row label { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 0.88rem; }
+
+.btn { padding: 11px 24px; border-radius: 30px; border: none; background: var(--azul); color: white; font-weight: 700; cursor: pointer; font-size: 0.9rem; }
+.btn:hover { background: var(--azul-hover); }
+.btn.secundario { background: var(--branco); color: var(--cinza-600); border: 1px solid var(--cinza-300); }
+.btn.perigo { background: var(--vermelho); }
+.btn.pequeno { padding: 7px 16px; font-size: 0.82rem; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.pill { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 10px; background: var(--azul-claro); color: var(--azul-escuro); margin-right: 4px; }
+.pill.inativo { background: var(--vermelho-bg); color: var(--vermelho); }
+.pill.verde { background: var(--verde-bg); color: var(--verde); }
+
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.kpi { background: var(--branco); border-radius: 12px; padding: 14px 16px; text-align: center; border: 1px solid var(--cinza-200); }
+.kpi .valor { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--azul-escuro); font-weight: 700; }
+.kpi .rotulo { font-size: 0.75rem; color: var(--cinza-400); }
+
+.msg-inline { padding: 10px 14px; border-radius: 10px; font-size: 0.88rem; margin-top: 12px; }
+.msg-inline.sucesso { background: var(--verde-bg); color: var(--verde); }
+.msg-inline.erro { background: var(--vermelho-bg); color: var(--vermelho); }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+th { text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--cinza-200); color: var(--cinza-600); font-size: 0.78rem; text-transform: uppercase; }
+td { padding: 10px 12px; border-bottom: 1px solid var(--cinza-100); }
+
+footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
+
+/* ===== MÓDULOS & AULAS ===== */
+.split { display: grid; grid-template-columns: 380px 1fr; gap: 20px; align-items: start; }
+@media(max-width: 900px) { .split { grid-template-columns: 1fr; } }
+
+.modulo-card {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--cinza-200);
+  margin-bottom: 10px; cursor: grab; background: var(--cinza-50); transition: 0.15s;
+}
+.modulo-card.selecionado { border-color: var(--azul); background: var(--azul-claro); }
+.modulo-card.inativo { opacity: 0.55; }
+.modulo-card .icone-swatch {
+  width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.modulo-card .info { flex: 1; min-width: 0; }
+.modulo-card .titulo { font-weight: 700; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.modulo-card .meta { font-size: 0.76rem; color: var(--cinza-400); }
+.modulo-card .acoes { display: flex; gap: 4px; flex-shrink: 0; }
+.modulo-card .acoes button { background: none; border: none; cursor: pointer; font-size: 0.95rem; padding: 4px; border-radius: 6px; }
+.modulo-card .acoes button:hover { background: var(--cinza-200); }
+.modulo-card.drag-over-top { border-top: 3px solid var(--azul); }
+.modulo-card.drag-over-bottom { border-bottom: 3px solid var(--azul); }
+
+.aula-row {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--cinza-200);
+  margin-bottom: 8px; cursor: grab; background: var(--cinza-50);
+}
+.aula-row.inativa { opacity: 0.55; }
+.aula-row .ordem-handle { color: var(--cinza-400); font-size: 1rem; }
+.aula-row .info { flex: 1; min-width: 0; }
+.aula-row .titulo { font-weight: 600; font-size: 0.9rem; }
+.aula-row .meta { font-size: 0.75rem; color: var(--cinza-400); display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+.aula-row select.mover-select { font-size: 0.78rem; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); }
+.aula-row .acoes { display: flex; gap: 4px; }
+.aula-row .acoes button { background: none; border: none; cursor: pointer; font-size: 0.92rem; padding: 4px; border-radius: 6px; }
+.aula-row .acoes button:hover { background: var(--cinza-200); }
+.aula-row.drag-over-top { border-top: 3px solid var(--azul); }
+.aula-row.drag-over-bottom { border-bottom: 3px solid var(--azul); }
+
+.vazio-aviso { text-align: center; padding: 30px 10px; color: var(--cinza-400); font-size: 0.9rem; }
+
+.cor-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.cor-swatch { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
+.cor-swatch.selecionada { border-color: var(--cinza-800); }
+
+/* ===== MODAIS ===== */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.5); z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.show { display: flex; }
+.modal-box { background: var(--branco); border-radius: var(--radius); padding: 28px 30px; max-width: 620px; width: 100%; max-height: 88vh; overflow-y: auto; box-shadow: var(--sombra); }
+.modal-box h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 18px; }
+.modal-close-row { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+.field-error { color: var(--vermelho); font-size: 0.85rem; display: none; margin-top: 6px; }
+
+.doc-form-item { border: 1px solid var(--cinza-200); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+.material-item { display: flex; align-items: center; gap: 10px; border: 1px solid var(--cinza-200); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+.material-item .info { flex: 1; font-size: 0.85rem; }
+.material-item .info strong { display: block; }
+.material-item .info span { color: var(--cinza-400); font-size: 0.78rem; }
+
+.upload-bloqueado { text-align: center; padding: 16px; color: var(--cinza-400); font-size: 0.85rem; border: 1px dashed var(--cinza-300); border-radius: 12px; }
+.dropzone-video { border: 2px dashed var(--cinza-300); border-radius: 12px; padding: 20px; text-align: center; }
+.dropzone-video input { margin-top: 8px; }
+
+.tabs-video { display: flex; gap: 8px; margin-bottom: 12px; }
+.tabs-video button { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-600); font-weight: 600; cursor: pointer; font-size: 0.85rem; }
+.tabs-video button.active { background: var(--azul); color: white; border-color: var(--azul); }
+</style>
+</head>
+
+<body style="visibility:hidden;">
+<script>
+(async function protegerPagina() {
+  const token = localStorage.getItem('token');
+  function bloquear(msg) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; font-family:'Poppins',sans-serif; background:#f8fafc; color:#1e293b;">
+        <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; margin-bottom:16px; color:#1e40af;">Acesso restrito</h1>
+        <p style="font-size:1.1rem; max-width:480px; margin-bottom:28px; opacity:0.85;">${msg}</p>
+        <a href="login.html" style="padding:14px 28px; background:#2563eb; color:white; border-radius:30px; text-decoration:none; font-weight:700;">Entrar</a>
+      </div>`;
+    document.body.style.visibility = 'visible';
+  }
+  if (!token) return bloquear('Esta página é exclusiva para administradores.');
+  try {
+    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return bloquear('Sessão expirada. Entre novamente.');
+    const data = await res.json();
+    if (data.role !== 'admin') return bloquear('Esta página é exclusiva para administradores.');
+    document.body.style.visibility = 'visible';
+  } catch (err) { bloquear('Erro ao verificar sua conta.'); }
+})();
+</script>
+
+<header><a href="index.html">Francês na Mira</a></header>
+
+<div class="wrap">
+  <div class="painel-header">
+    <h1>Painel Administrativo — Aulas Especializadas</h1>
+    <p>Gerencie módulos, aulas, vídeos e materiais da plataforma de aulas online.</p>
+  </div>
+
+  <div class="top-tabs">
+    <button class="top-tab active" data-tab="modulos">🧩 Módulos &amp; Aulas</button>
+    <button class="top-tab" data-tab="estatisticas">📊 Estatísticas</button>
+  </div>
+
+  <!-- ===================== MÓDULOS & AULAS ===================== -->
+  <div id="tabModulos">
+    <div class="split">
+      <div class="card">
+        <div class="card-head">
+          <h2>Módulos</h2>
+          <button class="btn pequeno" id="novoModuloBtn">+ Novo módulo</button>
+        </div>
+        <div id="modulosLista"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2 id="aulasCardTitulo">Selecione um módulo</h2>
+          <button class="btn pequeno" id="novaAulaBtn" disabled>+ Nova aula</button>
+        </div>
+        <div id="aulasLista"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ESTATÍSTICAS ===================== -->
+  <div id="tabEstatisticas" style="display:none;">
+    <div class="card">
+      <h2>Visão geral</h2>
+      <div class="kpi-row" id="statsKpiRow"></div>
+    </div>
+    <div class="card">
+      <h2>Vídeos mais assistidos</h2>
+      <table><thead><tr><th>Aula</th><th>Visualizações</th></tr></thead><tbody id="statsVideosTbody"></tbody></table>
+    </div>
+    <div class="card">
+      <h2>Módulos mais concluídos</h2>
+      <table><thead><tr><th>Módulo</th><th>Alunos que concluíram</th></tr></thead><tbody id="statsModulosTbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL MÓDULO ===================== -->
+<div class="modal-overlay" id="modalModulo">
+  <div class="modal-box">
+    <h3 id="modalModuloTitulo">Novo módulo</h3>
+    <input type="hidden" id="moduloId">
+    <div class="campo"><label>Título</label><input type="text" id="moduloTitulo" placeholder="Ex.: Pronúncia Francesa"></div>
+    <div class="campo"><label>Descrição</label><textarea id="moduloDescricao"></textarea></div>
+    <div class="campo-row">
+      <div class="campo"><label>Ícone (emoji)</label><input type="text" id="moduloIcone" placeholder="📘" maxlength="4"></div>
+      <div class="campo">
+        <label>Cor</label>
+        <div class="cor-swatches" id="moduloCorSwatches"></div>
+        <input type="hidden" id="moduloCor" value="#2563eb">
+      </div>
+    </div>
+    <div class="checks-row">
+      <label><input type="checkbox" id="moduloExigeAnterior"> Exige o módulo anterior 100% concluído</label>
+      <label><input type="checkbox" id="moduloAtivo" checked> Publicado (visível para os alunos)</label>
+    </div>
+    <p class="field-error" id="moduloErro"></p>
+    <div class="modal-close-row">
+      <button class="btn secundario" id="fecharModuloBtn" type="button">Cancelar</button>
+      <button class="btn" id="salvarModuloBtn" type="button">Salvar módulo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL AULA ===================== -->
+<div class="modal-overlay" id="modalAula">
+  <div class="modal-box">
+    <h3 id="modalAulaTitulo">Nova aula</h3>
+    <input type="hidden" id="aulaId">
+    <input type="hidden" id="aulaModuloIdOriginal">
+    <div class="campo"><label>Módulo</label><select id="aulaModuloId"></select></div>
+    <div class="campo"><label>Título</label><input type="text" id="aulaTitulo"></div>
+    <div class="campo"><label>Descrição</label><textarea id="aulaDescricao"></textarea></div>
+    <div class="campo"><label>Observações do professor</label><textarea id="aulaObservacoes" placeholder="Anotações internas, dicas para o aluno, contexto..."></textarea></div>
+    <div class="checks-row"><label><input type="checkbox" id="aulaAtivo" checked> Publicada (visível para os alunos)</label></div>
+
+    <h3 style="margin-top:18px; font-size:1.05rem;">Vídeo</h3>
+    <div class="tabs-video">
+      <button type="button" class="active" data-video-tipo="url" id="tabVideoUrl">Link externo</button>
+      <button type="button" data-video-tipo="upload" id="tabVideoUpload">Upload local</button>
+    </div>
+    <div id="videoUrlWrap">
+      <div class="campo"><label>URL do vídeo (embed do YouTube não listado, Vimeo, Bunny Stream, Cloudflare Stream ou link direto .mp4)</label><input type="text" id="aulaVideoUrl" placeholder="https://player.vimeo.com/video/..."></div>
+    </div>
+    <div id="videoUploadWrap" style="display:none;">
+      <div id="videoUploadBloqueado" class="upload-bloqueado">Salve a aula primeiro para poder enviar um arquivo de vídeo.</div>
+      <div id="videoUploadArea" style="display:none;">
+        <div id="videoAtualInfo" style="margin-bottom:10px; font-size:0.85rem; color:var(--cinza-600);"></div>
+        <div class="dropzone-video">
+          <div>🎬 Selecione o arquivo de vídeo (MP4, WebM ou OGG)</div>
+          <input type="file" id="aulaVideoArquivo" accept="video/mp4,video/webm,video/ogg">
+        </div>
+        <div style="display:flex; gap:10px; margin-top:10px;">
+          <button class="btn pequeno" type="button" id="enviarVideoBtn">Enviar vídeo</button>
+          <button class="btn pequeno perigo" type="button" id="removerVideoBtn">Remover vídeo atual</button>
+        </div>
+        <p class="field-error" id="videoErro"></p>
+      </div>
+    </div>
+    <div class="campo" style="margin-top:10px;"><label>Duração (segundos, opcional)</label><input type="number" id="aulaVideoDuracao" min="0"></div>
+
+    <h3 style="margin-top:18px; font-size:1.05rem;">Materiais</h3>
+    <div id="materiaisBloqueado" class="upload-bloqueado">Salve a aula primeiro para poder adicionar materiais.</div>
+    <div id="materiaisArea" style="display:none;">
+      <div id="materiaisLista"></div>
+      <div class="doc-form-item">
+        <div class="campo-row">
+          <div class="campo"><label>Nome</label><input type="text" id="novoMaterialNome"></div>
+          <div class="campo"><label>Tipo</label>
+            <select id="novoMaterialTipo">
+              <option value="pdf">PDF</option>
+              <option value="imagem">Imagem</option>
+              <option value="audio">Áudio</option>
+              <option value="exercicio">Exercício</option>
+              <option value="arquivo">Arquivo</option>
+              <option value="link">Link externo</option>
+            </select>
+          </div>
+        </div>
+        <div class="campo" id="novoMaterialArquivoWrap"><label>Arquivo</label><input type="file" id="novoMaterialArquivo"></div>
+        <div class="campo" id="novoMaterialUrlWrap" style="display:none;"><label>URL</label><input type="text" id="novoMaterialUrl" placeholder="https://..."></div>
+        <button class="btn secundario pequeno" type="button" id="addMaterialBtn">+ Adicionar material</button>
+        <p class="field-error" id="materialErro"></p>
+      </div>
+    </div>
+
+    <p class="field-error" id="aulaErro"></p>
+    <div class="modal-close-row">
+      <button class="btn secundario" id="fecharAulaBtn" type="button">Fechar</button>
+      <button class="btn" id="salvarAulaBtn" type="button">Salvar aula</button>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/admin-aulas.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda de Aulas — Francês na Mira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/matricula.css">
+</head>
+<body class="mira-theme">
+<div class="bg-target"></div>
+
+<div class="mira-topbar">
+  <a href="minha-conta.html" class="voltar">← Minha conta</a>
+</div>
+
+<div class="wrap wide">
+  <header class="top" style="text-align:left;margin-bottom:10px;">
+    <div class="eyebrow">Painel administrativo</div>
+    <h1 class="brand" style="font-size:30px;">Agenda de aulas particulares<span class="dot"></span></h1>
+  </header>
+
+  <div class="card tight">
+    <div class="cal-header">
+      <div class="cal-nav">
+        <button type="button" class="btn-outline btn-small" id="btnSemanaAnterior">←</button>
+        <span class="cal-title" id="calTitulo"></span>
+        <button type="button" class="btn-outline btn-small" id="btnSemanaSeguinte">→</button>
+        <button type="button" class="btn-ghost btn-small" id="btnHoje">Hoje</button>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <select id="professorSelect" style="width:auto;"></select>
+        <button type="button" class="btn-outline btn-small" id="btnRecorrente">+ Horários recorrentes</button>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:14px;margin-bottom:14px;font-size:12px;color:var(--muted);flex-wrap:wrap;">
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#EEF3EA;border:1px solid #d7e6d1;margin-right:5px;"></span>Disponível</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#FDF9EF;border:1px solid var(--gold-soft);margin-right:5px;"></span>Reservado</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:#eee;margin-right:5px;"></span>Bloqueado</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--paper);margin-right:5px;"></span>Concluído</span>
+    </div>
+
+    <div class="cal-grid" id="calGrid"></div>
+  </div>
+</div>
+
+<!-- ===================== MODAL NOVO HORÁRIO ===================== -->
+<div class="modal-overlay" id="modalSlot">
+  <div class="modal-box">
+    <h3 id="modalSlotTitulo">Novo horário</h3>
+    <input type="hidden" id="slotDia">
+    <div class="field"><label>Data</label><input type="date" id="slotData"></div>
+    <div class="field"><label>Hora</label><input type="text" id="slotHora" placeholder="19:00"></div>
+    <div class="field"><label>Duração (minutos)</label><input type="number" id="slotDuracao" value="60"></div>
+    <p class="field-error" id="slotErro" style="display:none;"></p>
+    <div class="modal-close-row">
+      <button type="button" class="btn-ghost" id="btnFecharSlot">Cancelar</button>
+      <button type="button" class="btn-primary" id="btnSalvarSlot">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL AÇÕES DO HORÁRIO ===================== -->
+<div class="modal-overlay" id="modalAcoesSlot">
+  <div class="modal-box">
+    <h3>Horário</h3>
+    <p class="step-hint" id="acoesSlotInfo"></p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <button type="button" class="btn-outline" id="btnMoverSlot">Alterar data/hora</button>
+      <button type="button" class="btn-outline" id="btnDuplicarSlot">Duplicar</button>
+      <button type="button" class="btn-outline" id="btnBloquearSlot">Bloquear</button>
+      <button type="button" class="btn-outline" id="btnLiberarSlot">Liberar (voltar a disponível)</button>
+      <button type="button" class="btn-danger" id="btnExcluirSlot">Excluir</button>
+    </div>
+    <div class="modal-close-row">
+      <button type="button" class="btn-ghost" id="btnFecharAcoesSlot">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODAL RECORRÊNCIA ===================== -->
+<div class="modal-overlay" id="modalRecorrente">
+  <div class="modal-box">
+    <h3>Criar horários recorrentes</h3>
+    <div class="field"><label>Dia da semana</label>
+      <select id="recDiaSemana">
+        <option value="0">Domingo</option><option value="1">Segunda</option><option value="2">Terça</option>
+        <option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option>
+      </select>
+    </div>
+    <div class="field"><label>Hora</label><input type="text" id="recHora" placeholder="19:00"></div>
+    <div class="field"><label>Duração (minutos)</label><input type="number" id="recDuracao" value="60"></div>
+    <div class="field"><label>Repetir por quantas semanas</label><input type="number" id="recSemanas" value="8"></div>
+    <p class="field-error" id="recErro" style="display:none;"></p>
+    <div class="modal-close-row">
+      <button type="button" class="btn-ghost" id="btnFecharRecorrente">Cancelar</button>
+      <button type="button" class="btn-primary" id="btnSalvarRecorrente">Criar horários</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/admin-agenda.js"></script>
+</body>
+</html>

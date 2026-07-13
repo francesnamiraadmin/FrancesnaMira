@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Examen TCF</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #002F6C, #FFD100);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+  <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-[#002F6C] mb-6">Acesso Restrito</h2>
+
+    <form onsubmit="login(event)">
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail autorizado</label>
+        <input type="email" id="email" required placeholder="exemplo@email.com"
+               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD100]">
+      </div>
+
+      <div class="mb-6">
+        <label for="senha" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+        <input type="password" id="senha" required placeholder="********"
+               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD100]">
+      </div>
+
+      <button type="submit"
+      
+              class="w-full bg-[#FFD100] hover:bg-yellow-400 text-[#002F6C] font-bold py-2 px-4 rounded-lg transition duration-300">
+        Entrar
+      </button>
+      <button onclick="loginComGoogle()" type="button"
+        class="mt-4 w-full bg-[#002F6C] hover:bg-[#001a3a] text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+  Entrar com Google
+</button>
+    </form>
+
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Não tem acesso? <a href="#" class="text-[#002F6C] font-semibold hover:underline">Solicite autorização</a>
+    </p>
+  </div>
+
+  <script>
+    // 🔐 Configuração Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCjBo8_7juz_F6CRIXvx4GoyvM42suwtyM",
+      authDomain: "examenstcfnamira.firebaseapp.com",
+      projectId: "examenstcfnamira",
+      storageBucket: "examenstcfnamira.firebasestorage.app",
+      messagingSenderId: "1057517044235",
+      appId: "1:1057517044235:web:b0366cec43427e4df93d0e",
+      measurementId: "G-D5KF13D474"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    // 📧 E-mails permitidos
+    const emailsPermitidos = [
+      "mirandamarianaoliveira@gmail.com",
+      "usuario2@email.com"
+    ];
+
+    // 🟡 Função de login
+    function login(event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const senha = document.getElementById("senha").value;
+
+      firebase.auth().signInWithEmailAndPassword(email, senha)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          if (emailsPermitidos.includes(user.email)) {
+            alert("Login autorizado!");
+            window.location.href = "pagina-protegida.html"; // redirecione aqui
+          } else {
+            firebase.auth().signOut();
+            alert("Este e-mail não está autorizado.");
+          }
+        })
+        .catch((error) => {
+          alert("Erro no login: " + error.message);
+        });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Administrativo - Correções de Texto</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --azul: #2563eb; --azul-escuro: #1e40af; --azul-claro: #eff6ff; --azul-hover: #1d4ed8;
+  --cinza-50: #f8fafc; --cinza-100: #f1f5f9; --cinza-200: #e2e8f0; --cinza-300: #cbd5e1;
+  --cinza-400: #94a3b8; --cinza-600: #475569; --cinza-800: #1e293b; --branco: #ffffff;
+  --verde: #16a34a; --verde-bg: #f0fdf4; --vermelho: #dc2626; --vermelho-bg: #fef2f2;
+  --sombra: 0 1px 3px rgba(15,23,42,0.08), 0 8px 24px rgba(15,23,42,0.06); --radius: 16px;
+}
+[data-theme="dark"] {
+  --branco: #1e2433;
+  --cinza-50: #161b28;
+  --cinza-100: #232a3b;
+  --cinza-200: #2d3548;
+  --cinza-300: #3a4358;
+  --cinza-400: #4b5568;
+  --cinza-600: #9aa5bd;
+  --cinza-800: #e8ecf5;
+  --azul: #3b82f6;
+  --azul-escuro: #2563eb;
+  --azul-claro: rgba(59,130,246,0.18);
+  --azul-hover: #60a5fa;
+  --verde: #22c55e;
+  --verde-bg: rgba(34,197,94,0.16);
+  --vermelho: #f87171;
+  --vermelho-bg: rgba(248,113,113,0.16);
+}
+body { font-family: 'Poppins', sans-serif; background: var(--cinza-50); color: var(--cinza-800); min-height: 100vh; }
+header { font-family: 'Playfair Display', serif; font-size: 2.2rem; text-align: center; padding: 22px; background: var(--branco); border-bottom: 1px solid var(--cinza-200); }
+header a { color: var(--azul-escuro); text-decoration: none; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 30px 3% 100px; }
+.painel-header { background: linear-gradient(135deg, var(--azul-escuro), var(--azul)); color: white; border-radius: var(--radius); padding: 26px 32px; margin-bottom: 24px; box-shadow: var(--sombra); }
+.painel-header h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+.painel-header p { opacity: 0.9; font-size: 0.9rem; margin-top: 4px; }
+
+.top-tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.top-tab { padding: 10px 22px; border-radius: 30px; border: 1px solid var(--cinza-200); background: var(--branco); color: var(--cinza-600); font-weight: 600; cursor: pointer; font-size: 0.9rem; }
+.top-tab.active { background: var(--azul); color: white; border-color: var(--azul); }
+
+.card { background: var(--branco); border: 1px solid var(--cinza-200); border-radius: var(--radius); box-shadow: var(--sombra); padding: 24px 26px; margin-bottom: 20px; }
+.card h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 16px; }
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.campo label { font-size: 0.8rem; font-weight: 700; color: var(--cinza-600); }
+.campo input, .campo select, .campo textarea { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--cinza-300); font-family: 'Poppins', sans-serif; font-size: 0.9rem; }
+.campo textarea { min-height: 70px; resize: vertical; }
+.campo-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.checks-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.checks-row label { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 0.88rem; }
+
+.btn { padding: 11px 24px; border-radius: 30px; border: none; background: var(--azul); color: white; font-weight: 700; cursor: pointer; font-size: 0.9rem; }
+.btn:hover { background: var(--azul-hover); }
+.btn.secundario { background: var(--branco); color: var(--cinza-600); border: 1px solid var(--cinza-300); }
+.btn.perigo { background: var(--vermelho); }
+.btn.pequeno { padding: 7px 16px; font-size: 0.82rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+th { text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--cinza-200); color: var(--cinza-600); font-size: 0.78rem; text-transform: uppercase; }
+td { padding: 10px 12px; border-bottom: 1px solid var(--cinza-100); }
+.pill { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 10px; background: var(--azul-claro); color: var(--azul-escuro); margin-right: 4px; }
+.pill.inativo { background: var(--vermelho-bg); color: var(--vermelho); }
+
+.doc-form-item { border: 1px solid var(--cinza-200); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; position: relative; }
+.doc-form-item .remover-doc { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--vermelho); font-weight: 700; cursor: pointer; }
+
+.criterio-edit-row { display: grid; grid-template-columns: 2fr 90px 3fr auto; gap: 10px; align-items: center; margin-bottom: 8px; }
+.criterio-edit-row input { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--cinza-300); font-size: 0.85rem; }
+
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.kpi { background: var(--branco); border-radius: 12px; padding: 14px 16px; text-align: center; }
+.kpi .valor { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--azul-escuro); font-weight: 700; }
+.kpi .rotulo { font-size: 0.75rem; color: var(--cinza-400); }
+
+.msg-inline { padding: 10px 14px; border-radius: 10px; font-size: 0.88rem; margin-top: 12px; }
+.msg-inline.sucesso { background: var(--verde-bg); color: var(--verde); }
+.msg-inline.erro { background: var(--vermelho-bg); color: var(--vermelho); }
+footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
+</style>
+</head>
+
+<body style="visibility:hidden;">
+<script>
+(async function protegerPagina() {
+  const token = localStorage.getItem('token');
+  function bloquear(msg) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; font-family:'Poppins',sans-serif; background:#f8fafc; color:#1e293b;">
+        <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; margin-bottom:16px; color:#1e40af;">Acesso restrito</h1>
+        <p style="font-size:1.1rem; max-width:480px; margin-bottom:28px; opacity:0.85;">${msg}</p>
+        <a href="login.html" style="padding:14px 28px; background:#2563eb; color:white; border-radius:30px; text-decoration:none; font-weight:700;">Entrar</a>
+      </div>`;
+    document.body.style.visibility = 'visible';
+  }
+  if (!token) return bloquear('Esta página é exclusiva para administradores.');
+  try {
+    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return bloquear('Sessão expirada. Entre novamente.');
+    const data = await res.json();
+    if (data.role !== 'admin') return bloquear('Esta página é exclusiva para administradores.');
+    document.body.style.visibility = 'visible';
+  } catch (err) { bloquear('Erro ao verificar sua conta.'); }
+})();
+</script>
+
+<header><a href="index.html">Francês na Mira</a></header>
+
+<div class="wrap">
+  <div class="painel-header">
+    <h1>Painel Administrativo — Correções de Texto</h1>
+    <p>Gerencie professores, temas, créditos, rubricas de correção e acompanhe as estatísticas do módulo.</p>
+  </div>
+
+  <div class="top-tabs">
+    <button class="top-tab active" data-tab="professores">👩‍🏫 Professores</button>
+    <button class="top-tab" data-tab="temas">📚 Temas</button>
+    <button class="top-tab" data-tab="creditos">💳 Créditos</button>
+    <button class="top-tab" data-tab="rubricas">📋 Rubricas</button>
+    <button class="top-tab" data-tab="estatisticas">📊 Estatísticas</button>
+  </div>
+
+  <!-- ===================== PROFESSORES ===================== -->
+  <div id="tabProfessores">
+    <div class="card">
+      <h2>Criar novo professor</h2>
+      <div class="campo-row">
+        <div class="campo"><label>Nome</label><input type="text" id="profNome"></div>
+        <div class="campo"><label>E-mail</label><input type="email" id="profEmail"></div>
+        <div class="campo"><label>Senha provisória</label><input type="password" id="profSenha"></div>
+      </div>
+      <div class="campo"><label>Especialidades (exames que pode corrigir)</label>
+        <div class="checks-row">
+          <label><input type="checkbox" value="TCF" class="profEsp"> TCF</label>
+          <label><input type="checkbox" value="TEF" class="profEsp"> TEF</label>
+          <label><input type="checkbox" value="DELF" class="profEsp"> DELF</label>
+          <label><input type="checkbox" value="DALF" class="profEsp"> DALF</label>
+        </div>
+      </div>
+      <button class="btn" id="criarProfessorBtn">Criar professor</button>
+      <div class="msg-inline" id="profMsg" style="display:none;"></div>
+    </div>
+    <div class="card">
+      <h2>Professores cadastrados</h2>
+      <table><thead><tr><th>Nome</th><th>E-mail</th><th>Especialidades</th><th>Ações</th></tr></thead><tbody id="professoresTbody"></tbody></table>
+    </div>
+  </div>
+
+  <!-- ===================== TEMAS ===================== -->
+  <div id="tabTemas" style="display:none;">
+    <div class="card">
+      <h2>Criar novo tema</h2>
+      <div class="campo"><label>Título</label><input type="text" id="temaTitulo"></div>
+      <div class="campo-row">
+        <div class="campo"><label>Exame</label><select id="temaExame"><option>TCF</option><option>TEF</option><option>DELF</option><option>DALF</option></select></div>
+        <div class="campo"><label>Nível</label><select id="temaNivel"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option></select></div>
+        <div class="campo"><label>Dificuldade</label><select id="temaDificuldade"><option value="facil">Fácil</option><option value="medio" selected>Médio</option><option value="dificil">Difícil</option></select></div>
+        <div class="campo"><label>Tipo de produção</label><input type="text" id="temaTipoProducao" placeholder="Ex.: Essai argumentatif"></div>
+      </div>
+      <div class="campo"><label>Descrição (para o aluno)</label><textarea id="temaDescricao"></textarea></div>
+      <div class="campo"><label>Objetivos (um por linha)</label><textarea id="temaObjetivos"></textarea></div>
+      <div class="campo"><label>Instruções da produção (consigne, em francês)</label><textarea id="temaInstrucoes"></textarea></div>
+      <div class="campo"><label>Critérios (resumo, um por linha)</label><textarea id="temaCriteriosResumo"></textarea></div>
+      <div class="campo"><label>Competências avaliadas (uma por linha)</label><textarea id="temaCompetencias"></textarea></div>
+      <div class="campo-row">
+        <div class="campo"><label>Tempo sugerido (min)</label><input type="number" id="temaTempo" value="45"></div>
+        <div class="campo"><label>Mín. de palavras</label><input type="number" id="temaMinPalavras" value="160"></div>
+        <div class="campo"><label>Máx. de palavras</label><input type="number" id="temaMaxPalavras" value="190"></div>
+        <div class="campo"><label>Créditos necessários</label><input type="number" id="temaCreditos" value="1"></div>
+      </div>
+
+      <h2 style="margin-top:20px;">Coletânea de textos de apoio</h2>
+      <div id="coletaneaForm"></div>
+      <button class="btn secundario pequeno" id="addDocBtn" type="button">+ Adicionar documento</button>
+
+      <div style="margin-top:20px;"><button class="btn" id="criarTemaBtn">Criar tema</button></div>
+      <div class="msg-inline" id="temaMsg" style="display:none;"></div>
+    </div>
+    <div class="card">
+      <h2>Temas cadastrados</h2>
+      <table><thead><tr><th>Título</th><th>Exame/Nível</th><th>Status</th><th>Ações</th></tr></thead><tbody id="temasTbody"></tbody></table>
+    </div>
+  </div>
+
+  <!-- ===================== CRÉDITOS ===================== -->
+  <div id="tabCreditos" style="display:none;">
+    <div class="card">
+      <h2>Conceder créditos de correção</h2>
+      <div class="campo-row">
+        <div class="campo"><label>E-mail do usuário</label><input type="email" id="credEmail"></div>
+        <div class="campo"><label>Quantidade</label><input type="number" id="credQtd" value="1"></div>
+      </div>
+      <button class="btn" id="concederCreditosBtn">Conceder créditos</button>
+      <div class="msg-inline" id="credMsg" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ===================== RUBRICAS ===================== -->
+  <div id="tabRubricas" style="display:none;">
+    <div class="campo" style="max-width:260px;"><label>Exame</label><select id="rubricaExameSelect"><option>TCF</option><option>TEF</option><option>DELF</option><option>DALF</option></select></div>
+    <div class="card">
+      <h2>Critérios e pesos</h2>
+      <div id="criteriosRubricaForm"></div>
+      <button class="btn secundario pequeno" id="addCriterioBtn" type="button">+ Adicionar critério</button>
+      <div class="campo" style="max-width:200px; margin-top:16px;"><label>Nota máxima</label><input type="number" id="rubricaNotaMaxima" value="20"></div>
+      <div style="margin-top:16px;"><button class="btn" id="salvarRubricaBtn">Salvar rubrica</button></div>
+      <div class="msg-inline" id="rubricaMsg" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- ===================== ESTATÍSTICAS ===================== -->
+  <div id="tabEstatisticas" style="display:none;">
+    <div class="card">
+      <h2>Visão geral</h2>
+      <div class="kpi-row" id="statsKpiRow"></div>
+    </div>
+    <div class="card">
+      <h2>Desempenho por professor</h2>
+      <table><thead><tr><th>Professor</th><th>Correções concluídas</th><th>Tempo médio</th></tr></thead><tbody id="statsProfessorTbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/admin-correcoes.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

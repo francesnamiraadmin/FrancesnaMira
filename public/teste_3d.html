@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiência 3D</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* NAVBAR */
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.logo {
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.hero p {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #aaa;
+}
+
+.btn {
+  margin-top: 40px;
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: 1px solid #444;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* CANVAS 3D */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="logo">3D Experience</div>
+  <div class="menu">
+    <span>Home</span>
+    <span>Produtos</span>
+    <span>Contato</span>
+  </div>
+</div>
+
+<section class="hero">
+  <h1>PROFUNDIDADE</h1>
+  <p>Uma nova forma de sentir o digital</p>
+  <button class="btn">Explorar</button>
+</section>
+
+<!-- IMPORT MAP -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth/window.innerHeight,
+  0.1,
+  1000
+);
+camera.position.z = 8;
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+/* LUZ */
+const light = new THREE.DirectionalLight(0xffffff, 1.2);
+light.position.set(5,5,5);
+scene.add(light);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+
+/* TEXTO 3D */
+let textMesh;
+
+new FontLoader().load(
+  'https://threejs.org/examples/fonts/helvetiker_bold.typeface.json',
+  (font) => {
+
+    const geometry = new TextGeometry('3D', {
+      font,
+      size: 2,
+      height: 0.5,
+      bevelEnabled: true,
+      bevelThickness: 0.05,
+      bevelSize: 0.02
+    });
+
+    geometry.center();
+
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      metalness: 1,
+      roughness: 0.2
+    });
+
+    textMesh = new THREE.Mesh(geometry, material);
+    scene.add(textMesh);
+  }
+);
+
+/* INTERAÇÃO */
+let mouseX = 0;
+let mouseY = 0;
+
+window.addEventListener('mousemove', (e) => {
+  mouseX = (e.clientX/window.innerWidth - 0.5);
+  mouseY = (e.clientY/window.innerHeight - 0.5);
+});
+
+/* ANIMAÇÃO */
+function animate() {
+  requestAnimationFrame(animate);
+
+  if (textMesh) {
+    textMesh.rotation.y += 0.003;
+    textMesh.rotation.x = mouseY * 0.5;
+    textMesh.rotation.y += mouseX * 0.3;
+  }
+
+  renderer.render(scene, camera);
+}
+
+animate();
+
+/* RESPONSIVO */
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+
+</body>
+</html>
