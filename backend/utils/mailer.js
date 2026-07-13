@@ -1,23 +1,36 @@
-const nodemailer = require("nodemailer");
+// Envio de e-mail via API HTTP do Brevo (https://api.brevo.com) em vez de SMTP direto.
+// Motivo: a hospedagem (Railway) bloqueia conexões SMTP de saída para o Gmail
+// ("Connection timeout" tanto na porta 465 quanto na 587) — a API por HTTPS não
+// sofre esse bloqueio.
+const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 
-// host/porta explícitos (587 + STARTTLS) em vez do atalho service:"gmail" (que usa a
-// porta 465/SSL) — alguns provedores de hospedagem bloqueiam a 465 e liberam a 587.
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+async function enviarViaAPI({ destinatario, nome, assunto, html }) {
+  const res = await fetch(BREVO_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "api-key": process.env.BREVO_API_KEY
+    },
+    body: JSON.stringify({
+      sender: { name: "Francês na Mira", email: process.env.EMAIL_USER },
+      to: [{ email: destinatario, name: nome }],
+      subject: assunto,
+      htmlContent: html
+    })
+  });
+
+  if (!res.ok) {
+    const corpo = await res.text().catch(() => "");
+    throw new Error(`Brevo respondeu ${res.status}: ${corpo}`);
   }
-});
+}
 
 async function enviarEmailConfirmacao(destinatario, nome, link) {
-  await transporter.sendMail({
-    from: `"Francês na Mira" <${process.env.EMAIL_USER}>`,
-    to: destinatario,
-    subject: "Confirme seu cadastro - Francês na Mira",
+  await enviarViaAPI({
+    destinatario,
+    nome,
+    assunto: "Confirme seu cadastro - Francês na Mira",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto;">
         <h2 style="color:#08203e;">Olá, ${nome}!</h2>
@@ -33,10 +46,10 @@ async function enviarEmailConfirmacao(destinatario, nome, link) {
 }
 
 async function enviarEmailMatriculaConfirmada(destinatario, nome, detalhes) {
-  await transporter.sendMail({
-    from: `"Francês na Mira" <${process.env.EMAIL_USER}>`,
-    to: destinatario,
-    subject: "Matrícula confirmada - Francês na Mira",
+  await enviarViaAPI({
+    destinatario,
+    nome,
+    assunto: "Matrícula confirmada - Francês na Mira",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto;">
         <h2 style="color:#3f5d3a;">Parabéns, ${nome}!</h2>
@@ -52,10 +65,10 @@ async function enviarEmailMatriculaConfirmada(destinatario, nome, detalhes) {
 }
 
 async function enviarEmailPagamentoRejeitado(destinatario, nome) {
-  await transporter.sendMail({
-    from: `"Francês na Mira" <${process.env.EMAIL_USER}>`,
-    to: destinatario,
-    subject: "Pagamento não aprovado - Francês na Mira",
+  await enviarViaAPI({
+    destinatario,
+    nome,
+    assunto: "Pagamento não aprovado - Francês na Mira",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto;">
         <h2 style="color:#a33;">Olá, ${nome}</h2>
