@@ -79,6 +79,19 @@ body {
   color: var(--text);
 }
 
+/* ---------- ÍCONE DO LOGO (alvo/seta) ao lado do título "Francês na Mira" ----------
+   Dimensionado em em para acompanhar o font-size do elemento que o contém —
+   cabeçalhos grandes (header) ganham um símbolo grande, navbars menores um símbolo menor. */
+.logo-mira-icone {
+  height: 0.6em;
+  width: 0.6em;
+  margin-left: -0.55em;
+  vertical-align: top;
+  position: relative;
+  top: 0.14em;
+  display: inline-block;
+}
+
 /* ---------- TÍTULOS DOS CARDS "price-card-new" (bronze/prata/ouro) ----------
    As cores originais (#f0b27a/#f2f2f2/#ffe680) foram pensadas para o fundo
    escuro; no modo claro o card fica bem mais pálido e essas cores somem. */

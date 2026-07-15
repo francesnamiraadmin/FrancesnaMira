@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
 <title>Minha Conta - Francês na Mira</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -64,7 +65,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   <div class="dash-sub" id="welcomeSub">&nbsp;</div>
 
   <div class="dash-profile-card">
-    <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil">
+    <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil" title="Clique para alterar sua foto" style="cursor:pointer;">
     <div class="dash-profile-meta" id="profileMeta"></div>
   </div>
 </div>
@@ -75,6 +76,38 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
     <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
     <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
+  </div>
+
+  <!-- ===================== PERFIL ===================== -->
+  <div class="dash-section-card" id="secPerfil">
+    <h2>👤 Meu Perfil</h2>
+    <div class="campo">
+      <label for="bioInput">Descrição sobre você</label>
+      <textarea id="bioInput" placeholder="Fale um pouco sobre você, seu nível atual de francês, sua motivação para estudar..."></textarea>
+    </div>
+    <div class="campo">
+      <label for="interessesInput">Seus interesses</label>
+      <input type="text" id="interessesInput" placeholder="Ex.: cinema francês, viagens, culinária, literatura...">
+    </div>
+    <div class="campo-row">
+      <div class="campo">
+        <label for="provaAlvoInput">Qual prova você vai fazer?</label>
+        <select id="provaAlvoInput">
+          <option value="">Ainda não decidi</option>
+          <option value="TCF">TCF</option>
+          <option value="TEF">TEF</option>
+          <option value="DELF">DELF</option>
+          <option value="DALF">DALF</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="dataProvaInput">Data da prova</label>
+        <input type="date" id="dataProvaInput">
+      </div>
+    </div>
+    <div class="countdown-box" id="countdownBox" style="display:none;"></div>
+    <button class="dash-btn" id="salvarPerfilBtn" style="margin-top:8px;">Salvar alterações</button>
+    <div class="salvar-msg" id="salvarMsg"></div>
   </div>
 
   <div class="dash-section-card" id="painelEquipeBox" style="display:none;">
@@ -123,38 +156,6 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
       <a href="matricula.html" class="dash-btn">Nova matrícula</a>
       <a href="minhas-matriculas.html" class="dash-btn secundario">Minhas matrículas</a>
     </div>
-  </div>
-
-  <!-- ===================== PERFIL ===================== -->
-  <div class="dash-section-card" id="secPerfil">
-    <h2>👤 Meu Perfil</h2>
-    <div class="campo">
-      <label for="bioInput">Descrição sobre você</label>
-      <textarea id="bioInput" placeholder="Fale um pouco sobre você, seu nível atual de francês, sua motivação para estudar..."></textarea>
-    </div>
-    <div class="campo">
-      <label for="interessesInput">Seus interesses</label>
-      <input type="text" id="interessesInput" placeholder="Ex.: cinema francês, viagens, culinária, literatura...">
-    </div>
-    <div class="campo-row">
-      <div class="campo">
-        <label for="provaAlvoInput">Qual prova você vai fazer?</label>
-        <select id="provaAlvoInput">
-          <option value="">Ainda não decidi</option>
-          <option value="TCF">TCF</option>
-          <option value="TEF">TEF</option>
-          <option value="DELF">DELF</option>
-          <option value="DALF">DALF</option>
-        </select>
-      </div>
-      <div class="campo">
-        <label for="dataProvaInput">Data da prova</label>
-        <input type="date" id="dataProvaInput">
-      </div>
-    </div>
-    <div class="countdown-box" id="countdownBox" style="display:none;"></div>
-    <button class="dash-btn" id="salvarPerfilBtn" style="margin-top:8px;">Salvar alterações</button>
-    <div class="salvar-msg" id="salvarMsg"></div>
   </div>
 
   <!-- ===================== ESTATÍSTICAS AVANÇADAS (apagar dados) ===================== -->
@@ -212,6 +213,7 @@ function renderHeader(dados) {
   const primeiroNome = (dados.nome || '').split(' ')[0] || 'aluno(a)';
   document.getElementById('welcomeMsg').textContent = `Bem-vindo de volta, ${primeiroNome}!`;
   document.getElementById('dashAvatar').src = dados.perfil?.foto || AVATAR_PADRAO;
+  document.getElementById('dashAvatar').onclick = () => window.AppShell.abrirModalFoto();
 
   const plano = dados.plano || { ativo: false };
   const metaItens = [];
@@ -307,11 +309,14 @@ function fmtTempoEstudado(ms) {
 }
 
 function renderPlataforma(dados) {
+  const card = document.getElementById('secPlataforma');
   const alvo = document.getElementById('conteudoPlataforma');
   if (!window.AppShell.temAcesso('plataforma')) {
+    card.classList.add('locked');
     alvo.innerHTML = cardBloqueado('Plataforma de Questões', 'Plataforma de Questões');
     return;
   }
+  card.classList.remove('locked');
 
   const eventos = carregarEventos();
   if (eventos.length === 0) {
@@ -435,11 +440,14 @@ document.getElementById('apagarDiaBtn').addEventListener('click', () => {
 // ===================== AMBIENTE DE PRODUÇÃO =====================
 const STATUS_AGUARDANDO = ['em_fila', 'em_correcao', 'aguardando_revisao'];
 async function renderProducao(dados) {
+  const card = document.getElementById('secProducao');
   const alvo = document.getElementById('conteudoProducao');
   if (!window.AppShell.temAcesso('producao')) {
+    card.classList.add('locked');
     alvo.innerHTML = cardBloqueado('Ambiente de Produção Oral e Textual', 'Ambiente de Produção Oral e Textual');
     return;
   }
+  card.classList.remove('locked');
   try {
     const res = await fetch('/api/producoes/minhas', { headers: authHeaders() });
     const producoes = await res.json();
@@ -472,11 +480,14 @@ async function renderProducao(dados) {
 
 // ===================== AULAS ESPECIALIZADAS =====================
 async function renderAulas(dados) {
+  const card = document.getElementById('secAulas');
   const alvo = document.getElementById('conteudoAulas');
   if (!window.AppShell.temAcesso('aulasEspecializadas')) {
+    card.classList.add('locked');
     alvo.innerHTML = cardBloqueado('Aulas Especializadas Online', 'Aulas Especializadas Online');
     return;
   }
+  card.classList.remove('locked');
   try {
     const [resResumo, resHistorico, resMatriculas] = await Promise.all([
       fetch('/api/aulas/progresso/resumo', { headers: authHeaders() }),

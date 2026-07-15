@@ -15,26 +15,29 @@
   border-bottom: 1px solid var(--glass-border);
 }
 .app-nav-inner {
-  max-width: 1200px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 14px 28px;
+  padding: 16px 32px;
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 32px;
 }
 .app-nav-logo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
+  font-size: 1.85rem;
   font-weight: 700;
   color: var(--text);
   text-decoration: none;
   white-space: nowrap;
+  flex: 0 0 auto;
+  letter-spacing: 0.2px;
 }
 .app-nav-links {
   display: flex;
   gap: 6px;
   flex: 1;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 .app-nav-link {
   position: relative;
@@ -44,6 +47,7 @@
   font-size: 0.95rem;
   padding: 9px 14px;
   border-radius: 10px;
+  white-space: nowrap;
   transition: background 0.2s ease, color 0.2s ease;
 }
 .app-nav-link:hover { background: var(--glass-hover); }
@@ -53,7 +57,7 @@
 }
 .app-nav-link.app-nav-locked:hover { background: var(--warning-bg); color: var(--warning-text); }
 
-.app-nav-right { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+.app-nav-right { display: flex; align-items: center; gap: 14px; white-space: nowrap; flex: 0 0 auto; }
 .app-nav-item { position: relative; }
 
 .app-nav-pill {
@@ -127,9 +131,17 @@
 .app-dropdown hr { border: none; border-top: 1px solid var(--glass-border); margin: 6px 4px; }
 .app-dropdown .app-dropdown-danger { color: var(--danger-text); }
 
+@media (min-width: 1400px) {
+  .app-nav-inner { padding: 18px 40px; gap: 40px; }
+  .app-nav-logo { font-size: 2rem; }
+  .app-nav-links { justify-content: center; gap: 10px; }
+  .app-nav-link { font-size: 1rem; padding: 10px 18px; }
+}
+
 @media (max-width: 900px) {
   .app-nav-inner { flex-wrap: wrap; padding: 12px 16px; gap: 12px; }
-  .app-nav-links { order: 3; flex-basis: 100%; justify-content: center; gap: 2px; }
+  .app-nav-logo { font-size: 1.5rem; }
+  .app-nav-links { order: 3; flex-basis: 100%; justify-content: center; gap: 2px; flex-wrap: wrap; }
   .app-nav-link { padding: 8px 10px; font-size: 0.88rem; }
   .app-nav-user span { display: none; }
 }
@@ -181,11 +193,13 @@
   box-shadow: var(--shadow); margin-bottom: 22px; position: relative;
 }
 .dash-section-card h2 { font-size: 1.15rem; margin-bottom: 18px; font-family: 'Playfair Display', serif; display:flex; align-items:center; gap:10px; }
-.dash-section-card.locked { opacity: 0.55; }
+.dash-section-card.locked { overflow: hidden; min-height: 220px; }
 .dash-lock-overlay {
-  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 10px; background: var(--overlay); border-radius: 20px; text-align: center; padding: 20px;
+  position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; background: #0c1830; border-radius: 20px; text-align: center; padding: 20px;
 }
+:root[data-theme="light"] .dash-lock-overlay { background: #eef2f9; }
+.dash-lock-overlay p { color: var(--text); font-size: 0.98rem; max-width: 340px; }
 .dash-lock-overlay .upgrade-btn {
   padding: 10px 26px; border-radius: 30px; background: var(--accent); color: var(--accent-text);
   font-weight: 700; text-decoration: none;
