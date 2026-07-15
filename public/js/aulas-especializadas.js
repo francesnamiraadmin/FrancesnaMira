@@ -220,8 +220,24 @@ document.getElementById('materiaisLista').addEventListener('click', async e => {
 
 // ---------- player ----------
 function detectarTipoEmbed(url) {
-  if (/youtube\.com\/embed|youtu\.be|player\.vimeo\.com|iframe\.mediadelivery\.net|cloudflarestream\.com\/.+\/iframe/i.test(url || '')) return 'iframe';
+  if (/youtube\.com|youtu\.be|player\.vimeo\.com|iframe\.mediadelivery\.net|cloudflarestream\.com\/.+\/iframe/i.test(url || '')) return 'iframe';
   return 'video';
+}
+
+// Aceita qualquer link de YouTube colado pelo professor (watch?v=, youtu.be/, shorts/, embed/)
+// e converte para o formato /embed/ID, que é o único que o YouTube permite carregar em iframe.
+function normalizarUrlYoutube(url) {
+  const padroes = [
+    /youtube\.com\/watch\?(?:.*&)?v=([\w-]{6,})/i,
+    /youtube\.com\/shorts\/([\w-]{6,})/i,
+    /youtube\.com\/embed\/([\w-]{6,})/i,
+    /youtu\.be\/([\w-]{6,})/i
+  ];
+  for (const re of padroes) {
+    const match = (url || '').match(re);
+    if (match) return `https://www.youtube.com/embed/${match[1]}`;
+  }
+  return url;
 }
 
 async function renderPlayer() {
@@ -236,7 +252,8 @@ async function renderPlayer() {
 
   if (video.tipo === 'url') {
     if (detectarTipoEmbed(video.url) === 'iframe') {
-      wrap.innerHTML = `<iframe src="${escapeHtml(video.url)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+      const urlEmbed = /youtube\.com|youtu\.be/i.test(video.url) ? normalizarUrlYoutube(video.url) : video.url;
+      wrap.innerHTML = `<iframe src="${escapeHtml(urlEmbed)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
     } else {
       wrap.innerHTML = `<video controls src="${escapeHtml(video.url)}"></video>`;
       ligarEventosVideo(wrap.querySelector('video'));

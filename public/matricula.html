@@ -5,16 +5,145 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Matrícula — Francês na Mira</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/matricula.css">
 <script src="https://sdk.mercadopago.com/js/v2"></script>
-</head>
-<body class="mira-theme">
-<div class="bg-target"></div>
 
-<div class="mira-topbar">
-  <a href="index.html" class="voltar">← Voltar ao site</a>
-</div>
+<style>
+html { scroll-behavior: smooth; }
+header { font-family: 'Playfair Display', serif; font-size: 3.8rem; text-align: center; padding: 35px; background: var(--header-bg); }
+header a { color: inherit; text-decoration: none; }
+
+:root[data-theme="dark"] .card { background: #2f5c86; }
+
+:root[data-theme="dark"] .option,
+:root[data-theme="dark"] .pacote {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+:root[data-theme="dark"] .option:hover,
+:root[data-theme="dark"] .pacote:hover {
+  border-color: #D9B65A;
+}
+:root[data-theme="dark"] .option.selected,
+:root[data-theme="dark"] .pacote.selected {
+  background: rgba(217, 182, 90, 0.32);
+  border-color: #D9B65A;
+}
+
+:root[data-theme="dark"] input[type=text],
+:root[data-theme="dark"] input[type=email],
+:root[data-theme="dark"] input[type=tel],
+:root[data-theme="dark"] input[type=date],
+:root[data-theme="dark"] input[type=number],
+:root[data-theme="dark"] input[type=password],
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] .slot-btn,
+:root[data-theme="dark"] .day-row {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #F2EFE4;
+}
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] select:focus,
+:root[data-theme="dark"] textarea:focus,
+:root[data-theme="dark"] .slot-btn:hover,
+:root[data-theme="dark"] .day-row:hover {
+  border-color: #D9B65A;
+}
+:root[data-theme="dark"] .slot-btn.selected,
+:root[data-theme="dark"] .day-row.checked {
+  background: rgba(217, 182, 90, 0.32);
+  border-color: #D9B65A;
+}
+:root[data-theme="dark"] .cupom-row input {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #F2EFE4;
+}
+
+:root[data-theme="dark"] .btn-primary {
+  background: #D9B65A;
+  color: #12180F;
+}
+:root[data-theme="dark"] .btn-primary:hover {
+  background: #c2a04a;
+}
+:root[data-theme="dark"] .resumo-total .valor {
+  color: #D9B65A;
+}
+
+nav {
+  position: relative; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 40px; background: var(--glass-strong); backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--glass-border); width: 100%; font-family: 'Poppins', sans-serif;
+}
+.nav-item { position: relative; flex: 1; text-align: center; }
+nav a { position: relative; color: var(--text); text-decoration: none; font-weight: 600; padding: 10px 0; display: inline-block; cursor: pointer; transition: color 0.3s ease; }
+nav a:hover { color: #3b96ff; }
+nav a::after { content: ""; position: absolute; left: 0; bottom: -0.5px; height: 4px; width: 0%; background: var(--accent); transition: width 0.3s ease; }
+nav a:hover::after { width: 100%; }
+
+.dropdown {
+  position: absolute; top: 100%; left: 50%; transform: translate(-50%, 10px); background: var(--overlay-strong);
+  border-radius: 18px; min-width: 240px; opacity: 0; pointer-events: none; transition: 0.3s ease; z-index: 2000;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+.dropdown.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+.dropdown a { padding: 14px 20px; font-size: 1rem; text-align: left; }
+.dropdown-cursos { display: flex; gap: 10px; min-width: 190px; padding: 10px 10px; }
+.dropdown-cursos .coluna { display: flex; flex-direction: column; }
+.dropdown-cursos strong { margin-bottom: 10px; font-weight: 700; color: var(--accent); }
+
+.login { background: var(--accent); color: var(--accent-text); padding: 10px 28px; border-radius: 30px; font-weight: 700; flex: 0 0 auto; margin-left: 20px; }
+
+footer.site-footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; font-family: 'Poppins', sans-serif; color: var(--text); }
+</style>
+</head>
+<body>
+
+<header><a href="index.html">Francês na Mira</a></header>
+
+<nav>
+  <div class="nav-item"><a href="blog.html">Blog</a></div>
+  <div class="nav-item">
+    <a href="correcoes.html">Correções</a>
+    <div class="dropdown">
+      <a href="producao-oral.html">Produção Oral</a>
+      <a href="producao-escrita.html">Produção Escrita</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a href="cursos.html">Cursos</a>
+    <div class="dropdown dropdown-cursos">
+      <div class="coluna">
+        <strong>Específicos</strong>
+        <a href="tcf.html">TCF</a>
+        <a href="delf.html">DELF</a>
+        <a href="dalf.html">DALF</a>
+        <a href="tef.html">TEF</a>
+      </div>
+      <div class="coluna">
+        <strong>Gerais</strong>
+        <a href="a1.html">A1</a>
+        <a href="a2.html">A2</a>
+        <a href="b1.html">B1</a>
+        <a href="b2.html">B2</a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a href="academia.html">Academia</a>
+    <div class="dropdown">
+      <a href="plataforma.html">Plataforma de Questões</a>
+      <a href="aulas.html">Aulas Especializadas</a>
+    </div>
+  </div>
+  <div class="nav-item"><a href="cadastro.html">Cadastrar</a></div>
+  <a href="login.html" class="login">Entrar</a>
+</nav>
 
 <div class="wrap">
 
@@ -235,6 +364,20 @@
   <footer class="note">Seus dados são usados apenas para organizar sua matrícula em Francês na Mira.</footer>
 </div>
 
+<footer class="site-footer">© 2026 · Francês na Mira</footer>
+
+<script>
+document.querySelectorAll('.nav-item').forEach(item => {
+  const dropdown = item.querySelector('.dropdown');
+  if (!dropdown) return;
+  let timeout;
+  item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown.classList.add('show'); });
+  item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown.classList.remove('show'); }, 150); });
+});
+</script>
+
 <script src="js/matricula.js"></script>
+<script src="js/main.js"></script>
+<script src="js/theme-toggle.js"></script>
 </body>
 </html>

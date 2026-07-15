@@ -86,22 +86,14 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 }
 .excellence-note strong { color: var(--accent); }
 
-.price-carousel { position: relative; width: 100%; max-width: 460px; display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
-.price-nav {
-  flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--glass-border-strong);
-  background: var(--glass-strong); color: var(--text); font-size: 1.3rem; cursor: pointer; transition: 0.3s;
-}
-.price-nav:hover { background: var(--accent); color: var(--accent-text); }
-.price-track { position: relative; flex: 1; height: 520px; }
+.price-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; gap: 24px; width: 100%; margin-bottom: 30px; }
 
 .price-card-new {
-  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: 36px 28px; border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
+  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+  flex: 1 1 260px; max-width: 320px; padding: 36px 28px; border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
   backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
   color: #ffffff;
-  opacity: 0; pointer-events: none; transform: scale(0.94); transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.price-card-new.active { opacity: 1; pointer-events: auto; transform: scale(1); }
 
 .price-card-new.tier-bronze { background: linear-gradient(160deg, rgba(205,127,50,0.45), rgba(205,127,50,0.12)); border-color: rgba(205,127,50,0.7); }
 .price-card-new.tier-prata { background: linear-gradient(160deg, rgba(200,200,200,0.4), rgba(200,200,200,0.1)); border-color: rgba(220,220,220,0.7); }
@@ -131,10 +123,6 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   font-weight: 700; font-size: 1.05rem; border-radius: 8px; text-decoration: none; transition: 0.3s;
 }
 .price-card-new a:hover { background: var(--accent-hover); }
-
-.price-dots { position: absolute; bottom: -24px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; }
-.price-dots .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--glass-border-strong); cursor: pointer; transition: 0.3s; }
-.price-dots .dot.active { background: var(--accent); width: 22px; border-radius: 6px; }
 
 .excellence-badge {
   position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
@@ -282,51 +270,43 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   <h2 class="feature-title">Escolha seu plano</h2>
   <p class="excellence-note">O plano <strong>Excellence</strong> inclui acompanhamento particular, curso gravado, plataforma de questões e suporte prioritário — a forma mais completa de chegar preparado.</p>
   <div class="feature-price">
-    <div class="price-carousel">
-      <button class="price-nav price-prev" aria-label="Plano anterior">‹</button>
-      <div class="price-track">
-        <div class="price-card-new tier-bronze">
-          
-          <h3>Essentiel</h3>
-          <p class="price-value">R$99<span>/mês</span></p>
-          <ul>
-            <li class="feature-hours">Horas semanais: 3h</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
-            <li class="feature-no"><span class="feature-icon">✗</span>Acompanhamento particular</li>
-            <li class="feature-no"><span class="feature-icon">✗</span>Curso gravado disponível</li>
-            <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
-          </ul>
-        </div>
-        <div class="price-card-new tier-prata">
-          
-          <h3>Avancé</h3>
-          <p class="price-value">R$129<span>/mês</span></p>
-          <ul>
-            <li class="feature-hours">Horas semanais: 4h</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
-            <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
-          </ul>
-        </div>
-        <div class="price-card-new tier-ouro active">
-          <span class="excellence-badge">⭐ Mais escolhido</span>
-          <h3>Excellence</h3>
-          <p class="price-value">R$159<span>/mês</span></p>
-          <ul>
-            <li class="feature-hours">Horas semanais: 5h</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Plataforma de questões</li>
-          </ul>
-        </div>
+    <div class="price-grid">
+      <div class="price-card-new tier-bronze">
+        <h3>Essentiel</h3>
+        <p class="price-value">R$99<span>/mês</span></p>
+        <ul>
+          <li class="feature-hours">Horas semanais: 3h</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
+          <li class="feature-no"><span class="feature-icon">✗</span>Acompanhamento particular</li>
+          <li class="feature-no"><span class="feature-icon">✗</span>Curso gravado disponível</li>
+          <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
+        </ul>
+        <a href="matricula.html?curso=A2&plano=Essentiel&valor=99">Assine o plano</a>
       </div>
-      <button class="price-nav price-next" aria-label="Próximo plano">›</button>
-      <div class="price-dots">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot active"></span>
+      <div class="price-card-new tier-prata">
+        <h3>Avancé</h3>
+        <p class="price-value">R$129<span>/mês</span></p>
+        <ul>
+          <li class="feature-hours">Horas semanais: 4h</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
+          <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
+        </ul>
+        <a href="matricula.html?curso=A2&plano=Avanc%C3%A9&valor=129">Assine o plano</a>
+      </div>
+      <div class="price-card-new tier-ouro">
+        <span class="excellence-badge">⭐ Mais escolhido</span>
+        <h3>Excellence</h3>
+        <p class="price-value">R$159<span>/mês</span></p>
+        <ul>
+          <li class="feature-hours">Horas semanais: 5h</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Plataforma de questões</li>
+        </ul>
+        <a href="matricula.html?curso=A2&plano=Excellence&valor=159">Assine o plano</a>
       </div>
     </div>
   </div>
@@ -421,24 +401,10 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 </div>
  </div>
 </div>
-<div class="feature-row" style="padding-top:0;">
- <div class="feature-container">
-  <h2 class="feature-title">Forma de pagamento</h2>
-  <p class="payment-summary" id="planSummary"></p>
-  <p id="loginNotice" style="display:none; text-align:center; background:var(--danger-bg); border:1px solid rgba(255,82,82,0.4); border-radius:14px; padding:14px 20px; max-width:480px;">
-    Você precisa <a href="login.html" style="color:var(--accent); font-weight:700;">entrar na sua conta</a> para finalizar a compra.
-  </p>
-
-  <button type="button" class="cta-btn" id="btnIrParaMatricula" style="max-width:360px;">Continuar para pagamento</button>
- </div>
-</div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
 <script>
-const COURSE_TITLE = "Francês A2";
-const NIVEL_TURMA = "A2";
-
 document.querySelectorAll('.nav-item').forEach(item => {
   const dropdown = item.querySelector('.dropdown');
   if (!dropdown) return;
@@ -446,67 +412,6 @@ document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown.classList.add('show'); });
   item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown.classList.remove('show'); }, 150); });
 });
-
-
-function updatePlanSummary() {
-  const carousel = document.querySelector('.price-carousel');
-  const summary = document.getElementById('planSummary');
-  if (!carousel || !summary) return;
-  const activeCard = carousel.querySelector('.price-card-new.active');
-  if (!activeCard) return;
-  const label = activeCard.querySelector('h3').textContent;
-  const price = activeCard.querySelector('.price-value').textContent;
-  summary.innerHTML = 'Plano selecionado: <strong>' + label + '</strong> — <strong>' + price + '</strong>';
-}
-
-document.querySelectorAll('.price-carousel').forEach(carousel => {
-  const cards = carousel.querySelectorAll('.price-card-new');
-  const dots = carousel.querySelectorAll('.dot');
-  let tierIndex = Array.from(cards).findIndex(c => c.classList.contains('active'));
-  if (tierIndex < 0) tierIndex = 0;
-
-  function showTier(i) {
-    cards.forEach(c => c.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
-    cards[i].classList.add('active');
-    dots[i].classList.add('active');
-    tierIndex = i;
-    updatePlanSummary();
-  }
-
-  carousel.querySelector('.price-prev').addEventListener('click', () => {
-    showTier((tierIndex - 1 + cards.length) % cards.length);
-  });
-  carousel.querySelector('.price-next').addEventListener('click', () => {
-    showTier((tierIndex + 1) % cards.length);
-  });
-  dots.forEach((dot, i) => dot.addEventListener('click', () => showTier(i)));
-});
-updatePlanSummary();
-
-
-function checarLogin() {
-  const banner = document.getElementById('loginNotice');
-  const logado = !!localStorage.getItem('token');
-  if (banner) banner.style.display = logado ? 'none' : 'block';
-  return logado;
-}
-checarLogin();
-
-function getActivePlan() {
-  const activeCard = document.querySelector('.price-card-new.active');
-  const label = activeCard.querySelector('h3').textContent;
-  const valor = parseFloat(activeCard.querySelector('.price-value').childNodes[0].textContent.replace('R$', '').replace(',', '.').trim());
-  return { label, valor };
-}
-
-document.getElementById('btnIrParaMatricula').addEventListener('click', () => {
-  if (!checarLogin()) return;
-  const plan = getActivePlan();
-  const params = new URLSearchParams({ curso: NIVEL_TURMA, plano: plan.label, valor: plan.valor });
-  window.location.href = 'matricula.html?' + params.toString();
-});
-
 </script>
 
 <script src="js/main.js"></script>

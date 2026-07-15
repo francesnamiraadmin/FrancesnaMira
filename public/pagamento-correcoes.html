@@ -7,7 +7,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
-<script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <style>
 
@@ -86,21 +85,13 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 }
 .excellence-note strong { color: var(--accent); }
 
-.price-carousel { position: relative; width: 100%; max-width: 460px; display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
-.price-nav {
-  flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--glass-border-strong);
-  background: var(--glass-strong); color: var(--text); font-size: 1.3rem; cursor: pointer; transition: 0.3s;
-}
-.price-nav:hover { background: var(--accent); color: var(--accent-text); }
-.price-track { position: relative; flex: 1; height: 520px; }
+.price-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; gap: 24px; width: 100%; margin-bottom: 30px; }
 
 .price-card-new {
-  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: 36px 28px; border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
+  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+  flex: 1 1 260px; max-width: 320px; padding: 36px 28px; border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
   backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-  opacity: 0; pointer-events: none; transform: scale(0.94); transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.price-card-new.active { opacity: 1; pointer-events: auto; transform: scale(1); }
 
 .price-card-new.tier-bronze { background: linear-gradient(160deg, rgba(205,127,50,0.45), rgba(205,127,50,0.12)); border-color: rgba(205,127,50,0.7); }
 .price-card-new.tier-prata { background: linear-gradient(160deg, rgba(200,200,200,0.4), rgba(200,200,200,0.1)); border-color: rgba(220,220,220,0.7); }
@@ -130,10 +121,6 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   font-weight: 700; font-size: 1.05rem; border-radius: 8px; text-decoration: none; transition: 0.3s;
 }
 .price-card-new a:hover { background: var(--accent-hover); }
-
-.price-dots { position: absolute; bottom: -24px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; }
-.price-dots .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--glass-border-strong); cursor: pointer; transition: 0.3s; }
-.price-dots .dot.active { background: var(--accent); width: 22px; border-radius: 6px; }
 
 .excellence-badge {
   position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
@@ -281,51 +268,43 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   <h2 class="feature-title">Escolha seu plano</h2>
   <p class="excellence-note">O plano <strong>Excellence</strong> inclui acompanhamento particular, curso gravado, plataforma de questões e suporte prioritário — a forma mais completa de chegar preparado.</p>
   <div class="feature-price">
-    <div class="price-carousel">
-      <button class="price-nav price-prev" aria-label="Plano anterior">‹</button>
-      <div class="price-track">
-        <div class="price-card-new tier-bronze">
-          
-          <h3>Essentiel</h3>
-          <p class="price-value">R$59<span>/mês</span></p>
-          <ul>
-            <li class="feature-hours">Horas semanais: 2h</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
-            <li class="feature-no"><span class="feature-icon">✗</span>Acompanhamento particular</li>
-            <li class="feature-no"><span class="feature-icon">✗</span>Curso gravado disponível</li>
-            <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
-          </ul>
-        </div>
-        <div class="price-card-new tier-prata">
-          
-          <h3>Avancé</h3>
-          <p class="price-value">R$99<span>/mês</span></p>
-          <ul>
-            <li class="feature-hours">Horas semanais: 3h</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
-            <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
-          </ul>
-        </div>
-        <div class="price-card-new tier-ouro active">
-          <span class="excellence-badge">⭐ Mais escolhido</span>
-          <h3>Excellence</h3>
-          <p class="price-value">R$149<span>/mês</span></p>
-          <ul>
-            <li class="feature-hours">Horas semanais: 4h</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
-            <li class="feature-yes"><span class="feature-icon">✓</span>Plataforma de questões</li>
-          </ul>
-        </div>
+    <div class="price-grid">
+      <div class="price-card-new tier-bronze">
+        <h3>Essentiel</h3>
+        <p class="price-value">R$59<span>/mês</span></p>
+        <ul>
+          <li class="feature-hours">Horas semanais: 2h</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
+          <li class="feature-no"><span class="feature-icon">✗</span>Acompanhamento particular</li>
+          <li class="feature-no"><span class="feature-icon">✗</span>Curso gravado disponível</li>
+          <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
+        </ul>
+        <a href="matricula.html?curso=Corre%C3%A7%C3%B5es%20de%20Texto&plano=Essentiel&valor=59">Assine o plano</a>
       </div>
-      <button class="price-nav price-next" aria-label="Próximo plano">›</button>
-      <div class="price-dots">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot active"></span>
+      <div class="price-card-new tier-prata">
+        <h3>Avancé</h3>
+        <p class="price-value">R$99<span>/mês</span></p>
+        <ul>
+          <li class="feature-hours">Horas semanais: 3h</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
+          <li class="feature-no"><span class="feature-icon">✗</span>Plataforma de questões</li>
+        </ul>
+        <a href="matricula.html?curso=Corre%C3%A7%C3%B5es%20de%20Texto&plano=Avanc%C3%A9&valor=99">Assine o plano</a>
+      </div>
+      <div class="price-card-new tier-ouro">
+        <span class="excellence-badge">⭐ Mais escolhido</span>
+        <h3>Excellence</h3>
+        <p class="price-value">R$149<span>/mês</span></p>
+        <ul>
+          <li class="feature-hours">Horas semanais: 4h</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Correção de textos</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Acompanhamento particular</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Curso gravado disponível</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Plataforma de questões</li>
+        </ul>
+        <a href="matricula.html?curso=Corre%C3%A7%C3%B5es%20de%20Texto&plano=Excellence&valor=149">Assine o plano</a>
       </div>
     </div>
   </div>
@@ -420,89 +399,10 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 </div>
  </div>
 </div>
-<div class="feature-row" style="padding-top:0;">
- <div class="feature-container">
-  <h2 class="feature-title">Forma de pagamento</h2>
-  <p class="payment-summary" id="planSummary"></p>
-  <p id="loginNotice" style="display:none; text-align:center; background:var(--danger-bg); border:1px solid rgba(255,82,82,0.4); border-radius:14px; padding:14px 20px; max-width:480px;">
-    Você precisa <a href="login.html" style="color:var(--accent); font-weight:700;">entrar na sua conta</a> para finalizar a compra.
-  </p>
-
-  <div class="payment-tabs">
-    <button class="payment-tab active" data-tab="debito">Cartão de Débito</button>
-    <button class="payment-tab" data-tab="credito">Cartão de Crédito</button>
-    <button class="payment-tab" data-tab="boleto">Boleto</button>
-    <button class="payment-tab" data-tab="pix">Pix</button>
-  </div>
-
-  <div class="payment-panel active" id="panel-debito">
-    <form class="payment-form" id="form-debito" onsubmit="return submitCard(event, 'debito')">
-      <input type="email" id="debito-email" placeholder="Seu e-mail" required>
-      <input type="text" id="debito-cpf" placeholder="CPF (somente números)" maxlength="11" required>
-      <input type="text" id="debito-numero" placeholder="Número do cartão" maxlength="19" required>
-      <input type="text" id="debito-nome" placeholder="Nome impresso no cartão" required>
-      <div class="payment-row">
-        <input type="text" id="debito-validade" placeholder="Validade (MM/AA)" maxlength="5" required>
-        <input type="text" id="debito-cvv" placeholder="CVV" maxlength="4" required>
-      </div>
-      <button type="submit" class="cta-btn">Pagar com Débito</button>
-    </form>
-    <p class="payment-result" id="result-debito"></p>
-  </div>
-
-  <div class="payment-panel" id="panel-credito">
-    <form class="payment-form" id="form-credito" onsubmit="return submitCard(event, 'credito')">
-      <input type="email" id="credito-email" placeholder="Seu e-mail" required>
-      <input type="text" id="credito-cpf" placeholder="CPF (somente números)" maxlength="11" required>
-      <input type="text" id="credito-numero" placeholder="Número do cartão" maxlength="19" required>
-      <input type="text" id="credito-nome" placeholder="Nome impresso no cartão" required>
-      <div class="payment-row">
-        <input type="text" id="credito-validade" placeholder="Validade (MM/AA)" maxlength="5" required>
-        <input type="text" id="credito-cvv" placeholder="CVV" maxlength="4" required>
-      </div>
-      <select id="credito-parcelas" required>
-        <option value="1">1x sem juros</option>
-        <option value="3">3x sem juros</option>
-        <option value="6">6x sem juros</option>
-        <option value="12">12x sem juros</option>
-      </select>
-      <button type="submit" class="cta-btn">Pagar com Crédito</button>
-    </form>
-    <p class="payment-result" id="result-credito"></p>
-  </div>
-
-  <div class="payment-panel" id="panel-boleto">
-    <div class="boleto-info">
-      <p><strong>Vencimento:</strong> 3 dias úteis após a geração.</p>
-      <p><strong>Compensação:</strong> até 2 dias úteis após o pagamento.</p>
-      <p>O boleto será enviado para o e-mail informado abaixo.</p>
-    </div>
-    <form class="payment-form" id="form-boleto" onsubmit="return submitBoleto(event)">
-      <input type="email" id="boleto-email" placeholder="Seu e-mail" required>
-      <input type="text" id="boleto-cpf" placeholder="CPF (somente números)" maxlength="11" required>
-      <input type="text" id="boleto-nome" placeholder="Nome completo" required>
-      <button type="submit" class="cta-btn">Gerar boleto</button>
-    </form>
-    <p class="payment-result" id="result-boleto"></p>
-  </div>
-
-  <div class="payment-panel" id="panel-pix">
-    <p>Informe seus dados para gerar um Pix real via Mercado Pago. Escaneie o QR Code ou copie a chave — a confirmação costuma sair em poucos minutos.</p>
-    <form class="payment-form" id="form-pix" onsubmit="return submitPix(event)">
-      <input type="email" id="pix-email" placeholder="Seu e-mail" required>
-      <input type="text" id="pix-cpf" placeholder="CPF (somente números)" maxlength="11" required>
-      <button type="submit" class="cta-btn">Gerar Pix</button>
-    </form>
-    <div id="pix-result"></div>
-  </div>
- </div>
-</div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
 <script>
-const COURSE_TITLE = "Correções de Texto";
-
 document.querySelectorAll('.nav-item').forEach(item => {
   const dropdown = item.querySelector('.dropdown');
   if (!dropdown) return;
@@ -510,232 +410,6 @@ document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown.classList.add('show'); });
   item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown.classList.remove('show'); }, 150); });
 });
-
-
-function updatePlanSummary() {
-  const carousel = document.querySelector('.price-carousel');
-  const summary = document.getElementById('planSummary');
-  if (!carousel || !summary) return;
-  const activeCard = carousel.querySelector('.price-card-new.active');
-  if (!activeCard) return;
-  const label = activeCard.querySelector('h3').textContent;
-  const price = activeCard.querySelector('.price-value').textContent;
-  summary.innerHTML = 'Plano selecionado: <strong>' + label + '</strong> — <strong>' + price + '</strong>';
-}
-
-document.querySelectorAll('.price-carousel').forEach(carousel => {
-  const cards = carousel.querySelectorAll('.price-card-new');
-  const dots = carousel.querySelectorAll('.dot');
-  let tierIndex = Array.from(cards).findIndex(c => c.classList.contains('active'));
-  if (tierIndex < 0) tierIndex = 0;
-
-  function showTier(i) {
-    cards.forEach(c => c.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
-    cards[i].classList.add('active');
-    dots[i].classList.add('active');
-    tierIndex = i;
-    updatePlanSummary();
-  }
-
-  carousel.querySelector('.price-prev').addEventListener('click', () => {
-    showTier((tierIndex - 1 + cards.length) % cards.length);
-  });
-  carousel.querySelector('.price-next').addEventListener('click', () => {
-    showTier((tierIndex + 1) % cards.length);
-  });
-  dots.forEach((dot, i) => dot.addEventListener('click', () => showTier(i)));
-});
-updatePlanSummary();
-
-
-document.querySelectorAll('.payment-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.payment-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.payment-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
-  });
-});
-
-let mp;
-(async () => {
-  try {
-    const cfg = await fetch('/api/pagamentos/config').then(r => r.json());
-    if (cfg.publicKey && !cfg.publicKey.includes('COLOQUE_AQUI') && window.MercadoPago) {
-      mp = new MercadoPago(cfg.publicKey, { locale: 'pt-BR' });
-    }
-  } catch (e) {
-    console.error('Não foi possível carregar a configuração de pagamento', e);
-  }
-})();
-
-function getActivePlan() {
-  const activeCard = document.querySelector('.price-card-new.active');
-  const label = activeCard.querySelector('h3').textContent;
-  const valor = parseFloat(activeCard.querySelector('.price-value').childNodes[0].textContent.replace('R$', '').replace(',', '.').trim());
-  return { label, valor };
-}
-
-function copyPix() {
-  const key = document.getElementById('pixKeyText').textContent.trim();
-  navigator.clipboard?.writeText(key);
-  alert('Chave Pix copiada!');
-}
-
-function checarLogin() {
-  const banner = document.getElementById('loginNotice');
-  const logado = !!localStorage.getItem('token');
-  if (banner) banner.style.display = logado ? 'none' : 'block';
-  return logado;
-}
-checarLogin();
-
-async function submitCard(ev, tipo) {
-  ev.preventDefault();
-  const resultEl = document.getElementById('result-' + tipo);
-  resultEl.style.color = 'white';
-  resultEl.textContent = 'Processando...';
-
-  if (!checarLogin()) {
-    resultEl.style.color = '#ff6b6b';
-    resultEl.textContent = 'Faça login para finalizar a compra.';
-    return false;
-  }
-
-  if (!mp) {
-    resultEl.style.color = '#ff6b6b';
-    resultEl.textContent = 'Pagamento ainda não configurado. Cadastre as chaves do Mercado Pago em backend/.env para ativar cobranças reais.';
-    return false;
-  }
-
-  try {
-    const numero = document.getElementById(tipo + '-numero').value.replace(/\s/g, '');
-    const nome = document.getElementById(tipo + '-nome').value;
-    const [mm, aa] = document.getElementById(tipo + '-validade').value.split('/');
-    const cvv = document.getElementById(tipo + '-cvv').value;
-    const cpf = document.getElementById(tipo + '-cpf').value;
-    const email = document.getElementById(tipo + '-email').value;
-    const installments = tipo === 'credito' ? document.getElementById('credito-parcelas').value : 1;
-
-    const bin = numero.slice(0, 6);
-    const methods = await mp.getPaymentMethods({ bin });
-    const paymentMethodId = methods.results && methods.results[0] ? methods.results[0].id : null;
-    if (!paymentMethodId) throw new Error('Bandeira do cartão não reconhecida.');
-
-    const tokenResp = await mp.createCardToken({
-      cardNumber: numero,
-      cardholderName: nome,
-      cardExpirationMonth: mm,
-      cardExpirationYear: '20' + aa,
-      securityCode: cvv,
-      identificationType: 'CPF',
-      identificationNumber: cpf
-    });
-
-    const plan = getActivePlan();
-    const res = await fetch('/api/pagamentos/cartao', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') },
-      body: JSON.stringify({
-        token: tokenResp.id, paymentMethodId, installments,
-        curso: COURSE_TITLE, plano: plan.label, valor: plan.valor,
-        email, cpf, tipo
-      })
-    });
-    const data = await res.json();
-
-    if (res.ok && data.status === 'approved') {
-      resultEl.style.color = '#4ade80';
-      resultEl.textContent = 'Pagamento aprovado! Redirecionando para sua conta...';
-      setTimeout(() => window.location.href = 'minha-conta.html', 1500);
-    } else {
-      resultEl.style.color = '#ff6b6b';
-      resultEl.textContent = data.msg || ('Pagamento não aprovado (' + (data.statusDetail || data.status) + ').');
-    }
-  } catch (err) {
-    resultEl.style.color = '#ff6b6b';
-    resultEl.textContent = 'Erro: ' + err.message;
-  }
-  return false;
-}
-
-async function submitPix(ev) {
-  ev.preventDefault();
-  const container = document.getElementById('pix-result');
-
-  if (!checarLogin()) {
-    container.innerHTML = '<p style="color:#ff6b6b;">Faça login para finalizar a compra.</p>';
-    return false;
-  }
-
-  container.innerHTML = 'Gerando Pix...';
-
-  try {
-    const email = document.getElementById('pix-email').value;
-    const cpf = document.getElementById('pix-cpf').value;
-    const plan = getActivePlan();
-
-    const res = await fetch('/api/pagamentos/pix', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') },
-      body: JSON.stringify({ curso: COURSE_TITLE, plano: plan.label, valor: plan.valor, email, cpf })
-    });
-    const data = await res.json();
-
-    if (res.ok && data.qrCodeBase64) {
-      container.innerHTML =
-        '<img src="data:image/png;base64,' + data.qrCodeBase64 + '" style="width:220px;height:220px;border-radius:12px;" alt="QR Code Pix">' +
-        '<div class="pix-key"><span id="pixKeyText">' + data.copiaECola + '</span><button type="button" onclick="copyPix()">Copiar chave</button></div>';
-    } else {
-      container.innerHTML = '<p style="color:#ff6b6b;">' + (data.msg || 'Não foi possível gerar o Pix. Cadastre as chaves do Mercado Pago em backend/.env.') + '</p>';
-    }
-  } catch (err) {
-    container.innerHTML = '<p style="color:#ff6b6b;">Erro: ' + err.message + '</p>';
-  }
-  return false;
-}
-
-async function submitBoleto(ev) {
-  ev.preventDefault();
-  const resultEl = document.getElementById('result-boleto');
-
-  if (!checarLogin()) {
-    resultEl.style.color = '#ff6b6b';
-    resultEl.textContent = 'Faça login para finalizar a compra.';
-    return false;
-  }
-
-  resultEl.style.color = 'white';
-  resultEl.textContent = 'Gerando boleto...';
-
-  try {
-    const email = document.getElementById('boleto-email').value;
-    const cpf = document.getElementById('boleto-cpf').value;
-    const nome = document.getElementById('boleto-nome').value;
-    const plan = getActivePlan();
-
-    const res = await fetch('/api/pagamentos/boleto', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') },
-      body: JSON.stringify({ curso: COURSE_TITLE, plano: plan.label, valor: plan.valor, email, cpf, nome })
-    });
-    const data = await res.json();
-
-    if (res.ok && data.boletoUrl) {
-      resultEl.style.color = '#4ade80';
-      resultEl.innerHTML = 'Boleto gerado! <a href="' + data.boletoUrl + '" target="_blank" style="color:var(--accent);">Clique aqui para visualizar</a>.';
-    } else {
-      resultEl.style.color = '#ff6b6b';
-      resultEl.textContent = data.msg || 'Não foi possível gerar o boleto. Cadastre as chaves do Mercado Pago em backend/.env.';
-    }
-  } catch (err) {
-    resultEl.style.color = '#ff6b6b';
-    resultEl.textContent = 'Erro: ' + err.message;
-  }
-  return false;
-}
-
 </script>
 
 <script src="js/main.js"></script>
