@@ -7,6 +7,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
 
 <style>
 
@@ -324,51 +325,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <body>
 
-<header><a href="index.html">Francês na Mira</a></header>
-
-<nav>
-  <div class="nav-item"><a href="blog.html">Blog</a></div>
-
-  <div class="nav-item">
-    <a href="correcoes.html">Correções</a>
-    <div class="dropdown">
-      <a href="producao-oral.html">Produção Oral</a>
-      <a href="producao-escrita.html">Produção Escrita</a>
-    </div>
-  </div>
-
-  <div class="nav-item">
-    <a href="cursos.html">Cursos</a>
-    <div class="dropdown dropdown-cursos">
-      <div class="coluna">
-        <strong>Específicos</strong>
-        <a href="tcf.html">TCF</a>
-        <a href="delf.html">DELF</a>
-        <a href="dalf.html">DALF</a>
-        <a href="tef.html">TEF</a>
-      </div>
-      <div class="coluna">
-        <strong>Gerais</strong>
-        <a href="a1.html">A1</a>
-        <a href="a2.html">A2</a>
-        <a href="b1.html">B1</a>
-        <a href="b2.html">B2</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="nav-item">
-    <a href="academia.html">Academia</a>
-    <div class="dropdown">
-      <a href="plataforma.html">Plataforma de Questões</a>
-      <a href="aulas.html">Aulas Especializadas</a>
-    </div>
-  </div>
-
-  <div class="nav-item"><a href="cadastro.html">Cadastrar</a></div>
-
-  <a href="login.html" class="login">Entrar</a>
-</nav>
+<div id="app-navbar" class="app-navbar-bar"></div>
 
 <section class="carousel">
   <div class="carousel-slide active" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Student_Panel_Discussion.jpg?width=1400')">
@@ -398,7 +355,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 </div>
 <section class="cta-section">
   <h2 class="feature-title" style="margin-bottom:18px;">Envie sua primeira produção</h2>
-  <p style="font-size:1.2rem; opacity:0.9; max-width:600px; margin:0 auto;">Assine o plano Correções de Texto e comece a receber devolutivas detalhadas de professores especializados.</p>
+  <p style="font-size:1.2rem; opacity:0.9; max-width:600px; margin:0 auto;">Assine o plano Ambiente de Produção Oral e Textual e comece a receber devolutivas detalhadas de professores especializados.</p>
   <a class="cta-btn" href="correcoes.html">Ver planos de correção</a>
 </section>
 
@@ -449,7 +406,7 @@ document.querySelectorAll('.price-carousel').forEach(carousel => {
 
 </script>
 
-<script src="js/main.js"></script>
+<script src="js/appShell.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>
 </html>

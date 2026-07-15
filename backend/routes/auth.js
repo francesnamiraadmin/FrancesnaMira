@@ -123,7 +123,7 @@ router.post("/login", async (req, res) => {
 // DADOS DO USUÁRIO LOGADO (nome, email, plano ativo, perfil, papel, créditos)
 router.get("/me", exigirAuth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select("nome email plano perfil role creditosCorrecao especialidades temasFavoritos");
+    const user = await User.findById(req.userId).select("nome email plano produtosAvulsos perfil role creditosCorrecao especialidades temasFavoritos criadoEm");
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
     // Expira o plano automaticamente 30 dias após a ativação
@@ -132,15 +132,28 @@ router.get("/me", exigirAuth, async (req, res) => {
       await user.save();
     }
 
+    // Expira compras avulsas do Pack Prestige automaticamente 30 dias após a ativação
+    let produtosAlterados = false;
+    for (const chave of ["plataforma", "producao", "aulasEspecializadas"]) {
+      const produto = user.produtosAvulsos?.[chave];
+      if (produto?.ativo && produto.dataVencimento && produto.dataVencimento < new Date()) {
+        produto.ativo = false;
+        produtosAlterados = true;
+      }
+    }
+    if (produtosAlterados) await user.save();
+
     res.json({
       nome: user.nome,
       email: user.email,
       plano: user.plano || { ativo: false },
+      produtosAvulsos: user.produtosAvulsos || {},
       perfil: user.perfil || {},
       role: user.role || "aluno",
       creditosCorrecao: user.creditosCorrecao || 0,
       especialidades: user.especialidades || [],
-      temasFavoritos: user.temasFavoritos || []
+      temasFavoritos: user.temasFavoritos || [],
+      criadoEm: user.criadoEm
     });
   } catch (err) {
     console.error(err);
@@ -170,6 +183,29 @@ router.put("/perfil", exigirAuth, async (req, res) => {
     await user.save();
 
     res.json({ msg: "Perfil atualizado com sucesso!", perfil: user.perfil });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// ALTERAR SENHA
+router.put("/senha", exigirAuth, async (req, res) => {
+  try {
+    const { senhaAtual, novaSenha } = req.body;
+    if (!senhaAtual || !novaSenha) return res.status(400).json({ msg: "Preencha todos os campos" });
+    if (novaSenha.length < 6) return res.status(400).json({ msg: "A nova senha deve ter pelo menos 6 caracteres" });
+
+    const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
+
+    const isMatch = await bcrypt.compare(senhaAtual, user.senha);
+    if (!isMatch) return res.status(400).json({ msg: "Senha atual incorreta" });
+
+    user.senha = await bcrypt.hash(novaSenha, 10);
+    await user.save();
+
+    res.json({ msg: "Senha alterada com sucesso!" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor. Tente novamente." });

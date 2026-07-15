@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minhas Inscrições - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+
+<style>
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; min-height: 100vh; }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; }
+
+.tabela-wrap { overflow-x: auto; }
+table.inscricoes { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+table.inscricoes th {
+  text-align: left; padding: 12px 14px; color: var(--text-muted); font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.03em; border-bottom: 1px solid var(--glass-border-strong);
+}
+table.inscricoes td { padding: 14px; border-bottom: 1px solid var(--glass-hover); vertical-align: top; }
+table.inscricoes tr:last-child td { border-bottom: none; }
+.status-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
+.status-badge.aprovado { background: var(--success-bg); color: var(--success-text); }
+.status-badge.pendente { background: var(--warning-bg); color: var(--warning-text); }
+.status-badge.rejeitado, .status-badge.cancelado { background: var(--danger-bg); color: var(--danger-text); }
+</style>
+</head>
+
+<body>
+
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<div class="dash-header">
+  <div class="dash-welcome">Minhas Inscrições</div>
+  <div class="dash-sub">Seu plano atual, produtos avulsos e todo o histórico de compras.</div>
+</div>
+
+<div class="dash-container">
+
+  <div class="dash-cards-row" id="planoAtualCards">
+    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
+  </div>
+
+  <div class="dash-section-card">
+    <h2>📜 Histórico de compras</h2>
+    <div class="tabela-wrap">
+      <table class="inscricoes" id="tabelaHistorico">
+        <thead>
+          <tr><th>Data</th><th>Curso / Produto</th><th>Plano</th><th>Valor</th><th>Pagamento</th><th>Status</th><th>Incluído</th></tr>
+        </thead>
+        <tbody id="corpoHistorico">
+          <tr><td colspan="7"><div class="skeleton skeleton-line"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/appShell.js"></script>
+<script src="js/minhasInscricoes.js"></script>
+<script src="js/theme-toggle.js"></script>
+
+</body>
+</html>

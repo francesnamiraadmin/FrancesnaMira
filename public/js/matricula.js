@@ -13,14 +13,8 @@
   function fmtMoeda(v) {
     return (v || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   }
-  function fmtData(d) {
-    return new Date(d).toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" });
-  }
-  function fmtHora(d) {
-    return new Date(d).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-  }
 
-  // ---------- MODO PLANO (vindo das páginas de pagamento-*.html) ----------
+  // ---------- MODO PLANO (vindo dos cards de preço) ----------
   const urlParams = new URLSearchParams(window.location.search);
   const modoPlano = urlParams.has("plano");
   const planoInfo = modoPlano ? {
@@ -30,43 +24,113 @@
   } : null;
   let turmaDisponivelParaPlano = true;
 
-  // ---------- DADOS FIXOS ----------
-  const PACOTES = [
-    { nome: "Aula avulsa — 1h", horas: 1, periodicidade: "avulsa", preco: 100, sub: "Uma aula, sem compromisso mensal" },
-    { nome: "Mensalidade 1h/semana (4 aulas)", horas: 4, periodicidade: "semanal", preco: 340, sub: "Ritmo leve e constante" },
-    { nome: "Mensalidade 1,5h/semana (4 aulas)", horas: 4, periodicidade: "semanal", preco: 530, sub: "Um pouco mais de imersão por semana" },
-    { nome: "Mensalidade 2h/semana (8 aulas)", horas: 8, periodicidade: "semanal", preco: 600, sub: "O pacote mais popular" },
-    { nome: "Mensalidade 3h/semana (12 aulas)", horas: 12, periodicidade: "semanal", preco: 935, sub: "Para quem quer acelerar o aprendizado" }
+  // Cursos com agenda própria (grade de horários + preço progressivo).
+  const CURSOS_COM_HORARIO = ["TCF", "TEF", "DELF", "DALF", "A1", "A2", "B1", "B2"];
+  const usaHorarios = !modoPlano || CURSOS_COM_HORARIO.includes(planoInfo.curso);
+
+  // Produtos do Pack Prestige (plano único + upgrades) — mesma config do
+  // backend/utils/precoPackPrestige.js, aqui só para o preview ao vivo.
+  const PACK_PRESTIGE_PRODUTOS = {
+    "Plataforma de Questões": { chave: "plataforma", preco: 65 },
+    "Ambiente de Produção Oral e Textual": { chave: "producao", preco: 65 },
+    "Aulas Especializadas Online": { chave: "aulasEspecializadas", preco: 110 }
+  };
+  // R$55 (não R$30) para Plataforma/Produção como upgrade — faz o total fechar igual não
+  // importa qual dos 3 produtos é escolhido como principal (ver backend/utils/precoPackPrestige.js).
+  const PRECO_UPGRADE = { plataforma: 55, producao: 55, aulasEspecializadas: 100 };
+  const NOMES_PRODUTO_PACK = {
+    plataforma: "Plataforma de Questões",
+    producao: "Ambiente de Produção Oral e Textual",
+    aulasEspecializadas: "Aulas Especializadas Online"
+  };
+  function precoPackPrestige(produtoPrincipal, upgrades) {
+    const principal = PACK_PRESTIGE_PRODUTOS[produtoPrincipal];
+    if (!principal) return 0;
+    let total = principal.preco;
+    (upgrades || []).forEach(k => { if (k !== principal.chave && PRECO_UPGRADE[k] !== undefined) total += PRECO_UPGRADE[k]; });
+    return total;
+  }
+  const usaPackPrestige = modoPlano && !!PACK_PRESTIGE_PRODUTOS[planoInfo.curso] && planoInfo.plano === "Pack Prestige";
+
+  // ---------- PREÇO (mesma fórmula do backend/utils/precoMatricula.js — o valor real
+  // cobrado é sempre recalculado no servidor, isso aqui é só o preview ao vivo) ----------
+  const VALOR_BASE_AULA = 400;
+  const DESCONTO_POR_QTD = { 1: 0, 2: 0.05, 3: 0.10, 4: 0.15 };
+  function precoEssentiel(n) {
+    const d = DESCONTO_POR_QTD[n];
+    if (d === undefined) return 0;
+    return Math.ceil(n * VALOR_BASE_AULA - d * VALOR_BASE_AULA);
+  }
+  function precoPorTier(n, tier) {
+    const essentiel = precoEssentiel(n);
+    if (tier === "Essentiel") return essentiel;
+    const avance = essentiel + 90;
+    if (tier === "Avancé") return avance;
+    return avance + 100; // Excellence
+  }
+
+  const TIERS = ["Essentiel", "Avancé", "Excellence"];
+  const BENEFICIOS_TIER = {
+    Essentiel: { particular: true, plataforma: false, producao: false, gravadas: false },
+    "Avancé": { particular: true, plataforma: true, producao: true, gravadas: false },
+    Excellence: { particular: true, plataforma: true, producao: true, gravadas: true }
+  };
+  const NOMES_BENEFICIO = [
+    { key: "particular", label: "Aula Particular / Turma" },
+    { key: "plataforma", label: "Plataforma de Questões" },
+    { key: "producao", label: "Produção Oral e Escrita" },
+    { key: "gravadas", label: "Aulas Especializadas Gravadas" }
   ];
 
+  const DIAS_LABEL = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+  const ORDEM_DIAS = [1, 2, 3, 4, 5, 6, 0]; // exibição Seg..Dom
+
   const STEP_LABELS = {
-    tipo: "Você procura", dados: "Seus dados", turma: "Turma",
-    pacote: "Pacote", horarios: "Horários", resumo: "Resumo", pagamento: "Pagamento"
+    tipo: "Particular ou Turma", dados: "Seus dados", turma: "Turma", upgrade: "Upgrade",
+    horarios: "Horários e plano", resumo: "Resumo", pagamento: "Pagamento"
   };
 
   // ---------- ESTADO ----------
   const state = {
     tipo: null,
-    turma: null,
-    pacote: null,
-    professorId: null,
-    horariosSelecionados: [],
+    turma: null, // só usado pelo fluxo antigo (turma avulsa fora do Pack Prestige)
+    periodo: null,
+    slotsSelecionados: [], // [{_id, diaSemana, horaInicio}]
+    tierEscolhido: modoPlano && CURSOS_COM_HORARIO.includes(planoInfo?.curso) ? planoInfo.plano : null,
+    upgrades: [], // chaves do Pack Prestige (plataforma/producao/aulasEspecializadas) marcadas como adicional
     cupom: null,
-    matricula: null,
-    pagamento: null
+    matricula: null
   };
+  let ultimosSlotsCarregados = [];
 
   let steps = ["tipo"];
   let currentIndex = 0;
-  let sse = null;
 
-  function stepsForTipo(tipo) {
-    if (tipo === "turma") return ["tipo", "dados", "turma", "resumo", "pagamento"];
-    if (tipo === "particular") return ["tipo", "dados", "pacote", "horarios", "resumo", "pagamento"];
-    return ["tipo"];
+  function stepsPadrao() {
+    return ["tipo", "dados", "horarios", "resumo", "pagamento"];
   }
 
-  if (modoPlano) {
+  if (usaHorarios) {
+    steps = stepsPadrao();
+    document.getElementById("campoCupom").style.display = "none";
+    if (modoPlano) {
+      document.querySelector(".eyebrow").textContent = "Assinatura";
+      document.querySelector("header.top .sub").textContent =
+        "Escolha a modalidade, os horários e o plano ideal para " + planoInfo.curso + ".";
+    }
+  } else if (usaPackPrestige) {
+    // Plataforma de Questões, Ambiente de Produção Oral e Textual e Aulas Especializadas
+    // Online — plano único (Pack Prestige) com upgrades opcionais para os outros dois produtos.
+    state.tipo = "turma";
+    steps = ["dados", "upgrade", "resumo", "pagamento"];
+    document.querySelector(".eyebrow").textContent = "Assinatura";
+    document.querySelector("h1.brand").innerHTML = "Pack Prestige" + '<span class="dot"></span>';
+    document.querySelector("header.top .sub").textContent =
+      "Finalize sua assinatura de " + planoInfo.curso + " e adicione outros produtos ao seu pack, se quiser.";
+    document.getElementById("campoCupom").style.display = "none";
+    document.getElementById("camposParticular").style.display = "none";
+  } else {
+    // Fluxo antigo (sem alteração, hoje sem nenhum card apontando para cá).
     state.tipo = "turma";
     steps = planoInfo.plano === "Essentiel" ? ["dados", "resumo", "pagamento"] : ["dados", "turma", "resumo", "pagamento"];
     document.querySelector(".eyebrow").textContent = "Assinatura";
@@ -75,6 +139,10 @@
       "Falta pouco para ativar seu plano " + planoInfo.plano + (planoInfo.curso ? " em " + planoInfo.curso : "") + ". Confirme seus dados e escolha a forma de pagamento.";
     document.getElementById("campoCupom").style.display = "none";
     document.getElementById("camposParticular").style.display = "none";
+  }
+
+  function cursoAtual() {
+    return (modoPlano && planoInfo.curso) || "Aula particular/turma";
   }
 
   // ---------- MIRA TRACK ----------
@@ -97,11 +165,6 @@
     el.style.display = "block";
   }
   function hideTopOk() { document.getElementById("topOk").style.display = "none"; }
-  function showTopOk(msg) {
-    const el = document.getElementById("topOk");
-    el.textContent = msg;
-    el.style.display = "block";
-  }
 
   function showStep(index) {
     currentIndex = index;
@@ -111,6 +174,8 @@
     document.getElementById("btnBack").style.visibility = index === 0 ? "hidden" : "visible";
     document.getElementById("btnNext").style.display = key === "pagamento" ? "none" : "inline-block";
     document.getElementById("btnNext").innerHTML = 'Continuar <span class="arrow">→</span>';
+    document.getElementById("btnNext").disabled = false;
+    document.querySelector(".wrap").classList.toggle("wide", key === "horarios");
     renderMira();
     hideTopError();
     hideTopOk();
@@ -118,10 +183,10 @@
 
     if (key === "dados") prefillDados();
     if (key === "turma") carregarTurmas();
-    if (key === "pacote") renderPacotes();
     if (key === "horarios") entrarEmHorarios();
+    if (key === "upgrade") renderUpgradeGrid();
     if (key === "resumo") renderResumo();
-    if (key !== "horarios" && sse) { sse.close(); sse = null; }
+    if (key === "pagamento") renderPagamentoResumo();
   }
 
   function showSuccess(msg) {
@@ -130,14 +195,13 @@
     document.getElementById("actions").style.display = "none";
     document.getElementById("miraTrack").style.display = "none";
     if (!msg && modoPlano) msg = "Seu plano " + planoInfo.plano + " foi ativado. Em instantes você recebe um e-mail de confirmação. À bientôt!";
+    if (!msg && usaHorarios && !modoPlano) msg = "Sua matrícula foi confirmada. Em instantes você recebe um e-mail de confirmação. À bientôt!";
     if (msg) document.getElementById("successMsg").textContent = msg;
-    if (modoPlano) {
-      const link = document.getElementById("successLink");
-      link.href = "minha-conta.html";
-      link.textContent = "Ver minha conta";
-    }
-    if (sse) { sse.close(); sse = null; }
+    const link = document.getElementById("successLink");
+    link.href = "minha-conta.html";
+    link.textContent = "Ver minha conta";
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(() => { window.location.href = "minha-conta.html"; }, 1800);
   }
 
   function showFieldError(fieldId, show) {
@@ -151,8 +215,10 @@
       document.querySelectorAll("#tipoGrid .option").forEach(o => o.classList.remove("selected"));
       r.closest(".option").classList.add("selected");
       state.tipo = r.value;
-      steps = stepsForTipo(state.tipo);
       document.getElementById("camposParticular").style.display = state.tipo === "particular" ? "block" : "none";
+      // Trocar de modalidade invalida a grade e as seleções feitas na modalidade anterior.
+      state.periodo = null;
+      state.slotsSelecionados = [];
       renderMira();
     });
   });
@@ -176,7 +242,61 @@
     document.getElementById("f-dataExame").style.display = isProva ? "block" : "none";
   });
 
-  // ---------- STEP: TURMA ----------
+  // ---------- STEP: UPGRADE (Pack Prestige) ----------
+  function outrosProdutosPack() {
+    const principal = PACK_PRESTIGE_PRODUTOS[planoInfo.curso];
+    return Object.keys(PACK_PRESTIGE_PRODUTOS)
+      .filter(nome => nome !== planoInfo.curso)
+      .map(nome => ({ nome, chave: PACK_PRESTIGE_PRODUTOS[nome].chave }))
+      .filter(p => p.chave !== principal.chave);
+  }
+
+  function renderUpgradeGrid() {
+    const grid = document.getElementById("upgradeGrid");
+    const outros = outrosProdutosPack();
+    grid.innerHTML = outros.map(p =>
+      '<label class="option" for="upg-' + p.chave + '">' +
+        '<input type="checkbox" id="upg-' + p.chave + '" data-upgrade="' + p.chave + '">' +
+        '<span class="opt-text"><span class="opt-title">' + p.nome + '</span><br>' +
+        '<span class="opt-sub">+' + fmtMoeda(PRECO_UPGRADE[p.chave]) + '/mês</span></span>' +
+      '</label>'
+    ).join("") +
+      '<label class="option" for="upg-nenhum">' +
+        '<input type="checkbox" id="upg-nenhum" data-upgrade="nenhum">' +
+        '<span class="opt-text"><span class="opt-title">Não quero adicionais</span></span>' +
+      '</label>';
+    atualizarSelecaoUpgrade();
+    atualizarTotalUpgrade();
+  }
+
+  function atualizarSelecaoUpgrade() {
+    document.querySelectorAll('#upgradeGrid input[data-upgrade]').forEach(input => {
+      const marcado = input.dataset.upgrade === "nenhum" ? state.upgrades.length === 0 : state.upgrades.includes(input.dataset.upgrade);
+      input.checked = marcado;
+      input.closest(".option").classList.toggle("selected", marcado);
+    });
+  }
+
+  function atualizarTotalUpgrade() {
+    document.getElementById("upgradeTotalValor").textContent = fmtMoeda(precoPackPrestige(planoInfo.curso, state.upgrades));
+  }
+
+  document.getElementById("upgradeGrid").addEventListener("change", e => {
+    const input = e.target.closest("input[data-upgrade]");
+    if (!input) return;
+    const chave = input.dataset.upgrade;
+    if (chave === "nenhum") {
+      state.upgrades = [];
+    } else if (input.checked) {
+      state.upgrades = state.upgrades.includes(chave) ? state.upgrades : state.upgrades.concat(chave);
+    } else {
+      state.upgrades = state.upgrades.filter(k => k !== chave);
+    }
+    atualizarSelecaoUpgrade();
+    atualizarTotalUpgrade();
+  });
+
+  // ---------- STEP: TURMA (fluxo antigo — turma avulsa fora do Pack Prestige) ----------
   async function carregarTurmas() {
     const grid = document.getElementById("turmaGrid");
     grid.innerHTML = '<p class="help">Carregando turmas…</p>';
@@ -241,151 +361,178 @@
     }
   }
 
-  // ---------- STEP: PACOTE ----------
-  function renderPacotes() {
-    const grid = document.getElementById("pacoteGrid");
-    grid.innerHTML = "";
-    PACOTES.forEach((p, idx) => {
-      const id = "pacote-" + idx;
-      const card = document.createElement("label");
-      card.className = "option pacote";
-      card.setAttribute("for", id);
-      card.innerHTML =
-        '<input type="radio" name="pacote" id="' + id + '" style="display:none;">' +
-        '<span class="opt-text" style="width:100%;">' +
-          '<span class="pacote-head"><span class="pacote-name">' + p.nome + '</span><span class="pacote-price">' + fmtMoeda(p.preco) + '</span></span>' +
-          '<span class="pacote-sub">' + p.sub + '</span>' +
-        '</span>';
-      grid.appendChild(card);
-      if (state.pacote && state.pacote.nome === p.nome) { card.classList.add("selected"); card.querySelector("input").checked = true; }
-      card.querySelector("input").addEventListener("change", () => {
-        grid.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
-        card.classList.add("selected");
-        state.pacote = p;
-        state.horariosSelecionados = [];
-      });
-    });
+  // ---------- STEP: HORÁRIOS + PLANO (fluxo novo) ----------
+  const HORAS_POR_PERIODO = {
+    diurno: ["06:00", "07:00", "08:00", "09:00", "10:00", "11:00"],
+    vespertino: ["12:00", "13:00", "14:00", "15:00", "16:00", "17:00"],
+    noturno: ["18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00"]
+  };
+
+  function entrarEmHorarios() {
+    document.getElementById("btnNext").disabled = true;
+    if (!state.periodo) state.periodo = "diurno";
+    document.querySelectorAll(".periodo-tab").forEach(b => b.classList.toggle("active", b.dataset.periodo === state.periodo));
+    renderTierGrid();
+    renderResumoFlutuante();
+    carregarGrade();
   }
 
-  // ---------- STEP: HORÁRIOS ----------
-  async function entrarEmHorarios() {
-    if (!state.pacote) { showStep(steps.indexOf("pacote")); return; }
-    document.getElementById("horariosHint").textContent =
-      "Escolha " + state.pacote.horas + " horário(s) com o professor. A disponibilidade é atualizada em tempo real.";
+  document.getElementById("periodoTabs").addEventListener("click", e => {
+    const btn = e.target.closest(".periodo-tab");
+    if (!btn) return;
+    state.periodo = btn.dataset.periodo;
+    document.querySelectorAll(".periodo-tab").forEach(b => b.classList.toggle("active", b === btn));
+    carregarGrade();
+  });
 
-    const sel = document.getElementById("professorSelect");
-    if (!sel.dataset.loaded) {
-      try {
-        const res = await fetch("/api/disponibilidade/professores", { headers: authHeaders() });
-        const profs = await res.json();
-        sel.innerHTML = profs.map(p => '<option value="' + p._id + '">' + p.nome + "</option>").join("");
-        sel.dataset.loaded = "1";
-        state.professorId = sel.value || null;
-      } catch (e) { /* silencioso */ }
-    }
-    sel.onchange = () => { liberarSelecionados(); state.professorId = sel.value; carregarHorarios(); };
-
-    await carregarHorarios();
-
-    if (!sse) {
-      sse = new EventSource("/api/disponibilidade/stream");
-      sse.addEventListener("disponibilidade-atualizada", () => carregarHorarios());
-    }
-  }
-
-  async function liberarSelecionados() {
-    const ids = state.horariosSelecionados.map(s => s._id);
-    state.horariosSelecionados = [];
-    for (const id of ids) {
-      fetch("/api/disponibilidade/" + id + "/liberar-hold", { method: "POST", headers: authHeaders() }).catch(() => {});
-    }
-  }
-
-  async function carregarHorarios() {
-    const container = document.getElementById("horariosContainer");
-    if (!state.professorId) { container.innerHTML = ""; return; }
-    container.innerHTML = '<p class="help">Carregando horários…</p>';
+  async function carregarGrade() {
+    const tabela = document.getElementById("tabelaHorarios");
+    tabela.innerHTML = '<tr><td>Carregando horários…</td></tr>';
     try {
-      const res = await fetch("/api/disponibilidade?professorId=" + state.professorId, { headers: authHeaders() });
-      const slots = await res.json();
-      const selecionadosIds = state.horariosSelecionados.map(s => s._id);
-      const porDia = {};
-      slots.forEach(s => {
-        const dia = fmtData(s.dataHoraInicio);
-        (porDia[dia] = porDia[dia] || []).push(s);
-      });
-      // garante que horários já selecionados (agora com status reservado por mim) continuem visíveis
-      state.horariosSelecionados.forEach(s => {
-        const dia = fmtData(s.dataHoraInicio);
-        porDia[dia] = porDia[dia] || [];
-        if (!porDia[dia].find(x => x._id === s._id)) porDia[dia].push(s);
-      });
+      const res = await fetch("/api/horarios/" + state.tipo + "/" + state.periodo, { headers: authHeaders() });
+      ultimosSlotsCarregados = res.ok ? await res.json() : [];
+      renderTabela();
+    } catch (e) {
+      tabela.innerHTML = '<tr><td class="field-error" style="display:table-cell;">Não foi possível carregar os horários.</td></tr>';
+    }
+  }
 
-      if (!Object.keys(porDia).length) {
-        container.innerHTML = '<div class="empty-state"><div class="icon">🗓️</div>Este professor não tem horários disponíveis no momento.</div>';
+  function renderTabela() {
+    const tabela = document.getElementById("tabelaHorarios");
+    const porHora = {};
+    ultimosSlotsCarregados.forEach(s => {
+      (porHora[s.horaInicio] = porHora[s.horaInicio] || {})[s.diaSemana] = s;
+    });
+    const horas = HORAS_POR_PERIODO[state.periodo || "diurno"];
+
+    let html = '<thead><tr><th>Horário</th>' + ORDEM_DIAS.map(d => '<th>' + DIAS_LABEL[d] + '</th>').join("") + '</tr></thead><tbody>';
+    horas.forEach(hora => {
+      html += '<tr><td class="hora-label">' + hora + '</td>';
+      ORDEM_DIAS.forEach(dia => {
+        const slot = (porHora[hora] || {})[dia];
+        if (!slot) { html += '<td class="horario-cel vazio"></td>'; return; }
+        const selecionado = state.slotsSelecionados.some(s => s._id === slot._id);
+        const classe = selecionado ? "selecionado" : (slot.disponivel ? "disponivel" : "indisponivel");
+        html += '<td class="horario-cel ' + classe + '" data-slot-id="' + slot._id + '" data-dia="' + dia + '" data-hora="' + hora + '"></td>';
+      });
+      html += "</tr>";
+    });
+    html += "</tbody>";
+    tabela.innerHTML = html;
+  }
+
+  document.getElementById("tabelaHorarios").addEventListener("click", e => {
+    const td = e.target.closest(".horario-cel");
+    if (!td || td.classList.contains("vazio")) return;
+    const slotId = td.dataset.slotId;
+    const jaSelecionado = state.slotsSelecionados.find(s => s._id === slotId);
+
+    if (jaSelecionado) {
+      state.slotsSelecionados = state.slotsSelecionados.filter(s => s._id !== slotId);
+      hideTopError();
+    } else {
+      if (td.classList.contains("indisponivel")) return;
+      if (state.slotsSelecionados.length >= 4) {
+        showTopError("Você pode selecionar no máximo quatro horários semanais.");
         return;
       }
-
-      container.innerHTML = "";
-      Object.keys(porDia).sort((a, b) => new Date(porDia[a][0].dataHoraInicio) - new Date(porDia[b][0].dataHoraInicio)).forEach(dia => {
-        const heading = document.createElement("div");
-        heading.className = "slot-day-heading";
-        heading.textContent = dia;
-        container.appendChild(heading);
-
-        const grid = document.createElement("div");
-        grid.className = "slot-grid";
-        porDia[dia].sort((a, b) => new Date(a.dataHoraInicio) - new Date(b.dataHoraInicio)).forEach(s => {
-          const btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "slot-btn" + (selecionadosIds.includes(s._id) ? " selected" : "");
-          btn.textContent = fmtHora(s.dataHoraInicio);
-          btn.addEventListener("click", () => toggleHorario(s));
-          grid.appendChild(btn);
-        });
-        container.appendChild(grid);
-      });
-    } catch (e) {
-      container.innerHTML = '<p class="field-error" style="display:block;">Não foi possível carregar os horários.</p>';
+      state.slotsSelecionados.push({ _id: slotId, diaSemana: Number(td.dataset.dia), horaInicio: td.dataset.hora });
+      hideTopError();
     }
+    renderTabela();
+    renderTierGrid();
+    renderResumoFlutuante();
+    atualizarBotaoContinuarHorarios();
+  });
+
+  function renderTierGrid() {
+    const wrap = document.getElementById("tierGrid");
+    const n = state.slotsSelecionados.length;
+    wrap.innerHTML = TIERS.map(tier => {
+      const preco = n > 0 ? precoPorTier(n, tier) : null;
+      const beneficios = BENEFICIOS_TIER[tier];
+      const selecionado = state.tierEscolhido === tier;
+      return (
+        '<label class="tier-card' + (selecionado ? " selecionado" : "") + '" data-tier="' + tier + '">' +
+          '<input type="radio" name="tierEscolhido" value="' + tier + '" style="display:none;" ' + (selecionado ? "checked" : "") + '>' +
+          "<h3>" + tier + "</h3>" +
+          '<p class="tier-preco">' + (preco !== null ? fmtMoeda(preco) + "<span>/mês</span>" : "Escolha os horários") + "</p>" +
+          "<ul>" + NOMES_BENEFICIO.map(b =>
+            '<li class="' + (beneficios[b.key] ? "feature-yes" : "feature-no") + '"><span class="feature-icon">' + (beneficios[b.key] ? "✓" : "✗") + "</span>" + b.label + "</li>"
+          ).join("") + "</ul>" +
+        "</label>"
+      );
+    }).join("");
   }
 
-  async function toggleHorario(slot) {
-    const jaSelecionado = state.horariosSelecionados.find(s => s._id === slot._id);
-    if (jaSelecionado) {
-      state.horariosSelecionados = state.horariosSelecionados.filter(s => s._id !== slot._id);
-      fetch("/api/disponibilidade/" + slot._id + "/liberar-hold", { method: "POST", headers: authHeaders() }).catch(() => {});
-      carregarHorarios();
-      return;
-    }
-    if (state.horariosSelecionados.length >= state.pacote.horas) {
-      showTopError("Seu pacote inclui " + state.pacote.horas + " horário(s). Desmarque um horário antes de escolher outro.");
-      return;
-    }
-    try {
-      const res = await fetch("/api/disponibilidade/reservar-temp", {
-        method: "POST", headers: authHeaders(true), body: JSON.stringify({ ids: [slot._id] })
-      });
-      const data = await res.json();
-      if (!res.ok) { showTopError(data.msg || "Não foi possível reservar este horário."); carregarHorarios(); return; }
-      hideTopError();
-      state.horariosSelecionados.push(slot);
-      carregarHorarios();
-    } catch (e) {
-      showTopError("Erro de conexão ao reservar o horário.");
-    }
+  document.getElementById("tierGrid").addEventListener("click", e => {
+    const card = e.target.closest(".tier-card");
+    if (!card) return;
+    if (!state.slotsSelecionados.length) { showTopError("Escolha ao menos um horário antes de selecionar o plano."); return; }
+    state.tierEscolhido = card.dataset.tier;
+    hideTopError();
+    renderTierGrid();
+    renderResumoFlutuante();
+    atualizarBotaoContinuarHorarios();
+  });
+
+  function renderResumoFlutuante() {
+    const el = document.getElementById("resumoFlutuante");
+    const n = state.slotsSelecionados.length;
+    const preco = (n && state.tierEscolhido) ? precoPorTier(n, state.tierEscolhido) : null;
+    const horariosTexto = state.slotsSelecionados.slice()
+      .sort((a, b) => ORDEM_DIAS.indexOf(a.diaSemana) - ORDEM_DIAS.indexOf(b.diaSemana) || a.horaInicio.localeCompare(b.horaInicio))
+      .map(s => DIAS_LABEL[s.diaSemana] + " " + s.horaInicio).join(", ");
+    el.innerHTML =
+      "<h3>Seu resumo</h3>" +
+      linha("Modalidade", state.tipo === "turma" ? "Turma" : "Particular") +
+      linha("Horários", n ? (n + " (" + horariosTexto + ")") : "Nenhum ainda") +
+      (state.tierEscolhido ? linha("Plano", state.tierEscolhido) : "") +
+      linha("Benefícios liberados", state.tierEscolhido ? NOMES_BENEFICIO.filter(b => BENEFICIOS_TIER[state.tierEscolhido][b.key]).map(b => b.label).join(", ") : "—") +
+      '<div class="resumo-total"><span class="label">Mensal</span><span class="valor">' + (preco !== null ? fmtMoeda(preco) : "—") + "</span></div>";
+  }
+
+  function atualizarBotaoContinuarHorarios() {
+    document.getElementById("btnNext").disabled = !(state.slotsSelecionados.length >= 1 && state.slotsSelecionados.length <= 4 && !!state.tierEscolhido);
   }
 
   // ---------- STEP: RESUMO ----------
   function precoOriginalAtual() {
-    if (modoPlano) return planoInfo.valor;
-    return state.tipo === "turma" ? (state.turma?.preco || 0) : (state.pacote?.preco || 0);
+    if (usaHorarios) return precoPorTier(state.slotsSelecionados.length, state.tierEscolhido);
+    if (usaPackPrestige) return precoPackPrestige(planoInfo.curso, state.upgrades);
+    return state.tipo === "turma" && state.turma ? state.turma.preco : planoInfo.valor;
   }
 
   function renderResumo() {
     const el = document.getElementById("resumoConteudo");
     let html = "";
-    if (modoPlano) {
+    if (usaHorarios) {
+      html += linha("Curso", cursoAtual());
+      html += linha("Modalidade", state.tipo === "turma" ? "Aula em turma" : "Aula particular");
+      html += linha("Plano", state.tierEscolhido);
+      const nomesHorarios = state.slotsSelecionados.slice()
+        .sort((a, b) => ORDEM_DIAS.indexOf(a.diaSemana) - ORDEM_DIAS.indexOf(b.diaSemana) || a.horaInicio.localeCompare(b.horaInicio))
+        .map(s => DIAS_LABEL[s.diaSemana] + " às " + s.horaInicio).join("<br>");
+      html += linha("Horários escolhidos", nomesHorarios || "—");
+      html += linha("Valor mensal", fmtMoeda(precoOriginalAtual()));
+    } else if (usaPackPrestige) {
+      const principal = PACK_PRESTIGE_PRODUTOS[planoInfo.curso];
+      const d = dadosPessoaisAtuais();
+      html += linha("Produto principal", planoInfo.curso);
+      html += linha("Pack escolhido", "Pack Prestige");
+      html += linha(planoInfo.curso, fmtMoeda(principal.preco));
+      if (state.upgrades.length) {
+        state.upgrades.forEach(chave => {
+          html += linha(NOMES_PRODUTO_PACK[chave] + " (adicional)", "+" + fmtMoeda(PRECO_UPGRADE[chave]));
+        });
+      } else {
+        html += linha("Adicionais", "Nenhum");
+      }
+      html += linha("Valor mensal", fmtMoeda(precoOriginalAtual()));
+      html += linha("Nome", d.nome || "—");
+      html += linha("E-mail", d.email || "—");
+      html += linha("Telefone", d.telefone || "—");
+    } else if (modoPlano) {
       html += linha("Plano", planoInfo.plano + (planoInfo.curso ? " — " + planoInfo.curso : ""));
       if (state.turma) {
         html += linha("Turma", state.turma.nome);
@@ -394,17 +541,6 @@
         html += linha("Aulas ao vivo", "Turma a definir — combinaremos por e-mail");
       }
       html += linha("Valor mensal", fmtMoeda(planoInfo.valor));
-    } else if (state.tipo === "turma" && state.turma) {
-      html += linha("Turma", state.turma.nome + " — " + state.turma.nivel);
-      html += linha("Dias e horário", (state.turma.dias || []).join(", ") + " às " + state.turma.horario);
-      html += linha("Valor da turma", fmtMoeda(state.turma.preco));
-    } else if (state.tipo === "particular") {
-      html += linha("Pacote", state.pacote?.nome || "");
-      const nomesHorarios = state.horariosSelecionados
-        .slice().sort((a, b) => new Date(a.dataHoraInicio) - new Date(b.dataHoraInicio))
-        .map(s => fmtData(s.dataHoraInicio) + " às " + fmtHora(s.dataHoraInicio)).join("<br>");
-      html += linha("Horários escolhidos", nomesHorarios || "—");
-      html += linha("Valor do pacote", fmtMoeda(state.pacote?.preco));
     }
     el.innerHTML = html;
     atualizarTotal();
@@ -448,9 +584,8 @@
     }
   });
 
-  // ---------- CRIAR MATRÍCULA (ao sair do resumo) ----------
-  async function criarMatricula() {
-    const dadosPessoais = {
+  function dadosPessoaisAtuais() {
+    return {
       nome: document.getElementById("nome").value.trim(),
       email: document.getElementById("email").value.trim(),
       telefone: document.getElementById("telefone").value.trim(),
@@ -461,21 +596,6 @@
       dataExame: document.getElementById("dataExame").value,
       mensagem: document.getElementById("mensagem").value.trim()
     };
-
-    const body = { tipo: state.tipo, dadosPessoais, cupomCodigo: state.cupom ? state.cupom.codigo : undefined };
-    if (state.tipo === "turma") {
-      body.turmaId = state.turma._id;
-    } else {
-      body.professorId = state.professorId;
-      body.horarioIds = state.horariosSelecionados.map(s => s._id);
-      body.pacote = { nome: state.pacote.nome, horas: state.pacote.horas, periodicidade: state.pacote.periodicidade, preco: state.pacote.preco };
-    }
-
-    const res = await fetch("/api/matricula/iniciar", { method: "POST", headers: authHeaders(true), body: JSON.stringify(body) });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.msg || "Não foi possível iniciar a matrícula.");
-    state.matricula = data.matricula;
-    return data.matricula;
   }
 
   // ---------- STEP: PAGAMENTO ----------
@@ -531,9 +651,44 @@
     }
   }
 
-  async function garantirMatricula() {
-    if (state.matricula && state.matricula.status === "pendente_pagamento") return state.matricula;
-    return criarMatricula();
+  // Monta o corpo comum enviado para /api/pagamentos/{pix,cartao,boleto} — usaHorarios manda
+  // tipoMatricula+slotsEscolhidos, usaPackPrestige manda upgrades (preço sempre recalculado
+  // no servidor); o fluxo antigo manda curso/plano/valor fixos, exatamente como antes.
+  function corpoPagamentoBase(email, cpf) {
+    if (usaHorarios) {
+      return {
+        curso: cursoAtual(), plano: state.tierEscolhido, valor: precoOriginalAtual(),
+        email, cpf,
+        tipoMatricula: state.tipo,
+        slotsEscolhidos: state.slotsSelecionados.map(s => ({ slotId: s._id, diaSemana: s.diaSemana, horaInicio: s.horaInicio })),
+        dadosPessoais: dadosPessoaisAtuais()
+      };
+    }
+    if (usaPackPrestige) {
+      return {
+        curso: planoInfo.curso, plano: "Pack Prestige", valor: precoOriginalAtual(),
+        email, cpf,
+        upgrades: state.upgrades,
+        dadosPessoais: dadosPessoaisAtuais()
+      };
+    }
+    return { curso: planoInfo.curso, plano: planoInfo.plano, valor: planoInfo.valor, email, cpf, turmaId: state.turma?._id };
+  }
+
+  // ---------- STEP: PAGAMENTO — resumo do que está sendo comprado ----------
+  function renderPagamentoResumo() {
+    const el = document.getElementById("pagamentoResumo");
+    if (!usaPackPrestige) { el.innerHTML = ""; return; }
+    let html = linha("Produto adquirido", planoInfo.curso);
+    if (state.upgrades.length) {
+      state.upgrades.forEach(chave => {
+        html += linha(NOMES_PRODUTO_PACK[chave] + " (adicional)", "+" + fmtMoeda(PRECO_UPGRADE[chave]));
+      });
+    } else {
+      html += linha("Adicionais", "Nenhum");
+    }
+    html += '<div class="resumo-total"><span class="label">Valor final</span><span class="valor">' + fmtMoeda(precoOriginalAtual()) + "</span></div>";
+    el.innerHTML = html;
   }
 
   async function gerarPix() {
@@ -542,29 +697,17 @@
     if (cpf.length !== 11) { showTopError("Digite um CPF válido."); return; }
     btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Gerando…';
     try {
-      let res, data, pollId;
-      if (modoPlano) {
-        const email = document.getElementById("email").value.trim();
-        res = await fetch("/api/pagamentos/pix", {
-          method: "POST", headers: authHeaders(true),
-          body: JSON.stringify({ curso: planoInfo.curso, plano: planoInfo.plano, valor: planoInfo.valor, email, cpf, turmaId: state.turma?._id })
-        });
-        data = await res.json();
-        pollId = data.pedidoId;
-      } else {
-        const matricula = await garantirMatricula();
-        res = await fetch("/api/pagamento-matricula/pix", {
-          method: "POST", headers: authHeaders(true), body: JSON.stringify({ matriculaId: matricula._id, cpf })
-        });
-        data = await res.json();
-        pollId = data.pagamentoId;
-      }
+      const email = document.getElementById("email").value.trim();
+      const res = await fetch("/api/pagamentos/pix", {
+        method: "POST", headers: authHeaders(true), body: JSON.stringify(corpoPagamentoBase(email, cpf))
+      });
+      const data = await res.json();
       if (!res.ok || !data.qrCodeBase64) throw new Error(data.msg || "Não foi possível gerar o Pix.");
       document.getElementById("pixQrImg").src = "data:image/png;base64," + data.qrCodeBase64;
       document.getElementById("pixCode").value = data.copiaECola || "";
       document.getElementById("pixBox").classList.add("show");
       document.getElementById("pixStatus").innerHTML = '<span class="spinner"></span>Aguardando confirmação do pagamento…';
-      iniciarPollingPagamento(pollId);
+      iniciarPollingPagamento(data.pedidoId);
     } catch (e) {
       showTopError(e.message);
     } finally {
@@ -583,12 +726,11 @@
     }
   });
 
-  function iniciarPollingPagamento(pagamentoId) {
+  function iniciarPollingPagamento(pedidoId) {
     const status = document.getElementById("pixStatus");
-    const statusUrl = modoPlano ? "/api/pagamentos/status/" + pagamentoId : "/api/pagamento-matricula/" + pagamentoId + "/status";
     const intervalo = setInterval(async () => {
       try {
-        const res = await fetch(statusUrl, { headers: authHeaders() });
+        const res = await fetch("/api/pagamentos/status/" + pedidoId, { headers: authHeaders() });
         const data = await res.json();
         if (data.status === "aprovado") {
           clearInterval(intervalo);
@@ -627,27 +769,14 @@
         securityCode: cvv, identificationType: "CPF", identificationNumber: cpf
       });
 
-      let res;
-      if (modoPlano) {
-        const email = document.getElementById("email").value.trim();
-        res = await fetch("/api/pagamentos/cartao", {
-          method: "POST", headers: authHeaders(true),
-          body: JSON.stringify({
-            token: tokenResp.id, paymentMethodId, installments: parcelas,
-            curso: planoInfo.curso, plano: planoInfo.plano, valor: planoInfo.valor,
-            email, cpf, tipo: "credito", turmaId: state.turma?._id
-          })
-        });
-      } else {
-        const matricula = await garantirMatricula();
-        res = await fetch("/api/pagamento-matricula/cartao", {
-          method: "POST", headers: authHeaders(true),
-          body: JSON.stringify({
-            matriculaId: matricula._id, token: tokenResp.id, paymentMethodId,
-            installments: parcelas, cpf, tipo: "credito"
-          })
-        });
-      }
+      const email = document.getElementById("email").value.trim();
+      const corpo = corpoPagamentoBase(email, cpf);
+      corpo.token = tokenResp.id;
+      corpo.paymentMethodId = paymentMethodId;
+      corpo.installments = parcelas;
+      corpo.tipo = "credito"; // débito/crédito do cartão — não confundir com tipoMatricula
+
+      const res = await fetch("/api/pagamentos/cartao", { method: "POST", headers: authHeaders(true), body: JSON.stringify(corpo) });
       const data = await res.json();
       if (res.ok && data.status === "approved") {
         showSuccess();
@@ -680,28 +809,17 @@
     }
     btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Gerando…';
     try {
-      let res, data, pollId;
-      const endereco = { cep, rua, numero: numeroEndereco, bairro, cidade, estado };
-      if (modoPlano) {
-        const email = document.getElementById("email").value.trim();
-        const nome = document.getElementById("nome").value.trim();
-        res = await fetch("/api/pagamentos/boleto", {
-          method: "POST", headers: authHeaders(true),
-          body: JSON.stringify({ curso: planoInfo.curso, plano: planoInfo.plano, valor: planoInfo.valor, email, cpf, nome, turmaId: state.turma?._id, ...endereco })
-        });
-        data = await res.json();
-        pollId = data.pedidoId;
-      } else {
-        const matricula = await garantirMatricula();
-        res = await fetch("/api/pagamento-matricula/boleto", {
-          method: "POST", headers: authHeaders(true), body: JSON.stringify({ matriculaId: matricula._id, cpf, ...endereco })
-        });
-        data = await res.json();
-        pollId = data.pagamentoId;
-      }
+      const email = document.getElementById("email").value.trim();
+      const nome = document.getElementById("nome").value.trim();
+      const corpo = corpoPagamentoBase(email, cpf);
+      corpo.nome = nome;
+      corpo.cep = cep; corpo.rua = rua; corpo.numero = numeroEndereco; corpo.bairro = bairro; corpo.cidade = cidade; corpo.estado = estado;
+
+      const res = await fetch("/api/pagamentos/boleto", { method: "POST", headers: authHeaders(true), body: JSON.stringify(corpo) });
+      const data = await res.json();
       if (!res.ok || !data.boletoUrl) throw new Error(data.msg || "Não foi possível gerar o boleto.");
       status.innerHTML = 'Boleto gerado! <a href="' + data.boletoUrl + '" target="_blank">Clique aqui para visualizar e pagar</a>. Sua matrícula será confirmada automaticamente assim que o pagamento compensar.';
-      iniciarPollingPagamento(pollId);
+      iniciarPollingPagamento(data.pedidoId);
     } catch (e) {
       showTopError(e.message);
     } finally {
@@ -748,45 +866,24 @@
       ok = modoPlano ? (!!state.turma || !turmaDisponivelParaPlano) : !!state.turma;
       showFieldError("f-turma", !ok);
     }
-    if (key === "pacote") {
-      ok = !!state.pacote;
-      showFieldError("f-pacote", !ok);
-    }
     if (key === "horarios") {
-      ok = state.pacote && state.horariosSelecionados.length === state.pacote.horas;
-      showFieldError("f-horarios", !ok);
-      if (!ok) showTopError("Selecione exatamente " + (state.pacote?.horas || 0) + " horário(s) para continuar.");
+      ok = state.slotsSelecionados.length >= 1 && state.slotsSelecionados.length <= 4 && !!state.tierEscolhido;
+      showFieldError("f-grade-horarios", !state.slotsSelecionados.length);
+      showFieldError("f-tier", state.slotsSelecionados.length > 0 && !state.tierEscolhido);
     }
     return ok;
   }
 
   // ---------- NAVEGAÇÃO ----------
-  document.getElementById("btnNext").addEventListener("click", async () => {
+  document.getElementById("btnNext").addEventListener("click", () => {
     const key = steps[currentIndex];
     if (!validateStep(key)) return;
-
-    if (key === "resumo" && !modoPlano) {
-      const btn = document.getElementById("btnNext");
-      btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Preparando pagamento…';
-      try {
-        await criarMatricula();
-        showStep(currentIndex + 1);
-      } catch (e) {
-        showTopError(e.message);
-      } finally {
-        btn.disabled = false; btn.innerHTML = 'Continuar <span class="arrow">→</span>';
-      }
-      return;
-    }
-
     if (currentIndex < steps.length - 1) showStep(currentIndex + 1);
   });
 
   document.getElementById("btnBack").addEventListener("click", () => {
     if (currentIndex > 0) showStep(currentIndex - 1);
   });
-
-  window.addEventListener("beforeunload", () => { if (sse) sse.close(); });
 
   showStep(0);
 })();

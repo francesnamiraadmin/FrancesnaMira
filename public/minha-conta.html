@@ -7,83 +7,14 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
 
 <style>
 html { scroll-behavior: smooth; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Poppins', sans-serif; min-height: 100vh; }
 
-:root {
-  --glass-bg: rgba(255, 255, 255, 0.08);
-  --glass-strong: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.25);
-  --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-  --glass-blur: blur(18px);
-  --accent: #ffeb3b;
-}
-
-header { font-family: 'Playfair Display', serif; font-size: 3.2rem; text-align: center; padding: 30px; background: var(--header-bg); }
-header a { color: inherit; text-decoration: none; }
-
-nav {
-  position: relative; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
-  padding: 18px 40px; background: var(--glass-strong); backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid var(--glass-border); width: 100%;
-}
-.nav-item { position: relative; flex: 1; text-align: center; }
-nav a { position: relative; color: var(--text); text-decoration: none; font-weight: 600; padding: 10px 0; display: inline-block; cursor: pointer; transition: color 0.3s ease; }
-nav a:hover { color: #3b96ff; }
-nav a::after { content: ""; position: absolute; left: 0; bottom: -0.5px; height: 4px; width: 0%; background: var(--accent); transition: width 0.3s ease; }
-nav a:hover::after { width: 100%; }
-.dropdown {
-  position: absolute; top: 100%; left: 50%; transform: translate(-50%, 10px); background: var(--overlay-strong);
-  border-radius: 18px; min-width: 240px; opacity: 0; pointer-events: none; transition: 0.3s ease; z-index: 2000;
-  box-shadow: 0 20px 40px var(--overlay);
-}
-.dropdown.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
-.dropdown a { padding: 14px 20px; font-size: 1rem; text-align: left; }
-.dropdown-cursos { display: flex; gap: 10px; min-width: 190px; padding: 10px 10px; }
-.dropdown-cursos .coluna { display: flex; flex-direction: column; }
-.dropdown-cursos strong { margin-bottom: 10px; font-weight: 700; color: var(--accent); }
-.login { background: var(--accent); color: var(--accent-text); padding: 10px 28px; border-radius: 30px; font-weight: 700; flex: 0 0 auto; margin-left: 20px; }
-
-.wrap { max-width: 860px; margin: 0 auto; padding: 40px 4% 100px; }
-
-.perfil-header {
-  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 22px; padding: 30px; box-shadow: var(--glass-shadow);
-  margin-bottom: 26px;
-}
-.avatar-wrap { position: relative; width: 96px; height: 96px; flex: 0 0 auto; cursor: pointer; }
-.avatar-wrap img {
-  width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); display: block;
-  background: var(--glass-strong);
-}
-.avatar-edit {
-  position: absolute; bottom: -2px; right: -2px; background: var(--accent); color: var(--accent-text); width: 30px; height: 30px;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; border: 2px solid var(--accent-text);
-}
-.perfil-header h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 4px; }
-.perfil-header .email { opacity: 0.8; font-size: 0.95rem; }
-.perfil-header .badge-plano {
-  display: inline-block; margin-top: 8px; padding: 5px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700;
-}
-
-.top-tabs { display: flex; justify-content: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
-.top-tab {
-  padding: 12px 26px; border-radius: 30px; border: 1px solid var(--glass-border-strong); background: var(--glass-bg);
-  color: var(--text); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: 0.3s;
-}
-.top-tab:hover { background: var(--glass-hover); }
-.top-tab.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-
-.card {
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 20px; padding: 28px; box-shadow: var(--glass-shadow);
-  margin-bottom: 22px;
-}
-.card h2 { font-size: 1.2rem; margin-bottom: 18px; font-family: 'Playfair Display', serif; }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; }
 
 .campo { margin-bottom: 18px; }
 .campo label { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
@@ -99,32 +30,15 @@ nav a:hover::after { width: 100%; }
   border: 1px solid var(--warning-border); font-size: 0.95rem;
 }
 .countdown-box strong { color: var(--accent); font-size: 1.15rem; }
-
-.btn {
-  padding: 12px 28px; border-radius: 30px; border: none; background: var(--accent); color: var(--accent-text); font-weight: 700;
-  cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.95rem;
-}
-.btn.secundario { background: var(--glass-hover); color: var(--text); border: 1px solid var(--glass-border-strong); }
-.btn.perigo { background: #ff5252; color: white; }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .salvar-msg { margin-top: 12px; font-size: 0.9rem; }
 
-/* ESTATÍSTICAS */
 .stats-filtros { display: flex; justify-content: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
 .filtro-select {
   padding: 10px 16px; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--glass-input);
   color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.92rem;
 }
 .filtro-select option { color: var(--accent-text); }
-.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 24px; }
-.kpi {
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; text-align: center;
-}
-.kpi .valor { font-family: 'Playfair Display', serif; font-size: 2.1rem; color: var(--accent); }
-.kpi .rotulo { font-size: 0.85rem; opacity: 0.8; margin-top: 4px; }
 .chart-scroll { width: 100%; overflow-x: auto; }
-.chart-card svg { display: block; }
 .chart-card h3 { font-size: 1rem; margin-bottom: 14px; }
 .bar-list-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .bar-list-label { flex: 0 0 190px; font-size: 0.88rem; }
@@ -133,38 +47,6 @@ nav a:hover::after { width: 100%; }
 .bar-list-val { flex: 0 0 90px; text-align: right; font-size: 0.85rem; opacity: 0.9; }
 .stats-vazio { text-align: center; opacity: 0.8; padding: 30px 16px; font-size: 1rem; }
 .apagar-dia-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-
-/* PAGAMENTO */
-.status-badge { display: inline-block; padding: 5px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; }
-.status-badge.ativo { background: var(--success-bg); color: var(--success-text); }
-.status-badge.inativo { background: var(--danger-bg); color: var(--danger-text); }
-.pag-linha { display: flex; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--glass-hover); font-size: 0.95rem; flex-wrap: wrap; }
-.pag-linha:last-child { border-bottom: none; }
-.pag-linha .rotulo { opacity: 0.8; }
-.pag-linha .valor { font-weight: 700; }
-.cartao-mask { font-family: monospace; letter-spacing: 1px; }
-.sem-plano { text-align: center; padding: 10px 0; }
-.sem-plano p { margin-bottom: 20px; opacity: 0.9; }
-.recurso-item {
-  display: flex; align-items: center; justify-content: space-between; gap: 14px;
-  padding: 14px 18px; border-radius: 14px; margin-bottom: 10px;
-  background: var(--glass-bg-2); border: 1px solid var(--glass-border);
-}
-.recurso-item .nome { display: flex; align-items: center; gap: 12px; font-weight: 600; }
-.recurso-item .icon { font-size: 1.2rem; font-weight: 900; }
-.recurso-item.liberado .icon { color: var(--success-text); }
-.recurso-item.bloqueado .icon { color: var(--danger-text); }
-.recurso-item.bloqueado { opacity: 0.6; }
-.recurso-item a {
-  padding: 7px 16px; background: var(--accent); color: var(--accent-text); border-radius: 30px;
-  text-decoration: none; font-weight: 700; font-size: 0.85rem;
-}
-.aviso-vencimento {
-  background: var(--danger-bg); border: 1px solid var(--danger-text); border-radius: 14px;
-  padding: 14px 18px; font-size: 0.92rem; margin-bottom: 18px;
-}
-
-footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 20px; }
 
 @media(max-width: 700px) {
   .campo-row { grid-template-columns: 1fr; }
@@ -175,164 +57,124 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <body>
 
-<header><a href="index.html">Francês na Mira</a></header>
+<div id="app-navbar" class="app-navbar-bar"></div>
 
-<nav>
-  <div class="nav-item"><a href="blog.html">Blog</a></div>
-  <div class="nav-item">
-    <a href="correcoes.html">Correções</a>
-    <div class="dropdown">
-      <a href="producao-oral.html">Produção Oral</a>
-      <a href="producao-escrita.html">Produção Escrita</a>
-    </div>
-  </div>
-  <div class="nav-item">
-    <a href="cursos.html">Cursos</a>
-    <div class="dropdown dropdown-cursos">
-      <div class="coluna">
-        <strong>Específicos</strong>
-        <a href="tcf.html">TCF</a>
-        <a href="delf.html">DELF</a>
-        <a href="dalf.html">DALF</a>
-        <a href="tef.html">TEF</a>
-      </div>
-      <div class="coluna">
-        <strong>Gerais</strong>
-        <a href="a1.html">A1</a>
-        <a href="a2.html">A2</a>
-        <a href="b1.html">B1</a>
-        <a href="b2.html">B2</a>
-      </div>
-    </div>
-  </div>
-  <div class="nav-item">
-    <a href="academia.html">Academia</a>
-    <div class="dropdown">
-      <a href="plataforma.html">Plataforma de Questões</a>
-      <a href="aulas.html">Aulas Especializadas</a>
-    </div>
-  </div>
-  <div class="nav-item"><a href="cadastro.html">Cadastrar</a></div>
-  <a href="login.html" class="login">Entrar</a>
-</nav>
+<div class="dash-header">
+  <div class="dash-welcome" id="welcomeMsg">&nbsp;</div>
+  <div class="dash-sub" id="welcomeSub">&nbsp;</div>
 
-<div class="wrap">
-  <div class="perfil-header" id="perfilHeader">
-    <div class="avatar-wrap" id="avatarWrap">
-      <img id="avatarImg" src="" alt="Foto de perfil">
-      <div class="avatar-edit">✎</div>
-      <input type="file" id="fotoInput" accept="image/*" style="display:none;">
-    </div>
-    <div>
-      <h1 id="nomeUsuario">Carregando...</h1>
-      <div class="email" id="emailUsuario"></div>
-      <span class="badge-plano" id="badgePlano" style="display:none;"></span>
-    </div>
+  <div class="dash-profile-card">
+    <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil">
+    <div class="dash-profile-meta" id="profileMeta"></div>
+  </div>
+</div>
+
+<div class="dash-container">
+
+  <div class="dash-cards-row" id="summaryCards">
+    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
+    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
+    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
   </div>
 
-  <div class="card">
-    <h2 style="margin-bottom:6px;">Matrícula em turmas e aulas particulares</h2>
-    <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;">Inscreva-se em uma turma ou monte seu pacote de aulas particulares, com pagamento via Pix, cartão ou boleto.</p>
-    <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a href="matricula.html" class="btn" style="text-decoration:none; display:inline-block;">🎯 Nova matrícula</a>
-      <a href="minhas-matriculas.html" class="btn secundario" style="text-decoration:none; display:inline-block;">📋 Minhas matrículas</a>
-    </div>
-  </div>
-
-  <div class="card" id="painelEquipeBox" style="display:none; background:linear-gradient(145deg, var(--warning-bg), var(--glass-bg-2)); border-color:var(--warning-border);">
-    <h2 style="margin-bottom:6px;">Painel da equipe</h2>
+  <div class="dash-section-card" id="painelEquipeBox" style="display:none;">
+    <h2>🏫 Painel da equipe</h2>
     <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;">Sua conta tem acesso de <strong id="papelEquipeLabel"></strong>. Acesse as ferramentas de gestão abaixo.</p>
     <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a href="gestao-alunos.html" class="btn" style="text-decoration:none; display:inline-block;">👥 Gestão de Alunos</a>
-      <a href="professor-correcoes.html" class="btn secundario" id="linkFilaProfessor" style="text-decoration:none; display:inline-block;">📝 Fila de Correção</a>
-      <a href="admin-correcoes.html" class="btn secundario" id="linkPainelAdmin" style="text-decoration:none; display:none;">⚙️ Painel Administrativo</a>
-      <a href="admin-matriculas.html" class="btn secundario" id="linkAdminMatriculas" style="text-decoration:none; display:none;">🎯 Matrículas e Turmas</a>
-      <a href="admin-agenda.html" class="btn secundario" id="linkAdminAgenda" style="text-decoration:none; display:none;">🗓️ Agenda de Aulas</a>
-      <a href="admin-aulas.html" class="btn secundario" id="linkAdminAulas" style="text-decoration:none; display:none;">🎬 Aulas Especializadas</a>
+      <a href="gestao-alunos.html" class="dash-btn">👥 Gestão de Alunos</a>
+      <a href="professor-correcoes.html" class="dash-btn secundario" id="linkFilaProfessor">📝 Fila de Correção</a>
+      <a href="admin-correcoes.html" class="dash-btn secundario" id="linkPainelAdmin" style="display:none;">⚙️ Painel Administrativo</a>
+      <a href="admin-matriculas.html" class="dash-btn secundario" id="linkAdminMatriculas" style="display:none;">🎯 Matrículas e Turmas</a>
+      <a href="admin-agenda.html" class="dash-btn secundario" id="linkAdminAgenda" style="display:none;">🗓️ Agenda de Aulas</a>
+      <a href="admin-aulas.html" class="dash-btn secundario" id="linkAdminAulas" style="display:none;">🎬 Aulas Especializadas</a>
+      <a href="admin-horarios.html" class="dash-btn secundario" id="linkAdminHorarios" style="display:none;">🗓️ Grade de Horários</a>
     </div>
   </div>
 
-  <div class="top-tabs">
-    <button class="top-tab active" data-tab="perfil">👤 Perfil</button>
-    <button class="top-tab" data-tab="estatisticas">📊 Estatísticas</button>
-    <button class="top-tab" data-tab="pagamento">💳 Pagamento</button>
+  <!-- ===================== PLATAFORMA DE QUESTÕES ===================== -->
+  <div class="dash-section-card" id="secPlataforma">
+    <h2>📊 Plataforma de Questões</h2>
+    <div id="conteudoPlataforma">
+      <div class="skeleton skeleton-block"></div>
+    </div>
+  </div>
+
+  <!-- ===================== AMBIENTE DE PRODUÇÃO ===================== -->
+  <div class="dash-section-card" id="secProducao">
+    <h2>✍️ Ambiente de Produção Oral e Textual</h2>
+    <div id="conteudoProducao">
+      <div class="skeleton skeleton-block"></div>
+    </div>
+  </div>
+
+  <!-- ===================== AULAS ESPECIALIZADAS ===================== -->
+  <div class="dash-section-card" id="secAulas">
+    <h2>🎬 Aulas Especializadas Online</h2>
+    <div id="conteudoAulas">
+      <div class="skeleton skeleton-block"></div>
+    </div>
+  </div>
+
+  <!-- ===================== MATRÍCULA ===================== -->
+  <div class="dash-section-card">
+    <h2>🎯 Matrícula em turmas e aulas particulares</h2>
+    <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;">Inscreva-se em uma turma ou monte seu pacote de aulas particulares, com pagamento via Pix, cartão ou boleto.</p>
+    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+      <a href="matricula.html" class="dash-btn">Nova matrícula</a>
+      <a href="minhas-matriculas.html" class="dash-btn secundario">Minhas matrículas</a>
+    </div>
   </div>
 
   <!-- ===================== PERFIL ===================== -->
-  <div id="tabPerfil">
-    <div class="card">
-      <h2>Sobre você</h2>
+  <div class="dash-section-card" id="secPerfil">
+    <h2>👤 Meu Perfil</h2>
+    <div class="campo">
+      <label for="bioInput">Descrição sobre você</label>
+      <textarea id="bioInput" placeholder="Fale um pouco sobre você, seu nível atual de francês, sua motivação para estudar..."></textarea>
+    </div>
+    <div class="campo">
+      <label for="interessesInput">Seus interesses</label>
+      <input type="text" id="interessesInput" placeholder="Ex.: cinema francês, viagens, culinária, literatura...">
+    </div>
+    <div class="campo-row">
       <div class="campo">
-        <label for="bioInput">Descrição sobre você</label>
-        <textarea id="bioInput" placeholder="Fale um pouco sobre você, seu nível atual de francês, sua motivação para estudar..."></textarea>
+        <label for="provaAlvoInput">Qual prova você vai fazer?</label>
+        <select id="provaAlvoInput">
+          <option value="">Ainda não decidi</option>
+          <option value="TCF">TCF</option>
+          <option value="TEF">TEF</option>
+          <option value="DELF">DELF</option>
+          <option value="DALF">DALF</option>
+        </select>
       </div>
       <div class="campo">
-        <label for="interessesInput">Seus interesses</label>
-        <input type="text" id="interessesInput" placeholder="Ex.: cinema francês, viagens, culinária, literatura...">
+        <label for="dataProvaInput">Data da prova</label>
+        <input type="date" id="dataProvaInput">
       </div>
-      <div class="campo-row">
-        <div class="campo">
-          <label for="provaAlvoInput">Qual prova você vai fazer?</label>
-          <select id="provaAlvoInput">
-            <option value="">Ainda não decidi</option>
-            <option value="TCF">TCF</option>
-            <option value="TEF">TEF</option>
-            <option value="DELF">DELF</option>
-            <option value="DALF">DALF</option>
-          </select>
-        </div>
-        <div class="campo">
-          <label for="dataProvaInput">Data da prova</label>
-          <input type="date" id="dataProvaInput">
-        </div>
-      </div>
-      <div class="countdown-box" id="countdownBox" style="display:none;"></div>
-      <button class="btn" id="salvarPerfilBtn" style="margin-top:8px;">Salvar alterações</button>
-      <div class="salvar-msg" id="salvarMsg"></div>
+    </div>
+    <div class="countdown-box" id="countdownBox" style="display:none;"></div>
+    <button class="dash-btn" id="salvarPerfilBtn" style="margin-top:8px;">Salvar alterações</button>
+    <div class="salvar-msg" id="salvarMsg"></div>
+  </div>
+
+  <!-- ===================== ESTATÍSTICAS AVANÇADAS (apagar dados) ===================== -->
+  <div class="dash-section-card" id="secApagarDados" style="display:none;">
+    <h2>🗑️ Apagar estatísticas de um dia</h2>
+    <p style="opacity:0.85; font-size:0.9rem; margin-bottom:16px;">
+      Escolha um dia para apagar todo o seu histórico de estudo daquele dia na Plataforma de Questões. As questões de
+      <strong>Praticar</strong> respondidas nesse dia voltam a aparecer como não respondidas.
+    </p>
+    <div class="apagar-dia-row">
+      <select class="filtro-select" id="diaApagarSelect"></select>
+      <button class="dash-btn secundario" id="apagarDiaBtn" style="color:var(--danger-text);">Apagar estatísticas deste dia</button>
     </div>
   </div>
 
-  <!-- ===================== ESTATÍSTICAS ===================== -->
-  <div id="tabEstatisticas" style="display:none;">
-    <div class="stats-filtros">
-      <select class="filtro-select" id="statModo">
-        <option value="todas">Praticar + Simulados</option>
-        <option value="praticar">Apenas Praticar</option>
-        <option value="simulado">Apenas Simulados</option>
-      </select>
-      <select class="filtro-select" id="statMateria">
-        <option value="todas">Todas as matérias</option>
-      </select>
-    </div>
-    <div id="statsConteudo"></div>
-
-    <div class="card" style="margin-top:22px;">
-      <h2>Apagar estatísticas de um dia</h2>
-      <p style="opacity:0.85; font-size:0.9rem; margin-bottom:16px;">
-        Escolha um dia para apagar todo o seu histórico de estudo daquele dia. As questões de <strong>Praticar</strong>
-        respondidas nesse dia voltam a aparecer como não respondidas — um "refresh" para praticá-las de novo.
-      </p>
-      <div class="apagar-dia-row">
-        <select class="filtro-select" id="diaApagarSelect"></select>
-        <button class="btn perigo" id="apagarDiaBtn">Apagar estatísticas deste dia</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===================== PAGAMENTO ===================== -->
-  <div id="tabPagamento" style="display:none;">
-    <div class="card" id="pagamentoConteudo">
-      <p>Carregando...</p>
-    </div>
-    <div class="card" id="recursosConteudo" style="display:none;">
-      <h2>O que seu plano libera</h2>
-      <div id="recursosLista"></div>
-    </div>
-  </div>
 </div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
+<script src="js/appShell.js"></script>
 <script>
 const MATERIAS = {
   conjugaison: "Conjugação e tempos verbais",
@@ -346,19 +188,6 @@ const MATERIAS = {
 };
 const NIVEIS = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
-const RECURSOS = [
-  { key: 'correcoes', nome: 'Correções de Texto', href: 'correcoes-texto.html', minTier: 'Essentiel' },
-  { key: 'gravado', nome: 'Aulas Especializadas', href: 'aulas-especializadas.html', minTier: 'Avancé' },
-  { key: 'plataforma', nome: 'Plataforma de Questões', href: 'plataforma-questoes.html', minTier: 'Excellence' }
-];
-function entitlements(tier) {
-  return {
-    correcoes: ['Essentiel', 'Avancé', 'Excellence'].includes(tier),
-    gravado: ['Avancé', 'Excellence'].includes(tier),
-    plataforma: tier === 'Excellence'
-  };
-}
-
 const ESTILOS_PLANO = {
   Essentiel: { background: "rgba(205,127,50,0.35)", border: "#cd7f32", color: "#ffffff" },
   "Avancé": { background: "rgba(210,210,210,0.35)", border: "#c0c0c0", color: "#08203e" },
@@ -369,53 +198,339 @@ const AVATAR_PADRAO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="#3b96ff"/><circle cx="48" cy="38" r="18" fill="#ffffff"/><ellipse cx="48" cy="88" rx="30" ry="24" fill="#ffffff"/></svg>`
 );
 
-let token = localStorage.getItem('token');
-let dadosConta = null;
-let fotoPendente = undefined;
+const PRODUTOS_DASHBOARD = [
+  { chave: "plataforma", nome: "Plataforma de Questões", icone: "📊", curso: "Plataforma de Questões" },
+  { chave: "producao", nome: "Ambiente de Produção Oral e Textual", icone: "✍️", curso: "Ambiente de Produção Oral e Textual" },
+  { chave: "aulasEspecializadas", nome: "Aulas Especializadas Online", icone: "🎬", curso: "Aulas Especializadas Online" }
+];
 
-if (!token) window.location.href = 'login.html';
+const token = localStorage.getItem('token');
+function authHeaders() { return { Authorization: 'Bearer ' + token }; }
 
-// ===================== CARREGAR CONTA =====================
-async function carregarConta() {
+// ===================== CABEÇALHO =====================
+function renderHeader(dados) {
+  const primeiroNome = (dados.nome || '').split(' ')[0] || 'aluno(a)';
+  document.getElementById('welcomeMsg').textContent = `Bem-vindo de volta, ${primeiroNome}!`;
+  document.getElementById('dashAvatar').src = dados.perfil?.foto || AVATAR_PADRAO;
+
+  const plano = dados.plano || { ativo: false };
+  const metaItens = [];
+  if (plano.ativo && plano.tier) {
+    const estilo = ESTILOS_PLANO[plano.tier];
+    document.getElementById('welcomeSub').innerHTML =
+      `<span class="dash-status-tag ativo" style="background:${estilo.background}; color:${estilo.color};">Plano ${plano.tier} · ${plano.curso || ''}</span>`;
+  } else {
+    document.getElementById('welcomeSub').textContent = 'Você ainda não tem um plano de curso ativo.';
+  }
+  if (dados.criadoEm) metaItens.push(`<span><strong>Na plataforma desde</strong> ${new Date(dados.criadoEm).toLocaleDateString('pt-BR')}</span>`);
+  metaItens.push(`<span><strong>E-mail</strong> ${dados.email || ''}</span>`);
+  if (plano.dataVencimento) {
+    metaItens.push(`<span><strong>Status da assinatura</strong> ${plano.ativo ? 'Ativa' : 'Vencida'}</span>`);
+  }
+  document.getElementById('profileMeta').innerHTML = metaItens.join('');
+}
+
+// ===================== CARDS DE RESUMO (fonte de verdade: produtosAvulsos) =====================
+function renderSummaryCards(dados) {
+  const html = PRODUTOS_DASHBOARD.map(p => {
+    const acesso = window.AppShell.detalhesAcesso(p.chave);
+    let estado, tagClass, tagTexto;
+    if (acesso.ativo) {
+      estado = 'ativo'; tagClass = 'ativo';
+      tagTexto = acesso.viaCascata && !acesso.viaAvulso ? `✓ Ativo · incluído no plano ${dados.plano.tier}` : '✓ Ativo';
+    } else if (acesso.dataVencimentoAvulso) { estado = 'expirado'; tagClass = 'expirado'; tagTexto = '✗ Expirado'; }
+    else { estado = 'bloqueado'; tagClass = 'bloqueado'; tagTexto = '🔒 Não adquirido'; }
+
+    const cta = estado === 'ativo' ? '' :
+      `<a class="upgrade-btn" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige">${estado === 'expirado' ? 'Renovar' : 'Adquirir'}</a>`;
+
+    return `<div class="dash-summary-card">
+      <div class="icone">${p.icone}</div>
+      <h3>${p.nome}</h3>
+      <span class="dash-status-tag ${tagClass}">${tagTexto}</span><br>
+      ${cta}
+    </div>`;
+  }).join('');
+  document.getElementById('summaryCards').innerHTML = html;
+}
+
+// ===================== PAINEL DA EQUIPE =====================
+function renderPainelEquipe(dados) {
+  if (dados.role !== 'professor' && dados.role !== 'admin') return;
+  document.getElementById('painelEquipeBox').style.display = 'block';
+  document.getElementById('papelEquipeLabel').textContent = dados.role === 'admin' ? 'administrador(a)' : 'professor(a)';
+  const admin = dados.role === 'admin';
+  document.getElementById('linkPainelAdmin').style.display = admin ? 'inline-block' : 'none';
+  document.getElementById('linkAdminMatriculas').style.display = admin ? 'inline-block' : 'none';
+  document.getElementById('linkAdminAgenda').style.display = 'inline-block';
+  document.getElementById('linkAdminAulas').style.display = admin ? 'inline-block' : 'none';
+  document.getElementById('linkAdminHorarios').style.display = admin ? 'inline-block' : 'none';
+}
+
+function cardBloqueado(nome, curso) {
+  return `<div class="dash-lock-overlay">
+    <div style="font-size:2rem;">🔒</div>
+    <p>Você ainda não tem acesso a <strong>${nome}</strong>.</p>
+    <a class="upgrade-btn" href="matricula.html?curso=${encodeURIComponent(curso)}&plano=Pack%20Prestige">Desbloquear agora</a>
+  </div>`;
+}
+
+// ===================== PLATAFORMA DE QUESTÕES =====================
+function carregarRespostas() { return JSON.parse(localStorage.getItem('pq_respostas') || '{}'); }
+function carregarEventos() { return JSON.parse(localStorage.getItem('pq_eventos') || '[]'); }
+function diaDe(t) {
+  const d = new Date(t);
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function rotuloDia(chave) { const [, m, d] = chave.split('-'); return d + '/' + m; }
+function rotuloDiaCompleto(chave) { const [y, m, d] = chave.split('-'); return `${d}/${m}/${y}`; }
+
+function calcularSequenciaDiaria(dias) {
+  const hoje = diaDe(Date.now());
+  const ontem = diaDe(Date.now() - 86400000);
+  if (!dias.includes(hoje) && !dias.includes(ontem)) return 0;
+  const diasSet = new Set(dias);
+  let cursor = dias.includes(hoje) ? new Date() : new Date(Date.now() - 86400000);
+  let seq = 0;
+  while (diasSet.has(diaDe(cursor.getTime()))) {
+    seq++;
+    cursor = new Date(cursor.getTime() - 86400000);
+  }
+  return seq;
+}
+
+function fmtTempoEstudado(ms) {
+  const min = Math.round(ms / 60000);
+  if (min < 60) return `${min} min`;
+  const h = Math.floor(min / 60), m = min % 60;
+  return `${h}h${m ? ' ' + m + 'min' : ''}`;
+}
+
+function renderPlataforma(dados) {
+  const alvo = document.getElementById('conteudoPlataforma');
+  if (!window.AppShell.temAcesso('plataforma')) {
+    alvo.innerHTML = cardBloqueado('Plataforma de Questões', 'Plataforma de Questões');
+    return;
+  }
+
+  const eventos = carregarEventos();
+  if (eventos.length === 0) {
+    alvo.innerHTML = `<div class="stats-vazio">Nenhum dado ainda. Responda questões em <a href="plataforma-questoes.html" style="color:var(--accent); font-weight:700;">Praticar ou Simulados</a> para ver suas estatísticas aqui.</div>`;
+    return;
+  }
+
+  const total = eventos.length;
+  const acertos = eventos.filter(e => e.ok).length;
+  const taxa = Math.round((acertos / total) * 100);
+  const dias = [...new Set(eventos.map(e => diaDe(e.t)))].sort();
+  const sequencia = calcularSequenciaDiaria(dias);
+  const tempoMs = Number(localStorage.getItem('pq_tempoMs') || 0);
+
+  const porDia = dias.map(dia => {
+    const doDia = eventos.filter(e => diaDe(e.t) === dia);
+    const okDia = doDia.filter(e => e.ok).length;
+    return { dia, total: doDia.length, taxa: Math.round((okDia / doDia.length) * 100) };
+  });
+  const porNivel = NIVEIS.map(n => {
+    const doN = eventos.filter(e => e.nivel === n);
+    return { rotulo: 'Nível ' + n, total: doN.length, taxa: doN.length ? Math.round((doN.filter(e => e.ok).length / doN.length) * 100) : null };
+  });
+  const porMateria = Object.entries(MATERIAS).map(([k, v]) => {
+    const doM = eventos.filter(e => e.materia === k);
+    return { rotulo: v, total: doM.length, taxa: doM.length ? Math.round((doM.filter(e => e.ok).length / doM.length) * 100) : null };
+  });
+  const ultimasAtividades = eventos.slice(-8).reverse();
+
+  alvo.innerHTML = `
+    <div class="dash-kpi-row">
+      <div class="dash-kpi"><div class="valor">${total}</div><div class="rotulo">Questões resolvidas</div></div>
+      <div class="dash-kpi"><div class="valor">${taxa}%</div><div class="rotulo">Taxa de acerto</div></div>
+      <div class="dash-kpi"><div class="valor">${sequencia}🔥</div><div class="rotulo">Sequência diária</div></div>
+      <div class="dash-kpi"><div class="valor">${fmtTempoEstudado(tempoMs)}</div><div class="rotulo">Tempo estudado</div></div>
+    </div>
+    <div class="chart-card" style="margin-bottom:18px;">
+      <h3>Evolução da taxa de acerto (%)</h3>
+      <div class="chart-scroll">${svgLinha(porDia)}</div>
+    </div>
+    <div class="campo-row">
+      <div>
+        <h3 style="margin-bottom:12px;">Desempenho por nível</h3>
+        ${barList(porNivel)}
+      </div>
+      <div>
+        <h3 style="margin-bottom:12px;">Desempenho por competência</h3>
+        ${barList(porMateria)}
+      </div>
+    </div>
+    <h3 style="margin:18px 0 10px;">Últimas atividades</h3>
+    ${ultimasAtividades.map(e => `<div class="dash-atividade-item">
+      <span>${e.mode === 'simulado' ? 'Simulado' : 'Praticar'} · ${MATERIAS[e.materia] || e.materia} · Nível ${e.nivel}</span>
+      <span style="color:${e.ok ? 'var(--success-text)' : 'var(--danger-text)'};">${e.ok ? '✓ Acertou' : '✗ Errou'}</span>
+    </div>`).join('')}
+    <p style="font-size:0.78rem; color:var(--text-muted); margin-top:14px;">Esses dados ficam salvos neste navegador — se você praticar em outro dispositivo, as estatísticas não se somam automaticamente.</p>
+  `;
+
+  document.getElementById('secApagarDados').style.display = 'block';
+  popularSelectDias();
+}
+
+function svgLinha(porDia) {
+  const dados = porDia.slice(-30);
+  const W = Math.max(560, dados.length * 60), H = 200;
+  const padL = 40, padR = 16, padT = 16, padB = 30;
+  const iw = W - padL - padR, ih = H - padT - padB;
+  const x = i => dados.length === 1 ? padL + iw / 2 : padL + (i / (dados.length - 1)) * iw;
+  const y = v => padT + (1 - v / 100) * ih;
+  const grade = [0, 25, 50, 75, 100].map(v =>
+    `<line x1="${padL}" y1="${y(v)}" x2="${W - padR}" y2="${y(v)}" stroke="rgba(128,128,128,0.2)" stroke-width="1"/>
+     <text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="var(--text-muted)">${v}</text>`
+  ).join('');
+  const caminho = dados.map((p, i) => (i === 0 ? 'M' : 'L') + x(i).toFixed(1) + ' ' + y(p.taxa).toFixed(1)).join(' ');
+  const pontos = dados.map((p, i) => `<circle cx="${x(i)}" cy="${y(p.taxa)}" r="4" fill="var(--accent)"><title>${rotuloDia(p.dia)}: ${p.taxa}% (${p.total} questões)</title></circle>`).join('');
+  const eixoX = dados.map((p, i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="var(--text-muted)">${rotuloDia(p.dia)}</text>`).join('');
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Taxa de acerto por dia">
+    ${grade}<path d="${caminho}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${pontos}${eixoX}
+  </svg>`;
+}
+
+function barList(linhas) {
+  return linhas.map(l => {
+    if (l.taxa === null) {
+      return `<div class="bar-list-row"><span class="bar-list-label">${l.rotulo}</span><div class="bar-list-track"></div><span class="bar-list-val" style="opacity:0.5;">sem dados</span></div>`;
+    }
+    return `<div class="bar-list-row" title="${l.rotulo}: ${l.taxa}% de acerto em ${l.total} questões">
+      <span class="bar-list-label">${l.rotulo}</span>
+      <div class="bar-list-track"><div class="bar-list-fill" style="width:${l.taxa}%;"></div></div>
+      <span class="bar-list-val">${l.taxa}% · ${l.total}q</span>
+    </div>`;
+  }).join('');
+}
+
+function diasComDados() { return [...new Set(carregarEventos().map(e => diaDe(e.t)))].sort().reverse(); }
+function popularSelectDias() {
+  const dias = diasComDados();
+  const sel = document.getElementById('diaApagarSelect');
+  const btn = document.getElementById('apagarDiaBtn');
+  if (dias.length === 0) { sel.innerHTML = '<option value="">Nenhum dado disponível</option>'; btn.disabled = true; return; }
+  sel.innerHTML = dias.map(d => `<option value="${d}">${rotuloDiaCompleto(d)}</option>`).join('');
+  btn.disabled = false;
+}
+document.getElementById('apagarDiaBtn').addEventListener('click', () => {
+  const dia = document.getElementById('diaApagarSelect').value;
+  if (!dia) return;
+  if (!confirm(`Apagar todas as estatísticas de ${rotuloDiaCompleto(dia)}? As questões de Praticar respondidas nesse dia voltarão a aparecer como não respondidas.`)) return;
+  const eventos = carregarEventos();
+  const respostas = carregarRespostas();
+  const restantes = [];
+  eventos.forEach(e => {
+    if (diaDe(e.t) === dia) { if (e.mode === 'praticar' && e.id && respostas[e.id]) delete respostas[e.id]; }
+    else restantes.push(e);
+  });
+  localStorage.setItem('pq_eventos', JSON.stringify(restantes));
+  localStorage.setItem('pq_respostas', JSON.stringify(respostas));
+  popularSelectDias();
+  renderPlataforma(window.AppShell.dadosConta);
+});
+
+// ===================== AMBIENTE DE PRODUÇÃO =====================
+const STATUS_AGUARDANDO = ['em_fila', 'em_correcao', 'aguardando_revisao'];
+async function renderProducao(dados) {
+  const alvo = document.getElementById('conteudoProducao');
+  if (!window.AppShell.temAcesso('producao')) {
+    alvo.innerHTML = cardBloqueado('Ambiente de Produção Oral e Textual', 'Ambiente de Produção Oral e Textual');
+    return;
+  }
   try {
-    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
-    if (!res.ok) {
-      localStorage.removeItem('token');
-      window.location.href = 'login.html';
+    const res = await fetch('/api/producoes/minhas', { headers: authHeaders() });
+    const producoes = await res.json();
+    if (!Array.isArray(producoes) || producoes.length === 0) {
+      alvo.innerHTML = `<div class="stats-vazio">Você ainda não enviou nenhuma produção.</div><div style="text-align:center; margin-top:14px;"><a href="correcoes-texto.html" class="dash-btn">Nova Produção</a></div>`;
       return;
     }
-    dadosConta = await res.json();
+    const enviados = producoes.filter(p => p.status !== 'rascunho').length;
+    const aguardando = producoes.filter(p => STATUS_AGUARDANDO.includes(p.status)).length;
+    const corrigidas = producoes.filter(p => p.status === 'corrigido');
+    const ultimaCorrigida = corrigidas.sort((a, b) => new Date(b.criadoEm) - new Date(a.criadoEm))[0];
 
-    document.getElementById('nomeUsuario').textContent = `Olá, ${dadosConta.nome.split(' ')[0]}!`;
-    document.getElementById('emailUsuario').textContent = dadosConta.email;
-    document.getElementById('avatarImg').src = dadosConta.perfil?.foto || AVATAR_PADRAO;
-
-    const plano = dadosConta.plano || { ativo: false };
-    const badge = document.getElementById('badgePlano');
-    if (plano.ativo && plano.tier) {
-      const estilo = ESTILOS_PLANO[plano.tier];
-      badge.style.display = 'inline-block';
-      badge.textContent = 'Plano ' + plano.tier;
-      badge.style.background = estilo.background;
-      badge.style.border = `1.5px solid ${estilo.border}`;
-      badge.style.color = estilo.color;
-    } else {
-      badge.style.display = 'none';
-    }
-
-    preencherPerfil(dadosConta.perfil || {});
-    renderPagamento(plano);
-
-    if (dadosConta.role === 'professor' || dadosConta.role === 'admin') {
-      document.getElementById('painelEquipeBox').style.display = 'block';
-      document.getElementById('papelEquipeLabel').textContent = dadosConta.role === 'admin' ? 'administrador(a)' : 'professor(a)';
-      document.getElementById('linkPainelAdmin').style.display = dadosConta.role === 'admin' ? 'inline-block' : 'none';
-      document.getElementById('linkAdminMatriculas').style.display = dadosConta.role === 'admin' ? 'inline-block' : 'none';
-      document.getElementById('linkAdminAgenda').style.display = 'inline-block';
-      document.getElementById('linkAdminAulas').style.display = dadosConta.role === 'admin' ? 'inline-block' : 'none';
-    }
+    alvo.innerHTML = `
+      <div class="dash-kpi-row">
+        <div class="dash-kpi"><div class="valor">${enviados}</div><div class="rotulo">Produções enviadas</div></div>
+        <div class="dash-kpi"><div class="valor">${aguardando}</div><div class="rotulo">Aguardando correção</div></div>
+        <div class="dash-kpi"><div class="valor">${corrigidas.length}</div><div class="rotulo">Corrigidas</div></div>
+        <div class="dash-kpi"><div class="valor">${dados.creditosCorrecao ?? 0}</div><div class="rotulo">Créditos disponíveis</div></div>
+      </div>
+      ${ultimaCorrigida ? `<div class="dash-atividade-item" style="flex-direction:column; align-items:flex-start; gap:6px;">
+        <strong>Último feedback recebido${ultimaCorrigida.avaliacao?.notaTotal != null ? ' · Nota ' + ultimaCorrigida.avaliacao.notaTotal : ''}</strong>
+        <span style="color:var(--text-muted);">${ultimaCorrigida.avaliacao?.comentarioGeral || 'Sem comentário geral.'}</span>
+      </div>` : ''}
+      <div style="margin-top:16px;"><a href="correcoes-texto.html" class="dash-btn">Nova Produção</a></div>
+    `;
   } catch (err) {
-    document.getElementById('nomeUsuario').textContent = 'Não foi possível carregar sua conta';
+    alvo.innerHTML = '<p style="color:var(--danger-text);">Não foi possível carregar suas produções.</p>';
+  }
+}
+
+// ===================== AULAS ESPECIALIZADAS =====================
+async function renderAulas(dados) {
+  const alvo = document.getElementById('conteudoAulas');
+  if (!window.AppShell.temAcesso('aulasEspecializadas')) {
+    alvo.innerHTML = cardBloqueado('Aulas Especializadas Online', 'Aulas Especializadas Online');
+    return;
+  }
+  try {
+    const [resResumo, resHistorico, resMatriculas] = await Promise.all([
+      fetch('/api/aulas/progresso/resumo', { headers: authHeaders() }),
+      fetch('/api/aulas/progresso/historico', { headers: authHeaders() }),
+      fetch('/api/matricula/minhas', { headers: authHeaders() })
+    ]);
+    const resumo = resResumo.ok ? await resResumo.json() : { totalAulas: 0, concluidas: 0, percentual: 0, ultimaAula: null };
+    const historico = resHistorico.ok ? await resHistorico.json() : [];
+    const matriculas = resMatriculas.ok ? await resMatriculas.json() : [];
+
+    const agora = Date.now();
+    const proximas = [];
+    matriculas.filter(m => m.status === 'confirmada').forEach(m => {
+      if (m.tipo === 'particular' && m.horarios?.length) {
+        m.horarios.filter(h => new Date(h.dataHoraInicio).getTime() > agora).forEach(h => {
+          proximas.push({ tipo: 'particular', data: h.dataHoraInicio, professor: m.professorId?.nome || '—', zoomLink: null });
+        });
+      } else if (m.tipo === 'turma' && m.turmaId) {
+        proximas.push({ tipo: 'turma', recorrente: true, nome: m.turmaId.nome, nivel: m.turmaId.nivel, dias: m.turmaId.dias, horario: m.turmaId.horario, zoomLink: m.turmaId.zoomLink });
+      }
+    });
+    proximas.sort((a, b) => (a.data ? new Date(a.data) : 0) - (b.data ? new Date(b.data) : 0));
+
+    const proximasHtml = proximas.slice(0, 4).map(p => {
+      const titulo = p.recorrente ? `${p.nome} — ${p.nivel}` : 'Aula particular';
+      const quando = p.recorrente ? `${(p.dias || []).join(', ')} às ${p.horario || ''}` : new Date(p.data).toLocaleString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+      const entrar = p.zoomLink
+        ? `<a href="${p.zoomLink}" target="_blank" class="dash-btn secundario">Entrar na Aula</a>`
+        : `<span style="font-size:0.82rem; color:var(--text-muted);">Aguarde o contato do professor</span>`;
+      return `<div class="dash-atividade-item">
+        <span><strong>${titulo}</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">${p.professor ? 'Professor: ' + p.professor + ' · ' : ''}${quando}</span></span>
+        ${entrar}
+      </div>`;
+    }).join('') || '<div class="stats-vazio">Nenhuma aula ao vivo agendada.</div>';
+
+    alvo.innerHTML = `
+      <div class="dash-kpi-row">
+        <div class="dash-kpi"><div class="valor">${resumo.percentual}%</div><div class="rotulo">Progresso nas aulas gravadas</div></div>
+        <div class="dash-kpi"><div class="valor">${resumo.concluidas}/${resumo.totalAulas}</div><div class="rotulo">Aulas concluídas</div></div>
+      </div>
+      <h3 style="margin-bottom:10px;">Próximas aulas</h3>
+      ${proximasHtml}
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin:16px 0 20px;">
+        <a href="aulas-especializadas.html" class="dash-btn">${resumo.ultimaAula ? 'Continuar assistindo' : 'Ver aulas gravadas'}</a>
+        <a href="matricula.html" class="dash-btn secundario">Agendar Aula</a>
+      </div>
+      <h3 style="margin-bottom:10px;">Histórico de aulas gravadas</h3>
+      ${historico.slice(0, 6).map(h => `<div class="dash-atividade-item">
+        <span>${h.moduloIcone ? h.moduloIcone + ' ' : ''}${h.aulaTitulo}${h.moduloTitulo ? ' · ' + h.moduloTitulo : ''}</span>
+        <span style="color:${h.concluida ? 'var(--success-text)' : 'var(--text-muted)'};">${h.concluida ? '✓ Concluída' : 'Em andamento'}</span>
+      </div>`).join('') || '<div class="stats-vazio">Nenhuma aula assistida ainda.</div>'}
+    `;
+  } catch (err) {
+    alvo.innerHTML = '<p style="color:var(--danger-text);">Não foi possível carregar suas aulas.</p>';
   }
 }
 
@@ -427,7 +542,6 @@ function preencherPerfil(perfil) {
   document.getElementById('dataProvaInput').value = perfil.dataProva ? perfil.dataProva.slice(0, 10) : '';
   atualizarCountdown(perfil.dataProva, perfil.provaAlvo);
 }
-
 function atualizarCountdown(dataProvaStr, provaAlvo) {
   const box = document.getElementById('countdownBox');
   if (!dataProvaStr) { box.style.display = 'none'; return; }
@@ -440,68 +554,24 @@ function atualizarCountdown(dataProvaStr, provaAlvo) {
   else if (dias === 0) box.innerHTML = `<strong>É hoje!</strong> Boa sorte ${nomeProva}!`;
   else box.innerHTML = `A data ${nomeProva} já passou há ${Math.abs(dias)} dia(s). Atualize sua data se necessário.`;
 }
-
 document.getElementById('dataProvaInput').addEventListener('change', () => {
   atualizarCountdown(document.getElementById('dataProvaInput').value, document.getElementById('provaAlvoInput').value);
 });
 document.getElementById('provaAlvoInput').addEventListener('change', () => {
   atualizarCountdown(document.getElementById('dataProvaInput').value, document.getElementById('provaAlvoInput').value);
 });
-
-document.getElementById('avatarWrap').addEventListener('click', () => {
-  document.getElementById('fotoInput').click();
-});
-
-function lerEComprimirImagem(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = e => {
-      const img = new Image();
-      img.onload = () => {
-        const size = 300;
-        const canvas = document.createElement('canvas');
-        canvas.width = size; canvas.height = size;
-        const ctx = canvas.getContext('2d');
-        const scale = Math.max(size / img.width, size / img.height);
-        const w = img.width * scale, h = img.height * scale;
-        ctx.drawImage(img, (size - w) / 2, (size - h) / 2, w, h);
-        resolve(canvas.toDataURL('image/jpeg', 0.85));
-      };
-      img.onerror = reject;
-      img.src = e.target.result;
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-document.getElementById('fotoInput').addEventListener('change', async e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  try {
-    const dataUrl = await lerEComprimirImagem(file);
-    fotoPendente = dataUrl;
-    document.getElementById('avatarImg').src = dataUrl;
-  } catch (err) {
-    alert('Não foi possível carregar essa imagem.');
-  }
-});
-
 document.getElementById('salvarPerfilBtn').addEventListener('click', async () => {
   const btn = document.getElementById('salvarPerfilBtn');
   const msg = document.getElementById('salvarMsg');
   btn.disabled = true;
   msg.style.color = 'var(--text)';
   msg.textContent = 'Salvando...';
-
   const body = {
     bio: document.getElementById('bioInput').value,
     interesses: document.getElementById('interessesInput').value,
     provaAlvo: document.getElementById('provaAlvoInput').value,
     dataProva: document.getElementById('dataProvaInput').value || null
   };
-  if (fotoPendente !== undefined) body.foto = fotoPendente;
-
   try {
     const res = await fetch('/api/auth/perfil', {
       method: 'PUT',
@@ -512,7 +582,6 @@ document.getElementById('salvarPerfilBtn').addEventListener('click', async () =>
     if (res.ok) {
       msg.style.color = 'var(--success-text)';
       msg.textContent = data.msg;
-      fotoPendente = undefined;
     } else {
       msg.style.color = 'var(--danger-text)';
       msg.textContent = data.msg || 'Erro ao salvar.';
@@ -525,290 +594,18 @@ document.getElementById('salvarPerfilBtn').addEventListener('click', async () =>
   }
 });
 
-// ===================== PAGAMENTO =====================
-const METODOS_LABEL = {
-  cartao_credito: 'Cartão de Crédito',
-  cartao_debito: 'Cartão de Débito',
-  boleto: 'Boleto Bancário',
-  pix: 'Pix'
-};
-
-function renderPagamento(plano) {
-  const alvo = document.getElementById('pagamentoConteudo');
-  const recursosBox = document.getElementById('recursosConteudo');
-
-  if (!plano || !plano.tier) {
-    alvo.innerHTML = `
-      <h2>Assinatura</h2>
-      <div class="sem-plano">
-        <p>Você ainda não tem nenhuma inscrição. Assine um plano para liberar correções de texto, aulas especializadas e a plataforma de questões.</p>
-        <a class="btn" href="cursos.html">Ver planos disponíveis</a>
-      </div>`;
-    recursosBox.style.display = 'none';
-    return;
-  }
-
-  const vencimento = plano.dataVencimento ? new Date(plano.dataVencimento) : null;
-  const diasRestantes = vencimento ? Math.ceil((vencimento - new Date()) / 86400000) : null;
-  const metodoLabel = METODOS_LABEL[plano.metodoPagamento] || 'Não informado';
-  const ehCartao = plano.metodoPagamento === 'cartao_credito' || plano.metodoPagamento === 'cartao_debito';
-
-  let avisoHtml = '';
-  if (!plano.ativo) {
-    avisoHtml = `<div class="aviso-vencimento">Sua inscrição <strong>venceu</strong>${vencimento ? ' em ' + vencimento.toLocaleDateString('pt-BR') : ''} e o acesso aos recursos premium foi encerrado. Assine novamente para recuperar o acesso.</div>`;
-  } else if (diasRestantes !== null && diasRestantes <= 5) {
-    avisoHtml = `<div class="aviso-vencimento">Sua inscrição vence em <strong>${diasRestantes} ${diasRestantes === 1 ? 'dia' : 'dias'}</strong>. Renove para não perder o acesso.</div>`;
-  }
-
-  alvo.innerHTML = `
-    <h2>Assinatura</h2>
-    ${avisoHtml}
-    <div class="pag-linha"><span class="rotulo">Plano</span><span class="valor">${plano.tier}</span></div>
-    <div class="pag-linha"><span class="rotulo">Curso</span><span class="valor">${plano.curso || '—'}</span></div>
-    <div class="pag-linha"><span class="rotulo">Status da inscrição</span><span class="status-badge ${plano.ativo ? 'ativo' : 'inativo'}">${plano.ativo ? 'Ativa' : 'Vencida / Inativa'}</span></div>
-    <div class="pag-linha"><span class="rotulo">Forma de pagamento</span><span class="valor">${metodoLabel}</span></div>
-    ${ehCartao ? `<div class="pag-linha"><span class="rotulo">Cartão</span><span class="valor cartao-mask">•••• •••• •••• ${plano.cartaoFinal || '----'}</span></div>` : ''}
-    <div class="pag-linha"><span class="rotulo">Débito/crédito automático</span><span class="valor">${plano.autoRenovacao ? 'Ativado' : 'Não ativado — renovação manual'}</span></div>
-    <div class="pag-linha"><span class="rotulo">Início da inscrição</span><span class="valor">${plano.dataInicio ? new Date(plano.dataInicio).toLocaleDateString('pt-BR') : '—'}</span></div>
-    <div class="pag-linha"><span class="rotulo">Vencimento (30 dias)</span><span class="valor">${vencimento ? vencimento.toLocaleDateString('pt-BR') : '—'}</span></div>
-    <div style="margin-top:20px; text-align:center;">
-      <a class="btn ${plano.ativo ? 'secundario' : ''}" href="cursos.html">${plano.ativo ? 'Trocar ou renovar plano' : 'Assinar agora'}</a>
-    </div>`;
-
-  recursosBox.style.display = 'block';
-  const ok = entitlements(plano.tier);
-  document.getElementById('recursosLista').innerHTML = RECURSOS.map(r => {
-    const liberado = plano.ativo && ok[r.key];
-    return `
-      <div class="recurso-item ${liberado ? 'liberado' : 'bloqueado'}">
-        <span class="nome"><span class="icon">${liberado ? '✓' : '✗'}</span>${r.nome}</span>
-        ${liberado ? `<a href="${r.href}">Acessar</a>` : `<span style="font-size:0.85rem;">A partir do ${r.minTier}</span>`}
-      </div>`;
-  }).join('');
-}
-
-// ===================== ESTATÍSTICAS =====================
-function carregarRespostas() { return JSON.parse(localStorage.getItem('pq_respostas') || '{}'); }
-function carregarEventos() { return JSON.parse(localStorage.getItem('pq_eventos') || '[]'); }
-
-function diaDe(t) {
-  const d = new Date(t);
-  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-}
-function rotuloDia(chave) { const [, m, d] = chave.split('-'); return d + '/' + m; }
-function rotuloDiaCompleto(chave) { const [y, m, d] = chave.split('-'); return `${d}/${m}/${y}`; }
-
-const statMateriaSel = document.getElementById('statMateria');
-Object.entries(MATERIAS).forEach(([k, v]) => statMateriaSel.insertAdjacentHTML('beforeend', `<option value="${k}">${v}</option>`));
-document.getElementById('statModo').addEventListener('change', renderStats);
-statMateriaSel.addEventListener('change', renderStats);
-
-function renderStats() {
-  const modo = document.getElementById('statModo').value;
-  const materia = statMateriaSel.value;
-  const eventos = carregarEventos().filter(e =>
-    (modo === 'todas' || e.mode === modo) && (materia === 'todas' || e.materia === materia)
-  );
-  const alvo = document.getElementById('statsConteudo');
-
-  if (eventos.length === 0) {
-    alvo.innerHTML = '<div class="stats-vazio">Nenhum dado para este filtro ainda.<br>Responda questões em <strong>Praticar</strong> ou finalize um <strong>Simulado</strong> na Plataforma de Questões para ver suas estatísticas aqui.</div>';
-    return;
-  }
-
-  const total = eventos.length;
-  const acertos = eventos.filter(e => e.ok).length;
-  const taxa = Math.round((acertos / total) * 100);
-  const dias = [...new Set(eventos.map(e => diaDe(e.t)))].sort();
-
-  const porDia = dias.map(dia => {
-    const doDia = eventos.filter(e => diaDe(e.t) === dia);
-    const okDia = doDia.filter(e => e.ok).length;
-    return { dia, total: doDia.length, taxa: Math.round((okDia / doDia.length) * 100) };
-  });
-
-  const porNivel = NIVEIS.map(n => {
-    const doN = eventos.filter(e => e.nivel === n);
-    return { rotulo: 'Nível ' + n, total: doN.length, taxa: doN.length ? Math.round((doN.filter(e => e.ok).length / doN.length) * 100) : null };
-  });
-  const porMateria = Object.entries(MATERIAS).map(([k, v]) => {
-    const doM = eventos.filter(e => e.materia === k);
-    return { rotulo: v, total: doM.length, taxa: doM.length ? Math.round((doM.filter(e => e.ok).length / doM.length) * 100) : null };
-  });
-
-  alvo.innerHTML = `
-    <div class="kpi-row">
-      <div class="kpi"><div class="valor">${total}</div><div class="rotulo">Questões respondidas</div></div>
-      <div class="kpi"><div class="valor">${acertos}</div><div class="rotulo">Acertos</div></div>
-      <div class="kpi"><div class="valor">${taxa}%</div><div class="rotulo">Taxa de acerto</div></div>
-      <div class="kpi"><div class="valor">${dias.length}</div><div class="rotulo">Dias de estudo</div></div>
-    </div>
-    <div class="card chart-card">
-      <h3>Taxa de acerto por dia (%)</h3>
-      <div class="chart-scroll">${svgLinha(porDia)}</div>
-    </div>
-    <div class="card chart-card">
-      <h3>Questões respondidas por dia</h3>
-      <div class="chart-scroll">${svgBarras(porDia)}</div>
-    </div>
-    <div class="card chart-card">
-      <h3>Taxa de acerto por nível</h3>
-      ${barList(porNivel)}
-    </div>
-    <div class="card chart-card">
-      <h3>Taxa de acerto por matéria</h3>
-      ${barList(porMateria)}
-    </div>`;
-}
-
-function svgLinha(porDia) {
-  const dados = porDia.slice(-30);
-  const W = Math.max(560, dados.length * 60), H = 220;
-  const padL = 40, padR = 16, padT = 16, padB = 34;
-  const iw = W - padL - padR, ih = H - padT - padB;
-  const x = i => dados.length === 1 ? padL + iw / 2 : padL + (i / (dados.length - 1)) * iw;
-  const y = v => padT + (1 - v / 100) * ih;
-
-  const grade = [0, 25, 50, 75, 100].map(v =>
-    `<line x1="${padL}" y1="${y(v)}" x2="${W - padR}" y2="${y(v)}" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-     <text x="${padL - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="rgba(255,255,255,0.65)">${v}</text>`
-  ).join('');
-
-  const caminho = dados.map((p, i) => (i === 0 ? 'M' : 'L') + x(i).toFixed(1) + ' ' + y(p.taxa).toFixed(1)).join(' ');
-
-  const ultimo = dados.length - 1;
-  const pontos = dados.map((p, i) => {
-    const rotulo = (i === ultimo || p.taxa === Math.max(...dados.map(d => d.taxa)) || p.taxa === Math.min(...dados.map(d => d.taxa)))
-      ? `<text x="${x(i)}" y="${y(p.taxa) - 10}" text-anchor="middle" font-size="11" font-weight="700" fill="rgba(255,255,255,0.9)">${p.taxa}%</text>` : '';
-    return `<circle cx="${x(i)}" cy="${y(p.taxa)}" r="4" fill="#ffeb3b"><title>${rotuloDia(p.dia)}: ${p.taxa}% (${p.total} questões)</title></circle>${rotulo}`;
-  }).join('');
-
-  const eixoX = dados.map((p, i) =>
-    `<text x="${x(i)}" y="${H - 10}" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.65)">${rotuloDia(p.dia)}</text>`
-  ).join('');
-
-  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Taxa de acerto por dia">
-    ${grade}
-    <path d="${caminho}" fill="none" stroke="#ffeb3b" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-    ${pontos}
-    ${eixoX}
-  </svg>`;
-}
-
-function svgBarras(porDia) {
-  const dados = porDia.slice(-30);
-  const W = Math.max(560, dados.length * 60), H = 220;
-  const padL = 40, padR = 16, padT = 16, padB = 34;
-  const iw = W - padL - padR, ih = H - padT - padB;
-  const maxV = Math.max(...dados.map(d => d.total), 1);
-  const bw = Math.min(34, iw / dados.length - 8);
-
-  const passo = maxV <= 5 ? 1 : Math.ceil(maxV / 4);
-  let grade = '';
-  for (let v = 0; v <= maxV; v += passo) {
-    const yv = padT + (1 - v / maxV) * ih;
-    grade += `<line x1="${padL}" y1="${yv}" x2="${W - padR}" y2="${yv}" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-      <text x="${padL - 8}" y="${yv + 4}" text-anchor="end" font-size="11" fill="rgba(255,255,255,0.65)">${v}</text>`;
-  }
-
-  const barras = dados.map((p, i) => {
-    const cx = dados.length === 1 ? padL + iw / 2 : padL + (i + 0.5) / dados.length * iw;
-    const h = (p.total / maxV) * ih;
-    const yTopo = padT + ih - h;
-    return `<rect x="${(cx - bw / 2).toFixed(1)}" y="${yTopo.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="#ffeb3b"><title>${rotuloDia(p.dia)}: ${p.total} questões</title></rect>
-      <text x="${cx}" y="${yTopo - 6}" text-anchor="middle" font-size="11" font-weight="700" fill="rgba(255,255,255,0.9)">${p.total}</text>
-      <text x="${cx}" y="${H - 10}" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.65)">${rotuloDia(p.dia)}</text>`;
-  }).join('');
-
-  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Questões respondidas por dia">
-    ${grade}${barras}
-  </svg>`;
-}
-
-function barList(linhas) {
-  return linhas.map(l => {
-    if (l.taxa === null) {
-      return `<div class="bar-list-row">
-        <span class="bar-list-label">${l.rotulo}</span>
-        <div class="bar-list-track"></div>
-        <span class="bar-list-val" style="opacity:0.5;">sem dados</span>
-      </div>`;
-    }
-    return `<div class="bar-list-row" title="${l.rotulo}: ${l.taxa}% de acerto em ${l.total} questões">
-      <span class="bar-list-label">${l.rotulo}</span>
-      <div class="bar-list-track"><div class="bar-list-fill" style="width:${l.taxa}%;"></div></div>
-      <span class="bar-list-val">${l.taxa}% · ${l.total}q</span>
-    </div>`;
-  }).join('');
-}
-
-// Apagar estatísticas de um dia — remove os eventos daquele dia e "reabre"
-// (refresh) as questões de Praticar respondidas nesse dia.
-function diasComDados() {
-  return [...new Set(carregarEventos().map(e => diaDe(e.t)))].sort().reverse();
-}
-
-function popularSelectDias() {
-  const dias = diasComDados();
-  const sel = document.getElementById('diaApagarSelect');
-  const btn = document.getElementById('apagarDiaBtn');
-  if (dias.length === 0) {
-    sel.innerHTML = '<option value="">Nenhum dado disponível</option>';
-    btn.disabled = true;
-    return;
-  }
-  sel.innerHTML = dias.map(d => `<option value="${d}">${rotuloDiaCompleto(d)}</option>`).join('');
-  btn.disabled = false;
-}
-
-function apagarEstatisticasDoDia(diaStr) {
-  const eventos = carregarEventos();
-  const respostas = carregarRespostas();
-  const restantes = [];
-  eventos.forEach(e => {
-    if (diaDe(e.t) === diaStr) {
-      if (e.mode === 'praticar' && e.id && respostas[e.id]) delete respostas[e.id];
-    } else {
-      restantes.push(e);
-    }
-  });
-  localStorage.setItem('pq_eventos', JSON.stringify(restantes));
-  localStorage.setItem('pq_respostas', JSON.stringify(respostas));
-}
-
-document.getElementById('apagarDiaBtn').addEventListener('click', () => {
-  const dia = document.getElementById('diaApagarSelect').value;
-  if (!dia) return;
-  if (!confirm(`Apagar todas as estatísticas de ${rotuloDiaCompleto(dia)}? As questões de Praticar respondidas nesse dia voltarão a aparecer como não respondidas.`)) return;
-  apagarEstatisticasDoDia(dia);
-  popularSelectDias();
-  renderStats();
-});
-
-// ===================== ABAS =====================
-document.querySelectorAll('.top-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.top-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('tabPerfil').style.display = tab.dataset.tab === 'perfil' ? 'block' : 'none';
-    document.getElementById('tabEstatisticas').style.display = tab.dataset.tab === 'estatisticas' ? 'block' : 'none';
-    document.getElementById('tabPagamento').style.display = tab.dataset.tab === 'pagamento' ? 'block' : 'none';
-    if (tab.dataset.tab === 'estatisticas') { renderStats(); popularSelectDias(); }
-  });
-});
-
 // ===================== INIT =====================
-carregarConta();
-
-document.querySelectorAll('.nav-item').forEach(item => {
-  const dropdown = item.querySelector('.dropdown');
-  if (!dropdown) return;
-  let timeout;
-  item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown.classList.add('show'); });
-  item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown.classList.remove('show'); }, 150); });
+document.addEventListener('appshell:ready', e => {
+  const dados = e.detail;
+  renderHeader(dados);
+  renderSummaryCards(dados);
+  renderPainelEquipe(dados);
+  renderPlataforma(dados);
+  renderProducao(dados);
+  renderAulas(dados);
+  preencherPerfil(dados.perfil || {});
 });
 </script>
-<script src="js/main.js"></script>
 <script src="js/theme-toggle.js"></script>
 
 </body>

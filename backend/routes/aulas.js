@@ -13,11 +13,12 @@ const { exigirAuth } = require("../middleware/auth");
 // Mesma regra de public/minha-conta.html (entitlements.gravado), agora aplicada
 // de verdade no servidor — o gate no HTML da página é só cosmético.
 async function checarAcesso(userId) {
-  const user = await User.findById(userId).select("plano nome");
+  const user = await User.findById(userId).select("plano produtosAvulsos nome");
   const tier = user && user.plano && user.plano.tier;
   const ativo = !!(user && user.plano && user.plano.ativo);
-  const ok = ativo && ["Avancé", "Excellence"].includes(tier);
-  return { ok, user };
+  const okPorTier = ativo && ["Avancé", "Excellence"].includes(tier);
+  const okPorPackPrestige = !!user?.produtosAvulsos?.aulasEspecializadas?.ativo;
+  return { ok: okPorTier || okPorPackPrestige, user };
 }
 
 // Mesma lógica de extração de ID usada em public/js/aulas-especializadas.js (normalizarUrlYoutube),
