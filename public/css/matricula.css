@@ -29,6 +29,10 @@
   --tint-neutral-bg:#EEEEEE;
   --tint-neutral-text:#888888;
   --row-hover:#FCFBF6;
+
+  --info:#3B6EA8;
+  --info-dark:#2C5480;
+  --tint-info-bg:#E9F1F8;
 }
 :root[data-theme="dark"]{
   --ink:#F2EFE4;
@@ -55,6 +59,10 @@
   --tint-neutral-bg:#2B3324;
   --tint-neutral-text:#9CA68C;
   --row-hover:#202719;
+
+  --info:#6FA8DC;
+  --info-dark:#4A85BE;
+  --tint-info-bg:rgba(111,168,220,0.28);
 }
 *{box-sizing:border-box;}
 body.mira-theme{

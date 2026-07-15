@@ -14,6 +14,16 @@ const MatriculaSchema = new mongoose.Schema({
     periodicidade: String
   },
 
+  // Fluxo novo (grade semanal por HorarioSlot) — substitui horarios/pacote acima para
+  // matrículas feitas pelo seletor de Particular/Turma com preço por quantidade de aulas.
+  curso: { type: String, default: null },
+  slotsEscolhidos: [{
+    slotId: { type: mongoose.Schema.Types.ObjectId, ref: "HorarioSlot" },
+    diaSemana: Number,
+    horaInicio: String
+  }],
+  periodo: { type: String, enum: ["diurno", "vespertino", "noturno"], default: null },
+
   dadosPessoais: {
     nome: String, email: String, telefone: String,
     objetivo: String, nivelAtual: String, nivelDesejado: String,

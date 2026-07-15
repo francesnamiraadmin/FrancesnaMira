@@ -218,7 +218,7 @@ async function updateNav() {
       dropdown.innerHTML = `
         <a href="plataforma-questoes.html">Plataforma de Questões</a>
         <a href="aulas-especializadas.html">Aulas Especializadas</a>
-        <a href="correcoes-texto.html">Correções de Texto</a>
+        <a href="correcoes-texto.html">Ambiente de Produção Oral e Textual</a>
       `;
       navItem.appendChild(dropdown);
 

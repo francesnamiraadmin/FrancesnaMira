@@ -21,6 +21,14 @@ const UserSchema = new mongoose.Schema({
     dataInicio: { type: Date },
     dataVencimento: { type: Date }
   },
+  // Compras avulsas do Pack Prestige (Plataforma de Questões, Ambiente de Produção Oral e
+  // Textual, Aulas Especializadas Online) — independente do "plano" de curso acima, para não
+  // sobrescrever uma assinatura de curso já ativa ao comprar um desses produtos avulsos.
+  produtosAvulsos: {
+    plataforma: { ativo: { type: Boolean, default: false }, dataVencimento: { type: Date } },
+    producao: { ativo: { type: Boolean, default: false }, dataVencimento: { type: Date } },
+    aulasEspecializadas: { ativo: { type: Boolean, default: false }, dataVencimento: { type: Date } }
+  },
   perfil: {
     foto: { type: String },
     bio: { type: String },

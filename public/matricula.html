@@ -64,6 +64,61 @@ header a { color: inherit; text-decoration: none; }
   color: #F2EFE4;
 }
 
+:root[data-theme="dark"] select option {
+  background: #1B2740;
+  color: #F2EFE4;
+}
+
+:root[data-theme="dark"] .tier-card {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+:root[data-theme="dark"] .tier-card:hover {
+  border-color: #D9B65A;
+}
+:root[data-theme="dark"] .tier-card.selecionado {
+  background: rgba(217, 182, 90, 0.32);
+  border-color: #D9B65A;
+}
+:root[data-theme="dark"] .tier-card .tier-preco,
+:root[data-theme="dark"] .tier-card li.feature-yes .feature-icon {
+  color: #D9B65A;
+}
+
+:root[data-theme="dark"] .periodo-tab {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #F2EFE4;
+}
+:root[data-theme="dark"] .periodo-tab.active {
+  background: #D9B65A;
+  border-color: #D9B65A;
+  color: #12180F;
+}
+
+:root[data-theme="dark"] .resumo-flutuante {
+  background: #2f5c86;
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+:root[data-theme="dark"] .mira-step.active .target {
+  border-color: #D9B65A;
+}
+:root[data-theme="dark"] .mira-step.active .target .bull {
+  background: #D9B65A;
+}
+:root[data-theme="dark"] .mira-step.active .mira-label {
+  color: #D9B65A;
+}
+
+:root[data-theme="dark"] .btn-outline {
+  color: #D9B65A;
+  border-color: #D9B65A;
+}
+:root[data-theme="dark"] .btn-outline:hover {
+  background: rgba(217, 182, 90, 0.18);
+}
+
 :root[data-theme="dark"] .btn-primary {
   background: #D9B65A;
   color: #12180F;
@@ -100,6 +155,60 @@ nav a:hover::after { width: 100%; }
 .login { background: var(--accent); color: var(--accent-text); padding: 10px 28px; border-radius: 30px; font-weight: 700; flex: 0 0 auto; margin-left: 20px; }
 
 footer.site-footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; font-family: 'Poppins', sans-serif; color: var(--text); }
+
+/* ---------- ETAPA: HORÁRIOS + PLANO ---------- */
+.fuso-aviso {
+  background: var(--tint-warning-bg); border: 1px solid var(--tint-warning-border); color: var(--tint-warning-text);
+  border-radius: 10px; padding: 10px 14px; font-size: 13px; margin-bottom: 20px;
+}
+.periodo-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.periodo-tab {
+  flex: 1; min-width: 100px; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--line);
+  background: var(--surface-2); color: var(--ink); font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.2s;
+}
+.periodo-tab:hover { border-color: var(--gold); }
+.periodo-tab.active { background: var(--bordeaux); border-color: var(--bordeaux); color: var(--on-accent); }
+
+.grade-horarios-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); }
+.tabela-horarios { width: 100%; min-width: 400px; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+.tabela-horarios th { background: var(--surface-2); padding: 10px 6px; font-weight: 700; color: var(--ink); text-align: center; }
+.tabela-horarios th:first-child, .tabela-horarios td.hora-label { width: 46px; padding: 6px 4px; font-size: 11.5px; font-weight: 600; color: var(--muted); white-space: nowrap; text-align: right; }
+.tabela-horarios td.horario-cel { width: 44px; height: 38px; text-align: center; border: 1px solid var(--line); cursor: pointer; transition: 0.15s; }
+.tabela-horarios td.horario-cel.vazio { background: var(--tint-neutral-bg); cursor: not-allowed; opacity: 0.6; }
+.tabela-horarios td.horario-cel.disponivel { background: #4CD964; }
+.tabela-horarios td.horario-cel.disponivel:hover { background: var(--gold-soft); }
+.tabela-horarios td.horario-cel.indisponivel { background: var(--tint-neutral-bg); cursor: not-allowed; opacity: 0.6; }
+.tabela-horarios td.horario-cel.selecionado { background: var(--info); border-color: var(--info-dark); }
+
+.tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.tier-card {
+  border: 1.5px solid var(--line); border-radius: 12px; padding: 16px 14px; cursor: pointer; background: var(--surface-2);
+  text-align: center; transition: 0.2s; display: block;
+}
+.tier-card:hover { border-color: var(--gold); }
+.tier-card.selecionado { border-color: var(--bordeaux); background: var(--tint-success-bg); }
+.tier-card h3 { font-family: 'Fraunces', serif; font-size: 18px; margin-bottom: 6px; color: var(--ink); }
+.tier-card .tier-preco { font-weight: 700; color: var(--bordeaux); margin-bottom: 10px; font-size: 15px; }
+.tier-card .tier-preco span { font-weight: 400; font-size: 12px; color: var(--muted); }
+.tier-card ul { list-style: none; text-align: left; font-size: 12.5px; }
+.tier-card li { display: flex; align-items: center; gap: 6px; padding: 4px 0; }
+.tier-card li .feature-icon { font-weight: 900; flex-shrink: 0; }
+.tier-card li.feature-yes { color: var(--ink); }
+.tier-card li.feature-yes .feature-icon { color: var(--bordeaux); }
+.tier-card li.feature-no { color: var(--muted); }
+.tier-card li.feature-no .feature-icon { color: var(--error); }
+
+.horarios-layout { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+.horarios-layout .principal { flex: 1 1 460px; min-width: 0; }
+.resumo-flutuante {
+  flex: 0 0 260px; position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 14px; padding: 18px; box-shadow: 0 1px 3px rgba(22,33,62,0.04);
+}
+.resumo-flutuante h3 { font-family: 'Fraunces', serif; font-size: 16px; margin-bottom: 12px; color: var(--ink); }
+@media (max-width: 780px) {
+  .horarios-layout { flex-direction: column-reverse; }
+  .resumo-flutuante { position: static; flex: 1 1 auto; width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -262,6 +371,19 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
       </div>
     </section>
 
+    <!-- ===================== STEP: UPGRADE (Pack Prestige) ===================== -->
+    <section class="step" data-step="upgrade" style="display:none;">
+      <h2 class="step-title">Upgrade</h2>
+      <p class="step-hint">Adicione ao seu Pack</p>
+      <div class="field" id="f-upgrade">
+        <div class="option-grid" id="upgradeGrid"></div>
+      </div>
+      <div class="resumo-total" style="margin-top:20px;">
+        <span class="label">Mensal</span>
+        <span class="valor" id="upgradeTotalValor">R$ 0</span>
+      </div>
+    </section>
+
     <!-- ===================== STEP: TURMA ===================== -->
     <section class="step" data-step="turma" style="display:none;">
       <h2 class="step-title">Escolha sua turma</h2>
@@ -272,29 +394,39 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
       </div>
     </section>
 
-    <!-- ===================== STEP: PACOTE ===================== -->
-    <section class="step" data-step="pacote" style="display:none;">
-      <h2 class="step-title">Escolha seu pacote</h2>
-      <p class="step-hint">Selecione o formato de horas que combina com sua rotina.</p>
-      <div class="field" id="f-pacote">
-        <div class="option-grid" id="pacoteGrid"></div>
-        <div class="field-error">Escolha um pacote.</div>
-      </div>
-    </section>
-
-    <!-- ===================== STEP: HORÁRIOS ===================== -->
+    <!-- ===================== STEP: HORÁRIOS + PLANO ===================== -->
     <section class="step" data-step="horarios" style="display:none;">
-      <h2 class="step-title">Seus horários no alvo</h2>
-      <p class="step-hint" id="horariosHint">Escolha os horários com o professor. A disponibilidade é atualizada em tempo real.</p>
+      <h2 class="step-title">Escolha seus horários e plano</h2>
+      <p class="step-hint">Selecione de 1 a 4 horários semanais e o plano ideal para você.</p>
+      <p class="fuso-aviso">🕒 Todos os horários estão no horário oficial de Brasília (GMT-3 / São Paulo).</p>
 
-      <div class="field" id="f-professor">
-        <label>Professor <span class="req">*</span></label>
-        <select id="professorSelect"></select>
-      </div>
+      <div class="horarios-layout">
+        <div class="principal">
+          <div class="field" id="f-periodo">
+            <label>Período</label>
+            <div class="periodo-tabs" id="periodoTabs">
+              <button type="button" class="periodo-tab" data-periodo="diurno">Diurno</button>
+              <button type="button" class="periodo-tab" data-periodo="vespertino">Vespertino</button>
+              <button type="button" class="periodo-tab" data-periodo="noturno">Noturno</button>
+            </div>
+          </div>
 
-      <div class="field" id="f-horarios">
-        <div id="horariosContainer"></div>
-        <div class="field-error">Selecione a quantidade de horários exigida pelo pacote.</div>
+          <div class="field" id="f-grade-horarios">
+            <label>Horários (mínimo 1, máximo 4)</label>
+            <div class="grade-horarios-wrap">
+              <table class="tabela-horarios" id="tabelaHorarios"></table>
+            </div>
+            <div class="field-error">Escolha ao menos um horário para continuar.</div>
+          </div>
+
+          <div class="field" id="f-tier" style="margin-top:24px;">
+            <label>Plano escolhido</label>
+            <div class="tier-grid" id="tierGrid"></div>
+            <div class="field-error">Escolha um plano para continuar.</div>
+          </div>
+        </div>
+
+        <aside class="resumo-flutuante" id="resumoFlutuante"></aside>
       </div>
     </section>
 
@@ -324,6 +456,8 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
     <section class="step" data-step="pagamento" style="display:none;">
       <h2 class="step-title">Forma de pagamento</h2>
       <p class="step-hint">Pagamento processado com segurança pelo Mercado Pago.</p>
+
+      <div id="pagamentoResumo"></div>
 
       <div class="field" id="f-metodoPagamento">
         <div class="option-grid" id="metodoPagamentoGrid">
