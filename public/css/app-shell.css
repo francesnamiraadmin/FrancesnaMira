@@ -17,14 +17,14 @@
 .app-nav-inner {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 16px 32px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
 }
 .app-nav-logo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.85rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--text);
   text-decoration: none;
@@ -34,7 +34,7 @@
 }
 .app-nav-links {
   display: flex;
-  gap: 32px;
+  gap: 14px;
   flex: 1;
   flex-wrap: nowrap;
   min-width: 0;
@@ -45,8 +45,8 @@
   color: var(--text);
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.95rem;
-  padding: 9px 14px;
+  font-size: 0.92rem;
+  padding: 8px 10px;
   border-radius: 10px;
   white-space: nowrap;
   transition: background 0.2s ease, color 0.2s ease;
@@ -132,14 +132,14 @@
 .app-dropdown hr { border: none; border-top: 1px solid var(--glass-border); margin: 6px 4px; }
 .app-dropdown .app-dropdown-danger { color: var(--danger-text); }
 
-@media (min-width: 1400px) {
-  .app-nav-inner { padding: 18px 40px; gap: 40px; }
+@media (min-width: 1550px) {
+  .app-nav-inner { max-width: 1600px; padding: 18px 48px; gap: 32px; }
   .app-nav-logo { font-size: 2rem; }
-  .app-nav-links { justify-content: center; gap: 44px; }
+  .app-nav-links { justify-content: center; gap: 28px; }
   .app-nav-link { font-size: 1rem; padding: 10px 18px; }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1300px) {
   .app-nav-inner { flex-wrap: wrap; padding: 12px 16px; gap: 12px; }
   .app-nav-logo { font-size: 1.5rem; }
   .app-nav-links { order: 3; flex-basis: 100%; justify-content: center; gap: 10px; flex-wrap: wrap; }
