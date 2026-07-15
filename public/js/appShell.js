@@ -226,7 +226,7 @@
 
     root.innerHTML = `
       <div class="app-nav-inner">
-        <a class="app-nav-logo" href="minha-conta.html">Francês na Mira <img src="img/logo-mira.png" alt="" class="logo-mira-icone"></a>
+        <a class="app-nav-logo" href="index.html">Francês na Mira <img src="img/logo-mira.png" alt="" class="logo-mira-icone"></a>
         <div class="app-nav-links">${linksProdutos}</div>
         <div class="app-nav-right">
           <div class="app-nav-item">
