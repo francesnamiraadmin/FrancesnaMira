@@ -48,38 +48,29 @@ function renderModulosSidebar() {
           <div class="meta">${m.bloqueado ? 'Conclua o módulo anterior para desbloquear' : `${m.aulasConcluidas} de ${m.totalAulas} aulas · ${m.percentual}%`}</div>
           ${!m.bloqueado ? `<div class="barra-progresso"><div class="preenchimento" style="width:${m.percentual}%"></div></div>` : ''}
         </div>
-        <div class="modulo-seta">▶</div>
       </div>
-      <div class="aulas-sublista" id="aulasSublista-${m._id}"></div>
     </div>`).join('');
-
-  if (moduloExpandidoId && aulasCache[moduloExpandidoId]) {
-    renderAulasSidebar(moduloExpandidoId);
-  }
 }
 
 document.getElementById('modulosLista').addEventListener('click', e => {
   const toggle = e.target.closest('[data-toggle-modulo]');
-  if (toggle) {
-    const moduloId = toggle.dataset.toggleModulo;
-    const modulo = modulos.find(m => m._id === moduloId);
-    if (modulo && modulo.bloqueado) return;
-    toggleModulo(moduloId);
-    return;
-  }
+  if (!toggle) return;
+  const moduloId = toggle.dataset.toggleModulo;
+  const modulo = modulos.find(m => m._id === moduloId);
+  if (modulo && modulo.bloqueado) return;
+  selecionarModulo(moduloId);
+});
+
+document.getElementById('gradeAulas').addEventListener('click', e => {
   const item = e.target.closest('[data-abrir-aula]');
   if (item) abrirAula(item.dataset.abrirAula, item.dataset.moduloId);
 });
 
-async function toggleModulo(moduloId) {
-  if (moduloExpandidoId === moduloId) {
-    moduloExpandidoId = null;
-    renderModulosSidebar();
-    return;
-  }
+async function selecionarModulo(moduloId) {
   moduloExpandidoId = moduloId;
   await carregarAulasSidebar(moduloId);
   renderModulosSidebar();
+  renderConteudoPrincipal();
 }
 
 async function carregarAulasSidebar(moduloId) {
@@ -89,15 +80,94 @@ async function carregarAulasSidebar(moduloId) {
   }
 }
 
-function renderAulasSidebar(moduloId) {
-  const el = document.getElementById('aulasSublista-' + moduloId);
-  if (!el) return;
+// ===================== GRADE DE AULAS (cards com thumbnail) =====================
+function formatarDuracaoCurta(segundos) {
+  if (!segundos) return null;
+  const m = Math.floor(segundos / 60);
+  const s = Math.floor(segundos % 60);
+  const h = Math.floor(m / 60);
+  if (h > 0) return `${h}:${String(m % 60).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+function renderAulasGrade(moduloId) {
+  const wrap = document.getElementById('gradeAulas');
+  const tituloEl = document.getElementById('gradeAulasTitulo');
+  const modulo = modulos.find(m => m._id === moduloId);
+  tituloEl.textContent = modulo ? `Aulas — ${modulo.titulo}` : 'Aulas';
+
   const aulas = aulasCache[moduloId] || [];
-  el.innerHTML = aulas.length ? aulas.map(a => `
-    <div class="aula-item-side${aulaAtual && aulaAtual._id === a._id ? ' ativa' : ''}" data-abrir-aula="${a._id}" data-modulo-id="${moduloId}">
-      <span class="status-icone">${a.concluida ? '✅' : '⚪'}</span>
-      <span class="titulo-aula">${escapeHtml(a.titulo)}</span>
-    </div>`).join('') : '<p style="padding:10px 18px; font-size:0.8rem; opacity:0.7;">Nenhuma aula neste módulo ainda.</p>';
+  if (!aulas.length) {
+    wrap.innerHTML = '<p style="opacity:0.7; font-size:0.85rem;">Nenhuma aula neste módulo ainda.</p>';
+    return;
+  }
+
+  const agora = Date.now();
+  wrap.innerHTML = aulas.map((a, i) => {
+    const ativa = aulaAtual && aulaAtual._id === a._id;
+    const statusIcone = a.concluida ? '✓' : (a.emAndamento ? '⏳' : '▶');
+    const statusClasse = a.concluida ? 'assistida' : (a.emAndamento ? 'andamento' : '');
+    const nova = a.criadoEm && (agora - new Date(a.criadoEm).getTime()) < 14 * 24 * 60 * 60 * 1000;
+    const duracao = formatarDuracaoCurta(a.duracaoSegundos);
+    const progressoPct = (a.emAndamento && a.duracaoSegundos) ? Math.min(100, Math.round((a.ultimaPosicaoSegundos / a.duracaoSegundos) * 100)) : 0;
+
+    return `
+    <div class="aula-card${ativa ? ' ativa' : ''}" data-abrir-aula="${a._id}" data-modulo-id="${moduloId}">
+      <div class="aula-card-thumb" data-thumb-tipo="${a.thumbnailTipo}" data-thumb-valor="${escapeHtml(a.thumbnailValor || '')}" data-aula-id="${a._id}">
+        <div class="aula-card-thumb-placeholder" style="background:linear-gradient(160deg, ${modulo ? modulo.cor : '#2563eb'}33, ${modulo ? modulo.cor : '#2563eb'}11);">${modulo ? (modulo.icone || '📘') : '📘'}</div>
+        <div class="aula-card-overlay-play">▶</div>
+        <span class="aula-card-badge-status ${statusClasse}">${statusIcone}</span>
+        ${nova ? '<span class="aula-card-badge-novo">Novo</span>' : ''}
+        ${duracao ? `<span class="aula-card-badge-duracao">${duracao}</span>` : ''}
+        ${progressoPct > 0 ? `<div class="aula-card-mini-progresso"><div style="width:${progressoPct}%"></div></div>` : ''}
+      </div>
+      <div class="aula-card-info">
+        <div class="aula-card-meta">Aula ${a.ordem + 1}${modulo ? ' · ' + escapeHtml(modulo.titulo) : ''}</div>
+        <div class="aula-card-titulo">${escapeHtml(a.titulo)}</div>
+        ${a.descricao ? `<div class="aula-card-desc">${escapeHtml(a.descricao)}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  carregarThumbnailsGrade(aulas);
+}
+
+// Thumbnails "internas" (upload/gerado) exigem Authorization, então são buscadas via
+// fetch()+blob() e viram object URL; thumbnails do YouTube já são uma URL pública direta.
+function carregarThumbnailsGrade(aulas) {
+  aulas.forEach(a => {
+    const thumbEl = document.querySelector(`.aula-card-thumb[data-aula-id="${a._id}"]`);
+    if (!thumbEl) return;
+    if (a.thumbnailTipo === 'youtube' && a.thumbnailValor) {
+      inserirImagemThumb(thumbEl, a.thumbnailValor);
+    } else if (a.thumbnailTipo === 'interno') {
+      fetch(`/api/aulas/aulas/${a._id}/thumbnail`, { headers: authHeaders() })
+        .then(res => res.ok ? res.blob() : null)
+        .then(blob => { if (blob) inserirImagemThumb(thumbEl, URL.createObjectURL(blob)); })
+        .catch(() => {});
+    }
+  });
+}
+
+function inserirImagemThumb(thumbEl, src) {
+  if (thumbEl.querySelector('img')) return;
+  const img = document.createElement('img');
+  img.loading = 'lazy';
+  img.alt = '';
+  img.src = src;
+  thumbEl.querySelector('.aula-card-thumb-placeholder').replaceWith(img);
+}
+
+// ===================== ESTADO DA ÁREA PRINCIPAL (vazio / grade / player) =====================
+function renderConteudoPrincipal() {
+  const temModulo = !!moduloExpandidoId;
+  const temAula = !!aulaAtual;
+
+  document.getElementById('vazioInicial').style.display = temModulo ? 'none' : 'block';
+  document.getElementById('aulaCard').style.display = temAula ? 'block' : 'none';
+  document.getElementById('gradeAulasWrap').style.display = temModulo ? 'block' : 'none';
+
+  if (temModulo) renderAulasGrade(moduloExpandidoId);
 }
 
 // ===================== AULA (conteúdo principal) =====================
@@ -112,13 +182,12 @@ async function abrirAula(aulaId, moduloId) {
   renderModulosSidebar();
 
   mostrarView('aula');
+  renderConteudoPrincipal();
   renderAulaPrincipal();
+  document.getElementById('aulaCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderAulaPrincipal() {
-  document.getElementById('vazioInicial').style.display = 'none';
-  document.getElementById('aulaCard').style.display = 'block';
-
   document.getElementById('aulaTitulo').textContent = aulaAtual.titulo;
   document.getElementById('aulaDescricao').textContent = aulaAtual.descricao || '';
 
@@ -171,9 +240,10 @@ async function marcarConcluida(valor) {
   const data = await res.json();
   aulaAtual.concluida = data.concluida;
   const item = (aulasCache[aulaAtualModuloId] || []).find(a => a._id === aulaAtual._id);
-  if (item) item.concluida = data.concluida;
+  if (item) { item.concluida = data.concluida; if (data.concluida) item.emAndamento = false; }
 
   renderAulaPrincipal();
+  if (moduloExpandidoId === aulaAtualModuloId) renderAulasGrade(aulaAtualModuloId);
   await carregarModulos();
   await carregarResumoProgresso();
 }

@@ -140,6 +140,14 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .tabs-video { display: flex; gap: 8px; margin-bottom: 12px; }
 .tabs-video button { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-600); font-weight: 600; cursor: pointer; font-size: 0.85rem; }
 .tabs-video button.active { background: var(--azul); color: white; border-color: var(--azul); }
+
+.thumb-preview-wrap { width: 100%; max-width: 320px; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: var(--cinza-100); border: 1px solid var(--cinza-200); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+.thumb-preview-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.thumb-preview-vazio { font-size: 0.8rem; color: var(--cinza-400); text-align: center; padding: 10px; }
+.captura-frame-area { margin-top: 14px; border-top: 1px solid var(--cinza-200); padding-top: 14px; }
+.captura-frame-area canvas { width: 100%; max-height: 260px; border-radius: 12px; background: #000; display: block; }
+.captura-frame-area input[type=range] { width: 100%; margin-top: 10px; accent-color: var(--azul); }
+.captura-tempos { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--cinza-400); margin-top: 4px; }
 </style>
 </head>
 
@@ -281,6 +289,38 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       </div>
     </div>
     <div class="campo" style="margin-top:10px;"><label>Duração (segundos, opcional)</label><input type="number" id="aulaVideoDuracao" min="0"></div>
+
+    <h3 style="margin-top:18px; font-size:1.05rem;">Thumbnail (capa da aula)</h3>
+    <div id="thumbnailBloqueado" class="upload-bloqueado">Salve a aula primeiro para poder definir uma thumbnail.</div>
+    <div id="thumbnailArea" style="display:none;">
+      <div class="thumb-preview-wrap">
+        <img id="thumbnailPreviewImg" style="display:none;" alt="Prévia da thumbnail">
+        <div id="thumbnailPreviewVazio" class="thumb-preview-vazio">Sem thumbnail definida</div>
+      </div>
+      <p id="thumbnailYoutubeNota" style="display:none; font-size:0.82rem; color:var(--cinza-600); margin-bottom:10px;">Este vídeo é do YouTube — a thumbnail oficial já é usada automaticamente. Envie uma imagem própria para substituí-la.</p>
+      <div class="dropzone-video">
+        <div>🖼️ Selecione uma imagem (PNG, JPEG ou WebP)</div>
+        <input type="file" id="thumbnailArquivo" accept="image/png,image/jpeg,image/webp">
+      </div>
+      <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+        <button class="btn pequeno" type="button" id="enviarThumbnailBtn">Enviar imagem</button>
+        <button class="btn pequeno secundario" type="button" id="capturarThumbnailBtn" style="display:none;">🎬 Capturar do vídeo</button>
+        <button class="btn pequeno perigo" type="button" id="removerThumbnailBtn">Remover thumbnail</button>
+      </div>
+      <p class="field-error" id="thumbnailErro"></p>
+
+      <div id="capturaFrameArea" class="captura-frame-area" style="display:none;">
+        <video id="capturaVideoEl" style="display:none;" muted playsinline></video>
+        <canvas id="capturaCanvas"></canvas>
+        <input type="range" id="capturaSlider" min="0" max="100" value="25">
+        <div class="captura-tempos"><span id="capturaTempoAtual">0:00</span><span id="capturaTempoTotal">0:00</span></div>
+        <p id="capturaCarregando" style="font-size:0.82rem; color:var(--cinza-400); margin-top:6px;">Carregando vídeo...</p>
+        <div style="display:flex; gap:10px; margin-top:10px;">
+          <button class="btn pequeno" type="button" id="usarFrameBtn">Usar este frame</button>
+          <button class="btn pequeno secundario" type="button" id="cancelarCapturaBtn">Cancelar</button>
+        </div>
+      </div>
+    </div>
 
     <h3 style="margin-top:18px; font-size:1.05rem;">Materiais</h3>
     <div id="materiaisBloqueado" class="upload-bloqueado">Salve a aula primeiro para poder adicionar materiais.</div>

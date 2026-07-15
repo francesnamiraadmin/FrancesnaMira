@@ -11,6 +11,29 @@ function escapeHtml(str) {
 const CORES = ['#2563eb', '#16a34a', '#d97706', '#dc2626', '#7c3aed', '#0891b2', '#db2777', '#65a30d'];
 const NOMES_TIPO_MATERIAL = { pdf: 'PDF', imagem: 'Imagem', audio: 'Áudio', exercicio: 'Exercício', arquivo: 'Arquivo', link: 'Link' };
 
+// Mesma extração usada no player do aluno (public/js/aulas-especializadas.js) — só pra
+// mostrar a thumbnail oficial do YouTube como prévia/fallback no painel.
+function extrairIdYoutube(url) {
+  const padroes = [
+    /youtube\.com\/watch\?(?:.*&)?v=([\w-]{6,})/i,
+    /youtube\.com\/shorts\/([\w-]{6,})/i,
+    /youtube\.com\/embed\/([\w-]{6,})/i,
+    /youtu\.be\/([\w-]{6,})/i
+  ];
+  for (const re of padroes) {
+    const match = (url || '').match(re);
+    if (match) return match[1];
+  }
+  return null;
+}
+
+function formatarTempoCaptura(seg) {
+  if (!isFinite(seg)) return '0:00';
+  const m = Math.floor(seg / 60);
+  const s = Math.floor(seg % 60);
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
 let modulos = [];
 let moduloSelecionadoId = null;
 let aulasDoModulo = [];
@@ -312,6 +335,7 @@ async function abrirModalAula(id) {
   document.getElementById('videoErro').style.display = 'none';
   document.getElementById('materialErro').style.display = 'none';
 
+  fecharCapturaFrame();
   if (editando) {
     document.getElementById('videoUploadBloqueado').style.display = 'none';
     document.getElementById('videoUploadArea').style.display = 'block';
@@ -322,11 +346,16 @@ async function abrirModalAula(id) {
       ? `Vídeo atual: ${(aula.video.arquivo.tamanho / 1024 / 1024).toFixed(1)} MB`
       : 'Nenhum vídeo enviado ainda.';
     renderMateriaisModal(aula.materiais || []);
+    document.getElementById('thumbnailBloqueado').style.display = 'none';
+    document.getElementById('thumbnailArea').style.display = 'block';
+    await atualizarThumbnailPreview(aula);
   } else {
     document.getElementById('videoUploadBloqueado').style.display = 'block';
     document.getElementById('videoUploadArea').style.display = 'none';
     document.getElementById('materiaisBloqueado').style.display = 'block';
     document.getElementById('materiaisArea').style.display = 'none';
+    document.getElementById('thumbnailBloqueado').style.display = 'block';
+    document.getElementById('thumbnailArea').style.display = 'none';
   }
 
   document.getElementById('modalAula').classList.add('show');
@@ -335,6 +364,7 @@ async function abrirModalAula(id) {
 document.getElementById('novaAulaBtn').addEventListener('click', () => abrirModalAula(null));
 document.getElementById('fecharAulaBtn').addEventListener('click', () => {
   document.getElementById('modalAula').classList.remove('show');
+  fecharCapturaFrame();
   carregarAulasDoModulo(moduloSelecionadoId);
   carregarModulos();
 });
@@ -426,6 +456,160 @@ document.getElementById('removerVideoBtn').addEventListener('click', async () =>
   await fetch(`/api/admin-aulas/aulas/${id}/video`, { method: 'DELETE', headers: authHeaders() });
   document.getElementById('videoAtualInfo').textContent = 'Nenhum vídeo enviado ainda.';
   carregarAulasDoModulo(moduloSelecionadoId);
+});
+
+// ---------- thumbnail ----------
+let thumbnailObjectUrl = null;
+
+async function atualizarThumbnailPreview(aula) {
+  const previewImg = document.getElementById('thumbnailPreviewImg');
+  const previewVazio = document.getElementById('thumbnailPreviewVazio');
+  const notaYoutube = document.getElementById('thumbnailYoutubeNota');
+  const btnCapturar = document.getElementById('capturarThumbnailBtn');
+
+  if (thumbnailObjectUrl) { URL.revokeObjectURL(thumbnailObjectUrl); thumbnailObjectUrl = null; }
+
+  const temThumbInterna = !!(aula.thumbnail && aula.thumbnail.arquivo && aula.thumbnail.arquivo.caminho);
+  const ehUploadVideo = !!(aula.video && aula.video.tipo === 'upload' && aula.video.arquivo && aula.video.arquivo.caminho);
+  btnCapturar.style.display = ehUploadVideo ? 'inline-block' : 'none';
+
+  const idYoutube = aula.video && aula.video.tipo === 'url' ? extrairIdYoutube(aula.video.url) : null;
+  notaYoutube.style.display = (!temThumbInterna && idYoutube) ? 'block' : 'none';
+
+  if (temThumbInterna) {
+    const res = await fetch(`/api/admin-aulas/aulas/${aula._id}/thumbnail`, { headers: authHeaders() });
+    if (res.ok) {
+      const blob = await res.blob();
+      thumbnailObjectUrl = URL.createObjectURL(blob);
+      previewImg.src = thumbnailObjectUrl;
+      previewImg.style.display = 'block';
+      previewVazio.style.display = 'none';
+      return;
+    }
+  }
+  if (idYoutube) {
+    previewImg.src = `https://img.youtube.com/vi/${idYoutube}/hqdefault.jpg`;
+    previewImg.style.display = 'block';
+    previewVazio.style.display = 'none';
+    return;
+  }
+  previewImg.style.display = 'none';
+  previewVazio.style.display = 'block';
+}
+
+document.getElementById('enviarThumbnailBtn').addEventListener('click', async () => {
+  const id = document.getElementById('aulaId').value;
+  const fileInput = document.getElementById('thumbnailArquivo');
+  const erroEl = document.getElementById('thumbnailErro');
+  if (!fileInput.files[0]) { erroEl.textContent = 'Selecione uma imagem.'; erroEl.style.display = 'block'; return; }
+
+  const form = new FormData();
+  form.append('thumbnail', fileInput.files[0]);
+  form.append('tipo', 'upload');
+
+  const btn = document.getElementById('enviarThumbnailBtn');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+  try {
+    const res = await fetch(`/api/admin-aulas/aulas/${id}/thumbnail`, { method: 'POST', headers: { Authorization: 'Bearer ' + token }, body: form });
+    const data = await res.json();
+    if (!res.ok) { erroEl.textContent = data.msg || 'Erro ao enviar imagem.'; erroEl.style.display = 'block'; return; }
+    erroEl.style.display = 'none';
+    fileInput.value = '';
+    await atualizarThumbnailPreview(data);
+    carregarAulasDoModulo(moduloSelecionadoId);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Enviar imagem';
+  }
+});
+
+document.getElementById('removerThumbnailBtn').addEventListener('click', async () => {
+  const id = document.getElementById('aulaId').value;
+  if (!id) return;
+  if (!confirm('Remover a thumbnail desta aula?')) return;
+  const res = await fetch(`/api/admin-aulas/aulas/${id}/thumbnail`, { method: 'DELETE', headers: authHeaders() });
+  const data = await res.json();
+  if (res.ok) await atualizarThumbnailPreview(data);
+  carregarAulasDoModulo(moduloSelecionadoId);
+});
+
+function fecharCapturaFrame() {
+  document.getElementById('capturaFrameArea').style.display = 'none';
+  const videoEl = document.getElementById('capturaVideoEl');
+  videoEl.pause();
+  videoEl.src = '';
+  videoEl.onloadedmetadata = null;
+  videoEl.onseeked = null;
+}
+
+document.getElementById('capturarThumbnailBtn').addEventListener('click', async () => {
+  const id = document.getElementById('aulaId').value;
+  if (!id) return;
+
+  document.getElementById('capturaFrameArea').style.display = 'block';
+  document.getElementById('capturaCarregando').style.display = 'block';
+  document.getElementById('capturaCarregando').textContent = 'Carregando vídeo...';
+
+  const res = await fetch(`/api/admin-aulas/aulas/${id}/video-ticket`, { method: 'POST', headers: authHeaders() });
+  if (!res.ok) { document.getElementById('capturaCarregando').textContent = 'Não foi possível carregar o vídeo.'; return; }
+  const { ticket } = await res.json();
+
+  const videoEl = document.getElementById('capturaVideoEl');
+  const slider = document.getElementById('capturaSlider');
+
+  videoEl.onloadedmetadata = () => {
+    document.getElementById('capturaCarregando').style.display = 'none';
+    slider.max = Math.floor(videoEl.duration);
+    slider.value = Math.floor(videoEl.duration * 0.25);
+    document.getElementById('capturaTempoTotal').textContent = formatarTempoCaptura(videoEl.duration);
+    videoEl.currentTime = Number(slider.value);
+  };
+  videoEl.onseeked = () => {
+    const canvas = document.getElementById('capturaCanvas');
+    canvas.width = videoEl.videoWidth || 640;
+    canvas.height = videoEl.videoHeight || 360;
+    canvas.getContext('2d').drawImage(videoEl, 0, 0, canvas.width, canvas.height);
+    document.getElementById('capturaTempoAtual').textContent = formatarTempoCaptura(videoEl.currentTime);
+  };
+  videoEl.src = `/api/aulas/aulas/${id}/video?ticket=${ticket}`;
+  videoEl.load();
+});
+
+document.getElementById('capturaSlider').addEventListener('input', e => {
+  document.getElementById('capturaVideoEl').currentTime = Number(e.target.value);
+});
+
+document.getElementById('cancelarCapturaBtn').addEventListener('click', fecharCapturaFrame);
+
+document.getElementById('usarFrameBtn').addEventListener('click', () => {
+  const id = document.getElementById('aulaId').value;
+  const canvas = document.getElementById('capturaCanvas');
+  const videoEl = document.getElementById('capturaVideoEl');
+  const btn = document.getElementById('usarFrameBtn');
+
+  canvas.toBlob(async blob => {
+    if (!blob) return;
+    const form = new FormData();
+    form.append('thumbnail', blob, 'frame.jpg');
+    form.append('tipo', 'gerado');
+    form.append('timestampSegundos', Math.floor(videoEl.currentTime));
+
+    btn.disabled = true;
+    btn.textContent = 'Salvando...';
+    try {
+      const res = await fetch(`/api/admin-aulas/aulas/${id}/thumbnail`, { method: 'POST', headers: { Authorization: 'Bearer ' + token }, body: form });
+      const data = await res.json();
+      if (res.ok) {
+        fecharCapturaFrame();
+        await atualizarThumbnailPreview(data);
+        carregarAulasDoModulo(moduloSelecionadoId);
+      }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Usar este frame';
+    }
+  }, 'image/jpeg', 0.85);
 });
 
 // ---------- materiais ----------

@@ -20,6 +20,22 @@ async function checarAcesso(userId) {
   return { ok, user };
 }
 
+// Mesma lógica de extração de ID usada em public/js/aulas-especializadas.js (normalizarUrlYoutube),
+// aqui só para montar a URL pública da thumbnail oficial do YouTube (sem custo de processamento).
+function extrairIdYoutube(url) {
+  const padroes = [
+    /youtube\.com\/watch\?(?:.*&)?v=([\w-]{6,})/i,
+    /youtube\.com\/shorts\/([\w-]{6,})/i,
+    /youtube\.com\/embed\/([\w-]{6,})/i,
+    /youtu\.be\/([\w-]{6,})/i
+  ];
+  for (const re of padroes) {
+    const match = (url || "").match(re);
+    if (match) return match[1];
+  }
+  return null;
+}
+
 function serializarMaterial(m) {
   return {
     _id: m._id,
@@ -103,11 +119,33 @@ router.get("/modulos/:id/aulas", exigirAuth, async (req, res) => {
     const progresso = await ProgressoAula.find({ userId: req.userId, moduloId: req.params.id });
     const progressoMap = Object.fromEntries(progresso.map(p => [String(p.aulaId), p]));
 
-    res.json(aulas.map(a => ({
-      _id: a._id, titulo: a.titulo, descricao: a.descricao, ordem: a.ordem,
-      temVideo: !!(a.video && (a.video.url || (a.video.arquivo && a.video.arquivo.caminho))),
-      concluida: !!(progressoMap[String(a._id)] && progressoMap[String(a._id)].concluida)
-    })));
+    res.json(aulas.map(a => {
+      const prog = progressoMap[String(a._id)];
+      const concluida = !!(prog && prog.concluida);
+      const emAndamento = !concluida && !!(prog && prog.ultimaPosicaoSegundos > 0);
+
+      let thumbnailTipo = "nenhum";
+      let thumbnailValor = null;
+      if (a.thumbnail && a.thumbnail.arquivo && a.thumbnail.arquivo.caminho) {
+        thumbnailTipo = "interno";
+      } else if (a.video && a.video.tipo === "url" && a.video.url) {
+        const idYoutube = extrairIdYoutube(a.video.url);
+        if (idYoutube) {
+          thumbnailTipo = "youtube";
+          thumbnailValor = `https://img.youtube.com/vi/${idYoutube}/hqdefault.jpg`;
+        }
+      }
+
+      return {
+        _id: a._id, titulo: a.titulo, descricao: a.descricao, ordem: a.ordem,
+        criadoEm: a.criadoEm,
+        duracaoSegundos: a.video ? a.video.duracaoSegundos : undefined,
+        temVideo: !!(a.video && (a.video.url || (a.video.arquivo && a.video.arquivo.caminho))),
+        concluida, emAndamento,
+        ultimaPosicaoSegundos: prog ? prog.ultimaPosicaoSegundos : 0,
+        thumbnailTipo, thumbnailValor
+      };
+    }));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -244,6 +282,24 @@ router.get("/aulas/:id/video", async (req, res) => {
       "Content-Type": mimetype
     });
     fs.createReadStream(filePath, { start, end }).pipe(res);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// ===================== THUMBNAIL (imagem autenticada, mesmo gate de acesso do resto do conteúdo) =====================
+router.get("/aulas/:id/thumbnail", exigirAuth, async (req, res) => {
+  try {
+    const acesso = await checarAcesso(req.userId);
+    if (!acesso.ok) return res.status(403).json({ msg: "Este recurso é liberado a partir do plano Avancé." });
+
+    const aula = await Aula.findOne({ _id: req.params.id, ativo: true });
+    if (!aula || !aula.thumbnail || !aula.thumbnail.arquivo || !aula.thumbnail.arquivo.caminho) {
+      return res.status(404).json({ msg: "Thumbnail não encontrada." });
+    }
+    res.setHeader("Content-Type", aula.thumbnail.arquivo.mimetype || "image/jpeg");
+    fs.createReadStream(aula.thumbnail.arquivo.caminho).pipe(res);
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });

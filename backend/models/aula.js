@@ -20,11 +20,20 @@ const MaterialSchema = new mongoose.Schema({
   arquivo: ArquivoAulaSchema
 });
 
+// tipo "gerado" (frame capturado do vídeo) e "upload" (imagem enviada manualmente)
+// são armazenados e servidos exatamente da mesma forma — a distinção é só informativa.
+const ThumbnailSchema = new mongoose.Schema({
+  tipo: { type: String, enum: ["upload", "gerado", "nenhum"], default: "nenhum" },
+  arquivo: ArquivoAulaSchema,
+  timestampSegundos: { type: Number }
+}, { _id: false });
+
 const AulaSchema = new mongoose.Schema({
   moduloId: { type: mongoose.Schema.Types.ObjectId, ref: "Modulo", required: true, index: true },
   titulo: { type: String, required: true },
   descricao: { type: String },
   video: VideoSchema,
+  thumbnail: ThumbnailSchema,
   materiais: [MaterialSchema],
   observacoesProfessor: { type: String },
   ordem: { type: Number, default: 0 },

@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const jwt = require("jsonwebtoken");
 const Modulo = require("../models/modulo");
 const Aula = require("../models/aula");
 const ProgressoAula = require("../models/progressoAula");
 const User = require("../models/user");
 const { exigirAuth, exigirAdmin } = require("../middleware/auth");
-const { uploadVideo, uploadMaterial, comTratamentoDeErro } = require("../middleware/uploadAulas");
+const { uploadVideo, uploadThumbnail, uploadMaterial, comTratamentoDeErro } = require("../middleware/uploadAulas");
 
 router.use(exigirAuth, exigirAdmin);
 
@@ -187,6 +188,84 @@ router.delete("/aulas/:id/video", async (req, res) => {
       fs.unlink(aula.video.arquivo.caminho, () => {});
     }
     aula.video = undefined;
+    await aula.save();
+    res.json(aula);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// ===================== THUMBNAIL =====================
+// GET autenticado (só admin) pra pré-visualização no painel — img src não manda
+// Authorization, então o front busca via fetch()+blob() com esse endpoint.
+router.get("/aulas/:id/thumbnail", async (req, res) => {
+  try {
+    const aula = await Aula.findById(req.params.id);
+    if (!aula || !aula.thumbnail || !aula.thumbnail.arquivo || !aula.thumbnail.arquivo.caminho) {
+      return res.status(404).json({ msg: "Thumbnail não encontrada." });
+    }
+    res.setHeader("Content-Type", aula.thumbnail.arquivo.mimetype || "image/jpeg");
+    fs.createReadStream(aula.thumbnail.arquivo.caminho).pipe(res);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// Ticket de vídeo pro admin usar no <video> de captura de frame — mesmo mecanismo
+// (e mesma rota de streaming, GET /api/aulas/aulas/:id/video) do player do aluno;
+// a verificação do ticket lá não checa plano, só validade/aulaId, então reaproveita.
+router.post("/aulas/:id/video-ticket", async (req, res) => {
+  try {
+    const aula = await Aula.findById(req.params.id);
+    if (!aula || !aula.video || aula.video.tipo !== "upload" || !aula.video.arquivo || !aula.video.arquivo.caminho) {
+      return res.status(404).json({ msg: "Vídeo não encontrado." });
+    }
+    const ticket = jwt.sign(
+      { aulaId: String(aula._id), userId: req.userId, type: "video-ticket" },
+      process.env.JWT_SECRET,
+      { expiresIn: "5m" }
+    );
+    res.json({ ticket });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+router.post("/aulas/:id/thumbnail", comTratamentoDeErro(uploadThumbnail.single("thumbnail")), async (req, res) => {
+  try {
+    const aula = await Aula.findById(req.params.id);
+    if (!aula) return res.status(404).json({ msg: "Aula não encontrada." });
+    if (!req.file) return res.status(400).json({ msg: "Nenhuma imagem enviada." });
+
+    // Substituição: apaga o arquivo antigo antes de gravar a referência do novo.
+    if (aula.thumbnail && aula.thumbnail.arquivo && aula.thumbnail.arquivo.caminho) {
+      fs.unlink(aula.thumbnail.arquivo.caminho, () => {});
+    }
+
+    aula.thumbnail = {
+      tipo: req.body.tipo === "gerado" ? "gerado" : "upload",
+      arquivo: { caminho: req.file.path, tamanho: req.file.size, mimetype: req.file.mimetype },
+      timestampSegundos: req.body.timestampSegundos ? Number(req.body.timestampSegundos) : undefined
+    };
+    await aula.save();
+    res.json(aula);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+router.delete("/aulas/:id/thumbnail", async (req, res) => {
+  try {
+    const aula = await Aula.findById(req.params.id);
+    if (!aula) return res.status(404).json({ msg: "Aula não encontrada." });
+    if (aula.thumbnail && aula.thumbnail.arquivo && aula.thumbnail.arquivo.caminho) {
+      fs.unlink(aula.thumbnail.arquivo.caminho, () => {});
+    }
+    aula.thumbnail = undefined;
     await aula.save();
     res.json(aula);
   } catch (err) {

@@ -10,6 +10,12 @@ const TIPOS_VIDEO = {
   "video/ogg": ".ogv"
 };
 
+const TIPOS_THUMBNAIL = {
+  "image/png": ".png",
+  "image/jpeg": ".jpg",
+  "image/webp": ".webp"
+};
+
 const TIPOS_MATERIAL = {
   "application/pdf": ".pdf",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document": ".docx",
@@ -45,6 +51,19 @@ const uploadVideo = multer({
   limits: { fileSize: 1024 * 1024 * 1024 } // 1GB
 });
 
+const uploadThumbnail = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      const dir = path.join(UPLOAD_ROOT, "aulas", req.params.id, "thumbnail");
+      fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (req, file, cb) => cb(null, crypto.randomUUID() + (TIPOS_THUMBNAIL[file.mimetype] || ""))
+  }),
+  fileFilter: filtro(TIPOS_THUMBNAIL, "Formato de imagem não aceito. Envie PNG, JPEG ou WebP."),
+  limits: { fileSize: 5 * 1024 * 1024 } // 5MB
+});
+
 const uploadMaterial = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
@@ -58,4 +77,4 @@ const uploadMaterial = multer({
   limits: { fileSize: 50 * 1024 * 1024 } // 50MB
 });
 
-module.exports = { uploadVideo, uploadMaterial, comTratamentoDeErro, UPLOAD_ROOT };
+module.exports = { uploadVideo, uploadThumbnail, uploadMaterial, comTratamentoDeErro, UPLOAD_ROOT };
