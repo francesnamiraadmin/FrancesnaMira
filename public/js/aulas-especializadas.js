@@ -24,7 +24,28 @@ function mostrarView(nome) {
   document.getElementById('viewFavoritos').style.display = nome === 'favoritos' ? 'block' : 'none';
   document.getElementById('viewHistorico').style.display = nome === 'historico' ? 'block' : 'none';
   document.getElementById('viewCertificado').style.display = nome === 'certificado' ? 'block' : 'none';
-  document.getElementById('topoProgresso').style.display = nome === 'certificado' ? 'none' : (document.getElementById('topoProgresso').dataset.carregado ? 'flex' : 'none');
+  renderTopoProgresso();
+}
+
+// O anel de progresso passa a refletir o módulo selecionado (não o curso inteiro);
+// o link "continuar de onde parei" continua sendo global, então os dois controlam
+// a visibilidade do container em conjunto — ele aparece se qualquer um tiver conteúdo.
+function renderTopoProgresso() {
+  const anel = document.getElementById('anelProgresso');
+  const modulo = modulos.find(m => m._id === moduloExpandidoId);
+  if (modulo) {
+    document.getElementById('progressoResumoTexto').textContent = `Progresso do módulo: ${modulo.aulasConcluidas} de ${modulo.totalAulas} aulas`;
+    document.getElementById('progressoResumoPct').textContent = modulo.percentual + '%';
+    document.getElementById('progressoResumoBarra').style.width = modulo.percentual + '%';
+    anel.style.display = 'block';
+  } else {
+    anel.style.display = 'none';
+  }
+
+  const topo = document.getElementById('topoProgresso');
+  const emCertificado = document.getElementById('viewCertificado').style.display === 'block';
+  const continuarVisivel = document.getElementById('continuarWrap').style.display !== 'none';
+  topo.style.display = (!emCertificado && (modulo || continuarVisivel)) ? 'flex' : 'none';
 }
 
 // ===================== MÓDULOS (sidebar) =====================
@@ -70,6 +91,20 @@ async function selecionarModulo(moduloId) {
   moduloExpandidoId = moduloId;
   await carregarAulasSidebar(moduloId);
   renderModulosSidebar();
+
+  // Se a aula aberta no momento não é deste módulo, mostra a aula em andamento
+  // deste módulo (se houver) — senão fica só a grade, sem player de outro módulo.
+  if (!(aulaAtual && aulaAtualModuloId === moduloId)) {
+    const emAndamento = (aulasCache[moduloId] || []).find(a => a.emAndamento);
+    if (emAndamento) {
+      await abrirAula(emAndamento._id, moduloId);
+      return;
+    }
+    aulaAtual = null;
+    aulaAtualModuloId = null;
+  }
+
+  mostrarView('aula');
   renderConteudoPrincipal();
 }
 
@@ -383,13 +418,6 @@ async function carregarResumoProgresso() {
   document.getElementById('progressoGeralTexto').textContent = r.percentual + '%';
   document.getElementById('progressoGeralBarra').style.width = r.percentual + '%';
 
-  document.getElementById('progressoResumoTexto').textContent = `Progresso do curso: ${r.concluidas} de ${r.totalAulas} aulas`;
-  document.getElementById('progressoResumoPct').textContent = r.percentual + '%';
-  document.getElementById('progressoResumoBarra').style.width = r.percentual + '%';
-  const topo = document.getElementById('topoProgresso');
-  topo.dataset.carregado = '1';
-  if (document.getElementById('viewCertificado').style.display !== 'block') topo.style.display = 'flex';
-
   const continuarWrap = document.getElementById('continuarWrap');
   if (r.ultimaAula && r.percentual < 100) {
     continuarWrap.style.display = 'block';
@@ -399,6 +427,7 @@ async function carregarResumoProgresso() {
   } else {
     continuarWrap.style.display = 'none';
   }
+  renderTopoProgresso();
 
   atualizarCertificadoBanner(r.percentual, r.totalAulas);
 }
