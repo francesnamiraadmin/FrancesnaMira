@@ -505,6 +505,35 @@ nav a:hover::after {
 }
 .price-card-new a:hover { background: #ffd600; }
 
+/* ===== Pack Prestige — card premium, aparência invertida por tema ===== */
+:root[data-theme="light"] .price-card-new.pack-prestige {
+  background: linear-gradient(160deg, #2b2b2b, #0d0d0d);
+  border-color: rgba(217, 163, 0, 0.5);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.4), 0 0 0 1px rgba(217,163,0,0.12) inset;
+  color: #f5f5f5;
+}
+:root[data-theme="light"] .price-card-new.pack-prestige h3 { color: #e8b923; }
+:root[data-theme="light"] .price-card-new.pack-prestige .price-value { color: #ffffff; }
+:root[data-theme="light"] .price-card-new.pack-prestige li { border-top-color: rgba(255,255,255,0.14); }
+:root[data-theme="light"] .price-card-new.pack-prestige li.feature-yes { color: #f5f5f5; }
+:root[data-theme="light"] .price-card-new.pack-prestige li.feature-yes .feature-icon { color: #e8b923; }
+:root[data-theme="light"] .price-card-new.pack-prestige a { background: #e8b923; color: #0d0d0d; }
+:root[data-theme="light"] .price-card-new.pack-prestige a:hover { background: #c99e12; }
+
+:root[data-theme="dark"] .price-card-new.pack-prestige {
+  background: linear-gradient(160deg, #ececec, #d8d8da);
+  border-color: rgba(0,0,0,0.1);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.55);
+  color: #17171a;
+}
+:root[data-theme="dark"] .price-card-new.pack-prestige h3 { color: #8a6a00; }
+:root[data-theme="dark"] .price-card-new.pack-prestige .price-value { color: #17171a; }
+:root[data-theme="dark"] .price-card-new.pack-prestige li { border-top-color: rgba(0,0,0,0.1); }
+:root[data-theme="dark"] .price-card-new.pack-prestige li.feature-yes { color: #17171a; }
+:root[data-theme="dark"] .price-card-new.pack-prestige li.feature-yes .feature-icon { color: #a37c00; }
+:root[data-theme="dark"] .price-card-new.pack-prestige a { background: #17171a; color: #f0d78a; }
+:root[data-theme="dark"] .price-card-new.pack-prestige a:hover { background: #2a2a2e; }
+
 
 /* BLOG - fluido, sem container */
 
@@ -939,12 +968,12 @@ nav a:hover::after {
   </div>
   <div class="feature-price">
     <div class="price-grid">
-      <div class="price-card-new tier-ouro">
+      <div class="price-card-new pack-prestige">
         <h3>Pack Prestige</h3>
         <p class="price-value">R$110<span>/mês</span></p>
         <ul>
           <li class="feature-yes"><span class="feature-icon">✓</span>Aulas gravadas por especialistas em cada exame</li>
-          <li class="feature-yes"><span class="feature-icon">✓</span>Encontros ao vivo para tirar dúvidas</li>
+          <li class="feature-yes"><span class="feature-icon">✓</span>Aulas com progressão de nível</li>
           <li class="feature-yes"><span class="feature-icon">✓</span>Reveja no seu ritmo, quantas vezes precisar</li>
         </ul>
         <a href="matricula.html?curso=Aulas%20Especializadas%20Online&plano=Pack%20Prestige">Assine o plano</a>
