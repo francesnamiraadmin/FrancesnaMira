@@ -200,7 +200,7 @@
 .dash-section-card.locked { overflow: hidden; min-height: 220px; }
 .dash-lock-overlay {
   position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 10px; background: #0c1830; border-radius: 20px; text-align: center; padding: 20px;
+  gap: 10px; background: #111113; border-radius: 20px; text-align: center; padding: 20px;
 }
 :root[data-theme="light"] .dash-lock-overlay { background: #eef2f9; }
 .dash-lock-overlay p { color: var(--text); font-size: 0.98rem; max-width: 340px; }

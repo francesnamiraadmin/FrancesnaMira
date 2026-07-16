@@ -39,39 +39,42 @@
 }
 
 :root[data-theme="dark"] {
-  --bg-gradient: linear-gradient(60deg, #0a0460, #1fa2ff, #efe59f);
-  --text: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.78);
+  /* Fundo quase preto (estilo GitHub Dark / Vercel / Linear) — sem gradiente
+     colorido; os "cards" ganham profundidade por tons de branco translúcido
+     sobre esse fundo, não por um gradiente vibrante atrás do vidro. */
+  --bg-gradient: linear-gradient(160deg, #0a0a0a, #0d0d0f);
+  --text: #f2f2f2;
+  --text-muted: rgba(242, 242, 242, 0.64);
 
-  --accent: #ffeb3b;
-  --accent-hover: #ffd600;
-  --accent-text: #08203e;
+  --accent: #ffd60a;
+  --accent-hover: #ffc400;
+  --accent-text: #0a0a0a;
 
   /* hierarquia de containers, do mais sutil ao mais evidente */
-  --glass-bg-2: rgba(255, 255, 255, 0.05);
-  --glass-bg: rgba(255, 255, 255, 0.08);
-  --glass-input: rgba(255, 255, 255, 0.1);
-  --glass-hover: rgba(255, 255, 255, 0.16);
-  --glass-strong: rgba(255, 255, 255, 0.16);
-  --glass-border: rgba(255, 255, 255, 0.25);
-  --glass-border-strong: rgba(255, 255, 255, 0.35);
+  --glass-bg-2: rgba(255, 255, 255, 0.035);
+  --glass-bg: rgba(255, 255, 255, 0.055);
+  --glass-input: rgba(255, 255, 255, 0.07);
+  --glass-hover: rgba(255, 255, 255, 0.09);
+  --glass-strong: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-border-strong: rgba(255, 255, 255, 0.14);
 
-  --recessed: rgba(0, 0, 0, 0.22);
-  --recessed-2: rgba(0, 0, 0, 0.15);
-  --header-bg: rgba(0, 0, 0, 0.25);
-  --footer-bg: rgba(0, 0, 0, 0.3);
-  --overlay: rgba(0, 0, 0, 0.5);
-  --overlay-strong: rgba(0, 0, 0, 0.95);
+  --recessed: rgba(0, 0, 0, 0.4);
+  --recessed-2: rgba(0, 0, 0, 0.28);
+  --header-bg: rgba(0, 0, 0, 0.6);
+  --footer-bg: rgba(0, 0, 0, 0.65);
+  --overlay: rgba(0, 0, 0, 0.7);
+  --overlay-strong: rgba(8, 8, 9, 0.97);
 
-  --success-bg: rgba(74, 222, 128, 0.16);
-  --success-text: #4ade80;
+  --success-bg: rgba(63, 185, 80, 0.16);
+  --success-text: #3fb950;
   --danger-bg: rgba(255, 107, 107, 0.16);
   --danger-text: #ff6b6b;
-  --warning-bg: rgba(255, 235, 59, 0.16);
-  --warning-text: #ffeb3b;
-  --warning-border: rgba(255, 235, 59, 0.35);
+  --warning-bg: rgba(255, 214, 10, 0.14);
+  --warning-text: #ffd60a;
+  --warning-border: rgba(255, 214, 10, 0.3);
 
-  --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
 }
 
 body {
