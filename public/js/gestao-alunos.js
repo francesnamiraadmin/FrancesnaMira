@@ -103,14 +103,26 @@ async function carregarAlunos() {
 let buscaTimeout;
 document.getElementById('buscaInput').addEventListener('input', () => { clearTimeout(buscaTimeout); buscaTimeout = setTimeout(carregarAlunos, 300); });
 
+function iniciais(nome) {
+  return (nome || '').trim().split(/\s+/).filter(Boolean).slice(0, 2).map(p => p[0].toUpperCase()).join('');
+}
+function avatarHtml(foto, nome, classeExtra) {
+  return foto
+    ? `<img class="avatar-circle ${classeExtra || ''}" src="${foto}" alt="">`
+    : `<div class="avatar-circle ${classeExtra || ''}">${iniciais(nome)}</div>`;
+}
+
 function renderAlunoItem(a) {
   const planoTag = a.plano?.ativo
     ? `<span class="pill">Plano ${a.plano.tier}</span>`
     : `<span class="pill sem-plano">Sem plano ativo</span>`;
   return `<div class="aluno-item" data-id="${a._id}">
-    <div>
-      <h4>${a.nome}</h4>
-      <div class="meta">${a.email} · Cadastrado em ${new Date(a.criadoEm).toLocaleDateString('pt-BR')}${a.provaAlvo ? ' · Prova alvo: ' + a.provaAlvo : ''}</div>
+    <div class="aluno-item-info">
+      ${avatarHtml(a.foto, a.nome)}
+      <div>
+        <h4>${a.nome}</h4>
+        <div class="meta">${a.email} · Cadastrado em ${new Date(a.criadoEm).toLocaleDateString('pt-BR')}${a.provaAlvo ? ' · Prova alvo: ' + a.provaAlvo : ''}</div>
+      </div>
     </div>
     <div>
       ${planoTag}
@@ -136,6 +148,7 @@ async function abrirAluno(id) {
     renderDetalhe(data);
     mostrarView('detalhe');
     window.scrollTo(0, 0);
+    carregarDeverDoAluno(id);
   } catch (err) { alert('Erro ao carregar o aluno.'); }
 }
 
@@ -151,12 +164,18 @@ function renderDetalhe(data) {
   document.getElementById('detalheNome').textContent = a.nome;
   document.getElementById('detalheEmail').textContent = a.email;
   document.getElementById('credMsg').style.display = 'none';
+  const avatarAtual = document.getElementById('detalheAvatar');
+  avatarAtual.outerHTML = avatarHtml(a.foto, a.nome, 'grande').replace(/(<img|<div)/, '$1 id="detalheAvatar"');
 
   document.getElementById('detalheDadosPessoais').innerHTML = `
     ${a.telefone ? `Telefone: ${a.telefone}` : ''}${a.whatsapp ? ` · WhatsApp: ${a.whatsapp}` : ''}<br>
     Cadastrado em ${new Date(a.criadoEm).toLocaleDateString('pt-BR')}
     ${a.ultimoAcessoEm ? ` · Último acesso em ${new Date(a.ultimoAcessoEm).toLocaleDateString('pt-BR')}` : ''}
     ${a.idioma ? ` · Idioma: ${a.idioma}` : ''}${a.tema ? ` · Tema: ${a.tema}` : ''}`;
+
+  document.getElementById('detalheMeuPerfil').innerHTML = (a.bio || a.interesses) ? `
+    ${a.bio ? `<p style="font-size:0.86rem; color:var(--cinza-600); max-width:520px;">${a.bio}</p>` : ''}
+    ${a.interesses ? `<p style="font-size:0.82rem; color:var(--cinza-400); margin-top:4px;"><strong>Interesses:</strong> ${a.interesses}</p>` : ''}` : '';
 
   const planoTag = a.plano?.ativo
     ? `<span class="pill">Plano ${a.plano.tier} · ${a.plano.curso || ''}</span>`
@@ -340,6 +359,235 @@ document.getElementById('concederCreditosBtn').addEventListener('click', async (
   } catch (err) {
     msgEl.style.display = 'block'; msgEl.className = 'msg-inline erro'; msgEl.textContent = 'Erro ao conectar ao servidor.';
   }
+});
+
+// ===================== DASHBOARD DE DEVERES (lista) =====================
+function authHeadersDev(json) { return Object.assign({ Authorization: 'Bearer ' + token }, json ? { 'Content-Type': 'application/json' } : {}); }
+
+document.getElementById('toggleDashboardDeveresBtn').addEventListener('click', async () => {
+  const painel = document.getElementById('dashboardDeveresPainel');
+  painel.classList.toggle('show');
+  if (!painel.classList.contains('show') || painel.dataset.carregado) return;
+  painel.dataset.carregado = '1';
+  try {
+    const res = await fetch('/api/deveres/dashboard', { headers: authHeadersDev() });
+    const d = await res.json();
+    painel.innerHTML = `
+      <div class="kpi"><div class="valor">${d.total}</div><div class="rotulo">Total de deveres</div></div>
+      <div class="kpi"><div class="valor">${d.concluidos}</div><div class="rotulo">Concluídos</div></div>
+      <div class="kpi"><div class="valor">${d.atrasados}</div><div class="rotulo">Atrasados</div></div>
+      <div class="kpi"><div class="valor">${d.emAndamento}</div><div class="rotulo">Em andamento</div></div>
+      <div class="kpi"><div class="valor">${d.taxaMediaConclusao}%</div><div class="rotulo">Taxa de conclusão</div></div>
+      <div class="kpi"><div class="valor">${d.tempoMedioConclusaoDias ?? '—'}</div><div class="rotulo">Dias médios p/ concluir</div></div>
+      <div class="kpi"><div class="valor">${d.quantidadeUploads}</div><div class="rotulo">Uploads recebidos</div></div>
+      <div class="kpi"><div class="valor">${d.quantidadeAlunosComAtraso}</div><div class="rotulo">Alunos com atraso</div></div>
+      ${d.semanasMaisCriticas.length ? `<div style="grid-column:1/-1; margin-top:6px; font-size:0.85rem;"><strong>Semanas mais críticas:</strong> ${d.semanasMaisCriticas.map(s => `Semana ${s.numero} (${s.taxaAtraso}% atraso)`).join(' · ')}</div>` : ''}`;
+  } catch (err) {
+    painel.innerHTML = '<p>Erro ao carregar o dashboard.</p>';
+  }
+});
+
+// ===================== DEVER DE CASA (perfil do aluno) =====================
+const STATUS_DEVER_LABEL = { em_andamento: 'Em andamento', atrasado: 'Atrasado', concluido: 'Concluído' };
+let deveresDoAlunoAtual = [];
+let deverEditandoId = null;
+
+async function carregarDeverDoAluno(alunoId) {
+  document.getElementById('deveresLista').innerHTML = '<p style="opacity:0.6;">Carregando...</p>';
+  fecharFormulariosDever();
+  try {
+    const [resAtrib, resDeveres] = await Promise.all([
+      fetch(`/api/deveres/alunos/${alunoId}/atribuicao`, { headers: authHeadersDev() }),
+      fetch(`/api/deveres/alunos/${alunoId}/deveres`, { headers: authHeadersDev() })
+    ]);
+    renderAtribuicaoBox(resAtrib.ok ? await resAtrib.json() : null);
+    deveresDoAlunoAtual = resDeveres.ok ? await resDeveres.json() : [];
+    renderDeveresLista();
+  } catch (err) {
+    document.getElementById('deveresLista').innerHTML = '<div class="vazio-box">Erro ao carregar os deveres deste aluno.</div>';
+  }
+}
+
+function renderAtribuicaoBox(atribuicao) {
+  const box = document.getElementById('deverAtribuicaoBox');
+  box.innerHTML = atribuicao
+    ? `<div style="border:1px solid var(--cinza-200); border-radius:12px; padding:12px 16px; margin-bottom:6px;">
+        <h4>${atribuicao.planoBaseId?.nome || 'Plano-Base'}</h4>
+        <div class="meta">Início em ${new Date(atribuicao.dataInicio).toLocaleDateString('pt-BR')} · vínculo: ${atribuicao.vinculoTipo === 'turma' ? 'Turma' : 'Plano de curso'}</div>
+      </div>`
+    : '<p style="color:var(--cinza-400); font-size:0.9rem;">Nenhum Plano-Base atribuído no momento.</p>';
+}
+
+function labelEntrega(a, dever) {
+  if (a.entrega?.status === 'enviado') return a.entrega.entregueComAtraso ? 'Entregue com atraso' : 'Entregue';
+  return a.entrega?.atrasada ? 'Pendente em atraso' : 'Pendente';
+}
+
+function renderDeveresLista() {
+  const lista = document.getElementById('deveresLista');
+  if (!deveresDoAlunoAtual.length) { lista.innerHTML = '<div class="vazio-box">Nenhum dever de casa ainda.</div>'; return; }
+  lista.innerHTML = deveresDoAlunoAtual.map(d => {
+    const totalObrig = d.atividades.filter(a => a.obrigatoria).length;
+    const feitasObrig = d.atividades.filter(a => a.obrigatoria && a.entrega?.status === 'enviado').length;
+    const pct = totalObrig ? Math.round((feitasObrig / totalObrig) * 100) : 100;
+    const atividadesHtml = d.atividades.map((a, i) => `
+      <div class="entrega-box">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+          <strong style="font-size:0.88rem;">${a.titulo}${a.obrigatoria ? '' : ' <span style="font-weight:400; color:var(--cinza-400); font-size:0.78rem;">(opcional)</span>'}</strong>
+          <span class="entrega-status">${labelEntrega(a)}</span>
+        </div>
+        ${a.descricao ? `<p style="font-size:0.84rem; color:var(--cinza-600); margin:4px 0;">${a.descricao}</p>` : ''}
+        ${a.entrega?.texto ? `<div class="texto-box" style="margin:8px 0; background:var(--cinza-100); padding:10px; border-radius:8px; font-size:0.85rem;">${a.entrega.texto}</div>` : ''}
+        ${a.entrega?.arquivo?.nome ? `<button class="btn secundario pequeno" data-baixar-entrega="${d._id}|${i}|${encodeURIComponent(a.entrega.arquivo.nome)}">📎 Baixar ${a.entrega.arquivo.nome}</button>` : ''}
+        <div class="campo" style="margin-top:8px;">
+          <label>Comentário do professor</label>
+          <textarea data-comentario-input="${d._id}|${i}">${a.entrega?.comentarioProfessor || ''}</textarea>
+          <button class="btn secundario pequeno" style="align-self:flex-start; margin-top:6px;" data-salvar-comentario="${d._id}|${i}">Salvar comentário</button>
+        </div>
+      </div>`).join('');
+    return `<div class="dever-card">
+      <div class="dever-head" data-abrir-dever="${d._id}">
+        <div><h4>Semana ${d.numeroSemana} — ${d.titulo}</h4>
+          <div class="meta">Prazo: ${new Date(d.dataLimite).toLocaleDateString('pt-BR')} · ${pct}% das obrigatórias concluídas</div></div>
+        <span class="status-badge ${d.status}">${STATUS_DEVER_LABEL[d.status]}</span>
+      </div>
+      <div class="dever-corpo" id="deverCorpo${d._id}">
+        <button class="btn secundario pequeno" data-editar-dever="${d._id}" style="margin-bottom:14px;">Editar este dever</button>
+        ${atividadesHtml}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('deveresLista').addEventListener('click', async e => {
+  const head = e.target.closest('[data-abrir-dever]');
+  if (head) { document.getElementById('deverCorpo' + head.dataset.abrirDever).classList.toggle('show'); return; }
+
+  const baixarBtn = e.target.closest('[data-baixar-entrega]');
+  if (baixarBtn) {
+    const [deverId, index, nome] = baixarBtn.dataset.baixarEntrega.split('|');
+    const res = await fetch(`/api/deveres/deveres/${deverId}/atividades/${index}/arquivo`, { headers: authHeadersDev() });
+    if (!res.ok) { alert('Não foi possível baixar o arquivo.'); return; }
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = decodeURIComponent(nome);
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    return;
+  }
+
+  const comentarioBtn = e.target.closest('[data-salvar-comentario]');
+  if (comentarioBtn) {
+    const [deverId, index] = comentarioBtn.dataset.salvarComentario.split('|');
+    const textarea = document.querySelector(`[data-comentario-input="${deverId}|${index}"]`);
+    await fetch(`/api/deveres/deveres/${deverId}/atividades/${index}/comentario`, {
+      method: 'PUT', headers: authHeadersDev(true), body: JSON.stringify({ comentario: textarea.value })
+    });
+    comentarioBtn.textContent = 'Salvo ✓';
+    setTimeout(() => { comentarioBtn.textContent = 'Salvar comentário'; }, 1500);
+    return;
+  }
+
+  const editarBtn = e.target.closest('[data-editar-dever]');
+  if (editarBtn) abrirDeverManualForm(deveresDoAlunoAtual.find(d => d._id === editarBtn.dataset.editarDever));
+});
+
+// ===================== ATRIBUIR PLANO-BASE =====================
+function fecharFormulariosDever() {
+  document.getElementById('atribuirForm').style.display = 'none';
+  document.getElementById('deverManualForm').style.display = 'none';
+}
+
+document.getElementById('abrirAtribuirBtn').addEventListener('click', async () => {
+  fecharFormulariosDever();
+  document.getElementById('atribuirErro').style.display = 'none';
+  const [resPlanos, resTurmas] = await Promise.all([
+    fetch('/api/deveres/planos-base', { headers: authHeadersDev() }),
+    fetch('/api/turmas', { headers: authHeadersDev() })
+  ]);
+  const planos = resPlanos.ok ? await resPlanos.json() : [];
+  const turmas = resTurmas.ok ? await resTurmas.json() : [];
+  document.getElementById('atribuirPlanoBase').innerHTML = planos.map(p => `<option value="${p._id}">${p.nome}</option>`).join('') || '<option value="">Nenhum plano-base criado</option>';
+  document.getElementById('atribuirTurmaId').innerHTML = turmas.map(t => `<option value="${t._id}">${t.nome}</option>`).join('');
+  document.getElementById('atribuirForm').style.display = 'block';
+});
+document.getElementById('cancelarAtribuirBtn').addEventListener('click', fecharFormulariosDever);
+document.getElementById('atribuirVinculoTipo').addEventListener('change', e => {
+  document.getElementById('atribuirTurmaWrap').style.display = e.target.value === 'turma' ? 'flex' : 'none';
+});
+document.getElementById('salvarAtribuirBtn').addEventListener('click', async () => {
+  const erroEl = document.getElementById('atribuirErro');
+  const payload = {
+    alunoId: alunoAtual._id,
+    planoBaseId: document.getElementById('atribuirPlanoBase').value,
+    dataInicio: document.getElementById('atribuirDataInicio').value,
+    vinculoTipo: document.getElementById('atribuirVinculoTipo').value,
+    turmaId: document.getElementById('atribuirTurmaId').value || undefined
+  };
+  if (!payload.planoBaseId || !payload.dataInicio) {
+    erroEl.textContent = 'Selecione o plano-base e a data de início.'; erroEl.style.display = 'block'; return;
+  }
+  const res = await fetch('/api/deveres/atribuir', { method: 'POST', headers: authHeadersDev(true), body: JSON.stringify(payload) });
+  const data = await res.json();
+  if (!res.ok) { erroEl.textContent = data.msg || 'Erro ao atribuir.'; erroEl.style.display = 'block'; return; }
+  fecharFormulariosDever();
+  carregarDeverDoAluno(alunoAtual._id);
+});
+
+// ===================== DEVER MANUAL (criar/editar) =====================
+function abrirDeverManualForm(deverParaEditar) {
+  fecharFormulariosDever();
+  deverEditandoId = deverParaEditar ? deverParaEditar._id : null;
+  document.getElementById('manualErro').style.display = 'none';
+  document.getElementById('manualAtividadesWrap').innerHTML = '';
+
+  const d = deverParaEditar;
+  document.getElementById('manualNumeroSemana').value = d ? d.numeroSemana : (deveresDoAlunoAtual.length + 1);
+  document.getElementById('manualNumeroSemana').disabled = !!d;
+  document.getElementById('manualTitulo').value = d ? d.titulo : '';
+  document.getElementById('manualDataInicio').value = d ? d.dataInicio.slice(0, 10) : '';
+  document.getElementById('manualDataLimite').value = d ? d.dataLimite.slice(0, 10) : '';
+  document.getElementById('manualPrioridade').value = d ? d.prioridade : 'media';
+  document.getElementById('manualDescricao').value = d ? (d.descricao || '') : '';
+  document.getElementById('manualPermiteConclusaoManual').checked = d ? !!d.permiteConclusaoManual : false;
+
+  const wrap = document.getElementById('manualAtividadesWrap');
+  (d ? d.atividades : []).forEach(a => DeverUI.adicionarAtividadeBox(wrap, a, authHeadersDev));
+  if (!d) DeverUI.adicionarAtividadeBox(wrap, null, authHeadersDev);
+
+  document.getElementById('deverManualForm').style.display = 'block';
+}
+document.getElementById('abrirDeverManualBtn').addEventListener('click', () => abrirDeverManualForm(null));
+document.getElementById('cancelarDeverManualBtn').addEventListener('click', fecharFormulariosDever);
+document.getElementById('manualAddAtividadeBtn').addEventListener('click', () => {
+  DeverUI.adicionarAtividadeBox(document.getElementById('manualAtividadesWrap'), null, authHeadersDev);
+});
+document.getElementById('manualAtividadesWrap').addEventListener('click', e => {
+  if (e.target.closest('[data-remover-atividade]')) e.target.closest('[data-atividade-box]').remove();
+});
+DeverUI.ligarEventosConteudo(document.getElementById('manualAtividadesWrap'), authHeadersDev);
+
+document.getElementById('salvarDeverManualBtn').addEventListener('click', async () => {
+  const erroEl = document.getElementById('manualErro');
+  const titulo = document.getElementById('manualTitulo').value.trim();
+  const dataInicio = document.getElementById('manualDataInicio').value;
+  const dataLimite = document.getElementById('manualDataLimite').value;
+  if (!titulo || !dataInicio || !dataLimite) {
+    erroEl.textContent = 'Preencha título, data de início e data limite.'; erroEl.style.display = 'block'; return;
+  }
+  const payload = {
+    numeroSemana: Number(document.getElementById('manualNumeroSemana').value),
+    titulo, dataInicio, dataLimite,
+    prioridade: document.getElementById('manualPrioridade').value,
+    descricao: document.getElementById('manualDescricao').value.trim(),
+    permiteConclusaoManual: document.getElementById('manualPermiteConclusaoManual').checked,
+    atividades: DeverUI.coletarAtividades(document.getElementById('manualAtividadesWrap'))
+  };
+  const url = deverEditandoId ? `/api/deveres/deveres/${deverEditandoId}` : `/api/deveres/alunos/${alunoAtual._id}/deveres`;
+  const res = await fetch(url, { method: deverEditandoId ? 'PUT' : 'POST', headers: authHeadersDev(true), body: JSON.stringify(payload) });
+  const data = await res.json();
+  if (!res.ok) { erroEl.textContent = data.msg || 'Erro ao salvar o dever.'; erroEl.style.display = 'block'; return; }
+  fecharFormulariosDever();
+  carregarDeverDoAluno(alunoAtual._id);
 });
 
 // ===================== INIT =====================

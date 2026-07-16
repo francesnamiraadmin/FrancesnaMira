@@ -553,7 +553,16 @@ document.getElementById('btnNotificacoes').addEventListener('click', () => {
   checarNotificacoes();
 });
 
+// ===================== DEEP LINK (?aula=ID&modulo=ID) =====================
+// Permite que outra tela (ex.: uma atividade de dever de casa) linke direto
+// pra uma aula específica, sem precisar navegar pelos módulos manualmente.
+function abrirDeepLinkDaUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const aulaId = params.get('aula');
+  if (aulaId) abrirAula(aulaId, params.get('modulo'));
+}
+
 // ===================== INIT =====================
-carregarModulos();
+carregarModulos().then(abrirDeepLinkDaUrl);
 carregarResumoProgresso();
 carregarFavoritosIds();

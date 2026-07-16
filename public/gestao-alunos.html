@@ -55,6 +55,9 @@ header a { color: var(--azul-escuro); text-decoration: none; }
 .busca-row input { flex: 1; padding: 11px 16px; border-radius: 30px; border: 1px solid var(--cinza-300); font-family: 'Poppins', sans-serif; font-size: 0.92rem; }
 
 .aluno-item { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 20px; border: 1px solid var(--cinza-200); border-radius: 14px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; flex-wrap: wrap; }
+.aluno-item-info { display: flex; align-items: center; gap: 14px; }
+.avatar-circle { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--azul-claro); color: var(--azul-escuro); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
+.avatar-circle.grande { width: 76px; height: 76px; font-size: 1.3rem; }
 .aluno-item:hover { border-color: var(--azul); box-shadow: var(--sombra); }
 .aluno-item h4 { font-size: 1rem; }
 .aluno-item .meta { font-size: 0.82rem; color: var(--cinza-400); }
@@ -132,6 +135,28 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .timeline-titulo { font-weight: 700; font-size: 0.9rem; }
 .timeline-desc { font-size: 0.82rem; color: var(--cinza-600); margin-top: 2px; }
 .timeline-data { font-size: 0.75rem; color: var(--cinza-400); margin-top: 2px; }
+
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.campo label { font-size: 0.8rem; font-weight: 700; color: var(--cinza-600); }
+.campo input, .campo select, .campo textarea { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--cinza-300); font-family: 'Poppins', sans-serif; font-size: 0.9rem; background: var(--branco); color: var(--cinza-800); }
+.campo textarea { min-height: 60px; resize: vertical; }
+.campo-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-bottom: 10px; }
+.semana-box { border: 1px solid var(--cinza-200); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; background: var(--cinza-50); }
+.semana-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.atividade-box { border: 1px solid var(--cinza-200); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; background: var(--branco); }
+.atividade-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.btn.perigo { background: var(--vermelho-bg); color: var(--vermelho); border: 1px solid var(--vermelho); }
+
+.dever-card { border: 1px solid var(--cinza-200); border-radius: 14px; margin-bottom: 12px; overflow: hidden; }
+.dever-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 20px; background: var(--cinza-100); cursor: pointer; flex-wrap: wrap; }
+.dever-corpo { display: none; padding: 18px 20px; border-top: 1px solid var(--cinza-200); }
+.dever-corpo.show { display: block; }
+.status-badge.em_andamento { background: var(--azul-claro); color: var(--azul-escuro); }
+.status-badge.atrasado { background: var(--vermelho-bg); color: var(--vermelho); }
+.status-badge.concluido { background: var(--verde-bg); color: var(--verde); }
+.entrega-box { border: 1px solid var(--cinza-200); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+.entrega-box .entrega-status { font-size: 0.78rem; font-weight: 700; }
 </style>
 </head>
 
@@ -179,7 +204,11 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <div class="busca-row">
       <input type="text" id="buscaInput" placeholder="Buscar por nome, e-mail, telefone ou WhatsApp...">
       <button class="btn secundario" id="toggleFiltrosBtn">Filtros</button>
+      <button class="btn secundario" id="toggleDashboardDeveresBtn">📋 Dashboard de Deveres</button>
+      <a href="admin-planos-base.html" class="btn secundario">Planos-Base</a>
     </div>
+
+    <div class="filtros-painel" id="dashboardDeveresPainel"></div>
 
     <div class="filtros-painel" id="filtrosPainel">
       <div class="filtro-campo"><label>Plano</label><select id="filtroPlano"><option value="">Todos</option></select></div>
@@ -200,11 +229,15 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <!-- Dados pessoais -->
     <div class="card">
       <div class="aluno-header">
-        <div>
-          <h1 id="detalheNome"></h1>
-          <div class="email" id="detalheEmail"></div>
-          <div class="meta" id="detalheDadosPessoais" style="margin-top:8px;"></div>
-          <div id="detalhePills" style="margin-top:10px;"></div>
+        <div style="display:flex; gap:18px; align-items:flex-start;">
+          <div class="avatar-circle grande" id="detalheAvatar"></div>
+          <div>
+            <h1 id="detalheNome"></h1>
+            <div class="email" id="detalheEmail"></div>
+            <div class="meta" id="detalheDadosPessoais" style="margin-top:8px;"></div>
+            <div id="detalheMeuPerfil" style="margin-top:8px;"></div>
+            <div id="detalhePills" style="margin-top:10px;"></div>
+          </div>
         </div>
         <div class="credito-form">
           <input type="number" id="credQtd" value="1" min="1">
@@ -239,6 +272,62 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div id="producoesLista"></div>
     </div>
 
+    <!-- Dever de Casa -->
+    <div class="card">
+      <h2>Dever de Casa</h2>
+      <div id="deverAtribuicaoBox"></div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 18px;">
+        <button class="btn secundario pequeno" id="abrirAtribuirBtn">Atribuir Plano-Base</button>
+        <button class="btn secundario pequeno" id="abrirDeverManualBtn">+ Criar dever manual</button>
+      </div>
+
+      <div id="atribuirForm" style="display:none; border:1px solid var(--cinza-200); border-radius:14px; padding:18px 20px; margin-bottom:18px; background:var(--cinza-50);">
+        <div class="campo-row">
+          <div class="campo"><label>Plano-Base</label><select id="atribuirPlanoBase"></select></div>
+          <div class="campo"><label>Data de início</label><input type="date" id="atribuirDataInicio"></div>
+        </div>
+        <div class="campo-row">
+          <div class="campo"><label>Vínculo</label>
+            <select id="atribuirVinculoTipo">
+              <option value="plano_curso">Plano de curso (usa a data de vencimento do plano)</option>
+              <option value="turma">Turma (usa a data de fim da turma)</option>
+            </select>
+          </div>
+          <div class="campo" id="atribuirTurmaWrap" style="display:none;"><label>Turma</label><select id="atribuirTurmaId"></select></div>
+        </div>
+        <div id="atribuirErro" class="msg-inline erro" style="display:none;"></div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn pequeno" id="salvarAtribuirBtn">Atribuir</button>
+          <button class="btn secundario pequeno" id="cancelarAtribuirBtn">Cancelar</button>
+        </div>
+      </div>
+
+      <div id="deverManualForm" style="display:none; border:1px solid var(--cinza-200); border-radius:14px; padding:18px 20px; margin-bottom:18px; background:var(--cinza-50);">
+        <div class="campo-row">
+          <div class="campo"><label>Número da semana</label><input type="number" id="manualNumeroSemana" min="1"></div>
+          <div class="campo"><label>Título</label><input type="text" id="manualTitulo" placeholder="Ex.: Semana extra de revisão"></div>
+        </div>
+        <div class="campo-row">
+          <div class="campo"><label>Data de início</label><input type="date" id="manualDataInicio"></div>
+          <div class="campo"><label>Data limite</label><input type="date" id="manualDataLimite"></div>
+          <div class="campo"><label>Prioridade</label>
+            <select id="manualPrioridade"><option value="media">Média</option><option value="baixa">Baixa</option><option value="alta">Alta</option></select>
+          </div>
+        </div>
+        <div class="campo"><label>Descrição</label><textarea id="manualDescricao"></textarea></div>
+        <label class="checkbox-row"><input type="checkbox" id="manualPermiteConclusaoManual"> Permitir que o aluno marque como concluído mesmo com pendências obrigatórias</label>
+        <div id="manualAtividadesWrap"></div>
+        <button type="button" class="btn secundario pequeno" id="manualAddAtividadeBtn" style="margin-bottom:14px;">+ Adicionar atividade</button>
+        <div id="manualErro" class="msg-inline erro" style="display:none;"></div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn pequeno" id="salvarDeverManualBtn">Criar dever</button>
+          <button class="btn secundario pequeno" id="cancelarDeverManualBtn">Cancelar</button>
+        </div>
+      </div>
+
+      <div id="deveresLista"></div>
+    </div>
+
     <!-- Histórico -->
     <div class="card">
       <h2>Histórico</h2>
@@ -249,6 +338,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
 <footer>© 2026 · Francês na Mira</footer>
 
+<script src="js/deverAtividadeUI.js"></script>
 <script src="js/gestao-alunos.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>

@@ -75,7 +75,7 @@ router.get("/alunos", async (req, res) => {
     }
 
     const alunos = await User.find(filtro)
-      .select("nome email telefone whatsapp plano produtosAvulsos creditosCorrecao perfil.provaAlvo perfil.dataProva criadoEm ultimoAcessoEm")
+      .select("nome email telefone whatsapp plano produtosAvulsos creditosCorrecao perfil.provaAlvo perfil.dataProva perfil.foto criadoEm ultimoAcessoEm")
       .sort({ nome: 1 })
       .lean();
 
@@ -113,7 +113,7 @@ router.get("/alunos", async (req, res) => {
       return {
         _id: a._id, nome: a.nome, email: a.email, telefone: a.telefone, whatsapp: a.whatsapp,
         plano: a.plano, creditosCorrecao: a.creditosCorrecao,
-        provaAlvo: a.perfil?.provaAlvo, dataProva: a.perfil?.dataProva, criadoEm: a.criadoEm,
+        provaAlvo: a.perfil?.provaAlvo, dataProva: a.perfil?.dataProva, foto: a.perfil?.foto || null, criadoEm: a.criadoEm,
         ultimoAcessoEm: a.ultimoAcessoEm,
         totalProducoes: mapaContagem[chave] || 0,
         ativo, planos,
@@ -181,6 +181,7 @@ router.get("/alunos/:id", async (req, res) => {
         criadoEm: aluno.criadoEm, ultimoAcessoEm: aluno.ultimoAcessoEm,
         idioma: aluno.preferencias?.idioma, tema: aluno.preferencias?.tema,
         foto: aluno.perfil?.foto, provaAlvo: aluno.perfil?.provaAlvo, dataProva: aluno.perfil?.dataProva,
+        bio: aluno.perfil?.bio, interesses: aluno.perfil?.interesses,
         creditosCorrecao: aluno.creditosCorrecao, plano: aluno.plano
       },
       planos,

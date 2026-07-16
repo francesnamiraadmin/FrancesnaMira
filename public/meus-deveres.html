@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Meus Deveres - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; min-height: 100vh; }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; }
+
+.voltar-link { display: inline-flex; gap: 6px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-bottom: 18px; cursor: pointer; }
+
+.semanas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.semana-card-aluno {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow);
+}
+.semana-card-aluno h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 6px; }
+.semana-card-aluno .meta { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; }
+.status-tag { display: inline-flex; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
+.status-tag.em_andamento { background: var(--tint-info-bg, var(--warning-bg)); color: var(--accent); }
+.status-tag.atrasado { background: var(--danger-bg); color: var(--danger-text); }
+.status-tag.concluido { background: var(--success-bg); color: var(--success-text); }
+.progress-track { height: 10px; background: var(--glass-bg); border-radius: 6px; overflow: hidden; margin-bottom: 10px; }
+.progress-fill { height: 100%; background: var(--accent); }
+.dash-btn.pequeno { padding: 7px 16px; font-size: 0.8rem; }
+
+.atividade-aluno { border: 1px solid var(--glass-border); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+.atividade-aluno h4 { font-size: 0.98rem; margin-bottom: 4px; }
+.atividade-aluno .meta { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; }
+.atividade-aluno .comentario-prof { background: var(--glass-bg); border-radius: 10px; padding: 10px 14px; font-size: 0.86rem; margin-top: 10px; }
+.envio-form { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.envio-form textarea { padding: 10px 14px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; min-height: 70px; resize: vertical; }
+.envio-form input[type="file"] { font-size: 0.85rem; }
+.msg-inline { font-size: 0.85rem; margin-top: 6px; }
+.msg-inline.sucesso { color: var(--success-text); }
+.msg-inline.erro { color: var(--danger-text); }
+.vazio-box { text-align: center; opacity: 0.8; padding: 40px 16px; }
+</style>
+</head>
+
+<body>
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<div class="dash-header">
+  <div class="dash-welcome">📋 Meus Deveres</div>
+  <div class="dash-sub">Acompanhe suas semanas de dever de casa e envie suas atividades.</div>
+</div>
+
+<div class="dash-container">
+  <!-- ===================== LISTA DE SEMANAS ===================== -->
+  <div id="viewLista">
+    <div class="semanas-grid" id="semanasGrid">
+      <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
+    </div>
+  </div>
+
+  <!-- ===================== DETALHE DA SEMANA ===================== -->
+  <div id="viewDetalhe" style="display:none;">
+    <span class="voltar-link" id="voltarListaBtn">← Voltar às minhas semanas</span>
+    <div class="dash-section-card">
+      <h2 id="detalheTitulo"></h2>
+      <div class="meta" id="detalheMeta" style="margin-bottom:16px;"></div>
+      <div id="atividadesLista"></div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/appShell.js"></script>
+<script src="js/deverAtividadeUI.js"></script>
+<script src="js/meus-deveres.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>
