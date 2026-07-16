@@ -120,6 +120,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
       <a href="admin-agenda.html" class="dash-btn secundario" id="linkAdminAgenda" style="display:none;">🗓️ Agenda de Aulas</a>
       <a href="admin-aulas.html" class="dash-btn secundario" id="linkAdminAulas" style="display:none;">🎬 Aulas Especializadas</a>
       <a href="admin-horarios.html" class="dash-btn secundario" id="linkAdminHorarios" style="display:none;">🗓️ Grade de Horários</a>
+      <a href="admin-depoimentos.html" class="dash-btn secundario" id="linkAdminDepoimentos" style="display:none;">💬 Depoimentos</a>
     </div>
   </div>
 
@@ -270,6 +271,7 @@ function renderPainelEquipe(dados) {
   document.getElementById('linkAdminAgenda').style.display = 'inline-block';
   document.getElementById('linkAdminAulas').style.display = admin ? 'inline-block' : 'none';
   document.getElementById('linkAdminHorarios').style.display = admin ? 'inline-block' : 'none';
+  document.getElementById('linkAdminDepoimentos').style.display = admin ? 'inline-block' : 'none';
 }
 
 function cardBloqueado(nome, curso) {

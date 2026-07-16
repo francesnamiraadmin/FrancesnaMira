@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Gerenciamento de Depoimentos — Francês na Mira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/matricula.css">
+<style>
+.dep-foto { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; vertical-align: middle; }
+.dep-sem-foto {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--paper); display: inline-flex;
+  align-items: center; justify-content: center; font-size: 1.1rem; vertical-align: middle;
+}
+.dep-texto-truncado { max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; }
+.dep-estrelas { color: var(--gold); white-space: nowrap; }
+.dep-acoes { display: flex; gap: 6px; flex-wrap: wrap; }
+.btn-small { padding: 6px 12px; font-size: 12.5px; }
+</style>
+</head>
+<body class="mira-theme">
+<div class="bg-target"></div>
+
+<div class="mira-topbar">
+  <a href="minha-conta.html" class="voltar">← Minha conta</a>
+</div>
+
+<div class="wrap wide">
+  <header class="top" style="text-align:left;margin-bottom:10px;">
+    <div class="eyebrow">Painel administrativo</div>
+    <h1 class="brand" style="font-size:30px;">Gerenciamento de Depoimentos<span class="dot"></span></h1>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-status="pendente">Aguardando análise</button>
+    <button class="tab-btn" data-status="aprovado">Aprovados</button>
+    <button class="tab-btn" data-status="rejeitado">Rejeitados</button>
+  </div>
+
+  <div class="table-wrap">
+    <table class="mira-table">
+      <thead><tr><th>Foto</th><th>Nome</th><th>Plano</th><th>Título / depoimento</th><th>Nota</th><th>Data</th><th>Consentimento</th><th></th></tr></thead>
+      <tbody id="depoimentosTbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===================== MODAL DETALHE ===================== -->
+<div class="modal-overlay" id="modalDetalhe">
+  <div class="modal-box">
+    <h3 id="modalTitulo">Depoimento</h3>
+    <p style="margin:8px 0;"><strong id="modalNome"></strong> · <span id="modalPlano"></span></p>
+    <p class="dep-estrelas" id="modalEstrelas" style="margin-bottom:10px;"></p>
+    <p id="modalTexto" style="line-height:1.6; margin-bottom:14px;"></p>
+    <p style="font-size:13px; color:var(--muted);">Tempo de uso: <span id="modalTempo"></span></p>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Consentimento de imagem: <strong id="modalConsentimento"></strong></p>
+    <div class="modal-close-row" style="gap:8px; flex-wrap:wrap;">
+      <button type="button" class="btn-primary btn-small" id="btnModalAprovar">Aprovar</button>
+      <button type="button" class="btn-outline btn-small" id="btnModalRejeitar">Rejeitar</button>
+      <button type="button" class="btn-outline btn-small" id="btnModalDestacar">Destacar</button>
+      <button type="button" class="btn-ghost" id="btnFecharModal">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/admin-depoimentos.js"></script>
+</body>
+</html>

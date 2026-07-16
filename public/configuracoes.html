@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Configurações - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+
+<style>
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; min-height: 100vh; }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; }
+
+.config-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.config-nav a {
+  padding: 8px 16px; border-radius: 30px; background: var(--glass-bg); border: 1px solid var(--glass-border);
+  color: var(--text); text-decoration: none; font-size: 0.88rem; font-weight: 600;
+}
+.config-nav a:hover { background: var(--glass-hover); }
+
+.campo { margin-bottom: 18px; }
+.campo label { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 8px; }
+.campo input, .campo select {
+  width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--glass-border);
+  background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.95rem;
+}
+.campo select option { color: var(--accent-text); }
+.campo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.salvar-msg { margin-top: 12px; font-size: 0.9rem; min-height: 1.3em; }
+
+.tema-opcoes { display: flex; gap: 14px; flex-wrap: wrap; }
+.tema-card {
+  flex: 1; min-width: 160px; border: 2px solid var(--glass-border); border-radius: 16px; padding: 18px;
+  cursor: pointer; text-align: center; transition: border-color 0.2s ease, transform 0.15s ease;
+}
+.tema-card:hover { transform: translateY(-2px); }
+.tema-card.selecionado { border-color: var(--accent); }
+.tema-card .preview { width: 100%; height: 56px; border-radius: 10px; margin-bottom: 12px; }
+.tema-card.claro .preview { background: linear-gradient(135deg, #b9cdec, #ecd493); }
+.tema-card.escuro .preview { background: linear-gradient(135deg, #0a0a0a, #1a1a1a); }
+.tema-card span { font-weight: 700; font-size: 0.92rem; }
+
+.toggle-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 14px 0; border-bottom: 1px solid var(--glass-border);
+}
+.toggle-row:last-child { border-bottom: none; }
+.toggle-row .rotulo { font-weight: 600; font-size: 0.94rem; }
+.toggle-row .desc { font-size: 0.82rem; color: var(--text-muted); margin-top: 3px; }
+.switch { position: relative; width: 46px; height: 26px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch .slider {
+  position: absolute; inset: 0; background: var(--glass-border-strong); border-radius: 30px; cursor: pointer;
+  transition: background 0.2s ease;
+}
+.switch .slider::before {
+  content: ''; position: absolute; width: 20px; height: 20px; left: 3px; top: 3px; background: #fff;
+  border-radius: 50%; transition: transform 0.2s ease;
+}
+.switch input:checked + .slider { background: var(--accent); }
+.switch input:checked + .slider::before { transform: translateX(20px); }
+
+.sessao-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0;
+  border-bottom: 1px solid var(--glass-border); flex-wrap: wrap;
+}
+.sessao-item:last-child { border-bottom: none; }
+.sessao-tag {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+  background: var(--success-bg); color: var(--success-text); margin-left: 8px;
+}
+.privacidade-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; }
+.privacidade-links a { color: var(--accent); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+.privacidade-links a:hover { text-decoration: underline; }
+
+@media(max-width: 700px) {
+  .campo-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<div class="dash-header">
+  <div class="dash-welcome" data-i18n="config.titulo">Configurações</div>
+  <div class="dash-sub" data-i18n="config.subtitulo">Personalize sua experiência na plataforma</div>
+</div>
+
+<div class="dash-container">
+
+  <div class="config-nav">
+    <a href="#secAparencia" data-i18n="config.secao.aparencia">Aparência</a>
+    <a href="#secIdioma" data-i18n="config.secao.idioma">Idioma</a>
+    <a href="#secPerfil" data-i18n="config.secao.perfil">Perfil</a>
+    <a href="#secSeguranca" data-i18n="config.secao.seguranca">Segurança</a>
+    <a href="#secNotificacoes" data-i18n="config.secao.notificacoes">Notificações</a>
+    <a href="#secPrivacidade" data-i18n="config.secao.privacidade">Privacidade</a>
+  </div>
+
+  <!-- ===================== APARÊNCIA ===================== -->
+  <div class="dash-section-card" id="secAparencia">
+    <h2>🎨 <span data-i18n="config.secao.aparencia">Aparência</span></h2>
+    <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;" data-i18n="config.aparencia.desc">Escolha o tema visual da plataforma.</p>
+    <div class="tema-opcoes">
+      <div class="tema-card claro" data-tema="light">
+        <div class="preview"></div>
+        <span data-i18n="config.aparencia.temaClaro">Tema Claro</span>
+      </div>
+      <div class="tema-card escuro" data-tema="dark">
+        <div class="preview"></div>
+        <span data-i18n="config.aparencia.temaEscuro">Tema Escuro (Black)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== IDIOMA ===================== -->
+  <div class="dash-section-card" id="secIdioma">
+    <h2>🌐 <span data-i18n="config.secao.idioma">Idioma</span></h2>
+    <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;" data-i18n="config.idioma.desc">Escolha o idioma da interface.</p>
+    <div class="campo" style="max-width:280px;">
+      <select id="idiomaSelect">
+        <option value="pt-BR">Português (Brasil)</option>
+        <option value="fr">Français</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- ===================== PERFIL ===================== -->
+  <div class="dash-section-card" id="secPerfil">
+    <h2>👤 <span data-i18n="config.secao.perfil">Perfil</span></h2>
+    <div class="perfil-header-row">
+      <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil" title="Clique para alterar sua foto" style="cursor:pointer;">
+      <div class="dash-profile-meta" id="profileMeta"></div>
+    </div>
+    <div class="campo-row">
+      <div class="campo">
+        <label for="nomeInput" data-i18n="config.perfil.nome">Nome completo</label>
+        <input type="text" id="nomeInput">
+      </div>
+      <div class="campo">
+        <label for="telefoneInput" data-i18n="config.perfil.telefone">Telefone</label>
+        <input type="tel" id="telefoneInput">
+      </div>
+    </div>
+    <div class="campo">
+      <label for="whatsappInput" data-i18n="config.perfil.whatsapp">WhatsApp</label>
+      <input type="tel" id="whatsappInput">
+    </div>
+    <button class="dash-btn" id="salvarPerfilBtn" data-i18n="common.salvarAlteracoes">Salvar alterações</button>
+    <div class="salvar-msg" id="salvarPerfilMsg"></div>
+
+    <hr style="border:none; border-top:1px solid var(--glass-border); margin:22px 0;">
+
+    <div class="campo">
+      <label data-i18n="config.perfil.email">E-mail</label>
+      <input type="email" id="emailAtual" disabled>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:6px;" data-i18n="config.perfil.emailDesc">Alterar o e-mail exige confirmação no novo endereço antes de valer.</p>
+    </div>
+    <div class="campo-row">
+      <div class="campo">
+        <label for="novoEmailInput" data-i18n="config.perfil.novoEmail">Novo e-mail</label>
+        <input type="email" id="novoEmailInput">
+      </div>
+      <div style="display:flex; align-items:flex-end;">
+        <button class="dash-btn secundario" id="trocarEmailBtn" style="width:100%;" data-i18n="config.perfil.enviarConfirmacao">Enviar confirmação</button>
+      </div>
+    </div>
+    <div class="salvar-msg" id="trocarEmailMsg"></div>
+  </div>
+
+  <!-- ===================== SEGURANÇA ===================== -->
+  <div class="dash-section-card" id="secSeguranca">
+    <h2>🔒 <span data-i18n="config.secao.seguranca">Segurança</span></h2>
+    <div class="campo-row">
+      <div class="campo">
+        <label for="senhaAtualInput" data-i18n="config.seguranca.senhaAtual">Senha atual</label>
+        <input type="password" id="senhaAtualInput">
+      </div>
+      <div class="campo">
+        <label for="novaSenhaInput" data-i18n="config.seguranca.novaSenha">Nova senha</label>
+        <input type="password" id="novaSenhaInput">
+      </div>
+    </div>
+    <button class="dash-btn" id="alterarSenhaBtn" data-i18n="config.seguranca.alterarSenha">Alterar senha</button>
+    <div class="salvar-msg" id="senhaMsg"></div>
+
+    <hr style="border:none; border-top:1px solid var(--glass-border); margin:22px 0;">
+
+    <h3 style="font-size:1rem; margin-bottom:6px;" data-i18n="config.seguranca.sessoes">Dispositivos e sessões ativas</h3>
+    <p style="opacity:0.85; font-size:0.88rem; margin-bottom:14px;" data-i18n="config.seguranca.sessoesDesc">Locais onde sua conta está com sessão persistente ("Manter-me conectado") ativa.</p>
+    <div id="listaSessoes"><div class="skeleton skeleton-line" style="width:100%;"></div></div>
+    <button class="dash-btn secundario" id="encerrarOutrasBtn" style="margin-top:14px;" data-i18n="config.seguranca.encerrarOutras">Encerrar todas as outras sessões</button>
+    <div class="salvar-msg" id="sessoesMsg"></div>
+
+    <hr style="border:none; border-top:1px solid var(--glass-border); margin:22px 0;">
+
+    <div class="toggle-row">
+      <div>
+        <div class="rotulo" data-i18n="config.seguranca.doisFatores">Autenticação em dois fatores</div>
+        <div class="desc" data-i18n="config.seguranca.doisFatoresDesc">Camada extra de segurança por e-mail no login (em preparação).</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="doisFatoresToggle"><span class="slider"></span></label>
+    </div>
+  </div>
+
+  <!-- ===================== NOTIFICAÇÕES ===================== -->
+  <div class="dash-section-card" id="secNotificacoes">
+    <h2>🔔 <span data-i18n="config.secao.notificacoes">Notificações</span></h2>
+    <div class="toggle-row">
+      <div class="rotulo" data-i18n="config.notificacoes.lembretes">E-mails de lembrete</div>
+      <label class="switch"><input type="checkbox" class="notif-toggle" data-chave="lembretes"><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <div class="rotulo" data-i18n="config.notificacoes.novosDeveres">Notificações de novos deveres</div>
+      <label class="switch"><input type="checkbox" class="notif-toggle" data-chave="novosDeveres"><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <div class="rotulo" data-i18n="config.notificacoes.correcoesDisponiveis">Correções disponíveis</div>
+      <label class="switch"><input type="checkbox" class="notif-toggle" data-chave="correcoesDisponiveis"><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <div class="rotulo" data-i18n="config.notificacoes.novosConteudos">Novos conteúdos</div>
+      <label class="switch"><input type="checkbox" class="notif-toggle" data-chave="novosConteudos"><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <div class="rotulo" data-i18n="config.notificacoes.promocoes">Promoções e novidades</div>
+      <label class="switch"><input type="checkbox" class="notif-toggle" data-chave="promocoes"><span class="slider"></span></label>
+    </div>
+  </div>
+
+  <!-- ===================== PRIVACIDADE ===================== -->
+  <div class="dash-section-card" id="secPrivacidade">
+    <h2>🛡️ <span data-i18n="config.secao.privacidade">Privacidade</span></h2>
+    <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;" data-i18n="config.privacidade.desc">Gerencie seus dados e consentimentos.</p>
+    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+      <button class="dash-btn secundario" id="exportarDadosBtn" data-i18n="config.privacidade.exportar">Exportar meus dados</button>
+      <button class="dash-btn secundario" id="excluirContaBtn" style="color:var(--danger-text);" data-i18n="config.privacidade.excluir">Solicitar exclusão da conta</button>
+    </div>
+    <div class="salvar-msg" id="privacidadeMsg"></div>
+    <div class="privacidade-links">
+      <a href="termos-de-uso.html" data-i18n="config.privacidade.termos">Termos de Uso</a>
+      <a href="politica-privacidade.html" data-i18n="config.privacidade.politica">Política de Privacidade</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/theme-toggle.js"></script>
+<script src="js/appShell.js"></script>
+<script>
+const AVATAR_PADRAO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="#3b96ff"/><circle cx="48" cy="38" r="18" fill="#ffffff"/><ellipse cx="48" cy="88" rx="30" ry="24" fill="#ffffff"/></svg>`
+);
+const token = localStorage.getItem('token');
+function authHeaders() { return { Authorization: 'Bearer ' + token }; }
+function authHeadersJson() { return { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }; }
+
+// ===================== APARÊNCIA =====================
+function marcarTemaSelecionado(tema) {
+  document.querySelectorAll('.tema-card').forEach(c => c.classList.toggle('selecionado', c.dataset.tema === tema));
+}
+document.querySelectorAll('.tema-card').forEach(card => {
+  card.addEventListener('click', () => {
+    window.ThemeToggle.setTema(card.dataset.tema);
+    marcarTemaSelecionado(card.dataset.tema);
+  });
+});
+marcarTemaSelecionado(window.ThemeToggle.tema);
+
+// ===================== IDIOMA =====================
+document.getElementById('idiomaSelect').value = window.I18n.idioma;
+document.getElementById('idiomaSelect').addEventListener('change', e => {
+  window.I18n.setLocale(e.target.value);
+});
+document.addEventListener('i18n:aplicado', () => {
+  document.getElementById('idiomaSelect').value = window.I18n.idioma;
+});
+
+// ===================== PERFIL =====================
+function preencherPerfil(dados) {
+  document.getElementById('dashAvatar').src = dados.perfil?.foto || AVATAR_PADRAO;
+  document.getElementById('dashAvatar').onclick = () => window.AppShell.abrirModalFoto();
+  document.getElementById('nomeInput').value = dados.nome || '';
+  document.getElementById('telefoneInput').value = dados.telefone || '';
+  document.getElementById('whatsappInput').value = dados.whatsapp || '';
+  document.getElementById('emailAtual').value = dados.email || '';
+  document.getElementById('doisFatoresToggle').checked = !!dados.doisFatores?.ativo;
+
+  const notif = dados.preferencias?.notificacoes || {};
+  document.querySelectorAll('.notif-toggle').forEach(t => { t.checked = notif[t.dataset.chave] !== false; });
+
+  const metaItens = [];
+  if (dados.criadoEm) metaItens.push(`<span><strong>Na plataforma desde</strong> ${new Date(dados.criadoEm).toLocaleDateString('pt-BR')}</span>`);
+  document.getElementById('profileMeta').innerHTML = metaItens.join('');
+}
+
+document.getElementById('salvarPerfilBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('salvarPerfilBtn');
+  const msg = document.getElementById('salvarPerfilMsg');
+  btn.disabled = true;
+  msg.style.color = 'var(--text)'; msg.textContent = window.I18n.t('common.salvando');
+  try {
+    const res = await fetch('/api/auth/perfil', {
+      method: 'PUT', headers: authHeadersJson(),
+      body: JSON.stringify({
+        nome: document.getElementById('nomeInput').value,
+        telefone: document.getElementById('telefoneInput').value,
+        whatsapp: document.getElementById('whatsappInput').value
+      })
+    });
+    const data = await res.json();
+    msg.style.color = res.ok ? 'var(--success-text)' : 'var(--danger-text)';
+    msg.textContent = data.msg;
+    if (res.ok && data.nome) localStorage.setItem('nome', data.nome);
+  } catch (err) {
+    msg.style.color = 'var(--danger-text)'; msg.textContent = window.I18n.t('common.erroServidor');
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+document.getElementById('trocarEmailBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('trocarEmailBtn');
+  const msg = document.getElementById('trocarEmailMsg');
+  const novoEmail = document.getElementById('novoEmailInput').value.trim();
+  if (!novoEmail) return;
+  btn.disabled = true;
+  msg.style.color = 'var(--text)'; msg.textContent = window.I18n.t('common.enviando');
+  try {
+    const res = await fetch('/api/auth/trocar-email', { method: 'POST', headers: authHeadersJson(), body: JSON.stringify({ novoEmail }) });
+    const data = await res.json();
+    msg.style.color = res.ok ? 'var(--success-text)' : 'var(--danger-text)';
+    msg.textContent = data.msg;
+  } catch (err) {
+    msg.style.color = 'var(--danger-text)'; msg.textContent = window.I18n.t('common.erroServidor');
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+// ===================== SEGURANÇA =====================
+document.getElementById('alterarSenhaBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('alterarSenhaBtn');
+  const msg = document.getElementById('senhaMsg');
+  const senhaAtual = document.getElementById('senhaAtualInput').value;
+  const novaSenha = document.getElementById('novaSenhaInput').value;
+  if (!senhaAtual || !novaSenha) return;
+  btn.disabled = true;
+  msg.style.color = 'var(--text)'; msg.textContent = window.I18n.t('common.salvando');
+  try {
+    const res = await fetch('/api/auth/senha', { method: 'PUT', headers: authHeadersJson(), body: JSON.stringify({ senhaAtual, novaSenha }) });
+    const data = await res.json();
+    msg.style.color = res.ok ? 'var(--success-text)' : 'var(--danger-text)';
+    msg.textContent = data.msg;
+    if (res.ok) { document.getElementById('senhaAtualInput').value = ''; document.getElementById('novaSenhaInput').value = ''; }
+  } catch (err) {
+    msg.style.color = 'var(--danger-text)'; msg.textContent = window.I18n.t('common.erroServidor');
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+async function carregarSessoes() {
+  const alvo = document.getElementById('listaSessoes');
+  try {
+    const res = await fetch('/api/auth/sessoes', { headers: authHeaders() });
+    const sessoes = await res.json();
+    if (!Array.isArray(sessoes) || sessoes.length === 0) {
+      alvo.innerHTML = `<p style="opacity:0.8; font-size:0.9rem;">${window.I18n.t('config.seguranca.semSessoes')}</p>`;
+      return;
+    }
+    alvo.innerHTML = sessoes.map(s => `
+      <div class="sessao-item">
+        <span>${new Date(s.criadoEm).toLocaleString('pt-BR')}${s.atual ? '<span class="sessao-tag">' + window.I18n.t('config.seguranca.sessaoAtual') + '</span>' : ''}</span>
+        ${s.atual ? '' : `<button class="dash-btn secundario" data-encerrar="${s.id}" style="padding:6px 16px; font-size:0.82rem;">${window.I18n.t('config.seguranca.encerrarSessao')}</button>`}
+      </div>`).join('');
+    alvo.querySelectorAll('[data-encerrar]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        await fetch('/api/auth/sessoes/' + btn.dataset.encerrar, { method: 'DELETE', headers: authHeaders() });
+        carregarSessoes();
+      });
+    });
+  } catch (err) {
+    alvo.innerHTML = '<p style="color:var(--danger-text);">Não foi possível carregar as sessões.</p>';
+  }
+}
+
+document.getElementById('encerrarOutrasBtn').addEventListener('click', async () => {
+  const msg = document.getElementById('sessoesMsg');
+  msg.style.color = 'var(--text)'; msg.textContent = window.I18n.t('common.salvando');
+  try {
+    const res = await fetch('/api/auth/sessoes/encerrar-outras', { method: 'POST', headers: authHeaders() });
+    const data = await res.json();
+    msg.style.color = 'var(--success-text)'; msg.textContent = data.msg;
+    carregarSessoes();
+  } catch (err) {
+    msg.style.color = 'var(--danger-text)'; msg.textContent = window.I18n.t('common.erroServidor');
+  }
+});
+
+document.getElementById('doisFatoresToggle').addEventListener('change', async e => {
+  try {
+    await fetch('/api/auth/dois-fatores', { method: 'PUT', headers: authHeadersJson(), body: JSON.stringify({ ativo: e.target.checked }) });
+  } catch (err) { /* silencioso */ }
+});
+
+// ===================== NOTIFICAÇÕES =====================
+document.querySelectorAll('.notif-toggle').forEach(toggle => {
+  toggle.addEventListener('change', async () => {
+    const notificacoes = {};
+    document.querySelectorAll('.notif-toggle').forEach(t => { notificacoes[t.dataset.chave] = t.checked; });
+    try {
+      await fetch('/api/auth/preferencias', { method: 'PUT', headers: authHeadersJson(), body: JSON.stringify({ notificacoes }) });
+    } catch (err) { /* silencioso */ }
+  });
+});
+
+// ===================== PRIVACIDADE =====================
+document.getElementById('exportarDadosBtn').addEventListener('click', async () => {
+  try {
+    const res = await fetch('/api/auth/exportar-dados', { headers: authHeaders() });
+    const data = await res.json();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'meus-dados.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    document.getElementById('privacidadeMsg').style.color = 'var(--danger-text)';
+    document.getElementById('privacidadeMsg').textContent = window.I18n.t('common.erroServidor');
+  }
+});
+
+document.getElementById('excluirContaBtn').addEventListener('click', async () => {
+  if (!confirm('Tem certeza que deseja solicitar a exclusão da sua conta? Nossa equipe vai analisar antes de excluir definitivamente.')) return;
+  const msg = document.getElementById('privacidadeMsg');
+  try {
+    const res = await fetch('/api/auth/solicitar-exclusao', { method: 'POST', headers: authHeadersJson(), body: JSON.stringify({}) });
+    const data = await res.json();
+    msg.style.color = 'var(--success-text)'; msg.textContent = data.msg;
+  } catch (err) {
+    msg.style.color = 'var(--danger-text)'; msg.textContent = window.I18n.t('common.erroServidor');
+  }
+});
+
+// ===================== E-MAIL DE CONFIRMAÇÃO DE TROCA =====================
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('trocaEmail') === '1') {
+    document.getElementById('trocarEmailMsg').style.color = 'var(--success-text)';
+    document.getElementById('trocarEmailMsg').textContent = 'E-mail atualizado com sucesso!';
+  } else if (params.get('trocaEmail') === 'erro') {
+    document.getElementById('trocarEmailMsg').style.color = 'var(--danger-text)';
+    document.getElementById('trocarEmailMsg').textContent = 'Link de confirmação inválido ou expirado.';
+  }
+})();
+
+// ===================== INIT =====================
+document.addEventListener('appshell:ready', e => {
+  preencherPerfil(e.detail);
+  carregarSessoes();
+});
+// A lista de sessões é montada via JS (não tem data-i18n) — recarrega ao
+// trocar de idioma para que o texto acompanhe.
+document.addEventListener('i18n:aplicado', () => carregarSessoes());
+</script>
+
+</body>
+</html>
