@@ -108,6 +108,30 @@ header a { color: var(--azul-escuro); text-decoration: none; }
 .msg-inline.sucesso { background: var(--verde-bg); color: var(--verde); }
 .msg-inline.erro { background: var(--vermelho-bg); color: var(--vermelho); }
 footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
+
+.tabs-row { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+.tab-pill { padding: 9px 22px; border-radius: 30px; border: 1px solid var(--cinza-300); background: var(--branco); cursor: pointer; font-weight: 700; font-size: 0.88rem; color: var(--cinza-600); transition: 0.2s; }
+.tab-pill:hover { border-color: var(--azul); }
+.tab-pill.active { background: var(--azul); color: white; border-color: var(--azul); }
+.tab-pill .contagem { opacity: 0.8; font-weight: 600; }
+
+.filtros-painel { display: none; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; background: var(--cinza-50); border: 1px solid var(--cinza-200); border-radius: 14px; padding: 18px 20px; margin-bottom: 18px; align-items: end; }
+.filtros-painel.show { display: grid; }
+.filtro-campo label { font-size: 0.74rem; color: var(--cinza-600); font-weight: 700; display: block; margin-bottom: 5px; }
+.filtro-campo select { width: 100%; padding: 9px 10px; border-radius: 8px; border: 1px solid var(--cinza-300); font-family: 'Poppins', sans-serif; font-size: 0.85rem; background: var(--branco); color: var(--cinza-800); }
+.filtro-checkbox { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; padding-bottom: 8px; }
+
+.plano-card { border: 1px solid var(--cinza-200); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.plano-card.expirado { opacity: 0.55; }
+.plano-card h4 { font-size: 0.95rem; }
+.plano-card .meta { font-size: 0.8rem; color: var(--cinza-400); margin-top: 2px; }
+
+.timeline-item { position: relative; margin-left: 10px; padding: 4px 0 16px 22px; border-left: 2px solid var(--cinza-200); }
+.timeline-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+.timeline-item::before { content: ''; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--azul); border: 2px solid var(--branco); }
+.timeline-titulo { font-weight: 700; font-size: 0.9rem; }
+.timeline-desc { font-size: 0.82rem; color: var(--cinza-600); margin-top: 2px; }
+.timeline-data { font-size: 0.75rem; color: var(--cinza-400); margin-top: 2px; }
 </style>
 </head>
 
@@ -145,9 +169,27 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
   <!-- ===================== LISTA ===================== -->
   <div id="viewLista">
-    <div class="busca-row">
-      <input type="text" id="buscaInput" placeholder="Buscar por nome ou e-mail...">
+    <div class="kpi-row" id="listaKpiRow"></div>
+
+    <div class="tabs-row" id="tabsRow">
+      <span class="tab-pill active" data-tab="ativo">Ativos <span class="contagem" id="tabCountAtivo"></span></span>
+      <span class="tab-pill" data-tab="expirado">Expirados <span class="contagem" id="tabCountExpirado"></span></span>
     </div>
+
+    <div class="busca-row">
+      <input type="text" id="buscaInput" placeholder="Buscar por nome, e-mail, telefone ou WhatsApp...">
+      <button class="btn secundario" id="toggleFiltrosBtn">Filtros</button>
+    </div>
+
+    <div class="filtros-painel" id="filtrosPainel">
+      <div class="filtro-campo"><label>Plano</label><select id="filtroPlano"><option value="">Todos</option></select></div>
+      <div class="filtro-campo"><label>Curso</label><select id="filtroCurso"><option value="">Todos</option></select></div>
+      <div class="filtro-campo"><label>Tipo de prova</label><select id="filtroTipoProva"><option value="">Todos</option></select></div>
+      <div class="filtro-campo"><label>Professor responsável</label><select id="filtroProfessor"><option value="">Todos</option></select></div>
+      <label class="filtro-checkbox"><input type="checkbox" id="filtroProducaoPendente"> Produção pendente</label>
+      <label class="filtro-checkbox"><input type="checkbox" id="filtroCorrecaoPendente"> Correção pendente</label>
+    </div>
+
     <div id="alunosLista"></div>
   </div>
 
@@ -155,11 +197,13 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   <div id="viewDetalhe" style="display:none;">
     <span class="voltar-link" id="voltarListaBtn">← Voltar à lista de alunos</span>
 
+    <!-- Dados pessoais -->
     <div class="card">
       <div class="aluno-header">
         <div>
           <h1 id="detalheNome"></h1>
           <div class="email" id="detalheEmail"></div>
+          <div class="meta" id="detalheDadosPessoais" style="margin-top:8px;"></div>
           <div id="detalhePills" style="margin-top:10px;"></div>
         </div>
         <div class="credito-form">
@@ -170,15 +214,35 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div class="msg-inline" id="credMsg" style="display:none;"></div>
     </div>
 
+    <!-- Planos ativos -->
     <div class="card">
-      <h2>Estatísticas de redação</h2>
+      <h2>Planos ativos</h2>
+      <div id="planosLista"></div>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="card">
+      <h2>Estatísticas</h2>
       <div class="kpi-row" id="statsKpiRow"></div>
       <div id="statsGraficos"></div>
     </div>
 
+    <!-- Progressão nas Aulas -->
+    <div class="card">
+      <h2>Progressão nas Aulas</h2>
+      <div id="progressaoAulasBox"></div>
+    </div>
+
+    <!-- Produções -->
     <div class="card">
       <h2>Produções enviadas</h2>
       <div id="producoesLista"></div>
+    </div>
+
+    <!-- Histórico -->
+    <div class="card">
+      <h2>Histórico</h2>
+      <div id="historicoLista"></div>
     </div>
   </div>
 </div>

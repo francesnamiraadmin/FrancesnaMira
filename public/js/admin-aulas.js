@@ -248,6 +248,7 @@ function abrirModalModulo(id) {
   document.getElementById('moduloId').value = m ? m._id : '';
   document.getElementById('moduloTitulo').value = m ? m.titulo : '';
   document.getElementById('moduloDescricao').value = m ? (m.descricao || '') : '';
+  document.getElementById('moduloCurso').value = m ? (m.curso || '') : '';
   document.getElementById('moduloIcone').value = m ? (m.icone || '📘') : '📘';
   document.getElementById('moduloCor').value = m ? (m.cor || CORES[0]) : CORES[0];
   renderCorSwatches(document.getElementById('moduloCor').value);
@@ -265,6 +266,7 @@ document.getElementById('salvarModuloBtn').addEventListener('click', async () =>
   const payload = {
     titulo: document.getElementById('moduloTitulo').value.trim(),
     descricao: document.getElementById('moduloDescricao').value.trim(),
+    curso: document.getElementById('moduloCurso').value.trim() || null,
     icone: document.getElementById('moduloIcone').value.trim() || '📘',
     cor: document.getElementById('moduloCor').value,
     exigeModuloAnterior: document.getElementById('moduloExigeAnterior').checked,

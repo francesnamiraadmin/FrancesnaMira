@@ -98,7 +98,9 @@ router.post("/register", async (req, res) => {
       senha: hash,
       telefone: telefone || undefined,
       whatsapp: whatsapp || undefined,
-      tokenVerificacao
+      tokenVerificacao,
+      primeiroLoginEm: new Date(),
+      ultimoAcessoEm: new Date()
     });
     await user.save();
 
@@ -198,6 +200,10 @@ router.post("/login", async (req, res) => {
 
     await expirarSeVencido(user);
 
+    if (!user.primeiroLoginEm) user.primeiroLoginEm = new Date();
+    user.ultimoAcessoEm = new Date();
+    await user.save();
+
     const token = assinarAccessToken(user);
     let sessaoPersistente = false;
     if (manterConectado) {
@@ -236,6 +242,8 @@ router.post("/refresh", async (req, res) => {
     }
 
     await expirarSeVencido(user);
+
+    user.ultimoAcessoEm = new Date();
 
     // Rotação: descarta o token usado e emite um novo, para que um refresh token
     // roubado pare de funcionar assim que o dono legítimo o usar de novo.

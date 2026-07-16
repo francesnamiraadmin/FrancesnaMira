@@ -4,8 +4,14 @@ const NOMES_STATUS = {
   em_correcao: 'Em correção', aguardando_revisao: 'Aguardando revisão', corrigido: 'Corrigido',
   devolvido: 'Devolvido', arquivado: 'Arquivado', cancelado: 'Cancelado'
 };
+const NOMES_HISTORICO_ICONE = {
+  conta_criada: '👤', primeiro_login: '🔑', primeira_producao: '✍️',
+  conclusao_curso: '🎓', mudanca_plano: '🔄', renovacao: '♻️'
+};
 
 let alunoAtual = null;
+let abaAtual = 'ativo';
+let filtrosOpcoesCarregadas = false;
 
 function mostrarView(nome) {
   document.getElementById('viewLista').style.display = nome === 'lista' ? 'block' : 'none';
@@ -13,19 +19,80 @@ function mostrarView(nome) {
 }
 document.getElementById('voltarListaBtn').addEventListener('click', () => { mostrarView('lista'); carregarAlunos(); });
 
+// ===================== FILTROS =====================
+async function carregarFiltrosOpcoes() {
+  try {
+    const res = await fetch('/api/equipe/filtros-opcoes', { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return;
+    const data = await res.json();
+    preencherSelect('filtroPlano', data.tiers);
+    preencherSelect('filtroCurso', data.cursos);
+    preencherSelect('filtroTipoProva', data.tiposProva);
+    preencherSelect('filtroProfessor', data.professores.map(p => ({ value: p._id, label: p.nome })));
+    filtrosOpcoesCarregadas = true;
+  } catch (err) { /* filtros ficam com só "Todos" se isso falhar */ }
+}
+function preencherSelect(id, itens) {
+  const sel = document.getElementById(id);
+  itens.forEach(item => {
+    const opt = document.createElement('option');
+    if (typeof item === 'string') { opt.value = item; opt.textContent = item; }
+    else { opt.value = item.value; opt.textContent = item.label; }
+    sel.appendChild(opt);
+  });
+}
+
+document.getElementById('toggleFiltrosBtn').addEventListener('click', () => {
+  document.getElementById('filtrosPainel').classList.toggle('show');
+});
+['filtroPlano', 'filtroCurso', 'filtroTipoProva', 'filtroProfessor'].forEach(id => {
+  document.getElementById(id).addEventListener('change', carregarAlunos);
+});
+['filtroProducaoPendente', 'filtroCorrecaoPendente'].forEach(id => {
+  document.getElementById(id).addEventListener('change', carregarAlunos);
+});
+document.getElementById('tabsRow').addEventListener('click', e => {
+  const pill = e.target.closest('.tab-pill');
+  if (!pill) return;
+  abaAtual = pill.dataset.tab;
+  document.querySelectorAll('.tab-pill').forEach(p => p.classList.toggle('active', p === pill));
+  carregarAlunos();
+});
+
 // ===================== LISTA DE ALUNOS =====================
 async function carregarAlunos() {
   const params = new URLSearchParams();
   const busca = document.getElementById('buscaInput').value.trim();
   if (busca) params.set('busca', busca);
+  params.set('status', abaAtual);
+
+  const plano = document.getElementById('filtroPlano').value;
+  const curso = document.getElementById('filtroCurso').value;
+  const tipoProva = document.getElementById('filtroTipoProva').value;
+  const professorId = document.getElementById('filtroProfessor').value;
+  if (plano) params.set('plano', plano);
+  if (curso) params.set('curso', curso);
+  if (tipoProva) params.set('tipoProva', tipoProva);
+  if (professorId) params.set('professorId', professorId);
+  if (document.getElementById('filtroProducaoPendente').checked) params.set('producaoPendente', 'true');
+  if (document.getElementById('filtroCorrecaoPendente').checked) params.set('correcaoPendente', 'true');
 
   const lista = document.getElementById('alunosLista');
   lista.innerHTML = '<p style="opacity:0.6;">Carregando alunos...</p>';
   try {
     const res = await fetch(`/api/equipe/alunos?${params}`, { headers: { Authorization: 'Bearer ' + token } });
-    const alunos = await res.json();
-    if (!Array.isArray(alunos) || alunos.length === 0) {
-      lista.innerHTML = '<div class="vazio-box">Nenhum aluno encontrado.</div>';
+    const data = await res.json();
+    const alunos = data.alunos || [];
+
+    document.getElementById('tabCountAtivo').textContent = `(${data.totalAtivos ?? 0})`;
+    document.getElementById('tabCountExpirado').textContent = `(${data.totalExpirados ?? 0})`;
+    document.getElementById('listaKpiRow').innerHTML = `
+      <div class="kpi"><div class="valor">${data.total ?? 0}</div><div class="rotulo">Total de alunos</div></div>
+      <div class="kpi"><div class="valor">${data.totalAtivos ?? 0}</div><div class="rotulo">Ativos</div></div>
+      <div class="kpi"><div class="valor">${data.totalExpirados ?? 0}</div><div class="rotulo">Expirados</div></div>`;
+
+    if (!alunos.length) {
+      lista.innerHTML = `<div class="vazio-box">Nenhum aluno ${abaAtual === 'ativo' ? 'ativo' : 'expirado'} encontrado.</div>`;
       return;
     }
     lista.innerHTML = alunos.map(renderAlunoItem).join('');
@@ -49,6 +116,8 @@ function renderAlunoItem(a) {
       ${planoTag}
       <span class="pill creditos">${a.creditosCorrecao || 0} crédito${a.creditosCorrecao === 1 ? '' : 's'}</span>
       <span class="pill">${a.totalProducoes} ${a.totalProducoes === 1 ? 'produção' : 'produções'}</span>
+      ${a.temProducaoPendente ? '<span class="pill sem-plano">Produção pendente</span>' : ''}
+      ${a.temCorrecaoPendente ? '<span class="pill creditos">Correção pendente</span>' : ''}
     </div>
   </div>`;
 }
@@ -70,11 +139,24 @@ async function abrirAluno(id) {
   } catch (err) { alert('Erro ao carregar o aluno.'); }
 }
 
+function formatarTempo(segundos) {
+  if (!segundos) return '0h';
+  const horas = Math.floor(segundos / 3600);
+  const minutos = Math.round((segundos % 3600) / 60);
+  return horas ? `${horas}h ${minutos}min` : `${minutos}min`;
+}
+
 function renderDetalhe(data) {
   const a = data.aluno;
   document.getElementById('detalheNome').textContent = a.nome;
   document.getElementById('detalheEmail').textContent = a.email;
   document.getElementById('credMsg').style.display = 'none';
+
+  document.getElementById('detalheDadosPessoais').innerHTML = `
+    ${a.telefone ? `Telefone: ${a.telefone}` : ''}${a.whatsapp ? ` · WhatsApp: ${a.whatsapp}` : ''}<br>
+    Cadastrado em ${new Date(a.criadoEm).toLocaleDateString('pt-BR')}
+    ${a.ultimoAcessoEm ? ` · Último acesso em ${new Date(a.ultimoAcessoEm).toLocaleDateString('pt-BR')}` : ''}
+    ${a.idioma ? ` · Idioma: ${a.idioma}` : ''}${a.tema ? ` · Tema: ${a.tema}` : ''}`;
 
   const planoTag = a.plano?.ativo
     ? `<span class="pill">Plano ${a.plano.tier} · ${a.plano.curso || ''}</span>`
@@ -82,15 +164,35 @@ function renderDetalhe(data) {
   document.getElementById('detalhePills').innerHTML = `
     ${planoTag}
     <span class="pill creditos">${a.creditosCorrecao || 0} créditos disponíveis</span>
-    ${a.perfil?.provaAlvo ? `<span class="pill">Prova alvo: ${a.perfil.provaAlvo}</span>` : ''}
-    ${a.perfil?.dataProva ? `<span class="pill">Data da prova: ${new Date(a.perfil.dataProva).toLocaleDateString('pt-BR')}</span>` : ''}`;
+    ${a.provaAlvo ? `<span class="pill">Prova alvo: ${a.provaAlvo}</span>` : ''}
+    ${a.dataProva ? `<span class="pill">Data da prova: ${new Date(a.dataProva).toLocaleDateString('pt-BR')}</span>` : ''}`;
 
+  // ===== Planos ativos =====
+  const planosEl = document.getElementById('planosLista');
+  planosEl.innerHTML = data.planos.length ? data.planos.map(p => `
+    <div class="plano-card ${p.ativo ? '' : 'expirado'}">
+      <div>
+        <h4>${p.nome}</h4>
+        <div class="meta">
+          ${p.dataInicio ? 'Início: ' + new Date(p.dataInicio).toLocaleDateString('pt-BR') + ' · ' : ''}
+          ${p.dataVencimento ? 'Vencimento: ' + new Date(p.dataVencimento).toLocaleDateString('pt-BR') : 'Sem data de vencimento'}
+        </div>
+      </div>
+      <span class="status-badge ${p.ativo ? 'corrigido' : 'cancelado'}">
+        ${p.ativo ? (p.tempoRestanteDias !== null ? p.tempoRestanteDias + ' dias restantes' : 'Ativo') : 'Expirado'}
+      </span>
+    </div>`).join('') : '<div class="vazio-box">Nenhum plano registrado.</div>';
+
+  // ===== Estatísticas =====
   const s = data.estatisticas;
   document.getElementById('statsKpiRow').innerHTML = `
-    <div class="kpi"><div class="valor">${s.total}</div><div class="rotulo">Produções enviadas</div></div>
-    <div class="kpi"><div class="valor">${s.porStatus.corrigido || 0}</div><div class="rotulo">Corrigidas</div></div>
-    <div class="kpi"><div class="valor">${(s.porStatus.em_fila || 0) + (s.porStatus.em_correcao || 0)}</div><div class="rotulo">Em andamento</div></div>
-    <div class="kpi"><div class="valor">${s.notaMedia !== null ? s.notaMedia : '—'}</div><div class="rotulo">Nota média</div></div>`;
+    <div class="kpi"><div class="valor">${s.redacoesEnviadas}</div><div class="rotulo">Redações enviadas</div></div>
+    <div class="kpi"><div class="valor">${s.corrigidas}</div><div class="rotulo">Corrigidas</div></div>
+    <div class="kpi"><div class="valor">${s.emAndamento}</div><div class="rotulo">Em andamento</div></div>
+    <div class="kpi"><div class="valor">${s.notaMedia !== null ? s.notaMedia : '—'}</div><div class="rotulo">Nota média</div></div>
+    <div class="kpi"><div class="valor">${s.aulasAssistidas}</div><div class="rotulo">Aulas assistidas</div></div>
+    <div class="kpi"><div class="valor">${formatarTempo(s.tempoAssistidoSegundos)}</div><div class="rotulo">Tempo estudado</div></div>
+    <div class="kpi"><div class="valor">${s.streakDias}</div><div class="rotulo">Maior sequência (dias)</div></div>`;
 
   let graficosHtml = '';
   if (s.evolucaoNotas?.length) {
@@ -106,9 +208,39 @@ function renderDetalhe(data) {
   }
   document.getElementById('statsGraficos').innerHTML = graficosHtml || '<p style="color:var(--cinza-400); font-size:0.9rem;">Ainda não há produções corrigidas para gerar estatísticas.</p>';
 
+  // ===== Progressão nas Aulas =====
+  const progEl = document.getElementById('progressaoAulasBox');
+  let progHtml = '';
+  if (data.progressaoAulas?.length) {
+    progHtml += data.progressaoAulas.map(p => `<div class="bar-list-row">
+      <span class="bar-list-label">${p.curso}</span>
+      <div class="bar-list-track"><div class="bar-list-fill" style="width:${p.percentual}%;"></div></div>
+      <span class="bar-list-val">${p.percentual}%</span>
+    </div>`).join('');
+  } else {
+    progHtml += '<p style="color:var(--cinza-400); font-size:0.9rem;">Este aluno ainda não assistiu nenhuma aula.</p>';
+  }
+  if (s.ultimaAula) {
+    progHtml += `<p style="font-size:0.86rem; margin-top:14px;"><strong>Última aula assistida:</strong> ${s.ultimaAula.titulo} (${new Date(s.ultimaAula.data).toLocaleDateString('pt-BR')})</p>`;
+  }
+  if (s.proximaAulaRecomendada) {
+    progHtml += `<p style="font-size:0.86rem; margin-top:6px;"><strong>Próxima aula recomendada:</strong> ${s.proximaAulaRecomendada.titulo}${s.proximaAulaRecomendada.moduloTitulo ? ' — ' + s.proximaAulaRecomendada.moduloTitulo : ''}</p>`;
+  }
+  progEl.innerHTML = progHtml;
+
+  // ===== Produções =====
   document.getElementById('producoesLista').innerHTML = data.producoes.length
     ? data.producoes.map(renderProducaoItem).join('')
     : '<div class="vazio-box">Este aluno ainda não enviou nenhuma produção.</div>';
+
+  // ===== Histórico =====
+  const histEl = document.getElementById('historicoLista');
+  histEl.innerHTML = data.historico.length ? data.historico.map(h => `
+    <div class="timeline-item">
+      <div class="timeline-titulo">${NOMES_HISTORICO_ICONE[h.tipo] || '•'} ${h.titulo}</div>
+      ${h.descricao ? `<div class="timeline-desc">${h.descricao}</div>` : ''}
+      <div class="timeline-data">${new Date(h.data).toLocaleDateString('pt-BR')}</div>
+    </div>`).join('') : '<div class="vazio-box">Sem eventos registrados.</div>';
 }
 
 function svgEvolucaoNotas(pontos) {
@@ -211,4 +343,5 @@ document.getElementById('concederCreditosBtn').addEventListener('click', async (
 });
 
 // ===================== INIT =====================
+carregarFiltrosOpcoes();
 carregarAlunos();

@@ -8,6 +8,7 @@ const Turma = require("../models/turma");
 const Matricula = require("../models/matricula");
 const HorarioSlot = require("../models/horarioSlot");
 const PagamentoMatricula = require("../models/pagamentoMatricula");
+const HistoricoAluno = require("../models/historicoAluno");
 const { exigirAuth } = require("../middleware/auth");
 const { transmitir } = require("../utils/sse");
 const { confirmarMatricula, rejeitarMatricula } = require("./pagamentoMatricula");
@@ -108,6 +109,12 @@ async function ativarPackPrestige(userId, curso, upgrades, metodoPagamento, prec
       curso, plano: null, valor: precoFinal, metodoPagamento, dataInicio, dataVencimento, mercadoPagoId
     }).catch(err => console.error("Erro ao enviar e-mail de pagamento aprovado:", err.message));
   }
+
+  HistoricoAluno.create({
+    alunoId: userId, tipo: "mudanca_plano",
+    titulo: `Compra de ${curso}`,
+    descricao: `Produto avulso ativado até ${dataVencimento.toLocaleDateString("pt-BR")}.`
+  }).catch(err => console.error("Erro ao registrar histórico do aluno:", err.message));
 }
 
 async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, tipo, slotsEscolhidos, precoFinal, dadosPessoais, upgrades, mercadoPagoId) {
@@ -121,6 +128,10 @@ async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, t
   const dataInicio = new Date();
   const dataVencimento = new Date(dataInicio.getTime() + 30 * 24 * 60 * 60 * 1000);
   const creditosGanhos = CREDITOS_CORRECAO_POR_TIER[plano] || 0;
+
+  const planoAnterior = await User.findById(userId).select("plano");
+  const ehRenovacao = planoAnterior?.plano?.curso === curso && planoAnterior?.plano?.tier === plano;
+
   const user = await User.findByIdAndUpdate(userId, {
     plano: {
       curso, tier: plano, ativo: true,
@@ -136,6 +147,13 @@ async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, t
       curso, plano, valor: precoFinal, metodoPagamento, dataInicio, dataVencimento, mercadoPagoId
     }).catch(err => console.error("Erro ao enviar e-mail de pagamento aprovado:", err.message));
   }
+
+  HistoricoAluno.create({
+    alunoId: userId,
+    tipo: ehRenovacao ? "renovacao" : "mudanca_plano",
+    titulo: ehRenovacao ? `Renovação do plano ${plano} · ${curso}` : `Novo plano: ${plano} · ${curso}`,
+    descricao: `Válido até ${dataVencimento.toLocaleDateString("pt-BR")}.`
+  }).catch(err => console.error("Erro ao registrar histórico do aluno:", err.message));
 
   if (Array.isArray(slotsEscolhidos) && slotsEscolhidos.length && tipo) {
     await criarMatriculaDeHorarios(userId, curso, plano, tipo, slotsEscolhidos, precoFinal, dadosPessoais);

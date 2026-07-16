@@ -48,6 +48,10 @@ const UserSchema = new mongoose.Schema({
     em: { type: Date },
     motivo: { type: String }
   },
+  // Usados no perfil administrativo (Gestão de Alunos) para "último acesso"
+  // e para sintetizar o evento "primeiro login" na timeline do aluno.
+  ultimoAcessoEm: { type: Date },
+  primeiroLoginEm: { type: Date },
   creditosCorrecao: { type: Number, default: 0 },
   especialidades: [{ type: String, enum: ["TCF", "TEF", "DELF", "DALF"] }],
   temasFavoritos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tema" }],
