@@ -30,6 +30,7 @@ app.use("/api/admin-matricula", require("./routes/matriculaAdmin"));
 app.use("/api/aulas", require("./routes/aulas"));
 app.use("/api/admin-aulas", require("./routes/adminAulas"));
 app.use("/api/horarios", require("./routes/horarios"));
+app.use("/api/reclamacoes", require("./routes/reclamacoes"));
 
 // Conexão MongoDB
 mongoose.connect(process.env.MONGO_URI)

@@ -64,10 +64,19 @@
     alvo.innerHTML = planoCardHtml + produtosCards;
   }
 
+  // Toda ativação (plano de curso ou Pack Prestige) concede exatamente 30 dias a partir da
+  // aprovação — mesma regra usada em ativarPlano()/ativarPackPrestige() no backend. Como o
+  // pedido não guarda essa data, ela é estimada aqui a partir de quando a compra foi criada.
+  function fmtVencimento(p) {
+    if (p.status !== 'aprovado') return '—';
+    const vencimento = new Date(p.criadoEm).getTime() + 30 * 24 * 60 * 60 * 1000;
+    return fmtData(vencimento);
+  }
+
   function renderHistorico(pedidos) {
     const corpo = document.getElementById('corpoHistorico');
     if (!pedidos.length) {
-      corpo.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:24px;">Nenhuma compra registrada ainda.</td></tr>';
+      corpo.innerHTML = '<tr><td colspan="8" style="text-align:center; color:var(--text-muted); padding:24px;">Nenhuma compra registrada ainda.</td></tr>';
       return;
     }
     corpo.innerHTML = pedidos.map(p => {
@@ -82,6 +91,7 @@
         <td>${METODOS_LABEL[p.metodoPagamento] || p.metodoPagamento || '—'}</td>
         <td><span class="status-badge ${p.status}">${STATUS_LABEL[p.status] || p.status}</span></td>
         <td style="font-size:0.85rem; color:var(--text-muted);">${incluidos}</td>
+        <td>${fmtVencimento(p)}</td>
       </tr>`;
     }).join('');
   }

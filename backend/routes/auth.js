@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const crypto = require("crypto");
 const User = require("../models/user");
+const Matricula = require("../models/matricula");
+const Pedido = require("../models/pedido");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { enviarEmailConfirmacao } = require("../utils/mailer");
@@ -143,9 +145,27 @@ router.get("/me", exigirAuth, async (req, res) => {
     }
     if (produtosAlterados) await user.save();
 
+    // Telefone não é salvo no cadastro — recupera da matrícula/pedido mais recente
+    // com esse dado preenchido (informado ao pagar um plano).
+    let telefone = null;
+    const matriculaComTelefone = await Matricula.findOne({
+      alunoId: req.userId,
+      "dadosPessoais.telefone": { $exists: true, $ne: "" }
+    }).sort({ criadoEm: -1 }).select("dadosPessoais.telefone");
+    if (matriculaComTelefone) telefone = matriculaComTelefone.dadosPessoais.telefone;
+
+    if (!telefone) {
+      const pedidoComTelefone = await Pedido.findOne({
+        $or: [{ userId: req.userId }, { email: user.email }],
+        "dadosPessoais.telefone": { $exists: true, $ne: "" }
+      }).sort({ criadoEm: -1 }).select("dadosPessoais.telefone");
+      if (pedidoComTelefone) telefone = pedidoComTelefone.dadosPessoais.telefone;
+    }
+
     res.json({
       nome: user.nome,
       email: user.email,
+      telefone,
       plano: user.plano || { ativo: false },
       produtosAvulsos: user.produtosAvulsos || {},
       perfil: user.perfil || {},

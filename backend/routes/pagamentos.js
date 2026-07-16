@@ -13,6 +13,7 @@ const { transmitir } = require("../utils/sse");
 const { confirmarMatricula, rejeitarMatricula } = require("./pagamentoMatricula");
 const { precoPorTier } = require("../utils/precoMatricula");
 const { PRODUTOS_PACK_PRESTIGE, precoPackPrestige, chavesLiberadas } = require("../utils/precoPackPrestige");
+const { enviarEmailPagamentoAprovado } = require("../utils/mailer");
 
 const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
 const payment = new Payment(client);
@@ -90,30 +91,37 @@ async function criarMatriculaDeHorarios(userId, curso, plano, tipo, slotsEscolhi
 // Compras avulsas do Pack Prestige (Plataforma de Questões, Ambiente de Produção Oral e
 // Textual, Aulas Especializadas Online) não mexem no "plano" de curso do usuário — apenas
 // liberam as chaves compradas (produto principal + upgrades) em produtosAvulsos.
-async function ativarPackPrestige(userId, curso, upgrades) {
+async function ativarPackPrestige(userId, curso, upgrades, metodoPagamento, precoFinal, mercadoPagoId) {
   if (!userId) return;
-  const dataVencimento = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+  const dataInicio = new Date();
+  const dataVencimento = new Date(dataInicio.getTime() + 30 * 24 * 60 * 60 * 1000);
   const chaves = chavesLiberadas(curso, upgrades);
   const set = {};
   chaves.forEach(chave => {
     set[`produtosAvulsos.${chave}.ativo`] = true;
     set[`produtosAvulsos.${chave}.dataVencimento`] = dataVencimento;
   });
-  await User.findByIdAndUpdate(userId, { $set: set });
+  const user = await User.findByIdAndUpdate(userId, { $set: set }, { new: true }).select("nome email");
+
+  if (user?.email) {
+    enviarEmailPagamentoAprovado(user.email, user.nome, {
+      curso, plano: null, valor: precoFinal, metodoPagamento, dataInicio, dataVencimento, mercadoPagoId
+    }).catch(err => console.error("Erro ao enviar e-mail de pagamento aprovado:", err.message));
+  }
 }
 
-async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, tipo, slotsEscolhidos, precoFinal, dadosPessoais, upgrades) {
+async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, tipo, slotsEscolhidos, precoFinal, dadosPessoais, upgrades, mercadoPagoId) {
   if (!userId) return;
 
   if (PRODUTOS_PACK_PRESTIGE[curso]) {
-    await ativarPackPrestige(userId, curso, upgrades);
+    await ativarPackPrestige(userId, curso, upgrades, metodoPagamento, precoFinal, mercadoPagoId);
     return;
   }
 
   const dataInicio = new Date();
   const dataVencimento = new Date(dataInicio.getTime() + 30 * 24 * 60 * 60 * 1000);
   const creditosGanhos = CREDITOS_CORRECAO_POR_TIER[plano] || 0;
-  await User.findByIdAndUpdate(userId, {
+  const user = await User.findByIdAndUpdate(userId, {
     plano: {
       curso, tier: plano, ativo: true,
       metodoPagamento, cartaoFinal,
@@ -121,7 +129,13 @@ async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, t
       dataInicio, dataVencimento
     },
     $inc: { creditosCorrecao: creditosGanhos }
-  });
+  }, { new: true }).select("nome email");
+
+  if (user?.email) {
+    enviarEmailPagamentoAprovado(user.email, user.nome, {
+      curso, plano, valor: precoFinal, metodoPagamento, dataInicio, dataVencimento, mercadoPagoId
+    }).catch(err => console.error("Erro ao enviar e-mail de pagamento aprovado:", err.message));
+  }
 
   if (Array.isArray(slotsEscolhidos) && slotsEscolhidos.length && tipo) {
     await criarMatriculaDeHorarios(userId, curso, plano, tipo, slotsEscolhidos, precoFinal, dadosPessoais);
@@ -205,7 +219,7 @@ router.post("/cartao", exigirAuth, async (req, res) => {
     });
 
     if (aprovado) {
-      await ativarPlano(req.userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, pedido.tipo, slotsEscolhidos, valorFinal, dadosPessoais, upgrades);
+      await ativarPlano(req.userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, pedido.tipo, slotsEscolhidos, valorFinal, dadosPessoais, upgrades, resultado.id);
     }
 
     res.json({ status: resultado.status, statusDetail: resultado.status_detail, pedidoId: pedido._id });
@@ -375,7 +389,7 @@ router.post("/webhook", async (req, res) => {
 
       if (pedido) {
         if (novoStatus === "aprovado") {
-          await ativarPlano(pedido.userId, pedido.curso, pedido.plano, pedido.metodoPagamento, pedido.cartaoFinal, pedido.turmaId, pedido.tipo, pedido.slotsEscolhidos, pedido.valor, pedido.dadosPessoais, pedido.upgrades);
+          await ativarPlano(pedido.userId, pedido.curso, pedido.plano, pedido.metodoPagamento, pedido.cartaoFinal, pedido.turmaId, pedido.tipo, pedido.slotsEscolhidos, pedido.valor, pedido.dadosPessoais, pedido.upgrades, pedido.mercadoPagoId);
         }
       } else {
         const pagamentoMatricula = await PagamentoMatricula.findOneAndUpdate(

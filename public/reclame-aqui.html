@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Reclame Aqui - Francês na Mira</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    text-align: center;
+    padding: 30px;
+    background: var(--header-bg);
+  }
+  header a { color: var(--text); text-decoration: none; }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 520px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    border-radius: 18px;
+    padding: 40px 36px;
+  }
+
+  .auth-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .auth-card .subtitle {
+    text-align: center;
+    opacity: 0.85;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 0.9rem; margin-bottom: 6px; font-weight: 600; }
+  .field input, .field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--glass-border-strong);
+    background: var(--glass-input);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+  }
+  .field textarea { resize: vertical; min-height: 120px; }
+  .field input::placeholder, .field textarea::placeholder { color: var(--text-muted); }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 13px;
+    margin-top: 8px;
+    background: var(--accent);
+    color: var(--accent-text);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button[type="submit"]:hover { background: var(--accent-hover); }
+  button[type="submit"]:disabled { opacity: 0.6; cursor: default; }
+
+  #msgReclamacao {
+    margin-top: 16px;
+    text-align: center;
+    font-weight: 600;
+    min-height: 20px;
+  }
+
+  .switch-link {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 0.95rem;
+  }
+  .switch-link a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .switch-link a:hover { text-decoration: underline; }
+
+  footer { text-align: center; padding: 20px; background: var(--footer-bg); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header><a href="index.html">Francês na Mira <img src="img/logo-mira.png" alt="" class="logo-mira-icone"></a></header>
+
+<main>
+  <div class="auth-card">
+    <h1>Reclame Aqui</h1>
+    <p class="subtitle">Teve algum problema ou quer nos dar um feedback? Conte pra gente — sua mensagem vai direto para a nossa equipe e vamos responder o mais rápido possível.</p>
+
+    <form id="reclamacaoForm">
+      <div class="field">
+        <label for="nomeReclamacao">Nome</label>
+        <input type="text" id="nomeReclamacao" placeholder="Seu nome completo" required>
+      </div>
+      <div class="field">
+        <label for="emailReclamacao">E-mail</label>
+        <input type="email" id="emailReclamacao" placeholder="seuemail@exemplo.com" required>
+      </div>
+      <div class="field">
+        <label for="assuntoReclamacao">Assunto</label>
+        <input type="text" id="assuntoReclamacao" placeholder="Ex.: Problema com pagamento, sugestão, elogio...">
+      </div>
+      <div class="field">
+        <label for="mensagemReclamacao">Mensagem</label>
+        <textarea id="mensagemReclamacao" placeholder="Descreva com detalhes o que aconteceu..." required></textarea>
+      </div>
+      <button type="submit" id="btnEnviarReclamacao">Enviar mensagem</button>
+    </form>
+
+    <p id="msgReclamacao"></p>
+
+    <p class="switch-link"><a href="index.html">← Voltar para a página inicial</a></p>
+  </div>
+</main>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script>
+document.getElementById('reclamacaoForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('btnEnviarReclamacao');
+  const msg = document.getElementById('msgReclamacao');
+  btn.disabled = true;
+  msg.style.color = 'var(--text)';
+  msg.textContent = 'Enviando...';
+
+  const body = {
+    nome: document.getElementById('nomeReclamacao').value,
+    email: document.getElementById('emailReclamacao').value,
+    assunto: document.getElementById('assuntoReclamacao').value,
+    mensagem: document.getElementById('mensagemReclamacao').value
+  };
+
+  try {
+    const res = await fetch('/api/reclamacoes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    msg.style.color = res.ok ? 'var(--success-text)' : 'var(--danger-text)';
+    msg.textContent = data.msg;
+    if (res.ok) document.getElementById('reclamacaoForm').reset();
+  } catch (err) {
+    msg.style.color = 'var(--danger-text)';
+    msg.textContent = 'Não foi possível enviar sua mensagem. Tente novamente.';
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

@@ -63,11 +63,6 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div class="dash-header">
   <div class="dash-welcome" id="welcomeMsg">&nbsp;</div>
   <div class="dash-sub" id="welcomeSub">&nbsp;</div>
-
-  <div class="dash-profile-card">
-    <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil" title="Clique para alterar sua foto" style="cursor:pointer;">
-    <div class="dash-profile-meta" id="profileMeta"></div>
-  </div>
 </div>
 
 <div class="dash-container">
@@ -81,6 +76,10 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   <!-- ===================== PERFIL ===================== -->
   <div class="dash-section-card" id="secPerfil">
     <h2>👤 Meu Perfil</h2>
+    <div class="perfil-header-row">
+      <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil" title="Clique para alterar sua foto" style="cursor:pointer;">
+      <div class="dash-profile-meta" id="profileMeta"></div>
+    </div>
     <div class="campo">
       <label for="bioInput">Descrição sobre você</label>
       <textarea id="bioInput" placeholder="Fale um pouco sobre você, seu nível atual de francês, sua motivação para estudar..."></textarea>
@@ -225,7 +224,11 @@ function renderHeader(dados) {
     document.getElementById('welcomeSub').textContent = 'Você ainda não tem um plano de curso ativo.';
   }
   if (dados.criadoEm) metaItens.push(`<span><strong>Na plataforma desde</strong> ${new Date(dados.criadoEm).toLocaleDateString('pt-BR')}</span>`);
+  if (plano.dataVencimento) {
+    metaItens.push(`<span><strong>Data de fim da inscrição</strong> ${plano.curso || ''} ${plano.tier || ''} — ${new Date(plano.dataVencimento).toLocaleDateString('pt-BR')}</span>`);
+  }
   metaItens.push(`<span><strong>E-mail</strong> ${dados.email || ''}</span>`);
+  if (dados.telefone) metaItens.push(`<span><strong>Telefone</strong> ${dados.telefone}</span>`);
   if (plano.dataVencimento) {
     metaItens.push(`<span><strong>Status da assinatura</strong> ${plano.ativo ? 'Ativa' : 'Vencida'}</span>`);
   }

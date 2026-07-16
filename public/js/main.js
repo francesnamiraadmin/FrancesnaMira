@@ -173,17 +173,42 @@ async function updateNav() {
   }
 
   if (loginLink && nome) {
-    loginLink.textContent = `Olá, ${nome.split(" ")[0]} · Sair`;
+    loginLink.textContent = `Olá, ${nome.split(" ")[0]}`;
     loginLink.href = "#";
-    loginLink.onclick = e => {
-      e.preventDefault();
-      if (confirm("Deseja sair da sua conta?")) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("nome");
-        localStorage.removeItem("plano");
-        window.location.href = "index.html";
-      }
-    };
+    loginLink.onclick = e => e.preventDefault();
+
+    let wrapper = loginLink.closest(".login-wrapper");
+    if (!wrapper) {
+      wrapper = document.createElement("div");
+      wrapper.className = "login-wrapper";
+      wrapper.style.position = "relative";
+      wrapper.style.flex = "0 0 auto";
+      loginLink.parentNode.insertBefore(wrapper, loginLink);
+      wrapper.appendChild(loginLink);
+
+      const dropdown = document.createElement("div");
+      dropdown.className = "dropdown";
+      dropdown.innerHTML = `
+        <a href="minha-conta.html">Minha conta</a>
+        <a href="minhas-inscricoes.html">Minhas inscrições</a>
+        <a href="#" id="navSairBtn">Sair</a>
+      `;
+      wrapper.appendChild(dropdown);
+
+      let timeout;
+      wrapper.addEventListener("mouseenter", () => { clearTimeout(timeout); dropdown.classList.add("show"); });
+      wrapper.addEventListener("mouseleave", () => { timeout = setTimeout(() => dropdown.classList.remove("show"), 150); });
+
+      dropdown.querySelector("#navSairBtn").addEventListener("click", e => {
+        e.preventDefault();
+        if (confirm("Deseja sair da sua conta?")) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("nome");
+          localStorage.removeItem("plano");
+          window.location.href = "index.html";
+        }
+      });
+    }
   }
 
   const cadastroLink = document.querySelector('.nav-item a[href="cadastro.html"]');

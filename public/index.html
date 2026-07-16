@@ -616,6 +616,30 @@ nav a:hover::after {
   animation: pulseGlow 3s infinite ease-in-out;
 }
 
+/* PERGUNTAS FREQUENTES */
+.faq-section { padding: 60px 20px 20px; }
+.faq-lista { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+.faq-item {
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: 16px; overflow: hidden; transition: border-color 0.2s ease;
+}
+.faq-pergunta {
+  width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+  padding: 18px 22px; font-size: 1.05rem; font-weight: 600; color: var(--text);
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+.faq-seta { transition: transform 0.25s ease; flex-shrink: 0; color: var(--accent); }
+.faq-item.aberta .faq-seta { transform: rotate(180deg); }
+.faq-resposta { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 22px; }
+.faq-item.aberta .faq-resposta { max-height: 400px; padding-bottom: 20px; }
+.faq-resposta p { color: var(--text-muted); line-height: 1.6; }
+
+/* RECLAME AQUI — link discreto no rodapé */
+.reclame-aqui-rodape { text-align: center; padding: 8px; background: var(--footer-bg); }
+.reclame-aqui-rodape a { color: var(--text-muted); font-size: 0.76rem; text-decoration: none; opacity: 0.65; }
+.reclame-aqui-rodape a:hover { text-decoration: underline; opacity: 1; }
+
 </style>
 
 </head>
@@ -1397,6 +1421,15 @@ nav a:hover::after {
   </div>
 </section>
 
+<section class="faq-section" id="faq">
+  <div class="feature-container">
+    <h2 class="plan-title" style="text-align:center;">Perguntas Frequentes</h2>
+    <div class="faq-lista" id="faqLista"></div>
+  </div>
+</section>
+
+<div class="reclame-aqui-rodape"><a href="reclame-aqui.html">Reclame Aqui</a></div>
+
 <footer>© 2026 · Francês na Mira</footer>
 
 <script>
@@ -1529,6 +1562,29 @@ reveals.forEach(el => {
   el.classList.add('reveal');
   observer.observe(el);
 });
+
+// ===== PERGUNTAS FREQUENTES =====
+// Conteúdo provisório — será substituído depois pelo conteúdo definitivo.
+const FAQ_ITEMS = [
+  { pergunta: "Quais formas de pagamento vocês aceitam?", resposta: "Aceitamos cartão de crédito, cartão de débito, Pix e boleto bancário para todos os planos e produtos." },
+  { pergunta: "Preciso ter experiência prévia com francês para começar?", resposta: "Não! Nossos cursos vão do A1 (iniciante) ao C2 (avançado), então você pode começar do zero ou continuar de onde parou." },
+  { pergunta: "Por quanto tempo minha assinatura fica ativa?", resposta: "Cada assinatura de plano ou produto avulso tem validade de 30 dias a partir da confirmação do pagamento." }
+];
+
+function renderFAQ() {
+  const el = document.getElementById('faqLista');
+  if (!el) return;
+  el.innerHTML = FAQ_ITEMS.map((item) => `
+    <div class="faq-item">
+      <button class="faq-pergunta" type="button">${item.pergunta}<span class="faq-seta">▾</span></button>
+      <div class="faq-resposta"><p>${item.resposta}</p></div>
+    </div>
+  `).join('');
+  el.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-pergunta').addEventListener('click', () => item.classList.toggle('aberta'));
+  });
+}
+renderFAQ();
 
 </script>
 
