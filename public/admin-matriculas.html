@@ -46,7 +46,7 @@
     </div>
     <div class="table-wrap">
       <table class="mira-table">
-        <thead><tr><th>Turma</th><th>Nível</th><th>Dias / horário</th><th>Professor</th><th>Vagas</th><th>Preço</th><th>Status</th><th></th></tr></thead>
+        <thead><tr><th>Turma</th><th>Nível</th><th>Prova</th><th>Dias / horário</th><th>Início / Término</th><th>Professor</th><th>Vagas</th><th>Preço</th><th>Status</th><th></th></tr></thead>
         <tbody id="turmasTbody"></tbody>
       </table>
     </div>
@@ -93,12 +93,16 @@
     <input type="hidden" id="turmaId">
     <div class="field"><label>Nome</label><input type="text" id="turmaNome"></div>
     <div class="field"><label>Nível</label>
-      <select id="turmaNivel"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option></select>
+      <select id="turmaNivel"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option><option>TCF</option><option>DELF</option><option>DALF</option><option>TEF</option></select>
+    </div>
+    <div class="field"><label>Tipo de prova</label>
+      <select id="turmaTipoProva"><option value="">Nenhuma (curso geral)</option><option>TCF</option><option>TCF Canadá</option><option>DELF</option><option>DALF</option><option>TEF</option></select>
     </div>
     <div class="field"><label>Professor</label><select id="turmaProfessor"></select></div>
     <div class="field"><label>Dias (separados por vírgula)</label><input type="text" id="turmaDias" placeholder="Segunda, Quarta"></div>
     <div class="field"><label>Horário</label><input type="text" id="turmaHorario" placeholder="19:00"></div>
     <div class="field"><label>Data de início</label><input type="date" id="turmaDataInicio"></div>
+    <div class="field"><label>Data de término</label><input type="date" id="turmaDataFim"></div>
     <div class="field"><label>Máximo de alunos</label><input type="number" id="turmaMaxAlunos" value="8"></div>
     <div class="field"><label>Preço (R$)</label><input type="number" id="turmaPreco"></div>
     <div class="field"><label>Descrição</label><textarea id="turmaDescricao"></textarea></div>

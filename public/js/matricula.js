@@ -76,17 +76,17 @@
     Excellence: { particular: true, plataforma: true, producao: true, gravadas: true }
   };
   const NOMES_BENEFICIO = [
-    { key: "particular", label: "Aula Particular / Turma" },
-    { key: "plataforma", label: "Plataforma de Questões" },
-    { key: "producao", label: "Produção Oral e Escrita" },
-    { key: "gravadas", label: "Aulas Especializadas Gravadas" }
+    { key: "particular", label: "Aula particular" },
+    { key: "plataforma", label: "Plataforma de questões" },
+    { key: "producao", label: "Ambiente de produção" },
+    { key: "gravadas", label: "Aulas Especializadas gravadas" }
   ];
 
   const DIAS_LABEL = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
   const ORDEM_DIAS = [1, 2, 3, 4, 5, 6, 0]; // exibição Seg..Dom
 
   const STEP_LABELS = {
-    tipo: "Particular ou Turma", dados: "Seus dados", turma: "Turma", upgrade: "Upgrade",
+    dados: "Seus dados", turma: "Turma", upgrade: "Upgrade",
     horarios: "Horários e plano", resumo: "Resumo", pagamento: "Pagamento"
   };
 
@@ -103,14 +103,15 @@
   };
   let ultimosSlotsCarregados = [];
 
-  let steps = ["tipo"];
+  let steps = ["dados"];
   let currentIndex = 0;
 
   function stepsPadrao() {
-    return ["tipo", "dados", "horarios", "resumo", "pagamento"];
+    return ["dados", "horarios", "resumo", "pagamento"];
   }
 
   if (usaHorarios) {
+    state.tipo = "particular";
     steps = stepsPadrao();
     document.getElementById("campoCupom").style.display = "none";
     if (modoPlano) {
@@ -208,20 +209,6 @@
     const el = document.getElementById(fieldId);
     if (el) el.classList.toggle("invalid", !!show);
   }
-
-  // ---------- STEP: TIPO ----------
-  document.querySelectorAll('input[name=tipo]').forEach(r => {
-    r.addEventListener("change", () => {
-      document.querySelectorAll("#tipoGrid .option").forEach(o => o.classList.remove("selected"));
-      r.closest(".option").classList.add("selected");
-      state.tipo = r.value;
-      document.getElementById("camposParticular").style.display = state.tipo === "particular" ? "block" : "none";
-      // Trocar de modalidade invalida a grade e as seleções feitas na modalidade anterior.
-      state.periodo = null;
-      state.slotsSelecionados = [];
-      renderMira();
-    });
-  });
 
   // ---------- STEP: DADOS ----------
   async function prefillDados() {
@@ -830,10 +817,6 @@
   // ---------- VALIDAÇÃO POR ETAPA ----------
   function validateStep(key) {
     let ok = true;
-    if (key === "tipo") {
-      ok = !!state.tipo;
-      showFieldError("f-tipo", !ok);
-    }
     if (key === "dados") {
       const nome = document.getElementById("nome").value.trim();
       const email = document.getElementById("email").value.trim();

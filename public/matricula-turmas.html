@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
-<title>Matrícula — Francês na Mira</title>
+<title>Matrícula — Turmas — Francês na Mira</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
@@ -19,16 +19,19 @@ header a { color: inherit; text-decoration: none; }
 :root[data-theme="dark"] .card { background: #2f5c86; }
 
 :root[data-theme="dark"] .option,
-:root[data-theme="dark"] .pacote {
+:root[data-theme="dark"] .pacote,
+:root[data-theme="dark"] .turma-card {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.28);
 }
 :root[data-theme="dark"] .option:hover,
-:root[data-theme="dark"] .pacote:hover {
+:root[data-theme="dark"] .pacote:hover,
+:root[data-theme="dark"] .turma-card:hover {
   border-color: #D9B65A;
 }
 :root[data-theme="dark"] .option.selected,
-:root[data-theme="dark"] .pacote.selected {
+:root[data-theme="dark"] .pacote.selected,
+:root[data-theme="dark"] .turma-card.selecionada {
   background: rgba(217, 182, 90, 0.32);
   border-color: #D9B65A;
 }
@@ -40,23 +43,14 @@ header a { color: inherit; text-decoration: none; }
 :root[data-theme="dark"] input[type=number],
 :root[data-theme="dark"] input[type=password],
 :root[data-theme="dark"] select,
-:root[data-theme="dark"] textarea,
-:root[data-theme="dark"] .slot-btn,
-:root[data-theme="dark"] .day-row {
+:root[data-theme="dark"] textarea {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.28);
   color: #F2EFE4;
 }
 :root[data-theme="dark"] input:focus,
 :root[data-theme="dark"] select:focus,
-:root[data-theme="dark"] textarea:focus,
-:root[data-theme="dark"] .slot-btn:hover,
-:root[data-theme="dark"] .day-row:hover {
-  border-color: #D9B65A;
-}
-:root[data-theme="dark"] .slot-btn.selected,
-:root[data-theme="dark"] .day-row.checked {
-  background: rgba(217, 182, 90, 0.32);
+:root[data-theme="dark"] textarea:focus {
   border-color: #D9B65A;
 }
 :root[data-theme="dark"] .cupom-row input {
@@ -65,18 +59,11 @@ header a { color: inherit; text-decoration: none; }
   color: #F2EFE4;
 }
 
-:root[data-theme="dark"] select option {
-  background: #1B2740;
-  color: #F2EFE4;
-}
-
 :root[data-theme="dark"] .tier-card {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.28);
 }
-:root[data-theme="dark"] .tier-card:hover {
-  border-color: #D9B65A;
-}
+:root[data-theme="dark"] .tier-card:hover { border-color: #D9B65A; }
 :root[data-theme="dark"] .tier-card.selecionado {
   background: rgba(217, 182, 90, 0.32);
   border-color: #D9B65A;
@@ -86,50 +73,21 @@ header a { color: inherit; text-decoration: none; }
   color: #D9B65A;
 }
 
-:root[data-theme="dark"] .periodo-tab {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.28);
-  color: #F2EFE4;
-}
-:root[data-theme="dark"] .periodo-tab.active {
-  background: #D9B65A;
-  border-color: #D9B65A;
-  color: #12180F;
-}
-
 :root[data-theme="dark"] .resumo-flutuante {
   background: #2f5c86;
   border-color: rgba(255, 255, 255, 0.28);
 }
 
-:root[data-theme="dark"] .mira-step.active .target {
-  border-color: #D9B65A;
-}
-:root[data-theme="dark"] .mira-step.active .target .bull {
-  background: #D9B65A;
-}
-:root[data-theme="dark"] .mira-step.active .mira-label {
-  color: #D9B65A;
-}
+:root[data-theme="dark"] .mira-step.active .target { border-color: #D9B65A; }
+:root[data-theme="dark"] .mira-step.active .target .bull { background: #D9B65A; }
+:root[data-theme="dark"] .mira-step.active .mira-label { color: #D9B65A; }
 
-:root[data-theme="dark"] .btn-outline {
-  color: #D9B65A;
-  border-color: #D9B65A;
-}
-:root[data-theme="dark"] .btn-outline:hover {
-  background: rgba(217, 182, 90, 0.18);
-}
+:root[data-theme="dark"] .btn-outline { color: #D9B65A; border-color: #D9B65A; }
+:root[data-theme="dark"] .btn-outline:hover { background: rgba(217, 182, 90, 0.18); }
 
-:root[data-theme="dark"] .btn-primary {
-  background: #D9B65A;
-  color: #12180F;
-}
-:root[data-theme="dark"] .btn-primary:hover {
-  background: #c2a04a;
-}
-:root[data-theme="dark"] .resumo-total .valor {
-  color: #D9B65A;
-}
+:root[data-theme="dark"] .btn-primary { background: #D9B65A; color: #12180F; }
+:root[data-theme="dark"] .btn-primary:hover { background: #c2a04a; }
+:root[data-theme="dark"] .resumo-total .valor { color: #D9B65A; }
 
 nav {
   position: relative; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
@@ -157,31 +115,36 @@ nav a:hover::after { width: 100%; }
 
 footer.site-footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; font-family: 'Poppins', sans-serif; color: var(--text); }
 
-/* ---------- ETAPA: HORÁRIOS + PLANO ---------- */
-.fuso-aviso {
-  background: var(--tint-warning-bg); border: 1px solid var(--tint-warning-border); color: var(--tint-warning-text);
-  border-radius: 10px; padding: 10px 14px; font-size: 13px; margin-bottom: 20px;
+/* ---------- ETAPA: TURMAS + PLANO ---------- */
+.turmas-layout { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+.turmas-layout .principal { flex: 1 1 460px; min-width: 0; }
+.resumo-flutuante {
+  flex: 0 0 260px; position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 14px; padding: 18px; box-shadow: 0 1px 3px rgba(22,33,62,0.04);
 }
-.periodo-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
-.periodo-tab {
-  flex: 1; min-width: 100px; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--line);
-  background: var(--surface-2); color: var(--ink); font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.2s;
+.resumo-flutuante h3 { font-family: 'Fraunces', serif; font-size: 16px; margin-bottom: 12px; color: var(--ink); }
+@media (max-width: 780px) {
+  .turmas-layout { flex-direction: column-reverse; }
+  .resumo-flutuante { position: static; flex: 1 1 auto; width: 100%; }
 }
-.periodo-tab:hover { border-color: var(--gold); }
-.periodo-tab.active { background: var(--bordeaux); border-color: var(--bordeaux); color: var(--on-accent); }
 
-.grade-horarios-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); }
-.tabela-horarios { width: 100%; min-width: 400px; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
-.tabela-horarios th { background: var(--surface-2); padding: 10px 6px; font-weight: 700; color: var(--ink); text-align: center; }
-.tabela-horarios th:first-child, .tabela-horarios td.hora-label { width: 46px; padding: 6px 4px; font-size: 11.5px; font-weight: 600; color: var(--muted); white-space: nowrap; text-align: right; }
-.tabela-horarios td.horario-cel { width: 44px; height: 38px; text-align: center; border: 1px solid var(--line); cursor: pointer; transition: 0.15s; }
-.tabela-horarios td.horario-cel.vazio { background: var(--tint-neutral-bg); cursor: not-allowed; opacity: 0.6; }
-.tabela-horarios td.horario-cel.disponivel { background: #4CD964; }
-.tabela-horarios td.horario-cel.disponivel:hover { background: var(--gold-soft); }
-.tabela-horarios td.horario-cel.indisponivel { background: var(--tint-neutral-bg); cursor: not-allowed; opacity: 0.6; }
-.tabela-horarios td.horario-cel.selecionado { background: var(--info); border-color: var(--info-dark); }
+.turma-lista { display: flex; flex-direction: column; gap: 12px; }
+.turma-card {
+  border: 1.5px solid var(--line); border-radius: 14px; padding: 16px 18px; cursor: pointer; background: var(--surface-2);
+  transition: 0.2s; display: block;
+}
+.turma-card:hover { border-color: var(--gold); }
+.turma-card.selecionada { border-color: var(--bordeaux); background: var(--tint-success-bg); }
+.turma-card .turma-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.turma-card .turma-nome { font-family: 'Fraunces', serif; font-size: 17px; color: var(--ink); font-weight: 700; }
+.turma-card .turma-prova { font-size: 12.5px; font-weight: 700; color: var(--bordeaux); background: var(--tint-warning-bg); border-radius: 20px; padding: 3px 10px; }
+.turma-card .turma-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px 16px; margin-top: 12px; }
+.turma-card .turma-info-item { font-size: 13px; }
+.turma-card .turma-info-item .rotulo { display: block; color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 2px; }
+.turma-card .turma-info-item .val { color: var(--ink); font-weight: 600; }
+.turma-card .vagas-tag { margin-top: 10px; display: inline-block; }
 
-.tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 22px; }
 .tier-card {
   border: 1.5px solid var(--line); border-radius: 12px; padding: 16px 14px; cursor: pointer; background: var(--surface-2);
   text-align: center; transition: 0.2s; display: block;
@@ -198,18 +161,6 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
 .tier-card li.feature-yes .feature-icon { color: var(--bordeaux); }
 .tier-card li.feature-no { color: var(--muted); }
 .tier-card li.feature-no .feature-icon { color: var(--error); }
-
-.horarios-layout { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
-.horarios-layout .principal { flex: 1 1 460px; min-width: 0; }
-.resumo-flutuante {
-  flex: 0 0 260px; position: sticky; top: 20px; background: var(--surface); border: 1px solid var(--line);
-  border-radius: 14px; padding: 18px; box-shadow: 0 1px 3px rgba(22,33,62,0.04);
-}
-.resumo-flutuante h3 { font-family: 'Fraunces', serif; font-size: 16px; margin-bottom: 12px; color: var(--ink); }
-@media (max-width: 780px) {
-  .horarios-layout { flex-direction: column-reverse; }
-  .resumo-flutuante { position: static; flex: 1 1 auto; width: 100%; }
-}
 </style>
 </head>
 <body>
@@ -258,9 +209,9 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
 <div class="wrap">
 
   <header class="top">
-    <div class="eyebrow">Matrícula</div>
+    <div class="eyebrow">Matrícula em Turma</div>
     <h1 class="brand">Francês na Mira<span class="dot"></span></h1>
-    <p class="sub">Alguns passos rápidos para acertar o alvo: falar francês com confiança. Preencha com calma — cada etapa leva menos de um minuto.</p>
+    <p class="sub">Aulas em grupo, no dia e horário certos para você. Preencha com calma — cada etapa leva menos de um minuto.</p>
   </header>
 
   <div class="mira-track" id="miraTrack"></div>
@@ -291,117 +242,25 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
       <div class="field" id="f-telefone">
         <label>Telefone / WhatsApp <span class="req">*</span></label>
         <input type="tel" id="telefone" placeholder="(DDD) 00000-0000">
+        <div class="help">Usamos para combinar detalhes da turma escolhida, se precisar.</div>
         <div class="field-error">Digite um telefone de contato.</div>
       </div>
-
-      <div id="camposParticular">
-        <div class="field" id="f-objetivo">
-          <label>Objetivo principal <span class="req">*</span></label>
-          <select id="objetivo">
-            <option value="">Selecione…</option>
-            <option>Negócios</option>
-            <option>Turismo</option>
-            <option>Preparação para exame de proficiência</option>
-            <option>Uso acadêmico</option>
-            <option>Outro</option>
-          </select>
-          <div class="field-error">Selecione um objetivo.</div>
-        </div>
-
-        <div class="field" id="f-nivelAtual">
-          <label>Nível atual <span class="req">*</span></label>
-          <select id="nivelAtual">
-            <option value="">Selecione…</option>
-            <option>Iniciante (nunca estudei)</option>
-            <option>A1</option><option>A2</option><option>B1</option>
-            <option>B2</option><option>C1</option><option>C2</option>
-          </select>
-          <div class="field-error">Selecione seu nível atual.</div>
-        </div>
-
-        <div class="field" id="f-nivelPretendido">
-          <label>Nível pretendido <span class="req">*</span></label>
-          <select id="nivelPretendido">
-            <option value="">Selecione…</option>
-            <option>A1</option><option>A2</option><option>B1</option>
-            <option>B2</option><option>C1</option><option>C2</option>
-            <option>Fluência total</option>
-          </select>
-          <div class="field-error">Selecione o nível que você quer alcançar.</div>
-        </div>
-
-        <div class="field" id="f-prova" style="display:none;">
-          <label>Qual prova de proficiência? <span class="req">*</span></label>
-          <select id="prova">
-            <option value="">Selecione…</option>
-            <option>TCF</option><option>TCF Canada</option>
-            <option>DELF</option><option>DALF</option><option>TEF</option>
-          </select>
-          <div class="field-error">Selecione a prova pretendida.</div>
-        </div>
-
-        <div class="field" id="f-dataExame" style="display:none;">
-          <label>Data prevista do exame</label>
-          <input type="date" id="dataExame">
-          <div class="help">Se ainda não souber a data exata, deixe em branco.</div>
-        </div>
-
-        <div class="field">
-          <label>Quer dizer ou perguntar algo? (opcional)</label>
-          <textarea id="mensagem" placeholder="Fique à vontade…"></textarea>
-        </div>
-      </div>
     </section>
 
-    <!-- ===================== STEP: UPGRADE (Pack Prestige) ===================== -->
-    <section class="step" data-step="upgrade" style="display:none;">
-      <h2 class="step-title">Upgrade</h2>
-      <p class="step-hint">Adicione ao seu Pack</p>
-      <div class="field" id="f-upgrade">
-        <div class="option-grid" id="upgradeGrid"></div>
-      </div>
-      <div class="resumo-total" style="margin-top:20px;">
-        <span class="label">Mensal</span>
-        <span class="valor" id="upgradeTotalValor">R$ 0</span>
-      </div>
-    </section>
+    <!-- ===================== STEP: TURMA + PLANO ===================== -->
+    <section class="step" data-step="turmas" style="display:none;">
+      <h2 class="step-title">Escolha sua turma e seu plano</h2>
+      <p class="step-hint">Veja todas as informações de cada turma aberta e escolha a que combina com você.</p>
 
-    <!-- ===================== STEP: TURMA ===================== -->
-    <section class="step" data-step="turma" style="display:none;">
-      <h2 class="step-title">Escolha sua turma</h2>
-      <p class="step-hint">Turmas com vagas abertas no momento.</p>
-      <div class="field" id="f-turma">
-        <div class="option-grid" id="turmaGrid"></div>
-        <div class="field-error">Escolha uma turma disponível.</div>
-      </div>
-    </section>
-
-    <!-- ===================== STEP: HORÁRIOS + PLANO ===================== -->
-    <section class="step" data-step="horarios" style="display:none;">
-      <h2 class="step-title">Escolha seus horários e plano</h2>
-      <p class="step-hint">Selecione de 1 a 4 horários semanais e o plano ideal para você.</p>
-      <p class="fuso-aviso">🕒 Todos os horários estão no horário oficial de Brasília (GMT-3 / São Paulo).</p>
-
-      <div class="horarios-layout">
+      <div class="turmas-layout">
         <div class="principal">
-          <div class="field" id="f-periodo">
-            <label>Período</label>
-            <div class="periodo-tabs" id="periodoTabs">
-              <button type="button" class="periodo-tab" data-periodo="diurno">Diurno</button>
-              <button type="button" class="periodo-tab" data-periodo="vespertino">Vespertino</button>
-              <button type="button" class="periodo-tab" data-periodo="noturno">Noturno</button>
-            </div>
+          <div class="field" id="f-turma">
+            <label>Turmas com vagas abertas</label>
+            <div class="turma-lista" id="turmaLista"></div>
+            <div class="field-error">Escolha uma turma disponível.</div>
           </div>
 
-          <div class="field" id="f-grade-horarios">
-            <label>Horários (mínimo 1, máximo 4)</label>
-            <div class="grade-horarios-wrap">
-              <table class="tabela-horarios" id="tabelaHorarios"></table>
-            </div>
-            <div class="field-error">Escolha ao menos um horário para continuar.</div>
-          </div>
-
-          <div class="field" id="f-tier" style="margin-top:24px;">
+          <div class="field" id="f-tier" style="margin-top:10px;">
             <label>Plano escolhido</label>
             <div class="tier-grid" id="tierGrid"></div>
             <div class="field-error">Escolha um plano para continuar.</div>
@@ -419,17 +278,8 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
 
       <div id="resumoConteudo"></div>
 
-      <div class="field" id="campoCupom" style="margin-top:20px;">
-        <label>Cupom de desconto (opcional)</label>
-        <div class="cupom-row">
-          <input type="text" id="cupomInput" placeholder="Ex.: BIENVENUE10">
-          <button type="button" class="btn-outline btn-small" id="btnAplicarCupom">Aplicar</button>
-        </div>
-        <div class="cupom-msg" id="cupomMsg"></div>
-      </div>
-
       <div class="resumo-total">
-        <span class="label">Total</span>
+        <span class="label">Valor mensal</span>
         <span class="valor" id="resumoTotalValor">R$ 0</span>
       </div>
     </section>
@@ -465,9 +315,9 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
     <section class="step success" data-step="success" style="display:none;">
       <div class="bull-big"></div>
       <h2>Alvo atingido! 🎯</h2>
-      <p id="successMsg">Sua matrícula foi confirmada. Em instantes você recebe um e-mail de confirmação. À bientôt!</p>
+      <p id="successMsg">Sua matrícula na turma foi confirmada. Em instantes você recebe um e-mail de confirmação. À bientôt!</p>
       <div style="margin-top:20px;">
-        <a href="minhas-matriculas.html" id="successLink" class="btn-primary" style="display:inline-block;text-decoration:none;">Ver minha matrícula</a>
+        <a href="minha-conta.html" id="successLink" class="btn-primary" style="display:inline-block;text-decoration:none;">Ver minha conta</a>
       </div>
     </section>
 
@@ -492,7 +342,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
 });
 </script>
 
-<script src="js/matricula.js"></script>
+<script src="js/matricula-turmas.js"></script>
 <script src="js/main.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>

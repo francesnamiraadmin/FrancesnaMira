@@ -7,6 +7,8 @@ const TurmaSchema = new mongoose.Schema({
   dias: [{ type: String }],
   horario: { type: String, required: true },
   dataInicio: { type: Date, required: true },
+  dataFim: { type: Date, required: true },
+  tipoProva: { type: String, default: "" },
   maxAlunos: { type: Number, required: true, default: 8 },
   preco: { type: Number, required: true },
   descricao: { type: String },

@@ -81,16 +81,17 @@
 
   async function carregarTurmas() {
     const tbody = document.getElementById("turmasTbody");
-    tbody.innerHTML = '<tr><td colspan="8">Carregando…</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10">Carregando…</td></tr>';
     try {
       const res = await fetch("/api/turmas?todos=1", { headers: authHeaders() });
       const turmas = await res.json();
-      if (!turmas.length) { tbody.innerHTML = '<tr><td colspan="8">Nenhuma turma cadastrada.</td></tr>'; return; }
+      if (!turmas.length) { tbody.innerHTML = '<tr><td colspan="10">Nenhuma turma cadastrada.</td></tr>'; return; }
       tbody.innerHTML = "";
       turmas.forEach(t => {
         const tr = document.createElement("tr");
         tr.innerHTML =
-          "<td>" + t.nome + "</td><td>" + t.nivel + "</td><td>" + (t.dias || []).join(", ") + " " + t.horario + "</td>" +
+          "<td>" + t.nome + "</td><td>" + t.nivel + "</td><td>" + (t.tipoProva || "—") + "</td><td>" + (t.dias || []).join(", ") + " " + t.horario + "</td>" +
+          "<td>" + (t.dataInicio ? new Date(t.dataInicio).toLocaleDateString("pt-BR") : "—") + " – " + (t.dataFim ? new Date(t.dataFim).toLocaleDateString("pt-BR") : "—") + "</td>" +
           "<td>" + (t.professorId?.nome || "—") + "</td>" +
           "<td>" + t.vagasRestantes + "/" + t.maxAlunos + "</td><td>" + fmtMoeda(t.preco) + "</td>" +
           '<td><span class="badge ' + (t.ativa ? "badge-confirmada" : "badge-cancelada") + '">' + (t.ativa ? "Ativa" : "Inativa") + "</span></td>" +
@@ -109,7 +110,7 @@
         tbody.appendChild(tr);
       });
     } catch (e) {
-      tbody.innerHTML = '<tr><td colspan="8">Erro ao carregar turmas.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="10">Erro ao carregar turmas.</td></tr>';
     }
   }
 
@@ -118,9 +119,11 @@
     document.getElementById("turmaId").value = t?._id || "";
     document.getElementById("turmaNome").value = t?.nome || "";
     document.getElementById("turmaNivel").value = t?.nivel || "A1";
+    document.getElementById("turmaTipoProva").value = t?.tipoProva || "";
     document.getElementById("turmaDias").value = (t?.dias || []).join(", ");
     document.getElementById("turmaHorario").value = t?.horario || "";
     document.getElementById("turmaDataInicio").value = t?.dataInicio ? new Date(t.dataInicio).toISOString().slice(0, 10) : "";
+    document.getElementById("turmaDataFim").value = t?.dataFim ? new Date(t.dataFim).toISOString().slice(0, 10) : "";
     document.getElementById("turmaMaxAlunos").value = t?.maxAlunos || 8;
     document.getElementById("turmaPreco").value = t?.preco || "";
     document.getElementById("turmaDescricao").value = t?.descricao || "";
@@ -142,10 +145,12 @@
     const body = {
       nome: document.getElementById("turmaNome").value.trim(),
       nivel: document.getElementById("turmaNivel").value,
+      tipoProva: document.getElementById("turmaTipoProva").value,
       professorId: document.getElementById("turmaProfessor").value,
       dias: document.getElementById("turmaDias").value.split(",").map(s => s.trim()).filter(Boolean),
       horario: document.getElementById("turmaHorario").value.trim(),
       dataInicio: document.getElementById("turmaDataInicio").value,
+      dataFim: document.getElementById("turmaDataFim").value,
       maxAlunos: Number(document.getElementById("turmaMaxAlunos").value) || 8,
       preco: Number(document.getElementById("turmaPreco").value) || 0,
       descricao: document.getElementById("turmaDescricao").value.trim(),
@@ -153,8 +158,8 @@
       materialUrl: document.getElementById("turmaMaterial").value.trim()
     };
     const erroEl = document.getElementById("turmaErro");
-    if (!body.nome || !body.horario || !body.dias.length || !body.preco || !body.dataInicio) {
-      erroEl.textContent = "Preencha nome, dias, horário, data de início e preço."; erroEl.style.display = "block"; return;
+    if (!body.nome || !body.horario || !body.dias.length || !body.preco || !body.dataInicio || !body.dataFim) {
+      erroEl.textContent = "Preencha nome, dias, horário, data de início, data de término e preço."; erroEl.style.display = "block"; return;
     }
     try {
       const res = await fetch(id ? "/api/turmas/" + id : "/api/turmas", {
