@@ -19,6 +19,35 @@ const UserSchema = new mongoose.Schema({
   }],
   resetSenhaTokenHash: { type: String },
   resetSenhaExpiraEm: { type: Date },
+  // Troca de e-mail exige confirmação no endereço novo antes de valer.
+  emailPendente: { type: String },
+  emailPendenteTokenHash: { type: String },
+  emailPendenteExpiraEm: { type: Date },
+  // Preferências sincronizadas entre dispositivos (tema/idioma aplicados no
+  // login e restauração de sessão; notificações usadas pela central de e-mails
+  // transacionais/promocionais).
+  preferencias: {
+    tema: { type: String, enum: ["light", "dark"], default: "light" },
+    idioma: { type: String, enum: ["pt-BR", "fr"], default: "pt-BR" },
+    notificacoes: {
+      lembretes: { type: Boolean, default: true },
+      novosDeveres: { type: Boolean, default: true },
+      correcoesDisponiveis: { type: Boolean, default: true },
+      novosConteudos: { type: Boolean, default: true },
+      promocoes: { type: Boolean, default: true }
+    }
+  },
+  // Arquitetura preparada para 2FA (ver requisito 2 do produto) — desligado por
+  // padrão; a verificação em si (envio/validação de código) fica para uma
+  // etapa futura, mas o estado de "ativo" já existe e é consultável.
+  doisFatores: {
+    ativo: { type: Boolean, default: false },
+    metodo: { type: String, enum: ["email"], default: "email" }
+  },
+  exclusaoSolicitada: {
+    em: { type: Date },
+    motivo: { type: String }
+  },
   creditosCorrecao: { type: Number, default: 0 },
   especialidades: [{ type: String, enum: ["TCF", "TEF", "DELF", "DALF"] }],
   temasFavoritos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tema" }],

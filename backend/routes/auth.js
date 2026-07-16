@@ -32,6 +32,33 @@ function hashToken(raw) {
   return crypto.createHash("sha256").update(raw).digest("hex");
 }
 
+// Expira plano de curso e produtos avulsos do Pack Prestige vencidos — chamada
+// em login/register/refresh/me para que a página inicial calculada logo a
+// seguir (destinoInicial) já reflita um plano que acabou de vencer.
+async function expirarSeVencido(user) {
+  let alterou = false;
+  if (user.plano?.ativo && user.plano.dataVencimento && user.plano.dataVencimento < new Date()) {
+    user.plano.ativo = false;
+    alterou = true;
+  }
+  for (const chave of ["plataforma", "producao", "aulasEspecializadas"]) {
+    const produto = user.produtosAvulsos?.[chave];
+    if (produto?.ativo && produto.dataVencimento && produto.dataVencimento < new Date()) {
+      produto.ativo = false;
+      alterou = true;
+    }
+  }
+  if (alterou) await user.save();
+}
+
+// Usuário com plano de curso ativo tem a área do aluno como página inicial;
+// sem plano ativo, continua caindo no index — recalculado a cada login e a
+// cada restauração de sessão (refresh), então um plano vencido reverte
+// automaticamente para o index na próxima vez que a sessão for validada.
+function destinoInicial(user) {
+  return user.plano?.ativo ? "minha-conta.html" : "index.html";
+}
+
 async function emitirRefreshToken(user) {
   const raw = crypto.randomBytes(40).toString("hex");
   const expiraEm = new Date(Date.now() + REFRESH_DIAS * 24 * 60 * 60 * 1000);
@@ -95,7 +122,8 @@ router.post("/register", async (req, res) => {
 
     res.json({
       msg: "Cadastro realizado! Verifique seu e-mail para confirmar a conta.",
-      token, nome: user.nome, role: user.role, manterConectado: sessaoPersistente
+      token, nome: user.nome, role: user.role, manterConectado: sessaoPersistente,
+      preferencias: user.preferencias, destinoInicial: destinoInicial(user)
     });
   } catch (err) {
     console.error(err);
@@ -168,6 +196,8 @@ router.post("/login", async (req, res) => {
       return res.status(403).json({ msg: "Confirme seu e-mail antes de entrar. Verifique sua caixa de entrada." });
     }
 
+    await expirarSeVencido(user);
+
     const token = assinarAccessToken(user);
     let sessaoPersistente = false;
     if (manterConectado) {
@@ -178,7 +208,10 @@ router.post("/login", async (req, res) => {
       res.clearCookie(REFRESH_COOKIE, { path: "/api/auth" });
     }
 
-    res.json({ token, nome: user.nome, role: user.role, manterConectado: sessaoPersistente });
+    res.json({
+      token, nome: user.nome, role: user.role, manterConectado: sessaoPersistente,
+      preferencias: user.preferencias, destinoInicial: destinoInicial(user)
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
@@ -202,13 +235,79 @@ router.post("/refresh", async (req, res) => {
       return res.status(401).json({ msg: "Sessão expirada, faça login novamente" });
     }
 
+    await expirarSeVencido(user);
+
     // Rotação: descarta o token usado e emite um novo, para que um refresh token
     // roubado pare de funcionar assim que o dono legítimo o usar de novo.
     user.refreshTokens = user.refreshTokens.filter(rt => rt.tokenHash !== hash);
     const novoRaw = await emitirRefreshToken(user);
     res.cookie(REFRESH_COOKIE, novoRaw, cookieRefreshOpts);
 
-    res.json({ token: assinarAccessToken(user), nome: user.nome, role: user.role });
+    res.json({
+      token: assinarAccessToken(user), nome: user.nome, role: user.role,
+      preferencias: user.preferencias, destinoInicial: destinoInicial(user)
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// SESSÕES ATIVAS ("Manter-me conectado" em outros dispositivos) — cada refresh
+// token válido representa um dispositivo/navegador que continua conectado
+// mesmo depois de fechado. Não guardamos nome de dispositivo/IP (não são
+// coletados hoje), então a listagem é por data de criação/expiração.
+router.get("/sessoes", exigirAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("refreshTokens");
+    if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
+
+    const rawAtual = req.cookies?.[REFRESH_COOKIE];
+    const hashAtual = rawAtual ? hashToken(rawAtual) : null;
+
+    const sessoes = (user.refreshTokens || [])
+      .filter(rt => rt.expiraEm > new Date())
+      .sort((a, b) => b.criadoEm - a.criadoEm)
+      .map(rt => ({
+        id: rt._id,
+        criadoEm: rt.criadoEm,
+        expiraEm: rt.expiraEm,
+        atual: rt.tokenHash === hashAtual
+      }));
+
+    res.json(sessoes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// ENCERRAR UMA SESSÃO ESPECÍFICA
+router.delete("/sessoes/:id", exigirAuth, async (req, res) => {
+  try {
+    await User.updateOne(
+      { _id: req.userId },
+      { $pull: { refreshTokens: { _id: req.params.id } } }
+    );
+    res.json({ msg: "Sessão encerrada." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// ENCERRAR TODAS AS OUTRAS SESSÕES (mantém só a do dispositivo atual, se houver)
+router.post("/sessoes/encerrar-outras", exigirAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("refreshTokens");
+    if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
+
+    const rawAtual = req.cookies?.[REFRESH_COOKIE];
+    const hashAtual = rawAtual ? hashToken(rawAtual) : null;
+    user.refreshTokens = hashAtual ? user.refreshTokens.filter(rt => rt.tokenHash === hashAtual) : [];
+    await user.save();
+
+    res.json({ msg: "As demais sessões foram encerradas." });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
@@ -289,25 +388,10 @@ router.post("/redefinir-senha", async (req, res) => {
 // DADOS DO USUÁRIO LOGADO (nome, email, plano ativo, perfil, papel, créditos)
 router.get("/me", exigirAuth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select("nome email telefone whatsapp plano produtosAvulsos perfil role creditosCorrecao especialidades temasFavoritos criadoEm");
+    const user = await User.findById(req.userId).select("nome email telefone whatsapp plano produtosAvulsos perfil role creditosCorrecao especialidades temasFavoritos preferencias doisFatores criadoEm");
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
-    // Expira o plano automaticamente 30 dias após a ativação
-    if (user.plano?.ativo && user.plano.dataVencimento && user.plano.dataVencimento < new Date()) {
-      user.plano.ativo = false;
-      await user.save();
-    }
-
-    // Expira compras avulsas do Pack Prestige automaticamente 30 dias após a ativação
-    let produtosAlterados = false;
-    for (const chave of ["plataforma", "producao", "aulasEspecializadas"]) {
-      const produto = user.produtosAvulsos?.[chave];
-      if (produto?.ativo && produto.dataVencimento && produto.dataVencimento < new Date()) {
-        produto.ativo = false;
-        produtosAlterados = true;
-      }
-    }
-    if (produtosAlterados) await user.save();
+    await expirarSeVencido(user);
 
     // Telefone não é salvo no cadastro — recupera da matrícula/pedido mais recente
     // com esse dado preenchido (informado ao pagar um plano).
@@ -338,6 +422,9 @@ router.get("/me", exigirAuth, async (req, res) => {
       creditosCorrecao: user.creditosCorrecao || 0,
       especialidades: user.especialidades || [],
       temasFavoritos: user.temasFavoritos || [],
+      preferencias: user.preferencias || { tema: "light", idioma: "pt-BR" },
+      doisFatores: user.doisFatores || { ativo: false },
+      destinoInicial: destinoInicial(user),
       criadoEm: user.criadoEm
     });
   } catch (err) {
@@ -349,7 +436,7 @@ router.get("/me", exigirAuth, async (req, res) => {
 // ATUALIZAR PERFIL (foto, bio, interesses, prova alvo, data da prova)
 router.put("/perfil", exigirAuth, async (req, res) => {
   try {
-    const { foto, bio, interesses, provaAlvo, dataProva } = req.body;
+    const { foto, bio, interesses, provaAlvo, dataProva, nome, telefone, whatsapp } = req.body;
 
     if (foto && foto.length > 1_500_000) {
       return res.status(400).json({ msg: "A imagem é muito grande. Escolha uma foto menor." });
@@ -365,9 +452,143 @@ router.put("/perfil", exigirAuth, async (req, res) => {
       provaAlvo: provaAlvo !== undefined ? provaAlvo : user.perfil?.provaAlvo,
       dataProva: dataProva !== undefined ? (dataProva || null) : user.perfil?.dataProva
     };
+    if (nome !== undefined && nome.trim()) user.nome = nome.trim();
+    if (telefone !== undefined) user.telefone = telefone;
+    if (whatsapp !== undefined) user.whatsapp = whatsapp;
     await user.save();
 
-    res.json({ msg: "Perfil atualizado com sucesso!", perfil: user.perfil });
+    res.json({ msg: "Perfil atualizado com sucesso!", perfil: user.perfil, nome: user.nome, telefone: user.telefone, whatsapp: user.whatsapp });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// PREFERÊNCIAS (tema, idioma, notificações) — sincronizadas entre dispositivos
+router.put("/preferencias", exigirAuth, async (req, res) => {
+  try {
+    const { tema, idioma, notificacoes } = req.body;
+    const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
+
+    if (!user.preferencias) user.preferencias = {};
+    if (tema && ["light", "dark"].includes(tema)) user.preferencias.tema = tema;
+    if (idioma && ["pt-BR", "fr"].includes(idioma)) user.preferencias.idioma = idioma;
+    if (notificacoes && typeof notificacoes === "object") {
+      user.preferencias.notificacoes = { ...(user.preferencias.notificacoes || {}), ...notificacoes };
+    }
+    await user.save();
+
+    res.json({ msg: "Preferências salvas!", preferencias: user.preferencias });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// AUTENTICAÇÃO EM DOIS FATORES — liga/desliga o estado; o fluxo de envio e
+// validação de código fica para uma etapa futura (arquitetura preparada).
+router.put("/dois-fatores", exigirAuth, async (req, res) => {
+  try {
+    const { ativo } = req.body;
+    const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
+
+    if (!user.doisFatores) user.doisFatores = {};
+    user.doisFatores.ativo = !!ativo;
+    user.doisFatores.metodo = "email";
+    await user.save();
+
+    res.json({ msg: ativo ? "Autenticação em dois fatores ativada." : "Autenticação em dois fatores desativada.", doisFatores: user.doisFatores });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// TROCA DE E-MAIL — exige confirmação no endereço novo antes de valer, para
+// evitar trocas indevidas caso a conta seja acessada por outra pessoa.
+router.post("/trocar-email", exigirAuth, async (req, res) => {
+  try {
+    const { novoEmail } = req.body;
+    if (!novoEmail) return res.status(400).json({ msg: "Informe o novo e-mail" });
+
+    const existente = await User.findOne({ email: novoEmail.toLowerCase() });
+    if (existente) return res.status(400).json({ msg: "Este e-mail já está em uso por outra conta." });
+
+    const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
+
+    const raw = crypto.randomBytes(32).toString("hex");
+    user.emailPendente = novoEmail.toLowerCase();
+    user.emailPendenteTokenHash = hashToken(raw);
+    user.emailPendenteExpiraEm = new Date(Date.now() + 60 * 60 * 1000);
+    await user.save();
+
+    const origem = process.env.SITE_URL || `${req.protocol}://${req.get("host")}`;
+    const link = `${origem}/api/auth/confirmar-troca-email/${raw}`;
+    try {
+      await enviarEmailConfirmacao(novoEmail, user.nome, link);
+    } catch (mailErr) {
+      console.error("Erro ao enviar e-mail de confirmação de troca:", mailErr.message);
+    }
+
+    res.json({ msg: "Enviamos um link de confirmação para o novo e-mail. Ele só passa a valer depois de confirmado." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+router.get("/confirmar-troca-email/:token", async (req, res) => {
+  try {
+    const user = await User.findOne({ emailPendenteTokenHash: hashToken(req.params.token), emailPendenteExpiraEm: { $gt: new Date() } });
+    if (!user) return res.redirect("/configuracoes.html?trocaEmail=erro");
+
+    user.email = user.emailPendente;
+    user.emailPendente = undefined;
+    user.emailPendenteTokenHash = undefined;
+    user.emailPendenteExpiraEm = undefined;
+    await user.save();
+
+    res.redirect("/configuracoes.html?trocaEmail=1");
+  } catch (err) {
+    console.error(err);
+    res.redirect("/configuracoes.html?trocaEmail=erro");
+  }
+});
+
+// EXPORTAR DADOS DA CONTA (perfil + matrículas + pedidos) em JSON
+router.get("/exportar-dados", exigirAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("-senha -refreshTokens -resetSenhaTokenHash -emailPendenteTokenHash");
+    if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
+
+    const [matriculas, pedidos] = await Promise.all([
+      Matricula.find({ alunoId: req.userId }).lean(),
+      Pedido.find({ $or: [{ userId: req.userId }, { email: user.email }] }).lean()
+    ]);
+
+    res.setHeader("Content-Disposition", "attachment; filename=meus-dados.json");
+    res.json({ exportadoEm: new Date(), conta: user, matriculas, pedidos });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// SOLICITAR EXCLUSÃO DA CONTA — não apaga na hora; marca para revisão
+// administrativa (evita perda de dados por acesso indevido ou clique errado).
+router.post("/solicitar-exclusao", exigirAuth, async (req, res) => {
+  try {
+    const { motivo } = req.body;
+    const user = await User.findById(req.userId);
+    if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
+
+    user.exclusaoSolicitada = { em: new Date(), motivo: motivo || "" };
+    await user.save();
+
+    res.json({ msg: "Solicitação registrada. Nossa equipe vai analisar e entrar em contato antes de excluir sua conta." });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
