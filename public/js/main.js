@@ -99,6 +99,7 @@ loginForm?.addEventListener("submit", async e => {
   e.preventDefault();
   const email = document.getElementById("emailLogin").value.trim();
   const senha = document.getElementById("senhaLogin").value;
+  const manterConectado = document.getElementById("manterConectado")?.checked || false;
   const msg = document.getElementById("msgLogin");
 
   msg.style.color = "var(--text)";
@@ -108,12 +109,14 @@ loginForm?.addEventListener("submit", async e => {
     const res = await fetch(`${backendURL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, senha })
+      credentials: "include",
+      body: JSON.stringify({ email, senha, manterConectado })
     });
     const data = await res.json();
 
     if (res.ok && data.token) {
-      localStorage.setItem("token", data.token);
+      if (window.AuthStorage) window.AuthStorage.setToken(data.token);
+      else localStorage.setItem("token", data.token);
       localStorage.setItem("nome", data.nome);
       msg.style.color = "var(--accent)";
       msg.textContent = `Bem-vindo, ${data.nome}! Redirecionando...`;
@@ -126,6 +129,40 @@ loginForm?.addEventListener("submit", async e => {
   } catch (err) {
     msg.style.color = "var(--danger-text)";
     msg.textContent = "Erro ao conectar ao servidor.";
+  }
+});
+
+// Esqueci minha senha (login.html)
+document.getElementById("toggleEsqueciBox")?.addEventListener("click", () => {
+  const box = document.getElementById("esqueciBox");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+});
+document.getElementById("esqueciBtn")?.addEventListener("click", async () => {
+  const email = document.getElementById("esqueciEmail").value.trim();
+  const msg = document.getElementById("esqueciMsg");
+  const btn = document.getElementById("esqueciBtn");
+  if (!email) {
+    msg.style.color = "var(--danger-text)";
+    msg.textContent = "Informe seu e-mail.";
+    return;
+  }
+  btn.disabled = true;
+  msg.style.color = "var(--text)";
+  msg.textContent = "Enviando...";
+  try {
+    const res = await fetch(`${backendURL}/esqueci-senha`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    msg.style.color = "var(--accent)";
+    msg.textContent = data.msg;
+  } catch (err) {
+    msg.style.color = "var(--danger-text)";
+    msg.textContent = "Erro ao conectar ao servidor.";
+  } finally {
+    btn.disabled = false;
   }
 });
 

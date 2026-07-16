@@ -158,6 +158,20 @@ async function enviarEmailPagamentoRejeitado(destinatario, nome) {
   });
 }
 
+async function enviarEmailRedefinicaoSenha(destinatario, nome, link) {
+  await enviarViaAPI({
+    destinatario,
+    nome,
+    assunto: "Redefinição de senha - Francês na Mira",
+    html: casco(`
+      <h2 style="margin-top:0;">Olá, ${nome}!</h2>
+      <p>Recebemos um pedido para redefinir a senha da sua conta.</p>
+      ${botao(link, "Redefinir minha senha")}
+      <p style="font-size:13px; color:#8892a6;">Este link expira em 1 hora e só pode ser usado uma vez. Se você não pediu essa redefinição, pode ignorar este e-mail com segurança — sua senha continua a mesma.</p>
+    `)
+  });
+}
+
 // Encaminha o formulário de "Reclame Aqui" (canal próprio do site) para o e-mail da
 // administração — não tem relação com o serviço externo reclameaqui.com.br.
 async function enviarEmailReclamacao({ nome, email, assunto, mensagem }) {
@@ -178,6 +192,7 @@ async function enviarEmailReclamacao({ nome, email, assunto, mensagem }) {
 
 module.exports = {
   enviarEmailConfirmacao,
+  enviarEmailRedefinicaoSenha,
   enviarEmailMatriculaConfirmada,
   enviarEmailPagamentoAprovado,
   enviarEmailPagamentoRejeitado,

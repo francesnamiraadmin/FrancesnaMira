@@ -1,9 +1,8 @@
 (function () {
-  const tk = localStorage.getItem("token");
-  if (!tk) {
-    window.location.href = "login.html?redirect=matricula.html";
-    return;
-  }
+  // Preenchido depois que window.AuthGate.ensure() resolver (login existente,
+  // sessão renovada via refresh token, ou login/cadastro feitos ali mesmo no
+  // modal, sem sair da página) — ver a chamada a showStep(0) no fim do arquivo.
+  let tk = null;
 
   function authHeaders(json) {
     const h = { Authorization: "Bearer " + tk };
@@ -868,5 +867,9 @@
     if (currentIndex > 0) showStep(currentIndex - 1);
   });
 
-  showStep(0);
+  (async () => {
+    const dados = await window.AuthGate.ensure();
+    tk = dados.token;
+    showStep(0);
+  })();
 })();

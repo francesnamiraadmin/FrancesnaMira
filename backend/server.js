@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json({ limit: "2mb" }));
+app.use(cookieParser());
 
 // Arquivos estáticos do site (index.html, login.html, cadastro.html, etc.)
 app.use(express.static(path.join(__dirname, "../public")));

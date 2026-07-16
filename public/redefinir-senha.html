@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Redefinir senha - Francês na Mira</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    text-align: center;
+    padding: 30px;
+    background: var(--header-bg);
+  }
+  header a { color: var(--text); text-decoration: none; }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    border-radius: 18px;
+    padding: 40px 36px;
+  }
+
+  .auth-card h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .auth-card .subtitle {
+    text-align: center;
+    opacity: 0.85;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+  }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 0.9rem; margin-bottom: 6px; font-weight: 600; }
+  .field input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--glass-border-strong);
+    background: var(--glass-input);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+  }
+  .field input:focus { outline: none; border-color: var(--accent); }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 13px;
+    margin-top: 8px;
+    background: var(--accent);
+    color: var(--accent-text);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button[type="submit"]:hover { background: var(--accent-hover); }
+  button[type="submit"]:disabled { opacity: 0.6; cursor: default; }
+
+  #msg {
+    margin-top: 16px;
+    text-align: center;
+    font-weight: 600;
+    min-height: 20px;
+  }
+
+  .switch-link { text-align: center; margin-top: 22px; font-size: 0.95rem; }
+  .switch-link a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .switch-link a:hover { text-decoration: underline; }
+
+  footer { text-align: center; padding: 20px; background: var(--footer-bg); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<header><a href="index.html">Francês na Mira <img src="img/logo-mira.png" alt="" class="logo-mira-icone"></a></header>
+
+<main>
+  <div class="auth-card">
+    <div id="formWrap">
+      <h1>Nova senha</h1>
+      <p class="subtitle">Escolha uma nova senha para sua conta</p>
+
+      <form id="redefinirForm">
+        <div class="field">
+          <label for="novaSenha">Nova senha</label>
+          <input type="password" id="novaSenha" placeholder="••••••••" required minlength="6">
+        </div>
+        <div class="field">
+          <label for="confirmarSenha">Confirmar nova senha</label>
+          <input type="password" id="confirmarSenha" placeholder="••••••••" required minlength="6">
+        </div>
+        <button type="submit" id="btnRedefinir">Redefinir senha</button>
+      </form>
+    </div>
+
+    <div id="semTokenWrap" style="display:none;">
+      <h1>Link inválido</h1>
+      <p class="subtitle">Este link de redefinição de senha está incompleto ou expirou.</p>
+    </div>
+
+    <p id="msg"></p>
+
+    <p class="switch-link"><a href="login.html">Voltar para o login</a></p>
+  </div>
+</main>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/theme-toggle.js"></script>
+<script>
+  const token = new URLSearchParams(window.location.search).get("token");
+  const msg = document.getElementById("msg");
+
+  if (!token) {
+    document.getElementById("formWrap").style.display = "none";
+    document.getElementById("semTokenWrap").style.display = "block";
+  }
+
+  document.getElementById("redefinirForm")?.addEventListener("submit", async e => {
+    e.preventDefault();
+    const novaSenha = document.getElementById("novaSenha").value;
+    const confirmarSenha = document.getElementById("confirmarSenha").value;
+    const btn = document.getElementById("btnRedefinir");
+
+    if (novaSenha !== confirmarSenha) {
+      msg.style.color = "var(--danger-text)";
+      msg.textContent = "As senhas não coincidem.";
+      return;
+    }
+
+    btn.disabled = true;
+    msg.style.color = "var(--text)";
+    msg.textContent = "Salvando...";
+
+    try {
+      const res = await fetch("/api/auth/redefinir-senha", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, novaSenha })
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        document.getElementById("formWrap").style.display = "none";
+        msg.style.color = "var(--accent)";
+        msg.textContent = data.msg + " Redirecionando para o login...";
+        setTimeout(() => { window.location.href = "login.html"; }, 2000);
+      } else {
+        msg.style.color = "var(--danger-text)";
+        msg.textContent = data.msg || "Não foi possível redefinir sua senha.";
+        btn.disabled = false;
+      }
+    } catch (err) {
+      msg.style.color = "var(--danger-text)";
+      msg.textContent = "Erro ao conectar ao servidor.";
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

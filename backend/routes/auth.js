@@ -6,16 +6,54 @@ const Matricula = require("../models/matricula");
 const Pedido = require("../models/pedido");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { enviarEmailConfirmacao } = require("../utils/mailer");
+const { enviarEmailConfirmacao, enviarEmailRedefinicaoSenha } = require("../utils/mailer");
 const { exigirAuth } = require("../middleware/auth");
+
+// ---------- SESSÃO PERSISTENTE ("Manter-me conectado") ----------
+// Access token de vida curta (assinado a cada login/refresh) + refresh token de
+// vida longa guardado como cookie httpOnly (nunca acessível via JS) e cujo hash
+// (nunca o valor puro) fica salvo no usuário, permitindo revogar/rotacionar sem
+// expor nada reaproveitável caso o banco vaze.
+const REFRESH_COOKIE = "refreshToken";
+const REFRESH_DIAS = 30;
+const cookieRefreshOpts = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",
+  path: "/api/auth",
+  maxAge: REFRESH_DIAS * 24 * 60 * 60 * 1000
+};
+
+function assinarAccessToken(user) {
+  return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
+}
+
+function hashToken(raw) {
+  return crypto.createHash("sha256").update(raw).digest("hex");
+}
+
+async function emitirRefreshToken(user) {
+  const raw = crypto.randomBytes(40).toString("hex");
+  const expiraEm = new Date(Date.now() + REFRESH_DIAS * 24 * 60 * 60 * 1000);
+  // Mantém no máximo os 4 tokens mais recentes ainda válidos (multi-dispositivo
+  // sem deixar o array crescer indefinidamente).
+  user.refreshTokens = (user.refreshTokens || []).filter(rt => rt.expiraEm > new Date()).slice(-4);
+  user.refreshTokens.push({ tokenHash: hashToken(raw), expiraEm });
+  await user.save();
+  return raw;
+}
 
 // CADASTRO
 router.post("/register", async (req, res) => {
   try {
-    const { nome, email, senha } = req.body;
+    const { nome, sobrenome, email, senha, confirmarSenha, telefone, whatsapp, manterConectado } = req.body;
+    const nomeCompleto = (sobrenome ? `${nome || ""} ${sobrenome}` : (nome || "")).trim();
 
-    if (!nome || !email || !senha) {
+    if (!nomeCompleto || !email || !senha) {
       return res.status(400).json({ msg: "Preencha todos os campos" });
+    }
+    if (confirmarSenha !== undefined && senha !== confirmarSenha) {
+      return res.status(400).json({ msg: "As senhas não coincidem" });
     }
     if (senha.length < 6) {
       return res.status(400).json({ msg: "A senha deve ter pelo menos 6 caracteres" });
@@ -28,9 +66,11 @@ router.post("/register", async (req, res) => {
     const tokenVerificacao = crypto.randomBytes(32).toString("hex");
 
     const user = new User({
-      nome,
+      nome: nomeCompleto,
       email: email.toLowerCase(),
       senha: hash,
+      telefone: telefone || undefined,
+      whatsapp: whatsapp || undefined,
       tokenVerificacao
     });
     await user.save();
@@ -42,7 +82,21 @@ router.post("/register", async (req, res) => {
       console.error("Erro ao enviar e-mail de confirmação:", mailErr.message);
     }
 
-    res.json({ msg: "Cadastro realizado! Verifique seu e-mail para confirmar a conta." });
+    // Login automático logo após o cadastro — um fluxo de matrícula/checkout não
+    // deve travar esperando a confirmação do e-mail, que continua pendente e
+    // pode ser cobrada em outros pontos do produto.
+    const token = assinarAccessToken(user);
+    let sessaoPersistente = false;
+    if (manterConectado) {
+      const raw = await emitirRefreshToken(user);
+      res.cookie(REFRESH_COOKIE, raw, cookieRefreshOpts);
+      sessaoPersistente = true;
+    }
+
+    res.json({
+      msg: "Cadastro realizado! Verifique seu e-mail para confirmar a conta.",
+      token, nome: user.nome, role: user.role, manterConectado: sessaoPersistente
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
@@ -98,7 +152,7 @@ router.get("/confirmar/:token", async (req, res) => {
 // LOGIN
 router.post("/login", async (req, res) => {
   try {
-    const { email, senha } = req.body;
+    const { email, senha, manterConectado } = req.body;
 
     if (!email || !senha) {
       return res.status(400).json({ msg: "Preencha todos os campos" });
@@ -114,8 +168,118 @@ router.post("/login", async (req, res) => {
       return res.status(403).json({ msg: "Confirme seu e-mail antes de entrar. Verifique sua caixa de entrada." });
     }
 
-    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
-    res.json({ token, nome: user.nome, role: user.role });
+    const token = assinarAccessToken(user);
+    let sessaoPersistente = false;
+    if (manterConectado) {
+      const raw = await emitirRefreshToken(user);
+      res.cookie(REFRESH_COOKIE, raw, cookieRefreshOpts);
+      sessaoPersistente = true;
+    } else {
+      res.clearCookie(REFRESH_COOKIE, { path: "/api/auth" });
+    }
+
+    res.json({ token, nome: user.nome, role: user.role, manterConectado: sessaoPersistente });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// RENOVAR ACCESS TOKEN A PARTIR DO REFRESH TOKEN (cookie httpOnly)
+// Chamado no carregamento da página quando não há (ou expirou) o access token
+// em memória, para restaurar a sessão de quem marcou "Manter-me conectado".
+router.post("/refresh", async (req, res) => {
+  try {
+    const raw = req.cookies?.[REFRESH_COOKIE];
+    if (!raw) return res.status(401).json({ msg: "Sessão não encontrada" });
+
+    const hash = hashToken(raw);
+    const user = await User.findOne({ "refreshTokens.tokenHash": hash });
+    const entrada = user?.refreshTokens.find(rt => rt.tokenHash === hash);
+
+    if (!user || !entrada || entrada.expiraEm < new Date()) {
+      res.clearCookie(REFRESH_COOKIE, { path: "/api/auth" });
+      return res.status(401).json({ msg: "Sessão expirada, faça login novamente" });
+    }
+
+    // Rotação: descarta o token usado e emite um novo, para que um refresh token
+    // roubado pare de funcionar assim que o dono legítimo o usar de novo.
+    user.refreshTokens = user.refreshTokens.filter(rt => rt.tokenHash !== hash);
+    const novoRaw = await emitirRefreshToken(user);
+    res.cookie(REFRESH_COOKIE, novoRaw, cookieRefreshOpts);
+
+    res.json({ token: assinarAccessToken(user), nome: user.nome, role: user.role });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// LOGOUT — revoga o refresh token atual (não afeta outros dispositivos/sessões)
+router.post("/logout", async (req, res) => {
+  try {
+    const raw = req.cookies?.[REFRESH_COOKIE];
+    if (raw) {
+      const hash = hashToken(raw);
+      await User.updateOne({ "refreshTokens.tokenHash": hash }, { $pull: { refreshTokens: { tokenHash: hash } } });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  res.clearCookie(REFRESH_COOKIE, { path: "/api/auth" });
+  res.json({ msg: "Sessão encerrada" });
+});
+
+// ESQUECI MINHA SENHA — gera token de uso único (1h) e envia link por e-mail
+router.post("/esqueci-senha", async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ msg: "Informe o e-mail" });
+
+    const user = await User.findOne({ email: email.toLowerCase() });
+    if (user) {
+      const raw = crypto.randomBytes(32).toString("hex");
+      user.resetSenhaTokenHash = hashToken(raw);
+      user.resetSenhaExpiraEm = new Date(Date.now() + 60 * 60 * 1000);
+      await user.save();
+
+      const origem = process.env.SITE_URL || `${req.protocol}://${req.get("host")}`;
+      const link = `${origem}/redefinir-senha.html?token=${raw}`;
+      try {
+        await enviarEmailRedefinicaoSenha(user.email, user.nome, link);
+      } catch (mailErr) {
+        console.error("Erro ao enviar e-mail de redefinição:", mailErr.message);
+      }
+    }
+
+    // Mensagem sempre genérica, para não revelar se o e-mail existe na base.
+    res.json({ msg: "Se houver uma conta com esse e-mail, enviamos um link de redefinição de senha." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
+  }
+});
+
+// REDEFINIR SENHA — valida o token de uso único e troca a senha
+router.post("/redefinir-senha", async (req, res) => {
+  try {
+    const { token, novaSenha } = req.body;
+    if (!token || !novaSenha) return res.status(400).json({ msg: "Preencha todos os campos" });
+    if (novaSenha.length < 6) return res.status(400).json({ msg: "A nova senha deve ter pelo menos 6 caracteres" });
+
+    const user = await User.findOne({
+      resetSenhaTokenHash: hashToken(token),
+      resetSenhaExpiraEm: { $gt: new Date() }
+    });
+    if (!user) return res.status(400).json({ msg: "Link inválido ou expirado. Solicite uma nova redefinição." });
+
+    user.senha = await bcrypt.hash(novaSenha, 10);
+    user.resetSenhaTokenHash = undefined;
+    user.resetSenhaExpiraEm = undefined;
+    user.refreshTokens = []; // revoga sessões persistentes antigas por segurança
+    await user.save();
+
+    res.json({ msg: "Senha redefinida com sucesso! Você já pode entrar com a nova senha." });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor. Tente novamente." });
@@ -125,7 +289,7 @@ router.post("/login", async (req, res) => {
 // DADOS DO USUÁRIO LOGADO (nome, email, plano ativo, perfil, papel, créditos)
 router.get("/me", exigirAuth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select("nome email plano produtosAvulsos perfil role creditosCorrecao especialidades temasFavoritos criadoEm");
+    const user = await User.findById(req.userId).select("nome email telefone whatsapp plano produtosAvulsos perfil role creditosCorrecao especialidades temasFavoritos criadoEm");
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
     // Expira o plano automaticamente 30 dias após a ativação
@@ -147,8 +311,8 @@ router.get("/me", exigirAuth, async (req, res) => {
 
     // Telefone não é salvo no cadastro — recupera da matrícula/pedido mais recente
     // com esse dado preenchido (informado ao pagar um plano).
-    let telefone = null;
-    const matriculaComTelefone = await Matricula.findOne({
+    let telefone = user.telefone || null;
+    const matriculaComTelefone = telefone ? null : await Matricula.findOne({
       alunoId: req.userId,
       "dadosPessoais.telefone": { $exists: true, $ne: "" }
     }).sort({ criadoEm: -1 }).select("dadosPessoais.telefone");
@@ -166,6 +330,7 @@ router.get("/me", exigirAuth, async (req, res) => {
       nome: user.nome,
       email: user.email,
       telefone,
+      whatsapp: user.whatsapp || null,
       plano: user.plano || { ativo: false },
       produtosAvulsos: user.produtosAvulsos || {},
       perfil: user.perfil || {},

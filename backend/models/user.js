@@ -4,9 +4,21 @@ const UserSchema = new mongoose.Schema({
   nome: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   senha: { type: String, required: true },
+  telefone: { type: String },
+  whatsapp: { type: String },
   verificado: { type: Boolean, default: false },
   tokenVerificacao: { type: String },
   role: { type: String, enum: ["aluno", "professor", "admin"], default: "aluno" },
+  // Sessão persistente ("Manter-me conectado"): cada refresh token emitido fica
+  // guardado só como hash (nunca em texto puro) para permitir revogação/rotação
+  // sem expor o valor real caso o banco vaze.
+  refreshTokens: [{
+    tokenHash: { type: String, required: true },
+    expiraEm: { type: Date, required: true },
+    criadoEm: { type: Date, default: Date.now }
+  }],
+  resetSenhaTokenHash: { type: String },
+  resetSenhaExpiraEm: { type: Date },
   creditosCorrecao: { type: Number, default: 0 },
   especialidades: [{ type: String, enum: ["TCF", "TEF", "DELF", "DALF"] }],
   temasFavoritos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tema" }],
