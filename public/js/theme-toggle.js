@@ -7,7 +7,7 @@
     if (btn) btn.textContent = tema === "dark" ? "☀️" : "🌙";
   }
 
-  const salvo = localStorage.getItem(STORAGE_KEY) || "dark";
+  const salvo = localStorage.getItem(STORAGE_KEY) || "light";
   aplicarTema(salvo);
 
   function criarBotao() {
@@ -17,9 +17,9 @@
     btn.type = "button";
     btn.setAttribute("aria-label", "Alternar tema claro/escuro");
     btn.title = "Alternar tema claro/escuro";
-    btn.textContent = (localStorage.getItem(STORAGE_KEY) || "dark") === "dark" ? "☀️" : "🌙";
+    btn.textContent = (localStorage.getItem(STORAGE_KEY) || "light") === "dark" ? "☀️" : "🌙";
     btn.addEventListener("click", () => {
-      const atual = document.documentElement.getAttribute("data-theme") || "dark";
+      const atual = document.documentElement.getAttribute("data-theme") || "light";
       const proximo = atual === "dark" ? "light" : "dark";
       localStorage.setItem(STORAGE_KEY, proximo);
       aplicarTema(proximo);
