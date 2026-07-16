@@ -246,7 +246,8 @@
               <a href="minha-conta.html">Meu Perfil</a>
               <a href="minha-conta.html">Editar Perfil</a>
               <button type="button" class="app-dropdown-item" id="alterarFotoBtn">Alterar Foto</button>
-              <a href="minha-conta.html">Configurações</a>
+              <a href="configuracoes.html">Configurações</a>
+              <a href="depoimentos.html">Depoimentos</a>
               <button type="button" class="app-dropdown-item" id="alterarSenhaBtn">Alterar Senha</button>
               <hr>
               <button type="button" class="app-dropdown-item app-dropdown-danger" id="sairBtn">Sair</button>
@@ -273,6 +274,17 @@
       const dadosConta = await res.json();
       window.AppShell.dadosConta = dadosConta;
       montarNavbar(dadosConta);
+
+      // Restaura tema/idioma salvos na conta — cobre o caso de logar num
+      // navegador/computador novo, onde ainda não há nada em localStorage.
+      const prefs = dadosConta.preferencias || {};
+      if (prefs.tema && window.ThemeToggle && window.ThemeToggle.tema !== prefs.tema) {
+        window.ThemeToggle.setTema(prefs.tema, { sincronizar: false });
+      }
+      if (prefs.idioma && window.I18n && window.I18n.idioma !== prefs.idioma) {
+        window.I18n.setLocale(prefs.idioma, { sincronizar: false });
+      }
+
       document.dispatchEvent(new CustomEvent("appshell:ready", { detail: dadosConta }));
     } catch (err) {
       const root = document.getElementById("app-navbar");

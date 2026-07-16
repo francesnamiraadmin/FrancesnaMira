@@ -118,10 +118,12 @@ loginForm?.addEventListener("submit", async e => {
       if (window.AuthStorage) window.AuthStorage.setToken(data.token);
       else localStorage.setItem("token", data.token);
       localStorage.setItem("nome", data.nome);
+      if (data.preferencias?.tema && window.ThemeToggle) window.ThemeToggle.setTema(data.preferencias.tema, { sincronizar: false });
+      if (data.preferencias?.idioma && window.I18n) window.I18n.setLocale(data.preferencias.idioma, { sincronizar: false });
       msg.style.color = "var(--accent)";
       msg.textContent = `Bem-vindo, ${data.nome}! Redirecionando...`;
       const redirect = new URLSearchParams(window.location.search).get("redirect");
-      setTimeout(() => window.location.href = redirect || "index.html", 1000);
+      setTimeout(() => window.location.href = redirect || data.destinoInicial || "index.html", 1000);
     } else {
       msg.style.color = "var(--danger-text)";
       msg.textContent = data.msg || "Erro ao entrar.";
@@ -198,6 +200,14 @@ async function updateNav() {
       plano = data.plano;
       localStorage.setItem("nome", nome);
       localStorage.setItem("plano", JSON.stringify(plano || { ativo: false }));
+
+      // Quem tem plano de curso ativo cai direto em Minha Conta ao abrir o
+      // index — se o plano vencer, a próxima visita já volta a cair aqui.
+      const estaNoIndex = ["/", "/index.html"].includes(window.location.pathname);
+      if (estaNoIndex && data.destinoInicial === "minha-conta.html") {
+        window.location.href = "minha-conta.html";
+        return;
+      }
     } else if (res.status === 401) {
       localStorage.removeItem("token");
       localStorage.removeItem("nome");

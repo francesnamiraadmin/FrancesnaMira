@@ -121,6 +121,8 @@
         if (res.ok && data.token) {
           window.AuthStorage.setToken(data.token);
           localStorage.setItem("nome", data.nome);
+          if (data.preferencias?.tema && window.ThemeToggle) window.ThemeToggle.setTema(data.preferencias.tema, { sincronizar: false });
+          if (data.preferencias?.idioma && window.I18n) window.I18n.setLocale(data.preferencias.idioma, { sincronizar: false });
           msg.className = "ag-msg ok"; msg.textContent = "Login realizado!";
           fecharEResolver(resolver, data);
         } else {
