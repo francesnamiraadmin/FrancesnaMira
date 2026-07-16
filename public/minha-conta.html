@@ -49,9 +49,22 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .stats-vazio { text-align: center; opacity: 0.8; padding: 30px 16px; font-size: 1rem; }
 .apagar-dia-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 
+.perfil-titulo-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+.perfil-titulo-row h2 { margin-bottom: 0; }
+
+.perfil-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px; }
+.perfil-info-item.full { grid-column: 1 / -1; }
+.perfil-info-label { display: block; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 6px; }
+.perfil-info-valor { font-size: 0.98rem; line-height: 1.55; white-space: pre-wrap; }
+.perfil-info-valor.vazio { opacity: 0.6; font-style: italic; }
+
+.perfil-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.perfil-tag { padding: 5px 14px; border-radius: 20px; background: var(--glass-bg-2); border: 1px solid var(--glass-border); font-size: 0.84rem; }
+
 @media(max-width: 700px) {
   .campo-row { grid-template-columns: 1fr; }
   .bar-list-label { flex-basis: 120px; }
+  .perfil-info-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -75,38 +88,67 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
   <!-- ===================== PERFIL ===================== -->
   <div class="dash-section-card" id="secPerfil">
-    <h2>👤 Meu Perfil</h2>
+    <div class="perfil-titulo-row">
+      <h2>👤 Meu Perfil</h2>
+      <button class="dash-btn secundario" id="editarPerfilBtn" type="button">✏️ Fazer alterações</button>
+    </div>
     <div class="perfil-header-row">
       <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil" title="Clique para alterar sua foto" style="cursor:pointer;">
       <div class="dash-profile-meta" id="profileMeta"></div>
     </div>
-    <div class="campo">
-      <label for="bioInput">Descrição sobre você</label>
-      <textarea id="bioInput" placeholder="Fale um pouco sobre você, seu nível atual de francês, sua motivação para estudar..."></textarea>
-    </div>
-    <div class="campo">
-      <label for="interessesInput">Seus interesses</label>
-      <input type="text" id="interessesInput" placeholder="Ex.: cinema francês, viagens, culinária, literatura...">
-    </div>
-    <div class="campo-row">
-      <div class="campo">
-        <label for="provaAlvoInput">Qual prova você vai fazer?</label>
-        <select id="provaAlvoInput">
-          <option value="">Ainda não decidi</option>
-          <option value="TCF">TCF</option>
-          <option value="TEF">TEF</option>
-          <option value="DELF">DELF</option>
-          <option value="DALF">DALF</option>
-        </select>
-      </div>
-      <div class="campo">
-        <label for="dataProvaInput">Data da prova</label>
-        <input type="date" id="dataProvaInput">
-      </div>
-    </div>
+
     <div class="countdown-box" id="countdownBox" style="display:none;"></div>
-    <button class="dash-btn" id="salvarPerfilBtn" style="margin-top:8px;">Salvar alterações</button>
-    <div class="salvar-msg" id="salvarMsg"></div>
+
+    <!-- MODO VISUALIZAÇÃO (fixo) -->
+    <div id="perfilVisualizacao">
+      <div class="perfil-info-grid">
+        <div class="perfil-info-item full">
+          <span class="perfil-info-label">Sobre você</span>
+          <p class="perfil-info-valor" id="bioView"></p>
+        </div>
+        <div class="perfil-info-item">
+          <span class="perfil-info-label">Seus interesses</span>
+          <div class="perfil-tags" id="interessesView"></div>
+        </div>
+        <div class="perfil-info-item">
+          <span class="perfil-info-label">Prova e data</span>
+          <p class="perfil-info-valor" id="provaView"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODO EDIÇÃO -->
+    <div id="perfilEdicao" style="display:none;">
+      <div class="campo">
+        <label for="bioInput">Descrição sobre você</label>
+        <textarea id="bioInput" placeholder="Fale um pouco sobre você, seu nível atual de francês, sua motivação para estudar..."></textarea>
+      </div>
+      <div class="campo">
+        <label for="interessesInput">Seus interesses</label>
+        <input type="text" id="interessesInput" placeholder="Ex.: cinema francês, viagens, culinária, literatura...">
+      </div>
+      <div class="campo-row">
+        <div class="campo">
+          <label for="provaAlvoInput">Qual prova você vai fazer?</label>
+          <select id="provaAlvoInput">
+            <option value="">Ainda não decidi</option>
+            <option value="TCF">TCF</option>
+            <option value="TEF">TEF</option>
+            <option value="DELF">DELF</option>
+            <option value="DALF">DALF</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="dataProvaInput">Data da prova</label>
+          <input type="date" id="dataProvaInput">
+        </div>
+      </div>
+      <div style="display:flex; gap:12px; margin-top:8px;">
+        <button class="dash-btn" id="salvarPerfilBtn" type="button">Salvar alterações</button>
+        <button class="dash-btn secundario" id="cancelarPerfilBtn" type="button">Cancelar</button>
+      </div>
+      <div class="salvar-msg" id="salvarMsg"></div>
+    </div>
   </div>
 
   <div class="dash-section-card" id="painelEquipeBox" style="display:none;">
@@ -126,9 +168,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
   <!-- ===================== MEUS DEVERES ===================== -->
   <div class="dash-section-card">
-    <h2>📋 Meus Deveres</h2>
-    <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;">Acompanhe suas semanas de dever de casa, envie suas atividades e veja os comentários do seu professor.</p>
-    <a href="meus-deveres.html" class="dash-btn">Ver meus deveres</a>
+    <h2>📋 Dever de Casa</h2>
+    <div id="conteudoDeveres"><div class="skeleton skeleton-block"></div></div>
   </div>
 
   <!-- ===================== PLATAFORMA DE QUESTÕES ===================== -->
@@ -450,6 +491,49 @@ document.getElementById('apagarDiaBtn').addEventListener('click', () => {
   renderPlataforma(window.AppShell.dadosConta);
 });
 
+// ===================== DEVER DE CASA (o que falta fazer) =====================
+async function renderDeveres() {
+  const alvo = document.getElementById('conteudoDeveres');
+  try {
+    const res = await fetch('/api/deveres/minhas-semanas', { headers: authHeaders() });
+    const semanas = res.ok ? await res.json() : [];
+    if (!semanas.length) {
+      alvo.innerHTML = `<div class="stats-vazio">Nenhum dever de casa atribuído ainda.</div>`;
+      return;
+    }
+
+    const pendentes = semanas.filter(s => s.status !== 'concluido').sort((a, b) => a.numeroSemana - b.numeroSemana);
+    if (!pendentes.length) {
+      alvo.innerHTML = `<div class="stats-vazio">🎉 Você está em dia com todos os seus deveres!</div><div style="text-align:center; margin-top:14px;"><a href="meus-deveres.html" class="dash-btn secundario">Ver meus deveres</a></div>`;
+      return;
+    }
+
+    const atual = pendentes[0];
+    const totalObrig = atual.atividades.filter(a => a.obrigatoria).length;
+    const feitasObrig = atual.atividades.filter(a => a.obrigatoria && a.entrega?.status === 'enviado').length;
+    const pct = totalObrig ? Math.round((feitasObrig / totalObrig) * 100) : 100;
+    const diasRestantes = Math.ceil((new Date(atual.dataLimite) - Date.now()) / (24 * 60 * 60 * 1000));
+    const prazoTexto = diasRestantes >= 0
+      ? `${diasRestantes} dia${diasRestantes === 1 ? '' : 's'} restante${diasRestantes === 1 ? '' : 's'}`
+      : `Atrasado há ${Math.abs(diasRestantes)} dia${Math.abs(diasRestantes) === 1 ? '' : 's'}`;
+
+    const aFazer = atual.atividades.filter(a => a.entrega?.status !== 'enviado');
+    const aFazerHtml = aFazer.slice(0, 4).map(a => `<div class="dash-atividade-item"><span>${a.titulo}${a.obrigatoria ? '' : ' <span style="color:var(--text-muted); font-size:0.82rem;">(opcional)</span>'}</span></div>`).join('');
+
+    alvo.innerHTML = `
+      <div class="dash-kpi-row">
+        <div class="dash-kpi"><div class="valor">Semana ${atual.numeroSemana}</div><div class="rotulo">${atual.titulo}</div></div>
+        <div class="dash-kpi"><div class="valor">${pct}%</div><div class="rotulo">Concluído</div></div>
+        <div class="dash-kpi"><div class="valor">${prazoTexto}</div><div class="rotulo">Prazo: ${new Date(atual.dataLimite).toLocaleDateString('pt-BR')}</div></div>
+      </div>
+      ${aFazerHtml || '<div class="stats-vazio">Todas as atividades desta semana já foram entregues.</div>'}
+      <div style="margin-top:16px;"><a href="meus-deveres.html" class="dash-btn">Ver meus deveres</a></div>
+    `;
+  } catch (err) {
+    alvo.innerHTML = '<p style="color:var(--danger-text);">Não foi possível carregar seus deveres.</p>';
+  }
+}
+
 // ===================== AMBIENTE DE PRODUÇÃO =====================
 const STATUS_AGUARDANDO = ['em_fila', 'em_correcao', 'aguardando_revisao'];
 async function renderProducao(dados) {
@@ -559,11 +643,54 @@ async function renderAulas(dados) {
 }
 
 // ===================== PERFIL =====================
+let perfilAtual = {};
+
+function modoVisualizacao() {
+  document.getElementById('perfilVisualizacao').style.display = 'block';
+  document.getElementById('perfilEdicao').style.display = 'none';
+  document.getElementById('editarPerfilBtn').style.display = 'inline-block';
+}
+function modoEdicao() {
+  document.getElementById('perfilVisualizacao').style.display = 'none';
+  document.getElementById('perfilEdicao').style.display = 'block';
+  document.getElementById('editarPerfilBtn').style.display = 'none';
+  document.getElementById('salvarMsg').textContent = '';
+}
+document.getElementById('editarPerfilBtn').addEventListener('click', modoEdicao);
+document.getElementById('cancelarPerfilBtn').addEventListener('click', () => {
+  preencherPerfil(perfilAtual);
+  modoVisualizacao();
+});
+
+function renderPerfilView(perfil) {
+  document.getElementById('bioView').innerHTML = perfil.bio
+    ? perfil.bio.replace(/</g, '&lt;')
+    : '<span class="vazio">Você ainda não escreveu nada sobre você. Que tal contar sua motivação para estudar francês?</span>';
+  document.getElementById('bioView').classList.toggle('vazio', !perfil.bio);
+
+  const tagsWrap = document.getElementById('interessesView');
+  const interesses = (perfil.interesses || '').split(',').map(s => s.trim()).filter(Boolean);
+  tagsWrap.innerHTML = interesses.length
+    ? interesses.map(i => `<span class="perfil-tag">${i}</span>`).join('')
+    : '<p class="perfil-info-valor vazio">Nenhum interesse adicionado ainda.</p>';
+
+  const provaView = document.getElementById('provaView');
+  if (perfil.provaAlvo || perfil.dataProva) {
+    provaView.classList.remove('vazio');
+    provaView.innerHTML = `${perfil.provaAlvo ? `<strong>${perfil.provaAlvo}</strong>` : 'Prova ainda não decidida'}${perfil.dataProva ? ' · ' + new Date(perfil.dataProva).toLocaleDateString('pt-BR') : ''}`;
+  } else {
+    provaView.classList.add('vazio');
+    provaView.textContent = 'Você ainda não escolheu uma prova nem uma data.';
+  }
+}
+
 function preencherPerfil(perfil) {
+  perfilAtual = perfil || {};
   document.getElementById('bioInput').value = perfil.bio || '';
   document.getElementById('interessesInput').value = perfil.interesses || '';
   document.getElementById('provaAlvoInput').value = perfil.provaAlvo || '';
   document.getElementById('dataProvaInput').value = perfil.dataProva ? perfil.dataProva.slice(0, 10) : '';
+  renderPerfilView(perfil);
   atualizarCountdown(perfil.dataProva, perfil.provaAlvo);
 }
 function atualizarCountdown(dataProvaStr, provaAlvo) {
@@ -606,6 +733,8 @@ document.getElementById('salvarPerfilBtn').addEventListener('click', async () =>
     if (res.ok) {
       msg.style.color = 'var(--success-text)';
       msg.textContent = data.msg;
+      preencherPerfil(data.perfil || body);
+      setTimeout(modoVisualizacao, 700);
     } else {
       msg.style.color = 'var(--danger-text)';
       msg.textContent = data.msg || 'Erro ao salvar.';
@@ -627,6 +756,7 @@ document.addEventListener('appshell:ready', e => {
   renderPlataforma(dados);
   renderProducao(dados);
   renderAulas(dados);
+  renderDeveres();
   preencherPerfil(dados.perfil || {});
 });
 // O cabeçalho é montado via JS (não tem data-i18n) — recarrega ao trocar de

@@ -146,52 +146,6 @@
     });
   }
 
-  function montarModalSenha() {
-    const overlay = document.createElement("div");
-    overlay.className = "app-modal-overlay";
-    overlay.innerHTML = `
-      <div class="app-modal">
-        <h3>Alterar senha</h3>
-        <label for="appSenhaAtual">Senha atual</label>
-        <input type="password" id="appSenhaAtual">
-        <label for="appSenhaNova">Nova senha</label>
-        <input type="password" id="appSenhaNova">
-        <div class="app-modal-msg" id="appSenhaMsg"></div>
-        <div class="app-modal-actions">
-          <button class="dash-btn secundario" id="appSenhaCancelar" type="button">Cancelar</button>
-          <button class="dash-btn" id="appSenhaSalvar" type="button">Salvar</button>
-        </div>
-      </div>`;
-    document.body.appendChild(overlay);
-    requestAnimationFrame(() => overlay.classList.add("show"));
-
-    function fechar() { overlay.classList.remove("show"); setTimeout(() => overlay.remove(), 200); }
-    overlay.querySelector("#appSenhaCancelar").addEventListener("click", fechar);
-    overlay.addEventListener("click", e => { if (e.target === overlay) fechar(); });
-
-    overlay.querySelector("#appSenhaSalvar").addEventListener("click", async () => {
-      const msg = overlay.querySelector("#appSenhaMsg");
-      const senhaAtual = overlay.querySelector("#appSenhaAtual").value;
-      const novaSenha = overlay.querySelector("#appSenhaNova").value;
-      msg.style.color = "var(--text)";
-      msg.textContent = "Salvando...";
-      try {
-        const res = await fetch("/api/auth/senha", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-          body: JSON.stringify({ senhaAtual, novaSenha })
-        });
-        const data = await res.json();
-        msg.style.color = res.ok ? "var(--success-text)" : "var(--danger-text)";
-        msg.textContent = data.msg;
-        if (res.ok) setTimeout(fechar, 1200);
-      } catch (err) {
-        msg.style.color = "var(--danger-text)";
-        msg.textContent = "Erro ao conectar ao servidor.";
-      }
-    });
-  }
-
   function sair() {
     if (!confirm("Deseja sair da sua conta?")) return;
     // Revoga o refresh token (cookie httpOnly) no servidor além de limpar o
@@ -244,10 +198,10 @@
             </button>
             <div class="app-dropdown" id="userDropdown">
               <a href="minha-conta.html">Meu Perfil</a>
+              <a href="meus-deveres.html">Dever de Casa</a>
               <button type="button" class="app-dropdown-item" id="alterarFotoBtn">Alterar Foto</button>
               <a href="configuracoes.html">Configurações</a>
               <a href="depoimentos.html">Depoimentos</a>
-              <button type="button" class="app-dropdown-item" id="alterarSenhaBtn">Alterar Senha</button>
               <hr>
               <button type="button" class="app-dropdown-item app-dropdown-danger" id="sairBtn">Sair</button>
             </div>
@@ -258,7 +212,6 @@
     ligarDropdown("planoDropdownBtn", "planoDropdown");
     ligarDropdown("userDropdownBtn", "userDropdown");
     document.getElementById("alterarFotoBtn").addEventListener("click", e => { e.stopPropagation(); fecharTodosDropdowns(); montarModalFoto(); });
-    document.getElementById("alterarSenhaBtn").addEventListener("click", e => { e.stopPropagation(); fecharTodosDropdowns(); montarModalSenha(); });
     document.getElementById("sairBtn").addEventListener("click", e => { e.stopPropagation(); sair(); });
   }
 
