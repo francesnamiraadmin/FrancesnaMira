@@ -43,10 +43,7 @@
 
         <div class="ag-panel" data-panel="criar" style="display:none;">
           <form id="agCadastroForm" novalidate>
-            <div class="ag-row">
-              <div class="ag-field"><label for="agNome">Nome</label><input type="text" id="agNome" autocomplete="given-name" required></div>
-              <div class="ag-field"><label for="agSobrenome">Sobrenome</label><input type="text" id="agSobrenome" autocomplete="family-name" required></div>
-            </div>
+            <div class="ag-field"><label for="agNome">Nome completo</label><input type="text" id="agNome" autocomplete="name" required></div>
             <div class="ag-field"><label for="agEmailCadastro">Email</label><input type="email" id="agEmailCadastro" autocomplete="email" required></div>
             <div class="ag-row">
               <div class="ag-field"><label for="agSenhaCadastro">Senha</label><input type="password" id="agSenhaCadastro" autocomplete="new-password" required></div>
@@ -140,7 +137,6 @@
       e.preventDefault();
       const msg = overlay.querySelector("#agMsgCadastro");
       const nome = overlay.querySelector("#agNome").value.trim();
-      const sobrenome = overlay.querySelector("#agSobrenome").value.trim();
       const email = overlay.querySelector("#agEmailCadastro").value.trim();
       const senha = overlay.querySelector("#agSenhaCadastro").value;
       const confirmarSenha = overlay.querySelector("#agConfirmarSenha").value;
@@ -155,8 +151,10 @@
         const res = await fetch("/api/auth/register", {
           method: "POST", headers: { "Content-Type": "application/json" }, credentials: "include",
           // Telefone e WhatsApp são a mesma caixa no formulário — manda o mesmo
-          // valor para os dois campos que o backend já esperava separados.
-          body: JSON.stringify({ nome, sobrenome, email, senha, confirmarSenha, telefone, whatsapp: telefone })
+          // valor para os dois campos que o backend já esperava separados. Nome
+          // completo vai só no campo "nome" — o backend usa como está quando
+          // não recebe "sobrenome".
+          body: JSON.stringify({ nome, email, senha, confirmarSenha, telefone, whatsapp: telefone })
         });
         const data = await res.json();
         if (res.ok && data.token) {
