@@ -132,6 +132,9 @@
 .app-dropdown hr { border: none; border-top: 1px solid var(--glass-border); margin: 6px 4px; }
 .app-dropdown .app-dropdown-danger { color: var(--danger-text); }
 
+#userDropdown { min-width: 0; width: max-content; }
+#userDropdown a:hover, #userDropdown button.app-dropdown-item:hover { background: none; }
+
 @media (min-width: 1550px) {
   .app-nav-inner { max-width: 1600px; padding: 18px 48px; gap: 32px; }
   .app-nav-logo { font-size: 2rem; }
