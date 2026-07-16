@@ -175,6 +175,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <footer>© 2026 · Francês na Mira</footer>
 
+<script src="js/i18n.js"></script>
 <script src="js/appShell.js"></script>
 <script>
 const MATERIAS = {
@@ -224,7 +225,7 @@ function renderHeader(dados) {
   } else {
     document.getElementById('welcomeSub').textContent = 'Você ainda não tem um plano de curso ativo.';
   }
-  if (dados.criadoEm) metaItens.push(`<span><strong>Na plataforma desde</strong> ${new Date(dados.criadoEm).toLocaleDateString('pt-BR')}</span>`);
+  if (dados.criadoEm) metaItens.push(`<span><strong>${window.I18n.t('common.naPlataformaDesde')}</strong> ${new Date(dados.criadoEm).toLocaleDateString(window.I18n.idioma === 'fr' ? 'fr-FR' : 'pt-BR')}</span>`);
   if (plano.dataVencimento) {
     metaItens.push(`<span><strong>Data de fim da inscrição</strong> ${plano.curso || ''} ${plano.tier || ''} — ${new Date(plano.dataVencimento).toLocaleDateString('pt-BR')}</span>`);
   }
@@ -620,6 +621,11 @@ document.addEventListener('appshell:ready', e => {
   renderProducao(dados);
   renderAulas(dados);
   preencherPerfil(dados.perfil || {});
+});
+// O cabeçalho é montado via JS (não tem data-i18n) — recarrega ao trocar de
+// idioma para que "Na plataforma desde" acompanhe.
+document.addEventListener('i18n:aplicado', () => {
+  if (window.AppShell?.dadosConta) renderHeader(window.AppShell.dadosConta);
 });
 </script>
 <script src="js/theme-toggle.js"></script>

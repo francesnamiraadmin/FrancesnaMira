@@ -244,7 +244,6 @@
             </button>
             <div class="app-dropdown" id="userDropdown">
               <a href="minha-conta.html">Meu Perfil</a>
-              <a href="minha-conta.html">Editar Perfil</a>
               <button type="button" class="app-dropdown-item" id="alterarFotoBtn">Alterar Foto</button>
               <a href="configuracoes.html">Configurações</a>
               <a href="depoimentos.html">Depoimentos</a>

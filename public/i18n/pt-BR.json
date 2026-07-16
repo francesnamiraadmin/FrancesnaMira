@@ -29,6 +29,7 @@
   "common.rejeitar": "Rejeitar",
   "common.destacar": "Destacar",
   "common.removerDestaque": "Remover destaque",
+  "common.naPlataformaDesde": "Na plataforma desde",
 
   "config.titulo": "Configurações",
   "config.subtitulo": "Personalize sua experiência na plataforma",
@@ -64,12 +65,6 @@
   "config.notificacoes.correcoesDisponiveis": "Correções disponíveis",
   "config.notificacoes.novosConteudos": "Novos conteúdos",
   "config.notificacoes.promocoes": "Promoções e novidades",
-  "config.secao.privacidade": "Privacidade",
-  "config.privacidade.desc": "Gerencie seus dados e consentimentos.",
-  "config.privacidade.exportar": "Exportar meus dados",
-  "config.privacidade.excluir": "Solicitar exclusão da conta",
-  "config.privacidade.termos": "Termos de Uso",
-  "config.privacidade.politica": "Política de Privacidade",
 
   "depoimentos.titulo": "Depoimentos",
   "depoimentos.subtitulo": "Conte sua experiência com a Francês na Mira",

@@ -74,10 +74,6 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px;
   background: var(--success-bg); color: var(--success-text); margin-left: 8px;
 }
-.privacidade-links { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 14px; }
-.privacidade-links a { color: var(--accent); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
-.privacidade-links a:hover { text-decoration: underline; }
-
 @media(max-width: 700px) {
   .campo-row { grid-template-columns: 1fr; }
 }
@@ -101,7 +97,6 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     <a href="#secPerfil" data-i18n="config.secao.perfil">Perfil</a>
     <a href="#secSeguranca" data-i18n="config.secao.seguranca">Segurança</a>
     <a href="#secNotificacoes" data-i18n="config.secao.notificacoes">Notificações</a>
-    <a href="#secPrivacidade" data-i18n="config.secao.privacidade">Privacidade</a>
   </div>
 
   <!-- ===================== APARÊNCIA ===================== -->
@@ -235,21 +230,6 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     </div>
   </div>
 
-  <!-- ===================== PRIVACIDADE ===================== -->
-  <div class="dash-section-card" id="secPrivacidade">
-    <h2>🛡️ <span data-i18n="config.secao.privacidade">Privacidade</span></h2>
-    <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;" data-i18n="config.privacidade.desc">Gerencie seus dados e consentimentos.</p>
-    <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <button class="dash-btn secundario" id="exportarDadosBtn" data-i18n="config.privacidade.exportar">Exportar meus dados</button>
-      <button class="dash-btn secundario" id="excluirContaBtn" style="color:var(--danger-text);" data-i18n="config.privacidade.excluir">Solicitar exclusão da conta</button>
-    </div>
-    <div class="salvar-msg" id="privacidadeMsg"></div>
-    <div class="privacidade-links">
-      <a href="termos-de-uso.html" data-i18n="config.privacidade.termos">Termos de Uso</a>
-      <a href="politica-privacidade.html" data-i18n="config.privacidade.politica">Política de Privacidade</a>
-    </div>
-  </div>
-
 </div>
 
 <footer>© 2026 · Francês na Mira</footer>
@@ -300,7 +280,7 @@ function preencherPerfil(dados) {
   document.querySelectorAll('.notif-toggle').forEach(t => { t.checked = notif[t.dataset.chave] !== false; });
 
   const metaItens = [];
-  if (dados.criadoEm) metaItens.push(`<span><strong>Na plataforma desde</strong> ${new Date(dados.criadoEm).toLocaleDateString('pt-BR')}</span>`);
+  if (dados.criadoEm) metaItens.push(`<span><strong>${window.I18n.t('common.naPlataformaDesde')}</strong> ${new Date(dados.criadoEm).toLocaleDateString(window.I18n.idioma === 'fr' ? 'fr-FR' : 'pt-BR')}</span>`);
   document.getElementById('profileMeta').innerHTML = metaItens.join('');
 }
 
@@ -426,35 +406,6 @@ document.querySelectorAll('.notif-toggle').forEach(toggle => {
   });
 });
 
-// ===================== PRIVACIDADE =====================
-document.getElementById('exportarDadosBtn').addEventListener('click', async () => {
-  try {
-    const res = await fetch('/api/auth/exportar-dados', { headers: authHeaders() });
-    const data = await res.json();
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'meus-dados.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  } catch (err) {
-    document.getElementById('privacidadeMsg').style.color = 'var(--danger-text)';
-    document.getElementById('privacidadeMsg').textContent = window.I18n.t('common.erroServidor');
-  }
-});
-
-document.getElementById('excluirContaBtn').addEventListener('click', async () => {
-  if (!confirm('Tem certeza que deseja solicitar a exclusão da sua conta? Nossa equipe vai analisar antes de excluir definitivamente.')) return;
-  const msg = document.getElementById('privacidadeMsg');
-  try {
-    const res = await fetch('/api/auth/solicitar-exclusao', { method: 'POST', headers: authHeadersJson(), body: JSON.stringify({}) });
-    const data = await res.json();
-    msg.style.color = 'var(--success-text)'; msg.textContent = data.msg;
-  } catch (err) {
-    msg.style.color = 'var(--danger-text)'; msg.textContent = window.I18n.t('common.erroServidor');
-  }
-});
-
 // ===================== E-MAIL DE CONFIRMAÇÃO DE TROCA =====================
 (function () {
   const params = new URLSearchParams(window.location.search);
@@ -472,9 +423,12 @@ document.addEventListener('appshell:ready', e => {
   preencherPerfil(e.detail);
   carregarSessoes();
 });
-// A lista de sessões é montada via JS (não tem data-i18n) — recarrega ao
-// trocar de idioma para que o texto acompanhe.
-document.addEventListener('i18n:aplicado', () => carregarSessoes());
+// A lista de sessões e o "Na plataforma desde" são montados via JS (não tem
+// data-i18n) — recarrega ao trocar de idioma para que o texto acompanhe.
+document.addEventListener('i18n:aplicado', () => {
+  carregarSessoes();
+  if (window.AppShell?.dadosConta) preencherPerfil(window.AppShell.dadosConta);
+});
 </script>
 
 </body>
