@@ -645,6 +645,31 @@ nav a:hover::after {
   animation: pulseGlow 3s infinite ease-in-out;
 }
 
+/* DEPOIMENTOS */
+.depoimentos-section { padding: 60px 20px; }
+.depoimentos-scroll {
+  display: flex; gap: 22px; overflow-x: auto; padding: 10px 4px 24px; scroll-snap-type: x mandatory;
+}
+.depoimento-card {
+  flex: 0 0 300px; scroll-snap-align: start; background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: 18px; padding: 26px; backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow); position: relative;
+}
+.depoimento-card.destaque { border-color: var(--accent); }
+.depoimento-card .estrelas { color: var(--accent); font-size: 1.05rem; margin-bottom: 12px; }
+.depoimento-card .cabecalho { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.depoimento-card .avatar, .depoimento-card .avatar-fallback {
+  width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+}
+.depoimento-card .avatar-fallback {
+  background: var(--glass-strong); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem;
+}
+.depoimento-card h4 { font-size: 1rem; }
+.depoimento-card .curso { font-size: 0.78rem; color: var(--text-muted); }
+.depoimento-card .texto-dep { font-size: 0.92rem; line-height: 1.55; margin-bottom: 12px; }
+.depoimento-card .data-dep { font-size: 0.74rem; color: var(--text-muted); }
+.depoimentos-vazio { text-align: center; opacity: 0.75; padding: 20px; }
+
 /* PERGUNTAS FREQUENTES */
 .faq-section { padding: 60px 20px 20px; }
 .faq-lista { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
@@ -677,11 +702,6 @@ nav a:hover::after {
 <header>Francês na Mira <img src="img/logo-mira.png" alt="" class="logo-mira-icone"></header>
 
 <nav>
-  <!-- BLOG -->
-  <div class="nav-item">
-    <a href="blog.html">Blog</a>
-  </div>
-
   <!-- CORREÇÕES -->
   <div class="nav-item">
     <a href="correcoes.html">Correções</a>
@@ -713,6 +733,11 @@ nav a:hover::after {
       </div>
 
     </div>
+  </div>
+
+  <!-- BLOG -->
+  <div class="nav-item">
+    <a href="blog.html">Blog</a>
   </div>
 
   <!-- ACADEMIA -->
@@ -1488,6 +1513,15 @@ nav a:hover::after {
   </div>
 </section>
 
+<section class="depoimentos-section" id="depoimentos">
+  <div class="feature-container">
+    <h2 class="plan-title" style="text-align:center;">Depoimentos</h2>
+    <div class="depoimentos-scroll" id="depoimentosLista">
+      <div class="depoimentos-vazio">Carregando depoimentos…</div>
+    </div>
+  </div>
+</section>
+
 <section class="faq-section" id="faq">
   <div class="feature-container">
     <h2 class="plan-title" style="text-align:center;">Perguntas Frequentes</h2>
@@ -1652,6 +1686,47 @@ function renderFAQ() {
   });
 }
 renderFAQ();
+
+// DEPOIMENTOS APROVADOS
+function escapeHtmlDepoimento(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+async function renderDepoimentos() {
+  const alvo = document.getElementById('depoimentosLista');
+  try {
+    const res = await fetch('/api/depoimentos/aprovados');
+    const depoimentos = await res.json();
+    if (!Array.isArray(depoimentos) || depoimentos.length === 0) {
+      alvo.innerHTML = '<div class="depoimentos-vazio">Em breve, depoimentos de quem já estuda com a gente.</div>';
+      return;
+    }
+    alvo.innerHTML = depoimentos.map(d => {
+      const nome = escapeHtmlDepoimento(d.nome);
+      const titulo = escapeHtmlDepoimento(d.titulo);
+      const texto = escapeHtmlDepoimento(d.texto);
+      const curso = escapeHtmlDepoimento(d.cursoOuPlano);
+      const inicial = (d.nome || '?').trim().charAt(0).toUpperCase();
+      const avatarHtml = d.foto
+        ? `<img class="avatar" src="${d.foto}" alt="">`
+        : `<span class="avatar-fallback">${escapeHtmlDepoimento(inicial)}</span>`;
+      return `<div class="depoimento-card${d.destaque ? ' destaque' : ''}">
+        <div class="cabecalho">
+          ${avatarHtml}
+          <div>
+            <h4>${nome}</h4>
+            ${curso ? `<div class="curso">${curso}</div>` : ''}
+          </div>
+        </div>
+        <div class="estrelas">${'★'.repeat(d.nota)}${'☆'.repeat(5 - d.nota)}</div>
+        <p class="texto-dep">${titulo ? '<strong>' + titulo + '</strong><br>' : ''}${texto}</p>
+        <div class="data-dep">${new Date(d.criadoEm).toLocaleDateString('pt-BR')}</div>
+      </div>`;
+    }).join('');
+  } catch (err) {
+    alvo.innerHTML = '<div class="depoimentos-vazio">Não foi possível carregar os depoimentos.</div>';
+  }
+}
+renderDepoimentos();
 
 </script>
 
