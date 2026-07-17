@@ -19,10 +19,21 @@ function renderChipsNiveis() {
   ).join('');
 }
 
+const TODAS_MATERIAS = Object.keys(MATERIAS_LABELS);
+
 function renderChipsMaterias() {
-  document.getElementById('chipMaterias').innerHTML = Object.entries(MATERIAS_LABELS).map(([k, v]) =>
+  const chipTodos = `<button type="button" class="chip-toggle" data-materia-todos>Todos os conteúdos</button>`;
+  const chipsIndividuais = Object.entries(MATERIAS_LABELS).map(([k, v]) =>
     `<button type="button" class="chip-toggle" data-materia="${k}">${v}</button>`
   ).join('');
+  document.getElementById('chipMaterias').innerHTML = chipTodos + chipsIndividuais;
+}
+
+// Mantém o chip "Todos os conteúdos" marcado só quando as 8 categorias estiverem
+// selecionadas de fato — reflete o estado real em vez de ser um botão independente.
+function sincronizarChipTodos(form) {
+  const todasSelecionadas = TODAS_MATERIAS.every(m => filtroForm.materias.has(m));
+  form.querySelector('[data-materia-todos]')?.classList.toggle('selecionado', todasSelecionadas);
 }
 
 function renderChipsQuantidade() {
@@ -35,6 +46,65 @@ function mostrarErroForm(msg) {
   const el = document.getElementById('criarConjuntoErro');
   el.textContent = msg;
   el.classList.add('show');
+}
+
+// ===================== MEUS CONJUNTOS PERSONALIZADOS =====================
+
+const STATUS_LABEL_PERSONALIZADO = { nao_iniciado: 'Não iniciado', em_andamento: 'Em andamento', concluido: 'Concluído' };
+
+function formatarTempoLimite(segundos) {
+  if (!segundos) return 'sem limite de tempo';
+  return `${Math.round(segundos / 60)} min`;
+}
+
+async function carregarMeusPersonalizados() {
+  const lista = document.getElementById('meusPersonalizadosLista');
+  try {
+    const res = await fetch('/api/questoes/conjuntos/meus-personalizados', { headers: authHeaders() });
+    if (!res.ok) throw new Error();
+    const conjuntos = await res.json();
+    if (!conjuntos.length) {
+      lista.innerHTML = '<p class="meus-personalizados-vazio">Você ainda não criou nenhum conjunto personalizado.</p>';
+      return;
+    }
+    lista.innerHTML = conjuntos.map(c => `
+      <div class="personalizado-item">
+        <div class="info">
+          <span class="nome">${c.nome}</span>
+          <span class="meta">
+            <span class="q-status-pill ${c.status}">${STATUS_LABEL_PERSONALIZADO[c.status]}</span>
+            &nbsp;${c.quantidadeQuestoes} questões · ${formatarTempoLimite(c.tempoLimiteSegundos)}${c.ultimaTentativa ? ` · última tentativa: ${c.ultimaTentativa.percentualAcertos}% de acertos` : ''}
+          </span>
+        </div>
+        <div class="acoes">
+          <a class="q-btn secundario" href="resolver-conjunto.html?id=${c._id}">${c.status === 'nao_iniciado' ? 'Começar' : c.status === 'em_andamento' ? 'Continuar' : 'Refazer'}</a>
+          <button type="button" class="q-btn perigo" data-excluir-personalizado="${c._id}">Excluir</button>
+        </div>
+      </div>`).join('');
+  } catch (err) {
+    lista.innerHTML = '<p class="meus-personalizados-vazio">Erro ao carregar seus conjuntos personalizados.</p>';
+  }
+}
+
+function initMeusPersonalizados() {
+  document.getElementById('meusPersonalizadosLista').addEventListener('click', async e => {
+    const btn = e.target.closest('[data-excluir-personalizado]');
+    if (!btn) return;
+    const item = btn.closest('.personalizado-item');
+    const nome = item.querySelector('.nome').textContent;
+    if (!confirm(`Excluir o conjunto personalizado "${nome}"? Isso não pode ser desfeito.`)) return;
+    btn.disabled = true;
+    try {
+      const res = await fetch(`/api/questoes/conjuntos/${btn.dataset.excluirPersonalizado}`, { method: 'DELETE', headers: authHeaders() });
+      if (!res.ok) { btn.disabled = false; alert('Não foi possível excluir este conjunto.'); return; }
+      item.remove();
+      if (!document.getElementById('meusPersonalizadosLista').children.length) carregarMeusPersonalizados();
+    } catch (err) {
+      btn.disabled = false;
+      alert('Erro ao conectar ao servidor.');
+    }
+  });
+  carregarMeusPersonalizados();
 }
 
 function initFormularioConjunto() {
@@ -52,11 +122,21 @@ function initFormularioConjunto() {
       nivelChip.classList.toggle('selecionado');
       return;
     }
+    const materiaTodosChip = e.target.closest('[data-materia-todos]');
+    if (materiaTodosChip) {
+      const todasJaSelecionadas = TODAS_MATERIAS.every(m => filtroForm.materias.has(m));
+      if (todasJaSelecionadas) filtroForm.materias.clear();
+      else TODAS_MATERIAS.forEach(m => filtroForm.materias.add(m));
+      form.querySelectorAll('[data-materia]').forEach(chip => chip.classList.toggle('selecionado', filtroForm.materias.has(chip.dataset.materia)));
+      sincronizarChipTodos(form);
+      return;
+    }
     const materiaChip = e.target.closest('[data-materia]');
     if (materiaChip) {
       const m = materiaChip.dataset.materia;
       filtroForm.materias.has(m) ? filtroForm.materias.delete(m) : filtroForm.materias.add(m);
       materiaChip.classList.toggle('selecionado');
+      sincronizarChipTodos(form);
       return;
     }
     const quantidadeChip = e.target.closest('[data-quantidade]');
@@ -101,3 +181,4 @@ function initFormularioConjunto() {
 }
 
 initFormularioConjunto();
+initMeusPersonalizados();

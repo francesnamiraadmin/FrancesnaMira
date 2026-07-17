@@ -1,4 +1,5 @@
 const Questao = require("../models/questao");
+const Tentativa = require("../models/tentativa");
 
 const ORDEM_NIVEL = { A1: 1, A2: 2, B1: 3, B2: 4, C1: 5, C2: 6 };
 const TOTAL_MATERIAS = Questao.MATERIAS.length; // 8 categorias possíveis hoje
@@ -26,7 +27,14 @@ function embaralhar(lista) {
 // níveis/matérias e fixa a ordem — usado na criação de um Conjunto personalizado.
 // Lança um erro com `.status = 422` se o pool filtrado tiver menos questões que o pedido,
 // pra rota poder devolver esse status sem criar um conjunto incompleto silenciosamente.
-async function sortearQuestoes({ niveis, materias, quantidade, pool = "praticar" }) {
+//
+// Quando `alunoId` é passado (só a rota de personalizado tem esse contexto — o seed de
+// conjuntos oficiais não tem aluno nenhum), o sorteio PRIORIZA questões que esse aluno
+// ainda não respondeu em nenhuma Tentativa finalizada (de qualquer Conjunto, não só
+// deste — a mesma questão pode aparecer sorteada em conjuntos diferentes). Só entram
+// questões já respondidas se não houver inéditas suficientes pra completar a quantidade
+// pedida, pra nunca devolver menos questões do que o aluno escolheu.
+async function sortearQuestoes({ niveis, materias, quantidade, pool = "praticar", alunoId }) {
   const filtro = { pool, ativo: true };
   if (niveis?.length) filtro.nivel = { $in: niveis };
   if (materias?.length) filtro.materia = { $in: materias };
@@ -38,7 +46,16 @@ async function sortearQuestoes({ niveis, materias, quantidade, pool = "praticar"
     throw erro;
   }
 
-  const sorteadas = embaralhar(candidatas).slice(0, quantidade);
+  let ineditas = candidatas, jaRespondidas = [];
+  if (alunoId) {
+    const respondidasIds = new Set(
+      (await Tentativa.find({ alunoId }).distinct("respostas.questaoId")).map(String)
+    );
+    ineditas = candidatas.filter(q => !respondidasIds.has(String(q._id)));
+    jaRespondidas = candidatas.filter(q => respondidasIds.has(String(q._id)));
+  }
+
+  const sorteadas = embaralhar(ineditas).concat(embaralhar(jaRespondidas)).slice(0, quantidade);
   return sorteadas.map((q, i) => ({ questaoId: q._id, ordem: i }));
 }
 

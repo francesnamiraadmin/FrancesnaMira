@@ -168,6 +168,44 @@ router.get("/conjuntos", async (req, res) => {
   }
 });
 
+// Lista compacta (sem os buckets de Sugeridos/Em Andamento/Respondidos que GET /conjuntos
+// monta) só dos conjuntos PERSONALIZADOS que o próprio aluno criou — usada pela tela
+// "Personalizar Conjunto" pra mostrar o histórico do que ele já montou, com opção de
+// excluir. Precisa vir ANTES de "GET /conjuntos/:id" nesta ordem de registro, senão o
+// Express casaria "meus-personalizados" com o parâmetro :id daquela rota.
+router.get("/conjuntos/meus-personalizados", async (req, res) => {
+  try {
+    const pool = req.query.pool === "simulado" ? "simulado" : "praticar";
+    const conjuntos = await Conjunto.find({ ativo: true, tipo: "personalizado", pool, criadoPor: req.userId }).sort({ criadoEm: -1 });
+    const ids = conjuntos.map(c => c._id);
+
+    const [sessoes, tentativas] = await Promise.all([
+      SessaoResolucao.find({ alunoId: req.userId, conjuntoId: { $in: ids } }).select("conjuntoId"),
+      Tentativa.find({ alunoId: req.userId, conjuntoId: { $in: ids } }).select("conjuntoId percentualAcertos finalizadaEm").sort({ finalizadaEm: -1 })
+    ]);
+    const emAndamentoSet = new Set(sessoes.map(s => String(s.conjuntoId)));
+    const ultimaTentativaPorConjunto = new Map();
+    tentativas.forEach(t => {
+      const chave = String(t.conjuntoId);
+      if (!ultimaTentativaPorConjunto.has(chave)) ultimaTentativaPorConjunto.set(chave, t);
+    });
+
+    res.json(conjuntos.map(c => {
+      const chave = String(c._id);
+      const ultima = ultimaTentativaPorConjunto.get(chave);
+      return {
+        _id: c._id, nome: c.nome, filtros: c.filtros, dificuldade: c.dificuldade,
+        quantidadeQuestoes: c.quantidadeQuestoes, tempoLimiteSegundos: c.tempoLimiteSegundos, criadoEm: c.criadoEm,
+        status: emAndamentoSet.has(chave) ? "em_andamento" : (ultima ? "concluido" : "nao_iniciado"),
+        ultimaTentativa: ultima ? { percentualAcertos: ultima.percentualAcertos, finalizadaEm: ultima.finalizadaEm } : null
+      };
+    }));
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
 router.get("/conjuntos/:id", async (req, res) => {
   try {
     const conjunto = await Conjunto.findOne({ _id: req.params.id, ativo: true });
@@ -205,7 +243,7 @@ router.post("/conjuntos/personalizado", async (req, res) => {
 
     let questoes;
     try {
-      questoes = await sortearQuestoes({ niveis, materias, quantidade, pool });
+      questoes = await sortearQuestoes({ niveis, materias, quantidade, pool, alunoId: req.userId });
     } catch (err) {
       if (err.status === 422) return res.status(422).json({ msg: err.message });
       throw err;
@@ -224,6 +262,24 @@ router.post("/conjuntos/personalizado", async (req, res) => {
     });
 
     res.json(conjunto);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// Exclusão (soft-delete, mesmo padrão de DELETE /admin/conjuntos/:id) restrita ao
+// próprio aluno e só pra conjuntos que ELE criou — nunca deixa excluir um oficial. A
+// query já filtra tipo+criadoPor no mesmo findOneAndUpdate, então tentar excluir um
+// conjunto de outra pessoa (ou oficial) só devolve 404, sem vazar se o id existe.
+router.delete("/conjuntos/:id", async (req, res) => {
+  try {
+    const conjunto = await Conjunto.findOneAndUpdate(
+      { _id: req.params.id, tipo: "personalizado", criadoPor: req.userId, ativo: true },
+      { ativo: false }
+    );
+    if (!conjunto) return res.status(404).json({ msg: "Conjunto personalizado não encontrado." });
+    res.json({ msg: "Conjunto excluído." });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
