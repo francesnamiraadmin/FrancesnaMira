@@ -6,14 +6,78 @@
 // renderRespondidoCard/formatarTempo/authHeaders) e o clique delegado em
 // `document` que já existe lá (data-iniciar/continuar/refazer/revisar),
 // então não precisa reimplementar nada disso aqui — só buscar e desenhar
-// os cards. Não carrega js/questoes.js (só usado pelas páginas antigas) —
-// por isso NIVEIS é declarado aqui localmente, e usa MATERIAS_LABELS (8
-// categorias, de js/questoesRender.js) em vez do MATERIAS antigo (6).
+// os cards. A criação de simulado personalizado saiu desta página — virou
+// só mais uma opção de pool em personalizar-conjunto.html (junto com
+// Praticar), pra não duplicar o mesmo formulário em dois lugares.
+//
+// Filtro (nível/categoria/busca por nome) segue o mesmo padrão já usado em
+// praticar.js (mesmas classes .conjuntos-filtro-row/.filtro-select),
+// persistido em sessionStorage — mas aqui filtra as DUAS listas (Sugeridos
+// E Respondidos), já que as duas vivem nesta mesma página (Praticar
+// filtra só Sugeridos porque Em Andamento/Respondidos é outra página).
 // =====================================================================
 
 const NIVEIS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-const QUANTIDADES_SIMULADO = [10, 20, 40];
-const simFiltroForm = { niveis: new Set(), materias: new Set(), quantidade: 10 };
+const CHAVE_FILTRO_SESSAO = 'simulados_filtro';
+
+let sugeridosRaw = [];
+let respondidosRaw = [];
+
+function salvarFiltro() {
+  sessionStorage.setItem(CHAVE_FILTRO_SESSAO, JSON.stringify({
+    nivel: document.getElementById('filtroSimuladoNivel').value,
+    materia: document.getElementById('filtroSimuladoMateria').value,
+    busca: document.getElementById('filtroSimuladoBusca').value
+  }));
+}
+
+function restaurarFiltro() {
+  try {
+    const salvo = JSON.parse(sessionStorage.getItem(CHAVE_FILTRO_SESSAO) || 'null');
+    if (!salvo) return;
+    document.getElementById('filtroSimuladoNivel').value = salvo.nivel || '';
+    document.getElementById('filtroSimuladoMateria').value = salvo.materia || '';
+    document.getElementById('filtroSimuladoBusca').value = salvo.busca || '';
+  } catch (err) { /* sessionStorage corrompido — ignora e segue sem filtro salvo */ }
+}
+
+function passaFiltroSimulado(c) {
+  const nivel = document.getElementById('filtroSimuladoNivel').value;
+  const materia = document.getElementById('filtroSimuladoMateria').value;
+  const busca = document.getElementById('filtroSimuladoBusca').value.trim().toLowerCase();
+  if (nivel && !(c.filtros?.niveis || []).includes(nivel)) return false;
+  if (materia && !(c.filtros?.materias || []).includes(materia)) return false;
+  if (busca && !c.nome.toLowerCase().includes(busca)) return false;
+  return true;
+}
+
+function renderListas() {
+  const prioritariosEl = document.getElementById('simuladosPrioritarios');
+  const respondidosEl = document.getElementById('simuladosRespondidos');
+
+  const filtradosSugeridos = sugeridosRaw.filter(passaFiltroSimulado);
+  prioritariosEl.innerHTML = filtradosSugeridos.length
+    ? filtradosSugeridos.map(renderPrioritarioCard).join('')
+    : sugeridosRaw.length
+      ? '<p class="conjuntos-vazio">Nenhum simulado encontrado para esse filtro.</p>'
+      : '<p class="conjuntos-vazio">Nenhum simulado disponível ainda — <a href="personalizar-conjunto.html">crie um personalizado</a>.</p>';
+
+  const filtradosRespondidos = respondidosRaw.filter(passaFiltroSimulado);
+  respondidosEl.innerHTML = filtradosRespondidos.length
+    ? filtradosRespondidos.map(renderRespondidoCard).join('')
+    : respondidosRaw.length
+      ? '<p class="conjuntos-vazio">Nenhum simulado encontrado para esse filtro.</p>'
+      : '<p class="conjuntos-vazio">Você ainda não concluiu nenhum simulado.</p>';
+}
+
+function initFiltroSimulado() {
+  document.getElementById('filtroSimuladoNivel').insertAdjacentHTML('beforeend', NIVEIS.map(n => `<option value="${n}">${n}</option>`).join(''));
+  document.getElementById('filtroSimuladoMateria').insertAdjacentHTML('beforeend', Object.entries(MATERIAS_LABELS).map(([k, v]) => `<option value="${k}">${v}</option>`).join(''));
+  restaurarFiltro();
+  document.getElementById('filtroSimuladoNivel').addEventListener('change', () => { salvarFiltro(); renderListas(); });
+  document.getElementById('filtroSimuladoMateria').addEventListener('change', () => { salvarFiltro(); renderListas(); });
+  document.getElementById('filtroSimuladoBusca').addEventListener('input', () => { salvarFiltro(); renderListas(); });
+}
 
 async function carregarSimulados() {
   const prioritariosEl = document.getElementById('simuladosPrioritarios');
@@ -23,117 +87,14 @@ async function carregarSimulados() {
     if (!res.ok) throw new Error('Erro ao carregar simulados.');
     const data = await res.json();
 
-    const naoIniciados = data.prioritarios.naoIniciados;
-    const emAndamento = data.prioritarios.emAndamento;
-    const todos = [...emAndamento, ...naoIniciados];
-
-    prioritariosEl.innerHTML = todos.length
-      ? todos.map(renderPrioritarioCard).join('')
-      : '<p class="conjuntos-vazio">Nenhum simulado disponível ainda — gere um personalizado abaixo.</p>';
-
-    respondidosEl.innerHTML = data.respondidos.length
-      ? data.respondidos.map(renderRespondidoCard).join('')
-      : '<p class="conjuntos-vazio">Você ainda não concluiu nenhum simulado.</p>';
+    sugeridosRaw = [...data.prioritarios.emAndamento, ...data.prioritarios.naoIniciados];
+    respondidosRaw = data.respondidos;
+    renderListas();
   } catch (err) {
     prioritariosEl.innerHTML = '<p class="conjuntos-vazio">Erro ao carregar simulados.</p>';
     respondidosEl.innerHTML = '';
   }
 }
 
-function renderSimChipsNiveis() {
-  document.getElementById('simChipNiveis').innerHTML = NIVEIS.map(n =>
-    `<button type="button" class="chip-toggle" data-simnivel="${n}">${n}</button>`
-  ).join('');
-}
-function renderSimChipsMaterias() {
-  document.getElementById('simChipMaterias').innerHTML = Object.entries(MATERIAS_LABELS).map(([k, v]) =>
-    `<button type="button" class="chip-toggle" data-simmateria="${k}">${v}</button>`
-  ).join('');
-}
-function renderSimChipsQuantidade() {
-  document.getElementById('simChipQuantidade').innerHTML = QUANTIDADES_SIMULADO.map(q =>
-    `<button type="button" class="chip-toggle ${q === simFiltroForm.quantidade ? 'selecionado' : ''}" data-simquantidade="${q}">${q} questões</button>`
-  ).join('');
-}
-
-function initFormularioSimulado() {
-  renderSimChipsNiveis();
-  renderSimChipsMaterias();
-  renderSimChipsQuantidade();
-
-  const form = document.getElementById('criarSimuladoForm');
-
-  document.getElementById('criarSimuladoBtn').addEventListener('click', () => {
-    form.style.display = form.style.display === 'none' ? 'flex' : 'none';
-  });
-  document.getElementById('cancelarCriarSimuladoBtn').addEventListener('click', () => { form.style.display = 'none'; });
-
-  form.addEventListener('click', e => {
-    const nivelChip = e.target.closest('[data-simnivel]');
-    if (nivelChip) {
-      const n = nivelChip.dataset.simnivel;
-      simFiltroForm.niveis.has(n) ? simFiltroForm.niveis.delete(n) : simFiltroForm.niveis.add(n);
-      nivelChip.classList.toggle('selecionado');
-      return;
-    }
-    const materiaChip = e.target.closest('[data-simmateria]');
-    if (materiaChip) {
-      const m = materiaChip.dataset.simmateria;
-      simFiltroForm.materias.has(m) ? simFiltroForm.materias.delete(m) : simFiltroForm.materias.add(m);
-      materiaChip.classList.toggle('selecionado');
-      return;
-    }
-    const quantidadeChip = e.target.closest('[data-simquantidade]');
-    if (quantidadeChip) {
-      simFiltroForm.quantidade = Number(quantidadeChip.dataset.simquantidade);
-      form.querySelectorAll('[data-simquantidade]').forEach(b => b.classList.toggle('selecionado', Number(b.dataset.simquantidade) === simFiltroForm.quantidade));
-    }
-  });
-
-  form.querySelectorAll('input[name="simTempoModo"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      document.getElementById('simTempoMinutos').style.display = document.querySelector('input[name="simTempoModo"]:checked').value === 'com' ? 'inline-block' : 'none';
-    });
-  });
-
-  document.getElementById('gerarSimuladoBtn').addEventListener('click', async () => {
-    const erroEl = document.getElementById('criarSimuladoErro');
-    erroEl.classList.remove('show');
-
-    if (!simFiltroForm.niveis.size) return mostrarErroFormSim('Selecione ao menos um nível.');
-    if (!simFiltroForm.materias.size) return mostrarErroFormSim('Selecione ao menos uma categoria.');
-
-    const tempoModo = document.querySelector('input[name="simTempoModo"]:checked').value;
-    const minutos = Number(document.getElementById('simTempoMinutos').value);
-    if (tempoModo === 'com' && (!minutos || minutos <= 0)) return mostrarErroFormSim('Informe a duração em minutos.');
-
-    try {
-      const res = await fetch('/api/questoes/conjuntos/personalizado', {
-        method: 'POST', headers: authHeaders(true),
-        body: JSON.stringify({
-          niveis: [...simFiltroForm.niveis], materias: [...simFiltroForm.materias], quantidade: simFiltroForm.quantidade,
-          tempoLimiteSegundos: tempoModo === 'com' ? minutos * 60 : null,
-          pool: 'simulado'
-        })
-      });
-      const data = await res.json();
-      if (!res.ok) return mostrarErroFormSim(data.msg || 'Erro ao criar simulado.');
-      window.location.href = `resolver-conjunto.html?id=${data._id}`;
-    } catch (err) {
-      mostrarErroFormSim('Erro ao criar simulado.');
-    }
-  });
-
-  function mostrarErroFormSim(msg) {
-    const el = document.getElementById('criarSimuladoErro');
-    el.textContent = msg;
-    el.classList.add('show');
-  }
-}
-
-function initSimuladosTab() {
-  initFormularioSimulado();
-  carregarSimulados();
-}
-
-initSimuladosTab();
+initFiltroSimulado();
+carregarSimulados();

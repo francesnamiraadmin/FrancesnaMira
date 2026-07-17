@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/plataforma-topicos-nav.css">
 
 <style>
 html { scroll-behavior: smooth; }
@@ -27,23 +28,23 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .criar-conjunto-card {
   background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
   border: 1px solid var(--glass-border); border-radius: 20px; padding: 26px 28px;
-  box-shadow: var(--glass-shadow); max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px;
+  box-shadow: var(--glass-shadow); max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px;
 }
-.criar-conjunto-card label.grupo-label { font-weight: 700; font-size: 0.92rem; margin-bottom: 8px; display: block; }
-.chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.criar-conjunto-card label.grupo-label { font-weight: 700; font-size: 0.92rem; margin-bottom: 8px; display: block; text-align: center; }
+.chip-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .chip-toggle {
   padding: 8px 16px; border-radius: 20px; border: 1px solid var(--glass-border); background: var(--glass-bg-2);
   color: var(--text); font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.88rem; transition: 0.2s;
 }
 .chip-toggle.selecionado { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-.quantidade-row, .tempo-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.quantidade-row, .tempo-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: center; }
 .criar-conjunto-card input[type="number"] {
   padding: 10px 14px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-input);
   color: var(--text); font-family: 'Poppins', sans-serif; width: 100px;
 }
-.criar-conjunto-erro { color: var(--danger-text); font-size: 0.88rem; display: none; }
+.criar-conjunto-erro { color: var(--danger-text); font-size: 0.88rem; display: none; text-align: center; }
 .criar-conjunto-erro.show { display: block; }
-.conjunto-acoes { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.conjunto-acoes { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; justify-content: center; }
 .q-btn {
   padding: 10px 20px; border-radius: 20px; border: none; background: var(--accent); color: var(--accent-text); font-weight: 700;
   cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.92rem;
@@ -74,14 +75,19 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <script src="js/plataformaGate.js"></script>
 
 <div id="app-navbar" class="app-navbar-bar"></div>
+<div id="plataformaTopicosNav" class="plataforma-topicos-nav"></div>
 
 <section class="intro">
   <h1>🎯 Personalize seu Conjunto</h1>
-  <p>Escolha níveis, categorias, quantidade de questões e tempo — o sistema monta um conjunto sob medida pra você praticar.</p>
+  <p>Escolha para quê, níveis, categorias, quantidade de questões e tempo — o sistema monta um conjunto sob medida pra você.</p>
 </section>
 
 <div class="pagina-wrap">
   <div class="criar-conjunto-card" id="criarConjuntoForm">
+    <div>
+      <label class="grupo-label">Conjunto para</label>
+      <div class="chip-grid" id="chipPool"></div>
+    </div>
     <div>
       <label class="grupo-label">Níveis</label>
       <div class="chip-grid" id="chipNiveis"></div>
@@ -109,7 +115,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   </div>
 
   <div class="meus-personalizados">
-    <h2>Meus conjuntos personalizados</h2>
+    <h2 id="meusPersonalizadosTitulo">Meus conjuntos personalizados</h2>
     <div id="meusPersonalizadosLista"><p class="meus-personalizados-vazio">Carregando...</p></div>
   </div>
 </div>
@@ -117,6 +123,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <footer>© 2026 · Francês na Mira</footer>
 
 <script src="js/questoesRender.js"></script>
+<script src="js/plataformaTopicosNav.js"></script>
 <script src="js/personalizarConjunto.js"></script>
 <script src="js/appShell.js"></script>
 <script src="js/estudoTimerGlobal.js"></script>

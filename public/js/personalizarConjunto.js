@@ -11,7 +11,27 @@ function authHeaders(json) {
 
 const NIVEIS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 const QUANTIDADES_CONJUNTO = [10, 20, 40];
-const filtroForm = { niveis: new Set(), materias: new Set(), quantidade: 10 };
+const POOLS = [
+  { valor: 'praticar', label: 'Praticar' },
+  { valor: 'simulado', label: 'Simulado' }
+];
+const filtroForm = { pool: 'praticar', niveis: new Set(), materias: new Set(), quantidade: 10 };
+
+function renderChipsPool() {
+  document.getElementById('chipPool').innerHTML = POOLS.map(p =>
+    `<button type="button" class="chip-toggle ${p.valor === filtroForm.pool ? 'selecionado' : ''}" data-pool="${p.valor}">${p.label}</button>`
+  ).join('');
+}
+
+// Simulado é sempre cronometrado por padrão (ver backend/seed/simuladosOficiais.js —
+// mesmo "padrão" já usado no catálogo oficial: 60min sugerido), Praticar não.
+function aplicarPadraoTempoPool(form) {
+  const tempoModoInput = form.querySelector(`input[name="tempoModo"][value="${filtroForm.pool === 'simulado' ? 'com' : 'sem'}"]`);
+  tempoModoInput.checked = true;
+  const minutosInput = document.getElementById('tempoMinutos');
+  minutosInput.style.display = filtroForm.pool === 'simulado' ? 'inline-block' : 'none';
+  if (filtroForm.pool === 'simulado' && !minutosInput.value) minutosInput.value = 60;
+}
 
 function renderChipsNiveis() {
   document.getElementById('chipNiveis').innerHTML = NIVEIS.map(n =>
@@ -57,10 +77,16 @@ function formatarTempoLimite(segundos) {
   return `${Math.round(segundos / 60)} min`;
 }
 
+function atualizarTituloMeusPersonalizados() {
+  const label = POOLS.find(p => p.valor === filtroForm.pool).label;
+  document.getElementById('meusPersonalizadosTitulo').textContent = `Meus conjuntos personalizados — ${label}`;
+}
+
 async function carregarMeusPersonalizados() {
   const lista = document.getElementById('meusPersonalizadosLista');
+  lista.innerHTML = '<p class="meus-personalizados-vazio">Carregando...</p>';
   try {
-    const res = await fetch('/api/questoes/conjuntos/meus-personalizados', { headers: authHeaders() });
+    const res = await fetch(`/api/questoes/conjuntos/meus-personalizados?pool=${filtroForm.pool}`, { headers: authHeaders() });
     if (!res.ok) throw new Error();
     const conjuntos = await res.json();
     if (!conjuntos.length) {
@@ -104,17 +130,29 @@ function initMeusPersonalizados() {
       alert('Erro ao conectar ao servidor.');
     }
   });
+  atualizarTituloMeusPersonalizados();
   carregarMeusPersonalizados();
 }
 
 function initFormularioConjunto() {
+  renderChipsPool();
   renderChipsNiveis();
   renderChipsMaterias();
   renderChipsQuantidade();
 
   const form = document.getElementById('criarConjuntoForm');
+  aplicarPadraoTempoPool(form);
 
   form.addEventListener('click', e => {
+    const poolChip = e.target.closest('[data-pool]');
+    if (poolChip) {
+      filtroForm.pool = poolChip.dataset.pool;
+      form.querySelectorAll('[data-pool]').forEach(chip => chip.classList.toggle('selecionado', chip.dataset.pool === filtroForm.pool));
+      aplicarPadraoTempoPool(form);
+      atualizarTituloMeusPersonalizados();
+      carregarMeusPersonalizados();
+      return;
+    }
     const nivelChip = e.target.closest('[data-nivel]');
     if (nivelChip) {
       const n = nivelChip.dataset.nivel;
@@ -168,7 +206,8 @@ function initFormularioConjunto() {
         method: 'POST', headers: authHeaders(true),
         body: JSON.stringify({
           niveis: [...filtroForm.niveis], materias: [...filtroForm.materias], quantidade: filtroForm.quantidade,
-          tempoLimiteSegundos: tempoModo === 'com' ? minutos * 60 : null
+          tempoLimiteSegundos: tempoModo === 'com' ? minutos * 60 : null,
+          pool: filtroForm.pool
         })
       });
       const data = await res.json();
