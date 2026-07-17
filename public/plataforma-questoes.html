@@ -170,6 +170,14 @@ nav a:hover::after { width: 100%; }
 .placeholder-card p { font-size: 0.88rem; }
 .placeholder-card .em-breve { display: inline-block; margin-top: 10px; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 14px; background: var(--warning-bg); color: var(--warning-text); }
 
+.sim-qnav { display: flex; flex-wrap: wrap; gap: 8px; background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-radius: 16px; padding: 14px; margin-bottom: 20px; }
+.qnav-btn {
+  width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-bg);
+  color: var(--text); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.85rem;
+}
+.qnav-btn.respondida { background: var(--success-bg); border-color: var(--success-text); color: var(--success-text); }
+.qnav-btn.atual { outline: 3px solid var(--accent); }
+
 .sim-header {
   display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;
   background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-radius: 16px; padding: 16px 22px;
@@ -297,6 +305,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   <div class="top-tabs">
     <button class="top-tab active" data-tab="praticar">📝 Praticar</button>
     <button class="top-tab" data-tab="simulados">⏱️ Simulados</button>
+    <button class="top-tab" data-tab="respondidos">✅ Respondidos</button>
   </div>
 
   <!-- ===================== PRATICAR (Conjuntos de Questões) ===================== -->
@@ -335,7 +344,10 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
     <h2 class="conjuntos-titulo">Conjuntos Prioritários</h2>
     <div class="conjuntos-grid" id="conjuntosPrioritarios"></div>
+  </div>
 
+  <!-- ===================== RESPONDIDOS ===================== -->
+  <div id="tabRespondidos" style="display:none;">
     <h2 class="conjuntos-titulo">Conjuntos Respondidos</h2>
     <div class="conjuntos-grid" id="conjuntosRespondidos"></div>
   </div>
@@ -383,6 +395,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
         <div class="sim-progress" id="simProgress"></div>
         <div class="sim-timer" id="simTimer"></div>
       </div>
+      <div class="sim-qnav" id="simQnav"></div>
       <div class="q-list" id="simQuestao"></div>
       <div class="sim-nav">
         <button class="q-btn secundario" id="simAnteriorBtn">‹ Anterior</button>
@@ -465,6 +478,7 @@ document.querySelectorAll('.top-tab').forEach(tab => {
     tab.classList.add('active');
     document.getElementById('tabPraticar').style.display = tab.dataset.tab === 'praticar' ? 'block' : 'none';
     document.getElementById('tabSimulados').style.display = tab.dataset.tab === 'simulados' ? 'block' : 'none';
+    document.getElementById('tabRespondidos').style.display = tab.dataset.tab === 'respondidos' ? 'block' : 'none';
   });
 });
 
@@ -548,7 +562,26 @@ function renderSimuladoQuestao() {
     <div class="q-head"><span class="q-tags"><span class="q-tag">${NOMES_TIPO[p.tipo]}</span><span class="q-pill">${MATERIAS[p.materia]}</span></span></div>
     ${corpo}
   </div>`;
+
+  renderSimNav();
 }
+
+// Barra de navegação numerada entre as questões do simulado — mesma ideia visual da
+// navegação usada em resolver-conjunto.html (Praticar), aqui operando só em memória
+// (simulado.respostas), já que Simulados continua sem persistência no backend nesta fase.
+function renderSimNav() {
+  document.getElementById('simQnav').innerHTML = simulado.perguntas.map((p, i) => {
+    const respondida = simulado.respostas[p.id] !== undefined;
+    return `<button class="qnav-btn ${respondida ? 'respondida' : ''} ${i === simulado.indice ? 'atual' : ''}" data-simir="${i}">${i + 1}</button>`;
+  }).join('');
+}
+
+document.getElementById('simQnav').addEventListener('click', e => {
+  const btn = e.target.closest('[data-simir]');
+  if (!btn) return;
+  simulado.indice = Number(btn.dataset.simir);
+  renderSimuladoQuestao();
+});
 
 document.getElementById('simQuestao').addEventListener('click', e => {
   const audioBtn = e.target.closest('[data-simaudio]');
