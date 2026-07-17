@@ -27,9 +27,11 @@ async function dataFimMatricula(atribuicao) {
 function copiarAtividades(atividadesTemplate) {
   return (atividadesTemplate || []).map(a => ({
     tipo: a.tipo, titulo: a.titulo, descricao: a.descricao, obrigatoria: a.obrigatoria,
+    dependeDe: a.dependeDe ?? null,
     conteudo: a.conteudo ? {
       url: a.conteudo.url, texto: a.conteudo.texto, arquivo: a.conteudo.arquivo,
-      temaId: a.conteudo.temaId, aulaId: a.conteudo.aulaId, moduloId: a.conteudo.moduloId
+      temaId: a.conteudo.temaId, aulaId: a.conteudo.aulaId, moduloId: a.conteudo.moduloId,
+      conjuntoId: a.conteudo.conjuntoId
     } : undefined,
     entrega: { status: "pendente" }
   }));
@@ -120,12 +122,12 @@ async function statusEntregaReal(atividade, alunoId) {
     const concluidas = await ProgressoAula.countDocuments({ userId: alunoId, aulaId: { $in: aulas.map(a => a._id) }, concluida: true });
     return { status: concluidas >= aulas.length ? "enviado" : "pendente", progressoReal: { concluidas, total: aulas.length } };
   }
-  if (atividade.tipo === "producao_textual" && atividade.entrega?.linkProducaoId) {
+  if (["producao_textual", "producao_oral"].includes(atividade.tipo) && atividade.entrega?.linkProducaoId) {
     const producao = await Producao.findById(atividade.entrega.linkProducaoId).select("status avaliacao.notaTotal");
     if (!producao) return null;
     return { status: "enviado", producaoReal: { status: producao.status, notaTotal: producao.avaliacao?.notaTotal ?? null } };
   }
-  if (atividade.tipo === "questoes_plataforma" && atividade.conteudo?.conjuntoId) {
+  if (["questoes_plataforma", "exercicio_lista", "simulado"].includes(atividade.tipo) && atividade.conteudo?.conjuntoId) {
     const conjuntoId = atividade.conteudo.conjuntoId._id || atividade.conteudo.conjuntoId;
     const tentativa = await Tentativa.findOne({ alunoId, conjuntoId }).sort({ finalizadaEm: -1 }).select("percentualAcertos finalizadaEm");
     return {

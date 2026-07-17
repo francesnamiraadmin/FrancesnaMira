@@ -36,8 +36,9 @@ const DeverUI = (() => {
     return '<option value="">Selecione...</option>' + modulosDisponiveis.map(m =>
       `<option value="${m._id}" ${String(selecionado) === String(m._id) ? 'selected' : ''}>${m.titulo}</option>`).join('');
   }
-  function opcoesTema(selecionado) {
-    return '<option value="">Selecione...</option>' + temasDisponiveis.map(t =>
+  function opcoesTema(selecionado, modalidade) {
+    const lista = modalidade ? temasDisponiveis.filter(t => (t.modalidade || 'textual') === modalidade) : temasDisponiveis;
+    return '<option value="">Selecione...</option>' + lista.map(t =>
       `<option value="${t._id}" ${String(selecionado) === String(t._id) ? 'selected' : ''}>${t.titulo}</option>`).join('');
   }
   function opcoesConjunto(selecionado) {
@@ -71,7 +72,7 @@ const DeverUI = (() => {
 
       <div class="campo campo-conteudo campo-url" style="display:none;"><label>Link/URL</label><input type="text" data-conteudo="url" value="${c.url || ''}" placeholder="https://..."></div>
       <div class="campo campo-conteudo campo-texto" style="display:none;"><label>Texto</label><textarea data-conteudo="texto">${c.texto || ''}</textarea></div>
-      <div class="campo campo-conteudo campo-tema" style="display:none;"><label>Tema (produção textual)</label><select data-conteudo="temaId">${opcoesTema(c.temaId)}</select></div>
+      <div class="campo campo-conteudo campo-tema" style="display:none;"><label>Tema</label><select data-conteudo="temaId">${opcoesTema(c.temaId, a.tipo === 'producao_oral' ? 'oral' : 'textual')}</select></div>
       <div class="campo campo-conteudo campo-modulo" style="display:none;"><label>Módulo</label><select data-conteudo="moduloId">${opcoesModulo(c.moduloId)}</select></div>
       <div class="campo campo-conteudo campo-aula" style="display:none;"><label>Aula</label><select data-conteudo="aulaId"><option value="">Selecione o módulo primeiro</option></select></div>
       <div class="campo campo-conteudo campo-conjunto" style="display:none;"><label>Conjunto de questões</label><select data-conteudo="conjuntoId">${opcoesConjunto(c.conjuntoId)}</select></div>
@@ -93,10 +94,15 @@ const DeverUI = (() => {
     if (['link_externo', 'video', 'imagem'].includes(tipo)) mostrar('.campo-url');
     if (tipo === 'upload_arquivo') { mostrar('.campo-url'); mostrar('.campo-material-upload'); }
     if (['texto', 'leitura'].includes(tipo)) mostrar('.campo-texto');
-    if (tipo === 'producao_textual') mostrar('.campo-tema');
+    if (['producao_textual', 'producao_oral'].includes(tipo)) {
+      mostrar('.campo-tema');
+      const selectTema = box.querySelector('[data-conteudo="temaId"]');
+      const valorAtual = selectTema.value;
+      selectTema.innerHTML = opcoesTema(valorAtual, tipo === 'producao_oral' ? 'oral' : 'textual');
+    }
     if (tipo === 'assistir_modulo') mostrar('.campo-modulo');
     if (tipo === 'assistir_aula') { mostrar('.campo-modulo'); mostrar('.campo-aula'); }
-    if (tipo === 'questoes_plataforma') mostrar('.campo-conjunto');
+    if (['questoes_plataforma', 'exercicio_lista', 'simulado'].includes(tipo)) mostrar('.campo-conjunto');
   }
 
   async function preencherAulasDoModulo(box, moduloId, aulaSelecionada, authHeadersFn) {

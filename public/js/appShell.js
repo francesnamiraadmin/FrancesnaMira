@@ -31,6 +31,7 @@
       // o mesmo tratamento no futuro só preenchendo este campo.
       submenu: [
         { nome: "Praticar", href: "praticar.html", icone: "📝" },
+        { nome: "Em Andamento / Respondidos", href: "meus-conjuntos.html", icone: "✅" },
         { nome: "Simulados", href: "simulados.html", icone: "⏱️" },
         { nome: "Personalize", href: "personalizar-conjunto.html", icone: "🎯" },
         { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "📓" },
@@ -236,6 +237,7 @@
             <div class="app-dropdown" id="userDropdown">
               <a href="minha-conta.html">Meu Perfil</a>
               <a href="meus-deveres.html">Dever de Casa</a>
+              <a href="mapeador-estudos.html">⏱️ Mapeador de Estudos</a>
               <button type="button" class="app-dropdown-item" id="alterarFotoBtn">Alterar Foto</button>
               <a href="configuracoes.html">Configurações</a>
               <a href="depoimentos.html">Depoimentos</a>

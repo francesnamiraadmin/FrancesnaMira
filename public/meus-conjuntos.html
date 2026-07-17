@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
-<title>Praticar - Francês na Mira</title>
+<title>Em Andamento / Respondidos - Francês na Mira</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
@@ -27,15 +27,6 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .conjuntos-titulo { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 34px 0 16px; text-align: center; }
 .conjuntos-titulo:first-of-type { margin-top: 0; }
 .conjuntos-vazio { text-align: center; opacity: 0.75; padding: 20px; font-size: 0.95rem; }
-
-.conjuntos-filtro-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
-.filtro-select {
-  padding: 10px 16px; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--glass-input);
-  color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.95rem;
-}
-.filtro-select option { color: var(--accent-text); }
-.conjuntos-filtro-row .filtro-select { min-width: 180px; }
-.conjuntos-filtro-row input.filtro-select { flex: 1; max-width: 320px; }
 
 .conjuntos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
 .conjunto-card {
@@ -71,24 +62,23 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div id="app-navbar" class="app-navbar-bar"></div>
 
 <section class="intro">
-  <h1>📝 Praticar</h1>
-  <p>Escolha um conjunto sugerido para resolver e acompanhar sua evolução. Os conjuntos que você já começou ou já concluiu ficam em <a href="meus-conjuntos.html" style="color:var(--accent); font-weight:700;">Em Andamento / Respondidos</a>.</p>
+  <h1>✅ Em Andamento / Respondidos</h1>
+  <p>Acompanhe os conjuntos que você já começou e reveja o resultado dos que já concluiu — oficiais e personalizados juntos.</p>
 </section>
 
 <div class="pagina-wrap">
-  <div class="conjuntos-filtro-row">
-    <select class="filtro-select" id="filtroSugeridoNivel"><option value="">Todos os níveis</option></select>
-    <select class="filtro-select" id="filtroSugeridoMateria"><option value="">Todas as categorias</option></select>
-    <input type="text" class="filtro-select" id="filtroSugeridoBusca" placeholder="Buscar conjunto pelo nome...">
-  </div>
-  <div class="conjuntos-grid" id="conjuntosSugeridos"><p class="conjuntos-vazio">Carregando...</p></div>
+  <h2 class="conjuntos-titulo">Em Andamento</h2>
+  <div class="conjuntos-grid" id="conjuntosEmAndamento"><p class="conjuntos-vazio">Carregando...</p></div>
+
+  <h2 class="conjuntos-titulo">Respondidos</h2>
+  <div class="conjuntos-grid" id="conjuntosRespondidos"></div>
 </div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
 <script src="js/questoesRender.js"></script>
 <script src="js/conjuntoCard.js"></script>
-<script src="js/praticar.js"></script>
+<script src="js/meusConjuntos.js"></script>
 <script src="js/appShell.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>

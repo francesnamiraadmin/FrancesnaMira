@@ -12,7 +12,7 @@ async function carregarIndicadores() {
     const { kpis } = await res.json();
 
     if (kpis.conjuntosEmAndamento > 0) {
-      const el = document.getElementById('indicadorPraticar');
+      const el = document.getElementById('indicadorAndamento');
       el.textContent = `${kpis.conjuntosEmAndamento} em andamento`;
       el.style.display = 'inline-block';
     }

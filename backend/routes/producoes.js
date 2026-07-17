@@ -20,11 +20,20 @@ function contarPalavras(texto) {
   return texto.trim().split(/\s+/).filter(Boolean).length;
 }
 
-async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAluno, file, origemId }) {
+async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAluno, file, origemId, duracaoSegundos }) {
   const tema = await Tema.findById(temaId);
   if (!tema || !tema.ativo) throw { status: 404, msg: "Tema não encontrado." };
 
-  if (!file && !textoDigitado?.trim()) throw { status: 400, msg: "Envie um arquivo ou digite seu texto." };
+  // Modalidade nunca vem do cliente — deriva sempre do Tema, pra nunca
+  // divergir de qual rubrica/validação se aplica.
+  const modalidade = tema.modalidade === "oral" ? "oral" : "textual";
+
+  if (modalidade === "oral") {
+    if (!file) throw { status: 400, msg: "Envie o áudio da sua produção oral." };
+    if (!file.mimetype.startsWith("audio/")) throw { status: 400, msg: "Envie um arquivo de áudio (MP3, WAV ou WebM)." };
+  } else if (!file && !textoDigitado?.trim()) {
+    throw { status: 400, msg: "Envie um arquivo ou digite seu texto." };
+  }
 
   const user = await User.findById(userId);
   if ((user.creditosCorrecao || 0) < tema.creditosNecessarios) {
@@ -32,7 +41,7 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
   }
 
   let contagemPalavras = null;
-  if (textoDigitado?.trim()) {
+  if (modalidade === "textual" && textoDigitado?.trim()) {
     contagemPalavras = contarPalavras(textoDigitado);
     if (contagemPalavras < tema.limitePalavrasMin) {
       throw { status: 400, msg: `Seu texto tem ${contagemPalavras} palavras. O mínimo exigido é ${tema.limitePalavrasMin}.` };
@@ -56,9 +65,11 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
     temaId,
     origemId: origemId || null,
     status: "em_fila",
+    modalidade,
     arquivoOriginal,
-    textoDigitado: textoDigitado?.trim() || undefined,
+    textoDigitado: modalidade === "textual" ? (textoDigitado?.trim() || undefined) : undefined,
     contagemPalavras,
+    duracaoSegundos: modalidade === "oral" ? (Number(duracaoSegundos) || undefined) : undefined,
     observacoesAluno,
     creditosUtilizados: tema.creditosNecessarios,
     prazoEstimado: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
@@ -77,11 +88,11 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
 router.post("/", exigirAuth, comTratamentoDeErro(uploadOriginal.single("arquivo")), async (req, res) => {
   const limparTemp = () => { if (req.file) fs.unlink(req.file.path, () => {}); };
   try {
-    const { temaId, textoDigitado, observacoesAluno } = req.body;
+    const { temaId, textoDigitado, observacoesAluno, duracaoSegundos } = req.body;
     if (!temaId) { limparTemp(); return res.status(400).json({ msg: "Selecione um tema." }); }
 
     const producao = await montarNovaProducao({
-      userId: req.userId, temaId, textoDigitado, observacoesAluno, file: req.file
+      userId: req.userId, temaId, textoDigitado, observacoesAluno, file: req.file, duracaoSegundos
     });
     res.json({ msg: "Produção enviada com sucesso! Protocolo: " + producao.protocolo, producao });
   } catch (err) {
@@ -251,10 +262,10 @@ router.post("/:id/reenviar", exigirAuth, comTratamentoDeErro(uploadOriginal.sing
       return res.status(404).json({ msg: "Produção não encontrada." });
     }
 
-    const { textoDigitado, observacoesAluno } = req.body;
+    const { textoDigitado, observacoesAluno, duracaoSegundos } = req.body;
     const nova = await montarNovaProducao({
       userId: req.userId, temaId: original.temaId, textoDigitado, observacoesAluno,
-      file: req.file, origemId: original._id
+      file: req.file, origemId: original._id, duracaoSegundos
     });
 
     res.json({ msg: "Reenviado com sucesso! Novo protocolo: " + nova.protocolo, producao: nova });

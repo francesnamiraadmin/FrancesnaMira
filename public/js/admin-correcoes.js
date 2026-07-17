@@ -101,6 +101,15 @@ document.getElementById('coletaneaForm').addEventListener('click', e => {
 });
 novoDocForm(); novoDocForm();
 
+function atualizarCamposModalidadeTema() {
+  const oral = document.getElementById('temaModalidade').value === 'oral';
+  document.getElementById('campoMinPalavras').style.display = oral ? 'none' : 'flex';
+  document.getElementById('campoMaxPalavras').style.display = oral ? 'none' : 'flex';
+  document.getElementById('campoTempoMinimo').style.display = oral ? 'flex' : 'none';
+  document.getElementById('campoTempoMaximo').style.display = oral ? 'flex' : 'none';
+}
+document.getElementById('temaModalidade').addEventListener('change', atualizarCamposModalidadeTema);
+
 document.getElementById('criarTemaBtn').addEventListener('click', async () => {
   const coletanea = Array.from(document.querySelectorAll('.doc-form-item')).map(item => ({
     tipo: item.querySelector('.docTipo').value,
@@ -111,10 +120,12 @@ document.getElementById('criarTemaBtn').addEventListener('click', async () => {
     conteudo: item.querySelector('.docConteudo').value.trim()
   })).filter(d => d.titulo && d.conteudo);
 
+  const modalidade = document.getElementById('temaModalidade').value;
   const corpo = {
     titulo: document.getElementById('temaTitulo').value.trim(),
     exame: document.getElementById('temaExame').value,
     nivel: document.getElementById('temaNivel').value,
+    modalidade,
     dificuldade: document.getElementById('temaDificuldade').value,
     tipoProducao: document.getElementById('temaTipoProducao').value.trim(),
     descricao: document.getElementById('temaDescricao').value.trim(),
@@ -123,11 +134,16 @@ document.getElementById('criarTemaBtn').addEventListener('click', async () => {
     criteriosResumo: document.getElementById('temaCriteriosResumo').value.split('\n').map(s => s.trim()).filter(Boolean),
     competenciasAvaliadas: document.getElementById('temaCompetencias').value.split('\n').map(s => s.trim()).filter(Boolean),
     tempoSugerido: Number(document.getElementById('temaTempo').value),
-    limitePalavrasMin: Number(document.getElementById('temaMinPalavras').value),
-    limitePalavrasMax: Number(document.getElementById('temaMaxPalavras').value),
     creditosNecessarios: Number(document.getElementById('temaCreditos').value),
     coletanea
   };
+  if (modalidade === 'oral') {
+    corpo.tempoMinimoSegundos = Number(document.getElementById('temaTempoMinimo').value);
+    corpo.tempoMaximoSegundos = Number(document.getElementById('temaTempoMaximo').value);
+  } else {
+    corpo.limitePalavrasMin = Number(document.getElementById('temaMinPalavras').value);
+    corpo.limitePalavrasMax = Number(document.getElementById('temaMaxPalavras').value);
+  }
 
   if (!corpo.titulo || !corpo.descricao || !corpo.instrucoes || !corpo.tipoProducao) {
     mostrarMsg('temaMsg', 'Preencha ao menos título, tipo de produção, descrição e instruções.', true);
@@ -155,7 +171,7 @@ async function carregarTemas() {
     const temas = await res.json();
     document.getElementById('temasTbody').innerHTML = temas.map(t => `
       <tr>
-        <td>${t.titulo}</td>
+        <td>${t.titulo} <span class="pill">${t.modalidade === 'oral' ? '🎤 Oral' : '✍️ Textual'}</span></td>
         <td>${t.exame} · ${t.nivel}</td>
         <td><span class="pill ${t.ativo ? '' : 'inativo'}">${t.ativo ? 'Ativo' : 'Inativo'}</span></td>
         <td>${t.ativo ? `<button class="btn perigo pequeno" data-desativar-tema="${t._id}">Desativar</button>` : ''}</td>
@@ -204,11 +220,14 @@ document.getElementById('criteriosRubricaForm').addEventListener('click', e => {
   if (btn) btn.closest('.criterio-edit-row').remove();
 });
 document.getElementById('rubricaExameSelect').addEventListener('change', carregarRubrica);
+document.getElementById('rubricaModalidadeSelect').addEventListener('change', carregarRubrica);
 
 async function carregarRubrica() {
   document.getElementById('criteriosRubricaForm').innerHTML = '';
   try {
-    const res = await fetch(`/api/temas/rubrica/${document.getElementById('rubricaExameSelect').value}`, { headers: { Authorization: 'Bearer ' + token } });
+    const exame = document.getElementById('rubricaExameSelect').value;
+    const modalidade = document.getElementById('rubricaModalidadeSelect').value;
+    const res = await fetch(`/api/temas/rubrica/${exame}?modalidade=${modalidade}`, { headers: { Authorization: 'Bearer ' + token } });
     if (res.ok) {
       const r = await res.json();
       (r.criterios || []).forEach(c => novoCriterioForm(c.nome, c.peso, c.descricao));
@@ -230,9 +249,10 @@ document.getElementById('salvarRubricaBtn').addEventListener('click', async () =
   if (criterios.length === 0) { mostrarMsg('rubricaMsg', 'Adicione ao menos um critério.', true); return; }
 
   try {
+    const modalidade = document.getElementById('rubricaModalidadeSelect').value;
     const res = await fetch(`/api/admin/rubricas/${exame}`, {
       method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
-      body: JSON.stringify({ criterios, notaMaxima: Number(document.getElementById('rubricaNotaMaxima').value) || 20 })
+      body: JSON.stringify({ criterios, notaMaxima: Number(document.getElementById('rubricaNotaMaxima').value) || 20, modalidade })
     });
     const data = await res.json();
     mostrarMsg('rubricaMsg', res.ok ? 'Rubrica salva com sucesso!' : (data.msg || 'Erro ao salvar.'), !res.ok);

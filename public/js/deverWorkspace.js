@@ -156,9 +156,24 @@ const DeverWorkspace = (() => {
           temaId: atividade.conteudo.temaId._id, deverId, index, entregaExistente: atividade.entrega, onEnviado: onAtualizado
         });
       }
-    } else if (atividade.tipo === 'producao_oral') {
-      GravadorAudio.criarGravadorAudio(widgetEl, { deverId, index, entregaExistente: atividade.entrega, onEnviado: onAtualizado });
-    } else if (atividade.tipo === 'questoes_plataforma' && atividade.conteudo?.conjuntoId?._id) {
+    } else if (atividade.tipo === 'producao_oral' && atividade.conteudo?.temaId?._id) {
+      if (atividade.producaoReal) {
+        widgetEl.innerHTML = `<p class="embed-aviso">Produção enviada — status: <strong>${NOMES_STATUS_PRODUCAO[atividade.producaoReal.status] || atividade.producaoReal.status}</strong>${atividade.producaoReal.notaTotal != null ? ' · Nota: ' + atividade.producaoReal.notaTotal : ''}</p>`;
+      } else {
+        GravadorAudio.criarGravadorAudio(widgetEl, {
+          jaEnviado: false,
+          onEnviado: onAtualizado,
+          enviarArquivo: async (arquivo, duracaoSegundos) => {
+            const form = new FormData();
+            form.append('arquivo', arquivo);
+            form.append('duracaoSegundos', duracaoSegundos || 0);
+            const res = await fetch(`/api/deveres/minhas-semanas/${deverId}/atividades/${index}/enviar`, { method: 'POST', headers: authHeaders(), body: form });
+            const data = await res.json();
+            return { ok: res.ok, data };
+          }
+        });
+      }
+    } else if (['questoes_plataforma', 'exercicio_lista', 'simulado'].includes(atividade.tipo) && atividade.conteudo?.conjuntoId?._id) {
       const conjunto = atividade.conteudo.conjuntoId;
       if (atividade.tentativaReal) {
         widgetEl.innerHTML = `<p class="embed-aviso">Conjunto resolvido — <strong>${atividade.tentativaReal.percentualAcertos}% de acertos</strong>.</p>

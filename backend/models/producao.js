@@ -31,6 +31,9 @@ const ProducaoSchema = new mongoose.Schema({
   alunoId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   temaId: { type: mongoose.Schema.Types.ObjectId, ref: "Tema", required: true },
   professorId: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
+  // Espelha Tema.modalidade — evita um join extra pra decidir como renderizar
+  // (áudio vs. texto) na fila do professor e no histórico do aluno.
+  modalidade: { type: String, enum: ["textual", "oral"], default: "textual" },
   status: {
     type: String,
     enum: ["rascunho", "aguardando_envio", "enviado", "em_fila", "em_correcao", "aguardando_revisao", "corrigido", "devolvido", "arquivado", "cancelado"],
@@ -41,6 +44,7 @@ const ProducaoSchema = new mongoose.Schema({
   arquivoOriginal: ArquivoSchema,
   textoDigitado: { type: String },
   contagemPalavras: { type: Number },
+  duracaoSegundos: { type: Number },
   observacoesAluno: { type: String },
 
   creditosUtilizados: { type: Number, default: 1 },

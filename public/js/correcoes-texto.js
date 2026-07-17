@@ -18,6 +18,10 @@ let modoEnvio = 'arquivo';
 let arquivoSelecionado = null;
 
 function creditosDisponiveis() { return window.__creditosCorrecao || 0; }
+function formatarDuracao(seg) {
+  const m = Math.floor((seg || 0) / 60), s = (seg || 0) % 60;
+  return s ? `${m}min ${s}s` : `${m} min`;
+}
 
 // ===================== NAVEGAÇÃO ENTRE VIEWS =====================
 function mostrarView(nome) {
@@ -49,10 +53,12 @@ async function carregarTemas() {
   const exame = document.getElementById('filtroExame').value;
   const nivel = document.getElementById('filtroNivel').value;
   const dificuldade = document.getElementById('filtroDificuldade').value;
+  const modalidade = document.getElementById('filtroModalidade').value;
   const busca = document.getElementById('filtroBusca').value.trim();
   if (exame) params.set('exame', exame);
   if (nivel) params.set('nivel', nivel);
   if (dificuldade) params.set('dificuldade', dificuldade);
+  if (modalidade) params.set('modalidade', modalidade);
   if (busca) params.set('busca', busca);
 
   const grid = document.getElementById('temasGrid');
@@ -73,18 +79,20 @@ async function carregarTemas() {
 
 function renderTemaCard(t) {
   const favoritado = (window.__favoritos || []).includes(t._id);
+  const oral = t.modalidade === 'oral';
   return `<div class="tema-card" data-id="${t._id}">
     <button class="fav-btn ${favoritado ? 'ativo' : ''}" data-fav="${t._id}" title="Favoritar tema">★</button>
     <div class="tema-tags">
       <span class="tag exame">${t.exame}</span>
       <span class="tag nivel">${t.nivel}</span>
       <span class="tag dificuldade-${t.dificuldade}">${t.dificuldade}</span>
+      <span class="tag">${oral ? '🎤 Oral' : '✍️ Textual'}</span>
     </div>
     <h3>${t.titulo}</h3>
     <p class="desc">${t.descricao}</p>
     <div class="tema-meta">
       <span>⏱️ <strong>${t.tempoSugerido} min</strong></span>
-      <span>📝 <strong>${t.limitePalavrasMin}-${t.limitePalavrasMax} palavras</strong></span>
+      <span>${oral ? `🎙️ <strong>${Math.round(t.tempoMinimoSegundos / 60)}-${Math.round(t.tempoMaximoSegundos / 60)} min de fala</strong>` : `📝 <strong>${t.limitePalavrasMin}-${t.limitePalavrasMax} palavras</strong>`}</span>
       <span class="creditos-pill">${t.creditosNecessarios} crédito${t.creditosNecessarios > 1 ? 's' : ''}</span>
     </div>
   </div>`;
@@ -108,7 +116,7 @@ async function favoritarTema(id) {
   } catch (err) { /* silencioso */ }
 }
 
-['filtroExame', 'filtroNivel', 'filtroDificuldade'].forEach(id => document.getElementById(id).addEventListener('change', carregarTemas));
+['filtroExame', 'filtroNivel', 'filtroDificuldade', 'filtroModalidade'].forEach(id => document.getElementById(id).addEventListener('change', carregarTemas));
 let buscaTimeout;
 document.getElementById('filtroBusca').addEventListener('input', () => { clearTimeout(buscaTimeout); buscaTimeout = setTimeout(carregarTemas, 350); });
 
@@ -125,19 +133,26 @@ async function abrirTema(id) {
 }
 
 function renderTemaDetalhe(t) {
+  const oral = t.modalidade === 'oral';
   document.getElementById('temaDetalheHead').innerHTML = `
     <div class="tema-tags" style="margin-bottom:12px;">
       <span class="tag exame">${t.exame}</span>
       <span class="tag nivel">Nível ${t.nivel}</span>
       <span class="tag dificuldade-${t.dificuldade}">${t.dificuldade}</span>
       <span class="tag" style="background:var(--cinza-100); color:var(--cinza-600);">${t.tipoProducao}</span>
+      <span class="tag">${oral ? '🎤 Produção oral' : '✍️ Produção textual'}</span>
     </div>
     <h1>${t.titulo}</h1>
     <p style="color:var(--cinza-600); margin-top:8px;">${t.descricao}</p>
     <div class="info-grid">
       <div class="info-item"><div class="rotulo">Tempo sugerido</div><div class="valor">${t.tempoSugerido} min</div></div>
+      ${oral ? `
+      <div class="info-item"><div class="rotulo">Duração mínima</div><div class="valor">${formatarDuracao(t.tempoMinimoSegundos)}</div></div>
+      <div class="info-item"><div class="rotulo">Duração máxima</div><div class="valor">${formatarDuracao(t.tempoMaximoSegundos)}</div></div>
+      ` : `
       <div class="info-item"><div class="rotulo">Mínimo de palavras</div><div class="valor">${t.limitePalavrasMin}</div></div>
       <div class="info-item"><div class="rotulo">Máximo de palavras</div><div class="valor">${t.limitePalavrasMax}</div></div>
+      `}
       <div class="info-item"><div class="rotulo">Créditos</div><div class="valor">${t.creditosNecessarios}</div></div>
     </div>`;
 
@@ -204,7 +219,7 @@ function svgGraficoDoc(g) {
 // ===================== ENVIO =====================
 document.getElementById('iniciarProducaoBtn').addEventListener('click', () => prepararEnvio(temaAtual));
 
-function prepararEnvio(t) {
+function prepararEnvio(t, urlEnvio) {
   document.getElementById('envioTitulo').textContent = 'Enviar produção — ' + t.titulo;
   document.getElementById('envioResumo').innerHTML = `
     <div class="resumo-item"><div class="rotulo">Tema</div><div class="valor">${t.titulo}</div></div>
@@ -225,8 +240,51 @@ function prepararEnvio(t) {
   document.getElementById('obsInput').value = '';
   document.getElementById('envioMsg').style.display = 'none';
   atualizarContadorPalavras();
+
+  const oral = t.modalidade === 'oral';
+  document.getElementById('modoToggle').style.display = oral ? 'none' : 'flex';
+  document.getElementById('modoArquivoWrap').style.display = oral ? 'none' : (modoEnvio === 'arquivo' ? 'block' : 'none');
+  document.getElementById('modoTextoWrap').style.display = oral ? 'none' : (modoEnvio === 'texto' ? 'block' : 'none');
+  document.getElementById('envioBtnWrap').style.display = oral ? 'none' : 'block';
+  document.getElementById('modoOralWrap').style.display = oral ? 'block' : 'none';
+  if (oral) iniciarGravadorEnvio(t, urlEnvio || urlEnvioPadrao);
+
   mostrarView('envio');
   window.scrollTo(0, 0);
+}
+
+// URL de envio padrão (nova produção). abrirReenvio() substitui por outra função pra reenviar.
+function urlEnvioPadrao() { return '/api/producoes'; }
+
+function iniciarGravadorEnvio(t, obterUrl) {
+  const suficiente = creditosDisponiveis() >= t.creditosNecessarios;
+  const container = document.getElementById('gravadorOralContainer');
+  if (!suficiente) {
+    container.innerHTML = '<p class="embed-aviso">🚫 Você não tem créditos suficientes para enviar esta produção.</p>';
+    return;
+  }
+  GravadorAudio.criarGravadorAudio(container, {
+    jaEnviado: false,
+    enviarArquivo: async (arquivo, duracaoSegundos) => {
+      const formData = new FormData();
+      formData.append('temaId', t._id);
+      formData.append('observacoesAluno', document.getElementById('obsInput').value);
+      formData.append('duracaoSegundos', duracaoSegundos || 0);
+      const res = await fetch(obterUrl(), { method: 'POST', headers: { Authorization: 'Bearer ' + token }, body: formData });
+      const data = await res.json();
+      return { ok: res.ok, data };
+    },
+    onEnviado: data => {
+      window.__creditosCorrecao = creditosDisponiveis() - t.creditosNecessarios;
+      document.getElementById('creditosValor').textContent = creditosDisponiveis();
+      setTimeout(() => {
+        document.querySelectorAll('.top-tab').forEach(tb => tb.classList.remove('active'));
+        document.querySelector('[data-view="historico"]').classList.add('active');
+        mostrarView('historico');
+        carregarHistorico();
+      }, 1200);
+    }
+  });
 }
 
 document.querySelectorAll('.modo-btn').forEach(btn => {
@@ -424,11 +482,12 @@ function renderProducaoDetalhe(p) {
     </div>
 
     <div class="arquivos-row">
-      ${p.arquivoOriginal?.nome ? `<div class="arquivo-download-card"><span class="icone">📄</span><div class="info"><div class="nome">${p.arquivoOriginal.nome}</div><div class="tipo">Seu arquivo original</div></div><button class="btn secundario pequeno" data-baixar="original">Baixar</button></div>` : ''}
+      ${p.modalidade !== 'oral' && p.arquivoOriginal?.nome ? `<div class="arquivo-download-card"><span class="icone">📄</span><div class="info"><div class="nome">${p.arquivoOriginal.nome}</div><div class="tipo">Seu arquivo original</div></div><button class="btn secundario pequeno" data-baixar="original">Baixar</button></div>` : ''}
       ${p.textoDigitado ? `<div class="arquivo-download-card" style="flex:2;"><span class="icone">⌨️</span><div class="info"><div class="nome">Texto digitado (${p.contagemPalavras} palavras)</div><div class="tipo">Sua produção original</div></div></div>` : ''}
       ${p.arquivoCorrigido?.nome ? `<div class="arquivo-download-card"><span class="icone">✅</span><div class="info"><div class="nome">${p.arquivoCorrigido.nome}</div><div class="tipo">Arquivo corrigido</div></div><button class="btn pequeno" data-baixar="corrigido">Baixar</button></div>` : ''}
     </div>
 
+    ${p.modalidade === 'oral' && p.arquivoOriginal?.nome ? `<div class="card"><h2>Sua gravação${p.duracaoSegundos ? ' — ' + formatarDuracao(p.duracaoSegundos) : ''}</h2><audio controls id="audioOriginalPlayer" style="width:100%;"></audio></div>` : ''}
     ${p.textoDigitado ? `<div class="card"><h2>Seu texto enviado</h2><div class="comentario-geral-box" style="white-space:pre-wrap;">${p.textoDigitado}</div></div>` : ''}
   `;
 
@@ -469,6 +528,9 @@ function renderProducaoDetalhe(p) {
     btn.addEventListener('click', () => baixarArquivo(p._id, btn.dataset.baixar, btn.dataset.baixar === 'corrigido' ? p.arquivoCorrigido.nome : p.arquivoOriginal.nome));
   });
 
+  const audioPlayer = document.getElementById('audioOriginalPlayer');
+  if (audioPlayer) carregarAudioPlayer(audioPlayer, p._id, 'original');
+
   const reenviarBtn = document.getElementById('reenviarBtn');
   if (reenviarBtn) reenviarBtn.addEventListener('click', () => abrirReenvio(p));
 
@@ -484,6 +546,18 @@ function renderProducaoDetalhe(p) {
       if (res.ok) { input.value = ''; abrirProducao(p._id); }
     } catch (err) {}
   });
+}
+
+// Mesmo padrão de fetch+blob de baixarArquivo, só que aponta pro <audio> em
+// vez de disparar um download — a rota exige Authorization, então não dá pra
+// simplesmente apontar o `src` pra URL.
+async function carregarAudioPlayer(audioEl, producaoId, tipo) {
+  try {
+    const res = await fetch(`${API}/api/producoes/${producaoId}/arquivo/${tipo}`, { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return;
+    const blob = await res.blob();
+    audioEl.src = URL.createObjectURL(blob);
+  } catch (err) { /* player fica sem áudio se falhar */ }
 }
 
 async function baixarArquivo(producaoId, tipo, nomeArquivo) {
@@ -505,7 +579,10 @@ function abrirReenvio(p) {
     return;
   }
   temaAtual = p.temaId;
-  prepararEnvio(temaAtual);
+  const urlReenvio = () => `/api/producoes/${p._id}/reenviar`;
+  prepararEnvio(temaAtual, urlReenvio);
+  if (temaAtual.modalidade === 'oral') return; // gravador já foi conectado à rota de reenvio dentro de prepararEnvio
+
   // Sobrescreve o botão de envio para usar a rota de reenvio nesta sessão
   const btn = document.getElementById('enviarProducaoBtn');
   const novoBtn = btn.cloneNode(true);

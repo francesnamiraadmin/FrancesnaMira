@@ -33,7 +33,7 @@ async function carregarConjuntos() {
     lista.innerHTML = conjuntos.map(c => `
       <div class="conjunto-item ${c.ativo ? '' : 'inativo'}">
         <div>
-          <h4>${c.nome}${c.ativo ? '' : ' (inativo)'}</h4>
+          <h4>${c.nome}${c.ativo ? '' : ' (inativo)'}${c.pool === 'simulado' ? ' <span class="pill">Simulado</span>' : ''}</h4>
           <div class="meta">${c.quantidadeQuestoes} questões · ${(c.filtros?.niveis || []).join('+') || '—'} · ${c.dificuldade || 'automática'}</div>
         </div>
         <button class="btn secundario pequeno" data-editar="${c._id}">Editar</button>
@@ -67,6 +67,7 @@ async function abrirEditor(id) {
   document.getElementById('removerConjuntoBtn').style.display = id ? 'inline-block' : 'none';
   document.getElementById('conjuntoNome').value = '';
   document.getElementById('conjuntoDescricao').value = '';
+  document.getElementById('conjuntoPool').value = 'praticar';
   document.getElementById('conjuntoDificuldade').value = '';
   document.getElementById('conjuntoTempo').value = '';
   document.getElementById('conjuntoAtivo').checked = true;
@@ -78,6 +79,7 @@ async function abrirEditor(id) {
       const c = await res.json();
       document.getElementById('conjuntoNome').value = c.nome;
       document.getElementById('conjuntoDescricao').value = c.descricao || '';
+      document.getElementById('conjuntoPool').value = c.pool || 'praticar';
       document.getElementById('conjuntoDificuldade').value = c.dificuldade || '';
       document.getElementById('conjuntoTempo').value = c.tempoLimiteSegundos ? Math.round(c.tempoLimiteSegundos / 60) : '';
       document.getElementById('conjuntoAtivo').checked = c.ativo;
@@ -171,6 +173,7 @@ document.getElementById('salvarConjuntoBtn').addEventListener('click', async () 
   const tempoMin = Number(document.getElementById('conjuntoTempo').value);
   const payload = {
     nome, descricao: document.getElementById('conjuntoDescricao').value.trim(),
+    pool: document.getElementById('conjuntoPool').value,
     dificuldade: document.getElementById('conjuntoDificuldade').value || undefined,
     tempoLimiteSegundos: tempoMin > 0 ? tempoMin * 60 : null,
     ativo: document.getElementById('conjuntoAtivo').checked,

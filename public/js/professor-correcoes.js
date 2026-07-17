@@ -118,7 +118,7 @@ async function abrirProducaoParaCorrecao(id) {
     if (!res.ok) { alert('Não foi possível abrir esta produção.'); return; }
     producaoAtual = await res.json();
 
-    const resRubrica = await fetch(`/api/temas/rubrica/${producaoAtual.temaId.exame}`, { headers: { Authorization: 'Bearer ' + token } });
+    const resRubrica = await fetch(`/api/temas/rubrica/${producaoAtual.temaId.exame}?modalidade=${producaoAtual.modalidade || 'textual'}`, { headers: { Authorization: 'Bearer ' + token } });
     rubricaAtual = resRubrica.ok ? await resRubrica.json() : { criterios: [] };
 
     renderCorrecao(producaoAtual);
@@ -151,7 +151,9 @@ function renderCorrecao(p) {
     </div>`).join('');
 
   let producaoHtml = '';
-  if (p.arquivoOriginal?.nome) {
+  if (p.modalidade === 'oral' && p.arquivoOriginal?.nome) {
+    producaoHtml = `<div style="font-weight:700; margin-bottom:8px;">🎤 Gravação do aluno${p.duracaoSegundos ? ' — ' + formatarDuracao(p.duracaoSegundos) : ''}</div><audio controls id="audioProducaoOriginal" style="width:100%;"></audio>`;
+  } else if (p.arquivoOriginal?.nome) {
     producaoHtml = `<div class="arquivo-baixar-box"><span style="font-size:1.6rem;">📄</span><div style="flex:1;"><div style="font-weight:700;">${p.arquivoOriginal.nome}</div><div style="font-size:0.8rem; color:var(--cinza-400);">${(p.arquivoOriginal.tamanho / 1024).toFixed(0)} KB</div></div><button class="btn pequeno" id="baixarOriginalBtn">Baixar</button></div>`;
   } else if (p.textoDigitado) {
     producaoHtml = `<div class="texto-enviado-box">${p.textoDigitado}</div><div style="margin-top:8px; font-size:0.8rem; color:var(--cinza-400);">${p.contagemPalavras} palavras</div>`;
@@ -159,6 +161,8 @@ function renderCorrecao(p) {
   document.getElementById('producaoEnviadaBox').innerHTML = producaoHtml;
   const baixarBtn = document.getElementById('baixarOriginalBtn');
   if (baixarBtn) baixarBtn.addEventListener('click', () => baixarArquivo(p._id, 'original', p.arquivoOriginal.nome));
+  const audioEl = document.getElementById('audioProducaoOriginal');
+  if (audioEl) carregarAudioPlayer(audioEl, p._id, 'original');
 
   document.getElementById('historicoAluno').innerHTML = `<div class="hist-item">Protocolo atual: ${p.protocolo} — status ${NOMES_STATUS[p.status]}</div>` +
     (p.historicoStatus || []).map(h => `<div class="hist-item">${NOMES_STATUS[h.status] || h.status} em ${new Date(h.data).toLocaleString('pt-BR')}</div>`).join('');
@@ -228,6 +232,22 @@ async function baixarArquivo(producaoId, tipo, nomeArquivo) {
     document.body.appendChild(a); a.click(); a.remove();
     URL.revokeObjectURL(url);
   } catch (err) { alert('Erro ao baixar o arquivo.'); }
+}
+
+function formatarDuracao(seg) {
+  const m = Math.floor((seg || 0) / 60), s = (seg || 0) % 60;
+  return s ? `${m}min ${s}s` : `${m} min`;
+}
+
+// Mesmo padrão de fetch+blob de baixarArquivo, só que aponta pro <audio> em
+// vez de disparar um download — a rota exige Authorization.
+async function carregarAudioPlayer(audioEl, producaoId, tipo) {
+  try {
+    const res = await fetch(`/api/producoes/${producaoId}/arquivo/${tipo}`, { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return;
+    const blob = await res.blob();
+    audioEl.src = URL.createObjectURL(blob);
+  } catch (err) { /* player fica sem áudio se falhar */ }
 }
 
 // ===================== UPLOAD DO ARQUIVO CORRIGIDO =====================

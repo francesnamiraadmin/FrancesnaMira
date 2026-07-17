@@ -1,8 +1,9 @@
 // =====================================================================
-// PRATICAR — 3 seções (Sugeridos/Em Andamento/Respondidos). Usa os
-// renderers compartilhados de js/conjuntoCard.js (authHeaders,
-// renderSugeridoCard, renderEmAndamentoCard, renderRespondidoCard, e o
-// delegated click de iniciar/continuar/refazer/revisar).
+// PRATICAR — só Conjuntos Sugeridos (oficiais, não iniciados, ordenados
+// por prioridade). Em Andamento/Respondidos viraram página própria,
+// meus-conjuntos.html + js/meusConjuntos.js. Usa os renderers
+// compartilhados de js/conjuntoCard.js (authHeaders, renderSugeridoCard,
+// e o delegated click de iniciar/continuar/refazer/revisar).
 // Não carrega js/questoes.js (só usado por Simulados) — NIVEIS é
 // declarado aqui localmente.
 // =====================================================================
@@ -58,8 +59,6 @@ function initFiltroSugeridos() {
 }
 
 async function carregarConjuntos() {
-  const emAndamentoEl = document.getElementById('conjuntosEmAndamento');
-  const respondidosEl = document.getElementById('conjuntosRespondidos');
   try {
     const res = await fetch('/api/questoes/conjuntos', { headers: authHeaders() });
     if (!res.ok) throw new Error('Erro ao carregar conjuntos.');
@@ -67,18 +66,8 @@ async function carregarConjuntos() {
 
     sugeridosRaw = data.prioritarios.naoIniciados.filter(c => c.tipo === 'oficial');
     renderSugeridos();
-
-    emAndamentoEl.innerHTML = data.prioritarios.emAndamento.length
-      ? data.prioritarios.emAndamento.map(renderEmAndamentoCard).join('')
-      : '<p class="conjuntos-vazio">Nenhum conjunto em andamento no momento.</p>';
-
-    respondidosEl.innerHTML = data.respondidos.length
-      ? data.respondidos.map(renderRespondidoCard).join('')
-      : '<p class="conjuntos-vazio">Você ainda não concluiu nenhum conjunto.</p>';
   } catch (err) {
     document.getElementById('conjuntosSugeridos').innerHTML = '<p class="conjuntos-vazio">Erro ao carregar conjuntos.</p>';
-    emAndamentoEl.innerHTML = '';
-    respondidosEl.innerHTML = '';
   }
 }
 

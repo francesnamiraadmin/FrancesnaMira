@@ -8,7 +8,8 @@ const { exigirAuth, exigirAdmin } = require("../middleware/auth");
 // RUBRICA DE UM EXAME (critérios oficiais) — usada pelo professor na correção
 router.get("/rubrica/:exame", exigirAuth, async (req, res) => {
   try {
-    const rubrica = await Rubrica.findOne({ exame: req.params.exame });
+    const modalidade = req.query.modalidade === "oral" ? "oral" : "textual";
+    const rubrica = await Rubrica.findOne({ exame: req.params.exame, modalidade });
     if (!rubrica) return res.status(404).json({ msg: "Rubrica não encontrada para este exame." });
     res.json(rubrica);
   } catch (err) {
@@ -19,13 +20,14 @@ router.get("/rubrica/:exame", exigirAuth, async (req, res) => {
 // LISTAR TEMAS (com filtros) — qualquer usuário autenticado
 router.get("/", exigirAuth, async (req, res) => {
   try {
-    const { exame, nivel, tipoProducao, dificuldade, busca, todos } = req.query;
+    const { exame, nivel, tipoProducao, dificuldade, modalidade, busca, todos } = req.query;
     const filtro = {};
     if (!(todos === "1" && req.userRole === "admin")) filtro.ativo = true;
     if (exame) filtro.exame = exame;
     if (nivel) filtro.nivel = nivel;
     if (tipoProducao) filtro.tipoProducao = tipoProducao;
     if (dificuldade) filtro.dificuldade = dificuldade;
+    if (modalidade) filtro.modalidade = modalidade;
     if (busca) filtro.titulo = { $regex: busca, $options: "i" };
 
     const temas = await Tema.find(filtro).select("-coletanea").sort({ criadoEm: -1 });

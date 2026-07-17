@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Matérias e Conteúdos - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+
+<style>
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; }
+:root { --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45); }
+
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
+
+.voltar-link { display: inline-flex; gap: 6px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+
+.intro { text-align: center; padding: 40px 4% 10px; }
+.intro h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; }
+.intro p { font-size: 1.05rem; opacity: 0.9; max-width: 680px; margin: 0 auto; }
+
+.pagina-wrap { max-width: 1100px; margin: 0 auto; padding: 20px 4% 100px; }
+
+.secao-titulo-row { display: flex; align-items: center; justify-content: space-between; margin: 30px 0 16px; flex-wrap: wrap; gap: 10px; }
+.secao-titulo-row h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+
+.materias-grid, .conteudos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+
+.materia-card, .conteudo-card {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-left: 6px solid var(--cor-item, var(--accent));
+  border-radius: 16px; padding: 18px 20px; box-shadow: var(--glass-shadow); cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.materia-card:hover, .conteudo-card:hover { transform: translateY(-3px); }
+.materia-card.selecionada { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: -1px; }
+.conteudo-card { cursor: default; }
+.materia-card-topo { display: flex; align-items: center; gap: 10px; }
+.materia-card .icone-materia { font-size: 1.6rem; }
+.materia-card h3, .conteudo-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; flex: 1; }
+.materia-card p, .conteudo-card p { font-size: 0.85rem; opacity: 0.8; margin-top: 6px; line-height: 1.4; }
+.card-meta { font-size: 0.78rem; opacity: 0.7; margin-top: 8px; }
+.card-acoes { display: flex; gap: 8px; margin-top: 12px; }
+.card-acoes button {
+  border: none; background: var(--glass-hover); color: var(--text); border-radius: 8px; padding: 6px 12px;
+  font-size: 0.78rem; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif;
+}
+.card-acoes button.apagar { color: var(--danger-text); }
+
+.vazio-msg { text-align: center; opacity: 0.75; padding: 30px 16px; font-size: 0.95rem; }
+.erro-msg { color: var(--danger-text); font-size: 0.85rem; margin-top: 8px; text-align: center; }
+
+/* Modal — reaproveita .app-modal-overlay/.app-modal do app-shell.css, só amplia e
+   adiciona estilos que faltam ali (textarea, select). */
+.app-modal.largo { max-width: 460px; }
+.app-modal textarea {
+  width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--glass-border);
+  background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; min-height: 70px; resize: vertical;
+}
+
+/* Seletor de cor (colorPicker.js) — seletores escopados sob .seletor-cor (em vez de
+   .seletor-cor-nativo/.seletor-cor-hex isolados) de propósito: dentro de um .app-modal,
+   a regra global ".app-modal input { width:100% }" (app-shell.css) tem especificidade
+   0-1-1, que bate qualquer classe única (0-1-0) — sem esse escopo extra, o swatch nativo
+   herdava width:100% como flex-basis e "engolia" o espaço do campo hex. */
+.seletor-cor-linha { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.seletor-cor .seletor-cor-nativo { width: 44px; height: 40px; padding: 2px; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--glass-input); cursor: pointer; }
+.seletor-cor-preview { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--glass-border-strong); flex-shrink: 0; }
+.seletor-cor .seletor-cor-hex { flex: 1; width: auto; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-input); color: var(--text); font-family: monospace; }
+.seletor-cor-rgb { display: flex; gap: 10px; margin-bottom: 12px; }
+.seletor-cor-rgb label { flex: 1; font-size: 0.78rem; font-weight: 700; opacity: 0.8; }
+.seletor-cor .seletor-cor-rgb input { width: 100%; margin-top: 4px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--glass-input); color: var(--text); }
+.seletor-cor-paleta { display: flex; flex-wrap: wrap; gap: 8px; }
+.seletor-cor-swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; }
+.seletor-cor-swatch.selecionada { border-color: var(--text); }
+</style>
+</head>
+
+<body>
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<section class="intro">
+  <a class="voltar-link" href="mapeador-estudos.html">← Mapeador de Estudos</a>
+  <h1>🗂️ Matérias e Conteúdos</h1>
+  <p>Organize sua hierarquia de estudo: crie Matérias (ex.: Francês, Gramática) e, dentro delas, os Conteúdos específicos (ex.: Passé Composé, Verbos) — cada um com sua própria cor.</p>
+</section>
+
+<div class="pagina-wrap">
+  <div class="secao-titulo-row">
+    <h2>Matérias</h2>
+    <button class="dash-btn" id="btnNovaMateria">+ Nova Matéria</button>
+  </div>
+  <div class="materias-grid" id="materiasGrid"></div>
+
+  <div class="secao-titulo-row" id="conteudosTituloRow" style="display:none;">
+    <h2 id="conteudosTitulo">Conteúdos</h2>
+    <button class="dash-btn" id="btnNovoConteudo">+ Novo Conteúdo</button>
+  </div>
+  <div class="conteudos-grid" id="conteudosGrid"></div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<div class="app-modal-overlay" id="modalMateria">
+  <div class="app-modal largo">
+    <h3 id="modalMateriaTitulo">Nova Matéria</h3>
+    <label>Nome</label>
+    <input type="text" id="materiaNome" placeholder="Ex.: Francês">
+    <label>Ícone (opcional)</label>
+    <input type="text" id="materiaIcone" placeholder="Ex.: 🇫🇷" maxlength="4">
+    <label>Descrição (opcional)</label>
+    <textarea id="materiaDescricao" placeholder="Descrição opcional"></textarea>
+    <label>Cor</label>
+    <div id="materiaCorPicker"></div>
+    <p class="erro-msg" id="modalMateriaErro"></p>
+    <div class="app-modal-actions">
+      <button class="dash-btn secundario" id="btnCancelarMateria" type="button">Cancelar</button>
+      <button class="dash-btn" id="btnSalvarMateria" type="button">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="app-modal-overlay" id="modalConteudo">
+  <div class="app-modal largo">
+    <h3 id="modalConteudoTitulo">Novo Conteúdo</h3>
+    <label>Nome</label>
+    <input type="text" id="conteudoNome" placeholder="Ex.: Passé Composé">
+    <label>Descrição (opcional)</label>
+    <textarea id="conteudoDescricao" placeholder="Descrição opcional"></textarea>
+    <label>Cor</label>
+    <div id="conteudoCorPicker"></div>
+    <p class="erro-msg" id="modalConteudoErro"></p>
+    <div class="app-modal-actions">
+      <button class="dash-btn secundario" id="btnCancelarConteudo" type="button">Cancelar</button>
+      <button class="dash-btn" id="btnSalvarConteudo" type="button">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/colorPicker.js"></script>
+<script src="js/mapeadorMaterias.js"></script>
+<script src="js/appShell.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

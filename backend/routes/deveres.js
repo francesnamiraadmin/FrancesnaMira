@@ -333,16 +333,16 @@ router.post("/minhas-semanas/:deverId/atividades/:index/enviar", comTratamentoDe
       return res.status(400).json({ msg: "Conclua a tarefa anterior desta semana antes desta." });
     }
 
-    const { texto } = req.body;
+    const { texto, duracaoSegundos } = req.body;
     if (!req.file && !texto?.trim()) return res.status(400).json({ msg: "Envie um arquivo ou um texto." });
 
-    // Produção textual não duplica o texto/arquivo no dever — cria uma Producao
+    // Produção textual/oral não duplica o texto/arquivo no dever — cria uma Producao
     // de verdade (mesma fila de correção do Ambiente de Produção) e só guarda o vínculo.
-    if (atividade.tipo === "producao_textual") {
+    if (["producao_textual", "producao_oral"].includes(atividade.tipo)) {
       if (!atividade.conteudo?.temaId) { limparTemp(); return res.status(400).json({ msg: "Esta atividade não tem um tema de produção configurado." }); }
       const producao = await montarNovaProducao({
         userId: req.userId, temaId: atividade.conteudo.temaId, textoDigitado: texto,
-        observacoesAluno: undefined, file: req.file, origemId: null
+        observacoesAluno: undefined, file: req.file, origemId: null, duracaoSegundos
       });
       atividade.entrega.status = "enviado";
       atividade.entrega.enviadoEm = new Date();

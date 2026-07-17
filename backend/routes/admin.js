@@ -76,15 +76,17 @@ router.get("/rubricas", async (req, res) => {
 
 router.put("/rubricas/:exame", async (req, res) => {
   try {
-    const { criterios, notaMaxima } = req.body;
+    const { criterios, notaMaxima, modalidade } = req.body;
     if (!criterios?.length) return res.status(400).json({ msg: "Informe ao menos um critério." });
+    const modalidadeFinal = modalidade === "oral" ? "oral" : "textual";
     const rubrica = await Rubrica.findOneAndUpdate(
-      { exame: req.params.exame },
-      { exame: req.params.exame, criterios, notaMaxima: notaMaxima || 20, atualizadoEm: new Date() },
+      { exame: req.params.exame, modalidade: modalidadeFinal },
+      { exame: req.params.exame, modalidade: modalidadeFinal, criterios, notaMaxima: notaMaxima || 20, atualizadoEm: new Date() },
       { new: true, upsert: true }
     );
     res.json(rubrica);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
   }
 });

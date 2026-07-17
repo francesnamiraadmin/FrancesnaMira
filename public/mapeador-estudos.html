@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
-<title>Plataforma de Questões - Francês na Mira</title>
+<title>Mapeador de Estudos - Francês na Mira</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
@@ -43,57 +43,45 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 </style>
 </head>
 
-<body style="visibility:hidden;">
-<script src="js/plataformaGate.js"></script>
-
+<body>
 <div id="app-navbar" class="app-navbar-bar"></div>
 
 <section class="intro">
-  <h1>Plataforma de Questões</h1>
-  <p>Questões no estilo TCF, DELF, DALF e TEF — organizadas em conjuntos por nível e por matéria, com simulados cronometrados, caderno de revisão e estatísticas completas do seu progresso.</p>
+  <h1>⏱️ Mapeador de Estudos</h1>
+  <p>Organize suas Matérias e Conteúdos, cronometre suas sessões de estudo e acompanhe sua evolução com estatísticas completas — inspirado no Aprovado App, totalmente integrado à sua conta.</p>
 </section>
 
 <div class="hub-wrap">
-  <div class="hub-grid" id="hubGrid">
-    <a class="hub-card" href="praticar.html">
-      <div class="icone">📝</div>
-      <h2>Praticar</h2>
-      <p>Resolver conjuntos de questões e acompanhar sua evolução.</p>
-    </a>
-    <a class="hub-card" href="meus-conjuntos.html">
-      <div class="icone">✅</div>
-      <h2>Em Andamento / Respondidos</h2>
-      <p>Acompanhar os conjuntos que você já começou e rever o resultado dos que já concluiu.</p>
-      <span class="indicador" id="indicadorAndamento" style="display:none;"></span>
-    </a>
-    <a class="hub-card" href="simulados.html">
+  <div class="hub-grid">
+    <a class="hub-card" href="mapeador-timer.html">
       <div class="icone">⏱️</div>
-      <h2>Simulados</h2>
-      <p>Realizar simulados completos em ambiente semelhante às provas oficiais.</p>
+      <h2>Timer de Estudos</h2>
+      <p>Escolha uma matéria e um conteúdo e inicie o cronômetro da sua sessão de estudo.</p>
+      <span class="indicador" id="indicadorTimer" style="display:none;"></span>
     </a>
-    <a class="hub-card" href="personalizar-conjunto.html">
-      <div class="icone">🎯</div>
-      <h2>Personalize</h2>
-      <p>Criar conjuntos personalizados escolhendo níveis, categorias, quantidade de questões e tempo.</p>
+    <a class="hub-card" href="mapeador-historico.html">
+      <div class="icone">📜</div>
+      <h2>Histórico</h2>
+      <p>Ver todas as suas sessões registradas, com busca, filtro e edição.</p>
+      <span class="indicador" id="indicadorHistorico" style="display:none;"></span>
     </a>
-    <a class="hub-card" href="caderno-revisao.html">
-      <div class="icone">📓</div>
-      <h2>Caderno de Revisão</h2>
-      <p>Gerenciar todas as questões marcadas para revisão e criar novas sessões de estudo.</p>
-      <span class="indicador" id="indicadorCaderno" style="display:none;"></span>
-    </a>
-    <a class="hub-card" href="estatisticas-questoes.html">
+    <a class="hub-card" href="mapeador-estatisticas.html">
       <div class="icone">📊</div>
       <h2>Estatísticas</h2>
-      <p>Visualizar gráficos, desempenho, evolução e histórico completo da Plataforma de Questões.</p>
+      <p>Gráficos, indicadores, sequência de dias e evolução do seu tempo de estudo.</p>
       <span class="indicador" id="indicadorEstatisticas" style="display:none;"></span>
+    </a>
+    <a class="hub-card" href="mapeador-materias.html">
+      <div class="icone">🗂️</div>
+      <h2>Matérias e Conteúdos</h2>
+      <p>Criar e organizar suas matérias e conteúdos, cada um com sua própria cor.</p>
     </a>
   </div>
 </div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
-<script src="js/plataformaHub.js"></script>
+<script src="js/mapeadorHub.js"></script>
 <script src="js/appShell.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>

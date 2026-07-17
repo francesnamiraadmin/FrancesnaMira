@@ -1,22 +1,19 @@
-// Gravador de áudio ao vivo — usado na atividade "Produção oral" do Dever de
-// Casa. Não existe nenhuma correção rica de produção oral na plataforma ainda
-// (decisão registrada no plano da Fase 2/3A), então o áudio gravado aqui vai
-// pra mesma entrega genérica das outras atividades — só a captura em si é
-// nova (getUserMedia/MediaRecorder), sem nada reaproveitável antes disso.
+// Gravador de áudio ao vivo — usado tanto na atividade "Produção oral" do
+// Dever de Casa quanto no envio de produção oral no Ambiente de Produção
+// (correcoes-texto.html). A captura (getUserMedia/MediaRecorder) é sempre a
+// mesma; quem muda é ONDE o áudio gravado é enviado — por isso o upload em
+// si fica a cargo de `opts.enviarArquivo`, passado por quem usa o widget,
+// em vez de fixar uma rota aqui dentro.
 const GravadorAudio = (() => {
-  function authHeaders(json) {
-    const token = localStorage.getItem('token');
-    return { Authorization: 'Bearer ' + token, ...(json ? { 'Content-Type': 'application/json' } : {}) };
-  }
   function formatarTempo(seg) {
     const m = Math.floor(seg / 60), s = Math.floor(seg % 60);
     return `${m}:${String(s).padStart(2, '0')}`;
   }
 
   // container: onde o gravador inteiro é renderizado.
-  // opts: { deverId, index, entregaExistente, onEnviado }
+  // opts: { jaEnviado (bool), onEnviado(data), enviarArquivo(file) => Promise<{ok, data}> }
   function criarGravadorAudio(container, opts) {
-    const { deverId, index, entregaExistente, onEnviado } = opts;
+    const { jaEnviado, onEnviado, enviarArquivo } = opts;
 
     if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
       container.innerHTML = `
@@ -27,7 +24,7 @@ const GravadorAudio = (() => {
       const input = container.querySelector('[data-arquivo-audio]');
       const btn = container.querySelector('[data-enviar-arquivo-audio]');
       input.addEventListener('change', () => { btn.disabled = !input.files[0]; });
-      btn.addEventListener('click', () => enviarBlob(input.files[0], container, deverId, index, onEnviado));
+      btn.addEventListener('click', () => enviar(input.files[0], container, opts));
       return;
     }
 
@@ -35,7 +32,7 @@ const GravadorAudio = (() => {
 
     function renderInicial() {
       container.innerHTML = `
-        <p class="embed-aviso">${entregaExistente?.status === 'enviado' ? 'Você já enviou uma gravação. Grave de novo pra substituir.' : 'Clique em gravar e fale sua resposta.'}</p>
+        <p class="embed-aviso">${jaEnviado ? 'Você já enviou uma gravação. Grave de novo pra substituir.' : 'Clique em gravar e fale sua resposta.'}</p>
         <div class="gravador-controles">
           <button class="dash-btn pequeno" type="button" data-gravar>🎙️ Gravar</button>
           <span class="gravador-tempo" data-tempo style="display:none;"></span>
@@ -86,28 +83,25 @@ const GravadorAudio = (() => {
       container.querySelector('[data-regravar]').addEventListener('click', renderInicial);
       container.querySelector('[data-enviar-gravacao]').addEventListener('click', () => {
         const arquivo = new File([blobGravado], 'gravacao.webm', { type: 'audio/webm' });
-        enviarBlob(arquivo, container, deverId, index, onEnviado);
+        enviar(arquivo, container, opts, segundos);
       });
     }
 
     renderInicial();
   }
 
-  async function enviarBlob(arquivo, container, deverId, index, onEnviado) {
+  async function enviar(arquivo, container, opts, duracaoSegundos) {
     const btn = container.querySelector('[data-enviar-gravacao], [data-enviar-arquivo-audio]');
     const msg = container.querySelector('[data-msg]');
     if (btn) btn.disabled = true;
     msg.className = 'msg-inline';
     msg.textContent = 'Enviando...';
-    const form = new FormData();
-    form.append('arquivo', arquivo);
     try {
-      const res = await fetch(`/api/deveres/minhas-semanas/${deverId}/atividades/${index}/enviar`, { method: 'POST', headers: authHeaders(), body: form });
-      const data = await res.json();
-      if (!res.ok) { msg.className = 'msg-inline erro'; msg.textContent = data.msg || 'Erro ao enviar.'; if (btn) btn.disabled = false; return; }
+      const resultado = await opts.enviarArquivo(arquivo, duracaoSegundos);
+      if (!resultado.ok) { msg.className = 'msg-inline erro'; msg.textContent = resultado.data?.msg || 'Erro ao enviar.'; if (btn) btn.disabled = false; return; }
       msg.className = 'msg-inline sucesso';
       msg.textContent = 'Áudio enviado!';
-      if (onEnviado) onEnviado(data);
+      if (opts.onEnviado) opts.onEnviado(resultado.data);
     } catch (err) {
       msg.className = 'msg-inline erro';
       msg.textContent = 'Erro ao conectar ao servidor.';

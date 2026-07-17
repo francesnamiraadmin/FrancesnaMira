@@ -172,6 +172,12 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     <div id="conteudoDeveres"><div class="skeleton skeleton-block"></div></div>
   </div>
 
+  <!-- ===================== MAPEADOR DE ESTUDOS ===================== -->
+  <div class="dash-section-card">
+    <h2>⏱️ Mapeador de Estudos</h2>
+    <div id="conteudoMapeador"><div class="skeleton skeleton-block"></div></div>
+  </div>
+
   <!-- ===================== PLATAFORMA DE QUESTÕES ===================== -->
   <div class="dash-section-card" id="secPlataforma">
     <h2>📊 Plataforma de Questões</h2>
@@ -760,6 +766,33 @@ document.getElementById('salvarPerfilBtn').addEventListener('click', async () =>
   }
 });
 
+// ===================== MAPEADOR DE ESTUDOS (resumo) =====================
+async function renderMapeador() {
+  const alvo = document.getElementById('conteudoMapeador');
+  try {
+    const res = await fetch('/api/estudos/estatisticas', { headers: authHeaders() });
+    if (!res.ok) throw new Error('Erro ao carregar.');
+    const { kpis } = await res.json();
+
+    if (!kpis.numeroSessoes) {
+      alvo.innerHTML = `<div class="stats-vazio">Organize suas matérias e cronometre suas sessões de estudo.</div><div style="text-align:center; margin-top:14px;"><a href="mapeador-timer.html" class="dash-btn">Iniciar primeira sessão</a></div>`;
+      return;
+    }
+
+    const h = seg => { const m = Math.round((seg || 0) / 60); const hh = Math.floor(m / 60); return hh > 0 ? `${hh}h${String(m % 60).padStart(2, '0')}` : `${m}min`; };
+    alvo.innerHTML = `
+      <div class="dash-kpi-row">
+        <div class="dash-kpi"><div class="valor">${h(kpis.tempoHojeSegundos)}</div><div class="rotulo">Hoje</div></div>
+        <div class="dash-kpi"><div class="valor">${h(kpis.tempoSemanaSegundos)}</div><div class="rotulo">Esta semana</div></div>
+        <div class="dash-kpi"><div class="valor">${kpis.sequenciaDiasAtual}🔥</div><div class="rotulo">Sequência de dias</div></div>
+        <div class="dash-kpi"><div class="valor">${h(kpis.tempoTotalSegundos)}</div><div class="rotulo">Tempo total</div></div>
+      </div>
+      <div style="text-align:center; margin-top:6px;"><a href="mapeador-estudos.html" class="dash-btn secundario">Ver Mapeador de Estudos</a></div>`;
+  } catch (err) {
+    alvo.innerHTML = `<div class="stats-vazio">Erro ao carregar o Mapeador de Estudos.</div>`;
+  }
+}
+
 // ===================== INIT =====================
 document.addEventListener('appshell:ready', e => {
   const dados = e.detail;
@@ -770,6 +803,7 @@ document.addEventListener('appshell:ready', e => {
   renderProducao(dados);
   renderAulas(dados);
   renderDeveres();
+  renderMapeador();
   preencherPerfil(dados.perfil || {});
 });
 

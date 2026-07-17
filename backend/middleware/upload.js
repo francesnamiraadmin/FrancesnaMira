@@ -10,12 +10,15 @@ fs.mkdirSync(TMP_DIR, { recursive: true });
 const TIPOS_ACEITOS = {
   "application/pdf": ".pdf",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document": ".docx",
-  "application/vnd.oasis.opendocument.text": ".odt"
+  "application/vnd.oasis.opendocument.text": ".odt",
+  "audio/mpeg": ".mp3",
+  "audio/wav": ".wav",
+  "audio/webm": ".webm" // formato padrão do MediaRecorder do navegador (gravador ao vivo)
 };
 
 function filtroArquivo(req, file, cb) {
   if (!TIPOS_ACEITOS[file.mimetype]) {
-    return cb(new Error("Formato não aceito. Envie um arquivo PDF, DOCX ou ODT."));
+    return cb(new Error("Formato não aceito. Envie um arquivo PDF, DOCX, ODT ou áudio (MP3/WAV/WebM)."));
   }
   cb(null, true);
 }

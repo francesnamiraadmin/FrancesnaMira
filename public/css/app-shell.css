@@ -59,41 +59,62 @@
 .app-nav-link.app-nav-locked:hover { background: var(--warning-bg); color: var(--warning-text); }
 .app-nav-link.app-nav-link-ativo { background: var(--warning-bg); color: var(--accent); }
 
-/* Submenu expansível (ex.: Plataforma de Questões → Praticar/Simulados/...) — expande
-   suavemente para baixo no hover, sem JS de mouseenter/mouseleave. Reutilizável por
-   qualquer produto que preencha PRODUTOS_NAV[].submenu em appShell.js. */
-.app-nav-submenu-wrap { position: relative; }
+/* Submenu expansível (ex.: Plataforma de Questões → Praticar/Simulados/...) —
+   ancorado na MESMA COLUNA do link-gatilho (não centralizado na navbar inteira,
+   que ficava visualmente desconectado do link e difícil de alcançar com o mouse
+   sem perder o hover no caminho). Cresce suavemente pra baixo no hover, sem JS de
+   mouseenter/mouseleave. Reutilizável por qualquer produto que preencha
+   PRODUTOS_NAV[].submenu em appShell.js.
+   `.app-nav-item.app-nav-submenu-wrap` sobrescreve com 2 classes (maior
+   especificidade que o `.app-nav-item` sozinho) só pra garantir `display:flex;
+   align-items:center` — é isso que centraliza verticalmente o `<a>` dentro do
+   wrap (um <div> comum, não-flex por padrão) igual aos `<a>` soltos ao lado;
+   sem isso o link ficava colado no topo do item esticado pelo flex da navbar. */
+.app-nav-item.app-nav-submenu-wrap { position: relative; display: flex; align-items: center; }
 .app-nav-submenu {
+  /* top:100% SEM margem/gap de propósito — um espaço vazio entre o link e o submenu
+     vira uma "zona morta" onde o mouse sai da área hoverable no caminho pra baixo,
+     fechando o submenu antes de dar tempo de clicar num item (esse era o bug real
+     por trás de "não consigo clicar nos tópicos"). Qualquer respiro visual tem que
+     vir de padding (fica DENTRO da caixa hoverable), nunca de margin/top deslocado
+     (fica FORA da caixa, recria a zona morta). */
   position: absolute;
   top: 100%;
-  left: 50%;
-  min-width: 230px;
+  left: 0;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   background: var(--overlay-strong);
   border-radius: 16px;
   box-shadow: var(--shadow);
   padding: 8px;
+  margin-top: 0;
+  max-height: 0;
   opacity: 0;
-  transform: translate(-50%, -8px);
+  overflow: hidden;
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
   z-index: 1500;
 }
 .app-nav-submenu-wrap:hover .app-nav-submenu,
 .app-nav-submenu-wrap:focus-within .app-nav-submenu {
+  max-height: 400px;
   opacity: 1;
-  transform: translate(-50%, 6px);
+  padding: 8px;
   pointer-events: auto;
 }
 .app-nav-submenu-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
+  padding: 11px 14px;
   border-radius: 10px;
   color: var(--text);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
+  white-space: nowrap;
   transition: background 0.15s ease;
 }
 .app-nav-submenu-item:hover { background: var(--glass-hover); }

@@ -47,6 +47,7 @@ header a { color: var(--azul-escuro); text-decoration: none; }
 .conjunto-item h4 { font-size: 1rem; }
 .conjunto-item .meta { font-size: 0.82rem; color: var(--cinza-400); }
 .conjunto-item.inativo { opacity: 0.55; }
+.pill { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 2px 10px; border-radius: 10px; background: var(--azul-claro); color: var(--azul-escuro); vertical-align: middle; }
 .campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
 .campo label { font-size: 0.8rem; font-weight: 700; color: var(--cinza-600); }
 .campo input, .campo select, .campo textarea { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--cinza-300); font-family: 'Poppins', sans-serif; font-size: 0.9rem; background: var(--branco); color: var(--cinza-800); }
@@ -122,6 +123,12 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div class="campo"><label>Nome</label><input type="text" id="conjuntoNome" placeholder="Ex.: Conjunto 01 — Nível A1"></div>
       <div class="campo"><label>Descrição (opcional)</label><textarea id="conjuntoDescricao"></textarea></div>
       <div class="campo-row">
+        <div class="campo"><label>Categoria</label>
+          <select id="conjuntoPool">
+            <option value="praticar">Praticar</option>
+            <option value="simulado">Simulado</option>
+          </select>
+        </div>
         <div class="campo"><label>Dificuldade</label>
           <select id="conjuntoDificuldade">
             <option value="">Automática (pelo nível das questões)</option>

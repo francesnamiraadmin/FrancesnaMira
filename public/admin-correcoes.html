@@ -164,6 +164,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
         <div class="campo"><label>Nível</label><select id="temaNivel"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option></select></div>
         <div class="campo"><label>Dificuldade</label><select id="temaDificuldade"><option value="facil">Fácil</option><option value="medio" selected>Médio</option><option value="dificil">Difícil</option></select></div>
         <div class="campo"><label>Tipo de produção</label><input type="text" id="temaTipoProducao" placeholder="Ex.: Essai argumentatif"></div>
+        <div class="campo"><label>Modalidade</label><select id="temaModalidade"><option value="textual">✍️ Textual</option><option value="oral">🎤 Oral</option></select></div>
       </div>
       <div class="campo"><label>Descrição (para o aluno)</label><textarea id="temaDescricao"></textarea></div>
       <div class="campo"><label>Objetivos (um por linha)</label><textarea id="temaObjetivos"></textarea></div>
@@ -172,8 +173,10 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div class="campo"><label>Competências avaliadas (uma por linha)</label><textarea id="temaCompetencias"></textarea></div>
       <div class="campo-row">
         <div class="campo"><label>Tempo sugerido (min)</label><input type="number" id="temaTempo" value="45"></div>
-        <div class="campo"><label>Mín. de palavras</label><input type="number" id="temaMinPalavras" value="160"></div>
-        <div class="campo"><label>Máx. de palavras</label><input type="number" id="temaMaxPalavras" value="190"></div>
+        <div class="campo" id="campoMinPalavras"><label>Mín. de palavras</label><input type="number" id="temaMinPalavras" value="160"></div>
+        <div class="campo" id="campoMaxPalavras"><label>Máx. de palavras</label><input type="number" id="temaMaxPalavras" value="190"></div>
+        <div class="campo" id="campoTempoMinimo" style="display:none;"><label>Duração mínima (segundos)</label><input type="number" id="temaTempoMinimo" value="30"></div>
+        <div class="campo" id="campoTempoMaximo" style="display:none;"><label>Duração máxima (segundos)</label><input type="number" id="temaTempoMaximo" value="120"></div>
         <div class="campo"><label>Créditos necessários</label><input type="number" id="temaCreditos" value="1"></div>
       </div>
 
@@ -205,7 +208,10 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
   <!-- ===================== RUBRICAS ===================== -->
   <div id="tabRubricas" style="display:none;">
-    <div class="campo" style="max-width:260px;"><label>Exame</label><select id="rubricaExameSelect"><option>TCF</option><option>TEF</option><option>DELF</option><option>DALF</option></select></div>
+    <div class="campo-row" style="max-width:520px;">
+      <div class="campo"><label>Exame</label><select id="rubricaExameSelect"><option>TCF</option><option>TEF</option><option>DELF</option><option>DALF</option></select></div>
+      <div class="campo"><label>Modalidade</label><select id="rubricaModalidadeSelect"><option value="textual">✍️ Textual</option><option value="oral">🎤 Oral</option></select></div>
+    </div>
     <div class="card">
       <h2>Critérios e pesos</h2>
       <div id="criteriosRubricaForm"></div>
