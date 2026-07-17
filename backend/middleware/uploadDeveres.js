@@ -16,6 +16,7 @@ const TIPOS_ENTREGA = {
   "image/webp": ".webp",
   "audio/mpeg": ".mp3",
   "audio/wav": ".wav",
+  "audio/webm": ".webm", // formato padrão do MediaRecorder do navegador (gravador ao vivo)
   "application/zip": ".zip"
 };
 

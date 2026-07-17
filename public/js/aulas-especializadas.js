@@ -324,73 +324,16 @@ document.getElementById('materiaisLista').addEventListener('click', async e => {
 });
 
 // ---------- player ----------
-function detectarTipoEmbed(url) {
-  if (/youtube\.com|youtu\.be|player\.vimeo\.com|iframe\.mediadelivery\.net|cloudflarestream\.com\/.+\/iframe/i.test(url || '')) return 'iframe';
-  return 'video';
-}
-
-// Aceita qualquer link de YouTube colado pelo professor (watch?v=, youtu.be/, shorts/, embed/)
-// e converte para o formato /embed/ID, que é o único que o YouTube permite carregar em iframe.
-function normalizarUrlYoutube(url) {
-  const padroes = [
-    /youtube\.com\/watch\?(?:.*&)?v=([\w-]{6,})/i,
-    /youtube\.com\/shorts\/([\w-]{6,})/i,
-    /youtube\.com\/embed\/([\w-]{6,})/i,
-    /youtu\.be\/([\w-]{6,})/i
-  ];
-  for (const re of padroes) {
-    const match = (url || '').match(re);
-    if (match) return `https://www.youtube.com/embed/${match[1]}`;
-  }
-  return url;
-}
-
+// Delega pro módulo compartilhado (public/js/aulaPlayerEmbed.js), que também é
+// usado dentro do Dever de Casa — assim as duas telas nunca ficam com duas
+// implementações divergentes da mesma lógica de progresso de vídeo.
 async function renderPlayer() {
   const wrap = document.getElementById('playerWrap');
-  wrap.innerHTML = '';
-  const video = aulaAtual.video;
-
-  if (!video || (!video.url && !video.temArquivo)) {
-    wrap.innerHTML = '<div class="player-vazio">Esta aula ainda não tem vídeo.</div>';
-    return;
-  }
-
-  if (video.tipo === 'url') {
-    if (detectarTipoEmbed(video.url) === 'iframe') {
-      const urlEmbed = /youtube\.com|youtu\.be/i.test(video.url) ? normalizarUrlYoutube(video.url) : video.url;
-      wrap.innerHTML = `<iframe src="${escapeHtml(urlEmbed)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
-    } else {
-      wrap.innerHTML = `<video controls src="${escapeHtml(video.url)}"></video>`;
-      ligarEventosVideo(wrap.querySelector('video'));
-    }
-    return;
-  }
-
-  const res = await fetch(`/api/aulas/aulas/${aulaAtual._id}/video-ticket`, { method: 'POST', headers: authHeaders() });
-  if (!res.ok) { wrap.innerHTML = '<div class="player-vazio">Não foi possível carregar o vídeo.</div>'; return; }
-  const { ticket } = await res.json();
-  wrap.innerHTML = `<video controls src="/api/aulas/aulas/${aulaAtual._id}/video?ticket=${ticket}"></video>`;
-  ligarEventosVideo(wrap.querySelector('video'));
-}
-
-function ligarEventosVideo(videoEl) {
-  if (!videoEl) return;
   const aulaId = aulaAtual._id;
-  if (aulaAtual.ultimaPosicaoSegundos) {
-    videoEl.addEventListener('loadedmetadata', () => { videoEl.currentTime = aulaAtual.ultimaPosicaoSegundos; }, { once: true });
-  }
-  let ultimoEnvio = 0;
-  videoEl.addEventListener('timeupdate', () => {
-    if (aulaAtual._id !== aulaId) return;
-    const agora = Date.now();
-    if (agora - ultimoEnvio > 15000) {
-      ultimoEnvio = agora;
-      fetch(`/api/aulas/aulas/${aulaId}/progresso`, {
-        method: 'POST', headers: authHeaders(true), body: JSON.stringify({ posicaoSegundos: Math.floor(videoEl.currentTime) })
-      }).catch(() => {});
-    }
+  await AulaPlayerEmbed.renderVideo(wrap, aulaAtual, () => {
+    if (aulaAtual._id !== aulaId) return; // aluno já trocou de aula antes do "ended" chegar
+    marcarConcluida(true);
   });
-  videoEl.addEventListener('ended', () => { if (aulaAtual._id === aulaId) marcarConcluida(true); });
 }
 
 // ---------- navegação anterior/próxima ----------

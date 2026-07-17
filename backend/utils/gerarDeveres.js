@@ -3,6 +3,9 @@ const DeverSemanal = require("../models/deverSemanal");
 const Turma = require("../models/turma");
 const User = require("../models/user");
 const AtribuicaoPlanoBase = require("../models/atribuicaoPlanoBase");
+const Aula = require("../models/aula");
+const Producao = require("../models/producao");
+const ProgressoAula = require("../models/progressoAula");
 
 const DIA_MS = 24 * 60 * 60 * 1000;
 
@@ -95,23 +98,66 @@ function podeConcluir(dever) {
   return dever.atividades.filter(a => a.obrigatoria).every(a => a.entrega?.status === "enviado");
 }
 
-// Anota cada atividade com o rótulo de atraso, calculado na leitura (nunca
-// gravado) a partir de dataLimite/enviadoEm: "pendente em atraso" (nunca
-// entregue e o prazo já venceu) ou "entregue com atraso" (entregou depois do
-// prazo). Usado pra montar a resposta das rotas de listagem/detalhe.
-function enriquecerDever(deverDoc) {
+// Pro princípio "não duplicar dados" (ver plano da Fase 3A): atividades
+// ligadas a uma entidade real da plataforma não guardam seu próprio status —
+// ele é calculado aqui, na leitura, a partir de ProgressoAula/Producao.
+// Retorna null quando o tipo não tem entidade real (usa o `entrega` gravado
+// normalmente).
+async function statusEntregaReal(atividade, alunoId) {
+  if (atividade.tipo === "assistir_aula" && atividade.conteudo?.aulaId) {
+    const aulaId = atividade.conteudo.aulaId._id || atividade.conteudo.aulaId;
+    const progresso = await ProgressoAula.findOne({ userId: alunoId, aulaId }).select("concluida ultimaPosicaoSegundos");
+    return {
+      status: progresso?.concluida ? "enviado" : "pendente",
+      progressoReal: progresso ? { concluida: progresso.concluida, ultimaPosicaoSegundos: progresso.ultimaPosicaoSegundos } : null
+    };
+  }
+  if (atividade.tipo === "assistir_modulo" && atividade.conteudo?.moduloId) {
+    const moduloId = atividade.conteudo.moduloId._id || atividade.conteudo.moduloId;
+    const aulas = await Aula.find({ moduloId, ativo: true }).select("_id");
+    if (!aulas.length) return { status: "pendente", progressoReal: { concluidas: 0, total: 0 } };
+    const concluidas = await ProgressoAula.countDocuments({ userId: alunoId, aulaId: { $in: aulas.map(a => a._id) }, concluida: true });
+    return { status: concluidas >= aulas.length ? "enviado" : "pendente", progressoReal: { concluidas, total: aulas.length } };
+  }
+  if (atividade.tipo === "producao_textual" && atividade.entrega?.linkProducaoId) {
+    const producao = await Producao.findById(atividade.entrega.linkProducaoId).select("status avaliacao.notaTotal");
+    if (!producao) return null;
+    return { status: "enviado", producaoReal: { status: producao.status, notaTotal: producao.avaliacao?.notaTotal ?? null } };
+  }
+  return null;
+}
+
+// Anota cada atividade com status real (quando aplicável), rótulo de atraso
+// (calculado na leitura a partir de dataLimite/enviadoEm — nunca gravado) e
+// se está bloqueada por dependência. Usado pra montar a resposta das rotas
+// de listagem/detalhe, tanto do admin quanto do aluno.
+async function enriquecerDever(deverDoc) {
   const dever = deverDoc.toObject ? deverDoc.toObject() : deverDoc;
   const venceu = new Date(dever.dataLimite) < new Date();
+
+  const atividades = await Promise.all(dever.atividades.map(async a => {
+    const derivado = await statusEntregaReal(a, dever.alunoId);
+    const status = derivado?.status ?? a.entrega?.status ?? "pendente";
+    return {
+      ...a,
+      entrega: {
+        ...a.entrega,
+        status,
+        atrasada: status === "pendente" && venceu,
+        entregueComAtraso: status === "enviado" && a.entrega?.enviadoEm && new Date(a.entrega.enviadoEm) > new Date(dever.dataLimite)
+      },
+      ...(derivado?.progressoReal !== undefined ? { progressoReal: derivado.progressoReal } : {}),
+      ...(derivado?.producaoReal !== undefined ? { producaoReal: derivado.producaoReal } : {})
+    };
+  }));
+
+  atividades.forEach((a, i) => {
+    a.bloqueada = a.dependeDe != null && atividades[a.dependeDe]?.entrega?.status !== "enviado";
+  });
+
+  dever.atividades = atividades;
   dever.status = statusDever(dever);
   dever.podeConcluir = podeConcluir(dever);
-  dever.atividades = dever.atividades.map(a => ({
-    ...a,
-    entrega: {
-      ...a.entrega,
-      atrasada: a.entrega?.status === "pendente" && venceu,
-      entregueComAtraso: a.entrega?.status === "enviado" && a.entrega?.enviadoEm && new Date(a.entrega.enviadoEm) > new Date(dever.dataLimite)
-    }
-  }));
   return dever;
 }
 

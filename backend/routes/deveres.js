@@ -8,6 +8,8 @@ const Turma = require("../models/turma");
 const { exigirAuth, exigirProfessor } = require("../middleware/auth");
 const { uploadEntregaDever, comTratamentoDeErro } = require("../middleware/uploadDeveres");
 const { gerarSemanasPendentes, atualizarSemanasDoAluno, statusDever, enriquecerDever } = require("../utils/gerarDeveres");
+const { montarNovaProducao } = require("./producoes");
+const { transmitir } = require("../utils/sse");
 
 router.use(exigirAuth);
 
@@ -129,7 +131,7 @@ router.post("/alunos/:alunoId/deveres", exigirProfessor, async (req, res) => {
       prioridade, professorId: professorId || null, observacoes, permiteConclusaoManual: !!permiteConclusaoManual,
       atividades: (atividades || []).map(a => ({ ...a, entrega: { status: "pendente" } }))
     });
-    res.json(enriquecerDever(dever));
+    res.json(await enriquecerDever(dever));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -139,7 +141,7 @@ router.post("/alunos/:alunoId/deveres", exigirProfessor, async (req, res) => {
 router.put("/deveres/:id", exigirProfessor, async (req, res) => {
   try {
     const { titulo, descricao, dataInicio, dataLimite, prioridade, professorId, observacoes, permiteConclusaoManual, atividades } = req.body;
-    const dever = await DeverSemanal.findById(req.params.id);
+    const dever = await DeverSemanal.findById(req.params.id).populate(POPULATE_CONTEUDO);
     if (!dever) return res.status(404).json({ msg: "Dever não encontrado." });
 
     if (titulo !== undefined) dever.titulo = titulo;
@@ -156,7 +158,7 @@ router.put("/deveres/:id", exigirProfessor, async (req, res) => {
       dever.atividades = atividades.map((a, i) => ({ ...a, entrega: dever.atividades[i]?.entrega || { status: "pendente" } }));
     }
     await dever.save();
-    res.json(enriquecerDever(dever));
+    res.json(await enriquecerDever(dever));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -167,13 +169,56 @@ router.put("/deveres/:id", exigirProfessor, async (req, res) => {
 router.put("/deveres/:id/atividades/:index/comentario", exigirProfessor, async (req, res) => {
   try {
     const { comentario } = req.body;
-    const dever = await DeverSemanal.findById(req.params.id);
+    const dever = await DeverSemanal.findById(req.params.id).populate(POPULATE_CONTEUDO);
     if (!dever) return res.status(404).json({ msg: "Dever não encontrado." });
     const atividade = dever.atividades[req.params.index];
     if (!atividade) return res.status(404).json({ msg: "Atividade não encontrada." });
     atividade.entrega.comentarioProfessor = comentario || "";
     await dever.save();
-    res.json(enriquecerDever(dever));
+    transmitir("dever-atualizado", { alunoId: String(dever.alunoId) });
+    res.json(await enriquecerDever(dever));
+  } catch (err) {
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// Admin anexa um arquivo real (PDF/Word/imagem/etc.) como conteúdo de uma
+// atividade "upload_arquivo" — o aluno baixa pela rota de material abaixo.
+router.post("/deveres/:deverId/atividades/:index/material", exigirProfessor, comTratamentoDeErro(uploadEntregaDever.single("arquivo")), async (req, res) => {
+  const limparTemp = () => { if (req.file) fs.unlink(req.file.path, () => {}); };
+  try {
+    const dever = await DeverSemanal.findById(req.params.deverId).populate(POPULATE_CONTEUDO);
+    if (!dever) { limparTemp(); return res.status(404).json({ msg: "Dever não encontrado." }); }
+    const atividade = dever.atividades[req.params.index];
+    if (!atividade) { limparTemp(); return res.status(404).json({ msg: "Atividade não encontrada." }); }
+    if (!req.file) return res.status(400).json({ msg: "Envie um arquivo." });
+
+    atividade.conteudo = atividade.conteudo || {};
+    atividade.conteudo.arquivo = {
+      nome: req.file.originalname, caminho: req.file.path, tamanho: req.file.size,
+      mimetype: req.file.mimetype, enviadoEm: new Date()
+    };
+    await dever.save();
+    res.json(await enriquecerDever(dever));
+  } catch (err) {
+    limparTemp();
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// Download autenticado do material anexado pelo admin (paralelo à rota de
+// entrega abaixo, que baixa o que o ALUNO enviou).
+router.get("/deveres/:id/atividades/:index/material", async (req, res) => {
+  try {
+    const dever = await DeverSemanal.findById(req.params.id);
+    if (!dever) return res.status(404).json({ msg: "Dever não encontrado." });
+    if (String(dever.alunoId) !== req.userId && req.userRole !== "admin" && req.userRole !== "professor") {
+      return res.status(403).json({ msg: "Acesso negado." });
+    }
+    const arquivo = dever.atividades[req.params.index]?.conteudo?.arquivo;
+    if (!arquivo?.caminho) return res.status(404).json({ msg: "Arquivo não encontrado." });
+    res.download(arquivo.caminho, arquivo.nome);
   } catch (err) {
     res.status(500).json({ msg: "Erro no servidor." });
   }
@@ -184,7 +229,7 @@ router.get("/alunos/:alunoId/deveres", exigirProfessor, async (req, res) => {
   try {
     await atualizarSemanasDoAluno(req.params.alunoId);
     const deveres = await DeverSemanal.find({ alunoId: req.params.alunoId }).populate(POPULATE_CONTEUDO).sort({ numeroSemana: 1 });
-    res.json(deveres.map(enriquecerDever));
+    res.json(await Promise.all(deveres.map(enriquecerDever)));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -246,7 +291,7 @@ router.get("/minhas-semanas", async (req, res) => {
   try {
     await atualizarSemanasDoAluno(req.userId);
     const deveres = await DeverSemanal.find({ alunoId: req.userId }).populate(POPULATE_CONTEUDO).sort({ numeroSemana: 1 });
-    res.json(deveres.map(enriquecerDever));
+    res.json(await Promise.all(deveres.map(enriquecerDever)));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -257,11 +302,16 @@ router.get("/minhas-semanas/:id", async (req, res) => {
   try {
     const dever = await DeverSemanal.findOne({ _id: req.params.id, alunoId: req.userId }).populate(POPULATE_CONTEUDO);
     if (!dever) return res.status(404).json({ msg: "Dever não encontrado." });
-    res.json(enriquecerDever(dever));
+    res.json(await enriquecerDever(dever));
   } catch (err) {
     res.status(500).json({ msg: "Erro no servidor." });
   }
 });
+
+// "assistir_aula"/"assistir_modulo" não têm envio manual — o progresso vem só
+// do player embutido, direto na API real de aulas (ver public/js/aulaPlayerEmbed.js),
+// pra nunca duplicar o dado que já mora em ProgressoAula.
+const TIPOS_SEM_ENVIO_MANUAL = ["assistir_aula", "assistir_modulo"];
 
 router.post("/minhas-semanas/:deverId/atividades/:index/enviar", comTratamentoDeErro(uploadEntregaDever.single("arquivo")), async (req, res) => {
   const limparTemp = () => { if (req.file) fs.unlink(req.file.path, () => {}); };
@@ -271,22 +321,48 @@ router.post("/minhas-semanas/:deverId/atividades/:index/enviar", comTratamentoDe
     const atividade = dever.atividades[req.params.index];
     if (!atividade) { limparTemp(); return res.status(404).json({ msg: "Atividade não encontrada." }); }
 
+    if (TIPOS_SEM_ENVIO_MANUAL.includes(atividade.tipo)) {
+      limparTemp();
+      return res.status(400).json({ msg: "Essa atividade é concluída automaticamente ao assistir a aula — não precisa enviar nada aqui." });
+    }
+
+    const enriquecidoAntes = await enriquecerDever(dever);
+    if (enriquecidoAntes.atividades[req.params.index].bloqueada) {
+      limparTemp();
+      return res.status(400).json({ msg: "Conclua a tarefa anterior desta semana antes desta." });
+    }
+
     const { texto } = req.body;
     if (!req.file && !texto?.trim()) return res.status(400).json({ msg: "Envie um arquivo ou um texto." });
 
-    atividade.entrega.status = "enviado";
-    atividade.entrega.enviadoEm = new Date();
-    if (texto?.trim()) atividade.entrega.texto = texto.trim();
-    if (req.file) {
-      atividade.entrega.arquivo = {
-        nome: req.file.originalname, caminho: req.file.path, tamanho: req.file.size,
-        mimetype: req.file.mimetype, enviadoEm: new Date()
-      };
+    // Produção textual não duplica o texto/arquivo no dever — cria uma Producao
+    // de verdade (mesma fila de correção do Ambiente de Produção) e só guarda o vínculo.
+    if (atividade.tipo === "producao_textual") {
+      if (!atividade.conteudo?.temaId) { limparTemp(); return res.status(400).json({ msg: "Esta atividade não tem um tema de produção configurado." }); }
+      const producao = await montarNovaProducao({
+        userId: req.userId, temaId: atividade.conteudo.temaId, textoDigitado: texto,
+        observacoesAluno: undefined, file: req.file, origemId: null
+      });
+      atividade.entrega.status = "enviado";
+      atividade.entrega.enviadoEm = new Date();
+      atividade.entrega.linkProducaoId = producao._id;
+    } else {
+      atividade.entrega.status = "enviado";
+      atividade.entrega.enviadoEm = new Date();
+      if (texto?.trim()) atividade.entrega.texto = texto.trim();
+      if (req.file) {
+        atividade.entrega.arquivo = {
+          nome: req.file.originalname, caminho: req.file.path, tamanho: req.file.size,
+          mimetype: req.file.mimetype, enviadoEm: new Date()
+        };
+      }
     }
     await dever.save();
-    res.json(enriquecerDever(dever));
+    transmitir("dever-atualizado", { alunoId: req.userId });
+    res.json(await enriquecerDever(dever));
   } catch (err) {
     limparTemp();
+    if (err.status) return res.status(err.status).json({ msg: err.msg });
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
   }
@@ -294,16 +370,17 @@ router.post("/minhas-semanas/:deverId/atividades/:index/enviar", comTratamentoDe
 
 router.post("/minhas-semanas/:id/concluir", async (req, res) => {
   try {
-    const dever = await DeverSemanal.findOne({ _id: req.params.id, alunoId: req.userId });
+    const dever = await DeverSemanal.findOne({ _id: req.params.id, alunoId: req.userId }).populate(POPULATE_CONTEUDO);
     if (!dever) return res.status(404).json({ msg: "Dever não encontrado." });
 
-    const { podeConcluir } = require("../utils/gerarDeveres");
-    if (!podeConcluir(dever)) {
+    const enriquecido = await enriquecerDever(dever);
+    if (!enriquecido.podeConcluir) {
       return res.status(400).json({ msg: "Ainda há atividades obrigatórias pendentes." });
     }
     dever.concluidoEm = new Date();
     await dever.save();
-    res.json(enriquecerDever(dever));
+    transmitir("dever-atualizado", { alunoId: req.userId });
+    res.json(await enriquecerDever(dever));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });

@@ -9,6 +9,7 @@ const ProgressoAula = require("../models/progressoAula");
 const Certificado = require("../models/certificado");
 const User = require("../models/user");
 const { exigirAuth } = require("../middleware/auth");
+const { transmitir } = require("../utils/sse");
 
 // Mesma regra de public/minha-conta.html (entitlements.gravado), agora aplicada
 // de verdade no servidor — o gate no HTML da página é só cosmético.
@@ -196,6 +197,10 @@ router.post("/aulas/:id/progresso", exigirAuth, async (req, res) => {
       { $set: set },
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
+
+    // Só avisa em tempo real quando algo muda de fato (conclusão), não a cada
+    // ping de posição do vídeo (evita barulho no canal SSE global).
+    if (typeof concluida === "boolean") transmitir("aula-progresso-atualizado", { userId: req.userId, aulaId: aula._id });
 
     res.json({ concluida: progresso.concluida, ultimaPosicaoSegundos: progresso.ultimaPosicaoSegundos });
   } catch (err) {

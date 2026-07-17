@@ -32,6 +32,9 @@ function criarAtividadeSchema(comEntrega) {
     titulo: { type: String, required: true },
     descricao: { type: String },
     obrigatoria: { type: Boolean, default: true },
+    // Índice de outra atividade do mesmo dever que precisa estar concluída
+    // antes desta ficar liberada. null = sem dependência.
+    dependeDe: { type: Number, default: null },
     conteudo: ConteudoAtividadeSchema
   };
   if (comEntrega) {

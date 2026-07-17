@@ -225,6 +225,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <script src="js/i18n.js"></script>
 <script src="js/appShell.js"></script>
+<script src="js/deverRealtime.js"></script>
 <script>
 const MATERIAS = {
   conjugaison: "Conjugação e tempos verbais",
@@ -797,6 +798,15 @@ document.addEventListener('appshell:ready', e => {
   renderAulas(dados);
   renderDeveres();
   preencherPerfil(dados.perfil || {});
+});
+
+// ===================== TEMPO REAL =====================
+// Assistir uma aula ou ter uma produção corrigida (aqui, no Dever de Casa, ou
+// em outra aba) atualiza os cards do dashboard sem precisar recarregar.
+DeverRealtime.escutar({
+  'dever-atualizado': d => { if (d.alunoId === DeverRealtime.meuUserId()) renderDeveres(); },
+  'aula-progresso-atualizado': d => { if (d.userId === DeverRealtime.meuUserId()) renderAulas(window.AppShell.dadosConta); },
+  'producao-atualizada': d => { if (d.alunoId === DeverRealtime.meuUserId()) renderProducao(window.AppShell.dadosConta); }
 });
 // O cabeçalho é montado via JS (não tem data-i18n) — recarrega ao trocar de
 // idioma para que "Na plataforma desde" acompanhe.

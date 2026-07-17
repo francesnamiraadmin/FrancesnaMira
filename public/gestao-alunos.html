@@ -144,8 +144,11 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-bottom: 10px; }
 .semana-box { border: 1px solid var(--cinza-200); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; background: var(--cinza-50); }
 .semana-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.atividade-box { border: 1px solid var(--cinza-200); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; background: var(--branco); }
-.atividade-box-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.atividade-box { border: 1px solid var(--cinza-200); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; background: var(--branco); transition: opacity 0.15s; }
+.atividade-box.arrastando { opacity: 0.4; }
+.atividade-box-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.drag-handle { cursor: grab; color: var(--cinza-400); font-size: 1rem; user-select: none; }
+.drag-handle:active { cursor: grabbing; }
 .btn.perigo { background: var(--vermelho-bg); color: var(--vermelho); border: 1px solid var(--vermelho); }
 
 .dever-card { border: 1px solid var(--cinza-200); border-radius: 14px; margin-bottom: 12px; overflow: hidden; }
@@ -339,6 +342,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 <footer>© 2026 · Francês na Mira</footer>
 
 <script src="js/deverAtividadeUI.js"></script>
+<script src="js/deverRealtime.js"></script>
 <script src="js/gestao-alunos.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>

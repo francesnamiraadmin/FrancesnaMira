@@ -43,6 +43,40 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .msg-inline.sucesso { color: var(--success-text); }
 .msg-inline.erro { color: var(--danger-text); }
 .vazio-box { text-align: center; opacity: 0.8; padding: 40px 16px; }
+.dash-btn.perigo { background: var(--danger-bg); color: var(--danger-text); }
+.opcional-tag { font-weight: 400; opacity: 0.7; font-size: 0.78rem; }
+.texto-box { background: var(--glass-bg); padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; margin-top: 8px; white-space: pre-wrap; }
+.embed-aviso { font-size: 0.86rem; opacity: 0.85; margin-bottom: 10px; }
+
+/* Player de aula embutido (mesmo visual de aulas-especializadas.html) */
+.player-wrap { position: relative; width: 100%; padding-top: 56.25%; background: #000; border-radius: 12px; overflow: hidden; margin: 8px 0; }
+.player-wrap iframe, .player-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.player-vazio { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; opacity: 0.7; font-size: 0.9rem; }
+.embed-aula-titulo { font-size: 1rem; margin-bottom: 4px; }
+.embed-aula-descricao { font-size: 0.88rem; opacity: 0.85; margin-bottom: 8px; }
+.materiais-embed { margin-top: 10px; }
+.material-item-aluno {
+  display: flex; align-items: center; gap: 12px; padding: 10px 14px; border: 1px solid var(--glass-border);
+  border-radius: 12px; margin-bottom: 8px; text-decoration: none; color: var(--text); cursor: pointer;
+}
+.material-item-aluno:hover { background: var(--glass-hover); }
+.material-item-aluno .icone { font-size: 1.2rem; }
+.material-item-aluno .nome { font-weight: 600; font-size: 0.88rem; }
+.material-item-aluno .tipo { font-size: 0.74rem; opacity: 0.7; }
+
+/* Editor de produção embutido */
+.embed-producao-titulo { font-size: 1rem; margin-bottom: 4px; }
+.embed-producao-enunciado { font-size: 0.88rem; opacity: 0.9; margin-bottom: 8px; white-space: pre-wrap; }
+.embed-producao-limites { font-size: 0.8rem; opacity: 0.7; margin-bottom: 10px; }
+.embed-textarea { width: 100%; min-height: 160px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; resize: vertical; }
+.embed-contador { font-size: 0.8rem; font-weight: 700; margin: 6px 0 12px; }
+
+/* Gravador de áudio embutido */
+.gravador-controles { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+.gravador-tempo { font-weight: 700; color: var(--danger-text); }
+
+/* "Assistir módulo inteiro" */
+.modulo-aulas-lista { display: flex; flex-wrap: wrap; gap: 8px; }
 </style>
 </head>
 
@@ -78,6 +112,11 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <script src="js/i18n.js"></script>
 <script src="js/appShell.js"></script>
 <script src="js/deverAtividadeUI.js"></script>
+<script src="js/deverRealtime.js"></script>
+<script src="js/aulaPlayerEmbed.js"></script>
+<script src="js/producaoTextualEmbed.js"></script>
+<script src="js/gravadorAudio.js"></script>
+<script src="js/deverWorkspace.js"></script>
 <script src="js/meus-deveres.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>

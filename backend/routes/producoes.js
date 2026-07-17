@@ -8,6 +8,7 @@ const Tema = require("../models/tema");
 const User = require("../models/user");
 const { exigirAuth, exigirProfessor } = require("../middleware/auth");
 const { uploadOriginal, uploadCorrigido, moverParaPastaDefinitiva, comTratamentoDeErro } = require("../middleware/upload");
+const { transmitir } = require("../utils/sse");
 
 function gerarProtocolo() {
   const ano = new Date().getFullYear();
@@ -68,6 +69,7 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
   user.creditosCorrecao -= tema.creditosNecessarios;
   await user.save();
 
+  transmitir("producao-atualizada", { alunoId: String(userId), producaoId: String(producao._id) });
   return producao;
 }
 
@@ -330,6 +332,7 @@ router.post("/:id/corrigir", exigirAuth, exigirProfessor, comTratamentoDeErro(up
     producao.dataCorrecao = new Date();
     producao.historicoStatus.push({ status: "corrigido", data: new Date() });
     await producao.save();
+    transmitir("producao-atualizada", { alunoId: String(producao.alunoId), producaoId: String(producao._id) });
 
     res.json({ msg: "Correção enviada ao aluno!", producao });
   } catch (err) {
@@ -338,4 +341,8 @@ router.post("/:id/corrigir", exigirAuth, exigirProfessor, comTratamentoDeErro(up
   }
 });
 
+// Reaproveitado por backend/routes/deveres.js — uma atividade de dever de casa
+// do tipo "producao_textual" cria uma Producao real em vez de duplicar a
+// lógica de validação/criação aqui.
 module.exports = router;
+module.exports.montarNovaProducao = montarNovaProducao;

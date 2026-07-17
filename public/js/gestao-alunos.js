@@ -550,21 +550,33 @@ function abrirDeverManualForm(deverParaEditar) {
   document.getElementById('manualDescricao').value = d ? (d.descricao || '') : '';
   document.getElementById('manualPermiteConclusaoManual').checked = d ? !!d.permiteConclusaoManual : false;
 
+  // Upload de material só é possível quando o dever já existe de verdade
+  // (precisa de um deverId real pra rota de upload) — em criação nova, o
+  // admin anexa o material depois de salvar, reabrindo pra editar.
+  const materialCtx = d ? { deverId: d._id, authHeadersFn: authHeadersDev } : null;
   const wrap = document.getElementById('manualAtividadesWrap');
-  (d ? d.atividades : []).forEach(a => DeverUI.adicionarAtividadeBox(wrap, a, authHeadersDev));
-  if (!d) DeverUI.adicionarAtividadeBox(wrap, null, authHeadersDev);
+  (d ? d.atividades : []).forEach(a => DeverUI.adicionarAtividadeBox(wrap, a, authHeadersDev, materialCtx));
+  if (!d) DeverUI.adicionarAtividadeBox(wrap, null, authHeadersDev, materialCtx);
+  DeverUI.resolverDependenciasIniciais(wrap);
 
   document.getElementById('deverManualForm').style.display = 'block';
 }
 document.getElementById('abrirDeverManualBtn').addEventListener('click', () => abrirDeverManualForm(null));
 document.getElementById('cancelarDeverManualBtn').addEventListener('click', fecharFormulariosDever);
 document.getElementById('manualAddAtividadeBtn').addEventListener('click', () => {
-  DeverUI.adicionarAtividadeBox(document.getElementById('manualAtividadesWrap'), null, authHeadersDev);
+  const wrap = document.getElementById('manualAtividadesWrap');
+  const materialCtx = deverEditandoId ? { deverId: deverEditandoId, authHeadersFn: authHeadersDev } : null;
+  DeverUI.adicionarAtividadeBox(wrap, null, authHeadersDev, materialCtx);
+  DeverUI.atualizarOpcoesDependeDe(wrap);
 });
 document.getElementById('manualAtividadesWrap').addEventListener('click', e => {
-  if (e.target.closest('[data-remover-atividade]')) e.target.closest('[data-atividade-box]').remove();
+  if (e.target.closest('[data-remover-atividade]')) {
+    const wrap = document.getElementById('manualAtividadesWrap');
+    e.target.closest('[data-atividade-box]').remove();
+    DeverUI.atualizarOpcoesDependeDe(wrap);
+  }
 });
-DeverUI.ligarEventosConteudo(document.getElementById('manualAtividadesWrap'), authHeadersDev);
+DeverUI.ligarEventosConteudo(document.getElementById('manualAtividadesWrap'), authHeadersDev, () => deverEditandoId ? { deverId: deverEditandoId, authHeadersFn: authHeadersDev } : null);
 
 document.getElementById('salvarDeverManualBtn').addEventListener('click', async () => {
   const erroEl = document.getElementById('manualErro');
@@ -588,6 +600,15 @@ document.getElementById('salvarDeverManualBtn').addEventListener('click', async 
   if (!res.ok) { erroEl.textContent = data.msg || 'Erro ao salvar o dever.'; erroEl.style.display = 'block'; return; }
   fecharFormulariosDever();
   carregarDeverDoAluno(alunoAtual._id);
+});
+
+// ===================== TEMPO REAL =====================
+// Se o aluno que o admin está vendo agora enviar algo (aula/produção/dever)
+// em outra aba, a seção "Dever de Casa" desse perfil atualiza sozinha.
+DeverRealtime.escutar({
+  'dever-atualizado': d => { if (alunoAtual && d.alunoId === alunoAtual._id) carregarDeverDoAluno(alunoAtual._id); },
+  'aula-progresso-atualizado': d => { if (alunoAtual && d.userId === alunoAtual._id) carregarDeverDoAluno(alunoAtual._id); },
+  'producao-atualizada': d => { if (alunoAtual && d.alunoId === alunoAtual._id) carregarDeverDoAluno(alunoAtual._id); }
 });
 
 // ===================== INIT =====================

@@ -96,6 +96,7 @@ function adicionarSemanaBox(semanaData) {
     box.querySelector('[data-campo="titulo"]').value = semanaData.titulo || '';
     const atividadesWrap = box.querySelector('[data-atividades-wrap]');
     (semanaData.atividades || []).forEach(a => DeverUI.adicionarAtividadeBox(atividadesWrap, a, authHeaders));
+    DeverUI.resolverDependenciasIniciais(atividadesWrap);
   }
   renumerarSemanas();
 }
@@ -111,12 +112,17 @@ document.getElementById('semanasWrap').addEventListener('click', e => {
   }
   if (e.target.closest('[data-add-atividade]')) {
     const semanaBox = e.target.closest('[data-semana-box]');
-    DeverUI.adicionarAtividadeBox(semanaBox.querySelector('[data-atividades-wrap]'), null, authHeaders);
+    const atividadesWrap = semanaBox.querySelector('[data-atividades-wrap]');
+    DeverUI.adicionarAtividadeBox(atividadesWrap, null, authHeaders);
+    DeverUI.atualizarOpcoesDependeDe(atividadesWrap);
     return;
   }
   if (e.target.closest('[data-remover-atividade]')) {
     if (!confirm('Remover esta atividade?')) return;
-    e.target.closest('[data-atividade-box]').remove();
+    const atBox = e.target.closest('[data-atividade-box]');
+    const atividadesWrap = atBox.closest('[data-atividades-wrap]');
+    atBox.remove();
+    DeverUI.atualizarOpcoesDependeDe(atividadesWrap);
   }
 });
 DeverUI.ligarEventosConteudo(document.getElementById('semanasWrap'), authHeaders);
