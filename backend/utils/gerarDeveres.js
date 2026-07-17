@@ -132,7 +132,7 @@ async function statusEntregaReal(atividade, alunoId) {
     const tentativa = await Tentativa.findOne({ alunoId, conjuntoId }).sort({ finalizadaEm: -1 }).select("percentualAcertos finalizadaEm");
     return {
       status: tentativa ? "enviado" : "pendente",
-      tentativaReal: tentativa ? { percentualAcertos: tentativa.percentualAcertos, finalizadaEm: tentativa.finalizadaEm } : null
+      tentativaReal: tentativa ? { _id: tentativa._id, percentualAcertos: tentativa.percentualAcertos, finalizadaEm: tentativa.finalizadaEm } : null
     };
   }
   return null;

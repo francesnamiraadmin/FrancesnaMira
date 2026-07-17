@@ -39,9 +39,6 @@ const DeverWorkspace = (() => {
     if (c.arquivo?.nome) partes.push(`<button class="dash-btn secundario pequeno" data-baixar-material>📎 Baixar material: ${c.arquivo.nome}</button>`);
     if (c.url) partes.push(`<a href="${c.url}" target="_blank" rel="noopener" class="dash-btn secundario pequeno">Abrir link</a>`);
     if (c.texto) partes.push(`<div class="texto-box">${c.texto}</div>`);
-    if (['questoes_plataforma', 'simulado', 'exercicio_lista'].includes(a.tipo)) {
-      partes.push(`<p class="embed-aviso">Essa atividade ainda não abre dentro do Dever de Casa — resolva pela <a href="plataforma-questoes.html" target="_blank">Plataforma de Questões</a> e volte aqui pra marcar como concluída.</p>`);
-    }
     return partes.join('');
   }
 
@@ -126,6 +123,49 @@ const DeverWorkspace = (() => {
     });
   }
 
+  // Widget de Conjunto de Questões (questoes_plataforma/exercicio_lista/simulado) —
+  // resolve o conjunto inteiro dentro da própria atividade, usando o motor
+  // compartilhado de public/js/conjuntoResolverEmbed.js (o mesmo que
+  // resolver-conjunto.html usa) — o aluno nunca precisa sair da aba de Dever de
+  // Casa pra responder. `onAtualizado` é chamado só quando a resolução termina
+  // (finaliza o conjunto), o que rebusca o dever e faz este widget virar o
+  // resumo "Conjunto resolvido" no próximo render.
+  function renderConjuntoEmbutido(widgetEl, a, deverId, onAtualizado) {
+    const conjunto = a.conteudo.conjuntoId;
+    if (a.tentativaReal) {
+      widgetEl.innerHTML = `
+        <p class="embed-aviso">Conjunto resolvido — <strong>${a.tentativaReal.percentualAcertos}% de acertos</strong>.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="dash-btn secundario pequeno" type="button" data-ver-gabarito>Ver gabarito</button>
+          <button class="dash-btn secundario pequeno" type="button" data-refazer-conjunto>Refazer conjunto</button>
+        </div>
+        <div data-conjunto-resolver style="margin-top:14px;"></div>`;
+      widgetEl.querySelector('[data-ver-gabarito]').addEventListener('click', () => {
+        widgetEl.querySelectorAll('[data-ver-gabarito], [data-refazer-conjunto]').forEach(b => b.remove());
+        ConjuntoResolverEmbed.criarResolver(widgetEl.querySelector('[data-conjunto-resolver]'), {
+          tentativaId: a.tentativaReal._id, embed: true
+        });
+      });
+      widgetEl.querySelector('[data-refazer-conjunto]').addEventListener('click', () => {
+        widgetEl.querySelectorAll('[data-ver-gabarito], [data-refazer-conjunto]').forEach(b => b.remove());
+        ConjuntoResolverEmbed.criarResolver(widgetEl.querySelector('[data-conjunto-resolver]'), {
+          conjuntoId: conjunto._id, embed: true, onFinalizado: onAtualizado
+        });
+      });
+    } else {
+      widgetEl.innerHTML = `
+        <p class="embed-aviso">${conjunto.descricao || ''} ${conjunto.quantidadeQuestoes} questões.</p>
+        <button class="dash-btn pequeno" type="button" data-iniciar-conjunto>Começar: ${conjunto.nome}</button>
+        <div data-conjunto-resolver style="margin-top:14px;"></div>`;
+      widgetEl.querySelector('[data-iniciar-conjunto]').addEventListener('click', () => {
+        widgetEl.querySelector('[data-iniciar-conjunto]').remove();
+        ConjuntoResolverEmbed.criarResolver(widgetEl.querySelector('[data-conjunto-resolver]'), {
+          conjuntoId: conjunto._id, embed: true, onFinalizado: onAtualizado
+        });
+      });
+    }
+  }
+
   // container: elemento onde a atividade inteira (título, status, widget) é
   // renderizada. ctx = { deverId, onAtualizado(dadosDeverAtualizado) }.
   async function renderAtividade(container, atividade, index, ctx) {
@@ -174,14 +214,7 @@ const DeverWorkspace = (() => {
         });
       }
     } else if (['questoes_plataforma', 'exercicio_lista', 'simulado'].includes(atividade.tipo) && atividade.conteudo?.conjuntoId?._id) {
-      const conjunto = atividade.conteudo.conjuntoId;
-      if (atividade.tentativaReal) {
-        widgetEl.innerHTML = `<p class="embed-aviso">Conjunto resolvido — <strong>${atividade.tentativaReal.percentualAcertos}% de acertos</strong>.</p>
-          <a href="resolver-conjunto.html?id=${conjunto._id}" target="_blank" class="dash-btn secundario pequeno">Refazer conjunto</a>`;
-      } else {
-        widgetEl.innerHTML = `<p class="embed-aviso">${conjunto.descricao || ''} ${conjunto.quantidadeQuestoes} questões.</p>
-          <a href="resolver-conjunto.html?id=${conjunto._id}" target="_blank" class="dash-btn pequeno">Abrir conjunto: ${conjunto.nome}</a>`;
-      }
+      renderConjuntoEmbutido(widgetEl, atividade, deverId, onAtualizado);
     } else {
       renderGenerico(widgetEl, atividade, deverId, index, onAtualizado);
     }
