@@ -612,5 +612,6 @@ DeverRealtime.escutar({
 });
 
 // ===================== INIT =====================
+DeverUI.carregarAuxiliares(authHeadersDev);
 carregarFiltrosOpcoes();
 carregarAlunos();

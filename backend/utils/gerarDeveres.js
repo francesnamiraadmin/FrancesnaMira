@@ -6,6 +6,7 @@ const AtribuicaoPlanoBase = require("../models/atribuicaoPlanoBase");
 const Aula = require("../models/aula");
 const Producao = require("../models/producao");
 const ProgressoAula = require("../models/progressoAula");
+const Tentativa = require("../models/tentativa");
 
 const DIA_MS = 24 * 60 * 60 * 1000;
 
@@ -124,6 +125,14 @@ async function statusEntregaReal(atividade, alunoId) {
     if (!producao) return null;
     return { status: "enviado", producaoReal: { status: producao.status, notaTotal: producao.avaliacao?.notaTotal ?? null } };
   }
+  if (atividade.tipo === "questoes_plataforma" && atividade.conteudo?.conjuntoId) {
+    const conjuntoId = atividade.conteudo.conjuntoId._id || atividade.conteudo.conjuntoId;
+    const tentativa = await Tentativa.findOne({ alunoId, conjuntoId }).sort({ finalizadaEm: -1 }).select("percentualAcertos finalizadaEm");
+    return {
+      status: tentativa ? "enviado" : "pendente",
+      tentativaReal: tentativa ? { percentualAcertos: tentativa.percentualAcertos, finalizadaEm: tentativa.finalizadaEm } : null
+    };
+  }
   return null;
 }
 
@@ -147,7 +156,8 @@ async function enriquecerDever(deverDoc) {
         entregueComAtraso: status === "enviado" && a.entrega?.enviadoEm && new Date(a.entrega.enviadoEm) > new Date(dever.dataLimite)
       },
       ...(derivado?.progressoReal !== undefined ? { progressoReal: derivado.progressoReal } : {}),
-      ...(derivado?.producaoReal !== undefined ? { producaoReal: derivado.producaoReal } : {})
+      ...(derivado?.producaoReal !== undefined ? { producaoReal: derivado.producaoReal } : {}),
+      ...(derivado?.tentativaReal !== undefined ? { tentativaReal: derivado.tentativaReal } : {})
     };
   }));
 

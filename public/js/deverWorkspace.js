@@ -158,6 +158,15 @@ const DeverWorkspace = (() => {
       }
     } else if (atividade.tipo === 'producao_oral') {
       GravadorAudio.criarGravadorAudio(widgetEl, { deverId, index, entregaExistente: atividade.entrega, onEnviado: onAtualizado });
+    } else if (atividade.tipo === 'questoes_plataforma' && atividade.conteudo?.conjuntoId?._id) {
+      const conjunto = atividade.conteudo.conjuntoId;
+      if (atividade.tentativaReal) {
+        widgetEl.innerHTML = `<p class="embed-aviso">Conjunto resolvido — <strong>${atividade.tentativaReal.percentualAcertos}% de acertos</strong>.</p>
+          <a href="resolver-conjunto.html?id=${conjunto._id}" target="_blank" class="dash-btn secundario pequeno">Refazer conjunto</a>`;
+      } else {
+        widgetEl.innerHTML = `<p class="embed-aviso">${conjunto.descricao || ''} ${conjunto.quantidadeQuestoes} questões.</p>
+          <a href="resolver-conjunto.html?id=${conjunto._id}" target="_blank" class="dash-btn pequeno">Abrir conjunto: ${conjunto.nome}</a>`;
+      }
     } else {
       renderGenerico(widgetEl, atividade, deverId, index, onAtualizado);
     }

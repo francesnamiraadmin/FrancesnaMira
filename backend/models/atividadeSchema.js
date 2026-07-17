@@ -21,7 +21,8 @@ const ConteudoAtividadeSchema = new mongoose.Schema({
   arquivo: ArquivoDeverSchema,
   temaId: { type: mongoose.Schema.Types.ObjectId, ref: "Tema" },
   aulaId: { type: mongoose.Schema.Types.ObjectId, ref: "Aula" },
-  moduloId: { type: mongoose.Schema.Types.ObjectId, ref: "Modulo" }
+  moduloId: { type: mongoose.Schema.Types.ObjectId, ref: "Modulo" },
+  conjuntoId: { type: mongoose.Schema.Types.ObjectId, ref: "Conjunto" }
 }, { _id: false });
 
 // `comEntrega: true` para o dever real (instância por aluno) — o Plano-Base

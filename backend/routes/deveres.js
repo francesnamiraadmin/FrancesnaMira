@@ -18,7 +18,8 @@ router.use(exigirAuth);
 const POPULATE_CONTEUDO = [
   { path: "atividades.conteudo.temaId", select: "titulo" },
   { path: "atividades.conteudo.aulaId", select: "titulo" },
-  { path: "atividades.conteudo.moduloId", select: "titulo" }
+  { path: "atividades.conteudo.moduloId", select: "titulo" },
+  { path: "atividades.conteudo.conjuntoId", select: "nome descricao quantidadeQuestoes" }
 ];
 
 // ===================== ADMIN/PROFESSOR: PLANOS-BASE (templates) =====================

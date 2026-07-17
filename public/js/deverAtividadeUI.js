@@ -15,17 +15,20 @@ const DeverUI = (() => {
 
   let modulosDisponiveis = [];
   let temasDisponiveis = [];
+  let conjuntosDisponiveis = [];
   let contadorBoxId = 0;
   function novoBoxId() { return 'box' + (++contadorBoxId) + '_' + Date.now(); }
 
   async function carregarAuxiliares(authHeadersFn) {
     try {
-      const [resModulos, resTemas] = await Promise.all([
+      const [resModulos, resTemas, resConjuntos] = await Promise.all([
         fetch('/api/admin-aulas/modulos', { headers: authHeadersFn() }),
-        fetch('/api/temas?todos=0', { headers: authHeadersFn() })
+        fetch('/api/temas?todos=0', { headers: authHeadersFn() }),
+        fetch('/api/questoes/admin/conjuntos', { headers: authHeadersFn() })
       ]);
       modulosDisponiveis = resModulos.ok ? await resModulos.json() : [];
       temasDisponiveis = resTemas.ok ? await resTemas.json() : [];
+      conjuntosDisponiveis = resConjuntos.ok ? await resConjuntos.json() : [];
     } catch (err) { /* selects ficam vazios se isso falhar */ }
   }
 
@@ -36,6 +39,10 @@ const DeverUI = (() => {
   function opcoesTema(selecionado) {
     return '<option value="">Selecione...</option>' + temasDisponiveis.map(t =>
       `<option value="${t._id}" ${String(selecionado) === String(t._id) ? 'selected' : ''}>${t.titulo}</option>`).join('');
+  }
+  function opcoesConjunto(selecionado) {
+    return '<option value="">Selecione...</option>' + conjuntosDisponiveis.map(c =>
+      `<option value="${c._id}" ${String(selecionado) === String(c._id) ? 'selected' : ''}>${c.nome} (${c.quantidadeQuestoes} questões)</option>`).join('');
   }
   function opcoesTipo(selecionado) {
     return Object.entries(NOMES_TIPO).map(([valor, nome]) =>
@@ -67,6 +74,7 @@ const DeverUI = (() => {
       <div class="campo campo-conteudo campo-tema" style="display:none;"><label>Tema (produção textual)</label><select data-conteudo="temaId">${opcoesTema(c.temaId)}</select></div>
       <div class="campo campo-conteudo campo-modulo" style="display:none;"><label>Módulo</label><select data-conteudo="moduloId">${opcoesModulo(c.moduloId)}</select></div>
       <div class="campo campo-conteudo campo-aula" style="display:none;"><label>Aula</label><select data-conteudo="aulaId"><option value="">Selecione o módulo primeiro</option></select></div>
+      <div class="campo campo-conteudo campo-conjunto" style="display:none;"><label>Conjunto de questões</label><select data-conteudo="conjuntoId">${opcoesConjunto(c.conjuntoId)}</select></div>
       ${comMaterialUpload ? `<div class="campo campo-conteudo campo-material-upload" style="display:none;">
         <label>Arquivo do material${c.arquivo?.nome ? ' (atual: ' + c.arquivo.nome + ')' : ''}</label>
         <div style="display:flex; gap:8px; align-items:center;">
@@ -88,6 +96,7 @@ const DeverUI = (() => {
     if (tipo === 'producao_textual') mostrar('.campo-tema');
     if (tipo === 'assistir_modulo') mostrar('.campo-modulo');
     if (tipo === 'assistir_aula') { mostrar('.campo-modulo'); mostrar('.campo-aula'); }
+    if (tipo === 'questoes_plataforma') mostrar('.campo-conjunto');
   }
 
   async function preencherAulasDoModulo(box, moduloId, aulaSelecionada, authHeadersFn) {
@@ -268,7 +277,7 @@ const DeverUI = (() => {
   }
 
   return {
-    NOMES_TIPO, carregarAuxiliares, opcoesModulo, opcoesTema, opcoesTipo,
+    NOMES_TIPO, carregarAuxiliares, opcoesModulo, opcoesTema, opcoesConjunto, opcoesTipo,
     atividadeBoxHtml, atualizarCamposConteudo, preencherAulasDoModulo,
     adicionarAtividadeBox, resolverDependenciasIniciais, atualizarOpcoesDependeDe,
     ligarEventosConteudo, ligarDragReorder, coletarAtividades
