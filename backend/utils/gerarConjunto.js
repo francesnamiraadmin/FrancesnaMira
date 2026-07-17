@@ -1,6 +1,7 @@
 const Questao = require("../models/questao");
 
 const ORDEM_NIVEL = { A1: 1, A2: 2, B1: 3, B2: 4, C1: 5, C2: 6 };
+const TOTAL_MATERIAS = Questao.MATERIAS.length; // 8 categorias possíveis hoje
 
 // Deriva a dificuldade do conjunto a partir do nível mais alto presente na seleção —
 // usado só na criação de conjuntos personalizados (admin define manualmente em oficiais).
@@ -41,4 +42,37 @@ async function sortearQuestoes({ niveis, materias, quantidade, pool = "praticar"
   return sorteadas.map((q, i) => ({ questaoId: q._id, ordem: i }));
 }
 
-module.exports = { derivarDificuldade, sortearQuestoes };
+// Deriva `filtros.{niveis,materias}` a partir da união real de nível/matéria das
+// questões que compõem o conjunto — usado tanto na curadoria manual de conjuntos
+// oficiais (admin) quanto no seed/migração do catálogo pré-montado. Nunca confiar no
+// filtro de ENTRADA que gerou o sorteio (ex.: "todas as matérias" = filtro vazio na
+// busca, mas a união real das questões sorteadas quase sempre tem só um subconjunto
+// das 8 categorias) — foi exatamente essa confusão que gerou o bug de `filtros.materias`
+// vazio nos conjuntos "Nível X" do catálogo inicial.
+async function derivarFiltrosDeQuestoes(questaoIds) {
+  const questoes = await Questao.find({ _id: { $in: questaoIds } }).select("nivel materia");
+  return {
+    niveis: [...new Set(questoes.map(q => q.nivel))],
+    materias: [...new Set(questoes.map(q => q.materia))]
+  };
+}
+
+// Classifica um Conjunto oficial em 3 níveis de prioridade de exibição na aba
+// Sugeridos, a partir de `filtros` (que precisa refletir a união REAL de
+// nível/matéria das questões — ver derivarFiltrosDeQuestoes acima):
+//   1 = um nível só, categorias variadas (ex. "Conjunto 01 – Nível A1")
+//   2 = múltiplos níveis, categorias variadas (ex. "A1+A2" misto)
+//   3 = tema único, qualquer quantidade de níveis (ex. "Gramática A1")
+// "Variada" = 4 ou mais das 8 categorias possíveis presentes — limiar arbitrário mas
+// deliberadamente conservador, pra não confundir um conjunto de 2-3 temas correlatos
+// (ex. "Vocabulário + Conjugação + Expressões") com um conjunto de prática geral.
+function classificarPrioridade(conjunto) {
+  const nivelCount = conjunto.filtros?.niveis?.length || 0;
+  const materiaCount = conjunto.filtros?.materias?.length || 0;
+  const variada = materiaCount >= Math.min(4, TOTAL_MATERIAS);
+  if (nivelCount === 1 && variada) return 1;
+  if (nivelCount >= 2 && variada) return 2;
+  return 3;
+}
+
+module.exports = { derivarDificuldade, sortearQuestoes, derivarFiltrosDeQuestoes, classificarPrioridade };

@@ -57,6 +57,16 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 .q-texto { font-size: 0.98rem; line-height: 1.65; margin-bottom: 14px; padding: 14px 16px; background: var(--recessed); border-radius: 12px; border-left: 3px solid var(--glass-border-strong); font-style: italic; opacity: 0.95; }
 .q-imagem { display: flex; justify-content: center; margin-bottom: 16px; padding: 18px; background: var(--recessed); border-radius: 14px; }
+.preco-card { display: flex; flex-direction: column; align-items: center; gap: 8px; background: linear-gradient(145deg, #fff7d6, #ffe9a8); color: #5a3d00; border-radius: 14px; padding: 20px 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); position: relative; }
+.preco-card::before { content: ""; position: absolute; left: -8px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; background: rgba(0,0,0,0.2); border-radius: 50%; }
+.preco-icone { font-size: 2.6rem; }
+.preco-valor { font-size: 1.3rem; font-weight: 700; }
+.calendario-card { display: flex; flex-direction: column; align-items: center; background: #fff; color: #08203e; border-radius: 14px; overflow: hidden; min-width: 140px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+.cal-mes { width: 100%; text-align: center; background: #ff5252; color: white; font-weight: 700; padding: 8px 0; text-transform: uppercase; font-size: 0.9rem; }
+.cal-dia { font-size: 3rem; font-weight: 700; padding: 10px 0 0; }
+.cal-semana { padding: 4px 0 14px; font-weight: 600; opacity: 0.8; }
+.contagem-grid { display: flex; flex-wrap: wrap; gap: 10px; max-width: 320px; justify-content: center; align-items: center; }
+.contagem-grid span { font-size: 2.2rem; line-height: 1; }
 .q-enunciado { font-size: 1.15rem; line-height: 1.6; margin-bottom: 16px; }
 .q-audio-btn {
   display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--warning-bg);
@@ -105,39 +115,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 </head>
 
 <body style="visibility:hidden;">
-<script>
-(async function protegerPagina() {
-  const featureKey = 'plataforma';
-  const token = localStorage.getItem('token');
-  function bloquear() {
-    document.body.innerHTML = `
-      <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; font-family:'Poppins',sans-serif; background:var(--bg-gradient); color:var(--text);">
-        <h1 style="font-family:'Playfair Display',serif; font-size:2.5rem; margin-bottom:16px;">Conteúdo exclusivo</h1>
-        <p style="font-size:1.2rem; max-width:520px; margin-bottom:28px; opacity:0.95;">A plataforma de questões é liberada no plano Excellence. Entre na sua conta ou assine um plano que inclua este recurso para continuar.</p>
-        <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
-          <a href="login.html" style="padding:14px 28px; background:var(--glass-strong); border:1px solid var(--glass-border-strong); border-radius:30px; color:var(--text); text-decoration:none; font-weight:700;">Entrar</a>
-          <a href="cursos.html" style="padding:14px 28px; background:var(--accent); color:var(--accent-text); border-radius:30px; text-decoration:none; font-weight:700;">Ver planos</a>
-        </div>
-      </div>`;
-    document.body.style.visibility = 'visible';
-  }
-  if (!token) return bloquear();
-  try {
-    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
-    if (!res.ok) return bloquear();
-    const data = await res.json();
-    const tier = data.plano && data.plano.tier;
-    const ativo = data.plano && data.plano.ativo;
-    const entitlementsCurso = { plataforma: !!ativo && tier === 'Excellence' };
-    const avulsos = data.produtosAvulsos || {};
-    const entitlementsAvulso = { plataforma: !!avulsos.plataforma?.ativo };
-    if (!(entitlementsCurso[featureKey] || entitlementsAvulso[featureKey])) return bloquear();
-    document.body.style.visibility = 'visible';
-  } catch (err) {
-    bloquear();
-  }
-})();
-</script>
+<script src="js/plataformaGate.js"></script>
 
 <div id="app-navbar" class="app-navbar-bar"></div>
 

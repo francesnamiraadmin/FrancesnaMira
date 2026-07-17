@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 const User = require("../models/user");
 const Questao = require("../models/questao");
 const Conjunto = require("../models/conjunto");
-const { derivarDificuldade, sortearQuestoes } = require("../utils/gerarConjunto");
+const { derivarDificuldade, sortearQuestoes, derivarFiltrosDeQuestoes } = require("../utils/gerarConjunto");
 
 const NIVEIS = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const CATEGORIAS_ROBUSTAS = [
@@ -94,9 +94,14 @@ async function main() {
     const quantidade = Math.min(def.alvo, disponivel);
 
     const questoes = await sortearQuestoes({ niveis: def.niveis, materias: def.materias || [], quantidade, pool: "praticar" });
+    // `filtros` reflete a união REAL de nível/matéria das questões sorteadas, não o
+    // filtro de entrada (`def.materias` pode ser null = "todas") — senão um conjunto
+    // "misto" gravaria filtros.materias vazio e nunca seria filtrável nem classificado
+    // como prioridade 1/2 na aba Sugeridos.
+    const filtrosReais = await derivarFiltrosDeQuestoes(questoes.map(q => q.questaoId));
     await Conjunto.create({
       nome: def.nome, descricao: def.descricao, tipo: "oficial", pool: "praticar", criadoPor: admin._id,
-      filtros: { niveis: def.niveis, materias: def.materias || [] },
+      filtros: filtrosReais,
       dificuldade: derivarDificuldade(def.niveis),
       questoes, quantidadeQuestoes: questoes.length, tempoLimiteSegundos: null
     });

@@ -6,7 +6,7 @@ const SessaoResolucao = require("../models/sessaoResolucao");
 const Tentativa = require("../models/tentativa");
 const CadernoErros = require("../models/cadernoErros");
 const { exigirAuth, exigirProfessor } = require("../middleware/auth");
-const { derivarDificuldade, sortearQuestoes } = require("../utils/gerarConjunto");
+const { derivarDificuldade, sortearQuestoes, derivarFiltrosDeQuestoes, classificarPrioridade } = require("../utils/gerarConjunto");
 
 router.use(exigirAuth);
 
@@ -57,15 +57,17 @@ async function montarSessaoPublica(sessao, conjunto) {
 // resolução ao vivo (ver rotas de Caderno de Revisão mais abaixo).
 async function montarResultadoTentativa(tentativa) {
   const questaoIds = tentativa.respostas.map(r => r.questaoId);
-  const [questoes, noCaderno] = await Promise.all([
+  const [questoes, noCaderno, conjunto] = await Promise.all([
     Questao.find({ _id: { $in: questaoIds } }),
-    CadernoErros.find({ alunoId: tentativa.alunoId, questaoId: { $in: questaoIds } }).select("questaoId")
+    CadernoErros.find({ alunoId: tentativa.alunoId, questaoId: { $in: questaoIds } }).select("questaoId"),
+    Conjunto.findById(tentativa.conjuntoId).select("pool nome")
   ]);
   const porId = new Map(questoes.map(q => [String(q._id), q]));
   const idsNoCaderno = new Set(noCaderno.map(c => String(c.questaoId)));
 
   return {
-    _id: tentativa._id, conjuntoId: tentativa.conjuntoId, numero: tentativa.numero,
+    _id: tentativa._id, conjuntoId: tentativa.conjuntoId, conjuntoNome: conjunto?.nome,
+    pool: conjunto?.pool || "praticar", numero: tentativa.numero,
     totalQuestoes: tentativa.totalQuestoes, totalCorretas: tentativa.totalCorretas,
     percentualAcertos: tentativa.percentualAcertos, tempoGastoSegundos: tentativa.tempoGastoSegundos,
     expirouPorTempo: tentativa.expirouPorTempo, iniciadaEm: tentativa.iniciadaEm, finalizadaEm: tentativa.finalizadaEm,
@@ -83,24 +85,17 @@ async function montarResultadoTentativa(tentativa) {
   };
 }
 
-async function derivarFiltrosDeQuestoes(questaoIds) {
-  const questoes = await Questao.find({ _id: { $in: questaoIds } }).select("nivel materia");
-  return {
-    niveis: [...new Set(questoes.map(q => q.nivel))],
-    materias: [...new Set(questoes.map(q => q.materia))]
-  };
-}
-
 // ===================== ALUNO: LISTAGEM DE CONJUNTOS =====================
 
 router.get("/conjuntos", async (req, res) => {
   try {
+    const pool = req.query.pool === "simulado" ? "simulado" : "praticar";
     // Oficiais em ordem crescente de criação (Conjunto 01, 02, 03...) — é a ordem em que
     // o catálogo pré-montado foi pensado para ser navegado. Personalizados em ordem
     // decrescente (o conjunto que o próprio aluno acabou de montar aparece primeiro).
     const [oficiais, personalizados] = await Promise.all([
-      Conjunto.find({ ativo: true, tipo: "oficial" }).sort({ criadoEm: 1 }),
-      Conjunto.find({ ativo: true, tipo: "personalizado", criadoPor: req.userId }).sort({ criadoEm: -1 })
+      Conjunto.find({ ativo: true, tipo: "oficial", pool }).sort({ criadoEm: 1 }),
+      Conjunto.find({ ativo: true, tipo: "personalizado", pool, criadoPor: req.userId }).sort({ criadoEm: -1 })
     ]);
     const conjuntos = [...oficiais, ...personalizados];
 
@@ -132,7 +127,11 @@ router.get("/conjuntos", async (req, res) => {
       const tentativasDoConjunto = tentativasPorConjunto.get(chave);
 
       if (sessao) {
-        emAndamento.push({ ...resumoBase(c), status: "em_andamento", sessaoId: sessao._id, questoesRespondidas: sessao.respostas.filter(r => r.respostaEscolhida !== null).length });
+        emAndamento.push({
+          ...resumoBase(c), status: "em_andamento", sessaoId: sessao._id,
+          questoesRespondidas: sessao.respostas.filter(r => r.respostaEscolhida !== null).length,
+          tempoDecorridoSegundos: Math.floor((Date.now() - sessao.iniciadoEm.getTime()) / 1000)
+        });
       } else if (tentativasDoConjunto?.length) {
         const ultima = tentativasDoConjunto[0];
         respondidos.push({
@@ -148,8 +147,19 @@ router.get("/conjuntos", async (req, res) => {
       }
     }
 
+    // Aba Sugeridos = só oficiais não iniciados, ordenados por prioridade (1 = nível
+    // único + categorias variadas, 2 = múltiplos níveis + variadas, 3 = tema único).
+    // Personalizados praticamente nunca chegam aqui (criar um já leva direto pra uma
+    // sessão em andamento), mas se acontecer ficam ao final, sem entrar na prioridade.
+    const sugeridosOficiais = naoIniciados
+      .filter(c => c.tipo === "oficial")
+      .map((c, indiceOriginal) => ({ c, prioridade: classificarPrioridade(c), indiceOriginal }))
+      .sort((a, b) => a.prioridade - b.prioridade || a.indiceOriginal - b.indiceOriginal)
+      .map(({ c }) => c);
+    const naoIniciadosOrdenados = [...sugeridosOficiais, ...naoIniciados.filter(c => c.tipo !== "oficial")];
+
     res.json({
-      prioritarios: { naoIniciados, emAndamento, recomendados: [], atribuidosComoDever: [] },
+      prioritarios: { naoIniciados: naoIniciadosOrdenados, emAndamento, recomendados: [], atribuidosComoDever: [] },
       respondidos
     });
   } catch (err) {
@@ -186,7 +196,8 @@ const QUANTIDADES_PERMITIDAS = [10, 20, 40];
 
 router.post("/conjuntos/personalizado", async (req, res) => {
   try {
-    const { nome, niveis, materias, quantidade, tempoLimiteSegundos } = req.body;
+    const { nome, niveis, materias, quantidade, tempoLimiteSegundos, pool: poolBody } = req.body;
+    const pool = poolBody === "simulado" ? "simulado" : "praticar";
 
     if (!Array.isArray(niveis) || !niveis.length) return res.status(400).json({ msg: "Selecione ao menos um nível." });
     if (!Array.isArray(materias) || !materias.length) return res.status(400).json({ msg: "Selecione ao menos uma categoria." });
@@ -194,16 +205,16 @@ router.post("/conjuntos/personalizado", async (req, res) => {
 
     let questoes;
     try {
-      questoes = await sortearQuestoes({ niveis, materias, quantidade, pool: "praticar" });
+      questoes = await sortearQuestoes({ niveis, materias, quantidade, pool });
     } catch (err) {
       if (err.status === 422) return res.status(422).json({ msg: err.message });
       throw err;
     }
 
     const conjunto = await Conjunto.create({
-      nome: nome?.trim() || `Conjunto personalizado — ${niveis.join("+")}`,
+      nome: nome?.trim() || `${pool === "simulado" ? "Simulado" : "Conjunto"} personalizado — ${niveis.join("+")}`,
       tipo: "personalizado",
-      pool: "praticar",
+      pool,
       criadoPor: req.userId,
       filtros: { niveis, materias },
       dificuldade: derivarDificuldade(niveis),
@@ -264,7 +275,7 @@ router.get("/admin/conjuntos/:id", exigirProfessor, async (req, res) => {
 
 router.post("/admin/conjuntos", exigirProfessor, async (req, res) => {
   try {
-    const { nome, descricao, questoes: questaoIds, tempoLimiteSegundos, dificuldade } = req.body;
+    const { nome, descricao, questoes: questaoIds, tempoLimiteSegundos, dificuldade, pool } = req.body;
     if (!nome?.trim()) return res.status(400).json({ msg: "Informe o nome do conjunto." });
     if (!Array.isArray(questaoIds) || !questaoIds.length) return res.status(400).json({ msg: "Selecione ao menos uma questão." });
 
@@ -273,7 +284,7 @@ router.post("/admin/conjuntos", exigirProfessor, async (req, res) => {
 
     const filtros = await derivarFiltrosDeQuestoes(questaoIds);
     const conjunto = await Conjunto.create({
-      nome: nome.trim(), descricao, tipo: "oficial", pool: "praticar", criadoPor: req.userId,
+      nome: nome.trim(), descricao, tipo: "oficial", pool: pool === "simulado" ? "simulado" : "praticar", criadoPor: req.userId,
       filtros, dificuldade: dificuldade || derivarDificuldade(filtros.niveis),
       questoes: questaoIds.map((id, i) => ({ questaoId: id, ordem: i })),
       quantidadeQuestoes: questaoIds.length,
@@ -292,12 +303,13 @@ router.put("/admin/conjuntos/:id", exigirProfessor, async (req, res) => {
     const conjunto = await Conjunto.findOne({ _id: req.params.id, tipo: "oficial" });
     if (!conjunto) return res.status(404).json({ msg: "Conjunto não encontrado." });
 
-    const { nome, descricao, ativo, tempoLimiteSegundos, dificuldade, questoes: questaoIds } = req.body;
+    const { nome, descricao, ativo, tempoLimiteSegundos, dificuldade, questoes: questaoIds, pool } = req.body;
     if (nome !== undefined) conjunto.nome = nome;
     if (descricao !== undefined) conjunto.descricao = descricao;
     if (ativo !== undefined) conjunto.ativo = !!ativo;
     if (tempoLimiteSegundos !== undefined) conjunto.tempoLimiteSegundos = tempoLimiteSegundos || null;
     if (dificuldade !== undefined) conjunto.dificuldade = dificuldade;
+    if (pool !== undefined) conjunto.pool = pool === "simulado" ? "simulado" : "praticar";
 
     if (questaoIds !== undefined) {
       if (!Array.isArray(questaoIds) || !questaoIds.length) return res.status(400).json({ msg: "Selecione ao menos uma questão." });
@@ -542,23 +554,94 @@ router.get("/caderno", async (req, res) => {
 
 // ===================== ALUNO: ESTATÍSTICAS RESUMIDAS (usadas em minha-conta.html) =====================
 
+// Mesmo algoritmo que já existia em minha-conta.html (client-side, sobre pq_eventos) —
+// maior sequência de dias consecutivos terminando hoje ou ontem (não zera à meia-noite
+// se o aluno já estudou hoje mas ainda não abriu a página de novo).
+function diaISO(data) { return new Date(data).toISOString().slice(0, 10); }
+function calcularSequenciaDiaria(dias) {
+  const hoje = diaISO(Date.now());
+  const ontem = diaISO(Date.now() - 86400000);
+  if (!dias.includes(hoje) && !dias.includes(ontem)) return 0;
+  const diasSet = new Set(dias);
+  let cursor = dias.includes(hoje) ? new Date() : new Date(Date.now() - 86400000);
+  let seq = 0;
+  while (diasSet.has(diaISO(cursor.getTime()))) {
+    seq++;
+    cursor = new Date(cursor.getTime() - 86400000);
+  }
+  return seq;
+}
+
 router.get("/estatisticas", async (req, res) => {
   try {
     const [tentativas, conjuntosEmAndamento, tamanhoCaderno] = await Promise.all([
-      Tentativa.find({ alunoId: req.userId }).select("conjuntoId percentualAcertos"),
+      Tentativa.find({ alunoId: req.userId }).sort({ finalizadaEm: -1 }),
       SessaoResolucao.countDocuments({ alunoId: req.userId }),
       CadernoErros.countDocuments({ alunoId: req.userId })
     ]);
 
-    const conjuntosConcluidos = new Set(tentativas.map(t => String(t.conjuntoId))).size;
-    const mediaPercentualAcertos = tentativas.length
-      ? Math.round(tentativas.reduce((soma, t) => soma + t.percentualAcertos, 0) / tentativas.length)
-      : null;
+    const conjuntoIds = [...new Set(tentativas.map(t => String(t.conjuntoId)))];
+    const questaoIds = [...new Set(tentativas.flatMap(t => t.respostas.map(r => String(r.questaoId))))];
+    const [conjuntosDocs, questoesDocs] = await Promise.all([
+      Conjunto.find({ _id: { $in: conjuntoIds } }).select("nome"),
+      Questao.find({ _id: { $in: questaoIds } }).select("materia")
+    ]);
+    const nomePorConjunto = new Map(conjuntosDocs.map(c => [String(c._id), c.nome]));
+    const materiaPorQuestao = new Map(questoesDocs.map(q => [String(q._id), q.materia]));
 
-    res.json({
-      conjuntosConcluidos, conjuntosEmAndamento, totalTentativas: tentativas.length,
-      mediaPercentualAcertos, tamanhoCaderno
+    const porConjunto = new Map();
+    tentativas.forEach(t => {
+      const chave = String(t.conjuntoId);
+      if (!porConjunto.has(chave)) porConjunto.set(chave, []);
+      porConjunto.get(chave).push(t);
     });
+    const conjuntosRefeitos = [...porConjunto.values()].filter(lista => lista.length > 1).length;
+
+    const percentuais = tentativas.map(t => t.percentualAcertos);
+    const tempos = tentativas.map(t => t.tempoGastoSegundos);
+    const diasComAtividade = [...new Set(tentativas.map(t => diaISO(t.finalizadaEm)))];
+
+    const kpis = {
+      conjuntosConcluidos: conjuntoIds.length, conjuntosEmAndamento, conjuntosRefeitos,
+      totalTentativas: tentativas.length,
+      mediaPercentualAcertos: percentuais.length ? Math.round(percentuais.reduce((a, b) => a + b, 0) / percentuais.length) : null,
+      maiorNota: percentuais.length ? Math.max(...percentuais) : null,
+      menorNota: percentuais.length ? Math.min(...percentuais) : null,
+      tempoMedioSegundos: tempos.length ? Math.round(tempos.reduce((a, b) => a + b, 0) / tempos.length) : null,
+      sequenciaDiasConsecutivos: calcularSequenciaDiaria(diasComAtividade),
+      tamanhoCaderno
+    };
+
+    // Granular (1 linha por resposta, todas as tentativas) — é o que permite a pizza E
+    // as barras por categoria serem filtráveis pelo mesmo seletor de conjunto no
+    // cliente, sem precisar de mais endpoints nem reagregar no servidor a cada filtro.
+    const respostas = tentativas.flatMap(t => {
+      const conjuntoNome = nomePorConjunto.get(String(t.conjuntoId)) || "Conjunto removido";
+      return t.respostas.map(r => ({
+        conjuntoId: t.conjuntoId, conjuntoNome,
+        materia: materiaPorQuestao.get(String(r.questaoId)) || null,
+        correta: r.correta
+      }));
+    });
+
+    const tentativasResumo = tentativas.map(t => ({
+      _id: t._id, conjuntoId: t.conjuntoId, conjuntoNome: nomePorConjunto.get(String(t.conjuntoId)) || "Conjunto removido",
+      numero: t.numero, totalCorretas: t.totalCorretas, totalQuestoes: t.totalQuestoes,
+      percentualAcertos: t.percentualAcertos, tempoGastoSegundos: t.tempoGastoSegundos, finalizadaEm: t.finalizadaEm
+    }));
+
+    const porDia = new Map();
+    tentativas.forEach(t => {
+      const dia = diaISO(t.finalizadaEm);
+      if (!porDia.has(dia)) porDia.set(dia, []);
+      porDia.get(dia).push(t.percentualAcertos);
+    });
+    const evolucao = [...porDia.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .slice(-30)
+      .map(([data, valores]) => ({ data, percentualMedio: Math.round(valores.reduce((a, b) => a + b, 0) / valores.length), quantidade: valores.length }));
+
+    res.json({ kpis, tentativas: tentativasResumo, respostas, evolucao });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });

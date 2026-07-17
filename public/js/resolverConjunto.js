@@ -221,13 +221,15 @@ async function carregarResultado(tentativaId) {
 
 function renderResultado(t) {
   const minutos = Math.round(t.tempoGastoSegundos / 60);
+  const voltarHref = t.pool === 'simulado' ? 'simulados.html' : 'praticar.html';
+  const voltarTexto = t.pool === 'simulado' ? 'Voltar aos Simulados' : 'Voltar aos Conjuntos';
   wrap.innerHTML = `
     <div class="resultado-resumo">
       <h1 style="font-family:'Playfair Display', serif;">Resultado</h1>
       <div class="nota">${t.totalCorretas}/${t.totalQuestoes}</div>
       <p>${t.percentualAcertos}% de aproveitamento — ${minutos} min ${t.expirouPorTempo ? '(tempo esgotado)' : ''}</p>
       <div class="conjunto-acoes" style="justify-content:center; margin-top:16px;">
-        <a class="q-btn secundario" href="plataforma-questoes.html">Voltar aos Conjuntos</a>
+        <a class="q-btn secundario" href="${voltarHref}">${voltarTexto}</a>
       </div>
     </div>
     <div class="resultado-lista">

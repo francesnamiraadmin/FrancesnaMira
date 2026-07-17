@@ -14,692 +14,82 @@
 html { scroll-behavior: smooth; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Poppins', sans-serif; }
+:root { --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45); }
 
-:root {
-  --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-  --glass-blur: blur(18px);
-}
-
-header { font-family: 'Playfair Display', serif; font-size: 3.2rem; text-align: center; padding: 30px; background: var(--header-bg); }
-header a { color: inherit; text-decoration: none; }
-
-nav {
-  position: relative; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
-  padding: 18px 40px; background: var(--glass-strong); backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid var(--glass-border); width: 100%;
-}
-.nav-item { position: relative; flex: 1; text-align: center; }
-nav a { position: relative; color: var(--text); text-decoration: none; font-weight: 600; padding: 10px 0; display: inline-block; cursor: pointer; transition: color 0.3s ease; }
-nav a:hover { color: #3b96ff; }
-nav a::after { content: ""; position: absolute; left: 0; bottom: -0.5px; height: 4px; width: 0%; background: var(--accent); transition: width 0.3s ease; }
-nav a:hover::after { width: 100%; }
-.dropdown {
-  position: absolute; top: 100%; left: 50%; transform: translate(-50%, 10px); background: var(--overlay-strong);
-  border-radius: 18px; min-width: 240px; opacity: 0; pointer-events: none; transition: 0.3s ease; z-index: 2000;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-}
-.dropdown.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
-.dropdown a { padding: 14px 20px; font-size: 1rem; text-align: left; }
-.dropdown-cursos { display: flex; gap: 10px; min-width: 190px; padding: 10px 10px; }
-.dropdown-cursos .coluna { display: flex; flex-direction: column; }
-.dropdown-cursos strong { margin-bottom: 10px; font-weight: 700; color: var(--accent); }
-.login { background: var(--accent); color: var(--accent-text); padding: 10px 28px; border-radius: 30px; font-weight: 700; flex: 0 0 auto; margin-left: 20px; }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
 
 .intro { text-align: center; padding: 50px 4% 20px; }
 .intro h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 10px; }
 .intro p { font-size: 1.15rem; opacity: 0.9; max-width: 720px; margin: 0 auto; }
 
-.app-wrap { max-width: 1000px; margin: 0 auto; padding: 30px 4% 100px; }
+.hub-wrap { max-width: 1100px; margin: 0 auto; padding: 30px 4% 100px; }
+.hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
 
-.top-tabs { display: flex; justify-content: center; gap: 14px; margin-bottom: 30px; flex-wrap: wrap; }
-.top-tab {
-  padding: 12px 26px; border-radius: 30px; border: 1px solid var(--glass-border-strong); background: var(--glass-bg);
-  color: var(--text); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: 0.3s;
-}
-.top-tab:hover { background: var(--glass-hover); }
-.top-tab.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-
-.filtros-row { display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
-.level-tab {
-  padding: 9px 20px; border-radius: 20px; border: 1px solid var(--glass-border); background: var(--glass-bg);
-  color: var(--text); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; transition: 0.3s;
-}
-.level-tab.active { background: var(--warning-bg); border-color: var(--accent); color: var(--accent); }
-.filtro-select {
-  padding: 10px 16px; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--glass-input);
-  color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.95rem;
-}
-.filtro-select option { color: var(--accent-text); }
-
-.score-bar {
-  display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 26px;
-  background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-radius: 16px; padding: 14px 20px;
-  text-align: center; font-size: 1.05rem; flex-wrap: wrap;
-}
-.score-bar strong { color: var(--accent); font-size: 1.3rem; }
-
-.q-list { display: flex; flex-direction: column; gap: 16px; }
-.q-card {
+.hub-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
   background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 18px; padding: 22px 24px;
-  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border); border-radius: 20px; padding: 32px 26px;
+  box-shadow: var(--glass-shadow); text-decoration: none; color: var(--text);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
-.q-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
-.q-tags { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.q-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.75; font-weight: 700; }
-.q-pill { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 14px; background: var(--glass-input); }
-.q-status { font-size: 0.85rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
-.q-status.nao-respondida { background: var(--glass-input); color: var(--text-muted); }
-.q-status.correta { background: var(--success-bg); color: var(--success-text); }
-.q-status.incorreta { background: var(--danger-bg); color: var(--danger-text); }
-
-.q-texto { font-size: 0.98rem; line-height: 1.65; margin-bottom: 14px; padding: 14px 16px; background: var(--recessed); border-radius: 12px; border-left: 3px solid var(--glass-border-strong); font-style: italic; opacity: 0.95; }
-
-.q-imagem { display: flex; justify-content: center; margin-bottom: 16px; padding: 18px; background: var(--recessed); border-radius: 14px; }
-.preco-card { display: flex; flex-direction: column; align-items: center; gap: 8px; background: linear-gradient(145deg, #fff7d6, #ffe9a8); color: #5a3d00; border-radius: 14px; padding: 20px 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); position: relative; }
-.preco-card::before { content: ""; position: absolute; left: -8px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; background: rgba(0,0,0,0.2); border-radius: 50%; }
-.preco-icone { font-size: 2.6rem; }
-.preco-valor { font-size: 1.3rem; font-weight: 700; }
-.calendario-card { display: flex; flex-direction: column; align-items: center; background: #fff; color: #08203e; border-radius: 14px; overflow: hidden; min-width: 140px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-.cal-mes { width: 100%; text-align: center; background: #ff5252; color: white; font-weight: 700; padding: 8px 0; text-transform: uppercase; font-size: 0.9rem; }
-.cal-dia { font-size: 3rem; font-weight: 700; padding: 10px 0 0; }
-.cal-semana { padding: 4px 0 14px; font-weight: 600; opacity: 0.8; }
-.contagem-grid { display: flex; flex-wrap: wrap; gap: 10px; max-width: 320px; justify-content: center; align-items: center; }
-.contagem-grid span { font-size: 2.2rem; line-height: 1; }
-.q-enunciado { font-size: 1.15rem; line-height: 1.6; margin-bottom: 16px; }
-.q-audio-btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--warning-bg);
-  border: 1px solid var(--accent); color: var(--accent); border-radius: 30px; cursor: pointer; font-weight: 700; margin-bottom: 16px;
-  font-family: 'Poppins', sans-serif; font-size: 0.95rem;
+.hub-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.hub-card .icone { font-size: 2.6rem; }
+.hub-card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+.hub-card p { font-size: 0.92rem; opacity: 0.85; line-height: 1.5; }
+.hub-card .indicador {
+  margin-top: 4px; font-size: 0.78rem; font-weight: 700; padding: 4px 14px; border-radius: 20px;
+  background: var(--warning-bg); color: var(--accent);
 }
-.q-audio-btn:hover { background: var(--warning-bg); }
-
-.q-opcoes { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
-.q-opcao {
-  text-align: left; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--glass-border);
-  background: var(--glass-bg-2); color: var(--text); cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.98rem; transition: 0.2s;
-}
-.q-opcao:hover:not(:disabled) { background: var(--glass-hover); }
-.q-opcao.selecionada { border-color: var(--accent); background: var(--warning-bg); }
-.q-opcao.certa { border-color: var(--success-text); background: var(--success-bg); }
-.q-opcao.errada { border-color: var(--danger-text); background: var(--danger-bg); }
-.q-opcao:disabled { cursor: default; }
-
-.q-vf-btns { display: flex; gap: 12px; margin-bottom: 16px; }
-.q-vf-btns button {
-  flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--glass-bg-2);
-  color: var(--text); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif;
-}
-.q-vf-btns button.selecionada { border-color: var(--accent); background: var(--warning-bg); }
-.q-vf-btns button.certa { border-color: var(--success-text); background: var(--success-bg); }
-.q-vf-btns button.errada { border-color: var(--danger-text); background: var(--danger-bg); }
-
-.q-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.q-btn {
-  padding: 10px 20px; border-radius: 20px; border: none; background: var(--accent); color: var(--accent-text); font-weight: 700;
-  cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.92rem;
-}
-.q-btn.secundario { background: var(--glass-hover); color: var(--text); border: 1px solid var(--glass-border-strong); }
-.q-gabarito {
-  display: none; margin-top: 14px; padding: 14px 16px; background: var(--recessed); border-radius: 12px;
-  font-size: 0.95rem; line-height: 1.6; border-left: 3px solid var(--accent);
-}
-.q-gabarito.show { display: block; }
-
-/* SIMULADOS */
-.sim-intro p { font-size: 1.05rem; opacity: 0.9; max-width: 640px; margin: 0 auto 26px; text-align: center; }
-.sim-config-card {
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; box-shadow: var(--glass-shadow);
-  max-width: 640px; margin: 0 auto 30px; display: flex; flex-direction: column; gap: 16px;
-}
-.sim-config-card label { font-weight: 700; font-size: 0.92rem; }
-.sim-config-card select {
-  padding: 12px 16px; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--glass-input);
-  color: var(--text); font-family: 'Poppins', sans-serif; font-size: 1rem; width: 100%;
-}
-.sim-config-card select option { color: var(--accent-text); }
-.prova-desc { font-size: 0.92rem; opacity: 0.85; line-height: 1.55; background: var(--recessed); border-radius: 12px; padding: 14px 16px; border-left: 3px solid var(--accent); }
-
-.placeholders { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 640px; margin: 30px auto 0; }
-.placeholder-card {
-  border: 1px dashed var(--glass-border-strong); border-radius: 18px; padding: 24px; text-align: center; opacity: 0.75;
-}
-.placeholder-card .icone { font-size: 2rem; margin-bottom: 10px; }
-.placeholder-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 6px; }
-.placeholder-card p { font-size: 0.88rem; }
-.placeholder-card .em-breve { display: inline-block; margin-top: 10px; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 14px; background: var(--warning-bg); color: var(--warning-text); }
-
-.sim-qnav { display: flex; flex-wrap: wrap; gap: 8px; background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-radius: 16px; padding: 14px; margin-bottom: 20px; }
-.qnav-btn {
-  width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-bg);
-  color: var(--text); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.85rem;
-}
-.qnav-btn.respondida { background: var(--success-bg); border-color: var(--success-text); color: var(--success-text); }
-.qnav-btn.atual { outline: 3px solid var(--accent); }
-
-.sim-header {
-  display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;
-  background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-radius: 16px; padding: 16px 22px;
-}
-.sim-timer { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
-.sim-timer.alerta { color: var(--danger-text); }
-.sim-progress { font-size: 0.95rem; opacity: 0.85; }
-.sim-nav { display: flex; justify-content: space-between; margin-top: 20px; gap: 14px; flex-wrap: wrap; }
-
-.sim-result { text-align: center; }
-.sim-result .nota { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--accent); margin: 14px 0; }
-.sim-review-item { text-align: left; margin-top: 14px; }
-
-footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
-
-@media(max-width: 700px) {
-  .intro h1 { font-size: 2.1rem; }
-  .sim-header { flex-direction: column; align-items: flex-start; }
-  .bar-list-label { flex-basis: 120px; }
-}
-
-/* CONJUNTOS DE QUESTÕES */
-.conjuntos-toolbar { display: flex; justify-content: center; margin-bottom: 24px; }
-.conjuntos-titulo { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 34px 0 16px; text-align: center; }
-.conjuntos-titulo:first-of-type { margin-top: 0; }
-.conjuntos-vazio { text-align: center; opacity: 0.75; padding: 20px; font-size: 0.95rem; }
-.conjuntos-filtro-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
-.conjuntos-filtro-row .filtro-select { min-width: 180px; }
-.conjuntos-filtro-row input.filtro-select { flex: 1; max-width: 320px; }
-
-.conjuntos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
-.conjunto-card {
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 18px; padding: 20px 22px;
-  box-shadow: var(--glass-shadow); display: flex; flex-direction: column; gap: 10px;
-}
-.conjunto-card.destaque { border-color: var(--accent); }
-.conjunto-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; }
-.conjunto-card .conjunto-desc { font-size: 0.88rem; opacity: 0.85; line-height: 1.4; }
-.conjunto-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.conjunto-status { font-size: 0.78rem; font-weight: 700; padding: 3px 11px; border-radius: 14px; align-self: flex-start; }
-.conjunto-status.nao_iniciado { background: var(--glass-input); color: var(--text-muted); }
-.conjunto-status.em_andamento { background: var(--warning-bg); color: var(--warning-text); }
-.conjunto-status.concluido { background: var(--success-bg); color: var(--success-text); }
-.conjunto-resultado { font-size: 0.88rem; background: var(--recessed); border-radius: 12px; padding: 10px 14px; line-height: 1.6; }
-.conjunto-resultado strong { color: var(--accent); }
-.conjunto-acoes { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
-
-.criar-conjunto-card {
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 20px; padding: 26px 28px;
-  box-shadow: var(--glass-shadow); max-width: 640px; margin: 0 auto 34px; display: flex; flex-direction: column; gap: 18px;
-}
-.criar-conjunto-card label.grupo-label { font-weight: 700; font-size: 0.92rem; margin-bottom: 8px; display: block; }
-.chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip-toggle {
-  padding: 8px 16px; border-radius: 20px; border: 1px solid var(--glass-border); background: var(--glass-bg-2);
-  color: var(--text); font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.88rem; transition: 0.2s;
-}
-.chip-toggle.selecionado { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-.quantidade-row, .tempo-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.criar-conjunto-card input[type="number"] {
-  padding: 10px 14px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-input);
-  color: var(--text); font-family: 'Poppins', sans-serif; width: 100px;
-}
-.criar-conjunto-erro { color: var(--danger-text); font-size: 0.88rem; display: none; }
-.criar-conjunto-erro.show { display: block; }
 </style>
 </head>
 
 <body style="visibility:hidden;">
-<script>
-(async function protegerPagina() {
-  const featureKey = 'plataforma';
-  const token = localStorage.getItem('token');
-
-  function bloquear() {
-    document.body.innerHTML = `
-      <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; font-family:'Poppins',sans-serif; background:var(--bg-gradient); color:var(--text);">
-        <h1 style="font-family:'Playfair Display',serif; font-size:2.5rem; margin-bottom:16px;">Conteúdo exclusivo</h1>
-        <p style="font-size:1.2rem; max-width:520px; margin-bottom:28px; opacity:0.95;">A plataforma de questões é liberada no plano Excellence. Entre na sua conta ou assine um plano que inclua este recurso para continuar.</p>
-        <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
-          <a href="login.html" style="padding:14px 28px; background:var(--glass-strong); border:1px solid var(--glass-border-strong); border-radius:30px; color:var(--text); text-decoration:none; font-weight:700;">Entrar</a>
-          <a href="cursos.html" style="padding:14px 28px; background:var(--accent); color:var(--accent-text); border-radius:30px; text-decoration:none; font-weight:700;">Ver planos</a>
-        </div>
-      </div>`;
-    document.body.style.visibility = 'visible';
-  }
-
-  if (!token) return bloquear();
-
-  try {
-    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
-    if (!res.ok) return bloquear();
-    const data = await res.json();
-    const tier = data.plano && data.plano.tier;
-    const ativo = data.plano && data.plano.ativo;
-    // Liberado pelo plano de curso (cascata por tier) OU por uma compra avulsa do Pack
-    // Prestige (Plataforma de Questões / Ambiente de Produção Oral e Textual / Aulas
-    // Especializadas Online) — os dois caminhos são independentes.
-    const entitlementsCurso = {
-      correcoes: !!ativo && ['Essentiel', 'Avancé', 'Excellence'].includes(tier),
-      gravado: !!ativo && ['Avancé', 'Excellence'].includes(tier),
-      plataforma: !!ativo && tier === 'Excellence'
-    };
-    const avulsos = data.produtosAvulsos || {};
-    const entitlementsAvulso = {
-      correcoes: !!avulsos.producao?.ativo,
-      gravado: !!avulsos.aulasEspecializadas?.ativo,
-      plataforma: !!avulsos.plataforma?.ativo
-    };
-    if (!(entitlementsCurso[featureKey] || entitlementsAvulso[featureKey])) return bloquear();
-    document.body.style.visibility = 'visible';
-  } catch (err) {
-    bloquear();
-  }
-})();
-</script>
+<script src="js/plataformaGate.js"></script>
 
 <div id="app-navbar" class="app-navbar-bar"></div>
 
 <section class="intro">
   <h1>Plataforma de Questões</h1>
-  <p>900 questões no estilo TCF, DELF, DALF e TEF — compreensão oral, compreensão escrita, estruturas da língua, compreensão visual e interpretação de textos longos, organizadas por nível (A1 a C2) e por matéria, com simulados cronometrados. Suas estatísticas de progresso ficam em <a href="minha-conta.html" style="color:var(--accent); font-weight:700;">Minha Conta</a>.</p>
+  <p>Questões no estilo TCF, DELF, DALF e TEF — organizadas em conjuntos por nível e por matéria, com simulados cronometrados, caderno de revisão e estatísticas completas do seu progresso.</p>
 </section>
 
-<div class="app-wrap">
-  <div class="top-tabs">
-    <button class="top-tab active" data-tab="praticar">📝 Praticar</button>
-    <button class="top-tab" data-tab="personalizados">🎯 Personalizados</button>
-    <button class="top-tab" data-tab="caderno">📓 Caderno de Revisão</button>
-    <button class="top-tab" data-tab="simulados">⏱️ Simulados</button>
-    <button class="top-tab" data-tab="respondidos">✅ Respondidos</button>
-  </div>
-
-  <!-- ===================== PRATICAR (Conjuntos Sugeridos) ===================== -->
-  <div id="tabPraticar">
-    <div class="conjuntos-filtro-row">
-      <select class="filtro-select" id="filtroSugeridoNivel"><option value="">Todos os níveis</option></select>
-      <select class="filtro-select" id="filtroSugeridoMateria"><option value="">Todas as categorias</option></select>
-      <input type="text" class="filtro-select" id="filtroSugeridoBusca" placeholder="Buscar conjunto pelo nome...">
-    </div>
-
-    <h2 class="conjuntos-titulo">Conjuntos Sugeridos</h2>
-    <div class="conjuntos-grid" id="conjuntosPrioritarios"></div>
-  </div>
-
-  <!-- ===================== PERSONALIZADOS ===================== -->
-  <div id="tabPersonalizados" style="display:none;">
-    <div class="conjuntos-toolbar">
-      <button class="q-btn" id="criarConjuntoBtn">+ Criar conjunto personalizado</button>
-    </div>
-
-    <div class="criar-conjunto-card" id="criarConjuntoForm" style="display:none;">
-      <div>
-        <label class="grupo-label">Níveis</label>
-        <div class="chip-grid" id="chipNiveis"></div>
-      </div>
-      <div>
-        <label class="grupo-label">Categorias</label>
-        <div class="chip-grid" id="chipMaterias"></div>
-      </div>
-      <div>
-        <label class="grupo-label">Quantidade de questões</label>
-        <div class="quantidade-row" id="chipQuantidade"></div>
-      </div>
-      <div>
-        <label class="grupo-label">Tempo</label>
-        <div class="tempo-row">
-          <label style="display:flex; align-items:center; gap:6px; font-weight:600; font-size:0.9rem;"><input type="radio" name="tempoModo" value="sem" checked> Sem limite de tempo</label>
-          <label style="display:flex; align-items:center; gap:6px; font-weight:600; font-size:0.9rem;"><input type="radio" name="tempoModo" value="com"> Tempo limitado</label>
-          <input type="number" id="tempoMinutos" min="1" placeholder="minutos" style="display:none;">
-        </div>
-      </div>
-      <p class="criar-conjunto-erro" id="criarConjuntoErro"></p>
-      <div class="conjunto-acoes">
-        <button class="q-btn" id="gerarConjuntoBtn">Gerar conjunto</button>
-        <button class="q-btn secundario" id="cancelarCriarConjuntoBtn">Cancelar</button>
-      </div>
-    </div>
-
-    <h2 class="conjuntos-titulo">Meus Conjuntos Personalizados</h2>
-    <div class="conjuntos-grid" id="conjuntosPersonalizados"></div>
-  </div>
-
-  <!-- ===================== CADERNO DE REVISÃO ===================== -->
-  <div id="tabCaderno" style="display:none;">
-    <h2 class="conjuntos-titulo">Caderno de Revisão</h2>
-    <p style="text-align:center; opacity:0.85; max-width:640px; margin:0 auto 22px;">Questões que você marcou para revisar depois de responder um conjunto. Só é possível adicionar uma questão ao caderno na tela de resultado, após enviar o conjunto.</p>
-    <div id="cadernoLista"></div>
-  </div>
-
-  <!-- ===================== RESPONDIDOS ===================== -->
-  <div id="tabRespondidos" style="display:none;">
-    <h2 class="conjuntos-titulo">Conjuntos Respondidos</h2>
-    <div class="conjuntos-grid" id="conjuntosRespondidos"></div>
-  </div>
-
-  <!-- ===================== SIMULADOS ===================== -->
-  <div id="tabSimulados" style="display:none;">
-    <div id="simIntro" class="sim-intro">
-      <p>Escolha a prova e o tempo. As questões dos simulados são <strong>diferentes</strong> das da seção Praticar, e você só vê o gabarito ao finalizar — como numa prova real.</p>
-      <div class="sim-config-card">
-        <div>
-          <label for="simProva">Tipo de prova</label>
-          <select id="simProva">
-            <option value="TCF">TCF — multinível (A1–C2)</option>
-            <option value="TEF">TEF — multinível (A1–C2)</option>
-            <option value="DELF">DELF — A1 a B2</option>
-            <option value="DALF">DALF — C1 e C2</option>
-          </select>
-        </div>
-        <div class="prova-desc" id="provaDesc"></div>
-        <div>
-          <label for="simTempo">Tempo de prova</label>
-          <select id="simTempo"></select>
-        </div>
-        <button class="q-btn" id="iniciarSimuladoBtn" style="align-self:center; padding:13px 34px;">Iniciar simulado</button>
-      </div>
-
-      <div class="placeholders">
-        <div class="placeholder-card">
-          <div class="icone">✍️</div>
-          <h3>Simulado de Produção Escrita</h3>
-          <p>Redações cronometradas com correção pela nossa equipe.</p>
-          <span class="em-breve">EM BREVE</span>
-        </div>
-        <div class="placeholder-card">
-          <div class="icone">🎤</div>
-          <h3>Simulado de Produção Oral</h3>
-          <p>Prática de expressão oral no formato dos exames oficiais.</p>
-          <span class="em-breve">EM BREVE</span>
-        </div>
-      </div>
-    </div>
-
-    <div id="simAtivo" style="display:none;">
-      <div class="sim-header">
-        <div class="sim-progress" id="simProgress"></div>
-        <div class="sim-timer" id="simTimer"></div>
-      </div>
-      <div class="sim-qnav" id="simQnav"></div>
-      <div class="q-list" id="simQuestao"></div>
-      <div class="sim-nav">
-        <button class="q-btn secundario" id="simAnteriorBtn">‹ Anterior</button>
-        <button class="q-btn secundario" id="simProximoBtn">Próxima ›</button>
-        <button class="q-btn" id="simFinalizarBtn">Finalizar simulado</button>
-      </div>
-    </div>
-
-    <div id="simResultado" style="display:none;" class="sim-result"></div>
+<div class="hub-wrap">
+  <div class="hub-grid" id="hubGrid">
+    <a class="hub-card" href="praticar.html">
+      <div class="icone">📝</div>
+      <h2>Praticar</h2>
+      <p>Resolver conjuntos de questões e acompanhar sua evolução.</p>
+      <span class="indicador" id="indicadorPraticar" style="display:none;"></span>
+    </a>
+    <a class="hub-card" href="simulados.html">
+      <div class="icone">⏱️</div>
+      <h2>Simulados</h2>
+      <p>Realizar simulados completos em ambiente semelhante às provas oficiais.</p>
+    </a>
+    <a class="hub-card" href="personalizar-conjunto.html">
+      <div class="icone">🎯</div>
+      <h2>Personalize</h2>
+      <p>Criar conjuntos personalizados escolhendo níveis, categorias, quantidade de questões e tempo.</p>
+    </a>
+    <a class="hub-card" href="caderno-revisao.html">
+      <div class="icone">📓</div>
+      <h2>Caderno de Revisão</h2>
+      <p>Gerenciar todas as questões marcadas para revisão e criar novas sessões de estudo.</p>
+      <span class="indicador" id="indicadorCaderno" style="display:none;"></span>
+    </a>
+    <a class="hub-card" href="estatisticas-questoes.html">
+      <div class="icone">📊</div>
+      <h2>Estatísticas</h2>
+      <p>Visualizar gráficos, desempenho, evolução e histórico completo da Plataforma de Questões.</p>
+      <span class="indicador" id="indicadorEstatisticas" style="display:none;"></span>
+    </a>
   </div>
 </div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
-<script src="js/questoes.js"></script>
-<script src="js/questoes2.js"></script>
-<script src="js/questoes3.js"></script>
-<script src="js/questoes4.js"></script>
-<script src="js/questoes5.js"></script>
-<script src="js/questoes6.js"></script>
-<script src="js/questoesRender.js"></script>
-<script src="js/conjuntos.js"></script>
-<script>
-// ===================== UTILITÁRIOS (Simulados) =====================
-// NOMES_TIPO, renderVisual e tocarAudio vêm de js/questoesRender.js (compartilhado
-// com a nova tela de resolução de conjuntos em resolver-conjunto.html).
-
-// Embaralha as opções de forma determinística por id (a correta está sempre em opcoes[0] nos dados)
-function hashStr(s) { let h = 0; for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) >>> 0; } return h; }
-QUESTOES.forEach(q => {
-  if (!q.opcoes) return;
-  const idx = q.opcoes.map((_, i) => i);
-  let seed = hashStr(q.id);
-  for (let i = idx.length - 1; i > 0; i--) {
-    seed = (seed * 1103515245 + 12345) >>> 0;
-    const j = seed % (i + 1);
-    [idx[i], idx[j]] = [idx[j], idx[i]];
-  }
-  q.opcoesExibidas = idx.map(i => q.opcoes[i]);
-  q.respostaExibida = idx.indexOf(0);
-});
-const byId = {};
-QUESTOES.forEach(q => byId[q.id] = q);
-
-// ===================== PERSISTÊNCIA (Simulados — histórico de eventos) =====================
-function carregarEventos() { return JSON.parse(localStorage.getItem('pq_eventos') || '[]'); }
-function registrarEvento(evt) {
-  const evts = carregarEventos();
-  evts.push(evt);
-  localStorage.setItem('pq_eventos', JSON.stringify(evts));
-}
-
-// ===================== TEMPO ESTUDADO =====================
-// Acumula o tempo com a página aberta em 'pq_tempoMs' (usado no card de
-// estatísticas de Minha Conta). Flush periódico + em troca de aba/fechamento,
-// já que 'beforeunload' sozinho não é confiável em todos os navegadores.
-let sessaoInicio = Date.now();
-function flushTempoEstudado() {
-  const agora = Date.now();
-  const delta = agora - sessaoInicio;
-  sessaoInicio = agora;
-  if (delta <= 0) return;
-  const total = Number(localStorage.getItem('pq_tempoMs') || 0);
-  localStorage.setItem('pq_tempoMs', String(total + delta));
-}
-setInterval(flushTempoEstudado, 15000);
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) flushTempoEstudado(); else sessaoInicio = Date.now();
-});
-window.addEventListener('beforeunload', flushTempoEstudado);
-
-// A aba Praticar agora é inteiramente controlada por js/conjuntos.js (Conjuntos de
-// Questões, com sessão de resolução em resolver-conjunto.html) — ver init no final
-// deste script (`if (window.initConjuntosTab) initConjuntosTab();`).
-
-// ===================== ABAS =====================
-const ABAS_PLATAFORMA = ['praticar', 'personalizados', 'caderno', 'simulados', 'respondidos'];
-function ativarAba(nomeAba) {
-  if (!ABAS_PLATAFORMA.includes(nomeAba)) return;
-  document.querySelectorAll('.top-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === nomeAba));
-  document.getElementById('tabPraticar').style.display = nomeAba === 'praticar' ? 'block' : 'none';
-  document.getElementById('tabPersonalizados').style.display = nomeAba === 'personalizados' ? 'block' : 'none';
-  document.getElementById('tabCaderno').style.display = nomeAba === 'caderno' ? 'block' : 'none';
-  document.getElementById('tabSimulados').style.display = nomeAba === 'simulados' ? 'block' : 'none';
-  document.getElementById('tabRespondidos').style.display = nomeAba === 'respondidos' ? 'block' : 'none';
-  if (nomeAba === 'caderno' && window.carregarCaderno) carregarCaderno();
-}
-document.querySelectorAll('.top-tab').forEach(tab => {
-  tab.addEventListener('click', () => ativarAba(tab.dataset.tab));
-});
-// Permite abrir direto numa aba específica via link, ex.: plataforma-questoes.html?tab=caderno
-const abaInicial = new URLSearchParams(window.location.search).get('tab');
-if (abaInicial) ativarAba(abaInicial);
-
-// ===================== SIMULADOS =====================
-let simulado = null;
-
-const simProvaSel = document.getElementById('simProva');
-const simTempoSel = document.getElementById('simTempo');
-
-function atualizarConfigProva() {
-  const prova = PROVAS[simProvaSel.value];
-  document.getElementById('provaDesc').innerHTML =
-    `<strong>${prova.nome}</strong> — ${prova.desc}<br>Simulado: <strong>${prova.questoes} questões</strong> · tempo sugerido: <strong>${prova.tempoSugerido} min</strong>.`;
-  simTempoSel.innerHTML = [
-    `<option value="${prova.tempoSugerido}">Sugerido (${prova.tempoSugerido} min)</option>`,
-    ...[15, 20, 30, 45, 60].filter(m => m !== prova.tempoSugerido).map(m => `<option value="${m}">${m} min</option>`)
-  ].join('');
-}
-simProvaSel.addEventListener('change', atualizarConfigProva);
-atualizarConfigProva();
-
-document.getElementById('iniciarSimuladoBtn').addEventListener('click', () => {
-  const prova = PROVAS[simProvaSel.value];
-  const pool = QUESTOES.filter(q => q.pool === 'simulado' && prova.niveis.includes(q.nivel));
-  const embaralhado = [...pool].sort(() => Math.random() - 0.5);
-  const perguntas = embaralhado.slice(0, Math.min(prova.questoes, embaralhado.length))
-    .sort((a, b) => NIVEIS.indexOf(a.nivel) - NIVEIS.indexOf(b.nivel)); // dificuldade progressiva, como no TCF/TEF
-
-  simulado = { prova: prova.nome, perguntas, respostas: {}, indice: 0, tempoRestante: Number(simTempoSel.value) * 60 };
-
-  document.getElementById('simIntro').style.display = 'none';
-  document.getElementById('simResultado').style.display = 'none';
-  document.getElementById('simAtivo').style.display = 'block';
-
-  renderSimuladoQuestao();
-  iniciarTimer();
-});
-
-function formatarTempo(seg) {
-  const m = Math.floor(seg / 60).toString().padStart(2, '0');
-  const s = (seg % 60).toString().padStart(2, '0');
-  return `${m}:${s}`;
-}
-
-function iniciarTimer() {
-  clearInterval(simulado.timerId);
-  simulado.timerId = setInterval(() => {
-    simulado.tempoRestante--;
-    const el = document.getElementById('simTimer');
-    el.textContent = '⏱️ ' + formatarTempo(Math.max(simulado.tempoRestante, 0));
-    if (simulado.tempoRestante <= 60) el.classList.add('alerta');
-    if (simulado.tempoRestante <= 0) { clearInterval(simulado.timerId); finalizarSimulado(); }
-  }, 1000);
-}
-
-function renderSimuladoQuestao() {
-  const p = simulado.perguntas[simulado.indice];
-  document.getElementById('simProgress').textContent = `${simulado.prova} — Questão ${simulado.indice + 1} de ${simulado.perguntas.length} (nível ${p.nivel})`;
-  document.getElementById('simTimer').textContent = '⏱️ ' + formatarTempo(simulado.tempoRestante);
-
-  const respAtual = simulado.respostas[p.id];
-  let corpo = '';
-  if (p.tipo === 'escuta') corpo += `<button class="q-audio-btn" data-simaudio="${encodeURIComponent(p.audio)}">🔊 Ouvir áudio</button>`;
-  if (p.visual) corpo += renderVisual(p.visual);
-  if (p.texto) corpo += `<div class="q-texto">${p.texto}</div>`;
-  corpo += `<div class="q-enunciado">${p.enunciado}</div>`;
-  if (p.tipo === 'vf') corpo += `<div class="q-enunciado" style="font-weight:600;">Afirmação: « ${p.afirmacao} »</div>`;
-
-  if (p.tipo === 'vf') {
-    corpo += `<div class="q-vf-btns" data-simqid="${p.id}">
-      <button data-valor="true" class="${respAtual === true ? 'selecionada' : ''}">Vrai</button>
-      <button data-valor="false" class="${respAtual === false ? 'selecionada' : ''}">Faux</button>
-    </div>`;
-  } else {
-    corpo += `<div class="q-opcoes" data-simqid="${p.id}">` + p.opcoesExibidas.map((op, i) =>
-      `<button class="q-opcao ${respAtual === i ? 'selecionada' : ''}" data-indice="${i}">${op}</button>`
-    ).join('') + `</div>`;
-  }
-
-  document.getElementById('simQuestao').innerHTML = `<div class="q-card">
-    <div class="q-head"><span class="q-tags"><span class="q-tag">${NOMES_TIPO[p.tipo]}</span><span class="q-pill">${MATERIAS[p.materia]}</span></span></div>
-    ${corpo}
-  </div>`;
-
-  renderSimNav();
-}
-
-// Barra de navegação numerada entre as questões do simulado — mesma ideia visual da
-// navegação usada em resolver-conjunto.html (Praticar), aqui operando só em memória
-// (simulado.respostas), já que Simulados continua sem persistência no backend nesta fase.
-function renderSimNav() {
-  document.getElementById('simQnav').innerHTML = simulado.perguntas.map((p, i) => {
-    const respondida = simulado.respostas[p.id] !== undefined;
-    return `<button class="qnav-btn ${respondida ? 'respondida' : ''} ${i === simulado.indice ? 'atual' : ''}" data-simir="${i}">${i + 1}</button>`;
-  }).join('');
-}
-
-document.getElementById('simQnav').addEventListener('click', e => {
-  const btn = e.target.closest('[data-simir]');
-  if (!btn) return;
-  simulado.indice = Number(btn.dataset.simir);
-  renderSimuladoQuestao();
-});
-
-document.getElementById('simQuestao').addEventListener('click', e => {
-  const audioBtn = e.target.closest('[data-simaudio]');
-  if (audioBtn) { tocarAudio(decodeURIComponent(audioBtn.dataset.simaudio)); return; }
-
-  const opcaoBtn = e.target.closest('.q-opcao');
-  if (opcaoBtn) {
-    simulado.respostas[opcaoBtn.parentElement.dataset.simqid] = Number(opcaoBtn.dataset.indice);
-    renderSimuladoQuestao();
-    return;
-  }
-  const vfBtn = e.target.closest('.q-vf-btns button');
-  if (vfBtn) {
-    simulado.respostas[vfBtn.parentElement.dataset.simqid] = vfBtn.dataset.valor === 'true';
-    renderSimuladoQuestao();
-  }
-});
-
-document.getElementById('simAnteriorBtn').addEventListener('click', () => {
-  if (simulado.indice > 0) { simulado.indice--; renderSimuladoQuestao(); }
-});
-document.getElementById('simProximoBtn').addEventListener('click', () => {
-  if (simulado.indice < simulado.perguntas.length - 1) { simulado.indice++; renderSimuladoQuestao(); }
-});
-document.getElementById('simFinalizarBtn').addEventListener('click', () => {
-  if (confirm('Deseja finalizar o simulado agora?')) finalizarSimulado();
-});
-
-function respostaCerta(p) { return p.tipo === 'vf' ? p.resposta : p.respostaExibida; }
-function textoResposta(p, resp) {
-  if (resp === undefined) return '<em>não respondida</em>';
-  return p.tipo === 'vf' ? (resp ? 'Vrai' : 'Faux') : p.opcoesExibidas[resp];
-}
-
-function finalizarSimulado() {
-  clearInterval(simulado.timerId);
-  document.getElementById('simAtivo').style.display = 'none';
-  document.getElementById('simResultado').style.display = 'block';
-
-  const agora = Date.now();
-  let acertos = 0;
-  const revisao = simulado.perguntas.map(p => {
-    const resp = simulado.respostas[p.id];
-    const ok = resp === respostaCerta(p);
-    if (ok) acertos++;
-    registrarEvento({ t: agora, mode: 'simulado', prova: simulado.prova, materia: p.materia, nivel: p.nivel, ok, id: p.id });
-    const certaTxt = p.tipo === 'vf' ? (p.resposta ? 'Vrai' : 'Faux') : p.opcoesExibidas[p.respostaExibida];
-    return `<div class="q-card sim-review-item">
-      <div class="q-head"><span class="q-tags"><span class="q-tag">${NOMES_TIPO[p.tipo]}</span><span class="q-pill">${p.nivel}</span></span><span class="q-status ${ok ? 'correta' : 'incorreta'}">${ok ? '✓ Acertou' : '✗ Errou'}</span></div>
-      ${p.visual ? renderVisual(p.visual) : ''}
-      ${p.texto ? `<div class="q-texto">${p.texto}</div>` : ''}
-      <div class="q-enunciado">${p.enunciado}</div>
-      ${p.tipo === 'vf' ? `<div class="q-enunciado" style="font-weight:600;">Afirmação: « ${p.afirmacao} »</div>` : ''}
-      <p>Sua resposta: ${textoResposta(p, resp)}</p>
-      <p>Resposta certa: <strong>${certaTxt}</strong></p>
-      <div class="q-gabarito show"><strong>Explicação:</strong> ${p.explicacao}</div>
-    </div>`;
-  }).join('');
-
-  const pct = Math.round((acertos / simulado.perguntas.length) * 100);
-  document.getElementById('simResultado').innerHTML = `
-    <h2 class="q-tag" style="font-size:1.1rem;">Resultado — Simulado ${simulado.prova}</h2>
-    <div class="nota">${acertos}/${simulado.perguntas.length}</div>
-    <p>${pct}% de aproveitamento</p>
-    <button class="q-btn" id="novoSimuladoBtn" style="margin-top:20px;">Fazer outro simulado</button>
-    <div style="margin-top:30px; text-align:left;">${revisao}</div>
-  `;
-  document.getElementById('novoSimuladoBtn').addEventListener('click', () => {
-    document.getElementById('simResultado').style.display = 'none';
-    document.getElementById('simIntro').style.display = 'block';
-  });
-}
-
-// ===================== INIT =====================
-if (window.initConjuntosTab) initConjuntosTab();
-
-document.querySelectorAll('.nav-item').forEach(item => {
-  const dropdown = item.querySelector('.dropdown');
-  if (!dropdown) return;
-  let timeout;
-  item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown.classList.add('show'); });
-  item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown.classList.remove('show'); }, 150); });
-});
-</script>
+<script src="js/plataformaHub.js"></script>
 <script src="js/appShell.js"></script>
 <script src="js/theme-toggle.js"></script>
-
 </body>
 </html>

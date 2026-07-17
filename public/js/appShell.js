@@ -25,7 +25,18 @@
   };
 
   const PRODUTOS_NAV = [
-    { chave: "plataforma", nome: "Plataforma de Questões", href: "plataforma-questoes.html", curso: "Plataforma de Questões" },
+    {
+      chave: "plataforma", nome: "Plataforma de Questões", href: "plataforma-questoes.html", curso: "Plataforma de Questões",
+      // Submenu expansível (ver montarNavLinkComSubmenu) — outros produtos podem ganhar
+      // o mesmo tratamento no futuro só preenchendo este campo.
+      submenu: [
+        { nome: "Praticar", href: "praticar.html", icone: "📝" },
+        { nome: "Simulados", href: "simulados.html", icone: "⏱️" },
+        { nome: "Personalize", href: "personalizar-conjunto.html", icone: "🎯" },
+        { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "📓" },
+        { nome: "Estatísticas", href: "estatisticas-questoes.html", icone: "📊" }
+      ]
+    },
     { chave: "producao", nome: "Ambiente de Produção", href: "correcoes-texto.html", curso: "Ambiente de Produção Oral e Textual" },
     { chave: "aulasEspecializadas", nome: "Aulas Especializadas", href: "aulas-especializadas.html", curso: "Aulas Especializadas Online" }
   ];
@@ -158,6 +169,36 @@
     window.location.href = "index.html";
   }
 
+  // Link de topo de um produto — cadeado simples se bloqueado, link com submenu
+  // expansível se `produto.submenu` existir e o aluno tiver acesso, senão link simples.
+  function montarLinkProduto(p) {
+    const liberado = window.AppShell.temAcesso(p.chave);
+    if (!liberado) {
+      return `<a class="app-nav-link app-nav-locked" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige" title="Bloqueado — clique para assinar">🔒 ${p.nome}</a>`;
+    }
+    if (!p.submenu) return `<a class="app-nav-link" href="${p.href}">${p.nome}</a>`;
+    return montarNavLinkComSubmenu(p);
+  }
+
+  // Componente reutilizável: link de topo + submenu que expande suavemente no hover
+  // (CSS puro, ver .app-nav-submenu em app-shell.css). Em touch (sem hover), tocar no
+  // link principal simplesmente navega pro hub do produto, que já expõe os mesmos
+  // destinos como cards clicáveis — não há beco sem saída em mobile. Pensado pra
+  // qualquer produto futuro poder ganhar submenu só preenchendo `produto.submenu`.
+  function montarNavLinkComSubmenu(p) {
+    const paginaAtual = location.pathname.split("/").pop() || "index.html";
+    const paginasDoModulo = [p.href, ...p.submenu.map(s => s.href), "resolver-conjunto.html"];
+    const ativoNoModulo = paginasDoModulo.includes(paginaAtual);
+    const itens = p.submenu.map(s =>
+      `<a class="app-nav-submenu-item ${s.href === paginaAtual ? "active" : ""}" href="${s.href}"><span class="icone">${s.icone}</span> ${s.nome}</a>`
+    ).join("");
+    return `
+      <div class="app-nav-item app-nav-submenu-wrap">
+        <a class="app-nav-link ${ativoNoModulo ? "app-nav-link-ativo" : ""}" href="${p.href}">${p.nome}</a>
+        <div class="app-nav-submenu">${itens}</div>
+      </div>`;
+  }
+
   function montarNavbar(dadosConta) {
     const root = document.getElementById("app-navbar");
     if (!root) return;
@@ -166,11 +207,7 @@
     const foto = dadosConta.perfil?.foto || AVATAR_PADRAO;
     const plano = dadosConta.plano || { ativo: false };
 
-    const linksProdutos = PRODUTOS_NAV.map(p => {
-      const liberado = window.AppShell.temAcesso(p.chave);
-      if (liberado) return `<a class="app-nav-link" href="${p.href}">${p.nome}</a>`;
-      return `<a class="app-nav-link app-nav-locked" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige" title="Bloqueado — clique para assinar">🔒 ${p.nome}</a>`;
-    }).join("");
+    const linksProdutos = PRODUTOS_NAV.map(montarLinkProduto).join("");
 
     let planoDropdown = `<a href="minha-conta.html">Minha Conta</a><a href="minhas-inscricoes.html">Minhas Inscrições</a>`;
     if (plano.ativo && plano.tier && PROXIMO_TIER[plano.tier]) {
