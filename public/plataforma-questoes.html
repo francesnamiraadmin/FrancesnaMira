@@ -33,7 +33,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .hub-card:hover { transform: translateY(-4px); border-color: var(--accent); }
-.hub-card .icone { font-size: 2.6rem; }
+.hub-card .icone { width: 64px; height: 64px; object-fit: contain; }
 .hub-card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
 .hub-card p { font-size: 0.92rem; opacity: 0.85; line-height: 1.5; }
 .hub-card .indicador {
@@ -56,34 +56,34 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div class="hub-wrap">
   <div class="hub-grid" id="hubGrid">
     <a class="hub-card" href="praticar.html">
-      <div class="icone">📝</div>
+      <img class="icone" src="img/icones/praticar.svg" alt="">
       <h2>Praticar</h2>
       <p>Resolver conjuntos de questões e acompanhar sua evolução.</p>
     </a>
     <a class="hub-card" href="meus-conjuntos.html">
-      <div class="icone">✅</div>
+      <img class="icone" src="img/icones/andamento.svg" alt="">
       <h2>Em Andamento / Respondidos</h2>
       <p>Acompanhar os conjuntos que você já começou e rever o resultado dos que já concluiu.</p>
       <span class="indicador" id="indicadorAndamento" style="display:none;"></span>
     </a>
     <a class="hub-card" href="simulados.html">
-      <div class="icone">⏱️</div>
+      <img class="icone" src="img/icones/simulados.svg" alt="">
       <h2>Simulados</h2>
       <p>Realizar simulados completos em ambiente semelhante às provas oficiais.</p>
     </a>
     <a class="hub-card" href="personalizar-conjunto.html">
-      <div class="icone">🎯</div>
+      <img class="icone" src="img/icones/personalizar.svg" alt="">
       <h2>Personalize</h2>
       <p>Criar conjuntos personalizados para Praticar ou Simulado, escolhendo níveis, categorias, quantidade de questões e tempo.</p>
     </a>
     <a class="hub-card" href="caderno-revisao.html">
-      <div class="icone">📓</div>
+      <img class="icone" src="img/icones/caderno.svg" alt="">
       <h2>Caderno de Revisão</h2>
       <p>Gerenciar todas as questões marcadas para revisão e criar novas sessões de estudo.</p>
       <span class="indicador" id="indicadorCaderno" style="display:none;"></span>
     </a>
     <a class="hub-card" href="estatisticas-questoes.html">
-      <div class="icone">📊</div>
+      <img class="icone" src="img/icones/estatisticas.svg" alt="">
       <h2>Estatísticas</h2>
       <p>Visualizar gráficos, desempenho, evolução e histórico completo da Plataforma de Questões.</p>
       <span class="indicador" id="indicadorEstatisticas" style="display:none;"></span>

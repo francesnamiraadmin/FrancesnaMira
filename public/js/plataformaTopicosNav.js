@@ -15,12 +15,12 @@
 // =====================================================================
 (function () {
   const TOPICOS = [
-    { arquivo: 'praticar.html', nome: 'Praticar', icone: '📝' },
-    { arquivo: 'meus-conjuntos.html', nome: 'Em Andamento / Respondidos', icone: '✅' },
-    { arquivo: 'simulados.html', nome: 'Simulados', icone: '⏱️' },
-    { arquivo: 'personalizar-conjunto.html', nome: 'Personalize', icone: '🎯' },
-    { arquivo: 'caderno-revisao.html', nome: 'Caderno de Revisão', icone: '📓' },
-    { arquivo: 'estatisticas-questoes.html', nome: 'Estatísticas', icone: '📊' }
+    { arquivo: 'praticar.html', nome: 'Praticar', icone: 'img/icones/praticar.svg' },
+    { arquivo: 'meus-conjuntos.html', nome: 'Em Andamento / Respondidos', icone: 'img/icones/andamento.svg' },
+    { arquivo: 'simulados.html', nome: 'Simulados', icone: 'img/icones/simulados.svg' },
+    { arquivo: 'personalizar-conjunto.html', nome: 'Personalize', icone: 'img/icones/personalizar.svg' },
+    { arquivo: 'caderno-revisao.html', nome: 'Caderno de Revisão', icone: 'img/icones/caderno.svg' },
+    { arquivo: 'estatisticas-questoes.html', nome: 'Estatísticas', icone: 'img/icones/estatisticas.svg' }
   ];
 
   const el = document.getElementById('plataformaTopicosNav');
@@ -29,6 +29,6 @@
   const atual = location.pathname.split('/').pop();
   const outros = TOPICOS.filter(t => t.arquivo !== atual);
   el.innerHTML = outros.map(t =>
-    `<a class="topico-card" href="${t.arquivo}"><span class="icone">${t.icone}</span><span class="nome">${t.nome}</span></a>`
+    `<a class="topico-card" href="${t.arquivo}"><img class="icone" src="${t.icone}" alt=""><span class="nome">${t.nome}</span></a>`
   ).join('');
 })();

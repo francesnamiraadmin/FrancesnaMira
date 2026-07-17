@@ -30,12 +30,12 @@
       // Submenu expansível (ver montarNavLinkComSubmenu) — outros produtos podem ganhar
       // o mesmo tratamento no futuro só preenchendo este campo.
       submenu: [
-        { nome: "Praticar", href: "praticar.html", icone: "📝" },
-        { nome: "Em Andamento / Respondidos", href: "meus-conjuntos.html", icone: "✅" },
-        { nome: "Simulados", href: "simulados.html", icone: "⏱️" },
-        { nome: "Personalize", href: "personalizar-conjunto.html", icone: "🎯" },
-        { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "📓" },
-        { nome: "Estatísticas", href: "estatisticas-questoes.html", icone: "📊" }
+        { nome: "Praticar", href: "praticar.html", icone: "img/icones/praticar.svg" },
+        { nome: "Em Andamento / Respondidos", href: "meus-conjuntos.html", icone: "img/icones/andamento.svg" },
+        { nome: "Simulados", href: "simulados.html", icone: "img/icones/simulados.svg" },
+        { nome: "Personalize", href: "personalizar-conjunto.html", icone: "img/icones/personalizar.svg" },
+        { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "img/icones/caderno.svg" },
+        { nome: "Estatísticas", href: "estatisticas-questoes.html", icone: "img/icones/estatisticas.svg" }
       ]
     },
     { chave: "producao", nome: "Ambiente de Produção", href: "correcoes-texto.html", curso: "Ambiente de Produção Oral e Textual" },
@@ -191,7 +191,7 @@
     const paginasDoModulo = [p.href, ...p.submenu.map(s => s.href), "resolver-conjunto.html"];
     const ativoNoModulo = paginasDoModulo.includes(paginaAtual);
     const itens = p.submenu.map(s =>
-      `<a class="app-nav-submenu-item ${s.href === paginaAtual ? "active" : ""}" href="${s.href}"><span class="icone">${s.icone}</span> ${s.nome}</a>`
+      `<a class="app-nav-submenu-item ${s.href === paginaAtual ? "active" : ""}" href="${s.href}"><img class="icone" src="${s.icone}" alt=""> ${s.nome}</a>`
     ).join("");
     return `
       <div class="app-nav-item app-nav-submenu-wrap">
@@ -237,7 +237,7 @@
             <div class="app-dropdown" id="userDropdown">
               <a href="minha-conta.html">Meu Perfil</a>
               <a href="meus-deveres.html">Dever de Casa</a>
-              <a href="mapeador-estudos.html">⏱️ Mapeador de Estudos</a>
+              <a href="mapeador-estudos.html">Mapeador de Estudos</a>
               <button type="button" class="app-dropdown-item" id="alterarFotoBtn">Alterar Foto</button>
               <a href="configuracoes.html">Configurações</a>
               <a href="depoimentos.html">Depoimentos</a>
