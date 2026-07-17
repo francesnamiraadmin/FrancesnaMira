@@ -10,12 +10,24 @@ function authHeaders(json) {
 }
 
 const NIVEIS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+// Simulado troca a seleção de "Níveis" (A1-C2, o mesmo eixo do banco de questões) por
+// "Provas de Proficiência" — mais familiar pra quem tá treinando pra uma prova real. Cada
+// prova mapeia pro(s) nível(is) CEFR que ela cobre de verdade (DELF vai só até B2, DALF só
+// C1-C2, TCF/TEF cobrem a escala inteira) — o backend nunca vê "TCF"/"DELF": o front traduz
+// pra `niveis` (união dos níveis das provas escolhidas) antes de enviar, então o schema de
+// Conjunto/Questao não precisa saber nada sobre provas.
+const PROVAS_NIVEIS = {
+  TCF: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
+  TEF: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
+  DELF: ['A1', 'A2', 'B1', 'B2'],
+  DALF: ['C1', 'C2']
+};
 const QUANTIDADES_CONJUNTO = [10, 20, 40];
 const POOLS = [
   { valor: 'praticar', label: 'Praticar' },
   { valor: 'simulado', label: 'Simulado' }
 ];
-const filtroForm = { pool: 'praticar', niveis: new Set(), materias: new Set(), quantidade: 10 };
+const filtroForm = { pool: 'praticar', niveis: new Set(), provas: new Set(), materias: new Set(), quantidade: 10 };
 
 function renderChipsPool() {
   document.getElementById('chipPool').innerHTML = POOLS.map(p =>
@@ -33,10 +45,13 @@ function aplicarPadraoTempoPool(form) {
   if (filtroForm.pool === 'simulado' && !minutosInput.value) minutosInput.value = 60;
 }
 
-function renderChipsNiveis() {
-  document.getElementById('chipNiveis').innerHTML = NIVEIS.map(n =>
-    `<button type="button" class="chip-toggle" data-nivel="${n}">${n}</button>`
-  ).join('');
+// Alterna entre "Níveis" (Praticar) e "Provas de Proficiência" (Simulado) — o label e o
+// conjunto de chips mudam inteiramente, mas o container (#chipNiveis) é o mesmo.
+function renderChipsNiveisOuProvas() {
+  document.getElementById('labelNiveis').textContent = filtroForm.pool === 'simulado' ? 'Provas de Proficiência' : 'Níveis';
+  document.getElementById('chipNiveis').innerHTML = filtroForm.pool === 'simulado'
+    ? Object.keys(PROVAS_NIVEIS).map(p => `<button type="button" class="chip-toggle ${filtroForm.provas.has(p) ? 'selecionado' : ''}" data-prova="${p}">${p}</button>`).join('')
+    : NIVEIS.map(n => `<button type="button" class="chip-toggle ${filtroForm.niveis.has(n) ? 'selecionado' : ''}" data-nivel="${n}">${n}</button>`).join('');
 }
 
 const TODAS_MATERIAS = Object.keys(MATERIAS_LABELS);
@@ -69,12 +84,26 @@ function mostrarErroForm(msg) {
 }
 
 // ===================== MEUS CONJUNTOS PERSONALIZADOS =====================
+// Reaproveita os MESMOS cards visuais de Sugeridos/Respondidos
+// (renderPrioritarioCard/renderRespondidoCard, de js/conjuntoCard.js — a rota
+// GET /conjuntos/meus-personalizados devolve o mesmo formato que essas funções
+// esperam) — só acrescenta um botão "Excluir" dentro do card via DOM (não por
+// concatenação de string, pra não depender da formatação exata do template
+// dessas funções). Os botões Começar/Continuar/Refazer/Revisar já funcionam
+// sozinhos: o clique delegado deles é registrado globalmente por
+// conjuntoCard.js (document.addEventListener), não precisa de nada aqui.
 
-const STATUS_LABEL_PERSONALIZADO = { nao_iniciado: 'Não iniciado', em_andamento: 'Em andamento', concluido: 'Concluído' };
-
-function formatarTempoLimite(segundos) {
-  if (!segundos) return 'sem limite de tempo';
-  return `${Math.round(segundos / 60)} min`;
+function renderPersonalizadoCard(c) {
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = c.status === 'concluido' ? renderRespondidoCard(c) : renderPrioritarioCard(c);
+  const card = wrapper.firstElementChild;
+  const btnExcluir = document.createElement('button');
+  btnExcluir.type = 'button';
+  btnExcluir.className = 'q-btn perigo';
+  btnExcluir.dataset.excluirPersonalizado = c._id;
+  btnExcluir.textContent = 'Excluir';
+  card.querySelector('.conjunto-acoes').appendChild(btnExcluir);
+  return card.outerHTML;
 }
 
 function atualizarTituloMeusPersonalizados() {
@@ -89,24 +118,9 @@ async function carregarMeusPersonalizados() {
     const res = await fetch(`/api/questoes/conjuntos/meus-personalizados?pool=${filtroForm.pool}`, { headers: authHeaders() });
     if (!res.ok) throw new Error();
     const conjuntos = await res.json();
-    if (!conjuntos.length) {
-      lista.innerHTML = '<p class="meus-personalizados-vazio">Você ainda não criou nenhum conjunto personalizado.</p>';
-      return;
-    }
-    lista.innerHTML = conjuntos.map(c => `
-      <div class="personalizado-item">
-        <div class="info">
-          <span class="nome">${c.nome}</span>
-          <span class="meta">
-            <span class="q-status-pill ${c.status}">${STATUS_LABEL_PERSONALIZADO[c.status]}</span>
-            &nbsp;${c.quantidadeQuestoes} questões · ${formatarTempoLimite(c.tempoLimiteSegundos)}${c.ultimaTentativa ? ` · última tentativa: ${c.ultimaTentativa.percentualAcertos}% de acertos` : ''}
-          </span>
-        </div>
-        <div class="acoes">
-          <a class="q-btn secundario" href="resolver-conjunto.html?id=${c._id}">${c.status === 'nao_iniciado' ? 'Começar' : c.status === 'em_andamento' ? 'Continuar' : 'Refazer'}</a>
-          <button type="button" class="q-btn perigo" data-excluir-personalizado="${c._id}">Excluir</button>
-        </div>
-      </div>`).join('');
+    lista.innerHTML = conjuntos.length
+      ? conjuntos.map(renderPersonalizadoCard).join('')
+      : '<p class="meus-personalizados-vazio">Você ainda não criou nenhum conjunto personalizado.</p>';
   } catch (err) {
     lista.innerHTML = '<p class="meus-personalizados-vazio">Erro ao carregar seus conjuntos personalizados.</p>';
   }
@@ -116,8 +130,8 @@ function initMeusPersonalizados() {
   document.getElementById('meusPersonalizadosLista').addEventListener('click', async e => {
     const btn = e.target.closest('[data-excluir-personalizado]');
     if (!btn) return;
-    const item = btn.closest('.personalizado-item');
-    const nome = item.querySelector('.nome').textContent;
+    const item = btn.closest('.conjunto-card');
+    const nome = item.querySelector('h3').textContent;
     if (!confirm(`Excluir o conjunto personalizado "${nome}"? Isso não pode ser desfeito.`)) return;
     btn.disabled = true;
     try {
@@ -136,7 +150,7 @@ function initMeusPersonalizados() {
 
 function initFormularioConjunto() {
   renderChipsPool();
-  renderChipsNiveis();
+  renderChipsNiveisOuProvas();
   renderChipsMaterias();
   renderChipsQuantidade();
 
@@ -148,6 +162,7 @@ function initFormularioConjunto() {
     if (poolChip) {
       filtroForm.pool = poolChip.dataset.pool;
       form.querySelectorAll('[data-pool]').forEach(chip => chip.classList.toggle('selecionado', chip.dataset.pool === filtroForm.pool));
+      renderChipsNiveisOuProvas();
       aplicarPadraoTempoPool(form);
       atualizarTituloMeusPersonalizados();
       carregarMeusPersonalizados();
@@ -158,6 +173,13 @@ function initFormularioConjunto() {
       const n = nivelChip.dataset.nivel;
       filtroForm.niveis.has(n) ? filtroForm.niveis.delete(n) : filtroForm.niveis.add(n);
       nivelChip.classList.toggle('selecionado');
+      return;
+    }
+    const provaChip = e.target.closest('[data-prova]');
+    if (provaChip) {
+      const p = provaChip.dataset.prova;
+      filtroForm.provas.has(p) ? filtroForm.provas.delete(p) : filtroForm.provas.add(p);
+      provaChip.classList.toggle('selecionado');
       return;
     }
     const materiaTodosChip = e.target.closest('[data-materia-todos]');
@@ -194,18 +216,23 @@ function initFormularioConjunto() {
     const erroEl = document.getElementById('criarConjuntoErro');
     erroEl.classList.remove('show');
 
-    if (!filtroForm.niveis.size) return mostrarErroForm('Selecione ao menos um nível.');
+    if (filtroForm.pool === 'simulado' && !filtroForm.provas.size) return mostrarErroForm('Selecione ao menos uma prova.');
+    if (filtroForm.pool === 'praticar' && !filtroForm.niveis.size) return mostrarErroForm('Selecione ao menos um nível.');
     if (!filtroForm.materias.size) return mostrarErroForm('Selecione ao menos uma categoria.');
 
     const tempoModo = document.querySelector('input[name="tempoModo"]:checked').value;
     const minutos = Number(document.getElementById('tempoMinutos').value);
     if (tempoModo === 'com' && (!minutos || minutos <= 0)) return mostrarErroForm('Informe a duração em minutos.');
 
+    const niveis = filtroForm.pool === 'simulado'
+      ? [...new Set([...filtroForm.provas].flatMap(p => PROVAS_NIVEIS[p]))]
+      : [...filtroForm.niveis];
+
     try {
       const res = await fetch('/api/questoes/conjuntos/personalizado', {
         method: 'POST', headers: authHeaders(true),
         body: JSON.stringify({
-          niveis: [...filtroForm.niveis], materias: [...filtroForm.materias], quantidade: filtroForm.quantidade,
+          niveis, materias: [...filtroForm.materias], quantidade: filtroForm.quantidade,
           tempoLimiteSegundos: tempoModo === 'com' ? minutos * 60 : null,
           pool: filtroForm.pool
         })

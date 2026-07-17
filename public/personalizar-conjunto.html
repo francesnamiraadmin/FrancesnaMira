@@ -52,22 +52,28 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .q-btn.secundario { background: var(--glass-hover); color: var(--text); border: 1px solid var(--glass-border-strong); }
 .q-btn.perigo { background: var(--danger-bg); color: var(--danger-text); }
 
-.meus-personalizados { max-width: 640px; margin: 40px auto 0; }
+.meus-personalizados { margin: 40px auto 0; }
 .meus-personalizados h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 14px; text-align: center; }
-.personalizado-item {
-  display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 14px; padding: 14px 18px; margin-bottom: 10px;
-}
-.personalizado-item .info { display: flex; flex-direction: column; gap: 4px; }
-.personalizado-item .nome { font-weight: 700; }
-.personalizado-item .meta { font-size: 0.82rem; opacity: 0.8; }
-.personalizado-item .acoes { display: flex; gap: 8px; flex-wrap: wrap; }
-.q-status-pill { font-size: 0.74rem; font-weight: 700; padding: 3px 11px; border-radius: 14px; }
-.q-status-pill.nao_iniciado { background: var(--glass-input); color: var(--text-muted); }
-.q-status-pill.em_andamento { background: var(--warning-bg); color: var(--warning-text); }
-.q-status-pill.concluido { background: var(--success-bg); color: var(--success-text); }
 .meus-personalizados-vazio { text-align: center; opacity: 0.75; padding: 10px; font-size: 0.9rem; }
+
+.conjuntos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+.conjunto-card {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 18px; padding: 22px 24px;
+  box-shadow: var(--glass-shadow); display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+}
+.conjunto-card.destaque { border-color: var(--accent); }
+.conjunto-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; }
+.conjunto-card .conjunto-desc { font-size: 0.88rem; opacity: 0.85; line-height: 1.4; }
+.conjunto-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.conjunto-status { font-size: 0.78rem; font-weight: 700; padding: 3px 11px; border-radius: 14px; }
+.conjunto-status.nao_iniciado { background: var(--glass-input); color: var(--text-muted); }
+.conjunto-status.em_andamento { background: var(--warning-bg); color: var(--warning-text); }
+.conjunto-status.concluido { background: var(--success-bg); color: var(--success-text); }
+.conjunto-resultado { font-size: 0.88rem; background: var(--recessed); border-radius: 12px; padding: 10px 14px; line-height: 1.6; text-align: center; }
+.conjunto-resultado strong { color: var(--accent); }
+.q-pill { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 14px; background: var(--glass-input); }
+.q-pill.personalizado { background: var(--accent); color: var(--accent-text); }
 </style>
 </head>
 
@@ -89,7 +95,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
       <div class="chip-grid" id="chipPool"></div>
     </div>
     <div>
-      <label class="grupo-label">Níveis</label>
+      <label class="grupo-label" id="labelNiveis">Níveis</label>
       <div class="chip-grid" id="chipNiveis"></div>
     </div>
     <div>
@@ -116,13 +122,14 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
   <div class="meus-personalizados">
     <h2 id="meusPersonalizadosTitulo">Meus conjuntos personalizados</h2>
-    <div id="meusPersonalizadosLista"><p class="meus-personalizados-vazio">Carregando...</p></div>
+    <div class="conjuntos-grid" id="meusPersonalizadosLista"><p class="meus-personalizados-vazio">Carregando...</p></div>
   </div>
 </div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
 <script src="js/questoesRender.js"></script>
+<script src="js/conjuntoCard.js"></script>
 <script src="js/plataformaTopicosNav.js"></script>
 <script src="js/personalizarConjunto.js"></script>
 <script src="js/appShell.js"></script>

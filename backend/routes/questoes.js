@@ -173,6 +173,10 @@ router.get("/conjuntos", async (req, res) => {
 // "Personalizar Conjunto" pra mostrar o histórico do que ele já montou, com opção de
 // excluir. Precisa vir ANTES de "GET /conjuntos/:id" nesta ordem de registro, senão o
 // Express casaria "meus-personalizados" com o parâmetro :id daquela rota.
+// Formato devolvido é compatível com renderPrioritarioCard/renderRespondidoCard de
+// conjuntoCard.js (mesmos campos que GET /conjuntos usa) — pra "Meus conjuntos
+// personalizados" reaproveitar os MESMOS cards visuais de Sugeridos/Respondidos, ver
+// personalizarConjunto.js#renderPersonalizadoCard.
 router.get("/conjuntos/meus-personalizados", async (req, res) => {
   try {
     const pool = req.query.pool === "simulado" ? "simulado" : "praticar";
@@ -180,24 +184,35 @@ router.get("/conjuntos/meus-personalizados", async (req, res) => {
     const ids = conjuntos.map(c => c._id);
 
     const [sessoes, tentativas] = await Promise.all([
-      SessaoResolucao.find({ alunoId: req.userId, conjuntoId: { $in: ids } }).select("conjuntoId"),
-      Tentativa.find({ alunoId: req.userId, conjuntoId: { $in: ids } }).select("conjuntoId percentualAcertos finalizadaEm").sort({ finalizadaEm: -1 })
+      SessaoResolucao.find({ alunoId: req.userId, conjuntoId: { $in: ids } }).select("conjuntoId respostas"),
+      Tentativa.find({ alunoId: req.userId, conjuntoId: { $in: ids } })
+        .select("conjuntoId percentualAcertos finalizadaEm totalCorretas totalQuestoes tempoGastoSegundos")
+        .sort({ finalizadaEm: -1 })
     ]);
-    const emAndamentoSet = new Set(sessoes.map(s => String(s.conjuntoId)));
-    const ultimaTentativaPorConjunto = new Map();
+    const sessaoPorConjunto = new Map(sessoes.map(s => [String(s.conjuntoId), s]));
+    const tentativasPorConjunto = new Map();
     tentativas.forEach(t => {
       const chave = String(t.conjuntoId);
-      if (!ultimaTentativaPorConjunto.has(chave)) ultimaTentativaPorConjunto.set(chave, t);
+      if (!tentativasPorConjunto.has(chave)) tentativasPorConjunto.set(chave, []);
+      tentativasPorConjunto.get(chave).push(t);
     });
 
     res.json(conjuntos.map(c => {
       const chave = String(c._id);
-      const ultima = ultimaTentativaPorConjunto.get(chave);
+      const sessao = sessaoPorConjunto.get(chave);
+      const tentativasDoConjunto = tentativasPorConjunto.get(chave) || [];
+      const ultima = tentativasDoConjunto[0];
       return {
-        _id: c._id, nome: c.nome, filtros: c.filtros, dificuldade: c.dificuldade,
+        _id: c._id, nome: c.nome, descricao: c.descricao, tipo: "personalizado",
+        filtros: c.filtros, dificuldade: c.dificuldade,
         quantidadeQuestoes: c.quantidadeQuestoes, tempoLimiteSegundos: c.tempoLimiteSegundos, criadoEm: c.criadoEm,
-        status: emAndamentoSet.has(chave) ? "em_andamento" : (ultima ? "concluido" : "nao_iniciado"),
-        ultimaTentativa: ultima ? { percentualAcertos: ultima.percentualAcertos, finalizadaEm: ultima.finalizadaEm } : null
+        status: sessao ? "em_andamento" : (ultima ? "concluido" : "nao_iniciado"),
+        questoesRespondidas: sessao ? sessao.respostas.filter(r => r.respostaEscolhida !== null).length : undefined,
+        totalTentativas: tentativasDoConjunto.length,
+        ultimaTentativa: ultima ? {
+          _id: ultima._id, percentualAcertos: ultima.percentualAcertos, finalizadaEm: ultima.finalizadaEm,
+          totalCorretas: ultima.totalCorretas, totalQuestoes: ultima.totalQuestoes, tempoGastoSegundos: ultima.tempoGastoSegundos
+        } : null
       };
     }));
   } catch (err) {
