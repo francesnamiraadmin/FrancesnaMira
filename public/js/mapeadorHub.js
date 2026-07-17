@@ -18,7 +18,7 @@ async function carregarIndicadores() {
     }
     if (kpis.numeroSessoes > 0) {
       const el = document.getElementById('indicadorHistorico');
-      el.textContent = `${kpis.numeroSessoes} sessõe${kpis.numeroSessoes > 1 ? 's' : ''} registrada${kpis.numeroSessoes > 1 ? 's' : ''}`;
+      el.textContent = `${kpis.numeroSessoes} ${kpis.numeroSessoes > 1 ? 'sessões registradas' : 'sessão registrada'}`;
       el.style.display = 'inline-block';
     }
     if (kpis.sequenciaDiasAtual > 0) {
@@ -30,3 +30,7 @@ async function carregarIndicadores() {
 }
 
 carregarIndicadores();
+
+DeverRealtime.escutar({
+  'sessao-estudo-finalizada': d => { if (d.alunoId === DeverRealtime.meuUserId()) carregarIndicadores(); }
+});

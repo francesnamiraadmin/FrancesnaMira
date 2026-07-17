@@ -1,8 +1,11 @@
 // =====================================================================
-// MAPEADOR DE ESTUDOS — Timer. Elapsed calculado sempre por matemática de
-// timestamps do servidor (iniciadoEm + pausas), nunca por contagem local —
-// resiliente a refresh/fechar aba: reabrir a página busca GET /sessoes/ativa
-// e recalcula a partir dos timestamps, sem perder nem adiantar tempo.
+// MAPEADOR DE ESTUDOS — Timer/Matérias. Central única de organização:
+// cada Matéria é um card na cor escolhida pelo usuário, com os Conteúdos
+// dela como subcards dentro — clicar "Iniciar" num subcard delega pro
+// serviço global (public/js/estudoTimerGlobal.js), que cuida da barra
+// fixa persistente e sobrevive à navegação. Esta página só mostra/edita
+// a hierarquia Matéria→Conteúdo e dispara o início da sessão; o
+// cronômetro em si nunca vive aqui.
 // =====================================================================
 
 function authHeaders(json) {
@@ -14,234 +17,269 @@ function escapeHtml(str) {
   div.textContent = str || '';
   return div.innerHTML;
 }
-
-let sessaoAtiva = null;
-let materias = [];
-let conteudosDaMateria = [];
-let materiaEscolhidaId = null;
-let conteudoEscolhidoId = null;
-let intervaloId = null;
-
-function formatarHMS(ms) {
-  const totalSeg = Math.max(0, Math.floor(ms / 1000));
+function formatarDuracaoLonga(seg) {
+  const totalSeg = seg || 0;
   const h = Math.floor(totalSeg / 3600);
   const m = Math.floor((totalSeg % 3600) / 60);
-  const s = totalSeg % 60;
-  const pad = n => String(n).padStart(2, '0');
-  return h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
+  if (h > 0) return `${h}h ${String(m).padStart(2, '0')}min`;
+  if (m > 0) return `${m} min`;
+  return `${totalSeg}s`;
 }
 
-async function iniciarPagina() {
-  const res = await fetch('/api/estudos/materias', { headers: authHeaders() });
-  materias = res.ok ? await res.json() : [];
+let materias = [];
+let conteudosPorMateria = new Map();
+let sessaoAtivaExiste = false;
+let editandoMateriaId = null;
+let editandoConteudoId = null;
+let materiaParaNovoConteudo = null;
+let corPickerMateria = null;
+let corPickerConteudo = null;
 
-  const ativaRes = await fetch('/api/estudos/sessoes/ativa', { headers: authHeaders() });
-  sessaoAtiva = ativaRes.ok ? await ativaRes.json() : null;
+async function carregarTudo() {
+  const [resM, resC, resAtiva] = await Promise.all([
+    fetch('/api/estudos/materias', { headers: authHeaders() }),
+    fetch('/api/estudos/conteudos', { headers: authHeaders() }),
+    fetch('/api/estudos/sessoes/ativa', { headers: authHeaders() })
+  ]);
+  materias = resM.ok ? await resM.json() : [];
+  const conteudos = resC.ok ? await resC.json() : [];
+  const sessaoAtiva = resAtiva.ok ? await resAtiva.json() : null;
+  sessaoAtivaExiste = !!sessaoAtiva;
 
-  if (sessaoAtiva) mostrarTimerAtivo();
-  else mostrarSelecao();
+  conteudosPorMateria = new Map();
+  conteudos.forEach(c => {
+    const chave = c.materiaId;
+    if (!conteudosPorMateria.has(chave)) conteudosPorMateria.set(chave, []);
+    conteudosPorMateria.get(chave).push(c);
+  });
+
+  renderAviso();
+  renderMateriasGrid();
 }
 
-function mostrarSelecao() {
-  document.getElementById('timerSelecao').style.display = 'block';
-  document.getElementById('timerAtivo').style.display = 'none';
-  document.getElementById('timerSucesso').style.display = 'none';
-  renderMateriasSelecao();
+function renderAviso() {
+  const el = document.getElementById('avisoSessaoAtiva');
+  if (sessaoAtivaExiste) {
+    el.style.display = 'block';
+    el.textContent = 'Você já tem uma sessão de estudo em andamento — veja a barra no rodapé da tela. Finalize ou cancele antes de iniciar outra.';
+  } else {
+    el.style.display = 'none';
+  }
 }
 
-function renderMateriasSelecao() {
-  const el = document.getElementById('selecaoMaterias');
+function renderMateriasGrid() {
+  const el = document.getElementById('materiasGrid');
   if (!materias.length) {
-    el.innerHTML = '<p class="vazio-msg">Você ainda não tem matérias. <a href="mapeador-materias.html">Crie uma primeiro</a>.</p>';
+    el.innerHTML = '<p class="vazio-msg">Você ainda não tem matérias. Clique em "+ Nova Matéria" para começar a organizar seus estudos.</p>';
     return;
   }
-  el.innerHTML = materias.map(m => `
-    <button type="button" class="chip-materia ${m._id === materiaEscolhidaId ? 'ativo' : ''}" style="--cor-item:${m.cor};" data-id="${m._id}">
-      ${m.icone ? escapeHtml(m.icone) + ' ' : ''}${escapeHtml(m.nome)}
-    </button>`).join('');
+  el.innerHTML = materias.map(renderMateriaCard).join('');
 }
 
-async function escolherMateria(id) {
-  materiaEscolhidaId = id;
-  conteudoEscolhidoId = null;
-  renderMateriasSelecao();
-  document.getElementById('selecaoConteudosWrap').style.display = 'block';
-  const res = await fetch('/api/estudos/conteudos?materiaId=' + id, { headers: authHeaders() });
-  conteudosDaMateria = res.ok ? await res.json() : [];
-  renderConteudosSelecao();
-  atualizarBotaoIniciar();
+function renderMateriaCard(m) {
+  const conteudos = conteudosPorMateria.get(m._id) || [];
+  const subcards = conteudos.length
+    ? conteudos.map(c => renderConteudoSubcard(c)).join('')
+    : '<p class="conteudos-vazio-msg">Nenhum conteúdo ainda.</p>';
+  return `
+    <div class="materia-card-grande" style="--cor-item:${m.cor};" data-id="${m._id}">
+      <div class="materia-card-topo">
+        <div class="materia-card-titulo">
+          ${m.icone ? `<span class="icone-materia">${escapeHtml(m.icone)}</span>` : ''}
+          <h3 title="${escapeHtml(m.nome)}">${escapeHtml(m.nome)}</h3>
+        </div>
+        <div class="card-acoes-icone">
+          <button type="button" class="icone-btn editar-materia" data-id="${m._id}" title="Editar matéria">✏️</button>
+          <button type="button" class="icone-btn apagar-materia" data-id="${m._id}" title="Excluir matéria">🗑️</button>
+        </div>
+      </div>
+      ${m.descricao ? `<p class="materia-descricao">${escapeHtml(m.descricao)}</p>` : ''}
+      <div class="materia-meta-row">
+        <span>${m.qtdConteudos} conteúdo${m.qtdConteudos === 1 ? '' : 's'}</span>
+        <span>${formatarDuracaoLonga(m.tempoTotalSegundos)}</span>
+      </div>
+      <div class="conteudos-subgrid">${subcards}</div>
+      <button type="button" class="btn-add-conteudo" data-materia-id="${m._id}">+ Adicionar Conteúdo</button>
+    </div>`;
 }
 
-function renderConteudosSelecao() {
-  const el = document.getElementById('selecaoConteudos');
-  if (!conteudosDaMateria.length) {
-    el.innerHTML = '<p class="vazio-msg">Esta matéria ainda não tem conteúdos. <a href="mapeador-materias.html">Crie um primeiro</a>.</p>';
+function renderConteudoSubcard(c) {
+  const desabilitar = sessaoAtivaExiste ? 'disabled' : '';
+  return `
+    <div class="conteudo-subcard" style="--cor-item:${c.cor};" data-id="${c._id}">
+      <div class="conteudo-subcard-topo">
+        <span class="conteudo-nome">${escapeHtml(c.nome)}</span>
+        <div class="card-acoes-icone">
+          <button type="button" class="icone-btn editar-conteudo" data-id="${c._id}" title="Editar conteúdo">✏️</button>
+          <button type="button" class="icone-btn apagar-conteudo" data-id="${c._id}" title="Excluir conteúdo">🗑️</button>
+        </div>
+      </div>
+      <div class="conteudo-meta-row">
+        <span>${formatarDuracaoLonga(c.tempoTotalSegundos)}</span>
+        <span>${c.numeroSessoes} ${c.numeroSessoes === 1 ? 'sessão' : 'sessões'}</span>
+      </div>
+      <button type="button" class="btn-iniciar-conteudo" data-materia-id="${c.materiaId}" data-conteudo-id="${c._id}" ${desabilitar}>▶ Iniciar</button>
+    </div>`;
+}
+
+// ===================== INICIAR SESSÃO (delega pra EstudoTimerGlobal) =====================
+
+async function iniciarConteudo(materiaId, conteudoId, botao) {
+  if (sessaoAtivaExiste) return;
+  botao.disabled = true;
+  botao.textContent = 'Iniciando...';
+  const resultado = await window.EstudoTimerGlobal.iniciarSessao(materiaId, conteudoId);
+  if (!resultado.ok) {
+    if (resultado.conflito) {
+      sessaoAtivaExiste = true;
+      renderAviso();
+      renderMateriasGrid();
+    } else {
+      alert(resultado.msg || 'Erro ao iniciar sessão.');
+      botao.disabled = false;
+      botao.textContent = '▶ Iniciar';
+    }
     return;
   }
-  el.innerHTML = conteudosDaMateria.map(c => `
-    <button type="button" class="chip-materia ${c._id === conteudoEscolhidoId ? 'ativo' : ''}" style="--cor-item:${c.cor};" data-id="${c._id}">${escapeHtml(c.nome)}</button>`).join('');
+  sessaoAtivaExiste = true;
+  renderAviso();
+  renderMateriasGrid();
 }
 
-function escolherConteudo(id) {
-  conteudoEscolhidoId = id;
-  renderConteudosSelecao();
-  atualizarBotaoIniciar();
-}
+// ===================== MODAL MATÉRIA =====================
 
-function atualizarBotaoIniciar() {
-  document.getElementById('btnIniciarTimer').disabled = !(materiaEscolhidaId && conteudoEscolhidoId);
+function abrirModalMateria(materia) {
+  editandoMateriaId = materia ? materia._id : null;
+  document.getElementById('modalMateriaTitulo').textContent = materia ? 'Editar Matéria' : 'Nova Matéria';
+  document.getElementById('materiaNome').value = materia ? materia.nome : '';
+  document.getElementById('materiaIcone').value = materia ? (materia.icone || '') : '';
+  document.getElementById('materiaDescricao').value = materia ? (materia.descricao || '') : '';
+  document.getElementById('modalMateriaErro').textContent = '';
+  corPickerMateria = montarSeletorCor(document.getElementById('materiaCorPicker'), { corInicial: materia ? materia.cor : undefined });
+  document.getElementById('modalMateria').classList.add('show');
 }
+function fecharModalMateria() { document.getElementById('modalMateria').classList.remove('show'); }
 
-async function iniciarTimer() {
-  const res = await fetch('/api/estudos/sessoes/iniciar', {
-    method: 'POST', headers: authHeaders(true),
-    body: JSON.stringify({ materiaId: materiaEscolhidaId, conteudoId: conteudoEscolhidoId })
+async function salvarMateria() {
+  const nome = document.getElementById('materiaNome').value.trim();
+  const icone = document.getElementById('materiaIcone').value.trim();
+  const descricao = document.getElementById('materiaDescricao').value.trim();
+  const cor = corPickerMateria.getCor();
+  const erroEl = document.getElementById('modalMateriaErro');
+  if (!nome) { erroEl.textContent = 'Informe o nome da matéria.'; return; }
+
+  const url = editandoMateriaId ? `/api/estudos/materias/${editandoMateriaId}` : '/api/estudos/materias';
+  const res = await fetch(url, {
+    method: editandoMateriaId ? 'PUT' : 'POST',
+    headers: authHeaders(true),
+    body: JSON.stringify({ nome, icone, descricao, cor })
   });
   const data = await res.json();
-  if (!res.ok) {
-    if (res.status === 409 && data.sessaoAtiva) { sessaoAtiva = data.sessaoAtiva; mostrarTimerAtivo(); return; }
-    alert(data.msg || 'Erro ao iniciar.');
-    return;
-  }
-  sessaoAtiva = data;
-  mostrarTimerAtivo();
+  if (!res.ok) { erroEl.textContent = data.msg || 'Erro ao salvar.'; return; }
+
+  fecharModalMateria();
+  await carregarTudo();
 }
 
-function materiaPorId(id) { return materias.find(m => m._id === id); }
-
-function mostrarTimerAtivo() {
-  document.getElementById('timerSelecao').style.display = 'none';
-  document.getElementById('timerSucesso').style.display = 'none';
-  document.getElementById('timerAtivo').style.display = 'block';
-  renderInfoSessao();
-  atualizarDisplayTempo();
-  clearInterval(intervaloId);
-  intervaloId = setInterval(atualizarDisplayTempo, 1000);
-  atualizarBotoesPausa();
+async function apagarMateria(id) {
+  if (!confirm('Apagar esta matéria? Isso só é possível se ela não tiver conteúdos.')) return;
+  const res = await fetch(`/api/estudos/materias/${id}`, { method: 'DELETE', headers: authHeaders() });
+  const data = await res.json();
+  if (!res.ok) { alert(data.msg || 'Erro ao apagar.'); return; }
+  await carregarTudo();
 }
 
-async function renderInfoSessao() {
-  let materia = materiaPorId(sessaoAtiva.materiaId);
-  if (!materia) {
-    const res = await fetch('/api/estudos/materias', { headers: authHeaders() });
-    materias = res.ok ? await res.json() : materias;
-    materia = materiaPorId(sessaoAtiva.materiaId);
-  }
-  document.getElementById('timerMateriaNome').textContent = materia ? materia.nome : '—';
-  document.getElementById('timerMateriaNome').style.color = materia ? materia.cor : 'inherit';
+// ===================== MODAL CONTEÚDO =====================
 
-  const resC = await fetch('/api/estudos/conteudos?materiaId=' + sessaoAtiva.materiaId, { headers: authHeaders() });
-  const lista = resC.ok ? await resC.json() : [];
-  const conteudo = lista.find(c => c._id === sessaoAtiva.conteudoId);
-  document.getElementById('timerConteudoNome').textContent = conteudo ? conteudo.nome : '—';
+function abrirModalConteudo(materiaId, conteudo) {
+  materiaParaNovoConteudo = materiaId;
+  editandoConteudoId = conteudo ? conteudo._id : null;
+  document.getElementById('modalConteudoTitulo').textContent = conteudo ? 'Editar Conteúdo' : 'Novo Conteúdo';
+  document.getElementById('conteudoNome').value = conteudo ? conteudo.nome : '';
+  document.getElementById('conteudoDescricao').value = conteudo ? (conteudo.descricao || '') : '';
+  document.getElementById('modalConteudoErro').textContent = '';
+  const materia = materias.find(m => m._id === materiaId);
+  corPickerConteudo = montarSeletorCor(document.getElementById('conteudoCorPicker'), { corInicial: conteudo ? conteudo.cor : (materia ? materia.cor : undefined) });
+  document.getElementById('modalConteudo').classList.add('show');
 }
+function fecharModalConteudo() { document.getElementById('modalConteudo').classList.remove('show'); }
 
-function pausaAbertaMs(sessao, agora) {
-  const aberta = (sessao.pausas || []).find(p => !p.fim);
-  return aberta ? agora - new Date(aberta.inicio).getTime() : 0;
-}
-function pausasFechadasMs(sessao) {
-  return (sessao.pausas || []).filter(p => p.fim).reduce((acc, p) => acc + (new Date(p.fim) - new Date(p.inicio)), 0);
-}
-function calcularElapsedMs(sessao) {
-  const agora = Date.now();
-  const bruto = agora - new Date(sessao.iniciadoEm).getTime();
-  const pausasMs = pausasFechadasMs(sessao) + pausaAbertaMs(sessao, agora);
-  return Math.max(0, bruto - pausasMs);
-}
-function estaPausada(sessao) {
-  return (sessao.pausas || []).some(p => !p.fim);
-}
+async function salvarConteudo() {
+  const nome = document.getElementById('conteudoNome').value.trim();
+  const descricao = document.getElementById('conteudoDescricao').value.trim();
+  const cor = corPickerConteudo.getCor();
+  const erroEl = document.getElementById('modalConteudoErro');
+  if (!nome) { erroEl.textContent = 'Informe o nome do conteúdo.'; return; }
 
-function atualizarDisplayTempo() {
-  if (!sessaoAtiva) return;
-  document.getElementById('timerDisplay').textContent = formatarHMS(calcularElapsedMs(sessaoAtiva));
-}
-
-function atualizarBotoesPausa() {
-  const pausada = estaPausada(sessaoAtiva);
-  document.getElementById('btnPausar').style.display = pausada ? 'none' : 'inline-block';
-  document.getElementById('btnContinuar').style.display = pausada ? 'inline-block' : 'none';
-  const tag = document.getElementById('timerStatusTag');
-  tag.textContent = pausada ? 'Pausado' : 'Em andamento';
-  tag.className = 'timer-status-tag ' + (pausada ? 'pausado' : 'ativo');
-}
-
-async function pausar() {
-  const res = await fetch(`/api/estudos/sessoes/${sessaoAtiva._id}/pausar`, { method: 'POST', headers: authHeaders() });
-  if (res.ok) { sessaoAtiva = await res.json(); atualizarBotoesPausa(); atualizarDisplayTempo(); }
-}
-async function continuar() {
-  const res = await fetch(`/api/estudos/sessoes/${sessaoAtiva._id}/continuar`, { method: 'POST', headers: authHeaders() });
-  if (res.ok) { sessaoAtiva = await res.json(); atualizarBotoesPausa(); atualizarDisplayTempo(); }
-}
-
-function abrirModalFinalizar() {
-  document.getElementById('finalizarObservacoes').value = '';
-  document.getElementById('modalFinalizarErro').textContent = '';
-  document.getElementById('modalFinalizarResumoTempo').textContent = formatarHMS(calcularElapsedMs(sessaoAtiva));
-  document.getElementById('modalFinalizar').classList.add('show');
-}
-function fecharModalFinalizar() { document.getElementById('modalFinalizar').classList.remove('show'); }
-
-function detectarDispositivo() {
-  const ua = navigator.userAgent || '';
-  if (/Mobi|Android/i.test(ua)) return 'Celular';
-  if (/Tablet|iPad/i.test(ua)) return 'Tablet';
-  return 'Computador';
-}
-
-async function confirmarFinalizar() {
-  const observacoes = document.getElementById('finalizarObservacoes').value.trim();
-  const res = await fetch(`/api/estudos/sessoes/${sessaoAtiva._id}/finalizar`, {
-    method: 'POST', headers: authHeaders(true),
-    body: JSON.stringify({ observacoes, dispositivo: detectarDispositivo() })
+  const url = editandoConteudoId ? `/api/estudos/conteudos/${editandoConteudoId}` : '/api/estudos/conteudos';
+  const res = await fetch(url, {
+    method: editandoConteudoId ? 'PUT' : 'POST',
+    headers: authHeaders(true),
+    body: JSON.stringify({ materiaId: materiaParaNovoConteudo, nome, descricao, cor })
   });
   const data = await res.json();
-  if (!res.ok) { document.getElementById('modalFinalizarErro').textContent = data.msg || 'Erro ao finalizar.'; return; }
-  fecharModalFinalizar();
-  clearInterval(intervaloId);
-  mostrarSucessoFinalizado(data);
+  if (!res.ok) { erroEl.textContent = data.msg || 'Erro ao salvar.'; return; }
+
+  fecharModalConteudo();
+  await carregarTudo();
 }
 
-function mostrarSucessoFinalizado(sessao) {
-  sessaoAtiva = null;
-  document.getElementById('timerAtivo').style.display = 'none';
-  document.getElementById('timerSucesso').style.display = 'block';
-  document.getElementById('sucessoTempo').textContent = formatarHMS((sessao.duracaoSegundos || 0) * 1000);
+async function apagarConteudo(id) {
+  if (!confirm('Apagar este conteúdo? Isso só é possível se ele não tiver sessões de estudo registradas.')) return;
+  const res = await fetch(`/api/estudos/conteudos/${id}`, { method: 'DELETE', headers: authHeaders() });
+  const data = await res.json();
+  if (!res.ok) { alert(data.msg || 'Erro ao apagar.'); return; }
+  await carregarTudo();
 }
 
-async function cancelarSessao() {
-  if (!confirm('Cancelar esta sessão? O tempo não será registrado.')) return;
-  await fetch(`/api/estudos/sessoes/${sessaoAtiva._id}/cancelar`, { method: 'POST', headers: authHeaders() });
-  clearInterval(intervaloId);
-  sessaoAtiva = null;
-  materiaEscolhidaId = null; conteudoEscolhidoId = null;
-  mostrarSelecao();
-}
-
-function novaSessao() {
-  materiaEscolhidaId = null; conteudoEscolhidoId = null;
-  mostrarSelecao();
+function conteudoPorId(id) {
+  for (const lista of conteudosPorMateria.values()) {
+    const c = lista.find(x => x._id === id);
+    if (c) return c;
+  }
+  return null;
 }
 
 // ===================== EVENTOS =====================
 
-document.getElementById('selecaoMaterias').addEventListener('click', e => {
-  const btn = e.target.closest('.chip-materia');
-  if (btn) escolherMateria(btn.dataset.id);
-});
-document.getElementById('selecaoConteudos').addEventListener('click', e => {
-  const btn = e.target.closest('.chip-materia');
-  if (btn) escolherConteudo(btn.dataset.id);
-});
-document.getElementById('btnIniciarTimer').addEventListener('click', iniciarTimer);
-document.getElementById('btnPausar').addEventListener('click', pausar);
-document.getElementById('btnContinuar').addEventListener('click', continuar);
-document.getElementById('btnFinalizar').addEventListener('click', abrirModalFinalizar);
-document.getElementById('btnCancelarFinalizar').addEventListener('click', fecharModalFinalizar);
-document.getElementById('btnConfirmarFinalizar').addEventListener('click', confirmarFinalizar);
-document.getElementById('btnCancelar').addEventListener('click', cancelarSessao);
-document.getElementById('btnNovaSessao').addEventListener('click', novaSessao);
+document.getElementById('btnNovaMateria').addEventListener('click', () => abrirModalMateria(null));
+document.getElementById('btnCancelarMateria').addEventListener('click', fecharModalMateria);
+document.getElementById('btnSalvarMateria').addEventListener('click', salvarMateria);
 
-iniciarPagina();
+document.getElementById('btnCancelarConteudo').addEventListener('click', fecharModalConteudo);
+document.getElementById('btnSalvarConteudo').addEventListener('click', salvarConteudo);
+
+document.getElementById('materiasGrid').addEventListener('click', e => {
+  const btnEditarMateria = e.target.closest('button.editar-materia');
+  if (btnEditarMateria) { abrirModalMateria(materias.find(m => m._id === btnEditarMateria.dataset.id)); return; }
+
+  const btnApagarMateria = e.target.closest('button.apagar-materia');
+  if (btnApagarMateria) { apagarMateria(btnApagarMateria.dataset.id); return; }
+
+  const btnAddConteudo = e.target.closest('button.btn-add-conteudo');
+  if (btnAddConteudo) { abrirModalConteudo(btnAddConteudo.dataset.materiaId, null); return; }
+
+  const btnEditarConteudo = e.target.closest('button.editar-conteudo');
+  if (btnEditarConteudo) {
+    const conteudo = conteudoPorId(btnEditarConteudo.dataset.id);
+    if (conteudo) abrirModalConteudo(conteudo.materiaId, conteudo);
+    return;
+  }
+
+  const btnApagarConteudo = e.target.closest('button.apagar-conteudo');
+  if (btnApagarConteudo) { apagarConteudo(btnApagarConteudo.dataset.id); return; }
+
+  const btnIniciar = e.target.closest('button.btn-iniciar-conteudo');
+  if (btnIniciar && !btnIniciar.disabled) { iniciarConteudo(btnIniciar.dataset.materiaId, btnIniciar.dataset.conteudoId, btnIniciar); return; }
+});
+
+// Quando uma sessão é finalizada (nesta aba ou em outra), tempos/contagens
+// mudam e os botões "Iniciar" voltam a ficar disponíveis — reaproveita o
+// mesmo canal SSE já usado pelo resto da plataforma (ver deverRealtime.js).
+if (window.DeverRealtime) {
+  DeverRealtime.escutar({
+    'sessao-estudo-finalizada': d => { if (d.alunoId === DeverRealtime.meuUserId()) carregarTudo(); }
+  });
+}
+
+carregarTudo();

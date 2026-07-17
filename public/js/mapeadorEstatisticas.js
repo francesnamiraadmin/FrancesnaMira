@@ -108,3 +108,7 @@ async function carregar() {
 document.getElementById('filtroPizzaMateria').addEventListener('change', renderPizzaConteudo);
 
 carregar();
+
+DeverRealtime.escutar({
+  'sessao-estudo-finalizada': d => { if (d.alunoId === DeverRealtime.meuUserId()) carregar(); }
+});

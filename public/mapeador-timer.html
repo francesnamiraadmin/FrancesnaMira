@@ -24,56 +24,90 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .intro h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; }
 .intro p { font-size: 1.05rem; opacity: 0.9; max-width: 680px; margin: 0 auto; }
 
-.pagina-wrap { max-width: 720px; margin: 0 auto; padding: 20px 4% 100px; }
+.pagina-wrap { max-width: 1200px; margin: 0 auto; padding: 20px 4% 100px; }
 
-.timer-card {
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 22px; padding: 30px 28px; box-shadow: var(--glass-shadow);
+.secao-titulo-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+.secao-titulo-row h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+
+.aviso-sessao-ativa {
+  background: var(--warning-bg); color: var(--accent); border-radius: 14px; padding: 14px 18px;
+  margin-bottom: 20px; font-size: 0.9rem; font-weight: 600; text-align: center;
 }
-.timer-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 14px; text-align: center; }
 
-.chip-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; }
-.chip-materia {
-  border: 2px solid var(--cor-item, var(--accent)); background: transparent; color: var(--text);
-  padding: 9px 18px; border-radius: 30px; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem; cursor: pointer;
+.vazio-msg { text-align: center; opacity: 0.75; padding: 40px 16px; font-size: 0.95rem; }
+.erro-msg { color: var(--danger-text); font-size: 0.85rem; margin-top: 8px; text-align: center; }
+
+/* ===== Cards de Matéria ===== */
+.materias-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+.materia-card-grande {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-top: 5px solid var(--cor-item, var(--accent));
+  border-radius: 18px; padding: 20px 22px; box-shadow: var(--glass-shadow);
+}
+.materia-card-topo { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.materia-card-titulo { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.materia-card-titulo .icone-materia { font-size: 1.6rem; flex-shrink: 0; }
+.materia-card-titulo h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.materia-descricao { font-size: 0.85rem; opacity: 0.8; margin-top: 6px; line-height: 1.4; }
+.materia-meta-row { display: flex; gap: 18px; font-size: 0.82rem; opacity: 0.85; margin: 10px 0 16px; font-weight: 600; }
+
+.card-acoes-icone { display: flex; gap: 6px; flex-shrink: 0; }
+.icone-btn {
+  border: none; background: var(--glass-hover); width: 30px; height: 30px; border-radius: 8px;
+  cursor: pointer; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center;
   transition: background 0.15s ease;
 }
-.chip-materia.ativo { background: var(--cor-item, var(--accent)); color: #fff; }
+.icone-btn:hover { background: var(--glass-border-strong); }
 
-.vazio-msg { text-align: center; opacity: 0.75; padding: 16px; font-size: 0.9rem; }
-.vazio-msg a { color: var(--accent); }
-
-.timer-iniciar-row { text-align: center; margin-top: 10px; }
-.timer-iniciar-row button:disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* Timer ativo */
-.timer-info-row { text-align: center; margin-bottom: 18px; }
-.timer-info-row .materia { font-weight: 700; font-size: 1.15rem; }
-.timer-info-row .conteudo { opacity: 0.85; font-size: 0.95rem; }
-.timer-status-tag {
-  display: inline-block; margin-top: 8px; font-size: 0.78rem; font-weight: 700; padding: 4px 14px; border-radius: 20px;
+/* ===== Subcards de Conteúdo ===== */
+.conteudos-subgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.conteudo-subcard {
+  background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-left: 5px solid var(--cor-item, var(--accent));
+  border-radius: 12px; padding: 12px 14px;
 }
-.timer-status-tag.ativo { background: var(--success-bg); color: var(--success-text); }
-.timer-status-tag.pausado { background: var(--warning-bg); color: var(--accent); }
-
-.timer-display {
-  text-align: center; font-family: 'Playfair Display', serif; font-size: 3.6rem; font-weight: 700; margin: 20px 0 28px;
-  font-variant-numeric: tabular-nums;
+.conteudo-subcard-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+.conteudo-nome { font-weight: 700; font-size: 0.9rem; word-break: break-word; }
+.conteudo-meta-row { display: flex; justify-content: space-between; font-size: 0.75rem; opacity: 0.85; margin: 8px 0 10px; gap: 6px; }
+.btn-iniciar-conteudo {
+  width: 100%; padding: 8px; border-radius: 8px; border: none; background: var(--cor-item, var(--accent));
+  color: #fff; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: opacity 0.15s ease;
 }
-.timer-botoes { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.timer-botoes .dash-btn.perigo { background: var(--danger-bg); color: var(--danger-text); }
+.btn-iniciar-conteudo:hover:not(:disabled) { opacity: 0.88; }
+.btn-iniciar-conteudo:disabled { opacity: 0.45; cursor: not-allowed; }
+.conteudos-vazio-msg { font-size: 0.8rem; opacity: 0.7; margin-bottom: 12px; }
 
-/* Sucesso */
-.timer-sucesso { text-align: center; padding: 20px 0; }
-.timer-sucesso .icone-check { font-size: 3rem; margin-bottom: 10px; }
-.timer-sucesso .tempo-registrado { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent); margin: 10px 0 20px; }
-.timer-sucesso-botoes { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+.btn-add-conteudo {
+  width: 100%; padding: 9px; border-radius: 10px; border: 1px dashed var(--glass-border-strong);
+  background: transparent; color: var(--text); font-weight: 600; font-size: 0.85rem; cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.btn-add-conteudo:hover { border-color: var(--cor-item, var(--accent)); color: var(--cor-item, var(--accent)); }
 
+/* ===== Modais (reaproveita .app-modal-overlay/.app-modal do app-shell.css) ===== */
+.app-modal.largo { max-width: 460px; }
 .app-modal textarea {
   width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--glass-border);
   background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; min-height: 70px; resize: vertical;
 }
-.app-modal .resumo-tempo { text-align: center; font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 6px 0 4px; color: var(--accent); }
+
+/* Seletor de cor (colorPicker.js) — escopado sob .seletor-cor de propósito (ver
+   comentário completo em colorPicker.js / memória do projeto): dentro de um
+   .app-modal, ".app-modal input { width:100% }" bate qualquer classe única. */
+.seletor-cor-linha { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.seletor-cor .seletor-cor-nativo { width: 44px; height: 40px; padding: 2px; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--glass-input); cursor: pointer; }
+.seletor-cor-preview { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--glass-border-strong); flex-shrink: 0; }
+.seletor-cor .seletor-cor-hex { flex: 1; width: auto; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-input); color: var(--text); font-family: monospace; }
+.seletor-cor-rgb { display: flex; gap: 10px; margin-bottom: 12px; }
+.seletor-cor-rgb label { flex: 1; font-size: 0.78rem; font-weight: 700; opacity: 0.8; }
+.seletor-cor .seletor-cor-rgb input { width: 100%; margin-top: 4px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--glass-input); color: var(--text); }
+.seletor-cor-paleta { display: flex; flex-wrap: wrap; gap: 8px; }
+.seletor-cor-swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; }
+.seletor-cor-swatch.selecionada { border-color: var(--text); }
+
+@media (max-width: 600px) {
+  .materias-grid { grid-template-columns: 1fr; }
+  .conteudos-subgrid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+}
 </style>
 </head>
 
@@ -83,71 +117,63 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <section class="intro">
   <a class="voltar-link" href="mapeador-estudos.html">← Mapeador de Estudos</a>
   <h1>⏱️ Timer de Estudos</h1>
-  <p>Escolha uma matéria e um conteúdo, inicie o cronômetro e registre automaticamente sua sessão ao finalizar.</p>
+  <p>Organize suas Matérias e Conteúdos e inicie uma sessão de estudo com um clique — o cronômetro te acompanha em qualquer página da plataforma até você finalizar.</p>
 </section>
 
 <div class="pagina-wrap">
-
-  <div class="timer-card" id="timerSelecao">
-    <h3>1. Escolha a Matéria</h3>
-    <div class="chip-row" id="selecaoMaterias"></div>
-
-    <div id="selecaoConteudosWrap" style="display:none;">
-      <h3>2. Escolha o Conteúdo</h3>
-      <div class="chip-row" id="selecaoConteudos"></div>
-    </div>
-
-    <div class="timer-iniciar-row">
-      <button class="dash-btn" id="btnIniciarTimer" disabled>▶ Iniciar Timer</button>
-    </div>
+  <div class="secao-titulo-row">
+    <h2>Minhas Matérias</h2>
+    <button class="dash-btn" id="btnNovaMateria">+ Nova Matéria</button>
   </div>
 
-  <div class="timer-card" id="timerAtivo" style="display:none;">
-    <div class="timer-info-row">
-      <div class="materia" id="timerMateriaNome">—</div>
-      <div class="conteudo" id="timerConteudoNome">—</div>
-      <span class="timer-status-tag ativo" id="timerStatusTag">Em andamento</span>
-    </div>
-    <div class="timer-display" id="timerDisplay">00:00</div>
-    <div class="timer-botoes">
-      <button class="dash-btn secundario" id="btnPausar">⏸ Pausar</button>
-      <button class="dash-btn secundario" id="btnContinuar" style="display:none;">▶ Continuar</button>
-      <button class="dash-btn" id="btnFinalizar">✔ Finalizar</button>
-      <button class="dash-btn perigo" id="btnCancelar">✕ Cancelar</button>
-    </div>
-  </div>
+  <div class="aviso-sessao-ativa" id="avisoSessaoAtiva" style="display:none;"></div>
 
-  <div class="timer-card timer-sucesso" id="timerSucesso" style="display:none;">
-    <div class="icone-check">✅</div>
-    <h3>Sessão registrada!</h3>
-    <div class="tempo-registrado" id="sucessoTempo">00:00</div>
-    <div class="timer-sucesso-botoes">
-      <button class="dash-btn" id="btnNovaSessao">Nova sessão</button>
-      <a class="dash-btn secundario" href="mapeador-historico.html">Ver histórico</a>
-      <a class="dash-btn secundario" href="mapeador-estatisticas.html">Ver estatísticas</a>
-    </div>
-  </div>
-
+  <div class="materias-grid" id="materiasGrid"></div>
 </div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
-<div class="app-modal-overlay" id="modalFinalizar">
+<div class="app-modal-overlay" id="modalMateria">
   <div class="app-modal largo">
-    <h3>Finalizar sessão</h3>
-    <p class="resumo-tempo" id="modalFinalizarResumoTempo">00:00</p>
-    <label>Observações (opcional)</label>
-    <textarea id="finalizarObservacoes" placeholder="O que você estudou nesta sessão?"></textarea>
-    <p class="erro-msg" id="modalFinalizarErro" style="color:var(--danger-text); font-size:0.85rem; margin-top:8px;"></p>
+    <h3 id="modalMateriaTitulo">Nova Matéria</h3>
+    <label>Nome</label>
+    <input type="text" id="materiaNome" placeholder="Ex.: Francês">
+    <label>Ícone (opcional)</label>
+    <input type="text" id="materiaIcone" placeholder="Ex.: 🇫🇷" maxlength="4">
+    <label>Descrição (opcional)</label>
+    <textarea id="materiaDescricao" placeholder="Descrição opcional"></textarea>
+    <label>Cor</label>
+    <div id="materiaCorPicker"></div>
+    <p class="erro-msg" id="modalMateriaErro"></p>
     <div class="app-modal-actions">
-      <button class="dash-btn secundario" id="btnCancelarFinalizar" type="button">Voltar</button>
-      <button class="dash-btn" id="btnConfirmarFinalizar" type="button">Confirmar e registrar</button>
+      <button class="dash-btn secundario" id="btnCancelarMateria" type="button">Cancelar</button>
+      <button class="dash-btn" id="btnSalvarMateria" type="button">Salvar</button>
     </div>
   </div>
 </div>
 
+<div class="app-modal-overlay" id="modalConteudo">
+  <div class="app-modal largo">
+    <h3 id="modalConteudoTitulo">Novo Conteúdo</h3>
+    <label>Nome</label>
+    <input type="text" id="conteudoNome" placeholder="Ex.: Passé Composé">
+    <label>Descrição (opcional)</label>
+    <textarea id="conteudoDescricao" placeholder="Descrição opcional"></textarea>
+    <label>Cor</label>
+    <div id="conteudoCorPicker"></div>
+    <p class="erro-msg" id="modalConteudoErro"></p>
+    <div class="app-modal-actions">
+      <button class="dash-btn secundario" id="btnCancelarConteudo" type="button">Cancelar</button>
+      <button class="dash-btn" id="btnSalvarConteudo" type="button">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/colorPicker.js"></script>
+<script src="js/deverRealtime.js"></script>
 <script src="js/mapeadorTimer.js"></script>
 <script src="js/appShell.js"></script>
+<script src="js/estudoTimerGlobal.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>
 </html>

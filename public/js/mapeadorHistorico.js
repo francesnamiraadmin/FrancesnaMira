@@ -150,3 +150,7 @@ document.getElementById('btnApagarSessao').addEventListener('click', apagarSessa
   await carregarFiltros();
   await carregarSessoes();
 })();
+
+DeverRealtime.escutar({
+  'sessao-estudo-finalizada': d => { if (d.alunoId === DeverRealtime.meuUserId()) carregarSessoes(); }
+});

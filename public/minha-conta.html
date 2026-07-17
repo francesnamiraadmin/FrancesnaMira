@@ -231,6 +231,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <script src="js/i18n.js"></script>
 <script src="js/appShell.js"></script>
+<script src="js/estudoTimerGlobal.js"></script>
 <script src="js/deverRealtime.js"></script>
 <script src="js/chartsSvg.js"></script>
 <script>
@@ -813,7 +814,8 @@ document.addEventListener('appshell:ready', e => {
 DeverRealtime.escutar({
   'dever-atualizado': d => { if (d.alunoId === DeverRealtime.meuUserId()) renderDeveres(); },
   'aula-progresso-atualizado': d => { if (d.userId === DeverRealtime.meuUserId()) renderAulas(window.AppShell.dadosConta); },
-  'producao-atualizada': d => { if (d.alunoId === DeverRealtime.meuUserId()) renderProducao(window.AppShell.dadosConta); }
+  'producao-atualizada': d => { if (d.alunoId === DeverRealtime.meuUserId()) renderProducao(window.AppShell.dadosConta); },
+  'sessao-estudo-finalizada': d => { if (d.alunoId === DeverRealtime.meuUserId()) renderMapeador(); }
 });
 // O cabeçalho é montado via JS (não tem data-i18n) — recarrega ao trocar de
 // idioma para que "Na plataforma desde" acompanhe.

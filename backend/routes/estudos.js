@@ -4,6 +4,7 @@ const MateriaEstudo = require("../models/materiaEstudo");
 const ConteudoEstudo = require("../models/conteudoEstudo");
 const SessaoEstudo = require("../models/sessaoEstudo");
 const { exigirAuth } = require("../middleware/auth");
+const { transmitir } = require("../utils/sse");
 
 router.use(exigirAuth);
 
@@ -57,10 +58,33 @@ function semanaISO(data) {
 
 // ===================== MATÉRIAS =====================
 
+// Devolve qtdConteudos/tempoTotalSegundos junto com cada matéria (agregação em
+// JS puro sobre .find().lean(), mesmo padrão de /estatisticas) — evita N+1
+// fetch no card de cada matéria em mapeador-timer.html.
 router.get("/materias", async (req, res) => {
   try {
-    const materias = await MateriaEstudo.find({ userId: req.userId }).sort({ criadoEm: 1 });
-    res.json(materias);
+    const [materias, conteudos, sessoes] = await Promise.all([
+      MateriaEstudo.find({ userId: req.userId }).sort({ criadoEm: 1 }).lean(),
+      ConteudoEstudo.find({ userId: req.userId }).select("materiaId").lean(),
+      SessaoEstudo.find({ userId: req.userId, status: "finalizada" }).select("materiaId duracaoSegundos").lean()
+    ]);
+
+    const qtdConteudosPorMateria = new Map();
+    conteudos.forEach(c => {
+      const chave = String(c.materiaId);
+      qtdConteudosPorMateria.set(chave, (qtdConteudosPorMateria.get(chave) || 0) + 1);
+    });
+    const tempoPorMateria = new Map();
+    sessoes.forEach(s => {
+      const chave = String(s.materiaId);
+      tempoPorMateria.set(chave, (tempoPorMateria.get(chave) || 0) + (s.duracaoSegundos || 0));
+    });
+
+    res.json(materias.map(m => ({
+      ...m,
+      qtdConteudos: qtdConteudosPorMateria.get(String(m._id)) || 0,
+      tempoTotalSegundos: tempoPorMateria.get(String(m._id)) || 0
+    })));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -116,12 +140,30 @@ router.delete("/materias/:id", async (req, res) => {
 
 // ===================== CONTEÚDOS =====================
 
+// Mesmo princípio de agregação de /materias: tempoTotalSegundos/numeroSessoes
+// por conteúdo, prontos pro subcard em mapeador-timer.html.
 router.get("/conteudos", async (req, res) => {
   try {
     const filtro = { userId: req.userId };
     if (req.query.materiaId) filtro.materiaId = req.query.materiaId;
-    const conteudos = await ConteudoEstudo.find(filtro).sort({ criadoEm: 1 });
-    res.json(conteudos);
+    const [conteudos, sessoes] = await Promise.all([
+      ConteudoEstudo.find(filtro).sort({ criadoEm: 1 }).lean(),
+      SessaoEstudo.find({ userId: req.userId, status: "finalizada" }).select("conteudoId duracaoSegundos").lean()
+    ]);
+
+    const tempoPorConteudo = new Map();
+    const qtdPorConteudo = new Map();
+    sessoes.forEach(s => {
+      const chave = String(s.conteudoId);
+      tempoPorConteudo.set(chave, (tempoPorConteudo.get(chave) || 0) + (s.duracaoSegundos || 0));
+      qtdPorConteudo.set(chave, (qtdPorConteudo.get(chave) || 0) + 1);
+    });
+
+    res.json(conteudos.map(c => ({
+      ...c,
+      tempoTotalSegundos: tempoPorConteudo.get(String(c._id)) || 0,
+      numeroSessoes: qtdPorConteudo.get(String(c._id)) || 0
+    })));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -264,6 +306,7 @@ router.post("/sessoes/:id/finalizar", async (req, res) => {
     if (dispositivo !== undefined) sessao.dispositivo = dispositivo?.trim() || undefined;
     await sessao.save();
 
+    transmitir("sessao-estudo-finalizada", { alunoId: String(req.userId), sessaoId: String(sessao._id) });
     res.json(sessao);
   } catch (err) {
     console.error(err);
