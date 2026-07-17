@@ -51,10 +51,18 @@ async function montarSessaoPublica(sessao, conjunto) {
   };
 }
 
-// Monta o resultado completo (com gabarito) de uma Tentativa já finalizada.
+// Monta o resultado completo (com gabarito) de uma Tentativa já finalizada. `noCaderno`
+// só é conhecido aqui (depois da resposta certa ter sido revelada) — é por isso que
+// adicionar ao Caderno de Revisão só é possível a partir desta tela, nunca durante a
+// resolução ao vivo (ver rotas de Caderno de Revisão mais abaixo).
 async function montarResultadoTentativa(tentativa) {
-  const questoes = await Questao.find({ _id: { $in: tentativa.respostas.map(r => r.questaoId) } });
+  const questaoIds = tentativa.respostas.map(r => r.questaoId);
+  const [questoes, noCaderno] = await Promise.all([
+    Questao.find({ _id: { $in: questaoIds } }),
+    CadernoErros.find({ alunoId: tentativa.alunoId, questaoId: { $in: questaoIds } }).select("questaoId")
+  ]);
   const porId = new Map(questoes.map(q => [String(q._id), q]));
+  const idsNoCaderno = new Set(noCaderno.map(c => String(c.questaoId)));
 
   return {
     _id: tentativa._id, conjuntoId: tentativa.conjuntoId, numero: tentativa.numero,
@@ -65,7 +73,7 @@ async function montarResultadoTentativa(tentativa) {
       const q = porId.get(String(r.questaoId));
       return {
         index, questaoId: r.questaoId, respostaEscolhida: r.respostaEscolhida, correta: r.correta,
-        marcadaRevisao: r.marcadaRevisao,
+        marcadaRevisao: r.marcadaRevisao, noCaderno: idsNoCaderno.has(String(r.questaoId)),
         respostaCorreta: q.tipo === "vf" ? q.respostaVF : q.opcoes[q.indiceCorreta],
         explicacao: q.explicacao,
         tipo: q.tipo, nivel: q.nivel, materia: q.materia,
@@ -87,10 +95,14 @@ async function derivarFiltrosDeQuestoes(questaoIds) {
 
 router.get("/conjuntos", async (req, res) => {
   try {
-    const conjuntos = await Conjunto.find({
-      ativo: true,
-      $or: [{ tipo: "oficial" }, { tipo: "personalizado", criadoPor: req.userId }]
-    }).sort({ criadoEm: -1 });
+    // Oficiais em ordem crescente de criação (Conjunto 01, 02, 03...) — é a ordem em que
+    // o catálogo pré-montado foi pensado para ser navegado. Personalizados em ordem
+    // decrescente (o conjunto que o próprio aluno acabou de montar aparece primeiro).
+    const [oficiais, personalizados] = await Promise.all([
+      Conjunto.find({ ativo: true, tipo: "oficial" }).sort({ criadoEm: 1 }),
+      Conjunto.find({ ativo: true, tipo: "personalizado", criadoPor: req.userId }).sort({ criadoEm: -1 })
+    ]);
+    const conjuntos = [...oficiais, ...personalizados];
 
     const sessoes = await SessaoResolucao.find({ alunoId: req.userId });
     const sessaoPorConjunto = new Map(sessoes.map(s => [String(s.conjuntoId), s]));
@@ -470,16 +482,21 @@ router.get("/tentativas/:id", async (req, res) => {
   }
 });
 
-// ===================== CADERNO DE REVISÃO (toggle durante a resolução) =====================
+// ===================== CADERNO DE REVISÃO =====================
+// Só é possível adicionar uma questão DEPOIS que o conjunto foi respondido — por isso
+// a rota de adicionar é presa a uma Tentativa (que só existe após "Enviar Conjunto"),
+// nunca a uma SessaoResolucao em andamento. Remover não precisa desse contexto.
 
-router.post("/sessoes/:id/questoes/:questaoId/caderno", async (req, res) => {
+router.post("/tentativas/:tentativaId/questoes/:questaoId/caderno", async (req, res) => {
   try {
-    const sessao = await SessaoResolucao.findOne({ _id: req.params.id, alunoId: req.userId });
-    if (!sessao) return res.status(404).json({ msg: "Sessão não encontrada." });
+    const tentativa = await Tentativa.findOne({ _id: req.params.tentativaId, alunoId: req.userId });
+    if (!tentativa) return res.status(404).json({ msg: "Tentativa não encontrada." });
+    const pertence = tentativa.respostas.some(r => String(r.questaoId) === req.params.questaoId);
+    if (!pertence) return res.status(400).json({ msg: "Esta questão não pertence a esta tentativa." });
 
     await CadernoErros.findOneAndUpdate(
       { alunoId: req.userId, questaoId: req.params.questaoId },
-      { alunoId: req.userId, questaoId: req.params.questaoId, motivo: "revisao_manual", origem: { conjuntoId: sessao.conjuntoId } },
+      { alunoId: req.userId, questaoId: req.params.questaoId, motivo: "revisao_manual", origem: { tentativaId: tentativa._id, conjuntoId: tentativa.conjuntoId } },
       { upsert: true, setDefaultsOnInsert: true }
     );
     res.json({ msg: "Adicionada ao Caderno de Revisão." });
@@ -489,13 +506,59 @@ router.post("/sessoes/:id/questoes/:questaoId/caderno", async (req, res) => {
   }
 });
 
-router.delete("/sessoes/:id/questoes/:questaoId/caderno", async (req, res) => {
+router.delete("/caderno/:questaoId", async (req, res) => {
   try {
-    const sessao = await SessaoResolucao.findOne({ _id: req.params.id, alunoId: req.userId });
-    if (!sessao) return res.status(404).json({ msg: "Sessão não encontrada." });
-
     await CadernoErros.deleteOne({ alunoId: req.userId, questaoId: req.params.questaoId });
     res.json({ msg: "Removida do Caderno de Revisão." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+router.get("/caderno", async (req, res) => {
+  try {
+    const itens = await CadernoErros.find({ alunoId: req.userId }).sort({ adicionadoEm: -1 });
+    const questoes = await Questao.find({ _id: { $in: itens.map(i => i.questaoId) } });
+    const porId = new Map(questoes.map(q => [String(q._id), q]));
+
+    res.json(itens.map(item => {
+      const q = porId.get(String(item.questaoId));
+      return {
+        _id: item._id, questaoId: item.questaoId, motivo: item.motivo, adicionadoEm: item.adicionadoEm,
+        questao: q && {
+          tipo: q.tipo, nivel: q.nivel, materia: q.materia, enunciado: q.enunciado, texto: q.texto,
+          audio: q.audio, visual: q.visual, opcoes: q.opcoes, afirmacao: q.afirmacao,
+          respostaCorreta: q.tipo === "vf" ? q.respostaVF : q.opcoes[q.indiceCorreta],
+          explicacao: q.explicacao
+        }
+      };
+    }).filter(item => item.questao)); // questão pode ter sido desativada — não quebra a listagem
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// ===================== ALUNO: ESTATÍSTICAS RESUMIDAS (usadas em minha-conta.html) =====================
+
+router.get("/estatisticas", async (req, res) => {
+  try {
+    const [tentativas, conjuntosEmAndamento, tamanhoCaderno] = await Promise.all([
+      Tentativa.find({ alunoId: req.userId }).select("conjuntoId percentualAcertos"),
+      SessaoResolucao.countDocuments({ alunoId: req.userId }),
+      CadernoErros.countDocuments({ alunoId: req.userId })
+    ]);
+
+    const conjuntosConcluidos = new Set(tentativas.map(t => String(t.conjuntoId))).size;
+    const mediaPercentualAcertos = tentativas.length
+      ? Math.round(tentativas.reduce((soma, t) => soma + t.percentualAcertos, 0) / tentativas.length)
+      : null;
+
+    res.json({
+      conjuntosConcluidos, conjuntosEmAndamento, totalTentativas: tentativas.length,
+      mediaPercentualAcertos, tamanhoCaderno
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });

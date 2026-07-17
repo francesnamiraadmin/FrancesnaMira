@@ -204,6 +204,9 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .conjuntos-titulo { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 34px 0 16px; text-align: center; }
 .conjuntos-titulo:first-of-type { margin-top: 0; }
 .conjuntos-vazio { text-align: center; opacity: 0.75; padding: 20px; font-size: 0.95rem; }
+.conjuntos-filtro-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
+.conjuntos-filtro-row .filtro-select { min-width: 180px; }
+.conjuntos-filtro-row input.filtro-select { flex: 1; max-width: 320px; }
 
 .conjuntos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
 .conjunto-card {
@@ -304,12 +307,26 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div class="app-wrap">
   <div class="top-tabs">
     <button class="top-tab active" data-tab="praticar">📝 Praticar</button>
+    <button class="top-tab" data-tab="personalizados">🎯 Personalizados</button>
+    <button class="top-tab" data-tab="caderno">📓 Caderno de Revisão</button>
     <button class="top-tab" data-tab="simulados">⏱️ Simulados</button>
     <button class="top-tab" data-tab="respondidos">✅ Respondidos</button>
   </div>
 
-  <!-- ===================== PRATICAR (Conjuntos de Questões) ===================== -->
+  <!-- ===================== PRATICAR (Conjuntos Sugeridos) ===================== -->
   <div id="tabPraticar">
+    <div class="conjuntos-filtro-row">
+      <select class="filtro-select" id="filtroSugeridoNivel"><option value="">Todos os níveis</option></select>
+      <select class="filtro-select" id="filtroSugeridoMateria"><option value="">Todas as categorias</option></select>
+      <input type="text" class="filtro-select" id="filtroSugeridoBusca" placeholder="Buscar conjunto pelo nome...">
+    </div>
+
+    <h2 class="conjuntos-titulo">Conjuntos Sugeridos</h2>
+    <div class="conjuntos-grid" id="conjuntosPrioritarios"></div>
+  </div>
+
+  <!-- ===================== PERSONALIZADOS ===================== -->
+  <div id="tabPersonalizados" style="display:none;">
     <div class="conjuntos-toolbar">
       <button class="q-btn" id="criarConjuntoBtn">+ Criar conjunto personalizado</button>
     </div>
@@ -342,8 +359,15 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
       </div>
     </div>
 
-    <h2 class="conjuntos-titulo">Conjuntos Prioritários</h2>
-    <div class="conjuntos-grid" id="conjuntosPrioritarios"></div>
+    <h2 class="conjuntos-titulo">Meus Conjuntos Personalizados</h2>
+    <div class="conjuntos-grid" id="conjuntosPersonalizados"></div>
+  </div>
+
+  <!-- ===================== CADERNO DE REVISÃO ===================== -->
+  <div id="tabCaderno" style="display:none;">
+    <h2 class="conjuntos-titulo">Caderno de Revisão</h2>
+    <p style="text-align:center; opacity:0.85; max-width:640px; margin:0 auto 22px;">Questões que você marcou para revisar depois de responder um conjunto. Só é possível adicionar uma questão ao caderno na tela de resultado, após enviar o conjunto.</p>
+    <div id="cadernoLista"></div>
   </div>
 
   <!-- ===================== RESPONDIDOS ===================== -->
@@ -472,15 +496,23 @@ window.addEventListener('beforeunload', flushTempoEstudado);
 // deste script (`if (window.initConjuntosTab) initConjuntosTab();`).
 
 // ===================== ABAS =====================
+const ABAS_PLATAFORMA = ['praticar', 'personalizados', 'caderno', 'simulados', 'respondidos'];
+function ativarAba(nomeAba) {
+  if (!ABAS_PLATAFORMA.includes(nomeAba)) return;
+  document.querySelectorAll('.top-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === nomeAba));
+  document.getElementById('tabPraticar').style.display = nomeAba === 'praticar' ? 'block' : 'none';
+  document.getElementById('tabPersonalizados').style.display = nomeAba === 'personalizados' ? 'block' : 'none';
+  document.getElementById('tabCaderno').style.display = nomeAba === 'caderno' ? 'block' : 'none';
+  document.getElementById('tabSimulados').style.display = nomeAba === 'simulados' ? 'block' : 'none';
+  document.getElementById('tabRespondidos').style.display = nomeAba === 'respondidos' ? 'block' : 'none';
+  if (nomeAba === 'caderno' && window.carregarCaderno) carregarCaderno();
+}
 document.querySelectorAll('.top-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.top-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('tabPraticar').style.display = tab.dataset.tab === 'praticar' ? 'block' : 'none';
-    document.getElementById('tabSimulados').style.display = tab.dataset.tab === 'simulados' ? 'block' : 'none';
-    document.getElementById('tabRespondidos').style.display = tab.dataset.tab === 'respondidos' ? 'block' : 'none';
-  });
+  tab.addEventListener('click', () => ativarAba(tab.dataset.tab));
 });
+// Permite abrir direto numa aba específica via link, ex.: plataforma-questoes.html?tab=caderno
+const abaInicial = new URLSearchParams(window.location.search).get('tab');
+if (abaInicial) ativarAba(abaInicial);
 
 // ===================== SIMULADOS =====================
 let simulado = null;

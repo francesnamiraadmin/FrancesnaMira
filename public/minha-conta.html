@@ -362,7 +362,44 @@ function fmtTempoEstudado(ms) {
   return `${h}h${m ? ' ' + m + 'min' : ''}`;
 }
 
-function renderPlataforma(dados) {
+// Bloco de Conjuntos de Questões (fonte: backend, via /api/questoes) — KPIs de
+// progresso + prévia do Caderno de Revisão. Fica acima do histórico legado de
+// Simulados (abaixo, ainda baseado em localStorage) dentro do mesmo card.
+async function renderBlocoConjuntos() {
+  try {
+    const [statsRes, cadernoRes] = await Promise.all([
+      fetch('/api/questoes/estatisticas', { headers: authHeaders() }),
+      fetch('/api/questoes/caderno', { headers: authHeaders() })
+    ]);
+    const stats = statsRes.ok ? await statsRes.json() : null;
+    const caderno = cadernoRes.ok ? await cadernoRes.json() : [];
+    if (!stats) return '';
+
+    const previaCaderno = caderno.slice(0, 5).map(item => {
+      const q = item.questao;
+      const resumo = q.enunciado.length > 70 ? q.enunciado.slice(0, 70) + '…' : q.enunciado;
+      return `<div class="dash-atividade-item"><span>${q.nivel} · ${MATERIAS[q.materia] || q.materia} — ${resumo}</span></div>`;
+    }).join('');
+
+    return `
+      <h3 style="margin-bottom:12px;">Conjuntos de Questões</h3>
+      <div class="dash-kpi-row">
+        <div class="dash-kpi"><div class="valor">${stats.conjuntosConcluidos}</div><div class="rotulo">Conjuntos concluídos</div></div>
+        <div class="dash-kpi"><div class="valor">${stats.conjuntosEmAndamento}</div><div class="rotulo">Em andamento</div></div>
+        <div class="dash-kpi"><div class="valor">${stats.mediaPercentualAcertos !== null ? stats.mediaPercentualAcertos + '%' : '—'}</div><div class="rotulo">Média de acertos</div></div>
+        <div class="dash-kpi"><div class="valor">${stats.tamanhoCaderno}</div><div class="rotulo">No Caderno de Revisão</div></div>
+      </div>
+      <h3 style="margin:20px 0 12px;">Caderno de Revisão</h3>
+      ${caderno.length ? previaCaderno : '<div class="stats-vazio">Nenhuma questão salva no Caderno de Revisão ainda.</div>'}
+      <p style="margin-top:12px;"><a href="plataforma-questoes.html?tab=caderno" style="color:var(--accent); font-weight:700;">Ver Caderno de Revisão completo →</a></p>
+      <h3 style="margin:24px 0 12px;">Simulados — histórico</h3>
+    `;
+  } catch (err) {
+    return '';
+  }
+}
+
+async function renderPlataforma(dados) {
   const card = document.getElementById('secPlataforma');
   const alvo = document.getElementById('conteudoPlataforma');
   if (!window.AppShell.temAcesso('plataforma')) {
@@ -372,9 +409,11 @@ function renderPlataforma(dados) {
   }
   card.classList.remove('locked');
 
+  const blocoConjuntos = await renderBlocoConjuntos();
+
   const eventos = carregarEventos();
   if (eventos.length === 0) {
-    alvo.innerHTML = `<div class="stats-vazio">Nenhum dado ainda. Responda questões em <a href="plataforma-questoes.html" style="color:var(--accent); font-weight:700;">Praticar ou Simulados</a> para ver suas estatísticas aqui.</div>`;
+    alvo.innerHTML = blocoConjuntos + `<div class="stats-vazio">Nenhum dado de Simulados ainda. Faça um simulado em <a href="plataforma-questoes.html" style="color:var(--accent); font-weight:700;">Simulados</a> para ver o histórico aqui.</div>`;
     return;
   }
 
@@ -400,7 +439,7 @@ function renderPlataforma(dados) {
   });
   const ultimasAtividades = eventos.slice(-8).reverse();
 
-  alvo.innerHTML = `
+  alvo.innerHTML = blocoConjuntos + `
     <div class="dash-kpi-row">
       <div class="dash-kpi"><div class="valor">${total}</div><div class="rotulo">Questões resolvidas</div></div>
       <div class="dash-kpi"><div class="valor">${taxa}%</div><div class="rotulo">Taxa de acerto</div></div>

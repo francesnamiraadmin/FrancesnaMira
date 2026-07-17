@@ -1,10 +1,12 @@
 // =====================================================================
-// ABA PRATICAR — Conjuntos de Questões (Fase 1)
-// Lista Conjuntos Prioritários (não iniciados/em andamento) e Respondidos,
-// e o formulário de criação de conjunto personalizado por filtro.
-// Depende dos globais NIVEIS/MATERIAS definidos em js/questoes.js (já
-// carregado antes deste script) e é chamado por plataforma-questoes.html
-// via `initConjuntosTab()`.
+// PLATAFORMA DE QUESTÕES — Conjuntos + Caderno de Revisão
+// Aba Praticar = Conjuntos Sugeridos (oficiais, com filtro); aba
+// Personalizados = conjuntos criados pelo próprio aluno via filtro; aba
+// Caderno de Revisão = questões salvas (só é possível adicionar depois de
+// responder um conjunto, na tela de resultado — ver resolverConjunto.js).
+// Depende dos globais NIVEIS/MATERIAS/NOMES_TIPO/renderVisual definidos em
+// js/questoes.js e js/questoesRender.js (carregados antes deste script) e
+// é chamado por plataforma-questoes.html via `initConjuntosTab()`.
 // =====================================================================
 
 function authHeaders(json) {
@@ -14,6 +16,8 @@ function authHeaders(json) {
 
 const QUANTIDADES_CONJUNTO = [10, 20, 40];
 const filtroForm = { niveis: new Set(), materias: new Set(), quantidade: 10 };
+
+let sugeridosRaw = []; // conjuntos oficiais (não iniciados + em andamento), antes do filtro
 
 function badgeFiltros(c) {
   const niveis = (c.filtros?.niveis || []).join('+');
@@ -72,22 +76,29 @@ function renderRespondidoCard(c) {
 
 async function carregarConjuntos() {
   const prioritariosEl = document.getElementById('conjuntosPrioritarios');
+  const personalizadosEl = document.getElementById('conjuntosPersonalizados');
   const respondidosEl = document.getElementById('conjuntosRespondidos');
   try {
     const res = await fetch('/api/questoes/conjuntos', { headers: authHeaders() });
     if (!res.ok) throw new Error('Erro ao carregar conjuntos.');
     const data = await res.json();
 
-    const prioritarios = [...data.prioritarios.emAndamento, ...data.prioritarios.naoIniciados];
-    prioritariosEl.innerHTML = prioritarios.length
-      ? prioritarios.map(renderPrioritarioCard).join('')
-      : '<p class="conjuntos-vazio">Nenhum conjunto pendente — crie um conjunto personalizado para começar a praticar.</p>';
+    const todos = [...data.prioritarios.emAndamento, ...data.prioritarios.naoIniciados];
+    sugeridosRaw = todos.filter(c => c.tipo === 'oficial');
+    const personalizados = todos.filter(c => c.tipo === 'personalizado');
+
+    renderSugeridos();
+
+    personalizadosEl.innerHTML = personalizados.length
+      ? personalizados.map(renderPrioritarioCard).join('')
+      : '<p class="conjuntos-vazio">Você ainda não criou nenhum conjunto personalizado.</p>';
 
     respondidosEl.innerHTML = data.respondidos.length
       ? data.respondidos.map(renderRespondidoCard).join('')
       : '<p class="conjuntos-vazio">Você ainda não concluiu nenhum conjunto.</p>';
   } catch (err) {
     prioritariosEl.innerHTML = '<p class="conjuntos-vazio">Erro ao carregar conjuntos.</p>';
+    personalizadosEl.innerHTML = '';
     respondidosEl.innerHTML = '';
   }
 }
@@ -106,7 +117,85 @@ document.addEventListener('click', e => {
   if (revisar) return window.location.href = `resolver-conjunto.html?tentativaId=${revisar.dataset.revisar}`;
 });
 
-// ===================== FORMULÁRIO DE CRIAÇÃO =====================
+// ===================== FILTRO — CONJUNTOS SUGERIDOS =====================
+
+function passaFiltroSugerido(c) {
+  const nivel = document.getElementById('filtroSugeridoNivel').value;
+  const materia = document.getElementById('filtroSugeridoMateria').value;
+  const busca = document.getElementById('filtroSugeridoBusca').value.trim().toLowerCase();
+  if (nivel && !(c.filtros?.niveis || []).includes(nivel)) return false;
+  if (materia && !(c.filtros?.materias || []).includes(materia)) return false;
+  if (busca && !c.nome.toLowerCase().includes(busca)) return false;
+  return true;
+}
+
+function renderSugeridos() {
+  const el = document.getElementById('conjuntosPrioritarios');
+  const filtrados = sugeridosRaw.filter(passaFiltroSugerido);
+  el.innerHTML = filtrados.length
+    ? filtrados.map(renderPrioritarioCard).join('')
+    : '<p class="conjuntos-vazio">Nenhum conjunto encontrado para esse filtro.</p>';
+}
+
+function initFiltroSugeridos() {
+  document.getElementById('filtroSugeridoNivel').insertAdjacentHTML('beforeend', NIVEIS.map(n => `<option value="${n}">${n}</option>`).join(''));
+  document.getElementById('filtroSugeridoMateria').insertAdjacentHTML('beforeend', Object.entries(MATERIAS).map(([k, v]) => `<option value="${k}">${v}</option>`).join(''));
+  document.getElementById('filtroSugeridoNivel').addEventListener('change', renderSugeridos);
+  document.getElementById('filtroSugeridoMateria').addEventListener('change', renderSugeridos);
+  document.getElementById('filtroSugeridoBusca').addEventListener('input', renderSugeridos);
+}
+
+// ===================== CADERNO DE REVISÃO =====================
+
+function renderCadernoItem(item) {
+  const q = item.questao;
+  const textoResposta = valor => {
+    if (valor === null || valor === undefined) return '';
+    return q.tipo === 'vf' ? (valor ? 'Vrai' : 'Faux') : valor;
+  };
+  return `<div class="q-card" style="margin-bottom:16px;">
+    <div class="q-head">
+      <span class="q-tags">
+        <span class="q-tag">${NOMES_TIPO[q.tipo]}</span>
+        <span class="q-pill">${q.nivel}</span>
+        <span class="q-pill">${MATERIAS[q.materia] || q.materia}</span>
+      </span>
+    </div>
+    ${q.visual ? renderVisual(q.visual) : ''}
+    ${q.texto ? `<div class="q-texto">${q.texto}</div>` : ''}
+    <div class="q-enunciado">${q.enunciado}</div>
+    ${q.tipo === 'vf' ? `<div class="q-enunciado" style="font-weight:600;">Afirmação: « ${q.afirmacao} »</div>` : ''}
+    <p>Resposta certa: <strong>${textoResposta(q.respostaCorreta)}</strong></p>
+    <div class="q-gabarito show"><strong>Explicação:</strong> ${q.explicacao}</div>
+    <div class="q-actions">
+      <button class="q-btn secundario" data-remover-caderno="${item.questaoId}">Remover do Caderno</button>
+    </div>
+  </div>`;
+}
+
+async function carregarCaderno() {
+  const alvo = document.getElementById('cadernoLista');
+  alvo.innerHTML = '<p class="conjuntos-vazio">Carregando...</p>';
+  try {
+    const res = await fetch('/api/questoes/caderno', { headers: authHeaders() });
+    const itens = res.ok ? await res.json() : [];
+    alvo.innerHTML = itens.length
+      ? itens.map(renderCadernoItem).join('')
+      : '<p class="conjuntos-vazio">Nenhuma questão salva no Caderno de Revisão ainda. Depois de responder um conjunto, use "Adicionar ao Caderno de Revisão" na tela de resultado.</p>';
+  } catch (err) {
+    alvo.innerHTML = '<p class="conjuntos-vazio">Erro ao carregar o Caderno de Revisão.</p>';
+  }
+}
+window.carregarCaderno = carregarCaderno;
+
+document.addEventListener('click', async e => {
+  const btn = e.target.closest('[data-remover-caderno]');
+  if (!btn) return;
+  const res = await fetch(`/api/questoes/caderno/${btn.dataset.removerCaderno}`, { method: 'DELETE', headers: authHeaders() });
+  if (res.ok) carregarCaderno();
+});
+
+// ===================== FORMULÁRIO DE CRIAÇÃO (aba Personalizados) =====================
 
 function renderChipsNiveis() {
   document.getElementById('chipNiveis').innerHTML = NIVEIS.map(n =>
@@ -201,6 +290,7 @@ function initFormularioConjunto() {
 }
 
 function initConjuntosTab() {
+  initFiltroSugeridos();
   initFormularioConjunto();
   carregarConjuntos();
 }

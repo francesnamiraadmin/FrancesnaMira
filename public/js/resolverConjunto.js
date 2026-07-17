@@ -16,7 +16,6 @@ const tentativaIdParam = params.get('tentativaId');
 const wrap = document.getElementById('resolverWrap');
 
 let sessao = null;
-let noCaderno = new Set(); // toggle otimista nesta página — persistência real fica pra tela do Caderno na Fase 2
 let timerInterval = null;
 let enviando = false;
 
@@ -130,7 +129,6 @@ function renderQuestaoCard(q) {
 
   corpo += `<div class="q-actions">
     <button class="q-btn secundario ${q.marcadaRevisao ? 'ativo' : ''}" id="btnMarcarRevisao">${q.marcadaRevisao ? '★ Marcada para revisão' : '☆ Marcar para revisão'}</button>
-    <button class="q-btn secundario ${noCaderno.has(q._id) ? 'ativo' : ''}" id="btnCaderno">${noCaderno.has(q._id) ? '✓ No Caderno de Revisão' : '+ Adicionar ao Caderno de Revisão'}</button>
   </div>`;
 
   return `<div class="q-card">
@@ -165,7 +163,6 @@ function ligarEventosSessao() {
   });
 
   document.getElementById('btnMarcarRevisao').addEventListener('click', () => marcarRevisaoAtual());
-  document.getElementById('btnCaderno').addEventListener('click', () => toggleCadernoAtual());
 }
 
 async function irParaQuestao(index) {
@@ -191,16 +188,6 @@ async function marcarRevisaoAtual() {
     method: 'PUT', headers: authHeaders(true), body: JSON.stringify({ marcadaRevisao: !atual })
   });
   if (res.ok) { sessao = await res.json(); renderSessao(); }
-}
-
-async function toggleCadernoAtual() {
-  const q = sessao.questoes[sessao.questaoAtualIndex];
-  const metodo = noCaderno.has(q._id) ? 'DELETE' : 'POST';
-  const res = await fetch(`/api/questoes/sessoes/${sessao._id}/questoes/${q._id}/caderno`, { method: metodo, headers: authHeaders() });
-  if (res.ok) {
-    noCaderno.has(q._id) ? noCaderno.delete(q._id) : noCaderno.add(q._id);
-    renderSessao();
-  }
 }
 
 async function tentarFinalizar() {
@@ -244,12 +231,12 @@ function renderResultado(t) {
       </div>
     </div>
     <div class="resultado-lista">
-      ${t.respostas.map((r, i) => renderItemResultado(r, i)).join('')}
+      ${t.respostas.map((r, i) => renderItemResultado(r, i, t._id)).join('')}
     </div>
   `;
 }
 
-function renderItemResultado(r, i) {
+function renderItemResultado(r, i, tentativaId) {
   const textoResposta = valor => {
     if (valor === null || valor === undefined) return '<em>não respondida</em>';
     return r.tipo === 'vf' ? (valor ? 'Vrai' : 'Faux') : valor;
@@ -270,8 +257,25 @@ function renderItemResultado(r, i) {
     <p>Sua resposta: ${textoResposta(r.respostaEscolhida)}</p>
     <p>Resposta certa: <strong>${textoResposta(r.respostaCorreta)}</strong></p>
     <div class="q-gabarito"><strong>Explicação:</strong> ${r.explicacao}</div>
+    <div class="q-actions">
+      <button class="q-btn secundario ${r.noCaderno ? 'ativo' : ''}" data-caderno-questao="${r.questaoId}" data-caderno-tentativa="${tentativaId}">${r.noCaderno ? '✓ No Caderno de Revisão' : '+ Adicionar ao Caderno de Revisão'}</button>
+    </div>
   </div>`;
 }
+
+wrap.addEventListener('click', async e => {
+  const btn = e.target.closest('[data-caderno-questao]');
+  if (!btn) return;
+  const questaoId = btn.dataset.cadernoQuestao;
+  const tentativaId = btn.dataset.cadernoTentativa;
+  const jaEsta = btn.classList.contains('ativo');
+  const url = jaEsta ? `/api/questoes/caderno/${questaoId}` : `/api/questoes/tentativas/${tentativaId}/questoes/${questaoId}/caderno`;
+  const res = await fetch(url, { method: jaEsta ? 'DELETE' : 'POST', headers: authHeaders() });
+  if (res.ok) {
+    btn.classList.toggle('ativo');
+    btn.textContent = jaEsta ? '+ Adicionar ao Caderno de Revisão' : '✓ No Caderno de Revisão';
+  }
+});
 
 // ===================== INIT =====================
 
