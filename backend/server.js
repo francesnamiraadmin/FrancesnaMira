@@ -35,6 +35,7 @@ app.use("/api/horarios", require("./routes/horarios"));
 app.use("/api/reclamacoes", require("./routes/reclamacoes"));
 app.use("/api/depoimentos", require("./routes/depoimentos"));
 app.use("/api/deveres", require("./routes/deveres"));
+app.use("/api/questoes", require("./routes/questoes"));
 
 // Conexão MongoDB
 mongoose.connect(process.env.MONGO_URI)
