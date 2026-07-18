@@ -49,6 +49,22 @@ window.EstudoTimerGlobal = (() => {
     return 'Computador';
   }
 
+  // Diferença entre o relógio do servidor e o deste navegador — calibrada a
+  // cada resposta HTTP (o cabeçalho "Date" já vem de graça em toda resposta,
+  // sem precisar de nenhum campo novo no backend). Sem isso, se o processo
+  // Node estiver com o relógio alguns minutos à frente do navegador (comum em
+  // WSL2, cujo relógio virtual atrasa depois que a máquina hiberna), o
+  // elapsed dava negativo, ficava travado em 00:00:00 pelo Math.max(0, ...)
+  // até o tempo real alcançar essa diferença — daí "destravava" sozinho.
+  let offsetServidorMs = 0;
+  function calibrarOffsetServidor(res) {
+    const dataHeader = res && res.headers && res.headers.get('date');
+    if (!dataHeader) return;
+    const horaServidor = new Date(dataHeader).getTime();
+    if (!isNaN(horaServidor)) offsetServidorMs = horaServidor - Date.now();
+  }
+  function agoraServidor() { return Date.now() + offsetServidorMs; }
+
   // Mesma matemática de mapeadorTimer.js — elapsed nunca é um contador
   // incremental, sempre recalculado a partir de iniciadoEm/pausas.
   function pausaAbertaMs(sessao, agora) {
@@ -59,7 +75,7 @@ window.EstudoTimerGlobal = (() => {
     return (sessao.pausas || []).filter(p => p.fim).reduce((acc, p) => acc + (new Date(p.fim) - new Date(p.inicio)), 0);
   }
   function calcularElapsedMs(sessao) {
-    const agora = Date.now();
+    const agora = agoraServidor();
     const bruto = agora - new Date(sessao.iniciadoEm).getTime();
     const pausasMs = pausasFechadasMs(sessao) + pausaAbertaMs(sessao, agora);
     return Math.max(0, bruto - pausasMs);
@@ -224,10 +240,12 @@ window.EstudoTimerGlobal = (() => {
 
   async function pausar() {
     const res = await fetch(`/api/estudos/sessoes/${sessaoAtiva._id}/pausar`, { method: 'POST', headers: authHeaders() });
+    calibrarOffsetServidor(res);
     if (res.ok) { sessaoAtiva = await res.json(); atualizarBotoesPausa(); atualizarTempo(); }
   }
   async function continuar() {
     const res = await fetch(`/api/estudos/sessoes/${sessaoAtiva._id}/continuar`, { method: 'POST', headers: authHeaders() });
+    calibrarOffsetServidor(res);
     if (res.ok) { sessaoAtiva = await res.json(); atualizarBotoesPausa(); atualizarTempo(); }
   }
 
@@ -382,6 +400,7 @@ window.EstudoTimerGlobal = (() => {
         method: 'POST', headers: authHeaders(true),
         body: JSON.stringify({ materiaId, conteudoId })
       });
+      calibrarOffsetServidor(res);
       const data = await res.json();
       if (!res.ok) {
         if (res.status === 409 && data.sessaoAtiva) return { ok: false, conflito: true, sessaoAtiva: data.sessaoAtiva };
@@ -416,6 +435,7 @@ window.EstudoTimerGlobal = (() => {
   async function verificarSessaoAtiva() {
     try {
       const res = await fetch('/api/estudos/sessoes/ativa', { headers: authHeaders() });
+      calibrarOffsetServidor(res);
       sessaoAtiva = res.ok ? await res.json() : null;
       if (sessaoAtiva) await buscarNomes(sessaoAtiva);
     } catch (err) { sessaoAtiva = null; /* sem barra se a checagem falhar — não é crítico */ }
@@ -432,5 +452,8 @@ window.EstudoTimerGlobal = (() => {
     await aplicarEstadoVisual();
   });
 
-  return { iniciarSessao, sessaoAtivaAtual, definirVisibilidade };
+  // agoraServidor() também é usado por mapeadorTimer.js — mesmo relógio
+  // calibrado, pra não haver dois offsets diferentes entre a barra e os
+  // cards "ao vivo" da grade de Matéria/Conteúdo.
+  return { iniciarSessao, sessaoAtivaAtual, definirVisibilidade, agoraServidor };
 })();

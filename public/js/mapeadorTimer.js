@@ -37,7 +37,10 @@ function pausasFechadasMs(sessao) {
   return (sessao.pausas || []).filter(p => p.fim).reduce((acc, p) => acc + (new Date(p.fim) - new Date(p.inicio)), 0);
 }
 function calcularElapsedSeg(sessao) {
-  const agora = Date.now();
+  // agoraServidor() (não Date.now() puro) — calibrado por estudoTimerGlobal.js
+  // contra o cabeçalho "Date" das respostas HTTP, pra não travar em 0 quando o
+  // relógio do processo Node estiver dessincronizado do navegador (ex.: WSL2).
+  const agora = window.EstudoTimerGlobal.agoraServidor();
   const bruto = agora - new Date(sessao.iniciadoEm).getTime();
   const pausasMs = pausasFechadasMs(sessao) + pausaAbertaMs(sessao, agora);
   return Math.max(0, Math.floor((bruto - pausasMs) / 1000));
