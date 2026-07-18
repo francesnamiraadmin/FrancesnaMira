@@ -168,7 +168,7 @@ nav a:hover { color: var(--accent); }
   transition: 0.2s; background: var(--recessed-2);
 }
 .dropzone.dragover { border-color: var(--accent); background: var(--warning-bg); }
-.dropzone .icone { font-size: 2.4rem; margin-bottom: 10px; }
+.dropzone .icone { width: 52px; height: 52px; margin-bottom: 10px; object-fit: contain; }
 .dropzone p { color: var(--text); font-size: 0.95rem; }
 .dropzone .formatos { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
 .arquivo-selecionado { display: flex; align-items: center; justify-content: space-between; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 14px 18px; margin-top: 14px; }
@@ -321,8 +321,8 @@ footer { text-align: center; padding: 24px; background: var(--footer-bg); margin
   </div>
 
   <div class="top-tabs">
-    <button class="top-tab active" data-view="catalogo">📚 Temas</button>
-    <button class="top-tab" data-view="historico">🗂️ Meu Histórico</button>
+    <button class="top-tab active" data-view="catalogo"><img class="titulo-icone-inline pequeno" src="img/icones/folder.svg" alt="">Temas</button>
+    <button class="top-tab" data-view="historico"><img class="titulo-icone-inline pequeno" src="img/icones/scroll.svg" alt="">Meu Histórico</button>
   </div>
 
   <!-- ===================== CATÁLOGO ===================== -->
@@ -342,7 +342,7 @@ footer { text-align: center; padding: 24px; background: var(--footer-bg); margin
       </div>
       <div class="campo-filtro">
         <label for="filtroModalidade">Modalidade</label>
-        <select id="filtroModalidade"><option value="">Todas</option><option value="textual">✍️ Textual</option><option value="oral">🎤 Oral</option></select>
+        <select id="filtroModalidade"><option value="">Todas</option><option value="textual">Textual</option><option value="oral">Oral</option></select>
       </div>
       <div class="campo-filtro busca">
         <label for="filtroBusca">Buscar por palavra-chave</label>
@@ -354,25 +354,25 @@ footer { text-align: center; padding: 24px; background: var(--footer-bg); margin
 
   <!-- ===================== DETALHE DO TEMA ===================== -->
   <div id="viewTema" style="display:none;">
-    <span class="voltar-link" id="voltarCatalogoBtn">← Voltar ao catálogo</span>
+    <span class="voltar-link" id="voltarCatalogoBtn"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Voltar ao catálogo</span>
     <div class="card tema-detalhe-head" id="temaDetalheHead"></div>
     <div class="card" id="temaObjetivosCard"></div>
     <div class="card" id="temaColetaneaCard"></div>
     <div style="text-align:center; margin-top:26px;">
-      <button class="btn" id="iniciarProducaoBtn" style="padding:16px 40px; font-size:1rem;">Iniciar Produção ✍️</button>
+      <button class="btn" id="iniciarProducaoBtn" style="padding:16px 40px; font-size:1rem;">Iniciar Produção<img class="titulo-icone-inline pequeno" src="img/icones/writing-hand.svg" alt="" style="margin-left:6px; margin-right:0;"></button>
     </div>
   </div>
 
   <!-- ===================== ENVIO ===================== -->
   <div id="viewEnvio" style="display:none;">
-    <span class="voltar-link" id="voltarTemaBtn">← Voltar ao tema</span>
+    <span class="voltar-link" id="voltarTemaBtn"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Voltar ao tema</span>
     <div class="card">
       <h2 id="envioTitulo">Enviar produção</h2>
       <div class="resumo-envio" id="envioResumo"></div>
 
       <div class="modo-toggle" id="modoToggle">
-        <button class="modo-btn active" data-modo="arquivo">📎 Enviar arquivo</button>
-        <button class="modo-btn" data-modo="texto">⌨️ Digitar texto</button>
+        <button class="modo-btn active" data-modo="arquivo"><img class="titulo-icone-inline pequeno" src="img/icones/paperclip.svg" alt="">Enviar arquivo</button>
+        <button class="modo-btn" data-modo="texto"><img class="titulo-icone-inline pequeno" src="img/icones/keyboard.svg" alt="">Digitar texto</button>
       </div>
 
       <div id="modoOralWrap" style="display:none;">
@@ -381,7 +381,7 @@ footer { text-align: center; padding: 24px; background: var(--footer-bg); margin
 
       <div id="modoArquivoWrap">
         <div class="dropzone" id="dropzone">
-          <div class="icone">📄</div>
+          <img class="icone" src="img/icones/document.svg" alt="">
           <p><strong>Arraste seu arquivo aqui</strong> ou clique para selecionar</p>
           <div class="formatos">Formatos aceitos: PDF, DOCX, ODT — máximo 10 MB</div>
         </div>
@@ -430,7 +430,7 @@ footer { text-align: center; padding: 24px; background: var(--footer-bg); margin
 
   <!-- ===================== DETALHE DA PRODUÇÃO ===================== -->
   <div id="viewProducao" style="display:none;">
-    <span class="voltar-link" id="voltarHistoricoBtn">← Voltar ao histórico</span>
+    <span class="voltar-link" id="voltarHistoricoBtn"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Voltar ao histórico</span>
     <div id="producaoConteudo"></div>
   </div>
 </div>

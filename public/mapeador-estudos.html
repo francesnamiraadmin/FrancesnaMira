@@ -33,7 +33,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .hub-card:hover { transform: translateY(-4px); border-color: var(--accent); }
-.hub-card .icone { font-size: 2.6rem; }
+.hub-card .icone { width: 64px; height: 64px; object-fit: contain; }
 .hub-card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
 .hub-card p { font-size: 0.92rem; opacity: 0.85; line-height: 1.5; }
 .hub-card .indicador {
@@ -47,26 +47,26 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div id="app-navbar" class="app-navbar-bar"></div>
 
 <section class="intro">
-  <h1>⏱️ Mapeador de Estudos</h1>
+  <h1><img class="titulo-icone-inline" src="img/icones/simulados.svg" alt="">Mapeador de Estudos</h1>
   <p>Organize suas Matérias e Conteúdos, cronometre suas sessões de estudo e acompanhe sua evolução com estatísticas completas — inspirado no Aprovado App, totalmente integrado à sua conta.</p>
 </section>
 
 <div class="hub-wrap">
   <div class="hub-grid">
     <a class="hub-card" href="mapeador-timer.html">
-      <div class="icone">⏱️</div>
+      <img class="icone" src="img/icones/simulados.svg" alt="">
       <h2>Timer de Estudos</h2>
       <p>Escolha uma matéria e um conteúdo e inicie o cronômetro da sua sessão de estudo.</p>
       <span class="indicador" id="indicadorTimer" style="display:none;"></span>
     </a>
     <a class="hub-card" href="mapeador-historico.html">
-      <div class="icone">📜</div>
+      <img class="icone" src="img/icones/scroll.svg" alt="">
       <h2>Histórico</h2>
       <p>Ver todas as suas sessões registradas, com busca, filtro e edição.</p>
       <span class="indicador" id="indicadorHistorico" style="display:none;"></span>
     </a>
     <a class="hub-card" href="mapeador-estatisticas.html">
-      <div class="icone">📊</div>
+      <img class="icone" src="img/icones/estatisticas.svg" alt="">
       <h2>Estatísticas</h2>
       <p>Gráficos, indicadores, sequência de dias e evolução do seu tempo de estudo.</p>
       <span class="indicador" id="indicadorEstatisticas" style="display:none;"></span>

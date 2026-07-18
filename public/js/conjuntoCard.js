@@ -39,7 +39,7 @@ function conjuntoCardBase(c) {
       ${c.tipo === 'personalizado' ? '<span class="q-pill personalizado">Personalizado</span>' : ''}
       <span class="q-pill">${c.quantidadeQuestoes} questões</span>
       ${c.dificuldade ? `<span class="q-pill">${c.dificuldade}</span>` : ''}
-      ${c.tempoLimiteSegundos ? `<span class="q-pill">⏱️ ${formatarTempo(c.tempoLimiteSegundos)}</span>` : '<span class="q-pill">Sem limite de tempo</span>'}
+      ${c.tempoLimiteSegundos ? `<span class="q-pill"><img src="img/icones/tempo.svg" alt="" style="width:0.9em; height:0.9em; vertical-align:-0.1em; margin-right:2px;"> ${formatarTempo(c.tempoLimiteSegundos)}</span>` : '<span class="q-pill">Sem limite de tempo</span>'}
     </div>
     <p class="conjunto-desc">${badgeFiltros(c)}</p>
     ${c.mediaPercentualAcertos !== null && c.mediaPercentualAcertos !== undefined ? `<p class="conjunto-desc">Média de acertos dos alunos: <strong>${c.mediaPercentualAcertos}%</strong></p>` : ''}

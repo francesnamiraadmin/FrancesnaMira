@@ -1,0 +1,9 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquivo">
+  <path d="M6 2.5 h8 l4 4 v15 h-12 Z" fill="#5c6bc0"/>
+  <path d="M14 2.5 v4 h4 Z" fill="#3949ab"/>
+  <g fill="#e8eaf6">
+    <rect x="7.5" y="12" width="9" height="1.6" rx="0.8"/>
+    <rect x="7.5" y="15.2" width="9" height="1.6" rx="0.8"/>
+    <rect x="7.5" y="18.4" width="5.5" height="1.6" rx="0.8"/>
+  </g>
+</svg>

@@ -239,7 +239,7 @@
   box-shadow: var(--shadow); transition: transform 0.2s ease;
 }
 .dash-summary-card:hover { transform: translateY(-3px); }
-.dash-summary-card .icone { font-size: 1.6rem; margin-bottom: 10px; }
+.dash-summary-card .icone { width: 40px; height: 40px; margin-bottom: 10px; object-fit: contain; }
 .dash-summary-card h3 { font-size: 1.02rem; margin-bottom: 8px; }
 .dash-status-tag {
   display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700;
@@ -387,3 +387,11 @@ body.tem-timer-ativo { padding-bottom: 88px; transition: padding-bottom 0.25s ea
   .estudo-timer-info { order: 1; }
   .estudo-timer-acoes { order: 2; margin-left: auto; }
 }
+
+/* ===================== ÍCONES SVG SUBSTITUINDO EMOJIS ===================== */
+/* Classe utilitária global (app-shell.css é carregado em toda página logada)
+   pra qualquer ícone inline dentro de título/botão/tag/rótulo — tamanho em
+   "em" acompanha o font-size de onde é inserido, sem precisar de uma regra
+   por página. Ver public/img/icones/*.svg. */
+.titulo-icone-inline { width: 1em; height: 1em; object-fit: contain; vertical-align: -0.14em; margin-right: 8px; }
+.titulo-icone-inline.pequeno { margin-right: 5px; }

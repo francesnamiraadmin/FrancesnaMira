@@ -16,7 +16,7 @@
 (function () {
   const TOPICOS = [
     { arquivo: 'praticar.html', nome: 'Praticar', icone: 'img/icones/praticar.svg' },
-    { arquivo: 'meus-conjuntos.html', nome: 'Em Andamento / Respondidos', icone: 'img/icones/andamento.svg' },
+    { arquivo: 'meus-conjuntos.html', nome: 'Respondidos / Em Andamento', icone: 'img/icones/andamento.svg' },
     { arquivo: 'simulados.html', nome: 'Simulados', icone: 'img/icones/simulados.svg' },
     { arquivo: 'personalizar-conjunto.html', nome: 'Personalize', icone: 'img/icones/personalizar.svg' },
     { arquivo: 'caderno-revisao.html', nome: 'Caderno de Revisão', icone: 'img/icones/caderno.svg' },

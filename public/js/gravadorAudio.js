@@ -34,7 +34,7 @@ const GravadorAudio = (() => {
       container.innerHTML = `
         <p class="embed-aviso">${jaEnviado ? 'Você já enviou uma gravação. Grave de novo pra substituir.' : 'Clique em gravar e fale sua resposta.'}</p>
         <div class="gravador-controles">
-          <button class="dash-btn pequeno" type="button" data-gravar>🎙️ Gravar</button>
+          <button class="dash-btn pequeno" type="button" data-gravar><img src="img/icones/mic.svg" alt="" style="width:0.9em; height:0.9em; vertical-align:-0.12em; margin-right:4px;">Gravar</button>
           <span class="gravador-tempo" data-tempo style="display:none;"></span>
         </div>
         <div class="msg-inline" data-msg></div>`;
@@ -66,7 +66,7 @@ const GravadorAudio = (() => {
       tempoEl.style.display = 'inline';
       timerId = setInterval(() => { segundos++; tempoEl.textContent = formatarTempo(segundos); }, 1000);
 
-      container.querySelector('[data-gravar]').outerHTML = `<button class="dash-btn perigo pequeno" type="button" data-parar>⏹ Parar</button>`;
+      container.querySelector('[data-gravar]').outerHTML = `<button class="dash-btn perigo pequeno" type="button" data-parar><img src="img/icones/stop.svg" alt="" style="width:0.9em; height:0.9em; vertical-align:-0.12em; margin-right:4px;">Parar</button>`;
       container.querySelector('[data-parar]').addEventListener('click', () => mediaRecorder.stop());
     }
 

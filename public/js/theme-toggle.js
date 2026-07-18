@@ -1,10 +1,16 @@
 (function () {
   const STORAGE_KEY = "site-theme";
 
+  function iconeTema(tema) {
+    return tema === "dark"
+      ? '<img src="img/icones/sun.svg" alt="" style="width:20px; height:20px;">'
+      : '<img src="img/icones/moon.svg" alt="" style="width:20px; height:20px;">';
+  }
+
   function aplicarTema(tema) {
     document.documentElement.setAttribute("data-theme", tema);
     const btn = document.getElementById("themeToggleBtn");
-    if (btn) btn.textContent = tema === "dark" ? "☀️" : "🌙";
+    if (btn) btn.innerHTML = iconeTema(tema);
   }
 
   const salvo = localStorage.getItem(STORAGE_KEY) || "light";
@@ -36,7 +42,7 @@
     btn.type = "button";
     btn.setAttribute("aria-label", "Alternar tema claro/escuro");
     btn.title = "Alternar tema claro/escuro";
-    btn.textContent = (localStorage.getItem(STORAGE_KEY) || "light") === "dark" ? "☀️" : "🌙";
+    btn.innerHTML = iconeTema(localStorage.getItem(STORAGE_KEY) || "light");
     btn.addEventListener("click", () => {
       const atual = document.documentElement.getAttribute("data-theme") || "light";
       setTema(atual === "dark" ? "light" : "dark");

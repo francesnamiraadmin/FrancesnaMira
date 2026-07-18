@@ -1,0 +1,16 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Texto digitado">
+  <rect x="2" y="6" width="20" height="13" rx="2" fill="#78909c"/>
+  <g fill="#eceff1">
+    <rect x="4.5" y="8.5" width="2" height="2" rx="0.5"/>
+    <rect x="7.5" y="8.5" width="2" height="2" rx="0.5"/>
+    <rect x="10.5" y="8.5" width="2" height="2" rx="0.5"/>
+    <rect x="13.5" y="8.5" width="2" height="2" rx="0.5"/>
+    <rect x="16.5" y="8.5" width="2" height="2" rx="0.5"/>
+    <rect x="4.5" y="11.5" width="2" height="2" rx="0.5"/>
+    <rect x="7.5" y="11.5" width="2" height="2" rx="0.5"/>
+    <rect x="10.5" y="11.5" width="2" height="2" rx="0.5"/>
+    <rect x="13.5" y="11.5" width="2" height="2" rx="0.5"/>
+    <rect x="16.5" y="11.5" width="2" height="2" rx="0.5"/>
+    <rect x="6" y="14.5" width="12" height="2" rx="1"/>
+  </g>
+</svg>

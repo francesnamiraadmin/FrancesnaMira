@@ -1,0 +1,6 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Histórico">
+  <circle cx="12" cy="13" r="9" fill="#66bb6a"/>
+  <path d="M12 13 V7.5 M12 13 L16 15" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 3.5 A9 9 0 0 0 3 8.5" fill="none" stroke="#66bb6a" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M3 5 L3 8.5 L6.5 8.5" fill="none" stroke="#66bb6a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

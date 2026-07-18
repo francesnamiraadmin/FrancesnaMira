@@ -81,18 +81,18 @@ function renderTemaCard(t) {
   const favoritado = (window.__favoritos || []).includes(t._id);
   const oral = t.modalidade === 'oral';
   return `<div class="tema-card" data-id="${t._id}">
-    <button class="fav-btn ${favoritado ? 'ativo' : ''}" data-fav="${t._id}" title="Favoritar tema">★</button>
+    <button class="fav-btn ${favoritado ? 'ativo' : ''}" data-fav="${t._id}" title="Favoritar tema"><img src="img/icones/${favoritado ? 'star-filled' : 'star-empty'}.svg" alt="" style="width:1em; height:1em;"></button>
     <div class="tema-tags">
       <span class="tag exame">${t.exame}</span>
       <span class="tag nivel">${t.nivel}</span>
       <span class="tag dificuldade-${t.dificuldade}">${t.dificuldade}</span>
-      <span class="tag">${oral ? '🎤 Oral' : '✍️ Textual'}</span>
+      <span class="tag">${oral ? '<img class="titulo-icone-inline pequeno" src="img/icones/mic.svg" alt="">Oral' : '<img class="titulo-icone-inline pequeno" src="img/icones/writing-hand.svg" alt="">Textual'}</span>
     </div>
     <h3>${t.titulo}</h3>
     <p class="desc">${t.descricao}</p>
     <div class="tema-meta">
-      <span>⏱️ <strong>${t.tempoSugerido} min</strong></span>
-      <span>${oral ? `🎙️ <strong>${Math.round(t.tempoMinimoSegundos / 60)}-${Math.round(t.tempoMaximoSegundos / 60)} min de fala</strong>` : `📝 <strong>${t.limitePalavrasMin}-${t.limitePalavrasMax} palavras</strong>`}</span>
+      <span><img class="titulo-icone-inline pequeno" src="img/icones/tempo.svg" alt=""><strong>${t.tempoSugerido} min</strong></span>
+      <span>${oral ? `<img class="titulo-icone-inline pequeno" src="img/icones/mic.svg" alt=""><strong>${Math.round(t.tempoMinimoSegundos / 60)}-${Math.round(t.tempoMaximoSegundos / 60)} min de fala</strong>` : `<img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt=""><strong>${t.limitePalavrasMin}-${t.limitePalavrasMax} palavras</strong>`}</span>
       <span class="creditos-pill">${t.creditosNecessarios} crédito${t.creditosNecessarios > 1 ? 's' : ''}</span>
     </div>
   </div>`;
@@ -140,7 +140,7 @@ function renderTemaDetalhe(t) {
       <span class="tag nivel">Nível ${t.nivel}</span>
       <span class="tag dificuldade-${t.dificuldade}">${t.dificuldade}</span>
       <span class="tag" style="background:var(--cinza-100); color:var(--cinza-600);">${t.tipoProducao}</span>
-      <span class="tag">${oral ? '🎤 Produção oral' : '✍️ Produção textual'}</span>
+      <span class="tag">${oral ? '<img class="titulo-icone-inline pequeno" src="img/icones/mic.svg" alt="">Produção oral' : '<img class="titulo-icone-inline pequeno" src="img/icones/writing-hand.svg" alt="">Produção textual'}</span>
     </div>
     <h1>${t.titulo}</h1>
     <p style="color:var(--cinza-600); margin-top:8px;">${t.descricao}</p>
@@ -229,8 +229,8 @@ function prepararEnvio(t, urlEnvio) {
 
   const suficiente = creditosDisponiveis() >= t.creditosNecessarios;
   document.getElementById('avisoCreditos').innerHTML = suficiente
-    ? `⚠️ Este envio consumirá <strong>${t.creditosNecessarios} crédito${t.creditosNecessarios > 1 ? 's' : ''}</strong> do seu saldo (você tem ${creditosDisponiveis()}).`
-    : `🚫 Você não tem créditos suficientes (precisa de ${t.creditosNecessarios}, tem ${creditosDisponiveis()}). Assine ou aguarde a renovação do seu plano para receber mais créditos.`;
+    ? `<img class="titulo-icone-inline pequeno" src="img/icones/warning.svg" alt="">Este envio consumirá <strong>${t.creditosNecessarios} crédito${t.creditosNecessarios > 1 ? 's' : ''}</strong> do seu saldo (você tem ${creditosDisponiveis()}).`
+    : `<img class="titulo-icone-inline pequeno" src="img/icones/no-entry.svg" alt="">Você não tem créditos suficientes (precisa de ${t.creditosNecessarios}, tem ${creditosDisponiveis()}). Assine ou aguarde a renovação do seu plano para receber mais créditos.`;
   document.getElementById('enviarProducaoBtn').disabled = !suficiente;
 
   arquivoSelecionado = null;
@@ -260,7 +260,7 @@ function iniciarGravadorEnvio(t, obterUrl) {
   const suficiente = creditosDisponiveis() >= t.creditosNecessarios;
   const container = document.getElementById('gravadorOralContainer');
   if (!suficiente) {
-    container.innerHTML = '<p class="embed-aviso">🚫 Você não tem créditos suficientes para enviar esta produção.</p>';
+    container.innerHTML = '<p class="embed-aviso"><img class="titulo-icone-inline pequeno" src="img/icones/no-entry.svg" alt="">Você não tem créditos suficientes para enviar esta produção.</p>';
     return;
   }
   GravadorAudio.criarGravadorAudio(container, {
@@ -463,7 +463,7 @@ async function abrirProducao(id) {
 
 function estrelas(nota) {
   let html = '<span class="estrelas">';
-  for (let i = 1; i <= 5; i++) html += `<span class="${i <= nota ? 'cheia' : ''}">★</span>`;
+  for (let i = 1; i <= 5; i++) html += `<span class="${i <= nota ? 'cheia' : ''}"><img src="img/icones/${i <= nota ? 'star-filled' : 'star-empty'}.svg" alt="" style="width:1em; height:1em;"></span>`;
   return html + '</span>';
 }
 
@@ -482,9 +482,9 @@ function renderProducaoDetalhe(p) {
     </div>
 
     <div class="arquivos-row">
-      ${p.modalidade !== 'oral' && p.arquivoOriginal?.nome ? `<div class="arquivo-download-card"><span class="icone">📄</span><div class="info"><div class="nome">${p.arquivoOriginal.nome}</div><div class="tipo">Seu arquivo original</div></div><button class="btn secundario pequeno" data-baixar="original">Baixar</button></div>` : ''}
-      ${p.textoDigitado ? `<div class="arquivo-download-card" style="flex:2;"><span class="icone">⌨️</span><div class="info"><div class="nome">Texto digitado (${p.contagemPalavras} palavras)</div><div class="tipo">Sua produção original</div></div></div>` : ''}
-      ${p.arquivoCorrigido?.nome ? `<div class="arquivo-download-card"><span class="icone">✅</span><div class="info"><div class="nome">${p.arquivoCorrigido.nome}</div><div class="tipo">Arquivo corrigido</div></div><button class="btn pequeno" data-baixar="corrigido">Baixar</button></div>` : ''}
+      ${p.modalidade !== 'oral' && p.arquivoOriginal?.nome ? `<div class="arquivo-download-card"><img class="icone" src="img/icones/document.svg" alt=""><div class="info"><div class="nome">${p.arquivoOriginal.nome}</div><div class="tipo">Seu arquivo original</div></div><button class="btn secundario pequeno" data-baixar="original">Baixar</button></div>` : ''}
+      ${p.textoDigitado ? `<div class="arquivo-download-card" style="flex:2;"><img class="icone" src="img/icones/keyboard.svg" alt=""><div class="info"><div class="nome">Texto digitado (${p.contagemPalavras} palavras)</div><div class="tipo">Sua produção original</div></div></div>` : ''}
+      ${p.arquivoCorrigido?.nome ? `<div class="arquivo-download-card"><img class="icone" src="img/icones/check.svg" alt=""><div class="info"><div class="nome">${p.arquivoCorrigido.nome}</div><div class="tipo">Arquivo corrigido</div></div><button class="btn pequeno" data-baixar="corrigido">Baixar</button></div>` : ''}
     </div>
 
     ${p.modalidade === 'oral' && p.arquivoOriginal?.nome ? `<div class="card"><h2>Sua gravação${p.duracaoSegundos ? ' — ' + formatarDuracao(p.duracaoSegundos) : ''}</h2><audio controls id="audioOriginalPlayer" style="width:100%;"></audio></div>` : ''}
@@ -503,7 +503,7 @@ function renderProducaoDetalhe(p) {
       <div class="comentario-geral-box">${p.avaliacao.comentarioGeral || 'Sem comentário adicional.'}</div>
     </div>
     <div style="text-align:center; margin-bottom:22px;">
-      <button class="btn secundario" id="reenviarBtn">🔁 Reenviar novo texto para este tema (consome novo crédito)</button>
+      <button class="btn secundario" id="reenviarBtn"><img class="titulo-icone-inline pequeno" src="img/icones/repeat.svg" alt="">Reenviar novo texto para este tema (consome novo crédito)</button>
     </div>`;
   } else {
     html += `<div class="card"><p style="color:var(--cinza-600);">Sua produção está com o status <strong>${NOMES_STATUS[p.status]}</strong>. Assim que o professor concluir a correção, o resultado aparecerá aqui.</p>

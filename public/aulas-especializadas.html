@@ -324,7 +324,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   <!-- ===================== SIDEBAR ===================== -->
   <aside class="sidebar">
     <div class="busca-wrap">
-      <input type="text" id="buscaInput" placeholder="🔍 Buscar aulas...">
+      <input type="text" id="buscaInput" placeholder="Buscar aulas...">
       <div class="busca-resultados" id="buscaResultados"></div>
     </div>
 
@@ -334,12 +334,12 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     </div>
 
     <div class="sidebar-acoes">
-      <button type="button" id="btnNotificacoes">🔔 Novidades</button>
-      <button type="button" id="btnFavoritos">⭐ Favoritos</button>
-      <button type="button" id="btnHistorico">🕘 Histórico</button>
+      <button type="button" id="btnNotificacoes"><img class="titulo-icone-inline pequeno" src="img/icones/bell.svg" alt="">Novidades</button>
+      <button type="button" id="btnFavoritos"><img class="titulo-icone-inline pequeno" src="img/icones/star-filled.svg" alt="">Favoritos</button>
+      <button type="button" id="btnHistorico"><img class="titulo-icone-inline pequeno" src="img/icones/history-clock.svg" alt="">Histórico</button>
     </div>
 
-    <div class="sidebar-titulo">📚 Todos os módulos</div>
+    <div class="sidebar-titulo"><img class="titulo-icone-inline pequeno" src="img/icones/folder.svg" alt="">Todos os módulos</div>
     <div id="modulosLista"></div>
   </aside>
 
@@ -350,7 +350,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
         <div class="rotulo"><span id="progressoResumoTexto"></span><span id="progressoResumoPct"></span></div>
         <div class="barra-progresso"><div class="preenchimento" id="progressoResumoBarra" style="width:0%"></div></div>
       </div>
-      <div class="continuar" id="continuarWrap" style="display:none;"><a href="#" id="continuarLink">Continuar de onde parei →</a></div>
+      <div class="continuar" id="continuarWrap" style="display:none;"><a href="#" id="continuarLink">Continuar de onde parei<img class="titulo-icone-inline pequeno" src="img/icones/chevron-right.svg" alt="" style="margin-right:0; margin-left:5px;"></a></div>
     </div>
 
     <div id="certificadoBanner" style="display:none;"></div>
@@ -358,7 +358,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     <!-- VIEW: AULA -->
     <div id="viewAula">
       <div class="card-vazio" id="vazioInicial">
-        <p>Selecione um módulo na barra lateral para ver as aulas. 👈</p>
+        <p>Selecione um módulo na barra lateral para ver as aulas.</p>
       </div>
       <div class="aula-card-principal" id="aulaCard" style="display:none;">
         <div class="player-wrap" id="playerWrap"></div>
@@ -368,8 +368,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
           </div>
           <p class="descricao" id="aulaDescricao"></p>
           <div class="botoes-acao-aula">
-            <button type="button" class="btn-concluir" id="btnConcluir">✓ Marcar como assistida</button>
-            <button type="button" class="btn-favoritar" id="btnFavoritar">⭐ Favoritar</button>
+            <button type="button" class="btn-concluir" id="btnConcluir"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Marcar como assistida</button>
+            <button type="button" class="btn-favoritar" id="btnFavoritar"><img class="titulo-icone-inline pequeno" src="img/icones/star-empty.svg" alt="">Favoritar</button>
           </div>
           <div class="observacoes-professor" id="observacoesWrap" style="display:none;">
             <strong>Observações do professor</strong>
@@ -381,8 +381,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
           </div>
         </div>
         <div class="navegacao-aulas">
-          <button type="button" id="btnAulaAnterior">← Aula anterior</button>
-          <button type="button" id="btnProximaAula">Próxima aula →</button>
+          <button type="button" id="btnAulaAnterior"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Aula anterior</button>
+          <button type="button" id="btnProximaAula">Próxima aula<img class="titulo-icone-inline pequeno" src="img/icones/chevron-right.svg" alt="" style="margin-right:0; margin-left:5px;"></button>
         </div>
       </div>
 
@@ -394,21 +394,21 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
     <!-- VIEW: FAVORITOS -->
     <div id="viewFavoritos" style="display:none;">
-      <h2 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:16px;">⭐ Suas aulas favoritas</h2>
+      <h2 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:16px;"><img class="titulo-icone-inline" src="img/icones/star-filled.svg" alt="">Suas aulas favoritas</h2>
       <div id="favoritosLista"></div>
     </div>
 
     <!-- VIEW: HISTÓRICO -->
     <div id="viewHistorico" style="display:none;">
-      <h2 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:16px;">🕘 Histórico de estudo</h2>
+      <h2 style="font-family:'Playfair Display',serif; font-size:1.4rem; margin-bottom:16px;"><img class="titulo-icone-inline" src="img/icones/history-clock.svg" alt="">Histórico de estudo</h2>
       <div id="historicoLista"></div>
     </div>
 
     <!-- VIEW: CERTIFICADO -->
     <div id="viewCertificado" style="display:none;">
-      <button type="button" class="voltar-certificado" id="voltarDoCertificado" style="margin-bottom:16px; padding:10px 18px; border-radius:30px; border:1px solid var(--glass-border-strong); background:var(--glass-bg); color:var(--text); cursor:pointer;">← Voltar às aulas</button>
+      <button type="button" class="voltar-certificado" id="voltarDoCertificado" style="margin-bottom:16px; padding:10px 18px; border-radius:30px; border:1px solid var(--glass-border-strong); background:var(--glass-bg); color:var(--text); cursor:pointer;"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Voltar às aulas</button>
       <div class="certificado-box" id="certificadoConteudo"></div>
-      <button type="button" class="btn-imprimir" id="btnImprimirCertificado">🖨️ Imprimir / Salvar como PDF</button>
+      <button type="button" class="btn-imprimir" id="btnImprimirCertificado"><img class="titulo-icone-inline pequeno" src="img/icones/print.svg" alt="">Imprimir / Salvar como PDF</button>
     </div>
   </main>
 </div>

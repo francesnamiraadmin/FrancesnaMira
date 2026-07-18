@@ -26,6 +26,23 @@ function formatarDuracaoLonga(seg) {
   return `${totalSeg}s`;
 }
 
+// Mesma matemática de estudoTimerGlobal.js — pra somar ao tempo já registrado
+// o quanto a sessão em andamento (se houver) já acumulou, ao vivo, sem
+// esperar ela ser finalizada pra atualizar o card.
+function pausaAbertaMs(sessao, agora) {
+  const aberta = (sessao.pausas || []).find(p => !p.fim);
+  return aberta ? agora - new Date(aberta.inicio).getTime() : 0;
+}
+function pausasFechadasMs(sessao) {
+  return (sessao.pausas || []).filter(p => p.fim).reduce((acc, p) => acc + (new Date(p.fim) - new Date(p.inicio)), 0);
+}
+function calcularElapsedSeg(sessao) {
+  const agora = Date.now();
+  const bruto = agora - new Date(sessao.iniciadoEm).getTime();
+  const pausasMs = pausasFechadasMs(sessao) + pausaAbertaMs(sessao, agora);
+  return Math.max(0, Math.floor((bruto - pausasMs) / 1000));
+}
+
 let materias = [];
 let conteudosPorMateria = new Map();
 let sessaoAtivaExiste = false;
@@ -34,6 +51,7 @@ let editandoConteudoId = null;
 let materiaParaNovoConteudo = null;
 let corPickerMateria = null;
 let corPickerConteudo = null;
+let intervaloTemposAoVivo = null;
 
 async function carregarTudo() {
   const [resM, resC, resAtiva] = await Promise.all([
@@ -89,14 +107,14 @@ function renderMateriaCard(m) {
           <h3 title="${escapeHtml(m.nome)}">${escapeHtml(m.nome)}</h3>
         </div>
         <div class="card-acoes-icone">
-          <button type="button" class="icone-btn editar-materia" data-id="${m._id}" title="Editar matéria">✏️</button>
-          <button type="button" class="icone-btn apagar-materia" data-id="${m._id}" title="Excluir matéria">🗑️</button>
+          <button type="button" class="icone-btn editar-materia" data-id="${m._id}" title="Editar matéria"><img src="img/icones/edit-pencil.svg" alt="" style="width:1em; height:1em;"></button>
+          <button type="button" class="icone-btn apagar-materia" data-id="${m._id}" title="Excluir matéria"><img src="img/icones/trash.svg" alt="" style="width:1em; height:1em;"></button>
         </div>
       </div>
       ${m.descricao ? `<p class="materia-descricao">${escapeHtml(m.descricao)}</p>` : ''}
       <div class="materia-meta-row">
         <span>${m.qtdConteudos} conteúdo${m.qtdConteudos === 1 ? '' : 's'}</span>
-        <span>${formatarDuracaoLonga(m.tempoTotalSegundos)}</span>
+        <span class="materia-tempo-total" data-materia-id="${m._id}">${formatarDuracaoLonga(m.tempoTotalSegundos)}</span>
       </div>
       <div class="conteudos-subgrid">${subcards}</div>
       <button type="button" class="btn-add-conteudo" data-materia-id="${m._id}">+ Adicionar Conteúdo</button>
@@ -110,16 +128,59 @@ function renderConteudoSubcard(c) {
       <div class="conteudo-subcard-topo">
         <span class="conteudo-nome">${escapeHtml(c.nome)}</span>
         <div class="card-acoes-icone">
-          <button type="button" class="icone-btn editar-conteudo" data-id="${c._id}" title="Editar conteúdo">✏️</button>
-          <button type="button" class="icone-btn apagar-conteudo" data-id="${c._id}" title="Excluir conteúdo">🗑️</button>
+          <button type="button" class="icone-btn editar-conteudo" data-id="${c._id}" title="Editar conteúdo"><img src="img/icones/edit-pencil.svg" alt="" style="width:1em; height:1em;"></button>
+          <button type="button" class="icone-btn apagar-conteudo" data-id="${c._id}" title="Excluir conteúdo"><img src="img/icones/trash.svg" alt="" style="width:1em; height:1em;"></button>
         </div>
       </div>
+      <span class="badge-ao-vivo" data-ao-vivo-de="${c._id}" style="display:none;"><span class="ponto"></span>Ao vivo</span>
       <div class="conteudo-meta-row">
-        <span>${formatarDuracaoLonga(c.tempoTotalSegundos)}</span>
+        <span class="conteudo-tempo-total" data-conteudo-id="${c._id}">${formatarDuracaoLonga(c.tempoTotalSegundos)}</span>
         <span>${c.numeroSessoes} ${c.numeroSessoes === 1 ? 'sessão' : 'sessões'}</span>
       </div>
-      <button type="button" class="btn-iniciar-conteudo" data-materia-id="${c.materiaId}" data-conteudo-id="${c._id}" ${desabilitar}>▶ Iniciar</button>
+      <button type="button" class="btn-iniciar-conteudo" data-materia-id="${c.materiaId}" data-conteudo-id="${c._id}" ${desabilitar}><img src="img/icones/chevron-right.svg" alt="" style="width:0.9em; height:0.9em; vertical-align:-0.05em; margin-right:3px;">Iniciar</button>
     </div>`;
+}
+
+// Roda a cada segundo (independente de qualquer re-render da grade): soma ao
+// tempo já registrado o quanto a sessão em andamento (se houver, e for de um
+// conteúdo desta página) já acumulou, sem esperar ela ser finalizada — antes
+// disso o card ficava parado no total antigo (0s numa primeira sessão) até o
+// fim, dando a impressão de cronômetro travado.
+function atualizarTemposAoVivo() {
+  const sessao = window.EstudoTimerGlobal && window.EstudoTimerGlobal.sessaoAtivaAtual();
+  const elapsedSeg = sessao ? calcularElapsedSeg(sessao) : 0;
+
+  document.querySelectorAll('.conteudo-tempo-total').forEach(el => {
+    const id = el.dataset.conteudoId;
+    const c = conteudoPorId(id);
+    if (!c) return;
+    const extra = (sessao && sessao.conteudoId === id) ? elapsedSeg : 0;
+    el.textContent = formatarDuracaoLonga(c.tempoTotalSegundos + extra);
+  });
+  document.querySelectorAll('.materia-tempo-total').forEach(el => {
+    const id = el.dataset.materiaId;
+    const m = materias.find(x => x._id === id);
+    if (!m) return;
+    const extra = (sessao && sessao.materiaId === id) ? elapsedSeg : 0;
+    el.textContent = formatarDuracaoLonga(m.tempoTotalSegundos + extra);
+  });
+
+  document.querySelectorAll('.conteudo-subcard').forEach(card => {
+    const ativo = !!sessao && sessao.conteudoId === card.dataset.id;
+    card.classList.toggle('tem-sessao-ativa', ativo);
+  });
+  document.querySelectorAll('.materia-card-grande').forEach(card => {
+    const ativo = !!sessao && sessao.materiaId === card.dataset.id;
+    card.classList.toggle('tem-sessao-ativa', ativo);
+  });
+  document.querySelectorAll('.badge-ao-vivo').forEach(badge => {
+    badge.style.display = (sessao && sessao.conteudoId === badge.dataset.aoVivoDe) ? 'inline-flex' : 'none';
+  });
+}
+
+function ligarAtualizacaoAoVivo() {
+  clearInterval(intervaloTemposAoVivo);
+  intervaloTemposAoVivo = setInterval(atualizarTemposAoVivo, 1000);
 }
 
 // ===================== INICIAR SESSÃO (delega pra EstudoTimerGlobal) =====================
@@ -137,13 +198,14 @@ async function iniciarConteudo(materiaId, conteudoId, botao) {
     } else {
       alert(resultado.msg || 'Erro ao iniciar sessão.');
       botao.disabled = false;
-      botao.textContent = '▶ Iniciar';
+      botao.innerHTML = '<img src="img/icones/chevron-right.svg" alt="" style="width:0.9em; height:0.9em; vertical-align:-0.05em; margin-right:3px;">Iniciar';
     }
     return;
   }
   sessaoAtivaExiste = true;
   renderAviso();
   renderMateriasGrid();
+  atualizarTemposAoVivo();
 }
 
 // ===================== MODAL MATÉRIA =====================
@@ -283,3 +345,4 @@ if (window.DeverRealtime) {
 }
 
 carregarTudo();
+ligarAtualizacaoAoVivo();

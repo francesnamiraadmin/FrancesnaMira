@@ -25,36 +25,81 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .intro p { font-size: 1.05rem; opacity: 0.9; max-width: 680px; margin: 0 auto; }
 
 .pagina-wrap { max-width: 1100px; margin: 0 auto; padding: 20px 4% 100px; }
-.secao-titulo { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 34px 0 16px; text-align: center; }
+.secao-titulo { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 34px 0 16px; }
 
-.stats-grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 20px; }
-.chart-card {
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 18px; padding: 22px 24px; box-shadow: var(--glass-shadow); margin-bottom: 20px;
-}
-.chart-card h3 { font-size: 1rem; margin-bottom: 14px; text-align: center; }
-.chart-scroll { width: 100%; overflow-x: auto; }
 .vazio-msg { text-align: center; opacity: 0.75; padding: 24px 16px; font-size: 0.92rem; }
 
-.bar-list-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.bar-list-label { flex: 0 0 110px; font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.bar-list-track { flex: 1; height: 14px; background: var(--glass-bg); border-radius: 7px; overflow: hidden; }
-.bar-list-fill { height: 100%; background: var(--accent); border-radius: 7px; }
-.bar-list-val { flex: 0 0 80px; text-align: right; font-size: 0.82rem; opacity: 0.9; }
-
-.pizza-multipla-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.pizza-multipla-legenda { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: center; }
-.pizza-legenda-item { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; }
-.pizza-legenda-cor { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
-
+/* ===== Painel de filtros — uma linha só, acima de tudo que ela escopa
+   (regra do skill de dataviz: filtros nunca dentro de um card de gráfico). ===== */
+.filtros-painel {
+  display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end;
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 16px; padding: 16px 20px; margin-bottom: 22px;
+  box-shadow: var(--glass-shadow);
+}
+.filtro-campo { display: flex; flex-direction: column; gap: 5px; }
+.filtro-campo label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-muted); }
 .filtro-select {
-  padding: 9px 14px; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--glass-input);
-  color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.88rem; display: block; margin: 0 auto 14px;
+  padding: 9px 12px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-input);
+  color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.86rem; min-width: 150px;
 }
 .filtro-select option { color: var(--accent-text); }
 
+.chart-card {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 18px; padding: 22px 24px; box-shadow: var(--glass-shadow); margin-bottom: 20px;
+  transition: opacity 0.2s ease;
+}
+.chart-card.carregando { opacity: 0.55; }
+.chart-card-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.chart-card-topo h3 { font-size: 1rem; }
+.chart-scroll { width: 100%; overflow-x: auto; }
+
+.toggle-acumulado { display: flex; align-items: center; gap: 7px; font-size: 0.82rem; color: var(--text-muted); cursor: pointer; user-select: none; }
+.toggle-acumulado input { accent-color: var(--accent); width: 15px; height: 15px; cursor: pointer; }
+
+.stats-grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+
+/* ===== Gráfico de evolução (linha/área/barras + crosshair) ===== */
+.grafico-evolucao-wrap { position: relative; }
+.grafico-crosshair { stroke: var(--text-muted); stroke-width: 1; stroke-dasharray: 3 3; transition: opacity 0.1s ease; }
+.grafico-hitarea { cursor: crosshair; }
+.grafico-marca { transition: opacity 0.12s ease, r 0.12s ease; }
+circle.grafico-marca { opacity: 0.85; }
+circle.grafico-marca.ativa { r: 5.5; opacity: 1; }
+path.grafico-marca { opacity: 0.82; }
+path.grafico-marca.ativa { opacity: 1; }
+.grafico-tooltip {
+  position: absolute; top: 4px; transform: translateX(-50%);
+  background: var(--overlay-strong); border: 1px solid var(--glass-border-strong); border-radius: 10px;
+  padding: 7px 12px; box-shadow: var(--shadow); pointer-events: none; white-space: nowrap; text-align: center;
+}
+.grafico-tooltip strong { display: block; font-size: 0.98rem; color: var(--accent); font-family: 'Playfair Display', serif; }
+.grafico-tooltip span { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+
+/* ===== Distribuição — rosca ou barras horizontais ===== */
+.grafico-aviso-fallback { font-size: 0.78rem; opacity: 0.7; text-align: center; margin-bottom: 12px; }
+.grafico-rosca-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.grafico-fatia { transition: opacity 0.15s ease; cursor: pointer; }
+.grafico-fatia.esmaecida { opacity: 0.28; }
+.grafico-legenda { display: flex; flex-wrap: wrap; gap: 7px 18px; justify-content: center; }
+.grafico-legenda-item { display: flex; align-items: center; gap: 7px; font-size: 0.83rem; padding: 3px 6px; border-radius: 8px; cursor: pointer; transition: background 0.15s ease; }
+.grafico-legenda-item.ativa { background: var(--glass-hover); }
+.grafico-legenda-cor { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.grafico-legenda-nome { font-weight: 600; }
+.grafico-legenda-val { color: var(--text-muted); }
+
+.grafico-barras-h-wrap { display: flex; flex-direction: column; gap: 12px; }
+.grafico-barra-h-row { display: flex; align-items: center; gap: 12px; }
+.grafico-barra-h-label { flex: 0 0 120px; font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.grafico-barra-h-track { flex: 1; height: 14px; background: var(--glass-bg); border-radius: 7px; overflow: hidden; }
+.grafico-barra-h-fill { height: 100%; border-radius: 7px; transition: width 0.4s ease; }
+.grafico-barra-h-val { flex: 0 0 76px; text-align: right; font-size: 0.82rem; color: var(--text-muted); }
+
 @media (max-width: 700px) {
-  .bar-list-label { flex-basis: 80px; }
+  .filtros-painel { flex-direction: column; align-items: stretch; }
+  .filtro-select { width: 100%; }
+  .grafico-barra-h-label { flex-basis: 80px; }
 }
 </style>
 </head>
@@ -63,64 +108,86 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div id="app-navbar" class="app-navbar-bar"></div>
 
 <section class="intro">
-  <a class="voltar-link" href="mapeador-estudos.html">← Mapeador de Estudos</a>
-  <h1>📊 Estatísticas</h1>
-  <p>Indicadores, gráficos e evolução completa do seu tempo de estudo.</p>
+  <a class="voltar-link" href="mapeador-estudos.html"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Mapeador de Estudos</a>
+  <h1><img class="titulo-icone-inline" src="img/icones/estatisticas.svg" alt="">Estatísticas</h1>
+  <p>Indicadores, gráficos e evolução completa do seu tempo de estudo — filtre por período e matéria pra explorar do seu jeito.</p>
 </section>
 
 <div class="pagina-wrap">
+
+  <div class="filtros-painel">
+    <div class="filtro-campo">
+      <label for="filtroPeriodo">Período</label>
+      <select class="filtro-select" id="filtroPeriodo">
+        <option value="tudo">Todo o período</option>
+        <option value="hoje">Hoje</option>
+        <option value="7dias">Últimos 7 dias</option>
+        <option value="30dias">Últimos 30 dias</option>
+        <option value="12meses">Últimos 12 meses</option>
+      </select>
+    </div>
+    <div class="filtro-campo">
+      <label for="filtroMateriaEscopo">Matéria</label>
+      <select class="filtro-select" id="filtroMateriaEscopo">
+        <option value="">Todas as Matérias</option>
+      </select>
+    </div>
+    <div class="filtro-campo">
+      <label for="filtroGranularidade">Agrupar por</label>
+      <select class="filtro-select" id="filtroGranularidade">
+        <option value="dia">Dia</option>
+        <option value="semana">Semana</option>
+        <option value="mes">Mês</option>
+      </select>
+    </div>
+    <div class="filtro-campo">
+      <label for="filtroTipoEvolucao">Gráfico de evolução</label>
+      <select class="filtro-select" id="filtroTipoEvolucao">
+        <option value="area">Área</option>
+        <option value="linha">Linha</option>
+        <option value="barras">Barras</option>
+      </select>
+    </div>
+    <div class="filtro-campo">
+      <label for="filtroTipoDistribuicao">Gráfico de distribuição</label>
+      <select class="filtro-select" id="filtroTipoDistribuicao">
+        <option value="rosca">Rosca</option>
+        <option value="barras">Barras</option>
+      </select>
+    </div>
+  </div>
+
   <div class="dash-kpi-row" id="kpiRow"></div>
 
-  <h2 class="secao-titulo">Distribuição do tempo</h2>
-  <div class="stats-grid-2col">
-    <div class="chart-card">
-      <h3>Por matéria</h3>
-      <div id="graficoPizzaMateria"></div>
-    </div>
-    <div class="chart-card">
-      <h3>Por conteúdo</h3>
-      <select class="filtro-select" id="filtroPizzaMateria"></select>
-      <div id="graficoPizzaConteudo"></div>
-    </div>
-  </div>
-
-  <div class="chart-card">
-    <h3>Tempo por conteúdo</h3>
-    <div id="graficoBarrasConteudo"></div>
-  </div>
-
   <h2 class="secao-titulo">Evolução ao longo do tempo</h2>
-  <div class="chart-card">
-    <h3>Tempo estudado por dia</h3>
-    <div class="chart-scroll" id="graficoPorDia"></div>
-  </div>
-  <div class="stats-grid-2col">
-    <div class="chart-card">
-      <h3>Por semana</h3>
-      <div class="chart-scroll" id="graficoPorSemana"></div>
+  <div class="chart-card" id="cardEvolucao">
+    <div class="chart-card-topo">
+      <h3 id="tituloEvolucao">Tempo estudado</h3>
+      <label class="toggle-acumulado"><input type="checkbox" id="toggleAcumulado"> Mostrar acumulado</label>
     </div>
-    <div class="chart-card">
-      <h3>Por mês</h3>
-      <div class="chart-scroll" id="graficoPorMes"></div>
-    </div>
+    <div class="chart-scroll" id="graficoEvolucao"></div>
   </div>
-  <div class="chart-card">
-    <h3>Evolução acumulada</h3>
-    <div class="chart-scroll" id="graficoAcumulado"></div>
+
+  <h2 class="secao-titulo">Distribuição do tempo</h2>
+  <div class="chart-card" id="cardDistribuicao">
+    <div class="chart-card-topo">
+      <h3 id="tituloDistribuicao">Por matéria</h3>
+    </div>
+    <div id="graficoDistribuicao"></div>
   </div>
 
   <h2 class="secao-titulo">Calendário e rotina</h2>
-  <div class="chart-card">
-    <h3>Calendário de estudo</h3>
+  <div class="chart-card" id="cardHeatmap">
+    <div class="chart-card-topo"><h3>Calendário de estudo</h3></div>
     <div class="chart-scroll" id="graficoHeatmap"></div>
   </div>
   <div class="stats-grid-2col">
-    <div class="chart-card">
-      <h3>Distribuição por hora do dia</h3>
+    <div class="chart-card" id="cardPorHora">
+      <div class="chart-card-topo"><h3>Por hora do dia</h3></div>
       <div id="graficoPorHora"></div>
     </div>
-    <div class="chart-card">
-      <h3>Média por dia da semana</h3>
+    <div class="chart-card" id="cardPorDiaSemana">
+      <div class="chart-card-topo"><h3>Média por dia da semana</h3></div>
       <div id="graficoPorDiaSemana"></div>
     </div>
   </div>

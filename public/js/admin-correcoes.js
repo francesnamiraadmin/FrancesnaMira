@@ -83,7 +83,7 @@ function novoDocForm() {
   div.className = 'doc-form-item';
   div.dataset.idx = idx;
   div.innerHTML = `
-    <button type="button" class="remover-doc" data-remover-doc="${idx}">✕</button>
+    <button type="button" class="remover-doc" data-remover-doc="${idx}"><img src="img/icones/x-mark.svg" alt="" style="width:0.9em; height:0.9em;"></button>
     <div class="campo-row">
       <div class="campo"><label>Tipo</label><select class="docTipo">${Object.entries(NOMES_TIPO_DOC).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></div>
       <div class="campo"><label>Título</label><input type="text" class="docTitulo"></div>
@@ -171,7 +171,7 @@ async function carregarTemas() {
     const temas = await res.json();
     document.getElementById('temasTbody').innerHTML = temas.map(t => `
       <tr>
-        <td>${t.titulo} <span class="pill">${t.modalidade === 'oral' ? '🎤 Oral' : '✍️ Textual'}</span></td>
+        <td>${t.titulo} <span class="pill">${t.modalidade === 'oral' ? '<img class="titulo-icone-inline pequeno" src="img/icones/mic.svg" alt="">Oral' : '<img class="titulo-icone-inline pequeno" src="img/icones/writing-hand.svg" alt="">Textual'}</span></td>
         <td>${t.exame} · ${t.nivel}</td>
         <td><span class="pill ${t.ativo ? '' : 'inativo'}">${t.ativo ? 'Ativo' : 'Inativo'}</span></td>
         <td>${t.ativo ? `<button class="btn perigo pequeno" data-desativar-tema="${t._id}">Desativar</button>` : ''}</td>
@@ -211,7 +211,7 @@ function novoCriterioForm(nome, peso, descricao) {
     <input type="text" class="critNome" placeholder="Nome do critério" value="${nome || ''}">
     <input type="number" class="critPeso" placeholder="Peso" value="${peso || 1}">
     <input type="text" class="critDesc" placeholder="Descrição" value="${descricao || ''}">
-    <button type="button" class="btn perigo pequeno" data-remover-criterio>✕</button>`;
+    <button type="button" class="btn perigo pequeno" data-remover-criterio><img src="img/icones/x-mark.svg" alt="" style="width:0.9em; height:0.9em;"></button>`;
   document.getElementById('criteriosRubricaForm').appendChild(div);
 }
 document.getElementById('addCriterioBtn').addEventListener('click', () => novoCriterioForm());

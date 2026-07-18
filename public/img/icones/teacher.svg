@@ -1,0 +1,5 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Professores">
+  <circle cx="12" cy="7.5" r="4" fill="#8d6e63"/>
+  <path d="M4 21 c0-5 3.5-8 8-8 s8 3 8 8 Z" fill="#a1887f"/>
+  <path d="M6 4.5 L12 2 L18 4.5 L12 7 Z" fill="#5d4037"/>
+</svg>

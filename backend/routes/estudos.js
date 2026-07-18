@@ -47,6 +47,18 @@ function recordeSequenciaDiaria(dias) {
   return maior;
 }
 
+// Início da janela pro filtro de período em /estatisticas — "hoje" é o começo
+// do dia calendário local; os outros são janelas móveis (últimos N dias),
+// mais úteis que "mês calendário" pra quem abre a página no dia 2. null = tudo.
+function calcularInicioPeriodo(periodo) {
+  const agora = new Date();
+  if (periodo === "hoje") { const d = new Date(agora); d.setHours(0, 0, 0, 0); return d; }
+  if (periodo === "7dias") return new Date(agora.getTime() - 7 * 86400000);
+  if (periodo === "30dias") return new Date(agora.getTime() - 30 * 86400000);
+  if (periodo === "12meses") return new Date(agora.getTime() - 365 * 86400000);
+  return null;
+}
+
 function semanaISO(data) {
   const d = new Date(data);
   d.setHours(0, 0, 0, 0);
@@ -436,8 +448,12 @@ router.delete("/sessoes/:id", async (req, res) => {
 
 router.get("/estatisticas", async (req, res) => {
   try {
-    const [sessoes, materias, conteudos] = await Promise.all([
-      SessaoEstudo.find({ userId: req.userId, status: "finalizada" }).lean(),
+    const { materiaId } = req.query;
+    const filtroBase = { userId: req.userId, status: "finalizada" };
+    if (materiaId) filtroBase.materiaId = materiaId;
+
+    const [sessoesEscopo, materias, conteudos] = await Promise.all([
+      SessaoEstudo.find(filtroBase).lean(),
       MateriaEstudo.find({ userId: req.userId }).lean(),
       ConteudoEstudo.find({ userId: req.userId }).lean()
     ]);
@@ -445,18 +461,30 @@ router.get("/estatisticas", async (req, res) => {
     const materiaPorId = new Map(materias.map(m => [String(m._id), m]));
     const conteudoPorId = new Map(conteudos.map(c => [String(c._id), c]));
 
-    const duracoes = sessoes.map(s => s.duracaoSegundos || 0);
-    const tempoTotalSegundos = duracoes.reduce((a, b) => a + b, 0);
-
+    // "Hoje"/"Esta semana"/"Este mês" e a sequência de dias têm significado
+    // fixo de calendário — só respeitam o filtro de matéria (se houver),
+    // nunca o de período (senão período=hoje faria "tempoHojeSegundos" virar
+    // uma redundância de si mesmo). Consumidos hoje por mapeadorHub.js e pelo
+    // card do dashboard em minha-conta.html, sempre sem nenhum query param.
     const hojeISO = diaISO(Date.now());
     const inicioSemana = new Date(); inicioSemana.setHours(0, 0, 0, 0); inicioSemana.setDate(inicioSemana.getDate() - inicioSemana.getDay());
     const inicioMes = new Date(); inicioMes.setHours(0, 0, 0, 0); inicioMes.setDate(1);
+    const tempoHojeSegundos = sessoesEscopo.filter(s => diaISO(s.iniciadoEm) === hojeISO).reduce((a, s) => a + (s.duracaoSegundos || 0), 0);
+    const tempoSemanaSegundos = sessoesEscopo.filter(s => new Date(s.iniciadoEm) >= inicioSemana).reduce((a, s) => a + (s.duracaoSegundos || 0), 0);
+    const tempoMesSegundos = sessoesEscopo.filter(s => new Date(s.iniciadoEm) >= inicioMes).reduce((a, s) => a + (s.duracaoSegundos || 0), 0);
+    const diasComEstudo = [...new Set(sessoesEscopo.map(s => diaISO(s.iniciadoEm)))];
+    const sequenciaDiasAtual = calcularSequenciaDiaria(diasComEstudo);
+    const recordeSequenciaDias = recordeSequenciaDiaria(diasComEstudo);
 
-    const tempoHojeSegundos = sessoes.filter(s => diaISO(s.iniciadoEm) === hojeISO).reduce((a, s) => a + (s.duracaoSegundos || 0), 0);
-    const tempoSemanaSegundos = sessoes.filter(s => new Date(s.iniciadoEm) >= inicioSemana).reduce((a, s) => a + (s.duracaoSegundos || 0), 0);
-    const tempoMesSegundos = sessoes.filter(s => new Date(s.iniciadoEm) >= inicioMes).reduce((a, s) => a + (s.duracaoSegundos || 0), 0);
+    // O filtro de período escopa a "janela" usada por tudo abaixo (kpis de
+    // total/sessões e todas as séries) — página de Estatísticas só, as duas
+    // outras chamadoras (hub/dashboard) nunca passam ?periodo=, então tudo
+    // continua all-time pra elas (sessoes === sessoesEscopo).
+    const inicioPeriodo = calcularInicioPeriodo(req.query.periodo);
+    const sessoes = inicioPeriodo ? sessoesEscopo.filter(s => new Date(s.iniciadoEm) >= inicioPeriodo) : sessoesEscopo;
 
-    const diasComEstudo = [...new Set(sessoes.map(s => diaISO(s.iniciadoEm)))];
+    const duracoes = sessoes.map(s => s.duracaoSegundos || 0);
+    const tempoTotalSegundos = duracoes.reduce((a, b) => a + b, 0);
 
     const kpis = {
       tempoTotalSegundos, tempoHojeSegundos, tempoSemanaSegundos, tempoMesSegundos,
@@ -466,8 +494,7 @@ router.get("/estatisticas", async (req, res) => {
       numeroSessoes: sessoes.length,
       numeroMaterias: materias.length,
       numeroConteudos: conteudos.length,
-      sequenciaDiasAtual: calcularSequenciaDiaria(diasComEstudo),
-      recordeSequenciaDias: recordeSequenciaDiaria(diasComEstudo)
+      sequenciaDiasAtual, recordeSequenciaDias
     };
 
     const porMateriaMap = new Map();

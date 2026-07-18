@@ -20,13 +20,15 @@ window.EstudoTimerGlobal = (() => {
     div.textContent = str || '';
     return div.innerHTML;
   }
+  // Sempre HH:MM:SS — mesmo com 0 horas, pra deixar claro que a hora também
+  // está sendo contada (antes só aparecia depois de passar de 1h).
   function formatarHMS(ms) {
     const totalSeg = Math.max(0, Math.floor(ms / 1000));
     const h = Math.floor(totalSeg / 3600);
     const m = Math.floor((totalSeg % 3600) / 60);
     const s = totalSeg % 60;
     const pad = n => String(n).padStart(2, '0');
-    return h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
+    return `${pad(h)}:${pad(m)}:${pad(s)}`;
   }
   function detectarDispositivo() {
     const ua = navigator.userAgent || '';
@@ -90,10 +92,10 @@ window.EstudoTimerGlobal = (() => {
         </div>
         <div class="estudo-timer-tempo" id="estudoTimerTempo">00:00</div>
         <div class="estudo-timer-acoes">
-          <button type="button" class="estudo-timer-btn" id="estudoTimerPausar" title="Pausar">⏸</button>
-          <button type="button" class="estudo-timer-btn" id="estudoTimerContinuar" title="Continuar" style="display:none;">▶</button>
-          <button type="button" class="estudo-timer-btn principal" id="estudoTimerFinalizar" title="Finalizar">✔</button>
-          <button type="button" class="estudo-timer-btn perigo" id="estudoTimerCancelar" title="Cancelar">✕</button>
+          <button type="button" class="estudo-timer-btn" id="estudoTimerPausar" title="Pausar"><img src="img/icones/pause.svg" alt="" style="width:18px; height:18px;"></button>
+          <button type="button" class="estudo-timer-btn" id="estudoTimerContinuar" title="Continuar" style="display:none;"><img src="img/icones/play.svg" alt="" style="width:20px; height:20px;"></button>
+          <button type="button" class="estudo-timer-btn principal" id="estudoTimerFinalizar" title="Finalizar"><img src="img/icones/check.svg" alt="" style="width:18px; height:18px;"></button>
+          <button type="button" class="estudo-timer-btn perigo" id="estudoTimerCancelar" title="Cancelar"><img src="img/icones/x-mark.svg" alt="" style="width:18px; height:18px;"></button>
         </div>
       </div>`;
     document.body.appendChild(barraEl);

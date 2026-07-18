@@ -1,0 +1,6 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Login">
+  <circle cx="7" cy="12" r="4.5" fill="none" stroke="#ffb300" stroke-width="2.2"/>
+  <line x1="10.5" y1="14.8" x2="20" y2="5.5" stroke="#ffb300" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="16" y1="10.2" x2="18.2" y2="12.4" stroke="#ffb300" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="18.4" y1="8" x2="20.5" y2="10" stroke="#ffb300" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

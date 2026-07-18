@@ -31,7 +31,7 @@
       // o mesmo tratamento no futuro só preenchendo este campo.
       submenu: [
         { nome: "Praticar", href: "praticar.html", icone: "img/icones/praticar.svg" },
-        { nome: "Em Andamento / Respondidos", href: "meus-conjuntos.html", icone: "img/icones/andamento.svg" },
+        { nome: "Respondidos / Em Andamento", href: "meus-conjuntos.html", icone: "img/icones/andamento.svg" },
         { nome: "Simulados", href: "simulados.html", icone: "img/icones/simulados.svg" },
         { nome: "Personalize", href: "personalizar-conjunto.html", icone: "img/icones/personalizar.svg" },
         { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "img/icones/caderno.svg" },
@@ -175,7 +175,7 @@
   function montarLinkProduto(p) {
     const liberado = window.AppShell.temAcesso(p.chave);
     if (!liberado) {
-      return `<a class="app-nav-link app-nav-locked" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige" title="Bloqueado — clique para assinar">🔒 ${p.nome}</a>`;
+      return `<a class="app-nav-link app-nav-locked" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige" title="Bloqueado — clique para assinar"><img src="img/icones/lock.svg" alt="" style="width:0.85em; height:0.85em; vertical-align:-0.1em; margin-right:4px;">${p.nome}</a>`;
     }
     if (!p.submenu) return `<a class="app-nav-link" href="${p.href}">${p.nome}</a>`;
     return montarNavLinkComSubmenu(p);
@@ -226,13 +226,13 @@
         <div class="app-nav-links">${linksProdutos}</div>
         <div class="app-nav-right">
           <div class="app-nav-item">
-            <button class="app-nav-pill" id="planoDropdownBtn" style="background:${estiloTier.background}; border-color:${estiloTier.border}; color:${estiloTier.color};">${tierLabel} ▾</button>
+            <button class="app-nav-pill" id="planoDropdownBtn" style="background:${estiloTier.background}; border-color:${estiloTier.border}; color:${estiloTier.color};">${tierLabel} <img src="img/icones/chevron-down.svg" alt="" style="width:0.7em; height:0.7em; vertical-align:0.05em;"></button>
             <div class="app-dropdown" id="planoDropdown">${planoDropdown}</div>
           </div>
           <div class="app-nav-item">
             <button class="app-nav-user" id="userDropdownBtn">
               <img src="${foto}" alt="">
-              <span>Olá, ${primeiroNome}</span> ▾
+              <span>Olá, ${primeiroNome}</span> <img src="img/icones/chevron-down.svg" alt="" style="width:0.7em; height:0.7em; vertical-align:0.05em;">
             </button>
             <div class="app-dropdown" id="userDropdown">
               <a href="minha-conta.html">Meu Perfil</a>

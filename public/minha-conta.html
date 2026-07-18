@@ -89,8 +89,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   <!-- ===================== PERFIL ===================== -->
   <div class="dash-section-card" id="secPerfil">
     <div class="perfil-titulo-row">
-      <h2>👤 Meu Perfil</h2>
-      <button class="dash-btn secundario" id="editarPerfilBtn" type="button">✏️ Fazer alterações</button>
+      <h2><img class="titulo-icone-inline" src="img/icones/profile.svg" alt="">Meu Perfil</h2>
+      <button class="dash-btn secundario" id="editarPerfilBtn" type="button"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Fazer alterações</button>
     </div>
     <div class="perfil-header-row">
       <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil" title="Clique para alterar sua foto" style="cursor:pointer;">
@@ -152,35 +152,35 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   </div>
 
   <div class="dash-section-card" id="painelEquipeBox" style="display:none;">
-    <h2>🏫 Painel da equipe</h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/teacher.svg" alt="">Painel da equipe</h2>
     <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;">Sua conta tem acesso de <strong id="papelEquipeLabel"></strong>. Acesse as ferramentas de gestão abaixo.</p>
     <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a href="gestao-alunos.html" class="dash-btn secundario">👥 Gestão de Alunos</a>
-      <a href="professor-correcoes.html" class="dash-btn secundario" id="linkFilaProfessor">📝 Fila de Correção</a>
-      <a href="admin-correcoes.html" class="dash-btn secundario" id="linkPainelAdmin" style="display:none;">⚙️ Painel Administrativo</a>
-      <a href="admin-matriculas.html" class="dash-btn secundario" id="linkAdminMatriculas" style="display:none;">🎯 Matrículas e Turmas</a>
-      <a href="admin-agenda.html" class="dash-btn secundario" id="linkAdminAgenda" style="display:none;">🗓️ Agenda de Aulas</a>
-      <a href="admin-aulas.html" class="dash-btn secundario" id="linkAdminAulas" style="display:none;">🎬 Aulas Especializadas</a>
-      <a href="admin-horarios.html" class="dash-btn secundario" id="linkAdminHorarios" style="display:none;">🗓️ Grade de Horários</a>
-      <a href="admin-depoimentos.html" class="dash-btn secundario" id="linkAdminDepoimentos" style="display:none;">💬 Depoimentos</a>
+      <a href="gestao-alunos.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/students.svg" alt="">Gestão de Alunos</a>
+      <a href="professor-correcoes.html" class="dash-btn secundario" id="linkFilaProfessor"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Fila de Correção</a>
+      <a href="admin-correcoes.html" class="dash-btn secundario" id="linkPainelAdmin" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/settings-gear.svg" alt="">Painel Administrativo</a>
+      <a href="admin-matriculas.html" class="dash-btn secundario" id="linkAdminMatriculas" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/personalizar.svg" alt="">Matrículas e Turmas</a>
+      <a href="admin-agenda.html" class="dash-btn secundario" id="linkAdminAgenda" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Agenda de Aulas</a>
+      <a href="admin-aulas.html" class="dash-btn secundario" id="linkAdminAulas" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/video.svg" alt="">Aulas Especializadas</a>
+      <a href="admin-horarios.html" class="dash-btn secundario" id="linkAdminHorarios" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Grade de Horários</a>
+      <a href="admin-depoimentos.html" class="dash-btn secundario" id="linkAdminDepoimentos" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/chat.svg" alt="">Depoimentos</a>
     </div>
   </div>
 
   <!-- ===================== MEUS DEVERES ===================== -->
   <div class="dash-section-card">
-    <h2>📋 Dever de Casa</h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/exercise-list.svg" alt="">Dever de Casa</h2>
     <div id="conteudoDeveres"><div class="skeleton skeleton-block"></div></div>
   </div>
 
   <!-- ===================== MAPEADOR DE ESTUDOS ===================== -->
   <div class="dash-section-card">
-    <h2>⏱️ Mapeador de Estudos</h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/simulados.svg" alt="">Mapeador de Estudos</h2>
     <div id="conteudoMapeador"><div class="skeleton skeleton-block"></div></div>
   </div>
 
   <!-- ===================== PLATAFORMA DE QUESTÕES ===================== -->
   <div class="dash-section-card" id="secPlataforma">
-    <h2>📊 Plataforma de Questões</h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/estatisticas.svg" alt="">Plataforma de Questões</h2>
     <div id="conteudoPlataforma">
       <div class="skeleton skeleton-block"></div>
     </div>
@@ -188,7 +188,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
   <!-- ===================== AMBIENTE DE PRODUÇÃO ===================== -->
   <div class="dash-section-card" id="secProducao">
-    <h2>✍️ Ambiente de Produção Oral e Textual</h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/writing-hand.svg" alt="">Ambiente de Produção Oral e Textual</h2>
     <div id="conteudoProducao">
       <div class="skeleton skeleton-block"></div>
     </div>
@@ -196,7 +196,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
   <!-- ===================== AULAS ESPECIALIZADAS ===================== -->
   <div class="dash-section-card" id="secAulas">
-    <h2>🎬 Aulas Especializadas Online</h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/video.svg" alt="">Aulas Especializadas Online</h2>
     <div id="conteudoAulas">
       <div class="skeleton skeleton-block"></div>
     </div>
@@ -204,7 +204,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
   <!-- ===================== MATRÍCULA ===================== -->
   <div class="dash-section-card">
-    <h2>🎯 Matrícula em turmas e aulas particulares</h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/personalizar.svg" alt="">Matrícula em turmas e aulas particulares</h2>
     <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;">Inscreva-se em uma turma ou monte seu pacote de aulas particulares, com pagamento via Pix, cartão ou boleto.</p>
     <div style="display:flex; gap:14px; flex-wrap:wrap;">
       <a href="matricula.html" class="dash-btn">Nova matrícula</a>
@@ -214,7 +214,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
   <!-- ===================== ESTATÍSTICAS AVANÇADAS (apagar dados) ===================== -->
   <div class="dash-section-card" id="secApagarDados" style="display:none;">
-    <h2>🗑️ Apagar estatísticas de um dia</h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/trash.svg" alt="">Apagar estatísticas de um dia</h2>
     <p style="opacity:0.85; font-size:0.9rem; margin-bottom:16px;">
       Escolha um dia para apagar todo o seu histórico de estudo daquele dia na Plataforma de Questões. As questões de
       <strong>Praticar</strong> respondidas nesse dia voltam a aparecer como não respondidas.
@@ -258,9 +258,9 @@ const AVATAR_PADRAO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
 );
 
 const PRODUTOS_DASHBOARD = [
-  { chave: "plataforma", nome: "Plataforma de Questões", icone: "📊", curso: "Plataforma de Questões" },
-  { chave: "producao", nome: "Ambiente de Produção Oral e Textual", icone: "✍️", curso: "Ambiente de Produção Oral e Textual" },
-  { chave: "aulasEspecializadas", nome: "Aulas Especializadas Online", icone: "🎬", curso: "Aulas Especializadas Online" }
+  { chave: "plataforma", nome: "Plataforma de Questões", icone: "img/icones/estatisticas.svg", curso: "Plataforma de Questões" },
+  { chave: "producao", nome: "Ambiente de Produção Oral e Textual", icone: "img/icones/writing-hand.svg", curso: "Ambiente de Produção Oral e Textual" },
+  { chave: "aulasEspecializadas", nome: "Aulas Especializadas Online", icone: "img/icones/video.svg", curso: "Aulas Especializadas Online" }
 ];
 
 const token = localStorage.getItem('token');
@@ -299,17 +299,20 @@ function renderSummaryCards(dados) {
   const html = PRODUTOS_DASHBOARD.map(p => {
     const acesso = window.AppShell.detalhesAcesso(p.chave);
     let estado, tagClass, tagTexto;
+    const iconeCheck = '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">';
+    const iconeX = '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">';
+    const iconeLock = '<img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">';
     if (acesso.ativo) {
       estado = 'ativo'; tagClass = 'ativo';
-      tagTexto = acesso.viaCascata && !acesso.viaAvulso ? `✓ Ativo · incluído no plano ${dados.plano.tier}` : '✓ Ativo';
-    } else if (acesso.dataVencimentoAvulso) { estado = 'expirado'; tagClass = 'expirado'; tagTexto = '✗ Expirado'; }
-    else { estado = 'bloqueado'; tagClass = 'bloqueado'; tagTexto = '🔒 Não adquirido'; }
+      tagTexto = acesso.viaCascata && !acesso.viaAvulso ? `${iconeCheck} Ativo · incluído no plano ${dados.plano.tier}` : `${iconeCheck} Ativo`;
+    } else if (acesso.dataVencimentoAvulso) { estado = 'expirado'; tagClass = 'expirado'; tagTexto = `${iconeX} Expirado`; }
+    else { estado = 'bloqueado'; tagClass = 'bloqueado'; tagTexto = `${iconeLock} Não adquirido`; }
 
     const cta = estado === 'ativo' ? '' :
       `<a class="upgrade-btn" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige">${estado === 'expirado' ? 'Renovar' : 'Adquirir'}</a>`;
 
     return `<div class="dash-summary-card">
-      <div class="icone">${p.icone}</div>
+      <img class="icone" src="${p.icone}" alt="">
       <h3>${p.nome}</h3>
       <span class="dash-status-tag ${tagClass}">${tagTexto}</span><br>
       ${cta}
@@ -334,7 +337,7 @@ function renderPainelEquipe(dados) {
 
 function cardBloqueado(nome, curso) {
   return `<div class="dash-lock-overlay">
-    <div style="font-size:2rem;">🔒</div>
+    <img src="img/icones/lock.svg" alt="" style="width:40px; height:40px;">
     <p>Você ainda não tem acesso a <strong>${nome}</strong>.</p>
     <a class="upgrade-btn" href="matricula.html?curso=${encodeURIComponent(curso)}&plano=Pack%20Prestige">Desbloquear agora</a>
   </div>`;
@@ -454,7 +457,7 @@ async function renderPlataforma(dados) {
     <div class="dash-kpi-row">
       <div class="dash-kpi"><div class="valor">${total}</div><div class="rotulo">Questões resolvidas</div></div>
       <div class="dash-kpi"><div class="valor">${taxa}%</div><div class="rotulo">Taxa de acerto</div></div>
-      <div class="dash-kpi"><div class="valor">${sequencia}🔥</div><div class="rotulo">Sequência diária</div></div>
+      <div class="dash-kpi"><div class="valor">${sequencia}<img src="img/icones/fire.svg" alt="" style="width:0.85em; height:0.85em; vertical-align:-0.05em;"></div><div class="rotulo">Sequência diária</div></div>
       <div class="dash-kpi"><div class="valor">${fmtTempoEstudado(tempoMs)}</div><div class="rotulo">Tempo estudado</div></div>
     </div>
     <div class="chart-card" style="margin-bottom:18px;">
@@ -474,7 +477,7 @@ async function renderPlataforma(dados) {
     <h3 style="margin:18px 0 10px;">Últimas atividades</h3>
     ${ultimasAtividades.map(e => `<div class="dash-atividade-item">
       <span>${e.mode === 'simulado' ? 'Simulado' : 'Praticar'} · ${MATERIAS[e.materia] || e.materia} · Nível ${e.nivel}</span>
-      <span style="color:${e.ok ? 'var(--success-text)' : 'var(--danger-text)'};">${e.ok ? '✓ Acertou' : '✗ Errou'}</span>
+      <span style="color:${e.ok ? 'var(--success-text)' : 'var(--danger-text)'};">${e.ok ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Acertou' : '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">Errou'}</span>
     </div>`).join('')}
     <p style="font-size:0.78rem; color:var(--text-muted); margin-top:14px;">Esses dados ficam salvos neste navegador — se você praticar em outro dispositivo, as estatísticas não se somam automaticamente.</p>
   `;
@@ -524,7 +527,7 @@ async function renderDeveres() {
 
     const pendentes = semanas.filter(s => s.status !== 'concluido').sort((a, b) => a.numeroSemana - b.numeroSemana);
     if (!pendentes.length) {
-      alvo.innerHTML = `<div class="stats-vazio">🎉 Você está em dia com todos os seus deveres!</div><div style="text-align:center; margin-top:14px;"><a href="meus-deveres.html" class="dash-btn secundario">Ver meus deveres</a></div>`;
+      alvo.innerHTML = `<div class="stats-vazio"><img class="titulo-icone-inline" src="img/icones/party.svg" alt="">Você está em dia com todos os seus deveres!</div><div style="text-align:center; margin-top:14px;"><a href="meus-deveres.html" class="dash-btn secundario">Ver meus deveres</a></div>`;
       return;
     }
 
@@ -654,7 +657,7 @@ async function renderAulas(dados) {
       <h3 style="margin-bottom:10px;">Histórico de aulas gravadas</h3>
       ${historico.slice(0, 6).map(h => `<div class="dash-atividade-item">
         <span>${h.moduloIcone ? h.moduloIcone + ' ' : ''}${h.aulaTitulo}${h.moduloTitulo ? ' · ' + h.moduloTitulo : ''}</span>
-        <span style="color:${h.concluida ? 'var(--success-text)' : 'var(--text-muted)'};">${h.concluida ? '✓ Concluída' : 'Em andamento'}</span>
+        <span style="color:${h.concluida ? 'var(--success-text)' : 'var(--text-muted)'};">${h.concluida ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Concluída' : 'Em andamento'}</span>
       </div>`).join('') || '<div class="stats-vazio">Nenhuma aula assistida ainda.</div>'}
     `;
   } catch (err) {
@@ -785,7 +788,7 @@ async function renderMapeador() {
       <div class="dash-kpi-row">
         <div class="dash-kpi"><div class="valor">${h(kpis.tempoHojeSegundos)}</div><div class="rotulo">Hoje</div></div>
         <div class="dash-kpi"><div class="valor">${h(kpis.tempoSemanaSegundos)}</div><div class="rotulo">Esta semana</div></div>
-        <div class="dash-kpi"><div class="valor">${kpis.sequenciaDiasAtual}🔥</div><div class="rotulo">Sequência de dias</div></div>
+        <div class="dash-kpi"><div class="valor">${kpis.sequenciaDiasAtual}<img src="img/icones/fire.svg" alt="" style="width:0.85em; height:0.85em; vertical-align:-0.05em;"></div><div class="rotulo">Sequência de dias</div></div>
         <div class="dash-kpi"><div class="valor">${h(kpis.tempoTotalSegundos)}</div><div class="rotulo">Tempo total</div></div>
       </div>
       <div style="text-align:center; margin-top:6px;"><a href="mapeador-estudos.html" class="dash-btn secundario">Ver Mapeador de Estudos</a></div>`;

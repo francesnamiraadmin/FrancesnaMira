@@ -37,19 +37,31 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .vazio-msg { text-align: center; opacity: 0.75; padding: 40px 16px; font-size: 0.95rem; }
 .erro-msg { color: var(--danger-text); font-size: 0.85rem; margin-top: 8px; text-align: center; }
 
-/* ===== Cards de Matéria ===== */
+/* ===== Cards de Matéria — coloridos como um todo (não só um filete de cor),
+   usando color-mix() pra tingir o glass de fundo com a cor exata escolhida
+   pelo usuário pra cada Matéria/Conteúdo, preservando contraste em claro/escuro. ===== */
 .materias-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
 .materia-card-grande {
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-top: 5px solid var(--cor-item, var(--accent));
+  background: linear-gradient(150deg, color-mix(in srgb, var(--cor-item, var(--accent)) 24%, var(--glass-bg)), color-mix(in srgb, var(--cor-item, var(--accent)) 8%, var(--glass-bg-2)));
+  border: 1px solid color-mix(in srgb, var(--cor-item, var(--accent)) 45%, var(--glass-border));
+  border-top: 5px solid var(--cor-item, var(--accent));
   border-radius: 18px; padding: 20px 22px; box-shadow: var(--glass-shadow);
+  transition: box-shadow 0.25s ease;
+}
+.materia-card-grande.tem-sessao-ativa {
+  box-shadow: 0 0 0 2px var(--cor-item, var(--accent)), var(--glass-shadow);
 }
 .materia-card-topo { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
 .materia-card-titulo { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.materia-card-titulo .icone-materia { font-size: 1.6rem; flex-shrink: 0; }
+.materia-card-titulo .icone-materia {
+  font-size: 1.3rem; flex-shrink: 0; width: 38px; height: 38px; border-radius: 11px;
+  background: color-mix(in srgb, var(--cor-item, var(--accent)) 35%, transparent);
+  display: inline-flex; align-items: center; justify-content: center;
+}
 .materia-card-titulo h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .materia-descricao { font-size: 0.85rem; opacity: 0.8; margin-top: 6px; line-height: 1.4; }
-.materia-meta-row { display: flex; gap: 18px; font-size: 0.82rem; opacity: 0.85; margin: 10px 0 16px; font-weight: 600; }
+.materia-meta-row { display: flex; gap: 18px; font-size: 0.82rem; opacity: 0.9; margin: 10px 0 16px; font-weight: 700; }
+.materia-tempo-total { color: var(--cor-item, var(--accent)); }
 
 .card-acoes-icone { display: flex; gap: 6px; flex-shrink: 0; }
 .icone-btn {
@@ -62,12 +74,19 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 /* ===== Subcards de Conteúdo ===== */
 .conteudos-subgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 14px; }
 .conteudo-subcard {
-  background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-left: 5px solid var(--cor-item, var(--accent));
-  border-radius: 12px; padding: 12px 14px;
+  background: linear-gradient(150deg, color-mix(in srgb, var(--cor-item, var(--accent)) 30%, var(--glass-bg-2)), color-mix(in srgb, var(--cor-item, var(--accent)) 12%, var(--glass-bg-2)));
+  border: 1px solid color-mix(in srgb, var(--cor-item, var(--accent)) 55%, var(--glass-border));
+  border-left: 5px solid var(--cor-item, var(--accent));
+  border-radius: 12px; padding: 12px 14px; transition: box-shadow 0.25s ease, transform 0.15s ease;
+}
+.conteudo-subcard:hover { transform: translateY(-2px); }
+.conteudo-subcard.tem-sessao-ativa {
+  box-shadow: 0 0 0 2px var(--cor-item, var(--accent));
 }
 .conteudo-subcard-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
 .conteudo-nome { font-weight: 700; font-size: 0.9rem; word-break: break-word; }
 .conteudo-meta-row { display: flex; justify-content: space-between; font-size: 0.75rem; opacity: 0.85; margin: 8px 0 10px; gap: 6px; }
+.conteudo-tempo-total { font-weight: 700; color: var(--cor-item, var(--accent)); }
 .btn-iniciar-conteudo {
   width: 100%; padding: 8px; border-radius: 8px; border: none; background: var(--cor-item, var(--accent));
   color: #fff; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: opacity 0.15s ease;
@@ -76,12 +95,25 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .btn-iniciar-conteudo:disabled { opacity: 0.45; cursor: not-allowed; }
 .conteudos-vazio-msg { font-size: 0.8rem; opacity: 0.7; margin-bottom: 12px; }
 
-.btn-add-conteudo {
-  width: 100%; padding: 9px; border-radius: 10px; border: 1px dashed var(--glass-border-strong);
-  background: transparent; color: var(--text); font-weight: 600; font-size: 0.85rem; cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease;
+.badge-ao-vivo {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 0.68rem; font-weight: 700;
+  color: var(--cor-item, var(--accent)); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px;
 }
-.btn-add-conteudo:hover { border-color: var(--cor-item, var(--accent)); color: var(--cor-item, var(--accent)); }
+.badge-ao-vivo .ponto {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--cor-item, var(--accent));
+  animation: pulso-ao-vivo 1.4s ease infinite;
+}
+@keyframes pulso-ao-vivo {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+.btn-add-conteudo {
+  width: 100%; padding: 9px; border-radius: 10px; border: 1px dashed color-mix(in srgb, var(--cor-item, var(--accent)) 50%, var(--glass-border-strong));
+  background: transparent; color: var(--text); font-weight: 600; font-size: 0.85rem; cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.btn-add-conteudo:hover { border-color: var(--cor-item, var(--accent)); color: var(--cor-item, var(--accent)); background: color-mix(in srgb, var(--cor-item, var(--accent)) 10%, transparent); }
 
 /* ===== Modais (reaproveita .app-modal-overlay/.app-modal do app-shell.css) ===== */
 .app-modal.largo { max-width: 460px; }
@@ -115,8 +147,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div id="app-navbar" class="app-navbar-bar"></div>
 
 <section class="intro">
-  <a class="voltar-link" href="mapeador-estudos.html">← Mapeador de Estudos</a>
-  <h1>⏱️ Timer de Estudos</h1>
+  <a class="voltar-link" href="mapeador-estudos.html"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Mapeador de Estudos</a>
+  <h1><img class="titulo-icone-inline" src="img/icones/simulados.svg" alt="">Timer de Estudos</h1>
   <p>Organize suas Matérias e Conteúdos e inicie uma sessão de estudo com um clique — o cronômetro te acompanha em qualquer página da plataforma até você finalizar.</p>
 </section>
 

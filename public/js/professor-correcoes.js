@@ -152,9 +152,9 @@ function renderCorrecao(p) {
 
   let producaoHtml = '';
   if (p.modalidade === 'oral' && p.arquivoOriginal?.nome) {
-    producaoHtml = `<div style="font-weight:700; margin-bottom:8px;">🎤 Gravação do aluno${p.duracaoSegundos ? ' — ' + formatarDuracao(p.duracaoSegundos) : ''}</div><audio controls id="audioProducaoOriginal" style="width:100%;"></audio>`;
+    producaoHtml = `<div style="font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:6px;"><img src="img/icones/mic.svg" alt="" style="width:1.1em; height:1.1em;">Gravação do aluno${p.duracaoSegundos ? ' — ' + formatarDuracao(p.duracaoSegundos) : ''}</div><audio controls id="audioProducaoOriginal" style="width:100%;"></audio>`;
   } else if (p.arquivoOriginal?.nome) {
-    producaoHtml = `<div class="arquivo-baixar-box"><span style="font-size:1.6rem;">📄</span><div style="flex:1;"><div style="font-weight:700;">${p.arquivoOriginal.nome}</div><div style="font-size:0.8rem; color:var(--cinza-400);">${(p.arquivoOriginal.tamanho / 1024).toFixed(0)} KB</div></div><button class="btn pequeno" id="baixarOriginalBtn">Baixar</button></div>`;
+    producaoHtml = `<div class="arquivo-baixar-box"><img src="img/icones/document.svg" alt="" style="width:1.6rem; height:1.6rem;"><div style="flex:1;"><div style="font-weight:700;">${p.arquivoOriginal.nome}</div><div style="font-size:0.8rem; color:var(--cinza-400);">${(p.arquivoOriginal.tamanho / 1024).toFixed(0)} KB</div></div><button class="btn pequeno" id="baixarOriginalBtn">Baixar</button></div>`;
   } else if (p.textoDigitado) {
     producaoHtml = `<div class="texto-enviado-box">${p.textoDigitado}</div><div style="margin-top:8px; font-size:0.8rem; color:var(--cinza-400);">${p.contagemPalavras} palavras</div>`;
   }
@@ -177,7 +177,7 @@ function renderCorrecao(p) {
       <div class="nome">${c.nome}</div>
       <div class="desc">${c.descricao || ''}</div>
       <div class="estrelas-input" data-criterio-estrelas="${c.nome}">
-        ${[1, 2, 3, 4, 5].map(n => `<button type="button" data-nota="${n}" class="${n <= (existente?.nota || 0) ? 'cheia' : ''}">★</button>`).join('')}
+        ${[1, 2, 3, 4, 5].map(n => `<button type="button" data-nota="${n}" class="${n <= (existente?.nota || 0) ? 'cheia' : ''}"><img src="img/icones/${n <= (existente?.nota || 0) ? 'star-filled' : 'star-empty'}.svg" alt="" style="width:1em; height:1em;"></button>`).join('')}
       </div>
       <textarea data-criterio-comentario="${c.nome}" placeholder="Comentário sobre este critério...">${existente?.comentario || ''}</textarea>
     </div>`;
@@ -205,7 +205,12 @@ document.getElementById('criteriosLista').addEventListener('click', e => {
   const nome = wrap.dataset.criterioEstrelas;
   const nota = Number(btn.dataset.nota);
   notasCriterios[nome].nota = nota;
-  wrap.querySelectorAll('button').forEach(b => b.classList.toggle('cheia', Number(b.dataset.nota) <= nota));
+  wrap.querySelectorAll('button').forEach(b => {
+    const cheia = Number(b.dataset.nota) <= nota;
+    b.classList.toggle('cheia', cheia);
+    const img = b.querySelector('img');
+    if (img) img.src = `img/icones/${cheia ? 'star-filled' : 'star-empty'}.svg`;
+  });
 });
 document.getElementById('criteriosLista').addEventListener('input', e => {
   const el = e.target.closest('[data-criterio-comentario]');
@@ -260,7 +265,7 @@ arquivoCorrigidoInput.addEventListener('change', () => {
   const ext = '.' + file.name.split('.').pop().toLowerCase();
   if (!['.pdf', '.docx', '.odt'].includes(ext)) { alert('Formato não aceito. Envie PDF, DOCX ou ODT.'); return; }
   arquivoCorrigidoSelecionado = file;
-  document.getElementById('uploadCorrigidoTexto').textContent = '✓ ' + file.name;
+  document.getElementById('uploadCorrigidoTexto').innerHTML = '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">' + file.name;
   uploadBox.classList.add('tem-arquivo');
 });
 
