@@ -7,7 +7,12 @@
 // restante do projeto (public/js/*.js carregado via <script src>).
 // =====================================================================
 
-const NOMES_TIPO = { lacuna: '✏️ Complete a frase', multipla: '❓ Múltipla escolha', escuta: '🎧 Compreensão oral', vf: '✅ Verdadeiro ou falso' };
+const NOMES_TIPO = {
+  lacuna: '<img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Complete a frase',
+  multipla: '<img class="titulo-icone-inline pequeno" src="img/icones/exercise-list.svg" alt="">Múltipla escolha',
+  escuta: '<img class="titulo-icone-inline pequeno" src="img/icones/headphones.svg" alt="">Compreensão oral',
+  vf: '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Verdadeiro ou falso'
+};
 
 // Rótulos de matéria para páginas que NÃO carregam js/questoes.js (que já define um
 // `MATERIAS` global equivalente, mas só para Simulados/plataforma-questoes.html —

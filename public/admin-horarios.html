@@ -135,7 +135,11 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <div class="grade-wrap">
       <table class="grade-admin" id="gradeAdmin"></table>
     </div>
-    <p style="font-size:0.78rem; color:var(--cinza-400); margin-top:10px;">🟩 Livre · 🟥 Ocupado (clique para ver quem reservou) · ⬜ Inativo</p>
+    <p style="font-size:0.78rem; color:var(--cinza-400); margin-top:10px; display:flex; align-items:center; flex-wrap:wrap; gap:6px;">
+      <span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--verde-bg); border:1px solid var(--verde);"></span> Livre ·
+      <span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--vermelho-bg); border:1px solid var(--vermelho);"></span> Ocupado (clique para ver quem reservou) ·
+      <span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--cinza-100); border:1px solid var(--cinza-300);"></span> Inativo
+    </p>
   </div>
 </div>
 

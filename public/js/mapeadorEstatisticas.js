@@ -45,7 +45,7 @@ function renderKpis(kpis) {
     { valor: formatarDuracaoLonga(kpis.maiorSessaoSegundos), rotulo: 'Maior sessão' },
     { valor: formatarDuracaoLonga(kpis.tempoHojeSegundos), rotulo: 'Hoje' },
     { valor: formatarDuracaoLonga(kpis.tempoSemanaSegundos), rotulo: 'Esta semana' },
-    { valor: kpis.sequenciaDiasAtual, rotulo: 'Sequência atual 🔥' },
+    { valor: kpis.sequenciaDiasAtual, rotulo: 'Sequência atual <img src="img/icones/fire.svg" alt="" style="width:0.85em;height:0.85em;vertical-align:-0.1em;">' },
     { valor: kpis.recordeSequenciaDias, rotulo: 'Recorde de sequência' }
   ];
   document.getElementById('kpiRow').innerHTML = itens.map(i => `<div class="dash-kpi"><div class="valor">${i.valor}</div><div class="rotulo">${i.rotulo}</div></div>`).join('');

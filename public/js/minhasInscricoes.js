@@ -27,7 +27,7 @@
     if (plano.ativo && plano.tier) {
       const estilo = ESTILOS_PLANO[plano.tier];
       planoCardHtml = `<div class="dash-summary-card">
-        <div class="icone">🎓</div>
+        <img class="icone" src="img/icones/cap.svg" alt="">
         <h3>Plano ${plano.tier} — ${plano.curso || ''}</h3>
         <span class="dash-status-tag ativo" style="background:${estilo.background}; color:${estilo.color};">Ativo</span>
         <p style="font-size:0.85rem; color:var(--text-muted); margin-top:8px;">
@@ -39,7 +39,7 @@
       </div>`;
     } else {
       planoCardHtml = `<div class="dash-summary-card">
-        <div class="icone">🎓</div>
+        <img class="icone" src="img/icones/cap.svg" alt="">
         <h3>Nenhum plano de curso ativo</h3>
         <span class="dash-status-tag bloqueado">Sem assinatura</span>
         <p style="font-size:0.85rem; color:var(--text-muted); margin-top:8px;">Assine um plano para matricular-se em turmas ou aulas particulares.</p>
@@ -51,10 +51,10 @@
       const info = produtos[chave] || {};
       const acesso = window.AppShell.detalhesAcesso(chave);
       const tagTexto = acesso.ativo
-        ? (acesso.viaCascata && !acesso.viaAvulso ? `✓ Ativo · incluído no plano ${plano.tier}` : '✓ Ativo')
-        : (info.dataVencimento ? '✗ Expirado' : '🔒 Não adquirido');
+        ? (acesso.viaCascata && !acesso.viaAvulso ? `<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Ativo · incluído no plano ${plano.tier}` : '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Ativo')
+        : (info.dataVencimento ? '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">Expirado' : '<img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">Não adquirido');
       return `<div class="dash-summary-card">
-        <div class="icone">📦</div>
+        <img class="icone" src="img/icones/package.svg" alt="">
         <h3>${nome}</h3>
         <span class="dash-status-tag ${acesso.ativo ? 'ativo' : (info.dataVencimento ? 'expirado' : 'bloqueado')}">${tagTexto}</span>
         ${info.dataVencimento ? `<p style="font-size:0.85rem; color:var(--text-muted); margin-top:8px;">Vencimento: ${fmtData(info.dataVencimento)}</p>` : ''}

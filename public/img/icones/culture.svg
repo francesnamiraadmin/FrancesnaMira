@@ -1,0 +1,7 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cultura">
+  <path d="M12 2 L13.3 6.5 H10.7 Z" fill="#78909c"/>
+  <path d="M9.5 9 H14.5 L13.6 12 H10.4 Z" fill="#78909c"/>
+  <path d="M8.5 12.5 H15.5 L14.3 16 H9.7 Z" fill="#78909c"/>
+  <path d="M7 16.5 H17 L17.8 20 H6.2 Z" fill="#78909c"/>
+  <rect x="4.5" y="20" width="15" height="1.8" rx="0.6" fill="#546e7a"/>
+</svg>

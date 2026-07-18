@@ -165,6 +165,8 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
 .tier-card li.feature-yes .feature-icon { color: var(--bordeaux); }
 .tier-card li.feature-no { color: var(--muted); }
 .tier-card li.feature-no .feature-icon { color: var(--error); }
+.titulo-icone-inline { width: 1em; height: 1em; object-fit: contain; vertical-align: -0.14em; margin-right: 8px; }
+.titulo-icone-inline.pequeno { margin-right: 5px; }
 </style>
 </head>
 <body>
@@ -318,7 +320,7 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
     <!-- ===================== SUCCESS ===================== -->
     <section class="step success" data-step="success" style="display:none;">
       <div class="bull-big"></div>
-      <h2>Alvo atingido! 🎯</h2>
+      <h2>Alvo atingido!<img class="titulo-icone-inline" src="img/icones/personalizar.svg" alt="" style="margin-left:8px; margin-right:0;"></h2>
       <p id="successMsg">Sua matrícula na turma foi confirmada. Em instantes você recebe um e-mail de confirmação. À bientôt!</p>
       <div style="margin-top:20px;">
         <a href="minha-conta.html" id="successLink" class="btn-primary" style="display:inline-block;text-decoration:none;">Ver minha conta</a>
@@ -326,8 +328,8 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
     </section>
 
     <div class="actions" id="actions">
-      <button type="button" class="btn-ghost" id="btnBack">← Voltar</button>
-      <button type="button" class="btn-primary" id="btnNext">Continuar <span class="arrow">→</span></button>
+      <button type="button" class="btn-ghost" id="btnBack"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Voltar</button>
+      <button type="button" class="btn-primary" id="btnNext">Continuar <span class="arrow"><img src="img/icones/chevron-right.svg" alt="" style="width:0.9em; height:0.9em;"></span></button>
     </div>
   </form>
 

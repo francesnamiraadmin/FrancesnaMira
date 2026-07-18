@@ -36,7 +36,7 @@ const DeverWorkspace = (() => {
   function conteudoHtml(a) {
     const c = a.conteudo || {};
     const partes = [];
-    if (c.arquivo?.nome) partes.push(`<button class="dash-btn secundario pequeno" data-baixar-material>📎 Baixar material: ${c.arquivo.nome}</button>`);
+    if (c.arquivo?.nome) partes.push(`<button class="dash-btn secundario pequeno" data-baixar-material><img class="titulo-icone-inline pequeno" src="img/icones/paperclip.svg" alt="">Baixar material: ${c.arquivo.nome}</button>`);
     if (c.url) partes.push(`<a href="${c.url}" target="_blank" rel="noopener" class="dash-btn secundario pequeno">Abrir link</a>`);
     if (c.texto) partes.push(`<div class="texto-box">${c.texto}</div>`);
     return partes.join('');
@@ -48,7 +48,7 @@ const DeverWorkspace = (() => {
     const jaEnviado = a.entrega?.status === 'enviado';
     widgetEl.innerHTML = `
       ${conteudoHtml(a)}
-      ${jaEnviado && a.entrega.arquivo?.nome ? `<button class="dash-btn secundario pequeno" data-baixar-entrega>📎 Baixar meu envio: ${a.entrega.arquivo.nome}</button>` : ''}
+      ${jaEnviado && a.entrega.arquivo?.nome ? `<button class="dash-btn secundario pequeno" data-baixar-entrega><img class="titulo-icone-inline pequeno" src="img/icones/paperclip.svg" alt="">Baixar meu envio: ${a.entrega.arquivo.nome}</button>` : ''}
       ${jaEnviado && a.entrega.texto ? `<div class="texto-box">${a.entrega.texto}</div>` : ''}
       ${a.tipo !== 'questoes_plataforma' && a.tipo !== 'simulado' && a.tipo !== 'exercicio_lista' ? `
       <div class="envio-form">
@@ -59,7 +59,7 @@ const DeverWorkspace = (() => {
           <span class="msg-inline" data-msg></span>
         </div>
       </div>` : `
-      <button class="dash-btn pequeno" data-marcar-concluido-manual style="margin-top:10px;">${jaEnviado ? '✓ Já marcada como feita' : 'Marcar como feita'}</button>
+      <button class="dash-btn pequeno" data-marcar-concluido-manual style="margin-top:10px;">${jaEnviado ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Já marcada como feita' : 'Marcar como feita'}</button>
       <span class="msg-inline" data-msg></span>`}
     `;
 
@@ -114,7 +114,7 @@ const DeverWorkspace = (() => {
     const progresso = a.progressoReal || { concluidas: 0, total: aulas.length };
     widgetEl.innerHTML = `
       <p class="embed-aviso">${progresso.concluidas}/${progresso.total} aulas concluídas</p>
-      <div class="modulo-aulas-lista">${aulas.map(au => `<button class="dash-btn secundario pequeno" data-assistir-modulo="${au._id}">${au.concluida ? '✓ ' : ''}${au.titulo}</button>`).join('')}</div>
+      <div class="modulo-aulas-lista">${aulas.map(au => `<button class="dash-btn secundario pequeno" data-assistir-modulo="${au._id}">${au.concluida ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">' : ''}${au.titulo}</button>`).join('')}</div>
       <div data-player-modulo style="margin-top:14px;"></div>`;
     widgetEl.querySelectorAll('[data-assistir-modulo]').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -172,7 +172,7 @@ const DeverWorkspace = (() => {
     const { deverId, onAtualizado } = ctx;
     container.innerHTML = `
       <h4>${atividade.titulo}${atividade.obrigatoria ? '' : ' <span class="opcional-tag">(opcional)</span>'}</h4>
-      <div class="meta">${NOMES_TIPO[atividade.tipo] || atividade.tipo} · ${atividade.bloqueada ? '🔒 Bloqueada' : labelEntrega(atividade)}</div>
+      <div class="meta">${NOMES_TIPO[atividade.tipo] || atividade.tipo} · ${atividade.bloqueada ? '<img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">Bloqueada' : labelEntrega(atividade)}</div>
       ${atividade.descricao ? `<p class="atividade-descricao">${atividade.descricao}</p>` : ''}
       <div data-widget></div>
       ${atividade.entrega?.comentarioProfessor ? `<div class="comentario-prof"><strong>Comentário do professor:</strong> ${atividade.entrega.comentarioProfessor}</div>` : ''}
@@ -180,7 +180,7 @@ const DeverWorkspace = (() => {
     const widgetEl = container.querySelector('[data-widget]');
 
     if (atividade.bloqueada) {
-      widgetEl.innerHTML = '<p class="embed-aviso">🔒 Conclua a tarefa anterior desta semana pra liberar esta.</p>';
+      widgetEl.innerHTML = '<p class="embed-aviso"><img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">Conclua a tarefa anterior desta semana pra liberar esta.</p>';
       return;
     }
 

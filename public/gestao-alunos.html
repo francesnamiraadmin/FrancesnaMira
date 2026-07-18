@@ -160,6 +160,8 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .status-badge.concluido { background: var(--verde-bg); color: var(--verde); }
 .entrega-box { border: 1px solid var(--cinza-200); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
 .entrega-box .entrega-status { font-size: 0.78rem; font-weight: 700; }
+.titulo-icone-inline { width: 1em; height: 1em; object-fit: contain; vertical-align: -0.14em; margin-right: 8px; }
+.titulo-icone-inline.pequeno { margin-right: 5px; }
 </style>
 </head>
 
@@ -207,7 +209,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <div class="busca-row">
       <input type="text" id="buscaInput" placeholder="Buscar por nome, e-mail, telefone ou WhatsApp...">
       <button class="btn secundario" id="toggleFiltrosBtn">Filtros</button>
-      <button class="btn secundario" id="toggleDashboardDeveresBtn">📋 Dashboard de Deveres</button>
+      <button class="btn secundario" id="toggleDashboardDeveresBtn"><img class="titulo-icone-inline pequeno" src="img/icones/exercise-list.svg" alt="">Dashboard de Deveres</button>
       <a href="admin-planos-base.html" class="btn secundario">Planos-Base</a>
     </div>
 

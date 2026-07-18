@@ -173,7 +173,7 @@
     document.querySelector('.step[data-step="' + key + '"]').style.display = "block";
     document.getElementById("btnBack").style.visibility = index === 0 ? "hidden" : "visible";
     document.getElementById("btnNext").style.display = key === "pagamento" ? "none" : "inline-block";
-    document.getElementById("btnNext").innerHTML = 'Continuar <span class="arrow">→</span>';
+    document.getElementById("btnNext").innerHTML = 'Continuar <span class="arrow"><img src="img/icones/chevron-right.svg" alt="" style="width:0.9em; height:0.9em;"></span>';
     document.getElementById("btnNext").disabled = false;
     document.querySelector(".wrap").classList.toggle("wide", key === "horarios");
     renderMira();
@@ -294,8 +294,8 @@
       if (!turmas.length) {
         turmaDisponivelParaPlano = false;
         grid.innerHTML = modoPlano
-          ? '<div class="empty-state"><div class="icon">🎯</div>Ainda não há turma aberta para ' + planoInfo.curso + '. Sua assinatura será ativada normalmente e nossa equipe entra em contato para agendar suas aulas ao vivo.</div>'
-          : '<div class="empty-state"><div class="icon">🎯</div>Nenhuma turma disponível no momento.</div>';
+          ? '<div class="empty-state"><img class="icon" src="img/icones/personalizar.svg" alt="" style="width:2.2rem; height:2.2rem;">Ainda não há turma aberta para ' + planoInfo.curso + '. Sua assinatura será ativada normalmente e nossa equipe entra em contato para agendar suas aulas ao vivo.</div>'
+          : '<div class="empty-state"><img class="icon" src="img/icones/personalizar.svg" alt="" style="width:2.2rem; height:2.2rem;">Nenhuma turma disponível no momento.</div>';
         return;
       }
       turmaDisponivelParaPlano = true;
@@ -335,7 +335,7 @@
                 body: JSON.stringify({ nome, email, telefone: document.getElementById("telefone").value.trim() })
               });
               const d = await r.json();
-              btnEspera.textContent = r.ok ? "Você entrou na lista ✓" : (d.msg || "Erro");
+              btnEspera.innerHTML = r.ok ? "Você entrou na lista <img class=\"titulo-icone-inline pequeno\" src=\"img/icones/check.svg\" alt=\"\" style=\"margin-right:0;\">" : (d.msg || "Erro");
             } catch (e) {
               btnEspera.textContent = "Erro ao enviar";
             }
@@ -444,7 +444,7 @@
           "<h3>" + tier + "</h3>" +
           '<p class="tier-preco">' + (preco !== null ? fmtMoeda(preco) + "<span>/mês</span>" : "Escolha os horários") + "</p>" +
           "<ul>" + NOMES_BENEFICIO.map(b =>
-            '<li class="' + (beneficios[b.key] ? "feature-yes" : "feature-no") + '"><span class="feature-icon">' + (beneficios[b.key] ? "✓" : "✗") + "</span>" + b.label + "</li>"
+            '<li class="' + (beneficios[b.key] ? "feature-yes" : "feature-no") + '"><img class="feature-icon" src="img/icones/' + (beneficios[b.key] ? "check" : "x-mark") + '.svg" alt="" style="width:1.1em;height:1.1em;vertical-align:-0.15em;">' + b.label + "</li>"
           ).join("") + "</ul>" +
         "</label>"
       );
@@ -706,7 +706,7 @@
       const input = document.getElementById("pixCode");
       input.select();
       navigator.clipboard?.writeText(input.value).then(() => {
-        e.target.textContent = "Copiado ✓"; e.target.classList.add("copied");
+        e.target.innerHTML = "Copiado <img class=\"titulo-icone-inline pequeno\" src=\"img/icones/check.svg\" alt=\"\" style=\"margin-right:0;\">"; e.target.classList.add("copied");
         setTimeout(() => { e.target.textContent = "Copiar"; e.target.classList.remove("copied"); }, 1800);
       });
     }

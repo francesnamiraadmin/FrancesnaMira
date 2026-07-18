@@ -102,14 +102,14 @@ function renderModulos() {
     div.draggable = true;
     div.dataset.id = m._id;
     div.innerHTML = `
-      <div class="icone-swatch" style="background:${m.cor}22; color:${m.cor};">${m.icone || '📘'}</div>
+      <div class="icone-swatch" style="background:${m.cor}22;"><img src="${caminhoIconeModulo(m.icone)}" alt="" style="width:60%; height:60%; object-fit:contain;"></div>
       <div class="info">
         <div class="titulo">${escapeHtml(m.titulo)}</div>
-        <div class="meta">${m.totalAulas} aula${m.totalAulas === 1 ? '' : 's'}${m.exigeModuloAnterior ? ' · 🔒 exige anterior' : ''}${!m.ativo ? ' · inativo' : ''}</div>
+        <div class="meta">${m.totalAulas} aula${m.totalAulas === 1 ? '' : 's'}${m.exigeModuloAnterior ? ' · <img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">exige anterior' : ''}${!m.ativo ? ' · inativo' : ''}</div>
       </div>
       <div class="acoes">
-        <button type="button" data-editar-modulo="${m._id}" title="Editar">✏️</button>
-        <button type="button" data-excluir-modulo="${m._id}" title="Excluir">🗑️</button>
+        <button type="button" data-editar-modulo="${m._id}" title="Editar"><img src="img/icones/edit-pencil.svg" alt="" style="width:1em; height:1em;"></button>
+        <button type="button" data-excluir-modulo="${m._id}" title="Excluir"><img src="img/icones/trash.svg" alt="" style="width:1em; height:1em;"></button>
       </div>`;
     div.addEventListener('click', e => {
       if (e.target.closest('.acoes')) return;
@@ -177,8 +177,8 @@ function renderAulas() {
       <div class="info">
         <div class="titulo">${escapeHtml(a.titulo)}</div>
         <div class="meta">
-          <span>${temVideo ? '🎬 com vídeo' : '⚠️ sem vídeo'}</span>
-          <span>📎 ${(a.materiais || []).length} material(is)</span>
+          <span>${temVideo ? '<img class="titulo-icone-inline pequeno" src="img/icones/video.svg" alt="">com vídeo' : '<img class="titulo-icone-inline pequeno" src="img/icones/warning.svg" alt="">sem vídeo'}</span>
+          <span><img class="titulo-icone-inline pequeno" src="img/icones/paperclip.svg" alt="">${(a.materiais || []).length} material(is)</span>
           ${!a.ativo ? '<span>inativa</span>' : ''}
         </div>
       </div>
@@ -186,8 +186,8 @@ function renderAulas() {
         ${modulos.map(m => `<option value="${m._id}" ${m._id === a.moduloId ? 'selected' : ''}>${escapeHtml(m.titulo)}</option>`).join('')}
       </select>
       <div class="acoes">
-        <button type="button" data-editar-aula="${a._id}" title="Editar">✏️</button>
-        <button type="button" data-excluir-aula="${a._id}" title="Excluir">🗑️</button>
+        <button type="button" data-editar-aula="${a._id}" title="Editar"><img src="img/icones/edit-pencil.svg" alt="" style="width:1em; height:1em;"></button>
+        <button type="button" data-excluir-aula="${a._id}" title="Excluir"><img src="img/icones/trash.svg" alt="" style="width:1em; height:1em;"></button>
       </div>`;
     wrap.appendChild(div);
   });
@@ -242,6 +242,22 @@ document.getElementById('moduloCorSwatches').addEventListener('click', e => {
   renderCorSwatches(sw.dataset.cor);
 });
 
+// Mesmo padrão dos swatches de cor, mas pra escolher um dos ícones fixos de
+// MODULO_ICONES (public/js/moduloIcones.js) — substitui o antigo campo de
+// texto livre onde o professor digitava qualquer emoji.
+function renderIconeSwatches(selecionada) {
+  const wrap = document.getElementById('moduloIconeSwatches');
+  wrap.innerHTML = Object.keys(MODULO_ICONES).map(chave =>
+    `<div class="icone-picker-swatch${chave === selecionada ? ' selecionada' : ''}" data-icone="${chave}" title="${MODULO_ICONES_NOMES[chave]}"><img src="${MODULO_ICONES[chave]}" alt=""></div>`
+  ).join('');
+}
+document.getElementById('moduloIconeSwatches').addEventListener('click', e => {
+  const sw = e.target.closest('.icone-picker-swatch');
+  if (!sw) return;
+  document.getElementById('moduloIcone').value = sw.dataset.icone;
+  renderIconeSwatches(sw.dataset.icone);
+});
+
 function abrirModalModulo(id) {
   const m = id ? modulos.find(x => x._id === id) : null;
   document.getElementById('modalModuloTitulo').textContent = m ? 'Editar módulo' : 'Novo módulo';
@@ -249,9 +265,10 @@ function abrirModalModulo(id) {
   document.getElementById('moduloTitulo').value = m ? m.titulo : '';
   document.getElementById('moduloDescricao').value = m ? (m.descricao || '') : '';
   document.getElementById('moduloCurso').value = m ? (m.curso || '') : '';
-  document.getElementById('moduloIcone').value = m ? (m.icone || '📘') : '📘';
+  document.getElementById('moduloIcone').value = (m && MODULO_ICONES[m.icone]) ? m.icone : MODULO_ICONE_PADRAO;
   document.getElementById('moduloCor').value = m ? (m.cor || CORES[0]) : CORES[0];
   renderCorSwatches(document.getElementById('moduloCor').value);
+  renderIconeSwatches(document.getElementById('moduloIcone').value);
   document.getElementById('moduloExigeAnterior').checked = m ? !!m.exigeModuloAnterior : false;
   document.getElementById('moduloAtivo').checked = m ? m.ativo !== false : true;
   document.getElementById('moduloErro').style.display = 'none';
@@ -267,7 +284,7 @@ document.getElementById('salvarModuloBtn').addEventListener('click', async () =>
     titulo: document.getElementById('moduloTitulo').value.trim(),
     descricao: document.getElementById('moduloDescricao').value.trim(),
     curso: document.getElementById('moduloCurso').value.trim() || null,
-    icone: document.getElementById('moduloIcone').value.trim() || '📘',
+    icone: document.getElementById('moduloIcone').value || MODULO_ICONE_PADRAO,
     cor: document.getElementById('moduloCor').value,
     exigeModuloAnterior: document.getElementById('moduloExigeAnterior').checked,
     ativo: document.getElementById('moduloAtivo').checked
@@ -689,7 +706,7 @@ async function carregarEstatisticas() {
     : '<tr><td colspan="2">Sem dados ainda.</td></tr>';
 
   document.getElementById('statsModulosTbody').innerHTML = s.modulosMaisConcluidos.length
-    ? s.modulosMaisConcluidos.map(m => `<tr><td>${m.icone || ''} ${escapeHtml(m.titulo)}</td><td>${m.alunosCompletos}</td></tr>`).join('')
+    ? s.modulosMaisConcluidos.map(m => `<tr><td><img src="${caminhoIconeModulo(m.icone)}" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em; margin-right:6px;">${escapeHtml(m.titulo)}</td><td>${m.alunosCompletos}</td></tr>`).join('')
     : '<tr><td colspan="2">Sem dados ainda.</td></tr>';
 }
 

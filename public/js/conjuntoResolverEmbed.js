@@ -88,7 +88,7 @@ const ConjuntoResolverEmbed = (() => {
         const restante = tempoRestanteSegundos();
         const el = container.querySelector('[data-resolver-timer]');
         if (el) {
-          el.textContent = '⏱️ ' + formatarMMSS(restante);
+          el.innerHTML = '<img class="titulo-icone-inline pequeno" src="img/icones/tempo.svg" alt="">' + formatarMMSS(restante);
           el.classList.toggle('alerta', restante <= 60);
         }
         if (restante <= 0) { clearInterval(timerInterval); finalizarConjunto(); }
@@ -103,14 +103,14 @@ const ConjuntoResolverEmbed = (() => {
         <div class="resolver-header">
           <h1>${sessao.conjuntoNome}</h1>
           <div class="resolver-progress">Questão ${sessao.questaoAtualIndex + 1} de ${sessao.questoes.length}</div>
-          ${sessao.tempoLimiteSegundos ? `<div class="resolver-timer" data-resolver-timer>⏱️ ${formatarMMSS(tempoRestanteSegundos())}</div>` : ''}
+          ${sessao.tempoLimiteSegundos ? `<div class="resolver-timer" data-resolver-timer><img class="titulo-icone-inline pequeno" src="img/icones/tempo.svg" alt="">${formatarMMSS(tempoRestanteSegundos())}</div>` : ''}
         </div>
         <div class="resolver-layout">
           <div>
             <div class="qnav-grid" data-qnav-grid>
               ${sessao.questoes.map((x, i) => `<button class="qnav-btn ${x.respondida ? 'respondida' : ''} ${x.marcadaRevisao ? 'marcada' : ''} ${i === sessao.questaoAtualIndex ? 'atual' : ''}" data-ir="${i}">${i + 1}</button>`).join('')}
             </div>
-            <div class="qnav-legenda">🟩 respondida &nbsp; ★ marcada para revisão &nbsp; contorno = atual</div>
+            <div class="qnav-legenda"><span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--success-bg); border:1px solid var(--success-text); vertical-align:-1px;"></span> respondida &nbsp; <img src="img/icones/star-filled.svg" alt="" style="width:0.9em; height:0.9em; vertical-align:-0.1em;"> marcada para revisão &nbsp; contorno = atual</div>
           </div>
           <div>
             ${renderQuestaoCard(q)}
@@ -130,7 +130,7 @@ const ConjuntoResolverEmbed = (() => {
 
     function renderQuestaoCard(q) {
       let corpo = '';
-      if (q.tipo === 'escuta') corpo += `<button class="q-audio-btn" data-audio>🔊 Ouvir áudio</button>`;
+      if (q.tipo === 'escuta') corpo += `<button class="q-audio-btn" data-audio><img class="titulo-icone-inline pequeno" src="img/icones/headphones.svg" alt="">Ouvir áudio</button>`;
       if (q.visual) corpo += renderVisual(q.visual);
       if (q.texto) corpo += `<div class="q-texto">${q.texto}</div>`;
       corpo += `<div class="q-enunciado">${q.enunciado}</div>`;
@@ -147,7 +147,7 @@ const ConjuntoResolverEmbed = (() => {
       }
 
       corpo += `<div class="q-actions">
-        <button class="q-btn secundario ${q.marcadaRevisao ? 'ativo' : ''}" data-marcar-revisao>${q.marcadaRevisao ? '★ Marcada para revisão' : '☆ Marcar para revisão'}</button>
+        <button class="q-btn secundario ${q.marcadaRevisao ? 'ativo' : ''}" data-marcar-revisao>${q.marcadaRevisao ? '<img class="titulo-icone-inline pequeno" src="img/icones/star-filled.svg" alt="">Marcada para revisão' : '<img class="titulo-icone-inline pequeno" src="img/icones/star-empty.svg" alt="">Marcar para revisão'}</button>
       </div>`;
 
       return `<div class="q-card">
@@ -288,7 +288,7 @@ const ConjuntoResolverEmbed = (() => {
           const res = await fetch(url, { method: jaEsta ? 'DELETE' : 'POST', headers: authHeaders() });
           if (res.ok) {
             btn.classList.toggle('ativo');
-            btn.textContent = jaEsta ? '+ Adicionar ao Caderno de Revisão' : '✓ No Caderno de Revisão';
+            btn.innerHTML = jaEsta ? '+ Adicionar ao Caderno de Revisão' : '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">No Caderno de Revisão';
           }
         });
       });
@@ -306,7 +306,7 @@ const ConjuntoResolverEmbed = (() => {
             <span class="q-pill">${r.nivel}</span>
             <span class="q-pill">${MATERIAS_LABELS[r.materia] || r.materia}</span>
           </span>
-          <span class="q-status ${r.correta ? 'correta' : 'incorreta'}">${r.correta ? '✓ Acertou' : '✗ Errou'}</span>
+          <span class="q-status ${r.correta ? 'correta' : 'incorreta'}">${r.correta ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Acertou' : '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">Errou'}</span>
         </div>
         ${r.visual ? renderVisual(r.visual) : ''}
         ${r.texto ? `<div class="q-texto">${r.texto}</div>` : ''}
@@ -316,7 +316,7 @@ const ConjuntoResolverEmbed = (() => {
         <p>Resposta certa: <strong>${textoResposta(r.respostaCorreta)}</strong></p>
         <div class="q-gabarito"><strong>Explicação:</strong> ${r.explicacao}</div>
         <div class="q-actions">
-          <button class="q-btn secundario ${r.noCaderno ? 'ativo' : ''}" data-caderno-questao="${r.questaoId}" data-caderno-tentativa="${idTentativa}">${r.noCaderno ? '✓ No Caderno de Revisão' : '+ Adicionar ao Caderno de Revisão'}</button>
+          <button class="q-btn secundario ${r.noCaderno ? 'ativo' : ''}" data-caderno-questao="${r.questaoId}" data-caderno-tentativa="${idTentativa}">${r.noCaderno ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">No Caderno de Revisão' : '+ Adicionar ao Caderno de Revisão'}</button>
         </div>
       </div>`;
     }

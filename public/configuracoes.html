@@ -52,18 +52,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .toggle-row:last-child { border-bottom: none; }
 .toggle-row .rotulo { font-weight: 600; font-size: 0.94rem; }
 .toggle-row .desc { font-size: 0.82rem; color: var(--text-muted); margin-top: 3px; }
-.switch { position: relative; width: 46px; height: 26px; flex-shrink: 0; }
-.switch input { opacity: 0; width: 0; height: 0; }
-.switch .slider {
-  position: absolute; inset: 0; background: var(--glass-border-strong); border-radius: 30px; cursor: pointer;
-  transition: background 0.2s ease;
-}
-.switch .slider::before {
-  content: ''; position: absolute; width: 20px; height: 20px; left: 3px; top: 3px; background: #fff;
-  border-radius: 50%; transition: transform 0.2s ease;
-}
-.switch input:checked + .slider { background: var(--accent); }
-.switch input:checked + .slider::before { transform: translateX(20px); }
+/* .switch (o toggle on/off em si) mora em css/app-shell.css — reutilizado
+   também no Mapeador de Estudos ("Exibir barra do timer"). */
 
 .sessao-item {
   display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0;

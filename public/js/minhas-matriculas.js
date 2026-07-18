@@ -23,7 +23,7 @@
       const res = await fetch("/api/matricula/minhas", { headers: authHeaders() });
       const matriculas = await res.json();
       if (!matriculas.length) {
-        lista.innerHTML = '<div class="empty-state"><div class="icon">🎯</div>Você ainda não tem nenhuma matrícula.<br><br><a href="matricula.html" class="btn-primary" style="display:inline-block;text-decoration:none;">Fazer minha primeira matrícula</a></div>';
+        lista.innerHTML = '<div class="empty-state"><img class="icon" src="img/icones/personalizar.svg" alt="" style="width:2.2rem; height:2.2rem;">Você ainda não tem nenhuma matrícula.<br><br><a href="matricula.html" class="btn-primary" style="display:inline-block;text-decoration:none;">Fazer minha primeira matrícula</a></div>';
         return;
       }
       lista.innerHTML = "";

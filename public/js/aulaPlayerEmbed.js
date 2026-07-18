@@ -15,7 +15,7 @@ const AulaPlayerEmbed = (() => {
   }
 
   const NOMES_TIPO_MATERIAL = { pdf: 'PDF', imagem: 'Imagem', audio: 'Áudio', exercicio: 'Exercício', arquivo: 'Arquivo', link: 'Link' };
-  const ICONES_TIPO_MATERIAL = { pdf: '📄', imagem: '🖼️', audio: '🎵', exercicio: '📝', arquivo: '📎', link: '🔗' };
+  const ICONES_TIPO_MATERIAL = { pdf: 'document', imagem: 'image', audio: 'audio-file', exercicio: 'exercise-list', arquivo: 'paperclip', link: 'link' };
 
   function detectarTipoEmbed(url) {
     if (/youtube\.com|youtu\.be|player\.vimeo\.com|iframe\.mediadelivery\.net|cloudflarestream\.com\/.+\/iframe/i.test(url || '')) return 'iframe';
@@ -93,13 +93,13 @@ const AulaPlayerEmbed = (() => {
     wrap.innerHTML = materiais.map(m => {
       if (m.tipo === 'link') {
         return `<a class="material-item-aluno" href="${escapeHtml(m.url)}" target="_blank" rel="noopener">
-          <span class="icone">${ICONES_TIPO_MATERIAL[m.tipo] || '📎'}</span>
+          <img class="icone" src="img/icones/${ICONES_TIPO_MATERIAL[m.tipo] || 'paperclip'}.svg" alt="">
           <span><span class="nome">${escapeHtml(m.nome)}</span><br><span class="tipo">${NOMES_TIPO_MATERIAL[m.tipo]}</span></span>
         </a>`;
       }
       const tamanho = m.tamanho ? ' · ' + (m.tamanho / 1024 / 1024).toFixed(1) + ' MB' : '';
       return `<div class="material-item-aluno" data-baixar-material="${m._id}">
-        <span class="icone">${ICONES_TIPO_MATERIAL[m.tipo] || '📎'}</span>
+        <img class="icone" src="img/icones/${ICONES_TIPO_MATERIAL[m.tipo] || 'paperclip'}.svg" alt="">
         <span><span class="nome">${escapeHtml(m.nome)}</span><br><span class="tipo">${NOMES_TIPO_MATERIAL[m.tipo]}${tamanho}</span></span>
       </div>`;
     }).join('');

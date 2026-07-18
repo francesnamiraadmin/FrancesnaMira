@@ -83,7 +83,7 @@ function renderDetalheSemana(d) {
     rodape.innerHTML = `<button class="dash-btn" id="concluirDeverBtn">${d.podeConcluir ? 'Marcar semana como concluída' : 'Conclua as atividades obrigatórias primeiro'}</button><div class="msg-inline" id="concluirMsg"></div>`;
     if (!d.podeConcluir) rodape.querySelector('#concluirDeverBtn').disabled = true;
   } else {
-    rodape.innerHTML = '<p style="opacity:0.8;">✅ Você já concluiu esta semana.</p>';
+    rodape.innerHTML = '<p style="opacity:0.8;"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Você já concluiu esta semana.</p>';
   }
   lista.appendChild(rodape);
 }

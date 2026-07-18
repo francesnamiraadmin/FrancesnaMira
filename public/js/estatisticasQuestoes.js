@@ -27,7 +27,7 @@ function renderKPIs(kpis) {
     { valor: kpis.maiorNota !== null ? kpis.maiorNota + '%' : '—', rotulo: 'Maior nota' },
     { valor: kpis.menorNota !== null ? kpis.menorNota + '%' : '—', rotulo: 'Menor nota' },
     { valor: formatarTempo(kpis.tempoMedioSegundos), rotulo: 'Tempo médio por conjunto' },
-    { valor: `${kpis.sequenciaDiasConsecutivos}🔥`, rotulo: 'Sequência de dias' },
+    { valor: `${kpis.sequenciaDiasConsecutivos}<img src="img/icones/fire.svg" alt="" style="width:0.8em;height:0.8em;vertical-align:-0.05em;">`, rotulo: 'Sequência de dias' },
     { valor: kpis.tamanhoCaderno, rotulo: 'No Caderno de Revisão' }
   ];
   document.getElementById('kpiRow').innerHTML = itens.map(i =>

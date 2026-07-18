@@ -119,6 +119,13 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .cor-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
 .cor-swatch { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
 .cor-swatch.selecionada { border-color: var(--cinza-800); }
+.icone-picker-swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.icone-picker-swatch {
+  width: 34px; height: 34px; border-radius: 9px; cursor: pointer; border: 2px solid var(--cinza-200);
+  background: var(--cinza-50); display: flex; align-items: center; justify-content: center; padding: 5px;
+}
+.icone-picker-swatch img { width: 100%; height: 100%; object-fit: contain; }
+.icone-picker-swatch.selecionada { border-color: var(--azul); background: var(--azul-claro); }
 
 /* ===== MODAIS ===== */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.5); z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
@@ -149,6 +156,8 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .captura-frame-area canvas { width: 100%; max-height: 260px; border-radius: 12px; background: #000; display: block; }
 .captura-frame-area input[type=range] { width: 100%; margin-top: 10px; accent-color: var(--azul); }
 .captura-tempos { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--cinza-400); margin-top: 4px; }
+.titulo-icone-inline { width: 1em; height: 1em; object-fit: contain; vertical-align: -0.14em; margin-right: 8px; }
+.titulo-icone-inline.pequeno { margin-right: 5px; }
 </style>
 </head>
 
@@ -185,8 +194,8 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   </div>
 
   <div class="top-tabs">
-    <button class="top-tab active" data-tab="modulos">🧩 Módulos &amp; Aulas</button>
-    <button class="top-tab" data-tab="estatisticas">📊 Estatísticas</button>
+    <button class="top-tab active" data-tab="modulos"><img class="titulo-icone-inline pequeno" src="img/icones/puzzle.svg" alt="">Módulos &amp; Aulas</button>
+    <button class="top-tab" data-tab="estatisticas"><img class="titulo-icone-inline pequeno" src="img/icones/estatisticas.svg" alt="">Estatísticas</button>
   </div>
 
   <!-- ===================== MÓDULOS & AULAS ===================== -->
@@ -236,7 +245,11 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <div class="campo"><label>Descrição</label><textarea id="moduloDescricao"></textarea></div>
     <div class="campo"><label>Curso (para agrupar o progresso do aluno)</label><input type="text" id="moduloCurso" placeholder="Ex.: A1, TCF, Aulas Especializadas"></div>
     <div class="campo-row">
-      <div class="campo"><label>Ícone (emoji)</label><input type="text" id="moduloIcone" placeholder="📘" maxlength="4"></div>
+      <div class="campo">
+        <label>Ícone</label>
+        <div class="icone-picker-swatches" id="moduloIconeSwatches"></div>
+        <input type="hidden" id="moduloIcone" value="book">
+      </div>
       <div class="campo">
         <label>Cor</label>
         <div class="cor-swatches" id="moduloCorSwatches"></div>
@@ -280,7 +293,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div id="videoUploadArea" style="display:none;">
         <div id="videoAtualInfo" style="margin-bottom:10px; font-size:0.85rem; color:var(--cinza-600);"></div>
         <div class="dropzone-video">
-          <div>🎬 Selecione o arquivo de vídeo (MP4, WebM ou OGG)</div>
+          <div><img class="titulo-icone-inline pequeno" src="img/icones/video.svg" alt="">Selecione o arquivo de vídeo (MP4, WebM ou OGG)</div>
           <input type="file" id="aulaVideoArquivo" accept="video/mp4,video/webm,video/ogg">
         </div>
         <div style="display:flex; gap:10px; margin-top:10px;">
@@ -301,12 +314,12 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       </div>
       <p id="thumbnailYoutubeNota" style="display:none; font-size:0.82rem; color:var(--cinza-600); margin-bottom:10px;">Este vídeo é do YouTube — a thumbnail oficial já é usada automaticamente. Envie uma imagem própria para substituí-la.</p>
       <div class="dropzone-video">
-        <div>🖼️ Selecione uma imagem (PNG, JPEG ou WebP)</div>
+        <div><img class="titulo-icone-inline pequeno" src="img/icones/image.svg" alt="">Selecione uma imagem (PNG, JPEG ou WebP)</div>
         <input type="file" id="thumbnailArquivo" accept="image/png,image/jpeg,image/webp">
       </div>
       <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
         <button class="btn pequeno" type="button" id="enviarThumbnailBtn">Enviar imagem</button>
-        <button class="btn pequeno secundario" type="button" id="capturarThumbnailBtn" style="display:none;">🎬 Capturar do vídeo</button>
+        <button class="btn pequeno secundario" type="button" id="capturarThumbnailBtn" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/video.svg" alt="">Capturar do vídeo</button>
         <button class="btn pequeno perigo" type="button" id="removerThumbnailBtn">Remover thumbnail</button>
       </div>
       <p class="field-error" id="thumbnailErro"></p>
@@ -359,6 +372,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
 <footer>© 2026 · Francês na Mira</footer>
 
+<script src="js/moduloIcones.js"></script>
 <script src="js/admin-aulas.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>

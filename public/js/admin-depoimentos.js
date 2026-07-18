@@ -7,7 +7,7 @@
     return h;
   }
   function fmtData(d) { return d ? new Date(d).toLocaleDateString("pt-BR") : "—"; }
-  function estrelas(n) { return "★".repeat(n) + "☆".repeat(5 - n); }
+  function estrelas(n) { let h = ""; for (let i = 1; i <= 5; i++) h += '<img src="img/icones/' + (i <= n ? "star-filled" : "star-empty") + '.svg" alt="" style="width:0.9em; height:0.9em;">'; return h; }
   function escapeHtml(s) {
     return (s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   }
@@ -40,7 +40,7 @@
       }
       tbody.innerHTML = depoimentos.map(d => {
         const foto = d.consentimento?.aceito ? (d.foto || d.alunoId?.perfil?.foto) : null;
-        const fotoHtml = foto ? `<img class="dep-foto" src="${foto}" alt="">` : '<span class="dep-sem-foto">👤</span>';
+        const fotoHtml = foto ? `<img class="dep-foto" src="${foto}" alt="">` : '<span class="dep-sem-foto"><img src="img/icones/profile.svg" alt="" style="width:60%; height:60%;"></span>';
         const plano = d.alunoId?.plano?.ativo ? d.alunoId.plano.tier : "—";
         return `<tr data-id="${d._id}">
           <td>${fotoHtml}</td>
@@ -49,7 +49,7 @@
           <td><strong>${escapeHtml(d.titulo)}</strong><br><span class="dep-texto-truncado">${escapeHtml(d.texto)}</span></td>
           <td class="dep-estrelas">${estrelas(d.nota)}</td>
           <td>${fmtData(d.criadoEm)}</td>
-          <td>${d.consentimento?.aceito ? "✓ Sim" : "✗ Não"}</td>
+          <td>${d.consentimento?.aceito ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Sim' : '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">Não'}</td>
           <td><button type="button" class="btn-outline btn-small" data-ver="${d._id}">Ver</button></td>
         </tr>`;
       }).join("");

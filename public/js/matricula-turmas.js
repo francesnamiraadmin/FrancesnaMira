@@ -88,7 +88,7 @@
     document.querySelector('.step[data-step="' + key + '"]').style.display = "block";
     document.getElementById("btnBack").style.visibility = index === 0 ? "hidden" : "visible";
     document.getElementById("btnNext").style.display = key === "pagamento" ? "none" : "inline-block";
-    document.getElementById("btnNext").innerHTML = 'Continuar <span class="arrow">→</span>';
+    document.getElementById("btnNext").innerHTML = 'Continuar <span class="arrow"><img src="img/icones/chevron-right.svg" alt="" style="width:0.9em; height:0.9em;"></span>';
     document.getElementById("btnNext").disabled = false;
     renderMira();
     hideTopError();
@@ -153,7 +153,7 @@
   function renderTurmaLista() {
     const lista = document.getElementById("turmaLista");
     if (!state.turmas.length) {
-      lista.innerHTML = '<div class="empty-state"><div class="icon">🎯</div>Nenhuma turma com vagas abertas no momento. Volte em breve ou fale com a gente para saber sobre as próximas turmas.</div>';
+      lista.innerHTML = '<div class="empty-state"><img class="icon" src="img/icones/personalizar.svg" alt="" style="width:2.2rem; height:2.2rem;">Nenhuma turma com vagas abertas no momento. Volte em breve ou fale com a gente para saber sobre as próximas turmas.</div>';
       return;
     }
     lista.innerHTML = state.turmas.map(t => {
@@ -205,7 +205,7 @@
           "<h3>" + tier + "</h3>" +
           '<p class="tier-preco">' + (preco !== null ? fmtMoeda(preco) + "<span>/mês</span>" : "Escolha uma turma") + "</p>" +
           "<ul>" + NOMES_BENEFICIO.map(b =>
-            '<li class="' + (beneficios[b.key] ? "feature-yes" : "feature-no") + '"><span class="feature-icon">' + (beneficios[b.key] ? "✓" : "✗") + "</span>" + b.label + "</li>"
+            '<li class="' + (beneficios[b.key] ? "feature-yes" : "feature-no") + '"><img class="feature-icon" src="img/icones/' + (beneficios[b.key] ? "check" : "x-mark") + '.svg" alt="" style="width:1.1em;height:1.1em;vertical-align:-0.15em;">' + b.label + "</li>"
           ).join("") + "</ul>" +
         "</label>"
       );
@@ -374,7 +374,7 @@
       const input = document.getElementById("pixCode");
       input.select();
       navigator.clipboard?.writeText(input.value).then(() => {
-        e.target.textContent = "Copiado ✓"; e.target.classList.add("copied");
+        e.target.innerHTML = "Copiado <img class=\"titulo-icone-inline pequeno\" src=\"img/icones/check.svg\" alt=\"\" style=\"margin-right:0;\">"; e.target.classList.add("copied");
         setTimeout(() => { e.target.textContent = "Copiar"; e.target.classList.remove("copied"); }, 1800);
       });
     }

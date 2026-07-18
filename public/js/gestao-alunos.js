@@ -5,8 +5,8 @@ const NOMES_STATUS = {
   devolvido: 'Devolvido', arquivado: 'Arquivado', cancelado: 'Cancelado'
 };
 const NOMES_HISTORICO_ICONE = {
-  conta_criada: '👤', primeiro_login: '🔑', primeira_producao: '✍️',
-  conclusao_curso: '🎓', mudanca_plano: '🔄', renovacao: '♻️'
+  conta_criada: 'profile', primeiro_login: 'key', primeira_producao: 'writing-hand',
+  conclusao_curso: 'cap', mudanca_plano: 'repeat', renovacao: 'repeat'
 };
 
 let alunoAtual = null;
@@ -256,7 +256,7 @@ function renderDetalhe(data) {
   const histEl = document.getElementById('historicoLista');
   histEl.innerHTML = data.historico.length ? data.historico.map(h => `
     <div class="timeline-item">
-      <div class="timeline-titulo">${NOMES_HISTORICO_ICONE[h.tipo] || '•'} ${h.titulo}</div>
+      <div class="timeline-titulo">${NOMES_HISTORICO_ICONE[h.tipo] ? `<img class="titulo-icone-inline pequeno" src="img/icones/${NOMES_HISTORICO_ICONE[h.tipo]}.svg" alt="">` : '• '}${h.titulo}</div>
       ${h.descricao ? `<div class="timeline-desc">${h.descricao}</div>` : ''}
       <div class="timeline-data">${new Date(h.data).toLocaleDateString('pt-BR')}</div>
     </div>`).join('') : '<div class="vazio-box">Sem eventos registrados.</div>';
@@ -282,7 +282,7 @@ function svgEvolucaoNotas(pontos) {
 
 function estrelasHtml(nota) {
   let html = '<span class="estrelas">';
-  for (let i = 1; i <= 5; i++) html += `<span class="${i <= nota ? 'cheia' : ''}">★</span>`;
+  for (let i = 1; i <= 5; i++) html += `<span class="${i <= nota ? 'cheia' : ''}"><img src="img/icones/${i <= nota ? 'star-filled' : 'star-empty'}.svg" alt="" style="width:1em; height:1em;"></span>`;
   return html + '</span>';
 }
 
@@ -302,8 +302,8 @@ function renderProducaoItem(p) {
     <div class="producao-corpo" id="prodCorpo${p._id}">
       ${p.textoDigitado ? `<div class="texto-box">${p.textoDigitado}</div>` : ''}
       <div class="arquivo-btn-row">
-        ${p.arquivoOriginal?.nome ? `<button class="btn secundario pequeno" data-baixar="${p._id}|original|${encodeURIComponent(p.arquivoOriginal.nome)}">📄 Baixar original</button>` : ''}
-        ${p.arquivoCorrigido?.nome ? `<button class="btn secundario pequeno" data-baixar="${p._id}|corrigido|${encodeURIComponent(p.arquivoCorrigido.nome)}">✅ Baixar corrigido</button>` : ''}
+        ${p.arquivoOriginal?.nome ? `<button class="btn secundario pequeno" data-baixar="${p._id}|original|${encodeURIComponent(p.arquivoOriginal.nome)}"><img class="titulo-icone-inline pequeno" src="img/icones/document.svg" alt="">Baixar original</button>` : ''}
+        ${p.arquivoCorrigido?.nome ? `<button class="btn secundario pequeno" data-baixar="${p._id}|corrigido|${encodeURIComponent(p.arquivoCorrigido.nome)}"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Baixar corrigido</button>` : ''}
       </div>
       ${p.observacoesAluno ? `<p style="font-size:0.86rem; color:var(--cinza-600); margin-bottom:10px;"><strong>Observações do aluno:</strong> ${p.observacoesAluno}</p>` : ''}
       ${p.avaliacao?.criterios?.length ? `
@@ -438,7 +438,7 @@ function renderDeveresLista() {
         </div>
         ${a.descricao ? `<p style="font-size:0.84rem; color:var(--cinza-600); margin:4px 0;">${a.descricao}</p>` : ''}
         ${a.entrega?.texto ? `<div class="texto-box" style="margin:8px 0; background:var(--cinza-100); padding:10px; border-radius:8px; font-size:0.85rem;">${a.entrega.texto}</div>` : ''}
-        ${a.entrega?.arquivo?.nome ? `<button class="btn secundario pequeno" data-baixar-entrega="${d._id}|${i}|${encodeURIComponent(a.entrega.arquivo.nome)}">📎 Baixar ${a.entrega.arquivo.nome}</button>` : ''}
+        ${a.entrega?.arquivo?.nome ? `<button class="btn secundario pequeno" data-baixar-entrega="${d._id}|${i}|${encodeURIComponent(a.entrega.arquivo.nome)}"><img class="titulo-icone-inline pequeno" src="img/icones/paperclip.svg" alt="">Baixar ${a.entrega.arquivo.nome}</button>` : ''}
         <div class="campo" style="margin-top:8px;">
           <label>Comentário do professor</label>
           <textarea data-comentario-input="${d._id}|${i}">${a.entrega?.comentarioProfessor || ''}</textarea>
@@ -482,7 +482,7 @@ document.getElementById('deveresLista').addEventListener('click', async e => {
     await fetch(`/api/deveres/deveres/${deverId}/atividades/${index}/comentario`, {
       method: 'PUT', headers: authHeadersDev(true), body: JSON.stringify({ comentario: textarea.value })
     });
-    comentarioBtn.textContent = 'Salvo ✓';
+    comentarioBtn.innerHTML = 'Salvo <img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="" style="margin-right:0;">';
     setTimeout(() => { comentarioBtn.textContent = 'Salvar comentário'; }, 1500);
     return;
   }

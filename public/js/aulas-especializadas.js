@@ -9,7 +9,7 @@ function escapeHtml(str) {
 }
 
 const NOMES_TIPO_MATERIAL = { pdf: 'PDF', imagem: 'Imagem', audio: 'Áudio', exercicio: 'Exercício', arquivo: 'Arquivo', link: 'Link' };
-const ICONES_TIPO_MATERIAL = { pdf: '📄', imagem: '🖼️', audio: '🎵', exercicio: '📝', arquivo: '📎', link: '🔗' };
+const ICONES_TIPO_MATERIAL = { pdf: 'document', imagem: 'image', audio: 'audio-file', exercicio: 'exercise-list', arquivo: 'paperclip', link: 'link' };
 
 let modulos = [];
 let aulasCache = {}; // moduloId -> [aulas resumidas]
@@ -63,7 +63,7 @@ function renderModulosSidebar() {
   wrap.innerHTML = modulos.map(m => `
     <div class="modulo-item${m._id === moduloExpandidoId ? ' expandido' : ''}${m.bloqueado ? ' bloqueado' : ''}" data-modulo-id="${m._id}">
       <div class="modulo-cabecalho" data-toggle-modulo="${m._id}">
-        <div class="modulo-icone" style="background:${m.cor}22; color:${m.cor};">${m.bloqueado ? '🔒' : (m.icone || '📘')}</div>
+        <div class="modulo-icone" style="background:${m.cor}22;"><img src="${m.bloqueado ? 'img/icones/lock.svg' : caminhoIconeModulo(m.icone)}" alt="" style="width:60%; height:60%; object-fit:contain;"></div>
         <div class="modulo-info">
           <div class="titulo">${escapeHtml(m.titulo)}</div>
           <div class="meta">${m.bloqueado ? 'Conclua o módulo anterior para desbloquear' : `${m.aulasConcluidas} de ${m.totalAulas} aulas · ${m.percentual}%`}</div>
@@ -140,7 +140,7 @@ function renderAulasGrade(moduloId) {
   const agora = Date.now();
   wrap.innerHTML = aulas.map((a, i) => {
     const ativa = aulaAtual && aulaAtual._id === a._id;
-    const statusIcone = a.concluida ? '✓' : (a.emAndamento ? '⏳' : '▶');
+    const statusIcone = a.concluida ? 'check' : (a.emAndamento ? 'history-clock' : 'play');
     const statusClasse = a.concluida ? 'assistida' : (a.emAndamento ? 'andamento' : '');
     const nova = a.criadoEm && (agora - new Date(a.criadoEm).getTime()) < 14 * 24 * 60 * 60 * 1000;
     const duracao = formatarDuracaoCurta(a.duracaoSegundos);
@@ -149,8 +149,8 @@ function renderAulasGrade(moduloId) {
     return `
     <div class="aula-card${ativa ? ' ativa' : ''}" data-abrir-aula="${a._id}" data-modulo-id="${moduloId}">
       <div class="aula-card-thumb" data-thumb-tipo="${a.thumbnailTipo}" data-thumb-valor="${escapeHtml(a.thumbnailValor || '')}" data-aula-id="${a._id}">
-        <div class="aula-card-thumb-placeholder" style="background:linear-gradient(160deg, ${modulo ? modulo.cor : '#2563eb'}33, ${modulo ? modulo.cor : '#2563eb'}11);">${modulo ? (modulo.icone || '📘') : '📘'}</div>
-        <div class="aula-card-overlay-play">▶</div>
+        <div class="aula-card-thumb-placeholder" style="background:linear-gradient(160deg, ${modulo ? modulo.cor : '#2563eb'}33, ${modulo ? modulo.cor : '#2563eb'}11);"><img src="${caminhoIconeModulo(modulo ? modulo.icone : null)}" alt="" style="width:44%; height:44%; object-fit:contain;"></div>
+        <div class="aula-card-overlay-play"><img src="img/icones/play.svg" alt="" style="width:48px; height:48px;"></div>
         <span class="aula-card-badge-status ${statusClasse}">${statusIcone}</span>
         ${nova ? '<span class="aula-card-badge-novo">Novo</span>' : ''}
         ${duracao ? `<span class="aula-card-badge-duracao">${duracao}</span>` : ''}
@@ -227,7 +227,7 @@ function renderAulaPrincipal() {
   document.getElementById('aulaDescricao').textContent = aulaAtual.descricao || '';
 
   const btnConcluir = document.getElementById('btnConcluir');
-  btnConcluir.textContent = aulaAtual.concluida ? '✓ Assistida' : '✓ Marcar como assistida';
+  btnConcluir.innerHTML = aulaAtual.concluida ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Assistida' : '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Marcar como assistida';
   btnConcluir.classList.toggle('concluida', aulaAtual.concluida);
 
   atualizarBotaoFavorito();
@@ -248,7 +248,7 @@ function renderAulaPrincipal() {
 function atualizarBotaoFavorito() {
   const btn = document.getElementById('btnFavoritar');
   const fav = favoritosIds.has(aulaAtual._id);
-  btn.textContent = fav ? '⭐ Favoritada' : '☆ Favoritar';
+  btn.innerHTML = fav ? '<img class="titulo-icone-inline pequeno" src="img/icones/star-filled.svg" alt="">Favoritada' : '<img class="titulo-icone-inline pequeno" src="img/icones/star-empty.svg" alt="">Favoritar';
   btn.classList.toggle('favoritada', fav);
 }
 
@@ -293,13 +293,13 @@ function renderMateriais() {
   lista.innerHTML = materiais.map(m => {
     if (m.tipo === 'link') {
       return `<a class="material-item-aluno" href="${escapeHtml(m.url)}" target="_blank" rel="noopener">
-        <span class="icone">${ICONES_TIPO_MATERIAL[m.tipo] || '📎'}</span>
+        <img class="icone" src="img/icones/${ICONES_TIPO_MATERIAL[m.tipo] || 'paperclip'}.svg" alt="">
         <span><span class="nome">${escapeHtml(m.nome)}</span><br><span class="tipo">${NOMES_TIPO_MATERIAL[m.tipo]}</span></span>
       </a>`;
     }
     const tamanho = m.tamanho ? ' · ' + (m.tamanho / 1024 / 1024).toFixed(1) + ' MB' : '';
     return `<div class="material-item-aluno" data-baixar-material="${m._id}">
-      <span class="icone">${ICONES_TIPO_MATERIAL[m.tipo] || '📎'}</span>
+      <img class="icone" src="img/icones/${ICONES_TIPO_MATERIAL[m.tipo] || 'paperclip'}.svg" alt="">
       <span><span class="nome">${escapeHtml(m.nome)}</span><br><span class="tipo">${NOMES_TIPO_MATERIAL[m.tipo]}${tamanho}</span></span>
     </div>`;
   }).join('');
@@ -365,7 +365,7 @@ async function carregarResumoProgresso() {
   if (r.ultimaAula && r.percentual < 100) {
     continuarWrap.style.display = 'block';
     const link = document.getElementById('continuarLink');
-    link.textContent = `Continuar: ${r.ultimaAula.titulo} →`;
+    link.innerHTML = `Continuar: ${r.ultimaAula.titulo}<img class="titulo-icone-inline pequeno" src="img/icones/chevron-right.svg" alt="" style="margin-right:0; margin-left:5px;">`;
     link.onclick = e => { e.preventDefault(); abrirAula(r.ultimaAula.aulaId, r.ultimaAula.moduloId); };
   } else {
     continuarWrap.style.display = 'none';
@@ -380,7 +380,7 @@ function atualizarCertificadoBanner(percentual, totalAulas) {
   if (percentual >= 100 && totalAulas > 0) {
     banner.style.display = 'flex';
     banner.className = 'certificado-banner';
-    banner.innerHTML = `<span>🎓 Parabéns! Você concluiu todas as aulas.</span><button type="button" id="btnVerCertificado">Ver certificado</button>`;
+    banner.innerHTML = `<span><img class="titulo-icone-inline pequeno" src="img/icones/cap.svg" alt="">Parabéns! Você concluiu todas as aulas.</span><button type="button" id="btnVerCertificado">Ver certificado</button>`;
     document.getElementById('btnVerCertificado').addEventListener('click', abrirCertificado);
   } else {
     banner.style.display = 'none';
@@ -396,7 +396,7 @@ async function abrirCertificado() {
   if (!res.ok) { conteudo.innerHTML = `<p>${escapeHtml(data.msg || 'Não foi possível emitir o certificado.')}</p>`; return; }
   const dataFormatada = new Date(data.emitidoEm).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
   conteudo.innerHTML = `
-    <div class="selo">🎓</div>
+    <div class="selo"><img src="img/icones/cap.svg" alt="" style="width:2.2rem; height:2.2rem;"></div>
     <h1>Certificado de Conclusão</h1>
     <div class="nome-aluno">${escapeHtml(data.nome)}</div>
     <p>concluiu com êxito todas as ${data.totalAulas} aulas da plataforma</p>
@@ -422,7 +422,7 @@ document.getElementById('btnFavoritos').addEventListener('click', async () => {
   const wrap = document.getElementById('favoritosLista');
   wrap.innerHTML = lista.length ? lista.map(f => `
     <div class="lista-simples-item" data-abrir-fav="${f._id}" data-modulo-fav="${f.moduloId || ''}">
-      <span class="icone">${f.moduloIcone || '📘'}</span>
+      <img class="icone" src="${caminhoIconeModulo(f.moduloIcone)}" alt="">
       <div class="info"><div class="titulo">${escapeHtml(f.titulo)}</div><div class="meta">${escapeHtml(f.moduloTitulo || '')}</div></div>
     </div>`).join('') : '<p style="opacity:0.7;">Você ainda não favoritou nenhuma aula.</p>';
 });
@@ -439,7 +439,7 @@ document.getElementById('btnHistorico').addEventListener('click', async () => {
   const wrap = document.getElementById('historicoLista');
   wrap.innerHTML = lista.length ? lista.map(h => `
     <div class="lista-simples-item" data-abrir-hist="${h.aulaId}" data-modulo-hist="${h.moduloId || ''}">
-      <span class="icone">${h.concluida ? '✅' : (h.moduloIcone || '📘')}</span>
+      <img class="icone" src="${h.concluida ? 'img/icones/check.svg' : caminhoIconeModulo(h.moduloIcone)}" alt="">
       <div class="info"><div class="titulo">${escapeHtml(h.aulaTitulo)}</div><div class="meta">${escapeHtml(h.moduloTitulo || '')} · ${new Date(h.ultimoAcessoEm).toLocaleDateString('pt-BR')}</div></div>
     </div>`).join('') : '<p style="opacity:0.7;">Nenhum histórico ainda.</p>';
 });

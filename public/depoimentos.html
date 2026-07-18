@@ -63,7 +63,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div class="dash-container">
 
   <div class="dash-section-card">
-    <h2>✍️ <span data-i18n="depoimentos.titulo">Depoimentos</span></h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/writing-hand.svg" alt=""><span data-i18n="depoimentos.titulo">Depoimentos</span></h2>
 
     <div class="campo">
       <label for="tituloInput" data-i18n="depoimentos.tituloCampo">Título</label>
@@ -78,7 +78,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     <div class="campo">
       <label data-i18n="depoimentos.notaCampo">Sua avaliação</label>
       <div class="estrelas" id="estrelasInput">
-        <span data-valor="1">★</span><span data-valor="2">★</span><span data-valor="3">★</span><span data-valor="4">★</span><span data-valor="5">★</span>
+        <span data-valor="1"><img src="img/icones/star-empty.svg" alt="" style="width:1em; height:1em;"></span><span data-valor="2"><img src="img/icones/star-empty.svg" alt="" style="width:1em; height:1em;"></span><span data-valor="3"><img src="img/icones/star-empty.svg" alt="" style="width:1em; height:1em;"></span><span data-valor="4"><img src="img/icones/star-empty.svg" alt="" style="width:1em; height:1em;"></span><span data-valor="5"><img src="img/icones/star-empty.svg" alt="" style="width:1em; height:1em;"></span>
       </div>
     </div>
 
@@ -118,7 +118,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   </div>
 
   <div class="dash-section-card">
-    <h2>📋 <span data-i18n="depoimentos.meusEnvios">Meus depoimentos enviados</span></h2>
+    <h2><img class="titulo-icone-inline" src="img/icones/exercise-list.svg" alt=""><span data-i18n="depoimentos.meusEnvios">Meus depoimentos enviados</span></h2>
     <div id="listaMeusDepoimentos"><div class="skeleton skeleton-line" style="width:100%;"></div></div>
   </div>
 
@@ -141,7 +141,11 @@ let fotoBase64 = null;
 document.querySelectorAll('#estrelasInput span').forEach(estrela => {
   estrela.addEventListener('click', () => {
     notaEscolhida = Number(estrela.dataset.valor);
-    document.querySelectorAll('#estrelasInput span').forEach(s => s.classList.toggle('ativa', Number(s.dataset.valor) <= notaEscolhida));
+    document.querySelectorAll('#estrelasInput span').forEach(s => {
+      const ativa = Number(s.dataset.valor) <= notaEscolhida;
+      s.classList.toggle('ativa', ativa);
+      s.querySelector('img').src = `img/icones/${ativa ? 'star-filled' : 'star-empty'}.svg`;
+    });
     atualizarBotaoEnvio();
   });
 });
@@ -209,7 +213,7 @@ document.getElementById('enviarBtn').addEventListener('click', async () => {
       document.getElementById('consentimentoCheck').checked = false;
       document.getElementById('fotoPreview').style.display = 'none';
       fotoBase64 = null; notaEscolhida = 0;
-      document.querySelectorAll('#estrelasInput span').forEach(s => s.classList.remove('ativa'));
+      document.querySelectorAll('#estrelasInput span').forEach(s => { s.classList.remove('ativa'); s.querySelector('img').src = 'img/icones/star-empty.svg'; });
       carregarMeusDepoimentos();
     }
   } catch (err) {
@@ -244,7 +248,7 @@ async function carregarMeusDepoimentos() {
           <h4>${escapeHtmlDep(d.titulo)}</h4>
           <span class="dash-status-tag ${info.classe}" data-i18n="${info.chave}">${window.I18n.t(info.chave) === info.chave ? info.label : window.I18n.t(info.chave)}</span>
         </div>
-        <div class="estrelas-view">${'★'.repeat(d.nota)}${'☆'.repeat(5 - d.nota)}</div>
+        <div class="estrelas-view">${Array.from({length:5}, (_, i) => `<img src="img/icones/${i < d.nota ? 'star-filled' : 'star-empty'}.svg" alt="" style="width:0.95em; height:0.95em;">`).join('')}</div>
         <p>${escapeHtmlDep(d.texto)}</p>
         <p style="margin-top:6px; font-size:0.78rem;">${new Date(d.criadoEm).toLocaleDateString('pt-BR')}${d.cursoOuPlano ? ' · ' + escapeHtmlDep(d.cursoOuPlano) : ''}</p>
       </div>`;

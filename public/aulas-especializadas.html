@@ -214,7 +214,7 @@ nav a:hover::after { width: 100%; }
   border-radius: 12px; margin-bottom: 8px; text-decoration: none; color: var(--text); cursor: pointer;
 }
 .material-item-aluno:hover { background: var(--glass-hover); }
-.material-item-aluno .icone { font-size: 1.3rem; }
+.material-item-aluno .icone { width: 22px; height: 22px; object-fit: contain; }
 .material-item-aluno .nome { font-weight: 600; font-size: 0.9rem; }
 .material-item-aluno .tipo { font-size: 0.75rem; opacity: 0.7; }
 
@@ -232,7 +232,7 @@ nav a:hover::after { width: 100%; }
   margin-bottom: 10px; cursor: pointer; background: var(--glass-bg-2);
 }
 .lista-simples-item:hover { background: var(--glass-hover); }
-.lista-simples-item .icone { font-size: 1.4rem; }
+.lista-simples-item .icone { width: 24px; height: 24px; object-fit: contain; }
 .lista-simples-item .info { flex: 1; }
 .lista-simples-item .titulo { font-weight: 700; font-size: 0.92rem; }
 .lista-simples-item .meta { font-size: 0.76rem; opacity: 0.7; margin-top: 2px; }
@@ -425,6 +425,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
 });
 </script>
 <script src="js/aulaPlayerEmbed.js"></script>
+<script src="js/moduloIcones.js"></script>
 <script src="js/aulas-especializadas.js"></script>
 <script src="js/appShell.js"></script>
 <script src="js/estudoTimerGlobal.js"></script>
