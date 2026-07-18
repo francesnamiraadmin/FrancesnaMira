@@ -344,5 +344,16 @@ if (window.DeverRealtime) {
   });
 }
 
+// Checkbox "Exibir barra do timer" — o listener é registrado aqui em cima
+// (script carregado antes de appShell.js) pra já estar pronto quando o
+// evento disparar, sem depender da ordem de carregamento dos scripts.
+document.addEventListener('appshell:ready', e => {
+  const prefs = (e.detail && e.detail.preferencias) || {};
+  document.getElementById('exibirBarraToggle').checked = prefs.exibirBarraTimer !== false;
+});
+document.getElementById('exibirBarraToggle').addEventListener('change', e => {
+  window.EstudoTimerGlobal.definirVisibilidade(e.target.checked);
+});
+
 carregarTudo();
 ligarAtualizacaoAoVivo();

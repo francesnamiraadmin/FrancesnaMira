@@ -340,24 +340,34 @@
 /* ===================== BARRA GLOBAL DO TIMER DE ESTUDOS ===================== */
 /* Território novo (nenhuma barra fixa existia antes) — reserva espaço no
    body pra não cobrir rodapé/botões enquanto a barra está visível. Aparece
-   só quando há sessão ativa (ver public/js/estudoTimerGlobal.js), incluída
-   em toda página logada, injetada via JS (mesmo padrão de montarModalFoto
-   em appShell.js) pra não exigir uma <div> vazia em cada página. z-index
-   abaixo do .app-modal-overlay (4000) e acima do .app-dropdown (2000). */
+   sempre que a preferência "exibir barra do timer" estiver ativa (ver
+   public/js/estudoTimerGlobal.js — estado de preparação quando não há
+   sessão, ou em execução/pausado quando há), incluída em toda página
+   logada, injetada via JS (mesmo padrão de montarModalFoto em appShell.js)
+   pra não exigir uma <div> vazia em cada página. z-index abaixo do
+   .app-modal-overlay (4000) e acima do .app-dropdown (2000). */
 body.tem-timer-ativo { padding-bottom: 88px; transition: padding-bottom 0.25s ease; }
 
+/* O container externo NUNCA recebe pointer-events — só o cartão interno
+   (.estudo-timer-bar-inner) — porque ele é fixed full-width (left:0;right:0)
+   por baixo da faixa inteira do rodapé pra poder centralizar o cartão, e
+   antes disso o pointer-events:auto do próprio container capturava cliques
+   em QUALQUER elemento fixed que caísse dentro da sua altura (ex.: o botão
+   de tema, também fixed no canto inferior direito) mesmo fora do cartão
+   visível — o clique nunca chegava no botão de tema enquanto a barra
+   estava presente. Ver public/css/theme.css#themeToggleBtn. */
 .estudo-timer-bar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 3000;
   display: flex; justify-content: center; padding: 0 16px 16px;
   opacity: 0; transform: translateY(16px); pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
-.estudo-timer-bar.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.estudo-timer-bar.show { opacity: 1; transform: translateY(0); }
 .estudo-timer-bar-inner {
   display: flex; align-items: center; gap: 18px; width: 100%; max-width: 640px;
   background: var(--overlay-strong); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border-strong); border-radius: 20px; padding: 12px 20px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow); pointer-events: auto;
 }
 .estudo-timer-bar.pausado .estudo-timer-bar-inner { opacity: 0.82; }
 .estudo-timer-info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
@@ -379,6 +389,25 @@ body.tem-timer-ativo { padding-bottom: 88px; transition: padding-bottom 0.25s ea
 .estudo-timer-btn.principal { background: var(--accent); color: var(--accent-text); }
 .estudo-timer-btn.perigo { background: var(--danger-bg); color: var(--danger-text); }
 
+/* ----- Estado "preparação": sem sessão ativa, pronta pra configurar e
+   iniciar direto da barra (Matéria/Conteúdo/Iniciar), sem sair da página
+   atual. Mesmo cartão .estudo-timer-bar-inner, conteúdo diferente. ----- */
+.estudo-timer-bar-inner.preparo { gap: 12px; }
+.estudo-timer-preparo-selects { display: flex; gap: 10px; flex: 1; min-width: 0; }
+.estudo-timer-select {
+  flex: 1; min-width: 0; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--glass-border);
+  background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.86rem;
+}
+.estudo-timer-select option { color: var(--accent-text); }
+.estudo-timer-btn-iniciar {
+  flex-shrink: 0; padding: 10px 20px; border-radius: 12px; border: none; background: var(--accent);
+  color: var(--accent-text); font-weight: 700; font-size: 0.88rem; cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.estudo-timer-btn-iniciar:hover:not(:disabled) { transform: scale(1.03); }
+.estudo-timer-btn-iniciar:disabled { opacity: 0.45; cursor: not-allowed; }
+.estudo-timer-preparo-vazio { flex: 1; font-size: 0.85rem; opacity: 0.8; }
+
 @media (max-width: 640px) {
   body.tem-timer-ativo { padding-bottom: 128px; }
   .estudo-timer-bar { padding: 0 10px 10px; }
@@ -386,6 +415,10 @@ body.tem-timer-ativo { padding-bottom: 88px; transition: padding-bottom 0.25s ea
   .estudo-timer-tempo { order: 3; width: 100%; text-align: center; }
   .estudo-timer-info { order: 1; }
   .estudo-timer-acoes { order: 2; margin-left: auto; }
+  .estudo-timer-bar-inner.preparo { flex-wrap: wrap; }
+  .estudo-timer-preparo-selects { order: 1; width: 100%; }
+  .estudo-timer-bar-inner.preparo .estudo-timer-tempo { order: 2; }
+  .estudo-timer-btn-iniciar { order: 3; margin-left: auto; }
 }
 
 /* ===================== ÍCONES SVG SUBSTITUINDO EMOJIS ===================== */

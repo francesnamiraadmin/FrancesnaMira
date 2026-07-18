@@ -475,13 +475,14 @@ router.put("/perfil", exigirAuth, async (req, res) => {
 // PREFERÊNCIAS (tema, idioma, notificações) — sincronizadas entre dispositivos
 router.put("/preferencias", exigirAuth, async (req, res) => {
   try {
-    const { tema, idioma, notificacoes } = req.body;
+    const { tema, idioma, notificacoes, exibirBarraTimer } = req.body;
     const user = await User.findById(req.userId);
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
     if (!user.preferencias) user.preferencias = {};
     if (tema && ["light", "dark"].includes(tema)) user.preferencias.tema = tema;
     if (idioma && ["pt-BR", "fr"].includes(idioma)) user.preferencias.idioma = idioma;
+    if (typeof exibirBarraTimer === "boolean") user.preferencias.exibirBarraTimer = exibirBarraTimer;
     if (notificacoes && typeof notificacoes === "object") {
       user.preferencias.notificacoes = { ...(user.preferencias.notificacoes || {}), ...notificacoes };
     }

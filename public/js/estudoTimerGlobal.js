@@ -1,14 +1,26 @@
 // =====================================================================
 // MAPEADOR DE ESTUDOS — barra de timer persistente (estilo mini-player),
 // serviço global incluído em toda página logada, sempre depois de
-// appShell.js. Só aparece quando existe uma sessão de estudo em
-// andamento; sobrevive à navegação entre páginas porque o estado real
-// mora no backend (GET /sessoes/ativa) — o elapsed é sempre matemática
-// pura sobre timestamps do servidor, nunca um contador local (mesmo
-// princípio de resiliência já usado no Timer, ver mapeadorTimer.js).
-// Expõe window.EstudoTimerGlobal.iniciarSessao(materiaId, conteudoId)
-// pra mapeador-timer.html iniciar uma sessão sem precisar recarregar a
-// página nem duplicar a lógica da barra.
+// appShell.js. Funciona como uma pequena máquina de estados:
+//   oculta       → preferência "exibir barra do timer" desligada, nunca
+//                  monta nada (o timer continua funcionando por trás —
+//                  ver nota sobre sessaoAtivaAtual() mais abaixo).
+//   preparação   → sem sessão ativa: mostra Matéria/Conteúdo/Iniciar,
+//                  pronta pra começar uma sessão de qualquer página.
+//   executando/
+//   pausado      → sessão ativa, igual ao comportamento original.
+// O estado real da sessão mora sempre no backend (GET /sessoes/ativa) —
+// elapsed é sempre matemática pura sobre timestamps do servidor, nunca um
+// contador local. Expõe:
+//   iniciarSessao(materiaId, conteudoId) — usado tanto pelos subcards de
+//     mapeador-timer.html quanto pelo botão Iniciar da própria barra (o
+//     mesmo caminho de código garante que a transição preparação→
+//     executando sempre liga o relógio na hora, sem travar em 00:00:00).
+//   sessaoAtivaAtual() — getter usado por mapeadorTimer.js pra somar o
+//     elapsed ao vivo nos cards, funciona mesmo com a barra oculta.
+//   definirVisibilidade(bool) — chamado pelo checkbox "Exibir barra do
+//     timer" em mapeador-timer.html; aplica na hora e sincroniza com
+//     /api/auth/preferencias.
 // =====================================================================
 window.EstudoTimerGlobal = (() => {
   function authHeaders(json) {
@@ -62,6 +74,21 @@ window.EstudoTimerGlobal = (() => {
   let materiaAtual = null;
   let conteudoAtual = null;
 
+  // Preferência do usuário (default true — nasce ligado, mesmo
+  // comportamento de antes de existir a preferência). Independente dela,
+  // sessaoAtiva continua sendo rastreada normalmente: é o que mantém
+  // sessaoAtivaAtual() funcionando pros cards ao vivo de mapeadorTimer.js
+  // quando o usuário desliga a barra.
+  let exibirBarra = true;
+
+  // Dados do estado "preparação" — carregados uma vez no appshell:ready
+  // (independente de exibirBarra, pra ligar o checkbox mostrar a barra na
+  // hora, sem esperar um fetch) e cacheados por matéria.
+  let materiasDisponiveis = [];
+  const conteudosPorMateriaCache = new Map();
+  let materiaSelecionadaId = null;
+  let conteudoSelecionadoId = null;
+
   async function buscarNomes(sessao) {
     try {
       const [resM, resC] = await Promise.all([
@@ -75,12 +102,66 @@ window.EstudoTimerGlobal = (() => {
     } catch (err) { materiaAtual = null; conteudoAtual = null; }
   }
 
-  // ===================== BARRA =====================
+  async function carregarMaterias() {
+    try {
+      const res = await fetch('/api/estudos/materias', { headers: authHeaders() });
+      materiasDisponiveis = res.ok ? await res.json() : [];
+    } catch (err) { materiasDisponiveis = []; }
+  }
 
-  function montarBarra() {
+  async function carregarConteudosDe(materiaId) {
+    if (conteudosPorMateriaCache.has(materiaId)) return conteudosPorMateriaCache.get(materiaId);
+    try {
+      const res = await fetch('/api/estudos/conteudos?materiaId=' + materiaId, { headers: authHeaders() });
+      const lista = res.ok ? await res.json() : [];
+      conteudosPorMateriaCache.set(materiaId, lista);
+      return lista;
+    } catch (err) { return []; }
+  }
+
+  // ===================== CONTAINER (comum aos estados) =====================
+
+  function garantirContainer() {
     if (barraEl) return;
     barraEl = document.createElement('div');
     barraEl.className = 'estudo-timer-bar';
+    document.body.appendChild(barraEl);
+    document.body.classList.add('tem-timer-ativo');
+    // Força um reflow antes de adicionar .show, pra garantir que a transição de
+    // entrada rode de verdade — requestAnimationFrame não é confiável aqui porque
+    // esta barra pode ser montada com a aba em segundo plano (ex.: verificarSessaoAtiva
+    // rodando ao carregar uma página que não está em foco no momento).
+    void barraEl.offsetHeight;
+    barraEl.classList.add('show');
+  }
+
+  function removerBarra() {
+    pararRelogio();
+    if (!barraEl) return;
+    barraEl.classList.remove('show');
+    document.body.classList.remove('tem-timer-ativo');
+    const el = barraEl;
+    barraEl = null;
+    setTimeout(() => el.remove(), 250);
+  }
+
+  // Decide o que desenhar dado o estado atual (chamado sempre que algo
+  // muda: preferência, sessão iniciada/pausada/finalizada/cancelada).
+  async function aplicarEstadoVisual() {
+    if (!exibirBarra) { removerBarra(); return; }
+    if (sessaoAtiva) {
+      montarBarraSessao();
+    } else {
+      await montarBarraPreparacao();
+    }
+  }
+
+  // ===================== ESTADO: EXECUTANDO / PAUSADO =====================
+
+  function montarBarraSessao() {
+    garantirContainer();
+    pararRelogio();
+    barraEl.classList.remove('pausado');
     barraEl.innerHTML = `
       <div class="estudo-timer-bar-inner">
         <div class="estudo-timer-info">
@@ -90,7 +171,7 @@ window.EstudoTimerGlobal = (() => {
             <span class="estudo-timer-conteudo" id="estudoTimerConteudo">—</span>
           </div>
         </div>
-        <div class="estudo-timer-tempo" id="estudoTimerTempo">00:00</div>
+        <div class="estudo-timer-tempo" id="estudoTimerTempo">00:00:00</div>
         <div class="estudo-timer-acoes">
           <button type="button" class="estudo-timer-btn" id="estudoTimerPausar" title="Pausar"><img src="img/icones/pause.svg" alt="" style="width:18px; height:18px;"></button>
           <button type="button" class="estudo-timer-btn" id="estudoTimerContinuar" title="Continuar" style="display:none;"><img src="img/icones/play.svg" alt="" style="width:20px; height:20px;"></button>
@@ -98,47 +179,43 @@ window.EstudoTimerGlobal = (() => {
           <button type="button" class="estudo-timer-btn perigo" id="estudoTimerCancelar" title="Cancelar"><img src="img/icones/x-mark.svg" alt="" style="width:18px; height:18px;"></button>
         </div>
       </div>`;
-    document.body.appendChild(barraEl);
-    document.body.classList.add('tem-timer-ativo');
-    // Força um reflow antes de adicionar .show, pra garantir que a transição de
-    // entrada rode de verdade — requestAnimationFrame não é confiável aqui porque
-    // esta barra pode ser montada com a aba em segundo plano (ex.: verificarSessaoAtiva
-    // rodando ao carregar uma página que não está em foco no momento).
-    void barraEl.offsetHeight;
-    barraEl.classList.add('show');
 
     barraEl.querySelector('#estudoTimerPausar').addEventListener('click', pausar);
     barraEl.querySelector('#estudoTimerContinuar').addEventListener('click', continuar);
     barraEl.querySelector('#estudoTimerFinalizar').addEventListener('click', abrirModalFinalizar);
     barraEl.querySelector('#estudoTimerCancelar').addEventListener('click', abrirModalCancelar);
-  }
 
-  function removerBarra() {
-    if (!barraEl) return;
-    barraEl.classList.remove('show');
-    document.body.classList.remove('tem-timer-ativo');
-    const el = barraEl;
-    barraEl = null;
-    setTimeout(() => el.remove(), 250);
+    atualizarInfo();
+    atualizarTempo();
+    atualizarBotoesPausa();
+    ligarRelogio();
   }
 
   function atualizarInfo() {
     if (!barraEl) return;
-    barraEl.querySelector('#estudoTimerDot').style.background = materiaAtual ? materiaAtual.cor : 'var(--accent)';
-    barraEl.querySelector('#estudoTimerMateria').textContent = materiaAtual ? materiaAtual.nome : '—';
-    barraEl.querySelector('#estudoTimerConteudo').textContent = conteudoAtual ? conteudoAtual.nome : '—';
+    const dot = barraEl.querySelector('#estudoTimerDot');
+    const materiaEl = barraEl.querySelector('#estudoTimerMateria');
+    const conteudoEl = barraEl.querySelector('#estudoTimerConteudo');
+    if (!dot || !materiaEl || !conteudoEl) return;
+    dot.style.background = materiaAtual ? materiaAtual.cor : 'var(--accent)';
+    materiaEl.textContent = materiaAtual ? materiaAtual.nome : '—';
+    conteudoEl.textContent = conteudoAtual ? conteudoAtual.nome : '—';
   }
 
   function atualizarTempo() {
     if (!barraEl || !sessaoAtiva) return;
-    barraEl.querySelector('#estudoTimerTempo').textContent = formatarHMS(calcularElapsedMs(sessaoAtiva));
+    const tempoEl = barraEl.querySelector('#estudoTimerTempo');
+    if (tempoEl) tempoEl.textContent = formatarHMS(calcularElapsedMs(sessaoAtiva));
   }
 
   function atualizarBotoesPausa() {
     if (!barraEl || !sessaoAtiva) return;
     const pausada = estaPausada(sessaoAtiva);
-    barraEl.querySelector('#estudoTimerPausar').style.display = pausada ? 'none' : 'inline-flex';
-    barraEl.querySelector('#estudoTimerContinuar').style.display = pausada ? 'inline-flex' : 'none';
+    const btnPausar = barraEl.querySelector('#estudoTimerPausar');
+    const btnContinuar = barraEl.querySelector('#estudoTimerContinuar');
+    if (!btnPausar || !btnContinuar) return;
+    btnPausar.style.display = pausada ? 'none' : 'inline-flex';
+    btnContinuar.style.display = pausada ? 'inline-flex' : 'none';
     barraEl.classList.toggle('pausado', pausada);
   }
 
@@ -152,6 +229,72 @@ window.EstudoTimerGlobal = (() => {
   async function continuar() {
     const res = await fetch(`/api/estudos/sessoes/${sessaoAtiva._id}/continuar`, { method: 'POST', headers: authHeaders() });
     if (res.ok) { sessaoAtiva = await res.json(); atualizarBotoesPausa(); atualizarTempo(); }
+  }
+
+  // ===================== ESTADO: PREPARAÇÃO =====================
+
+  async function montarBarraPreparacao() {
+    garantirContainer();
+    pararRelogio();
+    barraEl.classList.remove('pausado');
+
+    if (!materiasDisponiveis.length) await carregarMaterias();
+    if (materiaSelecionadaId && !materiasDisponiveis.some(m => m._id === materiaSelecionadaId)) materiaSelecionadaId = null;
+    if (!materiaSelecionadaId && materiasDisponiveis.length) materiaSelecionadaId = materiasDisponiveis[0]._id;
+
+    if (!materiasDisponiveis.length) {
+      barraEl.innerHTML = `
+        <div class="estudo-timer-bar-inner preparo">
+          <span class="estudo-timer-preparo-vazio">Crie uma matéria no Timer de Estudos para começar.</span>
+          <div class="estudo-timer-tempo">00:00:00</div>
+          <button type="button" class="estudo-timer-btn-iniciar" disabled>Iniciar</button>
+        </div>`;
+      return;
+    }
+
+    const conteudos = await carregarConteudosDe(materiaSelecionadaId);
+    if (conteudoSelecionadoId && !conteudos.some(c => c._id === conteudoSelecionadoId)) conteudoSelecionadoId = null;
+    if (!conteudoSelecionadoId && conteudos.length) conteudoSelecionadoId = conteudos[0]._id;
+
+    const opcoesMateria = materiasDisponiveis
+      .map(m => `<option value="${m._id}" ${m._id === materiaSelecionadaId ? 'selected' : ''}>${escapeHtml(m.nome)}</option>`)
+      .join('');
+    const opcoesConteudo = conteudos.length
+      ? conteudos.map(c => `<option value="${c._id}" ${c._id === conteudoSelecionadoId ? 'selected' : ''}>${escapeHtml(c.nome)}</option>`).join('')
+      : `<option value="">Sem conteúdos</option>`;
+
+    barraEl.innerHTML = `
+      <div class="estudo-timer-bar-inner preparo">
+        <div class="estudo-timer-preparo-selects">
+          <select class="estudo-timer-select" id="estudoTimerSelectMateria">${opcoesMateria}</select>
+          <select class="estudo-timer-select" id="estudoTimerSelectConteudo">${opcoesConteudo}</select>
+        </div>
+        <div class="estudo-timer-tempo">00:00:00</div>
+        <button type="button" class="estudo-timer-btn-iniciar" id="estudoTimerBtnIniciar" ${conteudos.length ? '' : 'disabled'}>Iniciar</button>
+      </div>`;
+
+    barraEl.querySelector('#estudoTimerSelectMateria').addEventListener('change', async e => {
+      materiaSelecionadaId = e.target.value;
+      conteudoSelecionadoId = null;
+      await montarBarraPreparacao();
+    });
+    const selectConteudo = barraEl.querySelector('#estudoTimerSelectConteudo');
+    if (selectConteudo && conteudos.length) {
+      selectConteudo.addEventListener('change', e => { conteudoSelecionadoId = e.target.value; });
+    }
+    const btnIniciar = barraEl.querySelector('#estudoTimerBtnIniciar');
+    if (btnIniciar) {
+      btnIniciar.addEventListener('click', async () => {
+        btnIniciar.disabled = true;
+        btnIniciar.textContent = 'Iniciando...';
+        const resultado = await iniciarSessao(materiaSelecionadaId, conteudoSelecionadoId);
+        if (!resultado.ok) {
+          alert(resultado.msg || 'Erro ao iniciar sessão.');
+          btnIniciar.disabled = false;
+          btnIniciar.textContent = 'Iniciar';
+        }
+      });
+    }
   }
 
   // ===================== MODAIS (criados/anexados sob demanda, mesmo
@@ -190,9 +333,8 @@ window.EstudoTimerGlobal = (() => {
         const data = await res.json();
         if (!res.ok) { overlay.querySelector('#estudoModalFinalizarMsg').textContent = data.msg || 'Erro ao finalizar.'; return; }
         fechar();
-        pararRelogio();
         sessaoAtiva = null; materiaAtual = null; conteudoAtual = null;
-        removerBarra();
+        await aplicarEstadoVisual();
         // O SSE ("sessao-estudo-finalizada", ver backend/utils/sse.js) atualiza
         // histórico/estatísticas/cards em qualquer aba aberta, incluindo esta.
       } catch (err) {
@@ -223,15 +365,17 @@ window.EstudoTimerGlobal = (() => {
     overlay.querySelector('#estudoModalCancelarConfirmar').addEventListener('click', async () => {
       try { await fetch(`/api/estudos/sessoes/${sessaoAtiva._id}/cancelar`, { method: 'POST', headers: authHeaders() }); } catch (err) { /* segue removendo a barra mesmo assim */ }
       fechar();
-      pararRelogio();
       sessaoAtiva = null; materiaAtual = null; conteudoAtual = null;
-      removerBarra();
+      await aplicarEstadoVisual();
     });
   }
 
   // ===================== API PÚBLICA =====================
 
-  // Chamado por mapeador-timer.html ao clicar "Iniciar" num subcard de Conteúdo.
+  // Chamado por mapeador-timer.html (subcard de Conteúdo) E pelo botão
+  // Iniciar do estado "preparação" da própria barra — único caminho de
+  // código pra criar uma sessão, garantindo que o relógio sempre liga na
+  // hora, sem depender de duas implementações separadas.
   async function iniciarSessao(materiaId, conteudoId) {
     try {
       const res = await fetch('/api/estudos/sessoes/iniciar', {
@@ -245,11 +389,7 @@ window.EstudoTimerGlobal = (() => {
       }
       sessaoAtiva = data;
       await buscarNomes(sessaoAtiva);
-      montarBarra();
-      atualizarInfo();
-      atualizarTempo();
-      atualizarBotoesPausa();
-      ligarRelogio();
+      await aplicarEstadoVisual();
       return { ok: true, sessao: data };
     } catch (err) {
       return { ok: false, msg: 'Erro ao conectar ao servidor.' };
@@ -258,22 +398,39 @@ window.EstudoTimerGlobal = (() => {
 
   function sessaoAtivaAtual() { return sessaoAtiva; }
 
+  // Chamado pelo checkbox "Exibir barra do timer" (mapeador-timer.html).
+  // Aplica na hora — mostra/esconde a barra sem esperar reload nem round-trip
+  // — e sincroniza a preferência com a conta em paralelo (mesmo padrão
+  // local-apply-then-sync de theme-toggle.js).
+  async function definirVisibilidade(ligado) {
+    exibirBarra = !!ligado;
+    aplicarEstadoVisual();
+    try {
+      await fetch('/api/auth/preferencias', {
+        method: 'PUT', headers: authHeaders(true),
+        body: JSON.stringify({ exibirBarraTimer: exibirBarra })
+      });
+    } catch (err) { /* silencioso */ }
+  }
+
   async function verificarSessaoAtiva() {
     try {
       const res = await fetch('/api/estudos/sessoes/ativa', { headers: authHeaders() });
-      const sessao = res.ok ? await res.json() : null;
-      if (!sessao) return;
-      sessaoAtiva = sessao;
-      await buscarNomes(sessaoAtiva);
-      montarBarra();
-      atualizarInfo();
-      atualizarTempo();
-      atualizarBotoesPausa();
-      ligarRelogio();
-    } catch (err) { /* sem barra se a checagem falhar — não é crítico */ }
+      sessaoAtiva = res.ok ? await res.json() : null;
+      if (sessaoAtiva) await buscarNomes(sessaoAtiva);
+    } catch (err) { sessaoAtiva = null; /* sem barra se a checagem falhar — não é crítico */ }
   }
 
-  document.addEventListener('appshell:ready', verificarSessaoAtiva);
+  document.addEventListener('appshell:ready', async e => {
+    const prefs = (e.detail && e.detail.preferencias) || {};
+    exibirBarra = prefs.exibirBarraTimer !== false;
+    // Sempre carrega sessão ativa e matérias, independente da preferência —
+    // é o que deixa o checkbox "ligar" instantâneo em qualquer página, e
+    // mantém sessaoAtivaAtual() funcionando pros cards ao vivo de
+    // mapeadorTimer.js mesmo com a barra oculta.
+    await Promise.all([verificarSessaoAtiva(), carregarMaterias()]);
+    await aplicarEstadoVisual();
+  });
 
-  return { iniciarSessao, sessaoAtivaAtual };
+  return { iniciarSessao, sessaoAtivaAtual, definirVisibilidade };
 })();
