@@ -189,10 +189,10 @@ window.EstudoTimerGlobal = (() => {
         </div>
         <div class="estudo-timer-tempo" id="estudoTimerTempo">00:00:00</div>
         <div class="estudo-timer-acoes">
-          <button type="button" class="estudo-timer-btn" id="estudoTimerPausar" title="Pausar"><img src="img/icones/pause.svg" alt="" style="width:18px; height:18px;"></button>
-          <button type="button" class="estudo-timer-btn" id="estudoTimerContinuar" title="Continuar" style="display:none;"><img src="img/icones/play.svg" alt="" style="width:20px; height:20px;"></button>
-          <button type="button" class="estudo-timer-btn principal" id="estudoTimerFinalizar" title="Finalizar"><img src="img/icones/check.svg" alt="" style="width:18px; height:18px;"></button>
-          <button type="button" class="estudo-timer-btn perigo" id="estudoTimerCancelar" title="Cancelar"><img src="img/icones/x-mark.svg" alt="" style="width:18px; height:18px;"></button>
+          <button type="button" class="estudo-timer-btn" id="estudoTimerPausar" title="Pausar"><img src="img/icones/pause.svg" alt="" style="width:16px; height:16px;"><span>Pausar</span></button>
+          <button type="button" class="estudo-timer-btn" id="estudoTimerContinuar" title="Continuar" style="display:none;"><img src="img/icones/play.svg" alt="" style="width:16px; height:16px;"><span>Continuar</span></button>
+          <button type="button" class="estudo-timer-btn principal" id="estudoTimerFinalizar" title="Registrar"><img src="img/icones/check.svg" alt="" style="width:16px; height:16px;"><span>Registrar</span></button>
+          <button type="button" class="estudo-timer-btn perigo" id="estudoTimerCancelar" title="Cancelar"><img src="img/icones/x-mark.svg" alt="" style="width:16px; height:16px;"><span>Cancelar</span></button>
         </div>
       </div>`;
 

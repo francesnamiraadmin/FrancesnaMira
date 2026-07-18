@@ -346,7 +346,7 @@
    logada, injetada via JS (mesmo padrão de montarModalFoto em appShell.js)
    pra não exigir uma <div> vazia em cada página. z-index abaixo do
    .app-modal-overlay (4000) e acima do .app-dropdown (2000). */
-body.tem-timer-ativo { padding-bottom: 88px; transition: padding-bottom 0.25s ease; }
+body.tem-timer-ativo { padding-bottom: 104px; transition: padding-bottom 0.25s ease; }
 
 /* O container externo NUNCA recebe pointer-events — só o cartão interno
    (.estudo-timer-bar-inner) — porque ele é fixed full-width (left:0;right:0)
@@ -364,57 +364,59 @@ body.tem-timer-ativo { padding-bottom: 88px; transition: padding-bottom 0.25s ea
 }
 .estudo-timer-bar.show { opacity: 1; transform: translateY(0); }
 .estudo-timer-bar-inner {
-  display: flex; align-items: center; gap: 18px; width: 100%; max-width: 640px;
+  display: flex; align-items: center; gap: 22px; width: 100%; max-width: 720px;
   background: var(--overlay-strong); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border-strong); border-radius: 20px; padding: 12px 20px;
+  border: 1px solid var(--glass-border-strong); border-radius: 22px; padding: 16px 26px;
   box-shadow: var(--shadow); pointer-events: auto;
 }
 .estudo-timer-bar.pausado .estudo-timer-bar-inner { opacity: 0.82; }
-.estudo-timer-info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
-.estudo-timer-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.estudo-timer-info { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+.estudo-timer-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
 .estudo-timer-labels { display: flex; flex-direction: column; min-width: 0; }
-.estudo-timer-materia { font-weight: 700; font-size: 0.92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.estudo-timer-conteudo { font-size: 0.8rem; opacity: 0.75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.estudo-timer-materia { font-weight: 700; font-size: 1.02rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.estudo-timer-conteudo { font-size: 0.88rem; opacity: 0.75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .estudo-timer-tempo {
   font-family: 'Playfair Display', serif; font-variant-numeric: tabular-nums;
-  font-size: 1.15rem; font-weight: 700; flex-shrink: 0;
+  font-size: 1.4rem; font-weight: 700; flex-shrink: 0;
 }
-.estudo-timer-acoes { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.estudo-timer-acoes { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .estudo-timer-btn {
-  width: 38px; height: 38px; border-radius: 50%; border: none; background: var(--glass-hover); color: var(--text);
-  font-size: 1rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  height: 44px; padding: 0 18px; border-radius: 14px; border: none; background: var(--glass-hover); color: var(--text);
+  font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.88rem; white-space: nowrap; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   transition: transform 0.15s ease, background 0.15s ease;
 }
-.estudo-timer-btn:hover { transform: scale(1.08); background: var(--glass-border-strong); }
+.estudo-timer-btn:hover { transform: scale(1.04); background: var(--glass-border-strong); }
 .estudo-timer-btn.principal { background: var(--accent); color: var(--accent-text); }
 .estudo-timer-btn.perigo { background: var(--danger-bg); color: var(--danger-text); }
 
 /* ----- Estado "preparação": sem sessão ativa, pronta pra configurar e
    iniciar direto da barra (Matéria/Conteúdo/Iniciar), sem sair da página
    atual. Mesmo cartão .estudo-timer-bar-inner, conteúdo diferente. ----- */
-.estudo-timer-bar-inner.preparo { gap: 12px; }
+.estudo-timer-bar-inner.preparo { gap: 14px; }
 .estudo-timer-preparo-selects { display: flex; gap: 10px; flex: 1; min-width: 0; }
 .estudo-timer-select {
-  flex: 1; min-width: 0; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--glass-border);
-  background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.86rem;
+  flex: 1; min-width: 0; padding: 11px 14px; border-radius: 12px; border: 1px solid var(--glass-border);
+  background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.92rem;
 }
 .estudo-timer-select option { color: var(--accent-text); }
 .estudo-timer-btn-iniciar {
-  flex-shrink: 0; padding: 10px 20px; border-radius: 12px; border: none; background: var(--accent);
-  color: var(--accent-text); font-weight: 700; font-size: 0.88rem; cursor: pointer;
+  flex-shrink: 0; height: 44px; padding: 0 26px; border-radius: 14px; border: none; background: var(--accent);
+  color: var(--accent-text); font-weight: 700; font-size: 0.92rem; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
 .estudo-timer-btn-iniciar:hover:not(:disabled) { transform: scale(1.03); }
 .estudo-timer-btn-iniciar:disabled { opacity: 0.45; cursor: not-allowed; }
-.estudo-timer-preparo-vazio { flex: 1; font-size: 0.85rem; opacity: 0.8; }
+.estudo-timer-preparo-vazio { flex: 1; font-size: 0.9rem; opacity: 0.8; }
 
 @media (max-width: 640px) {
-  body.tem-timer-ativo { padding-bottom: 128px; }
+  body.tem-timer-ativo { padding-bottom: 168px; }
   .estudo-timer-bar { padding: 0 10px 10px; }
-  .estudo-timer-bar-inner { flex-wrap: wrap; padding: 12px 14px; gap: 10px; }
+  .estudo-timer-bar-inner { flex-wrap: wrap; padding: 14px 16px; gap: 12px; }
   .estudo-timer-tempo { order: 3; width: 100%; text-align: center; }
   .estudo-timer-info { order: 1; }
-  .estudo-timer-acoes { order: 2; margin-left: auto; }
+  .estudo-timer-acoes { order: 2; width: 100%; flex-wrap: wrap; justify-content: flex-end; }
   .estudo-timer-bar-inner.preparo { flex-wrap: wrap; }
   .estudo-timer-preparo-selects { order: 1; width: 100%; }
   .estudo-timer-bar-inner.preparo .estudo-timer-tempo { order: 2; }

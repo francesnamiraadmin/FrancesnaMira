@@ -247,7 +247,7 @@ async function salvarMateria() {
 }
 
 async function apagarMateria(id) {
-  if (!confirm('Apagar esta matéria? Isso só é possível se ela não tiver conteúdos.')) return;
+  if (!confirm('Apagar esta matéria? Os conteúdos dela também serão apagados. As sessões de estudo já registradas continuam no seu histórico.')) return;
   const res = await fetch(`/api/estudos/materias/${id}`, { method: 'DELETE', headers: authHeaders() });
   const data = await res.json();
   if (!res.ok) { alert(data.msg || 'Erro ao apagar.'); return; }
@@ -290,7 +290,7 @@ async function salvarConteudo() {
 }
 
 async function apagarConteudo(id) {
-  if (!confirm('Apagar este conteúdo? Isso só é possível se ele não tiver sessões de estudo registradas.')) return;
+  if (!confirm('Apagar este conteúdo? As sessões de estudo já registradas continuam no seu histórico.')) return;
   const res = await fetch(`/api/estudos/conteudos/${id}`, { method: 'DELETE', headers: authHeaders() });
   const data = await res.json();
   if (!res.ok) { alert(data.msg || 'Erro ao apagar.'); return; }

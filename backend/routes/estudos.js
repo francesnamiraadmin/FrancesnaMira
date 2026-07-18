@@ -136,12 +136,17 @@ router.put("/materias/:id", async (req, res) => {
   }
 });
 
+// Apaga a matéria mesmo que já tenha conteúdos/sessões registradas — os
+// conteúdos dela são apagados junto (cascade), mas as SessaoEstudo em si
+// NUNCA são apagadas (nem aqui nem em /conteudos/:id): ficam órfãs de
+// propósito, e Histórico/Estatísticas já sabem mostrá-las como "Matéria
+// removida"/"Conteúdo removido" (ver GET /sessoes e GET /estatisticas
+// acima) — o registro de tempo estudado do usuário nunca desaparece.
 router.delete("/materias/:id", async (req, res) => {
   try {
     const materia = await MateriaEstudo.findOne({ _id: req.params.id, userId: req.userId });
     if (!materia) return res.status(404).json({ msg: "Matéria não encontrada." });
-    const temConteudos = await ConteudoEstudo.countDocuments({ materiaId: materia._id });
-    if (temConteudos) return res.status(400).json({ msg: "Remova os conteúdos desta matéria antes de apagá-la." });
+    await ConteudoEstudo.deleteMany({ materiaId: materia._id, userId: req.userId });
     await MateriaEstudo.deleteOne({ _id: materia._id });
     res.json({ msg: "Matéria removida." });
   } catch (err) {
@@ -215,12 +220,12 @@ router.put("/conteudos/:id", async (req, res) => {
   }
 });
 
+// Apaga o conteúdo mesmo que já tenha sessões de estudo registradas — as
+// SessaoEstudo continuam existindo (ver comentário em DELETE /materias/:id).
 router.delete("/conteudos/:id", async (req, res) => {
   try {
     const conteudo = await ConteudoEstudo.findOne({ _id: req.params.id, userId: req.userId });
     if (!conteudo) return res.status(404).json({ msg: "Conteúdo não encontrado." });
-    const temSessoes = await SessaoEstudo.countDocuments({ conteudoId: conteudo._id });
-    if (temSessoes) return res.status(400).json({ msg: "Este conteúdo já tem sessões de estudo registradas e não pode ser apagado." });
     await ConteudoEstudo.deleteOne({ _id: conteudo._id });
     res.json({ msg: "Conteúdo removido." });
   } catch (err) {
