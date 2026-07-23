@@ -23,6 +23,32 @@ let periodoAtual = 'diurno';
 let gradeCompleta = [];
 let slotSelecionado = null;
 
+// ===================== TIPOS DE AULA (filtro por curso) =====================
+const TIPOS_CURSO = ["TCF", "DELF", "DALF", "TEF", "A1", "A2", "B1", "B2"];
+
+function montarTiposChips(containerId) {
+  document.getElementById(containerId).innerHTML = TIPOS_CURSO.map(t =>
+    '<label class="tipo-chip"><input type="checkbox" value="' + t + '"> ' + t + '</label>'
+  ).join('');
+}
+function marcarCursos(containerId, cursos) {
+  const set = new Set(cursos || []);
+  document.querySelectorAll('#' + containerId + ' input').forEach(inp => {
+    inp.checked = set.has(inp.value);
+    inp.closest('.tipo-chip').classList.toggle('checked', inp.checked);
+  });
+}
+function lerCursosMarcados(containerId) {
+  return Array.from(document.querySelectorAll('#' + containerId + ' input:checked')).map(i => i.value);
+}
+document.addEventListener('change', e => {
+  const chip = e.target.closest('.tipo-chip');
+  if (!chip) return;
+  chip.classList.toggle('checked', e.target.checked);
+});
+montarTiposChips('novoCursosGrid');
+montarTiposChips('detalheCursosGrid');
+
 // ===================== TABS =====================
 document.querySelectorAll('.top-tab').forEach(tab => {
   tab.addEventListener('click', () => {
@@ -71,7 +97,8 @@ function renderGrade() {
         return;
       }
       const classe = slot.ativo === false ? 'inativo' : (slot.ocupadas >= slot.capacidadeMaxima ? 'ocupado' : 'livre');
-      html += '<td class="slot-cel ' + classe + '" data-slot-id="' + slot._id + '">' + slot.ocupadas + '/' + slot.capacidadeMaxima + '</td>';
+      const tituloTipos = slot.cursos && slot.cursos.length ? 'Tipos: ' + slot.cursos.join(', ') : 'Tipos: todos';
+      html += '<td class="slot-cel ' + classe + '" data-slot-id="' + slot._id + '" title="' + tituloTipos + '">' + slot.ocupadas + '/' + slot.capacidadeMaxima + '</td>';
     });
     html += '</tr>';
   });
@@ -108,6 +135,7 @@ function abrirNovoHorario(pre) {
   if (pre?.dia !== undefined) document.getElementById('novoDiaSemana').value = pre.dia;
   if (pre?.hora) document.getElementById('novoHoraInicio').value = pre.hora;
   document.getElementById('novoCapacidade').value = 8;
+  marcarCursos('novoCursosGrid', []);
   document.getElementById('modalNovoHorario').classList.add('show');
 }
 document.getElementById('novoHorarioBtn').addEventListener('click', () => abrirNovoHorario(null));
@@ -120,7 +148,8 @@ document.getElementById('salvarNovoHorarioBtn').addEventListener('click', async 
     diaSemana: Number(document.getElementById('novoDiaSemana').value),
     periodo: document.getElementById('novoPeriodo').value,
     horaInicio: document.getElementById('novoHoraInicio').value,
-    capacidadeMaxima: Number(document.getElementById('novoCapacidade').value) || 1
+    capacidadeMaxima: Number(document.getElementById('novoCapacidade').value) || 1,
+    cursos: lerCursosMarcados('novoCursosGrid')
   };
   const res = await fetch('/api/horarios/admin/slots', { method: 'POST', headers: authHeaders(true), body: JSON.stringify(payload) });
   const data = await res.json();
@@ -138,6 +167,7 @@ async function abrirDetalheHorario(slotId) {
   document.getElementById('detalheCapacidadeWrap').style.display = slot.modalidade === 'turma' ? 'flex' : 'none';
   document.getElementById('detalheCapacidade').value = slot.capacidadeMaxima;
   document.getElementById('detalheAtivo').checked = slot.ativo !== false;
+  marcarCursos('detalheCursosGrid', slot.cursos);
   document.getElementById('detalheErro').style.display = 'none';
   document.getElementById('detalheOcupantes').innerHTML = 'Carregando…';
   document.getElementById('modalDetalheHorario').classList.add('show');
@@ -177,7 +207,7 @@ document.getElementById('fecharDetalheBtn').addEventListener('click', () => docu
 
 document.getElementById('salvarDetalheBtn').addEventListener('click', async () => {
   const erroEl = document.getElementById('detalheErro');
-  const payload = { ativo: document.getElementById('detalheAtivo').checked };
+  const payload = { ativo: document.getElementById('detalheAtivo').checked, cursos: lerCursosMarcados('detalheCursosGrid') };
   if (slotSelecionado.modalidade === 'turma') payload.capacidadeMaxima = Number(document.getElementById('detalheCapacidade').value) || 1;
   const res = await fetch('/api/horarios/admin/slots/' + slotSelecionado._id, { method: 'PUT', headers: authHeaders(true), body: JSON.stringify(payload) });
   const data = await res.json();

@@ -34,8 +34,8 @@ function embaralhar(lista) {
 // deste — a mesma questão pode aparecer sorteada em conjuntos diferentes). Só entram
 // questões já respondidas se não houver inéditas suficientes pra completar a quantidade
 // pedida, pra nunca devolver menos questões do que o aluno escolheu.
-async function sortearQuestoes({ niveis, materias, quantidade, pool = "praticar", alunoId }) {
-  const filtro = { pool, ativo: true };
+async function sortearQuestoes({ niveis, materias, quantidade, pool = "praticar", alunoId, courseType }) {
+  const filtro = { pool, ativo: true, courseType };
   if (niveis?.length) filtro.nivel = { $in: niveis };
   if (materias?.length) filtro.materia = { $in: materias };
 

@@ -53,11 +53,25 @@
     dadosConta: null,
     detalhesAcesso(chave) {
       const d = window.AppShell.dadosConta;
+      // Fontes depreciadas (plano/produtosAvulsos únicos, sobrescritos a cada compra) —
+      // mantidas só pra não quebrar quem ainda não migrou.
       const avulso = d?.produtosAvulsos?.[chave] || {};
       const tier = d?.plano?.ativo ? d.plano.tier : null;
-      const viaCascata = !!(tier && CASCATA_POR_TIER[chave] && CASCATA_POR_TIER[chave].includes(tier));
+      const viaCascataAntiga = !!(tier && CASCATA_POR_TIER[chave] && CASCATA_POR_TIER[chave].includes(tier));
       const viaAvulso = !!avulso.ativo;
-      return { ativo: viaCascata || viaAvulso, viaCascata, viaAvulso, dataVencimentoAvulso: avulso.dataVencimento || null };
+      // Grandfather do Pack Prestige avulso antigo (cross-curso) — congelado, ver
+      // backend/seed/migrarPlanosUsuarios.js.
+      const legado = d?.legado?.produtosAvulsos?.[chave] || {};
+      const viaLegado = !!legado.ativo;
+      // Modelo novo — um plano por curso (planos[]); agregado aqui (não sabe QUAL curso),
+      // já que este painel ainda não tem seletor de curso.
+      const viaPlanoPorCurso = (d?.planos || []).some(p =>
+        (p.ativo && CASCATA_POR_TIER[chave] && CASCATA_POR_TIER[chave].includes(p.tier)) || p.packPrestige?.ativo
+      );
+      const ativo = viaCascataAntiga || viaAvulso || viaLegado || viaPlanoPorCurso;
+      const viaCascata = viaCascataAntiga || viaPlanoPorCurso;
+      const viaAvulsoTotal = viaAvulso || viaLegado;
+      return { ativo, viaCascata, viaAvulso: viaAvulsoTotal, dataVencimentoAvulso: avulso.dataVencimento || legado.dataVencimento || null };
     },
     temAcesso(chave) {
       return window.AppShell.detalhesAcesso(chave).ativo;

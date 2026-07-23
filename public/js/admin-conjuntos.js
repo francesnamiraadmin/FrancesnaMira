@@ -10,6 +10,7 @@ function authHeaders(json) {
 }
 
 const NIVEIS_ADMIN = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+const TIPOS_CURSO = ['TCF', 'DELF', 'DALF', 'TEF', 'A1', 'A2', 'B1', 'B2'];
 
 let conjuntoEditandoId = null;
 let selecionadas = []; // [{ _id, codigo, enunciado, nivel, materia, tipo }] na ordem de curadoria
@@ -33,7 +34,7 @@ async function carregarConjuntos() {
     lista.innerHTML = conjuntos.map(c => `
       <div class="conjunto-item ${c.ativo ? '' : 'inativo'}">
         <div>
-          <h4>${c.nome}${c.ativo ? '' : ' (inativo)'}${c.pool === 'simulado' ? ' <span class="pill">Simulado</span>' : ''}</h4>
+          <h4>${c.nome}${c.ativo ? '' : ' (inativo)'}${c.pool === 'simulado' ? ' <span class="pill">Simulado</span>' : ''}${c.courseType ? ` <span class="pill">${c.courseType}</span>` : ''}${c.pendenteRevisao ? ' <span class="pill" style="background:var(--amarelo-bg); color:var(--amarelo);">Pendente de revisão</span>' : ''}</h4>
           <div class="meta">${c.quantidadeQuestoes} questões · ${(c.filtros?.niveis || []).join('+') || '—'} · ${c.dificuldade || 'automática'}</div>
         </div>
         <button class="btn secundario pequeno" data-editar="${c._id}">Editar</button>
@@ -57,6 +58,7 @@ document.getElementById('voltarListaBtn').addEventListener('click', () => { most
 function preencherSelectsFiltro() {
   document.getElementById('filtroNivel').insertAdjacentHTML('beforeend', NIVEIS_ADMIN.map(n => `<option value="${n}">${n}</option>`).join(''));
   document.getElementById('filtroMateria').insertAdjacentHTML('beforeend', Object.entries(MATERIAS_LABELS).map(([k, v]) => `<option value="${k}">${v}</option>`).join(''));
+  document.getElementById('conjuntoCourseType').insertAdjacentHTML('beforeend', TIPOS_CURSO.map(c => `<option value="${c}">${c}</option>`).join(''));
 }
 
 async function abrirEditor(id) {
@@ -67,6 +69,7 @@ async function abrirEditor(id) {
   document.getElementById('removerConjuntoBtn').style.display = id ? 'inline-block' : 'none';
   document.getElementById('conjuntoNome').value = '';
   document.getElementById('conjuntoDescricao').value = '';
+  document.getElementById('conjuntoCourseType').value = '';
   document.getElementById('conjuntoPool').value = 'praticar';
   document.getElementById('conjuntoDificuldade').value = '';
   document.getElementById('conjuntoTempo').value = '';
@@ -79,6 +82,7 @@ async function abrirEditor(id) {
       const c = await res.json();
       document.getElementById('conjuntoNome').value = c.nome;
       document.getElementById('conjuntoDescricao').value = c.descricao || '';
+      document.getElementById('conjuntoCourseType').value = c.courseType || '';
       document.getElementById('conjuntoPool').value = c.pool || 'praticar';
       document.getElementById('conjuntoDificuldade').value = c.dificuldade || '';
       document.getElementById('conjuntoTempo').value = c.tempoLimiteSegundos ? Math.round(c.tempoLimiteSegundos / 60) : '';
@@ -173,6 +177,7 @@ document.getElementById('salvarConjuntoBtn').addEventListener('click', async () 
   const tempoMin = Number(document.getElementById('conjuntoTempo').value);
   const payload = {
     nome, descricao: document.getElementById('conjuntoDescricao').value.trim(),
+    courseType: document.getElementById('conjuntoCourseType').value || null,
     pool: document.getElementById('conjuntoPool').value,
     dificuldade: document.getElementById('conjuntoDificuldade').value || undefined,
     tempoLimiteSegundos: tempoMin > 0 ? tempoMin * 60 : null,

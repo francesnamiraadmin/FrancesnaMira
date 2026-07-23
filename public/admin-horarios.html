@@ -81,6 +81,14 @@ table.grade-admin td.slot-cel.inativo { background: var(--cinza-100); color: var
 .ocupante-item .info strong { display: block; }
 .ocupante-item .info span { color: var(--cinza-400); font-size: 0.78rem; }
 
+.campo-hint { font-size: 0.76rem; color: var(--cinza-400); margin-top: -2px; }
+.tipos-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.tipo-chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--cinza-300); background: var(--cinza-50); color: var(--cinza-600); font-weight: 600; font-size: 0.82rem; cursor: pointer; user-select: none; }
+.tipo-chip input { accent-color: var(--azul); margin: 0; }
+.tipo-chip.checked { background: var(--azul-claro); color: var(--azul-escuro); border-color: var(--azul); }
+.tipos-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+.tipos-tags span { background: var(--azul-claro); color: var(--azul-escuro); border-radius: 8px; padding: 1px 6px; font-size: 0.68rem; font-weight: 700; }
+
 footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
 </style>
 </head>
@@ -184,6 +192,11 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <label>Capacidade máxima (alunos por horário)</label>
       <input type="number" id="novoCapacidade" min="1" value="8">
     </div>
+    <div class="campo">
+      <label>Tipos de aula permitidos</label>
+      <div class="tipos-grid" id="novoCursosGrid"></div>
+      <span class="campo-hint">Deixe tudo desmarcado para liberar este horário a qualquer tipo de aula.</span>
+    </div>
     <p class="field-error" id="novoHorarioErro"></p>
     <div class="modal-close-row">
       <button class="btn secundario" id="fecharNovoHorarioBtn" type="button">Cancelar</button>
@@ -199,6 +212,11 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <div class="campo" id="detalheCapacidadeWrap">
       <label>Capacidade máxima</label>
       <input type="number" id="detalheCapacidade" min="1">
+    </div>
+    <div class="campo">
+      <label>Tipos de aula permitidos</label>
+      <div class="tipos-grid" id="detalheCursosGrid"></div>
+      <span class="campo-hint">Deixe tudo desmarcado para liberar este horário a qualquer tipo de aula.</span>
     </div>
     <div class="campo">
       <label><input type="checkbox" id="detalheAtivo"> Horário ativo (visível para os alunos)</label>

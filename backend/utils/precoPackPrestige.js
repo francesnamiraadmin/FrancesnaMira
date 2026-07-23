@@ -1,37 +1,27 @@
-// Fórmula única de preço para o Pack Prestige (Plataforma de Questões, Ambiente de Produção
-// Oral e Textual, Aulas Especializadas Online) — fonte de verdade no servidor.
+const { TIPOS_CURSO } = require("./tiposCurso");
 
-const PRODUTOS_PACK_PRESTIGE = {
-  "Plataforma de Questões": { chave: "plataforma", preco: 65 },
-  "Ambiente de Produção Oral e Textual": { chave: "producao", preco: 65 },
-  "Aulas Especializadas Online": { chave: "aulasEspecializadas", preco: 110 }
+// Pack Prestige por curso — R$300 fixo por curso, mesmos 3 benefícios (Plataforma de
+// Questões, Aulas Especializadas gravadas, Ambiente de Produção Textual) escopados a UM
+// curso só. Substitui o antigo Pack Prestige avulso/cross-curso (produto único, vendido
+// fora de qualquer curso, com upgrades entre 3 produtos a R$65/R$65/R$110) — quem já
+// tinha o avulso mantém acesso via User.legado.produtosAvulsos (ver migrarPlanosUsuarios.js).
+const PRECO_PACK_PRESTIGE_POR_CURSO = Object.fromEntries(TIPOS_CURSO.map(c => [c, 300]));
+
+// Pseudo-curso especial: combo "Do A1 ao B2" — um único Pack Prestige que libera A1, A2,
+// B1 e B2 simultaneamente (ver backend/routes/pagamentos.js#ativarPackPrestigeCombo).
+// Não é um courseType real, nunca aparece em TIPOS_CURSO nem em User.planos[].courseType.
+const CURSO_COMBO_FLUENCIA = "A1-B2";
+const CURSOS_DO_COMBO_FLUENCIA = ["A1", "A2", "B1", "B2"];
+const PRECO_PACK_PRESTIGE_COMBO = 500;
+
+function precoPackPrestige(curso) {
+  if (curso === CURSO_COMBO_FLUENCIA) return PRECO_PACK_PRESTIGE_COMBO;
+  const preco = PRECO_PACK_PRESTIGE_POR_CURSO[curso];
+  if (preco === undefined) throw new Error("Curso inválido para o Pack Prestige.");
+  return preco;
+}
+
+module.exports = {
+  PRECO_PACK_PRESTIGE_POR_CURSO, precoPackPrestige,
+  CURSO_COMBO_FLUENCIA, CURSOS_DO_COMBO_FLUENCIA, PRECO_PACK_PRESTIGE_COMBO
 };
-
-// O preço de upgrade da Plataforma e da Produção é R$55 (não R$30) para que o total feche
-// igual não importa qual produto é o principal — ver backend/utils/precoPackPrestige.test
-// mentalmente: 2-a-2 e os 3 juntos dão sempre o mesmo valor combinando com qualquer um
-// como principal (ex.: Plataforma+Aulas = Aulas+Plataforma = R$165; os 3 juntos = R$220).
-const PRECO_UPGRADE = { plataforma: 55, producao: 55, aulasEspecializadas: 100 };
-
-function precoPackPrestige(produtoPrincipal, upgrades) {
-  const principal = PRODUTOS_PACK_PRESTIGE[produtoPrincipal];
-  if (!principal) throw new Error("Produto inválido para o Pack Prestige.");
-
-  const chavesUpgrade = Array.from(new Set(upgrades || [])).filter(k => k !== principal.chave);
-  let total = principal.preco;
-  for (const k of chavesUpgrade) {
-    if (PRECO_UPGRADE[k] === undefined) throw new Error("Upgrade inválido.");
-    total += PRECO_UPGRADE[k];
-  }
-  return total;
-}
-
-// Chaves de entitlement liberadas por essa compra (produto principal + upgrades escolhidos).
-function chavesLiberadas(produtoPrincipal, upgrades) {
-  const principal = PRODUTOS_PACK_PRESTIGE[produtoPrincipal];
-  if (!principal) throw new Error("Produto inválido para o Pack Prestige.");
-  const chavesUpgrade = Array.from(new Set(upgrades || [])).filter(k => k !== principal.chave && PRECO_UPGRADE[k] !== undefined);
-  return Array.from(new Set([principal.chave, ...chavesUpgrade]));
-}
-
-module.exports = { PRODUTOS_PACK_PRESTIGE, PRECO_UPGRADE, precoPackPrestige, chavesLiberadas };

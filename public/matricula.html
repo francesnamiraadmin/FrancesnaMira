@@ -184,6 +184,7 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
 .tabela-horarios td.horario-cel.disponivel:hover { background: var(--gold-soft); }
 .tabela-horarios td.horario-cel.indisponivel { background: var(--tint-neutral-bg); cursor: not-allowed; opacity: 0.6; }
 .tabela-horarios td.horario-cel.selecionado { background: var(--info); border-color: var(--info-dark); }
+.sem-horarios-aviso { margin-top: 10px; padding: 12px 14px; border-radius: 10px; background: var(--tint-neutral-bg); color: var(--muted); font-size: 13px; }
 
 .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
 .tier-card {
@@ -359,19 +360,6 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
       </div>
     </section>
 
-    <!-- ===================== STEP: UPGRADE (Pack Prestige) ===================== -->
-    <section class="step" data-step="upgrade" style="display:none;">
-      <h2 class="step-title">Upgrade</h2>
-      <p class="step-hint">Adicione ao seu Pack</p>
-      <div class="field" id="f-upgrade">
-        <div class="option-grid" id="upgradeGrid"></div>
-      </div>
-      <div class="resumo-total" style="margin-top:20px;">
-        <span class="label">Mensal</span>
-        <span class="valor" id="upgradeTotalValor">R$ 0</span>
-      </div>
-    </section>
-
     <!-- ===================== STEP: TURMA ===================== -->
     <section class="step" data-step="turma" style="display:none;">
       <h2 class="step-title">Escolha sua turma</h2>
@@ -404,6 +392,7 @@ footer.site-footer { text-align: center; padding: 28px; background: var(--footer
             <div class="grade-horarios-wrap">
               <table class="tabela-horarios" id="tabelaHorarios"></table>
             </div>
+            <p class="sem-horarios-aviso" id="semHorariosAviso" style="display:none;">Não há horários disponíveis para este tipo de curso no momento. Escolha outro período ou aguarde novas disponibilizações.</p>
             <div class="field-error">Escolha ao menos um horário para continuar.</div>
           </div>
 

@@ -10,6 +10,10 @@ function escapeHtml(str) {
 
 const CORES = ['#2563eb', '#16a34a', '#d97706', '#dc2626', '#7c3aed', '#0891b2', '#db2777', '#65a30d'];
 const NOMES_TIPO_MATERIAL = { pdf: 'PDF', imagem: 'Imagem', audio: 'Áudio', exercicio: 'Exercício', arquivo: 'Arquivo', link: 'Link' };
+const TIPOS_CURSO = ['TCF', 'DELF', 'DALF', 'TEF', 'A1', 'A2', 'B1', 'B2'];
+
+document.getElementById('moduloCourseType').innerHTML =
+  '<option value="">Selecione...</option>' + TIPOS_CURSO.map(t => '<option value="' + t + '">' + t + '</option>').join('');
 
 // Mesma extração usada no player do aluno (public/js/aulas-especializadas.js) — só pra
 // mostrar a thumbnail oficial do YouTube como prévia/fallback no painel.
@@ -105,7 +109,7 @@ function renderModulos() {
       <div class="icone-swatch" style="background:${m.cor}22;"><img src="${caminhoIconeModulo(m.icone)}" alt="" style="width:60%; height:60%; object-fit:contain;"></div>
       <div class="info">
         <div class="titulo">${escapeHtml(m.titulo)}</div>
-        <div class="meta">${m.totalAulas} aula${m.totalAulas === 1 ? '' : 's'}${m.exigeModuloAnterior ? ' · <img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">exige anterior' : ''}${!m.ativo ? ' · inativo' : ''}</div>
+        <div class="meta">${m.courseType ? escapeHtml(m.courseType) : '<span style="color:var(--vermelho);">sem curso</span>'} · ${m.totalAulas} aula${m.totalAulas === 1 ? '' : 's'}${m.exigeModuloAnterior ? ' · <img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">exige anterior' : ''}${!m.ativo ? ' · inativo' : ''}</div>
       </div>
       <div class="acoes">
         <button type="button" data-editar-modulo="${m._id}" title="Editar"><img src="img/icones/edit-pencil.svg" alt="" style="width:1em; height:1em;"></button>
@@ -264,7 +268,7 @@ function abrirModalModulo(id) {
   document.getElementById('moduloId').value = m ? m._id : '';
   document.getElementById('moduloTitulo').value = m ? m.titulo : '';
   document.getElementById('moduloDescricao').value = m ? (m.descricao || '') : '';
-  document.getElementById('moduloCurso').value = m ? (m.curso || '') : '';
+  document.getElementById('moduloCourseType').value = m ? (m.courseType || '') : '';
   document.getElementById('moduloIcone').value = (m && MODULO_ICONES[m.icone]) ? m.icone : MODULO_ICONE_PADRAO;
   document.getElementById('moduloCor').value = m ? (m.cor || CORES[0]) : CORES[0];
   renderCorSwatches(document.getElementById('moduloCor').value);
@@ -283,7 +287,7 @@ document.getElementById('salvarModuloBtn').addEventListener('click', async () =>
   const payload = {
     titulo: document.getElementById('moduloTitulo').value.trim(),
     descricao: document.getElementById('moduloDescricao').value.trim(),
-    curso: document.getElementById('moduloCurso').value.trim() || null,
+    courseType: document.getElementById('moduloCourseType').value || null,
     icone: document.getElementById('moduloIcone').value || MODULO_ICONE_PADRAO,
     cor: document.getElementById('moduloCor').value,
     exigeModuloAnterior: document.getElementById('moduloExigeAnterior').checked,

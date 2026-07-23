@@ -36,9 +36,12 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 .config-timer-card {
   background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 16px; padding: 4px 20px;
+  border: 1px solid var(--glass-border); border-radius: 16px; padding: 18px 22px;
   margin-bottom: 24px; box-shadow: var(--glass-shadow);
 }
+.config-timer-toggle-topo { display: flex; align-items: center; gap: 14px; }
+.config-timer-toggle-titulo { font-weight: 700; font-size: 0.98rem; }
+.config-timer-toggle-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; line-height: 1.45; }
 
 .vazio-msg { text-align: center; opacity: 0.75; padding: 40px 16px; font-size: 0.95rem; }
 .erro-msg { color: var(--danger-text); font-size: 0.85rem; margin-top: 8px; text-align: center; }
@@ -160,13 +163,11 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <div class="pagina-wrap">
   <div class="config-timer-card">
-    <div class="toggle-row">
-      <div>
-        <div class="rotulo">Exibir barra do timer</div>
-        <div class="desc">Mostra uma barra fixa no rodapé, em toda a plataforma, pronta pra iniciar ou acompanhar sua sessão de estudo.</div>
-      </div>
+    <div class="config-timer-toggle-topo">
+      <span class="config-timer-toggle-titulo">Exibir barra do timer</span>
       <label class="switch"><input type="checkbox" id="exibirBarraToggle"><span class="slider"></span></label>
     </div>
+    <p class="config-timer-toggle-desc">Mostra uma barra fixa no rodapé, em toda a plataforma, pronta pra iniciar ou acompanhar sua sessão de estudo.</p>
   </div>
 
   <div class="secao-titulo-row">

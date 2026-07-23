@@ -342,7 +342,8 @@ router.post("/minhas-semanas/:deverId/atividades/:index/enviar", comTratamentoDe
       if (!atividade.conteudo?.temaId) { limparTemp(); return res.status(400).json({ msg: "Esta atividade não tem um tema de produção configurado." }); }
       const producao = await montarNovaProducao({
         userId: req.userId, temaId: atividade.conteudo.temaId, textoDigitado: texto,
-        observacoesAluno: undefined, file: req.file, origemId: null, duracaoSegundos
+        observacoesAluno: undefined, file: req.file, origemId: null, duracaoSegundos,
+        pularChecagemAcesso: true
       });
       atividade.entrega.status = "enviado";
       atividade.entrega.enviadoEm = new Date();

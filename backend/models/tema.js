@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
 // Mesmo padrão de arquivo genérico já usado em Producao/AtividadeSchema.
 const ArquivoTemaSchema = new mongoose.Schema({
@@ -23,7 +24,14 @@ const DocumentoApoioSchema = new mongoose.Schema({
 
 const TemaSchema = new mongoose.Schema({
   titulo: { type: String, required: true },
-  exame: { type: String, enum: ["TCF", "TEF", "DELF", "DALF"], required: true },
+  // Curso ao qual este tema pertence — filtra o que o aluno enxerga e decide o acesso
+  // (ver backend/middleware/acessoCurso.js). Campo universal, sempre preenchido.
+  courseType: { type: String, enum: TIPOS_CURSO, required: true },
+  // Formato oficial de prova — só se aplica aos 4 cursos de exame (TCF/DELF/DALF/TEF);
+  // continua igual a `courseType` nesses casos. Fica vazio para temas de A1-B2 (fluência
+  // não tem "formato de prova"). Mantido separado de `courseType` porque a rubrica de
+  // correção varia pelo formato do exame, não simplesmente pelo curso.
+  exame: { type: String, enum: ["TCF", "TEF", "DELF", "DALF"] },
   nivel: { type: String, enum: ["A1", "A2", "B1", "B2", "C1", "C2"], required: true },
   modalidade: { type: String, enum: ["textual", "oral"], default: "textual" },
   tipoProducao: { type: String, required: true },

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
 // Coleção de REFERÊNCIAS a questões — nunca duplica o conteúdo da questão. Populável já
 // na Fase 1 pelo botão "Adicionar ao Caderno de Revisão" durante a resolução (antes de o
@@ -9,6 +10,9 @@ const mongoose = require("mongoose");
 const CadernoErrosSchema = new mongoose.Schema({
   alunoId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   questaoId: { type: mongoose.Schema.Types.ObjectId, ref: "Questao", required: true },
+  // Copiado de Questao.courseType na criação — permite filtrar o Caderno por curso
+  // sem join. `null` em entradas antigas (ver migração).
+  courseType: { type: String, enum: TIPOS_CURSO, default: null },
   origem: {
     tentativaId: { type: mongoose.Schema.Types.ObjectId, ref: "Tentativa" },
     conjuntoId: { type: mongoose.Schema.Types.ObjectId, ref: "Conjunto" }
@@ -20,5 +24,6 @@ const CadernoErrosSchema = new mongoose.Schema({
 
 CadernoErrosSchema.index({ alunoId: 1, questaoId: 1 }, { unique: true });
 CadernoErrosSchema.index({ alunoId: 1, adicionadoEm: -1 });
+CadernoErrosSchema.index({ alunoId: 1, courseType: 1 });
 
 module.exports = mongoose.model("CadernoErros", CadernoErrosSchema);

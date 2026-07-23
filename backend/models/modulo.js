@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
 const ModuloSchema = new mongoose.Schema({
   titulo: { type: String, required: true },
   descricao: { type: String },
-  // Curso ao qual este módulo pertence (ex.: "A1", "TCF", "Aulas Especializadas") —
-  // usado para agrupar o progresso do aluno por curso no perfil administrativo.
-  // Livre (sem enum) para casar com a convenção já usada em Matricula.curso.
+  // DEPRECIADO — substituído por `courseType` abaixo (era texto livre, só decorativo,
+  // nunca filtrava nada na rota do aluno). Mantido para não perder o rótulo histórico.
   curso: { type: String, default: null },
+  // Curso ao qual este módulo pertence de verdade — filtra o que o aluno enxerga em
+  // GET /aulas/modulos. `null` = módulo ainda não migrado/classificado, fica invisível
+  // para o aluno até um admin reabrir e salvar com um courseType válido.
+  courseType: { type: String, enum: TIPOS_CURSO, default: null },
   // Chave de um ícone fixo (ver public/js/moduloIcones.js — MODULO_ICONES), não mais um
   // emoji livre digitado pelo admin. Registros antigos podem ter um emoji cru salvo aqui
   // de antes dessa mudança; o front trata isso como "não reconhecido" e cai no ícone

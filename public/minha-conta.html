@@ -308,8 +308,11 @@ function renderSummaryCards(dados) {
     } else if (acesso.dataVencimentoAvulso) { estado = 'expirado'; tagClass = 'expirado'; tagTexto = `${iconeX} Expirado`; }
     else { estado = 'bloqueado'; tagClass = 'bloqueado'; tagTexto = `${iconeLock} Não adquirido`; }
 
+    // Compra/renovação agora é sempre por curso (Pack Prestige de TCF, A1 etc.) — não
+    // existe mais uma compra avulsa cross-curso desses 3 produtos, então o CTA manda
+    // para a escolha de curso em vez de um link fixo que o backend não aceita mais.
     const cta = estado === 'ativo' ? '' :
-      `<a class="upgrade-btn" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige">${estado === 'expirado' ? 'Renovar' : 'Adquirir'}</a>`;
+      `<a class="upgrade-btn" href="cursos.html">${estado === 'expirado' ? 'Renovar' : 'Adquirir'}</a>`;
 
     return `<div class="dash-summary-card">
       <img class="icone" src="${p.icone}" alt="">

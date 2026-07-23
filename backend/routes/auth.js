@@ -37,26 +37,55 @@ function hashToken(raw) {
 // seguir (destinoInicial) já reflita um plano que acabou de vencer.
 async function expirarSeVencido(user) {
   let alterou = false;
-  if (user.plano?.ativo && user.plano.dataVencimento && user.plano.dataVencimento < new Date()) {
+  const agora = new Date();
+
+  // Campos depreciados (plano/produtosAvulsos únicos) — mantidos vivos só até não
+  // restar mais nenhum código lendo-os fora daqui.
+  if (user.plano?.ativo && user.plano.dataVencimento && user.plano.dataVencimento < agora) {
     user.plano.ativo = false;
     alterou = true;
   }
   for (const chave of ["plataforma", "producao", "aulasEspecializadas"]) {
     const produto = user.produtosAvulsos?.[chave];
-    if (produto?.ativo && produto.dataVencimento && produto.dataVencimento < new Date()) {
+    if (produto?.ativo && produto.dataVencimento && produto.dataVencimento < agora) {
       produto.ativo = false;
       alterou = true;
     }
   }
+
+  // planos[] — um plano por curso, cada um com sua própria data de vencimento.
+  for (const plano of user.planos || []) {
+    if (plano.ativo && plano.dataVencimento && plano.dataVencimento < agora) {
+      plano.ativo = false;
+      alterou = true;
+    }
+    if (plano.packPrestige?.ativo && plano.packPrestige.dataVencimento && plano.packPrestige.dataVencimento < agora) {
+      plano.packPrestige.ativo = false;
+      alterou = true;
+    }
+  }
+
+  // Grandfather do Pack Prestige avulso antigo (cross-curso) — expira sozinho, igual
+  // ao resto, sem precisar de nenhuma ação manual.
+  for (const chave of ["plataforma", "producao", "aulasEspecializadas"]) {
+    const produto = user.legado?.produtosAvulsos?.[chave];
+    if (produto?.ativo && produto.dataVencimento && produto.dataVencimento < agora) {
+      produto.ativo = false;
+      alterou = true;
+    }
+  }
+
   if (alterou) await user.save();
 }
 
-// Usuário com plano de curso ativo tem a área do aluno como página inicial;
-// sem plano ativo, continua caindo no index — recalculado a cada login e a
-// cada restauração de sessão (refresh), então um plano vencido reverte
-// automaticamente para o index na próxima vez que a sessão for validada.
+// Usuário com algum plano de curso ativo (novo modelo por curso, ou o antigo singular
+// pra quem ainda não migrou) tem a área do aluno como página inicial; sem nenhum plano
+// ativo, continua caindo no index — recalculado a cada login e a cada restauração de
+// sessão (refresh), então um plano vencido reverte automaticamente pro index na próxima
+// vez que a sessão for validada.
 function destinoInicial(user) {
-  return user.plano?.ativo ? "minha-conta.html" : "index.html";
+  const temPlanoNovo = (user.planos || []).some(p => p.ativo || p.packPrestige?.ativo);
+  return (temPlanoNovo || user.plano?.ativo) ? "minha-conta.html" : "index.html";
 }
 
 async function emitirRefreshToken(user) {
@@ -396,7 +425,7 @@ router.post("/redefinir-senha", async (req, res) => {
 // DADOS DO USUÁRIO LOGADO (nome, email, plano ativo, perfil, papel, créditos)
 router.get("/me", exigirAuth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select("nome email telefone whatsapp plano produtosAvulsos perfil role creditosCorrecao especialidades temasFavoritos preferencias doisFatores criadoEm");
+    const user = await User.findById(req.userId).select("nome email telefone whatsapp plano produtosAvulsos planos legado perfil role creditosCorrecao especialidades temasFavoritos preferencias doisFatores criadoEm");
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
     await expirarSeVencido(user);
@@ -425,6 +454,8 @@ router.get("/me", exigirAuth, async (req, res) => {
       whatsapp: user.whatsapp || null,
       plano: user.plano || { ativo: false },
       produtosAvulsos: user.produtosAvulsos || {},
+      planos: user.planos || [],
+      legado: user.legado || {},
       perfil: user.perfil || {},
       role: user.role || "aluno",
       creditosCorrecao: user.creditosCorrecao || 0,

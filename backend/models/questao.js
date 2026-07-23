@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
 const NIVEIS = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const MATERIAS = ["conjugaison", "vocabulaire", "grammaire", "co", "ce", "expressions", "historia", "visual"];
@@ -35,15 +36,22 @@ const QuestaoSchema = new mongoose.Schema({
   explicacao: { type: String, required: true },
   ativo: { type: Boolean, default: true }, // desativar sem quebrar Tentativas antigas que referenciam o id
 
+  // Curso ao qual esta questão pertence — segrega o banco por tipo de aula. `null` +
+  // `pendenteRevisaoCourseType` distingue "aguardando classificação do admin" de
+  // "nunca migrado" (ver backend/seed/migrarCourseTypeQuestoes.js).
+  courseType: { type: String, enum: TIPOS_CURSO, default: null },
+  pendenteRevisaoCourseType: { type: Boolean, default: false },
+
   criadoEm: { type: Date, default: Date.now }
 });
 
 // Filtro principal usado no sorteio de conjunto personalizado e na busca de curadoria manual.
-QuestaoSchema.index({ pool: 1, ativo: 1, nivel: 1, materia: 1 });
+QuestaoSchema.index({ courseType: 1, pool: 1, ativo: 1, nivel: 1, materia: 1 });
 
 const Questao = mongoose.model("Questao", QuestaoSchema);
 Questao.NIVEIS = NIVEIS;
 Questao.MATERIAS = MATERIAS;
 Questao.TIPOS_QUESTAO = TIPOS_QUESTAO;
+Questao.TIPOS_CURSO = TIPOS_CURSO;
 
 module.exports = Questao;

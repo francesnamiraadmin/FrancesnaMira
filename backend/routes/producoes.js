@@ -7,6 +7,7 @@ const Producao = require("../models/producao");
 const Tema = require("../models/tema");
 const User = require("../models/user");
 const { exigirAuth, exigirProfessor } = require("../middleware/auth");
+const { usuarioTemAcesso } = require("../middleware/acessoCurso");
 const { uploadOriginal, uploadCorrigido, moverParaPastaDefinitiva, comTratamentoDeErro } = require("../middleware/upload");
 const { transmitir } = require("../utils/sse");
 
@@ -20,9 +21,22 @@ function contarPalavras(texto) {
   return texto.trim().split(/\s+/).filter(Boolean).length;
 }
 
-async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAluno, file, origemId, duracaoSegundos }) {
+// `pularChecagemAcesso` existe só para backend/routes/deveres.js: uma atividade de
+// Dever de Casa (producao_textual/producao_oral) é atribuída pelo professor como parte
+// do plano de estudos do aluno, não é uma escolha livre dele dentro do catálogo do
+// Ambiente de Produção — não faz sentido negar o envio de um dever já atribuído por
+// causa da entitlement do módulo avulso. O fluxo de auto-atendimento (POST / e
+// POST /:id/reenviar aqui embaixo) sempre passa pela checagem normal.
+async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAluno, file, origemId, duracaoSegundos, pularChecagemAcesso }) {
   const tema = await Tema.findById(temaId);
   if (!tema || !tema.ativo) throw { status: 404, msg: "Tema não encontrado." };
+
+  // courseType nunca vem do cliente aqui — deriva sempre do Tema, exatamente como já
+  // acontece com `modalidade" logo abaixo. Fecha o vazamento que existia antes: qualquer
+  // plano ativo liberava produção pra qualquer Tema de qualquer curso, sem checagem.
+  if (!pularChecagemAcesso && (!tema.courseType || !(await usuarioTemAcesso(userId, "producao", tema.courseType)))) {
+    throw { status: 403, msg: "Você não tem acesso ao módulo de Produção Textual para este curso." };
+  }
 
   // Modalidade nunca vem do cliente — deriva sempre do Tema, pra nunca
   // divergir de qual rubrica/validação se aplica.
@@ -106,15 +120,16 @@ router.post("/", exigirAuth, comTratamentoDeErro(uploadOriginal.single("arquivo"
 // ===================== ALUNO: HISTÓRICO =====================
 router.get("/minhas", exigirAuth, async (req, res) => {
   try {
-    const { status, busca } = req.query;
+    const { status, busca, courseType } = req.query;
     const filtro = { alunoId: req.userId };
     if (status) filtro.status = status;
 
     let producoes = await Producao.find(filtro)
-      .populate("temaId", "titulo exame nivel")
+      .populate("temaId", "titulo exame courseType nivel")
       .populate("professorId", "nome")
       .sort({ criadoEm: -1 });
 
+    if (courseType) producoes = producoes.filter(p => p.temaId?.courseType === courseType);
     if (busca) {
       const termo = busca.toLowerCase();
       producoes = producoes.filter(p =>
@@ -131,10 +146,10 @@ router.get("/minhas", exigirAuth, async (req, res) => {
 // ===================== PROFESSOR: FILA =====================
 router.get("/professor/fila", exigirAuth, exigirProfessor, async (req, res) => {
   try {
-    const { exame, tema: temaFiltro, status, prioridade } = req.query;
+    const { exame, courseType, tema: temaFiltro, status, prioridade } = req.query;
 
     let producoes = await Producao.find({ status: { $in: ["em_fila", "em_correcao"] } })
-      .populate("temaId", "titulo exame nivel tempoSugerido")
+      .populate("temaId", "titulo exame courseType nivel tempoSugerido")
       .populate("alunoId", "nome")
       .sort({ dataEnvio: 1 });
 
@@ -144,6 +159,7 @@ router.get("/professor/fila", exigirAuth, exigirProfessor, async (req, res) => {
     });
 
     if (exame) producoes = producoes.filter(p => p.temaId?.exame === exame);
+    if (courseType) producoes = producoes.filter(p => p.temaId?.courseType === courseType);
     if (temaFiltro) producoes = producoes.filter(p => p.temaId?._id.toString() === temaFiltro);
     if (status) producoes = producoes.filter(p => p.status === status);
     if (prioridade === "urgente") {

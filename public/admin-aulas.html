@@ -134,6 +134,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .modal-box h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 18px; }
 .modal-close-row { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
 .field-error { color: var(--vermelho); font-size: 0.85rem; display: none; margin-top: 6px; }
+.campo-hint { font-size: 0.76rem; color: var(--cinza-400); margin-top: -2px; display: block; }
 
 .doc-form-item { border: 1px solid var(--cinza-200); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
 .material-item { display: flex; align-items: center; gap: 10px; border: 1px solid var(--cinza-200); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
@@ -243,7 +244,13 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <input type="hidden" id="moduloId">
     <div class="campo"><label>Título</label><input type="text" id="moduloTitulo" placeholder="Ex.: Pronúncia Francesa"></div>
     <div class="campo"><label>Descrição</label><textarea id="moduloDescricao"></textarea></div>
-    <div class="campo"><label>Curso (para agrupar o progresso do aluno)</label><input type="text" id="moduloCurso" placeholder="Ex.: A1, TCF, Aulas Especializadas"></div>
+    <div class="campo">
+      <label>Curso</label>
+      <select id="moduloCourseType">
+        <option value="">Selecione...</option>
+      </select>
+      <span class="campo-hint">Define quais alunos enxergam este módulo — sem curso, ele fica invisível para os alunos.</span>
+    </div>
     <div class="campo-row">
       <div class="campo">
         <label>Ícone</label>

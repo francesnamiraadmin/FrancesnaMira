@@ -6,6 +6,12 @@ const { exigirAuth, exigirAdmin } = require("../middleware/auth");
 
 const MODALIDADES = ["particular", "turma"];
 const PERIODOS = ["diurno", "vespertino", "noturno"];
+const TIPOS_CURSO = HorarioSlot.TIPOS_CURSO;
+
+function normalizarCursos(cursos) {
+  if (!Array.isArray(cursos)) return [];
+  return [...new Set(cursos.filter(c => TIPOS_CURSO.includes(c)))];
+}
 
 async function ocupacaoPorSlot(slotIds) {
   const grupos = await Matricula.aggregate([
@@ -52,7 +58,7 @@ router.get("/admin/slots/:id/ocupantes", exigirAuth, exigirAdmin, async (req, re
 
 router.post("/admin/slots", exigirAuth, exigirAdmin, async (req, res) => {
   try {
-    const { modalidade, diaSemana, horaInicio, periodo, capacidadeMaxima } = req.body;
+    const { modalidade, diaSemana, horaInicio, periodo, capacidadeMaxima, cursos } = req.body;
     if (!MODALIDADES.includes(modalidade)) return res.status(400).json({ msg: "Modalidade inválida." });
     if (!PERIODOS.includes(periodo)) return res.status(400).json({ msg: "Período inválido." });
     if (diaSemana === undefined || diaSemana < 0 || diaSemana > 6) return res.status(400).json({ msg: "Dia da semana inválido." });
@@ -60,7 +66,8 @@ router.post("/admin/slots", exigirAuth, exigirAdmin, async (req, res) => {
 
     const slot = await HorarioSlot.create({
       modalidade, diaSemana, horaInicio, periodo,
-      capacidadeMaxima: modalidade === "particular" ? 1 : Math.max(1, Number(capacidadeMaxima) || 1)
+      capacidadeMaxima: modalidade === "particular" ? 1 : Math.max(1, Number(capacidadeMaxima) || 1),
+      cursos: normalizarCursos(cursos)
     });
     res.json(slot);
   } catch (err) {
@@ -75,11 +82,12 @@ router.put("/admin/slots/:id", exigirAuth, exigirAdmin, async (req, res) => {
     const slot = await HorarioSlot.findById(req.params.id);
     if (!slot) return res.status(404).json({ msg: "Horário não encontrado." });
 
-    const { capacidadeMaxima, ativo } = req.body;
+    const { capacidadeMaxima, ativo, cursos } = req.body;
     if (capacidadeMaxima !== undefined) {
       slot.capacidadeMaxima = slot.modalidade === "particular" ? 1 : Math.max(1, Number(capacidadeMaxima) || 1);
     }
     if (ativo !== undefined) slot.ativo = !!ativo;
+    if (cursos !== undefined) slot.cursos = normalizarCursos(cursos);
     await slot.save();
     res.json(slot);
   } catch (err) {
@@ -106,10 +114,18 @@ router.delete("/admin/slots/:id", exigirAuth, exigirAdmin, async (req, res) => {
 router.get("/:modalidade/:periodo", exigirAuth, async (req, res) => {
   try {
     const { modalidade, periodo } = req.params;
+    const { curso } = req.query;
     if (!MODALIDADES.includes(modalidade)) return res.status(400).json({ msg: "Modalidade inválida." });
     if (!PERIODOS.includes(periodo)) return res.status(400).json({ msg: "Período inválido." });
 
-    const slots = await HorarioSlot.find({ modalidade, periodo, ativo: true }).sort({ diaSemana: 1, horaInicio: 1 });
+    const filtro = { modalidade, periodo, ativo: true };
+    // Um horário sem "cursos" definido fica liberado para todos os tipos; só restringe
+    // quando o admin marcou tipos específicos e nenhum deles bate com o curso da matrícula.
+    if (curso && TIPOS_CURSO.includes(curso)) {
+      filtro.$or = [{ cursos: { $exists: false } }, { cursos: { $size: 0 } }, { cursos: curso }];
+    }
+
+    const slots = await HorarioSlot.find(filtro).sort({ diaSemana: 1, horaInicio: 1 });
     const mapa = await ocupacaoPorSlot(slots.map(s => s._id));
 
     res.json(slots.map(s => {

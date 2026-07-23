@@ -5,12 +5,28 @@ const Conjunto = require("../models/conjunto");
 const SessaoResolucao = require("../models/sessaoResolucao");
 const Tentativa = require("../models/tentativa");
 const CadernoErros = require("../models/cadernoErros");
+const DeverSemanal = require("../models/deverSemanal");
 const { exigirAuth, exigirProfessor } = require("../middleware/auth");
+const { exigirAcessoCurso, usuarioTemAcesso } = require("../middleware/acessoCurso");
 const { derivarDificuldade, sortearQuestoes, derivarFiltrosDeQuestoes, classificarPrioridade } = require("../utils/gerarConjunto");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
 router.use(exigirAuth);
 
 // ===================== HELPERS =====================
+
+// Um conjunto atribuído como Dever de Casa (backend/routes/deveres.js) deve poder ser
+// resolvido mesmo que o aluno não tenha a entitlement de "Plataforma de Questões" —
+// dever de casa é atribuído pelo professor como parte do plano de estudos, não é uma
+// escolha livre do catálogo avulso da Plataforma.
+async function conjuntoAtribuidoComoDever(alunoId, conjuntoId) {
+  return !!(await DeverSemanal.exists({ alunoId, "atividades.conteudo.conjuntoId": conjuntoId }));
+}
+
+async function podeAcessarConjunto(userId, conjunto) {
+  if (conjunto.courseType && (await usuarioTemAcesso(userId, "plataforma", conjunto.courseType))) return true;
+  return conjuntoAtribuidoComoDever(userId, conjunto._id);
+}
 
 // Remove os campos de gabarito antes de expor uma questão durante a resolução
 // (o aluno nunca deve receber indiceCorreta/respostaVF/explicacao até enviar o conjunto).
@@ -87,15 +103,15 @@ async function montarResultadoTentativa(tentativa) {
 
 // ===================== ALUNO: LISTAGEM DE CONJUNTOS =====================
 
-router.get("/conjuntos", async (req, res) => {
+router.get("/conjuntos", exigirAcessoCurso("plataforma"), async (req, res) => {
   try {
     const pool = req.query.pool === "simulado" ? "simulado" : "praticar";
     // Oficiais em ordem crescente de criação (Conjunto 01, 02, 03...) — é a ordem em que
     // o catálogo pré-montado foi pensado para ser navegado. Personalizados em ordem
     // decrescente (o conjunto que o próprio aluno acabou de montar aparece primeiro).
     const [oficiais, personalizados] = await Promise.all([
-      Conjunto.find({ ativo: true, tipo: "oficial", pool }).sort({ criadoEm: 1 }),
-      Conjunto.find({ ativo: true, tipo: "personalizado", pool, criadoPor: req.userId }).sort({ criadoEm: -1 })
+      Conjunto.find({ ativo: true, tipo: "oficial", pool, courseType: req.courseType }).sort({ criadoEm: 1 }),
+      Conjunto.find({ ativo: true, tipo: "personalizado", pool, courseType: req.courseType, criadoPor: req.userId }).sort({ criadoEm: -1 })
     ]);
     const conjuntos = [...oficiais, ...personalizados];
 
@@ -177,10 +193,10 @@ router.get("/conjuntos", async (req, res) => {
 // conjuntoCard.js (mesmos campos que GET /conjuntos usa) — pra "Meus conjuntos
 // personalizados" reaproveitar os MESMOS cards visuais de Sugeridos/Respondidos, ver
 // personalizarConjunto.js#renderPersonalizadoCard.
-router.get("/conjuntos/meus-personalizados", async (req, res) => {
+router.get("/conjuntos/meus-personalizados", exigirAcessoCurso("plataforma"), async (req, res) => {
   try {
     const pool = req.query.pool === "simulado" ? "simulado" : "praticar";
-    const conjuntos = await Conjunto.find({ ativo: true, tipo: "personalizado", pool, criadoPor: req.userId }).sort({ criadoEm: -1 });
+    const conjuntos = await Conjunto.find({ ativo: true, tipo: "personalizado", pool, courseType: req.courseType, criadoPor: req.userId }).sort({ criadoEm: -1 });
     const ids = conjuntos.map(c => c._id);
 
     const [sessoes, tentativas] = await Promise.all([
@@ -225,6 +241,9 @@ router.get("/conjuntos/:id", async (req, res) => {
   try {
     const conjunto = await Conjunto.findOne({ _id: req.params.id, ativo: true });
     if (!conjunto) return res.status(404).json({ msg: "Conjunto não encontrado." });
+    if (!(await podeAcessarConjunto(req.userId, conjunto))) {
+      return res.status(403).json({ msg: "Você não tem acesso a este conjunto." });
+    }
 
     const sessao = await SessaoResolucao.findOne({ alunoId: req.userId, conjuntoId: conjunto._id });
     const tentativas = await Tentativa.find({ alunoId: req.userId, conjuntoId: conjunto._id }).sort({ finalizadaEm: -1 });
@@ -247,7 +266,7 @@ router.get("/conjuntos/:id", async (req, res) => {
 
 const QUANTIDADES_PERMITIDAS = [10, 20, 40];
 
-router.post("/conjuntos/personalizado", async (req, res) => {
+router.post("/conjuntos/personalizado", exigirAcessoCurso("plataforma"), async (req, res) => {
   try {
     const { nome, niveis, materias, quantidade, tempoLimiteSegundos, pool: poolBody } = req.body;
     const pool = poolBody === "simulado" ? "simulado" : "praticar";
@@ -258,7 +277,7 @@ router.post("/conjuntos/personalizado", async (req, res) => {
 
     let questoes;
     try {
-      questoes = await sortearQuestoes({ niveis, materias, quantidade, pool, alunoId: req.userId });
+      questoes = await sortearQuestoes({ niveis, materias, quantidade, pool, alunoId: req.userId, courseType: req.courseType });
     } catch (err) {
       if (err.status === 422) return res.status(422).json({ msg: err.message });
       throw err;
@@ -268,6 +287,7 @@ router.post("/conjuntos/personalizado", async (req, res) => {
       nome: nome?.trim() || `${pool === "simulado" ? "Simulado" : "Conjunto"} personalizado — ${niveis.join("+")}`,
       tipo: "personalizado",
       pool,
+      courseType: req.courseType,
       criadoPor: req.userId,
       filtros: { niveis, materias },
       dificuldade: derivarDificuldade(niveis),
@@ -305,15 +325,17 @@ router.delete("/conjuntos/:id", async (req, res) => {
 
 router.get("/admin/questoes", exigirProfessor, async (req, res) => {
   try {
-    const { nivel, materia, tipo, pool, busca } = req.query;
+    const { nivel, materia, tipo, pool, busca, courseType, pendenteRevisao } = req.query;
     const filtro = { ativo: true };
     if (nivel) filtro.nivel = nivel;
     if (materia) filtro.materia = materia;
     if (tipo) filtro.tipo = tipo;
     if (pool) filtro.pool = pool;
     if (busca) filtro.enunciado = { $regex: busca, $options: "i" };
+    if (pendenteRevisao === "1") filtro.pendenteRevisaoCourseType = true;
+    else if (courseType) filtro.courseType = courseType;
 
-    const questoes = await Questao.find(filtro).select("codigo pool nivel materia tipo enunciado").sort({ nivel: 1, materia: 1 }).limit(200);
+    const questoes = await Questao.find(filtro).select("codigo pool nivel materia tipo courseType pendenteRevisaoCourseType enunciado").sort({ nivel: 1, materia: 1 }).limit(200);
     res.json(questoes);
   } catch (err) {
     console.error(err);
@@ -325,7 +347,10 @@ router.get("/admin/questoes", exigirProfessor, async (req, res) => {
 
 router.get("/admin/conjuntos", exigirProfessor, async (req, res) => {
   try {
-    const conjuntos = await Conjunto.find({ tipo: "oficial" }).sort({ criadoEm: -1 });
+    const filtro = { tipo: "oficial" };
+    if (req.query.pendenteRevisao === "1") filtro.pendenteRevisao = true;
+    else if (req.query.courseType) filtro.courseType = req.query.courseType;
+    const conjuntos = await Conjunto.find(filtro).sort({ criadoEm: -1 });
     res.json(conjuntos);
   } catch (err) {
     console.error(err);
@@ -346,9 +371,10 @@ router.get("/admin/conjuntos/:id", exigirProfessor, async (req, res) => {
 
 router.post("/admin/conjuntos", exigirProfessor, async (req, res) => {
   try {
-    const { nome, descricao, questoes: questaoIds, tempoLimiteSegundos, dificuldade, pool } = req.body;
+    const { nome, descricao, questoes: questaoIds, tempoLimiteSegundos, dificuldade, pool, courseType } = req.body;
     if (!nome?.trim()) return res.status(400).json({ msg: "Informe o nome do conjunto." });
     if (!Array.isArray(questaoIds) || !questaoIds.length) return res.status(400).json({ msg: "Selecione ao menos uma questão." });
+    if (courseType && !TIPOS_CURSO.includes(courseType)) return res.status(400).json({ msg: "Curso inválido." });
 
     const encontradas = await Questao.countDocuments({ _id: { $in: questaoIds } });
     if (encontradas !== questaoIds.length) return res.status(400).json({ msg: "Uma ou mais questões selecionadas não existem." });
@@ -356,6 +382,7 @@ router.post("/admin/conjuntos", exigirProfessor, async (req, res) => {
     const filtros = await derivarFiltrosDeQuestoes(questaoIds);
     const conjunto = await Conjunto.create({
       nome: nome.trim(), descricao, tipo: "oficial", pool: pool === "simulado" ? "simulado" : "praticar", criadoPor: req.userId,
+      courseType: courseType || null,
       filtros, dificuldade: dificuldade || derivarDificuldade(filtros.niveis),
       questoes: questaoIds.map((id, i) => ({ questaoId: id, ordem: i })),
       quantidadeQuestoes: questaoIds.length,
@@ -374,13 +401,15 @@ router.put("/admin/conjuntos/:id", exigirProfessor, async (req, res) => {
     const conjunto = await Conjunto.findOne({ _id: req.params.id, tipo: "oficial" });
     if (!conjunto) return res.status(404).json({ msg: "Conjunto não encontrado." });
 
-    const { nome, descricao, ativo, tempoLimiteSegundos, dificuldade, questoes: questaoIds, pool } = req.body;
+    const { nome, descricao, ativo, tempoLimiteSegundos, dificuldade, questoes: questaoIds, pool, courseType } = req.body;
+    if (courseType !== undefined && courseType && !TIPOS_CURSO.includes(courseType)) return res.status(400).json({ msg: "Curso inválido." });
     if (nome !== undefined) conjunto.nome = nome;
     if (descricao !== undefined) conjunto.descricao = descricao;
     if (ativo !== undefined) conjunto.ativo = !!ativo;
     if (tempoLimiteSegundos !== undefined) conjunto.tempoLimiteSegundos = tempoLimiteSegundos || null;
     if (dificuldade !== undefined) conjunto.dificuldade = dificuldade;
     if (pool !== undefined) conjunto.pool = pool === "simulado" ? "simulado" : "praticar";
+    if (courseType !== undefined) { conjunto.courseType = courseType || null; conjunto.pendenteRevisao = false; }
 
     if (questaoIds !== undefined) {
       if (!Array.isArray(questaoIds) || !questaoIds.length) return res.status(400).json({ msg: "Selecione ao menos uma questão." });
@@ -415,12 +444,15 @@ router.post("/conjuntos/:id/sessao", async (req, res) => {
   try {
     const conjunto = await Conjunto.findOne({ _id: req.params.id, ativo: true });
     if (!conjunto) return res.status(404).json({ msg: "Conjunto não encontrado." });
+    if (!(await podeAcessarConjunto(req.userId, conjunto))) {
+      return res.status(403).json({ msg: "Você não tem acesso a este conjunto." });
+    }
 
     let sessao = await SessaoResolucao.findOne({ alunoId: req.userId, conjuntoId: conjunto._id });
     if (!sessao) {
       const questoesOrdenadas = conjunto.questoes.slice().sort((a, b) => a.ordem - b.ordem);
       sessao = await SessaoResolucao.create({
-        alunoId: req.userId, conjuntoId: conjunto._id,
+        alunoId: req.userId, conjuntoId: conjunto._id, courseType: conjunto.courseType,
         respostas: questoesOrdenadas.map(q => ({ questaoId: q.questaoId, respostaEscolhida: null, marcadaRevisao: false }))
       });
     }
@@ -438,6 +470,9 @@ router.get("/sessoes/:id", async (req, res) => {
     if (!sessao) return res.status(404).json({ msg: "Sessão não encontrada." });
     const conjunto = await Conjunto.findById(sessao.conjuntoId);
     if (!conjunto) return res.status(404).json({ msg: "Conjunto não encontrado." });
+    if (!(await podeAcessarConjunto(req.userId, conjunto))) {
+      return res.status(403).json({ msg: "Você não tem acesso a este conjunto." });
+    }
     res.json(await montarSessaoPublica(sessao, conjunto));
   } catch (err) {
     console.error(err);
@@ -449,6 +484,10 @@ router.patch("/sessoes/:id/atual", async (req, res) => {
   try {
     const sessao = await SessaoResolucao.findOne({ _id: req.params.id, alunoId: req.userId });
     if (!sessao) return res.status(404).json({ msg: "Sessão não encontrada." });
+    const conjunto = await Conjunto.findById(sessao.conjuntoId);
+    if (!conjunto || !(await podeAcessarConjunto(req.userId, conjunto))) {
+      return res.status(403).json({ msg: "Você não tem acesso a este conjunto." });
+    }
 
     const { index } = req.body;
     if (typeof index !== "number" || index < 0 || index >= sessao.respostas.length) {
@@ -458,7 +497,6 @@ router.patch("/sessoes/:id/atual", async (req, res) => {
     sessao.ultimaAtividadeEm = new Date();
     await sessao.save();
 
-    const conjunto = await Conjunto.findById(sessao.conjuntoId);
     res.json(await montarSessaoPublica(sessao, conjunto));
   } catch (err) {
     console.error(err);
@@ -470,6 +508,10 @@ router.put("/sessoes/:id/questoes/:index", async (req, res) => {
   try {
     const sessao = await SessaoResolucao.findOne({ _id: req.params.id, alunoId: req.userId });
     if (!sessao) return res.status(404).json({ msg: "Sessão não encontrada." });
+    const conjunto = await Conjunto.findById(sessao.conjuntoId);
+    if (!conjunto || !(await podeAcessarConjunto(req.userId, conjunto))) {
+      return res.status(403).json({ msg: "Você não tem acesso a este conjunto." });
+    }
 
     const index = Number(req.params.index);
     const item = sessao.respostas[index];
@@ -484,7 +526,6 @@ router.put("/sessoes/:id/questoes/:index", async (req, res) => {
     sessao.ultimaAtividadeEm = new Date();
     await sessao.save();
 
-    const conjunto = await Conjunto.findById(sessao.conjuntoId);
     res.json(await montarSessaoPublica(sessao, conjunto));
   } catch (err) {
     console.error(err);
@@ -498,6 +539,9 @@ router.post("/sessoes/:id/finalizar", async (req, res) => {
     if (!sessao) return res.status(404).json({ msg: "Sessão não encontrada." });
     const conjunto = await Conjunto.findById(sessao.conjuntoId);
     if (!conjunto) return res.status(404).json({ msg: "Conjunto não encontrado." });
+    if (!(await podeAcessarConjunto(req.userId, conjunto))) {
+      return res.status(403).json({ msg: "Você não tem acesso a este conjunto." });
+    }
 
     const tempoDecorridoSegundos = Math.floor((Date.now() - sessao.iniciadoEm.getTime()) / 1000);
     const expirouPorTempo = !!conjunto.tempoLimiteSegundos && tempoDecorridoSegundos >= conjunto.tempoLimiteSegundos;
@@ -531,7 +575,7 @@ router.post("/sessoes/:id/finalizar", async (req, res) => {
     const tempoGastoSegundos = expirouPorTempo ? conjunto.tempoLimiteSegundos : tempoDecorridoSegundos;
 
     const tentativa = await Tentativa.create({
-      alunoId: req.userId, conjuntoId: conjunto._id, numero,
+      alunoId: req.userId, conjuntoId: conjunto._id, courseType: conjunto.courseType, numero,
       respostas: respostasTentativa, totalQuestoes, totalCorretas, percentualAcertos,
       expirouPorTempo, tempoGastoSegundos, iniciadaEm: sessao.iniciadoEm
     });
@@ -579,7 +623,7 @@ router.post("/tentativas/:tentativaId/questoes/:questaoId/caderno", async (req, 
 
     await CadernoErros.findOneAndUpdate(
       { alunoId: req.userId, questaoId: req.params.questaoId },
-      { alunoId: req.userId, questaoId: req.params.questaoId, motivo: "revisao_manual", origem: { tentativaId: tentativa._id, conjuntoId: tentativa.conjuntoId } },
+      { alunoId: req.userId, questaoId: req.params.questaoId, courseType: tentativa.courseType, motivo: "revisao_manual", origem: { tentativaId: tentativa._id, conjuntoId: tentativa.conjuntoId } },
       { upsert: true, setDefaultsOnInsert: true }
     );
     res.json({ msg: "Adicionada ao Caderno de Revisão." });
@@ -601,7 +645,9 @@ router.delete("/caderno/:questaoId", async (req, res) => {
 
 router.get("/caderno", async (req, res) => {
   try {
-    const itens = await CadernoErros.find({ alunoId: req.userId }).sort({ adicionadoEm: -1 });
+    const filtro = { alunoId: req.userId };
+    if (req.query.courseType && TIPOS_CURSO.includes(req.query.courseType)) filtro.courseType = req.query.courseType;
+    const itens = await CadernoErros.find(filtro).sort({ adicionadoEm: -1 });
     const questoes = await Questao.find({ _id: { $in: itens.map(i => i.questaoId) } });
     const porId = new Map(questoes.map(q => [String(q._id), q]));
 
@@ -645,10 +691,13 @@ function calcularSequenciaDiaria(dias) {
 
 router.get("/estatisticas", async (req, res) => {
   try {
+    const filtroCurso = {};
+    if (req.query.courseType && TIPOS_CURSO.includes(req.query.courseType)) filtroCurso.courseType = req.query.courseType;
+
     const [tentativas, conjuntosEmAndamento, tamanhoCaderno] = await Promise.all([
-      Tentativa.find({ alunoId: req.userId }).sort({ finalizadaEm: -1 }),
-      SessaoResolucao.countDocuments({ alunoId: req.userId }),
-      CadernoErros.countDocuments({ alunoId: req.userId })
+      Tentativa.find({ alunoId: req.userId, ...filtroCurso }).sort({ finalizadaEm: -1 }),
+      SessaoResolucao.countDocuments({ alunoId: req.userId, ...filtroCurso }),
+      CadernoErros.countDocuments({ alunoId: req.userId, ...filtroCurso })
     ]);
 
     const conjuntoIds = [...new Set(tentativas.map(t => String(t.conjuntoId)))];

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
 const UserSchema = new mongoose.Schema({
   nome: { type: String, required: true },
@@ -56,9 +57,11 @@ const UserSchema = new mongoose.Schema({
   ultimoAcessoEm: { type: Date },
   primeiroLoginEm: { type: Date },
   creditosCorrecao: { type: Number, default: 0 },
-  especialidades: [{ type: String, enum: ["TCF", "TEF", "DELF", "DALF"] }],
+  especialidades: [{ type: String, enum: TIPOS_CURSO }],
   temasFavoritos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tema" }],
   aulasFavoritas: [{ type: mongoose.Schema.Types.ObjectId, ref: "Aula" }],
+  // DEPRECIADO — substituído por `planos[]` abaixo (um curso só sobrescrevia o anterior
+  // inteiro a cada compra). Mantido só para não perder histórico; nada grava aqui mais.
   plano: {
     curso: { type: String },
     tier: { type: String, enum: ["Essentiel", "Avancé", "Excellence"] },
@@ -69,13 +72,42 @@ const UserSchema = new mongoose.Schema({
     dataInicio: { type: Date },
     dataVencimento: { type: Date }
   },
-  // Compras avulsas do Pack Prestige (Plataforma de Questões, Ambiente de Produção Oral e
-  // Textual, Aulas Especializadas Online) — independente do "plano" de curso acima, para não
-  // sobrescrever uma assinatura de curso já ativa ao comprar um desses produtos avulsos.
+  // DEPRECIADO — substituído por `planos[].packPrestige` + `legado.produtosAvulsos` abaixo.
+  // Mantido só para não perder histórico; nada grava aqui mais.
   produtosAvulsos: {
     plataforma: { ativo: { type: Boolean, default: false }, dataVencimento: { type: Date } },
     producao: { ativo: { type: Boolean, default: false }, dataVencimento: { type: Date } },
     aulasEspecializadas: { ativo: { type: Boolean, default: false }, dataVencimento: { type: Date } }
+  },
+  // Um plano por curso — um aluno pode ter vários cursos ativos simultaneamente (ex.:
+  // TCF Excellence + B1 Essentiel). "Pack Prestige" é uma via alternativa de liberar os
+  // 3 módulos (plataforma/aulas/produção) daquele curso específico, paralela ao tier,
+  // não um tier acima de Excellence — ver backend/middleware/acessoCurso.js.
+  planos: [{
+    courseType: { type: String, enum: TIPOS_CURSO, required: true },
+    tier: { type: String, enum: ["Essentiel", "Avancé", "Excellence"], default: null },
+    ativo: { type: Boolean, default: false },
+    metodoPagamento: { type: String, enum: ["cartao_credito", "cartao_debito", "boleto", "pix"] },
+    cartaoFinal: { type: String },
+    autoRenovacao: { type: Boolean, default: false },
+    dataInicio: { type: Date },
+    dataVencimento: { type: Date },
+    packPrestige: {
+      ativo: { type: Boolean, default: false },
+      dataVencimento: { type: Date },
+      mercadoPagoId: { type: String }
+    }
+  }],
+  // Clientes que compraram o antigo Pack Prestige avulso (cross-curso, sem vínculo com
+  // um dos 8 cursos) mantêm acesso aqui até a assinatura vencer sozinha — congelado,
+  // nunca mais escrito depois da migração. Concede acesso ao módulo em QUALQUER curso
+  // (não dá pra saber a qual dos 8 vincular retroativamente).
+  legado: {
+    produtosAvulsos: {
+      plataforma: { ativo: { type: Boolean, default: false }, dataVencimento: { type: Date } },
+      producao: { ativo: { type: Boolean, default: false }, dataVencimento: { type: Date } },
+      aulasEspecializadas: { ativo: { type: Boolean, default: false }, dataVencimento: { type: Date } }
+    }
   },
   perfil: {
     foto: { type: String },

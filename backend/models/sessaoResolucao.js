@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
 // Estado mutável de uma resolução em andamento. Ao finalizar, este documento é
 // APAGADO e seus dados viram uma Tentativa imutável — não existe campo "status" aqui
@@ -17,6 +18,8 @@ const RespostaSessaoSchema = new mongoose.Schema({
 const SessaoResolucaoSchema = new mongoose.Schema({
   alunoId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   conjuntoId: { type: mongoose.Schema.Types.ObjectId, ref: "Conjunto", required: true },
+  // Copiado de Conjunto.courseType na criação — mesmo motivo de Tentativa.courseType.
+  courseType: { type: String, enum: TIPOS_CURSO, default: null },
 
   // Pré-populado a partir de conjunto.questoes na criação (mesma ordem, mesmo tamanho) —
   // permite navegação por índice sem merge no front.

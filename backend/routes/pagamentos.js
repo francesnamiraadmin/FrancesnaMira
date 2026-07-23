@@ -13,7 +13,8 @@ const { exigirAuth } = require("../middleware/auth");
 const { transmitir } = require("../utils/sse");
 const { confirmarMatricula, rejeitarMatricula } = require("./pagamentoMatricula");
 const { precoPorTier } = require("../utils/precoMatricula");
-const { PRODUTOS_PACK_PRESTIGE, precoPackPrestige, chavesLiberadas } = require("../utils/precoPackPrestige");
+const { precoPackPrestige, CURSO_COMBO_FLUENCIA, CURSOS_DO_COMBO_FLUENCIA } = require("../utils/precoPackPrestige");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 const { enviarEmailPagamentoAprovado } = require("../utils/mailer");
 
 const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
@@ -24,13 +25,38 @@ const NOMES_DIA = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", 
 
 // Recalcula o valor no servidor sempre que a matrícula vier acompanhada de horários
 // escolhidos (fluxo novo de Particular/Turma) — nunca confia no `valor` mandado pelo
-// cliente nesse caso. Para os planos sem agenda (Correções, Plataforma, Aulas Gravadas),
-// que não mandam slotsEscolhidos, o comportamento antigo (valor do cliente) é mantido.
-function valorAutoritativo(valorCliente, plano, slotsEscolhidos, curso, upgrades) {
-  if (PRODUTOS_PACK_PRESTIGE[curso]) return precoPackPrestige(curso, upgrades);
+// cliente nesse caso. Pack Prestige (por curso, R$300 fixo) e os planos sem agenda
+// mantêm o preço vindo de uma fonte de verdade no servidor também.
+function valorAutoritativo(valorCliente, plano, slotsEscolhidos, curso) {
+  if (plano === "Pack Prestige") return precoPackPrestige(curso);
   if (!Array.isArray(slotsEscolhidos) || slotsEscolhidos.length === 0) return Number(valorCliente);
   if (slotsEscolhidos.length > 4) throw new Error("Você pode selecionar no máximo quatro horários semanais.");
   return precoPorTier(slotsEscolhidos.length, plano);
+}
+
+// Faz upsert (match-then-push) de uma entrada em User.planos por courseType, dentro de
+// uma transação curta — evita duas entradas duplicadas pro mesmo curso se dois webhooks
+// do Mercado Pago pro mesmo pagamento chegarem quase simultaneamente (o MP reenvia
+// notificação). Não cria índice único sobre planos.courseType (seria multikey único por
+// COLEÇÃO inteira, bloquearia todo mundo depois do primeiro usuário) — a unicidade "um
+// courseType por usuário" é garantida só por este caminho de escrita.
+async function upsertPlanoCurso(userId, courseType, patch) {
+  const session = await mongoose.startSession();
+  try {
+    await session.withTransaction(async () => {
+      const setPrefixado = Object.fromEntries(Object.entries(patch).map(([k, v]) => [`planos.$.${k}`, v]));
+      const res = await User.updateOne(
+        { _id: userId, "planos.courseType": courseType },
+        { $set: setPrefixado },
+        { session }
+      );
+      if (res.matchedCount === 0) {
+        await User.updateOne({ _id: userId }, { $push: { planos: { courseType, ...patch } } }, { session });
+      }
+    });
+  } finally {
+    session.endSession();
+  }
 }
 
 // Checagem rápida (não atômica) só pra evitar cobrar o aluno por um horário já visivelmente
@@ -89,39 +115,72 @@ async function criarMatriculaDeHorarios(userId, curso, plano, tipo, slotsEscolhi
   }
 }
 
-// Compras avulsas do Pack Prestige (Plataforma de Questões, Ambiente de Produção Oral e
-// Textual, Aulas Especializadas Online) não mexem no "plano" de curso do usuário — apenas
-// liberam as chaves compradas (produto principal + upgrades) em produtosAvulsos.
-async function ativarPackPrestige(userId, curso, upgrades, metodoPagamento, precoFinal, mercadoPagoId) {
+// Ativa o Pack Prestige de UM curso (Plataforma de Questões + Aulas Especializadas +
+// Produção Textual, escopados a esse courseType) — não mexe em `tier`/`ativo` da
+// assinatura normal do mesmo curso, os dois convivem lado a lado (ver acessoCurso.js).
+async function ativarPackPrestige(userId, curso, metodoPagamento, precoFinal, mercadoPagoId) {
   if (!userId) return;
   const dataInicio = new Date();
   const dataVencimento = new Date(dataInicio.getTime() + 30 * 24 * 60 * 60 * 1000);
-  const chaves = chavesLiberadas(curso, upgrades);
-  const set = {};
-  chaves.forEach(chave => {
-    set[`produtosAvulsos.${chave}.ativo`] = true;
-    set[`produtosAvulsos.${chave}.dataVencimento`] = dataVencimento;
-  });
-  const user = await User.findByIdAndUpdate(userId, { $set: set }, { new: true }).select("nome email");
 
+  await upsertPlanoCurso(userId, curso, { packPrestige: { ativo: true, dataVencimento, mercadoPagoId } });
+
+  const user = await User.findById(userId).select("nome email");
   if (user?.email) {
     enviarEmailPagamentoAprovado(user.email, user.nome, {
-      curso, plano: null, valor: precoFinal, metodoPagamento, dataInicio, dataVencimento, mercadoPagoId
+      curso, plano: "Pack Prestige", valor: precoFinal, metodoPagamento, dataInicio, dataVencimento, mercadoPagoId
     }).catch(err => console.error("Erro ao enviar e-mail de pagamento aprovado:", err.message));
   }
 
   HistoricoAluno.create({
     alunoId: userId, tipo: "mudanca_plano",
-    titulo: `Compra de ${curso}`,
-    descricao: `Produto avulso ativado até ${dataVencimento.toLocaleDateString("pt-BR")}.`
+    titulo: `Pack Prestige ativado: ${curso}`,
+    descricao: `Válido até ${dataVencimento.toLocaleDateString("pt-BR")}.`
   }).catch(err => console.error("Erro ao registrar histórico do aluno:", err.message));
 }
 
-async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, tipo, slotsEscolhidos, precoFinal, dadosPessoais, upgrades, mercadoPagoId) {
+// Combo "Do A1 ao B2" — um único Pack Prestige que ativa A1, A2, B1 e B2 de uma vez.
+// Reaproveita upsertPlanoCurso por curso (mesmo caminho de escrita do Pack Prestige
+// normal), só que em loop — cada um dos 4 cursos fica com seu próprio packPrestige.ativo,
+// então o middleware de acesso (acessoCurso.js) não precisa saber que isso é um combo.
+async function ativarPackPrestigeCombo(userId, metodoPagamento, precoFinal, mercadoPagoId) {
+  if (!userId) return;
+  const dataInicio = new Date();
+  const dataVencimento = new Date(dataInicio.getTime() + 30 * 24 * 60 * 60 * 1000);
+
+  for (const curso of CURSOS_DO_COMBO_FLUENCIA) {
+    await upsertPlanoCurso(userId, curso, { packPrestige: { ativo: true, dataVencimento, mercadoPagoId } });
+  }
+
+  const user = await User.findById(userId).select("nome email");
+  if (user?.email) {
+    enviarEmailPagamentoAprovado(user.email, user.nome, {
+      curso: "A1, A2, B1 e B2", plano: "Pack Prestige", valor: precoFinal, metodoPagamento, dataInicio, dataVencimento, mercadoPagoId
+    }).catch(err => console.error("Erro ao enviar e-mail de pagamento aprovado:", err.message));
+  }
+
+  HistoricoAluno.create({
+    alunoId: userId, tipo: "mudanca_plano",
+    titulo: "Pack Prestige ativado: A1 ao B2",
+    descricao: `Válido até ${dataVencimento.toLocaleDateString("pt-BR")} para A1, A2, B1 e B2.`
+  }).catch(err => console.error("Erro ao registrar histórico do aluno:", err.message));
+}
+
+async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, tipo, slotsEscolhidos, precoFinal, dadosPessoais, mercadoPagoId) {
   if (!userId) return;
 
-  if (PRODUTOS_PACK_PRESTIGE[curso]) {
-    await ativarPackPrestige(userId, curso, upgrades, metodoPagamento, precoFinal, mercadoPagoId);
+  if (curso === CURSO_COMBO_FLUENCIA && plano === "Pack Prestige") {
+    await ativarPackPrestigeCombo(userId, metodoPagamento, precoFinal, mercadoPagoId);
+    return;
+  }
+
+  if (!TIPOS_CURSO.includes(curso)) {
+    console.error(`ativarPlano: curso "${curso}" não é um dos 8 códigos canônicos — pagamento aprovado mas plano não ativado, verificar manualmente (userId=${userId}).`);
+    return;
+  }
+
+  if (plano === "Pack Prestige") {
+    await ativarPackPrestige(userId, curso, metodoPagamento, precoFinal, mercadoPagoId);
     return;
   }
 
@@ -129,19 +188,15 @@ async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, t
   const dataVencimento = new Date(dataInicio.getTime() + 30 * 24 * 60 * 60 * 1000);
   const creditosGanhos = CREDITOS_CORRECAO_POR_TIER[plano] || 0;
 
-  const planoAnterior = await User.findById(userId).select("plano");
-  const ehRenovacao = planoAnterior?.plano?.curso === curso && planoAnterior?.plano?.tier === plano;
+  const existente = await User.findOne({ _id: userId, "planos.courseType": curso }, { "planos.$": 1 });
+  const ehRenovacao = existente?.planos?.[0]?.tier === plano;
 
-  const user = await User.findByIdAndUpdate(userId, {
-    plano: {
-      curso, tier: plano, ativo: true,
-      metodoPagamento, cartaoFinal,
-      autoRenovacao: false,
-      dataInicio, dataVencimento
-    },
-    $inc: { creditosCorrecao: creditosGanhos }
-  }, { new: true }).select("nome email");
+  await upsertPlanoCurso(userId, curso, {
+    tier: plano, ativo: true, metodoPagamento, cartaoFinal, autoRenovacao: false, dataInicio, dataVencimento
+  });
+  if (creditosGanhos) await User.updateOne({ _id: userId }, { $inc: { creditosCorrecao: creditosGanhos } });
 
+  const user = await User.findById(userId).select("nome email");
   if (user?.email) {
     enviarEmailPagamentoAprovado(user.email, user.nome, {
       curso, plano, valor: precoFinal, metodoPagamento, dataInicio, dataVencimento, mercadoPagoId
@@ -191,7 +246,7 @@ router.post("/cartao", exigirAuth, async (req, res) => {
   try {
     // "tipo" aqui é débito/crédito (bandeira do cartão) — não confundir com "tipoMatricula"
     // (particular/turma), que é o novo campo do fluxo de horários.
-    const { token, paymentMethodId, installments, curso, plano, valor, email, cpf, tipo, turmaId, tipoMatricula, slotsEscolhidos, dadosPessoais, upgrades } = req.body;
+    const { token, paymentMethodId, installments, curso, plano, valor, email, cpf, tipo, turmaId, tipoMatricula, slotsEscolhidos, dadosPessoais } = req.body;
 
     if (!token || !paymentMethodId || !curso || !plano || !valor || !email || !cpf) {
       return res.status(400).json({ msg: "Preencha todos os campos" });
@@ -199,7 +254,7 @@ router.post("/cartao", exigirAuth, async (req, res) => {
 
     let valorFinal;
     try {
-      valorFinal = valorAutoritativo(valor, plano, slotsEscolhidos, curso, upgrades);
+      valorFinal = valorAutoritativo(valor, plano, slotsEscolhidos, curso);
       await validarSlotsDisponiveis(slotsEscolhidos);
     } catch (err) {
       return res.status(409).json({ msg: err.message });
@@ -229,7 +284,6 @@ router.post("/cartao", exigirAuth, async (req, res) => {
       tipo: (tipoMatricula === "particular" || tipoMatricula === "turma") ? tipoMatricula : undefined,
       slotsEscolhidos: slotsEscolhidos || undefined,
       dadosPessoais: dadosPessoais || undefined,
-      upgrades: upgrades || undefined,
       curso, plano, valor: valorFinal, email,
       metodoPagamento, cartaoFinal,
       status: aprovado ? "aprovado" : "rejeitado",
@@ -237,7 +291,7 @@ router.post("/cartao", exigirAuth, async (req, res) => {
     });
 
     if (aprovado) {
-      await ativarPlano(req.userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, pedido.tipo, slotsEscolhidos, valorFinal, dadosPessoais, upgrades, resultado.id);
+      await ativarPlano(req.userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, pedido.tipo, slotsEscolhidos, valorFinal, dadosPessoais, resultado.id);
     }
 
     res.json({ status: resultado.status, statusDetail: resultado.status_detail, pedidoId: pedido._id });
@@ -250,7 +304,7 @@ router.post("/cartao", exigirAuth, async (req, res) => {
 // PIX — gera QR Code real
 router.post("/pix", exigirAuth, async (req, res) => {
   try {
-    const { curso, plano, valor, email, cpf, turmaId, tipoMatricula, slotsEscolhidos, dadosPessoais, upgrades } = req.body;
+    const { curso, plano, valor, email, cpf, turmaId, tipoMatricula, slotsEscolhidos, dadosPessoais } = req.body;
 
     if (!curso || !plano || !valor || !email || !cpf) {
       return res.status(400).json({ msg: "Preencha todos os campos" });
@@ -258,7 +312,7 @@ router.post("/pix", exigirAuth, async (req, res) => {
 
     let valorFinal;
     try {
-      valorFinal = valorAutoritativo(valor, plano, slotsEscolhidos, curso, upgrades);
+      valorFinal = valorAutoritativo(valor, plano, slotsEscolhidos, curso);
       await validarSlotsDisponiveis(slotsEscolhidos);
     } catch (err) {
       return res.status(409).json({ msg: err.message });
@@ -282,7 +336,6 @@ router.post("/pix", exigirAuth, async (req, res) => {
       tipo: (tipoMatricula === "particular" || tipoMatricula === "turma") ? tipoMatricula : undefined,
       slotsEscolhidos: slotsEscolhidos || undefined,
       dadosPessoais: dadosPessoais || undefined,
-      upgrades: upgrades || undefined,
       curso, plano, valor: valorFinal, email,
       metodoPagamento: "pix",
       status: "pendente",
@@ -304,7 +357,7 @@ router.post("/pix", exigirAuth, async (req, res) => {
 // BOLETO
 router.post("/boleto", exigirAuth, async (req, res) => {
   try {
-    const { curso, plano, valor, email, cpf, nome, turmaId, cep, rua, numero, bairro, cidade, estado, tipoMatricula, slotsEscolhidos, dadosPessoais, upgrades } = req.body;
+    const { curso, plano, valor, email, cpf, nome, turmaId, cep, rua, numero, bairro, cidade, estado, tipoMatricula, slotsEscolhidos, dadosPessoais } = req.body;
 
     if (!curso || !plano || !valor || !email || !cpf || !nome || !cep || !rua || !numero || !bairro || !cidade || !estado) {
       return res.status(400).json({ msg: "Preencha todos os campos, incluindo o endereço (exigido pelo Mercado Pago para gerar o boleto)." });
@@ -312,7 +365,7 @@ router.post("/boleto", exigirAuth, async (req, res) => {
 
     let valorFinal;
     try {
-      valorFinal = valorAutoritativo(valor, plano, slotsEscolhidos, curso, upgrades);
+      valorFinal = valorAutoritativo(valor, plano, slotsEscolhidos, curso);
       await validarSlotsDisponiveis(slotsEscolhidos);
     } catch (err) {
       return res.status(409).json({ msg: err.message });
@@ -349,7 +402,6 @@ router.post("/boleto", exigirAuth, async (req, res) => {
       tipo: (tipoMatricula === "particular" || tipoMatricula === "turma") ? tipoMatricula : undefined,
       slotsEscolhidos: slotsEscolhidos || undefined,
       dadosPessoais: dadosPessoais || undefined,
-      upgrades: upgrades || undefined,
       curso, plano, valor: valorFinal, email,
       metodoPagamento: "boleto",
       status: "pendente",
@@ -407,7 +459,7 @@ router.post("/webhook", async (req, res) => {
 
       if (pedido) {
         if (novoStatus === "aprovado") {
-          await ativarPlano(pedido.userId, pedido.curso, pedido.plano, pedido.metodoPagamento, pedido.cartaoFinal, pedido.turmaId, pedido.tipo, pedido.slotsEscolhidos, pedido.valor, pedido.dadosPessoais, pedido.upgrades, pedido.mercadoPagoId);
+          await ativarPlano(pedido.userId, pedido.curso, pedido.plano, pedido.metodoPagamento, pedido.cartaoFinal, pedido.turmaId, pedido.tipo, pedido.slotsEscolhidos, pedido.valor, pedido.dadosPessoais, pedido.mercadoPagoId);
         }
       } else {
         const pagamentoMatricula = await PagamentoMatricula.findOneAndUpdate(

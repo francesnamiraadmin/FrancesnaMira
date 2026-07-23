@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
 // Lista de questões FIXADA no momento da criação do Conjunto (sorteada uma vez para
 // personalizado, curada manualmente para oficial, nunca re-sorteada depois) — necessário
@@ -17,6 +18,13 @@ const ConjuntoSchema = new mongoose.Schema({
   // (unificação de Simulados) poder reaproveitar a mesma entidade sem migração de schema.
   pool: { type: String, enum: ["praticar", "simulado"], default: "praticar" },
   criadoPor: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+
+  // Curso ao qual este conjunto pertence. `null` + `pendenteRevisao` = as questões
+  // referenciadas não convergem num único courseType (conjunto misto de nível, ou ainda
+  // não migrado) — precisa de decisão manual do admin, nunca dividido automaticamente
+  // (ver backend/seed/migrarCourseTypeQuestoes.js).
+  courseType: { type: String, enum: TIPOS_CURSO, default: null },
+  pendenteRevisao: { type: Boolean, default: false },
 
   // Metadados de exibição ("B1-B2 · Gramática, Vocabulário"): para oficial, derivado
   // automaticamente da união de nível/matéria das questões curadas manualmente; para
@@ -45,7 +53,9 @@ const ConjuntoSchema = new mongoose.Schema({
   criadoEm: { type: Date, default: Date.now }
 });
 
-ConjuntoSchema.index({ tipo: 1, pool: 1, ativo: 1 });
-ConjuntoSchema.index({ criadoPor: 1, tipo: 1 });
+ConjuntoSchema.index({ courseType: 1, tipo: 1, pool: 1, ativo: 1 });
+ConjuntoSchema.index({ criadoPor: 1, courseType: 1, tipo: 1 });
 
-module.exports = mongoose.model("Conjunto", ConjuntoSchema);
+const Conjunto = mongoose.model("Conjunto", ConjuntoSchema);
+Conjunto.TIPOS_CURSO = TIPOS_CURSO;
+module.exports = Conjunto;

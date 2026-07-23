@@ -25,31 +25,18 @@
 
   // Cursos com agenda própria (grade de horários + preço progressivo).
   const CURSOS_COM_HORARIO = ["TCF", "TEF", "DELF", "DALF", "A1", "A2", "B1", "B2"];
-  const usaHorarios = !modoPlano || CURSOS_COM_HORARIO.includes(planoInfo.curso);
-
-  // Produtos do Pack Prestige (plano único + upgrades) — mesma config do
-  // backend/utils/precoPackPrestige.js, aqui só para o preview ao vivo.
-  const PACK_PRESTIGE_PRODUTOS = {
-    "Plataforma de Questões": { chave: "plataforma", preco: 65 },
-    "Ambiente de Produção Oral e Textual": { chave: "producao", preco: 65 },
-    "Aulas Especializadas Online": { chave: "aulasEspecializadas", preco: 110 }
-  };
-  // R$55 (não R$30) para Plataforma/Produção como upgrade — faz o total fechar igual não
-  // importa qual dos 3 produtos é escolhido como principal (ver backend/utils/precoPackPrestige.js).
-  const PRECO_UPGRADE = { plataforma: 55, producao: 55, aulasEspecializadas: 100 };
-  const NOMES_PRODUTO_PACK = {
-    plataforma: "Plataforma de Questões",
-    producao: "Ambiente de Produção Oral e Textual",
-    aulasEspecializadas: "Aulas Especializadas Online"
-  };
-  function precoPackPrestige(produtoPrincipal, upgrades) {
-    const principal = PACK_PRESTIGE_PRODUTOS[produtoPrincipal];
-    if (!principal) return 0;
-    let total = principal.preco;
-    (upgrades || []).forEach(k => { if (k !== principal.chave && PRECO_UPGRADE[k] !== undefined) total += PRECO_UPGRADE[k]; });
-    return total;
-  }
-  const usaPackPrestige = modoPlano && !!PACK_PRESTIGE_PRODUTOS[planoInfo.curso] && planoInfo.plano === "Pack Prestige";
+  // "A1-B2" é um pseudo-curso especial: não tem agenda própria (não é aula particular),
+  // é só o combo Pack Prestige que libera A1+A2+B1+B2 de uma vez (ver
+  // backend/routes/pagamentos.js#ativarPackPrestigeCombo).
+  const CURSO_COMBO_FLUENCIA = "A1-B2";
+  // Pack Prestige por curso — bundle fixo (Plataforma de Questões + Aulas Especializadas
+  // gravadas + Ambiente de Produção Textual), sem aula particular/horários. Substitui o
+  // antigo Pack Prestige avulso e cross-curso (ver backend/utils/precoPackPrestige.js).
+  const PRECO_PACK_PRESTIGE = 300;
+  const PRECO_PACK_PRESTIGE_COMBO = 500;
+  const usaPackPrestige = modoPlano && planoInfo.plano === "Pack Prestige" &&
+    (CURSOS_COM_HORARIO.includes(planoInfo.curso) || planoInfo.curso === CURSO_COMBO_FLUENCIA);
+  const usaHorarios = !usaPackPrestige && (!modoPlano || CURSOS_COM_HORARIO.includes(planoInfo.curso));
 
   // ---------- PREÇO (mesma fórmula do backend/utils/precoMatricula.js — o valor real
   // cobrado é sempre recalculado no servidor, isso aqui é só o preview ao vivo) ----------
@@ -85,7 +72,7 @@
   const ORDEM_DIAS = [1, 2, 3, 4, 5, 6, 0]; // exibição Seg..Dom
 
   const STEP_LABELS = {
-    dados: "Seus dados", turma: "Turma", upgrade: "Upgrade",
+    dados: "Seus dados", turma: "Turma",
     horarios: "Horários e plano", resumo: "Resumo", pagamento: "Pagamento"
   };
 
@@ -96,7 +83,6 @@
     periodo: null,
     slotsSelecionados: [], // [{_id, diaSemana, horaInicio}]
     tierEscolhido: modoPlano && CURSOS_COM_HORARIO.includes(planoInfo?.curso) ? planoInfo.plano : null,
-    upgrades: [], // chaves do Pack Prestige (plataforma/producao/aulasEspecializadas) marcadas como adicional
     cupom: null,
     matricula: null
   };
@@ -119,14 +105,14 @@
         "Escolha a modalidade, os horários e o plano ideal para " + planoInfo.curso + ".";
     }
   } else if (usaPackPrestige) {
-    // Plataforma de Questões, Ambiente de Produção Oral e Textual e Aulas Especializadas
-    // Online — plano único (Pack Prestige) com upgrades opcionais para os outros dois produtos.
-    state.tipo = "turma";
-    steps = ["dados", "upgrade", "resumo", "pagamento"];
+    // Pack Prestige por curso (ou o combo A1 ao B2) — bundle fixo, sem aula particular/horários.
+    const nomeCursoExibido = planoInfo.curso === CURSO_COMBO_FLUENCIA ? "A1 ao B2" : planoInfo.curso;
+    state.tipo = "particular";
+    steps = ["dados", "resumo", "pagamento"];
     document.querySelector(".eyebrow").textContent = "Assinatura";
     document.querySelector("h1.brand").innerHTML = "Pack Prestige" + '<span class="dot"></span>';
     document.querySelector("header.top .sub").textContent =
-      "Finalize sua assinatura de " + planoInfo.curso + " e adicione outros produtos ao seu pack, se quiser.";
+      "Finalize sua assinatura do Pack Prestige de " + nomeCursoExibido + ".";
     document.getElementById("campoCupom").style.display = "none";
     document.getElementById("camposParticular").style.display = "none";
   } else {
@@ -184,7 +170,6 @@
     if (key === "dados") prefillDados();
     if (key === "turma") carregarTurmas();
     if (key === "horarios") entrarEmHorarios();
-    if (key === "upgrade") renderUpgradeGrid();
     if (key === "resumo") renderResumo();
     if (key === "pagamento") renderPagamentoResumo();
   }
@@ -226,60 +211,6 @@
     const isProva = e.target.value === "Preparação para exame de proficiência";
     document.getElementById("f-prova").style.display = isProva ? "block" : "none";
     document.getElementById("f-dataExame").style.display = isProva ? "block" : "none";
-  });
-
-  // ---------- STEP: UPGRADE (Pack Prestige) ----------
-  function outrosProdutosPack() {
-    const principal = PACK_PRESTIGE_PRODUTOS[planoInfo.curso];
-    return Object.keys(PACK_PRESTIGE_PRODUTOS)
-      .filter(nome => nome !== planoInfo.curso)
-      .map(nome => ({ nome, chave: PACK_PRESTIGE_PRODUTOS[nome].chave }))
-      .filter(p => p.chave !== principal.chave);
-  }
-
-  function renderUpgradeGrid() {
-    const grid = document.getElementById("upgradeGrid");
-    const outros = outrosProdutosPack();
-    grid.innerHTML = outros.map(p =>
-      '<label class="option" for="upg-' + p.chave + '">' +
-        '<input type="checkbox" id="upg-' + p.chave + '" data-upgrade="' + p.chave + '">' +
-        '<span class="opt-text"><span class="opt-title">' + p.nome + '</span><br>' +
-        '<span class="opt-sub">+' + fmtMoeda(PRECO_UPGRADE[p.chave]) + '/mês</span></span>' +
-      '</label>'
-    ).join("") +
-      '<label class="option" for="upg-nenhum">' +
-        '<input type="checkbox" id="upg-nenhum" data-upgrade="nenhum">' +
-        '<span class="opt-text"><span class="opt-title">Não quero adicionais</span></span>' +
-      '</label>';
-    atualizarSelecaoUpgrade();
-    atualizarTotalUpgrade();
-  }
-
-  function atualizarSelecaoUpgrade() {
-    document.querySelectorAll('#upgradeGrid input[data-upgrade]').forEach(input => {
-      const marcado = input.dataset.upgrade === "nenhum" ? state.upgrades.length === 0 : state.upgrades.includes(input.dataset.upgrade);
-      input.checked = marcado;
-      input.closest(".option").classList.toggle("selected", marcado);
-    });
-  }
-
-  function atualizarTotalUpgrade() {
-    document.getElementById("upgradeTotalValor").textContent = fmtMoeda(precoPackPrestige(planoInfo.curso, state.upgrades));
-  }
-
-  document.getElementById("upgradeGrid").addEventListener("change", e => {
-    const input = e.target.closest("input[data-upgrade]");
-    if (!input) return;
-    const chave = input.dataset.upgrade;
-    if (chave === "nenhum") {
-      state.upgrades = [];
-    } else if (input.checked) {
-      state.upgrades = state.upgrades.includes(chave) ? state.upgrades : state.upgrades.concat(chave);
-    } else {
-      state.upgrades = state.upgrades.filter(k => k !== chave);
-    }
-    atualizarSelecaoUpgrade();
-    atualizarTotalUpgrade();
   });
 
   // ---------- STEP: TURMA (fluxo antigo — turma avulsa fora do Pack Prestige) ----------
@@ -375,7 +306,9 @@
     const tabela = document.getElementById("tabelaHorarios");
     tabela.innerHTML = '<tr><td>Carregando horários…</td></tr>';
     try {
-      const res = await fetch("/api/horarios/" + state.tipo + "/" + state.periodo, { headers: authHeaders() });
+      let url = "/api/horarios/" + state.tipo + "/" + state.periodo;
+      if (modoPlano && CURSOS_COM_HORARIO.includes(planoInfo.curso)) url += "?curso=" + encodeURIComponent(planoInfo.curso);
+      const res = await fetch(url, { headers: authHeaders() });
       ultimosSlotsCarregados = res.ok ? await res.json() : [];
       renderTabela();
     } catch (e) {
@@ -385,6 +318,7 @@
 
   function renderTabela() {
     const tabela = document.getElementById("tabelaHorarios");
+    document.getElementById("semHorariosAviso").style.display = ultimosSlotsCarregados.length ? "none" : "block";
     const porHora = {};
     ultimosSlotsCarregados.forEach(s => {
       (porHora[s.horaInicio] = porHora[s.horaInicio] || {})[s.diaSemana] = s;
@@ -485,7 +419,7 @@
   // ---------- STEP: RESUMO ----------
   function precoOriginalAtual() {
     if (usaHorarios) return precoPorTier(state.slotsSelecionados.length, state.tierEscolhido);
-    if (usaPackPrestige) return precoPackPrestige(planoInfo.curso, state.upgrades);
+    if (usaPackPrestige) return planoInfo.curso === CURSO_COMBO_FLUENCIA ? PRECO_PACK_PRESTIGE_COMBO : PRECO_PACK_PRESTIGE;
     return state.tipo === "turma" && state.turma ? state.turma.preco : planoInfo.valor;
   }
 
@@ -502,18 +436,11 @@
       html += linha("Horários escolhidos", nomesHorarios || "—");
       html += linha("Valor mensal", fmtMoeda(precoOriginalAtual()));
     } else if (usaPackPrestige) {
-      const principal = PACK_PRESTIGE_PRODUTOS[planoInfo.curso];
       const d = dadosPessoaisAtuais();
-      html += linha("Produto principal", planoInfo.curso);
+      const ehCombo = planoInfo.curso === CURSO_COMBO_FLUENCIA;
+      html += linha("Curso", ehCombo ? "A1, A2, B1 e B2" : planoInfo.curso);
       html += linha("Pack escolhido", "Pack Prestige");
-      html += linha(planoInfo.curso, fmtMoeda(principal.preco));
-      if (state.upgrades.length) {
-        state.upgrades.forEach(chave => {
-          html += linha(NOMES_PRODUTO_PACK[chave] + " (adicional)", "+" + fmtMoeda(PRECO_UPGRADE[chave]));
-        });
-      } else {
-        html += linha("Adicionais", "Nenhum");
-      }
+      html += linha("Inclui", "Plataforma de Questões, Aulas Especializadas gravadas e Ambiente de Produção Textual" + (ehCombo ? " — nos 4 níveis (A1 a B2)" : ""));
       html += linha("Valor mensal", fmtMoeda(precoOriginalAtual()));
       html += linha("Nome", d.nome || "—");
       html += linha("E-mail", d.email || "—");
@@ -638,8 +565,8 @@
   }
 
   // Monta o corpo comum enviado para /api/pagamentos/{pix,cartao,boleto} — usaHorarios manda
-  // tipoMatricula+slotsEscolhidos, usaPackPrestige manda upgrades (preço sempre recalculado
-  // no servidor); o fluxo antigo manda curso/plano/valor fixos, exatamente como antes.
+  // tipoMatricula+slotsEscolhidos; usaPackPrestige manda curso+"Pack Prestige" (preço fixo,
+  // sempre recalculado no servidor); o fluxo antigo manda curso/plano/valor fixos.
   function corpoPagamentoBase(email, cpf) {
     if (usaHorarios) {
       return {
@@ -654,7 +581,6 @@
       return {
         curso: planoInfo.curso, plano: "Pack Prestige", valor: precoOriginalAtual(),
         email, cpf,
-        upgrades: state.upgrades,
         dadosPessoais: dadosPessoaisAtuais()
       };
     }
@@ -665,14 +591,8 @@
   function renderPagamentoResumo() {
     const el = document.getElementById("pagamentoResumo");
     if (!usaPackPrestige) { el.innerHTML = ""; return; }
-    let html = linha("Produto adquirido", planoInfo.curso);
-    if (state.upgrades.length) {
-      state.upgrades.forEach(chave => {
-        html += linha(NOMES_PRODUTO_PACK[chave] + " (adicional)", "+" + fmtMoeda(PRECO_UPGRADE[chave]));
-      });
-    } else {
-      html += linha("Adicionais", "Nenhum");
-    }
+    const nomeCursoResumo = planoInfo.curso === CURSO_COMBO_FLUENCIA ? "A1 ao B2" : planoInfo.curso;
+    let html = linha("Produto adquirido", "Pack Prestige — " + nomeCursoResumo);
     html += '<div class="resumo-total"><span class="label">Valor final</span><span class="valor">' + fmtMoeda(precoOriginalAtual()) + "</span></div>";
     el.innerHTML = html;
   }

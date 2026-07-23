@@ -121,9 +121,12 @@ document.getElementById('criarTemaBtn').addEventListener('click', async () => {
   })).filter(d => d.titulo && d.conteudo);
 
   const modalidade = document.getElementById('temaModalidade').value;
+  const courseType = document.getElementById('temaCourseType').value;
+  const EXAMES = ['TCF', 'TEF', 'DELF', 'DALF'];
   const corpo = {
     titulo: document.getElementById('temaTitulo').value.trim(),
-    exame: document.getElementById('temaExame').value,
+    courseType,
+    exame: EXAMES.includes(courseType) ? courseType : undefined,
     nivel: document.getElementById('temaNivel').value,
     modalidade,
     dificuldade: document.getElementById('temaDificuldade').value,
@@ -172,7 +175,7 @@ async function carregarTemas() {
     document.getElementById('temasTbody').innerHTML = temas.map(t => `
       <tr>
         <td>${t.titulo} <span class="pill">${t.modalidade === 'oral' ? '<img class="titulo-icone-inline pequeno" src="img/icones/mic.svg" alt="">Oral' : '<img class="titulo-icone-inline pequeno" src="img/icones/writing-hand.svg" alt="">Textual'}</span></td>
-        <td>${t.exame} · ${t.nivel}</td>
+        <td>${t.courseType || t.exame || '—'} · ${t.nivel}</td>
         <td><span class="pill ${t.ativo ? '' : 'inativo'}">${t.ativo ? 'Ativo' : 'Inativo'}</span></td>
         <td>${t.ativo ? `<button class="btn perigo pequeno" data-desativar-tema="${t._id}">Desativar</button>` : ''}</td>
       </tr>`).join('');

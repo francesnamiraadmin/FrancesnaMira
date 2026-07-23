@@ -45,6 +45,48 @@ function obterPlanosDoAluno(user, matriculasTurma = []) {
     });
   });
 
+  // Um plano por curso (modelo novo) — assinatura por tier e/ou Pack Prestige, os dois
+  // podem estar ativos ao mesmo tempo pro mesmo curso.
+  (user.planos || []).forEach(p => {
+    if (p.ativo && p.dataVencimento) {
+      planos.push({
+        nome: `${p.courseType} ${p.tier || ""}`.trim(),
+        tipo: "plano_curso",
+        curso: p.courseType,
+        dataInicio: p.dataInicio || null,
+        dataVencimento: p.dataVencimento,
+        tempoRestanteDias: diasRestantes(p.dataVencimento),
+        ativo: new Date(p.dataVencimento) > agora
+      });
+    }
+    if (p.packPrestige?.ativo && p.packPrestige?.dataVencimento) {
+      planos.push({
+        nome: `Pack Prestige ${p.courseType}`,
+        tipo: "pack_prestige",
+        curso: p.courseType,
+        dataInicio: null,
+        dataVencimento: p.packPrestige.dataVencimento,
+        tempoRestanteDias: diasRestantes(p.packPrestige.dataVencimento),
+        ativo: new Date(p.packPrestige.dataVencimento) > agora
+      });
+    }
+  });
+
+  // Grandfather do Pack Prestige avulso antigo (cross-curso) — mostrado sem curso
+  // específico, igual ao avulso genérico acima, só que numa fonte congelada à parte.
+  Object.entries(user.legado?.produtosAvulsos || {}).forEach(([chave, dados]) => {
+    if (!dados?.ativo || !dados?.dataVencimento) return;
+    planos.push({
+      nome: `${NOMES_AVULSOS[chave] || chave} (legado)`,
+      tipo: "avulso",
+      curso: null,
+      dataInicio: null,
+      dataVencimento: dados.dataVencimento,
+      tempoRestanteDias: diasRestantes(dados.dataVencimento),
+      ativo: new Date(dados.dataVencimento) > agora
+    });
+  });
+
   matriculasTurma.forEach(m => {
     const turma = m.turmaId;
     if (!turma) return;

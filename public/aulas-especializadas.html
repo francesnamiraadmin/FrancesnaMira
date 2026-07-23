@@ -298,18 +298,26 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     // Liberado pelo plano de curso (cascata por tier) OU por uma compra avulsa do Pack
     // Prestige (Plataforma de Questões / Ambiente de Produção Oral e Textual / Aulas
     // Especializadas Online) — os dois caminhos são independentes.
+    const CASCATA = { correcoes: ['Essentiel', 'Avancé', 'Excellence'], gravado: ['Avancé', 'Excellence'], plataforma: ['Excellence'] };
+    const CHAVE_AVULSO = { correcoes: 'producao', gravado: 'aulasEspecializadas', plataforma: 'plataforma' };
     const entitlementsCurso = {
-      correcoes: !!ativo && ['Essentiel', 'Avancé', 'Excellence'].includes(tier),
-      gravado: !!ativo && ['Avancé', 'Excellence'].includes(tier),
-      plataforma: !!ativo && tier === 'Excellence'
+      correcoes: !!ativo && CASCATA.correcoes.includes(tier),
+      gravado: !!ativo && CASCATA.gravado.includes(tier),
+      plataforma: !!ativo && CASCATA.plataforma.includes(tier)
     };
     const avulsos = data.produtosAvulsos || {};
+    const legado = data.legado?.produtosAvulsos || {};
     const entitlementsAvulso = {
-      correcoes: !!avulsos.producao?.ativo,
-      gravado: !!avulsos.aulasEspecializadas?.ativo,
-      plataforma: !!avulsos.plataforma?.ativo
+      correcoes: !!avulsos.producao?.ativo || !!legado.producao?.ativo,
+      gravado: !!avulsos.aulasEspecializadas?.ativo || !!legado.aulasEspecializadas?.ativo,
+      plataforma: !!avulsos.plataforma?.ativo || !!legado.plataforma?.ativo
     };
-    if (!(entitlementsCurso[featureKey] || entitlementsAvulso[featureKey])) return bloquear();
+    // Modelo novo — um plano por curso (planos[]); agregado (não sabe QUAL curso), já
+    // que esta tela ainda não tem seletor de curso.
+    const viaPlanoPorCurso = (data.planos || []).some(p =>
+      (p.ativo && CASCATA[featureKey].includes(p.tier)) || p.packPrestige?.ativo
+    );
+    if (!(entitlementsCurso[featureKey] || entitlementsAvulso[featureKey] || viaPlanoPorCurso)) return bloquear();
     window.__nomeUsuario = data.nome;
     document.body.style.visibility = 'visible';
   } catch (err) {

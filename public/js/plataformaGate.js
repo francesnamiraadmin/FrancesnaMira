@@ -33,11 +33,13 @@
     const tier = data.plano && data.plano.tier;
     const ativo = data.plano && data.plano.ativo;
     // Liberado pelo plano de curso (cascata por tier) OU por uma compra avulsa do Pack
-    // Prestige — os dois caminhos são independentes.
-    const entitlementsCurso = { plataforma: !!ativo && tier === 'Excellence' };
-    const avulsos = data.produtosAvulsos || {};
-    const entitlementsAvulso = { plataforma: !!avulsos.plataforma?.ativo };
-    if (!(entitlementsCurso[featureKey] || entitlementsAvulso[featureKey])) return bloquear();
+    // Prestige — os dois caminhos são independentes. `planos[]`/`legado` são o modelo
+    // novo (por curso); agregados aqui porque esta tela ainda não tem seletor de curso.
+    const viaCascataAntiga = !!ativo && tier === 'Excellence';
+    const viaAvulsoAntigo = !!data.produtosAvulsos?.plataforma?.ativo;
+    const viaLegado = !!data.legado?.produtosAvulsos?.plataforma?.ativo;
+    const viaPlanoPorCurso = (data.planos || []).some(p => p.ativo && p.tier === 'Excellence' || p.packPrestige?.ativo);
+    if (!(viaCascataAntiga || viaAvulsoAntigo || viaLegado || viaPlanoPorCurso)) return bloquear();
     document.body.style.visibility = 'visible';
   } catch (err) {
     bloquear();

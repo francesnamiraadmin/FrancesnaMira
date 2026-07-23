@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
 // Snapshot IMUTÁVEL de uma resolução concluída. `correta` é calculado uma única vez,
 // no momento da finalização, comparando com Questao.indiceCorreta/respostaVF vigentes
@@ -17,6 +18,9 @@ const RespostaTentativaSchema = new mongoose.Schema({
 const TentativaSchema = new mongoose.Schema({
   alunoId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   conjuntoId: { type: mongoose.Schema.Types.ObjectId, ref: "Conjunto", required: true },
+  // Copiado de Conjunto.courseType no momento da criação — evita join pra filtrar
+  // estatísticas/progresso por curso. `null` em tentativas antigas (ver migração).
+  courseType: { type: String, enum: TIPOS_CURSO, default: null },
   numero: { type: Number, required: true }, // 1ª, 2ª... tentativa do aluno nesse Conjunto
 
   respostas: { type: [RespostaTentativaSchema], required: true },
@@ -33,5 +37,6 @@ const TentativaSchema = new mongoose.Schema({
 
 TentativaSchema.index({ alunoId: 1, conjuntoId: 1, finalizadaEm: -1 });
 TentativaSchema.index({ conjuntoId: 1 });
+TentativaSchema.index({ alunoId: 1, courseType: 1 });
 
 module.exports = mongoose.model("Tentativa", TentativaSchema);

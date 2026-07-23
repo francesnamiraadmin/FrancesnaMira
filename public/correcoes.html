@@ -359,7 +359,19 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
       gravado: ['Avancé', 'Excellence'].includes(tier),
       plataforma: tier === 'Excellence'
     };
-    if (!ativo || !entitlements[featureKey]) return bloquear();
+    // Página não é por curso (gate genérico) — soma o modelo antigo (tier único, checado
+    // acima) com o novo por curso: qualquer curso com tier ativo, Pack Prestige ativo, ou
+    // o Pack Prestige avulso legado (produtosAvulsos/legado.produtosAvulsos.producao)
+    // libera este recurso. Corrige uma inconsistência antiga: este gate nunca verificava
+    // produto avulso, diferente dos outros 3 gates do site.
+    const CASCATA = { correcoes: ['Essentiel', 'Avancé', 'Excellence'], gravado: ['Avancé', 'Excellence'], plataforma: ['Excellence'] };
+    const CHAVE_AVULSO = { correcoes: 'producao', gravado: 'aulasEspecializadas', plataforma: 'plataforma' };
+    const viaPlanoPorCurso = (data.planos || []).some(p =>
+      (p.ativo && CASCATA[featureKey].includes(p.tier)) || p.packPrestige?.ativo
+    );
+    const viaAvulso = !!data.produtosAvulsos?.[CHAVE_AVULSO[featureKey]]?.ativo;
+    const viaLegado = !!data.legado?.produtosAvulsos?.[CHAVE_AVULSO[featureKey]]?.ativo;
+    if (!((ativo && entitlements[featureKey]) || viaPlanoPorCurso || viaAvulso || viaLegado)) return bloquear();
     document.body.style.visibility = 'visible';
   } catch (err) {
     bloquear();

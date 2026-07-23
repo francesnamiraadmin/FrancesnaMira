@@ -393,6 +393,8 @@ nav a:hover::after {
 
 .feature-price {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 100%;
 }
@@ -446,6 +448,13 @@ nav a:hover::after {
   background: linear-gradient(160deg, rgba(255,215,0,0.4), rgba(255,215,0,0.1));
   border-color: rgba(255,215,0,0.75);
 }
+.price-card-new.tier-prestige { background: linear-gradient(160deg, rgba(168,85,247,0.55), rgba(88,28,135,0.28)); border-color: rgba(216,180,254,0.9); box-shadow: 0 0 34px rgba(168,85,247,0.4); }
+
+/* Tema light: RGB padrão, menos transparente para mais contraste. */
+:root[data-theme="light"] .price-card-new.tier-bronze { background: linear-gradient(160deg, rgba(205,127,50,0.75), rgba(205,127,50,0.45)); border-color: rgba(205,127,50,0.85); }
+:root[data-theme="light"] .price-card-new.tier-prata { background: linear-gradient(160deg, rgba(200,200,200,0.7), rgba(200,200,200,0.4)); border-color: rgba(220,220,220,0.85); }
+:root[data-theme="light"] .price-card-new.tier-ouro { background: linear-gradient(160deg, rgba(255,215,0,0.7), rgba(255,215,0,0.4)); border-color: rgba(255,215,0,0.9); }
+:root[data-theme="light"] .price-card-new.tier-prestige { background: linear-gradient(160deg, rgba(168,85,247,0.85), rgba(88,28,135,0.55)); border-color: rgba(216,180,254,0.95); box-shadow: 0 0 34px rgba(168,85,247,0.4); }
 
 .price-card-new h3 {
   font-family: 'Playfair Display', serif;
@@ -455,6 +464,19 @@ nav a:hover::after {
 .tier-bronze h3 { color: #f0b27a; }
 .tier-prata h3 { color: #f2f2f2; }
 .tier-ouro h3 { color: #ffe680; }
+.tier-prestige h3 { color: #e9d5ff; }
+
+.prestige-badge {
+  position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(135deg, #a855f7, #7c3aed); color: #ffffff; padding: 5px 16px; border-radius: 20px;
+  font-size: 0.82rem; font-weight: 800; white-space: nowrap; box-shadow: 0 4px 14px rgba(168,85,247,0.55);
+  z-index: 5;
+}
+.price-prestige-row { display: flex; justify-content: center; width: 100%; margin-bottom: 24px; }
+.container-titulo-grupo {
+  font-family: 'Playfair Display', serif; text-align: center; font-size: 2.2rem; margin: 50px 0 6px;
+}
+.container-subtitulo-grupo { text-align: center; font-size: 1.05rem; opacity: 0.85; margin-bottom: 10px; }
 
 .price-value { font-size: 2.6rem; font-weight: 700; margin-bottom: 20px; }
 .price-value span { font-size: 1rem; font-weight: 400; opacity: 0.8; }
@@ -997,19 +1019,22 @@ nav a:hover::after {
   <div class="feature-price">
     <div class="price-grid">
       <div class="price-card-new pack-prestige">
-        <h3>Pack Prestige</h3>
-        <p class="price-value">R$110<span>/mês</span></p>
+        <h3>Incluído no Pack Prestige</h3>
+        <p class="price-value" style="font-size:1.3rem;">Agora dentro do Pack Prestige de cada curso</p>
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas gravadas por especialistas em cada exame</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas com progressão de nível</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Reveja no seu ritmo, quantas vezes precisar</li>
         </ul>
-        <a href="matricula.html?curso=Aulas%20Especializadas%20Online&plano=Pack%20Prestige">Assine o plano</a>
+        <a href="cursos.html">Ver planos por curso</a>
       </div>
     </div>
   </div>
  </div>
 </div>
+
+<h2 class="container-titulo-grupo" id="provas-de-proficiencia">Proficiência em Provas</h2>
+<p class="container-subtitulo-grupo">Preparação específica para os exames oficiais TCF, DELF, DALF e TEF.</p>
 
 <!-- BLOCO TCF -->
 <div class="feature-row" id="tcf">
@@ -1024,6 +1049,19 @@ nav a:hover::after {
     </div>
   </div>
   <div class="feature-price">
+    <div class="price-prestige-row">
+      <div class="price-card-new tier-prestige">
+        <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
+        <h3>Conjunto completo TCF</h3>
+        <p class="price-value">R$300<span>/mês</span></p>
+        <ul>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de Questões</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção textual</li>
+        </ul>
+        <a href="matricula.html?curso=TCF&plano=Pack%20Prestige">Assine o plano</a>
+      </div>
+    </div>
     <div class="price-grid">
       <div class="price-card-new tier-bronze">
         <h3>Essentiel</h3>
@@ -1042,8 +1080,8 @@ nav a:hover::after {
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aula particular</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de questões</li>
-          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
-          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
         </ul>
         <a href="matricula.html?curso=TCF&plano=Avanc%C3%A9">Assine o plano</a>
       </div>
@@ -1059,6 +1097,7 @@ nav a:hover::after {
         <a href="matricula.html?curso=TCF&plano=Excellence">Assine o plano</a>
       </div>
     </div>
+    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*1 mês de assinatura com Aula particular equivale a 4 aulas dentro do período (uma aula por semana).</p>
   </div>
  </div>
 </div>
@@ -1076,6 +1115,19 @@ nav a:hover::after {
     </div>
   </div>
   <div class="feature-price">
+    <div class="price-prestige-row">
+      <div class="price-card-new tier-prestige">
+        <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
+        <h3>Conjunto completo DELF</h3>
+        <p class="price-value">R$300<span>/mês</span></p>
+        <ul>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de Questões</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção textual</li>
+        </ul>
+        <a href="matricula.html?curso=DELF&plano=Pack%20Prestige">Assine o plano</a>
+      </div>
+    </div>
     <div class="price-grid">
       <div class="price-card-new tier-bronze">
         <h3>Essentiel</h3>
@@ -1094,8 +1146,8 @@ nav a:hover::after {
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aula particular</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de questões</li>
-          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
-          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
         </ul>
         <a href="matricula.html?curso=DELF&plano=Avanc%C3%A9">Assine o plano</a>
       </div>
@@ -1111,6 +1163,7 @@ nav a:hover::after {
         <a href="matricula.html?curso=DELF&plano=Excellence">Assine o plano</a>
       </div>
     </div>
+    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*1 mês de assinatura com Aula particular equivale a 4 aulas dentro do período (uma aula por semana).</p>
   </div>
  </div>
 </div>
@@ -1128,6 +1181,19 @@ nav a:hover::after {
     </div>
   </div>
   <div class="feature-price">
+    <div class="price-prestige-row">
+      <div class="price-card-new tier-prestige">
+        <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
+        <h3>Conjunto completo TEF</h3>
+        <p class="price-value">R$300<span>/mês</span></p>
+        <ul>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de Questões</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção textual</li>
+        </ul>
+        <a href="matricula.html?curso=TEF&plano=Pack%20Prestige">Assine o plano</a>
+      </div>
+    </div>
     <div class="price-grid">
       <div class="price-card-new tier-bronze">
         <h3>Essentiel</h3>
@@ -1146,8 +1212,8 @@ nav a:hover::after {
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aula particular</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de questões</li>
-          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
-          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
         </ul>
         <a href="matricula.html?curso=TEF&plano=Avanc%C3%A9">Assine o plano</a>
       </div>
@@ -1163,6 +1229,7 @@ nav a:hover::after {
         <a href="matricula.html?curso=TEF&plano=Excellence">Assine o plano</a>
       </div>
     </div>
+    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*1 mês de assinatura com Aula particular equivale a 4 aulas dentro do período (uma aula por semana).</p>
   </div>
  </div>
 </div>
@@ -1180,6 +1247,19 @@ nav a:hover::after {
     </div>
   </div>
   <div class="feature-price">
+    <div class="price-prestige-row">
+      <div class="price-card-new tier-prestige">
+        <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
+        <h3>Conjunto completo DALF</h3>
+        <p class="price-value">R$300<span>/mês</span></p>
+        <ul>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de Questões</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção textual</li>
+        </ul>
+        <a href="matricula.html?curso=DALF&plano=Pack%20Prestige">Assine o plano</a>
+      </div>
+    </div>
     <div class="price-grid">
       <div class="price-card-new tier-bronze">
         <h3>Essentiel</h3>
@@ -1198,8 +1278,8 @@ nav a:hover::after {
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aula particular</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de questões</li>
-          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
-          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
         </ul>
         <a href="matricula.html?curso=DALF&plano=Avanc%C3%A9">Assine o plano</a>
       </div>
@@ -1215,9 +1295,13 @@ nav a:hover::after {
         <a href="matricula.html?curso=DALF&plano=Excellence">Assine o plano</a>
       </div>
     </div>
+    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*1 mês de assinatura com Aula particular equivale a 4 aulas dentro do período (uma aula por semana).</p>
   </div>
  </div>
 </div>
+
+<h2 class="container-titulo-grupo" id="rumo-a-fluencia">Rumo à fluência</h2>
+<p class="container-subtitulo-grupo">O percurso completo de aprendizado do idioma, do A1 ao B2.</p>
 
 <!-- BLOCO A1 -->
 <div class="feature-row" id="a1">
@@ -1233,6 +1317,19 @@ nav a:hover::after {
     </div>
   </div>
   <div class="feature-price">
+    <div class="price-prestige-row">
+      <div class="price-card-new tier-prestige">
+        <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
+        <h3>Conjunto completo A1</h3>
+        <p class="price-value">R$300<span>/mês</span></p>
+        <ul>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de Questões</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção textual</li>
+        </ul>
+        <a href="matricula.html?curso=A1&plano=Pack%20Prestige">Assine o plano</a>
+      </div>
+    </div>
     <div class="price-grid">
       <div class="price-card-new tier-bronze">
         <h3>Essentiel</h3>
@@ -1251,8 +1348,8 @@ nav a:hover::after {
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aula particular</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de questões</li>
-          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
-          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
         </ul>
         <a href="matricula.html?curso=A1&plano=Avanc%C3%A9">Assine o plano</a>
       </div>
@@ -1268,6 +1365,7 @@ nav a:hover::after {
         <a href="matricula.html?curso=A1&plano=Excellence">Assine o plano</a>
       </div>
     </div>
+    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*1 mês de assinatura com Aula particular equivale a 4 aulas dentro do período (uma aula por semana).</p>
   </div>
  </div>
 </div>
@@ -1286,6 +1384,19 @@ nav a:hover::after {
     </div>
   </div>
   <div class="feature-price">
+    <div class="price-prestige-row">
+      <div class="price-card-new tier-prestige">
+        <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
+        <h3>Conjunto completo A2</h3>
+        <p class="price-value">R$300<span>/mês</span></p>
+        <ul>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de Questões</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção textual</li>
+        </ul>
+        <a href="matricula.html?curso=A2&plano=Pack%20Prestige">Assine o plano</a>
+      </div>
+    </div>
     <div class="price-grid">
       <div class="price-card-new tier-bronze">
         <h3>Essentiel</h3>
@@ -1304,8 +1415,8 @@ nav a:hover::after {
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aula particular</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de questões</li>
-          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
-          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
         </ul>
         <a href="matricula.html?curso=A2&plano=Avanc%C3%A9">Assine o plano</a>
       </div>
@@ -1321,6 +1432,7 @@ nav a:hover::after {
         <a href="matricula.html?curso=A2&plano=Excellence">Assine o plano</a>
       </div>
     </div>
+    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*1 mês de assinatura com Aula particular equivale a 4 aulas dentro do período (uma aula por semana).</p>
   </div>
  </div>
 </div>
@@ -1339,6 +1451,19 @@ nav a:hover::after {
     </div>
   </div>
   <div class="feature-price">
+    <div class="price-prestige-row">
+      <div class="price-card-new tier-prestige">
+        <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
+        <h3>Conjunto completo B1</h3>
+        <p class="price-value">R$300<span>/mês</span></p>
+        <ul>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de Questões</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção textual</li>
+        </ul>
+        <a href="matricula.html?curso=B1&plano=Pack%20Prestige">Assine o plano</a>
+      </div>
+    </div>
     <div class="price-grid">
       <div class="price-card-new tier-bronze">
         <h3>Essentiel</h3>
@@ -1357,8 +1482,8 @@ nav a:hover::after {
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aula particular</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de questões</li>
-          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
-          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
         </ul>
         <a href="matricula.html?curso=B1&plano=Avanc%C3%A9">Assine o plano</a>
       </div>
@@ -1374,6 +1499,7 @@ nav a:hover::after {
         <a href="matricula.html?curso=B1&plano=Excellence">Assine o plano</a>
       </div>
     </div>
+    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*1 mês de assinatura com Aula particular equivale a 4 aulas dentro do período (uma aula por semana).</p>
   </div>
  </div>
 </div>
@@ -1392,6 +1518,19 @@ nav a:hover::after {
     </div>
   </div>
   <div class="feature-price">
+    <div class="price-prestige-row">
+      <div class="price-card-new tier-prestige">
+        <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
+        <h3>Conjunto completo B2</h3>
+        <p class="price-value">R$300<span>/mês</span></p>
+        <ul>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de Questões</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção textual</li>
+        </ul>
+        <a href="matricula.html?curso=B2&plano=Pack%20Prestige">Assine o plano</a>
+      </div>
+    </div>
     <div class="price-grid">
       <div class="price-card-new tier-bronze">
         <h3>Essentiel</h3>
@@ -1410,8 +1549,8 @@ nav a:hover::after {
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aula particular</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de questões</li>
-          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
-          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
+          <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção</li>
         </ul>
         <a href="matricula.html?curso=B2&plano=Avanc%C3%A9">Assine o plano</a>
       </div>
@@ -1425,6 +1564,30 @@ nav a:hover::after {
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas Especializadas gravadas</li>
         </ul>
         <a href="matricula.html?curso=B2&plano=Excellence">Assine o plano</a>
+      </div>
+    </div>
+    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*1 mês de assinatura com Aula particular equivale a 4 aulas dentro do período (uma aula por semana).</p>
+  </div>
+ </div>
+</div>
+
+<!-- BLOCO Do A1 ao B2 -->
+<div class="feature-row" id="a1-b2-completo">
+ <div class="feature-container">
+  <h2 class="feature-title">Do A1 ao B2</h2>
+  <p class="excellence-note">Um único plano para percorrer toda a jornada de fluência — do primeiro contato com o francês (A1) até a independência linguística plena (B2), sem precisar contratar cada nível separadamente.</p>
+  <div class="feature-price">
+    <div class="price-prestige-row">
+      <div class="price-card-new tier-prestige">
+        <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
+        <h3>Conjunto completo A1 ao B2</h3>
+        <p class="price-value">R$500<span>/mês</span></p>
+        <ul>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Plataforma de Questões (A1, A2, B1 e B2)</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Aulas especializadas gravadas (A1, A2, B1 e B2)</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Ambiente de produção textual (A1, A2, B1 e B2)</li>
+        </ul>
+        <a href="matricula.html?curso=A1-B2&plano=Pack%20Prestige&valor=500">Assine o plano</a>
       </div>
     </div>
   </div>
@@ -1446,14 +1609,14 @@ nav a:hover::after {
   <div class="feature-price">
     <div class="price-grid">
       <div class="price-card-new pack-prestige">
-        <h3>Pack Prestige</h3>
-        <p class="price-value">R$65<span>/mês</span></p>
+        <h3>Incluído no Pack Prestige</h3>
+        <p class="price-value" style="font-size:1.3rem;">Agora dentro do Pack Prestige de cada curso</p>
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Correção detalhada de textos, linha a linha</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Comentários pedagógicos e sugestões de melhoria</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Acompanhamento do seu progresso</li>
         </ul>
-        <a href="matricula.html?curso=Ambiente%20de%20Produ%C3%A7%C3%A3o%20Oral%20e%20Textual&plano=Pack%20Prestige">Assine o plano</a>
+        <a href="cursos.html">Ver planos por curso</a>
       </div>
     </div>
   </div>
@@ -1475,14 +1638,14 @@ nav a:hover::after {
   <div class="feature-price">
     <div class="price-grid">
       <div class="price-card-new pack-prestige">
-        <h3>Pack Prestige</h3>
-        <p class="price-value">R$65<span>/mês</span></p>
+        <h3>Incluído no Pack Prestige</h3>
+        <p class="price-value" style="font-size:1.3rem;">Agora dentro do Pack Prestige de cada curso</p>
         <ul>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Mais de 500 questões comentadas</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">TCF, DELF, TEF e DALF, por competência e nível</li>
           <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Acesso autogerenciado, no seu ritmo</li>
         </ul>
-        <a href="matricula.html?curso=Plataforma%20de%20Quest%C3%B5es&plano=Pack%20Prestige">Assine o plano</a>
+        <a href="cursos.html">Ver planos por curso</a>
       </div>
     </div>
   </div>
