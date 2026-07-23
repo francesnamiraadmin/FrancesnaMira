@@ -81,9 +81,10 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   border: 1px solid var(--glass-border); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
   border-radius: 32px; box-shadow: var(--glass-shadow);
 }
-.feature-title { width: 100%; font-family: 'Playfair Display', serif; font-size: 2.6rem; text-align: center; }
+.feature-title { display: table; margin: 0 auto; font-family: 'Playfair Display', serif; font-size: 2.6rem; text-align: center; border: 2px solid var(--glass-border); border-radius: 20px; padding: 8px 32px; }
 .feature-price { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
 .price-prestige-row { display: flex; justify-content: center; width: 100%; margin-bottom: 24px; }
+.price-section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2rem; margin: 0 0 30px; text-decoration: underline; }
 
 .excellence-note {
   max-width: 700px; margin: 0 auto; text-align: center; font-size: 1.1rem;
@@ -290,6 +291,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   <h2 class="feature-title">Escolha seu plano</h2>
   <p class="excellence-note">O plano <strong>Excellence</strong> inclui acompanhamento particular, curso gravado, plataforma de questões e suporte prioritário — a forma mais completa de chegar preparado.</p>
   <div class="feature-price">
+    <h3 class="price-section-title">Preparação Independente</h3>
     <div class="price-prestige-row">
       <div class="price-card-new tier-prestige">
         <span class="prestige-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Pack Prestige</span>
@@ -303,6 +305,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
         <a href="matricula.html?curso=A1&plano=Pack%20Prestige&valor=300">Assine o plano</a>
       </div>
     </div>
+    <h3 class="price-section-title">Preparação guiada com aulas particulares</h3>
     <div class="price-grid">
       <div class="price-card-new tier-bronze">
         <h3>Essentiel</h3>
@@ -339,7 +342,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
         <a href="matricula.html?curso=A1&plano=Excellence&valor=149">Assine o plano</a>
       </div>
     </div>
-    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*1 mês de assinatura com Aula particular equivale a 4 aulas dentro do período (uma aula por semana).</p>
+    <p style="text-align:center; font-size:0.8rem; opacity:0.75; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto;">*O valor exibido corresponde a 4 aulas particulares no mês (1 aula por semana). É possível contratar mais aulas semanais por um valor proporcional ao número de aulas por semana escolhido.</p>
   </div>
   <div class="compare-wrap">
   <h2 class="feature-title" style="margin-bottom:24px;">O que cada plano oferece</h2>
