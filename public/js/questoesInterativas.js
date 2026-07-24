@@ -35,38 +35,29 @@
     { id:'misto',    rot:'🎲 Misto',                dica:'As quatro mecânicas embaralhadas.' }
   ];
 
+  // O modo é escolhido no hub (questoes-interativas.html) e chega pela URL — esta
+  // página (questoes-interativas-jogo.html) não tem mais seletor de mecânica; se o
+  // parâmetro faltar ou for inválido, volta pro hub em vez de quebrar.
+  var MODOS_VALIDOS = MODOS.map(function(m){ return m.id; });
+  var modoDaUrl = new URLSearchParams(window.location.search).get('modo');
+  if (MODOS_VALIDOS.indexOf(modoDaUrl) === -1) {
+    window.location.href = 'questoes-interativas.html';
+    return;
+  }
+
   var E = {
-    cat:'todas', modo:'imagem', pool:[], rodada:0, totalRodadas:1, atual:[],
-    modoRodada:'imagem', acertos:0, erros:0, feitos:0, listaErros:[],
+    cat:'todas', modo:modoDaUrl, pool:[], rodada:0, totalRodadas:1, atual:[],
+    modoRodada:modoDaUrl, acertos:0, erros:0, feitos:0, listaErros:[],
     audio:true, t0:null, cron:null, arrastado:null
   };
 
   /* =========================================================
-     ÁUDIO
+     ÁUDIO — delega pro helper compartilhado (js/audioFrances.js), que escolhe
+     a melhor voz francesa disponível no navegador.
      ========================================================= */
-  var vozFR = null;
-  function carregarVoz(){
-    if (!window.speechSynthesis) return;
-    var vs = speechSynthesis.getVoices();
-    vozFR = vs.filter(function(v){ return /^fr/i.test(v.lang); })[0] || null;
-  }
-  carregarVoz();
-  if (window.speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = carregarVoz;
-  }
-
   function falar(texto, botao){
-    if (!E.audio || !window.speechSynthesis) return;
-    speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(texto);
-    u.lang = 'fr-FR';
-    u.rate = 0.82;
-    if (vozFR) u.voice = vozFR;
-    if (botao){
-      botao.classList.add('tocando');
-      u.onend = u.onerror = function(){ botao.classList.remove('tocando'); };
-    }
-    speechSynthesis.speak(u);
+    if (!E.audio || !window.falarFrances) return;
+    falarFrances(texto, botao);
   }
 
   /* =========================================================
@@ -113,17 +104,16 @@
     [].forEach.call(document.querySelectorAll('.qi-aba'), function(b){
       b.onclick = function(){ E.cat = b.dataset.cat; iniciar(); };
     });
+  }
 
-    el('qiModos').innerHTML = MODOS.map(function(m){
-      return '<button type="button" class="qi-modo'+(m.id===E.modo?' on':'')+'" data-modo="'+m.id+'">'+
-             m.rot+'</button>';
-    }).join('');
-    [].forEach.call(document.querySelectorAll('.qi-modo'), function(b){
-      b.onclick = function(){ E.modo = b.dataset.modo; iniciar(); };
-    });
+  function aplicarSubtitulo(){
+    var infoModo = MODOS.filter(function(x){ return x.id===E.modo; })[0];
+    var sub = el('qiSubtitulo');
+    if (infoModo && sub) sub.textContent = infoModo.rot.replace(/^[^\s]+\s/, '') + ' — ' + infoModo.dica;
   }
 
   function iniciar(){
+    aplicarSubtitulo();
     E.pool = baralhar(
       E.cat==='todas' ? VOCAB.slice() : VOCAB.filter(function(v){ return v.c===E.cat; })
     );

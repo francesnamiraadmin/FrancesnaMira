@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/app-shell.css">
 <link rel="stylesheet" href="css/plataforma-topicos-nav.css">
-<link rel="stylesheet" href="css/questoes-interativas-jogo.css">
 
 <style>
 html { scroll-behavior: smooth; }
@@ -22,6 +21,21 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .intro { text-align: center; padding: 40px 4% 20px; }
 .intro h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; }
 .intro p { font-size: 1.05rem; opacity: 0.9; max-width: 680px; margin: 0 auto; }
+
+.hub-wrap { max-width: 1100px; margin: 0 auto; padding: 30px 4% 100px; }
+.hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+
+.hub-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 20px; padding: 32px 26px;
+  box-shadow: var(--glass-shadow); text-decoration: none; color: var(--text);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.hub-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.hub-card .icone { width: 64px; height: 64px; object-fit: contain; }
+.hub-card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+.hub-card p { font-size: 0.92rem; opacity: 0.85; line-height: 1.5; }
 </style>
 </head>
 
@@ -35,45 +49,36 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <section class="intro">
   <h1><img class="titulo-icone" src="img/icones/puzzle.svg" alt="">Questões Interativas</h1>
-  <p>Arraste cada ficha até o par certo — imagens, palavras, categorias e áudio, misturando quatro formatos diferentes. Toque no 🔊 para ouvir a pronúncia antes de decidir.</p>
+  <p>Escolha como quer praticar o vocabulário de "La ville, les commerces et les loisirs" — arrastando fichas até o par certo. Toque no 🔊 pra ouvir a pronúncia antes de decidir.</p>
 </section>
 
-<div class="qi-wrap">
-  <div class="qi-secao-rot">Mecânica</div>
-  <div class="qi-modos" id="qiModos"></div>
-
-  <div class="qi-secao-rot">Categoria</div>
-  <div class="qi-abas" id="qiAbas"></div>
-
-  <div class="qi-status">
-    <div class="qi-chip">Rodada <b id="qiRodada">1/1</b></div>
-    <div class="qi-chip ok">Acertos <b id="qiAcertos">0</b></div>
-    <div class="qi-chip mau">Erros <b id="qiErros">0</b></div>
-    <div class="qi-chip">⏱ <b id="qiTempo">0:00</b></div>
-    <div class="qi-barra"><i id="qiBarra"></i></div>
-    <button type="button" class="qi-btn" id="qiBtnSom"><img class="titulo-icone-inline pequeno" src="img/icones/headphones.svg" alt="">Áudio: ligado</button>
-    <button type="button" class="qi-btn destaque" id="qiBtnReiniciar">Recomeçar</button>
-  </div>
-
-  <div class="qi-jogo">
-    <div class="qi-painel">
-      <h2 id="qiRotuloEsq">🖼️ Images</h2>
-      <p class="qi-dica" id="qiDicaModo"></p>
-      <div class="qi-fichas grade" id="qiFichas"></div>
-    </div>
-    <div class="qi-painel">
-      <h2 id="qiRotuloDir">🇫🇷 Vocabulaire</h2>
-      <p class="qi-dica">Solte aqui.</p>
-      <div class="qi-alvos" id="qiAlvos"></div>
-    </div>
-  </div>
-
-  <div class="qi-resultado" id="qiResultado">
-    <h2 id="qiRTitulo">Terminé !</h2>
-    <div class="qi-nota" id="qiRNota">0%</div>
-    <p class="qi-detalhe" id="qiRDetalhe"></p>
-    <div class="qi-erros" id="qiRErros"></div>
-    <button type="button" class="qi-btn destaque" id="qiBtnProxima">Próxima rodada →</button>
+<div class="hub-wrap">
+  <div class="hub-grid">
+    <a class="hub-card" href="questoes-interativas-jogo.html?modo=imagem">
+      <img class="icone" src="img/icones/image.svg" alt="">
+      <h2>Imagem → Francês</h2>
+      <p>Arraste o desenho até a palavra francesa correspondente.</p>
+    </a>
+    <a class="hub-card" href="questoes-interativas-jogo.html?modo=traducao">
+      <img class="icone" src="img/icones/repeat.svg" alt="">
+      <h2>Francês → Português</h2>
+      <p>Arraste o termo francês até a tradução certa.</p>
+    </a>
+    <a class="hub-card" href="questoes-interativas-jogo.html?modo=categoria">
+      <img class="icone" src="img/icones/folder.svg" alt="">
+      <h2>Termo → Categoria</h2>
+      <p>Arraste cada termo até a família a que ele pertence.</p>
+    </a>
+    <a class="hub-card" href="questoes-interativas-jogo.html?modo=audio">
+      <img class="icone" src="img/icones/headphones.svg" alt="">
+      <h2>Áudio → Escrita</h2>
+      <p>Ouça a pronúncia e arraste o som até a palavra escrita.</p>
+    </a>
+    <a class="hub-card" href="questoes-interativas-jogo.html?modo=misto">
+      <img class="icone" src="img/icones/party.svg" alt="">
+      <h2>Misto</h2>
+      <p>As quatro mecânicas embaralhadas, uma diferente a cada rodada.</p>
+    </a>
   </div>
 </div>
 
@@ -83,7 +88,5 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <script src="js/appShell.js"></script>
 <script src="js/estudoTimerGlobal.js"></script>
 <script src="js/theme-toggle.js"></script>
-<script src="js/questoesInterativasDados.js"></script>
-<script src="js/questoesInterativas.js"></script>
 </body>
 </html>

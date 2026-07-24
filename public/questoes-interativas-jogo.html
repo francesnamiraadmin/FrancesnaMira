@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Questões Interativas - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/plataforma-topicos-nav.css">
+<link rel="stylesheet" href="css/questoes-interativas-jogo.css">
+
+<style>
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; }
+:root { --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45); --glass-blur: blur(18px); }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
+
+.intro { text-align: center; padding: 40px 4% 10px; }
+.intro h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; }
+.intro p { font-size: 1.05rem; opacity: 0.9; max-width: 680px; margin: 0 auto; }
+.qi-voltar {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--accent); text-decoration: none;
+  font-weight: 700; font-size: 0.9rem; margin-top: 12px;
+}
+</style>
+</head>
+
+<body style="visibility:hidden;">
+<script>window.CURSO_CONTEXTO_MODULO = "plataforma"; window.CURSO_CONTEXTO_HUB = "plataforma-hub.html";</script>
+<script src="js/cursoContexto.js"></script>
+<script src="js/plataformaGate.js"></script>
+
+<div id="app-navbar" class="app-navbar-bar"></div>
+<div id="plataformaTopicosNav" class="plataforma-topicos-nav"></div>
+
+<section class="intro">
+  <h1><img class="titulo-icone" src="img/icones/puzzle.svg" alt="">Questões Interativas</h1>
+  <p id="qiSubtitulo">Arraste cada ficha até o par certo. Toque no 🔊 para ouvir a pronúncia antes de decidir.</p>
+  <a class="qi-voltar" href="questoes-interativas.html"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Escolher outra mecânica</a>
+</section>
+
+<div class="qi-wrap">
+  <div class="qi-secao-rot">Categoria</div>
+  <div class="qi-abas" id="qiAbas"></div>
+
+  <div class="qi-status">
+    <div class="qi-chip">Rodada <b id="qiRodada">1/1</b></div>
+    <div class="qi-chip ok">Acertos <b id="qiAcertos">0</b></div>
+    <div class="qi-chip mau">Erros <b id="qiErros">0</b></div>
+    <div class="qi-chip">⏱ <b id="qiTempo">0:00</b></div>
+    <div class="qi-barra"><i id="qiBarra"></i></div>
+    <button type="button" class="qi-btn" id="qiBtnSom"><img class="titulo-icone-inline pequeno" src="img/icones/headphones.svg" alt="">Áudio: ligado</button>
+    <button type="button" class="qi-btn destaque" id="qiBtnReiniciar">Recomeçar</button>
+  </div>
+
+  <div class="qi-jogo">
+    <div class="qi-painel">
+      <h2 id="qiRotuloEsq">🖼️ Images</h2>
+      <p class="qi-dica" id="qiDicaModo"></p>
+      <div class="qi-fichas grade" id="qiFichas"></div>
+    </div>
+    <div class="qi-painel">
+      <h2 id="qiRotuloDir">🇫🇷 Vocabulaire</h2>
+      <p class="qi-dica">Solte aqui.</p>
+      <div class="qi-alvos" id="qiAlvos"></div>
+    </div>
+  </div>
+
+  <div class="qi-resultado" id="qiResultado">
+    <h2 id="qiRTitulo">Terminé !</h2>
+    <div class="qi-nota" id="qiRNota">0%</div>
+    <p class="qi-detalhe" id="qiRDetalhe"></p>
+    <div class="qi-erros" id="qiRErros"></div>
+    <button type="button" class="qi-btn destaque" id="qiBtnProxima">Próxima rodada →</button>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/plataformaTopicosNav.js"></script>
+<script src="js/appShell.js"></script>
+<script src="js/estudoTimerGlobal.js"></script>
+<script src="js/theme-toggle.js"></script>
+<script src="js/audioFrances.js"></script>
+<script src="js/questoesInterativasDados.js"></script>
+<script src="js/questoesInterativas.js"></script>
+</body>
+</html>

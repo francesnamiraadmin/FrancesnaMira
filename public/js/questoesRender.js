@@ -139,11 +139,14 @@ function svgGraficoVisual(labels, valores, unidade) {
   </svg>`;
 }
 
+// Delega pro helper compartilhado (js/audioFrances.js), que escolhe a melhor voz
+// francesa disponível no navegador em vez de deixar a escolha por conta do sistema.
 function tocarAudio(texto) {
+  if (window.falarFrances) return falarFrances(texto);
   if (!window.speechSynthesis) { alert('Seu navegador não é compatível com leitura de áudio.'); return; }
   speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(texto);
   utter.lang = 'fr-FR';
-  utter.rate = 0.95;
+  utter.rate = 0.85;
   speechSynthesis.speak(utter);
 }
