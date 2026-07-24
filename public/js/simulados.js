@@ -83,7 +83,8 @@ async function carregarSimulados() {
   const prioritariosEl = document.getElementById('simuladosPrioritarios');
   const respondidosEl = document.getElementById('simuladosRespondidos');
   try {
-    const res = await fetch('/api/questoes/conjuntos?pool=simulado', { headers: authHeaders() });
+    const url = window.CursoContexto ? window.CursoContexto.urlComCurso('/api/questoes/conjuntos?pool=simulado') : '/api/questoes/conjuntos?pool=simulado';
+    const res = await fetch(url, { headers: authHeaders() });
     if (!res.ok) throw new Error('Erro ao carregar simulados.');
     const data = await res.json();
 

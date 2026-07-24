@@ -269,6 +269,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 </head>
 
 <body style="visibility:hidden;">
+<script>window.CURSO_CONTEXTO_MODULO = "aulas"; window.CURSO_CONTEXTO_HUB = "aulas-hub.html";</script>
+<script src="js/cursoContexto.js"></script>
 <script>
 (async function protegerPagina() {
   const featureKey = 'gravado';
@@ -318,6 +320,10 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
       (p.ativo && CASCATA[featureKey].includes(p.tier)) || p.packPrestige?.ativo
     );
     if (!(entitlementsCurso[featureKey] || entitlementsAvulso[featureKey] || viaPlanoPorCurso)) return bloquear();
+
+    // Resolve QUAL curso (TCF/DELF/.../B2) esta página deve usar — ver js/cursoContexto.js.
+    if (window.CursoContexto && !(await window.CursoContexto.garantir())) return;
+
     window.__nomeUsuario = data.nome;
     document.body.style.visibility = 'visible';
   } catch (err) {

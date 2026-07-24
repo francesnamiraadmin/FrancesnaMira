@@ -256,6 +256,8 @@ footer { text-align: center; padding: 24px; background: var(--footer-bg); margin
 </head>
 
 <body style="visibility:hidden;">
+<script>window.CURSO_CONTEXTO_MODULO = "producao"; window.CURSO_CONTEXTO_HUB = "producao-hub.html";</script>
+<script src="js/cursoContexto.js"></script>
 <script>
 (async function protegerPagina() {
   const featureKey = 'correcoes';
@@ -296,7 +298,19 @@ footer { text-align: center; padding: 24px; background: var(--footer-bg); margin
       gravado: !!avulsos.aulasEspecializadas?.ativo,
       plataforma: !!avulsos.plataforma?.ativo
     };
-    if (!(entitlementsCurso[featureKey] || entitlementsAvulso[featureKey])) return bloquear();
+    const legado = data.legado?.produtosAvulsos || {};
+    const viaLegado = featureKey === 'correcoes' && !!legado.producao?.ativo;
+    // Modelo novo — um plano por curso (planos[]); igual ao já usado em
+    // aulas-especializadas.html e js/plataformaGate.js.
+    const CASCATA = { correcoes: ['Essentiel', 'Avancé', 'Excellence'], gravado: ['Avancé', 'Excellence'], plataforma: ['Excellence'] };
+    const viaPlanoPorCurso = (data.planos || []).some(p =>
+      (p.ativo && CASCATA[featureKey].includes(p.tier)) || p.packPrestige?.ativo
+    );
+    if (!(entitlementsCurso[featureKey] || entitlementsAvulso[featureKey] || viaLegado || viaPlanoPorCurso)) return bloquear();
+
+    // Resolve QUAL curso (TCF/DELF/.../B2) esta página deve usar — ver js/cursoContexto.js.
+    if (window.CursoContexto && !(await window.CursoContexto.garantir())) return;
+
     window.__creditosCorrecao = data.creditosCorrecao || 0;
     window.__nomeUsuario = data.nome;
     document.body.style.visibility = 'visible';

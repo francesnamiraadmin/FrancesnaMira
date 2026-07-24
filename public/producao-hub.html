@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Ambiente de Produção - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/course-hub.css">
+
+<style>
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
+</style>
+</head>
+
+<body>
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<section class="hub-intro">
+  <h1>Ambiente de Produção Oral e Textual</h1>
+  <p>Escolha o curso para enviar redações e produções orais para correção, com feedback detalhado por critério, histórico e mensagens com o professor.</p>
+</section>
+
+<div class="hub-cursos-wrap">
+  <div id="hubCursosGrid"></div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/cursoHub.js"></script>
+<script>
+CursoHub.iniciar({
+  modulo: "producao",
+  proximaPagina: "correcoes-texto.html",
+  async progresso(cursos) {
+    const token = localStorage.getItem("token");
+    const mapa = new Map();
+    try {
+      const res = await fetch("/api/producoes/minhas", { headers: { Authorization: "Bearer " + token } });
+      if (!res.ok) return mapa;
+      const producoes = await res.json();
+      cursos.forEach(curso => {
+        const doCurso = producoes.filter(p => p.temaId?.courseType === curso);
+        const corrigidas = doCurso.filter(p => ["corrigido", "devolvido"].includes(p.status)).length;
+        mapa.set(curso, {
+          rotulo: doCurso.length ? `${corrigidas}/${doCurso.length} corrigidas` : "Nenhuma produção enviada",
+          percentual: doCurso.length ? Math.round((corrigidas / doCurso.length) * 100) : 0
+        });
+      });
+    } catch (err) { /* progresso é só um bônus visual */ }
+    return mapa;
+  }
+});
+</script>
+<script src="js/appShell.js"></script>
+<script src="js/estudoTimerGlobal.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

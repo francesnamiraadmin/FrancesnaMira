@@ -26,7 +26,11 @@
 
   const PRODUTOS_NAV = [
     {
-      chave: "plataforma", nome: "Plataforma de Questões", href: "plataforma-questoes.html", curso: "Plataforma de Questões",
+      // href aponta pro hub de seleção de curso (public/plataforma-hub.html) — a página real
+      // (plataforma-questoes.html) só resolve qual courseType usar depois disso, ver
+      // js/cursoContexto.js. O submenu continua indo direto pras páginas reais: elas resolvem
+      // o curso pelo sessionStorage deixado pelo hub na última visita.
+      chave: "plataforma", nome: "Plataforma de Questões", href: "plataforma-hub.html", curso: "Plataforma de Questões",
       // Submenu expansível (ver montarNavLinkComSubmenu) — outros produtos podem ganhar
       // o mesmo tratamento no futuro só preenchendo este campo.
       submenu: [
@@ -38,8 +42,8 @@
         { nome: "Estatísticas", href: "estatisticas-questoes.html", icone: "img/icones/estatisticas.svg" }
       ]
     },
-    { chave: "producao", nome: "Ambiente de Produção", href: "correcoes-texto.html", curso: "Ambiente de Produção Oral e Textual" },
-    { chave: "aulasEspecializadas", nome: "Aulas Especializadas", href: "aulas-especializadas.html", curso: "Aulas Especializadas Online" }
+    { chave: "producao", nome: "Ambiente de Produção", href: "producao-hub.html", curso: "Ambiente de Produção Oral e Textual" },
+    { chave: "aulasEspecializadas", nome: "Aulas Especializadas", href: "aulas-hub.html", curso: "Aulas Especializadas Online" }
   ];
 
   const token = localStorage.getItem("token");
@@ -202,7 +206,7 @@
   // qualquer produto futuro poder ganhar submenu só preenchendo `produto.submenu`.
   function montarNavLinkComSubmenu(p) {
     const paginaAtual = location.pathname.split("/").pop() || "index.html";
-    const paginasDoModulo = [p.href, ...p.submenu.map(s => s.href), "resolver-conjunto.html"];
+    const paginasDoModulo = [p.href, "plataforma-questoes.html", ...p.submenu.map(s => s.href), "resolver-conjunto.html"];
     const ativoNoModulo = paginasDoModulo.includes(paginaAtual);
     const itens = p.submenu.map(s =>
       `<a class="app-nav-submenu-item ${s.href === paginaAtual ? "active" : ""}" href="${s.href}"><img class="icone" src="${s.icone}" alt=""> ${s.nome}</a>`

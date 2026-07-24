@@ -37,7 +37,8 @@ async function carregarCaderno() {
   const alvo = document.getElementById('cadernoLista');
   alvo.innerHTML = '<p class="conjuntos-vazio">Carregando...</p>';
   try {
-    const res = await fetch('/api/questoes/caderno', { headers: authHeaders() });
+    const url = window.CursoContexto ? window.CursoContexto.urlComCurso('/api/questoes/caderno') : '/api/questoes/caderno';
+    const res = await fetch(url, { headers: authHeaders() });
     const itens = res.ok ? await res.json() : [];
     alvo.innerHTML = itens.length
       ? itens.map(renderCadernoItem).join('')

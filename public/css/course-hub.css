@@ -1,0 +1,92 @@
+/* ===================== HUB DE SELEÇÃO DE CURSO =====================
+   Grade de 8 cards (TCF/DELF/DALF/TEF/A1/A2/B1/B2) usada como porta de entrada de
+   Plataforma de Questões, Ambiente de Produção e Aulas Especializadas — ver js/cursoHub.js.
+   Construído sobre os tokens de css/theme.css (--accent, --glass-*, --warning-*), sem
+   paleta própria além das cores de identidade de cada curso (--curso-cor). */
+
+.hub-intro { text-align: center; padding: 50px 4% 10px; }
+.hub-intro h1 { font-family: 'Playfair Display', serif; font-size: 2.6rem; margin-bottom: 10px; }
+.hub-intro p { font-size: 1.1rem; opacity: 0.9; max-width: 720px; margin: 0 auto; }
+
+.hub-cursos-wrap { max-width: 1240px; margin: 0 auto; padding: 34px 4% 100px; }
+.hub-cursos-grupo { margin-bottom: 40px; }
+.hub-cursos-grupo-titulo {
+  font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 16px;
+  text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85;
+}
+
+.hub-cursos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 22px; }
+
+.curso-card {
+  position: relative;
+  display: flex; flex-direction: column; gap: 14px;
+  background: linear-gradient(150deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 22px; padding: 26px 24px;
+  box-shadow: var(--shadow); overflow: hidden;
+  transition: transform 0.3s cubic-bezier(.16,.8,.25,1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* ---- estado desbloqueado ---- */
+.curso-card.desbloqueado { cursor: pointer; text-decoration: none; color: var(--text); }
+.curso-card.desbloqueado::before {
+  content: ""; position: absolute; inset: 0; opacity: 0.14; pointer-events: none;
+  background: radial-gradient(circle at 100% 0%, var(--curso-cor), transparent 60%);
+}
+.curso-card.desbloqueado:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.35), 0 0 0 1px var(--curso-cor);
+  border-color: var(--curso-cor);
+}
+
+/* ---- estado bloqueado ---- */
+.curso-card.bloqueado { filter: grayscale(0.55); opacity: 0.72; }
+.curso-card.bloqueado:hover { opacity: 0.88; transform: translateY(-2px); }
+
+.curso-card-topo { display: flex; align-items: center; gap: 14px; }
+
+.curso-badge {
+  flex-shrink: 0; width: 62px; height: 62px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.3px;
+  color: #fff; background: linear-gradient(150deg, var(--curso-cor), color-mix(in srgb, var(--curso-cor) 55%, #000));
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--curso-cor) 45%, transparent);
+}
+.curso-card.bloqueado .curso-badge { box-shadow: none; }
+
+.curso-card-info { min-width: 0; }
+.curso-card-info h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; line-height: 1.25; }
+.curso-card-info .curso-status {
+  margin-top: 4px; display: inline-flex; align-items: center; gap: 5px; font-size: 0.74rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.4px; padding: 3px 10px; border-radius: 20px;
+}
+.curso-status.disponivel { background: var(--success-bg); color: var(--success-text); }
+.curso-status.bloqueado-status { background: var(--recessed); color: var(--text-muted); }
+.curso-status img { width: 0.85em; height: 0.85em; }
+
+.curso-card-desc { font-size: 0.9rem; opacity: 0.85; line-height: 1.5; flex: 1; }
+
+/* ---- progresso (cursos desbloqueados) ---- */
+.curso-progresso { margin-top: auto; }
+.curso-progresso .rotulo { display: flex; justify-content: space-between; font-size: 0.78rem; opacity: 0.85; margin-bottom: 6px; }
+.curso-progresso .barra { height: 8px; border-radius: 6px; background: var(--recessed); overflow: hidden; }
+.curso-progresso .barra .preenchimento { height: 100%; border-radius: 6px; background: var(--curso-cor); transition: width 0.5s ease; width: 0%; }
+
+/* ---- cadeado + CTA (cursos bloqueados) ---- */
+.curso-cadeado-wrap { margin-top: auto; display: flex; align-items: center; gap: 10px; }
+.curso-cadeado-wrap img { width: 20px; height: 20px; opacity: 0.7; flex-shrink: 0; }
+.curso-cadeado-wrap span { font-size: 0.85rem; opacity: 0.8; }
+
+.curso-btn-adquira {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 4px;
+  padding: 11px 18px; border-radius: 30px; background: var(--accent); color: var(--accent-text);
+  font-weight: 700; font-size: 0.88rem; text-decoration: none; text-align: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.curso-btn-adquira:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+.hub-cursos-vazio { text-align: center; padding: 60px 20px; opacity: 0.7; }
+
+@media (max-width: 480px) {
+  .hub-cursos-grid { grid-template-columns: 1fr; }
+  .hub-intro h1 { font-size: 2.1rem; }
+}

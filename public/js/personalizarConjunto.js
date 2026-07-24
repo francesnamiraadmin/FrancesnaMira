@@ -115,7 +115,9 @@ async function carregarMeusPersonalizados() {
   const lista = document.getElementById('meusPersonalizadosLista');
   lista.innerHTML = '<p class="meus-personalizados-vazio">Carregando...</p>';
   try {
-    const res = await fetch(`/api/questoes/conjuntos/meus-personalizados?pool=${filtroForm.pool}`, { headers: authHeaders() });
+    const urlBase = `/api/questoes/conjuntos/meus-personalizados?pool=${filtroForm.pool}`;
+    const url = window.CursoContexto ? window.CursoContexto.urlComCurso(urlBase) : urlBase;
+    const res = await fetch(url, { headers: authHeaders() });
     if (!res.ok) throw new Error();
     const conjuntos = await res.json();
     lista.innerHTML = conjuntos.length
@@ -234,7 +236,8 @@ function initFormularioConjunto() {
         body: JSON.stringify({
           niveis, materias: [...filtroForm.materias], quantidade: filtroForm.quantidade,
           tempoLimiteSegundos: tempoModo === 'com' ? minutos * 60 : null,
-          pool: filtroForm.pool
+          pool: filtroForm.pool,
+          courseType: window.CursoContexto ? window.CursoContexto.curso : undefined
         })
       });
       const data = await res.json();

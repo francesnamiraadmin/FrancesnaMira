@@ -60,6 +60,7 @@ async function carregarTemas() {
   if (dificuldade) params.set('dificuldade', dificuldade);
   if (modalidade) params.set('modalidade', modalidade);
   if (busca) params.set('busca', busca);
+  if (window.CursoContexto?.curso) params.set('courseType', window.CursoContexto.curso);
 
   const grid = document.getElementById('temasGrid');
   grid.innerHTML = '<p style="opacity:0.6;">Carregando temas...</p>';
@@ -412,6 +413,7 @@ async function carregarHistorico() {
   const busca = document.getElementById('histBusca').value.trim();
   if (status) params.set('status', status);
   if (busca) params.set('busca', busca);
+  if (window.CursoContexto?.curso) params.set('courseType', window.CursoContexto.curso);
 
   const lista = document.getElementById('historicoLista');
   lista.innerHTML = '<p style="opacity:0.6;">Carregando...</p>';

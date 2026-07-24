@@ -44,12 +44,23 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 </head>
 
 <body style="visibility:hidden;">
+<script>
+window.CURSO_CONTEXTO_MODULO = "plataforma";
+window.CURSO_CONTEXTO_HUB = "plataforma-hub.html";
+// Chamado pelo gate (js/plataformaGate.js) assim que o curso desta visita é resolvido.
+window.aoResolverCurso = function (curso) {
+  document.title = 'Plataforma de Questões - ' + curso + ' - Francês na Mira';
+  var titulo = document.getElementById('introTitulo');
+  if (titulo) titulo.textContent = 'Plataforma de Questões - ' + curso;
+};
+</script>
+<script src="js/cursoContexto.js"></script>
 <script src="js/plataformaGate.js"></script>
 
 <div id="app-navbar" class="app-navbar-bar"></div>
 
 <section class="intro">
-  <h1>Plataforma de Questões</h1>
+  <h1 id="introTitulo">Plataforma de Questões</h1>
   <p>Questões no estilo TCF, DELF, DALF e TEF — organizadas em conjuntos por nível e por matéria, com simulados cronometrados, caderno de revisão e estatísticas completas do seu progresso.</p>
 </section>
 

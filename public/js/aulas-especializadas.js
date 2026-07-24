@@ -50,7 +50,8 @@ function renderTopoProgresso() {
 
 // ===================== MÓDULOS (sidebar) =====================
 async function carregarModulos() {
-  const res = await fetch('/api/aulas/modulos', { headers: authHeaders() });
+  const url = window.CursoContexto ? window.CursoContexto.urlComCurso('/api/aulas/modulos') : '/api/aulas/modulos';
+  const res = await fetch(url, { headers: authHeaders() });
   if (!res.ok) return;
   modulos = await res.json();
   renderModulosSidebar();
@@ -354,7 +355,8 @@ function navegarAula(delta) {
 
 // ===================== PROGRESSO GERAL / CERTIFICADO =====================
 async function carregarResumoProgresso() {
-  const res = await fetch('/api/aulas/progresso/resumo', { headers: authHeaders() });
+  const urlResumo = window.CursoContexto ? window.CursoContexto.urlComCurso('/api/aulas/progresso/resumo') : '/api/aulas/progresso/resumo';
+  const res = await fetch(urlResumo, { headers: authHeaders() });
   if (!res.ok) return;
   const r = await res.json();
 
@@ -391,7 +393,8 @@ async function abrirCertificado() {
   mostrarView('certificado');
   const conteudo = document.getElementById('certificadoConteudo');
   conteudo.innerHTML = '<p>Carregando...</p>';
-  const res = await fetch('/api/aulas/certificado/emitir', { method: 'POST', headers: authHeaders() });
+  const urlCertificado = window.CursoContexto ? window.CursoContexto.urlComCurso('/api/aulas/certificado/emitir') : '/api/aulas/certificado/emitir';
+  const res = await fetch(urlCertificado, { method: 'POST', headers: authHeaders() });
   const data = await res.json();
   if (!res.ok) { conteudo.innerHTML = `<p>${escapeHtml(data.msg || 'Não foi possível emitir o certificado.')}</p>`; return; }
   const dataFormatada = new Date(data.emitidoEm).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
@@ -434,7 +437,8 @@ document.getElementById('favoritosLista').addEventListener('click', e => {
 // ===================== HISTÓRICO =====================
 document.getElementById('btnHistorico').addEventListener('click', async () => {
   mostrarView('historico');
-  const res = await fetch('/api/aulas/progresso/historico', { headers: authHeaders() });
+  const urlHistorico = window.CursoContexto ? window.CursoContexto.urlComCurso('/api/aulas/progresso/historico') : '/api/aulas/progresso/historico';
+  const res = await fetch(urlHistorico, { headers: authHeaders() });
   const lista = res.ok ? await res.json() : [];
   const wrap = document.getElementById('historicoLista');
   wrap.innerHTML = lista.length ? lista.map(h => `

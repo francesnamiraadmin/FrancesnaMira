@@ -7,7 +7,8 @@
 async function carregarIndicadores() {
   try {
     const token = localStorage.getItem('token');
-    const res = await fetch('/api/questoes/estatisticas', { headers: { Authorization: 'Bearer ' + token } });
+    const url = window.CursoContexto ? window.CursoContexto.urlComCurso('/api/questoes/estatisticas') : '/api/questoes/estatisticas';
+    const res = await fetch(url, { headers: { Authorization: 'Bearer ' + token } });
     if (!res.ok) return;
     const { kpis } = await res.json();
 

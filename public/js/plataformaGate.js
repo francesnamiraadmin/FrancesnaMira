@@ -40,7 +40,18 @@
     const viaLegado = !!data.legado?.produtosAvulsos?.plataforma?.ativo;
     const viaPlanoPorCurso = (data.planos || []).some(p => p.ativo && p.tier === 'Excellence' || p.packPrestige?.ativo);
     if (!(viaCascataAntiga || viaAvulsoAntigo || viaLegado || viaPlanoPorCurso)) return bloquear();
+
+    // Resolve QUAL curso (TCF/DELF/.../B2) esta página deve usar — ver js/cursoContexto.js.
+    // Se for ambíguo (aluno com 2+ cursos liberados aqui, sem ter vindo do hub), já redireciona
+    // pro plataforma-hub.html em vez de deixar as chamadas de API falharem.
+    if (window.CursoContexto && !(await window.CursoContexto.garantir())) return;
+
     document.body.style.visibility = 'visible';
+    // Hook opcional por página (ex.: plataforma-questoes.html usa pra atualizar o título
+    // com o curso resolvido) — só chamado depois que o body já está visível.
+    if (window.CursoContexto?.curso && typeof window.aoResolverCurso === 'function') {
+      window.aoResolverCurso(window.CursoContexto.curso);
+    }
   } catch (err) {
     bloquear();
   }

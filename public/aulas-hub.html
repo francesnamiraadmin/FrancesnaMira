@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Aulas Especializadas - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/course-hub.css">
+
+<style>
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
+</style>
+</head>
+
+<body>
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<section class="hub-intro">
+  <h1>Aulas Especializadas Gravadas</h1>
+  <p>Escolha o curso para assistir às aulas gravadas em vídeo, organizadas em módulos progressivos, com materiais para download e certificado ao concluir.</p>
+</section>
+
+<div class="hub-cursos-wrap">
+  <div id="hubCursosGrid"></div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/cursoHub.js"></script>
+<script>
+CursoHub.iniciar({
+  modulo: "aulas",
+  proximaPagina: "aulas-especializadas.html",
+  async progresso(cursos) {
+    const token = localStorage.getItem("token");
+    const mapa = new Map();
+    await Promise.all(cursos.map(async curso => {
+      try {
+        const res = await fetch(`/api/aulas/modulos?courseType=${encodeURIComponent(curso)}`, {
+          headers: { Authorization: "Bearer " + token }
+        });
+        if (!res.ok) return;
+        const modulos = await res.json();
+        const total = modulos.reduce((soma, m) => soma + (m.totalAulas || 0), 0);
+        const concluidas = modulos.reduce((soma, m) => soma + (m.aulasConcluidas || 0), 0);
+        mapa.set(curso, {
+          rotulo: total ? `${concluidas}/${total} aulas assistidas` : "Nenhuma aula publicada ainda",
+          percentual: total ? Math.round((concluidas / total) * 100) : 0
+        });
+      } catch (err) { /* progresso é só um bônus visual */ }
+    }));
+    return mapa;
+  }
+});
+</script>
+<script src="js/appShell.js"></script>
+<script src="js/estudoTimerGlobal.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

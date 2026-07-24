@@ -90,7 +90,8 @@ function initFiltroConjunto() {
 
 async function carregarEstatisticas() {
   try {
-    const res = await fetch('/api/questoes/estatisticas', { headers: authHeaders() });
+    const url = window.CursoContexto ? window.CursoContexto.urlComCurso('/api/questoes/estatisticas') : '/api/questoes/estatisticas';
+    const res = await fetch(url, { headers: authHeaders() });
     if (!res.ok) throw new Error('Erro ao carregar estatísticas.');
     dadosGlobais = await res.json();
     renderKPIs(dadosGlobais.kpis);

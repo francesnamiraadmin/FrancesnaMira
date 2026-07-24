@@ -8,7 +8,8 @@ async function carregarConjuntos() {
   const emAndamentoEl = document.getElementById('conjuntosEmAndamento');
   const respondidosEl = document.getElementById('conjuntosRespondidos');
   try {
-    const res = await fetch('/api/questoes/conjuntos', { headers: authHeaders() });
+    const url = window.CursoContexto ? window.CursoContexto.urlComCurso('/api/questoes/conjuntos') : '/api/questoes/conjuntos';
+    const res = await fetch(url, { headers: authHeaders() });
     if (!res.ok) throw new Error('Erro ao carregar conjuntos.');
     const data = await res.json();
 
