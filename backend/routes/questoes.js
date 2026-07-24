@@ -2,13 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Questao = require("../models/questao");
 const Conjunto = require("../models/conjunto");
-const User = require("../models/user");
 const SessaoResolucao = require("../models/sessaoResolucao");
 const Tentativa = require("../models/tentativa");
 const CadernoErros = require("../models/cadernoErros");
 const DeverSemanal = require("../models/deverSemanal");
 const { exigirAuth, exigirProfessor } = require("../middleware/auth");
-const { exigirAcessoCurso, usuarioTemAcesso } = require("../middleware/acessoCurso");
+const { exigirAcessoCurso, usuarioTemAcesso, cursosComAcesso } = require("../middleware/acessoCurso");
 const { derivarDificuldade, sortearQuestoes, derivarFiltrosDeQuestoes, classificarPrioridade } = require("../utils/gerarConjunto");
 const { TIPOS_CURSO } = require("../utils/tiposCurso");
 
@@ -264,15 +263,17 @@ router.get("/conjuntos/:id", async (req, res) => {
 // ===================== ALUNO: CRIAÇÃO DE CONJUNTO PERSONALIZADO =====================
 
 const QUANTIDADES_PERMITIDAS = [10, 20, 40];
+const NIVEIS_FLUENCIA = ["A1", "A2", "B1", "B2"];
 const NIVEIS_AVANCADOS = ["C1", "C2"];
 // C1/C2 não têm curso próprio (não existe courseType "C1"/"C2" — ver backend/utils/tiposCurso.js)
-// — são um bônus liberado só pra quem já tem acesso de Plataforma no topo da trilha: B2 (inclui
-// quem comprou o combo "A1 ao B2", que ativa packPrestige em B2 junto — ver
-// backend/utils/precoPackPrestige.js#ativarPackPrestigeCombo), ou qualquer uma das provas
-// TCF/DELF/DALF/TEF.
-const CURSOS_ELEGIVEIS_AVANCADO = ["B2", "TCF", "DELF", "DALF", "TEF"];
-function elegivelParaNiveisAvancados(planos) {
-  return (planos || []).some(p => CURSOS_ELEGIVEIS_AVANCADO.includes(p.courseType) && (p.ativo || p.packPrestige?.ativo));
+// — são um bônus liberado só pra quem tem os 4 cursos de fluência (o combo "A1 ao B2" — ver
+// backend/utils/precoPackPrestige.js#ativarPackPrestigeCombo, que ativa packPrestige nos 4 de
+// uma vez) ou qualquer uma das provas TCF/DELF/DALF/TEF. B2 sozinho NÃO libera C1/C2.
+const CURSOS_ELEGIVEIS_AVANCADO_EXAME = ["TCF", "DELF", "DALF", "TEF"];
+function elegivelParaNiveisAvancados(cursosComAcessoPlataforma) {
+  const comboCompleto = NIVEIS_FLUENCIA.every(c => cursosComAcessoPlataforma.includes(c));
+  const viaExame = CURSOS_ELEGIVEIS_AVANCADO_EXAME.some(c => cursosComAcessoPlataforma.includes(c));
+  return comboCompleto || viaExame;
 }
 
 router.post("/conjuntos/personalizado", exigirAcessoCurso("plataforma"), async (req, res) => {
@@ -283,20 +284,22 @@ router.post("/conjuntos/personalizado", exigirAcessoCurso("plataforma"), async (
     if (!Array.isArray(materias) || !materias.length) return res.status(400).json({ msg: "Selecione ao menos uma categoria." });
     if (!QUANTIDADES_PERMITIDAS.includes(quantidade)) return res.status(400).json({ msg: "Quantidade deve ser 10, 20 ou 40." });
 
-    // Nível fora do curso atual (ex.: pedir "B2" estando no contexto de A1) nunca encontra
-    // questão nenhuma no sorteio abaixo (courseType do curso atual + nivel pedido não batem),
-    // então cai sozinho no 422 de "poucas questões disponíveis" — só C1/C2 precisam de uma
-    // checagem própria, porque são as únicas com courseType null (fora da trilha normal).
-    if (niveis.some(n => NIVEIS_AVANCADOS.includes(n))) {
-      const user = await User.findById(req.userId).select("planos");
-      if (!elegivelParaNiveisAvancados(user?.planos)) {
-        return res.status(403).json({ msg: "Questões de nível C1/C2 são exclusivas para quem tem o curso B2, o combo A1 ao B2, ou TCF/DELF/DALF/TEF." });
-      }
+    // Cada nível de fluência (A1/A2/B1/B2) pedido precisa que a conta tenha Plataforma
+    // liberada NAQUELE curso específico — não só no curso do contexto atual (req.courseType),
+    // já que o Personalize agora deixa escolher entre todos os cursos de fluência que a conta
+    // possui. C1/C2 têm sua própria checagem (não têm curso próprio, ver acima).
+    const cursosComAcessoPlataforma = await cursosComAcesso(req.userId, "plataforma");
+    const niveisForaDeAcesso = niveis.filter(n => NIVEIS_FLUENCIA.includes(n) && !cursosComAcessoPlataforma.includes(n));
+    if (niveisForaDeAcesso.length) {
+      return res.status(403).json({ msg: `Você não tem acesso ao(s) curso(s): ${niveisForaDeAcesso.join(", ")}.` });
+    }
+    if (niveis.some(n => NIVEIS_AVANCADOS.includes(n)) && !elegivelParaNiveisAvancados(cursosComAcessoPlataforma)) {
+      return res.status(403).json({ msg: "Questões de nível C1/C2 são exclusivas para quem tem os 4 cursos de fluência (A1 ao B2) ou TCF/DELF/DALF/TEF." });
     }
 
     let questoes;
     try {
-      questoes = await sortearQuestoes({ niveis, materias, quantidade, alunoId: req.userId, courseType: req.courseType });
+      questoes = await sortearQuestoes({ niveis, materias, quantidade, alunoId: req.userId });
     } catch (err) {
       if (err.status === 422) return res.status(422).json({ msg: err.message });
       throw err;

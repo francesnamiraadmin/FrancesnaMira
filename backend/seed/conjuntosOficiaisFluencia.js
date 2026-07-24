@@ -90,7 +90,7 @@ async function main() {
       }
       const quantidade = Math.min(def.alvo, disponivel);
 
-      const questoes = await sortearQuestoes({ niveis: def.niveis, materias: def.materias || [], quantidade, courseType: def.courseType });
+      const questoes = await sortearQuestoes({ niveis: def.niveis, materias: def.materias || [], quantidade });
       const filtrosReais = await derivarFiltrosDeQuestoes(questoes.map(q => q.questaoId));
       await Conjunto.create({
         nome: def.nome, descricao: def.descricao, tipo: "oficial", pool: "praticar", criadoPor: admin._id,

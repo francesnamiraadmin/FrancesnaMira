@@ -7,24 +7,25 @@ function authHeaders(json) {
   return Object.assign({ Authorization: 'Bearer ' + token }, json ? { 'Content-Type': 'application/json' } : {});
 }
 
-// "Níveis" mostra só o que a conta realmente tem acesso: o nível do curso de fluência atual
-// (A1/A2/B1/B2 — 1 pra 1 com o courseType do contexto, ver js/cursoContexto.js) mais C1/C2 como
-// bônus cross-curso, liberado só pra quem tem B2 (inclui o combo "A1 ao B2", que ativa
-// packPrestige em B2 junto), TCF, DELF, DALF ou TEF — mesma regra do backend, ver
-// backend/routes/questoes.js#elegivelParaNiveisAvancados. `window.__planosConta` é exposto
-// por js/plataformaGate.js depois que a conta é carregada.
+// "Níveis" mostra um chip por curso de fluência (A1/A2/B1/B2) que a conta realmente possui —
+// não só o do contexto atual (js/cursoContexto.js): quem tem A1+A2 vê A1 e A2; quem tem só B2
+// vê só B2. C1/C2 aparecem como bônus só pra quem tem os 4 cursos de fluência completos (o
+// combo "A1 ao B2") ou qualquer uma das provas TCF/DELF/DALF/TEF — B2 sozinho NÃO libera C1/C2
+// — mesma regra do backend, ver backend/routes/questoes.js#elegivelParaNiveisAvancados.
+// `window.__planosConta` é exposto por js/plataformaGate.js depois que a conta é carregada.
 const NIVEIS_FLUENCIA = ['A1', 'A2', 'B1', 'B2'];
 const NIVEIS_AVANCADOS = ['C1', 'C2'];
-const CURSOS_ELEGIVEIS_AVANCADO = ['B2', 'TCF', 'DELF', 'DALF', 'TEF'];
+const CURSOS_ELEGIVEIS_AVANCADO_EXAME = ['TCF', 'DELF', 'DALF', 'TEF'];
+
+function possuiCursoPlataforma(curso) {
+  return (window.__planosConta || []).some(p => p.courseType === curso && (p.ativo || p.packPrestige?.ativo));
+}
 
 function niveisPermitidos() {
-  const curso = window.CursoContexto?.curso;
-  const permitidos = [];
-  if (NIVEIS_FLUENCIA.includes(curso)) permitidos.push(curso);
-  const elegivelAvancado = (window.__planosConta || []).some(p =>
-    CURSOS_ELEGIVEIS_AVANCADO.includes(p.courseType) && (p.ativo || p.packPrestige?.ativo)
-  );
-  if (elegivelAvancado) permitidos.push(...NIVEIS_AVANCADOS);
+  const permitidos = NIVEIS_FLUENCIA.filter(possuiCursoPlataforma);
+  const comboCompleto = NIVEIS_FLUENCIA.every(possuiCursoPlataforma);
+  const viaExame = CURSOS_ELEGIVEIS_AVANCADO_EXAME.some(possuiCursoPlataforma);
+  if (comboCompleto || viaExame) permitidos.push(...NIVEIS_AVANCADOS);
   return permitidos;
 }
 

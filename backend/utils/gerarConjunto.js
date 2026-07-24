@@ -44,13 +44,17 @@ const NIVEIS_AVANCADOS_SEM_CURSO = new Set(["C1", "C2"]);
 // deste — a mesma questão pode aparecer sorteada em conjuntos diferentes). Só entram
 // questões já respondidas se não houver inéditas suficientes pra completar a quantidade
 // pedida, pra nunca devolver menos questões do que o aluno escolheu.
-async function sortearQuestoes({ niveis, materias, quantidade, alunoId, courseType }) {
+async function sortearQuestoes({ niveis, materias, quantidade, alunoId }) {
   const niveisDoCurso = (niveis || []).filter(n => !NIVEIS_AVANCADOS_SEM_CURSO.has(n));
   const niveisAvancados = (niveis || []).filter(n => NIVEIS_AVANCADOS_SEM_CURSO.has(n));
 
   const condicoes = [];
-  if (niveisDoCurso.length || !niveis?.length) {
-    condicoes.push({ ativo: true, courseType, ...(niveisDoCurso.length ? { nivel: { $in: niveisDoCurso } } : {}) });
+  if (niveisDoCurso.length) {
+    // nivel e courseType são sempre o mesmo valor pros cursos de fluência (A1-B2) — ver
+    // backend/seed/migrarCourseTypeQuestoes.js — então cada nível pedido já resolve o curso
+    // sozinho, sem precisar receber um `courseType` externo (o Personalize agora deixa
+    // escolher entre todos os cursos de fluência que a conta possui, não só um por vez).
+    condicoes.push({ ativo: true, nivel: { $in: niveisDoCurso }, courseType: { $in: niveisDoCurso } });
   }
   if (niveisAvancados.length) {
     condicoes.push({ ativo: true, courseType: null, nivel: { $in: niveisAvancados } });
