@@ -52,8 +52,8 @@
   };
 
   /* =========================================================
-     ÁUDIO — delega pro helper compartilhado (js/audioFrances.js), que escolhe
-     a melhor voz francesa disponível no navegador.
+     ÁUDIO — delega pro helper compartilhado (js/audioFrances.js), que toca
+     o áudio real gerado com Coqui TTS (ou cai pra Web Speech API).
      ========================================================= */
   function falar(texto, botao){
     if (!E.audio || !window.falarFrances) return;

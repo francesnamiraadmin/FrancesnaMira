@@ -139,8 +139,8 @@ function svgGraficoVisual(labels, valores, unidade) {
   </svg>`;
 }
 
-// Delega pro helper compartilhado (js/audioFrances.js) — mesmo mecanismo usado em
-// Questões Interativas (Web Speech API do navegador, primeira voz "fr").
+// Delega pro helper compartilhado (js/audioFrances.js) — toca o áudio real
+// gerado com Coqui TTS, com fallback pra Web Speech API se preciso.
 function tocarAudio(texto) {
   if (window.falarFrances) return falarFrances(texto);
   if (!window.speechSynthesis) { alert('Seu navegador não é compatível com leitura de áudio.'); return; }

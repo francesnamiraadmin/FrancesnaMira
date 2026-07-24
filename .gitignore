@@ -3,3 +3,5 @@ node_modules/
 database.sqlite
 backend/uploads/
 .claude/settings.local.json
+.venv-tts/
+scripts_tts/_tmp.wav
