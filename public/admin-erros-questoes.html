@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Erros de Questões (Admin) - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --azul: #2563eb; --azul-escuro: #1e40af; --azul-claro: #eff6ff; --azul-hover: #1d4ed8;
+  --cinza-50: #f8fafc; --cinza-100: #f1f5f9; --cinza-200: #e2e8f0; --cinza-300: #cbd5e1;
+  --cinza-400: #94a3b8; --cinza-600: #475569; --cinza-800: #1e293b; --branco: #ffffff;
+  --verde: #16a34a; --verde-bg: #f0fdf4; --amarelo: #d97706; --amarelo-bg: #fffbeb;
+  --vermelho: #dc2626; --vermelho-bg: #fef2f2;
+  --sombra: 0 1px 3px rgba(15,23,42,0.08), 0 8px 24px rgba(15,23,42,0.06); --radius: 16px;
+}
+[data-theme="dark"] {
+  --branco: #1e2433; --cinza-50: #161b28; --cinza-100: #232a3b; --cinza-200: #2d3548;
+  --cinza-300: #3a4358; --cinza-400: #4b5568; --cinza-600: #9aa5bd; --cinza-800: #e8ecf5;
+  --azul: #3b82f6; --azul-escuro: #2563eb; --azul-claro: rgba(59,130,246,0.18); --azul-hover: #60a5fa;
+  --verde: #22c55e; --verde-bg: rgba(34,197,94,0.16);
+  --vermelho: #f87171; --vermelho-bg: rgba(248,113,113,0.16);
+  --amarelo: #fbbf24; --amarelo-bg: rgba(251,191,36,0.16);
+}
+body { font-family: 'Poppins', sans-serif; background: var(--cinza-50); color: var(--cinza-800); min-height: 100vh; }
+header { font-family: 'Playfair Display', serif; font-size: 2.2rem; text-align: center; padding: 22px; background: var(--branco); border-bottom: 1px solid var(--cinza-200); }
+header a { color: var(--azul-escuro); text-decoration: none; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 30px 3% 100px; }
+.painel-header { background: linear-gradient(135deg, var(--azul-escuro), var(--azul)); color: white; border-radius: var(--radius); padding: 26px 32px; margin-bottom: 24px; box-shadow: var(--sombra); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+.painel-header h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+.painel-header p { opacity: 0.9; font-size: 0.9rem; margin-top: 4px; }
+.btn { padding: 10px 22px; border-radius: 30px; border: none; background: var(--azul); color: white; font-weight: 700; cursor: pointer; font-size: 0.88rem; }
+.btn:hover { background: var(--azul-hover); }
+.btn.secundario { background: var(--branco); color: var(--cinza-600); border: 1px solid var(--cinza-300); }
+.btn.pequeno { padding: 6px 14px; font-size: 0.78rem; }
+.filtro-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.filtro-tab { padding: 8px 20px; border-radius: 30px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-600); font-weight: 600; cursor: pointer; font-size: 0.85rem; }
+.filtro-tab.active { background: var(--azul); color: white; border-color: var(--azul); }
+.vazio-box { text-align: center; padding: 40px 20px; color: var(--cinza-400); background: var(--branco); border-radius: var(--radius); border: 1px solid var(--cinza-200); }
+.relato-item { background: var(--branco); border: 1px solid var(--cinza-200); border-radius: var(--radius); box-shadow: var(--sombra); padding: 20px 24px; margin-bottom: 14px; }
+.relato-item.resolvido { opacity: 0.65; }
+.relato-cabecalho { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+.relato-aluno { font-weight: 700; font-size: 0.92rem; }
+.relato-data { font-size: 0.78rem; color: var(--cinza-400); }
+.pill { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 2px 10px; border-radius: 10px; background: var(--azul-claro); color: var(--azul-escuro); vertical-align: middle; margin-right: 4px; }
+.pill.status-aberto { background: var(--amarelo-bg); color: var(--amarelo); }
+.pill.status-resolvido { background: var(--verde-bg); color: var(--verde); }
+.relato-questao { font-size: 0.9rem; color: var(--cinza-600); margin-bottom: 10px; padding: 10px 14px; background: var(--cinza-50); border-radius: 10px; border-left: 3px solid var(--cinza-300); }
+.relato-mensagem { font-size: 0.95rem; line-height: 1.6; margin-bottom: 14px; }
+footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
+.titulo-icone-inline { width: 1em; height: 1em; object-fit: contain; vertical-align: -0.14em; margin-right: 8px; }
+.titulo-icone-inline.pequeno { margin-right: 5px; }
+</style>
+</head>
+
+<body style="visibility:hidden;">
+<script>
+(async function protegerPagina() {
+  const token = localStorage.getItem('token');
+  function bloquear(msg) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; font-family:'Poppins',sans-serif; background:#f8fafc; color:#1e293b;">
+        <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; margin-bottom:16px; color:#1e40af;">Acesso restrito</h1>
+        <p style="font-size:1.1rem; max-width:480px; margin-bottom:28px; opacity:0.85;">${msg}</p>
+        <a href="login.html" style="padding:14px 28px; background:#2563eb; color:white; border-radius:30px; text-decoration:none; font-weight:700;">Entrar</a>
+      </div>`;
+    document.body.style.visibility = 'visible';
+  }
+  if (!token) return bloquear('Esta página é exclusiva para professores e administradores.');
+  try {
+    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return bloquear('Sessão expirada. Entre novamente.');
+    const data = await res.json();
+    if (data.role !== 'professor' && data.role !== 'admin') return bloquear('Esta página é exclusiva para professores e administradores.');
+    document.body.style.visibility = 'visible';
+  } catch (err) { bloquear('Erro ao verificar sua conta.'); }
+})();
+</script>
+
+<header><a href="index.html">Francês na Mira <img src="img/logo-mira.png" alt="" class="logo-mira-icone"></a></header>
+
+<div class="wrap">
+  <div class="painel-header">
+    <div>
+      <h1>Erros de Questões</h1>
+      <p>Relatos enviados por alunos ao revisar o gabarito de um conjunto.</p>
+    </div>
+    <a href="minha-conta.html" class="btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Minha Conta</a>
+  </div>
+
+  <div class="filtro-tabs">
+    <button class="filtro-tab active" data-filtro="aberto">Abertos</button>
+    <button class="filtro-tab" data-filtro="resolvido">Resolvidos</button>
+    <button class="filtro-tab" data-filtro="">Todos</button>
+  </div>
+
+  <div id="relatosLista"><div class="vazio-box">Carregando...</div></div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/admin-erros-questoes.js"></script>
+</body>
+</html>

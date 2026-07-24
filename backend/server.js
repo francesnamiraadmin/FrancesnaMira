@@ -36,6 +36,7 @@ app.use("/api/reclamacoes", require("./routes/reclamacoes"));
 app.use("/api/depoimentos", require("./routes/depoimentos"));
 app.use("/api/deveres", require("./routes/deveres"));
 app.use("/api/questoes", require("./routes/questoes"));
+app.use("/api/erros-questoes", require("./routes/errosQuestoes"));
 app.use("/api/estudos", require("./routes/estudos"));
 
 // Conexão MongoDB

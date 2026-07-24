@@ -163,6 +163,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
       <a href="admin-aulas.html" class="dash-btn secundario" id="linkAdminAulas" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/video.svg" alt="">Aulas Especializadas</a>
       <a href="admin-horarios.html" class="dash-btn secundario" id="linkAdminHorarios" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Grade de Horários</a>
       <a href="admin-depoimentos.html" class="dash-btn secundario" id="linkAdminDepoimentos" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/chat.svg" alt="">Depoimentos</a>
+      <a href="admin-erros-questoes.html" class="dash-btn secundario" id="linkAdminErrosQuestoes" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/warning.svg" alt="">Erros de Questões</a>
     </div>
   </div>
 
@@ -336,6 +337,7 @@ function renderPainelEquipe(dados) {
   document.getElementById('linkAdminAulas').style.display = admin ? 'inline-block' : 'none';
   document.getElementById('linkAdminHorarios').style.display = admin ? 'inline-block' : 'none';
   document.getElementById('linkAdminDepoimentos').style.display = admin ? 'inline-block' : 'none';
+  document.getElementById('linkAdminErrosQuestoes').style.display = admin ? 'inline-block' : 'none';
 }
 
 function cardBloqueado(nome, curso) {

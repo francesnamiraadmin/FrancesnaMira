@@ -12,7 +12,7 @@
 // o aluno troca de atividade dentro do Dever de Casa enquanto um cronômetro
 // de tempo limite ainda está correndo em segundo plano).
 //
-// Responder uma questão, marcar revisão e navegar entre questões atualizam a
+// Responder uma questão e navegar entre questões atualizam a
 // tela NA HORA a partir do estado já carregado no cliente — a chamada de
 // rede que persiste a mudança roda em paralelo, sem travar a UI (só desfaz o
 // que apareceu na tela se o servidor de fato recusar). Antes, cada clique
@@ -108,9 +108,9 @@ const ConjuntoResolverEmbed = (() => {
         <div class="resolver-layout">
           <div>
             <div class="qnav-grid" data-qnav-grid>
-              ${sessao.questoes.map((x, i) => `<button class="qnav-btn ${x.respondida ? 'respondida' : ''} ${x.marcadaRevisao ? 'marcada' : ''} ${i === sessao.questaoAtualIndex ? 'atual' : ''}" data-ir="${i}">${i + 1}</button>`).join('')}
+              ${sessao.questoes.map((x, i) => `<button class="qnav-btn ${x.respondida ? 'respondida' : ''} ${i === sessao.questaoAtualIndex ? 'atual' : ''}" data-ir="${i}">${i + 1}</button>`).join('')}
             </div>
-            <div class="qnav-legenda"><span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--success-bg); border:1px solid var(--success-text); vertical-align:-1px;"></span> respondida &nbsp; <img src="img/icones/star-filled.svg" alt="" style="width:0.9em; height:0.9em; vertical-align:-0.1em;"> marcada para revisão &nbsp; contorno = atual</div>
+            <div class="qnav-legenda"><span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--success-bg); border:1px solid var(--success-text); vertical-align:-1px;"></span> respondida &nbsp; contorno = atual</div>
           </div>
           <div>
             ${renderQuestaoCard(q)}
@@ -146,10 +146,6 @@ const ConjuntoResolverEmbed = (() => {
         ).join('') + `</div>`;
       }
 
-      corpo += `<div class="q-actions">
-        <button class="q-btn secundario ${q.marcadaRevisao ? 'ativo' : ''}" data-marcar-revisao>${q.marcadaRevisao ? '<img class="titulo-icone-inline pequeno" src="img/icones/star-filled.svg" alt="">Marcada para revisão' : '<img class="titulo-icone-inline pequeno" src="img/icones/star-empty.svg" alt="">Marcar para revisão'}</button>
-      </div>`;
-
       return `<div class="q-card">
         <div class="q-head">
           <span class="q-tags">
@@ -180,8 +176,6 @@ const ConjuntoResolverEmbed = (() => {
         const vfBtn = e.target.closest('.q-vf-btns button');
         if (vfBtn) return responderAtual(vfBtn.dataset.valor === 'true');
       });
-
-      container.querySelector('[data-marcar-revisao]').addEventListener('click', () => marcarRevisaoAtual());
     }
 
     // Navegar entre questões já carregadas localmente não depende do servidor —
@@ -216,20 +210,6 @@ const ConjuntoResolverEmbed = (() => {
       if (!sessao || !sessao.questoes[index]) return;
       Object.assign(sessao.questoes[index], anterior);
       if (sessao.questaoAtualIndex === index) renderSessao();
-    }
-
-    function marcarRevisaoAtual() {
-      const index = sessao.questaoAtualIndex;
-      const novoValor = !sessao.questoes[index].marcadaRevisao;
-      sessao.questoes[index].marcadaRevisao = novoValor;
-      renderSessao();
-      fetch(`/api/questoes/sessoes/${sessao._id}/questoes/${index}`, {
-        method: 'PUT', headers: authHeaders(true), body: JSON.stringify({ marcadaRevisao: novoValor })
-      }).then(res => {
-        if (!res.ok && sessao?.questoes[index]) { sessao.questoes[index].marcadaRevisao = !novoValor; if (sessao.questaoAtualIndex === index) renderSessao(); }
-      }).catch(() => {
-        if (sessao?.questoes[index]) { sessao.questoes[index].marcadaRevisao = !novoValor; if (sessao.questaoAtualIndex === index) renderSessao(); }
-      });
     }
 
     async function tentarFinalizar() {
@@ -292,6 +272,53 @@ const ConjuntoResolverEmbed = (() => {
           }
         });
       });
+
+      container.querySelectorAll('[data-relatar-erro]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const wrap = container.querySelector(`[data-relato-wrap="${btn.dataset.relatarErro}"]`);
+          if (wrap) wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+        });
+      });
+      container.querySelectorAll('[data-relato-cancelar]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const wrap = container.querySelector(`[data-relato-wrap="${btn.dataset.relatoCancelar}"]`);
+          if (wrap) wrap.style.display = 'none';
+        });
+      });
+      container.querySelectorAll('[data-relato-enviar]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const questaoId = btn.dataset.relatoEnviar;
+          const idTentativa = btn.dataset.relatoTentativa;
+          const wrap = container.querySelector(`[data-relato-wrap="${questaoId}"]`);
+          const textarea = wrap.querySelector('textarea');
+          const msgEl = wrap.querySelector('[data-relato-msg]');
+          const mensagem = textarea.value.trim();
+          if (!mensagem) {
+            msgEl.textContent = 'Escreva uma mensagem descrevendo o erro.';
+            msgEl.className = 'q-relato-msg erro';
+            return;
+          }
+          btn.disabled = true;
+          try {
+            const res = await fetch('/api/erros-questoes', {
+              method: 'POST', headers: authHeaders(true),
+              body: JSON.stringify({ questaoId, tentativaId: idTentativa, mensagem })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+              msgEl.textContent = data.msg || 'Erro ao enviar o relato.';
+              msgEl.className = 'q-relato-msg erro';
+              btn.disabled = false;
+              return;
+            }
+            wrap.innerHTML = '<p class="q-relato-msg sucesso"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Relato enviado — obrigado por ajudar a melhorar as questões!</p>';
+          } catch (err) {
+            msgEl.textContent = 'Erro ao conectar ao servidor.';
+            msgEl.className = 'q-relato-msg erro';
+            btn.disabled = false;
+          }
+        });
+      });
     }
 
     function renderItemResultado(r, i, idTentativa) {
@@ -317,6 +344,15 @@ const ConjuntoResolverEmbed = (() => {
         <div class="q-gabarito"><strong>Explicação:</strong> ${r.explicacao}</div>
         <div class="q-actions">
           <button class="q-btn secundario ${r.noCaderno ? 'ativo' : ''}" data-caderno-questao="${r.questaoId}" data-caderno-tentativa="${idTentativa}">${r.noCaderno ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">No Caderno de Revisão' : '+ Adicionar ao Caderno de Revisão'}</button>
+          <button class="q-btn secundario" data-relatar-erro="${r.questaoId}"><img class="titulo-icone-inline pequeno" src="img/icones/warning.svg" alt="">Relatar erro</button>
+        </div>
+        <div class="q-relato-erro" data-relato-wrap="${r.questaoId}" style="display:none;">
+          <textarea placeholder="Descreva o que você encontrou de errado nesta questão..."></textarea>
+          <div class="q-relato-acoes">
+            <button class="q-btn" data-relato-enviar="${r.questaoId}" data-relato-tentativa="${idTentativa}">Enviar relato</button>
+            <button class="q-btn secundario" data-relato-cancelar="${r.questaoId}">Cancelar</button>
+          </div>
+          <p class="q-relato-msg" data-relato-msg></p>
         </div>
       </div>`;
     }

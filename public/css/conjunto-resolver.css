@@ -21,7 +21,6 @@
   color: var(--text); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.85rem; position: relative;
 }
 .qnav-btn.respondida { background: var(--success-bg); border-color: var(--success-text); color: var(--success-text); }
-.qnav-btn.marcada::after { content: '★'; position: absolute; top: -6px; right: -4px; font-size: 0.7rem; color: var(--accent); }
 .qnav-btn.atual { outline: 3px solid var(--accent); }
 .qnav-legenda { font-size: 0.78rem; opacity: 0.85; margin-top: 12px; line-height: 1.6; }
 
@@ -93,3 +92,13 @@
 .resultado-resumo { text-align: center; margin-bottom: 30px; }
 .resultado-resumo .nota { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: var(--accent); margin: 10px 0; }
 .resultado-lista { display: flex; flex-direction: column; gap: 16px; }
+
+.q-relato-erro { margin-top: 14px; padding: 16px 18px; background: var(--recessed); border-radius: 12px; }
+.q-relato-erro textarea {
+  width: 100%; min-height: 80px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--glass-border-strong);
+  background: var(--glass-input); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 0.92rem; resize: vertical;
+}
+.q-relato-acoes { display: flex; gap: 10px; margin-top: 10px; }
+.q-relato-msg { font-size: 0.85rem; margin-top: 8px; }
+.q-relato-msg.sucesso { color: var(--success-text); }
+.q-relato-msg.erro { color: var(--danger-text); }

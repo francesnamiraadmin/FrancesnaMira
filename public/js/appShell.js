@@ -35,7 +35,7 @@
       // o mesmo tratamento no futuro só preenchendo este campo.
       submenu: [
         { nome: "Praticar", href: "praticar.html", icone: "img/icones/praticar.svg" },
-        { nome: "Respondidos / Em Andamento", href: "meus-conjuntos.html", icone: "img/icones/andamento.svg" },
+        { nome: "Respondidas", href: "meus-conjuntos.html", icone: "img/icones/andamento.svg" },
         { nome: "Questões Interativas", href: "questoes-interativas.html", icone: "img/icones/puzzle.svg" },
         { nome: "Personalize", href: "personalizar-conjunto.html", icone: "img/icones/personalizar.svg" },
         { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "img/icones/caderno.svg" },
