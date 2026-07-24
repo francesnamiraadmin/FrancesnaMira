@@ -10,30 +10,18 @@
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/app-shell.css">
 <link rel="stylesheet" href="css/plataforma-topicos-nav.css">
+<link rel="stylesheet" href="css/questoes-interativas-jogo.css">
 
 <style>
 html { scroll-behavior: smooth; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Poppins', sans-serif; }
+:root { --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45); --glass-blur: blur(18px); }
 footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
 
 .intro { text-align: center; padding: 40px 4% 20px; }
 .intro h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; }
 .intro p { font-size: 1.05rem; opacity: 0.9; max-width: 680px; margin: 0 auto; }
-
-.em-breve-wrap { max-width: 640px; margin: 30px auto 100px; padding: 0 4%; }
-.em-breve-card {
-  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
-  border: 1px solid var(--glass-border); border-radius: 22px; padding: 50px 34px;
-  box-shadow: var(--glass-shadow); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px;
-}
-.em-breve-card img { width: 56px; height: 56px; opacity: 0.85; }
-.em-breve-card h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
-.em-breve-card p { font-size: 0.98rem; opacity: 0.85; line-height: 1.6; max-width: 480px; }
-.em-breve-card .voltar {
-  margin-top: 8px; display: inline-block; padding: 11px 24px; border-radius: 30px; background: var(--accent);
-  color: var(--accent-text); font-weight: 700; text-decoration: none; font-size: 0.9rem;
-}
 </style>
 </head>
 
@@ -47,15 +35,45 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <section class="intro">
   <h1><img class="titulo-icone" src="img/icones/puzzle.svg" alt="">Questões Interativas</h1>
-  <p>Um novo espaço na Plataforma de Questões, com formatos de questão além dos tradicionais.</p>
+  <p>Arraste cada ficha até o par certo — imagens, palavras, categorias e áudio, misturando quatro formatos diferentes. Toque no 🔊 para ouvir a pronúncia antes de decidir.</p>
 </section>
 
-<div class="em-breve-wrap">
-  <div class="em-breve-card">
-    <img src="img/icones/puzzle.svg" alt="">
-    <h2>Em breve</h2>
-    <p>Estamos preparando novos tipos de questões interativas para tornar sua prática ainda mais dinâmica. Enquanto isso, continue praticando no catálogo de conjuntos ou monte o seu no Personalize.</p>
-    <a class="voltar" href="praticar.html">Ir para Praticar</a>
+<div class="qi-wrap">
+  <div class="qi-secao-rot">Mecânica</div>
+  <div class="qi-modos" id="qiModos"></div>
+
+  <div class="qi-secao-rot">Categoria</div>
+  <div class="qi-abas" id="qiAbas"></div>
+
+  <div class="qi-status">
+    <div class="qi-chip">Rodada <b id="qiRodada">1/1</b></div>
+    <div class="qi-chip ok">Acertos <b id="qiAcertos">0</b></div>
+    <div class="qi-chip mau">Erros <b id="qiErros">0</b></div>
+    <div class="qi-chip">⏱ <b id="qiTempo">0:00</b></div>
+    <div class="qi-barra"><i id="qiBarra"></i></div>
+    <button type="button" class="qi-btn" id="qiBtnSom"><img class="titulo-icone-inline pequeno" src="img/icones/headphones.svg" alt="">Áudio: ligado</button>
+    <button type="button" class="qi-btn destaque" id="qiBtnReiniciar">Recomeçar</button>
+  </div>
+
+  <div class="qi-jogo">
+    <div class="qi-painel">
+      <h2 id="qiRotuloEsq">🖼️ Images</h2>
+      <p class="qi-dica" id="qiDicaModo"></p>
+      <div class="qi-fichas grade" id="qiFichas"></div>
+    </div>
+    <div class="qi-painel">
+      <h2 id="qiRotuloDir">🇫🇷 Vocabulaire</h2>
+      <p class="qi-dica">Solte aqui.</p>
+      <div class="qi-alvos" id="qiAlvos"></div>
+    </div>
+  </div>
+
+  <div class="qi-resultado" id="qiResultado">
+    <h2 id="qiRTitulo">Terminé !</h2>
+    <div class="qi-nota" id="qiRNota">0%</div>
+    <p class="qi-detalhe" id="qiRDetalhe"></p>
+    <div class="qi-erros" id="qiRErros"></div>
+    <button type="button" class="qi-btn destaque" id="qiBtnProxima">Próxima rodada →</button>
   </div>
 </div>
 
@@ -65,5 +83,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <script src="js/appShell.js"></script>
 <script src="js/estudoTimerGlobal.js"></script>
 <script src="js/theme-toggle.js"></script>
+<script src="js/questoesInterativasDados.js"></script>
+<script src="js/questoesInterativas.js"></script>
 </body>
 </html>

@@ -1,0 +1,138 @@
+/* ===================== QUESTÕES INTERATIVAS — jogo de arrastar-e-soltar =====================
+   Reskin do jogo de vocabulário sobre a paleta "glass" já usada no resto do site
+   (css/theme.css: --glass-*, --accent, --success/danger/warning-*) — a paleta pastel
+   própria do script original foi substituída inteira por esses tokens. */
+
+.qi-wrap { max-width: 1100px; margin: 0 auto; padding: 10px 4% 100px; }
+
+.qi-secao-rot {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase;
+  color: var(--text-muted); margin: 18px 0 8px;
+}
+.qi-secao-rot:first-child { margin-top: 0; }
+
+.qi-abas, .qi-modos { display: flex; flex-wrap: wrap; gap: 8px; }
+.qi-aba, .qi-modo {
+  border: 1px solid var(--glass-border); background: var(--glass-bg-2); padding: 8px 15px;
+  border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--text-muted);
+  cursor: pointer; transition: 0.18s; font-family: 'Poppins', sans-serif;
+}
+.qi-aba:hover, .qi-modo:hover { border-color: var(--accent); color: var(--text); }
+.qi-aba.on, .qi-modo.on { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+.qi-qt { opacity: 0.6; font-weight: 700; }
+
+.qi-status {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border); border-radius: 14px; padding: 12px 18px;
+  margin-bottom: 18px; box-shadow: var(--glass-shadow);
+}
+.qi-chip {
+  display: flex; align-items: center; gap: 7px; background: var(--glass-bg-2);
+  border: 1px solid var(--glass-border); padding: 6px 13px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; color: var(--text);
+}
+.qi-chip b { font-size: 15px; }
+.qi-chip.ok { background: var(--success-bg); border-color: transparent; color: var(--success-text); }
+.qi-chip.mau { background: var(--danger-bg); border-color: transparent; color: var(--danger-text); }
+.qi-barra { flex: 1; min-width: 120px; height: 8px; background: var(--recessed); border-radius: 99px; overflow: hidden; }
+.qi-barra i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-hover)); transition: width 0.45s cubic-bezier(0.4,0,0.2,1); }
+.qi-btn {
+  border: 1px solid var(--glass-border-strong); background: var(--glass-bg); padding: 8px 16px;
+  border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--text); cursor: pointer;
+  font-family: 'Poppins', sans-serif; transition: 0.18s;
+}
+.qi-btn:hover { background: var(--glass-hover); }
+.qi-btn.destaque { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+.qi-btn.destaque:hover { background: var(--accent-hover); }
+
+.qi-jogo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 880px) { .qi-jogo { grid-template-columns: 1fr; } }
+.qi-painel {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2)); border: 1px solid var(--glass-border);
+  border-radius: 18px; padding: 18px; box-shadow: var(--glass-shadow);
+}
+.qi-painel h2 { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.qi-painel .qi-dica { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; min-height: 16px; }
+
+/* ---- fichas ---- */
+.qi-fichas.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 11px; }
+.qi-fichas.coluna { display: flex; flex-direction: column; gap: 9px; }
+.qi-ficha {
+  background: var(--glass-bg-2); border: 1.5px solid var(--glass-border); border-radius: 14px;
+  cursor: grab; transition: 0.16s; position: relative; user-select: none;
+}
+.qi-fichas.grade .qi-ficha { padding: 13px 9px 10px; text-align: center; }
+.qi-ficha.texto { padding: 12px 42px 12px 15px; font-size: 14.5px; font-weight: 600; color: var(--text); display: flex; align-items: center; min-height: 48px; }
+.qi-ficha:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
+.qi-ficha:active { cursor: grabbing; }
+.qi-ficha.arrastando { opacity: 0.35; transform: scale(0.94); }
+.qi-ficha.usada { display: none; }
+.qi-ficha svg { width: 46px; height: 46px; display: block; margin: 0 auto 7px; }
+.qi-ficha .qi-pt { font-size: 11.5px; color: var(--text-muted); font-weight: 600; line-height: 1.3; }
+.qi-ficha .qi-mini { color: var(--text-muted); font-weight: 500; margin-right: 4px; }
+.qi-ficha.audio .qi-ondas { font-size: 30px; line-height: 1; margin: 4px 0 6px; }
+
+.qi-som {
+  position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 50%;
+  border: 1px solid var(--glass-border); background: var(--glass-bg); display: flex;
+  align-items: center; justify-content: center; cursor: pointer; font-size: 11px; transition: 0.15s;
+}
+.qi-ficha.texto .qi-som { top: 50%; transform: translateY(-50%); }
+.qi-som.grande { position: static; width: 100%; border-radius: 8px; height: 26px; margin-top: 6px; font-size: 12px; font-weight: 700; }
+.qi-som:hover { background: var(--accent); transform: scale(1.12); }
+.qi-ficha.texto .qi-som:hover { transform: translateY(-50%) scale(1.12); }
+.qi-som.grande:hover { transform: none; background: var(--accent); }
+.qi-som.tocando { background: var(--accent-hover); animation: qi-pulso 0.6s ease-in-out infinite; }
+@keyframes qi-pulso { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+/* ---- alvos ---- */
+.qi-alvos { display: flex; flex-direction: column; gap: 9px; max-height: 640px; overflow-y: auto; padding-right: 5px; }
+.qi-alvos::-webkit-scrollbar { width: 7px; }
+.qi-alvos::-webkit-scrollbar-thumb { background: var(--glass-border-strong); border-radius: 99px; }
+.qi-alvo {
+  display: flex; align-items: center; gap: 11px; background: var(--glass-bg-2);
+  border: 1.5px dashed var(--glass-border-strong); border-radius: 12px; padding: 11px 14px;
+  min-height: 58px; transition: 0.16s;
+}
+.qi-alvo.sobre { border-color: var(--accent); background: var(--warning-bg); border-style: solid; transform: scale(1.015); }
+.qi-alvo.certo { border-style: solid; border-color: var(--success-text); background: var(--success-bg); }
+.qi-alvo.errado { animation: qi-tremor 0.38s; }
+@keyframes qi-tremor { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
+.qi-alvo .qi-fr { flex: 1; font-size: 14.5px; font-weight: 600; color: var(--text); }
+.qi-alvo .qi-art { color: var(--text-muted); font-weight: 500; }
+.qi-encaixe {
+  width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0; background: var(--glass-bg);
+  border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center;
+}
+.qi-encaixe svg { width: 30px; height: 30px; }
+.qi-alvo.certo .qi-encaixe { background: var(--glass-bg-2); border-color: var(--success-text); }
+.qi-mini-som {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; border: 1px solid var(--glass-border);
+  background: var(--glass-bg); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; transition: 0.15s;
+}
+.qi-mini-som:hover { background: var(--accent); }
+
+/* alvo do modo categoria */
+.qi-alvo.familia { flex-wrap: wrap; align-items: flex-start; min-height: 74px; }
+.qi-alvo.familia .qi-fr { flex: 1 1 auto; font-size: 14px; }
+.qi-contador { font-size: 12px; font-weight: 700; color: var(--text-muted); background: var(--glass-bg); border-radius: 999px; padding: 3px 10px; }
+.qi-contador.oculto { display: none; }
+.qi-alvo.familia .qi-recebidos { flex: 1 1 100%; display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.qi-pilula { background: var(--glass-bg-2); border: 1px solid var(--success-text); color: var(--success-text); font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; }
+
+/* ---- resultado ---- */
+.qi-resultado {
+  display: none; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border); border-radius: 18px; padding: 30px; text-align: center;
+  margin-top: 18px; box-shadow: var(--glass-shadow);
+}
+.qi-resultado.ver { display: block; animation: qi-sobe 0.45s cubic-bezier(0.2,0.8,0.3,1); }
+@keyframes qi-sobe { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.qi-resultado h2 { font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 8px; }
+.qi-nota { font-size: 52px; font-weight: 800; letter-spacing: -2px; margin: 6px 0; color: var(--accent); }
+.qi-detalhe { color: var(--text-muted); font-size: 14px; line-height: 1.7; margin-bottom: 18px; }
+.qi-erros { text-align: left; background: var(--danger-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 14px 18px; margin: 0 auto 18px; max-width: 520px; font-size: 13.5px; }
+.qi-erros b { display: block; margin-bottom: 7px; color: var(--danger-text); }
+.qi-erros li { margin: 4px 0; list-style: none; padding-left: 16px; position: relative; color: var(--text); }
+.qi-erros li::before { content: '→'; position: absolute; left: 0; color: var(--danger-text); }
