@@ -23,10 +23,20 @@ function embaralhar(lista) {
   return copia;
 }
 
-// Sorteia `quantidade` questões do pool "praticar" que atendam aos filtros de
-// níveis/matérias e fixa a ordem — usado na criação de um Conjunto personalizado.
-// Lança um erro com `.status = 422` se o pool filtrado tiver menos questões que o pedido,
-// pra rota poder devolver esse status sem criar um conjunto incompleto silenciosamente.
+// Nível CEFR que não tem courseType próprio (não existe curso "C1"/"C2" — ver
+// backend/utils/tiposCurso.js) — essas questões ficam com `courseType: null` de propósito
+// (nunca migradas pra um curso, ver backend/seed/migrarCourseTypeQuestoes.js) e só entram
+// no sorteio quando pedidas explicitamente, misturadas às do curso atual (ver filtro abaixo).
+// A rota que chama isto (POST /conjuntos/personalizado) é responsável por checar se a conta
+// tem elegibilidade pra pedir C1/C2 antes de chegar aqui — esta função não sabe de plano.
+const NIVEIS_AVANCADOS_SEM_CURSO = new Set(["C1", "C2"]);
+
+// Sorteia `quantidade` questões que atendam aos filtros de níveis/matérias e fixa a ordem —
+// usado na criação de um Conjunto personalizado ou de um conjunto oficial (seed). Não filtra
+// mais por `Questao.pool` (era praticar/simulado — sem significado depois que Simulado saiu
+// da Plataforma de Questões; as duas metades do banco viram uma única fonte de questões).
+// Lança um erro com `.status = 422` se o filtro tiver menos questões que o pedido, pra rota
+// poder devolver esse status sem criar um conjunto incompleto silenciosamente.
 //
 // Quando `alunoId` é passado (só a rota de personalizado tem esse contexto — o seed de
 // conjuntos oficiais não tem aluno nenhum), o sorteio PRIORIZA questões que esse aluno
@@ -34,9 +44,18 @@ function embaralhar(lista) {
 // deste — a mesma questão pode aparecer sorteada em conjuntos diferentes). Só entram
 // questões já respondidas se não houver inéditas suficientes pra completar a quantidade
 // pedida, pra nunca devolver menos questões do que o aluno escolheu.
-async function sortearQuestoes({ niveis, materias, quantidade, pool = "praticar", alunoId, courseType }) {
-  const filtro = { pool, ativo: true, courseType };
-  if (niveis?.length) filtro.nivel = { $in: niveis };
+async function sortearQuestoes({ niveis, materias, quantidade, alunoId, courseType }) {
+  const niveisDoCurso = (niveis || []).filter(n => !NIVEIS_AVANCADOS_SEM_CURSO.has(n));
+  const niveisAvancados = (niveis || []).filter(n => NIVEIS_AVANCADOS_SEM_CURSO.has(n));
+
+  const condicoes = [];
+  if (niveisDoCurso.length || !niveis?.length) {
+    condicoes.push({ ativo: true, courseType, ...(niveisDoCurso.length ? { nivel: { $in: niveisDoCurso } } : {}) });
+  }
+  if (niveisAvancados.length) {
+    condicoes.push({ ativo: true, courseType: null, nivel: { $in: niveisAvancados } });
+  }
+  const filtro = condicoes.length === 1 ? condicoes[0] : { $or: condicoes };
   if (materias?.length) filtro.materia = { $in: materias };
 
   const candidatas = await Questao.find(filtro).select("_id");

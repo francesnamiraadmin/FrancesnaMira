@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Questao = require("../models/questao");
 const Conjunto = require("../models/conjunto");
+const User = require("../models/user");
 const SessaoResolucao = require("../models/sessaoResolucao");
 const Tentativa = require("../models/tentativa");
 const CadernoErros = require("../models/cadernoErros");
@@ -105,13 +106,12 @@ async function montarResultadoTentativa(tentativa) {
 
 router.get("/conjuntos", exigirAcessoCurso("plataforma"), async (req, res) => {
   try {
-    const pool = req.query.pool === "simulado" ? "simulado" : "praticar";
     // Oficiais em ordem crescente de criação (Conjunto 01, 02, 03...) — é a ordem em que
     // o catálogo pré-montado foi pensado para ser navegado. Personalizados em ordem
     // decrescente (o conjunto que o próprio aluno acabou de montar aparece primeiro).
     const [oficiais, personalizados] = await Promise.all([
-      Conjunto.find({ ativo: true, tipo: "oficial", pool, courseType: req.courseType }).sort({ criadoEm: 1 }),
-      Conjunto.find({ ativo: true, tipo: "personalizado", pool, courseType: req.courseType, criadoPor: req.userId }).sort({ criadoEm: -1 })
+      Conjunto.find({ ativo: true, tipo: "oficial", pool: "praticar", courseType: req.courseType }).sort({ criadoEm: 1 }),
+      Conjunto.find({ ativo: true, tipo: "personalizado", pool: "praticar", courseType: req.courseType, criadoPor: req.userId }).sort({ criadoEm: -1 })
     ]);
     const conjuntos = [...oficiais, ...personalizados];
 
@@ -195,8 +195,7 @@ router.get("/conjuntos", exigirAcessoCurso("plataforma"), async (req, res) => {
 // personalizarConjunto.js#renderPersonalizadoCard.
 router.get("/conjuntos/meus-personalizados", exigirAcessoCurso("plataforma"), async (req, res) => {
   try {
-    const pool = req.query.pool === "simulado" ? "simulado" : "praticar";
-    const conjuntos = await Conjunto.find({ ativo: true, tipo: "personalizado", pool, courseType: req.courseType, criadoPor: req.userId }).sort({ criadoEm: -1 });
+    const conjuntos = await Conjunto.find({ ativo: true, tipo: "personalizado", pool: "praticar", courseType: req.courseType, criadoPor: req.userId }).sort({ criadoEm: -1 });
     const ids = conjuntos.map(c => c._id);
 
     const [sessoes, tentativas] = await Promise.all([
@@ -265,28 +264,48 @@ router.get("/conjuntos/:id", async (req, res) => {
 // ===================== ALUNO: CRIAÇÃO DE CONJUNTO PERSONALIZADO =====================
 
 const QUANTIDADES_PERMITIDAS = [10, 20, 40];
+const NIVEIS_AVANCADOS = ["C1", "C2"];
+// C1/C2 não têm curso próprio (não existe courseType "C1"/"C2" — ver backend/utils/tiposCurso.js)
+// — são um bônus liberado só pra quem já tem acesso de Plataforma no topo da trilha: B2 (inclui
+// quem comprou o combo "A1 ao B2", que ativa packPrestige em B2 junto — ver
+// backend/utils/precoPackPrestige.js#ativarPackPrestigeCombo), ou qualquer uma das provas
+// TCF/DELF/DALF/TEF.
+const CURSOS_ELEGIVEIS_AVANCADO = ["B2", "TCF", "DELF", "DALF", "TEF"];
+function elegivelParaNiveisAvancados(planos) {
+  return (planos || []).some(p => CURSOS_ELEGIVEIS_AVANCADO.includes(p.courseType) && (p.ativo || p.packPrestige?.ativo));
+}
 
 router.post("/conjuntos/personalizado", exigirAcessoCurso("plataforma"), async (req, res) => {
   try {
-    const { nome, niveis, materias, quantidade, tempoLimiteSegundos, pool: poolBody } = req.body;
-    const pool = poolBody === "simulado" ? "simulado" : "praticar";
+    const { nome, niveis, materias, quantidade, tempoLimiteSegundos } = req.body;
 
     if (!Array.isArray(niveis) || !niveis.length) return res.status(400).json({ msg: "Selecione ao menos um nível." });
     if (!Array.isArray(materias) || !materias.length) return res.status(400).json({ msg: "Selecione ao menos uma categoria." });
     if (!QUANTIDADES_PERMITIDAS.includes(quantidade)) return res.status(400).json({ msg: "Quantidade deve ser 10, 20 ou 40." });
 
+    // Nível fora do curso atual (ex.: pedir "B2" estando no contexto de A1) nunca encontra
+    // questão nenhuma no sorteio abaixo (courseType do curso atual + nivel pedido não batem),
+    // então cai sozinho no 422 de "poucas questões disponíveis" — só C1/C2 precisam de uma
+    // checagem própria, porque são as únicas com courseType null (fora da trilha normal).
+    if (niveis.some(n => NIVEIS_AVANCADOS.includes(n))) {
+      const user = await User.findById(req.userId).select("planos");
+      if (!elegivelParaNiveisAvancados(user?.planos)) {
+        return res.status(403).json({ msg: "Questões de nível C1/C2 são exclusivas para quem tem o curso B2, o combo A1 ao B2, ou TCF/DELF/DALF/TEF." });
+      }
+    }
+
     let questoes;
     try {
-      questoes = await sortearQuestoes({ niveis, materias, quantidade, pool, alunoId: req.userId, courseType: req.courseType });
+      questoes = await sortearQuestoes({ niveis, materias, quantidade, alunoId: req.userId, courseType: req.courseType });
     } catch (err) {
       if (err.status === 422) return res.status(422).json({ msg: err.message });
       throw err;
     }
 
     const conjunto = await Conjunto.create({
-      nome: nome?.trim() || `${pool === "simulado" ? "Simulado" : "Conjunto"} personalizado — ${niveis.join("+")}`,
+      nome: nome?.trim() || `Conjunto personalizado — ${niveis.join("+")}`,
       tipo: "personalizado",
-      pool,
+      pool: "praticar",
       courseType: req.courseType,
       criadoPor: req.userId,
       filtros: { niveis, materias },

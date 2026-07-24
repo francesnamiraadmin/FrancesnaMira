@@ -36,7 +36,7 @@
       submenu: [
         { nome: "Praticar", href: "praticar.html", icone: "img/icones/praticar.svg" },
         { nome: "Respondidos / Em Andamento", href: "meus-conjuntos.html", icone: "img/icones/andamento.svg" },
-        { nome: "Simulados", href: "simulados.html", icone: "img/icones/simulados.svg" },
+        { nome: "Questões Interativas", href: "questoes-interativas.html", icone: "img/icones/puzzle.svg" },
         { nome: "Personalize", href: "personalizar-conjunto.html", icone: "img/icones/personalizar.svg" },
         { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "img/icones/caderno.svg" },
         { nome: "Estatísticas", href: "estatisticas-questoes.html", icone: "img/icones/estatisticas.svg" }

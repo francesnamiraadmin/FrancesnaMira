@@ -53,10 +53,10 @@ function renderSugeridoCard(c) {
   </div>`;
 }
 
-// Versão "mista" (não-iniciado OU em-andamento no mesmo card) — Praticar usa as 3
-// seções separadas acima, mas Simulados (public/js/simulados.js) continua com só 2
-// blocos (Sugeridos + Respondidos, sem seção "Em Andamento" própria), então precisa
-// deste renderer que decide a ação pelo status.
+// Versão "mista" (não-iniciado OU em-andamento no mesmo card) — usada por telas com só
+// 2 blocos (Sugeridos + Respondidos, sem seção "Em Andamento" própria, ex.: "Meus
+// conjuntos personalizados" em personalizar-conjunto.html), que precisam deste
+// renderer decidindo a ação pelo status.
 function renderPrioritarioCard(c) {
   const acao = c.status === 'em_andamento'
     ? `<button class="q-btn" data-continuar="${c._id}">Continuar</button>`

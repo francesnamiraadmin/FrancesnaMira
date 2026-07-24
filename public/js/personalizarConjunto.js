@@ -1,7 +1,5 @@
 // =====================================================================
 // PERSONALIZAR CONJUNTO — página própria (migrado de public/js/conjuntos.js).
-// Não carrega js/questoes.js (só usado por Simulados) — por isso NIVEIS é
-// declarado aqui localmente, em vez de reaproveitar o global de lá.
 // =====================================================================
 
 function authHeaders(json) {
@@ -9,49 +7,35 @@ function authHeaders(json) {
   return Object.assign({ Authorization: 'Bearer ' + token }, json ? { 'Content-Type': 'application/json' } : {});
 }
 
-const NIVEIS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-// Simulado troca a seleção de "Níveis" (A1-C2, o mesmo eixo do banco de questões) por
-// "Provas de Proficiência" — mais familiar pra quem tá treinando pra uma prova real. Cada
-// prova mapeia pro(s) nível(is) CEFR que ela cobre de verdade (DELF vai só até B2, DALF só
-// C1-C2, TCF/TEF cobrem a escala inteira) — o backend nunca vê "TCF"/"DELF": o front traduz
-// pra `niveis` (união dos níveis das provas escolhidas) antes de enviar, então o schema de
-// Conjunto/Questao não precisa saber nada sobre provas.
-const PROVAS_NIVEIS = {
-  TCF: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
-  TEF: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
-  DELF: ['A1', 'A2', 'B1', 'B2'],
-  DALF: ['C1', 'C2']
-};
+// "Níveis" mostra só o que a conta realmente tem acesso: o nível do curso de fluência atual
+// (A1/A2/B1/B2 — 1 pra 1 com o courseType do contexto, ver js/cursoContexto.js) mais C1/C2 como
+// bônus cross-curso, liberado só pra quem tem B2 (inclui o combo "A1 ao B2", que ativa
+// packPrestige em B2 junto), TCF, DELF, DALF ou TEF — mesma regra do backend, ver
+// backend/routes/questoes.js#elegivelParaNiveisAvancados. `window.__planosConta` é exposto
+// por js/plataformaGate.js depois que a conta é carregada.
+const NIVEIS_FLUENCIA = ['A1', 'A2', 'B1', 'B2'];
+const NIVEIS_AVANCADOS = ['C1', 'C2'];
+const CURSOS_ELEGIVEIS_AVANCADO = ['B2', 'TCF', 'DELF', 'DALF', 'TEF'];
+
+function niveisPermitidos() {
+  const curso = window.CursoContexto?.curso;
+  const permitidos = [];
+  if (NIVEIS_FLUENCIA.includes(curso)) permitidos.push(curso);
+  const elegivelAvancado = (window.__planosConta || []).some(p =>
+    CURSOS_ELEGIVEIS_AVANCADO.includes(p.courseType) && (p.ativo || p.packPrestige?.ativo)
+  );
+  if (elegivelAvancado) permitidos.push(...NIVEIS_AVANCADOS);
+  return permitidos;
+}
+
 const QUANTIDADES_CONJUNTO = [10, 20, 40];
-const POOLS = [
-  { valor: 'praticar', label: 'Praticar' },
-  { valor: 'simulado', label: 'Simulado' }
-];
-const filtroForm = { pool: 'praticar', niveis: new Set(), provas: new Set(), materias: new Set(), quantidade: 10 };
+const filtroForm = { niveis: new Set(), materias: new Set(), quantidade: 10 };
 
-function renderChipsPool() {
-  document.getElementById('chipPool').innerHTML = POOLS.map(p =>
-    `<button type="button" class="chip-toggle ${p.valor === filtroForm.pool ? 'selecionado' : ''}" data-pool="${p.valor}">${p.label}</button>`
-  ).join('');
-}
-
-// Simulado é sempre cronometrado por padrão (ver backend/seed/simuladosOficiais.js —
-// mesmo "padrão" já usado no catálogo oficial: 60min sugerido), Praticar não.
-function aplicarPadraoTempoPool(form) {
-  const tempoModoInput = form.querySelector(`input[name="tempoModo"][value="${filtroForm.pool === 'simulado' ? 'com' : 'sem'}"]`);
-  tempoModoInput.checked = true;
-  const minutosInput = document.getElementById('tempoMinutos');
-  minutosInput.style.display = filtroForm.pool === 'simulado' ? 'inline-block' : 'none';
-  if (filtroForm.pool === 'simulado' && !minutosInput.value) minutosInput.value = 60;
-}
-
-// Alterna entre "Níveis" (Praticar) e "Provas de Proficiência" (Simulado) — o label e o
-// conjunto de chips mudam inteiramente, mas o container (#chipNiveis) é o mesmo.
-function renderChipsNiveisOuProvas() {
-  document.getElementById('labelNiveis').textContent = filtroForm.pool === 'simulado' ? 'Provas de Proficiência' : 'Níveis';
-  document.getElementById('chipNiveis').innerHTML = filtroForm.pool === 'simulado'
-    ? Object.keys(PROVAS_NIVEIS).map(p => `<button type="button" class="chip-toggle ${filtroForm.provas.has(p) ? 'selecionado' : ''}" data-prova="${p}">${p}</button>`).join('')
-    : NIVEIS.map(n => `<button type="button" class="chip-toggle ${filtroForm.niveis.has(n) ? 'selecionado' : ''}" data-nivel="${n}">${n}</button>`).join('');
+function renderChipsNiveis() {
+  const permitidos = niveisPermitidos();
+  document.getElementById('chipNiveis').innerHTML = permitidos.length
+    ? permitidos.map(n => `<button type="button" class="chip-toggle ${filtroForm.niveis.has(n) ? 'selecionado' : ''}" data-nivel="${n}">${n}</button>`).join('')
+    : '<p style="opacity:0.75; font-size:0.88rem;">Nenhum nível disponível para o curso atual ainda.</p>';
 }
 
 const TODAS_MATERIAS = Object.keys(MATERIAS_LABELS);
@@ -106,16 +90,11 @@ function renderPersonalizadoCard(c) {
   return card.outerHTML;
 }
 
-function atualizarTituloMeusPersonalizados() {
-  const label = POOLS.find(p => p.valor === filtroForm.pool).label;
-  document.getElementById('meusPersonalizadosTitulo').textContent = `Meus conjuntos personalizados — ${label}`;
-}
-
 async function carregarMeusPersonalizados() {
   const lista = document.getElementById('meusPersonalizadosLista');
   lista.innerHTML = '<p class="meus-personalizados-vazio">Carregando...</p>';
   try {
-    const urlBase = `/api/questoes/conjuntos/meus-personalizados?pool=${filtroForm.pool}`;
+    const urlBase = '/api/questoes/conjuntos/meus-personalizados';
     const url = window.CursoContexto ? window.CursoContexto.urlComCurso(urlBase) : urlBase;
     const res = await fetch(url, { headers: authHeaders() });
     if (!res.ok) throw new Error();
@@ -146,42 +125,22 @@ function initMeusPersonalizados() {
       alert('Erro ao conectar ao servidor.');
     }
   });
-  atualizarTituloMeusPersonalizados();
   carregarMeusPersonalizados();
 }
 
 function initFormularioConjunto() {
-  renderChipsPool();
-  renderChipsNiveisOuProvas();
+  renderChipsNiveis();
   renderChipsMaterias();
   renderChipsQuantidade();
 
   const form = document.getElementById('criarConjuntoForm');
-  aplicarPadraoTempoPool(form);
 
   form.addEventListener('click', e => {
-    const poolChip = e.target.closest('[data-pool]');
-    if (poolChip) {
-      filtroForm.pool = poolChip.dataset.pool;
-      form.querySelectorAll('[data-pool]').forEach(chip => chip.classList.toggle('selecionado', chip.dataset.pool === filtroForm.pool));
-      renderChipsNiveisOuProvas();
-      aplicarPadraoTempoPool(form);
-      atualizarTituloMeusPersonalizados();
-      carregarMeusPersonalizados();
-      return;
-    }
     const nivelChip = e.target.closest('[data-nivel]');
     if (nivelChip) {
       const n = nivelChip.dataset.nivel;
       filtroForm.niveis.has(n) ? filtroForm.niveis.delete(n) : filtroForm.niveis.add(n);
       nivelChip.classList.toggle('selecionado');
-      return;
-    }
-    const provaChip = e.target.closest('[data-prova]');
-    if (provaChip) {
-      const p = provaChip.dataset.prova;
-      filtroForm.provas.has(p) ? filtroForm.provas.delete(p) : filtroForm.provas.add(p);
-      provaChip.classList.toggle('selecionado');
       return;
     }
     const materiaTodosChip = e.target.closest('[data-materia-todos]');
@@ -218,25 +177,19 @@ function initFormularioConjunto() {
     const erroEl = document.getElementById('criarConjuntoErro');
     erroEl.classList.remove('show');
 
-    if (filtroForm.pool === 'simulado' && !filtroForm.provas.size) return mostrarErroForm('Selecione ao menos uma prova.');
-    if (filtroForm.pool === 'praticar' && !filtroForm.niveis.size) return mostrarErroForm('Selecione ao menos um nível.');
+    if (!filtroForm.niveis.size) return mostrarErroForm('Selecione ao menos um nível.');
     if (!filtroForm.materias.size) return mostrarErroForm('Selecione ao menos uma categoria.');
 
     const tempoModo = document.querySelector('input[name="tempoModo"]:checked').value;
     const minutos = Number(document.getElementById('tempoMinutos').value);
     if (tempoModo === 'com' && (!minutos || minutos <= 0)) return mostrarErroForm('Informe a duração em minutos.');
 
-    const niveis = filtroForm.pool === 'simulado'
-      ? [...new Set([...filtroForm.provas].flatMap(p => PROVAS_NIVEIS[p]))]
-      : [...filtroForm.niveis];
-
     try {
       const res = await fetch('/api/questoes/conjuntos/personalizado', {
         method: 'POST', headers: authHeaders(true),
         body: JSON.stringify({
-          niveis, materias: [...filtroForm.materias], quantidade: filtroForm.quantidade,
+          niveis: [...filtroForm.niveis], materias: [...filtroForm.materias], quantidade: filtroForm.quantidade,
           tempoLimiteSegundos: tempoModo === 'com' ? minutos * 60 : null,
-          pool: filtroForm.pool,
           courseType: window.CursoContexto ? window.CursoContexto.curso : undefined
         })
       });
@@ -249,5 +202,10 @@ function initFormularioConjunto() {
   });
 }
 
-initFormularioConjunto();
-initMeusPersonalizados();
+// Só inicializa depois que js/plataformaGate.js confirmou acesso E resolveu o curso —
+// niveisPermitidos() depende de window.CursoContexto.curso e window.__planosConta,
+// que só existem depois disso (ver o hook window.aoResolverCurso, chamado pelo gate).
+window.aoResolverCurso = function () {
+  initFormularioConjunto();
+  initMeusPersonalizados();
+};

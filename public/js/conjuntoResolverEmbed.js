@@ -265,9 +265,9 @@ const ConjuntoResolverEmbed = (() => {
 
     function renderResultado(t) {
       const minutos = Math.round(t.tempoGastoSegundos / 60);
-      const voltar = !embed ? (t.pool === 'simulado'
-        ? `<a class="q-btn secundario" href="simulados.html">Voltar aos Simulados</a>`
-        : `<a class="q-btn secundario" href="praticar.html">Voltar aos Conjuntos</a>`) : '';
+      // Simulado saiu da Plataforma de Questões — uma Tentativa antiga com pool="simulado"
+      // ainda pode existir (histórico preservado), mas volta pra Praticar como qualquer outra.
+      const voltar = !embed ? `<a class="q-btn secundario" href="praticar.html">Voltar aos Conjuntos</a>` : '';
       container.innerHTML = `
         <div class="resultado-resumo">
           <h1 style="font-family:'Playfair Display', serif;">Resultado</h1>

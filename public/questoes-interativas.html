@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Questões Interativas - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/plataforma-topicos-nav.css">
+
+<style>
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
+
+.intro { text-align: center; padding: 40px 4% 20px; }
+.intro h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; }
+.intro p { font-size: 1.05rem; opacity: 0.9; max-width: 680px; margin: 0 auto; }
+
+.em-breve-wrap { max-width: 640px; margin: 30px auto 100px; padding: 0 4%; }
+.em-breve-card {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 22px; padding: 50px 34px;
+  box-shadow: var(--glass-shadow); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.em-breve-card img { width: 56px; height: 56px; opacity: 0.85; }
+.em-breve-card h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+.em-breve-card p { font-size: 0.98rem; opacity: 0.85; line-height: 1.6; max-width: 480px; }
+.em-breve-card .voltar {
+  margin-top: 8px; display: inline-block; padding: 11px 24px; border-radius: 30px; background: var(--accent);
+  color: var(--accent-text); font-weight: 700; text-decoration: none; font-size: 0.9rem;
+}
+</style>
+</head>
+
+<body style="visibility:hidden;">
+<script>window.CURSO_CONTEXTO_MODULO = "plataforma"; window.CURSO_CONTEXTO_HUB = "plataforma-hub.html";</script>
+<script src="js/cursoContexto.js"></script>
+<script src="js/plataformaGate.js"></script>
+
+<div id="app-navbar" class="app-navbar-bar"></div>
+<div id="plataformaTopicosNav" class="plataforma-topicos-nav"></div>
+
+<section class="intro">
+  <h1><img class="titulo-icone" src="img/icones/puzzle.svg" alt="">Questões Interativas</h1>
+  <p>Um novo espaço na Plataforma de Questões, com formatos de questão além dos tradicionais.</p>
+</section>
+
+<div class="em-breve-wrap">
+  <div class="em-breve-card">
+    <img src="img/icones/puzzle.svg" alt="">
+    <h2>Em breve</h2>
+    <p>Estamos preparando novos tipos de questões interativas para tornar sua prática ainda mais dinâmica. Enquanto isso, continue praticando no catálogo de conjuntos ou monte o seu no Personalize.</p>
+    <a class="voltar" href="praticar.html">Ir para Praticar</a>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/plataformaTopicosNav.js"></script>
+<script src="js/appShell.js"></script>
+<script src="js/estudoTimerGlobal.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

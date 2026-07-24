@@ -41,6 +41,11 @@
     const viaPlanoPorCurso = (data.planos || []).some(p => p.ativo && p.tier === 'Excellence' || p.packPrestige?.ativo);
     if (!(viaCascataAntiga || viaAvulsoAntigo || viaLegado || viaPlanoPorCurso)) return bloquear();
 
+    // Exposto pra páginas do módulo que precisam saber quais OUTROS cursos a conta possui
+    // (não só o `req.courseType` da visita atual) — hoje usado só por personalizar-conjunto.html
+    // pra decidir se libera os níveis C1/C2 (bônus cross-curso, ver js/personalizarConjunto.js).
+    window.__planosConta = data.planos || [];
+
     // Resolve QUAL curso (TCF/DELF/.../B2) esta página deve usar — ver js/cursoContexto.js.
     // Se for ambíguo (aluno com 2+ cursos liberados aqui, sem ter vindo do hub), já redireciona
     // pro plataforma-hub.html em vez de deixar as chamadas de API falharem.
