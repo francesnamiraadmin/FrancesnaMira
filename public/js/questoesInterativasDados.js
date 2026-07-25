@@ -1048,8 +1048,14 @@ var VOCAB = [
   {c:'problemes',f:'la criminalité',p:'criminalidade'}
 ];
 
-VOCAB.forEach(function(v, i){ v.id = 'v' + i; v.icone = ICONES[v.f]; });
+VOCAB.forEach(function(v, i){ v.id = 'v' + i; v.icone = ICONES[v.f]; v.n = 'A1'; });
 
 window.QI_VOCAB = VOCAB;
 window.QI_ICONES = ICONES;
+
+// DSL de desenho exposta pra ser reaproveitada pelos arquivos de vocabulário dos
+// outros níveis (js/questoesInterativasDadosA2.js, ...B1.js, ...B2.js, ...TCF.js,
+// ...DELF.js) — cada um carregado depois deste, concatenando em window.QI_VOCAB e
+// mesclando em window.QI_ICONES (ver final de cada um desses arquivos).
+window.QI_DSL = { S:S, R:R, W:W, D:D, CI:CI, EL:EL, T:T, L:L, P:P, PES:PES };
 })();

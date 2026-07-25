@@ -1,9 +1,11 @@
 // =====================================================================
 // Exporta, para um JSON, a lista única de textos em francês que precisam
-// de áudio gerado via Coqui TTS: os 127 termos de vocabulário de
-// Questões Interativas (public/js/questoesInterativasDados.js#QI_VOCAB),
-// a transcrição (campo `audio`) de toda Questao com tipo "escuta", e o
-// campo `fr` de todo FlashcardPalavra (módulo Flashcards).
+// de áudio gerado via Coqui TTS: os 640 termos de vocabulário de Questões
+// Interativas — public/js/questoesInterativasDados.js#QI_VOCAB (A1) mais
+// os arquivos por nível (A2/B1/B2/TCF/DELF, mesmo padrão de carregamento
+// de questoes-interativas-jogo.html) —, a transcrição (campo `audio`) de
+// toda Questao com tipo "escuta", e o campo `fr` de todo FlashcardPalavra
+// (módulo Flashcards).
 // Uso:
 //   node backend/seed/exportarTextosAudio.js <caminho-saida.json>
 // =====================================================================
@@ -21,14 +23,23 @@ if (!saida) {
   process.exit(1);
 }
 
+const ARQUIVOS_VOCAB_QI = [
+  "questoesInterativasDados.js",
+  "questoesInterativasDadosA2.js",
+  "questoesInterativasDadosB1.js",
+  "questoesInterativasDadosB2.js",
+  "questoesInterativasDadosTCF.js",
+  "questoesInterativasDadosDELF.js"
+];
+
 function lerVocab() {
-  const codigo = fs.readFileSync(
-    path.join(__dirname, "../../public/js/questoesInterativasDados.js"),
-    "utf8"
-  );
-  const sandbox = { window: {} };
+  const sandbox = {};
+  sandbox.window = sandbox; // top-level `var`/função em <script> vira propriedade de `window` no navegador
   vm.createContext(sandbox);
-  vm.runInContext(codigo, sandbox);
+  ARQUIVOS_VOCAB_QI.forEach((nome) => {
+    const codigo = fs.readFileSync(path.join(__dirname, "../../public/js", nome), "utf8");
+    vm.runInContext(codigo, sandbox);
+  });
   return sandbox.window.QI_VOCAB.map((v) => v.f);
 }
 

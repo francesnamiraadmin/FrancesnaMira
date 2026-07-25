@@ -11,21 +11,109 @@
 // (window.QI_VOCAB / window.QI_ICONES), carregado antes deste script.
 // =====================================================================
 (function () {
-  var VOCAB = window.QI_VOCAB;
   var POR_RODADA = 6;
 
-  var CATEGORIAS = [
-    { id:'todas',           rot:'Tudo' },
-    { id:'lieux',           rot:'📍 Les lieux' },
-    { id:'commerces',       rot:'🏪 Les commerces' },
-    { id:'batiments',       rot:'🏛️ Les bâtiments' },
-    { id:'transports',      rot:'🚗 Les transports' },
-    { id:'circulation',     rot:'🚦 La circulation' },
-    { id:'deplacements',    rot:'🚶 Les déplacements' },
-    { id:'infrastructures', rot:'🏢 Infrastructures' },
-    { id:'loisirs',         rot:'🌳 Les loisirs' },
-    { id:'problemes',       rot:'🚨 Les problèmes' }
+  // Vocabulário e categorias vêm de questoesInterativasDados.js (nível A1, sem
+  // campo `nivel` explícito nas categorias — tratado como A1 abaixo) mais os
+  // arquivos por nível carregados em seguida (A2/B1/B2/TCF/DELF, ver
+  // questoesInterativasDadosA2.js e os demais). window.QI_VOCAB já vem com
+  // `v.n` (nível) em cada termo; CATEGORIAS_TODAS abaixo espelha isso pra cada
+  // família temática, pra filtrar pelo curso resolvido em aplicarFiltroNivel().
+  var VOCAB_TODAS = window.QI_VOCAB;
+  var CATEGORIAS_TODAS = [
+    { id:'todas', rot:'Tudo' },
+
+    // --- A1 (vocabulário original "La ville, les commerces et les loisirs") ---
+    { id:'lieux',           rot:'📍 Les lieux',           nivel:'A1' },
+    { id:'commerces',       rot:'🏪 Les commerces',       nivel:'A1' },
+    { id:'batiments',       rot:'🏛️ Les bâtiments',       nivel:'A1' },
+    { id:'transports',      rot:'🚗 Les transports',      nivel:'A1' },
+    { id:'circulation',     rot:'🚦 La circulation',      nivel:'A1' },
+    { id:'deplacements',    rot:'🚶 Les déplacements',    nivel:'A1' },
+    { id:'infrastructures', rot:'🏢 Infrastructures',     nivel:'A1' },
+    { id:'loisirs',         rot:'🌳 Les loisirs',         nivel:'A1' },
+    { id:'problemes',       rot:'🚨 Les problèmes',       nivel:'A1' },
+
+    // --- A2 ---
+    { id:'a2-familia',     rot:'👪 La famille',       nivel:'A2' },
+    { id:'a2-corpo',       rot:'🧍 Le corps',          nivel:'A2' },
+    { id:'a2-vestimentas', rot:'👕 Les vêtements',     nivel:'A2' },
+    { id:'a2-comida',      rot:'🍞 La nourriture',     nivel:'A2' },
+    { id:'a2-casa',        rot:'🏠 La maison',         nivel:'A2' },
+    { id:'a2-meteo',       rot:'⛅ La météo',          nivel:'A2' },
+    { id:'a2-cores',       rot:'🎨 Les couleurs',      nivel:'A2' },
+    { id:'a2-animais',     rot:'🐶 Les animaux',       nivel:'A2' },
+    { id:'a2-lazer',       rot:'🎯 Les loisirs',       nivel:'A2' },
+    { id:'a2-adjetivos',   rot:'✨ Les adjectifs',     nivel:'A2' },
+    { id:'a2-verbos',      rot:'🔁 Les verbes',        nivel:'A2' },
+
+    // --- B1 ---
+    { id:'b1-sentimentos',   rot:'😊 Les sentiments',            nivel:'B1' },
+    { id:'b1-personalidade', rot:'🧠 La personnalité',           nivel:'B1' },
+    { id:'b1-viagem',        rot:'🧳 Le voyage',                 nivel:'B1' },
+    { id:'b1-midia',         rot:'📰 Médias et communication',   nivel:'B1' },
+    { id:'b1-ambiente',      rot:"🌳 L'environnement",           nivel:'B1' },
+    { id:'b1-trabalho',      rot:'💼 Le travail',                nivel:'B1' },
+    { id:'b1-tecnologia',    rot:'💻 La technologie',            nivel:'B1' },
+    { id:'b1-sociedade',     rot:'⚖️ La société',                nivel:'B1' },
+    { id:'b1-verbos',        rot:'🔁 Verbes et expressions',     nivel:'B1' },
+    { id:'b1-opiniao',       rot:"💬 L'opinion",                 nivel:'B1' },
+
+    // --- B2 ---
+    { id:'b2-ambiente',   rot:'🌍 Climat et environnement',    nivel:'B2' },
+    { id:'b2-sociedade',  rot:'🤝 Inégalités sociales',        nivel:'B2' },
+    { id:'b2-midia',      rot:'📡 Médias et désinformation',   nivel:'B2' },
+    { id:'b2-economia',   rot:'💰 Économie et consommation',   nivel:'B2' },
+    { id:'b2-saude',      rot:'🧘 Santé et bien-être',         nivel:'B2' },
+    { id:'b2-educacao',   rot:'🎓 Éducation',                  nivel:'B2' },
+    { id:'b2-politica',   rot:'🏛️ Politique et citoyenneté',   nivel:'B2' },
+    { id:'b2-ciencia',    rot:'🔬 Science et innovation',      nivel:'B2' },
+    { id:'b2-conectores', rot:'🔗 Connecteurs logiques',       nivel:'B2' },
+    { id:'b2-verbos',     rot:'🔁 Verbes et expressions',      nivel:'B2' },
+
+    // --- TCF ---
+    { id:'tcf-administrativo', rot:'📋 Vie administrative',     nivel:'TCF' },
+    { id:'tcf-profissional',   rot:'💼 Vie professionnelle',    nivel:'TCF' },
+    { id:'tcf-educacao',       rot:'🎓 Éducation et formation', nivel:'TCF' },
+    { id:'tcf-cotidiano',      rot:'🏘️ Quotidien avancé',       nivel:'TCF' },
+    { id:'tcf-atualidades',    rot:'📺 Actualités et médias',   nivel:'TCF' },
+    { id:'tcf-urbano',         rot:'🏙️ Environnement urbain',   nivel:'TCF' },
+    { id:'tcf-consumo',        rot:'🛒 Consommation',           nivel:'TCF' },
+    { id:'tcf-saude',          rot:'🩺 Santé et bien-être',     nivel:'TCF' },
+    { id:'tcf-expressoes',     rot:'🗣️ Expressions utiles',     nivel:'TCF' },
+    { id:'tcf-conectores',     rot:'🔗 Connecteurs',            nivel:'TCF' },
+
+    // --- DELF ---
+    { id:'delf-argumentacao', rot:'🗣️ Argumentation et opinion',    nivel:'DELF' },
+    { id:'delf-ambiente',     rot:'🌍 Environnement et écologie',   nivel:'DELF' },
+    { id:'delf-educacao',     rot:'🎓 Éducation et savoir',         nivel:'DELF' },
+    { id:'delf-trabalho',     rot:'💼 Monde du travail',            nivel:'DELF' },
+    { id:'delf-sociedade',    rot:'🤝 Société et solidarité',       nivel:'DELF' },
+    { id:'delf-cultura',      rot:'🎭 Culture et médias',           nivel:'DELF' },
+    { id:'delf-saude',        rot:'🧘 Santé et bien-être',          nivel:'DELF' },
+    { id:'delf-tecnologia',   rot:'💻 Technologie et innovation',   nivel:'DELF' },
+    { id:'delf-expressoes',   rot:'💬 Expressions DELF',            nivel:'DELF' },
+    { id:'delf-conectores',   rot:'🔗 Connecteurs DELF',            nivel:'DELF' }
   ];
+
+  // Cursos que têm vocabulário dedicado — DALF e TEF (e qualquer curso não
+  // resolvido) caem no fallback "sem filtro": mostram o acervo inteiro em vez
+  // de uma tela vazia, já que não foi pedido conteúdo específico pra eles.
+  var NIVEIS_COM_CONTEUDO = ['A1', 'A2', 'B1', 'B2', 'TCF', 'DELF'];
+
+  var VOCAB = VOCAB_TODAS;
+  var CATEGORIAS = CATEGORIAS_TODAS;
+
+  function aplicarFiltroNivel(){
+    var nivel = window.CursoContexto && window.CursoContexto.curso;
+    if (nivel && NIVEIS_COM_CONTEUDO.indexOf(nivel) !== -1) {
+      VOCAB = VOCAB_TODAS.filter(function(v){ return v.n === nivel; });
+      CATEGORIAS = CATEGORIAS_TODAS.filter(function(c){ return c.id === 'todas' || c.nivel === nivel; });
+    } else {
+      VOCAB = VOCAB_TODAS;
+      CATEGORIAS = CATEGORIAS_TODAS;
+    }
+  }
 
   var MODOS = [
     { id:'imagem',   rot:'🖼️ Imagem → francês',    dica:'Arraste o desenho até a palavra francesa.' },
@@ -449,5 +537,26 @@
     el('qiCatWrap').style.display = '';
   };
 
-  montarCartoesCategoria();
+  // O nível (A1/A2/.../DELF) só fica disponível depois que js/plataformaGate.js
+  // resolve o acesso e js/cursoContexto.js resolve o curso — ambos assíncronos,
+  // então espera o <body> sair de visibility:hidden (sinal de que o gate já
+  // terminou, com sucesso ou não) antes de montar a tela de categorias filtrada.
+  // Se o acesso foi negado, o gate substitui todo o body.innerHTML — o guard
+  // abaixo evita tentar montar o jogo em cima de um DOM que não existe mais.
+  function iniciarQuandoPronto(){
+    if (!el('qiCatGrid')) return;
+    aplicarFiltroNivel();
+    montarCartoesCategoria();
+  }
+  if (document.body.style.visibility !== 'hidden') {
+    iniciarQuandoPronto();
+  } else {
+    var obsGate = new MutationObserver(function(){
+      if (document.body.style.visibility !== 'hidden') {
+        obsGate.disconnect();
+        iniciarQuandoPronto();
+      }
+    });
+    obsGate.observe(document.body, { attributes:true, attributeFilter:['style'] });
+  }
 })();
