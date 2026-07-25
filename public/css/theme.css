@@ -95,12 +95,12 @@ body {
   display: inline-block;
 }
 
-/* ---------- TÍTULOS DOS CARDS "price-card-new" (bronze/prata/ouro) ----------
-   As cores originais (#f0b27a/#f2f2f2/#ffe680) foram pensadas para o fundo
+/* ---------- TÍTULOS DOS CARDS "price-card-new" (ouro/platina/diamante) ----------
+   As cores originais (#ffe680/#cbd5e1/#bae6fd) foram pensadas para o fundo
    escuro; no modo claro o card fica bem mais pálido e essas cores somem. */
-:root[data-theme="light"] .tier-bronze h3 { color: #7a3f10; }
+:root[data-theme="light"] .tier-bronze h3 { color: #92400e; }
 :root[data-theme="light"] .tier-prata h3 { color: #4b5563; }
-:root[data-theme="light"] .tier-ouro h3 { color: #92400e; }
+:root[data-theme="light"] .tier-ouro h3 { color: #075985; }
 
 /* ---------- BOTÃO DE ALTERNAR TEMA (injetado por theme-toggle.js) ---------- */
 #themeToggleBtn {

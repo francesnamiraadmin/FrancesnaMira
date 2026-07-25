@@ -5,9 +5,9 @@
   function fmtData(d) { return d ? new Date(d).toLocaleDateString('pt-BR') : '—'; }
 
   const ESTILOS_PLANO = {
-    Essentiel: { background: "rgba(205,127,50,0.35)", border: "#cd7f32", color: "#ffffff" },
-    "Avancé": { background: "rgba(210,210,210,0.35)", border: "#c0c0c0", color: "#08203e" },
-    Excellence: { background: "rgba(255,215,0,0.35)", border: "#ffd700", color: "#08203e" }
+    Essentiel: { background: "rgba(200,160,0,0.35)", border: "#c8a000", color: "#3a2e00" },
+    "Avancé": { background: "rgba(203,213,225,0.35)", border: "#cbd5e1", color: "#1e293b" },
+    Excellence: { background: "rgba(186,230,253,0.35)", border: "#7dd3fc", color: "#0c4a6e" }
   };
   const METODOS_LABEL = {
     cartao_credito: 'Cartão de Crédito', cartao_debito: 'Cartão de Débito',
