@@ -38,6 +38,7 @@ app.use("/api/deveres", require("./routes/deveres"));
 app.use("/api/questoes", require("./routes/questoes"));
 app.use("/api/erros-questoes", require("./routes/errosQuestoes"));
 app.use("/api/estudos", require("./routes/estudos"));
+app.use("/api/flashcards", require("./routes/flashcards"));
 
 // Conexão MongoDB
 mongoose.connect(process.env.MONGO_URI)

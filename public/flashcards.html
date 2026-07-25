@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Flashcards - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/plataforma-topicos-nav.css">
+<link rel="stylesheet" href="css/flashcards.css">
+
+<style>
+html { scroll-behavior: smooth; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; }
+:root { --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.45); --glass-blur: blur(18px); }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
+
+.intro { text-align: center; padding: 40px 4% 10px; }
+.intro h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 10px; }
+.intro p { font-size: 1.05rem; opacity: 0.9; max-width: 680px; margin: 0 auto; }
+.fc-voltar {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--accent); text-decoration: none;
+  font-weight: 700; font-size: 0.9rem; margin-top: 12px;
+}
+</style>
+</head>
+
+<body style="visibility:hidden;">
+<script>window.CURSO_CONTEXTO_MODULO = "plataforma"; window.CURSO_CONTEXTO_HUB = "plataforma-hub.html";</script>
+<script src="js/cursoContexto.js"></script>
+<script src="js/plataformaGate.js"></script>
+
+<div id="app-navbar" class="app-navbar-bar"></div>
+<div id="plataformaTopicosNav" class="plataforma-topicos-nav"></div>
+
+<section class="intro">
+  <h1><img class="titulo-icone" src="img/icones/book.svg" alt="">Flashcards</h1>
+  <p>Escolha os temas e a quantidade, vire a ficha pra ver a tradução e a frase de exemplo, e marque se você sabia. Toda semana, revise um leque de palavras pra fixar de vez.</p>
+  <a class="fc-voltar" href="questoes-interativas.html"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Escolher outra mecânica</a>
+</section>
+
+<div class="fc-wrap">
+  <div class="fc-tabs">
+    <button type="button" class="fc-tab on" data-view="rodada">Nova rodada</button>
+    <button type="button" class="fc-tab" data-view="revisao">Revisão semanal</button>
+    <button type="button" class="fc-tab" data-view="progresso">Meu progresso</button>
+  </div>
+
+  <div id="fcViewRodada" class="fc-view"></div>
+  <div id="fcViewRevisao" class="fc-view" style="display:none;"></div>
+  <div id="fcViewProgresso" class="fc-view" style="display:none;"></div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/audioFrances.js"></script>
+<script src="js/plataformaTopicosNav.js"></script>
+<script src="js/flashcards.js"></script>
+<script src="js/appShell.js"></script>
+<script src="js/estudoTimerGlobal.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

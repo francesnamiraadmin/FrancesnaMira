@@ -94,15 +94,30 @@
   /* =========================================================
      MONTAGEM
      ========================================================= */
-  function montarAbas(){
-    el('qiAbas').innerHTML = CATEGORIAS.map(function(c){
+  /** separa o emoji do resto do rótulo, pra desenhar o card com o emoji em destaque */
+  function partirEmoji(rot){
+    var m = rot.match(/^(\S+)\s(.+)$/);
+    return m ? { emoji:m[1], nome:m[2] } : { emoji:'', nome:rot };
+  }
+
+  function montarCartoesCategoria(){
+    el('qiCatGrid').innerHTML = CATEGORIAS.map(function(c){
       var n = c.id==='todas' ? VOCAB.length
             : VOCAB.filter(function(v){ return v.c===c.id; }).length;
-      return '<button type="button" class="qi-aba'+(c.id===E.cat?' on':'')+'" data-cat="'+c.id+'">'+
-             c.rot+' <span class="qi-qt">'+n+'</span></button>';
+      var part = partirEmoji(c.rot);
+      return '<div class="qi-cat-card" data-cat="'+c.id+'">'+
+               '<div class="qi-cat-emoji">'+(part.emoji||'📚')+'</div>'+
+               '<div class="qi-cat-nome">'+escapar(part.nome)+'</div>'+
+               '<div class="qi-cat-qt">'+n+' termo'+(n===1?'':'s')+'</div>'+
+             '</div>';
     }).join('');
-    [].forEach.call(document.querySelectorAll('.qi-aba'), function(b){
-      b.onclick = function(){ E.cat = b.dataset.cat; iniciar(); };
+    [].forEach.call(document.querySelectorAll('.qi-cat-card'), function(card){
+      card.onclick = function(){
+        E.cat = card.dataset.cat;
+        el('qiCatWrap').style.display = 'none';
+        el('qiWrap').style.display = '';
+        iniciar();
+      };
     });
   }
 
@@ -124,7 +139,6 @@
     E.cron = setInterval(function(){
       el('qiTempo').textContent = mmss(Math.floor((Date.now()-E.t0)/1000));
     }, 1000);
-    montarAbas();
     proximaRodada();
   }
 
@@ -264,8 +278,6 @@
         f.classList.add('arrastando');
         ev.dataTransfer.effectAllowed = 'move';
         ev.dataTransfer.setData('text/plain', f.dataset.id);
-        var it = porId(f.dataset.id);
-        if (it) falar(it.f);
       };
       f.ondragend = function(){ f.classList.remove('arrastando'); };
 
@@ -277,8 +289,6 @@
         fantasma.style.cssText = 'position:fixed;z-index:999;pointer-events:none;'+
           'opacity:.92;width:'+f.offsetWidth+'px;box-shadow:0 10px 28px rgba(0,0,0,.35)';
         document.body.appendChild(fantasma);
-        var it = porId(f.dataset.id);
-        if (it) falar(it.f);
       }, { passive:true });
 
       f.addEventListener('touchmove', function(ev){
@@ -432,6 +442,12 @@
       : '<img class="titulo-icone-inline pequeno" src="img/icones/no-entry.svg" alt="">Áudio: desligado';
     if (!E.audio && window.speechSynthesis) speechSynthesis.cancel();
   };
+  el('qiTrocarCat').onclick = function(ev){
+    ev.preventDefault();
+    clearInterval(E.cron);
+    el('qiWrap').style.display = 'none';
+    el('qiCatWrap').style.display = '';
+  };
 
-  iniciar();
+  montarCartoesCategoria();
 })();

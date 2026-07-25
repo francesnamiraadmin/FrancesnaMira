@@ -1,8 +1,9 @@
 // =====================================================================
 // Exporta, para um JSON, a lista única de textos em francês que precisam
 // de áudio gerado via Coqui TTS: os 127 termos de vocabulário de
-// Questões Interativas (public/js/questoesInterativasDados.js#QI_VOCAB)
-// e a transcrição (campo `audio`) de toda Questao com tipo "escuta".
+// Questões Interativas (public/js/questoesInterativasDados.js#QI_VOCAB),
+// a transcrição (campo `audio`) de toda Questao com tipo "escuta", e o
+// campo `fr` de todo FlashcardPalavra (módulo Flashcards).
 // Uso:
 //   node backend/seed/exportarTextosAudio.js <caminho-saida.json>
 // =====================================================================
@@ -12,6 +13,7 @@ const path = require("path");
 const vm = require("vm");
 const mongoose = require("mongoose");
 const Questao = require("../models/questao");
+const FlashcardPalavra = require("../models/flashcardPalavra");
 
 const saida = process.argv[2];
 if (!saida) {
@@ -37,15 +39,17 @@ async function main() {
   const questoesEscuta = await Questao.find({ tipo: "escuta", audio: { $nin: [null, ""] } })
     .select("audio")
     .lean();
+  const flashcards = await FlashcardPalavra.find().select("fr").lean();
   await mongoose.disconnect();
 
   const textosEscuta = questoesEscuta.map((q) => q.audio);
+  const textosFlashcards = flashcards.map((f) => f.fr);
 
-  const unicos = Array.from(new Set([...textosVocab, ...textosEscuta]));
+  const unicos = Array.from(new Set([...textosVocab, ...textosEscuta, ...textosFlashcards]));
 
   fs.writeFileSync(saida, JSON.stringify(unicos, null, 2), "utf8");
   console.log(
-    `Vocabulário: ${textosVocab.length} termos | Escuta: ${textosEscuta.length} questões | Únicos: ${unicos.length} textos`
+    `Vocabulário QI: ${textosVocab.length} | Escuta: ${textosEscuta.length} | Flashcards: ${textosFlashcards.length} | Únicos: ${unicos.length} textos`
   );
   console.log(`Salvo em ${saida}`);
 }

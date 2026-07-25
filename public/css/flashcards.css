@@ -1,0 +1,121 @@
+/* ===================== FLASHCARDS =====================
+   Nova rodada (escolha de temas + quantidade), Revisão semanal (leque de
+   palavras) e Meu progresso — sobre a mesma paleta "glass" do resto do
+   site (css/theme.css: --glass-*, --accent, --success/danger-*). */
+
+.fc-wrap { max-width: 900px; margin: 0 auto; padding: 10px 4% 100px; }
+
+.fc-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.fc-tab {
+  padding: 10px 20px; border-radius: 999px; border: 1px solid var(--glass-border);
+  background: var(--glass-bg-2); font-weight: 700; font-size: 0.9rem; color: var(--text-muted);
+  cursor: pointer; font-family: 'Poppins', sans-serif; transition: 0.18s;
+}
+.fc-tab:hover { color: var(--text); }
+.fc-tab.on { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+
+.fc-card-painel {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2)); border: 1px solid var(--glass-border);
+  border-radius: 18px; padding: 24px; box-shadow: var(--glass-shadow); margin-bottom: 18px;
+}
+.fc-card-painel h2 { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 4px; }
+.fc-hint { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px; }
+
+.fc-secao-rot {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase;
+  color: var(--text-muted); margin: 18px 0 8px;
+}
+.fc-secao-header { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.fc-link-btn { background: none; border: none; color: var(--accent); font-weight: 700; font-size: 0.8rem; cursor: pointer; padding: 0; }
+.fc-link-btn:hover { text-decoration: underline; }
+
+.fc-temas { display: flex; flex-wrap: wrap; gap: 10px; }
+.fc-tema-chip {
+  display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px;
+  border: 1.5px solid var(--glass-border); background: var(--glass-bg-2); cursor: pointer;
+  font-size: 0.85rem; font-weight: 600; color: var(--text-muted); transition: 0.15s;
+}
+.fc-tema-chip.on { border-color: var(--accent); background: var(--glass-bg); color: var(--text); }
+.fc-tema-chip .fc-qtd { font-size: 0.72rem; font-weight: 700; color: var(--accent); }
+.fc-tema-chip.sem-novas .fc-qtd { color: var(--text-muted); opacity: 0.6; }
+
+.fc-tamanhos { display: flex; flex-wrap: wrap; gap: 10px; }
+.fc-tam-chip {
+  padding: 9px 18px; border-radius: 999px; border: 1.5px solid var(--glass-border);
+  background: var(--glass-bg-2); font-weight: 700; font-size: 0.92rem; color: var(--text);
+  cursor: pointer; font-family: 'Poppins', sans-serif; transition: 0.15s;
+}
+.fc-tam-chip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+
+.fc-btn {
+  border: 1px solid var(--glass-border-strong); background: var(--glass-bg); padding: 11px 24px;
+  border-radius: 999px; font-size: 0.92rem; font-weight: 700; color: var(--text); cursor: pointer;
+  font-family: 'Poppins', sans-serif; transition: 0.18s;
+}
+.fc-btn:hover { background: var(--glass-hover); }
+.fc-btn.destaque { background: var(--accent); border-color: var(--accent); color: var(--accent-text); width: 100%; justify-content: center; }
+.fc-btn.destaque:hover { background: var(--accent-hover); }
+
+.fc-vazio { text-align: center; opacity: 0.8; padding: 30px 10px; font-size: 0.95rem; line-height: 1.6; }
+
+/* ---- flashcard (rodada + revisão) ---- */
+.fc-status {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 18px;
+}
+.fc-chip {
+  display: flex; align-items: center; gap: 7px; background: var(--glass-bg-2);
+  border: 1px solid var(--glass-border); padding: 6px 13px; border-radius: 999px;
+  font-size: 13px; font-weight: 600; color: var(--text);
+}
+.fc-chip b { font-size: 15px; }
+.fc-barra { flex: 1; min-width: 120px; height: 8px; background: var(--recessed); border-radius: 99px; overflow: hidden; }
+.fc-barra i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent-hover)); transition: width 0.35s ease; }
+
+.fc-flash-wrap { max-width: 480px; margin: 0 auto; text-align: center; }
+.fc-flash-card {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2)); border: 1.5px solid var(--glass-border);
+  border-radius: 20px; padding: 34px 24px; box-shadow: var(--glass-shadow); cursor: pointer;
+  min-height: 260px; display: flex; align-items: center; justify-content: center; position: relative;
+}
+.fc-flash-frente, .fc-flash-verso { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.fc-classe-tag, .fc-cat-tag {
+  position: absolute; top: 14px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; background: var(--glass-bg-2); border: 1px solid var(--glass-border); color: var(--text-muted);
+}
+.fc-classe-tag { left: 14px; }
+.fc-cat-tag { right: 14px; color: var(--accent); border-color: var(--accent); }
+.fc-flash-termo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--text); margin-top: 10px; }
+.fc-som { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: 0.15s; }
+.fc-som:hover { background: var(--accent); transform: scale(1.1); }
+.fc-som.tocando { background: var(--accent-hover); animation: fc-pulso 0.6s ease-in-out infinite; }
+@keyframes fc-pulso { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+.fc-flash-toque { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.fc-flash-trad { font-size: 1.4rem; font-weight: 800; color: var(--accent); margin-top: 8px; }
+.fc-flash-frase { font-style: italic; color: var(--text-muted); font-size: 0.92rem; max-width: 380px; }
+.fc-flash-botoes { display: flex; gap: 12px; margin-top: 14px; width: 100%; max-width: 380px; }
+.fc-flash-botoes .fc-btn { flex: 1; }
+.fc-btn.certo { background: var(--success-bg); border-color: transparent; color: var(--success-text); }
+.fc-btn.errado { background: var(--danger-bg); border-color: transparent; color: var(--danger-text); }
+
+.fc-progresso-legenda { font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; text-align: center; }
+.fc-progresso-legenda b { color: var(--text); }
+
+/* ---- meu progresso ---- */
+.fc-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; margin: 6px 0 20px; }
+.fc-stat-box { background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-radius: 14px; padding: 16px; text-align: center; }
+.fc-stat-box .fc-num { font-size: 1.6rem; font-weight: 800; color: var(--accent); font-family: 'Playfair Display', serif; }
+.fc-stat-box .fc-label { font-size: 0.76rem; color: var(--text-muted); margin-top: 4px; }
+
+.fc-palavra-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--glass-border); gap: 10px; }
+.fc-palavra-row:last-child { border-bottom: none; }
+.fc-palavra-row .fc-fr { font-weight: 700; }
+.fc-palavra-row .fc-pt { font-size: 0.82rem; color: var(--text-muted); }
+.fc-badge-erro {
+  background: var(--danger-bg); color: var(--danger-text); font-size: 0.72rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 999px; white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .fc-flash-card { padding: 26px 18px; min-height: 220px; }
+  .fc-flash-termo { font-size: 1.2rem; }
+}
