@@ -320,7 +320,8 @@ router.get("/minhas-semanas/:id", async (req, res) => {
 // "assistir_aula"/"assistir_modulo" não têm envio manual — o progresso vem só
 // do player embutido, direto na API real de aulas (ver public/js/aulaPlayerEmbed.js),
 // pra nunca duplicar o dado que já mora em ProgressoAula.
-const TIPOS_SEM_ENVIO_MANUAL = ["assistir_aula", "assistir_modulo"];
+// exercicio_interativo registra a entrega sozinho em POST /api/exercicios/:slug/corrigir.
+const TIPOS_SEM_ENVIO_MANUAL = ["assistir_aula", "assistir_modulo", "exercicio_interativo"];
 
 router.post("/minhas-semanas/:deverId/atividades/:index/enviar", comTratamentoDeErro(uploadEntregaDever.single("arquivo")), async (req, res) => {
   const limparTemp = () => { if (req.file) fs.unlink(req.file.path, () => {}); };
@@ -332,7 +333,7 @@ router.post("/minhas-semanas/:deverId/atividades/:index/enviar", comTratamentoDe
 
     if (TIPOS_SEM_ENVIO_MANUAL.includes(atividade.tipo)) {
       limparTemp();
-      return res.status(400).json({ msg: "Essa atividade é concluída automaticamente ao assistir a aula — não precisa enviar nada aqui." });
+      return res.status(400).json({ msg: atividade.tipo === "exercicio_interativo" ? "Essa atividade é entregue pelo próprio exercício, ao clicar em Entregar." : "Essa atividade é concluída automaticamente ao assistir a aula — não precisa enviar nada aqui." });
     }
 
     const enriquecidoAntes = await enriquecerDever(dever);

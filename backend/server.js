@@ -73,6 +73,7 @@ app.use("/api/estudos", require("./routes/estudos"));
 app.use("/api/flashcards", require("./routes/flashcards"));
 app.use("/api/seguranca", require("./routes/seguranca"));
 app.use("/api/financeiro", require("./routes/financeiro"));
+app.use("/api/exercicios", require("./routes/exercicios"));
 
 app.use("/api", (req, res) => {
   res.setHeader("X-Rota-Inexistente", "1"); // sinaliza ao monitor (sondagem de rotas)

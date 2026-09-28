@@ -166,6 +166,17 @@ const DeverWorkspace = (() => {
     }
   }
 
+  // Exercício interativo (exercicio.html): abre numa página própria, que
+  // corrige e registra a entrega sozinha; aqui mostra só o botão e a nota.
+  function renderExercicioInterativo(widgetEl, a, deverId, index) {
+    const url = `exercicio.html?slug=${encodeURIComponent(a.conteudo.exercicioSlug)}&dever=${encodeURIComponent(deverId)}&atividade=${index}`;
+    const enviado = a.entrega?.status === 'enviado';
+    const nota = enviado && a.entrega.texto ? (a.entrega.texto.match(/Nota automática: ([^\n]+)/) || [])[1] : null;
+    widgetEl.innerHTML = `
+      ${enviado ? `<p class="embed-aviso"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Entregue${nota ? ' · ' + nota : ''}. Você pode refazer para praticar: a nova entrega substitui a anterior.</p>` : ''}
+      <a class="dash-btn pequeno" href="${url}">${enviado ? 'Refazer exercício' : 'Abrir exercício'}</a>`;
+  }
+
   // container: elemento onde a atividade inteira (título, status, widget) é
   // renderizada. ctx = { deverId, onAtualizado(dadosDeverAtualizado) }.
   async function renderAtividade(container, atividade, index, ctx) {
@@ -213,6 +224,8 @@ const DeverWorkspace = (() => {
           }
         });
       }
+    } else if (atividade.tipo === 'exercicio_interativo' && atividade.conteudo?.exercicioSlug) {
+      renderExercicioInterativo(widgetEl, atividade, deverId, index);
     } else if (['questoes_plataforma', 'exercicio_lista', 'simulado'].includes(atividade.tipo) && atividade.conteudo?.conjuntoId?._id) {
       renderConjuntoEmbutido(widgetEl, atividade, deverId, onAtualizado);
     } else {

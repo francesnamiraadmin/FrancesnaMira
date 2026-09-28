@@ -1,0 +1,428 @@
+{
+ "slug": "vocabulaire-hebdomadaire",
+ "ordem": 4,
+ "nivel": "A1",
+ "titulo": "Vocabulaire de la semaine",
+ "descricao": "As expressões da semana e as fórmulas que o professor espera ver nas suas produções.",
+ "secoes": [
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Vocabulário",
+   "instrucao": "Ouça cada expressão e o exemplo.",
+   "html": "<h3>Hebdomadaire</h3><div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português</th><th>Exemple</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"avoir besoin de\">avoir besoin de</span></td><td>precisar de</td><td><span class=\"fr\" data-fr=\"J'ai besoin de renseignements sur vos horaires.\">J'ai besoin de renseignements sur vos horaires.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"se rendre à\">se rendre à</span></td><td>ir a, dirigir-se a</td><td><span class=\"fr\" data-fr=\"Je me rends au travail en métro.\">Je me rends au travail en métro.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"prendre rendez-vous\">prendre rendez-vous</span></td><td>marcar um horário</td><td><span class=\"fr\" data-fr=\"J'aimerais prendre rendez-vous pour jeudi.\">J'aimerais prendre rendez-vous pour jeudi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"un renseignement\">un renseignement</span></td><td>uma informação</td><td><span class=\"fr\" data-fr=\"Pourriez-vous me donner un renseignement ?\">Pourriez-vous me donner un renseignement ?</span></td></tr><tr><td><span class=\"fr\" data-fr=\"il vaut mieux\">il vaut mieux</span></td><td>é melhor</td><td><span class=\"fr\" data-fr=\"Il vaut mieux réserver à l'avance.\">Il vaut mieux réserver à l'avance.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"se débrouiller\">se débrouiller</span></td><td>virar-se, dar conta</td><td><span class=\"fr\" data-fr=\"Je me débrouille bien en français.\">Je me débrouille bien en français.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"un quartier\">un quartier</span></td><td>um bairro</td><td><span class=\"fr\" data-fr=\"Mon quartier est calme et bien desservi.\">Mon quartier est calme et bien desservi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"déménager\">déménager</span></td><td>mudar de casa</td><td><span class=\"fr\" data-fr=\"Nous allons déménager à Montréal en juillet.\">Nous allons déménager à Montréal en juillet.</span></td></tr></tbody></table></div><h3>Attentes du professeur</h3><p>Fórmulas que dão mais naturalidade às suas produções escritas e orais.</p><div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português</th><th>Exemple</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"Dans un contexte marqué par…\">Dans un contexte marqué par…</span></td><td>Num contexto marcado por… (abertura da T3)</td><td><span class=\"fr\" data-fr=\"Dans un contexte marqué par les profondes mutations des sociétés contemporaines, …\">Dans un contexte marqué par les profondes mutations des sociétés contemporaines, …</span></td></tr><tr><td><span class=\"fr\" data-fr=\"Dès lors, le débat portant sur… suscite de vives discussions\">Dès lors, le débat portant sur… suscite de vives discussions</span></td><td>Assim, o debate sobre… provoca discussões acaloradas</td><td><span class=\"fr\" data-fr=\"Dès lors, le débat portant sur le télétravail suscite de vives discussions.\">Dès lors, le débat portant sur le télétravail suscite de vives discussions.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"À cet égard, il convient de mettre en avant que…\">À cet égard, il convient de mettre en avant que…</span></td><td>Nesse sentido, convém destacar que… (tese)</td><td><span class=\"fr\" data-fr=\"À cet égard, il convient de mettre en avant que le sport favorise la santé.\">À cet égard, il convient de mettre en avant que le sport favorise la santé.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"Néanmoins, il convient également de souligner que…\">Néanmoins, il convient également de souligner que…</span></td><td>Contudo, convém também sublinhar que… (antítese)</td><td><span class=\"fr\" data-fr=\"Néanmoins, il convient également de souligner que ce mode de vie a un coût.\">Néanmoins, il convient également de souligner que ce mode de vie a un coût.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"Pour répondre durablement à cet enjeu, il est essentiel que…\">Pour répondre durablement à cet enjeu, il est essentiel que…</span></td><td>Para responder de forma duradoura a esse desafio, é essencial que… (+ subjuntivo)</td><td><span class=\"fr\" data-fr=\"Pour répondre durablement à cet enjeu, il est essentiel que l'État agisse.\">Pour répondre durablement à cet enjeu, il est essentiel que l'État agisse.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"en coopération avec\">en coopération avec</span></td><td>em cooperação com</td><td><span class=\"fr\" data-fr=\"Les municipalités, en coopération avec les associations, …\">Les municipalités, en coopération avec les associations, …</span></td></tr><tr><td><span class=\"fr\" data-fr=\"Parvenant ainsi à…\">Parvenant ainsi à…</span></td><td>Chegando assim a… (fecho da conclusão)</td><td><span class=\"fr\" data-fr=\"Parvenant ainsi à une société éthique, morale et respectueuse.\">Parvenant ainsi à une société éthique, morale et respectueuse.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"je fais appel à vos services car…\">je fais appel à vos services car…</span></td><td>recorro aos seus serviços porque… (abertura da T2)</td><td><span class=\"fr\" data-fr=\"Bonjour Madame, je fais appel à vos services car j'ai l'intention de voyager.\">Bonjour Madame, je fais appel à vos services car j'ai l'intention de voyager.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"J'aimerais également avoir des précisions concernant…\">J'aimerais également avoir des précisions concernant…</span></td><td>Gostaria também de ter mais detalhes sobre…</td><td><span class=\"fr\" data-fr=\"J'aimerais également avoir des précisions concernant les tarifs.\">J'aimerais également avoir des précisions concernant les tarifs.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"Je n'hésiterai pas à vous contacter\">Je n'hésiterai pas à vous contacter</span></td><td>Não hesitarei em entrar em contato</td><td><span class=\"fr\" data-fr=\"Je n'hésiterai pas à vous contacter si j'ai d'autres questions.\">Je n'hésiterai pas à vous contacter si j'ai d'autres questions.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées\">Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées</span></td><td>Atenciosamente (fórmula formal de carta)</td><td><span class=\"fr\" data-fr=\"Dans l'attente d'une réponse favorable, veuillez agréer…\">Dans l'attente d'une réponse favorable, veuillez agréer…</span></td></tr><tr><td><span class=\"fr\" data-fr=\"De surcroît\">De surcroît</span></td><td>Além disso (registro formal)</td><td><span class=\"fr\" data-fr=\"De surcroît, le petit déjeuner n'a jamais été servi.\">De surcroît, le petit déjeuner n'a jamais été servi.</span></td></tr></tbody></table></div>"
+  },
+  {
+   "id": "sens",
+   "tipo": "exercicio",
+   "titulo": "Le sens",
+   "instrucao": "Ligue cada expressão ao significado.",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Hebdomadaire",
+     "pares": [
+      {
+       "a": "avoir besoin de",
+       "b": "precisar de"
+      },
+      {
+       "a": "se rendre à",
+       "b": "ir a, dirigir-se a"
+      },
+      {
+       "a": "prendre rendez-vous",
+       "b": "marcar um horário"
+      },
+      {
+       "a": "un renseignement",
+       "b": "uma informação"
+      },
+      {
+       "a": "il vaut mieux",
+       "b": "é melhor"
+      },
+      {
+       "a": "se débrouiller",
+       "b": "virar-se, dar conta"
+      },
+      {
+       "a": "un quartier",
+       "b": "um bairro"
+      },
+      {
+       "a": "déménager",
+       "b": "mudar de casa"
+      }
+     ],
+     "audioEsquerda": true,
+     "explicacao": "avoir besoin de = precisar de · se rendre à = ir a, dirigir-se a · prendre rendez-vous = marcar um horário · un renseignement = uma informação · il vaut mieux = é melhor · se débrouiller = virar-se, dar conta · un quartier = um bairro · déménager = mudar de casa"
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Attentes du professeur (1)",
+     "pares": [
+      {
+       "a": "Dans un contexte marqué par…",
+       "b": "Num contexto marcado por… (abertura da T3)"
+      },
+      {
+       "a": "Dès lors, le débat portant sur… suscite de vives discussions",
+       "b": "Assim, o debate sobre… provoca discussões acaloradas"
+      },
+      {
+       "a": "À cet égard, il convient de mettre en avant que…",
+       "b": "Nesse sentido, convém destacar que… (tese)"
+      },
+      {
+       "a": "Néanmoins, il convient également de souligner que…",
+       "b": "Contudo, convém também sublinhar que… (antítese)"
+      },
+      {
+       "a": "Pour répondre durablement à cet enjeu, il est essentiel que…",
+       "b": "Para responder de forma duradoura a esse desafio, é essencial que… (+ subjuntivo)"
+      },
+      {
+       "a": "en coopération avec",
+       "b": "em cooperação com"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Attentes du professeur (2)",
+     "pares": [
+      {
+       "a": "Parvenant ainsi à…",
+       "b": "Chegando assim a… (fecho da conclusão)"
+      },
+      {
+       "a": "je fais appel à vos services car…",
+       "b": "recorro aos seus serviços porque… (abertura da T2)"
+      },
+      {
+       "a": "J'aimerais également avoir des précisions concernant…",
+       "b": "Gostaria também de ter mais detalhes sobre…"
+      },
+      {
+       "a": "Je n'hésiterai pas à vous contacter",
+       "b": "Não hesitarei em entrar em contato"
+      },
+      {
+       "a": "Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées",
+       "b": "Atenciosamente (fórmula formal de carta)"
+      },
+      {
+       "a": "De surcroît",
+       "b": "Além disso (registro formal)"
+      }
+     ],
+     "audioEsquerda": true
+    }
+   ]
+  },
+  {
+   "id": "contexte",
+   "tipo": "exercicio",
+   "titulo": "En contexte",
+   "instrucao": "Complete a frase com a palavra que falta.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "Je me ",
+     "depois": " au travail en métro.",
+     "respostas": [
+      "rends"
+     ],
+     "explicacao": "se rendre à = ir a, dirigir-se a.",
+     "audioCorrecao": "Je me rends au travail en métro.",
+     "dica": "Expressão: ir a, dirigir-se a"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "J'aimerais ",
+     "depois": " rendez-vous pour jeudi.",
+     "respostas": [
+      "prendre"
+     ],
+     "explicacao": "prendre rendez-vous = marcar um horário.",
+     "audioCorrecao": "J'aimerais prendre rendez-vous pour jeudi.",
+     "dica": "Expressão: marcar um horário"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Pourriez-vous me donner un ",
+     "depois": " ?",
+     "respostas": [
+      "renseignement"
+     ],
+     "explicacao": "un renseignement = uma informação.",
+     "audioCorrecao": "Pourriez-vous me donner un renseignement?",
+     "dica": "Expressão: uma informação"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " vaut mieux réserver à l'avance.",
+     "respostas": [
+      "Il"
+     ],
+     "explicacao": "il vaut mieux = é melhor.",
+     "audioCorrecao": "Il vaut mieux réserver à l'avance.",
+     "dica": "Expressão: é melhor"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Je me ",
+     "depois": " bien en français.",
+     "respostas": [
+      "débrouille"
+     ],
+     "explicacao": "se débrouiller = virar-se, dar conta.",
+     "audioCorrecao": "Je me débrouille bien en français.",
+     "dica": "Expressão: virar-se, dar conta"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Mon ",
+     "depois": " est calme et bien desservi.",
+     "respostas": [
+      "quartier"
+     ],
+     "explicacao": "un quartier = um bairro.",
+     "audioCorrecao": "Mon quartier est calme et bien desservi.",
+     "dica": "Expressão: um bairro"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Nous allons ",
+     "depois": " à Montréal en juillet.",
+     "respostas": [
+      "déménager"
+     ],
+     "explicacao": "déménager = mudar de casa.",
+     "audioCorrecao": "Nous allons déménager à Montréal en juillet.",
+     "dica": "Expressão: mudar de casa"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " un contexte marqué par les profondes mutations des sociétés contemporaines, …",
+     "respostas": [
+      "Dans"
+     ],
+     "explicacao": "Dans un contexte marqué par… = Num contexto marcado por… (abertura da T3).",
+     "audioCorrecao": "Dans un contexte marqué par les profondes mutations des sociétés contemporaines, …",
+     "dica": "Expressão: Num contexto marcado por… (abertura da T3)"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " lors, le débat portant sur le télétravail suscite de vives discussions.",
+     "respostas": [
+      "Dès"
+     ],
+     "explicacao": "Dès lors, le débat portant sur… suscite de vives discussions = Assim, o debate sobre… provoca discussões acaloradas.",
+     "audioCorrecao": "Dès lors, le débat portant sur le télétravail suscite de vives discussions.",
+     "dica": "Expressão: Assim, o debate sobre… provoca discussões acaloradas"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " cet égard, il convient de mettre en avant que le sport favorise la santé.",
+     "respostas": [
+      "À"
+     ],
+     "explicacao": "À cet égard, il convient de mettre en avant que… = Nesse sentido, convém destacar que… (tese).",
+     "audioCorrecao": "À cet égard, il convient de mettre en avant que le sport favorise la santé.",
+     "dica": "Expressão: Nesse sentido, convém destacar que… (tese)"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": ", il convient également de souligner que ce mode de vie a un coût.",
+     "respostas": [
+      "Néanmoins"
+     ],
+     "explicacao": "Néanmoins, il convient également de souligner que… = Contudo, convém também sublinhar que… (antítese).",
+     "audioCorrecao": "Néanmoins, il convient également de souligner que ce mode de vie a un coût.",
+     "dica": "Expressão: Contudo, convém também sublinhar que… (antítese)"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " répondre durablement à cet enjeu, il est essentiel que l'État agisse.",
+     "respostas": [
+      "Pour"
+     ],
+     "explicacao": "Pour répondre durablement à cet enjeu, il est essentiel que… = Para responder de forma duradoura a esse desafio, é essencial que… (+ subjuntivo).",
+     "audioCorrecao": "Pour répondre durablement à cet enjeu, il est essentiel que l'État agisse.",
+     "dica": "Expressão: Para responder de forma duradoura a esse desafio, é essencial que… (+ subjuntivo)"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Les municipalités, ",
+     "depois": " coopération avec les associations, …",
+     "respostas": [
+      "en"
+     ],
+     "explicacao": "en coopération avec = em cooperação com.",
+     "audioCorrecao": "Les municipalités, en coopération avec les associations, …",
+     "dica": "Expressão: em cooperação com"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " ainsi à une société éthique, morale et respectueuse.",
+     "respostas": [
+      "Parvenant"
+     ],
+     "explicacao": "Parvenant ainsi à… = Chegando assim a… (fecho da conclusão).",
+     "audioCorrecao": "Parvenant ainsi à une société éthique, morale et respectueuse.",
+     "dica": "Expressão: Chegando assim a… (fecho da conclusão)"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Bonjour Madame, ",
+     "depois": " fais appel à vos services car j'ai l'intention de voyager.",
+     "respostas": [
+      "je"
+     ],
+     "explicacao": "je fais appel à vos services car… = recorro aos seus serviços porque… (abertura da T2).",
+     "audioCorrecao": "Bonjour Madame, je fais appel à vos services car j'ai l'intention de voyager.",
+     "dica": "Expressão: recorro aos seus serviços porque… (abertura da T2)"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " également avoir des précisions concernant les tarifs.",
+     "respostas": [
+      "J'aimerais"
+     ],
+     "explicacao": "J'aimerais également avoir des précisions concernant… = Gostaria também de ter mais detalhes sobre….",
+     "audioCorrecao": "J'aimerais également avoir des précisions concernant les tarifs.",
+     "dica": "Expressão: Gostaria também de ter mais detalhes sobre…"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " n'hésiterai pas à vous contacter si j'ai d'autres questions.",
+     "respostas": [
+      "Je"
+     ],
+     "explicacao": "Je n'hésiterai pas à vous contacter = Não hesitarei em entrar em contato.",
+     "audioCorrecao": "Je n'hésiterai pas à vous contacter si j'ai d'autres questions.",
+     "dica": "Expressão: Não hesitarei em entrar em contato"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Dans l'attente d'une réponse favorable, ",
+     "depois": " agréer…",
+     "respostas": [
+      "veuillez"
+     ],
+     "explicacao": "Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées = Atenciosamente (fórmula formal de carta).",
+     "audioCorrecao": "Dans l'attente d'une réponse favorable, veuillez agréer…",
+     "dica": "Expressão: Atenciosamente (fórmula formal de carta)"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " surcroît, le petit déjeuner n'a jamais été servi.",
+     "respostas": [
+      "De"
+     ],
+     "explicacao": "De surcroît = Além disso (registro formal).",
+     "audioCorrecao": "De surcroît, le petit déjeuner n'a jamais été servi.",
+     "dica": "Expressão: Além disso (registro formal)"
+    }
+   ]
+  },
+  {
+   "id": "ecoute",
+   "tipo": "exercicio",
+   "titulo": "Écoute",
+   "instrucao": "Ouça e escreva a expressão.",
+   "itens": [
+    {
+     "tipo": "ditado",
+     "audio": "avoir besoin de",
+     "respostas": [
+      "avoir besoin de"
+     ],
+     "explicacao": "avoir besoin de = precisar de."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "se rendre à",
+     "respostas": [
+      "se rendre à"
+     ],
+     "explicacao": "se rendre à = ir a, dirigir-se a."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "prendre rendez-vous",
+     "respostas": [
+      "prendre rendez-vous"
+     ],
+     "explicacao": "prendre rendez-vous = marcar um horário."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "un renseignement",
+     "respostas": [
+      "un renseignement"
+     ],
+     "explicacao": "un renseignement = uma informação."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "il vaut mieux",
+     "respostas": [
+      "il vaut mieux"
+     ],
+     "explicacao": "il vaut mieux = é melhor."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "se débrouiller",
+     "respostas": [
+      "se débrouiller"
+     ],
+     "explicacao": "se débrouiller = virar-se, dar conta."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "un quartier",
+     "respostas": [
+      "un quartier"
+     ],
+     "explicacao": "un quartier = um bairro."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "déménager",
+     "respostas": [
+      "déménager"
+     ],
+     "explicacao": "déménager = mudar de casa."
+    }
+   ]
+  },
+  {
+   "id": "production",
+   "tipo": "exercicio",
+   "titulo": "Production",
+   "itens": [
+    {
+     "tipo": "livre",
+     "enunciado": "Escreva 5 frases sobre a sua semana usando pelo menos 5 expressões desta lista.",
+     "minPalavras": 40,
+     "placeholder": "Cette semaine, j'ai eu besoin de..."
+    }
+   ]
+  }
+ ]
+}

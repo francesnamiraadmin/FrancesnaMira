@@ -1,0 +1,175 @@
+/* ===================== EXERCÍCIOS INTERATIVOS (exercicio.html) =====================
+   Sobre os tokens de css/theme.css. Cada exercício tem abas (vídeo, aula, leitura,
+   exercícios); o feedback de correção usa --success/--danger/--warning. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; min-height: 100vh; }
+
+.ex-wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px 90px; }
+
+.ex-cabecalho {
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 22px; padding: 24px 26px; box-shadow: var(--shadow);
+  display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+}
+.ex-cabecalho .nivel {
+  flex: 0 0 auto; width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15rem; color: #fff;
+  background: linear-gradient(150deg, #2563eb, #1e3a8a); box-shadow: 0 10px 22px rgba(37,99,235,0.35);
+}
+.ex-cabecalho h1 { font-family: 'Playfair Display', serif; font-size: 1.7rem; line-height: 1.2; }
+.ex-cabecalho p { color: var(--text-muted); font-size: 0.92rem; margin-top: 4px; }
+.ex-cabecalho .info { flex: 1; min-width: 220px; }
+.ex-barra { height: 8px; border-radius: 6px; background: var(--recessed); overflow: hidden; margin-top: 12px; }
+.ex-barra span { display: block; height: 100%; background: var(--accent); border-radius: 6px; transition: width 0.4s ease; }
+.ex-selo-prova { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: var(--danger-bg); color: var(--danger-text); margin-left: 8px; vertical-align: middle; }
+
+/* abas */
+.ex-abas { display: flex; gap: 8px; overflow-x: auto; padding: 16px 2px 6px; scrollbar-width: thin; }
+.ex-aba {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--glass-border);
+  background: var(--glass-bg); color: var(--text); font-family: inherit; font-size: 0.84rem; font-weight: 600;
+  padding: 8px 14px; border-radius: 30px; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease;
+}
+.ex-aba:hover { border-color: var(--accent); }
+.ex-aba.ativa { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.ex-aba .ok { width: 18px; height: 18px; border-radius: 50%; background: var(--success-bg); color: var(--success-text); font-size: 0.7rem; display: inline-flex; align-items: center; justify-content: center; }
+.ex-aba.ativa .ok { background: rgba(255,255,255,0.35); color: inherit; }
+
+.ex-conteudo {
+  margin-top: 10px; background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 22px; padding: 26px; box-shadow: var(--shadow);
+}
+.ex-conteudo > h2 { font-family: 'Playfair Display', serif; font-size: 1.45rem; margin-bottom: 6px; }
+.ex-instrucao { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 18px; line-height: 1.55; }
+.ex-cronometro { float: right; font-weight: 700; font-variant-numeric: tabular-nums; padding: 4px 12px; border-radius: 20px; background: var(--warning-bg); color: var(--warning-text); font-size: 0.85rem; }
+.ex-cronometro.esgotado { background: var(--danger-bg); color: var(--danger-text); }
+
+/* vídeo */
+.ex-video { position: relative; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #000; max-width: 100%; }
+.ex-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* aula (conteúdo teórico) */
+.ex-aula { line-height: 1.7; font-size: 0.95rem; }
+.ex-aula h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin: 22px 0 8px; }
+.ex-aula h3:first-child { margin-top: 0; }
+.ex-aula p { margin-bottom: 10px; }
+.ex-aula ul { margin: 0 0 12px 20px; }
+.ex-aula .tabela-wrap { overflow-x: auto; margin: 8px 0 16px; }
+.ex-aula table { border-collapse: collapse; width: 100%; font-size: 0.9rem; min-width: 420px; }
+.ex-aula th, .ex-aula td { border: 1px solid var(--glass-border); padding: 8px 10px; text-align: left; vertical-align: top; }
+.ex-aula th { background: var(--glass-hover); font-weight: 600; }
+.ex-aula .destaque { background: var(--warning-bg); color: var(--warning-text); border-radius: 12px; padding: 12px 14px; margin: 10px 0 14px; }
+.ex-aula .dica { background: var(--glass-hover); border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 10px 14px; margin: 10px 0 14px; }
+.ex-aula .fr { font-style: italic; }
+
+/* botão de áudio */
+.ex-falar {
+  display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid var(--glass-border); background: var(--glass-bg); cursor: pointer; font-size: 0.95rem; vertical-align: middle; flex: 0 0 auto;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+.ex-falar:hover { transform: scale(1.08); background: var(--glass-hover); }
+.ex-falar.tocando { background: var(--accent); border-color: var(--accent); animation: pulso 1s ease infinite; }
+@keyframes pulso { 50% { transform: scale(1.12); } }
+.ex-falar-texto { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border-bottom: 1px dashed var(--text-muted); }
+
+/* leitura */
+.ex-leitor { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; padding: 12px 14px; border-radius: 14px; background: var(--glass-hover); }
+.ex-leitor label { font-size: 0.8rem; color: var(--text-muted); }
+.ex-leitura p { line-height: 1.85; margin-bottom: 14px; font-size: 1.02rem; }
+.ex-leitura p.lendo { background: var(--warning-bg); border-radius: 10px; box-shadow: 0 0 0 6px var(--warning-bg); }
+.ex-palavra.glossario { border-bottom: 2px dotted var(--accent); cursor: help; position: relative; }
+.ex-palavra.glossario:hover::after, .ex-palavra.glossario:focus::after {
+  content: attr(data-trad); position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%);
+  background: var(--text); color: var(--glass-strong); font-size: 0.78rem; padding: 4px 9px; border-radius: 8px; white-space: nowrap; z-index: 5;
+}
+
+/* regulamento */
+.ex-regra { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--glass-border); margin-bottom: 10px; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
+.ex-regra:hover { background: var(--glass-hover); }
+.ex-regra.lida { border-color: var(--success-text); background: var(--success-bg); }
+.ex-regra input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--success-text); flex: 0 0 auto; }
+.ex-regra .num { font-weight: 700; color: var(--text-muted); min-width: 24px; }
+.ex-regra p { line-height: 1.6; font-size: 0.93rem; }
+
+/* itens */
+.ex-item { padding: 16px 0; border-bottom: 1px solid var(--glass-border); }
+.ex-item:last-of-type { border-bottom: none; }
+.ex-item-topo { display: flex; gap: 10px; align-items: flex-start; }
+.ex-item-num { flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; background: var(--glass-hover); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; }
+.ex-item-corpo { flex: 1; min-width: 0; }
+.ex-enunciado { font-size: 0.97rem; line-height: 1.6; margin-bottom: 10px; }
+.ex-frase { font-size: 1.02rem; line-height: 2.1; }
+.ex-lacuna {
+  display: inline-block; min-width: 90px; padding: 2px 10px; margin: 0 3px; border: none; border-bottom: 2px solid var(--accent);
+  background: var(--glass-hover); border-radius: 6px 6px 0 0; font-family: inherit; font-size: 1rem; color: var(--text); text-align: center;
+}
+.ex-lacuna.vazia { color: var(--text-muted); }
+.ex-opcoes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.ex-opcao {
+  border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text); font-family: inherit; font-size: 0.9rem;
+  padding: 7px 14px; border-radius: 22px; cursor: pointer; transition: all 0.15s ease; text-align: left;
+}
+.ex-opcao:hover { border-color: var(--accent); }
+.ex-opcao.marcada { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.ex-opcoes.lista { flex-direction: column; }
+.ex-opcoes.lista .ex-opcao { border-radius: 12px; padding: 10px 14px; }
+.ex-input { width: 100%; padding: 10px 12px; border: 1px solid var(--glass-border); border-radius: 12px; background: var(--glass-bg); color: var(--text); font-family: inherit; font-size: 0.95rem; }
+textarea.ex-input { min-height: 130px; resize: vertical; line-height: 1.6; }
+.ex-contador { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+.ex-contador.fora { color: var(--danger-text); }
+.ex-dica { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
+.ex-imagem { max-width: 100%; border-radius: 14px; border: 1px solid var(--glass-border); margin: 6px 0 14px; display: block; }
+.ex-associar { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+.ex-associar td { vertical-align: middle; }
+.ex-associar td:first-child { font-weight: 600; padding-right: 12px; width: 40%; }
+.ex-associar select { width: 100%; }
+
+/* feedback */
+.ex-item.certo .ex-item-num { background: var(--success-bg); color: var(--success-text); }
+.ex-item.errado .ex-item-num { background: var(--danger-bg); color: var(--danger-text); }
+.ex-feedback { margin-top: 10px; padding: 10px 14px; border-radius: 12px; font-size: 0.87rem; line-height: 1.55; }
+.ex-feedback.certo { background: var(--success-bg); color: var(--success-text); }
+.ex-feedback.errado { background: var(--danger-bg); color: var(--danger-text); }
+.ex-feedback.livre { background: var(--glass-hover); color: var(--text); }
+.ex-feedback .exp { display: block; margin-top: 4px; color: var(--text); opacity: 0.9; }
+
+/* áudio de seção (prova) */
+.ex-audio-secao { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 14px 16px; border-radius: 14px; background: var(--glass-hover); margin-bottom: 18px; }
+.ex-audio-secao audio { flex: 1; min-width: 220px; }
+.ex-audio-secao small { color: var(--text-muted); font-size: 0.8rem; }
+
+.ex-acoes-secao { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+.ex-placar { font-weight: 700; }
+
+.ex-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; cursor: pointer; text-decoration: none;
+  background: var(--accent); color: var(--accent-text); font-family: inherit; font-weight: 700; font-size: 0.88rem;
+  padding: 10px 20px; border-radius: 30px; transition: background 0.2s ease, transform 0.2s ease;
+}
+.ex-btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.ex-btn:disabled { opacity: 0.55; cursor: default; transform: none; }
+.ex-btn.secundario { background: var(--glass-bg); color: var(--text); border: 1px solid var(--glass-border); }
+.ex-btn.secundario:hover { background: var(--glass-hover); }
+
+.ex-rodape { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+.ex-progresso-texto { font-size: 0.85rem; color: var(--text-muted); }
+
+/* modal de resultado */
+.ex-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 2000; }
+.ex-modal-caixa { background: var(--glass-strong); border: 1px solid var(--glass-border); border-radius: 22px; padding: 26px; max-width: 520px; width: 100%; max-height: 90vh; overflow: auto; box-shadow: 0 30px 60px rgba(0,0,0,0.35); }
+.ex-modal-caixa h2 { font-family: 'Playfair Display', serif; margin-bottom: 12px; }
+.ex-nota-grande { font-size: 2.6rem; font-weight: 700; line-height: 1; margin: 6px 0 4px; }
+.ex-modal-lista { list-style: none; margin: 14px 0; }
+.ex-modal-lista li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--glass-border); font-size: 0.9rem; }
+.ex-modal-acoes { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; margin-top: 16px; }
+.ex-msg { font-size: 0.85rem; margin-top: 8px; }
+.ex-msg.erro { color: var(--danger-text); } .ex-msg.ok { color: var(--success-text); }
+
+.ex-footer { text-align: center; padding: 26px; background: var(--footer-bg); color: var(--text-muted); font-size: 0.88rem; }
+
+@media (max-width: 600px) {
+  .ex-conteudo { padding: 18px; }
+  .ex-cabecalho h1 { font-size: 1.35rem; }
+  .ex-associar td:first-child { width: 45%; }
+}

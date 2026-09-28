@@ -1,0 +1,1304 @@
+{
+ "slug": "les-nombres",
+ "ordem": 3,
+ "nivel": "A1",
+ "titulo": "Les nombres",
+ "descricao": "Números, horas, dinheiro e datas: ouvir, entender e escrever, com áudio em cada questão.",
+ "secoes": [
+  {
+   "id": "videos",
+   "tipo": "video",
+   "titulo": "Vídeos",
+   "instrucao": "Três aulas curtas: números, horas e pontuação.",
+   "youtube": [
+    {
+     "id": "BOq8fJ1HCQc",
+     "titulo": "Les chiffres"
+    },
+    {
+     "id": "HPs-AJk5dfc",
+     "titulo": "Les heures"
+    },
+    {
+     "id": "pMIJnOFXHqU",
+     "titulo": "La ponctuation"
+    }
+   ]
+  },
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<p>Em francês, os números de <strong>0 a 16</strong> têm nomes próprios. De <strong>17 a 69</strong> seguem o padrão dezena + unidade. A partir de <strong>70</strong>, o francês da França usa somas: 70 = soixante-dix (60 + 10), 80 = quatre-vingts (4 × 20), 90 = quatre-vingt-dix (4 × 20 + 10).</p>\n<h3>De 0 a 20</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th></th><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>0</strong> <span class=\"fr\" data-fr=\"zéro\">zéro</span></td><td><strong>1</strong> <span class=\"fr\" data-fr=\"un\">un</span></td><td><strong>2</strong> <span class=\"fr\" data-fr=\"deux\">deux</span></td><td><strong>3</strong> <span class=\"fr\" data-fr=\"trois\">trois</span></td></tr><tr><td><strong>4</strong> <span class=\"fr\" data-fr=\"quatre\">quatre</span></td><td><strong>5</strong> <span class=\"fr\" data-fr=\"cinq\">cinq</span></td><td><strong>6</strong> <span class=\"fr\" data-fr=\"six\">six</span></td><td><strong>7</strong> <span class=\"fr\" data-fr=\"sept\">sept</span></td></tr><tr><td><strong>8</strong> <span class=\"fr\" data-fr=\"huit\">huit</span></td><td><strong>9</strong> <span class=\"fr\" data-fr=\"neuf\">neuf</span></td><td><strong>10</strong> <span class=\"fr\" data-fr=\"dix\">dix</span></td><td><strong>11</strong> <span class=\"fr\" data-fr=\"onze\">onze</span></td></tr><tr><td><strong>12</strong> <span class=\"fr\" data-fr=\"douze\">douze</span></td><td><strong>13</strong> <span class=\"fr\" data-fr=\"treize\">treize</span></td><td><strong>14</strong> <span class=\"fr\" data-fr=\"quatorze\">quatorze</span></td><td><strong>15</strong> <span class=\"fr\" data-fr=\"quinze\">quinze</span></td></tr><tr><td><strong>16</strong> <span class=\"fr\" data-fr=\"seize\">seize</span></td><td><strong>17</strong> <span class=\"fr\" data-fr=\"dix-sept\">dix-sept</span></td><td><strong>18</strong> <span class=\"fr\" data-fr=\"dix-huit\">dix-huit</span></td><td><strong>19</strong> <span class=\"fr\" data-fr=\"dix-neuf\">dix-neuf</span></td></tr><tr><td><strong>20</strong> <span class=\"fr\" data-fr=\"vingt\">vingt</span></td><td></td><td></td><td></td></tr></tbody></table></div>\n<h3>As dezenas e os números difíceis</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Número</th><th>Em francês</th><th>Atenção</th></tr></thead><tbody><tr><td>21, 31, 41, 51, 61</td><td><span class=\"fr\" data-fr=\"vingt et un\">vingt et un</span>, <span class=\"fr\" data-fr=\"trente et un\">trente et un</span></td><td>usa <strong>et</strong> (sem hífen) com o 1</td></tr><tr><td>22</td><td><span class=\"fr\" data-fr=\"vingt-deux\">vingt-deux</span></td><td>os outros usam hífen</td></tr><tr><td>70</td><td><span class=\"fr\" data-fr=\"soixante-dix\">soixante-dix</span></td><td>60 + 10</td></tr><tr><td>71</td><td><span class=\"fr\" data-fr=\"soixante et onze\">soixante et onze</span></td><td>60 + 11, com <strong>et</strong></td></tr><tr><td>79</td><td><span class=\"fr\" data-fr=\"soixante-dix-neuf\">soixante-dix-neuf</span></td><td>60 + 19</td></tr><tr><td>80</td><td><span class=\"fr\" data-fr=\"quatre-vingts\">quatre-vingts</span></td><td>4 × 20, com <strong>-s</strong></td></tr><tr><td>81</td><td><span class=\"fr\" data-fr=\"quatre-vingt-un\">quatre-vingt-un</span></td><td>perde o -s e <strong>não</strong> usa et</td></tr><tr><td>90</td><td><span class=\"fr\" data-fr=\"quatre-vingt-dix\">quatre-vingt-dix</span></td><td>4 × 20 + 10</td></tr><tr><td>99</td><td><span class=\"fr\" data-fr=\"quatre-vingt-dix-neuf\">quatre-vingt-dix-neuf</span></td><td>4 × 20 + 19</td></tr><tr><td>100</td><td><span class=\"fr\" data-fr=\"cent\">cent</span></td><td>sem <em>un</em> antes</td></tr></tbody></table></div>\n<div class=\"dica\">Na Bélgica e na Suíça: <strong>septante</strong> (70), <strong>huitante</strong> (80, na Suíça) e <strong>nonante</strong> (90). No TCF e no DELF use a forma da França.</div>\n<h3>Mille, million, milliard</h3>\n<ul>\n<li><strong>mille</strong> é invariável: <span class=\"fr\" data-fr=\"deux mille euros\">deux mille euros</span> (nunca \"milles\").</li>\n<li><strong>cent</strong> leva -s só quando é o último: <span class=\"fr\" data-fr=\"deux cents\">deux cents</span>, mas <span class=\"fr\" data-fr=\"deux cent trois\">deux cent trois</span>.</li>\n<li><strong>million</strong> e <strong>milliard</strong> são substantivos: <span class=\"fr\" data-fr=\"deux millions d'euros\">deux millions d'euros</span>, <span class=\"fr\" data-fr=\"un milliard de personnes\">un milliard de personnes</span>.</li>\n</ul>\n<h3>Os sinais</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Sinal</th><th>Em francês</th><th>Exemplo</th></tr></thead><tbody><tr><td>+</td><td>plus</td><td><span class=\"fr\" data-fr=\"Deux plus deux font quatre.\">Deux plus deux font quatre.</span></td></tr><tr><td>−</td><td>moins</td><td><span class=\"fr\" data-fr=\"Dix moins trois font sept.\">Dix moins trois font sept.</span></td></tr><tr><td>×</td><td>fois</td><td><span class=\"fr\" data-fr=\"Trois fois quatre font douze.\">Trois fois quatre font douze.</span></td></tr><tr><td>÷</td><td>divisé par</td><td><span class=\"fr\" data-fr=\"Vingt divisé par quatre font cinq.\">Vingt divisé par quatre font cinq.</span></td></tr><tr><td>%</td><td>pour cent</td><td><span class=\"fr\" data-fr=\"cinquante pour cent\">cinquante pour cent</span></td></tr></tbody></table></div>\n<h3>As horas</h3>\n<ul>\n<li><span class=\"fr\" data-fr=\"Il est trois heures.\">Il est trois heures.</span> · <span class=\"fr\" data-fr=\"Il est midi.\">Il est midi.</span> · <span class=\"fr\" data-fr=\"Il est minuit.\">Il est minuit.</span></li>\n<li><span class=\"fr\" data-fr=\"Il est trois heures et quart.\">Il est trois heures et quart.</span> (3h15) · <span class=\"fr\" data-fr=\"Il est trois heures et demie.\">Il est trois heures et demie.</span> (3h30) · <span class=\"fr\" data-fr=\"Il est quatre heures moins le quart.\">Il est quatre heures moins le quart.</span> (3h45)</li>\n<li>No oficial (trem, trabalho): <span class=\"fr\" data-fr=\"Il est quinze heures trente.\">Il est quinze heures trente.</span></li>\n</ul>\n<h3>As datas</h3>\n<p><span class=\"fr\" data-fr=\"Nous sommes le lundi 3 mars.\">Nous sommes le lundi 3 mars.</span> · <span class=\"fr\" data-fr=\"On est le premier mai.\">On est le premier mai.</span> Só o dia 1 usa o ordinal (<em>le premier</em>); os outros usam o número normal (<em>le deux, le trois</em>).</p>"
+  },
+  {
+   "id": "relier",
+   "tipo": "exercicio",
+   "titulo": "Reliez",
+   "instrucao": "Ligue cada número à forma escrita.",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Ligue os números às palavras (1ª parte).",
+     "pares": [
+      {
+       "a": "21",
+       "b": "vingt et un"
+      },
+      {
+       "a": "40",
+       "b": "quarante"
+      },
+      {
+       "a": "41",
+       "b": "quarante et un"
+      },
+      {
+       "a": "58",
+       "b": "cinquante-huit"
+      },
+      {
+       "a": "63",
+       "b": "soixante-trois"
+      },
+      {
+       "a": "70",
+       "b": "soixante-dix"
+      },
+      {
+       "a": "71",
+       "b": "soixante et onze"
+      },
+      {
+       "a": "72",
+       "b": "soixante-douze"
+      }
+     ],
+     "explicacao": "Lembre: 21, 31, 41... usam 'et un'; 80 é 'quatre-vingts' com -s."
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Ligue os números às palavras (2ª parte).",
+     "pares": [
+      {
+       "a": "79",
+       "b": "soixante-dix-neuf"
+      },
+      {
+       "a": "80",
+       "b": "quatre-vingts"
+      },
+      {
+       "a": "81",
+       "b": "quatre-vingt-un"
+      },
+      {
+       "a": "89",
+       "b": "quatre-vingt-neuf"
+      },
+      {
+       "a": "90",
+       "b": "quatre-vingt-dix"
+      },
+      {
+       "a": "91",
+       "b": "quatre-vingt-onze"
+      },
+      {
+       "a": "99",
+       "b": "quatre-vingt-dix-neuf"
+      },
+      {
+       "a": "100",
+       "b": "cent"
+      }
+     ],
+     "explicacao": "70, 80 e 90 são as armadilhas: soixante-dix, quatre-vingts, quatre-vingt-dix."
+    }
+   ]
+  },
+  {
+   "id": "oral",
+   "tipo": "exercicio",
+   "titulo": "À l'oral",
+   "instrucao": "Ouça e escreva o número em algarismos. Atenção especial a 40, 70, 71, 80, 81, 90 e 99.",
+   "itens": [
+    {
+     "tipo": "ditado",
+     "audio": "sept",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "7"
+     ],
+     "explicacao": "\"sept\" = 7.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "quinze",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "15"
+     ],
+     "explicacao": "\"quinze\" = 15.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "quarante",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "40"
+     ],
+     "explicacao": "Quarante (40) segue o padrao regular dezena, diferente de 70, 80 e 90.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "trois",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "3"
+     ],
+     "explicacao": "\"trois\" = 3.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "soixante et onze",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "71"
+     ],
+     "explicacao": "71 = soixante (60) et onze (11): soixante et onze.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "douze",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "12"
+     ],
+     "explicacao": "\"douze\" = 12.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "quatre-vingt-dix",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "90"
+     ],
+     "explicacao": "90 = quatre-vingt-dix, literalmente quatro vintenas e dez (4x20+10).",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "cinq",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "5"
+     ],
+     "explicacao": "\"cinq\" = 5.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "soixante-dix-neuf",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "79"
+     ],
+     "explicacao": "79 = soixante-dix (70) + neuf (9): soixante-dix-neuf.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "vingt",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "20"
+     ],
+     "explicacao": "\"vingt\" = 20.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "soixante",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "60"
+     ],
+     "explicacao": "\"soixante\" = 60.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "un",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "1"
+     ],
+     "explicacao": "\"un\" = 1.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "quatre-vingt-dix-neuf",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "99"
+     ],
+     "explicacao": "99 = quatre-vingt-dix-neuf, ou seja 4x20+19.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "trente-trois",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "33"
+     ],
+     "explicacao": "\"trente-trois\" = 33.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "soixante-dix",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "70"
+     ],
+     "explicacao": "70 nao tem palavra propria: usa-se soixante-dix (60+10).",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "neuf",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "9"
+     ],
+     "explicacao": "\"neuf\" = 9.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "quatre-vingts",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "80"
+     ],
+     "explicacao": "80 = quatre-vingts, literalmente quatro vintenas (4x20). Note o s no final.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "seize",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "16"
+     ],
+     "explicacao": "\"seize\" = 16.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "quarante-cinq",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "45"
+     ],
+     "explicacao": "\"quarante-cinq\" = 45.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "quatre-vingt-onze",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "91"
+     ],
+     "explicacao": "91 = quatre-vingt-onze (4x20+11). Sem s em quatre-vingt quando seguido de outro numero.",
+     "placeholder": "Ex.: 42"
+    }
+   ]
+  },
+  {
+   "id": "dictee",
+   "tipo": "exercicio",
+   "titulo": "Dictée de nombres",
+   "instrucao": "Números maiores: ouça com calma.",
+   "itens": [
+    {
+     "tipo": "ditado",
+     "audio": "vingt-trois",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "23"
+     ],
+     "explicacao": "\"vingt-trois\" = 23.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "quarante-sept",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "47"
+     ],
+     "explicacao": "\"quarante-sept\" = 47.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "soixante-douze",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "72"
+     ],
+     "explicacao": "\"soixante-douze\" = 72.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "quatre-vingt-seize",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "96"
+     ],
+     "explicacao": "\"quatre-vingt-seize\" = 96.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "trois cent quarante-cinq",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "345"
+     ],
+     "explicacao": "\"trois cent quarante-cinq\" = 345.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "neuf cent quatre-vingt-dix-neuf",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "999"
+     ],
+     "explicacao": "\"neuf cent quatre-vingt-dix-neuf\" = 999.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "mille deux cent trente-quatre",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "1234"
+     ],
+     "explicacao": "\"mille deux cent trente-quatre\" = 1234.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "dix-huit, vingt-quatre",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "18,24"
+     ],
+     "explicacao": "Pode separar os numeros por virgula, espaco, ou nada: 18,24 e 18 24 sao aceitos igualmente.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "cinquante-cinq, soixante-treize, quatre-vingt-neuf",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "55,73,89"
+     ],
+     "explicacao": "\"cinquante-cinq, soixante-treize, quatre-vingt-neuf\" = 55,73,89.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "zéro six, douze, trente",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "06,12,30"
+     ],
+     "explicacao": "O zero inicial faz parte do numero: 06, nao 6.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "douze, trente-cinq, cinquante-huit, soixante et onze, quatre-vingt-quatorze",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "12,35,58,71,94"
+     ],
+     "explicacao": "\"douze, trente-cinq, cinquante-huit, soixante et onze, quatre-vingt-quatorze\" = 12,35,58,71,94.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "sept, cinq, zéro, zéro, un",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "75001"
+     ],
+     "explicacao": "Este e o codigo postal de Paris, ditado digito por digito.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "un, trois, zéro, zéro, zéro",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "13000"
+     ],
+     "explicacao": "Este e o codigo postal de Marseille, ditado digito por digito.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "zéro six, douze, trente-quatre, cinquante-six, soixante-dix-huit",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "0612345678"
+     ],
+     "explicacao": "Numero de telefone frances: pares de digitos 06 12 34 56 78.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "zéro un, quarante-cinq, soixante-dix-neuf, quatre-vingt-deux, quatre-vingt-dix-huit",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "0145798298"
+     ],
+     "explicacao": "Numero de telefone frances, com dois pares em quatre-vingt seguidos.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "zéro sept, quatre-vingt-onze, soixante-trois, quarante, vingt-neuf",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "0791634029"
+     ],
+     "explicacao": "Numero de telefone frances misturando varias dezenas dificeis.",
+     "placeholder": "Ex.: 42"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "zéro deux, quatre-vingt-dix-neuf, soixante-dix-sept, quarante et un, quinze",
+     "enunciado": "Ouça e escreva o número em algarismos.",
+     "respostas": [
+      "0299774115"
+     ],
+     "explicacao": "Numero de telefone bem dificil: 02 99 77 41 15.",
+     "placeholder": "Ex.: 42"
+    }
+   ]
+  },
+  {
+   "id": "phrases",
+   "tipo": "exercicio",
+   "titulo": "Phrases avec des nombres",
+   "instrucao": "Ouça a frase e complete com o número.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "audio": "Je lave le linge trois fois par semaine.",
+     "antes": "Je lave le linge ",
+     "depois": " fois par semaine.",
+     "respostas": [
+      "trois",
+      "3"
+     ],
+     "explicacao": "Você ouviu: \"Je lave le linge trois fois par semaine.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Daniel fait les courses deux fois par semaine.",
+     "antes": "Daniel fait les courses ",
+     "depois": " fois par semaine.",
+     "respostas": [
+      "deux",
+      "2"
+     ],
+     "explicacao": "Você ouviu: \"Daniel fait les courses deux fois par semaine.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Le café coûte quatre euros.",
+     "antes": "Le café coûte ",
+     "depois": " euros.",
+     "respostas": [
+      "quatre",
+      "4"
+     ],
+     "explicacao": "Você ouviu: \"Le café coûte quatre euros.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Elle a vingt-cinq ans.",
+     "antes": "Elle a ",
+     "depois": " ans.",
+     "respostas": [
+      "vingt-cinq",
+      "25"
+     ],
+     "explicacao": "Você ouviu: \"Elle a vingt-cinq ans.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Nous avons quinze étudiants dans la classe.",
+     "antes": "Nous avons ",
+     "depois": " étudiants dans la classe.",
+     "respostas": [
+      "quinze",
+      "15"
+     ],
+     "explicacao": "Você ouviu: \"Nous avons quinze étudiants dans la classe.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Il y a sept jours dans une semaine.",
+     "antes": "Il y a ",
+     "depois": " jours dans une semaine.",
+     "respostas": [
+      "sept",
+      "7"
+     ],
+     "explicacao": "Você ouviu: \"Il y a sept jours dans une semaine.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Le loyer coûte sept cent cinquante euros par mois.",
+     "antes": "Le loyer coûte ",
+     "depois": " euros par mois.",
+     "respostas": [
+      "sept cent cinquante",
+      "750"
+     ],
+     "explicacao": "Você ouviu: \"Le loyer coûte sept cent cinquante euros par mois.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "J'ai acheté ce livre pour douze euros.",
+     "antes": "J'ai acheté ce livre pour ",
+     "depois": " euros.",
+     "respostas": [
+      "douze",
+      "12"
+     ],
+     "explicacao": "Você ouviu: \"J'ai acheté ce livre pour douze euros.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Elle travaille huit heures par jour.",
+     "antes": "Elle travaille ",
+     "depois": " heures par jour.",
+     "respostas": [
+      "huit",
+      "8"
+     ],
+     "explicacao": "Você ouviu: \"Elle travaille huit heures par jour.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Il a envoyé cinq colis cette semaine.",
+     "antes": "Il a envoyé ",
+     "depois": " colis cette semaine.",
+     "respostas": [
+      "cinq",
+      "5"
+     ],
+     "explicacao": "Você ouviu: \"Il a envoyé cinq colis cette semaine.\"",
+     "dica": "Ouça a frase e escreva o número (por extenso ou em algarismos)."
+    }
+   ]
+  },
+  {
+   "id": "heure",
+   "tipo": "exercicio",
+   "titulo": "L'heure",
+   "instrucao": "Olhe o relógio e escreva a hora completa, em francês.",
+   "itens": [
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Écrivez la phrase complète.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"74.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"50.0\" y2=\"14.0\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "placeholder": "Il est ...",
+     "dica": "Comece com 'Il est' e escreva a hora por extenso, em frances.",
+     "respostas": [
+      "il est trois heures"
+     ],
+     "explicacao": "Para horas cheias, basta dizer Il est + numero + heures.",
+     "audioCorrecao": "Il est trois heures."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Écrivez la phrase complète.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"50.0\" y2=\"26.0\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"50.0\" y2=\"14.0\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "placeholder": "Il est ...",
+     "dica": "Meio-dia tem uma palavra propria em frances, nao e apenas um numero.",
+     "respostas": [
+      "il est midi",
+      "il est douze heures"
+     ],
+     "explicacao": "Meio-dia tem uma palavra propria, midi, e nao leva heures depois. Douze heures tambem e aceito, mas midi e mais usado.",
+     "audioCorrecao": "Il est midi."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Écrivez la phrase complète.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"50.0\" y2=\"26.0\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"50.0\" y2=\"14.0\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "placeholder": "Il est ...",
+     "dica": "Meia-noite tambem tem uma palavra propria em frances.",
+     "respostas": [
+      "il est minuit",
+      "il est zéro heure"
+     ],
+     "explicacao": "Meia-noite tem uma palavra propria, minuit, e nao leva heures depois. Zéro heure tambem e aceito no formato oficial de horarios.",
+     "audioCorrecao": "Il est minuit."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Escolha a expressão correta.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"43.8\" y2=\"73.2\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"50.0\" y2=\"86.0\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "dica": "Escolha a opcao que corresponde ao relogio mostrado.",
+     "respostas": [
+      "Il est six heures et demie"
+     ],
+     "explicacao": "Meia hora (30 minutos) se diz et demie.",
+     "audioCorrecao": "I."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Escolha a expressão correta.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"69.0\" y2=\"64.6\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"86.0\" y2=\"50.0\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "dica": "Escolha a opcao que corresponde ao relogio mostrado.",
+     "respostas": [
+      "Il est quatre heures et quart"
+     ],
+     "explicacao": "Quinze minutos depois da hora se diz et quart.",
+     "audioCorrecao": "I."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Escolha a expressão correta.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"27.8\" y2=\"40.8\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"14.0\" y2=\"50.0\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "dica": "Escolha a opcao que corresponde ao relogio mostrado.",
+     "respostas": [
+      "Il est dix heures moins le quart"
+     ],
+     "explicacao": "Quinze minutos antes da proxima hora se diz moins le quart, contando a partir da hora seguinte (dix heures moins le quart, nao neuf heures quarante-cinq).",
+     "audioCorrecao": "I."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Écrivez la phrase complète.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"72.6\" y2=\"41.8\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"81.2\" y2=\"68.0\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "placeholder": "Il est ...",
+     "dica": "Comece com 'Il est' e escreva a hora por extenso, em frances.",
+     "respostas": [
+      "il est quatorze heures vingt",
+      "il est deux heures vingt"
+     ],
+     "explicacao": "Fora dos quartos de hora, basta somar os minutos depois de heures. Pode usar o formato 24h (quatorze) ou o formato informal (deux).",
+     "audioCorrecao": "Il est quatorze heures vingt."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Écrivez la phrase complète.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"26.1\" y2=\"52.1\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"18.8\" y2=\"32.0\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "placeholder": "Il est ...",
+     "dica": "Comece com 'Il est'. Voce pode escrever a hora cheia ou usar a construcao com moins.",
+     "respostas": [
+      "il est vingt heures cinquante",
+      "il est neuf heures moins dix",
+      "il est vingt et une heures moins dix"
+     ],
+     "explicacao": "Vingt heures cinquante e a forma direta. Neuf heures moins dix (informal) ou vingt et une heures moins dix tambem sao aceitas, contando os dez minutos que faltam para a proxima hora.",
+     "audioCorrecao": "Il est vingt heures cinquante."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Écrivez la phrase complète.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"38.9\" y2=\"28.7\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"68.0\" y2=\"18.8\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "placeholder": "Il est ...",
+     "dica": "Comece com 'Il est' e escreva a hora por extenso, em frances.",
+     "respostas": [
+      "il est onze heures cinq"
+     ],
+     "explicacao": "Resposta: il est onze heures cinq.",
+     "audioCorrecao": "Il est onze heures cinq."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Quelle heure est-il ? Écrivez la phrase complète.",
+     "svg": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"50\" cy=\"50\" r=\"47\" fill=\"#fff\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"50.0\" y1=\"12.0\" x2=\"50.0\" y2=\"6.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"69.0\" y1=\"17.1\" x2=\"72.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"82.9\" y1=\"31.0\" x2=\"88.1\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"88.0\" y1=\"50.0\" x2=\"94.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"82.9\" y1=\"69.0\" x2=\"88.1\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"69.0\" y1=\"82.9\" x2=\"72.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50.0\" y1=\"88.0\" x2=\"50.0\" y2=\"94.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"31.0\" y1=\"82.9\" x2=\"28.0\" y2=\"88.1\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"17.1\" y1=\"69.0\" x2=\"11.9\" y2=\"72.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"12.0\" y1=\"50.0\" x2=\"6.0\" y2=\"50.0\" stroke=\"#1F2B45\" stroke-width=\"3\"/><line x1=\"17.1\" y1=\"31.0\" x2=\"11.9\" y2=\"28.0\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"31.0\" y1=\"17.1\" x2=\"28.0\" y2=\"11.9\" stroke=\"#1F2B45\" stroke-width=\"1.5\"/><line x1=\"50\" y1=\"50\" x2=\"54.2\" y2=\"73.6\" stroke=\"#1F2B45\" stroke-width=\"4.5\" stroke-linecap=\"round\"/><line x1=\"50\" y1=\"50\" x2=\"18.8\" y2=\"68.0\" stroke=\"#2563eb\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"50\" r=\"3\" fill=\"#1F2B45\"/></svg>",
+     "placeholder": "Il est ...",
+     "dica": "Comece com 'Il est'. Voce pode escrever a hora cheia ou usar a construcao com moins.",
+     "respostas": [
+      "il est dix-sept heures quarante",
+      "il est six heures moins vingt",
+      "il est dix-huit heures moins vingt"
+     ],
+     "explicacao": "Dix-sept heures quarante e a forma direta. Six heures moins vingt (informal) ou dix-huit heures moins vingt tambem sao aceitas, contando os vinte minutos que faltam para a proxima hora.",
+     "audioCorrecao": "Il est dix-sept heures quarante."
+    }
+   ]
+  },
+  {
+   "id": "ordinaux",
+   "tipo": "exercicio",
+   "titulo": "Nombres ordinaux",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "C'est son ",
+     "depois": " jour de travail. (1)",
+     "opcoes": [
+      "premier",
+      "première",
+      "un"
+     ],
+     "resposta": "premier",
+     "explicacao": "\"Premier\" (masculino) e \"première\" (feminino) concordam com o substantivo. É o único ordinal irregular.",
+     "audioCorrecao": "C'est son premier jour de travail."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle habite au ",
+     "depois": " étage. (5)",
+     "opcoes": [
+      "cinquième",
+      "cinqième",
+      "cinquièmement"
+     ],
+     "resposta": "cinquième",
+     "explicacao": "Os ordinais se formam com -ième: deux → deuxième, trois → troisième, neuf → neuvième, cinq → cinquième.",
+     "audioCorrecao": "Elle habite au cinquième étage."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est la ",
+     "depois": " fois qu'il vient. (2)",
+     "opcoes": [
+      "deuxième",
+      "deux",
+      "second"
+     ],
+     "resposta": "deuxième",
+     "explicacao": "Os ordinais se formam com -ième: deux → deuxième, trois → troisième, neuf → neuvième, cinq → cinquième.",
+     "audioCorrecao": "C'est la deuxième fois qu'il vient."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il est arrivé ",
+     "depois": " à la course. (9)",
+     "opcoes": [
+      "neuvième",
+      "neufième",
+      "neuvièmement"
+     ],
+     "resposta": "neuvième",
+     "explicacao": "Os ordinais se formam com -ième: deux → deuxième, trois → troisième, neuf → neuvième, cinq → cinquième.",
+     "audioCorrecao": "Il est arrivé neuvième à la course."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est le ",
+     "depois": " mois de l'année. (12)",
+     "opcoes": [
+      "douzième",
+      "douzieme",
+      "douze"
+     ],
+     "resposta": "douzième",
+     "explicacao": "Os ordinais se formam com -ième: deux → deuxième, trois → troisième, neuf → neuvième, cinq → cinquième.",
+     "audioCorrecao": "C'est le douzième mois de l'année."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous habitons au ",
+     "depois": " étage. (1)",
+     "opcoes": [
+      "premier",
+      "première",
+      "un"
+     ],
+     "resposta": "premier",
+     "explicacao": "\"Premier\" (masculino) e \"première\" (feminino) concordam com o substantivo. É o único ordinal irregular.",
+     "audioCorrecao": "Nous habitons au premier étage."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est votre ",
+     "depois": " jour ici ? (4)",
+     "opcoes": [
+      "quatrième",
+      "quatreième",
+      "quatrièmement"
+     ],
+     "resposta": "quatrième",
+     "explicacao": "Os ordinais se formam com -ième: deux → deuxième, trois → troisième, neuf → neuvième, cinq → cinquième.",
+     "audioCorrecao": "C'est votre quatrième jour ici?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle a fini ",
+     "depois": " à l'examen. (3)",
+     "opcoes": [
+      "troisième",
+      "trois",
+      "troisièmement"
+     ],
+     "resposta": "troisième",
+     "explicacao": "Os ordinais se formam com -ième: deux → deuxième, trois → troisième, neuf → neuvième, cinq → cinquième.",
+     "audioCorrecao": "Elle a fini troisième à l'examen."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est la ",
+     "depois": " leçon du cours. (8)",
+     "opcoes": [
+      "huitième",
+      "huitieme",
+      "huit"
+     ],
+     "resposta": "huitième",
+     "explicacao": "Os ordinais se formam com -ième: deux → deuxième, trois → troisième, neuf → neuvième, cinq → cinquième.",
+     "audioCorrecao": "C'est la huitième leçon du cours."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le bureau est au ",
+     "depois": " étage. (21)",
+     "opcoes": [
+      "vingt et unième",
+      "vingtième et un",
+      "vingt-unième"
+     ],
+     "resposta": "vingt et unième",
+     "explicacao": "Os ordinais se formam com -ième: deux → deuxième, trois → troisième, neuf → neuvième, cinq → cinquième.",
+     "audioCorrecao": "Le bureau est au vingt et unième étage."
+    }
+   ]
+  },
+  {
+   "id": "argent",
+   "tipo": "exercicio",
+   "titulo": "L'argent",
+   "instrucao": "Ouça e complete com o valor.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "audio": "Je paie deux cents euros sur ma carte de crédit ce mois-ci.",
+     "antes": "Je paie ",
+     "depois": " euros sur ma carte de crédit ce mois-ci.",
+     "respostas": [
+      "deux cents",
+      "200"
+     ],
+     "explicacao": "Você ouviu: \"Je paie deux cents euros sur ma carte de crédit ce mois-ci.\""
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Je dois déposer cinquante euros à la banque.",
+     "antes": "Je dois déposer ",
+     "depois": " euros à la banque.",
+     "respostas": [
+      "cinquante",
+      "50"
+     ],
+     "explicacao": "Você ouviu: \"Je dois déposer cinquante euros à la banque.\""
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Le loyer est de six cents euros.",
+     "antes": "Le loyer est de ",
+     "depois": " euros.",
+     "respostas": [
+      "six cents",
+      "600"
+     ],
+     "explicacao": "Você ouviu: \"Le loyer est de six cents euros.\""
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "J'ai payé trente euros pour l'essence.",
+     "antes": "J'ai payé ",
+     "depois": " euros pour l'essence.",
+     "respostas": [
+      "trente",
+      "30"
+     ],
+     "explicacao": "Você ouviu: \"J'ai payé trente euros pour l'essence.\""
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Elle a économisé cent euros ce mois-ci.",
+     "antes": "Elle a économisé ",
+     "depois": " euros ce mois-ci.",
+     "respostas": [
+      "cent",
+      "100"
+     ],
+     "explicacao": "Você ouviu: \"Elle a économisé cent euros ce mois-ci.\""
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Le total de la facture est de quatre-vingts euros.",
+     "antes": "Le total de la facture est de ",
+     "depois": " euros.",
+     "respostas": [
+      "quatre-vingts",
+      "80"
+     ],
+     "explicacao": "Você ouviu: \"Le total de la facture est de quatre-vingts euros.\""
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Il me reste dix euros sur mon compte.",
+     "antes": "Il me reste ",
+     "depois": " euros sur mon compte.",
+     "respostas": [
+      "dix",
+      "10"
+     ],
+     "explicacao": "Você ouviu: \"Il me reste dix euros sur mon compte.\""
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Nous devons mille euros au total.",
+     "antes": "Nous devons ",
+     "depois": " euros au total.",
+     "respostas": [
+      "mille",
+      "1000"
+     ],
+     "explicacao": "Você ouviu: \"Nous devons mille euros au total.\""
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Le virement était de deux cent cinquante euros.",
+     "antes": "Le virement était de ",
+     "depois": " euros.",
+     "respostas": [
+      "deux cent cinquante",
+      "250"
+     ],
+     "explicacao": "Você ouviu: \"Le virement était de deux cent cinquante euros.\""
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Elle a retiré quarante euros au distributeur.",
+     "antes": "Elle a retiré ",
+     "depois": " euros au distributeur.",
+     "respostas": [
+      "quarante",
+      "40"
+     ],
+     "explicacao": "Você ouviu: \"Elle a retiré quarante euros au distributeur.\""
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Cette maison coûte deux ",
+     "depois": " euros.",
+     "respostas": [
+      "millions d'"
+     ],
+     "explicacao": "Million leva -s no plural (deux millions) e a preposicao de antes do substantivo. Antes de vogal, de vira d'."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il gagne trois mille ",
+     "depois": " par mois.",
+     "respostas": [
+      "euros"
+     ],
+     "explicacao": "Mille nunca leva de antes do substantivo: trois mille euros, sem preposicao, diferente de million e milliard."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Cette entreprise vaut un ",
+     "depois": " de dollars.",
+     "respostas": [
+      "milliard"
+     ],
+     "explicacao": "Milliard no singular (um bilhao) fica sem -s: un milliard, mas leva a preposicao de antes do substantivo."
+    }
+   ]
+  },
+  {
+   "id": "operations",
+   "tipo": "exercicio",
+   "titulo": "Opérations",
+   "itens": [
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>5 + 3 = ?</strong>",
+     "respostas": [
+      "huit"
+     ],
+     "explicacao": "Resultado: huit.",
+     "placeholder": "em francês, por extenso"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>10 - 4 = ?</strong>",
+     "respostas": [
+      "six"
+     ],
+     "explicacao": "Resultado: six.",
+     "placeholder": "em francês, por extenso"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>6 × 2 = ?</strong>",
+     "respostas": [
+      "douze"
+     ],
+     "explicacao": "Resultado: douze.",
+     "placeholder": "em francês, por extenso"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>20 ÷ 4 = ?</strong>",
+     "respostas": [
+      "cinq"
+     ],
+     "explicacao": "Resultado: cinq.",
+     "placeholder": "em francês, por extenso"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>15 + 15 = ?</strong>",
+     "respostas": [
+      "trente"
+     ],
+     "explicacao": "Resultado: trente.",
+     "placeholder": "em francês, por extenso"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>100 - 1 = ?</strong>",
+     "respostas": [
+      "quatre-vingt-dix-neuf",
+      "quatre vingt dix neuf"
+     ],
+     "explicacao": "Resultado: quatre-vingt-dix-neuf.",
+     "placeholder": "em francês, por extenso"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>7 × 7 = ?</strong>",
+     "respostas": [
+      "quarante-neuf"
+     ],
+     "explicacao": "Resultado: quarante-neuf.",
+     "placeholder": "em francês, por extenso"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>9 + 9 = ?</strong>",
+     "respostas": [
+      "dix-huit"
+     ],
+     "explicacao": "Resultado: dix-huit.",
+     "placeholder": "em francês, por extenso"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>50 ÷ 5 = ?</strong>",
+     "respostas": [
+      "dix"
+     ],
+     "explicacao": "Resultado: dix.",
+     "placeholder": "em francês, por extenso"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Escreva o resultado por extenso: <strong>12 × 8 = ?</strong>",
+     "respostas": [
+      "quatre-vingt-seize"
+     ],
+     "explicacao": "Resultado: quatre-vingt-seize.",
+     "placeholder": "em francês, por extenso"
+    }
+   ]
+  },
+  {
+   "id": "dates",
+   "tipo": "exercicio",
+   "titulo": "Les dates",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment dit-on la date en français ? (formule fixe)",
+     "opcoes": [
+      "Nous sommes",
+      "Il est",
+      "J'ai"
+     ],
+     "resposta": "Nous sommes",
+     "explicacao": "A fórmula fixa para a data é 'Nous sommes...' (ou 'On est...' no oral)."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " le lundi 3 mars.",
+     "opcoes": [
+      "Nous sommes",
+      "Il est",
+      "Nous avons"
+     ],
+     "resposta": "Nous sommes",
+     "explicacao": "Para a data usamos 'Nous sommes' (ou, no oral, 'On est') + le + dia.",
+     "audioCorrecao": "Nous sommes le lundi 3 mars."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " en 2026.",
+     "opcoes": [
+      "Nous sommes",
+      "Il est",
+      "C'est"
+     ],
+     "resposta": "Nous sommes",
+     "explicacao": "Para a data usamos 'Nous sommes' (ou, no oral, 'On est') + le + dia.",
+     "audioCorrecao": "Nous sommes en 2026."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel jour vient après mercredi ?",
+     "opcoes": [
+      "jeudi",
+      "mardi",
+      "vendredi"
+     ],
+     "resposta": "jeudi",
+     "explicacao": "A fórmula fixa para a data é 'Nous sommes...' (ou 'On est...' no oral)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel mois vient après juin ?",
+     "opcoes": [
+      "juillet",
+      "mai",
+      "août"
+     ],
+     "resposta": "juillet",
+     "explicacao": "A fórmula fixa para a data é 'Nous sommes...' (ou 'On est...' no oral)."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Aujourd'hui, ",
+     "depois": " le 15 août.",
+     "opcoes": [
+      "nous sommes",
+      "il est",
+      "nous avons"
+     ],
+     "resposta": "nous sommes",
+     "explicacao": "Para a data usamos 'Nous sommes' (ou, no oral, 'On est') + le + dia.",
+     "audioCorrecao": "Aujourd'hui, nous sommes le 15 août."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Como se diz o primeiro dia do mês em datas? (le 1er)",
+     "opcoes": [
+      "premier",
+      "un",
+      "première"
+     ],
+     "resposta": "premier",
+     "explicacao": "A fórmula fixa para a data é 'Nous sommes...' (ou 'On est...' no oral)."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Mon anniversaire est ",
+     "depois": " 12 septembre.",
+     "opcoes": [
+      "le",
+      "au",
+      "en"
+     ],
+     "resposta": "le",
+     "explicacao": "Para a data usamos 'Nous sommes' (ou, no oral, 'On est') + le + dia.",
+     "audioCorrecao": "Mon anniversaire est le 12 septembre."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il est né ",
+     "depois": " 2001.",
+     "opcoes": [
+      "en",
+      "le",
+      "au"
+     ],
+     "resposta": "en",
+     "explicacao": "Para a data usamos 'Nous sommes' (ou, no oral, 'On est') + le + dia.",
+     "audioCorrecao": "Il est né en 2001."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Como se diz o ano 2026 por extenso? (deux mille ___)",
+     "opcoes": [
+      "vingt-six",
+      "vingt-vingt-six",
+      "deux-six"
+     ],
+     "resposta": "vingt-six",
+     "explicacao": "A fórmula fixa para a data é 'Nous sommes...' (ou 'On est...' no oral)."
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "Une journée de Daniel",
+   "instrucao": "Leia e ouça. Repare nos números, nas horas e nos valores.",
+   "paragrafos": [
+    "Daniel a trente-deux ans. Il habite au troisième étage d’un immeuble près de la gare, à Lyon. Chaque matin, il se réveille à sept heures et prend son petit déjeuner avant de partir au travail.",
+    "Il travaille dans une entreprise de formation professionnelle depuis cinq ans. Son bureau se trouve au premier étage, à côté de la salle de réunion. Il gagne environ deux mille euros par mois, et il doit payer six cents euros de loyer.",
+    "Le week end, Daniel fait les courses deux fois: le samedi matin, vers dix heures, et le dimanche après midi, vers quinze heures. Il dépense en général cinquante euros par semaine pour la nourriture, et il aime aussi acheter des livres, pour douze ou quinze euros chacun.",
+    "Nous sommes aujourd’hui le vingt et un mars, et c’est justement l’anniversaire de Daniel. Il est midi, et ses collègues préparent une petite fête pour lui, avec un gâteau et quelques cadeaux. Depuis qu’il travaille ici, c’est la troisième fois qu’ils célèbrent son anniversaire ensemble.",
+    "Malgré son emploi du temps chargé, Daniel garde toujours du temps pour ses amis. Il est vingt heures quand il rentre chez lui, fatigué mais content. Grâce à sa formation et à sa persévérance, il espère bientôt obtenir une promotion, avec un meilleur salaire et plus de responsabilités."
+   ],
+   "glossario": {
+    "formation": "formação, curso",
+    "travail": "trabalho",
+    "reunion": "reunião",
+    "gare": "estação de trem",
+    "courses": "compras",
+    "semaine": "semana",
+    "promotion": "promoção",
+    "salaire": "salário",
+    "fete": "festa",
+    "anniversaire": "aniversário",
+    "loyer": "aluguel",
+    "etage": "andar",
+    "entreprise": "empresa",
+    "responsabilites": "responsabilidades"
+   }
+  }
+ ]
+}

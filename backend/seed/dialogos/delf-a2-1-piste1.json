@@ -1,0 +1,37 @@
+{
+ "saida": "public/audio/exercicios/delf-a2-1-piste1.mp3",
+ "vozes": {
+  "jornalista": "Ana Florence",
+  "alain": "Damien Black"
+ },
+ "falas": [
+  {
+   "voz": "jornalista",
+   "texto": "Portrait d'actif. Bonjour Alain. Vous avez 52 ans et, après une période de chômage, vous êtes employé depuis un an dans une entreprise de services. Vous pouvez nous expliquer comment vous avez vécu votre reprise du travail?"
+  },
+  {
+   "voz": "alain",
+   "texto": "Oui, bien sûr. Je sais qu'à mon âge, j'ai eu de la chance de retrouver du travail. Ce n'est pas simple pour ma génération."
+  },
+  {
+   "voz": "jornalista",
+   "texto": "Alors, comment s'est passée votre arrivée dans l'entreprise?"
+  },
+  {
+   "voz": "alain",
+   "texto": "Tout le monde a été très sympa dès le début. J'ai remplacé une collègue qui était partie s'installer dans une autre ville. Ils avaient besoin de moi: depuis son départ, il y avait trop de travail, et mon arrivée a été positive."
+  },
+  {
+   "voz": "jornalista",
+   "texto": "Vous avez trouvé votre place?"
+  },
+  {
+   "voz": "alain",
+   "texto": "Oui, tout à fait. On a chacun un rôle et les plus jeunes me demandent souvent conseil, notamment pour résoudre des problèmes, des conflits avec les clients. Ils me disent que je suis moins impulsif qu'eux, que je les calme quand ils sont stressés. En fait, je relativise. La vie m'a appris que le travail est fondamental, mais qu'il faut aussi savoir prendre du recul."
+  },
+  {
+   "voz": "jornalista",
+   "texto": "Nous allons nous quitter sur ces paroles de sagesse. Merci Alain pour ce témoignage et à la semaine prochaine pour un autre portrait d'actif."
+  }
+ ]
+}

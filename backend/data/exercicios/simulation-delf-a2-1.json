@@ -1,0 +1,242 @@
+{
+ "slug": "simulation-delf-a2-1",
+ "ordem": 9,
+ "nivel": "A2",
+ "modo": "prova",
+ "titulo": "Simulation DELF A2.1",
+ "descricao": "Simulado completo no formato DELF A2: compreensão oral e escrita corrigidas na hora, produções corrigidas pelo professor.",
+ "secoes": [
+  {
+   "id": "consignes",
+   "tipo": "aula",
+   "titulo": "Consignes",
+   "html": "<p>Esta prova tem <strong>4 partes</strong>, como o DELF A2. Cada parte mostra um cronômetro com o tempo recomendado.</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Parte</th><th>Tempo</th><th>Pontos</th><th>Correção</th></tr></thead><tbody><tr><td>Compréhension de l'oral</td><td>15 min</td><td>25</td><td>automática</td></tr><tr><td>Compréhension des écrits</td><td>25 min</td><td>25</td><td>automática</td></tr><tr><td>Production écrite</td><td>30 min</td><td>25</td><td>professor</td></tr><tr><td>Production orale (preparação)</td><td>25 min</td><td>25</td><td>em aula</td></tr></tbody></table></div>\n<div class=\"destaque\">Na compreensão oral você pode ouvir o áudio <strong>no máximo 2 vezes</strong>, como na prova real. Leia as perguntas antes de apertar o play.</div>\n<p>Só clique em <strong>Concluir</strong> no final: a correção aparece depois da entrega.</p>"
+  },
+  {
+   "id": "co",
+   "tipo": "exercicio",
+   "titulo": "Compréhension de l'oral",
+   "tempoMin": 15,
+   "audioArquivo": "audio/exercicios/delf-a2-1-piste1.mp3",
+   "maxReproducoes": 2,
+   "instrucao": "Écoutez le document une première fois et commencez à répondre aux questions. Écoutez-le une seconde fois, complétez vos réponses et relisez. (Ouça o áudio no máximo 2 vezes.)<br><strong>Portrait d'actif</strong>: une journaliste interviewe Alain.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "1. Alain travaille dans cette entreprise depuis :",
+     "opcoes": [
+      "sa jeunesse",
+      "plusieurs années",
+      "peu de temps"
+     ],
+     "resposta": "peu de temps",
+     "explicacao": "« Vous êtes employé depuis un an » - peu de temps.",
+     "pontos": 3
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "2. La journaliste a choisi de l'interviewer en raison de :",
+     "opcoes": [
+      "son âge",
+      "ses diplômes",
+      "son caractère"
+     ],
+     "resposta": "son âge",
+     "explicacao": "« Vous avez 52 ans... » / « Ce n'est pas simple pour ma génération. »",
+     "pontos": 3
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "3. Avec cet emploi, Alain s'estime :",
+     "opcoes": [
+      "courageux",
+      "malheureux",
+      "chanceux"
+     ],
+     "resposta": "chanceux",
+     "explicacao": "« À mon âge, j'ai eu de la chance de retrouver du travail. »",
+     "pontos": 3
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "4. Il s'est senti :",
+     "opcoes": [
+      "très bien accueilli",
+      "moyennement bien accueilli",
+      "mal accueilli"
+     ],
+     "resposta": "très bien accueilli",
+     "explicacao": "« Tout le monde a été très sympa dès le début. »",
+     "pontos": 3
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "5. Alain a remplacé un employé qui :",
+     "opcoes": [
+      "a eu un enfant",
+      "est parti à la retraite",
+      "a déménagé"
+     ],
+     "resposta": "a déménagé",
+     "explicacao": "Il a remplacé une collègue « partie s'installer dans une autre ville ».",
+     "pontos": 3
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "6. Dans l'interview, Alain parle de collègues qui :",
+     "opcoes": [
+      "sont plus jeunes",
+      "ont des âges différents",
+      "sont âgés"
+     ],
+     "resposta": "sont plus jeunes",
+     "explicacao": "« Les plus jeunes me demandent souvent conseil. »",
+     "pontos": 3
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "7. Dans quelle situation Alain donne-t-il des conseils à ses collègues ?",
+     "respostas": [
+      "pour résoudre des problèmes, des conflits avec les clients",
+      "pour résoudre des conflits avec les clients",
+      "pour résoudre des problèmes avec les clients",
+      "quand il y a des conflits avec les clients",
+      "des conflits avec les clients",
+      "conflits avec les clients",
+      "résoudre des problèmes"
+     ],
+     "mostrar": "Pour résoudre des problèmes, des conflits avec les clients",
+     "explicacao": "« ...notamment pour résoudre des problèmes, des conflits avec les clients. »",
+     "pontos": 4,
+     "placeholder": "Responda em francês"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "8. Ses collègues apprécient :",
+     "opcoes": [
+      "son autorité",
+      "son calme",
+      "son humour"
+     ],
+     "resposta": "son calme",
+     "explicacao": "« Je suis moins impulsif qu'eux, je les calme quand ils sont stressés. »",
+     "pontos": 3
+    }
+   ]
+  },
+  {
+   "id": "ce",
+   "tipo": "exercicio",
+   "titulo": "Compréhension des écrits",
+   "tempoMin": 25,
+   "imagem": "img/exercicios/delf-a2-1-article.jpg",
+   "imagemAlt": "De toit à toit, un réseau social d'un nouveau genre",
+   "instrucao": "Lisez le document puis répondez aux questions.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "1. Cet article présente :",
+     "opcoes": [
+      "un local au service des Parisiens",
+      "une association de locataires parisiens",
+      "un site internet fait pour les locataires"
+     ],
+     "resposta": "un site internet fait pour les locataires",
+     "explicacao": "« Un office public de l'habitat crée un réseau social en ligne pour ses locataires » - www.de-toit-a-toit.fr",
+     "pontos": 6
+    },
+    {
+     "tipo": "multipla",
+     "enunciado": "2. Vrai ou faux ? Sélectionnez uniquement les affirmations VRAIES.",
+     "opcoes": [
+      "Il faut payer pour utiliser les services proposés.",
+      "L'objectif de Paris Habitat est de trouver de nouveaux locataires.",
+      "On a d'abord expérimenté le réseau social avec les habitants d'un seul quartier de Paris.",
+      "Pour s'inscrire, il faut prendre rendez-vous."
+     ],
+     "respostas": [
+      "On a d'abord expérimenté le réseau social avec les habitants d'un seul quartier de Paris."
+     ],
+     "explicacao": "FAUX : « Les services proposés sont gratuits ». FAUX : le but est « de développer les relations entre voisins ». VRAI : « Après une période de test auprès des locataires du 19e arrondissement ». FAUX : « il suffit de s'inscrire » sur le site.",
+     "pontos": 10
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "<em>3. Quel service pour qui ? Lisez les besoins exprimés par les locataires et choisissez le numéro (1, 2, 3, 4 ou 5) du service qui peut être utile à chaque personne.</em><br>a) Lucie a 83 ans, elle souhaite trouver des voisins qui aiment jouer aux cartes pour passer des moments agréables ensemble.",
+     "opcoes": [
+      "Service nº 1",
+      "Service nº 2",
+      "Service nº 3",
+      "Service nº 4",
+      "Service nº 5"
+     ],
+     "resposta": "Service nº 3",
+     "explicacao": "Service 3 : « contacter vos voisins inscrits... créer des liens avec eux ».",
+     "pontos": 3
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "b) Éric a eu un deuxième enfant. Pour avoir une chambre en plus, il doit faire une demande d'échange d'appartement.",
+     "opcoes": [
+      "Service nº 1",
+      "Service nº 2",
+      "Service nº 3",
+      "Service nº 4",
+      "Service nº 5"
+     ],
+     "resposta": "Service nº 2",
+     "explicacao": "Service 2 : « télécharger des formulaires de demande de changement de logement ».",
+     "pontos": 3
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "c) Joëlle se demande quand aura lieu la prochaine fête de quartier.",
+     "opcoes": [
+      "Service nº 1",
+      "Service nº 2",
+      "Service nº 3",
+      "Service nº 4",
+      "Service nº 5"
+     ],
+     "resposta": "Service nº 4",
+     "explicacao": "Service 4 : « s'informer et informer des évènements à venir ».",
+     "pontos": 3
+    }
+   ]
+  },
+  {
+   "id": "pe",
+   "tipo": "exercicio",
+   "titulo": "Production écrite",
+   "tempoMin": 30,
+   "imagem": "img/exercicios/delf-a2-1-mail.jpg",
+   "imagemAlt": "Mail de Sandrine : ton boulot",
+   "itens": [
+    {
+     "tipo": "livre",
+     "enunciado": "Vous avez reçu ce mail d'une amie. Répondez-lui : remerciez-la pour son message et racontez vos premiers mois à votre nouveau travail. Donnez vos impressions sur cette nouvelle expérience (60 à 80 mots).",
+     "minPalavras": 60,
+     "maxPalavras": 80,
+     "placeholder": "Salut Sandrine, ...",
+     "explicacao": "Critérios DELF A2: respeitar a situação e o número de palavras, contar os fatos (passé composé / imparfait), dar impressões, fórmulas de carta amigável, vocabulário e gramática."
+    }
+   ]
+  },
+  {
+   "id": "po",
+   "tipo": "exercicio",
+   "titulo": "Production orale",
+   "tempoMin": 25,
+   "texto": "<p><b>Vous rencontrez un(e) voisin(e) installé(e) depuis peu.</b> Vous êtes dans l'ascenseur avec un nouveau voisin / une nouvelle voisine qui est installé(e) depuis peu de temps dans votre immeuble. Vous lui demandez s'il / si elle est bien installé(e). Il/elle vous raconte comment se passe sa vie dans l'immeuble / le quartier, en comparaison avec sa vie dans son ancien lieu de vie. Jouez la scène à deux.</p>",
+   "itens": [
+    {
+     "tipo": "livre",
+     "enunciado": "Escreva 10 possíveis perguntas e 10 possíveis respostas pertinentes para a proposta deste diálogo. Trabalhe de forma séria e decore se necessário, pois um diálogo real será realizado em sala de aula. Esteja preparado(a).",
+     "minPalavras": 80,
+     "placeholder": "Question 1 : ... / Réponse 1 : ...",
+     "explicacao": "Prepare perguntas variadas (est-ce que, inversion, mots interrogatifs) e respostas completas. O diálogo será feito em aula."
+    }
+   ]
+  }
+ ]
+}

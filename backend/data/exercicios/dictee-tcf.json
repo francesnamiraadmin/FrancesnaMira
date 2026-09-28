@@ -1,0 +1,318 @@
+{
+ "slug": "dictee-tcf",
+ "ordem": 8,
+ "nivel": "B1–B2",
+ "titulo": "Dictée · Modèles TCF",
+ "descricao": "Ditado frase a frase de 4 textos modelo do TCF, com as expressões-chave anotadas.",
+ "secoes": [
+  {
+   "id": "intro",
+   "tipo": "aula",
+   "titulo": "Como fazer",
+   "html": "<p>O ditado treina ao mesmo tempo <strong>compreensão oral, ortografia e gramática</strong>. Os textos são modelos de produção escrita do TCF (tâches 1, 2 e 3).</p><ul><li>Ouça cada frase quantas vezes quiser (🔊) e escreva exatamente o que ouviu.</li><li>Maiúsculas e pontuação final não contam; <strong>acentos contam</strong> (sem acento a resposta é aceita, mas marcada).</li><li>Depois da correção, leia o texto modelo anotado: as expressões destacadas são as que você deve reutilizar nas suas produções.</li></ul>"
+  },
+  {
+   "id": "d1",
+   "tipo": "exercicio",
+   "titulo": "Dictée 1",
+   "instrucao": "<strong>Tâche 1 — Invitation à un événement</strong> · 7 frases. Ouça e escreva cada frase.",
+   "itens": [
+    {
+     "tipo": "ditado",
+     "audio": "Chère Claire, J'espère que tu vas bien.",
+     "respostas": [
+      "Chère Claire, J'espère que tu vas bien."
+     ],
+     "explicacao": "Frase original: Chère Claire, J'espère que tu vas bien.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "Je t'écris aujourd'hui car ce sera bientôt mon anniversaire de trente ans et, pour célébrer cette occasion spéciale, il faut absolument que tu viennes.",
+     "respostas": [
+      "Je t'écris aujourd'hui car ce sera bientôt mon anniversaire de trente ans et, pour célébrer cette occasion spéciale, il faut absolument que tu viennes."
+     ],
+     "explicacao": "Frase original: Je t'écris aujourd'hui car ce sera bientôt mon anniversaire de trente ans et, pour célébrer cette occasion spéciale, il faut absolument que tu viennes.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "La fête aura lieu le 28 juin, chez moi, à partir de dix-neuf heures.",
+     "respostas": [
+      "La fête aura lieu le 28 juin, chez moi, à partir de dix-neuf heures."
+     ],
+     "explicacao": "Frase original: La fête aura lieu le 28 juin, chez moi, à partir de dix-neuf heures.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "En effet, j'ai prévu un programme surprise avec de la musique, un buffet convivial et quelques jeux pour ne pas s'ennuyer.",
+     "respostas": [
+      "En effet, j'ai prévu un programme surprise avec de la musique, un buffet convivial et quelques jeux pour ne pas s'ennuyer."
+     ],
+     "explicacao": "Frase original: En effet, j'ai prévu un programme surprise avec de la musique, un buffet convivial et quelques jeux pour ne pas s'ennuyer.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "N'hésite pas à apporter de quoi boire si le cœur t'en dit.",
+     "respostas": [
+      "N'hésite pas à apporter de quoi boire si le cœur t'en dit."
+     ],
+     "explicacao": "Frase original: N'hésite pas à apporter de quoi boire si le cœur t'en dit.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "J'espère vraiment que tu pourras venir fêter ce moment spécial avec moi.",
+     "respostas": [
+      "J'espère vraiment que tu pourras venir fêter ce moment spécial avec moi."
+     ],
+     "explicacao": "Frase original: J'espère vraiment que tu pourras venir fêter ce moment spécial avec moi.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "En attendant, je t'embrasse bien fort et à très bientôt!",
+     "respostas": [
+      "En attendant, je t'embrasse bien fort et à très bientôt!"
+     ],
+     "explicacao": "Frase original: En attendant, je t'embrasse bien fort et à très bientôt!",
+     "placeholder": "Escreva a frase…"
+    }
+   ]
+  },
+  {
+   "id": "m1",
+   "tipo": "aula",
+   "titulo": "Modèle 1",
+   "instrucao": "Texto modelo com as expressões para reutilizar.",
+   "html": "<h3>Tâche 1 — Invitation à un événement</h3><p>Chère Claire,</p><p><strong style=\"color:#2E86DE\">J'espère que</strong> tu vas bien. Je t'écris aujourd'hui car ce sera bientôt mon anniversaire de trente ans et, pour célébrer cette occasion spéciale, <strong style=\"color:#DC2626\">il faut absolument que</strong> tu viennes. La fête aura lieu le 28 juin, chez moi, à partir de dix-neuf heures.</p><p><strong style=\"color:#2E86DE\">En effet</strong>, j'ai prévu un programme surprise avec de la musique, un buffet convivial et quelques jeux pour ne pas s'ennuyer. <strong style=\"color:#D97706\">N'hésite pas à</strong> apporter de quoi boire si le cœur t'en dit.</p><p><strong style=\"color:#2E86DE\">J'espère vraiment que</strong> tu pourras venir fêter ce moment spécial avec moi. En attendant, je t'embrasse bien fort et à très bientôt !</p><p><strong style=\"color:#16A34A\">Avec toute mon amitié</strong>,<br>Sophie</p><h3>Expressions à retenir</h3><ul><li><strong style=\"color:#2E86DE\">j'espère que</strong> · <em>Formule d'ouverture</em>: Formule courante pour ouvrir un message personnel avant d'annoncer la raison de l'écriture. <span class=\"fr\" data-fr=\"J'espère que vous allez bien.\">J'espère que vous allez bien.</span></li><li><strong style=\"color:#DC2626\">il faut absolument que</strong> · <em>Subjonctif (nécessité)</em>: 'Il faut que' + subjonctif exprime une nécessité forte — ici renforcée par 'absolument'. <span class=\"fr\" data-fr=\"Il faut absolument que tu viennes.\">Il faut absolument que tu viennes.</span></li><li><strong style=\"color:#2E86DE\">en effet</strong> · <em>Connecteur logique</em>: Introduit une explication ou un développement de ce qui vient d'être annoncé. <span class=\"fr\" data-fr=\"En effet, j'ai prévu un programme complet.\">En effet, j'ai prévu un programme complet.</span></li><li><strong style=\"color:#D97706\">n'hésite pas à</strong> · <em>Impératif négatif + infinitif</em>: Structure utilisée pour encourager poliment quelqu'un à faire quelque chose. <span class=\"fr\" data-fr=\"N'hésite pas à apporter de quoi boire.\">N'hésite pas à apporter de quoi boire.</span></li><li><strong style=\"color:#2E86DE\">j'espère vraiment que</strong> · <em>Reformulation de l'attente</em>: Reprend l'ouverture pour clore le message en insistant sur l'attente exprimée. <span class=\"fr\" data-fr=\"J'espère vraiment que tu pourras venir.\">J'espère vraiment que tu pourras venir.</span></li><li><strong style=\"color:#16A34A\">avec toute mon amitié</strong> · <em>Formule de clôture (registre familier)</em>: Formule de fin adaptée à un message adressé à un(e) ami(e) — registre 'tu'. <span class=\"fr\" data-fr=\"Avec toute mon amitié, Sophie\">Avec toute mon amitié, Sophie</span></li></ul>"
+  },
+  {
+   "id": "d2",
+   "tipo": "exercicio",
+   "titulo": "Dictée 2",
+   "instrucao": "<strong>Tâche 2 — Une expérience personnelle (blog)</strong> · 7 frases. Ouça e escreva cada frase.",
+   "itens": [
+    {
+     "tipo": "ditado",
+     "audio": "Chers lecteurs, Aujourd'hui, sur le blog « Valise Magique », j'aimerais partager mon expérience lors de mon premier voyage en solo, il y a quelques années.",
+     "respostas": [
+      "Chers lecteurs, Aujourd'hui, sur le blog « Valise Magique », j'aimerais partager mon expérience lors de mon premier voyage en solo, il y a quelques années."
+     ],
+     "explicacao": "Frase original: Chers lecteurs, Aujourd'hui, sur le blog « Valise Magique », j'aimerais partager mon expérience lors de mon premier voyage en solo, il y a quelques années.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "Je suis partie sac au dos pour un mois en Amérique du Sud, sans itinéraire précis, avec seulement l'envie de découvrir de nouvelles cultures.",
+     "respostas": [
+      "Je suis partie sac au dos pour un mois en Amérique du Sud, sans itinéraire précis, avec seulement l'envie de découvrir de nouvelles cultures."
+     ],
+     "explicacao": "Frase original: Je suis partie sac au dos pour un mois en Amérique du Sud, sans itinéraire précis, avec seulement l'envie de découvrir de nouvelles cultures.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "Ce voyage m'a appris à sortir de ma zone de confort, à faire confiance aux inconnus et à apprécier chaque imprévu comme une aventure plutôt que comme un problème.",
+     "respostas": [
+      "Ce voyage m'a appris à sortir de ma zone de confort, à faire confiance aux inconnus et à apprécier chaque imprévu comme une aventure plutôt que comme un problème."
+     ],
+     "explicacao": "Frase original: Ce voyage m'a appris à sortir de ma zone de confort, à faire confiance aux inconnus et à apprécier chaque imprévu comme une aventure plutôt que comme un problème.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "J'espère que cet article vous a donné quelques idées ou inspiré de nouvelles perspectives.",
+     "respostas": [
+      "J'espère que cet article vous a donné quelques idées ou inspiré de nouvelles perspectives."
+     ],
+     "explicacao": "Frase original: J'espère que cet article vous a donné quelques idées ou inspiré de nouvelles perspectives.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "Si vous n'avez pas encore essayé de voyager seul, je vous encourage vivement à le faire, vous ne serez pas déçus!",
+     "respostas": [
+      "Si vous n'avez pas encore essayé de voyager seul, je vous encourage vivement à le faire, vous ne serez pas déçus!"
+     ],
+     "explicacao": "Frase original: Si vous n'avez pas encore essayé de voyager seul, je vous encourage vivement à le faire, vous ne serez pas déçus!",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "N'hésitez pas à partager vos impressions en commentaire, j'adore lire vos retours.",
+     "respostas": [
+      "N'hésitez pas à partager vos impressions en commentaire, j'adore lire vos retours."
+     ],
+     "explicacao": "Frase original: N'hésitez pas à partager vos impressions en commentaire, j'adore lire vos retours.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "À très bientôt pour de nouvelles découvertes!",
+     "respostas": [
+      "À très bientôt pour de nouvelles découvertes!"
+     ],
+     "explicacao": "Frase original: À très bientôt pour de nouvelles découvertes!",
+     "placeholder": "Escreva a frase…"
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "tipo": "aula",
+   "titulo": "Modèle 2",
+   "instrucao": "Texto modelo com as expressões para reutilizar.",
+   "html": "<h3>Tâche 2 — Une expérience personnelle (blog)</h3><p><strong style=\"color:#2E86DE\">Chers lecteurs</strong>,</p><p>Aujourd'hui, sur le blog « Valise Magique », j'aimerais partager mon expérience lors de mon premier voyage en solo, il y a quelques années. Je suis partie sac au dos pour un mois en Amérique du Sud, sans itinéraire précis, avec seulement l'envie de découvrir de nouvelles cultures. Ce voyage <strong style=\"color:#DC2626\">m'a appris à</strong> sortir de ma zone de confort, à faire confiance aux inconnus et à apprécier chaque imprévu comme une aventure <strong style=\"color:#2E86DE\">plutôt que</strong> comme un problème.</p><p><strong style=\"color:#2E86DE\">J'espère que</strong> cet article vous a donné quelques idées ou inspiré de nouvelles perspectives. Si vous n'avez pas encore essayé de voyager seul, <strong style=\"color:#16A34A\">je vous encourage vivement à</strong> le faire, vous ne serez pas déçus !</p><p><strong style=\"color:#D97706\">N'hésitez pas à</strong> partager vos impressions en commentaire, j'adore lire vos retours. À très bientôt pour de nouvelles découvertes !</p><h3>Expressions à retenir</h3><ul><li><strong style=\"color:#2E86DE\">chers lecteurs</strong> · <em>Formule d'ouverture (blog)</em>: Formule typique pour s'adresser au public d'un blog personnel. <span class=\"fr\" data-fr=\"Chers lecteurs, aujourd'hui je vous parle de...\">Chers lecteurs, aujourd'hui je vous parle de...</span></li><li><strong style=\"color:#DC2626\">m'a appris à</strong> · <em>Passé composé + infinitif</em>: 'Apprendre à' + infinitif — exprime ce que l'expérience a enseigné à l'auteur. <span class=\"fr\" data-fr=\"Ce voyage m'a appris à faire confiance aux inconnus.\">Ce voyage m'a appris à faire confiance aux inconnus.</span></li><li><strong style=\"color:#2E86DE\">plutôt que</strong> · <em>Connecteur de comparaison</em>: Introduit une préférence ou une opposition entre deux éléments comparés. <span class=\"fr\" data-fr=\"Comme une aventure plutôt que comme un problème.\">Comme une aventure plutôt que comme un problème.</span></li><li><strong style=\"color:#2E86DE\">j'espère que</strong> · <em>Transition vers la conclusion</em>: Ouvre le dernier paragraphe, typique de la conclusion d'un article de blog. <span class=\"fr\" data-fr=\"J'espère que cet article vous a plu.\">J'espère que cet article vous a plu.</span></li><li><strong style=\"color:#16A34A\">je vous encourage vivement à</strong> · <em>Appel à l'action</em>: Structure utilisée pour inciter fortement le lecteur à agir. <span class=\"fr\" data-fr=\"Je vous encourage vivement à essayer.\">Je vous encourage vivement à essayer.</span></li><li><strong style=\"color:#D97706\">n'hésitez pas à</strong> · <em>Impératif + invitation à l'interaction</em>: Invite le lecteur à réagir — typique de la clôture d'un article de blog. <span class=\"fr\" data-fr=\"N'hésitez pas à partager vos impressions.\">N'hésitez pas à partager vos impressions.</span></li></ul>"
+  },
+  {
+   "id": "d3",
+   "tipo": "exercicio",
+   "titulo": "Dictée 3",
+   "instrucao": "<strong>Tâche 3 — Texte argumentatif (l'immigration économique)</strong> · 8 frases. Ouça e escreva cada frase.",
+   "itens": [
+    {
+     "tipo": "ditado",
+     "audio": "Dans un contexte marqué par la mondialisation, la transition numérique et les profondes mutations des sociétés contemporaines, le marché du travail connaît d'importantes transformations.",
+     "respostas": [
+      "Dans un contexte marqué par la mondialisation, la transition numérique et les profondes mutations des sociétés contemporaines, le marché du travail connaît d'importantes transformations."
+     ],
+     "explicacao": "Frase original: Dans un contexte marqué par la mondialisation, la transition numérique et les profondes mutations des sociétés contemporaines, le marché du travail connaît d'importantes transformations.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "Dès lors, le débat portant sur l'immigration économique suscite aujourd'hui de vives discussions, tant sur le plan économique que social et culturel.",
+     "respostas": [
+      "Dès lors, le débat portant sur l'immigration économique suscite aujourd'hui de vives discussions, tant sur le plan économique que social et culturel."
+     ],
+     "explicacao": "Frase original: Dès lors, le débat portant sur l'immigration économique suscite aujourd'hui de vives discussions, tant sur le plan économique que social et culturel.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "À cet égard, il convient de souligner que x comporte plusieurs avantages, notamment en matière de...",
+     "respostas": [
+      "À cet égard, il convient de souligner que x comporte plusieurs avantages, notamment en matière de..."
+     ],
+     "explicacao": "Frase original: À cet égard, il convient de souligner que x comporte plusieurs avantages, notamment en matière de...",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": ", tout en contribuant à la m, n et o.",
+     "respostas": [
+      ", tout en contribuant à la m, n et o."
+     ],
+     "explicacao": "Frase original: , tout en contribuant à la m, n et o.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "Cette approche mérite néanmoins d'être nuancée.",
+     "respostas": [
+      "Cette approche mérite néanmoins d'être nuancée."
+     ],
+     "explicacao": "Frase original: Cette approche mérite néanmoins d'être nuancée.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "En effet, x présente également certaines limites, notamment en ce qui concerne 1,2,3.",
+     "respostas": [
+      "En effet, x présente également certaines limites, notamment en ce qui concerne 1,2,3."
+     ],
+     "explicacao": "Frase original: En effet, x présente également certaines limites, notamment en ce qui concerne 1,2,3.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "En conclusion, pour répondre durablement à cet enjeu, il est essentiel que les pouvoirs publics, en coopération avec les entreprises et les associations, mettent en œuvre des politiques d'accueil adaptées.",
+     "respostas": [
+      "En conclusion, pour répondre durablement à cet enjeu, il est essentiel que les pouvoirs publics, en coopération avec les entreprises et les associations, mettent en œuvre des politiques d'accueil adaptées."
+     ],
+     "explicacao": "Frase original: En conclusion, pour répondre durablement à cet enjeu, il est essentiel que les pouvoirs publics, en coopération avec les entreprises et les associations, mettent en œuvre des politiques d'accueil adaptées.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "Parvenant ainsi à une société plus éthique morale et juste.",
+     "respostas": [
+      "Parvenant ainsi à une société plus éthique morale et juste."
+     ],
+     "explicacao": "Frase original: Parvenant ainsi à une société plus éthique morale et juste.",
+     "placeholder": "Escreva a frase…"
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "tipo": "aula",
+   "titulo": "Modèle 3",
+   "instrucao": "Texto modelo com as expressões para reutilizar.",
+   "html": "<h3>Tâche 3 — Texte argumentatif (l'immigration économique)</h3><p>Dans un contexte marqué par la mondialisation, la transition numérique et les profondes mutations des sociétés contemporaines, le marché du travail connaît d'importantes transformations. <strong style=\"color:#2E86DE\">Dès lors</strong>, le débat portant sur l'immigration économique suscite aujourd'hui de vives discussions, tant sur le plan économique que social et culturel.</p><p><strong style=\"color:#2E86DE\">À cet égard</strong>, <strong style=\"color:#16A34A\">il convient de souligner que</strong> x comporte plusieurs avantages, notamment en matière de ..., tout en contribuant à la m, n et o.</p><p>Cette approche mérite <strong style=\"color:#2E86DE\">néanmoins</strong> d'être nuancée. <strong style=\"color:#2E86DE\">En effet</strong>, x présente également certaines limites, notamment en ce qui concerne 1,2,3.</p><p><strong style=\"color:#2E86DE\">En conclusion</strong>, pour répondre durablement à cet enjeu, <strong style=\"color:#DC2626\">il est essentiel que</strong> les pouvoirs publics, en coopération avec les entreprises et les associations, mettent en œuvre des politiques d'accueil adaptées. Parvenant ainsi à une société plus éthique morale et juste.</p><h3>Expressions à retenir</h3><ul><li><strong style=\"color:#2E86DE\">dès lors</strong> · <em>Connecteur logique (conséquence)</em>: Introduit une conséquence logique de ce qui vient d'être dit. <span class=\"fr\" data-fr=\"Dès lors, le débat suscite de vives discussions.\">Dès lors, le débat suscite de vives discussions.</span></li><li><strong style=\"color:#2E86DE\">à l'instar de</strong> · <em>Connecteur d'exemple</em>: Introduit un exemple concret qui illustre l'idée générale — synonyme de 'comme' ou 'à l'image de'. <span class=\"fr\" data-fr=\"À l'instar du Canada, qui a mis en place...\">À l'instar du Canada, qui a mis en place...</span></li><li><strong style=\"color:#2E86DE\">à cet égard</strong> · <em>Connecteur logique</em>: Sert à introduire un développement lié au point précédent. <span class=\"fr\" data-fr=\"À cet égard, il convient de souligner que...\">À cet égard, il convient de souligner que...</span></li><li><strong style=\"color:#16A34A\">il convient de souligner que</strong> · <em>Expression argumentative</em>: Structure formelle utilisée pour introduire un argument important. <span class=\"fr\" data-fr=\"Il convient de souligner que cette politique comporte des avantages.\">Il convient de souligner que cette politique comporte des avantages.</span></li><li><strong style=\"color:#2E86DE\">néanmoins</strong> · <em>Connecteur d'opposition</em>: Introduit une nuance ou une objection après un développement positif. <span class=\"fr\" data-fr=\"Cette approche mérite néanmoins d'être nuancée.\">Cette approche mérite néanmoins d'être nuancée.</span></li><li><strong style=\"color:#2E86DE\">en effet</strong> · <em>Connecteur logique</em>: Introduit une explication qui justifie l'affirmation précédente. <span class=\"fr\" data-fr=\"En effet, elle présente également certaines limites.\">En effet, elle présente également certaines limites.</span></li><li><strong style=\"color:#9333EA\">dans la mesure où</strong> · <em>Connecteur de cause</em>: Introduit la cause ou la raison d'un fait — équivalent formel de 'parce que'. <span class=\"fr\" data-fr=\"Dans la mesure où les différences culturelles peuvent freiner l'insertion.\">Dans la mesure où les différences culturelles peuvent freiner l'insertion.</span></li><li><strong style=\"color:#2E86DE\">en conclusion</strong> · <em>Connecteur de conclusion</em>: Introduit le dernier paragraphe, qui synthétise et propose une ouverture. <span class=\"fr\" data-fr=\"En conclusion, il est essentiel que...\">En conclusion, il est essentiel que...</span></li><li><strong style=\"color:#DC2626\">il est essentiel que</strong> · <em>Subjonctif (nécessité)</em>: 'Il est essentiel que' + subjonctif exprime une nécessité forte, typique de la conclusion d'un texte argumentatif. <span class=\"fr\" data-fr=\"Il est essentiel que les pouvoirs publics agissent.\">Il est essentiel que les pouvoirs publics agissent.</span></li></ul>"
+  },
+  {
+   "id": "d4",
+   "tipo": "exercicio",
+   "titulo": "Dictée 4",
+   "instrucao": "<strong>L'interdiction des voitures en ville</strong> · 5 frases. Ouça e escreva cada frase.",
+   "itens": [
+    {
+     "tipo": "ditado",
+     "audio": "Face à des niveaux de pollution très élevés observés dans plusieurs régions du monde, certaines villes ont décidé d'interdire la circulation des voitures dans les centres urbains.",
+     "respostas": [
+      "Face à des niveaux de pollution très élevés observés dans plusieurs régions du monde, certaines villes ont décidé d'interdire la circulation des voitures dans les centres urbains."
+     ],
+     "explicacao": "Frase original: Face à des niveaux de pollution très élevés observés dans plusieurs régions du monde, certaines villes ont décidé d'interdire la circulation des voitures dans les centres urbains.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "La capitale norvégienne, Oslo, a récemment choisi cette mesure et en tire un bilan positif, estimant qu'elle profite à tous.",
+     "respostas": [
+      "La capitale norvégienne, Oslo, a récemment choisi cette mesure et en tire un bilan positif, estimant qu'elle profite à tous."
+     ],
+     "explicacao": "Frase original: La capitale norvégienne, Oslo, a récemment choisi cette mesure et en tire un bilan positif, estimant qu'elle profite à tous.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "Avec le temps, les accidents diminueront, la consommation de pétrole reculera et la qualité de l'air s'améliorera.",
+     "respostas": [
+      "Avec le temps, les accidents diminueront, la consommation de pétrole reculera et la qualité de l'air s'améliorera."
+     ],
+     "explicacao": "Frase original: Avec le temps, les accidents diminueront, la consommation de pétrole reculera et la qualité de l'air s'améliorera.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "De nombreuses villes lancent des projets visant à interdire les voitures en milieu urbain sans disposer des moyens et des infrastructures indispensables pour assurer la réussite de ce changement.",
+     "respostas": [
+      "De nombreuses villes lancent des projets visant à interdire les voitures en milieu urbain sans disposer des moyens et des infrastructures indispensables pour assurer la réussite de ce changement."
+     ],
+     "explicacao": "Frase original: De nombreuses villes lancent des projets visant à interdire les voitures en milieu urbain sans disposer des moyens et des infrastructures indispensables pour assurer la réussite de ce changement.",
+     "placeholder": "Escreva a frase…"
+    },
+    {
+     "tipo": "ditado",
+     "audio": "Certes, la réduction du nombre de voitures permet de diminuer la pollution, mais en contrepartie, il est nécessaire de prévoir de grands parkings, de développer davantage les transports en commun (métros et bus) et d'accorder des autorisations spéciales à certains professionnels (police, services d'urgence, livreurs, etc.",
+     "respostas": [
+      "Certes, la réduction du nombre de voitures permet de diminuer la pollution, mais en contrepartie, il est nécessaire de prévoir de grands parkings, de développer davantage les transports en commun (métros et bus) et d'accorder des autorisations spéciales à certains professionnels (police, services d'urgence, livreurs, etc."
+     ],
+     "explicacao": "Frase original: Certes, la réduction du nombre de voitures permet de diminuer la pollution, mais en contrepartie, il est nécessaire de prévoir de grands parkings, de développer davantage les transports en commun (métros et bus) et d'accorder des autorisations spéciales à certains professionnels (police, services d'urgence, livreurs, etc.",
+     "placeholder": "Escreva a frase…"
+    }
+   ]
+  },
+  {
+   "id": "m4",
+   "tipo": "aula",
+   "titulo": "Modèle 4",
+   "instrucao": "Texto modelo com as expressões para reutilizar.",
+   "html": "<h3>L'interdiction des voitures en ville</h3><p>Face à des niveaux de pollution très élevés observés dans plusieurs régions du monde, certaines villes ont décidé d'interdire la circulation des voitures dans les centres urbains. La capitale norvégienne, Oslo, a récemment choisi cette mesure et en tire un bilan positif, <strong style=\"color:#9333EA\">estimant</strong> qu'elle profite à tous. Avec le temps, les accidents <strong style=\"color:#DC2626\">diminueront</strong>, la consommation de pétrole <strong style=\"color:#DC2626\">reculera</strong> et la qualité de l'air <strong style=\"color:#DC2626\">s'améliorera</strong>.</p><p>De nombreuses villes lancent des projets visant à interdire les voitures en milieu urbain <strong style=\"color:#D97706\">sans disposer</strong> des moyens et des infrastructures indispensables pour assurer la réussite de ce changement. <strong style=\"color:#2E86DE\">Certes</strong>, la réduction du nombre de voitures permet de diminuer la pollution, <strong style=\"color:#2E86DE\">mais</strong> en contrepartie, <strong style=\"color:#16A34A\">il est nécessaire de</strong> prévoir de grands parkings, de développer davantage les transports en commun (métros et bus) et d'accorder des autorisations spéciales à certains professionnels (police, services d'urgence, livreurs, etc.).</p><h3>Expressions à retenir</h3><ul><li><strong style=\"color:#2E86DE\">cependant</strong> · <em>Connecteur logique</em>: Permet d'exprimer une opposition. <span class=\"fr\" data-fr=\"Il pleuvait ; cependant, nous sommes sortis.\">Il pleuvait ; cependant, nous sommes sortis.</span></li><li><strong style=\"color:#2E86DE\">certes</strong> · <em>Connecteur logique</em>: Introduit une concession avant une objection — annonce souvent un 'mais' juste après. <span class=\"fr\" data-fr=\"Certes, il fait froid, mais le soleil brille.\">Certes, il fait froid, mais le soleil brille.</span></li><li><strong style=\"color:#2E86DE\">mais</strong> · <em>Connecteur d'opposition</em>: Introduit une opposition directe. <span class=\"fr\" data-fr=\"Il est petit, mais très fort.\">Il est petit, mais très fort.</span></li><li><strong style=\"color:#D97706\">sans disposer</strong> · <em>Préposition + infinitif</em>: 'Sans' + infinitif exprime une absence ou un manque. <span class=\"fr\" data-fr=\"Il est parti sans dire au revoir.\">Il est parti sans dire au revoir.</span></li><li><strong style=\"color:#9333EA\">estimant</strong> · <em>Gérondif (verbe estimer)</em>: Do verbo 'estimer' — exprime une opinion ou un jugement simultané à l'action principale. <span class=\"fr\" data-fr=\"Il agit ainsi, estimant que c'est juste.\">Il agit ainsi, estimant que c'est juste.</span></li><li><strong style=\"color:#DC2626\">diminueront</strong> · <em>Futur simple</em>: Verbe 'diminuer' au futur simple — exprime une prévision. <span class=\"fr\" data-fr=\"Les prix diminueront l'année prochaine.\">Les prix diminueront l'année prochaine.</span></li><li><strong style=\"color:#DC2626\">reculera</strong> · <em>Futur simple</em>: Verbe 'reculer' au futur simple. <span class=\"fr\" data-fr=\"La demande reculera si les prix montent.\">La demande reculera si les prix montent.</span></li><li><strong style=\"color:#DC2626\">s'améliorera</strong> · <em>Futur simple (pronominal)</em>: Verbe pronominal 's'améliorer' au futur simple. <span class=\"fr\" data-fr=\"La situation s'améliorera avec le temps.\">La situation s'améliorera avec le temps.</span></li><li><strong style=\"color:#16A34A\">il est nécessaire de</strong> · <em>Expression de nécessité</em>: Structure impersonnelle exprimant une obligation ou une nécessité, suivie de l'infinitif. <span class=\"fr\" data-fr=\"Il est nécessaire de réserver à l'avance.\">Il est nécessaire de réserver à l'avance.</span></li></ul>"
+  }
+ ]
+}

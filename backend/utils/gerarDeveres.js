@@ -31,7 +31,7 @@ function copiarAtividades(atividadesTemplate) {
     conteudo: a.conteudo ? {
       url: a.conteudo.url, texto: a.conteudo.texto, arquivo: a.conteudo.arquivo,
       temaId: a.conteudo.temaId, aulaId: a.conteudo.aulaId, moduloId: a.conteudo.moduloId,
-      conjuntoId: a.conteudo.conjuntoId
+      conjuntoId: a.conteudo.conjuntoId, exercicioSlug: a.conteudo.exercicioSlug
     } : undefined,
     entrega: { status: "pendente" }
   }));

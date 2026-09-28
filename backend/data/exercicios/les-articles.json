@@ -1,0 +1,1088 @@
+{
+ "slug": "les-articles",
+ "ordem": 6,
+ "nivel": "A1–A2",
+ "titulo": "Les articles",
+ "descricao": "Definido, indefinido, partitivo, contrações e negação, com explicação da regra em cada questão.",
+ "secoes": [
+  {
+   "id": "video",
+   "tipo": "video",
+   "titulo": "Vídeo",
+   "youtube": "YiVFs9XpfBg"
+  },
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir os exemplos.",
+   "html": "\n<p>O francês tem três famílias de artigo: <strong>definido</strong> (le/la/les), <strong>indefinido</strong> (un/une/des) e <strong>partitivo</strong> (du/de la/des). Em francês, o substantivo quase nunca aparece sem artigo.</p>\n<h3>Quadro geral</h3><div class=\"tabela-wrap\"><table><thead><tr><th></th><th>Défini</th><th>Indéfini</th><th>Partitif</th></tr></thead><tbody><tr><td>masc. sing.</td><td><span class=\"fr\" data-fr=\"le\">le</span></td><td><span class=\"fr\" data-fr=\"un\">un</span></td><td><span class=\"fr\" data-fr=\"du\">du</span></td></tr><tr><td>fem. sing.</td><td><span class=\"fr\" data-fr=\"la\">la</span></td><td><span class=\"fr\" data-fr=\"une\">une</span></td><td><span class=\"fr\" data-fr=\"de la\">de la</span></td></tr><tr><td>antes de vogal/h mudo</td><td><span class=\"fr\" data-fr=\"l'\">l'</span></td><td>un / une</td><td><span class=\"fr\" data-fr=\"de l'\">de l'</span></td></tr><tr><td>plural</td><td><span class=\"fr\" data-fr=\"les\">les</span></td><td><span class=\"fr\" data-fr=\"des\">des</span></td><td><span class=\"fr\" data-fr=\"des\">des</span></td></tr></tbody></table></div>\n<h3>Quando usar cada um</h3>\n<ul>\n<li><strong>Défini</strong>: coisa específica, conhecida, ou categoria geral: <span class=\"fr\" data-fr=\"Le livre est sur la table.\">Le livre est sur la table.</span> <span class=\"fr\" data-fr=\"J'aime le café.\">J'aime le café.</span></li>\n<li><strong>Indéfini</strong>: coisa contável, não específica, primeira menção: <span class=\"fr\" data-fr=\"J'ai un livre.\">J'ai un livre.</span> <span class=\"fr\" data-fr=\"Il y a des enfants dans le parc.\">Il y a des enfants dans le parc.</span></li>\n<li><strong>Partitif</strong>: quantidade indefinida de algo incontável: <span class=\"fr\" data-fr=\"Je mange du pain.\">Je mange du pain.</span> <span class=\"fr\" data-fr=\"Je bois de l'eau.\">Je bois de l'eau.</span></li>\n</ul>\n<div class=\"destaque\">O partitivo não existe em português: <span class=\"fr\" data-fr=\"Je mange du pain\">Je mange du pain</span> = \"como pão\" (sem artigo). Não deixe o artigo de fora em francês!</div>\n<h3>Partitif × contraction avec DE</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Partitif (quantidade)</th><th>Contração (de + le/les)</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"du pain\">du pain</span> (pão)</td><td><span class=\"fr\" data-fr=\"du bureau\">du bureau</span> (do escritório)</td></tr><tr><td><span class=\"fr\" data-fr=\"des fraises\">des fraises</span> (morangos)</td><td><span class=\"fr\" data-fr=\"des enfants\">des enfants</span> (das crianças)</td></tr></tbody></table></div>\n<h3>Contrações com À e DE</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th></th><th>Vira</th><th>Exemplo</th></tr></thead><tbody><tr><td>à + le</td><td><strong>au</strong></td><td><span class=\"fr\" data-fr=\"au cinéma\">au cinéma</span></td></tr><tr><td>à + la</td><td>à la</td><td><span class=\"fr\" data-fr=\"à la piscine\">à la piscine</span></td></tr><tr><td>à + l'</td><td>à l'</td><td><span class=\"fr\" data-fr=\"à l'école\">à l'école</span></td></tr><tr><td>à + les</td><td><strong>aux</strong></td><td><span class=\"fr\" data-fr=\"aux toilettes\">aux toilettes</span></td></tr><tr><td>de + le</td><td><strong>du</strong></td><td><span class=\"fr\" data-fr=\"du bureau\">du bureau</span></td></tr><tr><td>de + la</td><td>de la</td><td><span class=\"fr\" data-fr=\"de la piscine\">de la piscine</span></td></tr><tr><td>de + l'</td><td>de l'</td><td><span class=\"fr\" data-fr=\"de l'école\">de l'école</span></td></tr><tr><td>de + les</td><td><strong>des</strong></td><td><span class=\"fr\" data-fr=\"des enfants\">des enfants</span></td></tr></tbody></table></div>\n<div class=\"dica\">À também substitui \"com\" em comidas: <span class=\"fr\" data-fr=\"un café au lait\">un café au lait</span>, <span class=\"fr\" data-fr=\"une tarte aux pommes\">une tarte aux pommes</span>.</div>\n<h3>La négation des articles</h3>\n<ul>\n<li>Na negação, <strong>un / une / du / de la / des → de</strong> (d' antes de vogal): <span class=\"fr\" data-fr=\"J'ai un stylo.\">J'ai un stylo.</span> → <span class=\"fr\" data-fr=\"Je n'ai pas de stylo.\">Je n'ai pas de stylo.</span></li>\n<li>O artigo <strong>definido não muda</strong>: <span class=\"fr\" data-fr=\"Je n'aime pas le café.\">Je n'aime pas le café.</span></li>\n<li>Exceção 1: com <strong>être</strong> o artigo não muda: <span class=\"fr\" data-fr=\"Ce n'est pas un stylo.\">Ce n'est pas un stylo.</span></li>\n<li>Exceção 2: com oposição (<strong>mais</strong>): <span class=\"fr\" data-fr=\"Je ne bois pas du café, mais du thé.\">Je ne bois pas du café, mais du thé.</span></li>\n</ul>"
+  },
+  {
+   "id": "reliez",
+   "tipo": "exercicio",
+   "titulo": "Reliez",
+   "instrucao": "Ligue cada artigo à sua função.",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 1",
+     "pares": [
+      {
+       "a": "le",
+       "b": "artigo definido, masculino singular"
+      },
+      {
+       "a": "la",
+       "b": "artigo definido, feminino singular"
+      },
+      {
+       "a": "les",
+       "b": "artigo definido, plural"
+      },
+      {
+       "a": "l'",
+       "b": "artigo definido, antes de vogal/h mudo"
+      },
+      {
+       "a": "un",
+       "b": "artigo indefinido, masculino singular"
+      },
+      {
+       "a": "une",
+       "b": "artigo indefinido, feminino singular"
+      },
+      {
+       "a": "des",
+       "b": "artigo indefinido plural (ou contração de+les)"
+      },
+      {
+       "a": "du",
+       "b": "artigo partitivo masc. (ou contração de+le)"
+      },
+      {
+       "a": "de la",
+       "b": "artigo partitivo, feminino singular"
+      },
+      {
+       "a": "de l'",
+       "b": "artigo partitivo, antes de vogal/h mudo"
+      }
+     ]
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 2",
+     "pares": [
+      {
+       "a": "au",
+       "b": "contração de à + le"
+      },
+      {
+       "a": "aux",
+       "b": "contração de à + les"
+      },
+      {
+       "a": "à la",
+       "b": "sem contração (feminino singular)"
+      },
+      {
+       "a": "à l'",
+       "b": "sem contração (antes de vogal)"
+      },
+      {
+       "a": "je vais au cinéma",
+       "b": "exemplo de contração à+le"
+      },
+      {
+       "a": "je reviens du bureau",
+       "b": "exemplo de contração de+le"
+      },
+      {
+       "a": "je mange du pain",
+       "b": "exemplo de partitivo (masc. singular)"
+      },
+      {
+       "a": "je bois de l'eau",
+       "b": "exemplo de partitivo (antes de vogal)"
+      },
+      {
+       "a": "j'aime le chocolat",
+       "b": "exemplo de artigo definido (gosto geral)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "contractions",
+   "tipo": "exercicio",
+   "titulo": "Contractions",
+   "instrucao": "Escolha a contração certa.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Je vais ",
+     "depois": " cinéma ce soir. (à+le)",
+     "opcoes": [
+      "au",
+      "à la",
+      "à l'"
+     ],
+     "resposta": "au",
+     "explicacao": "À + le = AU (ao): je vais au cinéma.",
+     "audioCorrecao": "Je vais au cinéma ce soir."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle va ",
+     "depois": " piscine tous les matins. (à+la)",
+     "opcoes": [
+      "à la",
+      "au",
+      "aux"
+     ],
+     "resposta": "à la",
+     "explicacao": "À + la não muda: à la piscine.",
+     "audioCorrecao": "Elle va à la piscine tous les matins."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous allons ",
+     "depois": " école ensemble. (à+l')",
+     "opcoes": [
+      "à l'",
+      "au",
+      "aux"
+     ],
+     "resposta": "à l'",
+     "explicacao": "À + l' não muda: à l'école.",
+     "audioCorrecao": "Nous allons à l'école ensemble."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il parle ",
+     "depois": " employés de l'entreprise. (à+les)",
+     "opcoes": [
+      "aux",
+      "au",
+      "à les"
+     ],
+     "resposta": "aux",
+     "explicacao": "À + les = AUX (aos/às): aux toilettes.",
+     "audioCorrecao": "Il parle aux employés de l'entreprise."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je reviens ",
+     "depois": " bureau. (de+le)",
+     "opcoes": [
+      "du",
+      "de la",
+      "de l'"
+     ],
+     "resposta": "du",
+     "explicacao": "Partitivo (masc.): quantidade indefinida de algo incontável (pão, café...). Também pode ser de + le.",
+     "audioCorrecao": "Je reviens du bureau."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle revient ",
+     "depois": " piscine. (de+la)",
+     "opcoes": [
+      "de la",
+      "du",
+      "des"
+     ],
+     "resposta": "de la",
+     "explicacao": "Partitivo (fem.): quantidade indefinida de algo incontável (de la viande, de la musique).",
+     "audioCorrecao": "Elle revient de la piscine."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils reviennent ",
+     "depois": " école. (de+l')",
+     "opcoes": [
+      "de l'",
+      "du",
+      "des"
+     ],
+     "resposta": "de l'",
+     "explicacao": "Partitivo antes de vogal: de l'eau, de l'argent.",
+     "audioCorrecao": "Ils reviennent de l'école."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous parlons ",
+     "depois": " projets de l'équipe. (de+les)",
+     "opcoes": [
+      "des",
+      "du",
+      "de les"
+     ],
+     "resposta": "des",
+     "explicacao": "Plural de un/une (ou de + les / partitivo plural).",
+     "audioCorrecao": "Nous parlons des projets de l'équipe."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est le sac ",
+     "depois": " directeur. (de+le)",
+     "opcoes": [
+      "du",
+      "de la",
+      "des"
+     ],
+     "resposta": "du",
+     "explicacao": "Partitivo (masc.): quantidade indefinida de algo incontável (pão, café...). Também pode ser de + le.",
+     "audioCorrecao": "C'est le sac du directeur."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Voici la voiture ",
+     "depois": " employés. (de+les)",
+     "opcoes": [
+      "des",
+      "du",
+      "de la"
+     ],
+     "resposta": "des",
+     "explicacao": "Plural de un/une (ou de + les / partitivo plural).",
+     "audioCorrecao": "Voici la voiture des employés."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle téléphone ",
+     "depois": " candidats sélectionnés. (à+les)",
+     "opcoes": [
+      "aux",
+      "au",
+      "à les"
+     ],
+     "resposta": "aux",
+     "explicacao": "À + les = AUX (aos/às): aux toilettes.",
+     "audioCorrecao": "Elle téléphone aux candidats sélectionnés."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il pense toujours ",
+     "depois": " avenir de l'entreprise. (à+le)",
+     "opcoes": [
+      "au",
+      "à la",
+      "aux"
+     ],
+     "resposta": "au",
+     "explicacao": "À + le = AU (ao): je vais au cinéma.",
+     "audioCorrecao": "Il pense toujours au avenir de l'entreprise."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous allons ",
+     "depois": " réunion à quatorze heures. (à+la)",
+     "opcoes": [
+      "à la",
+      "au",
+      "aux"
+     ],
+     "resposta": "à la",
+     "explicacao": "À + la não muda: à la piscine.",
+     "audioCorrecao": "Nous allons à la réunion à quatorze heures."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle parle ",
+     "depois": " secrétaire tous les jours. (à+la)",
+     "opcoes": [
+      "à la",
+      "au",
+      "aux"
+     ],
+     "resposta": "à la",
+     "explicacao": "À + la não muda: à la piscine.",
+     "audioCorrecao": "Elle parle à la secrétaire tous les jours."
+    }
+   ]
+  },
+  {
+   "id": "selection",
+   "tipo": "exercicio",
+   "titulo": "Sélection",
+   "instrucao": "Definido, indefinido ou partitivo?",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " pain est sur la table.",
+     "opcoes": [
+      "Le",
+      "Un",
+      "Du"
+     ],
+     "resposta": "Le",
+     "explicacao": "Artigo definido (masc.): algo específico ou uma categoria em geral (j'aime le café).",
+     "audioCorrecao": "Le pain est sur la table."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je mange ",
+     "depois": " pain le matin.",
+     "opcoes": [
+      "du",
+      "le",
+      "un"
+     ],
+     "resposta": "du",
+     "explicacao": "Partitivo (masc.): quantidade indefinida de algo incontável (pão, café...). Também pode ser de + le.",
+     "audioCorrecao": "Je mange du pain le matin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il y a ",
+     "depois": " livre intéressant sur ce sujet.",
+     "opcoes": [
+      "un",
+      "le",
+      "du"
+     ],
+     "resposta": "un",
+     "explicacao": "Artigo indefinido (masc.): algo contável, não específico ou mencionado pela primeira vez.",
+     "audioCorrecao": "Il y a un livre intéressant sur ce sujet."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "J'aime beaucoup ",
+     "depois": " café le matin.",
+     "opcoes": [
+      "le",
+      "un",
+      "du"
+     ],
+     "resposta": "le",
+     "explicacao": "Artigo definido (masc.): algo específico ou uma categoria em geral (j'aime le café).",
+     "audioCorrecao": "J'aime beaucoup le café le matin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je bois toujours ",
+     "depois": " café avant le travail.",
+     "opcoes": [
+      "du",
+      "le",
+      "un"
+     ],
+     "resposta": "du",
+     "explicacao": "Partitivo (masc.): quantidade indefinida de algo incontável (pão, café...). Também pode ser de + le.",
+     "audioCorrecao": "Je bois toujours du café avant le travail."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle a ",
+     "depois": " expérience dans ce domaine.",
+     "opcoes": [
+      "de l'",
+      "de la",
+      "du"
+     ],
+     "resposta": "de l'",
+     "explicacao": "Partitivo antes de vogal: de l'eau, de l'argent.",
+     "audioCorrecao": "Elle a de l'expérience dans ce domaine."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous allons ",
+     "depois": " cinéma ce week-end.",
+     "opcoes": [
+      "au",
+      "à le",
+      "à la"
+     ],
+     "resposta": "au",
+     "explicacao": "À + le = AU (ao): je vais au cinéma.",
+     "audioCorrecao": "Nous allons au cinéma ce week-end."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le directeur parle ",
+     "depois": " nouveaux employés.",
+     "opcoes": [
+      "aux",
+      "au",
+      "à les"
+     ],
+     "resposta": "aux",
+     "explicacao": "À + les = AUX (aos/às): aux toilettes.",
+     "audioCorrecao": "Le directeur parle aux nouveaux employés."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est le bureau ",
+     "depois": " directeur.",
+     "opcoes": [
+      "du",
+      "de le",
+      "de la"
+     ],
+     "resposta": "du",
+     "explicacao": "Partitivo (masc.): quantidade indefinida de algo incontável (pão, café...). Também pode ser de + le.",
+     "audioCorrecao": "C'est le bureau du directeur."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Voici les documents ",
+     "depois": " candidats.",
+     "opcoes": [
+      "des",
+      "du",
+      "de les"
+     ],
+     "resposta": "des",
+     "explicacao": "Plural de un/une (ou de + les / partitivo plural).",
+     "audioCorrecao": "Voici les documents des candidats."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle mange ",
+     "depois": " salade tous les jours.",
+     "opcoes": [
+      "de la",
+      "du",
+      "une"
+     ],
+     "resposta": "de la",
+     "explicacao": "Partitivo (fem.): quantidade indefinida de algo incontável (de la viande, de la musique).",
+     "audioCorrecao": "Elle mange de la salade tous les jours."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il y a ",
+     "depois": " enfants dans la salle.",
+     "opcoes": [
+      "des",
+      "les",
+      "du"
+     ],
+     "resposta": "des",
+     "explicacao": "Plural de un/une (ou de + les / partitivo plural).",
+     "audioCorrecao": "Il y a des enfants dans la salle."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je reviens ",
+     "depois": " réunion importante.",
+     "opcoes": [
+      "de la",
+      "du",
+      "de l'"
+     ],
+     "resposta": "de la",
+     "explicacao": "Partitivo (fem.): quantidade indefinida de algo incontável (de la viande, de la musique).",
+     "audioCorrecao": "Je reviens de la réunion importante."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " candidat est très motivé.",
+     "opcoes": [
+      "Le",
+      "Un",
+      "Du"
+     ],
+     "resposta": "Le",
+     "explicacao": "Artigo definido (masc.): algo específico ou uma categoria em geral (j'aime le café).",
+     "audioCorrecao": "Le candidat est très motivé."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle cherche ",
+     "depois": " nouvel emploi.",
+     "opcoes": [
+      "un",
+      "le",
+      "du"
+     ],
+     "resposta": "un",
+     "explicacao": "Artigo indefinido (masc.): algo contável, não específico ou mencionado pela primeira vez.",
+     "audioCorrecao": "Elle cherche un nouvel emploi."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous avons besoin ",
+     "depois": " formation professionnelle.",
+     "opcoes": [
+      "d'une",
+      "de la",
+      "d'un"
+     ],
+     "resposta": "d'une",
+     "explicacao": "Avoir besoin DE + une formation = besoin d'une formation: o DE da expressão se junta ao artigo indefinido (d'un / d'une).",
+     "audioCorrecao": "Nous avons besoin d'une formation professionnelle."
+    }
+   ]
+  },
+  {
+   "id": "negation",
+   "tipo": "exercicio",
+   "titulo": "La négation",
+   "instrucao": "O que acontece com o artigo na negação?",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "J'ai un stylo. → Je n'ai pas ",
+     "depois": " stylo.",
+     "opcoes": [
+      "de",
+      "un",
+      "du"
+     ],
+     "resposta": "de",
+     "explicacao": "Na negação (ne... pas), un/une/du/de la/des viram DE (d' antes de vogal): je n'ai pas de stylo.",
+     "audioCorrecao": "J'ai un stylo. → Je n'ai pas de stylo."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il mange du pain. → Il ne mange pas ",
+     "depois": " pain.",
+     "opcoes": [
+      "de",
+      "du",
+      "un"
+     ],
+     "resposta": "de",
+     "explicacao": "Na negação (ne... pas), un/une/du/de la/des viram DE (d' antes de vogal): je n'ai pas de stylo.",
+     "audioCorrecao": "Il mange du pain. → Il ne mange pas de pain."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle a une voiture. → Elle n'a pas ",
+     "depois": " voiture.",
+     "opcoes": [
+      "de",
+      "une",
+      "des"
+     ],
+     "resposta": "de",
+     "explicacao": "Na negação (ne... pas), un/une/du/de la/des viram DE (d' antes de vogal): je n'ai pas de stylo.",
+     "audioCorrecao": "Elle a une voiture. → Elle n'a pas de voiture."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il y a des enfants. → Il n'y a pas ",
+     "depois": "enfants.",
+     "opcoes": [
+      "d'",
+      "des",
+      "de"
+     ],
+     "resposta": "d'",
+     "explicacao": "Na negação (ne... pas), un/une/du/de la/des viram DE (d' antes de vogal): je n'ai pas de stylo.",
+     "audioCorrecao": "Il y a des enfants. → Il n'y a pas d'enfants."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je bois de l'eau. → Je ne bois pas ",
+     "depois": "eau.",
+     "opcoes": [
+      "d'",
+      "de l'",
+      "du"
+     ],
+     "resposta": "d'",
+     "explicacao": "Na negação (ne... pas), un/une/du/de la/des viram DE (d' antes de vogal): je n'ai pas de stylo.",
+     "audioCorrecao": "Je bois de l'eau. → Je ne bois pas d'eau."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " un problème, c'est une catastrophe.",
+     "opcoes": [
+      "Ce n'est pas",
+      "Il n'y a pas de"
+     ],
+     "resposta": "Ce n'est pas",
+     "explicacao": "Com etre, o artigo nao muda para de.",
+     "audioCorrecao": "Ce n'est pas un problème, c'est une catastrophe."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je ne veux pas de café, mais ",
+     "depois": " thé.",
+     "opcoes": [
+      "du",
+      "de",
+      "un"
+     ],
+     "resposta": "du",
+     "explicacao": "Depois de mais, a parte afirmativa mantem o artigo normal.",
+     "audioCorrecao": "Je ne veux pas de café, mais du thé."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ce n'est pas de la confiture, mais ",
+     "depois": " miel.",
+     "opcoes": [
+      "du",
+      "de",
+      "un"
+     ],
+     "resposta": "du",
+     "explicacao": "Exceção: com ÊTRE (ou em oposição com 'mais') o artigo não muda: ce n'est pas un stylo, c'est un crayon.",
+     "audioCorrecao": "Ce n'est pas de la confiture, mais du miel."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous avons des collègues sympas. → Nous n'avons pas ",
+     "depois": "collègues sympas.",
+     "opcoes": [
+      "de",
+      "des",
+      "d'"
+     ],
+     "resposta": "de",
+     "explicacao": "Na negação (ne... pas), un/une/du/de la/des viram DE (d' antes de vogal): je n'ai pas de stylo.",
+     "audioCorrecao": "Nous avons des collègues sympas. → Nous n'avons pas decollègues sympas."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " un bon candidat, c'est un excellent candidat.",
+     "opcoes": [
+      "Ce n'est pas",
+      "Il n'y a pas de"
+     ],
+     "resposta": "Ce n'est pas",
+     "explicacao": "Exceção: com ÊTRE (ou em oposição com 'mais') o artigo não muda: ce n'est pas un stylo, c'est un crayon.",
+     "audioCorrecao": "Ce n'est pas un bon candidat, c'est un excellent candidat."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle mange de la salade. → Elle ne mange pas ",
+     "depois": " salade.",
+     "opcoes": [
+      "de",
+      "de la",
+      "du"
+     ],
+     "resposta": "de",
+     "explicacao": "Na negação (ne... pas), un/une/du/de la/des viram DE (d' antes de vogal): je n'ai pas de stylo.",
+     "audioCorrecao": "Elle mange de la salade. → Elle ne mange pas de salade."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "J'ai une formation. → Je n'ai pas ",
+     "depois": " formation.",
+     "opcoes": [
+      "de",
+      "une",
+      "des"
+     ],
+     "resposta": "de",
+     "explicacao": "Na negação (ne... pas), un/une/du/de la/des viram DE (d' antes de vogal): je n'ai pas de stylo.",
+     "audioCorrecao": "J'ai une formation. → Je n'ai pas de formation."
+    }
+   ]
+  },
+  {
+   "id": "digiter",
+   "tipo": "exercicio",
+   "titulo": "Digitez",
+   "instrucao": "Escreva o artigo certo (sem as opções).",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "Je mange ",
+     "depois": " (du/le) pain tous les matins.",
+     "respostas": [
+      "du"
+     ],
+     "explicacao": "Partitivo (masc.): quantidade indefinida de algo incontável (pão, café...). Também pode ser de + le.",
+     "audioCorrecao": "Je mange du pain tous les matins."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " (Le/Un) soleil brille aujourd'hui.",
+     "respostas": [
+      "Le"
+     ],
+     "explicacao": "Artigo definido (masc.): algo específico ou uma categoria em geral (j'aime le café).",
+     "audioCorrecao": "Le soleil brille aujourd'hui."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle a acheté ",
+     "depois": " (un/le) nouvel ordinateur. (une/un)",
+     "respostas": [
+      "un"
+     ],
+     "explicacao": "Artigo indefinido (masc.): algo contável, não específico ou mencionado pela primeira vez.",
+     "audioCorrecao": "Elle a acheté un nouvel ordinateur."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Nous allons ",
+     "depois": " (au/à la) bureau tous les jours.",
+     "respostas": [
+      "au"
+     ],
+     "explicacao": "À + le = AU (ao): je vais au cinéma.",
+     "audioCorrecao": "Nous allons au bureau tous les jours."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il revient ",
+     "depois": " (du/de la) réunion.",
+     "respostas": [
+      "de la"
+     ],
+     "explicacao": "Partitivo (fem.): quantidade indefinida de algo incontável (de la viande, de la musique).",
+     "audioCorrecao": "Il revient de la réunion."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle parle ",
+     "depois": " (aux/au) employés.",
+     "respostas": [
+      "aux"
+     ],
+     "explicacao": "À + les = AUX (aos/às): aux toilettes.",
+     "audioCorrecao": "Elle parle aux employés."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "C'est la voiture ",
+     "depois": " (du/de la) directeur.",
+     "respostas": [
+      "du"
+     ],
+     "explicacao": "Partitivo (masc.): quantidade indefinida de algo incontável (pão, café...). Também pode ser de + le.",
+     "audioCorrecao": "C'est la voiture du directeur."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Je bois ",
+     "depois": " (de l'/du) eau tous les jours.",
+     "respostas": [
+      "de l'"
+     ],
+     "explicacao": "Partitivo antes de vogal: de l'eau, de l'argent.",
+     "audioCorrecao": "Je bois de l'eau tous les jours."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " (L'/Le) entretien commence à quatorze heures.",
+     "respostas": [
+      "L'"
+     ],
+     "explicacao": "Artigo definido antes de vogal ou h mudo.",
+     "audioCorrecao": "L'entretien commence à quatorze heures."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Nous avons ",
+     "depois": " (des/les) nouveaux collègues.",
+     "respostas": [
+      "des"
+     ],
+     "explicacao": "Plural de un/une (ou de + les / partitivo plural).",
+     "audioCorrecao": "Nous avons des nouveaux collègues."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle a ",
+     "depois": " (de l'/du) expérience dans ce métier.",
+     "respostas": [
+      "de l'"
+     ],
+     "explicacao": "Partitivo antes de vogal: de l'eau, de l'argent.",
+     "audioCorrecao": "Elle a de l'expérience dans ce métier."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il cherche ",
+     "depois": " (un/le) emploi stable.",
+     "respostas": [
+      "un"
+     ],
+     "explicacao": "Artigo indefinido (masc.): algo contável, não específico ou mencionado pela primeira vez.",
+     "audioCorrecao": "Il cherche un emploi stable."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "J'aime ",
+     "depois": " (le/un) chocolat.",
+     "respostas": [
+      "le"
+     ],
+     "explicacao": "Artigo definido (masc.): algo específico ou uma categoria em geral (j'aime le café).",
+     "audioCorrecao": "J'aime le chocolat."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle mange ",
+     "depois": " (de la/la) salade au déjeuner.",
+     "respostas": [
+      "de la"
+     ],
+     "explicacao": "Partitivo (fem.): quantidade indefinida de algo incontável (de la viande, de la musique).",
+     "audioCorrecao": "Elle mange de la salade au déjeuner."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Nous pensons souvent ",
+     "depois": " (à l'/au) avenir de l'entreprise.",
+     "respostas": [
+      "à l'"
+     ],
+     "explicacao": "À + l' não muda: à l'école.",
+     "audioCorrecao": "Nous pensons souvent à l'avenir de l'entreprise."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Voici les projets ",
+     "depois": " (des/du) collègues.",
+     "respostas": [
+      "des"
+     ],
+     "explicacao": "Plural de un/une (ou de + les / partitivo plural).",
+     "audioCorrecao": "Voici les projets des collègues."
+    }
+   ]
+  },
+  {
+   "id": "transformez",
+   "tipo": "exercicio",
+   "titulo": "Traduisez",
+   "instrucao": "Traduza a frase para o francês, com o artigo certo.",
+   "itens": [
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Eu tomo <span class='pt-hint' title='café'>café</span> toda manhã.</div>",
+     "respostas": [
+      "je bois du café tous les matins",
+      "je bois du café tous les matins."
+     ],
+     "mostrar": "Je bois du café tous les matins.",
+     "explicacao": "Tradução modelo: Je bois du café tous les matins.",
+     "audioCorrecao": "Je bois du café tous les matins.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ela vai ao <span class='pt-hint' title='bureau'>escritório</span> às oito horas.</div>",
+     "respostas": [
+      "elle va au bureau à huit heures",
+      "elle va au bureau à huit heures."
+     ],
+     "mostrar": "Elle va au bureau à huit heures.",
+     "explicacao": "Tradução modelo: Elle va au bureau à huit heures.",
+     "audioCorrecao": "Elle va au bureau à huit heures.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Nós temos uma <span class='pt-hint' title='réunion'>reunião</span> importante hoje.</div>",
+     "respostas": [
+      "nous avons une réunion importante aujourd'hui",
+      "nous avons une réunion importante aujourd'hui."
+     ],
+     "mostrar": "Nous avons une réunion importante aujourd'hui.",
+     "explicacao": "Tradução modelo: Nous avons une réunion importante aujourd'hui.",
+     "audioCorrecao": "Nous avons une réunion importante aujourd'hui.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ele volta do <span class='pt-hint' title='bureau'>escritório</span> às seis horas.</div>",
+     "respostas": [
+      "il revient du bureau à six heures",
+      "il revient du bureau à six heures."
+     ],
+     "mostrar": "Il revient du bureau à six heures.",
+     "explicacao": "Tradução modelo: Il revient du bureau à six heures.",
+     "audioCorrecao": "Il revient du bureau à six heures.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ela tem <span class='pt-hint' title='expérience'>experiência</span> nessa área.</div>",
+     "respostas": [
+      "elle a de l'expérience dans ce domaine",
+      "elle a de l'expérience dans ce domaine."
+     ],
+     "mostrar": "Elle a de l'expérience dans ce domaine.",
+     "explicacao": "Tradução modelo: Elle a de l'expérience dans ce domaine.",
+     "audioCorrecao": "Elle a de l'expérience dans ce domaine.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Eu gosto muito do <span class='pt-hint' title='chocolat'>chocolate</span>.</div>",
+     "respostas": [
+      "j'aime beaucoup le chocolat",
+      "j'aime beaucoup le chocolat."
+     ],
+     "mostrar": "J'aime beaucoup le chocolat.",
+     "explicacao": "Tradução modelo: J'aime beaucoup le chocolat.",
+     "audioCorrecao": "J'aime beaucoup le chocolat.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ela fala com os <span class='pt-hint' title='employés'>funcionários</span> todos os dias.</div>",
+     "respostas": [
+      "elle parle aux employés tous les jours",
+      "elle parle aux employés tous les jours."
+     ],
+     "mostrar": "Elle parle aux employés tous les jours.",
+     "explicacao": "Tradução modelo: Elle parle aux employés tous les jours.",
+     "audioCorrecao": "Elle parle aux employés tous les jours.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Este é o carro do <span class='pt-hint' title='directeur'>diretor</span>.</div>",
+     "respostas": [
+      "c'est la voiture du directeur",
+      "c'est la voiture du directeur."
+     ],
+     "mostrar": "C'est la voiture du directeur.",
+     "explicacao": "Tradução modelo: C'est la voiture du directeur.",
+     "audioCorrecao": "C'est la voiture du directeur.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ela procura um novo <span class='pt-hint' title='emploi'>emprego</span>.</div>",
+     "respostas": [
+      "elle cherche un nouvel emploi",
+      "elle cherche un nouvel emploi."
+     ],
+     "mostrar": "Elle cherche un nouvel emploi.",
+     "explicacao": "Tradução modelo: Elle cherche un nouvel emploi.",
+     "audioCorrecao": "Elle cherche un nouvel emploi.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Nós precisamos de uma <span class='pt-hint' title='formation'>formação</span> profissional.</div>",
+     "respostas": [
+      "nous avons besoin d'une formation professionnelle",
+      "nous avons besoin d'une formation professionnelle."
+     ],
+     "mostrar": "Nous avons besoin d'une formation professionnelle.",
+     "explicacao": "Tradução modelo: Nous avons besoin d'une formation professionnelle.",
+     "audioCorrecao": "Nous avons besoin d'une formation professionnelle.",
+     "placeholder": "Escreva a frase em francês"
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "Une matinée chargée",
+   "instrucao": "Leia, ouça e repare nos artigos.",
+   "paragrafos": [
+    "Ce matin, Sophie se réveille tôt. Elle prend du café et mange un croissant. Puis elle va au bureau, où elle a une réunion importante avec le directeur.",
+    "Après la réunion, elle revient du bureau pour déjeuner. Elle boit de l'eau et mange de la salade. Elle parle des projets avec ses collègues, et tout le monde donne son avis.",
+    "L'après-midi, Sophie va à l'entretien d'un nouveau candidat. « Vous avez de l'expérience dans ce domaine ? » demande-t-elle. Le candidat répond avec confiance.",
+    "À la fin de la journée, elle parle aux employés de la nouvelle formation. « C'est une excellente opportunité pour vous », dit-elle. Puis elle rentre à la maison, fatiguée mais satisfaite de sa matinée chargée."
+   ],
+   "glossario": {
+    "reveille": "acorda",
+    "croissant": "croissant, pao doce",
+    "reunion": "reuniao",
+    "directeur": "diretor",
+    "dejeuner": "almocar, almoco",
+    "salade": "salada",
+    "projets": "projetos",
+    "collegues": "colegas",
+    "avis": "opiniao",
+    "entretien": "entrevista",
+    "candidat": "candidato",
+    "experience": "experiencia",
+    "domaine": "area, dominio",
+    "confiance": "confianca",
+    "employes": "funcionarios",
+    "formation": "formacao",
+    "opportunite": "oportunidade",
+    "chargee": "cheia, atarefada"
+   }
+  },
+  {
+   "id": "quiz",
+   "tipo": "exercicio",
+   "titulo": "Compréhension",
+   "instrucao": "Sobre o texto \"Une matinée chargée\".",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "O que Sophie toma de manhã, além do café ?",
+     "opcoes": [
+      "Un croissant",
+      "Une salade",
+      "Du chocolat"
+     ],
+     "resposta": "Un croissant",
+     "explicacao": "« Elle prend du café et mange un croissant. » Croissant é contável: UN croissant."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Com quem Sophie tem uma reunião importante ?",
+     "opcoes": [
+      "Le directeur",
+      "Un candidat",
+      "Ses parents"
+     ],
+     "resposta": "Le directeur",
+     "explicacao": "« Elle a une réunion importante avec le directeur. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que Sophie bebe no almoço ?",
+     "opcoes": [
+      "De l'eau",
+      "Du café",
+      "Du vin"
+     ],
+     "resposta": "De l'eau",
+     "explicacao": "« Elle boit de l'eau et mange de la salade. » Partitivo antes de vogal: DE L'eau."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Sobre o que Sophie fala com os colegas no almoço ?",
+     "opcoes": [
+      "Des projets",
+      "Du week-end",
+      "Des vacances"
+     ],
+     "resposta": "Des projets",
+     "explicacao": "« Elle parle des projets avec ses collègues. » Aqui DES = de + les (parler DE qqch)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que Sophie pergunta ao candidato ?",
+     "opcoes": [
+      "Se ele tem experiência na área",
+      "Qual é o salário desejado",
+      "Onde ele mora"
+     ],
+     "resposta": "Se ele tem experiência na área",
+     "explicacao": "« Vous avez de l'expérience dans ce domaine ? »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Do que Sophie fala com os funcionários no fim do dia ?",
+     "opcoes": [
+      "De la nouvelle formation",
+      "Du nouveau bureau",
+      "Des vacances"
+     ],
+     "resposta": "De la nouvelle formation",
+     "explicacao": "« Elle parle aux employés de la nouvelle formation. » Parler À qqn (aux employés) DE qqch (de la formation)."
+    }
+   ]
+  }
+ ]
+}

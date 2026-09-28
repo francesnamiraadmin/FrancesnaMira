@@ -9,7 +9,7 @@ const ArquivoDeverSchema = new mongoose.Schema({
 const TIPOS_ATIVIDADE = [
   "upload_arquivo", "video", "imagem", "link_externo", "texto", "leitura",
   "exercicio_lista", "questoes_plataforma", "producao_textual", "producao_oral",
-  "assistir_aula", "assistir_modulo", "simulado", "recurso_generico"
+  "assistir_aula", "assistir_modulo", "simulado", "recurso_generico", "exercicio_interativo"
 ];
 
 // Mesmo padrão de "tipo enum + campos opcionais por tipo" já usado em
@@ -22,7 +22,9 @@ const ConteudoAtividadeSchema = new mongoose.Schema({
   temaId: { type: mongoose.Schema.Types.ObjectId, ref: "Tema" },
   aulaId: { type: mongoose.Schema.Types.ObjectId, ref: "Aula" },
   moduloId: { type: mongoose.Schema.Types.ObjectId, ref: "Modulo" },
-  conjuntoId: { type: mongoose.Schema.Types.ObjectId, ref: "Conjunto" }
+  conjuntoId: { type: mongoose.Schema.Types.ObjectId, ref: "Conjunto" },
+  // "exercicio_interativo": slug de backend/data/exercicios/<slug>.js
+  exercicioSlug: { type: String }
 }, { _id: false });
 
 // `comEntrega: true` para o dever real (instância por aluno) — o Plano-Base

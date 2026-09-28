@@ -5,3 +5,5 @@ backend/uploads/
 .claude/settings.local.json
 .venv-tts/
 scripts_tts/_tmp.wav
+scripts_tts/__pycache__/
+scripts_tts/_tmp*.wav

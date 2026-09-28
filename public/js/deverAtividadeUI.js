@@ -10,25 +10,31 @@ const DeverUI = (() => {
     exercicio_lista: 'Lista de exercícios', questoes_plataforma: 'Questões da plataforma',
     producao_textual: 'Produção textual', producao_oral: 'Produção oral (áudio)',
     assistir_aula: 'Assistir aula gravada', assistir_modulo: 'Assistir conjunto de aulas',
-    simulado: 'Fazer simulado', recurso_generico: 'Outro recurso da plataforma'
+    simulado: 'Fazer simulado', recurso_generico: 'Outro recurso da plataforma',
+    exercicio_interativo: 'Exercício interativo (corrigido na hora)'
   };
 
   let modulosDisponiveis = [];
   let temasDisponiveis = [];
   let conjuntosDisponiveis = [];
+  let exerciciosDisponiveis = [];
   let contadorBoxId = 0;
   function novoBoxId() { return 'box' + (++contadorBoxId) + '_' + Date.now(); }
 
   async function carregarAuxiliares(authHeadersFn) {
     try {
-      const [resModulos, resTemas, resConjuntos] = await Promise.all([
+      const [resModulos, resTemas, resConjuntos, resExercicios] = await Promise.all([
         fetch('/api/admin-aulas/modulos', { headers: authHeadersFn() }),
         fetch('/api/temas?todos=0', { headers: authHeadersFn() }),
-        fetch('/api/questoes/admin/conjuntos', { headers: authHeadersFn() })
+        fetch('/api/questoes/admin/conjuntos', { headers: authHeadersFn() }),
+        fetch('/api/exercicios', { headers: authHeadersFn() })
       ]);
       modulosDisponiveis = resModulos.ok ? await resModulos.json() : [];
       temasDisponiveis = resTemas.ok ? await resTemas.json() : [];
       conjuntosDisponiveis = resConjuntos.ok ? await resConjuntos.json() : [];
+      exerciciosDisponiveis = resExercicios.ok ? await resExercicios.json() : [];
+      // Os boxes já desenhados antes do catálogo chegar ganham as opções agora.
+      document.querySelectorAll('select[data-conteudo="exercicioSlug"]').forEach(sel => { sel.innerHTML = opcoesExercicio(sel.dataset.atual || sel.value); });
     } catch (err) { /* selects ficam vazios se isso falhar */ }
   }
 
@@ -44,6 +50,10 @@ const DeverUI = (() => {
   function opcoesConjunto(selecionado) {
     return '<option value="">Selecione...</option>' + conjuntosDisponiveis.map(c =>
       `<option value="${c._id}" ${String(selecionado) === String(c._id) ? 'selected' : ''}>${c.nome} (${c.quantidadeQuestoes} questões)</option>`).join('');
+  }
+  function opcoesExercicio(selecionado) {
+    return '<option value="">Selecione...</option>' + exerciciosDisponiveis.map(e =>
+      `<option value="${e.slug}" ${selecionado === e.slug ? 'selected' : ''}>${e.nivel ? '[' + e.nivel + '] ' : ''}${e.titulo}${e.modo === 'prova' ? ' (prova)' : ''}</option>`).join('');
   }
   function opcoesTipo(selecionado) {
     return Object.entries(NOMES_TIPO).map(([valor, nome]) =>
@@ -76,6 +86,7 @@ const DeverUI = (() => {
       <div class="campo campo-conteudo campo-modulo" style="display:none;"><label>Módulo</label><select data-conteudo="moduloId">${opcoesModulo(c.moduloId)}</select></div>
       <div class="campo campo-conteudo campo-aula" style="display:none;"><label>Aula</label><select data-conteudo="aulaId"><option value="">Selecione o módulo primeiro</option></select></div>
       <div class="campo campo-conteudo campo-conjunto" style="display:none;"><label>Conjunto de questões</label><select data-conteudo="conjuntoId">${opcoesConjunto(c.conjuntoId)}</select></div>
+      <div class="campo campo-conteudo campo-exercicio" style="display:none;"><label>Exercício interativo</label><select data-conteudo="exercicioSlug" data-atual="${c.exercicioSlug || ''}">${opcoesExercicio(c.exercicioSlug)}</select></div>
       ${comMaterialUpload ? `<div class="campo campo-conteudo campo-material-upload" style="display:none;">
         <label>Arquivo do material${c.arquivo?.nome ? ' (atual: ' + c.arquivo.nome + ')' : ''}</label>
         <div style="display:flex; gap:8px; align-items:center;">
@@ -103,6 +114,7 @@ const DeverUI = (() => {
     if (tipo === 'assistir_modulo') mostrar('.campo-modulo');
     if (tipo === 'assistir_aula') { mostrar('.campo-modulo'); mostrar('.campo-aula'); }
     if (['questoes_plataforma', 'exercicio_lista', 'simulado'].includes(tipo)) mostrar('.campo-conjunto');
+    if (tipo === 'exercicio_interativo') mostrar('.campo-exercicio');
   }
 
   async function preencherAulasDoModulo(box, moduloId, aulaSelecionada, authHeadersFn) {

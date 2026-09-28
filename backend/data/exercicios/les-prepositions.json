@@ -1,0 +1,931 @@
+{
+ "slug": "les-prepositions",
+ "ordem": 5,
+ "nivel": "A1–A2",
+ "titulo": "Les prépositions",
+ "descricao": "Preposições simples, locuções, lugares geográficos e a famosa CHEZ, com explicação em cada questão.",
+ "secoes": [
+  {
+   "id": "video",
+   "tipo": "video",
+   "titulo": "Vídeo",
+   "youtube": "dXpJ8bOhJlw"
+  },
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir os exemplos.",
+   "html": "\n<p>As preposições ligam palavras e indicam relações de <strong>lugar, tempo, causa, posse e modo</strong>. Muitas não correspondem à preposição usada em português, por isso vale estudar com exemplos.</p>\n<h3>1. Prépositions simples</h3><div class=\"tabela-wrap\"><table><thead><tr><th>Préposition</th><th>Português</th><th>Exemple</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"à\">à</span></td><td>a, para, em (lugar/tempo)</td><td><span class=\"fr\" data-fr=\"Je vais à Paris.\">Je vais à Paris.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"de\">de</span></td><td>de</td><td><span class=\"fr\" data-fr=\"Le livre de Marie.\">Le livre de Marie.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"en\">en</span></td><td>em, de (matéria, país feminino)</td><td><span class=\"fr\" data-fr=\"Il habite en France.\">Il habite en France.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"dans\">dans</span></td><td>dentro de, em</td><td><span class=\"fr\" data-fr=\"Le chat est dans la boîte.\">Le chat est dans la boîte.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"sur\">sur</span></td><td>sobre, em cima de</td><td><span class=\"fr\" data-fr=\"Le livre est sur la table.\">Le livre est sur la table.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"sous\">sous</span></td><td>debaixo de</td><td><span class=\"fr\" data-fr=\"Le chat dort sous la table.\">Le chat dort sous la table.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"chez\">chez</span></td><td>na casa, no consultório de</td><td><span class=\"fr\" data-fr=\"Je vais chez le médecin.\">Je vais chez le médecin.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"avec\">avec</span></td><td>com</td><td><span class=\"fr\" data-fr=\"Je viens avec toi.\">Je viens avec toi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"sans\">sans</span></td><td>sem</td><td><span class=\"fr\" data-fr=\"Un café sans sucre.\">Un café sans sucre.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"pour\">pour</span></td><td>para</td><td><span class=\"fr\" data-fr=\"C’est pour toi.\">C’est pour toi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"par\">par</span></td><td>por</td><td><span class=\"fr\" data-fr=\"Il est passé par Paris.\">Il est passé par Paris.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"vers\">vers</span></td><td>em direção a, por volta de</td><td><span class=\"fr\" data-fr=\"Il marche vers la sortie.\">Il marche vers la sortie.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"entre\">entre</span></td><td>entre (dois elementos)</td><td><span class=\"fr\" data-fr=\"Entre nous.\">Entre nous.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"parmi\">parmi</span></td><td>entre, em meio a (um grupo)</td><td><span class=\"fr\" data-fr=\"Il est parmi les meilleurs.\">Il est parmi les meilleurs.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"contre\">contre</span></td><td>contra</td><td><span class=\"fr\" data-fr=\"Il est contre cette idée.\">Il est contre cette idée.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"avant\">avant</span></td><td>antes de</td><td><span class=\"fr\" data-fr=\"Avant le repas.\">Avant le repas.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"après\">après</span></td><td>depois de</td><td><span class=\"fr\" data-fr=\"Après le film.\">Après le film.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"devant\">devant</span></td><td>na frente de</td><td><span class=\"fr\" data-fr=\"Il est devant la porte.\">Il est devant la porte.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"derrière\">derrière</span></td><td>atrás de</td><td><span class=\"fr\" data-fr=\"Il est derrière la voiture.\">Il est derrière la voiture.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"autour de\">autour de</span></td><td>ao redor de</td><td><span class=\"fr\" data-fr=\"Autour de la table.\">Autour de la table.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"près de\">près de</span></td><td>perto de</td><td><span class=\"fr\" data-fr=\"Près de la gare.\">Près de la gare.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"loin de\">loin de</span></td><td>longe de</td><td><span class=\"fr\" data-fr=\"Loin de chez moi.\">Loin de chez moi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"malgré\">malgré</span></td><td>apesar de</td><td><span class=\"fr\" data-fr=\"Malgré la pluie.\">Malgré la pluie.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"selon\">selon</span></td><td>segundo, de acordo com</td><td><span class=\"fr\" data-fr=\"Selon lui.\">Selon lui.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"sauf\">sauf</span></td><td>exceto</td><td><span class=\"fr\" data-fr=\"Tous, sauf moi.\">Tous, sauf moi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"depuis\">depuis</span></td><td>desde</td><td><span class=\"fr\" data-fr=\"Depuis 2020.\">Depuis 2020.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"pendant\">pendant</span></td><td>durante</td><td><span class=\"fr\" data-fr=\"Pendant les vacances.\">Pendant les vacances.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"durant\">durant</span></td><td>durante (mais formal)</td><td><span class=\"fr\" data-fr=\"Durant la guerre.\">Durant la guerre.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"jusque\">jusque</span></td><td>até</td><td><span class=\"fr\" data-fr=\"Jusque-là.\">Jusque-là.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"jusqu’à\">jusqu’à</span></td><td>até</td><td><span class=\"fr\" data-fr=\"Jusqu’à demain.\">Jusqu’à demain.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"dès\">dès</span></td><td>desde já, a partir de</td><td><span class=\"fr\" data-fr=\"Dès maintenant.\">Dès maintenant.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"hors de\">hors de</span></td><td>fora de</td><td><span class=\"fr\" data-fr=\"Hors de danger.\">Hors de danger.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"excepté\">excepté</span></td><td>exceto</td><td><span class=\"fr\" data-fr=\"Tous, excepté lui.\">Tous, excepté lui.</span></td></tr></tbody></table></div>\n<h3>2. Locutions prépositives</h3><p>Grupos de palavras que funcionam como uma preposição só. Quase todas terminam em <strong>de</strong> ou <strong>à</strong>, que se contraem com o artigo: <span class=\"fr\" data-fr=\"à côté du parc\">à côté du parc</span>, <span class=\"fr\" data-fr=\"en face de la gare\">en face de la gare</span>.</p><div class=\"tabela-wrap\"><table><thead><tr><th>Préposition</th><th>Português</th><th>Exemple</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"à côté de\">à côté de</span></td><td>ao lado de</td><td><span class=\"fr\" data-fr=\"La banque est à côté de la poste.\">La banque est à côté de la poste.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"en face de\">en face de</span></td><td>em frente a</td><td><span class=\"fr\" data-fr=\"L’école est en face du parc.\">L’école est en face du parc.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"au-dessus de\">au-dessus de</span></td><td>acima de</td><td><span class=\"fr\" data-fr=\"L’avion vole au-dessus de la ville.\">L’avion vole au-dessus de la ville.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"au-dessous de\">au-dessous de</span></td><td>abaixo de</td><td><span class=\"fr\" data-fr=\"Le sous-sol est au-dessous du magasin.\">Le sous-sol est au-dessous du magasin.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"à l’intérieur de\">à l’intérieur de</span></td><td>dentro de</td><td><span class=\"fr\" data-fr=\"Il fait chaud à l’intérieur de la maison.\">Il fait chaud à l’intérieur de la maison.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"à l’extérieur de\">à l’extérieur de</span></td><td>fora de</td><td><span class=\"fr\" data-fr=\"Il neige à l’extérieur de la ville.\">Il neige à l’extérieur de la ville.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"au milieu de\">au milieu de</span></td><td>no meio de</td><td><span class=\"fr\" data-fr=\"La fontaine est au milieu de la place.\">La fontaine est au milieu de la place.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"à travers\">à travers</span></td><td>através de</td><td><span class=\"fr\" data-fr=\"Il marche à travers le champ.\">Il marche à travers le champ.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"au bout de\">au bout de</span></td><td>no fim de</td><td><span class=\"fr\" data-fr=\"Au bout de la rue, il y a un café.\">Au bout de la rue, il y a un café.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"au lieu de\">au lieu de</span></td><td>em vez de</td><td><span class=\"fr\" data-fr=\"Il travaille au lieu de se reposer.\">Il travaille au lieu de se reposer.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"à cause de\">à cause de</span></td><td>por causa de</td><td><span class=\"fr\" data-fr=\"Il est en retard à cause de la pluie.\">Il est en retard à cause de la pluie.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"grâce à\">grâce à</span></td><td>graças a</td><td><span class=\"fr\" data-fr=\"Elle a réussi grâce à ses efforts.\">Elle a réussi grâce à ses efforts.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"en raison de\">en raison de</span></td><td>devido a</td><td><span class=\"fr\" data-fr=\"Le vol est annulé en raison de la météo.\">Le vol est annulé en raison de la météo.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"faute de\">faute de</span></td><td>por falta de</td><td><span class=\"fr\" data-fr=\"Faute de temps, il n’a pas fini.\">Faute de temps, il n’a pas fini.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"au sujet de\">au sujet de</span></td><td>a respeito de</td><td><span class=\"fr\" data-fr=\"Ils parlent au sujet du projet.\">Ils parlent au sujet du projet.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"à propos de\">à propos de</span></td><td>a propósito de</td><td><span class=\"fr\" data-fr=\"À propos de ton message, j’ai une question.\">À propos de ton message, j’ai une question.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"en dépit de\">en dépit de</span></td><td>apesar de</td><td><span class=\"fr\" data-fr=\"En dépit du froid, ils sont sortis.\">En dépit du froid, ils sont sortis.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"au cours de\">au cours de</span></td><td>no decorrer de</td><td><span class=\"fr\" data-fr=\"Au cours de la réunion, tout a changé.\">Au cours de la réunion, tout a changé.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"lors de\">lors de</span></td><td>por ocasião de</td><td><span class=\"fr\" data-fr=\"Lors de son voyage, il a beaucoup appris.\">Lors de son voyage, il a beaucoup appris.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"au sein de\">au sein de</span></td><td>dentro de, no seio de</td><td><span class=\"fr\" data-fr=\"Il y a des tensions au sein de l’équipe.\">Il y a des tensions au sein de l’équipe.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"à partir de\">à partir de</span></td><td>a partir de</td><td><span class=\"fr\" data-fr=\"À partir de lundi, tout change.\">À partir de lundi, tout change.</span></td></tr></tbody></table></div>\n<h3>3. Lieux géographiques</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Lugar</th><th>Ir / estar em</th><th>Vir de</th></tr></thead><tbody><tr><td>Cidade</td><td><span class=\"fr\" data-fr=\"à Paris\">à Paris</span></td><td><span class=\"fr\" data-fr=\"de Paris\">de Paris</span></td></tr><tr><td>País feminino (-e)</td><td><span class=\"fr\" data-fr=\"en France\">en France</span></td><td><span class=\"fr\" data-fr=\"de France\">de France</span></td></tr><tr><td>País masculino</td><td><span class=\"fr\" data-fr=\"au Brésil\">au Brésil</span></td><td><span class=\"fr\" data-fr=\"du Brésil\">du Brésil</span></td></tr><tr><td>País no plural</td><td><span class=\"fr\" data-fr=\"aux États-Unis\">aux États-Unis</span></td><td><span class=\"fr\" data-fr=\"des États-Unis\">des États-Unis</span></td></tr><tr><td>País que começa com vogal</td><td><span class=\"fr\" data-fr=\"en Iran\">en Iran</span></td><td><span class=\"fr\" data-fr=\"d'Iran\">d'Iran</span></td></tr><tr><td>Continente</td><td><span class=\"fr\" data-fr=\"en Europe\">en Europe</span></td><td><span class=\"fr\" data-fr=\"d'Europe\">d'Europe</span></td></tr></tbody></table></div>\n<div class=\"destaque\">Exceções: <strong>le Mexique</strong> (au Mexique), <strong>le Cambodge</strong> e <strong>le Mozambique</strong> terminam em -e, mas são masculinos.</div>\n<h3>4. Expressions idiomatiques</h3><p>Verbos e expressões com preposição fixa, que muitas vezes difere do português.</p><div class=\"tabela-wrap\"><table><thead><tr><th>Préposition</th><th>Português</th><th>Exemple</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"avoir peur de\">avoir peur de</span></td><td>ter medo de</td><td><span class=\"fr\" data-fr=\"Elle a peur du noir.\">Elle a peur du noir.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"avoir besoin de\">avoir besoin de</span></td><td>precisar de</td><td><span class=\"fr\" data-fr=\"J’ai besoin de toi.\">J’ai besoin de toi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"avoir envie de\">avoir envie de</span></td><td>ter vontade de</td><td><span class=\"fr\" data-fr=\"Il a envie de dormir.\">Il a envie de dormir.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"penser à\">penser à</span></td><td>pensar em</td><td><span class=\"fr\" data-fr=\"Je pense à toi.\">Je pense à toi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"rêver de\">rêver de</span></td><td>sonhar com</td><td><span class=\"fr\" data-fr=\"Elle rêve de voyager.\">Elle rêve de voyager.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"s’intéresser à\">s’intéresser à</span></td><td>interessar-se por</td><td><span class=\"fr\" data-fr=\"Il s’intéresse à la musique.\">Il s’intéresse à la musique.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"compter sur\">compter sur</span></td><td>contar com</td><td><span class=\"fr\" data-fr=\"Tu peux compter sur moi.\">Tu peux compter sur moi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"être fier de\">être fier de</span></td><td>estar orgulhoso de</td><td><span class=\"fr\" data-fr=\"Je suis fier de toi.\">Je suis fier de toi.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"tomber amoureux de\">tomber amoureux de</span></td><td>apaixonar-se por</td><td><span class=\"fr\" data-fr=\"Il est tombé amoureux d’elle.\">Il est tombé amoureux d’elle.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"se souvenir de\">se souvenir de</span></td><td>lembrar-se de</td><td><span class=\"fr\" data-fr=\"Je me souviens de ce jour.\">Je me souviens de ce jour.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"féliciter pour\">féliciter pour</span></td><td>parabenizar por</td><td><span class=\"fr\" data-fr=\"Félicitations pour ton succès.\">Félicitations pour ton succès.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"être en train de\">être en train de</span></td><td>estar fazendo algo agora</td><td><span class=\"fr\" data-fr=\"Je suis en train de manger.\">Je suis en train de manger.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"de temps en temps\">de temps en temps</span></td><td>de vez em quando</td><td><span class=\"fr\" data-fr=\"On se voit de temps en temps.\">On se voit de temps en temps.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"petit à petit\">petit à petit</span></td><td>pouco a pouco</td><td><span class=\"fr\" data-fr=\"Il apprend petit à petit.\">Il apprend petit à petit.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"coup de foudre\">coup de foudre</span></td><td>paixão à primeira vista</td><td><span class=\"fr\" data-fr=\"Ça a été le coup de foudre.\">Ça a été le coup de foudre.</span></td></tr></tbody></table></div>\n<h3>Coup de projecteur: CHEZ</h3>\n<p><strong>Chez</strong> significa \"na casa de / no estabelecimento de\" e é usado só com <strong>pessoas</strong> (ou profissões, empresas, autores): <span class=\"fr\" data-fr=\"chez moi\">chez moi</span>, <span class=\"fr\" data-fr=\"chez le médecin\">chez le médecin</span>, <span class=\"fr\" data-fr=\"chez le coiffeur\">chez le coiffeur</span>, <span class=\"fr\" data-fr=\"chez Renault\">chez Renault</span>.</p>\n<div class=\"dica\">Com lugares, use à / dans: <span class=\"fr\" data-fr=\"à la boulangerie\">à la boulangerie</span> = <span class=\"fr\" data-fr=\"chez le boulanger\">chez le boulanger</span>. Chez vem do latim <em>casa</em>.</div>"
+  },
+  {
+   "id": "memoire",
+   "tipo": "exercicio",
+   "titulo": "Mémoire",
+   "instrucao": "Ligue cada preposição ao significado.",
+   "itens": [
+    {
+     "tipo": "associar",
+     "pares": [
+      {
+       "a": "à",
+       "b": "a, para"
+      },
+      {
+       "a": "de",
+       "b": "de"
+      },
+      {
+       "a": "en",
+       "b": "em"
+      },
+      {
+       "a": "dans",
+       "b": "dentro de"
+      },
+      {
+       "a": "chez",
+       "b": "na casa de"
+      },
+      {
+       "a": "avec",
+       "b": "com"
+      },
+      {
+       "a": "sans",
+       "b": "sem"
+      },
+      {
+       "a": "pour",
+       "b": "para"
+      }
+     ],
+     "audioEsquerda": true,
+     "explicacao": "à = a, para · de = de · en = em · dans = dentro de · chez = na casa de · avec = com · sans = sem · pour = para"
+    }
+   ]
+  },
+  {
+   "id": "simples",
+   "tipo": "exercicio",
+   "titulo": "Prépositions simples",
+   "instrucao": "Escolha a preposição correta.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Je vais ",
+     "depois": " Paris pour les vacances.",
+     "opcoes": [
+      "à",
+      "en",
+      "dans"
+     ],
+     "resposta": "à",
+     "explicacao": "\"à\" = a, para, em (lugar/tempo). Ex.: Je vais à Paris.",
+     "audioCorrecao": "Je vais à Paris pour les vacances."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il habite ",
+     "depois": " France depuis dix ans.",
+     "opcoes": [
+      "en",
+      "à",
+      "dans"
+     ],
+     "resposta": "en",
+     "explicacao": "\"en\" = em, de (matéria, país feminino). Ex.: Il habite en France.",
+     "audioCorrecao": "Il habite en France depuis dix ans."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le livre est ",
+     "depois": " la table du salon.",
+     "opcoes": [
+      "sur",
+      "sous",
+      "dans"
+     ],
+     "resposta": "sur",
+     "explicacao": "\"sur\" = sobre, em cima de. Ex.: Le livre est sur la table.",
+     "audioCorrecao": "Le livre est sur la table du salon."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le chat dort ",
+     "depois": " le lit, personne ne le voit.",
+     "opcoes": [
+      "sous",
+      "sur",
+      "dans"
+     ],
+     "resposta": "sous",
+     "explicacao": "\"sous\" = debaixo de. Ex.: Le chat dort sous la table.",
+     "audioCorrecao": "Le chat dort sous le lit, personne ne le voit."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle travaille ",
+     "depois": " le médecin trois fois par semaine.",
+     "opcoes": [
+      "chez",
+      "à",
+      "dans"
+     ],
+     "resposta": "chez",
+     "explicacao": "\"chez\" = na casa, no consultório de. Ex.: Je vais chez le médecin.",
+     "audioCorrecao": "Elle travaille chez le médecin trois fois par semaine."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il marche toujours ",
+     "depois": " moi quand on sort.",
+     "opcoes": [
+      "avec",
+      "sans",
+      "pour"
+     ],
+     "resposta": "avec",
+     "explicacao": "\"avec\" = com. Ex.: Je viens avec toi.",
+     "audioCorrecao": "Il marche toujours avec moi quand on sort."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Un café ",
+     "depois": " sucre, s’il vous plaît.",
+     "opcoes": [
+      "sans",
+      "avec",
+      "pour"
+     ],
+     "resposta": "sans",
+     "explicacao": "\"sans\" = sem. Ex.: Un café sans sucre.",
+     "audioCorrecao": "Un café sans sucre, s’il vous plaît."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ce cadeau est ",
+     "depois": " toi, joyeux anniversaire.",
+     "opcoes": [
+      "pour",
+      "par",
+      "vers"
+     ],
+     "resposta": "pour",
+     "explicacao": "\"pour\" = para. Ex.: C’est pour toi.",
+     "audioCorrecao": "Ce cadeau est pour toi, joyeux anniversaire."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il est passé ",
+     "depois": " Lyon avant d’arriver ici.",
+     "opcoes": [
+      "par",
+      "pour",
+      "vers"
+     ],
+     "resposta": "par",
+     "explicacao": "\"par\" = por. Ex.: Il est passé par Paris.",
+     "audioCorrecao": "Il est passé par Lyon avant d’arriver ici."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il marche ",
+     "depois": " la sortie du magasin.",
+     "opcoes": [
+      "vers",
+      "entre",
+      "parmi"
+     ],
+     "resposta": "vers",
+     "explicacao": "\"vers\" = em direção a, por volta de. Ex.: Il marche vers la sortie.",
+     "audioCorrecao": "Il marche vers la sortie du magasin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ce secret reste ",
+     "depois": " nous, d’accord ?",
+     "opcoes": [
+      "entre",
+      "parmi",
+      "contre"
+     ],
+     "resposta": "entre",
+     "explicacao": "\"entre\" = entre (dois elementos). Ex.: Entre nous.",
+     "audioCorrecao": "Ce secret reste entre nous, d’accord?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il est ",
+     "depois": " les meilleurs élèves de la classe.",
+     "opcoes": [
+      "parmi",
+      "entre",
+      "contre"
+     ],
+     "resposta": "parmi",
+     "explicacao": "\"parmi\" = entre, em meio a (um grupo). Ex.: Il est parmi les meilleurs.",
+     "audioCorrecao": "Il est parmi les meilleurs élèves de la classe."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il est fermement ",
+     "depois": " cette idée.",
+     "opcoes": [
+      "contre",
+      "pour",
+      "avec"
+     ],
+     "resposta": "contre",
+     "explicacao": "\"contre\" = contra. Ex.: Il est contre cette idée.",
+     "audioCorrecao": "Il est fermement contre cette idée."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "On se retrouve ",
+     "depois": " le repas, vers midi.",
+     "opcoes": [
+      "avant",
+      "après",
+      "pendant"
+     ],
+     "resposta": "avant",
+     "explicacao": "\"avant\" = antes de. Ex.: Avant le repas.",
+     "audioCorrecao": "On se retrouve avant le repas, vers midi."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il fait la sieste ",
+     "depois": " le repas.",
+     "opcoes": [
+      "après",
+      "avant",
+      "depuis"
+     ],
+     "resposta": "après",
+     "explicacao": "\"après\" = depois de. Ex.: Après le film.",
+     "audioCorrecao": "Il fait la sieste après le repas."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il est ",
+     "depois": " la porte, il attend.",
+     "opcoes": [
+      "devant",
+      "derrière",
+      "sous"
+     ],
+     "resposta": "devant",
+     "explicacao": "\"devant\" = na frente de. Ex.: Il est devant la porte.",
+     "audioCorrecao": "Il est devant la porte, il attend."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le chat est caché ",
+     "depois": " le canapé.",
+     "opcoes": [
+      "derrière",
+      "devant",
+      "sur"
+     ],
+     "resposta": "derrière",
+     "explicacao": "\"derrière\" = atrás de. Ex.: Il est derrière la voiture.",
+     "audioCorrecao": "Le chat est caché derrière le canapé."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " 2020, il habite à Paris.",
+     "opcoes": [
+      "Depuis",
+      "Pendant",
+      "Après"
+     ],
+     "resposta": "Depuis",
+     "explicacao": "\"depuis\" = desde. Ex.: Depuis 2020.",
+     "audioCorrecao": "Depuis 2020, il habite à Paris."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il a travaillé ",
+     "depois": " dix ans dans cette entreprise.",
+     "opcoes": [
+      "pendant",
+      "depuis",
+      "dans"
+     ],
+     "resposta": "pendant",
+     "explicacao": "\"pendant\" = durante. Ex.: Pendant les vacances.",
+     "audioCorrecao": "Il a travaillé pendant dix ans dans cette entreprise."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " la pluie, ils sont sortis se promener.",
+     "opcoes": [
+      "Malgré",
+      "Pendant",
+      "Depuis"
+     ],
+     "resposta": "Malgré",
+     "explicacao": "\"malgré\" = apesar de. Ex.: Malgré la pluie.",
+     "audioCorrecao": "Malgré la pluie, ils sont sortis se promener."
+    }
+   ]
+  },
+  {
+   "id": "locutions",
+   "tipo": "exercicio",
+   "titulo": "Locutions prépositives",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Le musée se trouve juste ",
+     "depois": " la gare.",
+     "opcoes": [
+      "à côté de",
+      "au milieu de",
+      "au lieu de"
+     ],
+     "resposta": "à côté de",
+     "explicacao": "\"à côté de\" = ao lado de. Ex.: La banque est à côté de la poste.",
+     "audioCorrecao": "Le musée se trouve juste à côté de la gare."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "La boulangerie est ",
+     "depois": " la banque.",
+     "opcoes": [
+      "en face de",
+      "au-dessus de",
+      "au sein de"
+     ],
+     "resposta": "en face de",
+     "explicacao": "\"en face de\" = em frente a. Ex.: L’école est en face du parc.",
+     "audioCorrecao": "La boulangerie est en face de la banque."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "L’avion vole ",
+     "depois": " la ville.",
+     "opcoes": [
+      "au-dessus de",
+      "au-dessous de",
+      "à travers"
+     ],
+     "resposta": "au-dessus de",
+     "explicacao": "\"au-dessus de\" = acima de. Ex.: L’avion vole au-dessus de la ville.",
+     "audioCorrecao": "L’avion vole au-dessus de la ville."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le parking est ",
+     "depois": " le magasin.",
+     "opcoes": [
+      "au-dessous de",
+      "au-dessus de",
+      "au bout de"
+     ],
+     "resposta": "au-dessous de",
+     "explicacao": "\"au-dessous de\" = abaixo de. Ex.: Le sous-sol est au-dessous du magasin.",
+     "audioCorrecao": "Le parking est au-dessous de le magasin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il fait chaud ",
+     "depois": " la maison.",
+     "opcoes": [
+      "à l’intérieur de",
+      "à l’extérieur de",
+      "autour de"
+     ],
+     "resposta": "à l’intérieur de",
+     "explicacao": "\"à l’intérieur de\" = dentro de. Ex.: Il fait chaud à l’intérieur de la maison.",
+     "audioCorrecao": "Il fait chaud à l’intérieur de la maison."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il neige ",
+     "depois": " la ville.",
+     "opcoes": [
+      "à l’extérieur de",
+      "à l’intérieur de",
+      "au sein de"
+     ],
+     "resposta": "à l’extérieur de",
+     "explicacao": "\"à l’extérieur de\" = fora de. Ex.: Il neige à l’extérieur de la ville.",
+     "audioCorrecao": "Il neige à l’extérieur de la ville."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "La fontaine est ",
+     "depois": " la place.",
+     "opcoes": [
+      "au milieu de",
+      "au bout de",
+      "à travers"
+     ],
+     "resposta": "au milieu de",
+     "explicacao": "\"au milieu de\" = no meio de. Ex.: La fontaine est au milieu de la place.",
+     "audioCorrecao": "La fontaine est au milieu de la place."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il marche ",
+     "depois": " le champ.",
+     "opcoes": [
+      "à travers",
+      "au bout de",
+      "au milieu de"
+     ],
+     "resposta": "à travers",
+     "explicacao": "\"à travers\" = através de. Ex.: Il marche à travers le champ.",
+     "audioCorrecao": "Il marche à travers le champ."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " la rue, il y a un café.",
+     "opcoes": [
+      "Au bout de",
+      "À côté de",
+      "Au sein de"
+     ],
+     "resposta": "Au bout de",
+     "explicacao": "\"au bout de\" = no fim de. Ex.: Au bout de la rue, il y a un café.",
+     "audioCorrecao": "Au bout de la rue, il y a un café."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il travaille ",
+     "depois": " se reposer.",
+     "opcoes": [
+      "au lieu de",
+      "à cause de",
+      "grâce à"
+     ],
+     "resposta": "au lieu de",
+     "explicacao": "\"au lieu de\" = em vez de. Ex.: Il travaille au lieu de se reposer.",
+     "audioCorrecao": "Il travaille au lieu de se reposer."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il est en retard ",
+     "depois": " la pluie.",
+     "opcoes": [
+      "à cause de",
+      "grâce à",
+      "au lieu de"
+     ],
+     "resposta": "à cause de",
+     "explicacao": "\"à cause de\" = por causa de. Ex.: Il est en retard à cause de la pluie.",
+     "audioCorrecao": "Il est en retard à cause de la pluie."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle a réussi ",
+     "depois": " ses efforts.",
+     "opcoes": [
+      "grâce à",
+      "à cause de",
+      "faute de"
+     ],
+     "resposta": "grâce à",
+     "explicacao": "\"grâce à\" = graças a. Ex.: Elle a réussi grâce à ses efforts.",
+     "audioCorrecao": "Elle a réussi grâce à ses efforts."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le vol est annulé ",
+     "depois": " la météo.",
+     "opcoes": [
+      "en raison de",
+      "grâce à",
+      "au sujet de"
+     ],
+     "resposta": "en raison de",
+     "explicacao": "\"en raison de\" = devido a. Ex.: Le vol est annulé en raison de la météo.",
+     "audioCorrecao": "Le vol est annulé en raison de la météo."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " temps, il n’a pas fini.",
+     "opcoes": [
+      "Faute de",
+      "Grâce à",
+      "Au sujet de"
+     ],
+     "resposta": "Faute de",
+     "explicacao": "\"faute de\" = por falta de. Ex.: Faute de temps, il n’a pas fini.",
+     "audioCorrecao": "Faute de temps, il n’a pas fini."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils parlent ",
+     "depois": " le projet.",
+     "opcoes": [
+      "au sujet de",
+      "à travers",
+      "au bout de"
+     ],
+     "resposta": "au sujet de",
+     "explicacao": "\"au sujet de\" = a respeito de. Ex.: Ils parlent au sujet du projet.",
+     "audioCorrecao": "Ils parlent au sujet de le projet."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " ton message, j’ai une question.",
+     "opcoes": [
+      "À propos de",
+      "Au sujet de",
+      "En dépit de"
+     ],
+     "resposta": "À propos de",
+     "explicacao": "\"à propos de\" = a propósito de. Ex.: À propos de ton message, j’ai une question.",
+     "audioCorrecao": "À propos de ton message, j’ai une question."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " le froid, ils sont sortis.",
+     "opcoes": [
+      "En dépit de",
+      "Grâce à",
+      "Au sein de"
+     ],
+     "resposta": "En dépit de",
+     "explicacao": "\"en dépit de\" = apesar de. Ex.: En dépit du froid, ils sont sortis.",
+     "audioCorrecao": "En dépit de le froid, ils sont sortis."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " la réunion, tout a changé.",
+     "opcoes": [
+      "Au cours de",
+      "Lors de",
+      "Au sein de"
+     ],
+     "resposta": "Au cours de",
+     "explicacao": "\"au cours de\" = no decorrer de. Ex.: Au cours de la réunion, tout a changé.",
+     "audioCorrecao": "Au cours de la réunion, tout a changé."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il y a des tensions ",
+     "depois": " l’équipe.",
+     "opcoes": [
+      "au sein de",
+      "à travers",
+      "au bout de"
+     ],
+     "resposta": "au sein de",
+     "explicacao": "\"au sein de\" = dentro de, no seio de. Ex.: Il y a des tensions au sein de l’équipe.",
+     "audioCorrecao": "Il y a des tensions au sein de l’équipe."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " lundi, tout change.",
+     "opcoes": [
+      "À partir de",
+      "Lors de",
+      "Au cours de"
+     ],
+     "resposta": "À partir de",
+     "explicacao": "\"à partir de\" = a partir de. Ex.: À partir de lundi, tout change.",
+     "audioCorrecao": "À partir de lundi, tout change."
+    }
+   ]
+  },
+  {
+   "id": "geo",
+   "tipo": "exercicio",
+   "titulo": "Géographie et chez",
+   "instrucao": "Cidade, país feminino, masculino ou plural?",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Je vais ",
+     "depois": " Paris.",
+     "opcoes": [
+      "à",
+      "en",
+      "au"
+     ],
+     "resposta": "à",
+     "explicacao": "Cidades (e ilhas sem artigo) usam À, sem artigo: à Paris, à Cuba.",
+     "audioCorrecao": "Je vais à Paris."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il habite ",
+     "depois": " France.",
+     "opcoes": [
+      "en",
+      "à",
+      "au"
+     ],
+     "resposta": "en",
+     "explicacao": "Países femininos (quase todos terminados em -e) e continentes usam EN: en France, en Europe.",
+     "audioCorrecao": "Il habite en France."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous allons ",
+     "depois": " Japon cet été.",
+     "opcoes": [
+      "au",
+      "en",
+      "à"
+     ],
+     "resposta": "au",
+     "explicacao": "Países masculinos no singular usam AU (à + le): au Brésil, au Canada, au Mexique.",
+     "audioCorrecao": "Nous allons au Japon cet été."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils vivent ",
+     "depois": " États-Unis.",
+     "opcoes": [
+      "aux",
+      "au",
+      "en"
+     ],
+     "resposta": "aux",
+     "explicacao": "Países no plural usam AUX (à + les): aux États-Unis, aux Pays-Bas.",
+     "audioCorrecao": "Ils vivent aux États-Unis."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle habite ",
+     "depois": " Cuba depuis un an.",
+     "opcoes": [
+      "à",
+      "en",
+      "au"
+     ],
+     "resposta": "à",
+     "explicacao": "Cidades (e ilhas sem artigo) usam À, sem artigo: à Paris, à Cuba.",
+     "audioCorrecao": "Elle habite à Cuba depuis un an."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il travaille ",
+     "depois": " Brésil.",
+     "opcoes": [
+      "au",
+      "en",
+      "à"
+     ],
+     "resposta": "au",
+     "explicacao": "Países masculinos no singular usam AU (à + le): au Brésil, au Canada, au Mexique.",
+     "audioCorrecao": "Il travaille au Brésil."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle passe l’été ",
+     "depois": " Californie.",
+     "opcoes": [
+      "en",
+      "au",
+      "dans le"
+     ],
+     "resposta": "en",
+     "explicacao": "Países femininos (quase todos terminados em -e) e continentes usam EN: en France, en Europe.",
+     "audioCorrecao": "Elle passe l’été en Californie."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il vit ",
+     "depois": " Texas.",
+     "opcoes": [
+      "dans le",
+      "en",
+      "au"
+     ],
+     "resposta": "dans le",
+     "explicacao": "Estados americanos masculinos usam DANS LE: dans le Texas, dans le Nevada (os terminados em -e usam EN: en Floride).",
+     "audioCorrecao": "Il vit dans le Texas."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils habitent ",
+     "depois": " Québec.",
+     "opcoes": [
+      "au",
+      "en",
+      "à"
+     ],
+     "resposta": "au",
+     "explicacao": "Países masculinos no singular usam AU (à + le): au Brésil, au Canada, au Mexique.",
+     "audioCorrecao": "Ils habitent au Québec."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle étudie ",
+     "depois": " Ontario.",
+     "opcoes": [
+      "en",
+      "au",
+      "dans"
+     ],
+     "resposta": "en",
+     "explicacao": "Países femininos (quase todos terminados em -e) e continentes usam EN: en France, en Europe.",
+     "audioCorrecao": "Elle étudie en Ontario."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "On vit heureux ",
+     "depois": " Europe, en Afrique ou en Asie.",
+     "opcoes": [
+      "en",
+      "au",
+      "à"
+     ],
+     "resposta": "en",
+     "explicacao": "Países femininos (quase todos terminados em -e) e continentes usam EN: en France, en Europe.",
+     "audioCorrecao": "On vit heureux en Europe, en Afrique ou en Asie."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il est né ",
+     "depois": " Portugal.",
+     "opcoes": [
+      "au",
+      "en",
+      "à"
+     ],
+     "resposta": "au",
+     "explicacao": "Países masculinos no singular usam AU (à + le): au Brésil, au Canada, au Mexique.",
+     "audioCorrecao": "Il est né au Portugal."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle va souvent ",
+     "depois": " le médecin.",
+     "opcoes": [
+      "chez",
+      "à",
+      "au"
+     ],
+     "resposta": "chez",
+     "explicacao": "\"chez\" = na casa, no consultório de. Ex.: Je vais chez le médecin.",
+     "audioCorrecao": "Elle va souvent chez le médecin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ce soir, je mange ",
+     "depois": " mes parents.",
+     "opcoes": [
+      "chez",
+      "à",
+      "en"
+     ],
+     "resposta": "chez",
+     "explicacao": "\"chez\" = na casa, no consultório de. Ex.: Je vais chez le médecin.",
+     "audioCorrecao": "Ce soir, je mange chez mes parents."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " Molière, on trouve souvent des critiques de la société.",
+     "opcoes": [
+      "Chez",
+      "En",
+      "À"
+     ],
+     "resposta": "Chez",
+     "explicacao": "\"chez\" = na casa, no consultório de. Ex.: Je vais chez le médecin.",
+     "audioCorrecao": "Chez Molière, on trouve souvent des critiques de la société."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il a rendez-vous ",
+     "depois": " le dentiste demain.",
+     "opcoes": [
+      "chez",
+      "à",
+      "au"
+     ],
+     "resposta": "chez",
+     "explicacao": "\"chez\" = na casa, no consultório de. Ex.: Je vais chez le médecin.",
+     "audioCorrecao": "Il a rendez-vous chez le dentiste demain."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous passons nos vacances ",
+     "depois": " Madagascar.",
+     "opcoes": [
+      "à",
+      "en",
+      "au"
+     ],
+     "resposta": "à",
+     "explicacao": "Cidades (e ilhas sem artigo) usam À, sem artigo: à Paris, à Cuba.",
+     "audioCorrecao": "Nous passons nos vacances à Madagascar."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle est née ",
+     "depois": " Havre.",
+     "opcoes": [
+      "au",
+      "à",
+      "en"
+     ],
+     "resposta": "au",
+     "explicacao": "Países masculinos no singular usam AU (à + le): au Brésil, au Canada, au Mexique.",
+     "audioCorrecao": "Elle est née au Havre."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils habitent ",
+     "depois": " Pays-Bas depuis longtemps.",
+     "opcoes": [
+      "aux",
+      "au",
+      "en"
+     ],
+     "resposta": "aux",
+     "explicacao": "Países no plural usam AUX (à + les): aux États-Unis, aux Pays-Bas.",
+     "audioCorrecao": "Ils habitent aux Pays-Bas depuis longtemps."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il travaille ",
+     "depois": " Canada, à Toronto.",
+     "opcoes": [
+      "au",
+      "en",
+      "à"
+     ],
+     "resposta": "au",
+     "explicacao": "Países masculinos no singular usam AU (à + le): au Brésil, au Canada, au Mexique.",
+     "audioCorrecao": "Il travaille au Canada, à Toronto."
+    }
+   ]
+  },
+  {
+   "id": "production",
+   "tipo": "exercicio",
+   "titulo": "Production",
+   "itens": [
+    {
+     "tipo": "livre",
+     "enunciado": "Conte uma viagem (real ou imaginária): de onde você saiu, por quais cidades e países passou e onde ficou. Use pelo menos 8 preposições diferentes.",
+     "minPalavras": 60,
+     "placeholder": "L'année dernière, je suis parti de São Paulo..."
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "Léa et les prépositions",
+   "instrucao": "Ouça e repare em cada preposição.",
+   "paragrafos": [
+    "Léa habite à Lyon depuis trois ans. Avant, elle vivait en Italie, chez ses grands-parents, dans une petite maison près de la gare. Aujourd’hui, elle suit une formation professionnelle et prépare un entretien d’embauche pour un nouveau poste, malgré le chômage qui touche sa région.",
+    "Chaque matin, elle part vers son travail à vélo, pour éviter les embouteillages. Elle passe devant une boulangerie, une épicerie et une poissonnerie, avant d’arriver à son bureau, à côté de la gare. Elle aime son métier, et selon elle, la persévérance est la clé pour réussir.",
+    "Pendant sa pause déjeuner, Léa va parfois chez sa collègue, qui habite juste au-dessus du bureau. Elles parlent de leurs projets, de leur envie de développer de nouvelles compétences, et échangent des conseils sur les réseaux sociaux au sujet du marché du travail.",
+    "Le week end, grâce à un ami qui a une voiture, elle part à la campagne, loin du bruit de la ville, pour se reposer. Elle apporte toujours un livre et un peu d’argent pour visiter un château ou un bâtiment insolite. Elle aime aussi jardiner dans les jardins communs près de chez elle, malgré la pollution qui menace parfois la région.",
+    "Depuis qu’elle vit en France, Léa a beaucoup appris: elle sait qu’il faut prendre soin de sa santé, éviter les tâches ménagères le dimanche, et profiter de ses congés pour s’évader. Grâce à sa formation et à sa volonté, elle espère bientôt trouver un nouvel emploi, avec un meilleur salaire et plus d’équité entre les employés.",
+    "À partir de maintenant, elle fait attention à chaque préposition, à cause d’une seule erreur qui, un jour, a complètement changé le sens de ce qu’elle voulait dire à un ami, pendant un entretien d’embauche important."
+   ],
+   "glossario": {
+    "depuis": "desde",
+    "chez": "na casa de",
+    "pendant": "durante",
+    "malgre": "apesar de",
+    "grace": "gracas a (grace a)",
+    "entre": "entre",
+    "devant": "na frente de",
+    "avec": "com",
+    "selon": "segundo",
+    "pres": "perto (pres de)",
+    "en": "em",
+    "formation": "formacao, curso",
+    "entretien": "entrevista",
+    "poste": "cargo",
+    "chomage": "desemprego",
+    "embouteillages": "engarrafamentos",
+    "metier": "profissao",
+    "marche": "mercado",
+    "chateau": "castelo",
+    "batiment": "predio",
+    "jardins": "jardins",
+    "pollution": "poluicao",
+    "sante": "saude",
+    "conges": "ferias, licenca",
+    "volonte": "vontade",
+    "emploi": "emprego",
+    "equite": "equidade",
+    "boulangerie": "padaria",
+    "epicerie": "mercearia",
+    "poissonnerie": "peixaria"
+   }
+  }
+ ]
+}

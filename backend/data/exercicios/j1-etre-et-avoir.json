@@ -1,0 +1,1386 @@
+{
+ "slug": "j1-etre-et-avoir",
+ "ordem": 2,
+ "nivel": "A1",
+ "titulo": "Être et avoir",
+ "descricao": "Os pronomes pessoais e os dois verbos mais importantes do francês, com exercícios corrigidos na hora e um texto para ler e ouvir.",
+ "secoes": [
+  {
+   "id": "video",
+   "tipo": "video",
+   "titulo": "Vídeo",
+   "instrucao": "Assista à aula antes de fazer os exercícios.",
+   "youtube": "Er9PeRf2cSw"
+  },
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir cada forma.",
+   "html": "\n<h3>Les pronoms personnels sujets</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Pronome</th><th>Português</th><th>Uso</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"je\">je</span></td><td>eu</td><td>vira <strong>j'</strong> antes de vogal ou h mudo: <span class=\"fr\" data-fr=\"j'ai\">j'ai</span></td></tr><tr><td><span class=\"fr\" data-fr=\"tu\">tu</span></td><td>tu / você (informal)</td><td>amigos, família, crianças</td></tr><tr><td><span class=\"fr\" data-fr=\"il / elle / on\">il / elle / on</span></td><td>ele / ela / a gente</td><td><span class=\"fr\" data-fr=\"on\">on</span> é muito usado no oral no lugar de <em>nous</em></td></tr><tr><td><span class=\"fr\" data-fr=\"nous\">nous</span></td><td>nós</td><td>mais usado na escrita</td></tr><tr><td><span class=\"fr\" data-fr=\"vous\">vous</span></td><td>vocês / o senhor, a senhora</td><td>plural <strong>ou</strong> tratamento formal de uma pessoa</td></tr><tr><td><span class=\"fr\" data-fr=\"ils / elles\">ils / elles</span></td><td>eles / elas</td><td>grupo misto = <strong>ils</strong></td></tr></tbody></table></div>\n<h3>ÊTRE (ser / estar)</h3>\n<p>O verbo ÊTRE é um dos verbos mais usados no francês. Ele expressa estado, identidade, profissão e localização.</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th></th><th>Présent</th><th>Passé composé</th><th>Imparfait</th><th>Futur simple</th></tr></thead><tbody><tr><td><strong>je / j'</strong></td><td><span class=\"fr\" data-fr=\"je suis\">je suis</span></td><td><span class=\"fr\" data-fr=\"j'ai été\">j'ai été</span></td><td><span class=\"fr\" data-fr=\"j'étais\">j'étais</span></td><td><span class=\"fr\" data-fr=\"je serai\">je serai</span></td></tr><tr><td><strong>tu</strong></td><td><span class=\"fr\" data-fr=\"tu es\">tu es</span></td><td><span class=\"fr\" data-fr=\"tu as été\">tu as été</span></td><td><span class=\"fr\" data-fr=\"tu étais\">tu étais</span></td><td><span class=\"fr\" data-fr=\"tu seras\">tu seras</span></td></tr><tr><td><strong>il / elle / on</strong></td><td><span class=\"fr\" data-fr=\"il est\">il est</span></td><td><span class=\"fr\" data-fr=\"il a été\">il a été</span></td><td><span class=\"fr\" data-fr=\"il était\">il était</span></td><td><span class=\"fr\" data-fr=\"il sera\">il sera</span></td></tr><tr><td><strong>nous</strong></td><td><span class=\"fr\" data-fr=\"nous sommes\">nous sommes</span></td><td><span class=\"fr\" data-fr=\"nous avons été\">nous avons été</span></td><td><span class=\"fr\" data-fr=\"nous étions\">nous étions</span></td><td><span class=\"fr\" data-fr=\"nous serons\">nous serons</span></td></tr><tr><td><strong>vous</strong></td><td><span class=\"fr\" data-fr=\"vous êtes\">vous êtes</span></td><td><span class=\"fr\" data-fr=\"vous avez été\">vous avez été</span></td><td><span class=\"fr\" data-fr=\"vous étiez\">vous étiez</span></td><td><span class=\"fr\" data-fr=\"vous serez\">vous serez</span></td></tr><tr><td><strong>ils / elles</strong></td><td><span class=\"fr\" data-fr=\"ils sont\">ils sont</span></td><td><span class=\"fr\" data-fr=\"ils ont été\">ils ont été</span></td><td><span class=\"fr\" data-fr=\"ils étaient\">ils étaient</span></td><td><span class=\"fr\" data-fr=\"ils seront\">ils seront</span></td></tr></tbody></table></div>\n<h3>AVOIR (ter)</h3>\n<p>AVOIR indica posse, idade e aparece em muitas expressões do dia a dia.</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th></th><th>Présent</th><th>Passé composé</th><th>Imparfait</th><th>Futur simple</th></tr></thead><tbody><tr><td><strong>je / j'</strong></td><td><span class=\"fr\" data-fr=\"j'ai\">j'ai</span></td><td><span class=\"fr\" data-fr=\"j'ai eu\">j'ai eu</span></td><td><span class=\"fr\" data-fr=\"j'avais\">j'avais</span></td><td><span class=\"fr\" data-fr=\"j'aurai\">j'aurai</span></td></tr><tr><td><strong>tu</strong></td><td><span class=\"fr\" data-fr=\"tu as\">tu as</span></td><td><span class=\"fr\" data-fr=\"tu as eu\">tu as eu</span></td><td><span class=\"fr\" data-fr=\"tu avais\">tu avais</span></td><td><span class=\"fr\" data-fr=\"tu auras\">tu auras</span></td></tr><tr><td><strong>il / elle / on</strong></td><td><span class=\"fr\" data-fr=\"il a\">il a</span></td><td><span class=\"fr\" data-fr=\"il a eu\">il a eu</span></td><td><span class=\"fr\" data-fr=\"il avait\">il avait</span></td><td><span class=\"fr\" data-fr=\"il aura\">il aura</span></td></tr><tr><td><strong>nous</strong></td><td><span class=\"fr\" data-fr=\"nous avons\">nous avons</span></td><td><span class=\"fr\" data-fr=\"nous avons eu\">nous avons eu</span></td><td><span class=\"fr\" data-fr=\"nous avions\">nous avions</span></td><td><span class=\"fr\" data-fr=\"nous aurons\">nous aurons</span></td></tr><tr><td><strong>vous</strong></td><td><span class=\"fr\" data-fr=\"vous avez\">vous avez</span></td><td><span class=\"fr\" data-fr=\"vous avez eu\">vous avez eu</span></td><td><span class=\"fr\" data-fr=\"vous aviez\">vous aviez</span></td><td><span class=\"fr\" data-fr=\"vous aurez\">vous aurez</span></td></tr><tr><td><strong>ils / elles</strong></td><td><span class=\"fr\" data-fr=\"ils ont\">ils ont</span></td><td><span class=\"fr\" data-fr=\"ils ont eu\">ils ont eu</span></td><td><span class=\"fr\" data-fr=\"ils avaient\">ils avaient</span></td><td><span class=\"fr\" data-fr=\"ils auront\">ils auront</span></td></tr></tbody></table></div>\n<h3>Onde o português usa \"estar/ser\" e o francês usa AVOIR</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"J'ai vingt-cinq ans.\">J'ai vingt-cinq ans.</span></td><td>Tenho 25 anos. (idade é sempre com <strong>avoir</strong>)</td></tr><tr><td><span class=\"fr\" data-fr=\"J'ai faim. J'ai soif.\">J'ai faim. J'ai soif.</span></td><td>Estou com fome. Estou com sede.</td></tr><tr><td><span class=\"fr\" data-fr=\"J'ai froid. J'ai chaud.\">J'ai froid. J'ai chaud.</span></td><td>Estou com frio. Estou com calor.</td></tr><tr><td><span class=\"fr\" data-fr=\"J'ai peur.\">J'ai peur.</span></td><td>Estou com medo.</td></tr><tr><td><span class=\"fr\" data-fr=\"J'ai raison. Tu as tort.\">J'ai raison. Tu as tort.</span></td><td>Tenho razão. Você está errado.</td></tr><tr><td><span class=\"fr\" data-fr=\"J'ai besoin d'aide.\">J'ai besoin d'aide.</span></td><td>Preciso de ajuda.</td></tr></tbody></table></div>\n<h3>Exemplos com ÊTRE</h3>\n<ul><li><span class=\"fr\" data-fr=\"Je suis étudiant à l'université de Lyon.\">Je suis étudiant à l'université de Lyon.</span></li><li><span class=\"fr\" data-fr=\"Nous sommes en retard pour l'entretien.\">Nous sommes en retard pour l'entretien.</span></li><li><span class=\"fr\" data-fr=\"Elle est fatiguée après le voyage.\">Elle est fatiguée après le voyage.</span></li></ul>\n<div class=\"destaque\">ÊTRE é irregular, não segue o padrão dos verbos em -ER.<br>É usado para formar o passé composé de verbos de movimento (ex: je suis allé).</div>\n<div class=\"dica\"><strong>Dicas para a prova:</strong><br>No TCF, preste atenção às formas contraídas na fala (j'suis, t'es), pois o áudio pode usá-las.<br>Memorize ÊTRE + adjetivo para descrever estados: être content, être disponible, être occupé.</div>\n<div class=\"dica\">Nas negações: <strong>ne ... pas</strong> em volta do verbo: <span class=\"fr\" data-fr=\"Je ne suis pas fatigué.\">Je ne suis pas fatigué.</span> · <span class=\"fr\" data-fr=\"Il n'a pas de voiture.\">Il n'a pas de voiture.</span></div>"
+  },
+  {
+   "id": "pronoms",
+   "tipo": "exercicio",
+   "titulo": "Les pronoms",
+   "instrucao": "Escolha o pronome que combina com o verbo.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " voyage souvent pour son travail.",
+     "opcoes": [
+      "Il",
+      "Nous",
+      "Vous"
+     ],
+     "resposta": "Il",
+     "explicacao": "O verbo \"voyage\" está conjugado para \"il\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Il voyage souvent pour son travail."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " cherchons un nouveau logement étudiant.",
+     "opcoes": [
+      "Nous",
+      "Vous",
+      "Ils"
+     ],
+     "resposta": "Nous",
+     "explicacao": "O verbo \"cherchons\" está conjugado para \"nous\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Nous cherchons un nouveau logement étudiant."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " évitez les embouteillages le matin.",
+     "opcoes": [
+      "Vous",
+      "Tu",
+      "Ils"
+     ],
+     "resposta": "Vous",
+     "explicacao": "O verbo \"évitez\" está conjugado para \"vous\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Vous évitez les embouteillages le matin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " propose une nouvelle formation en ligne.",
+     "opcoes": [
+      "Elle",
+      "Ils",
+      "Nous"
+     ],
+     "resposta": "Elle",
+     "explicacao": "O verbo \"propose\" está conjugado para \"elle\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Elle propose une nouvelle formation en ligne."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " recevons plusieurs colis chaque semaine.",
+     "opcoes": [
+      "Nous",
+      "Vous",
+      "Elles"
+     ],
+     "resposta": "Nous",
+     "explicacao": "O verbo \"recevons\" está conjugado para \"nous\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Nous recevons plusieurs colis chaque semaine."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " trouvent un emploi grâce au réseautage.",
+     "opcoes": [
+      "Ils",
+      "Il",
+      "Nous"
+     ],
+     "resposta": "Ils",
+     "explicacao": "O verbo \"trouvent\" está conjugado para \"ils\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Ils trouvent un emploi grâce au réseautage."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " prépares ton entretien d’embauche.",
+     "opcoes": [
+      "Tu",
+      "Vous",
+      "Je"
+     ],
+     "resposta": "Tu",
+     "explicacao": "O verbo \"prépares\" está conjugado para \"tu\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Tu prépares ton entretien d’embauche."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " développe son réseau professionnel.",
+     "opcoes": [
+      "Il",
+      "Elles",
+      "Vous"
+     ],
+     "resposta": "Il",
+     "explicacao": "O verbo \"développe\" está conjugado para \"il\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Il développe son réseau professionnel."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " partagez vos astuces sur les réseaux sociaux.",
+     "opcoes": [
+      "Vous",
+      "Tu",
+      "Ils"
+     ],
+     "resposta": "Vous",
+     "explicacao": "O verbo \"partagez\" está conjugado para \"vous\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Vous partagez vos astuces sur les réseaux sociaux."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " aiment les produits bio et les circuits courts.",
+     "opcoes": [
+      "Elles",
+      "Elle",
+      "Nous"
+     ],
+     "resposta": "Elles",
+     "explicacao": "O verbo \"aiment\" está conjugado para \"elles\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Elles aiment les produits bio et les circuits courts."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " demande un congé pour ses vacances.",
+     "opcoes": [
+      "Elle",
+      "Nous",
+      "Vous"
+     ],
+     "resposta": "Elle",
+     "explicacao": "O verbo \"demande\" está conjugado para \"elle\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Elle demande un congé pour ses vacances."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " aménageons notre nouvel appartement.",
+     "opcoes": [
+      "Nous",
+      "Vous",
+      "Ils"
+     ],
+     "resposta": "Nous",
+     "explicacao": "O verbo \"aménageons\" está conjugado para \"nous\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Nous aménageons notre nouvel appartement."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " déménagez à cause du chômage dans votre région.",
+     "opcoes": [
+      "Vous",
+      "Tu",
+      "Elles"
+     ],
+     "resposta": "Vous",
+     "explicacao": "O verbo \"déménagez\" está conjugado para \"vous\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Vous déménagez à cause du chômage dans votre région."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " évitent la pollution en prenant le vélo.",
+     "opcoes": [
+      "Ils",
+      "Il",
+      "Vous"
+     ],
+     "resposta": "Ils",
+     "explicacao": "O verbo \"évitent\" está conjugado para \"ils\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Ils évitent la pollution en prenant le vélo."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " écoute les informations à la radio pendant le trajet.",
+     "opcoes": [
+      "Il",
+      "Nous",
+      "Elles"
+     ],
+     "resposta": "Il",
+     "explicacao": "O verbo \"écoute\" está conjugado para \"il\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Il écoute les informations à la radio pendant le trajet."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " réservons un hébergement pour le séjour Erasmus.",
+     "opcoes": [
+      "Nous",
+      "Vous",
+      "Elle"
+     ],
+     "resposta": "Nous",
+     "explicacao": "O verbo \"réservons\" está conjugado para \"nous\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Nous réservons un hébergement pour le séjour Erasmus."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " signe la facture avant l’envoi de la marchandise.",
+     "opcoes": [
+      "Je",
+      "Ils",
+      "Vous"
+     ],
+     "resposta": "Je",
+     "explicacao": "O verbo \"signe\" está conjugado para \"je\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Je signe la facture avant l’envoi de la marchandise."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " partez en voyage la semaine prochaine.",
+     "opcoes": [
+      "Vous",
+      "Tu",
+      "Elles"
+     ],
+     "resposta": "Vous",
+     "explicacao": "O verbo \"partez\" está conjugado para \"vous\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Vous partez en voyage la semaine prochaine."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " adorent explorer de nouveaux quartiers à vélo.",
+     "opcoes": [
+      "Elles",
+      "Nous",
+      "Il"
+     ],
+     "resposta": "Elles",
+     "explicacao": "O verbo \"adorent\" está conjugado para \"elles\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Elles adorent explorer de nouveaux quartiers à vélo."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " enseigne les bonnes pratiques de mobilité urbaine.",
+     "opcoes": [
+      "Il",
+      "Elles",
+      "Nous"
+     ],
+     "resposta": "Il",
+     "explicacao": "O verbo \"enseigne\" está conjugado para \"il\". Olhe sempre a terminação do verbo para achar o sujeito.",
+     "audioCorrecao": "Il enseigne les bonnes pratiques de mobilité urbaine."
+    }
+   ]
+  },
+  {
+   "id": "avoir",
+   "tipo": "exercicio",
+   "titulo": "Le verbe avoir",
+   "instrucao": "Escolha a forma certa de AVOIR.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "J’",
+     "depois": " un entretien d’embauche demain matin.",
+     "opcoes": [
+      "ai",
+      "as",
+      "ont"
+     ],
+     "resposta": "ai",
+     "explicacao": "Com \"j'\", AVOIR fica \"ai\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "J’ai un entretien d’embauche demain matin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Tu ",
+     "depois": " une facture à régler avant la fin du mois.",
+     "opcoes": [
+      "as",
+      "ai",
+      "avons"
+     ],
+     "resposta": "as",
+     "explicacao": "Com \"tu\", AVOIR fica \"as\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Tu as une facture à régler avant la fin du mois."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il ",
+     "depois": " un rendez vous chez le médecin.",
+     "opcoes": [
+      "a",
+      "avez",
+      "avons"
+     ],
+     "resposta": "a",
+     "explicacao": "Com \"il / elle / on\", AVOIR fica \"a\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Il a un rendez vous chez le médecin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous ",
+     "depois": " beaucoup de colis à envoyer cette semaine.",
+     "opcoes": [
+      "avons",
+      "avez",
+      "ont"
+     ],
+     "resposta": "avons",
+     "explicacao": "Com \"nous\", AVOIR fica \"avons\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Nous avons beaucoup de colis à envoyer cette semaine."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Vous ",
+     "depois": " raison de vous méfier des embouteillages.",
+     "opcoes": [
+      "avez",
+      "a",
+      "ai"
+     ],
+     "resposta": "avez",
+     "explicacao": "Com \"vous\", AVOIR fica \"avez\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Vous avez raison de vous méfier des embouteillages."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils ",
+     "depois": " deux réunions importantes aujourd’hui.",
+     "opcoes": [
+      "ont",
+      "avons",
+      "as"
+     ],
+     "resposta": "ont",
+     "explicacao": "Com \"ils / elles\", AVOIR fica \"ont\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Ils ont deux réunions importantes aujourd’hui."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "J’",
+     "depois": " une bourse pour mon séjour Erasmus.",
+     "opcoes": [
+      "ai",
+      "ont",
+      "avez"
+     ],
+     "resposta": "ai",
+     "explicacao": "Com \"j'\", AVOIR fica \"ai\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "J’ai une bourse pour mon séjour Erasmus."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Tu ",
+     "depois": " un congé la semaine prochaine.",
+     "opcoes": [
+      "as",
+      "a",
+      "ai"
+     ],
+     "resposta": "as",
+     "explicacao": "Com \"tu\", AVOIR fica \"as\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Tu as un congé la semaine prochaine."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle ",
+     "depois": " un nouvel emploi dans le marché du travail.",
+     "opcoes": [
+      "a",
+      "avez",
+      "ont"
+     ],
+     "resposta": "a",
+     "explicacao": "Com \"il / elle / on\", AVOIR fica \"a\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Elle a un nouvel emploi dans le marché du travail."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous ",
+     "depois": " une formation sur la mobilité urbaine.",
+     "opcoes": [
+      "avons",
+      "a",
+      "avez"
+     ],
+     "resposta": "avons",
+     "explicacao": "Com \"nous\", AVOIR fica \"avons\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Nous avons une formation sur la mobilité urbaine."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Vous ",
+     "depois": " un logement étudiant près de la gare.",
+     "opcoes": [
+      "avez",
+      "avons",
+      "ai"
+     ],
+     "resposta": "avez",
+     "explicacao": "Com \"vous\", AVOIR fica \"avez\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Vous avez un logement étudiant près de la gare."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils ",
+     "depois": " une grande maison à la campagne.",
+     "opcoes": [
+      "ont",
+      "as",
+      "avons"
+     ],
+     "resposta": "ont",
+     "explicacao": "Com \"ils / elles\", AVOIR fica \"ont\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Ils ont une grande maison à la campagne."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "J’",
+     "depois": " besoin d’un renseignement sur les pistes cyclables.",
+     "opcoes": [
+      "ai",
+      "a",
+      "ont"
+     ],
+     "resposta": "ai",
+     "explicacao": "Com \"j'\", AVOIR fica \"ai\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "J’ai besoin d’un renseignement sur les pistes cyclables."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Tu ",
+     "depois": " de la chance d’éviter le chômage.",
+     "opcoes": [
+      "as",
+      "avez",
+      "ont"
+     ],
+     "resposta": "as",
+     "explicacao": "Com \"tu\", AVOIR fica \"as\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Tu as de la chance d’éviter le chômage."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il ",
+     "depois": " beaucoup de marchandise à livrer.",
+     "opcoes": [
+      "a",
+      "ai",
+      "avons"
+     ],
+     "resposta": "a",
+     "explicacao": "Com \"il / elle / on\", AVOIR fica \"a\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Il a beaucoup de marchandise à livrer."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous ",
+     "depois": " un projet de déménagement pour l’été.",
+     "opcoes": [
+      "avons",
+      "avez",
+      "ont"
+     ],
+     "resposta": "avons",
+     "explicacao": "Com \"nous\", AVOIR fica \"avons\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Nous avons un projet de déménagement pour l’été."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Vous ",
+     "depois": " une facture impayée depuis deux mois.",
+     "opcoes": [
+      "avez",
+      "as",
+      "a"
+     ],
+     "resposta": "avez",
+     "explicacao": "Com \"vous\", AVOIR fica \"avez\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Vous avez une facture impayée depuis deux mois."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elles ",
+     "depois": " une formation en ligne sur le réseautage.",
+     "opcoes": [
+      "ont",
+      "avons",
+      "ai"
+     ],
+     "resposta": "ont",
+     "explicacao": "Com \"ils / elles\", AVOIR fica \"ont\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Elles ont une formation en ligne sur le réseautage."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "J’",
+     "depois": " une question sur l’entretien individuel.",
+     "opcoes": [
+      "ai",
+      "avez",
+      "a"
+     ],
+     "resposta": "ai",
+     "explicacao": "Com \"j'\", AVOIR fica \"ai\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "J’ai une question sur l’entretien individuel."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils ",
+     "depois": " un entretien d’embauche demain après midi.",
+     "opcoes": [
+      "ont",
+      "a",
+      "avons"
+     ],
+     "resposta": "ont",
+     "explicacao": "Com \"ils / elles\", AVOIR fica \"ont\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Ils ont un entretien d’embauche demain après midi."
+    }
+   ]
+  },
+  {
+   "id": "etre",
+   "tipo": "exercicio",
+   "titulo": "Le verbe être",
+   "instrucao": "Escolha a forma certa de ÊTRE.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Je ",
+     "depois": " en formation Erasmus cette année.",
+     "opcoes": [
+      "suis",
+      "es",
+      "sommes"
+     ],
+     "resposta": "suis",
+     "explicacao": "Com \"je\", ÊTRE fica \"suis\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Je suis en formation Erasmus cette année."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Tu ",
+     "depois": " motivé pour cet entretien d’embauche.",
+     "opcoes": [
+      "es",
+      "suis",
+      "êtes"
+     ],
+     "resposta": "es",
+     "explicacao": "Com \"tu\", ÊTRE fica \"es\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Tu es motivé pour cet entretien d’embauche."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il ",
+     "depois": " directeur de cette entreprise.",
+     "opcoes": [
+      "est",
+      "es",
+      "sont"
+     ],
+     "resposta": "est",
+     "explicacao": "Com \"il / elle / on\", ÊTRE fica \"est\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Il est directeur de cette entreprise."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous ",
+     "depois": " en réunion jusqu’à midi.",
+     "opcoes": [
+      "sommes",
+      "es",
+      "sont"
+     ],
+     "resposta": "sommes",
+     "explicacao": "Com \"nous\", ÊTRE fica \"sommes\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Nous sommes en réunion jusqu’à midi."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Vous ",
+     "depois": " très motivés pour ce poste.",
+     "opcoes": [
+      "êtes",
+      "est",
+      "sommes"
+     ],
+     "resposta": "êtes",
+     "explicacao": "Com \"vous\", ÊTRE fica \"êtes\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Vous êtes très motivés pour ce poste."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils ",
+     "depois": " en vacances près de la campagne.",
+     "opcoes": [
+      "sont",
+      "est",
+      "sommes"
+     ],
+     "resposta": "sont",
+     "explicacao": "Com \"ils / elles\", ÊTRE fica \"sont\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Ils sont en vacances près de la campagne."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle ",
+     "depois": " étudiante en formation professionnelle.",
+     "opcoes": [
+      "est",
+      "es",
+      "sont"
+     ],
+     "resposta": "est",
+     "explicacao": "Com \"il / elle / on\", ÊTRE fica \"est\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Elle est étudiante en formation professionnelle."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elles ",
+     "depois": " très engagées dans les initiatives locales.",
+     "opcoes": [
+      "sont",
+      "est",
+      "sommes"
+     ],
+     "resposta": "sont",
+     "explicacao": "Com \"ils / elles\", ÊTRE fica \"sont\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Elles sont très engagées dans les initiatives locales."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je ",
+     "depois": " fier de mon nouvel emploi.",
+     "opcoes": [
+      "suis",
+      "es",
+      "sommes"
+     ],
+     "resposta": "suis",
+     "explicacao": "Com \"je\", ÊTRE fica \"suis\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Je suis fier de mon nouvel emploi."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Tu ",
+     "depois": " en retard pour ton rendez vous.",
+     "opcoes": [
+      "es",
+      "suis",
+      "êtes"
+     ],
+     "resposta": "es",
+     "explicacao": "Com \"tu\", ÊTRE fica \"es\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Tu es en retard pour ton rendez vous."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous ",
+     "depois": " préoccupés par le réchauffement climatique.",
+     "opcoes": [
+      "sommes",
+      "es",
+      "sont"
+     ],
+     "resposta": "sommes",
+     "explicacao": "Com \"nous\", ÊTRE fica \"sommes\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Nous sommes préoccupés par le réchauffement climatique."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Vous ",
+     "depois": " responsables du réseautage de l’entreprise.",
+     "opcoes": [
+      "êtes",
+      "est",
+      "sommes"
+     ],
+     "resposta": "êtes",
+     "explicacao": "Com \"vous\", ÊTRE fica \"êtes\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Vous êtes responsables du réseautage de l’entreprise."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il ",
+     "depois": " absent à cause d’un rendez vous chez le médecin.",
+     "opcoes": [
+      "est",
+      "es",
+      "sont"
+     ],
+     "resposta": "est",
+     "explicacao": "Com \"il / elle / on\", ÊTRE fica \"est\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Il est absent à cause d’un rendez vous chez le médecin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elles ",
+     "depois": " satisfaites de leur nouveau logement étudiant.",
+     "opcoes": [
+      "sont",
+      "est",
+      "sommes"
+     ],
+     "resposta": "sont",
+     "explicacao": "Com \"ils / elles\", ÊTRE fica \"sont\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Elles sont satisfaites de leur nouveau logement étudiant."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je ",
+     "depois": " habitué aux embouteillages de la ville.",
+     "opcoes": [
+      "suis",
+      "es",
+      "sommes"
+     ],
+     "resposta": "suis",
+     "explicacao": "Com \"je\", ÊTRE fica \"suis\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Je suis habitué aux embouteillages de la ville."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous ",
+     "depois": " ravis de découvrir ce château insolite.",
+     "opcoes": [
+      "sommes",
+      "est",
+      "sont"
+     ],
+     "resposta": "sommes",
+     "explicacao": "Com \"nous\", ÊTRE fica \"sommes\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Nous sommes ravis de découvrir ce château insolite."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Vous ",
+     "depois": " bien informés sur le marché du travail.",
+     "opcoes": [
+      "êtes",
+      "es",
+      "sommes"
+     ],
+     "resposta": "êtes",
+     "explicacao": "Com \"vous\", ÊTRE fica \"êtes\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Vous êtes bien informés sur le marché du travail."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils ",
+     "depois": " convaincus par les initiatives écologiques.",
+     "opcoes": [
+      "sont",
+      "est",
+      "sommes"
+     ],
+     "resposta": "sont",
+     "explicacao": "Com \"ils / elles\", ÊTRE fica \"sont\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Ils sont convaincus par les initiatives écologiques."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Tu ",
+     "depois": " curieux de visiter ce bâtiment ancien.",
+     "opcoes": [
+      "es",
+      "suis",
+      "êtes"
+     ],
+     "resposta": "es",
+     "explicacao": "Com \"tu\", ÊTRE fica \"es\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Tu es curieux de visiter ce bâtiment ancien."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle ",
+     "depois": " impliquée dans la cohabitation solidaire.",
+     "opcoes": [
+      "est",
+      "es",
+      "sont"
+     ],
+     "resposta": "est",
+     "explicacao": "Com \"il / elle / on\", ÊTRE fica \"est\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Elle est impliquée dans la cohabitation solidaire."
+    }
+   ]
+  },
+  {
+   "id": "mix",
+   "tipo": "exercicio",
+   "titulo": "Être ou avoir ?",
+   "instrucao": "Escreva a forma correta: ÊTRE ou AVOIR? Maiúsculas não contam; atenção aos acentos.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "Je ",
+     "depois": " en formation Erasmus ce semestre.",
+     "respostas": [
+      "suis"
+     ],
+     "explicacao": "Com \"je\", ÊTRE fica \"suis\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Je suis en formation Erasmus ce semestre."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Tu ",
+     "depois": " très motivé pour cet entretien d’embauche.",
+     "respostas": [
+      "es"
+     ],
+     "explicacao": "Com \"tu\", ÊTRE fica \"es\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Tu es très motivé pour cet entretien d’embauche."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il ",
+     "depois": " un rendez vous avec le directeur à quinze heures.",
+     "respostas": [
+      "a"
+     ],
+     "explicacao": "Com \"il / elle / on\", AVOIR fica \"a\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Il a un rendez vous avec le directeur à quinze heures."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Nous ",
+     "depois": " une réunion importante concernant la mobilité urbaine.",
+     "respostas": [
+      "avons"
+     ],
+     "explicacao": "Com \"nous\", AVOIR fica \"avons\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Nous avons une réunion importante concernant la mobilité urbaine."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Vous ",
+     "depois": " très aimables de partager ces astuces.",
+     "respostas": [
+      "êtes"
+     ],
+     "explicacao": "Com \"vous\", ÊTRE fica \"êtes\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Vous êtes très aimables de partager ces astuces."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Les étudiants ",
+     "depois": " logés près du campus grâce au programme Erasmus.",
+     "respostas": [
+      "sont"
+     ],
+     "explicacao": "Com \"ils / elles\", ÊTRE fica \"sont\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Les étudiants sont logés près du campus grâce au programme Erasmus."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "J’",
+     "depois": " beaucoup de colis à préparer avant la fermeture.",
+     "respostas": [
+      "ai"
+     ],
+     "explicacao": "Com \"j'\", AVOIR fica \"ai\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "J’ai beaucoup de colis à préparer avant la fermeture."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Tu ",
+     "depois": " une facture à envoyer au client.",
+     "respostas": [
+      "as"
+     ],
+     "explicacao": "Com \"tu\", AVOIR fica \"as\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Tu as une facture à envoyer au client."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Le directeur ",
+     "depois": " déjà en réunion avec les fournisseurs.",
+     "respostas": [
+      "est"
+     ],
+     "explicacao": "Com \"il / elle / on\", ÊTRE fica \"est\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Le directeur est déjà en réunion avec les fournisseurs."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Nous ",
+     "depois": " un entretien d’embauche prévu demain matin.",
+     "respostas": [
+      "avons"
+     ],
+     "explicacao": "Com \"nous\", AVOIR fica \"avons\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Nous avons un entretien d’embauche prévu demain matin."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Les touristes ",
+     "depois": " en vacances près des pistes cyclables.",
+     "respostas": [
+      "sont"
+     ],
+     "explicacao": "Com \"ils / elles\", ÊTRE fica \"sont\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Les touristes sont en vacances près des pistes cyclables."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Vous ",
+     "depois": " un logement étudiant près de l’université.",
+     "respostas": [
+      "avez"
+     ],
+     "explicacao": "Com \"vous\", AVOIR fica \"avez\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Vous avez un logement étudiant près de l’université."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ils ",
+     "depois": " très motivés malgré le chômage dans leur région.",
+     "respostas": [
+      "sont"
+     ],
+     "explicacao": "Com \"ils / elles\", ÊTRE fica \"sont\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Ils sont très motivés malgré le chômage dans leur région."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "J’",
+     "depois": " reçu un colis contenant la marchandise commandée.",
+     "respostas": [
+      "ai"
+     ],
+     "explicacao": "Com \"j'\", AVOIR fica \"ai\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "J’ai reçu un colis contenant la marchandise commandée."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "La gare ",
+     "depois": " à proximité du centre ville et des pistes cyclables.",
+     "respostas": [
+      "est"
+     ],
+     "explicacao": "Com \"il / elle / on\", ÊTRE fica \"est\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "La gare est à proximité du centre ville et des pistes cyclables."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Nous ",
+     "depois": " plusieurs projets concernant la mobilité urbaine et les transports.",
+     "respostas": [
+      "avons"
+     ],
+     "explicacao": "Com \"nous\", AVOIR fica \"avons\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Nous avons plusieurs projets concernant la mobilité urbaine et les transports."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Les produits bio ",
+     "depois": " de plus en plus populaires sur le marché.",
+     "respostas": [
+      "sont"
+     ],
+     "explicacao": "Com \"ils / elles\", ÊTRE fica \"sont\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Les produits bio sont de plus en plus populaires sur le marché."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Vous ",
+     "depois": " beaucoup de travail avant la fin de la formation.",
+     "respostas": [
+      "avez"
+     ],
+     "explicacao": "Com \"vous\", AVOIR fica \"avez\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Vous avez beaucoup de travail avant la fin de la formation."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Le marché du travail ",
+     "depois": " devenu plus exigeant à cause du chômage.",
+     "respostas": [
+      "est"
+     ],
+     "explicacao": "Com \"il / elle / on\", ÊTRE fica \"est\". Présent de être: je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+     "audioCorrecao": "Le marché du travail est devenu plus exigeant à cause du chômage."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Les voyageurs ",
+     "depois": " un séjour de cinq jours prévu en France.",
+     "respostas": [
+      "ont"
+     ],
+     "explicacao": "Com \"ils / elles\", AVOIR fica \"ont\". Présent de avoir: j'ai, tu as, il a, nous avons, vous avez, ils ont.",
+     "audioCorrecao": "Les voyageurs ont un séjour de cinq jours prévu en France."
+    }
+   ]
+  },
+  {
+   "id": "plus-loin",
+   "tipo": "exercicio",
+   "titulo": "Aller plus loin",
+   "instrucao": "Questões de revisão em vários formatos, do fácil ao difícil.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Je ",
+     "depois": " en réunion jusqu'à 15h.",
+     "opcoes": [
+      "suis",
+      "es",
+      "sont"
+     ],
+     "resposta": "suis",
+     "explicacao": "\"Je\" sempre usa \"suis\".",
+     "audioCorrecao": "Je suis en réunion jusqu'à 15h."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Vous ",
+     "depois": " disponible pour un entretien demain ?",
+     "opcoes": [
+      "êtes",
+      "est",
+      "sommes"
+     ],
+     "resposta": "êtes",
+     "explicacao": "\"Vous\" usa \"êtes\".",
+     "audioCorrecao": "Vous êtes disponible pour un entretien demain?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous ",
+     "depois": " étudiants en économie.",
+     "opcoes": [
+      "sommes",
+      "êtes",
+      "sont"
+     ],
+     "resposta": "sommes",
+     "explicacao": "\"Nous\" usa \"sommes\".",
+     "audioCorrecao": "Nous sommes étudiants en économie."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils ",
+     "depois": " arrivés en France il y a un mois.",
+     "opcoes": [
+      "sont",
+      "est",
+      "êtes"
+     ],
+     "resposta": "sont",
+     "explicacao": "\"Ils\" usa \"sont\".",
+     "audioCorrecao": "Ils sont arrivés en France il y a un mois."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Tu ",
+     "depois": " content de partir en Erasmus ?",
+     "opcoes": [
+      "es",
+      "est",
+      "suis"
+     ],
+     "resposta": "es",
+     "explicacao": "\"Tu\" usa \"es\".",
+     "audioCorrecao": "Tu es content de partir en Erasmus?"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual frase está correta?",
+     "opcoes": [
+      "Nous sont fatigués.",
+      "Nous sommes fatigués.",
+      "Nous êtes fatigués."
+     ],
+     "resposta": "Nous sommes fatigués.",
+     "explicacao": "\"Nous\" exige \"sommes\"."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "\"Vous êtes\" pode ser usado tanto para uma pessoa (formal) quanto para várias.",
+     "opcoes": [
+      "Verdadeiro",
+      "Falso"
+     ],
+     "resposta": "Verdadeiro",
+     "explicacao": "Correto: \"vous\" pode ser singular formal ou plural."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Complete: \"Les étudiants ___ en cours d'Erasmus.\"",
+     "respostas": [
+      "sont"
+     ],
+     "explicacao": "\"Les étudiants\" = ils → sont."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Corrija o erro: \"Je es content de mon travail.\"",
+     "respostas": [
+      "Je suis content de mon travail."
+     ],
+     "explicacao": "\"Je\" nunca usa \"es\"; a forma correta é \"suis\".",
+     "placeholder": "Escreva a frase corrigida"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Leia: \"Nous sommes arrivés en retard à l'entretien à cause du vol.\" Por que eles chegaram atrasados?",
+     "opcoes": [
+      "Por causa do voo",
+      "Por causa do trânsito",
+      "Por causa da chuva"
+     ],
+     "resposta": "Por causa do voo",
+     "explicacao": "O texto menciona \"à cause du vol\" (por causa do voo)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: \"On ___ prêts pour le voyage.\"",
+     "opcoes": [
+      "est",
+      "sommes",
+      "sont"
+     ],
+     "resposta": "est",
+     "explicacao": "\"On\" é gramaticalmente 3ª pessoa do singular."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "ÊTRE nunca é usado para indicar profissão.",
+     "opcoes": [
+      "Verdadeiro",
+      "Falso"
+     ],
+     "resposta": "Falso",
+     "explicacao": "Falso: \"Je suis étudiant\" indica profissão/ocupação."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Complete: \"Tu ___ disponible ce week-end pour visiter l'université ?\"",
+     "respostas": [
+      "es"
+     ],
+     "explicacao": "\"Tu\" usa \"es\"."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual associação pronome → forma está ERRADA?",
+     "opcoes": [
+      "nous → sommes",
+      "ils → sont",
+      "tu → est"
+     ],
+     "resposta": "tu → est",
+     "explicacao": "\"Tu\" usa \"es\", não \"est\"."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Corrija: \"Vous est en retard.\"",
+     "respostas": [
+      "Vous êtes en retard."
+     ],
+     "explicacao": "\"Vous\" exige \"êtes\", nunca \"est\".",
+     "placeholder": "Escreva a frase corrigida"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Complete com a forma correta de ÊTRE: \"Nous ___ ravis de vous accueillir.\"",
+     "respostas": [
+      "sommes"
+     ],
+     "explicacao": "A resposta correta é \"sommes\" (\"nous\" → \"sommes\")."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Complete com ÊTRE: \"Je ___ (être) très motivé à commencer ce nouveau poste.\"",
+     "respostas": [
+      "suis"
+     ],
+     "explicacao": "A resposta correta é \"suis\" (\"je\" → \"suis\")."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Reescreva na forma negativa: \"Ils sont satisfaits de l'entretien.\"",
+     "respostas": [
+      "Ils ne sont pas satisfaits de l'entretien.",
+      "Ils ne sont pas satisfaits de l'entretien"
+     ],
+     "explicacao": "Resposta modelo: \"Ils ne sont pas satisfaits de l'entretien.\""
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Transforme em pergunta com inversão: \"Vous êtes disponible demain.\"",
+     "respostas": [
+      "Êtes-vous disponible demain ?",
+      "Etes-vous disponible demain ?",
+      "Êtes-vous disponible demain"
+     ],
+     "explicacao": "Resposta modelo: \"Êtes-vous disponible demain ?\""
+    },
+    {
+     "tipo": "livre",
+     "enunciado": "Em 1-2 frases (em francês), explique por que \"on\" usa sempre a forma \"est\" do verbo ÊTRE, mesmo representando \"nós\".",
+     "minPalavras": 20,
+     "explicacao": "Resposta esperada: porque \"on\" é gramaticalmente um pronome de 3ª pessoa do singular (\"troisième personne du singulier\"), mesmo quando usado no sentido de \"nous\"."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Complete: \"Le train ___ toujours en retard le lundi.\"",
+     "respostas": [
+      "est"
+     ],
+     "explicacao": "A resposta correta é \"est\" (\"le train\" = il → \"est\")."
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "Complete com ÊTRE: \"Tu ___ (être) le/la bienvenu(e) à notre réunion.\"",
+     "respostas": [
+      "es"
+     ],
+     "explicacao": "A resposta correta é \"es\" (\"tu\" → \"es\")."
+    },
+    {
+     "tipo": "livre",
+     "enunciado": "Escreva uma frase original em francês usando ÊTRE para descrever como você se sente hoje no trabalho ou nos estudos.",
+     "minPalavras": 20,
+     "explicacao": "Qualquer frase correta contendo uma forma conjugada do verbo ÊTRE é aceita."
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "Une année à saisir",
+   "instrucao": "Texto de leitura (nível avançado) com o vocabulário do curso. Ouça, acompanhe e passe o mouse nas palavras sublinhadas.",
+   "paragrafos": [
+    "Nora quitte sa maison de province avec, dans ses cartons, l’essentiel d’une vie qu’elle réinvente. Elle a obtenu une bourse pour un programme d’échange Erasmus et elle est désormais étudiante dans une grande ville où tout, même la lumière, semble différent. Le voyage a duré une nuit entière, mais l’excitation vaut bien ce sacrifice. À la gare, une hôtesse d’accueil lui indique le chemin vers son nouveau logement étudiant, un petit studio proche des pistes cyclables et d’une épicerie ouverte tard le soir.",
+    "Les premiers cours sont exigeants. Chaque leçon apporte son lot de devoirs, et Nora doit s’organiser entre les réunions de groupe, les lectures et les exposés. Elle souhaite réussir, alors elle ménage ses efforts sans jamais les négliger. Entre deux cours, elle aime flâner dans les rues, visiter un château insolite ou s’arrêter devant un bâtiment dont l’ouvrage semble raconter une histoire ancienne. D’après ses camarades, la ville regorge de trésors méconnus, et elle a bien l’intention de les découvrir tous.",
+    "Vient ensuite le temps du marché du travail. Nora prépare son dossier, sollicite des entretiens individuels, se prépare à chaque entretien d’embauche avec la même rigueur qu’un examen. Elle sait que le chômage guette ceux qui n’osent pas se démarquer, alors elle mise sur le réseautage: elle rencontre des professionnels, échange sur les réseaux sociaux, relance, patiente. Un matin, un directeur la reçoit pour un poste qui, selon elle, constitue un véritable levier pour sa carrière. Elle a raison d’espérer: quelques jours plus tard, la réponse arrive, positive, et une joie discrète l’envahit.",
+    "Le travail commence, et avec lui, les embouteillages du matin. Nora choisit pourtant le vélo plutôt que la voiture: la mobilité urbaine devient pour elle une conviction autant qu’une habitude. Elle emprunte les pistes cyclables, traverse des jardins communs où des potagers partagés poussent entre les immeubles, et observe, non sans une pointe de fierté, la ville qui se réinvente. Le réseau de transports s’améliore, mais il faut encore combattre la pollution et le réchauffement qui pèsent sur tous les quartiers, riches ou délaissés.",
+    "Le soir, devant son ordinateur, Nora navigue entre journaux en ligne et notifications. Elle se méfie de la surabondance d’informations, de ce doute permanent que font naître les rumeurs bombardées sur les réseaux. Elle sait pourtant que le numérique est devenu incontournable: téléchargements, visioconférences, ubérisation de certains métiers. Elle défend son droit à la déconnexion, ménage ses soirées, et retrouve, dans une lettre manuscrite envoyée à sa grand mère, le plaisir presque oublié de l’écriture épistolaire.",
+    "Mais Nora n’ignore pas les contraintes que traverse sa génération: la précarité du travail intérimaire, les inégalités sociales, l’âgisme envers les aînés, la grossophobie qui persiste malgré les discours. Elle refuse de fermer les yeux sur la pauvreté qui côtoie la richesse, sur ce cache misère que certains discours dressent pour masquer l’absence de véritables solutions. Alors elle s’engage: elle participe à des initiatives locales, encourage la cohabitation solidaire, défend un accès équitable au logement et à la santé pour chacun.",
+    "Le week end, elle retourne parfois à la campagne, chez ses parents, où l’air paraît plus léger. Elle y retrouve les produits bio du marché, les repas partagés en famille, le petit déjeuner préparé sans hâte. Là bas, on cultive encore la terre sans engrais ni pesticides, et l’on jouit d’une tranquillité que la ville, malgré tout son charme, ne procure pas toujours. Ces excursions lui rappellent que le bonheur, souvent, tient à peu de choses: une lueur d’espoir, une astuce partagée entre voisins, un animal de compagnie qui attend sagement à la porte.",
+    "Un an après son arrivée, Nora mesure le chemin parcouru. Elle a un emploi, un cercle d’amis fidèles, une routine qui lui ressemble. Elle sait que la mondialisation, le vieillissement de la population et la mobilité internationale redessinent, chaque jour, le monde qu’elle habite. Mais elle avance, portée par la volonté d’apprendre, par le désir de comprendre et, surtout, par cette conviction simple: chaque défi, aussi grand soit il, finit toujours par révéler une occasion de s’épanouir."
+   ],
+   "glossario": {
+    "maison": "casa",
+    "cartons": "caixas",
+    "bourse": "bolsa de estudos",
+    "erasmus": "Erasmus",
+    "voyage": "viagem",
+    "gare": "estacao de trem",
+    "hotesse": "recepcionista",
+    "accueil": "recepcao",
+    "logement": "moradia",
+    "etudiant": "estudante",
+    "pistes": "trilhas",
+    "cyclables": "ciclaveis",
+    "epicerie": "mercearia",
+    "cours": "aula",
+    "lecon": "licao",
+    "devoirs": "deveres de casa",
+    "reunions": "reunioes",
+    "menage": "poupar esforcos",
+    "efforts": "esforcos",
+    "chateau": "castelo",
+    "insolite": "insolito",
+    "batiment": "predio",
+    "ouvrage": "obra",
+    "meconnus": "pouco conhecidos",
+    "decouvrir": "descobrir",
+    "marche": "mercado",
+    "travail": "trabalho",
+    "entretiens": "entrevistas",
+    "entretien": "entrevista",
+    "embauche": "contratacao",
+    "chomage": "desemprego",
+    "demarquer": "se destacar",
+    "reseautage": "networking",
+    "reseaux": "redes",
+    "sociaux": "sociais",
+    "directeur": "diretor",
+    "poste": "cargo",
+    "constitue": "constitui",
+    "levier": "alavanca",
+    "joie": "alegria",
+    "embouteillages": "engarrafamentos",
+    "velo": "bicicleta",
+    "mobilite": "mobilidade",
+    "urbaine": "urbana",
+    "jardins": "jardins",
+    "communs": "comuns",
+    "potagers": "hortas",
+    "fierte": "orgulho",
+    "reseau": "rede",
+    "transports": "transportes",
+    "ameliore": "melhora",
+    "combattre": "combater",
+    "pollution": "poluicao",
+    "rechauffement": "aquecimento global",
+    "delaisses": "abandonados",
+    "numerique": "digital",
+    "journaux": "jornais",
+    "mefie": "desconfia",
+    "surabondance": "superabundancia",
+    "doute": "duvida",
+    "bombardees": "bombardeadas",
+    "incontournable": "incontornavel",
+    "telechargements": "downloads",
+    "uberisation": "uberizacao",
+    "metiers": "profissoes",
+    "deconnexion": "desconexao",
+    "epistolaire": "epistolar",
+    "contraintes": "restricoes",
+    "interimaire": "temporario",
+    "inegalites": "desigualdades",
+    "agisme": "etarismo",
+    "grossophobie": "gordofobia",
+    "pauvrete": "pobreza",
+    "richesse": "riqueza",
+    "absence": "ausencia",
+    "initiatives": "iniciativas",
+    "cohabitation": "coabitacao",
+    "acces": "acesso",
+    "equitable": "equitativo",
+    "sante": "saude",
+    "campagne": "campo",
+    "produits": "produtos",
+    "bio": "organico",
+    "engrais": "fertilizantes",
+    "pesticides": "pesticidas",
+    "jouit": "desfruta",
+    "excursions": "excursoes",
+    "lueur": "lampejo",
+    "espoir": "esperanca",
+    "astuce": "dica",
+    "animal": "animal",
+    "compagnie": "companhia",
+    "mondialisation": "globalizacao",
+    "vieillissement": "envelhecimento",
+    "internationale": "internacional",
+    "volonte": "vontade",
+    "desir": "desejo",
+    "defi": "desafio",
+    "epanouir": "florescer"
+   }
+  }
+ ]
+}

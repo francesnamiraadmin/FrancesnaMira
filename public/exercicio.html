@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+  <script src="js/htmlSeguro.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Exercício - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/exercicio.css">
+</head>
+
+<body>
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<main class="ex-wrap">
+  <header class="ex-cabecalho" id="exCabecalho">
+    <div class="skeleton skeleton-line" style="width:40%"></div>
+    <div class="skeleton skeleton-line"></div>
+  </header>
+
+  <nav class="ex-abas" id="exAbas" aria-label="Partes do exercício"></nav>
+  <section class="ex-conteudo" id="exConteudo"><div class="skeleton skeleton-block"></div></section>
+
+  <div class="ex-rodape" id="exRodape" hidden>
+    <button class="ex-btn secundario" id="btnAnterior">← Anterior</button>
+    <span class="ex-progresso-texto" id="exProgressoTexto"></span>
+    <button class="ex-btn secundario" id="btnProxima">Próxima →</button>
+  </div>
+</main>
+
+<div class="ex-modal" id="exModal" hidden>
+  <div class="ex-modal-caixa" role="dialog" aria-modal="true" aria-labelledby="exModalTitulo">
+    <h2 id="exModalTitulo">Resultado</h2>
+    <div id="exModalCorpo"></div>
+    <div class="ex-modal-acoes">
+      <button class="ex-btn secundario" id="btnFecharModal">Revisar respostas</button>
+      <a class="ex-btn" id="btnVoltarDever" href="meus-deveres.html" hidden>Voltar ao dever de casa</a>
+    </div>
+  </div>
+</div>
+
+<footer class="ex-footer">© 2026 · Francês na Mira</footer>
+
+<script src="js/appShell.js"></script>
+<script src="js/audioFrances.js"></script>
+<script src="js/exercicio.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

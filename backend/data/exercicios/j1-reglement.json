@@ -1,0 +1,39 @@
+{
+ "slug": "j1-reglement",
+ "ordem": 1,
+ "nivel": "J1",
+ "titulo": "Règlement du cours",
+ "descricao": "Leia com atenção as regras das aulas e confirme cada uma. O aceite fica registrado no seu dever de casa.",
+ "secoes": [
+  {
+   "id": "intro",
+   "tipo": "aula",
+   "titulo": "Antes de começar",
+   "html": "<p>Este regulamento vale para as aulas particulares e em turma do Francês na Mira. Ele explica reposições, pagamentos, cancelamento e monitoria.</p>\n<div class=\"dica\">Leia cada regra e marque a caixa ao lado quando tiver entendido. Só é possível concluir o dever depois de confirmar as 16 regras.</div>\n<p>Ficou com alguma dúvida? Fale com o seu professor antes de confirmar.</p>"
+  },
+  {
+   "id": "regras",
+   "tipo": "regulamento",
+   "titulo": "Regulamento",
+   "instrucao": "Marque cada uma das 16 regras depois de lê-la.",
+   "regras": [
+    "A reposição de aulas é concedida exclusivamente mediante atestação médica do aluno ou de seus dependentes.",
+    "A qualidade da conexão de internet é responsabilidade de cada parte: o professor não responde pela internet do aluno, e vice-versa, não cabendo reposição por esse motivo.",
+    "Caso a aula não se realize por qualquer motivo de responsabilidade do professor, seja qual for a motivação, o valor correspondente é integralmente ressarcido ao aluno por meio de estorno. Por isso, é essencial que o pagamento seja sempre feito a partir de uma conta Pix cuja titularidade pertença ao próprio aluno, garantindo que o estorno retorne corretamente para ele.",
+    "É obrigatório o uso de computador com teclado e câmera funcionais durante as aulas. O não cumprimento dessa exigência autoriza o professor a optar pelo cancelamento da matrícula.",
+    "Diante de imprevistos financeiros ou pessoais, o aluno é sempre bem-vindo para conversar com o professor, para que, juntos, encontrem o melhor caminho.",
+    "Não há burocracia para o cancelamento da matrícula: basta não renovar a mensalidade, sem necessidade de aviso prévio ao professor. A não renovação suspende as aulas de imediato e, após 3 dias, culmina no cancelamento automático da matrícula e na perda da reserva de horário.",
+    "Ao cancelar a matrícula, 50% do valor remanescente é ressarcido ao aluno.",
+    "O acesso ao journal de classe é suspenso para alunos inadimplentes.",
+    "As cobranças não são feitas via WhatsApp. Todas as datas de vencimento e informações financeiras ficam reunidas na aba Mensalidade, localizada na parte inferior do journal de classe, ao lado das abas Accueil, P.O., P.E. e Vidéos, onde o aluno deve acompanhar sua situação.",
+    "A monitoria, destinada a esclarecer dúvidas pelo WhatsApp, funciona de segunda a sexta-feira, das 13h às 17h.",
+    "Acompanhar as datas das aulas já realizadas é responsabilidade do próprio aluno.",
+    "Saber tomar nota é responsabilidade do aluno, uma vez que o professor não exerce função de secretário. Havendo dúvidas sobre quais atividades realizar, basta enviar uma mensagem pelo WhatsApp, e o professor terá o maior prazer em auxiliar. Esse contato deve ser evitado no dia da própria aula, por razões óbvias de organização e tempo.",
+    "O aluno tem total autonomia para aumentar ou diminuir sua carga horária semanal (1h, 4h, 8h ou 12h) sempre que desejar. Essa alteração é feita diretamente na aba Mensalidade, de acordo com a disponibilidade de horários exibida no site oficial do Francês na Mira, através da aba suspensa destacada abaixo, onde se seleciona o novo pacote de aulas. Recomenda-se apenas notificar o professor após a mudança, para o devido acompanhamento.",
+    "A renovação do pacote de aulas funciona como uma recarga: basta efetuar o pagamento antes do vencimento. Caso contrário, as aulas são suspensas e, três dias após a primeira aula não realizada por falta de pagamento, o aluno é removido do horário e perde o acesso ao journal de classe. Ao vencer, o pacote gera uma notificação diretamente no journal de classe, visível apenas pelo computador, não aparecendo em celulares ou tablets. Bloqueadores de anúncios e extensões semelhantes instaladas no navegador também podem impedir sua exibição, por isso o acompanhamento da data de vencimento não deve depender exclusivamente dessa notificação.",
+    "O horário contratado é reservado de forma exclusiva ao aluno, razão pela qual o valor pago remunera não apenas a aula ministrada, mas também a disponibilidade do professor naquele período, que deixa de ser oferecido a outros estudantes. Assim, o simples aviso prévio de ausência, independentemente da antecedência, não gera direito à remarcação ou reposição da aula. A flexibilização indiscriminada dessa política contribui para a precarização do trabalho docente, ao desconsiderar que o professor organiza sua agenda, planejamento e disponibilidade com base nos horários previamente contratados. Dessa forma, a reposição somente será realizada em casos de impossibilidade por motivo de saúde, mediante apresentação de atestado médico. Pedidos insistentes de remarcação ou exceções fora dessa hipótese não serão aceitos..",
+    "Os materiais do Francês na Mira são de uso exclusivo da nossa comunidade. O compartilhamento fora dela resulta na remoção do aluno."
+   ]
+  }
+ ]
+}
