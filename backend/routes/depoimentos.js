@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { textoSeguro } = require("../middleware/seguranca");
 const Depoimento = require("../models/depoimento");
 const User = require("../models/user");
 const { exigirAuth, exigirAdmin } = require("../middleware/auth");
@@ -11,16 +12,25 @@ const TEXTO_CONSENTIMENTO_ATUAL =
 // nunca aparece automaticamente no site.
 router.post("/", exigirAuth, async (req, res) => {
   try {
-    const { titulo, texto, nota, cursoOuPlano, tempoUso, foto, aceiteImagem } = req.body;
+    const { foto, aceiteImagem } = req.body;
+    const titulo = textoSeguro(req.body.titulo, 150);
+    const texto = textoSeguro(req.body.texto, 3000);
+    const cursoOuPlano = textoSeguro(req.body.cursoOuPlano, 100);
+    const tempoUso = textoSeguro(req.body.tempoUso, 60);
+    const nota = Number(req.body.nota);
 
     if (!titulo || !texto || !nota) {
       return res.status(400).json({ msg: "Preencha título, depoimento e avaliação." });
     }
-    if (nota < 1 || nota > 5) {
+    if (!Number.isInteger(nota) || nota < 1 || nota > 5) {
       return res.status(400).json({ msg: "A avaliação deve ser de 1 a 5 estrelas." });
     }
     if (!aceiteImagem) {
       return res.status(400).json({ msg: "É necessário aceitar o termo de autorização de uso de imagem para enviar." });
+    }
+    // A foto aparece no site público: só data URI de imagem (nunca URL externa/javascript:).
+    if (foto && (typeof foto !== "string" || !/^data:image\/(png|jpe?g|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(foto))) {
+      return res.status(400).json({ msg: "Formato de imagem inválido. Envie PNG, JPEG, WebP ou GIF." });
     }
     if (foto && foto.length > 1_500_000) {
       return res.status(400).json({ msg: "A imagem é muito grande. Escolha uma foto menor." });

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const crypto = require("crypto");
 const { MercadoPagoConfig, Payment } = require("mercadopago");
 const Pedido = require("../models/pedido");
 const User = require("../models/user");
@@ -16,6 +17,81 @@ const { precoPorTier } = require("../utils/precoMatricula");
 const { precoPackPrestige, CURSO_COMBO_FLUENCIA, CURSOS_DO_COMBO_FLUENCIA } = require("../utils/precoPackPrestige");
 const { TIPOS_CURSO } = require("../utils/tiposCurso");
 const { enviarEmailPagamentoAprovado } = require("../utils/mailer");
+const { ehObjectId, normalizarEmail, textoSeguro, limitarTaxa } = require("../middleware/seguranca");
+const { registrar } = require("../utils/monitorSeguranca");
+
+// O front sempre manda o mesmo preço que o servidor calcula; divergência significa
+// requisição editada à mão tentando pagar menos. A cobrança já usa o valor do servidor —
+// aqui só registramos a tentativa (pontua o IP e avisa a equipe).
+function verificarAdulteracaoPreco(req, valorFinal) {
+  const enviado = Number(req.body.valor);
+  if (req.body.valor !== undefined && Number.isFinite(enviado) && enviado > 0 && Math.abs(enviado - valorFinal) > 0.01) {
+    registrar("adulteracao_preco", req, { curso: req.body.curso, plano: req.body.plano, valorEnviado: enviado, valorOficial: valorFinal });
+  }
+}
+
+// Criar cobranças é caro e abusável (teste de cartões roubados) — limite por IP.
+const limitePagamento = limitarTaxa({
+  nome: "pagamento", janelaMs: 15 * 60 * 1000, max: 15,
+  msg: "Muitas tentativas de pagamento. Aguarde alguns minutos e tente novamente."
+});
+
+// Preço mensal dos planos por curso quando NÃO há horários escolhidos (fluxo dos cards
+// de preço). Fonte de verdade no servidor — espelha os valores exibidos nas páginas de
+// cada curso (public/{curso}.html). Ao mudar um preço lá, mude aqui também.
+const PRECO_PLANO_FIXO = {
+  TCF: { Essentiel: 149, "Avancé": 199, Excellence: 249 },
+  TEF: { Essentiel: 169, "Avancé": 219, Excellence: 279 },
+  DELF: { Essentiel: 159, "Avancé": 209, Excellence: 269 },
+  DALF: { Essentiel: 179, "Avancé": 229, Excellence: 289 },
+  A1: { Essentiel: 89, "Avancé": 119, Excellence: 149 },
+  A2: { Essentiel: 99, "Avancé": 129, Excellence: 159 },
+  B1: { Essentiel: 109, "Avancé": 139, Excellence: 169 },
+  B2: { Essentiel: 119, "Avancé": 149, Excellence: 179 }
+};
+const TIERS = ["Essentiel", "Avancé", "Excellence"];
+
+// Valida e normaliza tudo que vem do cliente num pedido de pagamento. Lança erro
+// com mensagem amigável; nunca deixa objeto/operador chegar ao banco ou ao MP.
+function validarPedido(body) {
+  const { curso, plano, turmaId, tipoMatricula, slotsEscolhidos } = body;
+  const cursoValido = curso === CURSO_COMBO_FLUENCIA ? plano === "Pack Prestige" : TIPOS_CURSO.includes(curso);
+  if (!cursoValido) throw new Error("Curso inválido.");
+  if (plano !== "Pack Prestige" && !TIERS.includes(plano)) throw new Error("Plano inválido.");
+
+  const email = normalizarEmail(body.email);
+  if (!email) throw new Error("Informe um e-mail válido.");
+  const cpf = String(body.cpf || "").replace(/\D/g, "");
+  if (cpf.length !== 11) throw new Error("Informe um CPF válido.");
+
+  if (turmaId !== undefined && turmaId !== null && turmaId !== "" && !ehObjectId(turmaId)) throw new Error("Turma inválida.");
+  if (tipoMatricula !== undefined && !["particular", "turma"].includes(tipoMatricula)) throw new Error("Tipo de matrícula inválido.");
+
+  let slots;
+  if (slotsEscolhidos !== undefined && slotsEscolhidos !== null) {
+    if (!Array.isArray(slotsEscolhidos) || slotsEscolhidos.length > 4) throw new Error("Você pode selecionar no máximo quatro horários semanais.");
+    slots = slotsEscolhidos.map(sl => {
+      if (!sl || !ehObjectId(sl.slotId)) throw new Error("Horário inválido.");
+      return { slotId: sl.slotId, diaSemana: Number(sl.diaSemana), horaInicio: textoSeguro(sl.horaInicio, 5) };
+    });
+    if (new Set(slots.map(sl => sl.slotId)).size !== slots.length) throw new Error("Horário repetido na seleção.");
+  }
+
+  const dp = body.dadosPessoais && typeof body.dadosPessoais === "object" ? body.dadosPessoais : null;
+  const dadosPessoais = dp ? {
+    nome: textoSeguro(dp.nome, 120), email: normalizarEmail(dp.email) || undefined,
+    telefone: textoSeguro(dp.telefone, 30), objetivo: textoSeguro(dp.objetivo, 300),
+    nivelAtual: textoSeguro(dp.nivelAtual, 30), nivelDesejado: textoSeguro(dp.nivelDesejado, 30),
+    prova: textoSeguro(dp.prova, 60), dataExame: textoSeguro(dp.dataExame, 30), mensagem: textoSeguro(dp.mensagem, 2000)
+  } : undefined;
+
+  return {
+    curso, plano, email, cpf, dadosPessoais,
+    turmaId: turmaId || undefined,
+    tipoMatricula,
+    slotsEscolhidos: slots && slots.length ? slots : undefined
+  };
+}
 
 const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
 const payment = new Payment(client);
@@ -23,15 +99,25 @@ const payment = new Payment(client);
 const CREDITOS_CORRECAO_POR_TIER = { Essentiel: 2, "Avancé": 5, Excellence: 10 };
 const NOMES_DIA = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
 
-// Recalcula o valor no servidor sempre que a matrícula vier acompanhada de horários
-// escolhidos (fluxo novo de Particular/Turma) — nunca confia no `valor` mandado pelo
-// cliente nesse caso. Pack Prestige (por curso, R$300 fixo) e os planos sem agenda
-// mantêm o preço vindo de uma fonte de verdade no servidor também.
-function valorAutoritativo(valorCliente, plano, slotsEscolhidos, curso) {
+// O valor cobrado é SEMPRE calculado no servidor — o `valor` mandado pelo cliente é
+// ignorado (antes, nos planos sem agenda, ele era usado direto e bastava editar a
+// requisição para pagar R$ 1 por qualquer plano). Pack Prestige tem preço fixo por
+// curso; com horários escolhidos vale a fórmula progressiva; com turma, o preço da
+// turma no banco; sem nada disso, a tabela fixa de planos por curso.
+async function valorAutoritativo(plano, slotsEscolhidos, curso, turmaId) {
   if (plano === "Pack Prestige") return precoPackPrestige(curso);
-  if (!Array.isArray(slotsEscolhidos) || slotsEscolhidos.length === 0) return Number(valorCliente);
-  if (slotsEscolhidos.length > 4) throw new Error("Você pode selecionar no máximo quatro horários semanais.");
-  return precoPorTier(slotsEscolhidos.length, plano);
+  if (Array.isArray(slotsEscolhidos) && slotsEscolhidos.length > 0) {
+    if (slotsEscolhidos.length > 4) throw new Error("Você pode selecionar no máximo quatro horários semanais.");
+    return precoPorTier(slotsEscolhidos.length, plano);
+  }
+  if (turmaId) {
+    const turma = await Turma.findOne({ _id: turmaId, ativa: true }).select("preco");
+    if (!turma || !(turma.preco > 0)) throw new Error("Turma indisponível.");
+    return turma.preco;
+  }
+  const preco = PRECO_PLANO_FIXO[curso]?.[plano];
+  if (!preco) throw new Error("Plano indisponível para este curso.");
+  return preco;
 }
 
 // Faz upsert (match-then-push) de uma entrada em User.planos por courseType, dentro de
@@ -242,30 +328,38 @@ router.get("/config", (req, res) => {
 });
 
 // CARTÃO (débito ou crédito) — recebe o token já gerado no navegador pelo SDK do MP
-router.post("/cartao", exigirAuth, async (req, res) => {
+router.post("/cartao", exigirAuth, limitePagamento, async (req, res) => {
   try {
     // "tipo" aqui é débito/crédito (bandeira do cartão) — não confundir com "tipoMatricula"
     // (particular/turma), que é o novo campo do fluxo de horários.
-    const { token, paymentMethodId, installments, curso, plano, valor, email, cpf, tipo, turmaId, tipoMatricula, slotsEscolhidos, dadosPessoais } = req.body;
+    const { token, paymentMethodId, installments, tipo } = req.body;
 
-    if (!token || !paymentMethodId || !curso || !plano || !valor || !email || !cpf) {
+    if (!token || !paymentMethodId || !req.body.curso || !req.body.plano || !req.body.email || !req.body.cpf) {
       return res.status(400).json({ msg: "Preencha todos os campos" });
     }
+    if (typeof token !== "string" || typeof paymentMethodId !== "string" || !/^[a-z_]{2,30}$/.test(paymentMethodId)) {
+      return res.status(400).json({ msg: "Dados do cartão inválidos." });
+    }
+    const parcelas = Number(installments) || 1;
+    if (!Number.isInteger(parcelas) || parcelas < 1 || parcelas > 12) return res.status(400).json({ msg: "Número de parcelas inválido." });
 
-    let valorFinal;
+    let dados, valorFinal;
     try {
-      valorFinal = valorAutoritativo(valor, plano, slotsEscolhidos, curso);
-      await validarSlotsDisponiveis(slotsEscolhidos);
+      dados = validarPedido(req.body);
+      valorFinal = await valorAutoritativo(dados.plano, dados.slotsEscolhidos, dados.curso, dados.turmaId);
+      verificarAdulteracaoPreco(req, valorFinal);
+      await validarSlotsDisponiveis(dados.slotsEscolhidos);
     } catch (err) {
       return res.status(409).json({ msg: err.message });
     }
+    const { curso, plano, email, cpf, turmaId, tipoMatricula, slotsEscolhidos, dadosPessoais } = dados;
 
     const resultado = await payment.create({
       body: {
         transaction_amount: valorFinal,
         token,
         description: `${curso} - Plano ${plano}`,
-        installments: Number(installments) || 1,
+        installments: parcelas,
         payment_method_id: paymentMethodId,
         payer: {
           email,
@@ -275,6 +369,7 @@ router.post("/cartao", exigirAuth, async (req, res) => {
     });
 
     const aprovado = resultado.status === "approved";
+    if (resultado.status === "rejected") registrar("pagamento_recusado", req, { motivo: resultado.status_detail });
     const metodoPagamento = tipo === "debito" ? "cartao_debito" : "cartao_credito";
     const cartaoFinal = resultado.card?.last_four_digits;
 
@@ -297,26 +392,27 @@ router.post("/cartao", exigirAuth, async (req, res) => {
     res.json({ status: resultado.status, statusDetail: resultado.status_detail, pedidoId: pedido._id });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Erro ao processar pagamento", detalhe: err.message });
+    res.status(500).json({ msg: "Erro ao processar pagamento" });
   }
 });
 
 // PIX — gera QR Code real
-router.post("/pix", exigirAuth, async (req, res) => {
+router.post("/pix", exigirAuth, limitePagamento, async (req, res) => {
   try {
-    const { curso, plano, valor, email, cpf, turmaId, tipoMatricula, slotsEscolhidos, dadosPessoais } = req.body;
-
-    if (!curso || !plano || !valor || !email || !cpf) {
+    if (!req.body.curso || !req.body.plano || !req.body.email || !req.body.cpf) {
       return res.status(400).json({ msg: "Preencha todos os campos" });
     }
 
-    let valorFinal;
+    let dados, valorFinal;
     try {
-      valorFinal = valorAutoritativo(valor, plano, slotsEscolhidos, curso);
-      await validarSlotsDisponiveis(slotsEscolhidos);
+      dados = validarPedido(req.body);
+      valorFinal = await valorAutoritativo(dados.plano, dados.slotsEscolhidos, dados.curso, dados.turmaId);
+      verificarAdulteracaoPreco(req, valorFinal);
+      await validarSlotsDisponiveis(dados.slotsEscolhidos);
     } catch (err) {
       return res.status(409).json({ msg: err.message });
     }
+    const { curso, plano, email, cpf, turmaId, tipoMatricula, slotsEscolhidos, dadosPessoais } = dados;
 
     const resultado = await payment.create({
       body: {
@@ -350,26 +446,35 @@ router.post("/pix", exigirAuth, async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Erro ao gerar Pix", detalhe: err.message });
+    res.status(500).json({ msg: "Erro ao gerar Pix" });
   }
 });
 
 // BOLETO
-router.post("/boleto", exigirAuth, async (req, res) => {
+router.post("/boleto", exigirAuth, limitePagamento, async (req, res) => {
   try {
-    const { curso, plano, valor, email, cpf, nome, turmaId, cep, rua, numero, bairro, cidade, estado, tipoMatricula, slotsEscolhidos, dadosPessoais } = req.body;
+    const nome = textoSeguro(req.body.nome, 120);
+    const cep = textoSeguro(req.body.cep, 10);
+    const rua = textoSeguro(req.body.rua, 150);
+    const numero = textoSeguro(req.body.numero, 20);
+    const bairro = textoSeguro(req.body.bairro, 100);
+    const cidade = textoSeguro(req.body.cidade, 100);
+    const estado = textoSeguro(req.body.estado, 2);
 
-    if (!curso || !plano || !valor || !email || !cpf || !nome || !cep || !rua || !numero || !bairro || !cidade || !estado) {
+    if (!req.body.curso || !req.body.plano || !req.body.email || !req.body.cpf || !nome || !cep || !rua || !numero || !bairro || !cidade || !estado) {
       return res.status(400).json({ msg: "Preencha todos os campos, incluindo o endereço (exigido pelo Mercado Pago para gerar o boleto)." });
     }
 
-    let valorFinal;
+    let dados, valorFinal;
     try {
-      valorFinal = valorAutoritativo(valor, plano, slotsEscolhidos, curso);
-      await validarSlotsDisponiveis(slotsEscolhidos);
+      dados = validarPedido(req.body);
+      valorFinal = await valorAutoritativo(dados.plano, dados.slotsEscolhidos, dados.curso, dados.turmaId);
+      verificarAdulteracaoPreco(req, valorFinal);
+      await validarSlotsDisponiveis(dados.slotsEscolhidos);
     } catch (err) {
       return res.status(409).json({ msg: err.message });
     }
+    const { curso, plano, email, cpf, turmaId, tipoMatricula, slotsEscolhidos, dadosPessoais } = dados;
 
     const [firstName, ...rest] = nome.trim().split(" ");
     const lastName = rest.join(" ") || firstName;
@@ -414,7 +519,7 @@ router.post("/boleto", exigirAuth, async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Erro ao gerar boleto", detalhe: err.message });
+    res.status(500).json({ msg: "Erro ao gerar boleto" });
   }
 });
 
@@ -431,7 +536,7 @@ router.get("/minhas", exigirAuth, async (req, res) => {
 // CONSULTAR STATUS (polling de apoio para Pix/Boleto) — usa o mercadoPagoId retornado como "pedidoId"
 router.get("/status/:mercadoPagoId", exigirAuth, async (req, res) => {
   try {
-    const pedido = await Pedido.findOne({ mercadoPagoId: req.params.mercadoPagoId, userId: req.userId });
+    const pedido = await Pedido.findOne({ mercadoPagoId: String(req.params.mercadoPagoId), userId: req.userId });
     if (!pedido) return res.status(404).json({ msg: "Pedido não encontrado." });
     res.json({ status: pedido.status });
   } catch (err) {
@@ -439,16 +544,37 @@ router.get("/status/:mercadoPagoId", exigirAuth, async (req, res) => {
   }
 });
 
+// Validação opcional da assinatura do webhook (header x-signature do Mercado Pago).
+// Ativa quando MP_WEBHOOK_SECRET estiver configurado no ambiente — recomendado.
+function assinaturaWebhookValida(req) {
+  const segredo = process.env.MP_WEBHOOK_SECRET;
+  if (!segredo) return true;
+  const assinatura = String(req.headers["x-signature"] || "");
+  const requestId = String(req.headers["x-request-id"] || "");
+  const partes = Object.fromEntries(assinatura.split(",").map(p => p.trim().split("=")));
+  if (!partes.ts || !partes.v1) return false;
+  const dataId = String(req.query["data.id"] || req.body?.data?.id || "").toLowerCase();
+  const manifesto = `id:${dataId};request-id:${requestId};ts:${partes.ts};`;
+  const esperado = crypto.createHmac("sha256", segredo).update(manifesto).digest("hex");
+  const a = Buffer.from(esperado), b = Buffer.from(String(partes.v1));
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
 // WEBHOOK — Mercado Pago avisa aqui quando o status do pagamento muda (confirma Pix/Boleto)
 // Único URL de notificação cadastrado no Mercado Pago para toda a conta: trata tanto os
 // pagamentos de curso/plano (Pedido) quanto os de matrícula (PagamentoMatricula), já que o
 // Mercado Pago só permite configurar uma URL de webhook por aplicação.
 router.post("/webhook", async (req, res) => {
   try {
+    if (!assinaturaWebhookValida(req)) {
+      registrar("webhook_invalido", req, { assinatura: String(req.headers["x-signature"] || "").slice(0, 80) });
+      return res.sendStatus(401);
+    }
     const { type, data } = req.body;
 
-    if (type === "payment" && data?.id) {
-      const info = await payment.get({ id: data.id });
+    // O status nunca é lido do corpo: é sempre consultado na API do Mercado Pago.
+    if (type === "payment" && data?.id && /^\d{1,20}$/.test(String(data.id))) {
+      const info = await payment.get({ id: String(data.id) });
       const novoStatus = info.status === "approved" ? "aprovado" : info.status === "rejected" ? "rejeitado" : "pendente";
 
       const pedido = await Pedido.findOneAndUpdate(

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { escaparRegex } = require("../middleware/seguranca");
 const Questao = require("../models/questao");
 const Conjunto = require("../models/conjunto");
 const SessaoResolucao = require("../models/sessaoResolucao");
@@ -353,7 +354,7 @@ router.get("/admin/questoes", exigirProfessor, async (req, res) => {
     if (materia) filtro.materia = materia;
     if (tipo) filtro.tipo = tipo;
     if (pool) filtro.pool = pool;
-    if (busca) filtro.enunciado = { $regex: busca, $options: "i" };
+    if (busca) filtro.enunciado = { $regex: escaparRegex(String(busca)), $options: "i" };
     if (pendenteRevisao === "1") filtro.pendenteRevisaoCourseType = true;
     else if (courseType) filtro.courseType = courseType;
 

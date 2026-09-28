@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { escaparRegex } = require("../middleware/seguranca");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
@@ -261,7 +262,7 @@ router.get("/aulas/:id/video", async (req, res) => {
 
     let payload;
     try {
-      payload = jwt.verify(ticket, process.env.JWT_SECRET);
+      payload = jwt.verify(String(ticket), process.env.JWT_SECRET, { algorithms: ["HS256"] });
     } catch (err) {
       return res.status(401).json({ msg: "Ticket inválido ou expirado." });
     }
@@ -436,7 +437,7 @@ router.get("/favoritos", exigirAuth, async (req, res) => {
 // ===================== BUSCA =====================
 router.get("/buscar", exigirAuth, exigirAcessoCurso("aulas"), async (req, res) => {
   try {
-    const q = (req.query.q || "").trim();
+    const q = escaparRegex(String(req.query.q || "").trim());
     if (!q) return res.json([]);
 
     const moduloIds = await Modulo.find({ courseType: req.courseType, ativo: true }).distinct("_id");

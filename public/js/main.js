@@ -267,7 +267,11 @@ async function updateNav() {
     cadastroLink.style.background = estilo.background;
     cadastroLink.style.border = `1.5px solid ${estilo.border}`;
     cadastroLink.style.color = estilo.color;
-    cadastroLink.style.padding = "8px 20px";
+    // O item sempre ganha um dropdown logo abaixo (quando está dentro de .nav-item), e o
+    // css/navbar.css desenha a setinha dele a 13px da borda direita — o padding direito
+    // precisa reservar esse espaço, senão a seta fica em cima do texto ("Plano: Excellence").
+    const temDropdown = !!cadastroLink.closest(".nav-item");
+    cadastroLink.style.padding = temDropdown ? "8px 38px 8px 20px" : "8px 20px";
     cadastroLink.style.borderRadius = "30px";
     cadastroLink.style.fontWeight = "700";
     cadastroLink.style.display = "inline-block";

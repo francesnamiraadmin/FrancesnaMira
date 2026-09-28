@@ -46,6 +46,7 @@
   "config.perfil.email": "E-mail",
   "config.perfil.emailDesc": "Changer l'e-mail exige une confirmation à la nouvelle adresse avant de prendre effet.",
   "config.perfil.novoEmail": "Nouvel e-mail",
+  "config.perfil.senhaParaTrocarEmail": "Mot de passe actuel",
   "config.perfil.enviarConfirmacao": "Envoyer la confirmation",
   "config.secao.seguranca": "Sécurité",
   "config.seguranca.senhaAtual": "Mot de passe actuel",

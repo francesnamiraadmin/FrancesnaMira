@@ -18,6 +18,17 @@ const UserSchema = new mongoose.Schema({
     expiraEm: { type: Date, required: true },
     criadoEm: { type: Date, default: Date.now }
   }],
+  // Hashes de refresh tokens já rotacionados. Se um deles for apresentado de novo,
+  // alguém está reutilizando um token antigo (roubado) — ver monitorSeguranca.js.
+  refreshTokensUsados: [{
+    tokenHash: { type: String, required: true },
+    expiraEm: { type: Date, required: true },
+    usadoEm: { type: Date, default: Date.now }
+  }],
+  // Access tokens emitidos antes deste instante são recusados (revogação de sessões).
+  sessoesRevogadasEm: { type: Date },
+  // IPs de onde contas da equipe (professor/admin) já entraram — login de IP novo gera alerta.
+  ipsConhecidos: [{ type: String }],
   resetSenhaTokenHash: { type: String },
   resetSenhaExpiraEm: { type: Date },
   // Troca de e-mail exige confirmação no endereço novo antes de valer.

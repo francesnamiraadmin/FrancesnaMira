@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+  <script src="js/htmlSeguro.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
 <title>Minha Conta - Francês na Mira</title>
@@ -26,11 +27,6 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .campo select option { color: var(--accent-text); }
 .campo textarea { resize: vertical; min-height: 90px; }
 .campo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.countdown-box {
-  margin-top: 6px; padding: 14px 18px; border-radius: 14px; background: var(--warning-bg);
-  border: 1px solid var(--warning-border); font-size: 0.95rem;
-}
-.countdown-box strong { color: var(--accent); font-size: 1.15rem; }
 .salvar-msg { margin-top: 12px; font-size: 0.9rem; }
 
 .stats-filtros { display: flex; justify-content: center; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
@@ -66,14 +62,216 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   .bar-list-label { flex-basis: 120px; }
   .perfil-info-grid { grid-template-columns: 1fr; }
 }
+
+/* =====================================================================
+   REDESIGN "MINHA CONTA" — escopado em body.pagina-conta para não afetar
+   as outras páginas que compartilham css/app-shell.css.
+   ===================================================================== */
+.pagina-conta {
+  --conta-hero: linear-gradient(135deg, #0c1633 0%, #16306b 50%, #2459b8 100%);
+  --conta-ouro: linear-gradient(135deg, #f7d154, #d9a300);
+  --conta-raio: 22px;
+  --conta-sombra: 0 10px 30px rgba(12, 22, 51, 0.14), 0 2px 6px rgba(12, 22, 51, 0.08);
+  --conta-sombra-hover: 0 18px 40px rgba(12, 22, 51, 0.2), 0 4px 10px rgba(12, 22, 51, 0.1);
+}
+:root[data-theme="dark"] .pagina-conta {
+  --conta-sombra: 0 10px 30px rgba(0, 0, 0, 0.55);
+  --conta-sombra-hover: 0 18px 44px rgba(0, 0, 0, 0.7);
+}
+
+/* ---------- HERO ---------- */
+.pagina-conta .dash-header.conta-hero {
+  position: relative; overflow: hidden; max-width: 1200px; margin: 26px auto 0;
+  padding: 48px 44px 92px; border-radius: 28px; background: var(--conta-hero); color: #fff;
+  box-shadow: var(--conta-sombra);
+}
+.conta-hero::before, .conta-hero::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+.conta-hero::before { width: 360px; height: 360px; right: -100px; top: -150px; background: radial-gradient(circle, rgba(247, 209, 84, 0.38), transparent 70%); }
+.conta-hero::after { width: 280px; height: 280px; left: 40%; bottom: -180px; background: radial-gradient(circle, rgba(255, 255, 255, 0.14), transparent 70%); }
+.conta-hero-rotulo {
+  display: inline-block; position: relative; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #f7d154; margin-bottom: 10px;
+}
+.pagina-conta .dash-welcome { position: relative; font-size: 2.7rem; line-height: 1.15; margin-bottom: 12px; color: #fff; }
+.pagina-conta .dash-sub { position: relative; color: rgba(255, 255, 255, 0.85); font-size: 1.02rem; }
+.pagina-conta .dash-sub .dash-status-tag { font-size: 0.86rem; padding: 6px 16px; border: 1px solid rgba(255, 255, 255, 0.4); }
+
+/* ---------- CARDS DE PRODUTO (título em cima, ícone centralizado embaixo) ---------- */
+.pagina-conta .dash-container { padding-top: 0; }
+.pagina-conta .dash-cards-row { position: relative; z-index: 2; margin: -60px 0 36px; padding: 0 18px; gap: 22px; }
+.pagina-conta .dash-summary-card {
+  position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  text-align: center; gap: 16px; padding: 28px 22px 24px; border-radius: var(--conta-raio); cursor: pointer;
+  background: linear-gradient(160deg, var(--glass-strong), var(--glass-bg));
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--conta-sombra); transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.pagina-conta .dash-summary-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--conta-ouro); }
+.pagina-conta .dash-summary-card:hover { transform: translateY(-6px); box-shadow: var(--conta-sombra-hover); }
+.pagina-conta .dash-summary-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.pagina-conta .dash-summary-card h3 {
+  font-family: 'Playfair Display', serif; font-size: 1.32rem; line-height: 1.3; margin: 0; min-height: 2.6em;
+  display: flex; align-items: center; justify-content: center;
+}
+.icone-wrap {
+  width: 88px; height: 88px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 30% 30%, var(--glass-hover), var(--glass-bg-2));
+  border: 2px solid var(--glass-border-strong); transition: transform 0.3s ease;
+}
+.pagina-conta .dash-summary-card:hover .icone-wrap { transform: scale(1.08) rotate(-4deg); }
+.pagina-conta .dash-summary-card .icone { width: 46px; height: 46px; margin: 0; }
+.card-rodape { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.pagina-conta .dash-summary-card .dash-status-tag { margin: 0; font-size: 0.82rem; padding: 6px 14px; }
+.pagina-conta .dash-summary-card .upgrade-btn { margin: 0; padding: 9px 22px; font-size: 0.86rem; box-shadow: 0 6px 16px rgba(217, 163, 0, 0.35); }
+.card-ver-mais { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+
+/* ---------- CARTÕES DE SEÇÃO ---------- */
+.pagina-conta .dash-section-card {
+  padding: 0; margin-bottom: 20px; border-radius: var(--conta-raio); box-shadow: var(--conta-sombra);
+  background: linear-gradient(160deg, var(--glass-bg), var(--glass-bg-2)); transition: box-shadow 0.25s ease;
+}
+.pagina-conta .dash-section-card:hover { box-shadow: var(--conta-sombra-hover); }
+.pagina-conta .secao-fixa { padding: 34px 36px; }
+.pagina-conta .secao-fixa h2 { font-size: 1.9rem; margin-bottom: 0; }
+.pagina-conta .dash-section-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; }
+.grupo-rotulo {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted);
+  margin: 36px 8px 14px;
+}
+
+/* ---------- ACORDEÃO (seções que abrem com um clique) ---------- */
+.acordeao > summary { list-style: none; }
+.acordeao > summary::-webkit-details-marker { display: none; }
+.acordeao-cabecalho {
+  display: flex; align-items: center; gap: 18px; padding: 22px 28px; cursor: pointer; user-select: none;
+  border-radius: var(--conta-raio); transition: background 0.2s ease;
+}
+.acordeao-cabecalho:hover { background: var(--glass-hover); }
+.acordeao-cabecalho:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.acordeao-icone {
+  flex: 0 0 auto; width: 58px; height: 58px; border-radius: 17px; display: flex; align-items: center; justify-content: center;
+  background: var(--conta-ouro); box-shadow: 0 8px 18px rgba(217, 163, 0, 0.3);
+}
+.acordeao-icone img { width: 30px; height: 30px; object-fit: contain; }
+.acordeao-titulos { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.pagina-conta .acordeao-titulo { font-family: 'Playfair Display', serif; font-size: 1.6rem; line-height: 1.25; margin: 0; display: block; }
+.acordeao-sub { font-size: 0.9rem; color: var(--text-muted); }
+.acordeao-resumo {
+  flex: 0 0 auto; font-size: 0.82rem; font-weight: 700; padding: 6px 14px; border-radius: 20px;
+  background: var(--glass-bg-2); border: 1px solid var(--glass-border); white-space: nowrap;
+}
+.acordeao-resumo:empty { display: none; }
+.selo-bloqueado {
+  display: none; flex: 0 0 auto; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700;
+  padding: 6px 14px; border-radius: 20px; background: var(--warning-bg); color: var(--warning-text);
+}
+.selo-bloqueado img { width: 14px; height: 14px; }
+.acordeao.locked .selo-bloqueado { display: inline-flex; }
+.acordeao.locked .acordeao-resumo { display: none; }
+.acordeao-seta {
+  flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--glass-border-strong);
+  display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, background 0.2s ease;
+}
+.acordeao-seta::before {
+  content: ""; width: 9px; height: 9px; border-right: 2.5px solid var(--text); border-bottom: 2.5px solid var(--text);
+  transform: translateY(-2px) rotate(45deg);
+}
+.acordeao[open] .acordeao-seta { transform: rotate(180deg); background: var(--glass-hover); }
+.acordeao-corpo { margin: 0 18px; padding: 26px 12px 30px; border-top: 1px solid var(--glass-border); }
+.acordeao[open] .acordeao-corpo { animation: acordeao-abrir 0.35s ease; }
+@keyframes acordeao-abrir { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.acordeao-corpo > p.descricao { opacity: 0.85; font-size: 0.95rem; margin-bottom: 18px; line-height: 1.6; }
+
+/* Seção bloqueada: dentro do acordeão o aviso não cobre o cabeçalho clicável. */
+.pagina-conta .acordeao.locked { min-height: 0; overflow: visible; }
+.pagina-conta .acordeao .dash-lock-overlay {
+  position: static; background: var(--glass-bg-2); border: 1px dashed var(--glass-border-strong);
+  border-radius: 18px; padding: 36px 20px;
+}
+
+/* ---------- PERFIL ---------- */
+.pagina-conta .perfil-titulo-row { margin-bottom: 28px; }
+.pagina-conta .perfil-header-row { gap: 34px; margin-bottom: 28px; padding-bottom: 28px; align-items: center; }
+.avatar-wrap {
+  position: relative; flex: 0 0 auto; border-radius: 50%; padding: 5px;
+  background: var(--conta-ouro); box-shadow: 0 10px 26px rgba(217, 163, 0, 0.35);
+}
+.pagina-conta .dash-avatar { display: block; width: 138px; height: 138px; border: 4px solid var(--glass-strong); cursor: pointer; }
+.avatar-editar {
+  position: absolute; right: 6px; bottom: 6px; width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; cursor: pointer;
+  background: #16213a; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+.avatar-editar:hover { transform: scale(1.1); }
+.avatar-editar img { width: 18px; height: 18px; filter: invert(1); }
+.pagina-conta .dash-profile-meta {
+  flex: 1; min-width: 240px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px;
+}
+.meta-item {
+  min-width: 0; display: flex; flex-direction: column; gap: 3px; padding: 12px 16px;
+  background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-radius: 14px;
+}
+.meta-rotulo { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #a67c00; }
+:root[data-theme="dark"] .meta-rotulo { color: var(--accent); }
+.meta-valor { font-size: 0.96rem; color: var(--text); word-break: break-word; }
+.pagina-conta .perfil-info-grid { gap: 16px; }
+.pagina-conta .perfil-info-item { padding: 18px 20px; background: var(--glass-bg-2); border: 1px solid var(--glass-border); border-radius: 16px; }
+.pagina-conta .perfil-info-label { font-size: 0.78rem; }
+.pagina-conta .perfil-info-valor { font-size: 1rem; }
+
+/* ---------- KPIs, LISTAS E BOTÕES ---------- */
+.pagina-conta .dash-kpi-row { gap: 16px; margin-bottom: 22px; }
+.pagina-conta .dash-kpi {
+  position: relative; overflow: hidden; padding: 20px 14px 18px; border-radius: 18px;
+  background: linear-gradient(160deg, var(--glass-hover), var(--glass-bg-2)); transition: transform 0.2s ease;
+}
+.pagina-conta .dash-kpi::after {
+  content: ""; position: absolute; left: 22%; right: 22%; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--conta-ouro);
+}
+.pagina-conta .dash-kpi:hover { transform: translateY(-3px); }
+.pagina-conta .dash-kpi .valor { font-size: 1.95rem; line-height: 1.2; }
+.pagina-conta .dash-kpi .rotulo { font-size: 0.84rem; margin-top: 6px; }
+.pagina-conta .dash-atividade-item {
+  align-items: center; padding: 13px 14px; border-radius: 12px; border-bottom: 1px solid var(--glass-border);
+  font-size: 0.93rem; transition: background 0.2s ease;
+}
+.pagina-conta .dash-atividade-item:hover { background: var(--glass-bg-2); }
+.pagina-conta .dash-btn { padding: 11px 24px; box-shadow: 0 6px 16px rgba(217, 163, 0, 0.28); transition: transform 0.2s ease, background 0.2s ease; }
+.pagina-conta .dash-btn:hover { transform: translateY(-2px); background: var(--accent-hover); }
+.pagina-conta .dash-btn.secundario { box-shadow: none; }
+.pagina-conta .dash-btn.secundario:hover { background: var(--glass-strong); }
+.pagina-conta .stats-vazio { padding: 26px 16px; border-radius: 16px; background: var(--glass-bg-2); border: 1px dashed var(--glass-border-strong); }
+.botoes-equipe { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 12px; }
+.botoes-equipe .dash-btn { display: flex; align-items: center; justify-content: center; text-align: center; }
+.badge-seguranca { display: none; margin-left: 6px; padding: 0 8px; border-radius: 10px; background: #dc2626; color: #fff; font-size: 0.75rem; }
+
+@media (max-width: 700px) {
+  .pagina-conta .dash-header.conta-hero { margin: 16px 16px 0; padding: 34px 22px 84px; border-radius: 22px; }
+  .pagina-conta .dash-welcome { font-size: 2rem; }
+  .pagina-conta .dash-cards-row { padding: 0 6px; }
+  .pagina-conta .secao-fixa { padding: 26px 20px; }
+  .pagina-conta .secao-fixa h2 { font-size: 1.6rem; }
+  .acordeao-cabecalho { flex-wrap: wrap; gap: 12px; padding: 18px 16px; }
+  .acordeao-icone { width: 48px; height: 48px; border-radius: 14px; }
+  .acordeao-titulos { flex-basis: calc(100% - 124px); }
+  .pagina-conta .acordeao-titulo { font-size: 1.32rem; }
+  .acordeao-resumo, .selo-bloqueado { order: 5; }
+  .acordeao-corpo { margin: 0 10px; padding: 20px 6px 22px; }
+  .pagina-conta .perfil-header-row { justify-content: center; }
+  .pagina-conta .dash-avatar { width: 116px; height: 116px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pagina-conta *, .pagina-conta *::before { animation: none !important; transition: none !important; }
+}
 </style>
 </head>
 
-<body>
+<body class="pagina-conta">
 
 <div id="app-navbar" class="app-navbar-bar"></div>
 
-<div class="dash-header">
+<div class="dash-header conta-hero">
+  <span class="conta-hero-rotulo">Área do aluno</span>
   <div class="dash-welcome" id="welcomeMsg">&nbsp;</div>
   <div class="dash-sub" id="welcomeSub">&nbsp;</div>
 </div>
@@ -81,25 +279,26 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div class="dash-container">
 
   <div class="dash-cards-row" id="summaryCards">
-    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
-    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
-    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
+    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block" style="width:100%"></div></div>
+    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block" style="width:100%"></div></div>
+    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block" style="width:100%"></div></div>
   </div>
 
-  <!-- ===================== PERFIL ===================== -->
-  <div class="dash-section-card" id="secPerfil">
+  <!-- ===================== PERFIL (sempre visível) ===================== -->
+  <div class="dash-section-card secao-fixa" id="secPerfil">
     <div class="perfil-titulo-row">
       <h2><img class="titulo-icone-inline" src="img/icones/profile.svg" alt="">Meu Perfil</h2>
       <button class="dash-btn secundario" id="editarPerfilBtn" type="button"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Fazer alterações</button>
     </div>
     <div class="perfil-header-row">
-      <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil" title="Clique para alterar sua foto" style="cursor:pointer;">
+      <div class="avatar-wrap">
+        <img class="dash-avatar" id="dashAvatar" alt="Foto de perfil" title="Clique para alterar sua foto">
+        <button class="avatar-editar" id="avatarEditarBtn" type="button" title="Alterar foto" aria-label="Alterar foto de perfil"><img src="img/icones/edit-pencil.svg" alt=""></button>
+      </div>
       <div class="dash-profile-meta" id="profileMeta"></div>
     </div>
 
-    <div class="countdown-box" id="countdownBox" style="display:none;"></div>
-
-    <!-- MODO VISUALIZAÇÃO (fixo) -->
+    <!-- MODO VISUALIZAÇÃO -->
     <div id="perfilVisualizacao">
       <div class="perfil-info-grid">
         <div class="perfil-info-item full">
@@ -143,7 +342,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
           <input type="date" id="dataProvaInput">
         </div>
       </div>
-      <div style="display:flex; gap:12px; margin-top:8px;">
+      <div style="display:flex; gap:12px; margin-top:8px; flex-wrap:wrap;">
         <button class="dash-btn" id="salvarPerfilBtn" type="button">Salvar alterações</button>
         <button class="dash-btn secundario" id="cancelarPerfilBtn" type="button">Cancelar</button>
       </div>
@@ -151,80 +350,160 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     </div>
   </div>
 
-  <div class="dash-section-card" id="painelEquipeBox" style="display:none;">
-    <h2><img class="titulo-icone-inline" src="img/icones/teacher.svg" alt="">Painel da equipe</h2>
-    <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;">Sua conta tem acesso de <strong id="papelEquipeLabel"></strong>. Acesse as ferramentas de gestão abaixo.</p>
-    <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a href="gestao-alunos.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/students.svg" alt="">Gestão de Alunos</a>
-      <a href="professor-correcoes.html" class="dash-btn secundario" id="linkFilaProfessor"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Fila de Correção</a>
-      <a href="admin-correcoes.html" class="dash-btn secundario" id="linkPainelAdmin" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/settings-gear.svg" alt="">Painel Administrativo</a>
-      <a href="admin-matriculas.html" class="dash-btn secundario" id="linkAdminMatriculas" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/personalizar.svg" alt="">Matrículas e Turmas</a>
-      <a href="admin-agenda.html" class="dash-btn secundario" id="linkAdminAgenda" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Agenda de Aulas</a>
-      <a href="admin-aulas.html" class="dash-btn secundario" id="linkAdminAulas" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/video.svg" alt="">Aulas Especializadas</a>
-      <a href="admin-horarios.html" class="dash-btn secundario" id="linkAdminHorarios" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Grade de Horários</a>
-      <a href="admin-depoimentos.html" class="dash-btn secundario" id="linkAdminDepoimentos" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/chat.svg" alt="">Depoimentos</a>
-      <a href="admin-erros-questoes.html" class="dash-btn secundario" id="linkAdminErrosQuestoes" style="display:none;"><img class="titulo-icone-inline pequeno" src="img/icones/warning.svg" alt="">Erros de Questões</a>
+  <!-- ===================== DEVER DE CASA (aberto por padrão) ===================== -->
+  <details class="dash-section-card acordeao" id="secDeveres" data-secao="deveres" open>
+    <summary class="acordeao-cabecalho">
+      <span class="acordeao-icone"><img src="img/icones/exercise-list.svg" alt=""></span>
+      <span class="acordeao-titulos">
+        <h2 class="acordeao-titulo">Dever de Casa</h2>
+        <span class="acordeao-sub">O que falta entregar nesta semana</span>
+      </span>
+      <span class="acordeao-resumo" id="resumoDeveres"></span>
+      <span class="acordeao-seta" aria-hidden="true"></span>
+    </summary>
+    <div class="acordeao-corpo">
+      <div id="conteudoDeveres"><div class="skeleton skeleton-block"></div></div>
     </div>
-  </div>
+  </details>
 
-  <!-- ===================== MEUS DEVERES ===================== -->
-  <div class="dash-section-card">
-    <h2><img class="titulo-icone-inline" src="img/icones/exercise-list.svg" alt="">Dever de Casa</h2>
-    <div id="conteudoDeveres"><div class="skeleton skeleton-block"></div></div>
-  </div>
+  <div class="grupo-rotulo">Seus estudos</div>
 
   <!-- ===================== MAPEADOR DE ESTUDOS ===================== -->
-  <div class="dash-section-card">
-    <h2><img class="titulo-icone-inline" src="img/icones/simulados.svg" alt="">Mapeador de Estudos</h2>
-    <div id="conteudoMapeador"><div class="skeleton skeleton-block"></div></div>
-  </div>
+  <details class="dash-section-card acordeao" id="secMapeador" data-secao="mapeador">
+    <summary class="acordeao-cabecalho">
+      <span class="acordeao-icone"><img src="img/icones/simulados.svg" alt=""></span>
+      <span class="acordeao-titulos">
+        <h2 class="acordeao-titulo">Mapeador de Estudos</h2>
+        <span class="acordeao-sub">Tempo de estudo, sequência de dias e sessões</span>
+      </span>
+      <span class="acordeao-resumo" id="resumoMapeador"></span>
+      <span class="acordeao-seta" aria-hidden="true"></span>
+    </summary>
+    <div class="acordeao-corpo">
+      <div id="conteudoMapeador"><div class="skeleton skeleton-block"></div></div>
+    </div>
+  </details>
 
   <!-- ===================== PLATAFORMA DE QUESTÕES ===================== -->
-  <div class="dash-section-card" id="secPlataforma">
-    <h2><img class="titulo-icone-inline" src="img/icones/estatisticas.svg" alt="">Plataforma de Questões</h2>
-    <div id="conteudoPlataforma">
-      <div class="skeleton skeleton-block"></div>
+  <details class="dash-section-card acordeao" id="secPlataforma" data-secao="plataforma">
+    <summary class="acordeao-cabecalho">
+      <span class="acordeao-icone"><img src="img/icones/estatisticas.svg" alt=""></span>
+      <span class="acordeao-titulos">
+        <h2 class="acordeao-titulo">Plataforma de Questões</h2>
+        <span class="acordeao-sub">Desempenho, conjuntos e caderno de revisão</span>
+      </span>
+      <span class="selo-bloqueado"><img src="img/icones/lock.svg" alt="">Bloqueado</span>
+      <span class="acordeao-resumo" id="resumoPlataforma"></span>
+      <span class="acordeao-seta" aria-hidden="true"></span>
+    </summary>
+    <div class="acordeao-corpo">
+      <div id="conteudoPlataforma"><div class="skeleton skeleton-block"></div></div>
     </div>
-  </div>
+  </details>
 
   <!-- ===================== AMBIENTE DE PRODUÇÃO ===================== -->
-  <div class="dash-section-card" id="secProducao">
-    <h2><img class="titulo-icone-inline" src="img/icones/writing-hand.svg" alt="">Ambiente de Produção Oral e Textual</h2>
-    <div id="conteudoProducao">
-      <div class="skeleton skeleton-block"></div>
+  <details class="dash-section-card acordeao" id="secProducao" data-secao="producao">
+    <summary class="acordeao-cabecalho">
+      <span class="acordeao-icone"><img src="img/icones/writing-hand.svg" alt=""></span>
+      <span class="acordeao-titulos">
+        <h2 class="acordeao-titulo">Ambiente de Produção Oral e Textual</h2>
+        <span class="acordeao-sub">Suas produções, correções e créditos</span>
+      </span>
+      <span class="selo-bloqueado"><img src="img/icones/lock.svg" alt="">Bloqueado</span>
+      <span class="acordeao-resumo" id="resumoProducao"></span>
+      <span class="acordeao-seta" aria-hidden="true"></span>
+    </summary>
+    <div class="acordeao-corpo">
+      <div id="conteudoProducao"><div class="skeleton skeleton-block"></div></div>
     </div>
-  </div>
+  </details>
 
   <!-- ===================== AULAS ESPECIALIZADAS ===================== -->
-  <div class="dash-section-card" id="secAulas">
-    <h2><img class="titulo-icone-inline" src="img/icones/video.svg" alt="">Aulas Especializadas Online</h2>
-    <div id="conteudoAulas">
-      <div class="skeleton skeleton-block"></div>
+  <details class="dash-section-card acordeao" id="secAulas" data-secao="aulas">
+    <summary class="acordeao-cabecalho">
+      <span class="acordeao-icone"><img src="img/icones/video.svg" alt=""></span>
+      <span class="acordeao-titulos">
+        <h2 class="acordeao-titulo">Aulas Especializadas Online</h2>
+        <span class="acordeao-sub">Aulas gravadas, progresso e próximas aulas ao vivo</span>
+      </span>
+      <span class="selo-bloqueado"><img src="img/icones/lock.svg" alt="">Bloqueado</span>
+      <span class="acordeao-resumo" id="resumoAulas"></span>
+      <span class="acordeao-seta" aria-hidden="true"></span>
+    </summary>
+    <div class="acordeao-corpo">
+      <div id="conteudoAulas"><div class="skeleton skeleton-block"></div></div>
     </div>
-  </div>
+  </details>
+
+  <div class="grupo-rotulo">Conta e matrículas</div>
 
   <!-- ===================== MATRÍCULA ===================== -->
-  <div class="dash-section-card">
-    <h2><img class="titulo-icone-inline" src="img/icones/personalizar.svg" alt="">Matrícula em turmas e aulas particulares</h2>
-    <p style="opacity:0.85; font-size:0.92rem; margin-bottom:16px;">Inscreva-se em uma turma ou monte seu pacote de aulas particulares, com pagamento via Pix, cartão ou boleto.</p>
-    <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a href="matricula.html" class="dash-btn">Nova matrícula</a>
-      <a href="minhas-matriculas.html" class="dash-btn secundario">Minhas matrículas</a>
+  <details class="dash-section-card acordeao" id="secMatricula" data-secao="matricula">
+    <summary class="acordeao-cabecalho">
+      <span class="acordeao-icone"><img src="img/icones/personalizar.svg" alt=""></span>
+      <span class="acordeao-titulos">
+        <h2 class="acordeao-titulo">Matrícula em turmas e aulas particulares</h2>
+        <span class="acordeao-sub">Nova matrícula ou acompanhe as suas</span>
+      </span>
+      <span class="acordeao-seta" aria-hidden="true"></span>
+    </summary>
+    <div class="acordeao-corpo">
+      <p class="descricao">Inscreva-se em uma turma ou monte seu pacote de aulas particulares, com pagamento via Pix, cartão ou boleto.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a href="matricula.html" class="dash-btn">Nova matrícula</a>
+        <a href="minhas-matriculas.html" class="dash-btn secundario">Minhas matrículas</a>
+      </div>
     </div>
-  </div>
+  </details>
 
-  <!-- ===================== ESTATÍSTICAS AVANÇADAS (apagar dados) ===================== -->
-  <div class="dash-section-card" id="secApagarDados" style="display:none;">
-    <h2><img class="titulo-icone-inline" src="img/icones/trash.svg" alt="">Apagar estatísticas de um dia</h2>
-    <p style="opacity:0.85; font-size:0.9rem; margin-bottom:16px;">
-      Escolha um dia para apagar todo o seu histórico de estudo daquele dia na Plataforma de Questões. As questões de
-      <strong>Praticar</strong> respondidas nesse dia voltam a aparecer como não respondidas.
-    </p>
-    <div class="apagar-dia-row">
-      <select class="filtro-select" id="diaApagarSelect"></select>
-      <button class="dash-btn secundario" id="apagarDiaBtn" style="color:var(--danger-text);">Apagar estatísticas deste dia</button>
+  <!-- ===================== APAGAR ESTATÍSTICAS ===================== -->
+  <details class="dash-section-card acordeao" id="secApagarDados" data-secao="apagar" style="display:none;">
+    <summary class="acordeao-cabecalho">
+      <span class="acordeao-icone"><img src="img/icones/trash.svg" alt=""></span>
+      <span class="acordeao-titulos">
+        <h2 class="acordeao-titulo">Apagar estatísticas de um dia</h2>
+        <span class="acordeao-sub">Limpe o histórico da Plataforma de Questões de uma data</span>
+      </span>
+      <span class="acordeao-seta" aria-hidden="true"></span>
+    </summary>
+    <div class="acordeao-corpo">
+      <p class="descricao">
+        Escolha um dia para apagar todo o seu histórico de estudo daquele dia na Plataforma de Questões. As questões de
+        <strong>Praticar</strong> respondidas nesse dia voltam a aparecer como não respondidas.
+      </p>
+      <div class="apagar-dia-row">
+        <select class="filtro-select" id="diaApagarSelect"></select>
+        <button class="dash-btn secundario" id="apagarDiaBtn" style="color:var(--danger-text);">Apagar estatísticas deste dia</button>
+      </div>
     </div>
-  </div>
+  </details>
+
+  <!-- ===================== PAINEL DA EQUIPE ===================== -->
+  <!-- Admin vê todas as ferramentas; professor vê só Gestão de Alunos e Fila de Correção. -->
+  <details class="dash-section-card acordeao" id="painelEquipeBox" data-secao="equipe" style="display:none;">
+    <summary class="acordeao-cabecalho">
+      <span class="acordeao-icone"><img src="img/icones/teacher.svg" alt=""></span>
+      <span class="acordeao-titulos">
+        <h2 class="acordeao-titulo">Painel da equipe</h2>
+        <span class="acordeao-sub">Sua conta tem acesso de <strong id="papelEquipeLabel"></strong></span>
+      </span>
+      <span class="acordeao-seta" aria-hidden="true"></span>
+    </summary>
+    <div class="acordeao-corpo">
+      <div class="botoes-equipe">
+        <a href="gestao-alunos.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/students.svg" alt="">Gestão de Alunos</a>
+        <a href="professor-correcoes.html" class="dash-btn secundario" id="linkFilaProfessor"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Fila de Correção</a>
+        <a href="admin-correcoes.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/settings-gear.svg" alt="">Painel Administrativo</a>
+        <a href="admin-matriculas.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/personalizar.svg" alt="">Matrículas e Turmas</a>
+        <a href="admin-agenda.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Agenda de Aulas</a>
+        <a href="admin-aulas.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/video.svg" alt="">Aulas Especializadas</a>
+        <a href="admin-horarios.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Grade de Horários</a>
+        <a href="admin-depoimentos.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/chat.svg" alt="">Depoimentos</a>
+        <a href="admin-erros-questoes.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/warning.svg" alt="">Erros de Questões</a>
+        <a href="admin-seguranca.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">Segurança <span class="badge-seguranca" id="badgeSeguranca"></span></a>
+      </div>
+    </div>
+  </details>
 
 </div>
 
@@ -249,95 +528,167 @@ const MATERIAS = {
 const NIVEIS = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
 const ESTILOS_PLANO = {
-  Essentiel: { background: "rgba(200,160,0,0.35)", border: "#c8a000", color: "#3a2e00" },
-  "Avancé": { background: "rgba(203,213,225,0.35)", border: "#cbd5e1", color: "#1e293b" },
-  Excellence: { background: "rgba(186,230,253,0.35)", border: "#7dd3fc", color: "#0c4a6e" }
+  Essentiel: { background: "rgba(247,209,84,0.25)", color: "#fde68a" },
+  "Avancé": { background: "rgba(226,232,240,0.22)", color: "#f1f5f9" },
+  Excellence: { background: "rgba(125,211,252,0.25)", color: "#e0f2fe" }
 };
 
 const AVATAR_PADRAO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="#3b96ff"/><circle cx="48" cy="38" r="18" fill="#ffffff"/><ellipse cx="48" cy="88" rx="30" ry="24" fill="#ffffff"/></svg>`
 );
 
+// Cada card de produto abre a seção correspondente ao ser clicado.
 const PRODUTOS_DASHBOARD = [
-  { chave: "plataforma", nome: "Plataforma de Questões", icone: "img/icones/estatisticas.svg", curso: "Plataforma de Questões" },
-  { chave: "producao", nome: "Ambiente de Produção Oral e Textual", icone: "img/icones/writing-hand.svg", curso: "Ambiente de Produção Oral e Textual" },
-  { chave: "aulasEspecializadas", nome: "Aulas Especializadas Online", icone: "img/icones/video.svg", curso: "Aulas Especializadas Online" }
+  { chave: "plataforma", nome: "Plataforma de Questões", icone: "img/icones/estatisticas.svg", secao: "secPlataforma" },
+  { chave: "producao", nome: "Ambiente de Produção Oral e Textual", icone: "img/icones/writing-hand.svg", secao: "secProducao" },
+  { chave: "aulasEspecializadas", nome: "Aulas Especializadas Online", icone: "img/icones/video.svg", secao: "secAulas" }
 ];
 
 const token = localStorage.getItem('token');
 function authHeaders() { return { Authorization: 'Bearer ' + token }; }
 
-// ===================== CABEÇALHO =====================
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+// Pílula de resumo no cabeçalho de cada seção recolhível (ex.: "Semana 3 · 60%").
+function definirResumo(id, texto) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = texto || '';
+}
+
+// ===================== SEÇÕES RECOLHÍVEIS =====================
+// Lembra neste navegador quais seções o aluno deixou abertas (conveniência; se o
+// armazenamento falhar, a página segue com o padrão: só Dever de Casa aberto).
+const CHAVE_SECOES = 'minhaConta.secoesAbertas';
+function lerSecoesSalvas() {
+  try { return JSON.parse(localStorage.getItem(CHAVE_SECOES) || 'null'); } catch (e) { return null; }
+}
+function salvarSecoes() {
+  try {
+    const abertas = [...document.querySelectorAll('details.acordeao[open]')].map(d => d.dataset.secao);
+    localStorage.setItem(CHAVE_SECOES, JSON.stringify(abertas));
+  } catch (e) { /* sem armazenamento: ignora */ }
+}
+(function iniciarAcordeoes() {
+  const salvas = lerSecoesSalvas();
+  document.querySelectorAll('details.acordeao').forEach(d => {
+    if (Array.isArray(salvas)) d.open = salvas.includes(d.dataset.secao);
+    d.addEventListener('toggle', salvarSecoes);
+  });
+})();
+
+function abrirSecao(id) {
+  const secao = document.getElementById(id);
+  if (!secao) return;
+  secao.open = true;
+  secao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ===================== CABEÇALHO E DADOS DO PERFIL =====================
+function metaItem(rotulo, valor) {
+  return `<div class="meta-item"><span class="meta-rotulo">${esc(rotulo)}</span><span class="meta-valor">${esc(valor)}</span></div>`;
+}
+
 function renderHeader(dados) {
   const primeiroNome = (dados.nome || '').split(' ')[0] || 'aluno(a)';
   document.getElementById('welcomeMsg').textContent = `Bem-vindo de volta, ${primeiroNome}!`;
-  document.getElementById('dashAvatar').src = dados.perfil?.foto || AVATAR_PADRAO;
-  document.getElementById('dashAvatar').onclick = () => window.AppShell.abrirModalFoto();
+  const avatar = document.getElementById('dashAvatar');
+  avatar.src = dados.perfil?.foto || AVATAR_PADRAO;
+  avatar.onclick = () => window.AppShell.abrirModalFoto();
+  document.getElementById('avatarEditarBtn').onclick = () => window.AppShell.abrirModalFoto();
 
   const plano = dados.plano || { ativo: false };
-  const metaItens = [];
   if (plano.ativo && plano.tier) {
-    const estilo = ESTILOS_PLANO[plano.tier];
+    const estilo = ESTILOS_PLANO[plano.tier] || ESTILOS_PLANO.Essentiel;
     document.getElementById('welcomeSub').innerHTML =
-      `<span class="dash-status-tag ativo" style="background:${estilo.background}; color:${estilo.color};">Plano ${plano.tier} · ${plano.curso || ''}</span>`;
+      `<span class="dash-status-tag ativo" style="background:${estilo.background}; color:${estilo.color};">Plano ${esc(plano.tier)}${plano.curso ? ' · ' + esc(plano.curso) : ''}</span>`;
   } else {
     document.getElementById('welcomeSub').textContent = 'Você ainda não tem um plano de curso ativo.';
   }
-  if (dados.criadoEm) metaItens.push(`<span><strong>${window.I18n.t('common.naPlataformaDesde')}</strong> ${new Date(dados.criadoEm).toLocaleDateString(window.I18n.idioma === 'fr' ? 'fr-FR' : 'pt-BR')}</span>`);
-  if (plano.dataVencimento) {
-    metaItens.push(`<span><strong>Data de fim da inscrição</strong> ${plano.curso || ''} ${plano.tier || ''} — ${new Date(plano.dataVencimento).toLocaleDateString('pt-BR')}</span>`);
+
+  const itens = [];
+  itens.push(metaItem('E-mail', dados.email || ''));
+  if (dados.telefone) itens.push(metaItem('Telefone', dados.telefone));
+  if (dados.criadoEm) {
+    const rotuloDesde = window.I18n.t('common.naPlataformaDesde');
+    itens.push(metaItem(rotuloDesde && rotuloDesde !== 'common.naPlataformaDesde' ? rotuloDesde : 'Na plataforma desde',
+      new Date(dados.criadoEm).toLocaleDateString(window.I18n.idioma === 'fr' ? 'fr-FR' : 'pt-BR')));
   }
-  metaItens.push(`<span><strong>E-mail</strong> ${dados.email || ''}</span>`);
-  if (dados.telefone) metaItens.push(`<span><strong>Telefone</strong> ${dados.telefone}</span>`);
   if (plano.dataVencimento) {
-    metaItens.push(`<span><strong>Status da assinatura</strong> ${plano.ativo ? 'Ativa' : 'Vencida'}</span>`);
+    itens.push(metaItem('Fim da inscrição', `${plano.curso || ''} ${plano.tier || ''} — ${new Date(plano.dataVencimento).toLocaleDateString('pt-BR')}`.trim()));
+    itens.push(metaItem('Status da assinatura', plano.ativo ? 'Ativa' : 'Vencida'));
   }
-  document.getElementById('profileMeta').innerHTML = metaItens.join('');
+  document.getElementById('profileMeta').innerHTML = itens.join('');
 }
 
-// ===================== CARDS DE RESUMO (fonte de verdade: produtosAvulsos) =====================
+// ===================== CARDS DE PRODUTO =====================
+// Título em cima, ícone centralizado embaixo, status/botão no rodapé.
 function renderSummaryCards(dados) {
+  const iconeCheck = '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">';
+  const iconeX = '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">';
+  const iconeLock = '<img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">';
+
   const html = PRODUTOS_DASHBOARD.map(p => {
     const acesso = window.AppShell.detalhesAcesso(p.chave);
-    let estado, tagClass, tagTexto;
-    const iconeCheck = '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">';
-    const iconeX = '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">';
-    const iconeLock = '<img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">';
+    let estado, tagTexto;
     if (acesso.ativo) {
-      estado = 'ativo'; tagClass = 'ativo';
-      tagTexto = acesso.viaCascata && !acesso.viaAvulso ? `${iconeCheck} Ativo · incluído no plano ${dados.plano.tier}` : `${iconeCheck} Ativo`;
-    } else if (acesso.dataVencimentoAvulso) { estado = 'expirado'; tagClass = 'expirado'; tagTexto = `${iconeX} Expirado`; }
-    else { estado = 'bloqueado'; tagClass = 'bloqueado'; tagTexto = `${iconeLock} Não adquirido`; }
+      estado = 'ativo';
+      tagTexto = acesso.viaCascata && !acesso.viaAvulso ? `${iconeCheck}Ativo · incluído no plano ${esc(dados.plano?.tier || '')}` : `${iconeCheck}Ativo`;
+    } else if (acesso.dataVencimentoAvulso) { estado = 'expirado'; tagTexto = `${iconeX}Expirado`; }
+    else { estado = 'bloqueado'; tagTexto = `${iconeLock}Não adquirido`; }
 
-    // Compra/renovação agora é sempre por curso (Pack Prestige de TCF, A1 etc.) — não
-    // existe mais uma compra avulsa cross-curso desses 3 produtos, então o CTA manda
-    // para a escolha de curso em vez de um link fixo que o backend não aceita mais.
-    const cta = estado === 'ativo' ? '' :
-      `<a class="upgrade-btn" href="cursos.html">${estado === 'expirado' ? 'Renovar' : 'Adquirir'}</a>`;
+    // Compra/renovação é sempre por curso (Pack Prestige de TCF, A1 etc.) — o CTA
+    // leva para a escolha de curso.
+    const cta = estado === 'ativo'
+      ? '<span class="card-ver-mais">Clique para ver detalhes</span>'
+      : `<a class="upgrade-btn" href="cursos.html">${estado === 'expirado' ? 'Renovar' : 'Adquirir'}</a>`;
 
-    return `<div class="dash-summary-card">
-      <img class="icone" src="${p.icone}" alt="">
+    return `<div class="dash-summary-card" role="button" tabindex="0" data-abrir-secao="${p.secao}">
       <h3>${p.nome}</h3>
-      <span class="dash-status-tag ${tagClass}">${tagTexto}</span><br>
-      ${cta}
+      <div class="icone-wrap"><img class="icone" src="${p.icone}" alt=""></div>
+      <div class="card-rodape">
+        <span class="dash-status-tag ${estado}">${tagTexto}</span>
+        ${cta}
+      </div>
     </div>`;
   }).join('');
   document.getElementById('summaryCards').innerHTML = html;
 }
 
+document.getElementById('summaryCards').addEventListener('click', e => {
+  if (e.target.closest('a')) return; // botão Adquirir/Renovar navega normalmente
+  const card = e.target.closest('[data-abrir-secao]');
+  if (card) abrirSecao(card.dataset.abrirSecao);
+});
+document.getElementById('summaryCards').addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const card = e.target.closest('[data-abrir-secao]');
+  if (card) { e.preventDefault(); abrirSecao(card.dataset.abrirSecao); }
+});
+
 // ===================== PAINEL DA EQUIPE =====================
+// Admin: todas as ferramentas. Professor: só Gestão de Alunos e Fila de Correção.
 function renderPainelEquipe(dados) {
-  if (dados.role !== 'professor' && dados.role !== 'admin') return;
-  document.getElementById('painelEquipeBox').style.display = 'block';
-  document.getElementById('papelEquipeLabel').textContent = dados.role === 'admin' ? 'administrador(a)' : 'professor(a)';
   const admin = dados.role === 'admin';
-  document.getElementById('linkPainelAdmin').style.display = admin ? 'inline-block' : 'none';
-  document.getElementById('linkAdminMatriculas').style.display = admin ? 'inline-block' : 'none';
-  document.getElementById('linkAdminAgenda').style.display = 'inline-block';
-  document.getElementById('linkAdminAulas').style.display = admin ? 'inline-block' : 'none';
-  document.getElementById('linkAdminHorarios').style.display = admin ? 'inline-block' : 'none';
-  document.getElementById('linkAdminDepoimentos').style.display = admin ? 'inline-block' : 'none';
-  document.getElementById('linkAdminErrosQuestoes').style.display = admin ? 'inline-block' : 'none';
+  const professor = dados.role === 'professor';
+  if (!admin && !professor) return;
+  document.getElementById('painelEquipeBox').style.display = 'block';
+  document.getElementById('papelEquipeLabel').textContent = admin ? 'administrador(a)' : 'professor(a)';
+  document.querySelectorAll('#painelEquipeBox .so-admin').forEach(el => { el.style.display = admin ? '' : 'none'; });
+  if (admin) atualizarBadgeSeguranca();
+}
+
+// Quantidade de eventos de segurança graves (alta/crítica) nas últimas 24h.
+async function atualizarBadgeSeguranca() {
+  try {
+    const res = await fetch('/api/seguranca/resumo', { headers: authHeaders() });
+    if (!res.ok) return;
+    const r = await res.json();
+    const graves = (r.ultimas24h?.alta || 0) + (r.ultimas24h?.critica || 0);
+    const badge = document.getElementById('badgeSeguranca');
+    if (graves > 0) { badge.textContent = graves > 99 ? '99+' : graves; badge.style.display = 'inline-block'; }
+  } catch (err) { /* badge é opcional */ }
 }
 
 function cardBloqueado(nome, curso) {
@@ -389,17 +740,17 @@ async function renderBlocoConjuntos() {
     ]);
     const stats = statsRes.ok ? await statsRes.json() : null;
     const caderno = cadernoRes.ok ? await cadernoRes.json() : [];
-    if (!stats) return '';
+    if (!stats) return { html: '', kpis: null };
     const kpis = stats.kpis;
 
     const previaCaderno = caderno.slice(0, 5).map(item => {
       const q = item.questao;
       const resumo = q.enunciado.length > 70 ? q.enunciado.slice(0, 70) + '…' : q.enunciado;
-      return `<div class="dash-atividade-item"><span>${q.nivel} · ${MATERIAS[q.materia] || q.materia} — ${resumo}</span></div>`;
+      return `<div class="dash-atividade-item"><span>${esc(q.nivel)} · ${esc(MATERIAS[q.materia] || q.materia)} — ${esc(resumo)}</span></div>`;
     }).join('');
 
-    return `
-      <h3 style="margin-bottom:12px;">Conjuntos de Questões</h3>
+    const html = `
+      <h3 style="margin-bottom:14px;">Conjuntos de Questões</h3>
       <div class="dash-kpi-row">
         <div class="dash-kpi"><div class="valor">${kpis.conjuntosConcluidos}</div><div class="rotulo">Conjuntos concluídos</div></div>
         <div class="dash-kpi"><div class="valor">${kpis.conjuntosEmAndamento}</div><div class="rotulo">Em andamento</div></div>
@@ -407,12 +758,13 @@ async function renderBlocoConjuntos() {
         <div class="dash-kpi"><div class="valor">${kpis.tamanhoCaderno}</div><div class="rotulo">No Caderno de Revisão</div></div>
       </div>
       <p style="margin-top:12px;"><a href="estatisticas-questoes.html" style="color:var(--accent); font-weight:700;">Ver estatísticas completas<img class="titulo-icone-inline pequeno" src="img/icones/chevron-right.svg" alt="" style="margin-right:0; margin-left:5px;"></a></p>
-      <h3 style="margin:20px 0 12px;">Caderno de Revisão</h3>
+      <h3 style="margin:24px 0 12px;">Caderno de Revisão</h3>
       ${caderno.length ? previaCaderno : '<div class="stats-vazio">Nenhuma questão salva no Caderno de Revisão ainda.</div>'}
       <p style="margin-top:12px;"><a href="caderno-revisao.html" style="color:var(--accent); font-weight:700;">Ver Caderno de Revisão completo<img class="titulo-icone-inline pequeno" src="img/icones/chevron-right.svg" alt="" style="margin-right:0; margin-left:5px;"></a></p>
     `;
+    return { html, kpis };
   } catch (err) {
-    return '';
+    return { html: '', kpis: null };
   }
 }
 
@@ -426,11 +778,14 @@ async function renderPlataforma(dados) {
   }
   card.classList.remove('locked');
 
-  const blocoConjuntos = await renderBlocoConjuntos();
+  const bloco = await renderBlocoConjuntos();
+  if (bloco.kpis && bloco.kpis.mediaPercentualAcertos !== null) {
+    definirResumo('resumoPlataforma', `${bloco.kpis.mediaPercentualAcertos}% de acertos`);
+  }
 
   const eventos = carregarEventos();
   if (eventos.length === 0) {
-    alvo.innerHTML = blocoConjuntos;
+    alvo.innerHTML = bloco.html || '<div class="stats-vazio">Comece a praticar para ver suas estatísticas aqui.</div>';
     return;
   }
 
@@ -440,6 +795,7 @@ async function renderPlataforma(dados) {
   const dias = [...new Set(eventos.map(e => diaDe(e.t)))].sort();
   const sequencia = calcularSequenciaDiaria(dias);
   const tempoMs = Number(localStorage.getItem('pq_tempoMs') || 0);
+  if (!bloco.kpis || bloco.kpis.mediaPercentualAcertos === null) definirResumo('resumoPlataforma', `${taxa}% de acerto`);
 
   const porDia = dias.map(dia => {
     const doDia = eventos.filter(e => diaDe(e.t) === dia);
@@ -456,7 +812,8 @@ async function renderPlataforma(dados) {
   });
   const ultimasAtividades = eventos.slice(-8).reverse();
 
-  alvo.innerHTML = blocoConjuntos + `
+  alvo.innerHTML = bloco.html + `
+    <h3 style="margin:26px 0 14px;">Prática livre</h3>
     <div class="dash-kpi-row">
       <div class="dash-kpi"><div class="valor">${total}</div><div class="rotulo">Questões resolvidas</div></div>
       <div class="dash-kpi"><div class="valor">${taxa}%</div><div class="rotulo">Taxa de acerto</div></div>
@@ -477,12 +834,12 @@ async function renderPlataforma(dados) {
         ${barList(porMateria)}
       </div>
     </div>
-    <h3 style="margin:18px 0 10px;">Últimas atividades</h3>
+    <h3 style="margin:22px 0 10px;">Últimas atividades</h3>
     ${ultimasAtividades.map(e => `<div class="dash-atividade-item">
-      <span>${e.mode === 'simulado' ? 'Simulado' : 'Praticar'} · ${MATERIAS[e.materia] || e.materia} · Nível ${e.nivel}</span>
+      <span>${e.mode === 'simulado' ? 'Simulado' : 'Praticar'} · ${esc(MATERIAS[e.materia] || e.materia)} · Nível ${esc(e.nivel)}</span>
       <span style="color:${e.ok ? 'var(--success-text)' : 'var(--danger-text)'};">${e.ok ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Acertou' : '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">Errou'}</span>
     </div>`).join('')}
-    <p style="font-size:0.78rem; color:var(--text-muted); margin-top:14px;">Esses dados ficam salvos neste navegador — se você praticar em outro dispositivo, as estatísticas não se somam automaticamente.</p>
+    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:14px;">Esses dados ficam salvos neste navegador — se você praticar em outro dispositivo, as estatísticas não se somam automaticamente.</p>
   `;
 
   document.getElementById('secApagarDados').style.display = 'block';
@@ -524,13 +881,15 @@ async function renderDeveres() {
     const res = await fetch('/api/deveres/minhas-semanas', { headers: authHeaders() });
     const semanas = res.ok ? await res.json() : [];
     if (!semanas.length) {
+      definirResumo('resumoDeveres', '');
       alvo.innerHTML = `<div class="stats-vazio">Nenhum dever de casa atribuído ainda.</div>`;
       return;
     }
 
     const pendentes = semanas.filter(s => s.status !== 'concluido').sort((a, b) => a.numeroSemana - b.numeroSemana);
     if (!pendentes.length) {
-      alvo.innerHTML = `<div class="stats-vazio"><img class="titulo-icone-inline" src="img/icones/party.svg" alt="">Você está em dia com todos os seus deveres!</div><div style="text-align:center; margin-top:14px;"><a href="meus-deveres.html" class="dash-btn secundario">Ver meus deveres</a></div>`;
+      definirResumo('resumoDeveres', 'Em dia');
+      alvo.innerHTML = `<div class="stats-vazio"><img class="titulo-icone-inline" src="img/icones/party.svg" alt="">Você está em dia com todos os seus deveres!</div><div style="text-align:center; margin-top:16px;"><a href="meus-deveres.html" class="dash-btn secundario">Ver meus deveres</a></div>`;
       return;
     }
 
@@ -542,18 +901,19 @@ async function renderDeveres() {
     const prazoTexto = diasRestantes >= 0
       ? `${diasRestantes} dia${diasRestantes === 1 ? '' : 's'} restante${diasRestantes === 1 ? '' : 's'}`
       : `Atrasado há ${Math.abs(diasRestantes)} dia${Math.abs(diasRestantes) === 1 ? '' : 's'}`;
+    definirResumo('resumoDeveres', `Semana ${atual.numeroSemana} · ${pct}%`);
 
     const aFazer = atual.atividades.filter(a => a.entrega?.status !== 'enviado');
-    const aFazerHtml = aFazer.slice(0, 4).map(a => `<div class="dash-atividade-item"><span>${a.titulo}${a.obrigatoria ? '' : ' <span style="color:var(--text-muted); font-size:0.82rem;">(opcional)</span>'}</span></div>`).join('');
+    const aFazerHtml = aFazer.slice(0, 4).map(a => `<div class="dash-atividade-item"><span>${esc(a.titulo)}${a.obrigatoria ? '' : ' <span style="color:var(--text-muted); font-size:0.82rem;">(opcional)</span>'}</span></div>`).join('');
 
     alvo.innerHTML = `
       <div class="dash-kpi-row">
-        <div class="dash-kpi"><div class="valor">Semana ${atual.numeroSemana}</div><div class="rotulo">${atual.titulo}</div></div>
+        <div class="dash-kpi"><div class="valor">Semana ${atual.numeroSemana}</div><div class="rotulo">${esc(atual.titulo)}</div></div>
         <div class="dash-kpi"><div class="valor">${pct}%</div><div class="rotulo">Concluído</div></div>
         <div class="dash-kpi"><div class="valor">${prazoTexto}</div><div class="rotulo">Prazo: ${new Date(atual.dataLimite).toLocaleDateString('pt-BR')}</div></div>
       </div>
       ${aFazerHtml || '<div class="stats-vazio">Todas as atividades desta semana já foram entregues.</div>'}
-      <div style="margin-top:16px;"><a href="meus-deveres.html" class="dash-btn">Ver meus deveres</a></div>
+      <div style="margin-top:18px;"><a href="meus-deveres.html" class="dash-btn">Ver meus deveres</a></div>
     `;
   } catch (err) {
     alvo.innerHTML = '<p style="color:var(--danger-text);">Não foi possível carregar seus deveres.</p>';
@@ -575,13 +935,15 @@ async function renderProducao(dados) {
     const res = await fetch('/api/producoes/minhas', { headers: authHeaders() });
     const producoes = await res.json();
     if (!Array.isArray(producoes) || producoes.length === 0) {
-      alvo.innerHTML = `<div class="stats-vazio">Você ainda não enviou nenhuma produção.</div><div style="text-align:center; margin-top:14px;"><a href="correcoes-texto.html" class="dash-btn">Nova Produção</a></div>`;
+      definirResumo('resumoProducao', `${dados.creditosCorrecao ?? 0} crédito(s)`);
+      alvo.innerHTML = `<div class="stats-vazio">Você ainda não enviou nenhuma produção.</div><div style="text-align:center; margin-top:16px;"><a href="correcoes-texto.html" class="dash-btn">Nova Produção</a></div>`;
       return;
     }
     const enviados = producoes.filter(p => p.status !== 'rascunho').length;
     const aguardando = producoes.filter(p => STATUS_AGUARDANDO.includes(p.status)).length;
     const corrigidas = producoes.filter(p => p.status === 'corrigido');
     const ultimaCorrigida = corrigidas.sort((a, b) => new Date(b.criadoEm) - new Date(a.criadoEm))[0];
+    definirResumo('resumoProducao', aguardando ? `${aguardando} aguardando correção` : `${corrigidas.length} corrigida(s)`);
 
     alvo.innerHTML = `
       <div class="dash-kpi-row">
@@ -591,10 +953,10 @@ async function renderProducao(dados) {
         <div class="dash-kpi"><div class="valor">${dados.creditosCorrecao ?? 0}</div><div class="rotulo">Créditos disponíveis</div></div>
       </div>
       ${ultimaCorrigida ? `<div class="dash-atividade-item" style="flex-direction:column; align-items:flex-start; gap:6px;">
-        <strong>Último feedback recebido${ultimaCorrigida.avaliacao?.notaTotal != null ? ' · Nota ' + ultimaCorrigida.avaliacao.notaTotal : ''}</strong>
-        <span style="color:var(--text-muted);">${ultimaCorrigida.avaliacao?.comentarioGeral || 'Sem comentário geral.'}</span>
+        <strong>Último feedback recebido${ultimaCorrigida.avaliacao?.notaTotal != null ? ' · Nota ' + esc(ultimaCorrigida.avaliacao.notaTotal) : ''}</strong>
+        <span style="color:var(--text-muted);">${esc(ultimaCorrigida.avaliacao?.comentarioGeral || 'Sem comentário geral.')}</span>
       </div>` : ''}
-      <div style="margin-top:16px;"><a href="correcoes-texto.html" class="dash-btn">Nova Produção</a></div>
+      <div style="margin-top:18px;"><a href="correcoes-texto.html" class="dash-btn">Nova Produção</a></div>
     `;
   } catch (err) {
     alvo.innerHTML = '<p style="color:var(--danger-text);">Não foi possível carregar suas produções.</p>';
@@ -620,6 +982,7 @@ async function renderAulas(dados) {
     const resumo = resResumo.ok ? await resResumo.json() : { totalAulas: 0, concluidas: 0, percentual: 0, ultimaAula: null };
     const historico = resHistorico.ok ? await resHistorico.json() : [];
     const matriculas = resMatriculas.ok ? await resMatriculas.json() : [];
+    definirResumo('resumoAulas', `${resumo.percentual}% concluído`);
 
     const agora = Date.now();
     const proximas = [];
@@ -638,10 +1001,10 @@ async function renderAulas(dados) {
       const titulo = p.recorrente ? `${p.nome} — ${p.nivel}` : 'Aula particular';
       const quando = p.recorrente ? `${(p.dias || []).join(', ')} às ${p.horario || ''}` : new Date(p.data).toLocaleString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
       const entrar = p.zoomLink
-        ? `<a href="${p.zoomLink}" target="_blank" class="dash-btn secundario">Entrar na Aula</a>`
+        ? `<a href="${esc(p.zoomLink)}" target="_blank" rel="noopener" class="dash-btn secundario">Entrar na Aula</a>`
         : `<span style="font-size:0.82rem; color:var(--text-muted);">Aguarde o contato do professor</span>`;
       return `<div class="dash-atividade-item">
-        <span><strong>${titulo}</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">${p.professor ? 'Professor: ' + p.professor + ' · ' : ''}${quando}</span></span>
+        <span><strong>${esc(titulo)}</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">${p.professor ? 'Professor: ' + esc(p.professor) + ' · ' : ''}${esc(quando)}</span></span>
         ${entrar}
       </div>`;
     }).join('') || '<div class="stats-vazio">Nenhuma aula ao vivo agendada.</div>';
@@ -651,15 +1014,15 @@ async function renderAulas(dados) {
         <div class="dash-kpi"><div class="valor">${resumo.percentual}%</div><div class="rotulo">Progresso nas aulas gravadas</div></div>
         <div class="dash-kpi"><div class="valor">${resumo.concluidas}/${resumo.totalAulas}</div><div class="rotulo">Aulas concluídas</div></div>
       </div>
-      <h3 style="margin-bottom:10px;">Próximas aulas</h3>
+      <h3 style="margin-bottom:12px;">Próximas aulas</h3>
       ${proximasHtml}
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin:16px 0 20px;">
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin:18px 0 24px;">
         <a href="aulas-especializadas.html" class="dash-btn">${resumo.ultimaAula ? 'Continuar assistindo' : 'Ver aulas gravadas'}</a>
         <a href="matricula.html" class="dash-btn secundario">Agendar Aula</a>
       </div>
-      <h3 style="margin-bottom:10px;">Histórico de aulas gravadas</h3>
+      <h3 style="margin-bottom:12px;">Histórico de aulas gravadas</h3>
       ${historico.slice(0, 6).map(h => `<div class="dash-atividade-item">
-        <span>${h.moduloIcone ? h.moduloIcone + ' ' : ''}${h.aulaTitulo}${h.moduloTitulo ? ' · ' + h.moduloTitulo : ''}</span>
+        <span>${h.moduloIcone ? esc(h.moduloIcone) + ' ' : ''}${esc(h.aulaTitulo)}${h.moduloTitulo ? ' · ' + esc(h.moduloTitulo) : ''}</span>
         <span style="color:${h.concluida ? 'var(--success-text)' : 'var(--text-muted)'};">${h.concluida ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Concluída' : 'Em andamento'}</span>
       </div>`).join('') || '<div class="stats-vazio">Nenhuma aula assistida ainda.</div>'}
     `;
@@ -689,21 +1052,22 @@ document.getElementById('cancelarPerfilBtn').addEventListener('click', () => {
 });
 
 function renderPerfilView(perfil) {
-  document.getElementById('bioView').innerHTML = perfil.bio
-    ? perfil.bio.replace(/</g, '&lt;')
-    : '<span class="vazio">Você ainda não escreveu nada sobre você. Que tal contar sua motivação para estudar francês?</span>';
-  document.getElementById('bioView').classList.toggle('vazio', !perfil.bio);
+  const bioView = document.getElementById('bioView');
+  if (perfil.bio) bioView.textContent = perfil.bio;
+  else bioView.innerHTML = '<span class="vazio">Você ainda não escreveu nada sobre você. Que tal contar sua motivação para estudar francês?</span>';
+  bioView.classList.toggle('vazio', !perfil.bio);
 
   const tagsWrap = document.getElementById('interessesView');
   const interesses = (perfil.interesses || '').split(',').map(s => s.trim()).filter(Boolean);
   tagsWrap.innerHTML = interesses.length
-    ? interesses.map(i => `<span class="perfil-tag">${i}</span>`).join('')
+    ? interesses.map(i => `<span class="perfil-tag">${esc(i)}</span>`).join('')
     : '<p class="perfil-info-valor vazio">Nenhum interesse adicionado ainda.</p>';
 
+  // Só o dado (prova e data) — sem mensagens sobre quanto falta ou se a data já passou.
   const provaView = document.getElementById('provaView');
   if (perfil.provaAlvo || perfil.dataProva) {
     provaView.classList.remove('vazio');
-    provaView.innerHTML = `${perfil.provaAlvo ? `<strong>${perfil.provaAlvo}</strong>` : 'Prova ainda não decidida'}${perfil.dataProva ? ' · ' + new Date(perfil.dataProva).toLocaleDateString('pt-BR') : ''}`;
+    provaView.innerHTML = `${perfil.provaAlvo ? `<strong>${esc(perfil.provaAlvo)}</strong>` : 'Prova ainda não decidida'}${perfil.dataProva ? ' · ' + new Date(perfil.dataProva).toLocaleDateString('pt-BR') : ''}`;
   } else {
     provaView.classList.add('vazio');
     provaView.textContent = 'Você ainda não escolheu uma prova nem uma data.';
@@ -712,31 +1076,13 @@ function renderPerfilView(perfil) {
 
 function preencherPerfil(perfil) {
   perfilAtual = perfil || {};
-  document.getElementById('bioInput').value = perfil.bio || '';
-  document.getElementById('interessesInput').value = perfil.interesses || '';
-  document.getElementById('provaAlvoInput').value = perfil.provaAlvo || '';
-  document.getElementById('dataProvaInput').value = perfil.dataProva ? perfil.dataProva.slice(0, 10) : '';
-  renderPerfilView(perfil);
-  atualizarCountdown(perfil.dataProva, perfil.provaAlvo);
+  document.getElementById('bioInput').value = perfilAtual.bio || '';
+  document.getElementById('interessesInput').value = perfilAtual.interesses || '';
+  document.getElementById('provaAlvoInput').value = perfilAtual.provaAlvo || '';
+  document.getElementById('dataProvaInput').value = perfilAtual.dataProva ? perfilAtual.dataProva.slice(0, 10) : '';
+  renderPerfilView(perfilAtual);
 }
-function atualizarCountdown(dataProvaStr, provaAlvo) {
-  const box = document.getElementById('countdownBox');
-  if (!dataProvaStr) { box.style.display = 'none'; return; }
-  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
-  const alvo = new Date(dataProvaStr); alvo.setHours(0, 0, 0, 0);
-  const dias = Math.round((alvo - hoje) / 86400000);
-  const nomeProva = provaAlvo ? `da prova ${provaAlvo}` : 'da sua prova';
-  box.style.display = 'block';
-  if (dias > 0) box.innerHTML = `Faltam <strong>${dias} ${dias === 1 ? 'dia' : 'dias'}</strong> ${nomeProva}. Continue praticando!`;
-  else if (dias === 0) box.innerHTML = `<strong>É hoje!</strong> Boa sorte ${nomeProva}!`;
-  else box.innerHTML = `A data ${nomeProva} já passou há ${Math.abs(dias)} dia(s). Atualize sua data se necessário.`;
-}
-document.getElementById('dataProvaInput').addEventListener('change', () => {
-  atualizarCountdown(document.getElementById('dataProvaInput').value, document.getElementById('provaAlvoInput').value);
-});
-document.getElementById('provaAlvoInput').addEventListener('change', () => {
-  atualizarCountdown(document.getElementById('dataProvaInput').value, document.getElementById('provaAlvoInput').value);
-});
+
 document.getElementById('salvarPerfilBtn').addEventListener('click', async () => {
   const btn = document.getElementById('salvarPerfilBtn');
   const msg = document.getElementById('salvarMsg');
@@ -782,11 +1128,13 @@ async function renderMapeador() {
     const { kpis } = await res.json();
 
     if (!kpis.numeroSessoes) {
-      alvo.innerHTML = `<div class="stats-vazio">Organize suas matérias e cronometre suas sessões de estudo.</div><div style="text-align:center; margin-top:14px;"><a href="mapeador-timer.html" class="dash-btn">Iniciar primeira sessão</a></div>`;
+      definirResumo('resumoMapeador', '');
+      alvo.innerHTML = `<div class="stats-vazio">Organize suas matérias e cronometre suas sessões de estudo.</div><div style="text-align:center; margin-top:16px;"><a href="mapeador-timer.html" class="dash-btn">Iniciar primeira sessão</a></div>`;
       return;
     }
 
     const h = seg => { const m = Math.round((seg || 0) / 60); const hh = Math.floor(m / 60); return hh > 0 ? `${hh}h${String(m % 60).padStart(2, '0')}` : `${m}min`; };
+    definirResumo('resumoMapeador', `${h(kpis.tempoSemanaSegundos)} esta semana`);
     alvo.innerHTML = `
       <div class="dash-kpi-row">
         <div class="dash-kpi"><div class="valor">${h(kpis.tempoHojeSegundos)}</div><div class="rotulo">Hoje</div></div>
@@ -794,7 +1142,7 @@ async function renderMapeador() {
         <div class="dash-kpi"><div class="valor">${kpis.sequenciaDiasAtual}<img src="img/icones/fire.svg" alt="" style="width:0.85em; height:0.85em; vertical-align:-0.05em;"></div><div class="rotulo">Sequência de dias</div></div>
         <div class="dash-kpi"><div class="valor">${h(kpis.tempoTotalSegundos)}</div><div class="rotulo">Tempo total</div></div>
       </div>
-      <div style="text-align:center; margin-top:6px;"><a href="mapeador-estudos.html" class="dash-btn secundario">Ver Mapeador de Estudos</a></div>`;
+      <div style="text-align:center; margin-top:8px;"><a href="mapeador-estudos.html" class="dash-btn secundario">Ver Mapeador de Estudos</a></div>`;
   } catch (err) {
     alvo.innerHTML = `<div class="stats-vazio">Erro ao carregar o Mapeador de Estudos.</div>`;
   }

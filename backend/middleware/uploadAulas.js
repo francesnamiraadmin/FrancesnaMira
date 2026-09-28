@@ -2,7 +2,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
-const { comTratamentoDeErro, UPLOAD_ROOT } = require("./upload");
+const { comTratamentoDeErro, UPLOAD_ROOT, pastaUpload } = require("./upload");
 
 const TIPOS_VIDEO = {
   "video/mp4": ".mp4",
@@ -41,9 +41,7 @@ function filtro(tipos, mensagem) {
 const uploadVideo = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-      const dir = path.join(UPLOAD_ROOT, "aulas", req.params.id, "video");
-      fs.mkdirSync(dir, { recursive: true });
-      cb(null, dir);
+      try { cb(null, pastaUpload("aulas", req.params.id, "video")); } catch (err) { cb(err); }
     },
     filename: (req, file, cb) => cb(null, crypto.randomUUID() + (TIPOS_VIDEO[file.mimetype] || ""))
   }),
@@ -54,9 +52,7 @@ const uploadVideo = multer({
 const uploadThumbnail = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-      const dir = path.join(UPLOAD_ROOT, "aulas", req.params.id, "thumbnail");
-      fs.mkdirSync(dir, { recursive: true });
-      cb(null, dir);
+      try { cb(null, pastaUpload("aulas", req.params.id, "thumbnail")); } catch (err) { cb(err); }
     },
     filename: (req, file, cb) => cb(null, crypto.randomUUID() + (TIPOS_THUMBNAIL[file.mimetype] || ""))
   }),
@@ -67,11 +63,9 @@ const uploadThumbnail = multer({
 const uploadMaterial = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-      const dir = path.join(UPLOAD_ROOT, "aulas", req.params.id, "materiais");
-      fs.mkdirSync(dir, { recursive: true });
-      cb(null, dir);
+      try { cb(null, pastaUpload("aulas", req.params.id, "materiais")); } catch (err) { cb(err); }
     },
-    filename: (req, file, cb) => cb(null, crypto.randomUUID() + (TIPOS_MATERIAL[file.mimetype] || path.extname(file.originalname) || ""))
+    filename: (req, file, cb) => cb(null, crypto.randomUUID() + (TIPOS_MATERIAL[file.mimetype] || ""))
   }),
   fileFilter: filtro(TIPOS_MATERIAL, "Formato de material não aceito."),
   limits: { fileSize: 50 * 1024 * 1024 } // 50MB

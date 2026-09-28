@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { escaparRegex } = require("../middleware/seguranca");
 const Tema = require("../models/tema");
 const User = require("../models/user");
 const Rubrica = require("../models/rubrica");
@@ -47,7 +48,7 @@ router.get("/", exigirAuth, (req, res, next) => {
     if (tipoProducao) filtro.tipoProducao = tipoProducao;
     if (dificuldade) filtro.dificuldade = dificuldade;
     if (modalidade) filtro.modalidade = modalidade;
-    if (busca) filtro.titulo = { $regex: busca, $options: "i" };
+    if (busca) filtro.titulo = { $regex: escaparRegex(String(busca)), $options: "i" };
 
     const temas = await Tema.find(filtro).select("-coletanea").sort({ criadoEm: -1 });
     res.json(temas);

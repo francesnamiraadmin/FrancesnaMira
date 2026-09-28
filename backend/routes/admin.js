@@ -6,6 +6,7 @@ const Rubrica = require("../models/rubrica");
 const Producao = require("../models/producao");
 const { exigirAuth, exigirAdmin } = require("../middleware/auth");
 const { TIPOS_CURSO } = require("../utils/tiposCurso");
+const { registrar, revogarSessoes } = require("../utils/monitorSeguranca");
 
 router.use(exigirAuth, exigirAdmin);
 
@@ -23,7 +24,8 @@ router.post("/professores", async (req, res) => {
   try {
     const { nome, email, senha, especialidades } = req.body;
     if (!nome || !email || !senha) return res.status(400).json({ msg: "Preencha todos os campos." });
-    if (senha.length < 6) return res.status(400).json({ msg: "A senha deve ter pelo menos 6 caracteres." });
+    if (typeof senha !== "string" || senha.length < 8 || senha.length > 128) return res.status(400).json({ msg: "A senha deve ter entre 8 e 128 caracteres." });
+    if (typeof email !== "string" || typeof nome !== "string") return res.status(400).json({ msg: "Dados inválidos." });
 
     const existente = await User.findOne({ email: email.toLowerCase() });
     if (existente) return res.status(400).json({ msg: "Já existe uma conta com esse e-mail." });
@@ -33,6 +35,7 @@ router.post("/professores", async (req, res) => {
       nome, email: email.toLowerCase(), senha: hash, verificado: true,
       role: "professor", especialidades: especialidades || []
     });
+    registrar("privilegio_concedido", req, { acao: "professor criado", professorEmail: professor.email });
     res.json({ msg: "Professor criado com sucesso.", professor: { _id: professor._id, nome: professor.nome, email: professor.email } });
   } catch (err) {
     console.error(err);
@@ -59,6 +62,9 @@ router.delete("/professores/:id", async (req, res) => {
   try {
     const professor = await User.findOneAndUpdate({ _id: req.params.id, role: "professor" }, { role: "aluno", especialidades: [] });
     if (!professor) return res.status(404).json({ msg: "Professor não encontrado." });
+    // O token antigo ainda dizia "professor" — encerra as sessões para o rebaixamento valer na hora.
+    await revogarSessoes(professor._id, { motivo: "Privilégio de professor removido", req, adminId: req.userId, silencioso: true });
+    registrar("acao_administrativa", req, { acao: "professor removido", professorEmail: professor.email });
     res.json({ msg: "Professor removido (a conta volta a ser de aluno)." });
   } catch (err) {
     res.status(500).json({ msg: "Erro no servidor." });

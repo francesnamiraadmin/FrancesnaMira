@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { textoSeguro, ehObjectId } = require("../middleware/seguranca");
 const Tentativa = require("../models/tentativa");
 const ErroQuestao = require("../models/erroQuestao");
 const { exigirAuth, exigirProfessor } = require("../middleware/auth");
@@ -13,9 +14,10 @@ router.use(exigirAuth);
 // aluno, nunca confiar em questaoId vindo solto do cliente.
 router.post("/", async (req, res) => {
   try {
-    const { questaoId, tentativaId, mensagem } = req.body;
-    if (!mensagem || !mensagem.trim()) return res.status(400).json({ msg: "Escreva uma mensagem descrevendo o erro." });
-    if (!questaoId || !tentativaId) return res.status(400).json({ msg: "Questão ou tentativa não informada." });
+    const { questaoId, tentativaId } = req.body;
+    const mensagem = textoSeguro(req.body.mensagem, 2000);
+    if (!mensagem) return res.status(400).json({ msg: "Escreva uma mensagem descrevendo o erro." });
+    if (!ehObjectId(questaoId) || !ehObjectId(tentativaId)) return res.status(400).json({ msg: "Questão ou tentativa não informada." });
 
     const tentativa = await Tentativa.findOne({ _id: tentativaId, alunoId: req.userId });
     if (!tentativa) return res.status(404).json({ msg: "Tentativa não encontrada." });
@@ -23,7 +25,7 @@ router.post("/", async (req, res) => {
     if (!pertence) return res.status(400).json({ msg: "Esta questão não pertence a esta tentativa." });
 
     const erro = await ErroQuestao.create({
-      questaoId, alunoId: req.userId, tentativaId, mensagem: mensagem.trim()
+      questaoId, alunoId: req.userId, tentativaId, mensagem
     });
     res.json(erro);
   } catch (err) {

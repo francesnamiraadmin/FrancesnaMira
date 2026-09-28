@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+  <script src="js/htmlSeguro.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
 <title>Redefinir senha - Francês na Mira</title>
@@ -117,11 +118,11 @@
       <form id="redefinirForm">
         <div class="field">
           <label for="novaSenha">Nova senha</label>
-          <input type="password" id="novaSenha" placeholder="••••••••" required minlength="6">
+          <input type="password" id="novaSenha" placeholder="••••••••" required minlength="8" maxlength="128">
         </div>
         <div class="field">
           <label for="confirmarSenha">Confirmar nova senha</label>
-          <input type="password" id="confirmarSenha" placeholder="••••••••" required minlength="6">
+          <input type="password" id="confirmarSenha" placeholder="••••••••" required minlength="8" maxlength="128">
         </div>
         <button type="submit" id="btnRedefinir">Redefinir senha</button>
       </form>

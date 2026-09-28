@@ -8,6 +8,46 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { enviarEmailConfirmacao, enviarEmailRedefinicaoSenha } = require("../utils/mailer");
 const { exigirAuth } = require("../middleware/auth");
+const {
+  limitarTaxa, falhasExcedidas, registrarFalha, limparFalhas, validarIds,
+  normalizarEmail, textoSeguro, origemSite
+} = require("../middleware/seguranca");
+const { registrar, revogarSessoes } = require("../utils/monitorSeguranca");
+
+const ehEquipe = user => user && (user.role === "admin" || user.role === "professor");
+// Janela em que reapresentar um refresh token recém-rotacionado é tratado como corrida
+// legítima (duas abas renovando ao mesmo tempo), e não como roubo de sessão.
+const TOLERANCIA_REUSO_MS = 30 * 1000;
+
+// ---------- PROTEÇÕES CONTRA ABUSO ----------
+const QUINZE_MIN = 15 * 60 * 1000;
+const limiteLogin = limitarTaxa({ nome: "login", janelaMs: QUINZE_MIN, max: 10, msg: "Muitas tentativas de login. Aguarde 15 minutos e tente novamente." });
+const limiteCadastro = limitarTaxa({ nome: "cadastro", janelaMs: 60 * 60 * 1000, max: 5, msg: "Muitos cadastros a partir desta rede. Tente novamente mais tarde." });
+const limiteEnvioEmail = limitarTaxa({ nome: "envio-email", janelaMs: QUINZE_MIN, max: 5, msg: "Muitas solicitações. Aguarde alguns minutos antes de pedir outro e-mail." });
+const limiteToken = limitarTaxa({ nome: "token", janelaMs: QUINZE_MIN, max: 20 });
+const limiteRefresh = limitarTaxa({ nome: "refresh", janelaMs: QUINZE_MIN, max: 60 });
+const limiteSenha = limitarTaxa({ nome: "senha", janelaMs: QUINZE_MIN, max: 10 });
+// Bloqueio por conta: mesmo vindo de muitos IPs, no máximo 8 senhas erradas a cada 15 min.
+const MAX_FALHAS_POR_CONTA = 8;
+
+// bcrypt trunca em 72 bytes e senhas enormes custam CPU — limitamos o tamanho.
+const SENHA_MIN = 8;
+const SENHA_MAX = 128;
+function erroSenha(senha) {
+  if (typeof senha !== "string" || senha.length < SENHA_MIN) return `A senha deve ter pelo menos ${SENHA_MIN} caracteres`;
+  if (senha.length > SENHA_MAX) return `A senha deve ter no máximo ${SENHA_MAX} caracteres`;
+  return null;
+}
+
+// Comparação feita mesmo quando o e-mail não existe, para que o tempo de resposta
+// não revele quais e-mails têm conta.
+const HASH_FALSO = bcrypt.hashSync("senha-inexistente-para-tempo-constante", 10);
+const MSG_LOGIN_INVALIDO = "E-mail ou senha incorretos";
+
+// Tokens de e-mail/redefinição são sempre 64 caracteres hex (randomBytes(32)).
+const ehTokenHex = t => typeof t === "string" && /^[a-f0-9]{64}$/.test(t);
+const TELEFONE_VALIDO = /^[0-9+()\-\s]{0,30}$/;
+const FOTO_VALIDA = /^data:image\/(png|jpe?g|webp|gif);base64,[A-Za-z0-9+/=]+$/;
 
 // ---------- SESSÃO PERSISTENTE ("Manter-me conectado") ----------
 // Access token de vida curta (assinado a cada login/refresh) + refresh token de
@@ -100,22 +140,30 @@ async function emitirRefreshToken(user) {
 }
 
 // CADASTRO
-router.post("/register", async (req, res) => {
+router.post("/register", limiteCadastro, async (req, res) => {
   try {
-    const { nome, sobrenome, email, senha, confirmarSenha, telefone, whatsapp, manterConectado } = req.body;
-    const nomeCompleto = (sobrenome ? `${nome || ""} ${sobrenome}` : (nome || "")).trim();
+    const { senha, confirmarSenha, manterConectado } = req.body;
+    const nome = textoSeguro(req.body.nome, 60) || "";
+    const sobrenome = textoSeguro(req.body.sobrenome, 60);
+    const nomeCompleto = (sobrenome ? `${nome} ${sobrenome}` : nome).trim();
+    const email = normalizarEmail(req.body.email);
+    const telefone = textoSeguro(req.body.telefone, 30);
+    const whatsapp = textoSeguro(req.body.whatsapp, 30);
 
-    if (!nomeCompleto || !email || !senha) {
+    if (!nomeCompleto || !req.body.email || !senha) {
       return res.status(400).json({ msg: "Preencha todos os campos" });
+    }
+    if (!email) return res.status(400).json({ msg: "Informe um e-mail válido" });
+    if ((telefone && !TELEFONE_VALIDO.test(telefone)) || (whatsapp && !TELEFONE_VALIDO.test(whatsapp))) {
+      return res.status(400).json({ msg: "Telefone inválido" });
     }
     if (confirmarSenha !== undefined && senha !== confirmarSenha) {
       return res.status(400).json({ msg: "As senhas não coincidem" });
     }
-    if (senha.length < 6) {
-      return res.status(400).json({ msg: "A senha deve ter pelo menos 6 caracteres" });
-    }
+    const problemaSenha = erroSenha(senha);
+    if (problemaSenha) return res.status(400).json({ msg: problemaSenha });
 
-    const existingUser = await User.findOne({ email: email.toLowerCase() });
+    const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ msg: "Usuário já existe" });
 
     const hash = await bcrypt.hash(senha, 10);
@@ -123,7 +171,7 @@ router.post("/register", async (req, res) => {
 
     const user = new User({
       nome: nomeCompleto,
-      email: email.toLowerCase(),
+      email,
       senha: hash,
       telefone: telefone || undefined,
       whatsapp: whatsapp || undefined,
@@ -133,7 +181,7 @@ router.post("/register", async (req, res) => {
     });
     await user.save();
 
-    const link = `${req.protocol}://${req.get("host")}/api/auth/confirmar/${tokenVerificacao}`;
+    const link = `${origemSite(req)}/api/auth/confirmar/${tokenVerificacao}`;
     try {
       await enviarEmailConfirmacao(user.email, user.nome, link);
     } catch (mailErr) {
@@ -163,26 +211,27 @@ router.post("/register", async (req, res) => {
 });
 
 // REENVIAR E-MAIL DE CONFIRMAÇÃO
-router.post("/reenviar-confirmacao", async (req, res) => {
+router.post("/reenviar-confirmacao", limiteEnvioEmail, async (req, res) => {
   try {
-    const { email } = req.body;
-    if (!email) return res.status(400).json({ msg: "Informe o e-mail" });
+    const email = normalizarEmail(req.body.email);
+    if (!email) return res.status(400).json({ msg: "Informe um e-mail válido" });
 
-    const user = await User.findOne({ email: email.toLowerCase() });
-    if (!user) return res.status(400).json({ msg: "Não encontramos uma conta com esse e-mail" });
+    // Resposta idêntica exista ou não a conta (evita enumeração de e-mails).
+    const user = await User.findOne({ email });
+    if (user && !user.verificado) {
+      const tokenVerificacao = crypto.randomBytes(32).toString("hex");
+      user.tokenVerificacao = tokenVerificacao;
+      await user.save();
 
-    if (user.verificado) {
-      return res.status(400).json({ msg: "Este e-mail já está confirmado. Você já pode entrar." });
+      const link = `${origemSite(req)}/api/auth/confirmar/${tokenVerificacao}`;
+      try {
+        await enviarEmailConfirmacao(user.email, user.nome, link);
+      } catch (mailErr) {
+        console.error("Erro ao reenviar e-mail de confirmação:", mailErr.message);
+      }
     }
 
-    const tokenVerificacao = crypto.randomBytes(32).toString("hex");
-    user.tokenVerificacao = tokenVerificacao;
-    await user.save();
-
-    const link = `${req.protocol}://${req.get("host")}/api/auth/confirmar/${tokenVerificacao}`;
-    await enviarEmailConfirmacao(user.email, user.nome, link);
-
-    res.json({ msg: "E-mail de confirmação reenviado! Verifique sua caixa de entrada." });
+    res.json({ msg: "Se houver uma conta pendente de confirmação com esse e-mail, reenviamos o link. Verifique sua caixa de entrada." });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro ao reenviar o e-mail. Tente novamente." });
@@ -190,8 +239,9 @@ router.post("/reenviar-confirmacao", async (req, res) => {
 });
 
 // CONFIRMAÇÃO DE E-MAIL
-router.get("/confirmar/:token", async (req, res) => {
+router.get("/confirmar/:token", limiteToken, async (req, res) => {
   try {
+    if (!ehTokenHex(req.params.token)) return res.redirect("/login.html?confirmado=erro");
     const user = await User.findOne({ tokenVerificacao: req.params.token });
     if (!user) {
       return res.redirect("/login.html?confirmado=erro");
@@ -209,19 +259,31 @@ router.get("/confirmar/:token", async (req, res) => {
 });
 
 // LOGIN
-router.post("/login", async (req, res) => {
+router.post("/login", limiteLogin, async (req, res) => {
   try {
-    const { email, senha, manterConectado } = req.body;
+    const { senha, manterConectado } = req.body;
 
-    if (!email || !senha) {
+    if (!req.body.email || !senha) {
       return res.status(400).json({ msg: "Preencha todos os campos" });
     }
+    const email = normalizarEmail(req.body.email);
+    if (!email || typeof senha !== "string" || senha.length > SENHA_MAX) {
+      return res.status(400).json({ msg: MSG_LOGIN_INVALIDO });
+    }
 
-    const user = await User.findOne({ email: email.toLowerCase() });
-    if (!user) return res.status(400).json({ msg: "Usuário não encontrado" });
+    if (falhasExcedidas(email, MAX_FALHAS_POR_CONTA)) {
+      registrar("forca_bruta_conta", req, { email }, { email });
+      return res.status(429).json({ msg: "Muitas tentativas de login para esta conta. Aguarde 15 minutos e tente novamente." });
+    }
 
-    const isMatch = await bcrypt.compare(senha, user.senha);
-    if (!isMatch) return res.status(400).json({ msg: "Senha incorreta" });
+    const user = await User.findOne({ email });
+    const isMatch = await bcrypt.compare(senha, user ? user.senha : HASH_FALSO);
+    if (!user || !isMatch) {
+      registrarFalha(email, QUINZE_MIN);
+      registrar("login_falhou", req, { contaExiste: !!user }, { email, userId: user?._id });
+      return res.status(400).json({ msg: MSG_LOGIN_INVALIDO });
+    }
+    limparFalhas(email);
 
     if (!user.verificado) {
       return res.status(403).json({ msg: "Confirme seu e-mail antes de entrar. Verifique sua caixa de entrada." });
@@ -231,6 +293,13 @@ router.post("/login", async (req, res) => {
 
     if (!user.primeiroLoginEm) user.primeiroLoginEm = new Date();
     user.ultimoAcessoEm = new Date();
+    // Conta da equipe entrando de um IP nunca visto: avisa (pode ser invasão da conta).
+    if (ehEquipe(user) && req.ip && !(user.ipsConhecidos || []).includes(req.ip)) {
+      if ((user.ipsConhecidos || []).length) {
+        registrar("login_staff_novo_ip", req, { papel: user.role }, { email: user.email, userId: user._id });
+      }
+      user.ipsConhecidos = [...(user.ipsConhecidos || []), req.ip].slice(-20);
+    }
     await user.save();
 
     const token = assinarAccessToken(user);
@@ -256,10 +325,10 @@ router.post("/login", async (req, res) => {
 // RENOVAR ACCESS TOKEN A PARTIR DO REFRESH TOKEN (cookie httpOnly)
 // Chamado no carregamento da página quando não há (ou expirou) o access token
 // em memória, para restaurar a sessão de quem marcou "Manter-me conectado".
-router.post("/refresh", async (req, res) => {
+router.post("/refresh", limiteRefresh, async (req, res) => {
   try {
     const raw = req.cookies?.[REFRESH_COOKIE];
-    if (!raw) return res.status(401).json({ msg: "Sessão não encontrada" });
+    if (!raw || typeof raw !== "string" || raw.length > 200) return res.status(401).json({ msg: "Sessão não encontrada" });
 
     const hash = hashToken(raw);
     const user = await User.findOne({ "refreshTokens.tokenHash": hash });
@@ -267,6 +336,16 @@ router.post("/refresh", async (req, res) => {
 
     if (!user || !entrada || entrada.expiraEm < new Date()) {
       res.clearCookie(REFRESH_COOKIE, { path: "/api/auth" });
+      if (!user) {
+        // Token já rotacionado sendo reapresentado = cópia roubada em uso (ou o dono
+        // usando depois do ladrão). Resposta: derruba TODAS as sessões da conta.
+        const vitima = await User.findOne({ "refreshTokensUsados.tokenHash": hash }).select("email refreshTokensUsados");
+        const usado = vitima?.refreshTokensUsados.find(rt => rt.tokenHash === hash);
+        if (vitima && usado && Date.now() - new Date(usado.usadoEm).getTime() > TOLERANCIA_REUSO_MS) {
+          await revogarSessoes(vitima._id, { motivo: "Reuso de token de sessão (possível roubo)", req });
+          registrar("reuso_refresh_token", req, {}, { userId: vitima._id, email: vitima.email, resposta: "Todas as sessões da conta encerradas" });
+        }
+      }
       return res.status(401).json({ msg: "Sessão expirada, faça login novamente" });
     }
 
@@ -277,6 +356,10 @@ router.post("/refresh", async (req, res) => {
     // Rotação: descarta o token usado e emite um novo, para que um refresh token
     // roubado pare de funcionar assim que o dono legítimo o usar de novo.
     user.refreshTokens = user.refreshTokens.filter(rt => rt.tokenHash !== hash);
+    user.refreshTokensUsados = [
+      ...(user.refreshTokensUsados || []).filter(rt => rt.expiraEm > new Date()),
+      { tokenHash: hash, expiraEm: entrada.expiraEm, usadoEm: new Date() }
+    ].slice(-20);
     const novoRaw = await emitirRefreshToken(user);
     res.cookie(REFRESH_COOKIE, novoRaw, cookieRefreshOpts);
 
@@ -320,7 +403,7 @@ router.get("/sessoes", exigirAuth, async (req, res) => {
 });
 
 // ENCERRAR UMA SESSÃO ESPECÍFICA
-router.delete("/sessoes/:id", exigirAuth, async (req, res) => {
+router.delete("/sessoes/:id", exigirAuth, validarIds("id"), async (req, res) => {
   try {
     await User.updateOne(
       { _id: req.userId },
@@ -355,7 +438,7 @@ router.post("/sessoes/encerrar-outras", exigirAuth, async (req, res) => {
 router.post("/logout", async (req, res) => {
   try {
     const raw = req.cookies?.[REFRESH_COOKIE];
-    if (raw) {
+    if (raw && typeof raw === "string") {
       const hash = hashToken(raw);
       await User.updateOne({ "refreshTokens.tokenHash": hash }, { $pull: { refreshTokens: { tokenHash: hash } } });
     }
@@ -367,20 +450,21 @@ router.post("/logout", async (req, res) => {
 });
 
 // ESQUECI MINHA SENHA — gera token de uso único (1h) e envia link por e-mail
-router.post("/esqueci-senha", async (req, res) => {
+router.post("/esqueci-senha", limiteEnvioEmail, async (req, res) => {
   try {
-    const { email } = req.body;
-    if (!email) return res.status(400).json({ msg: "Informe o e-mail" });
+    if (!req.body.email) return res.status(400).json({ msg: "Informe o e-mail" });
+    const email = normalizarEmail(req.body.email);
+    if (!email) return res.status(400).json({ msg: "Informe um e-mail válido" });
 
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({ email });
     if (user) {
+      if (ehEquipe(user)) registrar("alteracao_conta_staff", req, { acao: "pedido de redefinição de senha" }, { email: user.email, userId: user._id });
       const raw = crypto.randomBytes(32).toString("hex");
       user.resetSenhaTokenHash = hashToken(raw);
       user.resetSenhaExpiraEm = new Date(Date.now() + 60 * 60 * 1000);
       await user.save();
 
-      const origem = process.env.SITE_URL || `${req.protocol}://${req.get("host")}`;
-      const link = `${origem}/redefinir-senha.html?token=${raw}`;
+      const link = `${origemSite(req)}/redefinir-senha.html?token=${raw}`;
       try {
         await enviarEmailRedefinicaoSenha(user.email, user.nome, link);
       } catch (mailErr) {
@@ -397,11 +481,13 @@ router.post("/esqueci-senha", async (req, res) => {
 });
 
 // REDEFINIR SENHA — valida o token de uso único e troca a senha
-router.post("/redefinir-senha", async (req, res) => {
+router.post("/redefinir-senha", limiteToken, async (req, res) => {
   try {
     const { token, novaSenha } = req.body;
     if (!token || !novaSenha) return res.status(400).json({ msg: "Preencha todos os campos" });
-    if (novaSenha.length < 6) return res.status(400).json({ msg: "A nova senha deve ter pelo menos 6 caracteres" });
+    if (!ehTokenHex(token)) return res.status(400).json({ msg: "Link inválido ou expirado. Solicite uma nova redefinição." });
+    const problemaSenha = erroSenha(novaSenha);
+    if (problemaSenha) return res.status(400).json({ msg: problemaSenha });
 
     const user = await User.findOne({
       resetSenhaTokenHash: hashToken(token),
@@ -414,6 +500,10 @@ router.post("/redefinir-senha", async (req, res) => {
     user.resetSenhaExpiraEm = undefined;
     user.refreshTokens = []; // revoga sessões persistentes antigas por segurança
     await user.save();
+    limparFalhas(user.email);
+    // Derruba também os access tokens ainda válidos (quem invadiu perde o acesso na hora).
+    await revogarSessoes(user._id, { motivo: "Senha redefinida por e-mail", req, silencioso: true });
+    if (ehEquipe(user)) registrar("alteracao_conta_staff", req, { acao: "senha redefinida" }, { email: user.email, userId: user._id });
 
     res.json({ msg: "Senha redefinida com sucesso! Você já pode entrar com a nova senha." });
   } catch (err) {
@@ -475,10 +565,28 @@ router.get("/me", exigirAuth, async (req, res) => {
 // ATUALIZAR PERFIL (foto, bio, interesses, prova alvo, data da prova)
 router.put("/perfil", exigirAuth, async (req, res) => {
   try {
-    const { foto, bio, interesses, provaAlvo, dataProva, nome, telefone, whatsapp } = req.body;
+    const { foto, dataProva } = req.body;
+    const bio = textoSeguro(req.body.bio, 1000);
+    const interesses = textoSeguro(req.body.interesses, 500);
+    const provaAlvo = textoSeguro(req.body.provaAlvo, 60);
+    const nome = textoSeguro(req.body.nome, 120);
+    const telefone = textoSeguro(req.body.telefone, 30);
+    const whatsapp = textoSeguro(req.body.whatsapp, 30);
 
-    if (foto && foto.length > 1_500_000) {
-      return res.status(400).json({ msg: "A imagem é muito grande. Escolha uma foto menor." });
+    // Só aceita imagem em data URI — impede "javascript:"/URLs externas no <img src>.
+    if (foto !== undefined && foto !== null && foto !== "") {
+      if (typeof foto !== "string" || !FOTO_VALIDA.test(foto)) {
+        return res.status(400).json({ msg: "Formato de imagem inválido. Envie PNG, JPEG, WebP ou GIF." });
+      }
+      if (foto.length > 1_500_000) {
+        return res.status(400).json({ msg: "A imagem é muito grande. Escolha uma foto menor." });
+      }
+    }
+    if ((telefone && !TELEFONE_VALIDO.test(telefone)) || (whatsapp && !TELEFONE_VALIDO.test(whatsapp))) {
+      return res.status(400).json({ msg: "Telefone inválido" });
+    }
+    if (dataProva && Number.isNaN(new Date(dataProva).getTime())) {
+      return res.status(400).json({ msg: "Data da prova inválida" });
     }
 
     const user = await User.findById(req.userId);
@@ -491,7 +599,7 @@ router.put("/perfil", exigirAuth, async (req, res) => {
       provaAlvo: provaAlvo !== undefined ? provaAlvo : user.perfil?.provaAlvo,
       dataProva: dataProva !== undefined ? (dataProva || null) : user.perfil?.dataProva
     };
-    if (nome !== undefined && nome.trim()) user.nome = nome.trim();
+    if (nome) user.nome = nome;
     if (telefone !== undefined) user.telefone = telefone;
     if (whatsapp !== undefined) user.whatsapp = whatsapp;
     await user.save();
@@ -514,8 +622,12 @@ router.put("/preferencias", exigirAuth, async (req, res) => {
     if (tema && ["light", "dark"].includes(tema)) user.preferencias.tema = tema;
     if (idioma && ["pt-BR", "fr"].includes(idioma)) user.preferencias.idioma = idioma;
     if (typeof exibirBarraTimer === "boolean") user.preferencias.exibirBarraTimer = exibirBarraTimer;
-    if (notificacoes && typeof notificacoes === "object") {
-      user.preferencias.notificacoes = { ...(user.preferencias.notificacoes || {}), ...notificacoes };
+    if (notificacoes && typeof notificacoes === "object" && !Array.isArray(notificacoes)) {
+      const atuais = user.preferencias.notificacoes || {};
+      for (const chave of ["lembretes", "novosDeveres", "correcoesDisponiveis", "novosConteudos", "promocoes"]) {
+        if (typeof notificacoes[chave] === "boolean") atuais[chave] = notificacoes[chave];
+      }
+      user.preferencias.notificacoes = atuais;
     }
     await user.save();
 
@@ -548,25 +660,36 @@ router.put("/dois-fatores", exigirAuth, async (req, res) => {
 
 // TROCA DE E-MAIL — exige confirmação no endereço novo antes de valer, para
 // evitar trocas indevidas caso a conta seja acessada por outra pessoa.
-router.post("/trocar-email", exigirAuth, async (req, res) => {
+router.post("/trocar-email", exigirAuth, limiteEnvioEmail, async (req, res) => {
   try {
-    const { novoEmail } = req.body;
-    if (!novoEmail) return res.status(400).json({ msg: "Informe o novo e-mail" });
-
-    const existente = await User.findOne({ email: novoEmail.toLowerCase() });
-    if (existente) return res.status(400).json({ msg: "Este e-mail já está em uso por outra conta." });
+    const { senhaAtual } = req.body;
+    if (!req.body.novoEmail) return res.status(400).json({ msg: "Informe o novo e-mail" });
+    const novoEmail = normalizarEmail(req.body.novoEmail);
+    if (!novoEmail) return res.status(400).json({ msg: "Informe um e-mail válido" });
+    if (typeof senhaAtual !== "string" || !senhaAtual) {
+      return res.status(400).json({ msg: "Confirme sua senha atual para trocar o e-mail." });
+    }
 
     const user = await User.findById(req.userId);
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
+    // Exige a senha: um token de sessão roubado sozinho não pode transferir a conta.
+    if (senhaAtual.length > SENHA_MAX || !(await bcrypt.compare(senhaAtual, user.senha))) {
+      registrar("login_falhou", req, { contexto: "troca de e-mail" }, { email: user.email });
+      return res.status(400).json({ msg: "Senha atual incorreta" });
+    }
+
+    if (ehEquipe(user)) registrar("alteracao_conta_staff", req, { acao: "pedido de troca de e-mail", novoEmail }, { email: user.email, userId: user._id });
+    const existente = await User.findOne({ email: novoEmail });
+    if (existente) return res.status(400).json({ msg: "Este e-mail já está em uso por outra conta." });
+
     const raw = crypto.randomBytes(32).toString("hex");
-    user.emailPendente = novoEmail.toLowerCase();
+    user.emailPendente = novoEmail;
     user.emailPendenteTokenHash = hashToken(raw);
     user.emailPendenteExpiraEm = new Date(Date.now() + 60 * 60 * 1000);
     await user.save();
 
-    const origem = process.env.SITE_URL || `${req.protocol}://${req.get("host")}`;
-    const link = `${origem}/api/auth/confirmar-troca-email/${raw}`;
+    const link = `${origemSite(req)}/api/auth/confirmar-troca-email/${raw}`;
     try {
       await enviarEmailConfirmacao(novoEmail, user.nome, link);
     } catch (mailErr) {
@@ -580,10 +703,15 @@ router.post("/trocar-email", exigirAuth, async (req, res) => {
   }
 });
 
-router.get("/confirmar-troca-email/:token", async (req, res) => {
+router.get("/confirmar-troca-email/:token", limiteToken, async (req, res) => {
   try {
+    if (!ehTokenHex(req.params.token)) return res.redirect("/configuracoes.html?trocaEmail=erro");
     const user = await User.findOne({ emailPendenteTokenHash: hashToken(req.params.token), emailPendenteExpiraEm: { $gt: new Date() } });
     if (!user) return res.redirect("/configuracoes.html?trocaEmail=erro");
+    // Outra conta pode ter ocupado o endereço depois do pedido — não sobrescreve.
+    if (await User.exists({ email: user.emailPendente, _id: { $ne: user._id } })) {
+      return res.redirect("/configuracoes.html?trocaEmail=erro");
+    }
 
     user.email = user.emailPendente;
     user.emailPendente = undefined;
@@ -601,7 +729,7 @@ router.get("/confirmar-troca-email/:token", async (req, res) => {
 // EXPORTAR DADOS DA CONTA (perfil + matrículas + pedidos) em JSON
 router.get("/exportar-dados", exigirAuth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select("-senha -refreshTokens -resetSenhaTokenHash -emailPendenteTokenHash");
+    const user = await User.findById(req.userId).select("-senha -refreshTokens -resetSenhaTokenHash -resetSenhaExpiraEm -emailPendenteTokenHash -tokenVerificacao");
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
     const [matriculas, pedidos] = await Promise.all([
@@ -621,7 +749,7 @@ router.get("/exportar-dados", exigirAuth, async (req, res) => {
 // administrativa (evita perda de dados por acesso indevido ou clique errado).
 router.post("/solicitar-exclusao", exigirAuth, async (req, res) => {
   try {
-    const { motivo } = req.body;
+    const motivo = textoSeguro(req.body.motivo, 1000);
     const user = await User.findById(req.userId);
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
@@ -636,19 +764,29 @@ router.post("/solicitar-exclusao", exigirAuth, async (req, res) => {
 });
 
 // ALTERAR SENHA
-router.put("/senha", exigirAuth, async (req, res) => {
+router.put("/senha", exigirAuth, limiteSenha, async (req, res) => {
   try {
     const { senhaAtual, novaSenha } = req.body;
     if (!senhaAtual || !novaSenha) return res.status(400).json({ msg: "Preencha todos os campos" });
-    if (novaSenha.length < 6) return res.status(400).json({ msg: "A nova senha deve ter pelo menos 6 caracteres" });
+    if (typeof senhaAtual !== "string" || senhaAtual.length > SENHA_MAX) return res.status(400).json({ msg: "Senha atual incorreta" });
+    const problemaSenha = erroSenha(novaSenha);
+    if (problemaSenha) return res.status(400).json({ msg: problemaSenha });
 
     const user = await User.findById(req.userId);
     if (!user) return res.status(404).json({ msg: "Usuário não encontrado" });
 
     const isMatch = await bcrypt.compare(senhaAtual, user.senha);
-    if (!isMatch) return res.status(400).json({ msg: "Senha atual incorreta" });
+    if (!isMatch) {
+      registrar("login_falhou", req, { contexto: "troca de senha" }, { email: user.email });
+      return res.status(400).json({ msg: "Senha atual incorreta" });
+    }
+    if (ehEquipe(user)) registrar("alteracao_conta_staff", req, { acao: "senha alterada" }, { email: user.email, userId: user._id });
 
     user.senha = await bcrypt.hash(novaSenha, 10);
+    // Encerra as sessões persistentes dos outros dispositivos (mantém a atual).
+    const rawAtual = req.cookies?.[REFRESH_COOKIE];
+    const hashAtual = typeof rawAtual === "string" ? hashToken(rawAtual) : null;
+    user.refreshTokens = (user.refreshTokens || []).filter(rt => rt.tokenHash === hashAtual);
     await user.save();
 
     res.json({ msg: "Senha alterada com sucesso!" });

@@ -3,6 +3,7 @@
 // ("Connection timeout" tanto na porta 465 quanto na 587) — a API por HTTPS não
 // sofre esse bloqueio.
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
+const { escaparHtml: esc } = require("../middleware/seguranca");
 
 const METODO_PAGAMENTO_LABEL = {
   cartao_credito: "Cartão de crédito",
@@ -47,14 +48,14 @@ function casco(conteudoHtml) {
 
 function botao(href, texto) {
   return `<p style="text-align:center; margin:32px 0;">
-    <a href="${href}" style="background:#ffd700; color:#16213a; padding:14px 34px; border-radius:30px; text-decoration:none; font-weight:bold; font-size:15px; display:inline-block;">${texto}</a>
+    <a href="${esc(href)}" style="background:#ffd700; color:#16213a; padding:14px 34px; border-radius:30px; text-decoration:none; font-weight:bold; font-size:15px; display:inline-block;">${texto}</a>
   </p>`;
 }
 
 function linhaRecibo(rotulo, valor, ultima) {
   return `<tr>
-    <td style="padding:10px 0; ${ultima ? "" : "border-bottom:1px solid #eee;"} color:#6b7385;">${rotulo}</td>
-    <td style="padding:10px 0; ${ultima ? "" : "border-bottom:1px solid #eee;"} text-align:right; font-weight:600;">${valor}</td>
+    <td style="padding:10px 0; ${ultima ? "" : "border-bottom:1px solid #eee;"} color:#6b7385;">${esc(rotulo)}</td>
+    <td style="padding:10px 0; ${ultima ? "" : "border-bottom:1px solid #eee;"} text-align:right; font-weight:600;">${esc(valor)}</td>
   </tr>`;
 }
 
@@ -86,7 +87,7 @@ async function enviarEmailConfirmacao(destinatario, nome, link) {
     nome,
     assunto: "Confirme seu cadastro - Francês na Mira",
     html: casco(`
-      <h2 style="margin-top:0;">Olá, ${nome}! 👋</h2>
+      <h2 style="margin-top:0;">Olá, ${esc(nome)}! 👋</h2>
       <p>Estamos muito felizes em ter você na nossa comunidade de estudantes de francês.</p>
       <p>Falta só um passo para ativar sua conta e começar a estudar:</p>
       ${botao(link, "Confirmar meu e-mail")}
@@ -101,9 +102,9 @@ async function enviarEmailMatriculaConfirmada(destinatario, nome, detalhes) {
     nome,
     assunto: "Matrícula confirmada - Francês na Mira",
     html: casco(`
-      <h2 style="margin-top:0;">Parabéns, ${nome}! 🎉</h2>
+      <h2 style="margin-top:0;">Parabéns, ${esc(nome)}! 🎉</h2>
       <p>Seu pagamento foi aprovado e sua matrícula está confirmada.</p>
-      <p style="background:#f6f4ee; border-radius:12px; padding:16px 18px;">${detalhes}</p>
+      <p style="background:#f6f4ee; border-radius:12px; padding:16px 18px;">${esc(detalhes)}</p>
       <p>Acesse sua área do aluno para ver todos os detalhes, horários e materiais.</p>
       ${botao(`${process.env.SITE_URL || ""}/minhas-matriculas.html`, "Ver minha matrícula")}
     `)
@@ -134,7 +135,7 @@ async function enviarEmailPagamentoAprovado(destinatario, nome, detalhes) {
     assunto: "Pagamento aprovado - Francês na Mira",
     html: casco(`
       <h2 style="margin-top:0;">Pagamento aprovado! 🎉</h2>
-      <p>Olá, ${nome}. Recebemos a confirmação do seu pagamento e sua assinatura já está ativa.</p>
+      <p>Olá, ${esc(nome)}. Recebemos a confirmação do seu pagamento e sua assinatura já está ativa.</p>
       <table role="presentation" style="width:100%; border-collapse:collapse; margin:24px 0; font-size:14px;">
         ${linhas}
       </table>
@@ -150,7 +151,7 @@ async function enviarEmailPagamentoRejeitado(destinatario, nome) {
     nome,
     assunto: "Pagamento não aprovado - Francês na Mira",
     html: casco(`
-      <h2 style="margin-top:0; color:#b33;">Olá, ${nome}</h2>
+      <h2 style="margin-top:0; color:#b33;">Olá, ${esc(nome)}</h2>
       <p>Infelizmente não conseguimos confirmar seu pagamento para a matrícula solicitada.</p>
       <p>Você pode tentar novamente com outro método de pagamento a qualquer momento.</p>
       ${botao(`${process.env.SITE_URL || ""}/matricula.html`, "Tentar novamente")}
@@ -164,7 +165,7 @@ async function enviarEmailRedefinicaoSenha(destinatario, nome, link) {
     nome,
     assunto: "Redefinição de senha - Francês na Mira",
     html: casco(`
-      <h2 style="margin-top:0;">Olá, ${nome}!</h2>
+      <h2 style="margin-top:0;">Olá, ${esc(nome)}!</h2>
       <p>Recebemos um pedido para redefinir a senha da sua conta.</p>
       ${botao(link, "Redefinir minha senha")}
       <p style="font-size:13px; color:#8892a6;">Este link expira em 1 hora e só pode ser usado uma vez. Se você não pediu essa redefinição, pode ignorar este e-mail com segurança — sua senha continua a mesma.</p>
@@ -178,14 +179,14 @@ async function enviarEmailReclamacao({ nome, email, assunto, mensagem }) {
   await enviarViaAPI({
     destinatario: process.env.EMAIL_USER,
     nome: "Equipe Francês na Mira",
-    assunto: `Reclame Aqui: ${assunto || "Nova mensagem"}`,
+    assunto: `Reclame Aqui: ${String(assunto || "Nova mensagem").replace(/[\r\n]+/g, " ").slice(0, 150)}`,
     html: casco(`
       <h2 style="margin-top:0;">Nova mensagem em Reclame Aqui</h2>
       <table role="presentation" style="width:100%; border-collapse:collapse; margin:16px 0; font-size:14px;">
         ${linhaRecibo("Nome", nome || "—")}
         ${linhaRecibo("E-mail", email || "—", true)}
       </table>
-      <p style="white-space:pre-wrap; background:#f6f4ee; border-radius:12px; padding:16px 18px;">${mensagem || ""}</p>
+      <p style="white-space:pre-wrap; background:#f6f4ee; border-radius:12px; padding:16px 18px;">${esc(mensagem || "")}</p>
     `)
   });
 }

@@ -2,10 +2,23 @@
 // Suficiente para um único processo Node; se o site crescer para múltiplas
 // instâncias, isso precisaria virar um pub/sub externo (ex.: Redis).
 const clientes = new Set();
+// Limites de conexões abertas — o stream é público e cada conexão fica viva
+// indefinidamente, então sem teto um único cliente poderia esgotar o servidor.
+const MAX_CLIENTES = 2000;
+const MAX_POR_IP = 10;
+const porIp = new Map();
 
-function registrarCliente(res) {
+// Retorna a função de remoção, ou null se o limite foi atingido.
+function registrarCliente(res, ip = "") {
+  const doIp = porIp.get(ip) || 0;
+  if (clientes.size >= MAX_CLIENTES || doIp >= MAX_POR_IP) return null;
   clientes.add(res);
-  return () => clientes.delete(res);
+  porIp.set(ip, doIp + 1);
+  return () => {
+    if (!clientes.delete(res)) return;
+    const restante = (porIp.get(ip) || 1) - 1;
+    if (restante <= 0) porIp.delete(ip); else porIp.set(ip, restante);
+  };
 }
 
 function transmitir(evento, dados) {

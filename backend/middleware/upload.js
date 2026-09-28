@@ -4,6 +4,23 @@ const fs = require("fs");
 const crypto = require("crypto");
 
 const UPLOAD_ROOT = path.join(__dirname, "..", "uploads");
+
+// Params de rota viram nomes de pasta no disco — só aceita ObjectId (24 hex) ou
+// índice numérico, e confere que o caminho final continua dentro de UPLOAD_ROOT.
+// Impede path traversal ("../../") gravando arquivos fora da pasta de uploads.
+function pastaUpload(...partes) {
+  for (const parte of partes.slice(1)) {
+    if (!/^[a-f0-9]{24}$/i.test(String(parte)) && !/^\d{1,4}$/.test(String(parte)) && !/^[a-z]+$/.test(String(parte))) {
+      throw Object.assign(new Error("Parâmetro inválido."), { status: 400 });
+    }
+  }
+  const dir = path.resolve(UPLOAD_ROOT, ...partes.map(String));
+  if (!dir.startsWith(path.resolve(UPLOAD_ROOT) + path.sep)) {
+    throw Object.assign(new Error("Parâmetro inválido."), { status: 400 });
+  }
+  fs.mkdirSync(dir, { recursive: true });
+  return dir;
+}
 const TMP_DIR = path.join(UPLOAD_ROOT, "tmp");
 fs.mkdirSync(TMP_DIR, { recursive: true });
 
@@ -39,9 +56,7 @@ const uploadOriginal = multer({
 const uploadCorrigido = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-      const dir = path.join(UPLOAD_ROOT, "producoes", req.params.id);
-      fs.mkdirSync(dir, { recursive: true });
-      cb(null, dir);
+      try { cb(null, pastaUpload("producoes", req.params.id)); } catch (err) { cb(err); }
     },
     filename: (req, file, cb) => cb(null, "corrigido-" + Date.now() + (TIPOS_ACEITOS[file.mimetype] || ""))
   }),
@@ -50,9 +65,8 @@ const uploadCorrigido = multer({
 });
 
 function moverParaPastaDefinitiva(tempPath, producaoId, prefixo, nomeOriginal, mimetype) {
-  const dir = path.join(UPLOAD_ROOT, "producoes", String(producaoId));
-  fs.mkdirSync(dir, { recursive: true });
-  const ext = TIPOS_ACEITOS[mimetype] || path.extname(nomeOriginal) || "";
+  const dir = pastaUpload("producoes", String(producaoId));
+  const ext = TIPOS_ACEITOS[mimetype] || "";
   const destino = path.join(dir, prefixo + "-" + Date.now() + ext);
   fs.renameSync(tempPath, destino);
   return destino;
@@ -63,10 +77,17 @@ function moverParaPastaDefinitiva(tempPath, producaoId, prefixo, nomeOriginal, m
 function comTratamentoDeErro(middlewareMulter) {
   return (req, res, next) => {
     middlewareMulter(req, res, err => {
-      if (err) return res.status(400).json({ msg: err.message || "Erro ao enviar arquivo." });
+      if (err) {
+        // Pasta inválida = tentativa de path traversal; o resto é arquivo fora das regras.
+        const traversal = err.message === "Parâmetro inválido.";
+        require("../utils/monitorSeguranca").registrar(traversal ? "path_traversal" : "upload_rejeitado", req, {
+          motivo: err.code || err.message, nomeArquivo: String(req.file?.originalname || "").slice(0, 100)
+        });
+        return res.status(400).json({ msg: err.message || "Erro ao enviar arquivo." });
+      }
       next();
     });
   };
 }
 
-module.exports = { uploadOriginal, uploadCorrigido, moverParaPastaDefinitiva, comTratamentoDeErro, UPLOAD_ROOT };
+module.exports = { uploadOriginal, uploadCorrigido, moverParaPastaDefinitiva, comTratamentoDeErro, UPLOAD_ROOT, pastaUpload };

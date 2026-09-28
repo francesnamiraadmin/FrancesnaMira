@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+  <script src="js/htmlSeguro.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
 <title>Configurações - Francês na Mira</title>
@@ -152,6 +153,10 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
       <div class="campo">
         <label for="novoEmailInput" data-i18n="config.perfil.novoEmail">Novo e-mail</label>
         <input type="email" id="novoEmailInput">
+      </div>
+      <div class="campo">
+        <label for="senhaTrocaEmailInput" data-i18n="config.perfil.senhaParaTrocarEmail">Senha atual</label>
+        <input type="password" id="senhaTrocaEmailInput" autocomplete="current-password">
       </div>
       <div style="display:flex; align-items:flex-end;">
         <button class="dash-btn secundario" id="trocarEmailBtn" style="width:100%;" data-i18n="config.perfil.enviarConfirmacao">Enviar confirmação</button>
@@ -304,11 +309,13 @@ document.getElementById('trocarEmailBtn').addEventListener('click', async () => 
   const btn = document.getElementById('trocarEmailBtn');
   const msg = document.getElementById('trocarEmailMsg');
   const novoEmail = document.getElementById('novoEmailInput').value.trim();
-  if (!novoEmail) return;
+  const senhaAtual = document.getElementById('senhaTrocaEmailInput').value;
+  if (!novoEmail || !senhaAtual) return;
   btn.disabled = true;
   msg.style.color = 'var(--text)'; msg.textContent = window.I18n.t('common.enviando');
   try {
-    const res = await fetch('/api/auth/trocar-email', { method: 'POST', headers: authHeadersJson(), body: JSON.stringify({ novoEmail }) });
+    const res = await fetch('/api/auth/trocar-email', { method: 'POST', headers: authHeadersJson(), body: JSON.stringify({ novoEmail, senhaAtual }) });
+    document.getElementById('senhaTrocaEmailInput').value = '';
     const data = await res.json();
     msg.style.color = res.ok ? 'var(--success-text)' : 'var(--danger-text)';
     msg.textContent = data.msg;

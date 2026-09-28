@@ -2,7 +2,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
-const { comTratamentoDeErro, UPLOAD_ROOT } = require("./upload");
+const { comTratamentoDeErro, pastaUpload } = require("./upload");
 
 // Mesmo whitelist de uploadAulas.js (TIPOS_MATERIAL) — é o único lugar do
 // projeto que já aceitava áudio e zip, necessários pra entrega de produção
@@ -25,11 +25,9 @@ const TIPOS_ENTREGA = {
 const uploadEntregaDever = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-      const dir = path.join(UPLOAD_ROOT, "deveres", req.params.deverId, req.params.index);
-      fs.mkdirSync(dir, { recursive: true });
-      cb(null, dir);
+      try { cb(null, pastaUpload("deveres", req.params.deverId, req.params.index)); } catch (err) { cb(err); }
     },
-    filename: (req, file, cb) => cb(null, crypto.randomUUID() + (TIPOS_ENTREGA[file.mimetype] || path.extname(file.originalname) || ""))
+    filename: (req, file, cb) => cb(null, crypto.randomUUID() + (TIPOS_ENTREGA[file.mimetype] || ""))
   }),
   fileFilter: (req, file, cb) => {
     if (!TIPOS_ENTREGA[file.mimetype]) return cb(new Error("Formato não aceito para entrega de dever de casa."));

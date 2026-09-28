@@ -6,6 +6,7 @@ const Disponibilidade = require("../models/disponibilidade");
 const User = require("../models/user");
 const { exigirAuth, exigirProfessor } = require("../middleware/auth");
 const { registrarCliente, transmitir } = require("../utils/sse");
+const { registrar } = require("../utils/monitorSeguranca");
 
 const HOLD_MINUTOS = 10;
 
@@ -15,6 +16,11 @@ function podeGerenciar(req, slotProfessorId) {
 
 // ===================== SSE: ATUALIZAÇÃO EM TEMPO REAL =====================
 router.get("/stream", (req, res) => {
+  const remover = registrarCliente(res, req.ip);
+  if (!remover) {
+    registrar("conexoes_excessivas", req, { recurso: "stream de disponibilidade" });
+    return res.status(429).json({ msg: "Muitas conexões abertas." });
+  }
   res.writeHead(200, {
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-cache",
@@ -22,7 +28,6 @@ router.get("/stream", (req, res) => {
     "X-Accel-Buffering": "no"
   });
   res.write("retry: 3000\n\n");
-  const remover = registrarCliente(res);
   const heartbeat = setInterval(() => res.write(": ping\n\n"), 25000);
   req.on("close", () => { clearInterval(heartbeat); remover(); });
 });

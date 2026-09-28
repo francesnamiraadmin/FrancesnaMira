@@ -10,6 +10,14 @@ const { exigirAuth, exigirProfessor } = require("../middleware/auth");
 const { usuarioTemAcesso } = require("../middleware/acessoCurso");
 const { uploadOriginal, uploadCorrigido, moverParaPastaDefinitiva, comTratamentoDeErro } = require("../middleware/upload");
 const { transmitir } = require("../utils/sse");
+const { validarIds, textoSeguro, ehObjectId } = require("../middleware/seguranca");
+
+const MAX_TEXTO_PRODUCAO = 50000;
+
+// Ids da URL também viram pastas de upload — só aceita ObjectId válido.
+for (const nome of ["id"]) {
+  router.param(nome, (req, res, next, valor) => (ehObjectId(valor) ? next() : res.status(400).json({ msg: "Identificador inválido." })));
+}
 
 function gerarProtocolo() {
   const ano = new Date().getFullYear();
@@ -28,6 +36,9 @@ function contarPalavras(texto) {
 // causa da entitlement do módulo avulso. O fluxo de auto-atendimento (POST / e
 // POST /:id/reenviar aqui embaixo) sempre passa pela checagem normal.
 async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAluno, file, origemId, duracaoSegundos, pularChecagemAcesso }) {
+  if (textoDigitado !== undefined && typeof textoDigitado !== "string") throw { status: 400, msg: "Texto inválido." };
+  if (textoDigitado && textoDigitado.length > MAX_TEXTO_PRODUCAO) throw { status: 400, msg: "Seu texto é longo demais." };
+  observacoesAluno = textoSeguro(observacoesAluno, 2000);
   const tema = await Tema.findById(temaId);
   if (!tema || !tema.ativo) throw { status: 404, msg: "Tema não encontrado." };
 
@@ -103,7 +114,9 @@ router.post("/", exigirAuth, comTratamentoDeErro(uploadOriginal.single("arquivo"
   const limparTemp = () => { if (req.file) fs.unlink(req.file.path, () => {}); };
   try {
     const { temaId, textoDigitado, observacoesAluno, duracaoSegundos } = req.body;
-    if (!temaId) { limparTemp(); return res.status(400).json({ msg: "Selecione um tema." }); }
+    if (!temaId || typeof temaId !== "string" || !/^[a-f0-9]{24}$/i.test(temaId)) {
+      limparTemp(); return res.status(400).json({ msg: "Selecione um tema." });
+    }
 
     const producao = await montarNovaProducao({
       userId: req.userId, temaId, textoDigitado, observacoesAluno, file: req.file, duracaoSegundos
@@ -242,8 +255,8 @@ router.get("/:id/arquivo/:tipo", exigirAuth, async (req, res) => {
 // ===================== MENSAGENS =====================
 router.post("/:id/mensagens", exigirAuth, async (req, res) => {
   try {
-    const { texto } = req.body;
-    if (!texto?.trim()) return res.status(400).json({ msg: "Escreva uma mensagem." });
+    const texto = textoSeguro(req.body.texto, 5000);
+    if (!texto) return res.status(400).json({ msg: "Escreva uma mensagem." });
 
     const producao = await Producao.findById(req.params.id);
     if (!producao) return res.status(404).json({ msg: "Produção não encontrada." });
@@ -329,19 +342,22 @@ router.put("/:id/avaliacao", exigirAuth, exigirProfessor, async (req, res) => {
 });
 
 // ===================== PROFESSOR: DEVOLVER CORRIGIDO =====================
-router.post("/:id/corrigir", exigirAuth, exigirProfessor, comTratamentoDeErro(uploadCorrigido.single("arquivo")), async (req, res) => {
+router.post("/:id/corrigir", exigirAuth, exigirProfessor, validarIds("id"), comTratamentoDeErro(uploadCorrigido.single("arquivo")), async (req, res) => {
+  const limparArquivo = () => { if (req.file) fs.unlink(req.file.path, () => {}); };
   try {
     const producao = await Producao.findById(req.params.id);
-    if (!producao) return res.status(404).json({ msg: "Produção não encontrada." });
+    if (!producao) { limparArquivo(); return res.status(404).json({ msg: "Produção não encontrada." }); }
     if (producao.professorId?.toString() !== req.userId && req.userRole !== "admin") {
+      limparArquivo();
       return res.status(403).json({ msg: "Esta produção não está atribuída a você." });
     }
 
     let avaliacao;
-    try { avaliacao = JSON.parse(req.body.avaliacao || "{}"); }
-    catch { return res.status(400).json({ msg: "Avaliação inválida." }); }
+    try { avaliacao = JSON.parse(typeof req.body.avaliacao === "string" ? req.body.avaliacao : "{}"); }
+    catch { limparArquivo(); return res.status(400).json({ msg: "Avaliação inválida." }); }
 
-    if (!avaliacao.criterios?.length || avaliacao.notaTotal === undefined) {
+    if (!avaliacao || typeof avaliacao !== "object" || !Array.isArray(avaliacao.criterios) || !avaliacao.criterios.length || avaliacao.notaTotal === undefined) {
+      limparArquivo();
       return res.status(400).json({ msg: "Preencha a avaliação completa antes de devolver." });
     }
 

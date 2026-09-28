@@ -10,8 +10,16 @@ const { uploadEntregaDever, comTratamentoDeErro } = require("../middleware/uploa
 const { gerarSemanasPendentes, atualizarSemanasDoAluno, statusDever, enriquecerDever } = require("../utils/gerarDeveres");
 const { montarNovaProducao } = require("./producoes");
 const { transmitir } = require("../utils/sse");
+const { ehObjectId } = require("../middleware/seguranca");
 
 router.use(exigirAuth);
+
+// Ids e índices de atividade chegam na URL e são usados para indexar arrays e
+// montar pastas de upload — só aceita ObjectId / inteiro pequeno.
+for (const nome of ["id", "deverId", "alunoId"]) {
+  router.param(nome, (req, res, next, valor) => (ehObjectId(valor) ? next() : res.status(400).json({ msg: "Identificador inválido." })));
+}
+router.param("index", (req, res, next, valor) => (/^\d{1,3}$/.test(valor) ? next() : res.status(400).json({ msg: "Índice inválido." })));
 
 // Preenche as referências dentro de atividades.conteudo (tema/aula/módulo) com
 // um título legível em vez do ObjectId cru, pro aluno/admin verem o nome real.

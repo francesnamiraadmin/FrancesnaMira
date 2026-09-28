@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { ehObjectId } = require("../middleware/seguranca");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const Modulo = require("../models/modulo");
@@ -10,6 +11,11 @@ const { exigirAuth, exigirAdmin } = require("../middleware/auth");
 const { uploadVideo, uploadThumbnail, uploadMaterial, comTratamentoDeErro } = require("../middleware/uploadAulas");
 
 router.use(exigirAuth, exigirAdmin);
+
+// Ids da URL também viram pastas de upload — só aceita ObjectId válido.
+for (const nome of ["id", "materialId"]) {
+  router.param(nome, (req, res, next, valor) => (ehObjectId(valor) ? next() : res.status(400).json({ msg: "Identificador inválido." })));
+}
 
 // ===================== MÓDULOS =====================
 router.get("/modulos", async (req, res) => {

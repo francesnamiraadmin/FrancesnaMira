@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+  <script src="js/htmlSeguro.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
 <title>Cadastro - Francês na Mira</title>
@@ -156,11 +157,11 @@
       </div>
       <div class="field">
         <label for="senha">Senha</label>
-        <input type="password" id="senha" placeholder="Mínimo 6 caracteres" minlength="6" required>
+        <input type="password" id="senha" placeholder="Mínimo 8 caracteres" minlength="8" maxlength="128" required>
       </div>
       <div class="field">
         <label for="confirmarSenha">Confirmar senha</label>
-        <input type="password" id="confirmarSenha" placeholder="Repita a senha" minlength="6" required>
+        <input type="password" id="confirmarSenha" placeholder="Repita a senha" minlength="8" maxlength="128" required>
       </div>
       <button type="submit">Cadastrar</button>
     </form>

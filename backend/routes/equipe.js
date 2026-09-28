@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { escaparRegex } = require("../middleware/seguranca");
 const User = require("../models/user");
 const Producao = require("../models/producao");
 const Matricula = require("../models/matricula");
@@ -66,11 +67,12 @@ router.get("/alunos", async (req, res) => {
 
     const filtro = { role: "aluno" };
     if (busca) {
+      const termo = escaparRegex(String(busca));
       filtro.$or = [
-        { nome: { $regex: busca, $options: "i" } },
-        { email: { $regex: busca, $options: "i" } },
-        { telefone: { $regex: busca, $options: "i" } },
-        { whatsapp: { $regex: busca, $options: "i" } }
+        { nome: { $regex: termo, $options: "i" } },
+        { email: { $regex: termo, $options: "i" } },
+        { telefone: { $regex: termo, $options: "i" } },
+        { whatsapp: { $regex: termo, $options: "i" } }
       ];
     }
 

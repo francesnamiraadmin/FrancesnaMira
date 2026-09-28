@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+  <script src="js/htmlSeguro.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Segurança (Admin) - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --azul: #2563eb; --azul-escuro: #1e40af; --azul-claro: #eff6ff; --azul-hover: #1d4ed8;
+  --cinza-50: #f8fafc; --cinza-100: #f1f5f9; --cinza-200: #e2e8f0; --cinza-300: #cbd5e1;
+  --cinza-400: #94a3b8; --cinza-600: #475569; --cinza-800: #1e293b; --branco: #ffffff;
+  --verde: #16a34a; --verde-bg: #f0fdf4; --amarelo: #d97706; --amarelo-bg: #fffbeb;
+  --laranja: #ea580c; --laranja-bg: #fff7ed;
+  --vermelho: #dc2626; --vermelho-bg: #fef2f2; --roxo: #7c3aed; --roxo-bg: #f5f3ff;
+  --sombra: 0 1px 3px rgba(15,23,42,0.08), 0 8px 24px rgba(15,23,42,0.06); --radius: 16px;
+}
+[data-theme="dark"] {
+  --branco: #1e2433; --cinza-50: #161b28; --cinza-100: #232a3b; --cinza-200: #2d3548;
+  --cinza-300: #3a4358; --cinza-400: #4b5568; --cinza-600: #9aa5bd; --cinza-800: #e8ecf5;
+  --azul: #3b82f6; --azul-escuro: #2563eb; --azul-claro: rgba(59,130,246,0.18); --azul-hover: #60a5fa;
+  --verde: #22c55e; --verde-bg: rgba(34,197,94,0.16);
+  --vermelho: #f87171; --vermelho-bg: rgba(248,113,113,0.16);
+  --amarelo: #fbbf24; --amarelo-bg: rgba(251,191,36,0.16);
+  --laranja: #fb923c; --laranja-bg: rgba(251,146,60,0.16);
+  --roxo: #a78bfa; --roxo-bg: rgba(167,139,250,0.16);
+}
+body { font-family: 'Poppins', sans-serif; background: var(--cinza-50); color: var(--cinza-800); min-height: 100vh; }
+header { font-family: 'Playfair Display', serif; font-size: 2.2rem; text-align: center; padding: 22px; background: var(--branco); border-bottom: 1px solid var(--cinza-200); }
+header a { color: var(--azul-escuro); text-decoration: none; }
+.wrap { max-width: 1150px; margin: 0 auto; padding: 30px 16px 100px; }
+.painel-header { background: linear-gradient(135deg, #7f1d1d, #b91c1c); color: white; border-radius: var(--radius); padding: 26px 32px; margin-bottom: 24px; box-shadow: var(--sombra); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+.painel-header h1 { font-family: 'Playfair Display', serif; font-size: 1.8rem; }
+.painel-header p { opacity: 0.9; font-size: 0.9rem; margin-top: 4px; }
+.btn { padding: 10px 22px; border-radius: 30px; border: none; background: var(--azul); color: white; font-weight: 700; cursor: pointer; font-size: 0.88rem; font-family: inherit; }
+.btn:hover { background: var(--azul-hover); }
+.btn:disabled { opacity: 0.6; cursor: default; }
+.btn.secundario { background: var(--branco); color: var(--cinza-600); border: 1px solid var(--cinza-300); }
+.btn.perigo { background: var(--vermelho); }
+.btn.pequeno { padding: 5px 12px; font-size: 0.75rem; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 22px; }
+.kpi { background: var(--branco); border: 1px solid var(--cinza-200); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--sombra); }
+.kpi .valor { font-size: 1.9rem; font-weight: 700; line-height: 1.1; }
+.kpi .rotulo { font-size: 0.8rem; color: var(--cinza-600); margin-top: 4px; }
+.kpi.critica .valor { color: var(--roxo); } .kpi.alta .valor { color: var(--vermelho); }
+.kpi.media .valor { color: var(--laranja); } .kpi.baixa .valor { color: var(--amarelo); }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; margin-bottom: 22px; }
+.card { background: var(--branco); border: 1px solid var(--cinza-200); border-radius: var(--radius); box-shadow: var(--sombra); padding: 20px 22px; margin-bottom: 18px; min-width: 0; }
+.card h2 { font-size: 1.05rem; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.card h2 .dica { font-size: 0.75rem; font-weight: 500; color: var(--cinza-600); }
+.linha-lista { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--cinza-100); font-size: 0.86rem; }
+.linha-lista:last-child { border-bottom: none; }
+.linha-lista .num { font-weight: 700; white-space: nowrap; }
+.mono { font-family: ui-monospace, Consolas, monospace; font-size: 0.82rem; word-break: break-all; }
+.canal { display: flex; justify-content: space-between; font-size: 0.86rem; padding: 6px 0; }
+.ok { color: var(--verde); font-weight: 600; } .nao { color: var(--cinza-600); }
+.filtros { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+select, input[type="text"], input[type="number"], input[type="email"] { padding: 8px 12px; border: 1px solid var(--cinza-300); border-radius: 10px; background: var(--branco); color: var(--cinza-800); font-family: inherit; font-size: 0.85rem; min-width: 0; }
+.form-linha { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.form-linha input { flex: 1 1 160px; }
+.evento { border-left: 4px solid var(--cinza-300); padding: 10px 14px; margin-bottom: 10px; background: var(--cinza-50); border-radius: 0 10px 10px 0; }
+.evento.critica { border-color: var(--roxo); } .evento.alta { border-color: var(--vermelho); }
+.evento.media { border-color: var(--laranja); } .evento.baixa { border-color: var(--amarelo); }
+.evento.novo { animation: destaque 2.5s ease-out; }
+@keyframes destaque { from { background: var(--vermelho-bg); } to { background: var(--cinza-50); } }
+.evento-topo { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 0.88rem; }
+.evento-meta { font-size: 0.78rem; color: var(--cinza-600); margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; }
+.evento details { margin-top: 6px; font-size: 0.78rem; }
+.evento pre { white-space: pre-wrap; word-break: break-all; background: var(--branco); padding: 8px; border-radius: 8px; margin-top: 4px; max-height: 220px; overflow: auto; }
+.pill { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 2px 9px; border-radius: 10px; text-transform: uppercase; }
+.pill.critica { background: var(--roxo-bg); color: var(--roxo); } .pill.alta { background: var(--vermelho-bg); color: var(--vermelho); }
+.pill.media { background: var(--laranja-bg); color: var(--laranja); } .pill.baixa { background: var(--amarelo-bg); color: var(--amarelo); }
+.pill.info { background: var(--azul-claro); color: var(--azul-escuro); }
+.pill.ativo { background: var(--vermelho-bg); color: var(--vermelho); } .pill.expirado { background: var(--cinza-100); color: var(--cinza-600); }
+.resposta { color: var(--vermelho); font-weight: 600; }
+.msg { font-size: 0.82rem; margin-top: 8px; min-height: 1em; }
+.tabela-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--cinza-100); vertical-align: top; }
+th { color: var(--cinza-600); font-weight: 600; }
+.vazio { color: var(--cinza-600); font-size: 0.86rem; padding: 10px 0; }
+.status-vivo { font-size: 0.78rem; opacity: 0.9; }
+footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
+.titulo-icone-inline { width: 1em; height: 1em; object-fit: contain; vertical-align: -0.14em; margin-right: 8px; }
+.titulo-icone-inline.pequeno { margin-right: 5px; }
+@media (max-width: 600px) { .painel-header { padding: 20px; } .painel-header h1 { font-size: 1.4rem; } }
+</style>
+</head>
+
+<body style="visibility:hidden;">
+<script>
+(async function protegerPagina() {
+  const token = localStorage.getItem('token');
+  function bloquear(msg) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; font-family:'Poppins',sans-serif; background:#f8fafc; color:#1e293b;">
+        <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; margin-bottom:16px; color:#1e40af;">Acesso restrito</h1>
+        <p style="font-size:1.1rem; max-width:480px; margin-bottom:28px; opacity:0.85;">${msg}</p>
+        <a href="login.html" style="padding:14px 28px; background:#2563eb; color:white; border-radius:30px; text-decoration:none; font-weight:700;">Entrar</a>
+      </div>`;
+    document.body.style.visibility = 'visible';
+  }
+  if (!token) return bloquear('Esta página é exclusiva para administradores.');
+  try {
+    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return bloquear('Sessão expirada. Entre novamente.');
+    const data = await res.json();
+    if (data.role !== 'admin') return bloquear('Esta página é exclusiva para administradores.');
+    document.body.style.visibility = 'visible';
+    window.acessoLiberado = true;
+    window.dispatchEvent(new Event('acesso-liberado'));
+  } catch (err) { bloquear('Erro ao verificar sua conta.'); }
+})();
+</script>
+
+<header><a href="index.html">Francês na Mira <img src="img/logo-mira.png" alt="" class="logo-mira-icone"></a></header>
+
+<div class="wrap">
+  <div class="painel-header">
+    <div>
+      <h1><img class="titulo-icone-inline" src="img/icones/lock.svg" alt="">Central de Segurança</h1>
+      <p>Tentativas de ataque detectadas, respostas automáticas e bloqueios. <span class="status-vivo" id="statusVivo">Atualizando…</span></p>
+    </div>
+    <div class="form-linha">
+      <button class="btn secundario" id="btnNotificacoes"><img class="titulo-icone-inline pequeno" src="img/icones/bell.svg" alt="">Ativar notificações</button>
+      <a href="minha-conta.html" class="btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Minha Conta</a>
+    </div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>Ataques mais frequentes <span class="dica">últimas 24h</span></h2>
+      <div id="porTipo"></div>
+    </div>
+    <div class="card">
+      <h2>IPs mais suspeitos <span class="dica">últimas 24h</span></h2>
+      <div id="topIps"></div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>Canais de alerta</h2>
+      <div id="canais"></div>
+      <div class="form-linha" style="margin-top:10px;">
+        <button class="btn pequeno" id="btnTeste">Enviar alerta de teste</button>
+      </div>
+      <div class="msg" id="msgTeste"></div>
+    </div>
+    <div class="card">
+      <h2>Ações de emergência</h2>
+      <p style="font-size:0.82rem; color:var(--cinza-600); margin-bottom:8px;">Bloquear um IP manualmente:</p>
+      <div class="form-linha">
+        <input type="text" id="bloqIp" placeholder="IP (ex.: 203.0.113.7)">
+        <input type="number" id="bloqHoras" placeholder="Horas" min="1" value="24" style="flex:0 0 90px;">
+        <button class="btn pequeno perigo" id="btnBloquear">Bloquear</button>
+      </div>
+      <p style="font-size:0.82rem; color:var(--cinza-600); margin:14px 0 8px;">Conta comprometida? Encerre todas as sessões dela:</p>
+      <div class="form-linha">
+        <input type="email" id="revEmail" placeholder="E-mail da conta">
+        <button class="btn pequeno perigo" id="btnRevogar">Encerrar sessões</button>
+      </div>
+      <div class="msg" id="msgAcoes"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>IPs bloqueados</h2>
+    <div class="tabela-wrap"><table>
+      <thead><tr><th>IP</th><th>Status</th><th>Até</th><th>Motivo</th><th>Reincidência</th><th></th></tr></thead>
+      <tbody id="bloqueios"></tbody>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>Eventos de segurança <span class="dica">atualiza a cada 20 s</span></h2>
+    <div class="filtros">
+      <select id="fSeveridade">
+        <option value="">Todas (exceto info)</option>
+        <option value="critica">Crítica</option>
+        <option value="alta">Alta</option>
+        <option value="media">Média</option>
+        <option value="baixa">Baixa</option>
+        <option value="info">Info (auditoria)</option>
+      </select>
+      <select id="fTipo"><option value="">Todos os tipos</option></select>
+      <input type="text" id="fIp" placeholder="Filtrar por IP">
+      <button class="btn pequeno secundario" id="btnFiltrar">Filtrar</button>
+    </div>
+    <div id="eventos"><div class="vazio">Carregando…</div></div>
+    <div class="form-linha" style="margin-top:10px;">
+      <button class="btn pequeno secundario" id="btnMais">Carregar mais</button>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/admin-seguranca.js"></script>
+</body>
+</html>

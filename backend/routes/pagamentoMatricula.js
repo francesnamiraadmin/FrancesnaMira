@@ -5,6 +5,13 @@ const Matricula = require("../models/matricula");
 const PagamentoMatricula = require("../models/pagamentoMatricula");
 const Disponibilidade = require("../models/disponibilidade");
 const { exigirAuth } = require("../middleware/auth");
+const { ehObjectId, limitarTaxa } = require("../middleware/seguranca");
+const { registrar } = require("../utils/monitorSeguranca");
+
+const limitePagamento = limitarTaxa({
+  nome: "pagamento", janelaMs: 15 * 60 * 1000, max: 15,
+  msg: "Muitas tentativas de pagamento. Aguarde alguns minutos e tente novamente."
+});
 const { transmitir } = require("../utils/sse");
 const { enviarEmailMatriculaConfirmada, enviarEmailPagamentoRejeitado } = require("../utils/mailer");
 
@@ -53,11 +60,12 @@ function podePagar(matricula, userId) {
 }
 
 // ===================== CARTÃO (crédito ou débito) =====================
-router.post("/cartao", exigirAuth, async (req, res) => {
+router.post("/cartao", exigirAuth, limitePagamento, async (req, res) => {
   try {
     const { matriculaId, token, paymentMethodId, installments, cpf, tipo } = req.body;
     if (!matriculaId || !token || !paymentMethodId || !cpf) return res.status(400).json({ msg: "Dados incompletos." });
 
+    if (!ehObjectId(matriculaId)) return res.status(400).json({ msg: "Matrícula inválida." });
     const matricula = await Matricula.findById(matriculaId);
     if (!matricula) return res.status(404).json({ msg: "Matrícula não encontrada." });
     const erro = podePagar(matricula, req.userId);
@@ -75,6 +83,7 @@ router.post("/cartao", exigirAuth, async (req, res) => {
     });
 
     const aprovado = resultado.status === "approved";
+    if (resultado.status === "rejected") registrar("pagamento_recusado", req, { motivo: resultado.status_detail });
     const metodoPagamento = tipo === "debito" ? "cartao_debito" : "cartao_credito";
 
     const pagamento = await PagamentoMatricula.create({
@@ -92,16 +101,17 @@ router.post("/cartao", exigirAuth, async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Erro ao processar pagamento", detalhe: err.message });
+    res.status(500).json({ msg: "Erro ao processar pagamento" });
   }
 });
 
 // ===================== PIX =====================
-router.post("/pix", exigirAuth, async (req, res) => {
+router.post("/pix", exigirAuth, limitePagamento, async (req, res) => {
   try {
     const { matriculaId, cpf } = req.body;
     if (!matriculaId || !cpf) return res.status(400).json({ msg: "Dados incompletos." });
 
+    if (!ehObjectId(matriculaId)) return res.status(400).json({ msg: "Matrícula inválida." });
     const matricula = await Matricula.findById(matriculaId);
     if (!matricula) return res.status(404).json({ msg: "Matrícula não encontrada." });
     const erro = podePagar(matricula, req.userId);
@@ -126,18 +136,19 @@ router.post("/pix", exigirAuth, async (req, res) => {
     res.json({ pagamentoId: pagamento._id, qrCodeBase64: txData?.qr_code_base64, copiaECola: txData?.qr_code });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Erro ao gerar Pix", detalhe: err.message });
+    res.status(500).json({ msg: "Erro ao gerar Pix" });
   }
 });
 
 // ===================== BOLETO =====================
-router.post("/boleto", exigirAuth, async (req, res) => {
+router.post("/boleto", exigirAuth, limitePagamento, async (req, res) => {
   try {
     const { matriculaId, cpf, cep, rua, numero, bairro, cidade, estado } = req.body;
     if (!matriculaId || !cpf || !cep || !rua || !numero || !bairro || !cidade || !estado) {
       return res.status(400).json({ msg: "Preencha todos os campos, incluindo o endereço (exigido pelo Mercado Pago para gerar o boleto)." });
     }
 
+    if (!ehObjectId(matriculaId)) return res.status(400).json({ msg: "Matrícula inválida." });
     const matricula = await Matricula.findById(matriculaId);
     if (!matricula) return res.status(404).json({ msg: "Matrícula não encontrada." });
     const erro = podePagar(matricula, req.userId);
@@ -168,7 +179,7 @@ router.post("/boleto", exigirAuth, async (req, res) => {
     res.json({ pagamentoId: pagamento._id, boletoUrl: resultado.transaction_details?.external_resource_url });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Erro ao gerar boleto", detalhe: err.message });
+    res.status(500).json({ msg: "Erro ao gerar boleto" });
   }
 });
 
@@ -202,8 +213,8 @@ router.get("/matricula/:matriculaId", exigirAuth, async (req, res) => {
 router.post("/webhook", async (req, res) => {
   try {
     const { type, data } = req.body;
-    if (type === "payment" && data?.id) {
-      const info = await payment.get({ id: data.id });
+    if (type === "payment" && data?.id && /^\d{1,20}$/.test(String(data.id))) {
+      const info = await payment.get({ id: String(data.id) });
       const novoStatus = info.status === "approved" ? "aprovado" : info.status === "rejected" ? "rejeitado" : "pendente";
 
       const pagamento = await PagamentoMatricula.findOneAndUpdate(

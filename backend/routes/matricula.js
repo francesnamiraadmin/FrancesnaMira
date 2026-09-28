@@ -6,14 +6,30 @@ const Disponibilidade = require("../models/disponibilidade");
 const Cupom = require("../models/cupom");
 const { exigirAuth } = require("../middleware/auth");
 const { transmitir } = require("../utils/sse");
+const { ehObjectId, normalizarEmail, textoSeguro } = require("../middleware/seguranca");
+
+// Pacotes de aula particular vendidos por este fluxo, com preço definido NO SERVIDOR.
+// Antes o preço vinha do cliente (pacote.preco), o que permitia matricular-se pagando
+// qualquer valor. Nenhuma página usa esse fluxo hoje; para reativá-lo, cadastre os
+// pacotes aqui (ex.: { id: "p10", nome: "10 aulas", horas: 10, periodicidade: "mensal", preco: 900 }).
+const PACOTES_PARTICULARES = [];
 
 // ===================== INICIAR MATRÍCULA (monta o carrinho) =====================
 router.post("/iniciar", exigirAuth, async (req, res) => {
   try {
-    const { tipo, turmaId, professorId, horarioIds, pacote, dadosPessoais, cupomCodigo } = req.body;
-    if (!tipo || !dadosPessoais?.nome || !dadosPessoais?.email || !dadosPessoais?.telefone) {
+    const { tipo, turmaId, professorId, horarioIds, pacote, cupomCodigo } = req.body;
+    const dp = req.body.dadosPessoais && typeof req.body.dadosPessoais === "object" ? req.body.dadosPessoais : {};
+    const dadosPessoais = {
+      nome: textoSeguro(dp.nome, 120), email: normalizarEmail(dp.email), telefone: textoSeguro(dp.telefone, 30),
+      objetivo: textoSeguro(dp.objetivo, 300), nivelAtual: textoSeguro(dp.nivelAtual, 30),
+      nivelDesejado: textoSeguro(dp.nivelDesejado, 30), prova: textoSeguro(dp.prova, 60),
+      dataExame: textoSeguro(dp.dataExame, 30), mensagem: textoSeguro(dp.mensagem, 2000)
+    };
+    if (!tipo || !dadosPessoais.nome || !dadosPessoais.email || !dadosPessoais.telefone) {
       return res.status(400).json({ msg: "Preencha os dados pessoais." });
     }
+    if (turmaId !== undefined && !ehObjectId(turmaId)) return res.status(400).json({ msg: "Turma inválida." });
+    if (professorId !== undefined && professorId !== null && !ehObjectId(professorId)) return res.status(400).json({ msg: "Professor inválido." });
 
     let precoOriginal = 0;
     const matriculaData = { alunoId: req.userId, tipo, dadosPessoais };
@@ -28,7 +44,9 @@ router.post("/iniciar", exigirAuth, async (req, res) => {
       matriculaData.professorId = turma.professorId;
     } else if (tipo === "particular") {
       if (!Array.isArray(horarioIds) || horarioIds.length === 0) return res.status(400).json({ msg: "Selecione ao menos um horário." });
-      if (!pacote?.preco) return res.status(400).json({ msg: "Selecione um pacote." });
+      if (horarioIds.length > 50 || !horarioIds.every(ehObjectId)) return res.status(400).json({ msg: "Horários inválidos." });
+      const pacoteServidor = PACOTES_PARTICULARES.find(p => p.id === pacote?.id);
+      if (!pacoteServidor) return res.status(400).json({ msg: "Selecione um pacote válido." });
 
       const slots = await Disponibilidade.find({ _id: { $in: horarioIds } });
       const validos = slots.length === horarioIds.length && slots.every(
@@ -37,10 +55,10 @@ router.post("/iniciar", exigirAuth, async (req, res) => {
       if (!validos) {
         return res.status(409).json({ msg: "Um ou mais horários não estão mais reservados para você. Selecione novamente." });
       }
-      precoOriginal = pacote.preco;
+      precoOriginal = pacoteServidor.preco;
       matriculaData.professorId = professorId;
       matriculaData.horarios = horarioIds;
-      matriculaData.pacote = { nome: pacote.nome, horas: pacote.horas, periodicidade: pacote.periodicidade };
+      matriculaData.pacote = { nome: pacoteServidor.nome, horas: pacoteServidor.horas, periodicidade: pacoteServidor.periodicidade };
     } else {
       return res.status(400).json({ msg: "Tipo de matrícula inválido." });
     }
@@ -48,7 +66,7 @@ router.post("/iniciar", exigirAuth, async (req, res) => {
     let desconto = 0;
     let cupomValido = null;
     if (cupomCodigo) {
-      const cupom = await Cupom.findOne({ codigo: cupomCodigo.toUpperCase(), ativo: true });
+      const cupom = await Cupom.findOne({ codigo: String(cupomCodigo).toUpperCase().slice(0, 50), ativo: true });
       if (cupom && (!cupom.validoAte || cupom.validoAte > new Date()) && (cupom.usoMaximo === null || cupom.usosAtuais < cupom.usoMaximo)) {
         desconto = Math.min(cupom.tipo === "percentual" ? precoOriginal * (cupom.valor / 100) : cupom.valor, precoOriginal);
         cupomValido = cupom;
@@ -84,8 +102,9 @@ router.post("/iniciar", exigirAuth, async (req, res) => {
 // ===================== VALIDAR CUPOM (preview, sem consumir uso) =====================
 router.post("/validar-cupom", exigirAuth, async (req, res) => {
   try {
-    const { codigo, precoOriginal } = req.body;
-    const cupom = await Cupom.findOne({ codigo: (codigo || "").toUpperCase(), ativo: true });
+    const codigo = String(req.body.codigo || "").toUpperCase().slice(0, 50);
+    const precoOriginal = Math.max(0, Number(req.body.precoOriginal) || 0);
+    const cupom = await Cupom.findOne({ codigo, ativo: true });
     if (!cupom || (cupom.validoAte && cupom.validoAte < new Date()) || (cupom.usoMaximo !== null && cupom.usosAtuais >= cupom.usoMaximo)) {
       return res.status(404).json({ msg: "Cupom inválido ou expirado." });
     }

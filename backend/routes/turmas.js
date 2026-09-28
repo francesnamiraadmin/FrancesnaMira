@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { textoSeguro, normalizarEmail, ehObjectId } = require("../middleware/seguranca");
 const Turma = require("../models/turma");
 const Matricula = require("../models/matricula");
 const { exigirAuth, exigirAdmin } = require("../middleware/auth");
@@ -44,10 +45,18 @@ router.get("/:id", exigirAuth, async (req, res) => {
 // Entrar na lista de espera de uma turma lotada
 router.post("/:id/lista-espera", exigirAuth, async (req, res) => {
   try {
-    const { nome, email, telefone } = req.body;
-    if (!nome || !email) return res.status(400).json({ msg: "Informe nome e e-mail." });
+    const nome = textoSeguro(req.body.nome, 120);
+    const email = normalizarEmail(req.body.email);
+    const telefone = textoSeguro(req.body.telefone, 30);
+    if (!nome || !email) return res.status(400).json({ msg: "Informe nome e um e-mail válido." });
+    if (!ehObjectId(req.params.id)) return res.status(400).json({ msg: "Turma inválida." });
     const turma = await Turma.findById(req.params.id);
     if (!turma) return res.status(404).json({ msg: "Turma não encontrada." });
+    // Evita duplicatas e crescimento ilimitado do documento da turma.
+    if (turma.listaEspera.some(e => e.email === email)) {
+      return res.json({ msg: "Você já está na lista de espera desta turma." });
+    }
+    if (turma.listaEspera.length >= 500) return res.status(409).json({ msg: "A lista de espera desta turma está cheia." });
     turma.listaEspera.push({ nome, email, telefone });
     await turma.save();
     res.json({ msg: "Você entrou na lista de espera. Avisaremos assim que houver vaga." });
