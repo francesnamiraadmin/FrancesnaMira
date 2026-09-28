@@ -1,0 +1,112 @@
+/* ===================== NAVBAR DO SITE — hover e dropdown =====================
+   Importado por css/theme.css. Cada página ainda tem o CSS antigo da navbar no próprio
+   <style> (carregado depois deste arquivo), por isso os seletores começam com
+   "html body nav" — especificidade suficiente para vencer "nav a:hover" e
+   ".dropdown a:hover" sem precisar editar as ~30 páginas. */
+
+/* ---- itens do topo: pílula suave + tracinho dourado centralizado ---- */
+html body nav .nav-item > a {
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+html body nav .nav-item > a::after {
+  left: 50%; bottom: 3px; width: 0; height: 3px; border-radius: 3px;
+  transform: translateX(-50%);
+  transition: width 0.25s ease;
+}
+html body nav .nav-item:hover > a,
+html body nav .nav-item:focus-within > a {
+  color: var(--text, #16213a);
+  background: color-mix(in srgb, var(--accent, #d9a300) 18%, transparent);
+}
+html body nav .nav-item:hover > a::after,
+html body nav .nav-item:focus-within > a::after { width: 22px; }
+html body nav a:focus-visible { outline: 2px solid var(--accent, #d9a300); outline-offset: 2px; }
+
+/* setinha indicando que o item abre um menu */
+html body nav .nav-item:has(> .dropdown) > a { padding-right: 32px; }
+html body nav .nav-item:has(> .dropdown) > a::before {
+  content: ""; position: absolute; right: 13px; top: 50%; width: 10px; height: 10px; margin-top: -5px;
+  background: currentColor; opacity: 0.65;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 3.5 5 7l3.5-3.5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 3.5 5 7l3.5-3.5' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform 0.25s ease;
+}
+html body nav .nav-item:hover > a::before,
+html body nav .nav-item:focus-within > a::before { transform: rotate(180deg); }
+
+/* ---- botão Entrar / conta ---- */
+html body nav a.login { transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; }
+html body nav a.login::after { display: none; }
+html body nav a.login:hover {
+  color: var(--accent-text, #0a0a0a);
+  background: var(--accent-hover, #b98700);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--accent, #d9a300) 40%, transparent);
+}
+
+/* ---- painel do dropdown ---- */
+html body nav .dropdown {
+  top: calc(100% + 10px);
+  min-width: 230px;
+  padding: 8px;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border, rgba(0,0,0,0.1));
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transform: translate(-50%, 8px) scale(0.98);
+  transform-origin: top center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+/* ponte invisível: o mouse atravessa o vão sem o menu fechar */
+html body nav .dropdown::before {
+  content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px;
+}
+html body nav .dropdown.show,
+html body nav .nav-item:focus-within > .dropdown,
+html body nav .login-wrapper:focus-within > .dropdown {
+  opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1);
+}
+
+/* ---- itens do dropdown: linha inteira destacada + barrinha dourada à esquerda ---- */
+html body nav .dropdown a {
+  position: relative;
+  display: block; width: 100%;
+  padding: 10px 14px 10px 18px;
+  border-radius: 10px;
+  font-size: 0.95rem; font-weight: 500;
+  text-align: left; white-space: nowrap;
+  color: var(--text, #16213a);
+  transition: background-color 0.15s ease, padding-left 0.15s ease;
+}
+html body nav .dropdown a::after { display: none; }
+html body nav .dropdown a::before {
+  content: ""; position: absolute; left: 7px; top: 50%; width: 3px; height: 0; border-radius: 3px;
+  background: var(--accent, #d9a300); transform: translateY(-50%);
+  transition: height 0.15s ease;
+}
+html body nav .dropdown a:hover,
+html body nav .dropdown a:focus-visible {
+  color: var(--text, #16213a);
+  background: color-mix(in srgb, var(--accent, #d9a300) 16%, transparent);
+  padding-left: 22px;
+  outline: none;
+}
+html body nav .dropdown a:hover::before,
+html body nav .dropdown a:focus-visible::before { height: 55%; }
+
+/* ---- dropdown de cursos: duas colunas com cabeçalho discreto ---- */
+html body nav .dropdown-cursos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(130px, 1fr));
+  gap: 0 8px;
+}
+html body nav .dropdown-cursos .coluna { display: flex; flex-direction: column; gap: 2px; }
+html body nav .dropdown-cursos strong {
+  margin: 0 0 4px; padding: 6px 14px 8px 18px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-muted, rgba(22,33,58,0.75));
+  border-bottom: 1px solid var(--glass-border, rgba(0,0,0,0.1));
+}

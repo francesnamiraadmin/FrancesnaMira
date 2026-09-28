@@ -2,6 +2,8 @@
    Variáveis compartilhadas pelas páginas com a identidade "glass" (gradiente azul/dourado).
    Trocar data-theme="light|dark" na <html> alterna a paleta inteira. */
 
+@import url("navbar.css");
+
 :root,
 :root[data-theme="light"] {
   --bg-gradient: linear-gradient(60deg, #b9cdec, #8fc2ec, #ecd493);

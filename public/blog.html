@@ -409,8 +409,8 @@ document.querySelectorAll('.nav-item').forEach(item => {
   const dropdown = item.querySelector('.dropdown');
   if (!dropdown) return;
   let timeout;
-  item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown.classList.add('show'); });
-  item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown.classList.remove('show'); }, 150); });
+  item.addEventListener('mouseenter', () => { clearTimeout(timeout); dropdown?.classList.add('show'); });
+  item.addEventListener('mouseleave', () => { timeout = setTimeout(() => { dropdown?.classList.remove('show'); }, 150); });
 });
 
 const reveals = document.querySelectorAll('.feature-row, .plan, .blog-card');
