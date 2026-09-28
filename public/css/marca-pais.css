@@ -1,11 +1,9 @@
 /* ===================== MARCA D'ÁGUA POR PAÍS — index.html =====================
    Mesmo símbolo discreto dos cards do hub (css/course-hub.css): Canadá (TCF) = folha
    de bordo, França (DELF/TEF/DALF) = faixa tricolor diagonal, Francês geral (A1–B2) =
-   Torre Eiffel. Aplicado aos cards .plan (classe marca-*) e aos cards de preço de cada
-   seção de curso (pelo id da seção). O ::before fica atrás do conteúdo via isolation,
-   sem overflow:hidden — o selo "Pack Prestige" dos cards de preço sai pra fora do card. */
+   Torre Eiffel. Aplicado aos cards de preço de cada seção de curso (pelo id da seção).
+   O ::before fica atrás do conteúdo via isolation, sem overflow:hidden — o selo "Pack Prestige" dos cards de preço sai pra fora do card. */
 
-.plan.marca-canada, .plan.marca-franca, .plan.marca-paris,
 #tcf .price-card-new,
 #delf .price-card-new, #tef .price-card-new, #dalf .price-card-new,
 #a1-b2-completo .price-card-new, #a1 .price-card-new, #a2 .price-card-new, #b1 .price-card-new, #b2 .price-card-new {
@@ -13,7 +11,6 @@
   isolation: isolate;
 }
 
-.plan.marca-canada::before, .plan.marca-franca::before, .plan.marca-paris::before,
 #tcf .price-card-new::before,
 #delf .price-card-new::before, #tef .price-card-new::before, #dalf .price-card-new::before,
 #a1-b2-completo .price-card-new::before, #a1 .price-card-new::before, #a2 .price-card-new::before,
@@ -24,71 +21,146 @@
 }
 
 /* Canadá — folha de bordo no canto inferior direito */
-.plan.marca-canada::before, #tcf .price-card-new::before {
-  right: 12px; bottom: 12px; width: 120px; height: 120px; opacity: 0.14;
+#tcf .price-card-new::before {
+  right: 12px; bottom: 12px; width: 120px; height: 120px; opacity: 0.2;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2015 -2000 4030 4030'%3E%3Cpath fill='%23d52b1e' d='m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z'/%3E%3C/svg%3E");
 }
-.plan.marca-canada:hover::before, #tcf .price-card-new:hover::before { transform: rotate(-8deg) scale(1.06); }
+#tcf .price-card-new:hover::before { transform: rotate(-8deg) scale(1.06); }
 
 /* França — faixa tricolor atravessando o canto inferior direito */
-.plan.marca-franca::before,
 #delf .price-card-new::before, #tef .price-card-new::before, #dalf .price-card-new::before {
-  inset: 0; border-radius: inherit; opacity: 0.2;
+  inset: 0; border-radius: inherit; opacity: 0.27;
   background: linear-gradient(135deg, transparent 0 74%, #0055a4 74% 77.5%, #fff 77.5% 81%, #ef4135 81% 84.5%, transparent 84.5%);
 }
 
 /* Francês geral — Torre Eiffel no canto inferior direito */
-.plan.marca-paris::before,
 #a1-b2-completo .price-card-new::before, #a1 .price-card-new::before, #a2 .price-card-new::before,
 #b1 .price-card-new::before, #b2 .price-card-new::before {
-  right: 14px; bottom: 10px; width: 101px; height: 161px; opacity: 0.13;
+  right: 14px; bottom: 10px; width: 101px; height: 161px; opacity: 0.19;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 160'%3E%3Cpath fill='%230055a4' d='M50 0 53 20h3l4 35h6l1 7h-4l9 38h8l1 8h-5l16 52H70q-20-40-40 0H8l16-52h-5l1-8h8l9-38h-4l1-7h6l4-35h3z'/%3E%3C/svg%3E");
 }
-.plan.marca-paris:hover::before,
 #a1-b2-completo .price-card-new:hover::before, #a1 .price-card-new:hover::before, #a2 .price-card-new:hover::before,
 #b1 .price-card-new:hover::before, #b2 .price-card-new:hover::before { transform: translateY(-4px) scale(1.05); }
-:root[data-theme="dark"] .plan.marca-paris::before,
-:root[data-theme="dark"] #a1-b2-completo .price-card-new::before, :root[data-theme="dark"] #a1 .price-card-new::before,
+:root[data-theme="dark"] :root[data-theme="dark"] #a1-b2-completo .price-card-new::before, :root[data-theme="dark"] #a1 .price-card-new::before,
 :root[data-theme="dark"] #a2 .price-card-new::before, :root[data-theme="dark"] #b1 .price-card-new::before,
-:root[data-theme="dark"] #b2 .price-card-new::before { filter: grayscale(1) brightness(5); opacity: 0.08; }
+:root[data-theme="dark"] #b2 .price-card-new::before { filter: grayscale(1) brightness(5); opacity: 0.12; }
 
 /* ---------- Container grande de cada curso (imagem + descrição + preços) ----------
-   Mesmo símbolo, em escala maior, no canto superior do .feature-container. */
+   Linguagem própria, diferente dos cards de preço: um brilho suave nas cores do país
+   no fundo, contorno fino em degradê da bandeira e um ornamento por país —
+   Canadá: ramo de folhas de bordo; França: fita-marcador tricolor pendurada no topo;
+   Francês geral: horizonte de Paris no rodapé. */
 #tcf > .feature-container,
-#delf > .feature-container, #tef > .feature-container, #dalf > .feature-container,
-#a1-b2-completo > .feature-container, #a1 > .feature-container, #a2 > .feature-container,
-#b1 > .feature-container, #b2 > .feature-container {
+#delf > .feature-container,
+#tef > .feature-container,
+#dalf > .feature-container,
+#a1-b2-completo > .feature-container,
+#a1 > .feature-container,
+#a2 > .feature-container,
+#b1 > .feature-container,
+#b2 > .feature-container {
   position: relative;
   isolation: isolate;
 }
 #tcf > .feature-container::before,
-#delf > .feature-container::before, #tef > .feature-container::before, #dalf > .feature-container::before,
-#a1-b2-completo > .feature-container::before, #a1 > .feature-container::before, #a2 > .feature-container::before,
-#b1 > .feature-container::before, #b2 > .feature-container::before {
-  content: ""; position: absolute; z-index: -1; pointer-events: none;
-  background-repeat: no-repeat; background-size: contain; background-position: center;
+#delf > .feature-container::before,
+#tef > .feature-container::before,
+#dalf > .feature-container::before,
+#a1-b2-completo > .feature-container::before,
+#a1 > .feature-container::before,
+#a2 > .feature-container::before,
+#b1 > .feature-container::before,
+#b2 > .feature-container::before,
+#tcf > .feature-container::after,
+#delf > .feature-container::after,
+#tef > .feature-container::after,
+#dalf > .feature-container::after,
+#a1-b2-completo > .feature-container::after,
+#a1 > .feature-container::after,
+#a2 > .feature-container::after,
+#b1 > .feature-container::after,
+#b2 > .feature-container::after {
+  content: ""; position: absolute; pointer-events: none;
 }
 
-/* Canadá — folha de bordo grande no canto superior direito */
+/* contorno em degradê (máscara recorta só a borda de 1.5px) */
+#tcf > .feature-container::after,
+#delf > .feature-container::after,
+#tef > .feature-container::after,
+#dalf > .feature-container::after,
+#a1-b2-completo > .feature-container::after,
+#a1 > .feature-container::after,
+#a2 > .feature-container::after,
+#b1 > .feature-container::after,
+#b2 > .feature-container::after {
+  inset: 0; border-radius: inherit; padding: 1.5px; z-index: 1;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+
+/* Canadá */
+#tcf > .feature-container {
+  background:
+    radial-gradient(ellipse 55% 45% at 100% 0%, rgba(213,43,30,0.16), transparent 70%),
+    radial-gradient(ellipse 40% 35% at 0% 100%, rgba(213,43,30,0.08), transparent 70%),
+    linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+}
+#tcf > .feature-container::after { background: linear-gradient(135deg, rgba(213,43,30,0.1) 20%, rgba(213,43,30,0.75) 70%, #d52b1e); }
 #tcf > .feature-container::before {
-  top: 28px; right: 32px; width: 240px; height: 240px; opacity: 0.1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2015 -2000 4030 4030'%3E%3Cpath fill='%23d52b1e' d='m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z'/%3E%3C/svg%3E");
+  z-index: -1; top: 18px; right: 22px; width: 300px; height: 260px; opacity: 0.3;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 260'%3E%3Cg fill='%23d52b1e'%3E%3Cpath transform='translate%28205 95%29 rotate%28-12%29 scale%280.03722%29' opacity='1' d='m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z'/%3E%3Cpath transform='translate%2875 60%29 rotate%2818%29 scale%280.01737%29' opacity='0.75' d='m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z'/%3E%3Cpath transform='translate%2895 185%29 rotate%28-28%29 scale%280.01191%29' opacity='0.6' d='m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z'/%3E%3Cpath transform='translate%28265 215%29 rotate%2824%29 scale%280.00993%29' opacity='0.5' d='m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z'/%3E%3Cpath transform='translate%2830 140%29 rotate%288%29 scale%280.00695%29' opacity='0.4' d='m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
 }
 
-/* França — faixa tricolor atravessando o canto superior esquerdo */
-#delf > .feature-container::before, #tef > .feature-container::before, #dalf > .feature-container::before {
-  top: 0; left: 0; width: 320px; height: 320px; opacity: 0.2; border-top-left-radius: inherit;
-  background: linear-gradient(135deg, transparent 0 20%, #0055a4 20% 25%, #fff 25% 30%, #ef4135 30% 35%, transparent 35%);
+/* França */
+#delf > .feature-container,
+#tef > .feature-container,
+#dalf > .feature-container {
+  background:
+    radial-gradient(ellipse 50% 45% at 0% 0%, rgba(0,85,164,0.16), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 100% 100%, rgba(239,65,53,0.13), transparent 70%),
+    linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
+}
+#delf > .feature-container::after,
+#tef > .feature-container::after,
+#dalf > .feature-container::after { background: linear-gradient(135deg, #0055a4, rgba(255,255,255,0.7) 50%, #ef4135); opacity: 0.7; }
+#delf > .feature-container::before,
+#tef > .feature-container::before,
+#dalf > .feature-container::before {
+  z-index: 2; top: 0; left: 56px; width: 42px; height: 118px; opacity: 0.8;
+  background: linear-gradient(90deg, #0055a4 0 33.33%, #f4f4f4 33.33% 66.66%, #ef4135 66.66%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
 }
 
-/* Francês geral — Torre Eiffel grande no canto superior direito */
-#a1-b2-completo > .feature-container::before, #a1 > .feature-container::before, #a2 > .feature-container::before,
-#b1 > .feature-container::before, #b2 > .feature-container::before {
-  top: 24px; right: 40px; width: 180px; height: 288px; opacity: 0.1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 160'%3E%3Cpath fill='%230055a4' d='M50 0 53 20h3l4 35h6l1 7h-4l9 38h8l1 8h-5l16 52H70q-20-40-40 0H8l16-52h-5l1-8h8l9-38h-4l1-7h6l4-35h3z'/%3E%3C/svg%3E");
+/* Francês geral */
+#a1-b2-completo > .feature-container,
+#a1 > .feature-container,
+#a2 > .feature-container,
+#b1 > .feature-container,
+#b2 > .feature-container {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(255,196,80,0.16), transparent 75%),
+    radial-gradient(ellipse 50% 40% at 100% 0%, rgba(0,85,164,0.12), transparent 70%),
+    linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2));
 }
-/* Seções .row-reverse têm a imagem à direita — a torre vai pro canto oposto. */
-#a2.row-reverse > .feature-container::before, #b2.row-reverse > .feature-container::before { right: auto; left: 40px; }
-:root[data-theme="dark"] #a1-b2-completo > .feature-container::before, :root[data-theme="dark"] #a1 > .feature-container::before,
-:root[data-theme="dark"] #a2 > .feature-container::before, :root[data-theme="dark"] #b1 > .feature-container::before,
-:root[data-theme="dark"] #b2 > .feature-container::before { filter: grayscale(1) brightness(5); opacity: 0.06; }
+#a1-b2-completo > .feature-container::after,
+#a1 > .feature-container::after,
+#a2 > .feature-container::after,
+#b1 > .feature-container::after,
+#b2 > .feature-container::after { background: linear-gradient(180deg, rgba(0,85,164,0.15), rgba(0,85,164,0.55) 60%, rgba(217,163,0,0.9)); }
+#a1-b2-completo > .feature-container::before,
+#a1 > .feature-container::before,
+#a2 > .feature-container::before,
+#b1 > .feature-container::before,
+#b2 > .feature-container::before {
+  z-index: -1; left: 0; right: 0; bottom: 0; height: 120px; opacity: 0.2;
+  border-radius: 0 0 32px 32px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cg fill='%230055a4'%3E%3Cpath d='M0 120 L0 98 L4 90 L36 90 L40 98 L40 120 L40 92 L68 92 L68 120 L68 91 L72 83 L92 83 L96 91 L96 120 L96 96 L100 88 L144 88 L148 96 L148 120 L148 89 L152 81 L190 81 L194 89 L194 120 L194 85 L198 77 L218 77 L222 85 L222 120 L222 91 L274 91 L274 120 L274 101 L278 93 L322 93 L326 101 L326 120 L326 70 L334 70 Q356 20 378 70 L386 70 L386 120 L386 93 L432 93 L432 120 L432 77 L460 77 L460 120 L460 89 L464 81 L496 81 L500 89 L500 120 L500 84 L504 76 L524 76 L528 84 L528 120 L528 99 L532 91 L558 91 L562 99 L562 120 L562 91 L566 83 L592 83 L596 91 L596 120 L596 84 L600 76 L620 76 L624 84 L624 120 L624 79 L658 79 L658 120 L658 78 L662 70 L700 70 L704 78 L704 120 L704 88 L708 80 L752 80 L756 88 L756 120 L756 77 L760 69 L786 69 L790 77 L790 120 L862 100 L866 92 L892 92 L896 100 L896 120 L896 79 L948 79 L948 120 L948 85 L994 85 L994 120 L994 99 L998 91 L1018 91 L1022 99 L1022 120 L1022 78 L1026 70 L1052 70 L1056 78 L1056 120 L1056 89 L1060 81 L1098 81 L1102 89 L1102 120 L1102 78 L1106 70 L1126 70 L1130 78 L1130 120 L1130 84 L1170 84 L1170 120 L1170 87 L1174 79 L1218 79 L1222 87 L1222 120 L1200 120 Z'/%3E%3Cpath transform='translate%28783 2%29 scale%280.74%29' d='M50 0 53 20h3l4 35h6l1 7h-4l9 38h8l1 8h-5l16 52H70q-20-40-40 0H8l16-52h-5l1-8h8l9-38h-4l1-7h6l4-35h3z'/%3E%3C/g%3E%3C/svg%3E") repeat-x bottom center / auto 120px;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+:root[data-theme="dark"] #a1-b2-completo > .feature-container::before,
+:root[data-theme="dark"] #a1 > .feature-container::before,
+:root[data-theme="dark"] #a2 > .feature-container::before,
+:root[data-theme="dark"] #b1 > .feature-container::before,
+:root[data-theme="dark"] #b2 > .feature-container::before { filter: grayscale(1) brightness(5); opacity: 0.1; }
