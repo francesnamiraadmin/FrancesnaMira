@@ -30,6 +30,11 @@
     B1: "Intermediário — autonomia para se comunicar.",
     B2: "Intermediário avançado — fluência ampliada."
   };
+  // Identidade visual do card desbloqueado (faixa + marca d'água em css/course-hub.css).
+  const PAIS = {
+    TCF: "canada", TEF: "canada", DELF: "franca", DALF: "franca",
+    A1: "paris", A2: "paris", B1: "paris", B2: "paris"
+  };
   // Mesma cascata de backend/middleware/acessoCurso.js e public/js/cursoContexto.js.
   const CASCATA_POR_TIER = {
     producao: ["Essentiel", "Avancé", "Excellence"],
@@ -55,7 +60,8 @@
 
   function renderCardDesbloqueado(curso, proximaPagina) {
     return `
-      <a class="curso-card desbloqueado" style="--curso-cor:${CORES[curso]};" href="${proximaPagina}?curso=${encodeURIComponent(curso)}">
+      <a class="curso-card desbloqueado pais-${PAIS[curso]}" style="--curso-cor:${CORES[curso]};" href="${proximaPagina}?curso=${encodeURIComponent(curso)}">
+        <span class="curso-bandeira" aria-hidden="true"></span>
         <div class="curso-card-topo">
           <div class="curso-badge">${curso}</div>
           <div class="curso-card-info">
