@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="img/logo-mira.png">
 <title>Minhas Inscrições - Francês na Mira</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/app-shell.css">
 
@@ -17,18 +17,141 @@ html { scroll-behavior: smooth; }
 body { font-family: 'Poppins', sans-serif; min-height: 100vh; }
 footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 20px; color: var(--text-muted); font-size: 0.9rem; }
 
-.tabela-wrap { overflow-x: auto; }
-table.inscricoes { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-table.inscricoes th {
-  text-align: left; padding: 12px 14px; color: var(--text-muted); font-size: 0.78rem;
-  text-transform: uppercase; letter-spacing: 0.03em; border-bottom: 1px solid var(--glass-border-strong);
+.secao-titulo {
+  font-family: 'Playfair Display', serif; font-size: 1.35rem; margin: 34px 0 14px;
+  display: flex; align-items: center; gap: 10px;
 }
-table.inscricoes td { padding: 14px; border-bottom: 1px solid var(--glass-hover); vertical-align: top; }
-table.inscricoes tr:last-child td { border-bottom: none; }
-.status-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
+.secao-titulo img { width: 1.1em; height: 1.1em; }
+.secao-titulo .contagem { font-family: 'Poppins', sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); background: var(--glass-hover); padding: 3px 10px; border-radius: 20px; }
+
+/* ---------- resumo ---------- */
+.resumo {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px;
+  background: var(--glass-border); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden;
+  margin-top: 22px; box-shadow: var(--shadow);
+}
+.resumo-item { background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2)); padding: 20px 22px; backdrop-filter: var(--glass-blur); }
+.resumo-item .rotulo { font-size: 0.74rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+.resumo-item .valor { font-size: 1.6rem; font-weight: 700; margin-top: 6px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.resumo-item .detalhe { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ---------- cards de curso ---------- */
+.cursos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+.curso-insc {
+  position: relative; display: flex; flex-direction: column;
+  background: linear-gradient(150deg, var(--glass-bg), var(--glass-bg-2));
+  border: 1px solid var(--glass-border); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.curso-insc:hover { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(0,0,0,0.22); }
+.curso-insc.expirado { filter: grayscale(0.5); opacity: 0.85; }
+.curso-topo {
+  position: relative; padding: 22px 22px 18px; display: flex; gap: 16px; align-items: center;
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--cor) 38%, transparent), transparent 65%),
+    linear-gradient(135deg, color-mix(in srgb, var(--cor) 16%, transparent), transparent);
+  border-bottom: 1px solid var(--glass-border);
+}
+.curso-sigla {
+  flex: 0 0 auto; width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: #fff;
+  background: linear-gradient(150deg, var(--cor), color-mix(in srgb, var(--cor) 55%, #000));
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--cor) 45%, transparent);
+}
+.curso-topo h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; line-height: 1.2; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 700; padding: 3px 11px; border-radius: 20px; letter-spacing: 0.02em; }
+.chip.tier-Essentiel { background: linear-gradient(135deg, #ffe27a, #f5c542); color: #5a3d00; }
+.chip.tier-Avancé { background: linear-gradient(135deg, #f1f5f9, #cbd5e1); color: #334155; }
+.chip.tier-Excellence { background: linear-gradient(135deg, #e0f2fe, #93c5fd); color: #0c4a6e; }
+.chip.prestige { background: linear-gradient(135deg, #a855f7, #7c3aed); color: #fff; }
+.chip.ok { background: var(--success-bg); color: var(--success-text); }
+.chip.off { background: var(--danger-bg); color: var(--danger-text); }
+
+.curso-corpo { padding: 18px 22px 22px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+.ciclo .linha { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 7px; }
+.ciclo .linha strong { color: var(--text); }
+.ciclo .barra { height: 8px; border-radius: 6px; background: var(--recessed); overflow: hidden; }
+.ciclo .barra span { display: block; height: 100%; border-radius: 6px; background: var(--cor); }
+.ciclo .barra.alerta span { background: var(--danger-text); }
+
+.detalhes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; font-size: 0.82rem; }
+.detalhes div span { display: block; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+.inclui { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: 0.84rem; }
+.inclui li { display: flex; align-items: center; gap: 8px; }
+.inclui li img { width: 1em; height: 1em; }
+.inclui li.nao { color: var(--text-muted); opacity: 0.75; }
+
+.acoes { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.btn-insc {
+  display: inline-flex; align-items: center; justify-content: center; padding: 9px 18px; border-radius: 30px;
+  font-weight: 700; font-size: 0.82rem; text-decoration: none; transition: transform 0.2s ease, background 0.2s ease;
+}
+.btn-insc.primario { background: var(--accent); color: var(--accent-text); }
+.btn-insc.primario:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-insc.secundario { border: 1px solid var(--glass-border-strong, var(--glass-border)); color: var(--text); }
+.btn-insc.secundario:hover { background: var(--glass-hover); }
+
+.vazio-card {
+  text-align: center; padding: 42px 24px; border-radius: 22px; border: 1px dashed var(--glass-border-strong, var(--glass-border));
+  background: linear-gradient(150deg, var(--glass-bg), var(--glass-bg-2));
+}
+.vazio-card img { width: 54px; height: 54px; opacity: 0.8; margin-bottom: 12px; }
+.vazio-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 6px; }
+.vazio-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 18px; }
+
+/* ---------- acessos ---------- */
+.acessos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.acesso {
+  display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 18px; text-decoration: none; color: var(--text);
+  background: linear-gradient(150deg, var(--glass-bg), var(--glass-bg-2)); border: 1px solid var(--glass-border);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.acesso:hover { transform: translateY(-2px); border-color: var(--accent); }
+.acesso .ic { width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: var(--glass-hover); flex: 0 0 auto; }
+.acesso .ic img { width: 26px; height: 26px; }
+.acesso strong { display: block; font-size: 0.92rem; }
+.acesso small { font-size: 0.76rem; font-weight: 700; }
+.acesso small.ok { color: var(--success-text); } .acesso small.off { color: var(--text-muted); }
+.acesso .seta { margin-left: auto; opacity: 0.5; font-size: 1.2rem; }
+
+/* ---------- histórico ---------- */
+.hist-topo { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.filtro-chips { display: inline-flex; background: var(--glass-hover); padding: 3px; border-radius: 12px; flex-wrap: wrap; }
+.filtro-chips button {
+  border: none; background: transparent; color: var(--text-muted); font-family: inherit; font-size: 0.8rem; font-weight: 600;
+  padding: 6px 13px; border-radius: 9px; cursor: pointer;
+}
+.filtro-chips button.ativo { background: var(--glass-strong); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
+.hist-total { font-size: 0.85rem; color: var(--text-muted); }
+.hist-total strong { color: var(--text); }
+.compras { display: flex; flex-direction: column; gap: 10px; }
+.compra {
+  display: grid; grid-template-columns: 62px 1fr auto; gap: 16px; align-items: center;
+  padding: 14px 18px; border-radius: 16px; border: 1px solid var(--glass-border);
+  background: linear-gradient(150deg, var(--glass-bg), var(--glass-bg-2));
+}
+.compra .data { text-align: center; line-height: 1.1; border-right: 1px solid var(--glass-border); padding-right: 14px; }
+.compra .data b { display: block; font-size: 1.35rem; font-family: 'Playfair Display', serif; }
+.compra .data span { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; }
+.compra .info strong { font-size: 0.95rem; }
+.compra .info .meta { font-size: 0.78rem; color: var(--text-muted); margin-top: 3px; display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.compra .lado { text-align: right; }
+.compra .lado .preco { font-weight: 700; font-size: 1rem; font-variant-numeric: tabular-nums; }
+.status-badge { display: inline-block; margin-top: 4px; padding: 3px 11px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; }
 .status-badge.aprovado { background: var(--success-bg); color: var(--success-text); }
 .status-badge.pendente { background: var(--warning-bg); color: var(--warning-text); }
 .status-badge.rejeitado, .status-badge.cancelado { background: var(--danger-bg); color: var(--danger-text); }
+.hist-vazio { text-align: center; color: var(--text-muted); padding: 26px; font-size: 0.9rem; }
+
+@media (max-width: 560px) {
+  .cursos-grid { grid-template-columns: 1fr; }
+  .compra { grid-template-columns: 52px 1fr; }
+  .compra .lado { grid-column: 2; text-align: left; display: flex; gap: 10px; align-items: center; }
+  .compra .lado .status-badge { margin-top: 0; }
+  .detalhes { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 
@@ -38,28 +161,37 @@ table.inscricoes tr:last-child td { border-bottom: none; }
 
 <div class="dash-header">
   <div class="dash-welcome">Minhas Inscrições</div>
-  <div class="dash-sub">Seu plano atual, produtos avulsos e todo o histórico de compras.</div>
+  <div class="dash-sub">Seus cursos, o que cada plano libera e todo o histórico de compras.</div>
 </div>
 
 <div class="dash-container">
 
-  <div class="dash-cards-row" id="planoAtualCards">
-    <div class="dash-summary-card"><div class="skeleton skeleton-line" style="width:60%"></div><div class="skeleton skeleton-block"></div></div>
+  <div class="resumo" id="resumo">
+    <div class="resumo-item"><div class="skeleton skeleton-line" style="width:50%"></div><div class="skeleton skeleton-line"></div></div>
+    <div class="resumo-item"><div class="skeleton skeleton-line" style="width:50%"></div><div class="skeleton skeleton-line"></div></div>
+    <div class="resumo-item"><div class="skeleton skeleton-line" style="width:50%"></div><div class="skeleton skeleton-line"></div></div>
+    <div class="resumo-item"><div class="skeleton skeleton-line" style="width:50%"></div><div class="skeleton skeleton-line"></div></div>
   </div>
 
-  <div class="dash-section-card">
-    <h2><img class="titulo-icone-inline" src="img/icones/scroll.svg" alt="">Histórico de compras</h2>
-    <div class="tabela-wrap">
-      <table class="inscricoes" id="tabelaHistorico">
-        <thead>
-          <tr><th>Data</th><th>Curso / Produto</th><th>Plano</th><th>Valor</th><th>Pagamento</th><th>Status</th><th>Incluído</th><th>Vencimento</th></tr>
-        </thead>
-        <tbody id="corpoHistorico">
-          <tr><td colspan="8"><div class="skeleton skeleton-line"></div></td></tr>
-        </tbody>
-      </table>
-    </div>
+  <h2 class="secao-titulo"><img src="img/icones/cap.svg" alt="">Meus cursos <span class="contagem" id="contagemCursos"></span></h2>
+  <div class="cursos-grid" id="cursosGrid">
+    <div class="curso-insc"><div class="curso-corpo"><div class="skeleton skeleton-block"></div></div></div>
   </div>
+
+  <h2 class="secao-titulo"><img src="img/icones/package.svg" alt="">Seus acessos</h2>
+  <div class="acessos" id="acessos"></div>
+
+  <h2 class="secao-titulo"><img src="img/icones/scroll.svg" alt="">Histórico de compras</h2>
+  <div class="hist-topo">
+    <div class="filtro-chips" id="filtroHist">
+      <button data-status="" class="ativo">Todas</button>
+      <button data-status="aprovado">Aprovadas</button>
+      <button data-status="pendente">Pendentes</button>
+      <button data-status="rejeitado">Recusadas</button>
+    </div>
+    <div class="hist-total" id="histTotal"></div>
+  </div>
+  <div class="compras" id="compras"><div class="skeleton skeleton-block"></div></div>
 
 </div>
 

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+  <script src="js/htmlSeguro.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Balanço Financeiro (Admin) - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --azul: #2563eb; --azul-escuro: #1e40af; --azul-claro: #eff6ff;
+  --cinza-50: #f8fafc; --cinza-100: #f1f5f9; --cinza-200: #e2e8f0; --cinza-300: #cbd5e1;
+  --cinza-400: #94a3b8; --cinza-600: #475569; --cinza-800: #1e293b; --branco: #ffffff;
+  --verde: #059669; --verde-bg: #ecfdf5; --amarelo: #b45309; --amarelo-bg: #fffbeb;
+  --vermelho: #dc2626; --vermelho-bg: #fef2f2; --roxo: #7c3aed; --roxo-bg: #f5f3ff;
+  --sombra: 0 1px 3px rgba(15,23,42,0.08), 0 8px 24px rgba(15,23,42,0.06); --radius: 16px;
+  /* série do gráfico principal */
+  --serie-recebido: #059669; --serie-receber: #f59e0b; --serie-qtd: #2563eb;
+}
+[data-theme="dark"] {
+  --branco: #1e2433; --cinza-50: #161b28; --cinza-100: #232a3b; --cinza-200: #2d3548;
+  --cinza-300: #3a4358; --cinza-400: #4b5568; --cinza-600: #9aa5bd; --cinza-800: #e8ecf5;
+  --azul: #3b82f6; --azul-escuro: #93c5fd; --azul-claro: rgba(59,130,246,0.18);
+  --verde: #34d399; --verde-bg: rgba(52,211,153,0.14);
+  --vermelho: #f87171; --vermelho-bg: rgba(248,113,113,0.16);
+  --amarelo: #fbbf24; --amarelo-bg: rgba(251,191,36,0.16);
+  --roxo: #a78bfa; --roxo-bg: rgba(167,139,250,0.16);
+  --serie-recebido: #34d399; --serie-receber: #fbbf24; --serie-qtd: #60a5fa;
+}
+body { font-family: 'Poppins', sans-serif; background: var(--cinza-50); color: var(--cinza-800); min-height: 100vh; }
+header { font-family: 'Playfair Display', serif; font-size: 2.2rem; text-align: center; padding: 22px; background: var(--branco); border-bottom: 1px solid var(--cinza-200); }
+header a { color: var(--azul-escuro); text-decoration: none; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 30px 16px 100px; }
+.titulo-icone-inline { width: 1em; height: 1em; object-fit: contain; vertical-align: -0.14em; margin-right: 8px; }
+
+.painel-header {
+  background: linear-gradient(135deg, #064e3b, #047857 55%, #0f766e); color: #fff;
+  border-radius: var(--radius); padding: 26px 32px; margin-bottom: 20px; box-shadow: var(--sombra);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+}
+.painel-header h1 { font-family: 'Playfair Display', serif; font-size: 1.9rem; }
+.painel-header p { opacity: 0.9; font-size: 0.9rem; margin-top: 4px; }
+.painel-header .acoes { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn { padding: 10px 20px; border-radius: 30px; border: none; background: var(--azul); color: #fff; font-weight: 700; cursor: pointer; font-size: 0.86rem; font-family: inherit; }
+.btn:hover { filter: brightness(1.08); }
+.btn.claro { background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.4); }
+.btn.claro:hover { background: rgba(255,255,255,0.26); }
+.btn.secundario { background: var(--branco); color: var(--cinza-600); border: 1px solid var(--cinza-300); }
+.btn.pequeno { padding: 6px 14px; font-size: 0.78rem; }
+
+/* ---- barra de filtros ---- */
+.filtros {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--branco); border: 1px solid var(--cinza-200); border-radius: var(--radius); box-shadow: var(--sombra);
+  padding: 14px 18px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: flex-end;
+}
+.filtro { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.filtro label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cinza-600); }
+.segmentado { display: inline-flex; background: var(--cinza-100); border-radius: 12px; padding: 3px; flex-wrap: wrap; }
+.segmentado button {
+  border: none; background: transparent; color: var(--cinza-600); font-family: inherit; font-size: 0.8rem; font-weight: 600;
+  padding: 6px 12px; border-radius: 9px; cursor: pointer; white-space: nowrap;
+}
+.segmentado button.ativo { background: var(--branco); color: var(--cinza-800); box-shadow: 0 1px 4px rgba(15,23,42,0.12); }
+select, input[type="date"], input[type="search"] {
+  padding: 7px 11px; border: 1px solid var(--cinza-300); border-radius: 10px; background: var(--branco);
+  color: var(--cinza-800); font-family: inherit; font-size: 0.82rem; min-width: 0;
+}
+.datas-custom { display: flex; gap: 6px; align-items: center; }
+.datas-custom[hidden] { display: none; }
+.periodo-texto { font-size: 0.8rem; color: var(--cinza-600); margin-left: auto; align-self: center; }
+
+/* ---- KPIs ---- */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.kpi {
+  background: var(--branco); border: 1px solid var(--cinza-200); border-radius: var(--radius); padding: 16px 18px;
+  box-shadow: var(--sombra); position: relative; overflow: hidden;
+}
+.kpi::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--kpi-cor, var(--cinza-300)); }
+.kpi .rotulo { font-size: 0.74rem; font-weight: 600; color: var(--cinza-600); text-transform: uppercase; letter-spacing: 0.04em; }
+.kpi .valor { font-size: 1.55rem; font-weight: 700; line-height: 1.2; margin-top: 6px; font-variant-numeric: tabular-nums; }
+.kpi .detalhe { font-size: 0.76rem; color: var(--cinza-600); margin-top: 4px; }
+.variacao { font-weight: 700; }
+.variacao.sobe { color: var(--verde); } .variacao.desce { color: var(--vermelho); }
+
+/* ---- cartões e grades ---- */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; margin-bottom: 18px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-bottom: 18px; }
+.card { background: var(--branco); border: 1px solid var(--cinza-200); border-radius: var(--radius); box-shadow: var(--sombra); padding: 20px 22px; margin-bottom: 18px; min-width: 0; }
+.grid-2 .card, .grid-3 .card { margin-bottom: 0; }
+.card h2 { font-size: 1.02rem; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.card .dica { font-size: 0.78rem; color: var(--cinza-600); margin-bottom: 14px; }
+.grafico { position: relative; height: 300px; }
+.grafico.alto { height: 340px; }
+.grafico.baixo { height: 240px; }
+
+/* destaque do curso campeão */
+.destaque { display: flex; gap: 16px; align-items: center; padding: 14px 16px; border-radius: 14px; background: var(--verde-bg); margin-bottom: 14px; }
+.destaque .medalha { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--verde); min-width: 64px; text-align: center; }
+.destaque .txt { font-size: 0.85rem; line-height: 1.5; }
+.destaque .txt strong { font-size: 1rem; }
+
+/* listas de ranking */
+.ranking { list-style: none; }
+.ranking li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 9px 0; border-bottom: 1px solid var(--cinza-100); font-size: 0.85rem; }
+.ranking li:last-child { border-bottom: none; }
+.ranking .barra { grid-column: 1 / -1; height: 6px; background: var(--cinza-100); border-radius: 4px; overflow: hidden; }
+.ranking .barra span { display: block; height: 100%; background: var(--verde); border-radius: 4px; }
+.ranking .num { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.ranking .sub { font-size: 0.74rem; color: var(--cinza-600); }
+
+/* mapa de calor dia × hora */
+.calor-wrap { overflow-x: auto; }
+.calor { display: grid; grid-template-columns: 42px repeat(24, minmax(22px, 1fr)); gap: 3px; min-width: 640px; font-size: 0.66rem; }
+.calor .cab { color: var(--cinza-600); text-align: center; }
+.calor .dia { color: var(--cinza-600); font-weight: 600; display: flex; align-items: center; }
+.calor .cel { aspect-ratio: 1; border-radius: 4px; background: var(--cinza-100); }
+.calor-legenda { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: var(--cinza-600); margin-top: 10px; }
+.calor-legenda .escala { width: 120px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--cinza-100), #059669); }
+
+/* tabelas */
+.tabela-topo { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+.tabela-topo input[type="search"] { flex: 1 1 220px; }
+.tabela-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--cinza-100); vertical-align: middle; white-space: nowrap; }
+th { color: var(--cinza-600); font-weight: 600; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.03em; }
+th.ordenavel { cursor: pointer; user-select: none; }
+th.ordenavel:hover { color: var(--cinza-800); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td .aluno-email { display: block; font-size: 0.72rem; color: var(--cinza-600); }
+.pill { display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
+.pill.aprovado { background: var(--verde-bg); color: var(--verde); }
+.pill.pendente { background: var(--amarelo-bg); color: var(--amarelo); }
+.pill.antiga { background: var(--cinza-100); color: var(--cinza-600); }
+.pill.rejeitado, .pill.cancelado { background: var(--vermelho-bg); color: var(--vermelho); }
+.pill.origem { background: var(--azul-claro); color: var(--azul-escuro); }
+.paginacao { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; font-size: 0.8rem; color: var(--cinza-600); flex-wrap: wrap; }
+.vazio { color: var(--cinza-600); font-size: 0.86rem; padding: 18px 0; text-align: center; }
+.aviso { font-size: 0.78rem; color: var(--cinza-600); background: var(--cinza-100); border-radius: 10px; padding: 10px 12px; margin-top: 12px; line-height: 1.5; }
+
+footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
+@media (max-width: 700px) {
+  .painel-header { padding: 20px; } .painel-header h1 { font-size: 1.45rem; }
+  .filtros { position: static; }
+  .periodo-texto { margin-left: 0; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body style="visibility:hidden;">
+<script>
+(async function protegerPagina() {
+  const token = localStorage.getItem('token');
+  function bloquear(msg) {
+    document.body.innerHTML = `
+      <div style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px; font-family:'Poppins',sans-serif; background:#f8fafc; color:#1e293b;">
+        <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; margin-bottom:16px; color:#1e40af;">Acesso restrito</h1>
+        <p style="font-size:1.1rem; max-width:480px; margin-bottom:28px; opacity:0.85;">${msg}</p>
+        <a href="login.html" style="padding:14px 28px; background:#2563eb; color:white; border-radius:30px; text-decoration:none; font-weight:700;">Entrar</a>
+      </div>`;
+    document.body.style.visibility = 'visible';
+  }
+  if (!token) return bloquear('Esta página é exclusiva para administradores.');
+  try {
+    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return bloquear('Sessão expirada. Entre novamente.');
+    const data = await res.json();
+    if (data.role !== 'admin') return bloquear('Esta página é exclusiva para administradores.');
+    document.body.style.visibility = 'visible';
+    window.acessoLiberado = true;
+    window.dispatchEvent(new Event('acesso-liberado'));
+  } catch (err) { bloquear('Erro ao verificar sua conta.'); }
+})();
+</script>
+
+<header><a href="index.html">Francês na Mira <img src="img/logo-mira.png" alt="" class="logo-mira-icone"></a></header>
+
+<div class="wrap">
+  <div class="painel-header">
+    <div>
+      <h1><img class="titulo-icone-inline" src="img/icones/estatisticas.svg" alt="">Balanço Financeiro</h1>
+      <p>Todas as compras de planos e matrículas, com análise por período, curso, forma de pagamento e horário. <span id="statusCarga">Carregando…</span></p>
+    </div>
+    <div class="acoes">
+      <button class="btn claro pequeno" id="btnAtualizar">Atualizar</button>
+      <button class="btn claro pequeno" id="btnCsv">Exportar CSV</button>
+      <a class="btn claro pequeno" href="minha-conta.html" style="text-decoration:none;">Minha conta</a>
+    </div>
+  </div>
+
+  <!-- ===================== FILTROS ===================== -->
+  <div class="filtros">
+    <div class="filtro">
+      <label>Período</label>
+      <div class="segmentado" id="segPeriodo">
+        <button data-periodo="hoje">Hoje</button>
+        <button data-periodo="7d">7 dias</button>
+        <button data-periodo="30d" class="ativo">30 dias</button>
+        <button data-periodo="mes">Este mês</button>
+        <button data-periodo="ano">Este ano</button>
+        <button data-periodo="tudo">Tudo</button>
+        <button data-periodo="custom">Personalizado</button>
+      </div>
+    </div>
+    <div class="filtro datas-custom" id="datasCustom" hidden>
+      <div class="filtro"><label for="dataDe">De</label><input type="date" id="dataDe"></div>
+      <div class="filtro"><label for="dataAte">Até</label><input type="date" id="dataAte"></div>
+    </div>
+    <div class="filtro">
+      <label>Agrupar por</label>
+      <div class="segmentado" id="segGrupo">
+        <button data-grupo="dia" class="ativo">Dia</button>
+        <button data-grupo="semana">Semana</button>
+        <button data-grupo="mes">Mês</button>
+        <button data-grupo="ano">Ano</button>
+      </div>
+    </div>
+    <div class="filtro"><label for="fCurso">Curso</label><select id="fCurso"><option value="">Todos</option></select></div>
+    <div class="filtro"><label for="fMetodo">Pagamento</label>
+      <select id="fMetodo">
+        <option value="">Todos</option>
+        <option value="pix">Pix</option>
+        <option value="cartao_credito">Cartão de crédito</option>
+        <option value="cartao_debito">Cartão de débito</option>
+        <option value="boleto">Boleto</option>
+      </select>
+    </div>
+    <div class="filtro"><label for="fOrigem">Origem</label>
+      <select id="fOrigem">
+        <option value="">Tudo</option>
+        <option value="plano">Planos e Pack Prestige</option>
+        <option value="matricula">Matrículas em aulas</option>
+      </select>
+    </div>
+    <div class="periodo-texto" id="periodoTexto"></div>
+  </div>
+
+  <!-- ===================== KPIs ===================== -->
+  <div class="kpis" id="kpis"></div>
+
+  <!-- ===================== FATURAMENTO NO TEMPO ===================== -->
+  <div class="card">
+    <h2>Faturamento no tempo</h2>
+    <p class="dica" id="dicaTempo">Valor recebido e a receber em cada intervalo, com a quantidade de compras aprovadas.</p>
+    <div class="grafico alto"><canvas id="gTempo"></canvas></div>
+  </div>
+
+  <!-- ===================== CURSOS ===================== -->
+  <div class="grid-2">
+    <div class="card">
+      <h2>Faturamento por curso</h2>
+      <p class="dica">Receita aprovada e número de alunos inscritos (pagantes distintos) em cada curso.</p>
+      <div id="destaqueCurso"></div>
+      <div class="grafico"><canvas id="gCursos"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Planos e produtos</h2>
+      <p class="dica">O que foi vendido: Essentiel, Avancé, Excellence, Pack Prestige e matrículas.</p>
+      <ul class="ranking" id="rankProdutos"></ul>
+    </div>
+  </div>
+
+  <!-- ===================== PAGAMENTO ===================== -->
+  <div class="grid-3">
+    <div class="card">
+      <h2>Formas de pagamento</h2>
+      <p class="dica">Participação de cada método na receita aprovada.</p>
+      <div class="grafico baixo"><canvas id="gMetodos"></canvas></div>
+      <ul class="ranking" id="rankMetodos" style="margin-top:10px;"></ul>
+    </div>
+    <div class="card">
+      <h2>Aprovação por método</h2>
+      <p class="dica">De todas as tentativas, quantas foram aprovadas, ficaram pendentes ou foram recusadas.</p>
+      <div class="grafico baixo"><canvas id="gAprovacao"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Parcelamento</h2>
+      <p class="dica">Compras aprovadas no cartão de crédito por número de parcelas.</p>
+      <div class="grafico baixo"><canvas id="gParcelas"></canvas></div>
+      <p class="aviso">O número de parcelas passou a ser registrado a partir desta versão; compras anteriores aparecem como 1x.</p>
+    </div>
+  </div>
+
+  <!-- ===================== HORÁRIOS ===================== -->
+  <div class="card">
+    <h2>Quando as compras acontecem</h2>
+    <p class="dica">Compras aprovadas por dia da semana e hora do dia (horário de Brasília do seu navegador). Quanto mais escuro, mais compras.</p>
+    <div class="calor-wrap"><div class="calor" id="mapaCalor"></div></div>
+    <div class="calor-legenda">menos <span class="escala"></span> mais <span id="picoTexto" style="margin-left:auto;"></span></div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h2>Por hora do dia</h2>
+      <p class="dica">Receita aprovada em cada hora.</p>
+      <div class="grafico baixo"><canvas id="gHoras"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Por dia da semana</h2>
+      <p class="dica">Receita aprovada em cada dia da semana.</p>
+      <div class="grafico baixo"><canvas id="gDias"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ===================== ALUNOS ===================== -->
+  <div class="grid-2">
+    <div class="card">
+      <h2>Cadastros e alunos pagantes</h2>
+      <p class="dica">Novas contas de aluno criadas e alunos que fizeram a primeira compra aprovada em cada intervalo.</p>
+      <div class="grafico"><canvas id="gAlunos"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Quem mais nos pagou</h2>
+      <p class="dica">Alunos com maior valor aprovado no período.</p>
+      <ul class="ranking" id="rankAlunos"></ul>
+    </div>
+  </div>
+
+  <!-- ===================== A RECEBER ===================== -->
+  <div class="card">
+    <h2>A receber</h2>
+    <p class="dica">Pix e boletos gerados e ainda não pagos. Pendências com mais de 7 dias quase certamente expiraram e ficam separadas.</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead><tr><th>Data</th><th>Aluno</th><th>Curso</th><th>Produto</th><th>Pagamento</th><th class="num">Valor</th><th>Situação</th></tr></thead>
+        <tbody id="corpoReceber"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== TODAS AS TRANSAÇÕES ===================== -->
+  <div class="card">
+    <h2>Todas as transações</h2>
+    <p class="dica">Registro completo de cada compra no período filtrado. Clique nos cabeçalhos para ordenar.</p>
+    <div class="tabela-topo">
+      <input type="search" id="busca" placeholder="Buscar por aluno, e-mail, curso ou ID do Mercado Pago">
+      <select id="fStatus">
+        <option value="">Todos os status</option>
+        <option value="aprovado">Aprovado</option>
+        <option value="pendente">Pendente</option>
+        <option value="rejeitado">Recusado</option>
+        <option value="cancelado">Cancelado</option>
+      </select>
+    </div>
+    <div class="tabela-wrap">
+      <table>
+        <thead><tr>
+          <th class="ordenavel" data-ordem="data">Data ↓</th>
+          <th class="ordenavel" data-ordem="aluno">Aluno</th>
+          <th class="ordenavel" data-ordem="curso">Curso</th>
+          <th>Produto</th>
+          <th>Origem</th>
+          <th class="ordenavel" data-ordem="metodo">Pagamento</th>
+          <th class="num ordenavel" data-ordem="valor">Valor</th>
+          <th class="ordenavel" data-ordem="status">Status</th>
+          <th>Mercado Pago</th>
+        </tr></thead>
+        <tbody id="corpoTransacoes"></tbody>
+      </table>
+    </div>
+    <div class="paginacao">
+      <span id="infoPagina"></span>
+      <span>
+        <button class="btn secundario pequeno" id="pagAnt">Anterior</button>
+        <button class="btn secundario pequeno" id="pagProx">Próxima</button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="js/admin-financeiro.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

@@ -71,11 +71,14 @@ router.post("/cartao", exigirAuth, limitePagamento, async (req, res) => {
     const erro = podePagar(matricula, req.userId);
     if (erro) return res.status(erro === "Acesso negado." ? 403 : 400).json({ msg: erro });
 
+    const parcelas = Number(installments) || 1;
+    if (!Number.isInteger(parcelas) || parcelas < 1 || parcelas > 12) return res.status(400).json({ msg: "Número de parcelas inválido." });
+
     const resultado = await payment.create({
       body: {
         transaction_amount: Number(matricula.precoFinal),
         token,
-        installments: Number(installments) || 1,
+        installments: parcelas,
         payment_method_id: paymentMethodId,
         description: `Matrícula Francês na Mira - ${matricula.dadosPessoais.nome}`,
         payer: { email: matricula.dadosPessoais.email, identification: { type: "CPF", number: cpf } }
@@ -87,7 +90,7 @@ router.post("/cartao", exigirAuth, limitePagamento, async (req, res) => {
     const metodoPagamento = tipo === "debito" ? "cartao_debito" : "cartao_credito";
 
     const pagamento = await PagamentoMatricula.create({
-      matriculaId: matricula._id, alunoId: req.userId, metodoPagamento,
+      matriculaId: matricula._id, alunoId: req.userId, metodoPagamento, parcelas,
       valor: matricula.precoFinal, status: aprovado ? "aprovado" : "rejeitado",
       mercadoPagoId: String(resultado.id)
     });

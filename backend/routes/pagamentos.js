@@ -380,7 +380,7 @@ router.post("/cartao", exigirAuth, limitePagamento, async (req, res) => {
       slotsEscolhidos: slotsEscolhidos || undefined,
       dadosPessoais: dadosPessoais || undefined,
       curso, plano, valor: valorFinal, email,
-      metodoPagamento, cartaoFinal,
+      metodoPagamento, cartaoFinal, parcelas,
       status: aprovado ? "aprovado" : "rejeitado",
       mercadoPagoId: resultado.id
     });

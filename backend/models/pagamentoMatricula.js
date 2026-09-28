@@ -5,6 +5,7 @@ const PagamentoMatriculaSchema = new mongoose.Schema({
   alunoId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   metodoPagamento: { type: String, enum: ["cartao_credito", "cartao_debito", "pix", "boleto"], required: true },
   valor: { type: Number, required: true },
+  parcelas: { type: Number, default: 1 },
   status: { type: String, enum: ["pendente", "aprovado", "rejeitado", "cancelado"], default: "pendente" },
   mercadoPagoId: { type: String },
   pixQrCodeBase64: { type: String },

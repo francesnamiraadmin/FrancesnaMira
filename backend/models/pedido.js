@@ -20,6 +20,7 @@ const PedidoSchema = new mongoose.Schema({
   valor: { type: Number, required: true },
   metodoPagamento: { type: String, enum: ["cartao_credito", "cartao_debito", "boleto", "pix"], required: true },
   cartaoFinal: { type: String },
+  parcelas: { type: Number, default: 1 },
   email: { type: String, required: true },
   status: { type: String, enum: ["pendente", "aprovado", "rejeitado", "cancelado"], default: "pendente" },
   mercadoPagoId: { type: String },
