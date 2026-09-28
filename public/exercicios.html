@@ -64,7 +64,7 @@
       grid.innerHTML = lista.map(x => `
         <article class="cat-card">
           <div class="cat-topo"><div class="cat-nivel">${esc(x.nivel || 'FR')}</div>
-            <div><h2>${esc(x.titulo)}</h2><div class="cat-meta">${x.questoes} questões · ${x.partes.length} partes${x.modo === 'prova' ? ' · prova' : ''}</div></div></div>
+            <div><h2>${esc(x.titulo)}</h2><div class="cat-meta">${x.questoes ? x.questoes + ' questões' : x.regras + ' regras'} · ${x.partes.length} partes${x.modo === 'prova' ? ' · prova' : ''}</div></div></div>
           <p>${esc(x.descricao)}</p>
           ${x.origem ? `<div class="cat-origem"><strong>Script do Google de origem</strong>${esc(x.origem)}</div>` : ''}
           <div class="cat-partes">${x.partes.map(p => `<span>${esc(p)}</span>`).join('')}</div>

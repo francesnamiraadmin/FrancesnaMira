@@ -43,7 +43,8 @@ function listar() {
       slug: d.slug, titulo: d.titulo, nivel: d.nivel, descricao: d.descricao, modo: d.modo || "treino",
       origem: d.origem || null,
       partes: d.secoes.map(s => s.titulo),
-      questoes: d.secoes.reduce((n, s) => n + (s.itens ? s.itens.length : 0), 0)
+      questoes: d.secoes.reduce((n, s) => n + (s.itens ? s.itens.length : 0), 0),
+      regras: d.secoes.reduce((n, s) => n + (s.regras ? s.regras.length : 0), 0)
     }));
 }
 
