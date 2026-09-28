@@ -27,20 +27,21 @@ const PLANOS = [
   {
     nome: "Parcours A1 · Francês na Mira",
     curso: "A1",
-    descricao: "Programa das primeiras semanas (J1 a J5): regulamento, être et avoir, números, vocabulário, preposições, artigos, a cidade e um simulado DELF A2.",
+    descricao: "Programa J1 a J8 do journal de classe: regulamento, fonética, être et avoir, o tempo, preposições, números, pronomes, família, simulado DELF A2, interrogativos, possessivos, adjetivos, negação, a cidade, c'est/il est e artigos.",
     semanas: [
-      { numero: 1, titulo: "J1 · Règlement, être et avoir", atividades: [
+      { numero: 1, titulo: "J1 · Règlement, phonétique, être et avoir", atividades: [
         atividade("j1-reglement"),
+        atividade("phonetique", { dependeDe: 0 }),
         atividade("j1-etre-et-avoir", { dependeDe: 0 }),
         atividade("vocabulaire-hebdomadaire", { dependeDe: 0 })
       ] },
-      { numero: 2, titulo: "J2 · Les nombres et les prépositions", atividades: [
-        atividade("les-nombres"),
-        atividade("les-prepositions")
-      ] },
-      { numero: 3, titulo: "J3 · Les articles", atividades: [atividade("les-articles")] },
-      { numero: 4, titulo: "J4 · La ville, les commerces et les loisirs", atividades: [atividade("la-ville")] },
-      { numero: 5, titulo: "J5 · Simulation DELF A2", atividades: [atividade("simulation-delf-a2-1")] }
+      { numero: 2, titulo: "J2 · Le temps et les prépositions", atividades: [atividade("le-calendrier"), atividade("les-prepositions")] },
+      { numero: 3, titulo: "J3 · Les nombres et les pronoms toniques", atividades: [atividade("les-nombres"), atividade("les-pronoms")] },
+      { numero: 4, titulo: "J4 · La famille et simulation DELF", atividades: [atividade("la-famille"), atividade("simulation-delf-a2-1")] },
+      { numero: 5, titulo: "J5 · Les mots interrogatifs et les possessifs", atividades: [atividade("les-interrogatifs"), atividade("les-possessifs")] },
+      { numero: 6, titulo: "J6 · Les adjectifs et la négation", atividades: [atividade("les-adjectifs"), atividade("la-negation")] },
+      { numero: 7, titulo: "J7 · La ville, les loisirs et c'est / il est", atividades: [atividade("la-ville"), atividade("cest-vs-il-est")] },
+      { numero: 8, titulo: "J8 · Les articles", atividades: [atividade("les-articles")] }
     ]
   },
   {

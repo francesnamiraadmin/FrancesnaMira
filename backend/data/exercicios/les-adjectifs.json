@@ -1,0 +1,663 @@
+{
+ "slug": "les-adjectifs",
+ "ordem": 14,
+ "nivel": "A1–A2",
+ "titulo": "Les adjectifs",
+ "origem": "Francês na Mira, Adjectifs",
+ "descricao": "Masculino, feminino e plural dos adjetivos, os irregulares, os unissex e os advérbios de intensidade.",
+ "secoes": [
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<p>Em francês, adjetivos <strong>e</strong> substantivos têm gênero e número. O adjetivo concorda com o substantivo.</p>\n<h3>Como o feminino se forma</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Padrão</th><th>Masculino</th><th>Feminino</th></tr></thead><tbody><tr><td>regra geral: +e</td><td><span class=\"fr\" data-fr=\"grand\">grand</span></td><td><span class=\"fr\" data-fr=\"grande\">grande</span></td></tr><tr><td>-eux → -euse</td><td><span class=\"fr\" data-fr=\"heureux\">heureux</span></td><td><span class=\"fr\" data-fr=\"heureuse\">heureuse</span></td></tr><tr><td>-f → -ve</td><td><span class=\"fr\" data-fr=\"actif\">actif</span></td><td><span class=\"fr\" data-fr=\"active\">active</span></td></tr><tr><td>-er → -ère</td><td><span class=\"fr\" data-fr=\"premier\">premier</span></td><td><span class=\"fr\" data-fr=\"première\">première</span></td></tr><tr><td>-on → -onne</td><td><span class=\"fr\" data-fr=\"bon\">bon</span></td><td><span class=\"fr\" data-fr=\"bonne\">bonne</span></td></tr><tr><td>-en → -enne</td><td><span class=\"fr\" data-fr=\"ancien\">ancien</span></td><td><span class=\"fr\" data-fr=\"ancienne\">ancienne</span></td></tr><tr><td>-eur → -euse</td><td><span class=\"fr\" data-fr=\"travailleur\">travailleur</span></td><td><span class=\"fr\" data-fr=\"travailleuse\">travailleuse</span></td></tr><tr><td>-teur → -trice</td><td><span class=\"fr\" data-fr=\"acteur\">acteur</span></td><td><span class=\"fr\" data-fr=\"actrice\">actrice</span></td></tr><tr><td>-c → -que</td><td><span class=\"fr\" data-fr=\"public\">public</span></td><td><span class=\"fr\" data-fr=\"publique\">publique</span></td></tr></tbody></table></div>\n<div class=\"destaque\"><strong>Irregulares:</strong> <span class=\"fr\" data-fr=\"beau\">beau</span> → <span class=\"fr\" data-fr=\"belle\">belle</span> · <span class=\"fr\" data-fr=\"nouveau\">nouveau</span> → <span class=\"fr\" data-fr=\"nouvelle\">nouvelle</span> · <span class=\"fr\" data-fr=\"vieux\">vieux</span> → <span class=\"fr\" data-fr=\"vieille\">vieille</span> · <span class=\"fr\" data-fr=\"blanc\">blanc</span> → <span class=\"fr\" data-fr=\"blanche\">blanche</span> · <span class=\"fr\" data-fr=\"long\">long</span> → <span class=\"fr\" data-fr=\"longue\">longue</span> · <span class=\"fr\" data-fr=\"doux\">doux</span> → <span class=\"fr\" data-fr=\"douce\">douce</span> · <span class=\"fr\" data-fr=\"gentil\">gentil</span> → <span class=\"fr\" data-fr=\"gentille\">gentille</span> · <span class=\"fr\" data-fr=\"faux\">faux</span> → <span class=\"fr\" data-fr=\"fausse\">fausse</span> · <span class=\"fr\" data-fr=\"frais\">frais</span> → <span class=\"fr\" data-fr=\"fraîche\">fraîche</span></div>\n<p><strong>Unissex</strong> (já terminam em -e): jeune, riche, calme, facile, difficile, rouge, sympathique, moderne; e substantivos como un/une élève, artiste, collègue.</p>\n<h3>Quando o substantivo muda de palavra</h3><p><span class=\"fr\" data-fr=\"un homme\">un homme</span> → <span class=\"fr\" data-fr=\"une femme\">une femme</span> · <span class=\"fr\" data-fr=\"un père\">un père</span> → <span class=\"fr\" data-fr=\"une mère\">une mère</span> · <span class=\"fr\" data-fr=\"un frère\">un frère</span> → <span class=\"fr\" data-fr=\"une sœur\">une sœur</span> · <span class=\"fr\" data-fr=\"un roi\">un roi</span> → <span class=\"fr\" data-fr=\"une reine\">une reine</span></p>\n<h3>O plural</h3>\n<ul><li>Regra geral +s: <span class=\"fr\" data-fr=\"grands\">grands</span>, <span class=\"fr\" data-fr=\"intéressantes\">intéressantes</span></li><li>Terminado em -s, -x, -z: não muda: <span class=\"fr\" data-fr=\"gros\">gros</span>, <span class=\"fr\" data-fr=\"heureux\">heureux</span></li><li>-eau → -eaux: <span class=\"fr\" data-fr=\"beaux\">beaux</span>, <span class=\"fr\" data-fr=\"nouveaux\">nouveaux</span></li><li>-al → -aux: <span class=\"fr\" data-fr=\"nationaux\">nationaux</span>, <span class=\"fr\" data-fr=\"originaux\">originaux</span></li></ul>\n<h3>Intensidade</h3>\n<p><span class=\"fr\" data-fr=\"très beau\">très beau</span> · <span class=\"fr\" data-fr=\"vraiment intéressant\">vraiment intéressant</span> · <span class=\"fr\" data-fr=\"si difficile\">si difficile</span> · <span class=\"fr\" data-fr=\"tellement content\">tellement content</span> · <span class=\"fr\" data-fr=\"extrêmement rare\">extrêmement rare</span></p>\n<div class=\"dica\">Adjetivos que já são intensos (excellent, magnifique, extraordinaire, formidable, superbe) não levam <em>très</em>: <span class=\"fr\" data-fr=\"C'est excellent !\">C'est excellent !</span></div>"
+  },
+  {
+   "id": "reliez",
+   "tipo": "exercicio",
+   "titulo": "Reliez",
+   "instrucao": "Ligue o masculino ao feminino.",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 1",
+     "pares": [
+      {
+       "a": "heureux",
+       "b": "heureuse (feliz)"
+      },
+      {
+       "a": "actif",
+       "b": "active (ativo)"
+      },
+      {
+       "a": "premier",
+       "b": "première (primeiro)"
+      },
+      {
+       "a": "bon",
+       "b": "bonne (bom)"
+      },
+      {
+       "a": "ancien",
+       "b": "ancienne (antigo)"
+      },
+      {
+       "a": "beau",
+       "b": "belle (bonito)"
+      },
+      {
+       "a": "nouveau",
+       "b": "nouvelle (novo)"
+      },
+      {
+       "a": "vieux",
+       "b": "vieille (velho)"
+      },
+      {
+       "a": "blanc",
+       "b": "blanche (branco)"
+      },
+      {
+       "a": "long",
+       "b": "longue (longo)"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 2",
+     "pares": [
+      {
+       "a": "doux",
+       "b": "douce (doce, suave)"
+      },
+      {
+       "a": "gentil",
+       "b": "gentille (gentil)"
+      },
+      {
+       "a": "un acteur",
+       "b": "une actrice (ator/atriz)"
+      },
+      {
+       "a": "un vendeur",
+       "b": "une vendeuse (vendedor)"
+      },
+      {
+       "a": "un ami",
+       "b": "une amie (amigo)"
+      },
+      {
+       "a": "un(e) élève",
+       "b": "unissex, so muda o artigo"
+      },
+      {
+       "a": "jeune",
+       "b": "unissex, nao muda (jovem)"
+      },
+      {
+       "a": "un homme",
+       "b": "une femme (homem/mulher)"
+      },
+      {
+       "a": "un roi",
+       "b": "une reine (rei/rainha)"
+      }
+     ],
+     "audioEsquerda": true
+    }
+   ]
+  },
+  {
+   "id": "selection",
+   "tipo": "exercicio",
+   "titulo": "Sélection",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Cette ville est très ",
+     "depois": ".",
+     "opcoes": [
+      "animée",
+      "animé",
+      "animées"
+     ],
+     "resposta": "animée",
+     "explicacao": "Ville e feminino singular.",
+     "audioCorrecao": "Cette ville est très animée."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ce quartier est ",
+     "depois": " le soir.",
+     "opcoes": [
+      "tranquille",
+      "tranquil",
+      "tranquilles"
+     ],
+     "resposta": "tranquille",
+     "explicacao": "Tranquille e unissex, nao muda.",
+     "audioCorrecao": "Ce quartier est tranquille le soir."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "L'hôtel était très ",
+     "depois": ".",
+     "opcoes": [
+      "confortable",
+      "confortables",
+      "confortablee"
+     ],
+     "resposta": "confortable",
+     "explicacao": "O adjetivo concorda em gênero e número com o substantivo.",
+     "audioCorrecao": "L'hôtel était très confortable."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'était un voyage ",
+     "depois": ".",
+     "opcoes": [
+      "épuisant",
+      "épuisante",
+      "épuisants"
+     ],
+     "resposta": "épuisant",
+     "explicacao": "Voyage e masculino singular.",
+     "audioCorrecao": "C'était un voyage épuisant."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Cette expérience était ",
+     "depois": ".",
+     "opcoes": [
+      "inoubliable",
+      "inoubliables",
+      "inoubliablee"
+     ],
+     "resposta": "inoubliable",
+     "explicacao": "O adjetivo concorda em gênero e número com o substantivo.",
+     "audioCorrecao": "Cette expérience était inoubliable."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ce château est très ",
+     "depois": ".",
+     "opcoes": [
+      "vieux",
+      "vieille",
+      "vieil"
+     ],
+     "resposta": "vieux",
+     "explicacao": "Chateau e masculino singular.",
+     "audioCorrecao": "Ce château est très vieux."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Cette formation était ",
+     "depois": ".",
+     "opcoes": [
+      "intéressante",
+      "intéressant",
+      "intéressants"
+     ],
+     "resposta": "intéressante",
+     "explicacao": "O adjetivo concorda em gênero e número com o substantivo.",
+     "audioCorrecao": "Cette formation était intéressante."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Les jardins sont ",
+     "depois": ".",
+     "opcoes": [
+      "magnifiques",
+      "magnifique",
+      "magnifiqe"
+     ],
+     "resposta": "magnifiques",
+     "explicacao": "Jardins e masculino plural.",
+     "audioCorrecao": "Les jardins sont magnifiques."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est une ",
+     "depois": " opportunité.",
+     "opcoes": [
+      "nouvelle",
+      "nouveau",
+      "nouveaux"
+     ],
+     "resposta": "nouvelle",
+     "explicacao": "Opportunite e feminino singular.",
+     "audioCorrecao": "C'est une nouvelle opportunité."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le logement était très ",
+     "depois": ".",
+     "opcoes": [
+      "spacieux",
+      "spacieuse",
+      "spacieuses"
+     ],
+     "resposta": "spacieux",
+     "explicacao": "Logement e masculino singular.",
+     "audioCorrecao": "Le logement était très spacieux."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "L'accueil a été très ",
+     "depois": ".",
+     "opcoes": [
+      "chaleureux",
+      "chaleureuse",
+      "chaleureuses"
+     ],
+     "resposta": "chaleureux",
+     "explicacao": "Accueil e masculino singular.",
+     "audioCorrecao": "L'accueil a été très chaleureux."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est une femme très ",
+     "depois": ".",
+     "opcoes": [
+      "active",
+      "actif",
+      "actifs"
+     ],
+     "resposta": "active",
+     "explicacao": "O adjetivo concorda em gênero e número com o substantivo.",
+     "audioCorrecao": "C'est une femme très active."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Mon collègue est ",
+     "depois": ".",
+     "opcoes": [
+      "sérieux",
+      "sérieuse",
+      "sérieuses"
+     ],
+     "resposta": "sérieux",
+     "explicacao": "O adjetivo concorda em gênero e número com o substantivo.",
+     "audioCorrecao": "Mon collègue est sérieux."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ma collègue est ",
+     "depois": ".",
+     "opcoes": [
+      "sérieuse",
+      "sérieux",
+      "sérieuxe"
+     ],
+     "resposta": "sérieuse",
+     "explicacao": "O adjetivo concorda em gênero e número com o substantivo.",
+     "audioCorrecao": "Ma collègue est sérieuse."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est vraiment ",
+     "depois": " comme restaurant.",
+     "opcoes": [
+      "bon",
+      "bonne",
+      "bons"
+     ],
+     "resposta": "bon",
+     "explicacao": "Restaurant e masculino singular.",
+     "audioCorrecao": "C'est vraiment bon comme restaurant."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Cette ville est vraiment ",
+     "depois": ".",
+     "opcoes": [
+      "belle",
+      "beau",
+      "beaux"
+     ],
+     "resposta": "belle",
+     "explicacao": "Ville e feminino singular.",
+     "audioCorrecao": "Cette ville est vraiment belle."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Cette note est ",
+     "depois": ".",
+     "opcoes": [
+      "excellente",
+      "excellent",
+      "excellents"
+     ],
+     "resposta": "excellente",
+     "explicacao": "Note e feminino: excellent vira excellente, diferente de magnifique/formidable, que sao unissex.",
+     "audioCorrecao": "Cette note est excellente."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ce résultat est ",
+     "depois": ".",
+     "opcoes": [
+      "excellent",
+      "excellente",
+      "excellentes"
+     ],
+     "resposta": "excellent",
+     "explicacao": "Resultat e masculino singular.",
+     "audioCorrecao": "Ce résultat est excellent."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'était un voyage ",
+     "depois": ".",
+     "opcoes": [
+      "formidable",
+      "formidables",
+      "formidablee"
+     ],
+     "resposta": "formidable",
+     "explicacao": "Formidable e unissex, nao muda mesmo com substantivo masculino ou feminino.",
+     "audioCorrecao": "C'était un voyage formidable."
+    }
+   ]
+  },
+  {
+   "id": "digiter",
+   "tipo": "exercicio",
+   "titulo": "Digitez",
+   "instrucao": "Escreva o adjetivo na forma correta.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "Cette maison est très ",
+     "depois": " (grand).",
+     "respostas": [
+      "grande"
+     ],
+     "explicacao": "Maison e feminino, regra geral +e.",
+     "audioCorrecao": "Cette maison est très grande.",
+     "dica": "Maison e feminino, regra geral +e."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ces histoires sont ",
+     "depois": " (intéressant).",
+     "respostas": [
+      "intéressantes"
+     ],
+     "explicacao": "Feminino plural.",
+     "audioCorrecao": "Ces histoires sont intéressantes.",
+     "dica": "Feminino plural."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Mon frère est très ",
+     "depois": " (actif).",
+     "respostas": [
+      "actif"
+     ],
+     "explicacao": "Masculino singular, sem mudanca.",
+     "audioCorrecao": "Mon frère est très actif.",
+     "dica": "Masculino singular, sem mudanca."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ma sœur est très ",
+     "depois": " (actif).",
+     "respostas": [
+      "active"
+     ],
+     "explicacao": "Feminino: f vira ve.",
+     "audioCorrecao": "Ma sœur est très active.",
+     "dica": "Feminino: f vira ve."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "C'est la ",
+     "depois": " (premier) fois que je viens ici.",
+     "respostas": [
+      "première"
+     ],
+     "explicacao": "Fois e feminino: er vira ere.",
+     "audioCorrecao": "C'est la première fois que je viens ici.",
+     "dica": "Fois e feminino: er vira ere."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ce sont de ",
+     "depois": " (bon) nouvelles.",
+     "respostas": [
+      "bonnes"
+     ],
+     "explicacao": "Nouvelles e feminino plural.",
+     "audioCorrecao": "Ce sont de bonnes nouvelles.",
+     "dica": "Nouvelles e feminino plural."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "C'est un ",
+     "depois": " (nouveau) collègue.",
+     "respostas": [
+      "nouveau"
+     ],
+     "explicacao": "Masculino singular, forma irregular.",
+     "audioCorrecao": "C'est un nouveau collègue.",
+     "dica": "Masculino singular, forma irregular."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "C'est une ",
+     "depois": " (nouveau) collègue.",
+     "respostas": [
+      "nouvelle"
+     ],
+     "explicacao": "Feminino, forma irregular.",
+     "audioCorrecao": "C'est une nouvelle collègue.",
+     "dica": "Feminino, forma irregular."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ces sacs sont ",
+     "depois": " (blanc).",
+     "respostas": [
+      "blancs"
+     ],
+     "explicacao": "Masculino plural.",
+     "audioCorrecao": "Ces sacs sont blancs.",
+     "dica": "Masculino plural."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ces valises sont ",
+     "depois": " (blanc).",
+     "respostas": [
+      "blanches"
+     ],
+     "explicacao": "Feminino plural: c vira che.",
+     "audioCorrecao": "Ces valises sont blanches.",
+     "dica": "Feminino plural: c vira che."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il a les cheveux ",
+     "depois": " (long).",
+     "respostas": [
+      "longs"
+     ],
+     "explicacao": "Masculino plural.",
+     "audioCorrecao": "Il a les cheveux longs.",
+     "dica": "Masculino plural."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle a les mains ",
+     "depois": " (doux).",
+     "respostas": [
+      "douces"
+     ],
+     "explicacao": "Feminino plural: x vira ce.",
+     "audioCorrecao": "Elle a les mains douces.",
+     "dica": "Feminino plural: x vira ce."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ce sont des enfants très ",
+     "depois": " (gentil).",
+     "respostas": [
+      "gentils"
+     ],
+     "explicacao": "Masculino plural.",
+     "audioCorrecao": "Ce sont des enfants très gentils.",
+     "dica": "Masculino plural."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ce sont des projets ",
+     "depois": " (national).",
+     "respostas": [
+      "nationaux"
+     ],
+     "explicacao": "Plural de -al normalmente vira -aux.",
+     "audioCorrecao": "Ce sont des projets nationaux.",
+     "dica": "Plural de -al normalmente vira -aux."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle est ",
+     "depois": " (jeune) et dynamique.",
+     "respostas": [
+      "jeune"
+     ],
+     "explicacao": "Jeune e unissex, nao muda.",
+     "audioCorrecao": "Elle est jeune et dynamique.",
+     "dica": "Jeune e unissex, nao muda."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "C'est un endroit ",
+     "depois": " (tranquille) et ",
+     "respostas": [
+      "tranquille"
+     ],
+     "explicacao": "Tranquille e unissex, nao muda.",
+     "audioCorrecao": "C'est un endroit tranquille et",
+     "dica": "Tranquille e unissex, nao muda."
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "Le voyage inoubliable de Lucie",
+   "instrucao": "Leia, ouça e repare na concordância dos adjetivos.",
+   "paragrafos": [
+    "Lucie raconte son voyage à ses amis. « C'était une expérience incroyable ! » dit-elle avec enthousiasme.",
+    "La ville où elle est allée est magnifique: les rues sont animées, les quartiers sont tranquilles le soir, et l'ambiance est chaleureuse. Son logement était confortable et spacieux, avec une vue superbe sur un vieux château.",
+    "« Les gens étaient tellement gentils », raconte Lucie. « Mon guide était très sérieux, mais aussi très drôle. » Elle a visité des jardins magnifiques et des bâtiments insolites, vraiment différents de tout ce qu'elle connaissait.",
+    "Le voyage était parfois épuisant, avec de longues journées de marche, mais l'accueil des habitants était toujours chaleureux. « C'était une aventure inoubliable », conclut-elle, les yeux brillants."
+   ],
+   "glossario": {
+    "enthousiasme": "entusiasmo",
+    "ambiance": "ambiente, clima",
+    "logement": "acomodação, moradia",
+    "vue": "vista",
+    "journees": "dias, jornadas",
+    "marche": "caminhada",
+    "accueil": "recepção, acolhimento",
+    "habitants": "habitantes",
+    "aventure": "aventura",
+    "brillants": "brilhantes"
+   }
+  },
+  {
+   "id": "quiz",
+   "tipo": "exercicio",
+   "titulo": "Compréhension",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment Lucie décrit-elle son voyage ?",
+     "opcoes": [
+      "Une expérience incroyable",
+      "Un voyage ennuyeux",
+      "Un voyage trop court"
+     ],
+     "resposta": "Une expérience incroyable",
+     "explicacao": "No texto: « « C'était une expérience incroyable ! »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment est la ville que Lucie a visitée ?",
+     "opcoes": [
+      "Magnifique",
+      "Sale",
+      "Dangereuse"
+     ],
+     "resposta": "Magnifique",
+     "explicacao": "No texto: « La ville où elle est allée est magnifique: les rues sont animées, les quartiers sont tranquilles le soir, et l'ambiance est chaleureuse. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment était le logement de Lucie ?",
+     "opcoes": [
+      "Confortable et spacieux",
+      "Petit et bruyant",
+      "Loin de tout"
+     ],
+     "resposta": "Confortable et spacieux",
+     "explicacao": "No texto: « Son logement était confortable et spacieux, avec une vue superbe sur un vieux château. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment était le guide de Lucie ?",
+     "opcoes": [
+      "Très sérieux et très drôle",
+      "Très timide",
+      "Toujours en retard"
+     ],
+     "resposta": "Très sérieux et très drôle",
+     "explicacao": "No texto: « « Mon guide était très sérieux, mais aussi très drôle. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment étaient les journées de marche ?",
+     "opcoes": [
+      "Longues et épuisantes",
+      "Courtes et faciles",
+      "Ennuyeuses"
+     ],
+     "resposta": "Longues et épuisantes",
+     "explicacao": "No texto: « Le voyage était parfois épuisant, avec de longues journées de marche, mais l'accueil des habitants était toujours chaleureux. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment Lucie décrit-elle l'accueil des habitants ?",
+     "opcoes": [
+      "Chaleureux",
+      "Froid",
+      "Indifférent"
+     ],
+     "resposta": "Chaleureux",
+     "explicacao": "No texto: « Le voyage était parfois épuisant, avec de longues journées de marche, mais l'accueil des habitants était toujours chaleureux. »"
+    }
+   ]
+  },
+  {
+   "id": "production",
+   "tipo": "exercicio",
+   "titulo": "Production",
+   "itens": [
+    {
+     "tipo": "livre",
+     "enunciado": "Descreva uma viagem ou um lugar de que você gostou, com pelo menos 8 adjetivos diferentes (atenção à concordância).",
+     "minPalavras": 50,
+     "placeholder": "L'année dernière, j'ai visité une ville magnifique..."
+    }
+   ]
+  }
+ ]
+}

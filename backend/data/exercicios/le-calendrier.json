@@ -1,0 +1,886 @@
+{
+ "slug": "le-calendrier",
+ "ordem": 16,
+ "nivel": "A1",
+ "titulo": "Le temps : jours, mois, saisons et météo",
+ "origem": "Francês na Mira, Calendrier",
+ "descricao": "Períodos do dia, refeições, clima (il fait / il y a / il a / il est), dias, meses e estações, com a origem mitológica dos nomes.",
+ "secoes": [
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<h3>Les périodes de la journée</h3><div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português / origem</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"l'aube\">l'aube</span></td><td>a alvorada, o amanhecer</td></tr><tr><td><span class=\"fr\" data-fr=\"le matin\">le matin</span></td><td>a manhã</td></tr><tr><td><span class=\"fr\" data-fr=\"midi\">midi</span></td><td>o meio-dia</td></tr><tr><td><span class=\"fr\" data-fr=\"l'après-midi\">l'après-midi</span></td><td>a tarde</td></tr><tr><td><span class=\"fr\" data-fr=\"le crépuscule\">le crépuscule</span></td><td>o entardecer, o pôr do sol</td></tr><tr><td><span class=\"fr\" data-fr=\"le soir\">le soir</span></td><td>o começo da noite</td></tr><tr><td><span class=\"fr\" data-fr=\"la nuit\">la nuit</span></td><td>a noite, a madrugada</td></tr></tbody></table></div>\n<h3>Les repas</h3>\n<div><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/cafe_manha.jpg\" alt=\"&lt;span class=\"fr\" data-fr=\"le petit-déjeuner\"&gt;le petit-déjeuner&lt;/span&gt; · le matin\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\"><span class=\"fr\" data-fr=\"le petit-déjeuner\">le petit-déjeuner</span> · le matin</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/almoco.jpg\" alt=\"&lt;span class=\"fr\" data-fr=\"le déjeuner\"&gt;le déjeuner&lt;/span&gt; · midi\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\"><span class=\"fr\" data-fr=\"le déjeuner\">le déjeuner</span> · midi</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/lanche.jpg\" alt=\"&lt;span class=\"fr\" data-fr=\"le goûter\"&gt;le goûter&lt;/span&gt; · l'après-midi\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\"><span class=\"fr\" data-fr=\"le goûter\">le goûter</span> · l'après-midi</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/jantar.jpg\" alt=\"&lt;span class=\"fr\" data-fr=\"le dîner\"&gt;le dîner&lt;/span&gt; · le soir\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\"><span class=\"fr\" data-fr=\"le dîner\">le dîner</span> · le soir</figcaption></figure></div>\n<h3>La météo</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th></th><th>Uso</th><th>Exemplos</th></tr></thead><tbody><tr><td><strong>Il fait</strong></td><td>o tempo em geral</td><td><span class=\"fr\" data-fr=\"Il fait beau.\">Il fait beau.</span> <span class=\"fr\" data-fr=\"Il fait froid.\">Il fait froid.</span></td></tr><tr><td><strong>Il y a</strong></td><td>um fenômeno específico</td><td><span class=\"fr\" data-fr=\"Il y a du vent.\">Il y a du vent.</span> <span class=\"fr\" data-fr=\"Il y a un orage.\">Il y a un orage.</span></td></tr><tr><td><strong>Il a</strong></td><td>a sensação de uma PESSOA (avoir)</td><td><span class=\"fr\" data-fr=\"Il a chaud.\">Il a chaud.</span> <span class=\"fr\" data-fr=\"Il a faim.\">Il a faim.</span></td></tr><tr><td><strong>Il est</strong></td><td>as horas</td><td><span class=\"fr\" data-fr=\"Il est trois heures.\">Il est trois heures.</span></td></tr></tbody></table></div>\n<div class=\"destaque\"><span class=\"fr\" data-fr=\"Il fait chaud\">Il fait chaud</span> = está calor (o clima) · <span class=\"fr\" data-fr=\"J'ai chaud\">J'ai chaud</span> = estou com calor (a pessoa). Chuva e neve têm verbo próprio: <span class=\"fr\" data-fr=\"Il pleut.\">Il pleut.</span> <span class=\"fr\" data-fr=\"Il neige.\">Il neige.</span></div>\n<h3>Les jours de la semaine</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português / origem</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"lundi\">lundi</span></td><td>dia da Lua</td></tr><tr><td><span class=\"fr\" data-fr=\"mardi\">mardi</span></td><td>dia de Mars, deus da guerra (Ares)</td></tr><tr><td><span class=\"fr\" data-fr=\"mercredi\">mercredi</span></td><td>dia de Mercure, mensageiro (Hermès)</td></tr><tr><td><span class=\"fr\" data-fr=\"jeudi\">jeudi</span></td><td>dia de Jupiter, rei dos deuses (Zeus)</td></tr><tr><td><span class=\"fr\" data-fr=\"vendredi\">vendredi</span></td><td>dia de Vénus, deusa do amor (Aphrodite)</td></tr><tr><td><span class=\"fr\" data-fr=\"samedi\">samedi</span></td><td>dia de Saturne, deus do tempo (Cronos)</td></tr><tr><td><span class=\"fr\" data-fr=\"dimanche\">dimanche</span></td><td>dia do Sol, depois dia do Senhor</td></tr></tbody></table></div>\n<div><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/ares.jpg\" alt=\"mardi · Mars / Arès\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">mardi · Mars / Arès</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/hermes.jpg\" alt=\"mercredi · Mercure / Hermès\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">mercredi · Mercure / Hermès</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/zeus.jpg\" alt=\"jeudi · Jupiter / Zeus\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">jeudi · Jupiter / Zeus</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/aphrodite.jpg\" alt=\"vendredi · Vénus / Aphrodite\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">vendredi · Vénus / Aphrodite</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/cronos.jpg\" alt=\"samedi · Saturne / Cronos\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">samedi · Saturne / Cronos</figcaption></figure></div>\n<h3>Les mois de l'année</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português / origem</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"janvier\">janvier</span></td><td>Janus, deus de duas caras</td></tr><tr><td><span class=\"fr\" data-fr=\"février\">février</span></td><td>Februa, festival de purificação</td></tr><tr><td><span class=\"fr\" data-fr=\"mars\">mars</span></td><td>Mars, deus da guerra</td></tr><tr><td><span class=\"fr\" data-fr=\"avril\">avril</span></td><td>aperire (abrir) / Aphrodite</td></tr><tr><td><span class=\"fr\" data-fr=\"mai\">mai</span></td><td>Maia, deusa do crescimento</td></tr><tr><td><span class=\"fr\" data-fr=\"juin\">juin</span></td><td>Junon, deusa do casamento</td></tr><tr><td><span class=\"fr\" data-fr=\"juillet\">juillet</span></td><td>em homenagem a Jules César</td></tr><tr><td><span class=\"fr\" data-fr=\"août\">août</span></td><td>em homenagem a Auguste</td></tr><tr><td><span class=\"fr\" data-fr=\"septembre\">septembre</span></td><td>do latim septem (7)</td></tr><tr><td><span class=\"fr\" data-fr=\"octobre\">octobre</span></td><td>do latim octo (8)</td></tr><tr><td><span class=\"fr\" data-fr=\"novembre\">novembre</span></td><td>do latim novem (9)</td></tr><tr><td><span class=\"fr\" data-fr=\"décembre\">décembre</span></td><td>do latim decem (10)</td></tr></tbody></table></div>\n<div><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/janus.jpg\" alt=\"janvier · Janus\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">janvier · Janus</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/maia.jpg\" alt=\"mai · Maia\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">mai · Maia</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/hera.jpg\" alt=\"juin · Junon / Héra\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">juin · Junon / Héra</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/julio_cesar.jpg\" alt=\"juillet · Jules César\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">juillet · Jules César</figcaption></figure><figure style=\"display:inline-block; width:130px; margin:4px; text-align:center; vertical-align:top;\"><img src=\"img/exercicios/calendrier/augusto.jpg\" alt=\"août · Auguste\" style=\"width:100%; border-radius:10px;\"><figcaption style=\"font-size:0.78rem;\">août · Auguste</figcaption></figure></div>\n<div class=\"dica\">Septembre, octobre, novembre e décembre vêm de <em>sept</em> (7), <em>octo</em> (8), <em>novem</em> (9) e <em>decem</em> (10): no calendário romano o ano começava em março.</div>\n<h3>Les saisons</h3><div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português / origem</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"le printemps\">le printemps</span></td><td>a primavera</td></tr><tr><td><span class=\"fr\" data-fr=\"l'été\">l'été</span></td><td>o verão</td></tr><tr><td><span class=\"fr\" data-fr=\"l'automne\">l'automne</span></td><td>o outono</td></tr><tr><td><span class=\"fr\" data-fr=\"l'hiver\">l'hiver</span></td><td>o inverno</td></tr></tbody></table></div>\n<p><span class=\"fr\" data-fr=\"au printemps\">au printemps</span> · <span class=\"fr\" data-fr=\"en été\">en été</span> · <span class=\"fr\" data-fr=\"en automne\">en automne</span> · <span class=\"fr\" data-fr=\"en hiver\">en hiver</span> (só a primavera usa <strong>au</strong>).</p>"
+  },
+  {
+   "id": "periodes",
+   "tipo": "exercicio",
+   "titulo": "Les périodes",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Le soleil se lève à l'",
+     "depois": ".",
+     "opcoes": [
+      "aube",
+      "après-midi",
+      "soir"
+     ],
+     "resposta": "aube",
+     "explicacao": "L'aube e o momento em que o sol nasce, o amanhecer.",
+     "audioCorrecao": "Le soleil se lève à l'aube."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le soleil se couche au ",
+     "depois": ".",
+     "opcoes": [
+      "crépuscule",
+      "matin",
+      "midi"
+     ],
+     "resposta": "crépuscule",
+     "explicacao": "Le crépuscule e o momento em que o sol se poe, o entardecer.",
+     "audioCorrecao": "Le soleil se couche au crépuscule."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je travaille toute la matinée, puis je déjeune à ",
+     "depois": ".",
+     "opcoes": [
+      "midi",
+      "minuit",
+      "l'aube"
+     ],
+     "resposta": "midi",
+     "explicacao": "midi: o meio-dia",
+     "audioCorrecao": "Je travaille toute la matinée, puis je déjeune à midi."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Après le déjeuner, c'est ",
+     "depois": ".",
+     "opcoes": [
+      "l'après-midi",
+      "le matin",
+      "l'aube"
+     ],
+     "resposta": "l'après-midi",
+     "explicacao": "l'après-midi: a tarde",
+     "audioCorrecao": "Après le déjeuner, c'est l'après-midi."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Quand le soleil est couché et qu'il fait sombre, c'est ",
+     "depois": ".",
+     "opcoes": [
+      "le soir",
+      "le matin",
+      "midi"
+     ],
+     "resposta": "le soir",
+     "explicacao": "le soir: o começo da noite",
+     "audioCorrecao": "Quand le soleil est couché et qu'il fait sombre, c'est le soir."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Entre minuit et le lever du soleil, c'est ",
+     "depois": ".",
+     "opcoes": [
+      "la nuit",
+      "le midi",
+      "l'après-midi"
+     ],
+     "resposta": "la nuit",
+     "explicacao": "la nuit: a noite, a madrugada",
+     "audioCorrecao": "Entre minuit et le lever du soleil, c'est la nuit."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment dit-on 'amanhecer' en français ?",
+     "opcoes": [
+      "l'aube",
+      "le crépuscule",
+      "minuit"
+     ],
+     "resposta": "l'aube",
+     "explicacao": "L'aube (ou le lever du soleil) e o termo para o amanhecer."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment dit-on 'entardecer' en français ?",
+     "opcoes": [
+      "le crépuscule",
+      "l'aube",
+      "midi"
+     ],
+     "resposta": "le crépuscule",
+     "explicacao": "Le crépuscule (ou le coucher du soleil) e o termo para o entardecer."
+    }
+   ]
+  },
+  {
+   "id": "repas",
+   "tipo": "exercicio",
+   "titulo": "Les repas",
+   "itens": [
+    {
+     "tipo": "associar",
+     "pares": [
+      {
+       "a": "le petit-déjeuner",
+       "b": "le matin"
+      },
+      {
+       "a": "le déjeuner",
+       "b": "midi"
+      },
+      {
+       "a": "le goûter",
+       "b": "l'après-midi"
+      },
+      {
+       "a": "le dîner",
+       "b": "le soir"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le matin, je prends mon ",
+     "depois": ".",
+     "opcoes": [
+      "petit-déjeuner",
+      "déjeuner",
+      "dîner"
+     ],
+     "resposta": "petit-déjeuner",
+     "explicacao": "Petit-déjeuner de manhã, déjeuner ao meio-dia, goûter à tarde e dîner à noite.",
+     "audioCorrecao": "Le matin, je prends mon petit-déjeuner."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "À midi, je prends mon ",
+     "depois": ".",
+     "opcoes": [
+      "déjeuner",
+      "petit-déjeuner",
+      "goûter"
+     ],
+     "resposta": "déjeuner",
+     "explicacao": "Petit-déjeuner de manhã, déjeuner ao meio-dia, goûter à tarde e dîner à noite.",
+     "audioCorrecao": "À midi, je prends mon déjeuner."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Vers seize heures, les enfants prennent souvent un ",
+     "depois": ".",
+     "opcoes": [
+      "goûter",
+      "dîner",
+      "déjeuner"
+     ],
+     "resposta": "goûter",
+     "explicacao": "Petit-déjeuner de manhã, déjeuner ao meio-dia, goûter à tarde e dîner à noite.",
+     "audioCorrecao": "Vers seize heures, les enfants prennent souvent un goûter."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le soir, toute la famille prend le ",
+     "depois": " ensemble.",
+     "opcoes": [
+      "dîner",
+      "petit-déjeuner",
+      "goûter"
+     ],
+     "resposta": "dîner",
+     "explicacao": "Petit-déjeuner de manhã, déjeuner ao meio-dia, goûter à tarde e dîner à noite.",
+     "audioCorrecao": "Le soir, toute la famille prend le dîner ensemble."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel repas est associé au matin ?",
+     "opcoes": [
+      "le petit-déjeuner",
+      "le déjeuner",
+      "le dîner"
+     ],
+     "resposta": "le petit-déjeuner",
+     "explicacao": "Petit-déjeuner de manhã, déjeuner ao meio-dia, goûter à tarde e dîner à noite."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel repas est associé à l'après-midi ?",
+     "opcoes": [
+      "le goûter",
+      "le petit-déjeuner",
+      "le dîner"
+     ],
+     "resposta": "le goûter",
+     "explicacao": "Petit-déjeuner de manhã, déjeuner ao meio-dia, goûter à tarde e dîner à noite."
+    }
+   ]
+  },
+  {
+   "id": "meteo",
+   "tipo": "exercicio",
+   "titulo": "La météo",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Quand le soleil brille et qu'il n'y a pas de nuages, on dit :",
+     "opcoes": [
+      "Il fait beau",
+      "Il pleut",
+      "Il neige"
+     ],
+     "resposta": "Il fait beau",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quand l'eau tombe du ciel, on dit :",
+     "opcoes": [
+      "Il pleut",
+      "Il fait beau",
+      "Il fait chaud"
+     ],
+     "resposta": "Il pleut",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "En hiver, quand des flocons blancs tombent, on dit :",
+     "opcoes": [
+      "Il neige",
+      "Il pleut",
+      "Il fait beau"
+     ],
+     "resposta": "Il neige",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quand il fait très, très chaud pendant plusieurs jours, on parle de :",
+     "opcoes": [
+      "une canicule",
+      "un orage",
+      "une tornade"
+     ],
+     "resposta": "une canicule",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quand il y a du tonnerre et des éclairs, on dit qu'il y a :",
+     "opcoes": [
+      "un orage",
+      "un arc-en-ciel",
+      "une canicule"
+     ],
+     "resposta": "un orage",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Après la pluie, on voit parfois dans le ciel :",
+     "opcoes": [
+      "un arc-en-ciel",
+      "une tornade",
+      "une canicule"
+     ],
+     "resposta": "un arc-en-ciel",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quand on a très froid, on peut dire :",
+     "opcoes": [
+      "J'ai froid",
+      "J'ai chaud",
+      "J'ai peur"
+     ],
+     "resposta": "J'ai froid",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quand on a très chaud, on peut dire :",
+     "opcoes": [
+      "J'ai chaud",
+      "J'ai froid",
+      "J'ai faim"
+     ],
+     "resposta": "J'ai chaud",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage)."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Un vent très fort et tournant qui peut tout détruire s'appelle :",
+     "opcoes": [
+      "une tornade",
+      "une canicule",
+      "un arc-en-ciel"
+     ],
+     "resposta": "une tornade",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage)."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Prends un parapluie, ",
+     "depois": " aujourd'hui.",
+     "opcoes": [
+      "il pleut",
+      "il fait beau",
+      "il fait chaud"
+     ],
+     "resposta": "il pleut",
+     "explicacao": "Il fait + adjetivo (beau, chaud, froid); il pleut / il neige; il y a + fenômeno (du vent, un orage).",
+     "audioCorrecao": "Prends un parapluie, il pleut aujourd'hui."
+    }
+   ]
+  },
+  {
+   "id": "jours",
+   "tipo": "exercicio",
+   "titulo": "Les jours",
+   "itens": [
+    {
+     "tipo": "associar",
+     "pares": [
+      {
+       "a": "mardi",
+       "b": "Mars / Ares"
+      },
+      {
+       "a": "mercredi",
+       "b": "Mercure / Hermès"
+      },
+      {
+       "a": "jeudi",
+       "b": "Jupiter / Zeus"
+      },
+      {
+       "a": "vendredi",
+       "b": "Vénus / Aphrodite"
+      },
+      {
+       "a": "samedi",
+       "b": "Saturne / Cronos"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " vient du latin dies Martis, jour de Mars, dieu de la guerre.",
+     "opcoes": [
+      "Mardi",
+      "Mercredi",
+      "Jeudi"
+     ],
+     "resposta": "Mardi",
+     "explicacao": "Mardi: dia de Mars, deus da guerra (Ares)",
+     "audioCorrecao": "Mardi vient du latin dies Martis, jour de Mars, dieu de la guerre."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " vient de Mercure, le messager des dieux, associé au commerce.",
+     "opcoes": [
+      "Mercredi",
+      "Jeudi",
+      "Vendredi"
+     ],
+     "resposta": "Mercredi",
+     "explicacao": "Mercredi: dia de Mercure, mensageiro (Hermès)",
+     "audioCorrecao": "Mercredi vient de Mercure, le messager des dieux, associé au commerce."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " vient de Jupiter, le roi des dieux romains.",
+     "opcoes": [
+      "Jeudi",
+      "Vendredi",
+      "Samedi"
+     ],
+     "resposta": "Jeudi",
+     "explicacao": "Jeudi: dia de Jupiter, rei dos deuses (Zeus)",
+     "audioCorrecao": "Jeudi vient de Jupiter, le roi des dieux romains."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " vient de Vénus, déesse de l'amour et de la beauté.",
+     "opcoes": [
+      "Vendredi",
+      "Samedi",
+      "Dimanche"
+     ],
+     "resposta": "Vendredi",
+     "explicacao": "Vendredi: dia de Vénus, deusa do amor (Aphrodite)",
+     "audioCorrecao": "Vendredi vient de Vénus, déesse de l'amour et de la beauté."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " vient de Saturne, dieu du temps et de l'agriculture.",
+     "opcoes": [
+      "Samedi",
+      "Dimanche",
+      "Lundi"
+     ],
+     "resposta": "Samedi",
+     "explicacao": "Samedi: dia de Saturne, deus do tempo (Cronos)",
+     "audioCorrecao": "Samedi vient de Saturne, dieu du temps et de l'agriculture."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "L'équivalent grec de Mars (dieu de la guerre) est :",
+     "opcoes": [
+      "Ares",
+      "Hermès",
+      "Zeus"
+     ],
+     "resposta": "Ares",
+     "explicacao": "Ares: "
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "L'équivalent grec de Jupiter (roi des dieux) est :",
+     "opcoes": [
+      "Zeus",
+      "Ares",
+      "Cronos"
+     ],
+     "resposta": "Zeus",
+     "explicacao": "Zeus: "
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "En anglais, Thursday vient du dieu nordique Thor, équivalent de :",
+     "opcoes": [
+      "Jupiter/Zeus",
+      "Mars/Ares",
+      "Vénus/Aphrodite"
+     ],
+     "resposta": "Jupiter/Zeus",
+     "explicacao": "Jupiter/Zeus: "
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Lundi vient de quel astre ?",
+     "opcoes": [
+      "la Lune",
+      "le Soleil",
+      "Mars"
+     ],
+     "resposta": "la Lune",
+     "explicacao": "la Lune: "
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Dimanche vient à l'origine de quel astre, avant de devenir le jour du Seigneur ?",
+     "opcoes": [
+      "le Soleil",
+      "la Lune",
+      "Saturne"
+     ],
+     "resposta": "le Soleil",
+     "explicacao": "le Soleil: "
+    }
+   ]
+  },
+  {
+   "id": "mois",
+   "tipo": "exercicio",
+   "titulo": "Les mois",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 1",
+     "pares": [
+      {
+       "a": "janvier",
+       "b": "Janus"
+      },
+      {
+       "a": "février",
+       "b": "Februa (purification)"
+      },
+      {
+       "a": "mars",
+       "b": "Mars (guerre)"
+      },
+      {
+       "a": "avril",
+       "b": "aperire / Aphrodite"
+      },
+      {
+       "a": "mai",
+       "b": "Maia"
+      },
+      {
+       "a": "juin",
+       "b": "Junon (Hera)"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 2",
+     "pares": [
+      {
+       "a": "juillet",
+       "b": "Jules César"
+      },
+      {
+       "a": "août",
+       "b": "Auguste"
+      },
+      {
+       "a": "septembre",
+       "b": "septem (7)"
+      },
+      {
+       "a": "octobre",
+       "b": "octo (8)"
+      },
+      {
+       "a": "novembre",
+       "b": "novem (9)"
+      },
+      {
+       "a": "décembre",
+       "b": "decem (10)"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " vient de Janus, le dieu romain des commencements et des portes.",
+     "opcoes": [
+      "Janvier",
+      "Février",
+      "Mars"
+     ],
+     "resposta": "Janvier",
+     "explicacao": "Janvier: Janus, deus de duas caras",
+     "audioCorrecao": "Janvier vient de Janus, le dieu romain des commencements et des portes."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " vient de Maia, déesse de la croissance et du printemps.",
+     "opcoes": [
+      "Mai",
+      "Avril",
+      "Juin"
+     ],
+     "resposta": "Mai",
+     "explicacao": "Mai: Maia, deusa do crescimento",
+     "audioCorrecao": "Mai vient de Maia, déesse de la croissance et du printemps."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " vient de Junon, épouse de Jupiter, déesse du mariage.",
+     "opcoes": [
+      "Juin",
+      "Mai",
+      "Juillet"
+     ],
+     "resposta": "Juin",
+     "explicacao": "Juin: Junon, deusa do casamento",
+     "audioCorrecao": "Juin vient de Junon, épouse de Jupiter, déesse du mariage."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " a été nommé en l'honneur de Jules César.",
+     "opcoes": [
+      "Juillet",
+      "Août",
+      "Juin"
+     ],
+     "resposta": "Juillet",
+     "explicacao": "Juillet: em homenagem a Jules César",
+     "audioCorrecao": "Juillet a été nommé en l'honneur de Jules César."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " a été nommé en l'honneur de l'empereur Auguste.",
+     "opcoes": [
+      "Août",
+      "Juillet",
+      "Septembre"
+     ],
+     "resposta": "Août",
+     "explicacao": "Août: em homenagem a Auguste",
+     "audioCorrecao": "Août a été nommé en l'honneur de l'empereur Auguste."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Pourquoi Janus a-t-il deux visages ?",
+     "opcoes": [
+      "Il regarde le passé et l'avenir",
+      "Il aime se déguiser",
+      "Il a deux enfants"
+     ],
+     "resposta": "Il regarde le passé et l'avenir",
+     "explicacao": "Il regarde le passé et l'avenir: "
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Junon (Hera en grec) est surtout associée à :",
+     "opcoes": [
+      "le mariage",
+      "la guerre",
+      "l'agriculture"
+     ],
+     "resposta": "le mariage",
+     "explicacao": "le mariage: "
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Septembre vient du latin septem, qui veut dire :",
+     "opcoes": [
+      "sept",
+      "neuf",
+      "dix"
+     ],
+     "resposta": "sept",
+     "explicacao": "sept: "
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Pourquoi septembre (septem = 7) est-il le neuvième mois aujourd'hui ?",
+     "opcoes": [
+      "Janvier et février ont été ajoutés au début",
+      "On a changé le calendrier par erreur",
+      "Les Romains ne savaient pas compter"
+     ],
+     "resposta": "Janvier et février ont été ajoutés au début",
+     "explicacao": "Janvier et février ont été ajoutés au début: "
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Décembre vient du latin decem, qui veut dire :",
+     "opcoes": [
+      "dix",
+      "douze",
+      "deux"
+     ],
+     "resposta": "dix",
+     "explicacao": "dix: "
+    }
+   ]
+  },
+  {
+   "id": "saisons",
+   "tipo": "exercicio",
+   "titulo": "Les saisons",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Quelle saison vient après l'hiver ?",
+     "opcoes": [
+      "le printemps",
+      "l'été",
+      "l'automne"
+     ],
+     "resposta": "le printemps",
+     "explicacao": "Ordem: le printemps → l'été → l'automne → l'hiver."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quelle saison vient après le printemps ?",
+     "opcoes": [
+      "l'été",
+      "l'automne",
+      "l'hiver"
+     ],
+     "resposta": "l'été",
+     "explicacao": "Ordem: le printemps → l'été → l'automne → l'hiver."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "En quelle saison les feuilles tombent-elles des arbres ?",
+     "opcoes": [
+      "l'automne",
+      "le printemps",
+      "l'été"
+     ],
+     "resposta": "l'automne",
+     "explicacao": "Ordem: le printemps → l'été → l'automne → l'hiver."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quelle saison est la plus froide ?",
+     "opcoes": [
+      "l'hiver",
+      "l'été",
+      "le printemps"
+     ],
+     "resposta": "l'hiver",
+     "explicacao": "Ordem: le printemps → l'été → l'automne → l'hiver."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " il fait souvent très chaud et on va à la plage.",
+     "opcoes": [
+      "En été",
+      "En hiver",
+      "Au printemps"
+     ],
+     "resposta": "En été",
+     "explicacao": "Ordem: le printemps → l'été → l'automne → l'hiver.",
+     "audioCorrecao": "En été il fait souvent très chaud et on va à la plage."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Selon le mythe grec, pourquoi y a-t-il des saisons ?",
+     "opcoes": [
+      "Perséphone passe une partie de l'année aux enfers",
+      "Zeus se dispute avec Héra",
+      "Les hommes ont fâché les dieux"
+     ],
+     "resposta": "Perséphone passe une partie de l'année aux enfers",
+     "explicacao": "Ordem: le printemps → l'été → l'automne → l'hiver."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Déméter, déesse de l'agriculture, est triste quand :",
+     "opcoes": [
+      "sa fille Perséphone est aux enfers",
+      "il pleut trop",
+      "l'été est trop court"
+     ],
+     "resposta": "sa fille Perséphone est aux enfers",
+     "explicacao": "Ordem: le printemps → l'été → l'automne → l'hiver."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quand Perséphone revient sur terre, quelle saison commence ?",
+     "opcoes": [
+      "le printemps",
+      "l'hiver",
+      "l'automne"
+     ],
+     "resposta": "le printemps",
+     "explicacao": "Ordem: le printemps → l'été → l'automne → l'hiver."
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "Le temps qui passe",
+   "instrucao": "Um texto com tudo desta lição: leia e ouça.",
+   "paragrafos": [
+    "Ce matin, dès l’aube, le soleil s’est levé sur un ciel sans nuages: il faisait beau. C’était un lundi de printemps, le premier avril, et toute la famille s’est réveillée tôt pour prendre le petit-déjeuner ensemble.",
+    "Vers midi, le temps a changé: le vent s’est levé, puis un orage a éclaté, avec du tonnerre et des éclairs. Heureusement, l’après-midi, un bel arc-en-ciel est apparu dans le ciel, juste avant le goûter.",
+    "Le mercredi suivant, en plein été, une canicule a frappé la région: il faisait si chaud que personne ne voulait sortir avant le crépuscule. Le soir, enfin, une petite brise fraîche est arrivée, et la famille a pu dîner dehors, en regardant la nuit tomber.",
+    "En automne, les jours raccourcissent: le soleil se lève plus tard et se couche plus tôt. En novembre, il commence à faire froid, et parfois, en hiver, il neige. Décembre est le dernier mois de l’année, et janvier, le mois de Janus, marque un nouveau départ.",
+    "Ainsi va le temps: entre l’aube et le crépuscule, entre le printemps et l’hiver, chaque jour, chaque mois et chaque saison a son propre caractère, tout comme les dieux qui leur ont donné leurs noms."
+   ],
+   "glossario": {
+    "aube": "alvorada, amanhecer",
+    "crepuscule": "entardecer, por do sol",
+    "orage": "tempestade",
+    "canicule": "onda de calor",
+    "arcenciel": "arco-iris",
+    "printemps": "primavera",
+    "automne": "outono",
+    "hiver": "inverno",
+    "ete": "verao",
+    "neige": "neve",
+    "vent": "vento",
+    "tonnerre": "trovao",
+    "eclairs": "relampagos"
+   }
+  },
+  {
+   "id": "quiz",
+   "tipo": "exercicio",
+   "titulo": "Compréhension",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "À quel moment de la journée commence l'histoire ?",
+     "opcoes": [
+      "À l'aube",
+      "Au crépuscule",
+      "À minuit"
+     ],
+     "resposta": "À l'aube",
+     "explicacao": "No texto: « Ce matin, dès l’aube, le soleil s’est levé sur un ciel sans nuages: il faisait beau. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "En quel mois commence l'histoire ?",
+     "opcoes": [
+      "Avril",
+      "Janvier",
+      "Août"
+     ],
+     "resposta": "Avril",
+     "explicacao": "No texto: « C’était un lundi de printemps, le premier avril, et toute la famille s’est réveillée tôt pour prendre le petit-déjeuner ensemble. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Que voit la famille dans le ciel après l'orage ?",
+     "opcoes": [
+      "Un arc-en-ciel",
+      "Une tornade",
+      "De la neige"
+     ],
+     "resposta": "Un arc-en-ciel",
+     "explicacao": "No texto: « Heureusement, l’après-midi, un bel arc-en-ciel est apparu dans le ciel, juste avant le goûter. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel jour de la semaine la canicule frappe-t-elle la région ?",
+     "opcoes": [
+      "Mercredi",
+      "Lundi",
+      "Dimanche"
+     ],
+     "resposta": "Mercredi",
+     "explicacao": "No texto: « Le mercredi suivant, en plein été, une canicule a frappé la région: il faisait si chaud que personne ne voulait sortir avant le crépuscule. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quelle saison suit le printemps dans l'histoire ?",
+     "opcoes": [
+      "L'été",
+      "L'automne",
+      "L'hiver"
+     ],
+     "resposta": "L'été",
+     "explicacao": "No texto: « Le mercredi suivant, en plein été, une canicule a frappé la région: il faisait si chaud que personne ne voulait sortir avant le crépuscule. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel dieu romain donne son nom à janvier, mentionné à la fin de l'histoire ?",
+     "opcoes": [
+      "Janus",
+      "Zeus",
+      "Mars"
+     ],
+     "resposta": "Janus",
+     "explicacao": "No texto: « Décembre est le dernier mois de l’année, et janvier, le mois de Janus, marque un nouveau départ. »"
+    }
+   ]
+  }
+ ]
+}

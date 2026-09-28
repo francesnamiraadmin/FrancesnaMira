@@ -1,0 +1,827 @@
+{
+ "slug": "les-possessifs",
+ "ordem": 10,
+ "nivel": "A1",
+ "titulo": "Les adjectifs possessifs",
+ "origem": "Francês na Mira, Possessifs",
+ "descricao": "Mon, ma, mes... a concordância com o objeto, a exceção do MON diante de vogal e a família de Camille.",
+ "secoes": [
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<p>Os possessivos indicam de quem é algo. Em francês eles concordam com <strong>a coisa possuída</strong>, não com quem possui.</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th></th><th>masc. sing.</th><th>fem. sing.</th><th>plural</th></tr></thead><tbody><tr><td>je</td><td><span class=\"fr\" data-fr=\"mon\">mon</span></td><td><span class=\"fr\" data-fr=\"ma\">ma</span></td><td><span class=\"fr\" data-fr=\"mes\">mes</span></td></tr><tr><td>tu</td><td><span class=\"fr\" data-fr=\"ton\">ton</span></td><td><span class=\"fr\" data-fr=\"ta\">ta</span></td><td><span class=\"fr\" data-fr=\"tes\">tes</span></td></tr><tr><td>il / elle</td><td><span class=\"fr\" data-fr=\"son\">son</span></td><td><span class=\"fr\" data-fr=\"sa\">sa</span></td><td><span class=\"fr\" data-fr=\"ses\">ses</span></td></tr><tr><td>nous</td><td><span class=\"fr\" data-fr=\"notre\">notre</span></td><td><span class=\"fr\" data-fr=\"notre\">notre</span></td><td><span class=\"fr\" data-fr=\"nos\">nos</span></td></tr><tr><td>vous</td><td><span class=\"fr\" data-fr=\"votre\">votre</span></td><td><span class=\"fr\" data-fr=\"votre\">votre</span></td><td><span class=\"fr\" data-fr=\"vos\">vos</span></td></tr><tr><td>ils / elles</td><td><span class=\"fr\" data-fr=\"leur\">leur</span></td><td><span class=\"fr\" data-fr=\"leur\">leur</span></td><td><span class=\"fr\" data-fr=\"leurs\">leurs</span></td></tr></tbody></table></div>\n<div class=\"destaque\"><strong>A armadilha:</strong> <span class=\"fr\" data-fr=\"son travail\">son travail</span> pode ser \"o trabalho dele\" ou \"o trabalho dela\". <span class=\"fr\" data-fr=\"Marie aime son travail.\">Marie aime son travail.</span> <span class=\"fr\" data-fr=\"Pierre aime son travail.\">Pierre aime son travail.</span> É SON nos dois casos, porque <em>travail</em> é masculino.</div>\n<h3>MON também serve para palavras femininas</h3>\n<p>Se a palavra feminina singular começar com <strong>vogal ou h mudo</strong>, usa-se mon/ton/son no lugar de ma/ta/sa, só pela pronúncia: <span class=\"fr\" data-fr=\"mon amie\">mon amie</span>, <span class=\"fr\" data-fr=\"ton histoire\">ton histoire</span>, <span class=\"fr\" data-fr=\"son école\">son école</span>.</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Feminina com vogal → MON</th><th>Feminina com consoante → MA</th><th>Masculina → MON</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"une amie\">une amie</span> <small>uma amiga -&gt; mon amie</small></td><td><span class=\"fr\" data-fr=\"une maison\">une maison</span> <small>uma casa -&gt; ma maison</small></td><td><span class=\"fr\" data-fr=\"un ami\">un ami</span> <small>um amigo -&gt; mon ami</small></td></tr><tr><td><span class=\"fr\" data-fr=\"une histoire\">une histoire</span> <small>uma história -&gt; mon histoire</small></td><td><span class=\"fr\" data-fr=\"une sœur\">une sœur</span> <small>uma irmã -&gt; ma sœur</small></td><td><span class=\"fr\" data-fr=\"un travail\">un travail</span> <small>um trabalho -&gt; mon travail</small></td></tr><tr><td><span class=\"fr\" data-fr=\"une école\">une école</span> <small>uma escola -&gt; mon école</small></td><td><span class=\"fr\" data-fr=\"une voiture\">une voiture</span> <small>um carro -&gt; ma voiture</small></td><td><span class=\"fr\" data-fr=\"un poste\">un poste</span> <small>um cargo -&gt; mon poste</small></td></tr><tr><td><span class=\"fr\" data-fr=\"une adresse\">une adresse</span> <small>um endereço -&gt; mon adresse</small></td><td><span class=\"fr\" data-fr=\"une formation\">une formation</span> <small>uma formação -&gt; ma formation</small></td><td><span class=\"fr\" data-fr=\"un frère\">un frère</span> <small>um irmão -&gt; mon frère</small></td></tr><tr><td><span class=\"fr\" data-fr=\"une entreprise\">une entreprise</span> <small>uma empresa -&gt; mon entreprise</small></td><td><span class=\"fr\" data-fr=\"une collègue\">une collègue</span> <small>uma colega -&gt; ma collègue</small></td><td><span class=\"fr\" data-fr=\"un collègue\">un collègue</span> <small>um colega -&gt; mon collègue</small></td></tr><tr><td><span class=\"fr\" data-fr=\"une idée\">une idée</span> <small>uma ideia -&gt; mon idée</small></td><td><span class=\"fr\" data-fr=\"une famille\">une famille</span> <small>uma família -&gt; ma famille</small></td><td><span class=\"fr\" data-fr=\"un entretien\">un entretien</span> <small>uma entrevista -&gt; mon entretien</small></td></tr><tr><td><span class=\"fr\" data-fr=\"une équipe\">une équipe</span> <small>uma equipe -&gt; mon équipe</small></td><td></td><td></td></tr></tbody></table></div>\n<h3>Singular × plural</h3>\n<ul><li><strong>notre / votre / leur</strong> = um objeto: <span class=\"fr\" data-fr=\"notre maison\">notre maison</span>, <span class=\"fr\" data-fr=\"leur enfant\">leur enfant</span></li><li><strong>nos / vos / leurs</strong> = vários objetos: <span class=\"fr\" data-fr=\"nos maisons\">nos maisons</span>, <span class=\"fr\" data-fr=\"leurs enfants\">leurs enfants</span></li></ul>\n<h3>Monsieur, Madame, Mademoiselle</h3>\n<p>O possessivo já está dentro dessas palavras (mon + sieur, ma + dame): no plural, <span class=\"fr\" data-fr=\"Messieurs\">Messieurs</span>, <span class=\"fr\" data-fr=\"Mesdames\">Mesdames</span>, <span class=\"fr\" data-fr=\"Mesdemoiselles\">Mesdemoiselles</span>. Por isso <em>Notre-Dame</em> significa \"Nossa Senhora\".</p>\n<div class=\"dica\"><strong>Cuidado:</strong> <span class=\"fr\" data-fr=\"mon copain\">mon copain</span> (e às vezes <span class=\"fr\" data-fr=\"mon ami\">mon ami</span>) costuma soar como \"meu namorado\". Para \"um amigo meu\", diga <span class=\"fr\" data-fr=\"C'est un ami à moi.\">C'est un ami à moi.</span></div>"
+  },
+  {
+   "id": "reliez",
+   "tipo": "exercicio",
+   "titulo": "Reliez",
+   "instrucao": "Ligue cada possessivo ao seu uso.",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 1",
+     "pares": [
+      {
+       "a": "mon",
+       "b": "meu (masc. sing., de je)"
+      },
+      {
+       "a": "ma",
+       "b": "minha (fem. sing., de je)"
+      },
+      {
+       "a": "mes",
+       "b": "meus/minhas (plural, de je)"
+      },
+      {
+       "a": "ton",
+       "b": "teu (masc. sing., de tu)"
+      },
+      {
+       "a": "ta",
+       "b": "tua (fem. sing., de tu)"
+      },
+      {
+       "a": "tes",
+       "b": "teus/tuas (plural, de tu)"
+      },
+      {
+       "a": "son",
+       "b": "seu/sua, dele ou dela (masc. sing.)"
+      },
+      {
+       "a": "sa",
+       "b": "sua/seu, dele ou dela (fem. sing.)"
+      },
+      {
+       "a": "ses",
+       "b": "seus/suas, dele ou dela (plural)"
+      },
+      {
+       "a": "notre",
+       "b": "nosso/nossa (singular)"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 2",
+     "pares": [
+      {
+       "a": "nos",
+       "b": "nossos/nossas (plural)"
+      },
+      {
+       "a": "votre",
+       "b": "seu/sua, de vocês (singular)"
+      },
+      {
+       "a": "vos",
+       "b": "seus/suas, de vocês (plural)"
+      },
+      {
+       "a": "leur",
+       "b": "deles/delas (singular)"
+      },
+      {
+       "a": "leurs",
+       "b": "deles/delas (plural)"
+      },
+      {
+       "a": "mon amie",
+       "b": "minha amiga (excecao fonetica)"
+      },
+      {
+       "a": "ton histoire",
+       "b": "tua historia (excecao fonetica)"
+      },
+      {
+       "a": "son argent",
+       "b": "o dinheiro dele/dela"
+      },
+      {
+       "a": "leur maison",
+       "b": "a casa deles/delas"
+      }
+     ],
+     "audioEsquerda": true
+    }
+   ]
+  },
+  {
+   "id": "mon",
+   "tipo": "exercicio",
+   "titulo": "MON ou MA ?",
+   "instrucao": "Atenção às palavras femininas que começam com vogal.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une amie) est architecte.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "Amie comeca com vogal, entao mon, apesar de feminino.",
+     "audioCorrecao": "Mon est architecte."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une maison) est grande.",
+     "opcoes": [
+      "Ma",
+      "Mon",
+      "Mes"
+     ],
+     "resposta": "Ma",
+     "explicacao": "MA: feminino singular de je, começando com consoante.",
+     "audioCorrecao": "Ma est grande."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (un ami) travaille avec moi.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "MON: masculino singular (ou feminino que começa com vogal/h mudo: mon amie).",
+     "audioCorrecao": "Mon travaille avec moi."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une école) est excellente.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "Ecole comeca com vogal, entao mon, apesar de feminino.",
+     "audioCorrecao": "Mon est excellente."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une sœur) habite à Lyon.",
+     "opcoes": [
+      "Ma",
+      "Mon",
+      "Mes"
+     ],
+     "resposta": "Ma",
+     "explicacao": "MA: feminino singular de je, começando com consoante.",
+     "audioCorrecao": "Ma habite à Lyon."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (un travail) me plaît beaucoup.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "MON: masculino singular (ou feminino que começa com vogal/h mudo: mon amie).",
+     "audioCorrecao": "Mon me plaît beaucoup."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une histoire) est compliquée.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "Histoire comeca com h mudo, entao mon.",
+     "audioCorrecao": "Mon est compliquée."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une entreprise) recrute en ce moment.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "Entreprise comeca com vogal, entao mon.",
+     "audioCorrecao": "Mon recrute en ce moment."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une voiture) est en panne.",
+     "opcoes": [
+      "Ma",
+      "Mon",
+      "Mes"
+     ],
+     "resposta": "Ma",
+     "explicacao": "MA: feminino singular de je, começando com consoante.",
+     "audioCorrecao": "Ma est en panne."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (un poste) est très intéressant.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "MON: masculino singular (ou feminino que começa com vogal/h mudo: mon amie).",
+     "audioCorrecao": "Mon est très intéressant."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une idée) va te plaire.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "Idee comeca com vogal, entao mon.",
+     "audioCorrecao": "Mon va te plaire."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une formation) commence demain.",
+     "opcoes": [
+      "Ma",
+      "Mon",
+      "Mes"
+     ],
+     "resposta": "Ma",
+     "explicacao": "MA: feminino singular de je, começando com consoante.",
+     "audioCorrecao": "Ma commence demain."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (un frère) travaille dans la formation.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "MON: masculino singular (ou feminino que começa com vogal/h mudo: mon amie).",
+     "audioCorrecao": "Mon travaille dans la formation."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une équipe) est formidable.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "Equipe comeca com vogal, entao mon.",
+     "audioCorrecao": "Mon est formidable."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (une collègue) part en vacances.",
+     "opcoes": [
+      "Ma",
+      "Mon",
+      "Mes"
+     ],
+     "resposta": "Ma",
+     "explicacao": "MA: feminino singular de je, começando com consoante.",
+     "audioCorrecao": "Ma part en vacances."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " (un entretien) est prévu demain.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "MON: masculino singular (ou feminino que começa com vogal/h mudo: mon amie).",
+     "audioCorrecao": "Mon est prévu demain."
+    }
+   ]
+  },
+  {
+   "id": "selection",
+   "tipo": "exercicio",
+   "titulo": "Sélection",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " frère travaille dans la formation professionnelle.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "MON: masculino singular (ou feminino que começa com vogal/h mudo: mon amie).",
+     "audioCorrecao": "Mon frère travaille dans la formation professionnelle."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " sœur cherche un nouvel emploi.",
+     "opcoes": [
+      "Ma",
+      "Mon",
+      "Mes"
+     ],
+     "resposta": "Ma",
+     "explicacao": "MA: feminino singular de je, começando com consoante.",
+     "audioCorrecao": "Ma sœur cherche un nouvel emploi."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "J'ai perdu ",
+     "depois": " clés.",
+     "opcoes": [
+      "mes",
+      "ma",
+      "mon"
+     ],
+     "resposta": "mes",
+     "explicacao": "MES: plural de je (masculino ou feminino).",
+     "audioCorrecao": "J'ai perdu mes clés."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " collègue est très sympathique.",
+     "opcoes": [
+      "Ton",
+      "Ta",
+      "Tes"
+     ],
+     "resposta": "Ton",
+     "explicacao": "TON: masculino singular de tu (ou feminino com vogal).",
+     "audioCorrecao": "Ton collègue est très sympathique."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Est-ce que c'est ",
+     "depois": " voiture ?",
+     "opcoes": [
+      "ta",
+      "ton",
+      "tes"
+     ],
+     "resposta": "ta",
+     "explicacao": "TA: feminino singular de tu.",
+     "audioCorrecao": "Est-ce que c'est ta voiture?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il a oublié ",
+     "depois": " dossiers au bureau.",
+     "opcoes": [
+      "ses",
+      "sa",
+      "son"
+     ],
+     "resposta": "ses",
+     "explicacao": "SES: plural de il/elle.",
+     "audioCorrecao": "Il a oublié ses dossiers au bureau."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Marie aime ",
+     "depois": " travail.",
+     "opcoes": [
+      "son",
+      "sa",
+      "ses"
+     ],
+     "resposta": "son",
+     "explicacao": "Travail e masculino, entao son, mesmo sendo Marie (mulher) a possuidora.",
+     "audioCorrecao": "Marie aime son travail."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " maison est très grande.",
+     "opcoes": [
+      "Notre",
+      "Nos",
+      "Votre"
+     ],
+     "resposta": "Notre",
+     "explicacao": "NOTRE: um só objeto, de nous.",
+     "audioCorrecao": "Notre maison est très grande."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " enfants sont adorables.",
+     "opcoes": [
+      "Nos",
+      "Notre",
+      "Nos "
+     ],
+     "resposta": "Nos",
+     "explicacao": "NOS: vários objetos, de nous.",
+     "audioCorrecao": "Nos enfants sont adorables."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " entreprise recrute beaucoup.",
+     "opcoes": [
+      "Votre",
+      "Vos",
+      "Notre"
+     ],
+     "resposta": "Votre",
+     "explicacao": "VOTRE: um só objeto, de vous.",
+     "audioCorrecao": "Votre entreprise recrute beaucoup."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " projets sont ambitieux.",
+     "opcoes": [
+      "Vos",
+      "Votre",
+      "Notre"
+     ],
+     "resposta": "Vos",
+     "explicacao": "VOS: vários objetos, de vous.",
+     "audioCorrecao": "Vos projets sont ambitieux."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils adorent ",
+     "depois": " nouveau poste.",
+     "opcoes": [
+      "leur",
+      "leurs",
+      "son"
+     ],
+     "resposta": "leur",
+     "explicacao": "LEUR: um só objeto, de ils/elles.",
+     "audioCorrecao": "Ils adorent leur nouveau poste."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elles ont changé ",
+     "depois": " habitudes.",
+     "opcoes": [
+      "leurs",
+      "leur",
+      "ses"
+     ],
+     "resposta": "leurs",
+     "explicacao": "LEURS: vários objetos, de ils/elles.",
+     "audioCorrecao": "Elles ont changé leurs habitudes."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " amie habite à Paris.",
+     "opcoes": [
+      "Mon",
+      "Ma",
+      "Mes"
+     ],
+     "resposta": "Mon",
+     "explicacao": "Amie e feminino mas comeca com vogal, entao usa-se mon por fonetica, nao ma.",
+     "audioCorrecao": "Mon amie habite à Paris."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il a présenté ",
+     "depois": " projet au directeur.",
+     "opcoes": [
+      "son",
+      "sa",
+      "ses"
+     ],
+     "resposta": "son",
+     "explicacao": "SON: masculino singular de il/elle (ou feminino com vogal). Não indica se é dele ou dela!",
+     "audioCorrecao": "Il a présenté son projet au directeur."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " parents sont fiers de toi.",
+     "opcoes": [
+      "Tes",
+      "Ton",
+      "Ta"
+     ],
+     "resposta": "Tes",
+     "explicacao": "TES: plural de tu.",
+     "audioCorrecao": "Tes parents sont fiers de toi."
+    }
+   ]
+  },
+  {
+   "id": "digiter",
+   "tipo": "exercicio",
+   "titulo": "Digitez",
+   "instrucao": "Escreva o possessivo, sem as opções.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " père travaille beaucoup.",
+     "respostas": [
+      "mon"
+     ],
+     "explicacao": "MON: masculino singular (ou feminino que começa com vogal/h mudo: mon amie).",
+     "audioCorrecao": "Mon père travaille beaucoup.",
+     "dica": "Pere e masculino singular, de je."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " mère est très gentille.",
+     "respostas": [
+      "ma"
+     ],
+     "explicacao": "MA: feminino singular de je, começando com consoante.",
+     "audioCorrecao": "Ma mère est très gentille.",
+     "dica": "Mere e feminino singular, de je."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " amie est architecte.",
+     "respostas": [
+      "mon"
+     ],
+     "explicacao": "MON: masculino singular (ou feminino que começa com vogal/h mudo: mon amie).",
+     "audioCorrecao": "Mon amie est architecte.",
+     "dica": "Amie e feminino, mas comeca com vogal: excecao fonetica."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " sœur habite à Lyon.",
+     "respostas": [
+      "ta"
+     ],
+     "explicacao": "TA: feminino singular de tu.",
+     "audioCorrecao": "Ta sœur habite à Lyon.",
+     "dica": "Soeur e feminino singular, de tu."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " collègues sont sympas.",
+     "respostas": [
+      "tes"
+     ],
+     "explicacao": "TES: plural de tu.",
+     "audioCorrecao": "Tes collègues sont sympas.",
+     "dica": "Plural, de tu."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle adore ",
+     "depois": " travail.",
+     "respostas": [
+      "son"
+     ],
+     "explicacao": "SON: masculino singular de il/elle (ou feminino com vogal). Não indica se é dele ou dela!",
+     "audioCorrecao": "Elle adore son travail.",
+     "dica": "Travail e masculino, nao importa se o possuidor e homem ou mulher."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il aime ",
+     "depois": " maison.",
+     "respostas": [
+      "sa"
+     ],
+     "explicacao": "SA: feminino singular de il/elle (o gênero é o do objeto, não do dono).",
+     "audioCorrecao": "Il aime sa maison.",
+     "dica": "Maison e feminino singular."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ils ont vendu ",
+     "depois": " voiture.",
+     "respostas": [
+      "leur"
+     ],
+     "explicacao": "LEUR: um só objeto, de ils/elles.",
+     "audioCorrecao": "Ils ont vendu leur voiture.",
+     "dica": "Singular, de ils."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " enfants grandissent vite.",
+     "respostas": [
+      "nos"
+     ],
+     "explicacao": "NOS: vários objetos, de nous.",
+     "audioCorrecao": "Nos enfants grandissent vite.",
+     "dica": "Plural, de nous."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " maison est confortable.",
+     "respostas": [
+      "notre"
+     ],
+     "explicacao": "NOTRE: um só objeto, de nous.",
+     "audioCorrecao": "Notre maison est confortable.",
+     "dica": "Singular, de nous."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " soutien compte beaucoup pour moi.",
+     "respostas": [
+      "votre"
+     ],
+     "explicacao": "VOTRE: um só objeto, de vous.",
+     "audioCorrecao": "Votre soutien compte beaucoup pour moi.",
+     "dica": "Singular, de vous."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " conseils sont toujours utiles.",
+     "respostas": [
+      "vos"
+     ],
+     "explicacao": "VOS: vários objetos, de vous.",
+     "audioCorrecao": "Vos conseils sont toujours utiles.",
+     "dica": "Plural, de vous."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elles ont trouvé ",
+     "depois": " place.",
+     "respostas": [
+      "leur"
+     ],
+     "explicacao": "LEUR: um só objeto, de ils/elles.",
+     "audioCorrecao": "Elles ont trouvé leur place.",
+     "dica": "Singular, de elles."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " histoire est fascinante.",
+     "respostas": [
+      "son"
+     ],
+     "explicacao": "SON: masculino singular de il/elle (ou feminino com vogal). Não indica se é dele ou dela!",
+     "audioCorrecao": "Son histoire est fascinante.",
+     "dica": "Histoire e feminino, mas comeca com h mudo: excecao fonetica."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "J'ai oublié ",
+     "depois": " clés à la maison.",
+     "respostas": [
+      "mes"
+     ],
+     "explicacao": "MES: plural de je (masculino ou feminino).",
+     "audioCorrecao": "J'ai oublié mes clés à la maison.",
+     "dica": "Plural, de je."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " poste actuel me plaît beaucoup.",
+     "respostas": [
+      "mon"
+     ],
+     "explicacao": "MON: masculino singular (ou feminino que começa com vogal/h mudo: mon amie).",
+     "audioCorrecao": "Mon poste actuel me plaît beaucoup.",
+     "dica": "Poste e masculino singular, de je."
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "La famille de Camille",
+   "instrucao": "Leia, ouça e repare em cada possessivo.",
+   "paragrafos": [
+    "Camille présente sa famille. « Voici mon père et ma mère, et là, c'est mon frère avec sa femme et leurs deux enfants. » Toute la famille est réunie pour fêter son nouvel emploi.",
+    "« J'ai enfin trouvé mon poste idéal, dans une entreprise de formation professionnelle », explique Camille à ses parents. « Mon nouveau bureau est très lumineux, et mes collègues sont adorables. »",
+    "Sa mère lui demande: « Et ton salaire, il te convient ? » « Oui, et surtout, mon travail correspond enfin à mes valeurs », répond Camille avec un grand sourire.",
+    "Son frère raconte aussi ses propres nouvelles: lui et sa femme viennent d'acheter leur première maison. « Notre nouvelle maison a un grand jardin, parfait pour nos enfants », dit-il fièrement.",
+    "Avant de partir, Camille remercie tout le monde: « Merci pour votre soutien pendant ma recherche d'emploi. Sans vous et vos conseils, je n'aurais jamais trouvé ma place. »"
+   ],
+   "glossario": {
+    "reunie": "reunida",
+    "entreprise": "empresa",
+    "lumineux": "iluminado, claro",
+    "convient": "convem, agrada",
+    "correspond": "corresponde",
+    "sourire": "sorriso",
+    "fierement": "orgulhosamente",
+    "soutien": "apoio",
+    "recherche": "busca, procura"
+   }
+  },
+  {
+   "id": "quiz",
+   "tipo": "exercicio",
+   "titulo": "Compréhension",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Que fête la famille de Camille ?",
+     "opcoes": [
+      "Son nouvel emploi",
+      "Son anniversaire",
+      "Son mariage"
+     ],
+     "resposta": "Son nouvel emploi",
+     "explicacao": "No texto: « » Toute la famille est réunie pour fêter son nouvel emploi. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Où travaille Camille maintenant ?",
+     "opcoes": [
+      "Dans une entreprise de formation professionnelle",
+      "Dans un hôpital",
+      "Dans une école"
+     ],
+     "resposta": "Dans une entreprise de formation professionnelle",
+     "explicacao": "No texto: « « J'ai enfin trouvé mon poste idéal, dans une entreprise de formation professionnelle », explique Camille à ses parents. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment Camille décrit-elle ses collègues ?",
+     "opcoes": [
+      "Adorables",
+      "Difficiles",
+      "Timides"
+     ],
+     "resposta": "Adorables",
+     "explicacao": "No texto: « « Mon nouveau bureau est très lumineux, et mes collègues sont adorables. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qu'est-ce que le frère de Camille vient d'acheter ?",
+     "opcoes": [
+      "Sa première maison",
+      "Une nouvelle voiture",
+      "Un appartement"
+     ],
+     "resposta": "Sa première maison",
+     "explicacao": "No texto: « Son frère raconte aussi ses propres nouvelles: lui et sa femme viennent d'acheter leur première maison. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qu'est-ce qui est parfait pour les enfants du frère de Camille ?",
+     "opcoes": [
+      "Le grand jardin",
+      "L'école proche",
+      "La piscine"
+     ],
+     "resposta": "Le grand jardin",
+     "explicacao": "No texto: « « Notre nouvelle maison a un grand jardin, parfait pour nos enfants », dit-il fièrement. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Pourquoi Camille remercie-t-elle tout le monde à la fin ?",
+     "opcoes": [
+      "Pour leur soutien pendant sa recherche d'emploi",
+      "Pour le cadeau reçu",
+      "Pour la fête organisée"
+     ],
+     "resposta": "Pour leur soutien pendant sa recherche d'emploi",
+     "explicacao": "No texto: « Avant de partir, Camille remercie tout le monde: « Merci pour votre soutien pendant ma recherche d'emploi. »"
+    }
+   ]
+  }
+ ]
+}

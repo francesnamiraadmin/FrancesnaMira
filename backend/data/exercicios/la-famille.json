@@ -1,0 +1,779 @@
+{
+ "slug": "la-famille",
+ "ordem": 18,
+ "nivel": "A1–A2",
+ "titulo": "La famille et les sentiments",
+ "origem": "Francês na Mira, Famille",
+ "descricao": "Vocabulário da família e dos sentimentos, com a árvore genealógica dos deuses gregos e a história de Hermès.",
+ "secoes": [
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Vocabulário",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<h3>La famille</h3><div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"le père\">le père</span></td><td>o pai</td></tr><tr><td><span class=\"fr\" data-fr=\"la mère\">la mère</span></td><td>a mãe</td></tr><tr><td><span class=\"fr\" data-fr=\"le fils\">le fils</span></td><td>o filho</td></tr><tr><td><span class=\"fr\" data-fr=\"la fille\">la fille</span></td><td>a filha</td></tr><tr><td><span class=\"fr\" data-fr=\"le frère\">le frère</span></td><td>o irmão</td></tr><tr><td><span class=\"fr\" data-fr=\"la sœur\">la sœur</span></td><td>a irmã</td></tr><tr><td><span class=\"fr\" data-fr=\"le grand-père\">le grand-père</span></td><td>o avô</td></tr><tr><td><span class=\"fr\" data-fr=\"la grand-mère\">la grand-mère</span></td><td>a avó</td></tr><tr><td><span class=\"fr\" data-fr=\"l'oncle\">l'oncle</span></td><td>o tio</td></tr><tr><td><span class=\"fr\" data-fr=\"la tante\">la tante</span></td><td>a tia</td></tr><tr><td><span class=\"fr\" data-fr=\"le cousin\">le cousin</span></td><td>o primo</td></tr><tr><td><span class=\"fr\" data-fr=\"la cousine\">la cousine</span></td><td>a prima</td></tr><tr><td><span class=\"fr\" data-fr=\"le neveu\">le neveu</span></td><td>o sobrinho</td></tr><tr><td><span class=\"fr\" data-fr=\"la nièce\">la nièce</span></td><td>a sobrinha</td></tr><tr><td><span class=\"fr\" data-fr=\"les jumeaux\">les jumeaux</span></td><td>os gêmeos</td></tr><tr><td><span class=\"fr\" data-fr=\"le demi-frère\">le demi-frère</span></td><td>o meio-irmão</td></tr><tr><td><span class=\"fr\" data-fr=\"la demi-sœur\">la demi-sœur</span></td><td>a meia-irmã</td></tr><tr><td><span class=\"fr\" data-fr=\"adopter\">adopter</span></td><td>adotar</td></tr><tr><td><span class=\"fr\" data-fr=\"les parents adoptifs\">les parents adoptifs</span></td><td>os pais adotivos</td></tr><tr><td><span class=\"fr\" data-fr=\"l'orphelin\">l'orphelin</span></td><td>o órfão</td></tr><tr><td><span class=\"fr\" data-fr=\"le beau-père\">le beau-père</span></td><td>o padrasto / sogro</td></tr><tr><td><span class=\"fr\" data-fr=\"la belle-mère\">la belle-mère</span></td><td>a madrasta / sogra</td></tr><tr><td><span class=\"fr\" data-fr=\"se marier avec\">se marier avec</span></td><td>casar-se com</td></tr><tr><td><span class=\"fr\" data-fr=\"divorcer\">divorcer</span></td><td>divorciar-se</td></tr></tbody></table></div>\n<div class=\"dica\">Atenção: <strong>les parents</strong> = os pais (pai e mãe); para \"parentes\" diga <strong>la famille</strong> ou <strong>les proches</strong>. <strong>Beau-père</strong> é sogro <em>ou</em> padrasto.</div>\n<h3>Les émotions de base</h3><div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"la joie\">la joie</span></td><td>a alegria</td></tr><tr><td><span class=\"fr\" data-fr=\"la tristesse\">la tristesse</span></td><td>a tristeza</td></tr><tr><td><span class=\"fr\" data-fr=\"la colère\">la colère</span></td><td>a raiva</td></tr><tr><td><span class=\"fr\" data-fr=\"la jalousie\">la jalousie</span></td><td>o ciúme</td></tr><tr><td><span class=\"fr\" data-fr=\"la peur\">la peur</span></td><td>o medo</td></tr><tr><td><span class=\"fr\" data-fr=\"l'amour\">l'amour</span></td><td>o amor</td></tr><tr><td><span class=\"fr\" data-fr=\"rire\">rire</span></td><td>rir</td></tr><tr><td><span class=\"fr\" data-fr=\"pleurer\">pleurer</span></td><td>chorar</td></tr><tr><td><span class=\"fr\" data-fr=\"les larmes\">les larmes</span></td><td>as lágrimas</td></tr></tbody></table></div>\n<h3>Le bonheur et l'accomplissement</h3><div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"le bonheur\">le bonheur</span></td><td>a felicidade</td></tr><tr><td><span class=\"fr\" data-fr=\"l'accomplissement\">l'accomplissement</span></td><td>a realização, o cumprimento</td></tr><tr><td><span class=\"fr\" data-fr=\"l'épanouissement\">l'épanouissement</span></td><td>o florescimento pessoal, a plenitude</td></tr><tr><td><span class=\"fr\" data-fr=\"être épanoui(e)\">être épanoui(e)</span></td><td>sentir-se realizado, pleno</td></tr><tr><td><span class=\"fr\" data-fr=\"se réjouir\">se réjouir</span></td><td>alegrar-se, regozijar-se</td></tr><tr><td><span class=\"fr\" data-fr=\"ça me rend content(e)\">ça me rend content(e)</span></td><td>isso me deixa feliz</td></tr></tbody></table></div>\n<h3>Ressentir et éprouver</h3><p>Para falar de um sentimento: <span class=\"fr\" data-fr=\"Je ressens de la joie.\">Je ressens de la joie.</span> <span class=\"fr\" data-fr=\"J'éprouve de la tristesse.\">J'éprouve de la tristesse.</span> <span class=\"fr\" data-fr=\"Je suis heureux.\">Je suis heureux.</span></p><div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"ressentir\">ressentir</span></td><td>sentir (uma emoção) · <span class=\"fr\" data-fr=\"Je ressens de la joie.\">Je ressens de la joie.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"éprouver\">éprouver</span></td><td>sentir, experimentar (um sentimento) · <span class=\"fr\" data-fr=\"J'éprouve de la tristesse.\">J'éprouve de la tristesse.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"éprouver de la joie\">éprouver de la joie</span></td><td>sentir alegria</td></tr><tr><td><span class=\"fr\" data-fr=\"éprouver de la tristesse\">éprouver de la tristesse</span></td><td>sentir tristeza</td></tr><tr><td><span class=\"fr\" data-fr=\"avoir du chagrin\">avoir du chagrin</span></td><td>estar magoado, sofrer</td></tr><tr><td><span class=\"fr\" data-fr=\"avoir de la peine\">avoir de la peine</span></td><td>sentir pena, tristeza</td></tr></tbody></table></div>\n<h3>Le deuil et la perte</h3><div class=\"tabela-wrap\"><table><thead><tr><th>Français</th><th>Português</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"mourir\">mourir</span></td><td>morrer</td></tr><tr><td><span class=\"fr\" data-fr=\"décéder\">décéder</span></td><td>falecer</td></tr><tr><td><span class=\"fr\" data-fr=\"le décès\">le décès</span></td><td>o falecimento</td></tr><tr><td><span class=\"fr\" data-fr=\"perdre quelqu'un\">perdre quelqu'un</span></td><td>perder alguém</td></tr><tr><td><span class=\"fr\" data-fr=\"être en deuil\">être en deuil</span></td><td>estar de luto</td></tr><tr><td><span class=\"fr\" data-fr=\"l'enterrement\">l'enterrement</span></td><td>o enterro</td></tr><tr><td><span class=\"fr\" data-fr=\"le cimetière\">le cimetière</span></td><td>o cemitério</td></tr><tr><td><span class=\"fr\" data-fr=\"veuf / veuve\">veuf / veuve</span></td><td>viúvo / viúva</td></tr><tr><td><span class=\"fr\" data-fr=\"s'effondrer\">s'effondrer</span></td><td>desmoronar-se (emocionalmente)</td></tr></tbody></table></div>"
+  },
+  {
+   "id": "reliez-famille",
+   "tipo": "exercicio",
+   "titulo": "Reliez: la famille",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 1",
+     "pares": [
+      {
+       "a": "le père",
+       "b": "o pai"
+      },
+      {
+       "a": "la mère",
+       "b": "a mãe"
+      },
+      {
+       "a": "le frère",
+       "b": "o irmão"
+      },
+      {
+       "a": "la sœur",
+       "b": "a irmã"
+      },
+      {
+       "a": "les jumeaux",
+       "b": "os gêmeos"
+      },
+      {
+       "a": "le neveu",
+       "b": "o sobrinho"
+      },
+      {
+       "a": "la nièce",
+       "b": "a sobrinha"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 2",
+     "pares": [
+      {
+       "a": "adopter",
+       "b": "adotar"
+      },
+      {
+       "a": "le demi-frère",
+       "b": "o meio-irmão"
+      },
+      {
+       "a": "le beau-père",
+       "b": "o padrasto / sogro"
+      },
+      {
+       "a": "la belle-mère",
+       "b": "a madrasta / sogra"
+      },
+      {
+       "a": "se marier avec",
+       "b": "casar-se com"
+      },
+      {
+       "a": "divorcer",
+       "b": "divorciar-se"
+      },
+      {
+       "a": "les parents adoptifs",
+       "b": "os pais adotivos"
+      }
+     ],
+     "audioEsquerda": true
+    }
+   ]
+  },
+  {
+   "id": "reliez-sentiments",
+   "tipo": "exercicio",
+   "titulo": "Reliez: les sentiments",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 1",
+     "pares": [
+      {
+       "a": "la joie",
+       "b": "a alegria"
+      },
+      {
+       "a": "la tristesse",
+       "b": "a tristeza"
+      },
+      {
+       "a": "la colère",
+       "b": "a raiva"
+      },
+      {
+       "a": "la jalousie",
+       "b": "o ciúme"
+      },
+      {
+       "a": "la peur",
+       "b": "o medo"
+      },
+      {
+       "a": "l'amour",
+       "b": "o amor"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 2",
+     "pares": [
+      {
+       "a": "le bonheur",
+       "b": "a felicidade"
+      },
+      {
+       "a": "l'accomplissement",
+       "b": "a realização"
+      },
+      {
+       "a": "l'épanouissement",
+       "b": "a plenitude pessoal"
+      },
+      {
+       "a": "ressentir",
+       "b": "sentir (uma emoção)"
+      },
+      {
+       "a": "éprouver",
+       "b": "sentir, experimentar"
+      },
+      {
+       "a": "avoir du chagrin",
+       "b": "estar magoado"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 3",
+     "pares": [
+      {
+       "a": "les larmes",
+       "b": "as lágrimas"
+      },
+      {
+       "a": "rire",
+       "b": "rir"
+      },
+      {
+       "a": "le deuil",
+       "b": "o luto"
+      },
+      {
+       "a": "décéder",
+       "b": "falecer"
+      },
+      {
+       "a": "veuf / veuve",
+       "b": "viúvo / viúva"
+      },
+      {
+       "a": "s'effondrer",
+       "b": "desmoronar-se"
+      }
+     ],
+     "audioEsquerda": true
+    }
+   ]
+  },
+  {
+   "id": "arbre",
+   "tipo": "exercicio",
+   "titulo": "L'arbre des dieux grecs",
+   "instrucao": "Complete os laços de família dos deuses do Olimpo.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Zeus est le ",
+     "depois": " de Cronos et de Rhéa.",
+     "opcoes": [
+      "fils",
+      "père",
+      "frère"
+     ],
+     "resposta": "fils",
+     "explicacao": "fils = o filho.",
+     "audioCorrecao": "Zeus est le fils de Cronos et de Rhéa."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Héra est la ",
+     "depois": " de Zeus.",
+     "opcoes": [
+      "épouse",
+      "fille",
+      "mère"
+     ],
+     "resposta": "épouse",
+     "explicacao": "Hera e a esposa (epouse) de Zeus, alem de ser sua irma, ja que ambos sao filhos de Cronos e Rhea.",
+     "audioCorrecao": "Héra est la épouse de Zeus."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Apollon et Artémis sont des ",
+     "depois": ", nés le même jour, de la même mère.",
+     "opcoes": [
+      "jumeaux",
+      "cousins",
+      "demi-frères"
+     ],
+     "resposta": "jumeaux",
+     "explicacao": "Frase completa: Apollon et Artémis sont des jumeaux, nés le même jour, de la même mère.",
+     "audioCorrecao": "Apollon et Artémis sont des jumeaux, nés le même jour, de la même mère."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Héraclès est le ",
+     "depois": " de Zeus et d'Alcmène, une mortelle.",
+     "opcoes": [
+      "fils",
+      "neveu",
+      "petit-fils"
+     ],
+     "resposta": "fils",
+     "explicacao": "fils = o filho.",
+     "audioCorrecao": "Héraclès est le fils de Zeus et d'Alcmène, une mortelle."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Poséidon, Hadès et Déméter sont les ",
+     "depois": " de Zeus.",
+     "opcoes": [
+      "frères et sœur",
+      "fils et fille",
+      "cousins"
+     ],
+     "resposta": "frères et sœur",
+     "explicacao": "Frase completa: Poséidon, Hadès et Déméter sont les frères et sœur de Zeus.",
+     "audioCorrecao": "Poséidon, Hadès et Déméter sont les frères et sœur de Zeus."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Dionysos est le fils de Sémélé, une mortelle, et de ",
+     "depois": ".",
+     "opcoes": [
+      "Zeus",
+      "Hadès",
+      "Poséidon"
+     ],
+     "resposta": "Zeus",
+     "explicacao": "Frase completa: Dionysos est le fils de Sémélé, une mortelle, et de Zeus.",
+     "audioCorrecao": "Dionysos est le fils de Sémélé, une mortelle, et de Zeus."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Perséphone est la ",
+     "depois": " de Zeus et de Déméter.",
+     "opcoes": [
+      "fille",
+      "sœur",
+      "nièce"
+     ],
+     "resposta": "fille",
+     "explicacao": "fille = a filha.",
+     "audioCorrecao": "Perséphone est la fille de Zeus et de Déméter."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Athéna est la ",
+     "depois": " de Zeus, née directement de sa tête.",
+     "opcoes": [
+      "fille",
+      "sœur",
+      "mère"
+     ],
+     "resposta": "fille",
+     "explicacao": "fille = a filha.",
+     "audioCorrecao": "Athéna est la fille de Zeus, née directement de sa tête."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Héraclès et Apollon sont des ",
+     "depois": ", tous deux fils de Zeus, mais de mères différentes.",
+     "opcoes": [
+      "demi-frères",
+      "jumeaux",
+      "cousins"
+     ],
+     "resposta": "demi-frères",
+     "explicacao": "Demi-freres (meio-irmaos) tem o mesmo pai (Zeus) mas maes diferentes, diferente de jumeaux (gemeos), que tem a mesma mae e nascem juntos.",
+     "audioCorrecao": "Héraclès et Apollon sont des demi-frères, tous deux fils de Zeus, mais de mères différentes."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Hermès est le ",
+     "depois": " de Zeus et de Maia.",
+     "opcoes": [
+      "fils",
+      "neveu",
+      "cousin"
+     ],
+     "resposta": "fils",
+     "explicacao": "fils = o filho.",
+     "audioCorrecao": "Hermès est le fils de Zeus et de Maia."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Déméter est la ",
+     "depois": " de Poséidon et d'Hadès.",
+     "opcoes": [
+      "sœur",
+      "mère",
+      "fille"
+     ],
+     "resposta": "sœur",
+     "explicacao": "sœur = a irmã.",
+     "audioCorrecao": "Déméter est la sœur de Poséidon et d'Hadès."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Perséphone et Athéna sont des ",
+     "depois": ", toutes deux filles de Zeus, mais de mères différentes.",
+     "opcoes": [
+      "demi-sœurs",
+      "jumelles",
+      "cousines"
+     ],
+     "resposta": "demi-sœurs",
+     "explicacao": "Frase completa: Perséphone et Athéna sont des demi-sœurs, toutes deux filles de Zeus, mais de mères différentes.",
+     "audioCorrecao": "Perséphone et Athéna sont des demi-sœurs, toutes deux filles de Zeus, mais de mères différentes."
+    }
+   ]
+  },
+  {
+   "id": "amour",
+   "tipo": "exercicio",
+   "titulo": "L'amour dans la mythologie",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Hadès tombe ",
+     "depois": " de Perséphone dès qu'il la voit.",
+     "opcoes": [
+      "amoureux",
+      "triste",
+      "jaloux"
+     ],
+     "resposta": "amoureux",
+     "explicacao": "Frase completa: Hadès tombe amoureux de Perséphone dès qu'il la voit.",
+     "audioCorrecao": "Hadès tombe amoureux de Perséphone dès qu'il la voit."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Persée sauve Andromède d'un monstre marin, puis il l'",
+     "depois": " peu après.",
+     "opcoes": [
+      "épouse",
+      "adopte",
+      "quitte"
+     ],
+     "resposta": "épouse",
+     "explicacao": "Frase completa: Persée sauve Andromède d'un monstre marin, puis il l'épouse peu après.",
+     "audioCorrecao": "Persée sauve Andromède d'un monstre marin, puis il l'épouse peu après."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Quand Orphée perd Eurydice, il ",
+     "depois": " une tristesse immense et descend aux enfers pour la chercher.",
+     "opcoes": [
+      "éprouve",
+      "adopte",
+      "épouse"
+     ],
+     "resposta": "éprouve",
+     "explicacao": "Frase completa: Quand Orphée perd Eurydice, il éprouve une tristesse immense et descend aux enfers pour la chercher.",
+     "audioCorrecao": "Quand Orphée perd Eurydice, il éprouve une tristesse immense et descend aux enfers pour la chercher."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": "",
+     "opcoes": [
+      "le coup de foudre",
+      "une dispute",
+      "un divorce"
+     ],
+     "resposta": "le coup de foudre",
+     "explicacao": "Frase completa: Le coup de foudre",
+     "audioCorrecao": "Le coup de foudre"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Persée et Andromède se rencontrent, tombent amoureux, puis se marient: c'est le début d'un ",
+     "depois": ".",
+     "opcoes": [
+      "couple",
+      "deuil",
+      "conflit"
+     ],
+     "resposta": "couple",
+     "explicacao": "Frase completa: Persée et Andromède se rencontrent, tombent amoureux, puis se marient: c'est le début d'un couple.",
+     "audioCorrecao": "Persée et Andromède se rencontrent, tombent amoureux, puis se marient: c'est le début d'un couple."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": "",
+     "opcoes": [
+      "l'amour",
+      "la colère",
+      "la peur"
+     ],
+     "resposta": "l'amour",
+     "explicacao": "l'amour = o amor.",
+     "audioCorrecao": "L'amour"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Hadès enlève Perséphone pour l'épouser: sa mère Déméter ",
+     "depois": " une grande tristesse et se met en deuil.",
+     "opcoes": [
+      "éprouve",
+      "adopte",
+      "marie"
+     ],
+     "resposta": "éprouve",
+     "explicacao": "Eprouver (sentir, experimentar) e usado com sentimentos: eprouver de la tristesse, de la joie, etc.",
+     "audioCorrecao": "Hadès enlève Perséphone pour l'épouser: sa mère Déméter éprouve une grande tristesse et se met en deuil."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": "",
+     "opcoes": [
+      "accomplissement",
+      "chagrin",
+      "jalousie"
+     ],
+     "resposta": "accomplissement",
+     "explicacao": "accomplissement = a realização, o cumprimento.",
+     "audioCorrecao": "Accomplissement"
+    }
+   ]
+  },
+  {
+   "id": "relations",
+   "tipo": "exercicio",
+   "titulo": "Relations et sentiments",
+   "instrucao": "Escreva a palavra que falta.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "Amphitryon n'était pas le père biologique d'Héraclès, mais il l'a élevé comme son fils: il l'a ",
+     "depois": ".",
+     "respostas": [
+      "adopté",
+      "adopte"
+     ],
+     "explicacao": "Adopter (adotar) significa criar como filho alguem que nao e biologicamente seu.",
+     "audioCorrecao": "Amphitryon n'était pas le père biologique d'Héraclès, mais il l'a élevé comme son fils: il l'a adopté."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Apollon et Artémis sont nés le même jour, de la même mère: ce sont des ",
+     "depois": ".",
+     "respostas": [
+      "jumeaux",
+      "jumeau"
+     ],
+     "explicacao": "Frase completa: Apollon et Artémis sont nés le même jour, de la même mère: ce sont des jumeaux.",
+     "audioCorrecao": "Apollon et Artémis sont nés le même jour, de la même mère: ce sont des jumeaux."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Le fils du frère ou de la sœur de quelqu'un s'appelle un ",
+     "depois": ".",
+     "respostas": [
+      "neveu"
+     ],
+     "explicacao": "neveu = o sobrinho.",
+     "audioCorrecao": "Le fils du frère ou de la sœur de quelqu'un s'appelle un neveu."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "La fille du frère ou de la sœur de quelqu'un s'appelle une ",
+     "depois": ".",
+     "respostas": [
+      "nièce"
+     ],
+     "explicacao": "nièce = a sobrinha.",
+     "audioCorrecao": "La fille du frère ou de la sœur de quelqu'un s'appelle une nièce."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Héraclès et Apollon ont le même père, Zeus, mais des mères différentes: ce sont des ",
+     "depois": ".",
+     "respostas": [
+      "demi-frères",
+      "demi-freres"
+     ],
+     "explicacao": "Frase completa: Héraclès et Apollon ont le même père, Zeus, mais des mères différentes: ce sont des demi-frères.",
+     "audioCorrecao": "Héraclès et Apollon ont le même père, Zeus, mais des mères différentes: ce sont des demi-frères."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Quand Déméter perd sa fille Perséphone, elle ressent une grande ",
+     "depois": ".",
+     "respostas": [
+      "tristesse"
+     ],
+     "explicacao": "tristesse = a tristeza.",
+     "audioCorrecao": "Quand Déméter perd sa fille Perséphone, elle ressent une grande tristesse."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Orphée a perdu son épouse Eurydice: il est en ",
+     "depois": " profond.",
+     "respostas": [
+      "deuil"
+     ],
+     "explicacao": "Frase completa: Orphée a perdu son épouse Eurydice: il est en deuil profond.",
+     "audioCorrecao": "Orphée a perdu son épouse Eurydice: il est en deuil profond."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Héra était tellement jalouse d'Héraclès qu'elle a essayé de le tuer. Ce sentiment s'appelle la ",
+     "depois": ".",
+     "respostas": [
+      "jalousie"
+     ],
+     "explicacao": "jalousie = o ciúme.",
+     "audioCorrecao": "Héra était tellement jalouse d'Héraclès qu'elle a essayé de le tuer. Ce sentiment s'appelle la jalousie."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Zeus aimait profondément ses enfants; ce sentiment fort s'appelle l'",
+     "depois": ".",
+     "respostas": [
+      "amour"
+     ],
+     "explicacao": "amour = o amor.",
+     "audioCorrecao": "Zeus aimait profondément ses enfants; ce sentiment fort s'appelle l'amour."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Après avoir accompli ses douze travaux, Héraclès a ressenti un immense sentiment d'",
+     "depois": ".",
+     "respostas": [
+      "accomplissement"
+     ],
+     "explicacao": "Accomplissement (realizacao) e o sentimento de ter completado algo importante, como um objetivo pessoal ou profissional.",
+     "audioCorrecao": "Après avoir accompli ses douze travaux, Héraclès a ressenti un immense sentiment d'accomplissement."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Le père de mon père s'appelle mon ",
+     "depois": ".",
+     "respostas": [
+      "grand-père",
+      "grand-pere"
+     ],
+     "explicacao": "grand-père = o avô.",
+     "audioCorrecao": "Le père de mon père s'appelle mon grand-père."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "La sœur de ma mère ou de mon père s'appelle ma ",
+     "depois": ".",
+     "respostas": [
+      "tante"
+     ],
+     "explicacao": "tante = a tia.",
+     "audioCorrecao": "La sœur de ma mère ou de mon père s'appelle ma tante."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Après un entretien d'embauche réussi et l'obtention du poste, elle s'est sentie ",
+     "depois": ".",
+     "respostas": [
+      "épanouie"
+     ],
+     "explicacao": "Epanoui(e) descreve alguem que se sente pleno, realizado, florescendo, seja na vida pessoal ou profissional.",
+     "audioCorrecao": "Après un entretien d'embauche réussi et l'obtention du poste, elle s'est sentie épanouie."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Persée n'avait jamais rencontré son père Zeus enfant; il a grandi avec la ",
+     "depois": " de le connaître un jour.",
+     "respostas": [
+      "peur",
+      "crainte"
+     ],
+     "explicacao": "peur = o medo.",
+     "audioCorrecao": "Persée n'avait jamais rencontré son père Zeus enfant; il a grandi avec la peur de le connaître un jour."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Quand on perd son emploi après des années de travail, on peut ressentir de la ",
+     "depois": " et un grand vide.",
+     "respostas": [
+      "tristesse"
+     ],
+     "explicacao": "tristesse = a tristeza.",
+     "audioCorrecao": "Quand on perd son emploi après des années de travail, on peut ressentir de la tristesse et un grand vide."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ino a élevé Dionysos comme son propre fils après la mort de sa mère Sémélé: elle l'a ",
+     "depois": ".",
+     "respostas": [
+      "adopté",
+      "adopte"
+     ],
+     "explicacao": "Frase completa: Ino a élevé Dionysos comme son propre fils après la mort de sa mère Sémélé: elle l'a adopté.",
+     "audioCorrecao": "Ino a élevé Dionysos comme son propre fils après la mort de sa mère Sémélé: elle l'a adopté."
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "La naissance d'Hermès",
+   "instrucao": "Leia e ouça a história do mensageiro dos deuses.",
+   "paragrafos": [
+    "Hermès est né à l'aube, dans une grotte du mont Cyllène, fils de Zeus et de la nymphe Maia. Mais ce nouveau-né n'avait rien d'un bébé ordinaire: le jour même de sa naissance, il a quitté son berceau en cachette pour partir à l'aventure.",
+    "Sa première invention a été la lyre: il a trouvé une tortue, vidé sa carapace, et l'a transformée en instrument de musique avec des cordes en boyau de vache. Puis, toujours le même jour, le petit malin a volé cinquante vaches sacrées appartenant à son demi-frère Apollon. Pour brouiller les pistes, il a fait marcher les vaches à reculons et a même fabriqué des sandales spéciales pour effacer ses propres traces. Ensuite, il est retourné se coucher dans son berceau, l'air totalement innocent.",
+    "Apollon, furieux et grâce à ses pouvoirs de divination, a vite deviné que le voleur n'était autre que ce nourrisson à l'air angélique. Devant Zeus, Hermès a nié avec un aplomb comique: « Comment un bébé pourrait-il voler des vaches ? Je viens à peine de naître ! » Zeus, amusé par tant d'audace et d'intelligence, a éclaté de rire, mais a quand même ordonné à Hermès de rendre les vaches.",
+    "Pour se réconcilier avec Apollon, Hermès lui a offert la lyre qu'il venait d'inventer. Apollon, enchanté par la beauté de l'instrument, est immédiatement tombé sous le charme et a proposé un échange: les vaches contre la lyre. C'est ainsi qu'est née une grande amitié entre les deux demi-frères, malgré leurs débuts mouvementés.",
+    "Même Héra, pourtant réputée pour sa jalousie envers les enfants illégitimes de Zeus, n'a pas résisté au charme du petit Hermès: selon une version du mythe, elle l'aurait allaité sans savoir qui il était vraiment, créant ainsi un lien particulier avec lui, une exception rare dans ses relations avec les demi-frères et sœurs d'Hermès.",
+    "Grâce à son intelligence et à sa ruse légendaires, Hermès est devenu le messager des dieux, le protecteur des voyageurs, des commerçants et même des voleurs. Son symbole, le caducée (un bâton entouré de deux serpents), ainsi que ses sandales ailées et son chapeau ailé, représentent la rapidité, la communication et l'habileté à franchir les frontières, entre le monde des dieux, celui des hommes, et même celui des morts."
+   ],
+   "glossario": {
+    "nymphe": "ninfa",
+    "berceau": "berço",
+    "tortue": "tartaruga",
+    "reculons": "de costas, para tras (marcher a reculons)",
+    "sandales": "sandalias",
+    "aplomb": "descaramento, seguranca",
+    "jalousie": "ciume",
+    "allaite": "amamentou",
+    "ruse": "astucia, esperteza",
+    "caducee": "caduceu, bastao com serpentes, simbolo de Hermes",
+    "messager": "mensageiro",
+    "voleur": "ladrao",
+    "voleurs": "ladroes",
+    "ailees": "aladas"
+   }
+  },
+  {
+   "id": "quiz",
+   "tipo": "exercicio",
+   "titulo": "Compréhension",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Où Hermès est-il né ?",
+     "opcoes": [
+      "Dans une grotte du mont Cyllène",
+      "À Thèbes",
+      "Sur l'Olympe"
+     ],
+     "resposta": "Dans une grotte du mont Cyllène",
+     "explicacao": "No texto: « Hermès est né à l'aube, dans une grotte du mont Cyllène, fils de Zeus et de la nymphe Maia. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qui sont les parents d'Hermès ?",
+     "opcoes": [
+      "Zeus et Maia",
+      "Zeus et Héra",
+      "Zeus et Léto"
+     ],
+     "resposta": "Zeus et Maia",
+     "explicacao": "No texto: « Hermès est né à l'aube, dans une grotte du mont Cyllène, fils de Zeus et de la nymphe Maia. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Avec quel animal Hermès a-t-il inventé la lyre ?",
+     "opcoes": [
+      "Une tortue",
+      "Une vache",
+      "Un serpent"
+     ],
+     "resposta": "Une tortue",
+     "explicacao": "No texto: « Sa première invention a été la lyre: il a trouvé une tortue, vidé sa carapace, et l'a transformée en instrument de musique avec des cordes en boyau de vache. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qu'est-ce qu'Hermès a volé le jour de sa naissance ?",
+     "opcoes": [
+      "Les vaches sacrées d'Apollon",
+      "Les flèches d'Artémis",
+      "Le trône de Zeus"
+     ],
+     "resposta": "Les vaches sacrées d'Apollon",
+     "explicacao": "No texto: « Puis, toujours le même jour, le petit malin a volé cinquante vaches sacrées appartenant à son demi-frère Apollon. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment Hermès a-t-il brouillé les pistes ?",
+     "opcoes": [
+      "En faisant marcher les vaches à reculons",
+      "En volant dans le ciel",
+      "En se cachant dans un arbre"
+     ],
+     "resposta": "En faisant marcher les vaches à reculons",
+     "explicacao": "No texto: « Pour brouiller les pistes, il a fait marcher les vaches à reculons et a même fabriqué des sandales spéciales pour effacer ses propres traces. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment Hermès et Apollon se sont-ils réconciliés ?",
+     "opcoes": [
+      "Hermès a offert la lyre à Apollon",
+      "Zeus les a punis tous les deux",
+      "Ils se sont battus"
+     ],
+     "resposta": "Hermès a offert la lyre à Apollon",
+     "explicacao": "No texto: « Pour se réconcilier avec Apollon, Hermès lui a offert la lyre qu'il venait d'inventer. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel lien surprenant Hermès a-t-il eu avec Héra ?",
+     "opcoes": [
+      "Elle l'aurait allaité sans le savoir",
+      "Elle l'a adopté officiellement",
+      "Elle est devenue sa marraine"
+     ],
+     "resposta": "Elle l'aurait allaité sans le savoir",
+     "explicacao": "No texto: « Même Héra, pourtant réputée pour sa jalousie envers les enfants illégitimes de Zeus, n'a pas résisté au charme du petit Hermès: selon une version du mythe, elle l'aurait allaité sans savoir qui il était vraiment, créant ainsi un lien particulier avec lui, une exception rare dans ses relations avec les demi-frères et sœurs d'Hermès. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel est le symbole d'Hermès, avec deux serpents enroulés ?",
+     "opcoes": [
+      "Le caducée",
+      "Le trident",
+      "La foudre"
+     ],
+     "resposta": "Le caducée",
+     "explicacao": "No texto: « Son symbole, le caducée (un bâton entouré de deux serpents), ainsi que ses sandales ailées et son chapeau ailé, représentent la rapidité, la communication et l'habileté à franchir les frontières, entre le monde des dieux, celui des hommes, et même celui des morts. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "De quoi Hermès est-il devenu le protecteur ?",
+     "opcoes": [
+      "Des voyageurs, des commerçants et des voleurs",
+      "Des guerriers uniquement",
+      "Des animaux sauvages"
+     ],
+     "resposta": "Des voyageurs, des commerçants et des voleurs",
+     "explicacao": "No texto: « Grâce à son intelligence et à sa ruse légendaires, Hermès est devenu le messager des dieux, le protecteur des voyageurs, des commerçants et même des voleurs. »"
+    }
+   ]
+  }
+ ]
+}

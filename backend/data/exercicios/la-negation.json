@@ -1,0 +1,956 @@
+{
+ "slug": "la-negation",
+ "ordem": 11,
+ "nivel": "A1–A2",
+ "titulo": "La négation",
+ "origem": "Francês na Mira, Négation",
+ "descricao": "Ne...pas e todas as outras negações, o DE depois da negação, o 'ne pas' com infinitivo e os tempos compostos.",
+ "secoes": [
+  {
+   "id": "video",
+   "tipo": "video",
+   "titulo": "Vídeo",
+   "youtube": "eElBo6Llx_E"
+  },
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<p>A negação usa <strong>duas partes em volta do verbo</strong>: <strong>ne</strong> antes e <strong>pas / jamais / rien / personne...</strong> depois. <strong>Ne</strong> vira <strong>n'</strong> antes de vogal ou h mudo.</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Estrutura</th><th>Significado</th><th>Exemplo</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"ne...pas\">ne...pas</span></td><td>não</td><td><span class=\"fr\" data-fr=\"Je ne sais pas.\">Je ne sais pas.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"ne...jamais\">ne...jamais</span></td><td>nunca</td><td><span class=\"fr\" data-fr=\"Il ne mange jamais de viande.\">Il ne mange jamais de viande.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"ne...plus\">ne...plus</span></td><td>não mais</td><td><span class=\"fr\" data-fr=\"Elle ne travaille plus ici.\">Elle ne travaille plus ici.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"ne...rien\">ne...rien</span></td><td>nada</td><td><span class=\"fr\" data-fr=\"Je ne vois rien.\">Je ne vois rien.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"ne...personne\">ne...personne</span></td><td>ninguém</td><td><span class=\"fr\" data-fr=\"Il ne connaît personne.\">Il ne connaît personne.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"ne...aucun(e)\">ne...aucun(e)</span></td><td>nenhum(a)</td><td><span class=\"fr\" data-fr=\"Je n'ai aucune idée.\">Je n'ai aucune idée.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"ne...ni...ni\">ne...ni...ni</span></td><td>nem...nem</td><td><span class=\"fr\" data-fr=\"Je n'aime ni le café ni le thé.\">Je n'aime ni le café ni le thé.</span></td></tr><tr><td><span class=\"fr\" data-fr=\"ne...guère\">ne...guère</span></td><td>quase não</td><td><span class=\"fr\" data-fr=\"Je n'ai guère de temps.\">Je n'ai guère de temps.</span></td></tr></tbody></table></div>\n<div class=\"destaque\"><strong>Depois da negação, du / de la / des / un / une → DE:</strong> <span class=\"fr\" data-fr=\"Je mange du pain.\">Je mange du pain.</span> → <span class=\"fr\" data-fr=\"Je ne mange pas de pain.\">Je ne mange pas de pain.</span> Exceção: com <strong>être</strong> não muda: <span class=\"fr\" data-fr=\"Ce n'est pas un livre.\">Ce n'est pas un livre.</span></div>\n<h3>Conjugado × infinitivo</h3>\n<ul><li>Verbo conjugado: separados, um de cada lado: <span class=\"fr\" data-fr=\"Il ne vient pas.\">Il ne vient pas.</span></li><li>Infinitivo: juntos, antes do verbo: <span class=\"fr\" data-fr=\"Il préfère ne pas venir.\">Il préfère ne pas venir.</span> (comum depois de préférer, décider de, essayer de, pour...)</li></ul>\n<h3>Tempos compostos</h3>\n<p>No passé composé a negação envolve só o auxiliar: <span class=\"fr\" data-fr=\"Je n'ai pas mangé.\">Je n'ai pas mangé.</span> (nunca \"je n'ai mangé pas\").</p>\n<div class=\"dica\"><strong>N'importe qui / où / quand / quoi</strong> não é negação: significa \"qualquer pessoa / lugar / momento / coisa\". Compare <span class=\"fr\" data-fr=\"Il ne connaît personne.\">Il ne connaît personne.</span> (ninguém) com <span class=\"fr\" data-fr=\"N'importe qui peut venir.\">N'importe qui peut venir.</span> (qualquer um).</div>\n<div class=\"dica\">No oral informal o <em>ne</em> some: <span class=\"fr\" data-fr=\"Je sais pas.\">Je sais pas.</span> Na escrita e nas provas, use sempre.</div>"
+  },
+  {
+   "id": "reliez",
+   "tipo": "exercicio",
+   "titulo": "Reliez",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 1",
+     "pares": [
+      {
+       "a": "ne...pas",
+       "b": "não"
+      },
+      {
+       "a": "ne...jamais",
+       "b": "nunca"
+      },
+      {
+       "a": "ne...plus",
+       "b": "não mais"
+      },
+      {
+       "a": "ne...rien",
+       "b": "nada"
+      },
+      {
+       "a": "ne...personne",
+       "b": "ninguém"
+      },
+      {
+       "a": "ne...aucun",
+       "b": "nenhum (masculino)"
+      },
+      {
+       "a": "ne...aucune",
+       "b": "nenhuma (feminino)"
+      },
+      {
+       "a": "ne...ni...ni",
+       "b": "nem...nem"
+      },
+      {
+       "a": "sans",
+       "b": "sem"
+      },
+      {
+       "a": "ne pas + infinitif",
+       "b": "negação com infinitivo, tudo junto antes do verbo"
+      },
+      {
+       "a": "Je ne sais pas",
+       "b": "eu não sei"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 2",
+     "pares": [
+      {
+       "a": "Je n'aime pas",
+       "b": "eu não gosto (elisão do ne)"
+      },
+      {
+       "a": "plus jamais",
+       "b": "nunca mais"
+      },
+      {
+       "a": "pas encore",
+       "b": "ainda não"
+      },
+      {
+       "a": "pas du tout",
+       "b": "de jeito nenhum"
+      },
+      {
+       "a": "du → de",
+       "b": "mudança de artigo depois de negação"
+      },
+      {
+       "a": "un/une → de",
+       "b": "mudança de artigo depois de negação (exceto com être)"
+      },
+      {
+       "a": "Ce n'est pas un livre",
+       "b": "exceção com être, mantém 'un'"
+      },
+      {
+       "a": "J'sais pas",
+       "b": "forma coloquial, sem o 'ne'"
+      },
+      {
+       "a": "ne...guère",
+       "b": "quase não, mal"
+      },
+      {
+       "a": "n'importe qui",
+       "b": "qualquer pessoa (não é negação!)"
+      }
+     ],
+     "audioEsquerda": true
+    }
+   ]
+  },
+  {
+   "id": "infinitif",
+   "tipo": "exercicio",
+   "titulo": "Ne pas + infinitif",
+   "instrucao": "Verbo conjugado ou no infinitivo?",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Il préfère ",
+     "depois": " répondre tout de suite.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas ne"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Repondre esta no infinitivo, entao ne pas fica junto, antes do verbo.",
+     "audioCorrecao": "Il préfère ne pas répondre tout de suite."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle a décidé de ",
+     "depois": " venir à la fête.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas ne"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Elle a décidé de ne pas venir à la fête."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Pour ",
+     "depois": " être en retard, pars maintenant.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Pour ne pas être en retard, pars maintenant."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Merci de ",
+     "depois": " fumer ici.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas ne"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Merci de ne pas fumer ici."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle m'a conseillé de ",
+     "depois": " insister.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas ne"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Elle m'a conseillé de ne pas insister."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il ",
+     "depois": " vient pas à la réunion.",
+     "opcoes": [
+      "ne",
+      "ne pas",
+      "n'"
+     ],
+     "resposta": "ne",
+     "explicacao": "Vient esta conjugado (il vient), entao ne e pas ficam separados.",
+     "audioCorrecao": "Il ne vient pas à la réunion."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ils ont choisi de ",
+     "depois": " participer au projet.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas ne"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Ils ont choisi de ne pas participer au projet."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous essayons de ",
+     "depois": " faire de bruit.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas ne"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Nous essayons de ne pas faire de bruit."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je ",
+     "depois": " comprends pas cette phrase.",
+     "opcoes": [
+      "ne",
+      "ne pas",
+      "n'"
+     ],
+     "resposta": "ne",
+     "explicacao": "Comprends esta conjugado (je comprends), entao ne e pas ficam separados.",
+     "audioCorrecao": "Je ne comprends pas cette phrase."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Afin de ",
+     "depois": " oublier, elle a écrit une liste.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas ne"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Afin de ne pas oublier, elle a écrit une liste."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle ",
+     "depois": " travaille pas le dimanche.",
+     "opcoes": [
+      "ne",
+      "ne pas",
+      "n'"
+     ],
+     "resposta": "ne",
+     "explicacao": "Travaille esta conjugado (elle travaille), entao ne e pas ficam separados.",
+     "audioCorrecao": "Elle ne travaille pas le dimanche."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il vaut mieux ",
+     "depois": " insister maintenant.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas ne"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Il vaut mieux ne pas insister maintenant."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous avons décidé de ",
+     "depois": " partir avant la fin.",
+     "opcoes": [
+      "ne pas",
+      "ne...pas",
+      "pas ne"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Nous avons décidé de ne pas partir avant la fin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle ",
+     "depois": " sait pas où aller.",
+     "opcoes": [
+      "ne",
+      "ne pas",
+      "n'"
+     ],
+     "resposta": "ne",
+     "explicacao": "Sait esta conjugado (elle sait), entao ne e pas ficam separados.",
+     "audioCorrecao": "Elle ne sait pas où aller."
+    }
+   ]
+  },
+  {
+   "id": "selection",
+   "tipo": "exercicio",
+   "titulo": "Sélection",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Je ",
+     "depois": " mange pas de viande.",
+     "opcoes": [
+      "ne",
+      "n'",
+      "pas"
+     ],
+     "resposta": "ne",
+     "explicacao": "NE vem antes do verbo conjugado; a segunda parte (pas, plus, jamais...) vem depois.",
+     "audioCorrecao": "Je ne mange pas de viande."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il ",
+     "depois": " travaille plus dans cette entreprise.",
+     "opcoes": [
+      "ne",
+      "n'",
+      "pas"
+     ],
+     "resposta": "ne",
+     "explicacao": "NE vem antes do verbo conjugado; a segunda parte (pas, plus, jamais...) vem depois.",
+     "audioCorrecao": "Il ne travaille plus dans cette entreprise."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je ",
+     "depois": " aime pas ça du tout.",
+     "opcoes": [
+      "n'",
+      "ne",
+      "pas"
+     ],
+     "resposta": "n'",
+     "explicacao": "Antes de vogal, ne vira n'.",
+     "audioCorrecao": "Je n'aime pas ça du tout."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle ne connaît ",
+     "depois": " dans cette ville.",
+     "opcoes": [
+      "personne",
+      "rien",
+      "jamais"
+     ],
+     "resposta": "personne",
+     "explicacao": "ne...PERSONNE = ninguém.",
+     "audioCorrecao": "Elle ne connaît personne dans cette ville."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je ne vois ",
+     "depois": " dans le noir.",
+     "opcoes": [
+      "rien",
+      "personne",
+      "aucun"
+     ],
+     "resposta": "rien",
+     "explicacao": "ne...RIEN = nada.",
+     "audioCorrecao": "Je ne vois rien dans le noir."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Nous n'avons ",
+     "depois": " problème avec ça.",
+     "opcoes": [
+      "aucun",
+      "aucune",
+      "aucuns"
+     ],
+     "resposta": "aucun",
+     "explicacao": "Probleme e masculino.",
+     "audioCorrecao": "Nous n'avons aucun problème avec ça."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il n'y a ",
+     "depois": " solution pour l'instant.",
+     "opcoes": [
+      "aucune",
+      "aucun",
+      "aucunes"
+     ],
+     "resposta": "aucune",
+     "explicacao": "Solution e feminino.",
+     "audioCorrecao": "Il n'y a aucune solution pour l'instant."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je n'aime ",
+     "depois": " le café ni le thé.",
+     "opcoes": [
+      "ni",
+      "pas",
+      "jamais"
+     ],
+     "resposta": "ni",
+     "explicacao": "ne...NI...NI = nem...nem.",
+     "audioCorrecao": "Je n'aime ni le café ni le thé."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il préfère ",
+     "depois": " sortir ce soir.",
+     "opcoes": [
+      "ne pas",
+      "pas ne",
+      "ne jamais pas"
+     ],
+     "resposta": "ne pas",
+     "explicacao": "Com infinitivo, ne pas fica junto, antes do verbo.",
+     "audioCorrecao": "Il préfère ne pas sortir ce soir."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je n'ai ",
+     "depois": " mangé ce matin.",
+     "opcoes": [
+      "pas",
+      "jamais pas",
+      "aucun"
+     ],
+     "resposta": "pas",
+     "explicacao": "No passe compose, ne...pas envolve o auxiliar avoir.",
+     "audioCorrecao": "Je n'ai pas mangé ce matin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je mange du pain, mais je ne mange pas ",
+     "depois": " viande.",
+     "opcoes": [
+      "de",
+      "du",
+      "de la"
+     ],
+     "resposta": "de",
+     "explicacao": "Depois de negacao, o artigo vira de.",
+     "audioCorrecao": "Je mange du pain, mais je ne mange pas de viande."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "J'ai un stylo, mais je n'ai pas ",
+     "depois": " crayon.",
+     "opcoes": [
+      "de",
+      "un",
+      "d'"
+     ],
+     "resposta": "de",
+     "explicacao": "Depois da negação, du/de la/des/un/une viram DE: je ne mange pas de viande.",
+     "audioCorrecao": "J'ai un stylo, mais je n'ai pas de crayon."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est un livre, mais ce n'est pas ",
+     "depois": " livre facile.",
+     "opcoes": [
+      "un",
+      "de",
+      "d'"
+     ],
+     "resposta": "un",
+     "explicacao": "Com o verbo etre, o artigo nao muda para de.",
+     "audioCorrecao": "C'est un livre, mais ce n'est pas un livre facile."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle ne travaille ",
+     "depois": " ici depuis un mois.",
+     "opcoes": [
+      "plus",
+      "jamais",
+      "rien"
+     ],
+     "resposta": "plus",
+     "explicacao": "ne...PLUS = não mais.",
+     "audioCorrecao": "Elle ne travaille plus ici depuis un mois."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Il ne mange ",
+     "depois": " de viande, c'est un principe pour lui.",
+     "opcoes": [
+      "jamais",
+      "plus jamais",
+      "rien"
+     ],
+     "resposta": "jamais",
+     "explicacao": "ne...JAMAIS = nunca.",
+     "audioCorrecao": "Il ne mange jamais de viande, c'est un principe pour lui."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Dans la langue parlée, on dit souvent ",
+     "depois": " plutôt que je ne sais pas.",
+     "opcoes": [
+      "je sais pas",
+      "je ne sais",
+      "pas je sais"
+     ],
+     "resposta": "je sais pas",
+     "explicacao": "Na fala informal, o ne costuma sumir.",
+     "audioCorrecao": "Dans la langue parlée, on dit souvent je sais pas plutôt que je ne sais pas."
+    }
+   ]
+  },
+  {
+   "id": "digiter",
+   "tipo": "exercicio",
+   "titulo": "Digitez",
+   "instrucao": "Escreva a parte que falta da negação.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "Je ",
+     "depois": " mange pas de viande. (ne/n')",
+     "respostas": [
+      "ne"
+     ],
+     "explicacao": "NE vem antes do verbo conjugado; a segunda parte (pas, plus, jamais...) vem depois.",
+     "audioCorrecao": "Je ne mange pas de viande."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il ",
+     "depois": " a jamais menti. (ne/n')",
+     "respostas": [
+      "n'"
+     ],
+     "explicacao": "NE vira N' antes de vogal ou h mudo: je n'ai pas.",
+     "audioCorrecao": "Il n'a jamais menti.",
+     "dica": "Antes de vogal, ne vira n'."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle ne connaît ",
+     "depois": " ici. (personne/rien)",
+     "respostas": [
+      "personne"
+     ],
+     "explicacao": "ne...PERSONNE = ninguém.",
+     "audioCorrecao": "Elle ne connaît personne ici."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Je ne bois ",
+     "depois": " d'alcool. (jamais/personne)",
+     "respostas": [
+      "jamais"
+     ],
+     "explicacao": "ne...JAMAIS = nunca.",
+     "audioCorrecao": "Je ne bois jamais d'alcool."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Nous n'avons ",
+     "depois": " doute là-dessus. (aucun/aucune)",
+     "respostas": [
+      "aucun"
+     ],
+     "explicacao": "ne...AUCUN(E) = nenhum(a), concorda com o substantivo.",
+     "audioCorrecao": "Nous n'avons aucun doute là-dessus.",
+     "dica": "Doute e masculino."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il n'a ",
+     "depois": " excuse valable. (aucun/aucune)",
+     "respostas": [
+      "aucune"
+     ],
+     "explicacao": "ne...AUCUNE = nenhuma.",
+     "audioCorrecao": "Il n'a aucune excuse valable.",
+     "dica": "Excuse e feminino."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Je ne mange ",
+     "depois": " les carottes ni les épinards. (ni/pas)",
+     "respostas": [
+      "ni"
+     ],
+     "explicacao": "ne...NI...NI = nem...nem.",
+     "audioCorrecao": "Je ne mange ni les carottes ni les épinards."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle préfère ",
+     "depois": " répondre tout de suite. (ne pas/pas ne)",
+     "respostas": [
+      "ne pas"
+     ],
+     "explicacao": "Com verbo no INFINITIVO, 'ne pas' fica junto, antes do verbo: préférer ne pas venir.",
+     "audioCorrecao": "Elle préfère ne pas répondre tout de suite."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Je n'ai ",
+     "depois": " fini mon travail. (pas/jamais pas)",
+     "respostas": [
+      "pas"
+     ],
+     "explicacao": "ne...PAS = não.",
+     "audioCorrecao": "Je n'ai pas fini mon travail."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il boit du café, mais il ne boit pas ",
+     "depois": " thé. (de/du)",
+     "respostas": [
+      "de"
+     ],
+     "explicacao": "Depois da negação, du/de la/des/un/une viram DE: je ne mange pas de viande.",
+     "audioCorrecao": "Il boit du café, mais il ne boit pas de thé."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "J'ai une voiture, mais je n'ai pas ",
+     "depois": " moto. (de/une)",
+     "respostas": [
+      "de"
+     ],
+     "explicacao": "Depois da negação, du/de la/des/un/une viram DE: je ne mange pas de viande.",
+     "audioCorrecao": "J'ai une voiture, mais je n'ai pas de moto."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "C'est une bonne idée, mais ce n'est pas ",
+     "depois": " idée facile. (une/de)",
+     "respostas": [
+      "une"
+     ],
+     "explicacao": "Com o verbo etre, o artigo nao muda.",
+     "audioCorrecao": "C'est une bonne idée, mais ce n'est pas une idée facile.",
+     "dica": "Com o verbo etre, o artigo nao muda."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle ne fume ",
+     "depois": " depuis deux ans. (plus/rien)",
+     "respostas": [
+      "plus"
+     ],
+     "explicacao": "ne...PLUS = não mais.",
+     "audioCorrecao": "Elle ne fume plus depuis deux ans."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Tu ne dois ",
+     "depois": " avoir peur. (pas/jamais pas)",
+     "respostas": [
+      "pas"
+     ],
+     "explicacao": "ne...PAS = não.",
+     "audioCorrecao": "Tu ne dois pas avoir peur."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il n'y a ",
+     "depois": " personne dans la salle. (aucun/-)",
+     "respostas": [
+      "aucun"
+     ],
+     "explicacao": "ne...AUCUN(E) = nenhum(a), concorda com o substantivo.",
+     "audioCorrecao": "Il n'y a aucun personne dans la salle.",
+     "dica": "Il n'y a aucun/aucune + substantivo, ou il n'y a personne."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Il mange des légumes, ",
+     "depois": " viande et sans sucre. (sans/pas)",
+     "respostas": [
+      "sans"
+     ],
+     "explicacao": "SANS (sem) já é negativo e não usa ne...pas: sans viande, sans sucre.",
+     "audioCorrecao": "Il mange des légumes, sans viande et sans sucre."
+    }
+   ]
+  },
+  {
+   "id": "transformez",
+   "tipo": "exercicio",
+   "titulo": "Traduisez",
+   "instrucao": "Traduza para o francês, na forma negativa.",
+   "itens": [
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Eu não tenho <span class='pt-hint' title='expérience'>experiência</span> nessa <span class='pt-hint' title='domaine'>área</span>.</div>",
+     "respostas": [
+      "je n'ai pas d'expérience dans ce domaine",
+      "je n'ai pas d'expérience dans ce domaine."
+     ],
+     "mostrar": "Je n'ai pas d'expérience dans ce domaine.",
+     "explicacao": "Tradução modelo: Je n'ai pas d'expérience dans ce domaine.",
+     "audioCorrecao": "Je n'ai pas d'expérience dans ce domaine.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ele nunca chega <span class='pt-hint' title='en retard'>atrasado</span> ao <span class='pt-hint' title='travail'>trabalho</span>.</div>",
+     "respostas": [
+      "il n'arrive jamais en retard au travail",
+      "il n'arrive jamais en retard au travail."
+     ],
+     "mostrar": "Il n'arrive jamais en retard au travail.",
+     "explicacao": "Tradução modelo: Il n'arrive jamais en retard au travail.",
+     "audioCorrecao": "Il n'arrive jamais en retard au travail.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Nós não trabalhamos mais nessa <span class='pt-hint' title='entreprise'>empresa</span>.</div>",
+     "respostas": [
+      "nous ne travaillons plus dans cette entreprise",
+      "nous ne travaillons plus dans cette entreprise."
+     ],
+     "mostrar": "Nous ne travaillons plus dans cette entreprise.",
+     "explicacao": "Tradução modelo: Nous ne travaillons plus dans cette entreprise.",
+     "audioCorrecao": "Nous ne travaillons plus dans cette entreprise.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ela não vê <span class='pt-hint' title='personne'>ninguém</span> no <span class='pt-hint' title='bureau'>escritório</span>.</div>",
+     "respostas": [
+      "elle ne voit personne au bureau",
+      "elle ne voit personne au bureau."
+     ],
+     "mostrar": "Elle ne voit personne au bureau.",
+     "explicacao": "Tradução modelo: Elle ne voit personne au bureau.",
+     "audioCorrecao": "Elle ne voit personne au bureau.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Eu prefiro não <span class='pt-hint' title='répondre'>responder</span> agora.</div>",
+     "respostas": [
+      "je préfère ne pas répondre maintenant",
+      "je préfère ne pas répondre maintenant."
+     ],
+     "mostrar": "Je préfère ne pas répondre maintenant.",
+     "explicacao": "Repondre esta no infinitivo, entao ne pas fica junto, antes do verbo.",
+     "audioCorrecao": "Je préfère ne pas répondre maintenant.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ele não tem nenhuma <span class='pt-hint' title='formation'>formação</span> nessa área.</div>",
+     "respostas": [
+      "il n'a aucune formation dans ce domaine",
+      "il n'a aucune formation dans ce domaine."
+     ],
+     "mostrar": "Il n'a aucune formation dans ce domaine.",
+     "explicacao": "Formation e feminino, entao aucune, nao aucun.",
+     "audioCorrecao": "Il n'a aucune formation dans ce domaine.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Eles decidiram não aceitar essa <span class='pt-hint' title='offre'>oferta</span>.</div>",
+     "respostas": [
+      "ils ont décidé de ne pas accepter cette offre",
+      "ils ont décidé de ne pas accepter cette offre."
+     ],
+     "mostrar": "Ils ont décidé de ne pas accepter cette offre.",
+     "explicacao": "Accepter esta no infinitivo, entao ne pas fica junto, antes do verbo.",
+     "audioCorrecao": "Ils ont décidé de ne pas accepter cette offre.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Eu não gosto nem do <span class='pt-hint' title='chef'>chefe</span> nem do <span class='pt-hint' title='horaire'>horário</span>.</div>",
+     "respostas": [
+      "je n'aime ni le chef ni l'horaire",
+      "je n'aime ni le chef ni l'horaire."
+     ],
+     "mostrar": "Je n'aime ni le chef ni l'horaire.",
+     "explicacao": "Tradução modelo: Je n'aime ni le chef ni l'horaire.",
+     "audioCorrecao": "Je n'aime ni le chef ni l'horaire.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ela não fala com <span class='pt-hint' title='personne'>ninguém</span> durante a <span class='pt-hint' title='entretien'>entrevista</span>.</div>",
+     "respostas": [
+      "elle ne parle à personne pendant l'entretien",
+      "elle ne parle à personne pendant l'entretien."
+     ],
+     "mostrar": "Elle ne parle à personne pendant l'entretien.",
+     "explicacao": "Tradução modelo: Elle ne parle à personne pendant l'entretien.",
+     "audioCorrecao": "Elle ne parle à personne pendant l'entretien.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Nós quase não temos <span class='pt-hint' title='temps'>tempo</span> para isso.</div>",
+     "respostas": [
+      "nous n'avons guère de temps pour ça",
+      "nous n'avons guère de temps pour ça."
+     ],
+     "mostrar": "Nous n'avons guère de temps pour ça.",
+     "explicacao": "Tradução modelo: Nous n'avons guère de temps pour ça.",
+     "audioCorrecao": "Nous n'avons guère de temps pour ça.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Eu não encontrei nada sobre esse <span class='pt-hint' title='poste'>cargo</span>.</div>",
+     "respostas": [
+      "je n'ai rien trouvé sur ce poste",
+      "je n'ai rien trouvé sur ce poste."
+     ],
+     "mostrar": "Je n'ai rien trouvé sur ce poste.",
+     "explicacao": "Tradução modelo: Je n'ai rien trouvé sur ce poste.",
+     "audioCorrecao": "Je n'ai rien trouvé sur ce poste.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Ele não vai mais participar dessa <span class='pt-hint' title='formation'>formação</span>.</div>",
+     "respostas": [
+      "il ne va plus participer à cette formation",
+      "il ne va plus participer à cette formation."
+     ],
+     "mostrar": "Il ne va plus participer à cette formation.",
+     "explicacao": "Tradução modelo: Il ne va plus participer à cette formation.",
+     "audioCorrecao": "Il ne va plus participer à cette formation.",
+     "placeholder": "Escreva a frase em francês"
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "Le régime de Thomas",
+   "instrucao": "Leia, ouça e repare nas negações.",
+   "paragrafos": [
+    "Thomas a décidé de changer ses habitudes. « Je ne mange plus de viande », annonce-t-il fièrement à ses amis. « Et je ne bois jamais d'alcool non plus. »",
+    "Ses amis sont surpris: « Tu ne manges rien au petit-déjeuner ? » demande Léa. « Non, je ne mange rien avant midi », répond Thomas. « Mais je n'ai aucun problème avec ça, je me sens en pleine forme. »",
+    "« Tu ne vois plus personne le week-end ? » demande un autre ami. « Ce n'est pas vrai, je vois toujours mes amis, mais je ne sors plus jamais en boîte de nuit. Je préfère ne pas sortir tard le soir. »",
+    "« Il n'y a aucune raison de t'inquiéter », dit Thomas à sa mère. « Je n'ai pas besoin de compléments, je mange juste des légumes, sans viande et sans sucre. »",
+    "Après trois mois, Thomas n'a plus jamais de fatigue, et il ne regrette rien de ce changement."
+   ],
+   "glossario": {
+    "habitudes": "hábitos",
+    "fierement": "orgulhosamente",
+    "surpris": "surpresos",
+    "forme": "forma, disposição física",
+    "sortir": "sair",
+    "sinquieter": "preocupar-se",
+    "complements": "suplementos",
+    "legumes": "vegetais, legumes",
+    "fatigue": "cansaço",
+    "changement": "mudança"
+   }
+  },
+  {
+   "id": "quiz",
+   "tipo": "exercicio",
+   "titulo": "Compréhension",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel changement Thomas annonce-t-il à ses amis ?",
+     "opcoes": [
+      "Il ne mange plus de viande",
+      "Il arrête de travailler",
+      "Il déménage"
+     ],
+     "resposta": "Il ne mange plus de viande",
+     "explicacao": "No texto: « « Je ne mange plus de viande », annonce-t-il fièrement à ses amis. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qu'est-ce que Thomas ne boit jamais ?",
+     "opcoes": [
+      "D'alcool",
+      "D'eau",
+      "De café"
+     ],
+     "resposta": "D'alcool",
+     "explicacao": "No texto: « « Et je ne bois jamais d'alcool non plus. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Que mange Thomas au petit-déjeuner ?",
+     "opcoes": [
+      "Rien, il ne mange rien avant midi",
+      "Des fruits",
+      "Du pain"
+     ],
+     "resposta": "Rien, il ne mange rien avant midi",
+     "explicacao": "No texto: « « Non, je ne mange rien avant midi », répond Thomas. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Est-ce que Thomas voit encore ses amis le week-end ?",
+     "opcoes": [
+      "Oui, il les voit toujours",
+      "Non, il ne voit plus personne",
+      "Seulement une fois par mois"
+     ],
+     "resposta": "Oui, il les voit toujours",
+     "explicacao": "No texto: « « Ce n'est pas vrai, je vois toujours mes amis, mais je ne sors plus jamais en boîte de nuit. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Que dit Thomas à sa mère pour la rassurer ?",
+     "opcoes": [
+      "Il n'y a aucune raison de s'inquiéter",
+      "Il va bientôt arrêter ce régime",
+      "Il se sent parfois fatigué"
+     ],
+     "resposta": "Il n'y a aucune raison de s'inquiéter",
+     "explicacao": "No texto: « » « Il n'y a aucune raison de t'inquiéter », dit Thomas à sa mère. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment Thomas se sent-il après trois mois ?",
+     "opcoes": [
+      "Il n'a plus jamais de fatigue",
+      "Il est très fatigué",
+      "Il regrette son choix"
+     ],
+     "resposta": "Il n'a plus jamais de fatigue",
+     "explicacao": "No texto: « » Après trois mois, Thomas n'a plus jamais de fatigue, et il ne regrette rien de ce changement. »"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,622 @@
+{
+ "slug": "les-interrogatifs",
+ "ordem": 15,
+ "nivel": "A1",
+ "titulo": "Les mots interrogatifs",
+ "origem": "Francês na Mira, Interrogatifs",
+ "descricao": "Qui, que, où, quand, comment, pourquoi, combien, quel... e as três formas de fazer uma pergunta.",
+ "secoes": [
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<p>Para escolher o interrogativo certo, pense no <strong>tipo de resposta</strong> que você espera.</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Resposta esperada</th><th>Interrogativo</th><th>Exemplo</th></tr></thead><tbody><tr><td>Pessoa</td><td>qui</td><td><span class=\"fr\" data-fr=\"Qui parle ?\">Qui parle ?</span></td></tr><tr><td>Coisa</td><td>que / quoi</td><td><span class=\"fr\" data-fr=\"Que fais-tu ?\">Que fais-tu ?</span> <span class=\"fr\" data-fr=\"Avec quoi ?\">Avec quoi ?</span></td></tr><tr><td>Escolha</td><td>quel / lequel</td><td><span class=\"fr\" data-fr=\"Quel livre ?\">Quel livre ?</span></td></tr><tr><td>Lugar</td><td>où</td><td><span class=\"fr\" data-fr=\"Où habites-tu ?\">Où habites-tu ?</span></td></tr><tr><td>Tempo</td><td>quand</td><td><span class=\"fr\" data-fr=\"Quand pars-tu ?\">Quand pars-tu ?</span></td></tr><tr><td>Modo</td><td>comment</td><td><span class=\"fr\" data-fr=\"Comment ça va ?\">Comment ça va ?</span></td></tr><tr><td>Causa</td><td>pourquoi</td><td><span class=\"fr\" data-fr=\"Pourquoi tu pleures ?\">Pourquoi tu pleures ?</span></td></tr><tr><td>Quantidade</td><td>combien (de)</td><td><span class=\"fr\" data-fr=\"Combien de frères as-tu ?\">Combien de frères as-tu ?</span></td></tr></tbody></table></div>\n<div class=\"destaque\"><strong>Pourquoi</strong> abre a pergunta; <strong>parce que</strong> abre a resposta: <span class=\"fr\" data-fr=\"Pourquoi tu es triste ? Parce que j'ai perdu mon travail.\">Pourquoi tu es triste ? Parce que j'ai perdu mon travail.</span></div>\n<h3>Quel, quelle, quels, quelles</h3>\n<p>Concordam com o substantivo: <span class=\"fr\" data-fr=\"quel âge\">quel âge</span> · <span class=\"fr\" data-fr=\"quelle heure\">quelle heure</span> · <span class=\"fr\" data-fr=\"quels sports\">quels sports</span> · <span class=\"fr\" data-fr=\"quelles couleurs\">quelles couleurs</span></p>\n<h3>As 3 formas de perguntar</h3>\n<ul><li>Entonação (informal): <span class=\"fr\" data-fr=\"Tu viens ?\">Tu viens ?</span></li><li>Est-ce que (neutra, a mais usada): <span class=\"fr\" data-fr=\"Est-ce que tu viens ?\">Est-ce que tu viens ?</span></li><li>Inversão (formal): <span class=\"fr\" data-fr=\"Viens-tu ?\">Viens-tu ?</span></li></ul>\n<p><span class=\"fr\" data-fr=\"Qu'est-ce que tu fais ?\">Qu'est-ce que tu fais ?</span> (o que = objeto) · <span class=\"fr\" data-fr=\"Qu'est-ce qui se passe ?\">Qu'est-ce qui se passe ?</span> (o que = sujeito)</p>"
+  },
+  {
+   "id": "reliez",
+   "tipo": "exercicio",
+   "titulo": "Reliez",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 1",
+     "pares": [
+      {
+       "a": "qui",
+       "b": "quem (pessoa)"
+      },
+      {
+       "a": "que",
+       "b": "o que (antes do verbo)"
+      },
+      {
+       "a": "quoi",
+       "b": "o que (depois de preposicao ou sozinho)"
+      },
+      {
+       "a": "où",
+       "b": "onde"
+      },
+      {
+       "a": "quand",
+       "b": "quando"
+      },
+      {
+       "a": "comment",
+       "b": "como"
+      },
+      {
+       "a": "pourquoi",
+       "b": "por que (pergunta)"
+      },
+      {
+       "a": "parce que",
+       "b": "porque (resposta)"
+      },
+      {
+       "a": "combien",
+       "b": "quanto"
+      },
+      {
+       "a": "combien de",
+       "b": "quantos/quantas"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 2",
+     "pares": [
+      {
+       "a": "quel",
+       "b": "qual (masculino singular)"
+      },
+      {
+       "a": "quelle",
+       "b": "qual (feminino singular)"
+      },
+      {
+       "a": "quels",
+       "b": "quais (masculino plural)"
+      },
+      {
+       "a": "quelles",
+       "b": "quais (feminino plural)"
+      },
+      {
+       "a": "est-ce que",
+       "b": "particula que transforma afirmacao em pergunta"
+      },
+      {
+       "a": "qu'est-ce que",
+       "b": "o que (versao falada de que)"
+      },
+      {
+       "a": "qu'est-ce qui",
+       "b": "o que, quando e sujeito da frase"
+      },
+      {
+       "a": "lequel",
+       "b": "qual deles (masculino singular)"
+      },
+      {
+       "a": "depuis quand",
+       "b": "desde quando"
+      }
+     ],
+     "audioEsquerda": true
+    }
+   ]
+  },
+  {
+   "id": "selection",
+   "tipo": "exercicio",
+   "titulo": "Sélection",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " tu t'appelles ?",
+     "opcoes": [
+      "Comment",
+      "Combien",
+      "Quand"
+     ],
+     "resposta": "Comment",
+     "explicacao": "COMMENT pergunta pelo MODO (como).",
+     "audioCorrecao": "Comment tu t'appelles?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " habites-tu ?",
+     "opcoes": [
+      "Où",
+      "Qui",
+      "Quoi"
+     ],
+     "resposta": "Où",
+     "explicacao": "OÙ pergunta pelo LUGAR.",
+     "audioCorrecao": "Où habites-tu?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " est ton anniversaire ?",
+     "opcoes": [
+      "Quand",
+      "Où",
+      "Combien"
+     ],
+     "resposta": "Quand",
+     "explicacao": "QUAND pergunta pelo TEMPO.",
+     "audioCorrecao": "Quand est ton anniversaire?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " ça coûte, ce livre ?",
+     "opcoes": [
+      "Combien",
+      "Comment",
+      "Quel"
+     ],
+     "resposta": "Combien",
+     "explicacao": "COMBIEN pergunta pela QUANTIDADE (combien de + substantivo).",
+     "audioCorrecao": "Combien ça coûte, ce livre?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " heure est-il ?",
+     "opcoes": [
+      "Quelle",
+      "Quel",
+      "Combien"
+     ],
+     "resposta": "Quelle",
+     "explicacao": "Heure e feminino, entao usa-se quelle.",
+     "audioCorrecao": "Quelle heure est-il?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " est le directeur de cette entreprise ?",
+     "opcoes": [
+      "Qui",
+      "Que",
+      "Où"
+     ],
+     "resposta": "Qui",
+     "explicacao": "QUI pergunta por uma PESSOA.",
+     "audioCorrecao": "Qui est le directeur de cette entreprise?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Tu parles à ",
+     "depois": " ?",
+     "opcoes": [
+      "qui",
+      "quoi",
+      "que"
+     ],
+     "resposta": "qui",
+     "explicacao": "Depois de uma preposicao (a), quando se refere a pessoa, usa-se qui.",
+     "audioCorrecao": "Tu parles à qui?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Avec ",
+     "depois": " écris-tu ?",
+     "opcoes": [
+      "quoi",
+      "qui",
+      "que"
+     ],
+     "resposta": "quoi",
+     "explicacao": "Depois de preposicao, referindo-se a uma coisa, usa-se quoi.",
+     "audioCorrecao": "Avec quoi écris-tu?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " n'es-tu pas venu à l'entretien hier ?",
+     "opcoes": [
+      "Pourquoi",
+      "Parce que",
+      "Comment"
+     ],
+     "resposta": "Pourquoi",
+     "explicacao": "POURQUOI pergunta pela CAUSA; a resposta começa com parce que.",
+     "audioCorrecao": "Pourquoi n'es-tu pas venu à l'entretien hier?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je suis en retard ",
+     "depois": " il y avait des embouteillages.",
+     "opcoes": [
+      "parce que",
+      "pourquoi",
+      "comment"
+     ],
+     "resposta": "parce que",
+     "explicacao": "PARCE QUE abre a RESPOSTA, não a pergunta.",
+     "audioCorrecao": "Je suis en retard parce que il y avait des embouteillages."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " frères et sœurs as-tu ?",
+     "opcoes": [
+      "Combien de",
+      "Combien",
+      "Quel"
+     ],
+     "resposta": "Combien de",
+     "explicacao": "COMBIEN DE + substantivo = quantos/quantas: combien de frères ?",
+     "audioCorrecao": "Combien de frères et sœurs as-tu?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " est ta couleur préférée ?",
+     "opcoes": [
+      "Quelle",
+      "Quel",
+      "Combien"
+     ],
+     "resposta": "Quelle",
+     "explicacao": "QUELLE: feminino singular (quelle heure ?).",
+     "audioCorrecao": "Quelle est ta couleur préférée?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " sont tes projets professionnels pour cette année ?",
+     "opcoes": [
+      "Quels",
+      "Quel",
+      "Quelles"
+     ],
+     "resposta": "Quels",
+     "explicacao": "Projets e masculino plural, entao quels.",
+     "audioCorrecao": "Quels sont tes projets professionnels pour cette année?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " tu viens à la formation demain ?",
+     "opcoes": [
+      "Est-ce que",
+      "Qu'est-ce que",
+      "Pourquoi"
+     ],
+     "resposta": "Est-ce que",
+     "explicacao": "EST-CE QUE transforma uma afirmação em pergunta sem inversão.",
+     "audioCorrecao": "Est-ce que tu viens à la formation demain?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " se passe ici ? Il y a beaucoup de monde.",
+     "opcoes": [
+      "Qu'est-ce qui",
+      "Qu'est-ce que",
+      "Qui"
+     ],
+     "resposta": "Qu'est-ce qui",
+     "explicacao": "Quando o que e sujeito da frase, usa-se qu'est-ce qui.",
+     "audioCorrecao": "Qu'est-ce qui se passe ici? Il y a beaucoup de monde."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " tu penses de ce nouveau poste ?",
+     "opcoes": [
+      "Qu'est-ce que",
+      "Qu'est-ce qui",
+      "Combien"
+     ],
+     "resposta": "Qu'est-ce que",
+     "explicacao": "QU'EST-CE QUE = o que (objeto).",
+     "audioCorrecao": "Qu'est-ce que tu penses de ce nouveau poste?"
+    }
+   ]
+  },
+  {
+   "id": "digiter",
+   "tipo": "exercicio",
+   "titulo": "Digitez",
+   "instrucao": "Sem opções: pense no tipo de resposta.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " est cette femme ?",
+     "respostas": [
+      "qui"
+     ],
+     "explicacao": "QUI pergunta por uma PESSOA.",
+     "audioCorrecao": "Qui est cette femme?",
+     "dica": "Pense: a resposta vai ser uma pessoa."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " commence la réunion ?",
+     "respostas": [
+      "quand"
+     ],
+     "explicacao": "QUAND pergunta pelo TEMPO.",
+     "audioCorrecao": "Quand commence la réunion?",
+     "dica": "Pense: a resposta vai ser um momento no tempo."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " se rend-on à la gare ?",
+     "respostas": [
+      "comment"
+     ],
+     "explicacao": "COMMENT pergunta pelo MODO (como).",
+     "audioCorrecao": "Comment se rend-on à la gare?",
+     "dica": "Pense: a resposta vai explicar o jeito de fazer algo."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " cherches-tu un nouvel emploi ?",
+     "respostas": [
+      "pourquoi"
+     ],
+     "explicacao": "POURQUOI pergunta pela CAUSA; a resposta começa com parce que.",
+     "audioCorrecao": "Pourquoi cherches-tu un nouvel emploi?",
+     "dica": "Esta e a pergunta sobre a causa, nao a resposta."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Je cherche un nouvel emploi ",
+     "depois": " je veux évoluer.",
+     "respostas": [
+      "parce que"
+     ],
+     "explicacao": "PARCE QUE abre a RESPOSTA, não a pergunta.",
+     "audioCorrecao": "Je cherche un nouvel emploi parce que je veux évoluer.",
+     "dica": "Aqui e a resposta que explica a causa, nao a pergunta."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " de temps dure la formation ?",
+     "respostas": [
+      "combien"
+     ],
+     "explicacao": "COMBIEN pergunta pela QUANTIDADE (combien de + substantivo).",
+     "audioCorrecao": "Combien de temps dure la formation?",
+     "dica": "Pense: a resposta vai ser uma quantidade."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " est ton poste actuellement ?",
+     "respostas": [
+      "quel"
+     ],
+     "explicacao": "QUEL: masculino singular (quel âge ?).",
+     "audioCorrecao": "Quel est ton poste actuellement?",
+     "dica": "Poste e masculino singular."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " formations as-tu suivies ?",
+     "respostas": [
+      "quelles"
+     ],
+     "explicacao": "QUELLES: feminino plural.",
+     "audioCorrecao": "Quelles formations as-tu suivies?",
+     "dica": "Formations e feminino plural."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " tu as trouvé un travail ?",
+     "respostas": [
+      "est-ce que"
+     ],
+     "explicacao": "EST-CE QUE transforma uma afirmação em pergunta sem inversão.",
+     "audioCorrecao": "Est-ce que tu as trouvé un travail?",
+     "dica": "Isso transforma a afirmacao em pergunta, sem inverter o verbo."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " tu fais ce week-end ?",
+     "respostas": [
+      "qu'est-ce que"
+     ],
+     "explicacao": "QU'EST-CE QUE = o que (objeto).",
+     "audioCorrecao": "Qu'est-ce que tu fais ce week-end?",
+     "dica": "O que e objeto aqui, nao sujeito."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " t'intéresse le plus dans ce métier ?",
+     "respostas": [
+      "qu'est-ce qui"
+     ],
+     "explicacao": "QU'EST-CE QUI = o que (sujeito): qu'est-ce qui se passe ?",
+     "audioCorrecao": "Qu'est-ce qui t'intéresse le plus dans ce métier?",
+     "dica": "O que e sujeito da frase aqui."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " est né ton collègue ?",
+     "respostas": [
+      "où"
+     ],
+     "explicacao": "OÙ pergunta pelo LUGAR.",
+     "audioCorrecao": "Où est né ton collègue?",
+     "dica": "Pense: a resposta vai ser um lugar."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " travailles-tu ici ?",
+     "respostas": [
+      "depuis quand"
+     ],
+     "explicacao": "Pergunta sobre desde qual momento algo comecou.",
+     "audioCorrecao": "Depuis quand travailles-tu ici?",
+     "dica": "Pergunta sobre desde qual momento algo comecou."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Tu penses à ",
+     "depois": " ? (une idée)",
+     "respostas": [
+      "quoi"
+     ],
+     "explicacao": "QUOI = o quê, depois de preposição ou no fim (avec quoi ? tu fais quoi ?).",
+     "audioCorrecao": "Tu penses à quoi?",
+     "dica": "Depois de preposicao, referindo-se a uma coisa."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Tu penses à ",
+     "depois": " ? (ton collègue)",
+     "respostas": [
+      "qui"
+     ],
+     "explicacao": "QUI pergunta por uma PESSOA.",
+     "audioCorrecao": "Tu penses à qui?",
+     "dica": "Depois de preposicao, referindo-se a uma pessoa."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " jour sommes-nous ?",
+     "respostas": [
+      "quel"
+     ],
+     "explicacao": "QUEL: masculino singular (quel âge ?).",
+     "audioCorrecao": "Quel jour sommes-nous?",
+     "dica": "Jour e masculino singular."
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "L'entretien avec la journaliste",
+   "instrucao": "Um diálogo cheio de perguntas: leia e ouça.",
+   "paragrafos": [
+    "Une journaliste rencontre Marc, qui vient de trouver un nouveau poste dans une entreprise de formation professionnelle. « Bonjour Marc, comment allez-vous ? » demande-t-elle.",
+    "« Qui êtes-vous, et pourquoi voulez-vous m'interviewer ? » répond Marc en souriant. La journaliste explique qu'elle écrit un article sur le marché du travail.",
+    "« Où travaillez-vous exactement, et depuis quand ? » « Je travaille ici depuis trois mois, dans le centre-ville. » « Combien de personnes travaillent dans votre équipe ? » « Nous sommes douze. »",
+    "« Qu'est-ce que vous préférez dans ce métier ? » demande la journaliste. « Ce qui me plaît le plus, c'est d'aider les gens à trouver un emploi qui leur correspond. » « Et quels sont vos projets pour l'année prochaine ? »",
+    "« Est-ce que vous pouvez me dire quel est votre plus grand défi ? » « Bien sûr: c'est de développer de nouvelles formations, parce que le marché change très vite. »"
+   ],
+   "glossario": {
+    "entreprise": "empresa",
+    "interviewer": "entrevistar",
+    "equipe": "equipe",
+    "metier": "profissao",
+    "emploi": "emprego",
+    "correspond": "corresponde",
+    "defi": "desafio",
+    "marche": "mercado"
+   }
+  },
+  {
+   "id": "quiz",
+   "tipo": "exercicio",
+   "titulo": "Compréhension",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Que vient de trouver Marc ?",
+     "opcoes": [
+      "Un nouveau poste",
+      "Un nouvel appartement",
+      "Une nouvelle voiture"
+     ],
+     "resposta": "Un nouveau poste",
+     "explicacao": "No texto: « Une journaliste rencontre Marc, qui vient de trouver un nouveau poste dans une entreprise de formation professionnelle. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Pourquoi la journaliste veut-elle interviewer Marc ?",
+     "opcoes": [
+      "Elle écrit un article sur le marché du travail",
+      "Elle cherche un emploi",
+      "Elle connaît sa famille"
+     ],
+     "resposta": "Elle écrit un article sur le marché du travail",
+     "explicacao": "No texto: « La journaliste explique qu'elle écrit un article sur le marché du travail. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Depuis quand Marc travaille-t-il là-bas ?",
+     "opcoes": [
+      "Trois mois",
+      "Trois ans",
+      "Trois semaines"
+     ],
+     "resposta": "Trois mois",
+     "explicacao": "No texto: « » « Je travaille ici depuis trois mois, dans le centre-ville. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Combien de personnes travaillent dans son équipe ?",
+     "opcoes": [
+      "Douze",
+      "Six",
+      "Vingt"
+     ],
+     "resposta": "Douze",
+     "explicacao": "No texto: « » « Nous sommes douze. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qu'est-ce que Marc préfère dans son métier ?",
+     "opcoes": [
+      "Aider les gens à trouver un emploi",
+      "Le salaire",
+      "Les horaires flexibles"
+     ],
+     "resposta": "Aider les gens à trouver un emploi",
+     "explicacao": "No texto: « « Ce qui me plaît le plus, c'est d'aider les gens à trouver un emploi qui leur correspond. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel est le plus grand défi de Marc ?",
+     "opcoes": [
+      "Développer de nouvelles formations",
+      "Trouver de nouveaux bureaux",
+      "Apprendre une langue"
+     ],
+     "resposta": "Développer de nouvelles formations",
+     "explicacao": "No texto: « » « Bien sûr: c'est de développer de nouvelles formations, parce que le marché change très vite. »"
+    }
+   ]
+  },
+  {
+   "id": "production",
+   "tipo": "exercicio",
+   "titulo": "Production",
+   "itens": [
+    {
+     "tipo": "livre",
+     "enunciado": "Você vai entrevistar um colega de turma. Escreva 10 perguntas usando pelo menos 7 interrogativos diferentes e as três formas (entonação, est-ce que, inversão).",
+     "minPalavras": 50,
+     "placeholder": "Comment tu t'appelles ?"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,490 @@
+{
+ "slug": "les-pronoms",
+ "ordem": 13,
+ "nivel": "A1",
+ "titulo": "Les pronoms sujets et toniques",
+ "origem": "Francês na Mira, Pronoms",
+ "descricao": "Je/moi, tu/toi, il/lui... quando usar o pronome sujeito e quando usar o tônico, com os 5 gatilhos.",
+ "secoes": [
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<p>O francês tem <strong>dois times</strong> de pronomes que em português às vezes viram a mesma palavra. A pergunta-chave: o pronome está <strong>colado no verbo</strong>? Então é <em>sujet</em>. Está <strong>sozinho, depois de preposição ou reforçando</strong>? Então é <em>tonique</em>.</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Sujet</th><th>Tonique</th><th>Português</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"je\">je</span></td><td><span class=\"fr\" data-fr=\"moi\">moi</span></td><td>eu / mim / comigo</td></tr><tr><td><span class=\"fr\" data-fr=\"tu\">tu</span></td><td><span class=\"fr\" data-fr=\"toi\">toi</span></td><td>tu / ti / contigo</td></tr><tr><td><span class=\"fr\" data-fr=\"il\">il</span></td><td><span class=\"fr\" data-fr=\"lui\">lui</span></td><td>ele</td></tr><tr><td><span class=\"fr\" data-fr=\"elle\">elle</span></td><td><span class=\"fr\" data-fr=\"elle\">elle</span></td><td>ela</td></tr><tr><td><span class=\"fr\" data-fr=\"nous\">nous</span></td><td><span class=\"fr\" data-fr=\"nous\">nous</span></td><td>nós</td></tr><tr><td><span class=\"fr\" data-fr=\"vous\">vous</span></td><td><span class=\"fr\" data-fr=\"vous\">vous</span></td><td>vocês / o senhor</td></tr><tr><td><span class=\"fr\" data-fr=\"ils\">ils</span></td><td><span class=\"fr\" data-fr=\"eux\">eux</span></td><td>eles</td></tr><tr><td><span class=\"fr\" data-fr=\"elles\">elles</span></td><td><span class=\"fr\" data-fr=\"elles\">elles</span></td><td>elas</td></tr></tbody></table></div>\n<h3>Os 5 gatilhos do pronome tônico</h3>\n<ul>\n<li><strong>1.</strong> Depois de preposição: <span class=\"fr\" data-fr=\"Le rendez-vous est chez moi.\">Le rendez-vous est chez moi.</span> <span class=\"fr\" data-fr=\"Ce colis est pour eux.\">Ce colis est pour eux.</span></li>\n<li><strong>2.</strong> Sozinho, numa resposta curta: <span class=\"fr\" data-fr=\"Qui veut proposer un dîner ? Moi !\">Qui veut proposer un dîner ? Moi !</span></li>\n<li><strong>3.</strong> Para reforçar o sujeito: <span class=\"fr\" data-fr=\"Eux, ils préfèrent le petit déjeuner à la maison.\">Eux, ils préfèrent le petit déjeuner à la maison.</span></li>\n<li><strong>4.</strong> Depois de c'est / ce sont: <span class=\"fr\" data-fr=\"C'est lui qui va réparer la voiture.\">C'est lui qui va réparer la voiture.</span></li>\n<li><strong>5.</strong> Em comparações e com et / ou / aussi: <span class=\"fr\" data-fr=\"Toi et moi, nous allons à la réunion.\">Toi et moi, nous allons à la réunion.</span> <span class=\"fr\" data-fr=\"Elle travaille plus que lui.\">Elle travaille plus que lui.</span></li>\n</ul>\n<h3>Os desafios para quem fala português</h3>\n<ul><li><strong>O sujeito não pode sumir:</strong> \"Quero um café\" = <span class=\"fr\" data-fr=\"Je veux un café.\">Je veux un café.</span></li><li><strong>\"Para mim\" é sempre tônico:</strong> <span class=\"fr\" data-fr=\"pour moi\">pour moi</span>, nunca \"pour je\".</li><li><strong>A ênfase se escreve:</strong> \"EU fiz\" = <span class=\"fr\" data-fr=\"Moi, je l'ai fait.\">Moi, je l'ai fait.</span></li></ul>"
+  },
+  {
+   "id": "verification",
+   "tipo": "exercicio",
+   "titulo": "Vérification",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Em português dizemos \"Quero um café\", sem sujeito. Em francês, o certo é:",
+     "opcoes": [
+      "Veux un café",
+      "Moi veux un café",
+      "Je veux un café"
+     ],
+     "resposta": "Je veux un café",
+     "explicacao": "Em francês o sujeito é obrigatório e o pronome tônico aparece nos 5 gatilhos da aula."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "\"Eu, eu odeio café.\" (com ênfase). Em francês:",
+     "opcoes": [
+      "Moi, moi déteste le café",
+      "Je, je déteste le café",
+      "Moi, je déteste le café"
+     ],
+     "resposta": "Moi, je déteste le café",
+     "explicacao": "Em francês o sujeito é obrigatório e o pronome tônico aparece nos 5 gatilhos da aula."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "\"Eu ou você?\" (sem verbo). Em francês:",
+     "opcoes": [
+      "Moi ou toi ?",
+      "Je ou tu ?",
+      "Me ou te ?"
+     ],
+     "resposta": "Moi ou toi ?",
+     "explicacao": "Em francês o sujeito é obrigatório e o pronome tônico aparece nos 5 gatilhos da aula."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "\"Quem quebrou a xícara?\" Resposta de uma palavra: \"Ele!\" Em francês:",
+     "opcoes": [
+      "La !",
+      "Il !",
+      "Lui !"
+     ],
+     "resposta": "Lui !",
+     "explicacao": "Em francês o sujeito é obrigatório e o pronome tônico aparece nos 5 gatilhos da aula."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "\"Ele comprou um presente para ela.\"",
+     "opcoes": [
+      "Elle a acheté un cadeau pour elle",
+      "Il a acheté un cadeau pour il",
+      "Il a acheté un cadeau pour elle"
+     ],
+     "resposta": "Il a acheté un cadeau pour elle",
+     "explicacao": "Em francês o sujeito é obrigatório e o pronome tônico aparece nos 5 gatilhos da aula."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Em português, antes de um verbo, o certo é \"para EU comprar\" ou \"para MIM comprar\"?",
+     "opcoes": [
+      "para eu comprar",
+      "para mim comprar"
+     ],
+     "resposta": "para eu comprar",
+     "explicacao": "Em francês o sujeito é obrigatório e o pronome tônico aparece nos 5 gatilhos da aula."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O pronome colado no verbo (\"___ parle\") é um pronome:",
+     "opcoes": [
+      "tonique",
+      "sujet"
+     ],
+     "resposta": "sujet",
+     "explicacao": "Em francês o sujeito é obrigatório e o pronome tônico aparece nos 5 gatilhos da aula."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Na resposta \"Qui vient ? ___ !\", usamos o pronome:",
+     "opcoes": [
+      "tonique",
+      "sujet"
+     ],
+     "resposta": "tonique",
+     "explicacao": "Em francês o sujeito é obrigatório e o pronome tônico aparece nos 5 gatilhos da aula."
+    }
+   ]
+  },
+  {
+   "id": "reliez",
+   "tipo": "exercicio",
+   "titulo": "Reliez",
+   "instrucao": "Ligue o pronome sujeito ao tônico.",
+   "itens": [
+    {
+     "tipo": "associar",
+     "pares": [
+      {
+       "a": "je",
+       "b": "moi"
+      },
+      {
+       "a": "tu",
+       "b": "toi"
+      },
+      {
+       "a": "il",
+       "b": "lui"
+      },
+      {
+       "a": "elle",
+       "b": "elle (tonique)"
+      },
+      {
+       "a": "nous",
+       "b": "nous (tonique)"
+      },
+      {
+       "a": "vous",
+       "b": "vous (tonique)"
+      },
+      {
+       "a": "ils",
+       "b": "eux"
+      },
+      {
+       "a": "elles",
+       "b": "elles (tonique)"
+      }
+     ],
+     "audioEsquerda": true
+    }
+   ]
+  },
+  {
+   "id": "choisir",
+   "tipo": "exercicio",
+   "titulo": "Choisir le bon pronom",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Ce colis est pour ",
+     "depois": ". (para mim)",
+     "opcoes": [
+      "me",
+      "moi",
+      "je"
+     ],
+     "resposta": "moi",
+     "explicacao": "Pronome tônico de \"je\": MOI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Ce colis est pour moi."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": ", je veux vendre la voiture. (ênfase: eu)",
+     "opcoes": [
+      "Moi",
+      "Je",
+      "Ma"
+     ],
+     "resposta": "Moi",
+     "explicacao": "Pronome tônico de \"je\": MOI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Moi, je veux vendre la voiture."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Le rendez-vous est chez ",
+     "depois": ". (na casa dele)",
+     "opcoes": [
+      "lui",
+      "le",
+      "il"
+     ],
+     "resposta": "lui",
+     "explicacao": "Pronome tônico de \"il\": LUI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Le rendez-vous est chez lui."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " veux un déjeuner à la maison. (eu, colado no verbo)",
+     "opcoes": [
+      "Moi",
+      "Je",
+      "Toi"
+     ],
+     "resposta": "Je",
+     "explicacao": "Colado no verbo: pronome sujeito (je).",
+     "audioCorrecao": "Je veux un déjeuner à la maison."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "C'est ",
+     "depois": " qui va réparer la voiture. (é ele)",
+     "opcoes": [
+      "lui",
+      "le",
+      "il"
+     ],
+     "resposta": "lui",
+     "explicacao": "Pronome tônico de \"il\": LUI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "C'est lui qui va réparer la voiture."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Toi et ",
+     "depois": " nous allons à la gare. (tu e eu)",
+     "opcoes": [
+      "moi",
+      "me",
+      "je"
+     ],
+     "resposta": "moi",
+     "explicacao": "Pronome tônico de \"je\": MOI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Toi et moi nous allons à la gare."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Marc et Sophie ? Ce paquet est pour ",
+     "depois": ". (para eles)",
+     "opcoes": [
+      "eux",
+      "ils",
+      "les"
+     ],
+     "resposta": "eux",
+     "explicacao": "Pronome tônico de \"ils\": EUX. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Marc et Sophie? Ce paquet est pour eux."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Qui veut proposer un dîner ? ",
+     "depois": " ! (eu!)",
+     "opcoes": [
+      "Je",
+      "Moi",
+      "Ma"
+     ],
+     "resposta": "Moi",
+     "explicacao": "Pronome tônico de \"je\": MOI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Qui veut proposer un dîner? Moi!"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Elle travaille plus que ",
+     "depois": ". (do que ele)",
+     "opcoes": [
+      "Ils",
+      "lui",
+      "il"
+     ],
+     "resposta": "lui",
+     "explicacao": "Pronome tônico de \"il\": LUI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Elle travaille plus que lui."
+    }
+   ]
+  },
+  {
+   "id": "completer",
+   "tipo": "exercicio",
+   "titulo": "Compléter",
+   "instrucao": "Escreva o pronome tônico.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "Ce colis est pour ",
+     "depois": ". (para mim)",
+     "respostas": [
+      "moi"
+     ],
+     "explicacao": "Pronome tônico de \"je\": MOI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Ce colis est pour moi."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Le rendez-vous est chez ",
+     "depois": ". (na casa dele)",
+     "respostas": [
+      "lui"
+     ],
+     "explicacao": "Pronome tônico de \"il\": LUI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Le rendez-vous est chez lui."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": ", je préfère le petit déjeuner à la maison. (reforço em eu)",
+     "respostas": [
+      "Moi",
+      "moi"
+     ],
+     "explicacao": "Pronome tônico de \"je\": MOI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Moi, je préfère le petit déjeuner à la maison."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "C'est ",
+     "depois": " qui a organisé la fête. (é ela)",
+     "respostas": [
+      "elle"
+     ],
+     "explicacao": "Resposta: elle.",
+     "audioCorrecao": "C'est elle qui a organisé la fête."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Toi et ",
+     "depois": " nous allons faire les courses. (eu)",
+     "respostas": [
+      "moi"
+     ],
+     "explicacao": "Pronome tônico de \"je\": MOI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Toi et moi nous allons faire les courses."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Ce paquet est pour ",
+     "depois": ". (para eles, masculino)",
+     "respostas": [
+      "eux"
+     ],
+     "explicacao": "Pronome tônico de \"ils\": EUX. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Ce paquet est pour eux."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Sans ",
+     "depois": ", cette réunion n'aurait pas lieu. (você/vc)",
+     "respostas": [
+      "toi"
+     ],
+     "explicacao": "Pronome tônico de \"tu\": TOI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Sans toi, cette réunion n'aurait pas lieu."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Elle travaille plus que ",
+     "depois": ". (do que ele)",
+     "respostas": [
+      "lui"
+     ],
+     "explicacao": "Pronome tônico de \"il\": LUI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Elle travaille plus que lui."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Qui veut un café ? ",
+     "depois": " ! (eu)",
+     "respostas": [
+      "Moi",
+      "moi"
+     ],
+     "explicacao": "Pronome tônico de \"je\": MOI. Use o tônico depois de preposição (pour, chez, avec...), sozinho, para reforçar ou depois de c'est.",
+     "audioCorrecao": "Qui veut un café? Moi!"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Nous, ",
+     "depois": " restons ici, mais eux partent. (reforço do sujeito nous)",
+     "respostas": [
+      "nous"
+     ],
+     "explicacao": "Resposta: nous.",
+     "audioCorrecao": "Nous, nous restons ici, mais eux partent."
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "La journée de Léa",
+   "instrucao": "Leia, ouça e repare nos pronomes.",
+   "paragrafos": [
+    "Ce matin, Léa reçoit un colis à la gare. « Ce colis, c'est pour moi ? » demande-t-elle à l'employé. « Oui, il est pour vous », répond l'employé. Dedans, il y a des livres et une facture.",
+    "Léa doit apporter les cartons à la maison, mais elle préfère d'abord proposer un déjeuner à ses amis. « Toi et moi, on va faire les courses ? » dit-elle à Paul. « Moi, je veux bien ! » répond Paul. Marc et Sophie, eux, ont un rendez-vous de travail, une réunion importante.",
+    "À la boulangerie, puis à l'épicerie, Léa et Paul achètent le repas. « C'est nous qui cuisinons ce soir ! » dit-elle. Le dîner sera une vraie fête. Pour eux, se décontracter après le travail, c'est très important.",
+    "À la fin de la journée, Léa veut remercier tout le monde. « Merci à vous ! » dit-elle. « Sans toi, cette fête n'existerait pas », répond Paul. Léa sourit: c'est elle qui a tout organisé, et lui le sait bien."
+   ],
+   "glossario": {
+    "colis": "encomenda, pacote",
+    "gare": "estacao de trem",
+    "lemploye": "o funcionario",
+    "facture": "fatura, nota fiscal",
+    "cartons": "caixas de papelao",
+    "dejeuner": "almoco",
+    "courses": "compras",
+    "rendezvous": "encontro, compromisso",
+    "reunion": "reuniao",
+    "boulangerie": "padaria",
+    "epicerie": "mercearia",
+    "repas": "refeicao",
+    "diner": "jantar",
+    "fete": "festa",
+    "decontracter": "relaxar",
+    "remercier": "agradecer"
+   }
+  },
+  {
+   "id": "quiz",
+   "tipo": "exercicio",
+   "titulo": "Compréhension",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "O que Léa recebe na estação (la gare) ?",
+     "opcoes": [
+      "Un colis",
+      "Une voiture",
+      "Un repas"
+     ],
+     "resposta": "Un colis",
+     "explicacao": "No texto: « Ce matin, Léa reçoit un colis à la gare. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que tem dentro do colis ?",
+     "opcoes": [
+      "Des cartons vides",
+      "Des livres et une facture",
+      "Un déjeuner"
+     ],
+     "resposta": "Des livres et une facture",
+     "explicacao": "No texto: « Dedans, il y a des livres et une facture. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Por que Marc e Sophie não vão às compras ?",
+     "opcoes": [
+      "Têm uma réunion de travail",
+      "Não gostam de cozinhar",
+      "Estão doentes"
+     ],
+     "resposta": "Têm uma réunion de travail",
+     "explicacao": "No texto: « Marc et Sophie, eux, ont un rendez-vous de travail, une réunion importante. »"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Na frase \"C'est ",
+     "depois": " qui cuisinons ce soir\", o pronome certo é (nós):",
+     "respostas": [
+      "nous"
+     ],
+     "explicacao": "Pronome tônico: nous. Depois de c'est e de preposição (à, pour, chez...) usa-se o tônico.",
+     "audioCorrecao": "Na frase \"C'est nous qui cuisinons ce soir\", o pronome certo é:"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "No fim, Léa diz \"Merci à ",
+     "depois": " !\" para agradecer a todos. (vocês)",
+     "respostas": [
+      "vous"
+     ],
+     "explicacao": "Pronome tônico: vous. Depois de c'est e de preposição (à, pour, chez...) usa-se o tônico.",
+     "audioCorrecao": "No fim, Léa diz \"Merci à vous!\" para agradecer a todos."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Que dit Paul à Léa à la fin ?",
+     "opcoes": [
+      "Sans toi cette fête n'existerait pas",
+      "Il faut partir maintenant",
+      "Le repas était mauvais"
+     ],
+     "resposta": "Sans toi cette fête n'existerait pas",
+     "explicacao": "No texto: « « Sans toi, cette fête n'existerait pas », répond Paul. »"
+    }
+   ]
+  }
+ ]
+}

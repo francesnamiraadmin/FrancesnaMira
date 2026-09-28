@@ -1,0 +1,895 @@
+{
+ "slug": "cest-vs-il-est",
+ "ordem": 12,
+ "nivel": "A1–A2",
+ "titulo": "C'est vs Il est",
+ "origem": "Francês na Mira, C'est vs Il est",
+ "descricao": "Quando identificar com C'EST e quando descrever com IL/ELLE EST, com o caso especial das profissões.",
+ "secoes": [
+  {
+   "id": "video",
+   "tipo": "video",
+   "titulo": "Vídeo",
+   "youtube": "DI6x5_uLHd8"
+  },
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<p><strong>C'est</strong> identifica ou apresenta (com substantivo) ou faz um comentário geral. <strong>Il est / Elle est</strong> descreve alguém ou algo já identificado (com adjetivo, sem artigo).</p>\n<h3>Identificação: C'est / Ce sont</h3>\n<ul><li><span class=\"fr\" data-fr=\"C'est un CV.\">C'est un CV.</span> <span class=\"fr\" data-fr=\"C'est mon collègue.\">C'est mon collègue.</span></li><li><span class=\"fr\" data-fr=\"Ce sont des documents.\">Ce sont des documents.</span> <span class=\"fr\" data-fr=\"Ce sont mes collègues.\">Ce sont mes collègues.</span></li></ul>\n<div class=\"destaque\">As perguntas ficam sempre no singular: <span class=\"fr\" data-fr=\"Qu'est-ce que c'est ?\">Qu'est-ce que c'est ?</span> (coisas) e <span class=\"fr\" data-fr=\"Qui est-ce ?\">Qui est-ce ?</span> (pessoas), mesmo quando a resposta é plural.</div>\n<h3>Descrição: Il est × C'est</h3>\n<ul><li>Alguém/algo específico: <span class=\"fr\" data-fr=\"Il est compétent.\">Il est compétent.</span> <span class=\"fr\" data-fr=\"Elle est motivée.\">Elle est motivée.</span></li><li>Comentário geral sobre uma situação: <span class=\"fr\" data-fr=\"C'est intéressant.\">C'est intéressant.</span> <span class=\"fr\" data-fr=\"C'est difficile.\">C'est difficile.</span></li></ul>\n<h3>A profissão: caso especial</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Situação</th><th>Forma</th><th>Exemplo</th></tr></thead><tbody><tr><td>Profissão sozinha</td><td>il / elle est + profissão (sem artigo)</td><td><span class=\"fr\" data-fr=\"Il est comptable.\">Il est comptable.</span></td></tr><tr><td>Profissão com adjetivo</td><td>c'est un / une + profissão + adjetivo</td><td><span class=\"fr\" data-fr=\"C'est un bon comptable.\">C'est un bon comptable.</span></td></tr><tr><td>Substantivo com determinante</td><td>sempre c'est</td><td><span class=\"fr\" data-fr=\"C'est mon collègue.\">C'est mon collègue.</span></td></tr></tbody></table></div>\n<h3>A negação</h3><p><span class=\"fr\" data-fr=\"Ce n'est pas facile.\">Ce n'est pas facile.</span> <span class=\"fr\" data-fr=\"Il n'est pas disponible.\">Il n'est pas disponible.</span></p>"
+  },
+  {
+   "id": "reliez",
+   "tipo": "exercicio",
+   "titulo": "Reliez",
+   "itens": [
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 1",
+     "pares": [
+      {
+       "a": "c'est",
+       "b": "identifica ou apresenta (singular)"
+      },
+      {
+       "a": "ce sont",
+       "b": "identifica ou apresenta (plural)"
+      },
+      {
+       "a": "qu'est-ce que c'est ?",
+       "b": "pergunta para identificar uma coisa"
+      },
+      {
+       "a": "qui est-ce ?",
+       "b": "pergunta para identificar uma pessoa"
+      },
+      {
+       "a": "il est",
+       "b": "descreve algo/alguém específico (masculino)"
+      },
+      {
+       "a": "elle est",
+       "b": "descreve algo/alguém específico (feminino)"
+      },
+      {
+       "a": "c'est + adjetivo",
+       "b": "comentário geral, neutro"
+      },
+      {
+       "a": "il est + profissão",
+       "b": "profissão sem artigo"
+      },
+      {
+       "a": "c'est un/une + profissão",
+       "b": "profissão com qualificador, precisa de artigo"
+      },
+      {
+       "a": "ce n'est pas",
+       "b": "negação de c'est"
+      }
+     ],
+     "audioEsquerda": true
+    },
+    {
+     "tipo": "associar",
+     "enunciado": "Parte 2",
+     "pares": [
+      {
+       "a": "il n'est pas",
+       "b": "negação de il est"
+      },
+      {
+       "a": "c'est mon/ma + substantivo",
+       "b": "c'est antes de substantivo determinado"
+      },
+      {
+       "a": "c'est un CV",
+       "b": "identificação de um objeto"
+      },
+      {
+       "a": "c'est mon collègue",
+       "b": "identificação de uma pessoa"
+      },
+      {
+       "a": "il est compétent",
+       "b": "descrição de alguém já identificado"
+      },
+      {
+       "a": "c'est intéressant",
+       "b": "comentário geral sobre uma situação"
+      },
+      {
+       "a": "il est comptable",
+       "b": "profissão simples, sem artigo"
+      },
+      {
+       "a": "c'est un bon comptable",
+       "b": "profissão com qualificador"
+      },
+      {
+       "a": "ce sont mes collègues",
+       "b": "identificação de pessoas no plural"
+      }
+     ],
+     "audioEsquerda": true
+    }
+   ]
+  },
+  {
+   "id": "profession",
+   "tipo": "exercicio",
+   "titulo": "La profession",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "Marc ",
+     "depois": " comptable.",
+     "opcoes": [
+      "est",
+      "est un",
+      "c'est"
+     ],
+     "resposta": "est",
+     "explicacao": "Profissao sozinha, sem qualificador: il/elle est, sem artigo.",
+     "audioCorrecao": "Marc est comptable."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " un excellent comptable.",
+     "opcoes": [
+      "C'est",
+      "Il est",
+      "Elle est"
+     ],
+     "resposta": "C'est",
+     "explicacao": "Profissao com qualificador (excellent) precisa de artigo e c'est.",
+     "audioCorrecao": "C'est un excellent comptable."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Sophie ",
+     "depois": " ingénieure.",
+     "opcoes": [
+      "est",
+      "est une",
+      "c'est"
+     ],
+     "resposta": "est",
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Sophie est ingénieure."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " une ingénieure très expérimentée.",
+     "opcoes": [
+      "C'est",
+      "Elle est",
+      "Il est"
+     ],
+     "resposta": "C'est",
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est une ingénieure très expérimentée."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Mon frère ",
+     "depois": " médecin.",
+     "opcoes": [
+      "est",
+      "est un",
+      "c'est"
+     ],
+     "resposta": "est",
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Mon frère est médecin."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " un médecin très compétent.",
+     "opcoes": [
+      "C'est",
+      "Il est",
+      "Elle est"
+     ],
+     "resposta": "C'est",
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est un médecin très compétent."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Karim ",
+     "depois": " directeur des ressources humaines.",
+     "opcoes": [
+      "est",
+      "est un",
+      "c'est"
+     ],
+     "resposta": "est",
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Karim est directeur des ressources humaines."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " un bon directeur.",
+     "opcoes": [
+      "C'est",
+      "Il est",
+      "Elle est"
+     ],
+     "resposta": "C'est",
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est un bon directeur."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Léa ",
+     "depois": " secrétaire dans cette entreprise.",
+     "opcoes": [
+      "est",
+      "est une",
+      "c'est"
+     ],
+     "resposta": "est",
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Léa est secrétaire dans cette entreprise."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " une secrétaire très organisée.",
+     "opcoes": [
+      "C'est",
+      "Elle est",
+      "Il est"
+     ],
+     "resposta": "C'est",
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est une secrétaire très organisée."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Je suis ",
+     "depois": " depuis dix ans.",
+     "opcoes": [
+      "professeur",
+      "un professeur",
+      "le professeur"
+     ],
+     "resposta": "professeur",
+     "explicacao": "Sem qualificador, nao usa artigo depois de je suis.",
+     "audioCorrecao": "Je suis professeur depuis dix ans."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " mon collègue, il travaille dans la formation.",
+     "opcoes": [
+      "C'est",
+      "Il est",
+      "Elle est"
+     ],
+     "resposta": "C'est",
+     "explicacao": "Antes de substantivo determinado (mon collegue), sempre c'est.",
+     "audioCorrecao": "C'est mon collègue, il travaille dans la formation."
+    }
+   ]
+  },
+  {
+   "id": "selection",
+   "tipo": "exercicio",
+   "titulo": "Sélection",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " un CV très complet.",
+     "opcoes": [
+      "C'est",
+      "Il est",
+      "Ce sont"
+     ],
+     "resposta": "C'est",
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est un CV très complet."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " des documents importants pour l'entretien.",
+     "opcoes": [
+      "Ce sont",
+      "C'est",
+      "Il est"
+     ],
+     "resposta": "Ce sont",
+     "explicacao": "CE SONT: identificação no plural: ce sont mes collègues.",
+     "audioCorrecao": "Ce sont des documents importants pour l'entretien."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " ce CV ?",
+     "opcoes": [
+      "Qu'est-ce que c'est",
+      "Qui est-ce",
+      "Qu'est-ce que ce sont"
+     ],
+     "resposta": "Qu'est-ce que c'est",
+     "explicacao": "A pergunta de identificacao e sempre singular.",
+     "audioCorrecao": "Qu'est-ce que c'est ce CV?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " cet homme ?",
+     "opcoes": [
+      "Qui est-ce",
+      "Qu'est-ce que c'est",
+      "Qui sont-ils"
+     ],
+     "resposta": "Qui est-ce",
+     "explicacao": "QUI EST-CE ? pergunta por uma PESSOA (sempre no singular).",
+     "audioCorrecao": "Qui est-ce cet homme?"
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Mon collègue ",
+     "depois": " très compétent.",
+     "opcoes": [
+      "est",
+      "c'est",
+      "sont"
+     ],
+     "resposta": "est",
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Mon collègue est très compétent."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " vraiment stressant, cet entretien.",
+     "opcoes": [
+      "C'est",
+      "Il est",
+      "Ils sont"
+     ],
+     "resposta": "C'est",
+     "explicacao": "Comentario geral sobre a situacao, nao descricao de uma pessoa especifica.",
+     "audioCorrecao": "C'est vraiment stressant, cet entretien."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Ma collègue ",
+     "depois": " très motivée.",
+     "opcoes": [
+      "est",
+      "c'est",
+      "sont"
+     ],
+     "resposta": "est",
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Ma collègue est très motivée."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " difficile de trouver un emploi en ce moment.",
+     "opcoes": [
+      "C'est",
+      "Il est",
+      "Elle est"
+     ],
+     "resposta": "C'est",
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est difficile de trouver un emploi en ce moment."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Paul ",
+     "depois": " comptable.",
+     "opcoes": [
+      "est",
+      "est un",
+      "c'est"
+     ],
+     "resposta": "est",
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Paul est comptable."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " un comptable très sérieux.",
+     "opcoes": [
+      "C'est",
+      "Il est",
+      "Ils sont"
+     ],
+     "resposta": "C'est",
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est un comptable très sérieux."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " n'est pas facile de préparer un entretien.",
+     "opcoes": [
+      "Ce",
+      "Il",
+      "Elle"
+     ],
+     "resposta": "Ce",
+     "explicacao": "Comentario geral: ce n'est pas.",
+     "audioCorrecao": "Ce n'est pas facile de préparer un entretien."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " n'est pas disponible aujourd'hui, c'est Marc.",
+     "opcoes": [
+      "Il",
+      "Ce",
+      "Elle"
+     ],
+     "resposta": "Il",
+     "explicacao": "Descricao de uma pessoa especifica: il n'est pas.",
+     "audioCorrecao": "Il n'est pas disponible aujourd'hui, c'est Marc."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " mon collègue, il travaille dans la même entreprise.",
+     "opcoes": [
+      "C'est",
+      "Il est",
+      "Elle est"
+     ],
+     "resposta": "C'est",
+     "explicacao": "Antes de substantivo determinado (mon collegue), sempre c'est.",
+     "audioCorrecao": "C'est mon collègue, il travaille dans la même entreprise."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " mes collègues, ils sont très gentils.",
+     "opcoes": [
+      "Ce sont",
+      "C'est",
+      "Ils sont"
+     ],
+     "resposta": "Ce sont",
+     "explicacao": "CE SONT: identificação no plural: ce sont mes collègues.",
+     "audioCorrecao": "Ce sont mes collègues, ils sont très gentils."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "",
+     "depois": " une entreprise reconnue.",
+     "opcoes": [
+      "C'est",
+      "Elle est",
+      "Il est"
+     ],
+     "resposta": "C'est",
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est une entreprise reconnue."
+    },
+    {
+     "tipo": "escolha",
+     "antes": "Cette formation ",
+     "depois": " vraiment intéressante.",
+     "opcoes": [
+      "est",
+      "c'est",
+      "sont"
+     ],
+     "resposta": "est",
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Cette formation est vraiment intéressante."
+    }
+   ]
+  },
+  {
+   "id": "digiter",
+   "tipo": "exercicio",
+   "titulo": "Digitez",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " un poste très intéressant. (c'est/il est)",
+     "respostas": [
+      "c'est"
+     ],
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est un poste très intéressant."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " des documents pour l'entretien. (ce sont/c'est)",
+     "respostas": [
+      "ce sont"
+     ],
+     "explicacao": "CE SONT: identificação no plural: ce sont mes collègues.",
+     "audioCorrecao": "Ce sont des documents pour l'entretien."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Mon directeur ",
+     "depois": " très compétent. (est/c'est)",
+     "respostas": [
+      "est"
+     ],
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Mon directeur est très compétent."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " un excellent directeur. (c'est/il est)",
+     "respostas": [
+      "c'est"
+     ],
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est un excellent directeur."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " cette femme ? (qui est-ce/qu'est-ce que c'est)",
+     "respostas": [
+      "qui est-ce"
+     ],
+     "explicacao": "QUI EST-CE ? pergunta por uma PESSOA (sempre no singular).",
+     "audioCorrecao": "Qui est-ce cette femme?"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " ce document ? (qu'est-ce que c'est/qui est-ce)",
+     "respostas": [
+      "qu'est-ce que c'est"
+     ],
+     "explicacao": "QU'EST-CE QUE C'EST ? pergunta por uma COISA (sempre no singular).",
+     "audioCorrecao": "Qu'est-ce que c'est ce document?"
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " vraiment fatigant, ce travail. (c'est/il est)",
+     "respostas": [
+      "c'est"
+     ],
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est vraiment fatigant, ce travail."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Mon collègue Paul ",
+     "depois": " fatigué aujourd'hui. (est/c'est)",
+     "respostas": [
+      "est"
+     ],
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Mon collègue Paul est fatigué aujourd'hui."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Léa ",
+     "depois": " secrétaire. (est/c'est)",
+     "respostas": [
+      "est"
+     ],
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Léa est secrétaire."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " une secrétaire très efficace. (c'est/elle est)",
+     "respostas": [
+      "c'est"
+     ],
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est une secrétaire très efficace."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " mon collègue. (c'est/il est)",
+     "respostas": [
+      "c'est"
+     ],
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est mon collègue.",
+     "dica": "Antes de substantivo determinado (mon...), sempre c'est."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " n'est pas facile de changer de métier. (ce/il)",
+     "respostas": [
+      "ce"
+     ],
+     "explicacao": "CE (c'est / ce n'est pas) para um comentário geral sobre uma situação: ce n'est pas facile de...",
+     "audioCorrecao": "Ce n'est pas facile de changer de métier."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Marc ",
+     "depois": " n'est pas disponible cette semaine. (il/ce)",
+     "respostas": [
+      "il"
+     ],
+     "explicacao": "IL (il est / il n'est pas) para alguém específico já mencionado: Marc, il n'est pas disponible.",
+     "audioCorrecao": "Marc il n'est pas disponible cette semaine."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " mes collègues. (ce sont/c'est)",
+     "respostas": [
+      "ce sont"
+     ],
+     "explicacao": "CE SONT: identificação no plural: ce sont mes collègues.",
+     "audioCorrecao": "Ce sont mes collègues."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "",
+     "depois": " une bonne opportunité pour ma carrière. (c'est/elle est)",
+     "respostas": [
+      "c'est"
+     ],
+     "explicacao": "C'EST + substantivo com determinante (un, le, mon...) para identificar, ou + adjetivo para um comentário geral: c'est intéressant.",
+     "audioCorrecao": "C'est une bonne opportunité pour ma carrière."
+    },
+    {
+     "tipo": "lacuna",
+     "antes": "Cette entreprise ",
+     "depois": " très reconnue dans le secteur. (est/c'est)",
+     "respostas": [
+      "est"
+     ],
+     "explicacao": "Profissão sozinha: il/elle EST + profissão, sem artigo.",
+     "audioCorrecao": "Cette entreprise est très reconnue dans le secteur."
+    }
+   ]
+  },
+  {
+   "id": "transformez",
+   "tipo": "exercicio",
+   "titulo": "Traduisez",
+   "instrucao": "Traduza para o francês.",
+   "itens": [
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Isto é um <span class='pt-hint' title='CV'>currículo</span> muito completo.</div>",
+     "respostas": [
+      "c'est un cv très complet",
+      "c'est un cv très complet."
+     ],
+     "mostrar": "C'est un cv très complet.",
+     "explicacao": "Tradução modelo: C'est un cv très complet.",
+     "audioCorrecao": "C'est un cv très complet.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Estes são documentos importantes para a <span class='pt-hint' title='entretien'>entrevista</span>.</div>",
+     "respostas": [
+      "ce sont des documents importants pour l'entretien",
+      "ce sont des documents importants pour l'entretien."
+     ],
+     "mostrar": "Ce sont des documents importants pour l'entretien.",
+     "explicacao": "Tradução modelo: Ce sont des documents importants pour l'entretien.",
+     "audioCorrecao": "Ce sont des documents importants pour l'entretien.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Meu <span class='pt-hint' title='collègue'>colega</span> é muito <span class='pt-hint' title='compétent'>competente</span>.</div>",
+     "respostas": [
+      "mon collègue est très compétent",
+      "mon collègue est très compétent."
+     ],
+     "mostrar": "Mon collègue est très compétent.",
+     "explicacao": "Tradução modelo: Mon collègue est très compétent.",
+     "audioCorrecao": "Mon collègue est très compétent.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Isto é muito <span class='pt-hint' title='stressant'>estressante</span>, essa entrevista.</div>",
+     "respostas": [
+      "c'est très stressant, cet entretien",
+      "c'est très stressant, cet entretien."
+     ],
+     "mostrar": "C'est très stressant, cet entretien.",
+     "explicacao": "Tradução modelo: C'est très stressant, cet entretien.",
+     "audioCorrecao": "C'est très stressant, cet entretien.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Paulo é <span class='pt-hint' title='comptable'>contador</span>.</div>",
+     "respostas": [
+      "paul est comptable",
+      "paul est comptable."
+     ],
+     "mostrar": "Paul est comptable.",
+     "explicacao": "Tradução modelo: Paul est comptable.",
+     "audioCorrecao": "Paul est comptable.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>É um contador muito <span class='pt-hint' title='sérieux'>sério</span>.</div>",
+     "respostas": [
+      "c'est un comptable très sérieux",
+      "c'est un comptable très sérieux."
+     ],
+     "mostrar": "C'est un comptable très sérieux.",
+     "explicacao": "Tradução modelo: C'est un comptable très sérieux.",
+     "audioCorrecao": "C'est un comptable très sérieux.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Não é fácil encontrar um <span class='pt-hint' title='emploi'>emprego</span> agora.</div>",
+     "respostas": [
+      "ce n'est pas facile de trouver un emploi maintenant",
+      "ce n'est pas facile de trouver un emploi maintenant."
+     ],
+     "mostrar": "Ce n'est pas facile de trouver un emploi maintenant.",
+     "explicacao": "Tradução modelo: Ce n'est pas facile de trouver un emploi maintenant.",
+     "audioCorrecao": "Ce n'est pas facile de trouver un emploi maintenant.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Este é meu colega, ele trabalha na <span class='pt-hint' title='formation'>formação</span>.</div>",
+     "respostas": [
+      "c'est mon collègue, il travaille dans la formation",
+      "c'est mon collègue, il travaille dans la formation."
+     ],
+     "mostrar": "C'est mon collègue, il travaille dans la formation.",
+     "explicacao": "Tradução modelo: C'est mon collègue, il travaille dans la formation.",
+     "audioCorrecao": "C'est mon collègue, il travaille dans la formation.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>Estes são meus colegas, eles são muito gentis.</div>",
+     "respostas": [
+      "ce sont mes collègues, ils sont très gentils",
+      "ce sont mes collègues, ils sont très gentils."
+     ],
+     "mostrar": "Ce sont mes collègues, ils sont très gentils.",
+     "explicacao": "Tradução modelo: Ce sont mes collègues, ils sont très gentils.",
+     "audioCorrecao": "Ce sont mes collègues, ils sont très gentils.",
+     "placeholder": "Escreva a frase em francês"
+    },
+    {
+     "tipo": "escrita",
+     "enunciado": "<div class='enunciado-pt'>É uma <span class='pt-hint' title='entreprise'>empresa</span> reconhecida.</div>",
+     "respostas": [
+      "c'est une entreprise reconnue",
+      "c'est une entreprise reconnue."
+     ],
+     "mostrar": "C'est une entreprise reconnue.",
+     "explicacao": "Tradução modelo: C'est une entreprise reconnue.",
+     "audioCorrecao": "C'est une entreprise reconnue.",
+     "placeholder": "Escreva a frase em francês"
+    }
+   ]
+  },
+  {
+   "id": "histoire",
+   "tipo": "leitura",
+   "titulo": "L'entretien de Karim",
+   "instrucao": "Leia, ouça e repare em c'est / il est.",
+   "paragrafos": [
+    "Karim arrive pour son entretien d'embauche. « Bonjour, c'est moi, Karim Benali », dit-il à la réceptionniste. « C'est pour le poste de comptable. »",
+    "Le directeur des ressources humaines l'accueille: « C'est vous, Karim ? Enchanté ! Je suis Marc, c'est moi qui vais mener l'entretien. » Karim est un peu nerveux, mais il est bien préparé.",
+    "« Alors, qu'est-ce que vous faites actuellement ? » demande Marc. « Je suis comptable dans une petite entreprise. C'est un travail intéressant, mais ce n'est pas très bien payé. » « Et vos collègues, ils sont sympas ? » « Oui, ce sont des gens formidables. »",
+    "« Pourquoi voulez-vous ce poste ? » « Parce que c'est une entreprise reconnue, et je crois que c'est une bonne opportunité pour ma carrière. Je suis motivé, et je suis quelqu'un de sérieux. »",
+    "À la fin de l'entretien, Marc sourit: « C'est excellent, Karim. Vous êtes exactement le candidat qu'on cherche. Ce n'est pas encore officiel, mais je pense que c'est vous que nous allons choisir. »"
+   ],
+   "glossario": {
+    "receptionniste": "recepcionista",
+    "ressources": "recursos",
+    "humaines": "humanos",
+    "accueille": "recebe, acolhe",
+    "nerveux": "nervoso",
+    "prepare": "preparado",
+    "actuellement": "atualmente",
+    "payee": "pago, remunerado",
+    "reconnue": "reconhecida",
+    "opportunite": "oportunidade",
+    "carriere": "carreira",
+    "candidat": "candidato",
+    "officiel": "oficial"
+   }
+  },
+  {
+   "id": "quiz",
+   "tipo": "exercicio",
+   "titulo": "Compréhension",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Pourquoi Karim est-il là ?",
+     "opcoes": [
+      "Pour un entretien d'embauche",
+      "Pour une visite touristique",
+      "Pour rencontrer un ami"
+     ],
+     "resposta": "Pour un entretien d'embauche",
+     "explicacao": "No texto: « Karim arrive pour son entretien d'embauche. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Quel poste Karim veut-il obtenir ?",
+     "opcoes": [
+      "Comptable",
+      "Directeur",
+      "Secrétaire"
+     ],
+     "resposta": "Comptable",
+     "explicacao": "No texto: « « C'est pour le poste de comptable. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qui mène l'entretien ?",
+     "opcoes": [
+      "Marc, le directeur des ressources humaines",
+      "La réceptionniste",
+      "Le père de Karim"
+     ],
+     "resposta": "Marc, le directeur des ressources humaines",
+     "explicacao": "No texto: « » Le directeur des ressources humaines l'accueille: « C'est vous, Karim ? »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment Karim décrit-il ses collègues actuels ?",
+     "opcoes": [
+      "Ce sont des gens formidables",
+      "Ils sont désagréables",
+      "Il ne les connaît pas bien"
+     ],
+     "resposta": "Ce sont des gens formidables",
+     "explicacao": "No texto: « » « Oui, ce sont des gens formidables. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Pourquoi Karim veut-il ce nouveau poste ?",
+     "opcoes": [
+      "C'est une entreprise reconnue et une bonne opportunité",
+      "Pour gagner moins d'argent",
+      "Parce que ses amis y travaillent"
+     ],
+     "resposta": "C'est une entreprise reconnue et une bonne opportunité",
+     "explicacao": "No texto: « » « Parce que c'est une entreprise reconnue, et je crois que c'est une bonne opportunité pour ma carrière. »"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Comment se termine l'entretien ?",
+     "opcoes": [
+      "Marc pense choisir Karim",
+      "Karim est refusé",
+      "L'entretien est reporté"
+     ],
+     "resposta": "Marc pense choisir Karim",
+     "explicacao": "No texto: « » À la fin de l'entretien, Marc sourit: « C'est excellent, Karim. »"
+    }
+   ]
+  }
+ ]
+}

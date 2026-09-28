@@ -1,0 +1,1077 @@
+{
+ "slug": "phonetique",
+ "ordem": 17,
+ "nivel": "A1",
+ "titulo": "Phonétique",
+ "origem": "Français na Mira — Phonétique",
+ "descricao": "Sons nasais, le/les, os acentos e ditados de palavras e frases: tudo de ouvido, com áudio em cada questão.",
+ "secoes": [
+  {
+   "id": "videos",
+   "tipo": "video",
+   "titulo": "Vidéos",
+   "instrucao": "Cinco videoaulas de fonética.",
+   "youtube": [
+    {
+     "id": "nVUMxi4k0cM",
+     "titulo": "Vidéo 1 — Phonétique"
+    },
+    {
+     "id": "8QGyrf_14rA",
+     "titulo": "Vidéo 2 — Phonétique"
+    },
+    {
+     "id": "YEnvgm2x6TE",
+     "titulo": "Vidéo 3 — Phonétique"
+    },
+    {
+     "id": "34sczS0MEEY",
+     "titulo": "Vidéo 4 — Phonétique"
+    },
+    {
+     "id": "V37sOWIS3-w",
+     "titulo": "Vidéo 5 — Phonétique"
+    }
+   ]
+  },
+  {
+   "id": "aula",
+   "tipo": "aula",
+   "titulo": "Aula",
+   "instrucao": "Clique em 🔊 para ouvir.",
+   "html": "\n<h3>Os sons nasais</h3>\n<p>O som nasal aparece quando a vogal vem seguida de <strong>n</strong> ou <strong>m</strong> na mesma sílaba. Hoje, para a maioria dos falantes, <em>un</em> e <em>in</em> soam igual [ɛ̃].</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Som</th><th>Grafias</th><th>Exemplos</th></tr></thead><tbody><tr><td>AN / EN  →  som [ɑ̃]</td><td><strong>an</strong>, <strong>en</strong></td><td><span class=\"fr\" data-fr=\"maman\">maman</span> <span class=\"fr\" data-fr=\"enfant\">enfant</span> <span class=\"fr\" data-fr=\"temps\">temps</span> <span class=\"fr\" data-fr=\"grand\">grand</span> <span class=\"fr\" data-fr=\"blanc\">blanc</span></td></tr><tr><td>ON  →  som [ɔ̃]</td><td><strong>on</strong></td><td><span class=\"fr\" data-fr=\"bonjour\">bonjour</span> <span class=\"fr\" data-fr=\"pont\">pont</span> <span class=\"fr\" data-fr=\"blond\">blond</span> <span class=\"fr\" data-fr=\"ton\">ton</span> <span class=\"fr\" data-fr=\"nom\">nom</span></td></tr><tr><td>IN / AIN / EIN / UN  →  som [ɛ̃]</td><td><strong>in</strong>, <strong>ain</strong>, <strong>un</strong></td><td><span class=\"fr\" data-fr=\"vin\">vin</span> <span class=\"fr\" data-fr=\"pain\">pain</span> <span class=\"fr\" data-fr=\"plein\">plein</span> <span class=\"fr\" data-fr=\"matin\">matin</span> <span class=\"fr\" data-fr=\"brun\">brun</span></td></tr><tr><td>AI / EI  →  som [ɛ]</td><td><strong>ai</strong>, <strong>ei</strong></td><td><span class=\"fr\" data-fr=\"français\">français</span> <span class=\"fr\" data-fr=\"lait\">lait</span> <span class=\"fr\" data-fr=\"maison\">maison</span> <span class=\"fr\" data-fr=\"peine\">peine</span></td></tr></tbody></table></div>\n<h3>Singular × plural que só se ouve no artigo</h3>\n<p>Em francês o <strong>-s</strong> do plural não se pronuncia: quem mostra o número é o artigo. <em>le</em> [lə] × <em>les</em> [le].</p>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Singular</th><th>Plural</th><th>Exemplo</th></tr></thead><tbody><tr><td><span class=\"fr\" data-fr=\"le\">le</span></td><td><span class=\"fr\" data-fr=\"les\">les</span></td><td><span class=\"fr\" data-fr=\"le livre\">le livre</span> → <span class=\"fr\" data-fr=\"les livres\">les livres</span></td></tr><tr><td><span class=\"fr\" data-fr=\"de\">de</span></td><td><span class=\"fr\" data-fr=\"des\">des</span></td><td><span class=\"fr\" data-fr=\"de la soupe\">de la soupe</span> → <span class=\"fr\" data-fr=\"des produits\">des produits</span></td></tr><tr><td><span class=\"fr\" data-fr=\"ce\">ce</span></td><td><span class=\"fr\" data-fr=\"ces\">ces</span></td><td><span class=\"fr\" data-fr=\"ce colis\">ce colis</span> → <span class=\"fr\" data-fr=\"ces colis\">ces colis</span></td></tr><tr><td><span class=\"fr\" data-fr=\"se\">se</span></td><td><span class=\"fr\" data-fr=\"ses\">ses</span></td><td><span class=\"fr\" data-fr=\"il se lave\">il se lave</span> → <span class=\"fr\" data-fr=\"ses amis\">ses amis</span></td></tr><tr><td><span class=\"fr\" data-fr=\"me\">me</span></td><td><span class=\"fr\" data-fr=\"mes\">mes</span></td><td><span class=\"fr\" data-fr=\"il me parle\">il me parle</span> → <span class=\"fr\" data-fr=\"mes livres\">mes livres</span></td></tr></tbody></table></div>\n<h3>Os acentos</h3>\n<div class=\"tabela-wrap\"><table><thead><tr><th>Acento</th><th>Uso</th></tr></thead><tbody><tr><td><strong>é</strong></td><td>Accent aigu (é): som [e] fechado, como em café, été.</td></tr><tr><td><strong>è</strong></td><td>Accent grave (è): som [ɛ] aberto, como em mère, très.</td></tr><tr><td><strong>ê</strong></td><td>Accent circonflexe (ê): som aberto; muitas vezes marca um S que existia antes (forêt = floresta, fête = festa).</td></tr><tr><td><strong>ë</strong></td><td>Tréma (ë): a vogal se pronuncia separada da anterior (Noël).</td></tr><tr><td><strong>ç</strong></td><td>Cedilha: C com som de S antes de a, o, u (français, garçon).</td></tr></tbody></table></div>"
+  },
+  {
+   "id": "nasais",
+   "tipo": "exercicio",
+   "titulo": "Sons nasals",
+   "instrucao": "Ouça a palavra e escolha a grafia.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "temps",
+     "opcoes": [
+      "temps",
+      "ton",
+      "teint"
+     ],
+     "resposta": "temps",
+     "explicacao": "Você ouviu « temps » · AN / EN  →  som [ɑ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "ton",
+     "opcoes": [
+      "ton",
+      "temps",
+      "teint"
+     ],
+     "resposta": "ton",
+     "explicacao": "Você ouviu « ton » · ON  →  som [ɔ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "pain",
+     "opcoes": [
+      "pain",
+      "pont",
+      "paon"
+     ],
+     "resposta": "pain",
+     "explicacao": "Você ouviu « pain » · IN / AIN / EIN / UN  →  som [ɛ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "pont",
+     "opcoes": [
+      "pont",
+      "pain",
+      "paon"
+     ],
+     "resposta": "pont",
+     "explicacao": "Você ouviu « pont » · ON  →  som [ɔ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "blanc",
+     "opcoes": [
+      "blanc",
+      "blond",
+      "blin"
+     ],
+     "resposta": "blanc",
+     "explicacao": "Você ouviu « blanc » · AN / EN  →  som [ɑ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "blond",
+     "opcoes": [
+      "blond",
+      "blanc",
+      "blin"
+     ],
+     "resposta": "blond",
+     "explicacao": "Você ouviu « blond » · ON  →  som [ɔ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "grand",
+     "opcoes": [
+      "grand",
+      "rond",
+      "rang"
+     ],
+     "resposta": "grand",
+     "explicacao": "Você ouviu « grand » · AN / EN  →  som [ɑ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "bonjour",
+     "opcoes": [
+      "bonjour",
+      "banjour",
+      "binjour"
+     ],
+     "resposta": "bonjour",
+     "explicacao": "Você ouviu « bonjour » · ON  →  som [ɔ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "maison",
+     "opcoes": [
+      "maison",
+      "mison",
+      "mouson"
+     ],
+     "resposta": "maison",
+     "explicacao": "Você ouviu « maison » · ON  →  som [ɔ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "français",
+     "opcoes": [
+      "français",
+      "francin",
+      "froncin"
+     ],
+     "resposta": "français",
+     "explicacao": "Você ouviu « français » · AN / EN  →  som [ɑ̃]."
+    }
+   ]
+  },
+  {
+   "id": "nasais2",
+   "tipo": "exercicio",
+   "titulo": "Quel mot ?",
+   "instrucao": "As opções mudam só no som nasal.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "grand",
+     "opcoes": [
+      "grand",
+      "grond",
+      "gruond"
+     ],
+     "resposta": "grand",
+     "explicacao": "Você ouviu « grand » · AN / EN  →  som [ɑ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "blond",
+     "opcoes": [
+      "blond",
+      "blanc",
+      "blin"
+     ],
+     "resposta": "blond",
+     "explicacao": "Você ouviu « blond » · ON  →  som [ɔ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "pain",
+     "opcoes": [
+      "pain",
+      "pont",
+      "pan"
+     ],
+     "resposta": "pain",
+     "explicacao": "Você ouviu « pain » · IN / AIN / EIN / UN  →  som [ɛ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "pont",
+     "opcoes": [
+      "pont",
+      "pain",
+      "pan"
+     ],
+     "resposta": "pont",
+     "explicacao": "Você ouviu « pont » · ON  →  som [ɔ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "temps",
+     "opcoes": [
+      "temps",
+      "thon",
+      "teint"
+     ],
+     "resposta": "temps",
+     "explicacao": "Você ouviu « temps » · AN / EN  →  som [ɑ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "thon",
+     "opcoes": [
+      "thon",
+      "temps",
+      "thin"
+     ],
+     "resposta": "thon",
+     "explicacao": "Você ouviu « thon » · ON  →  som [ɔ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "banc",
+     "opcoes": [
+      "banc",
+      "bon",
+      "bain"
+     ],
+     "resposta": "banc",
+     "explicacao": "Você ouviu « banc » · AN / EN  →  som [ɑ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "bon",
+     "opcoes": [
+      "bon",
+      "banc",
+      "bain"
+     ],
+     "resposta": "bon",
+     "explicacao": "Você ouviu « bon » · ON  →  som [ɔ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "lent",
+     "opcoes": [
+      "lent",
+      "long",
+      "lin"
+     ],
+     "resposta": "lent",
+     "explicacao": "Você ouviu « lent » · AN / EN  →  som [ɑ̃]."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Qual palavra você ouviu?",
+     "audio": "rond",
+     "opcoes": [
+      "rond",
+      "rang",
+      "rin"
+     ],
+     "resposta": "rond",
+     "explicacao": "Você ouviu « rond » · ON  →  som [ɔ̃]."
+    }
+   ]
+  },
+  {
+   "id": "le-les",
+   "tipo": "exercicio",
+   "titulo": "le / les, ce / ces...",
+   "instrucao": "Ouça e escolha a forma dita.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "O que você ouviu?",
+     "audio": "les livres",
+     "opcoes": [
+      "le livre",
+      "les livres"
+     ],
+     "resposta": "les livres",
+     "explicacao": "le [singular] × les [plural]: o -s final não se pronuncia, a diferença está no som do artigo."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que você ouviu?",
+     "audio": "le livre",
+     "opcoes": [
+      "le livre",
+      "les livres"
+     ],
+     "resposta": "le livre",
+     "explicacao": "le [singular] × les [plural]: o -s final não se pronuncia, a diferença está no som do artigo."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que você ouviu?",
+     "audio": "des produits",
+     "opcoes": [
+      "de produit",
+      "des produits"
+     ],
+     "resposta": "des produits",
+     "explicacao": "de [singular] × des [plural]: o -s final não se pronuncia, a diferença está no som do artigo."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que você ouviu?",
+     "audio": "ce colis",
+     "opcoes": [
+      "ce colis",
+      "ces colis"
+     ],
+     "resposta": "ce colis",
+     "explicacao": "ce [singular] × ces [plural]: o -s final não se pronuncia, a diferença está no som do artigo."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que você ouviu?",
+     "audio": "ces colis",
+     "opcoes": [
+      "ce colis",
+      "ces colis"
+     ],
+     "resposta": "ces colis",
+     "explicacao": "ce [singular] × ces [plural]: o -s final não se pronuncia, a diferença está no som do artigo."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que você ouviu?",
+     "audio": "mes amis",
+     "opcoes": [
+      "mon ami",
+      "mes amis"
+     ],
+     "resposta": "mes amis",
+     "explicacao": "me [singular] × mes [plural]: o -s final não se pronuncia, a diferença está no som do artigo."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que você ouviu?",
+     "audio": "ses amis",
+     "opcoes": [
+      "son ami",
+      "ses amis"
+     ],
+     "resposta": "ses amis",
+     "explicacao": "se [singular] × ses [plural]: o -s final não se pronuncia, a diferença está no som do artigo."
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "O que você ouviu?",
+     "audio": "il me parle",
+     "opcoes": [
+      "il me parle",
+      "il te parle"
+     ],
+     "resposta": "il me parle",
+     "explicacao": "Você ouviu « il me parle »."
+    }
+   ]
+  },
+  {
+   "id": "regles",
+   "tipo": "exercicio",
+   "titulo": "Les règles des accents",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Le tréma (ë, ï) apparaît quand...",
+     "audio": "Noël",
+     "opcoes": [
+      "duas vogais se pronunciam separadamente (Noël, naïf)",
+      "a palavra é estrangeira",
+      "a sílaba é tônica",
+      "nunca há regra"
+     ],
+     "resposta": "duas vogais se pronunciam separadamente (Noël, naïf)",
+     "explicacao": "Exemplo: Noël"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "La cédille (ç) sert à...",
+     "audio": "garçon",
+     "opcoes": [
+      "fazer o « c » soar [s] antes de a, o, u (garçon, leçon)",
+      "deixar a palavra mais bonita",
+      "indicar o plural",
+      "marcar o feminino"
+     ],
+     "resposta": "fazer o « c » soar [s] antes de a, o, u (garçon, leçon)",
+     "explicacao": "Exemplo: garçon"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "L'accent aigu (é) aparece...",
+     "audio": "école",
+     "opcoes": [
+      "apenas sobre a letra « e », com som fechado [e]",
+      "sobre qualquer vogal",
+      "só no fim das palavras",
+      "sobre o « c »"
+     ],
+     "resposta": "apenas sobre a letra « e », com som fechado [e]",
+     "explicacao": "Exemplo: école"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "L'accent grave sobre o « e » (è)...",
+     "audio": "très",
+     "opcoes": [
+      "dá o som aberto [ɛ] (très, mère, problème)",
+      "muda o « e » para [e] fechado",
+      "é igual ao tréma",
+      "só existe no « a »"
+     ],
+     "resposta": "dá o som aberto [ɛ] (très, mère, problème)",
+     "explicacao": "Exemplo: très"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "L'accent circonflexe (ê, â, î, ô, û) muitas vezes indica...",
+     "audio": "fenêtre",
+     "opcoes": [
+      "uma letra (frequentemente « s ») que existia no passado (forêt, hôpital)",
+      "o plural",
+      "o feminino",
+      "o som nasal"
+     ],
+     "resposta": "uma letra (frequentemente « s ») que existia no passado (forêt, hôpital)",
+     "explicacao": "Exemplo: fenêtre"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Sobre quais letras o tréma NÃO costuma aparecer?",
+     "audio": "naïf",
+     "opcoes": [
+      "sobre « a » sozinho no início da palavra",
+      "sobre « e »",
+      "sobre « i »",
+      "sobre « u »"
+     ],
+     "resposta": "sobre « a » sozinho no início da palavra",
+     "explicacao": "Exemplo: naïf"
+    }
+   ]
+  },
+  {
+   "id": "accents",
+   "tipo": "exercicio",
+   "titulo": "Quel accent ?",
+   "instrucao": "Ouça a palavra e escolha o acento que falta.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>caf_</strong>",
+     "audio": "café",
+     "opcoes": [
+      "é",
+      "è",
+      "ê",
+      "e"
+     ],
+     "resposta": "é",
+     "explicacao": "café · Accent aigu (é): som [e] fechado, como em café, été.",
+     "audioCorrecao": "café"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>tr_s</strong>",
+     "audio": "très",
+     "opcoes": [
+      "é",
+      "è",
+      "ê",
+      "e"
+     ],
+     "resposta": "è",
+     "explicacao": "très · Accent grave (è): som [ɛ] aberto, como em mère, très.",
+     "audioCorrecao": "très"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>fen_tre</strong>",
+     "audio": "fenêtre",
+     "opcoes": [
+      "é",
+      "è",
+      "ê",
+      "e"
+     ],
+     "resposta": "ê",
+     "explicacao": "fenêtre · Accent circonflexe (ê): som aberto; muitas vezes marca um S que existia antes (forêt = floresta, fête = festa).",
+     "audioCorrecao": "fenêtre"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>gar_on</strong>",
+     "audio": "garçon",
+     "opcoes": [
+      "ç",
+      "c",
+      "s",
+      "ss"
+     ],
+     "resposta": "ç",
+     "explicacao": "garçon · Cedilha: C com som de S antes de a, o, u (français, garçon).",
+     "audioCorrecao": "garçon"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>No_l</strong>",
+     "audio": "Noël",
+     "opcoes": [
+      "ë",
+      "é",
+      "è",
+      "e"
+     ],
+     "resposta": "ë",
+     "explicacao": "Noël · Tréma (ë): a vogal se pronuncia separada da anterior (Noël).",
+     "audioCorrecao": "Noël"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>_cole</strong>",
+     "audio": "école",
+     "opcoes": [
+      "é",
+      "è",
+      "ê",
+      "e"
+     ],
+     "resposta": "é",
+     "explicacao": "école · Accent aigu (é): som [e] fechado, como em café, été.",
+     "audioCorrecao": "école"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>ch_teau</strong>",
+     "audio": "château",
+     "opcoes": [
+      "â",
+      "a",
+      "à",
+      "ä"
+     ],
+     "resposta": "â",
+     "explicacao": "château · Circonflexe em â: som mais longo, antigo S (château = castelo).",
+     "audioCorrecao": "château"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>probl_me</strong>",
+     "audio": "problème",
+     "opcoes": [
+      "é",
+      "è",
+      "ê",
+      "e"
+     ],
+     "resposta": "è",
+     "explicacao": "problème · Accent grave (è): som [ɛ] aberto, como em mère, très.",
+     "audioCorrecao": "problème"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>le_on</strong>",
+     "audio": "leçon",
+     "opcoes": [
+      "ç",
+      "c",
+      "s",
+      "z"
+     ],
+     "resposta": "ç",
+     "explicacao": "leçon · Cedilha: C com som de S antes de a, o, u (français, garçon).",
+     "audioCorrecao": "leçon"
+    },
+    {
+     "tipo": "escolha",
+     "enunciado": "Complete: <strong>conna_tre</strong>",
+     "audio": "connaître",
+     "opcoes": [
+      "î",
+      "i",
+      "ï",
+      "í"
+     ],
+     "resposta": "î",
+     "explicacao": "connaître · Circonflexe em î (île = ilha).",
+     "audioCorrecao": "connaître"
+    }
+   ]
+  },
+  {
+   "id": "completez",
+   "tipo": "exercicio",
+   "titulo": "Complétez",
+   "instrucao": "Ouça e escreva a palavra inteira.",
+   "itens": [
+    {
+     "tipo": "ditado",
+     "audio": "maison",
+     "enunciado": "Ouça e escreva: <strong>m _ i s _ n</strong>",
+     "respostas": [
+      "maison"
+     ],
+     "explicacao": "A palavra é « maison »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "voyage",
+     "enunciado": "Ouça e escreva: <strong>v o _ a _ e</strong>",
+     "respostas": [
+      "voyage"
+     ],
+     "explicacao": "A palavra é « voyage »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "facture",
+     "enunciado": "Ouça e escreva: <strong>f _ c t _ r e</strong>",
+     "respostas": [
+      "facture"
+     ],
+     "explicacao": "A palavra é « facture »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "travail",
+     "enunciado": "Ouça e escreva: <strong>t r _ v _ i l</strong>",
+     "respostas": [
+      "travail"
+     ],
+     "explicacao": "A palavra é « travail »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "cinéma",
+     "enunciado": "Ouça e escreva: <strong>c i n _ m _</strong>",
+     "respostas": [
+      "cinéma"
+     ],
+     "explicacao": "A palavra é « cinéma »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "boulangerie",
+     "enunciado": "Ouça e escreva: <strong>b o u l _ n g _ r i e</strong>",
+     "respostas": [
+      "boulangerie"
+     ],
+     "explicacao": "A palavra é « boulangerie »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "château",
+     "enunciado": "Ouça e escreva: <strong>ch _ t _ a u</strong>",
+     "respostas": [
+      "château"
+     ],
+     "explicacao": "A palavra é « château »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "français",
+     "enunciado": "Ouça e escreva: <strong>f r _ n _ a i s</strong>",
+     "respostas": [
+      "français"
+     ],
+     "explicacao": "A palavra é « français »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "réunion",
+     "enunciado": "Ouça e escreva: <strong>r _ u n i _ n</strong>",
+     "respostas": [
+      "réunion"
+     ],
+     "explicacao": "A palavra é « réunion »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "déménager",
+     "enunciado": "Ouça e escreva: <strong>d _ m _ n a g e r</strong>",
+     "respostas": [
+      "déménager"
+     ],
+     "explicacao": "A palavra é « déménager »."
+    }
+   ]
+  },
+  {
+   "id": "ecrivez",
+   "tipo": "exercicio",
+   "titulo": "Écrivez le mot",
+   "instrucao": "Ouça e escreva com os acentos.",
+   "itens": [
+    {
+     "tipo": "ditado",
+     "audio": "cours",
+     "respostas": [
+      "cours"
+     ],
+     "explicacao": "A palavra é « cours »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "leçon",
+     "respostas": [
+      "leçon"
+     ],
+     "explicacao": "A palavra é « leçon »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "devoir",
+     "respostas": [
+      "devoir"
+     ],
+     "explicacao": "A palavra é « devoir »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "emploi",
+     "respostas": [
+      "emploi"
+     ],
+     "explicacao": "A palavra é « emploi »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "livre",
+     "respostas": [
+      "livre"
+     ],
+     "explicacao": "A palavra é « livre »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "paquet",
+     "respostas": [
+      "paquet"
+     ],
+     "explicacao": "A palavra é « paquet »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "congé",
+     "respostas": [
+      "congé"
+     ],
+     "explicacao": "A palavra é « congé »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "dîner",
+     "respostas": [
+      "dîner"
+     ],
+     "explicacao": "A palavra é « dîner »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "chômage",
+     "respostas": [
+      "chômage"
+     ],
+     "explicacao": "A palavra é « chômage »."
+    },
+    {
+     "tipo": "ditado",
+     "audio": "entretien",
+     "respostas": [
+      "entretien"
+     ],
+     "explicacao": "A palavra é « entretien »."
+    }
+   ]
+  },
+  {
+   "id": "sing-plur",
+   "tipo": "exercicio",
+   "titulo": "Singulier ou pluriel ?",
+   "instrucao": "Ouça a frase inteira.",
+   "itens": [
+    {
+     "tipo": "escolha",
+     "audio": "Je lis le livre de français.",
+     "antes": "Je lis ",
+     "depois": " livre de français.",
+     "opcoes": [
+      "le",
+      "les"
+     ],
+     "resposta": "le",
+     "explicacao": "Você ouviu: « Je lis le livre de français. »"
+    },
+    {
+     "tipo": "escolha",
+     "audio": "Elle range les cartons du déménagement.",
+     "antes": "Elle range ",
+     "depois": " cartons du déménagement.",
+     "opcoes": [
+      "le",
+      "les"
+     ],
+     "resposta": "les",
+     "explicacao": "Você ouviu: « Elle range les cartons du déménagement. »"
+    },
+    {
+     "tipo": "escolha",
+     "audio": "Nous achetons des produits à l'épicerie.",
+     "antes": "Nous achetons ",
+     "depois": " produits à l'épicerie.",
+     "opcoes": [
+      "de",
+      "des"
+     ],
+     "resposta": "des",
+     "explicacao": "Você ouviu: « Nous achetons des produits à l'épicerie. »"
+    },
+    {
+     "tipo": "escolha",
+     "audio": "Ce colis est arrivé à la gare.",
+     "antes": "",
+     "depois": " colis est arrivé à la gare.",
+     "opcoes": [
+      "ce",
+      "ces"
+     ],
+     "resposta": "ce",
+     "explicacao": "Você ouviu: « Ce colis est arrivé à la gare. »"
+    },
+    {
+     "tipo": "escolha",
+     "audio": "Ces factures sont sur la table.",
+     "antes": "",
+     "depois": " factures sont sur la table.",
+     "opcoes": [
+      "ce",
+      "ces"
+     ],
+     "resposta": "ces",
+     "explicacao": "Você ouviu: « Ces factures sont sur la table. »"
+    },
+    {
+     "tipo": "escolha",
+     "audio": "Elle invite ses collègues au dîner.",
+     "antes": "Elle invite ",
+     "depois": " collègues au dîner.",
+     "opcoes": [
+      "se",
+      "ses"
+     ],
+     "resposta": "ses",
+     "explicacao": "Você ouviu: « Elle invite ses collègues au dîner. »"
+    },
+    {
+     "tipo": "escolha",
+     "audio": "Le directeur me propose un poste.",
+     "antes": "Le directeur ",
+     "depois": " propose un poste.",
+     "opcoes": [
+      "me",
+      "mes"
+     ],
+     "resposta": "me",
+     "explicacao": "Você ouviu: « Le directeur me propose un poste. »"
+    },
+    {
+     "tipo": "escolha",
+     "audio": "Je prépare mes cours pour la réunion.",
+     "antes": "Je prépare ",
+     "depois": " cours pour la réunion.",
+     "opcoes": [
+      "me",
+      "mes"
+     ],
+     "resposta": "mes",
+     "explicacao": "Você ouviu: « Je prépare mes cours pour la réunion. »"
+    }
+   ]
+  },
+  {
+   "id": "mini-texte",
+   "tipo": "exercicio",
+   "titulo": "Mini-texte",
+   "instrucao": "Ouça a frase e complete a palavra que falta.",
+   "itens": [
+    {
+     "tipo": "lacuna",
+     "audio": "Aujourd'hui, je suis étudiant à l'université.",
+     "antes": "Aujourd'hui, je suis ",
+     "depois": " à l'université.",
+     "respostas": [
+      "étudiant"
+     ],
+     "explicacao": "Você ouviu: « Aujourd'hui, je suis étudiant à l'université. »"
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Après le cours de français, je révise.",
+     "antes": "Après le ",
+     "depois": " de français, je révise.",
+     "respostas": [
+      "cours"
+     ],
+     "explicacao": "Você ouviu: « Après le cours de français, je révise. »"
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Je vais visiter un château près de la gare.",
+     "antes": "Je vais visiter un ",
+     "depois": " près de la gare.",
+     "respostas": [
+      "château"
+     ],
+     "explicacao": "Você ouviu: « Je vais visiter un château près de la gare. »"
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Le voyage est très intéressant.",
+     "antes": "Le ",
+     "depois": " est très intéressant.",
+     "respostas": [
+      "voyage"
+     ],
+     "explicacao": "Você ouviu: « Le voyage est très intéressant. »"
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Je retrouve mes amis pour le dîner.",
+     "antes": "Je retrouve mes amis pour le ",
+     "depois": ".",
+     "respostas": [
+      "dîner"
+     ],
+     "explicacao": "Você ouviu: « Je retrouve mes amis pour le dîner. »"
+    },
+    {
+     "tipo": "lacuna",
+     "audio": "Nous célébrons Noël en famille.",
+     "antes": "Nous célébrons ",
+     "depois": " en famille.",
+     "respostas": [
+      "Noël"
+     ],
+     "explicacao": "Você ouviu: « Nous célébrons Noël en famille. »"
+    }
+   ]
+  },
+  {
+   "id": "texte",
+   "tipo": "leitura",
+   "titulo": "Le parcours de Léa",
+   "instrucao": "Texto final com o vocabulário do curso: leia e ouça.",
+   "paragrafos": [
+    "Depuis plusieurs années, Léa suivait des cours du soir et finissait chaque leçon et chaque devoir tard dans la nuit. Sa formation touchait à sa fin et elle souhaitait enfin trouver un emploi stable. Un matin, après un rapide petit déjeuner, elle décida qu'il fallait tout changer: ce changement serait son plus grand défi.",
+    "Elle reçut une facture et un colis le même jour, puis prépara ses livres pour un entretien d'embauche. Pour éviter l'embouteillage, elle prit son vélo au lieu de la voiture et arriva à la gare en avance. Le directeur l'attendait pour lui proposer un poste de professeure: elle allait enseigner le français!",
+    "Le nouveau travail l'obligeait à déménager. Il fallut aménager la maison, faire le ménage, ranger les cartons et réparer l'entrée. Ses amis passèrent à la boulangerie, à l'épicerie et à la poissonnerie pour préparer le repas. Le soir, autour d'un bon dîner, on organisa une petite fête.",
+    "Léa apprit à mieux gérer son temps: chaque rendez-vous, chaque réunion. Elle voulait éviter l'épuisement. Elle demanda un congé pour partir en vacances, loin de la pollution et du réchauffement de la ville.",
+    "Le voyage fut l'occasion de découvrir un château insolite classé au patrimoine. Léa aimait écrire, lire et voyager. Elle pensait aux grands enjeux du monde: la pauvreté, le chômage, le vieillissement et la mondialisation.",
+    "Désormais, Léa se sentait à sa place: aimer, manger avec ses amis, regarder des films au cinéma. Son épanouissement était le fruit de sa volonté: franchir les contraintes et transformer chaque tâche en un nouveau départ."
+   ],
+   "glossario": {
+    "plusieurs": "vários",
+    "suivait": "acompanhava",
+    "cours": "aulas",
+    "lecon": "lição",
+    "devoir": "tarefa",
+    "formation": "formação",
+    "souhaitait": "desejava",
+    "trouver": "encontrar",
+    "emploi": "emprego",
+    "petitdejeuner": "café da manhã",
+    "fallait": "era preciso",
+    "changer": "mudar",
+    "changement": "mudança",
+    "defi": "desafio",
+    "recut": "recebeu",
+    "facture": "fatura",
+    "colis": "encomenda",
+    "livres": "livros",
+    "entretien": "entrevista",
+    "eviter": "evitar",
+    "embouteillage": "engarrafamento",
+    "velo": "bicicleta",
+    "voiture": "carro",
+    "gare": "estação",
+    "directeur": "diretor",
+    "proposer": "propor",
+    "poste": "cargo",
+    "enseigner": "ensinar",
+    "travail": "trabalho",
+    "demenager": "mudar de casa",
+    "amenager": "arrumar",
+    "maison": "casa",
+    "menage": "faxina",
+    "cartons": "caixas",
+    "reparer": "consertar",
+    "entree": "entrada",
+    "boulangerie": "padaria",
+    "epicerie": "mercearia",
+    "poissonnerie": "peixaria",
+    "repas": "refeição",
+    "diner": "jantar",
+    "fete": "festa",
+    "gerer": "gerenciar",
+    "rendez-vous": "compromisso",
+    "reunion": "reunião",
+    "epuisement": "esgotamento",
+    "conge": "folga",
+    "vacances": "férias",
+    "pollution": "poluição",
+    "rechauffement": "aquecimento",
+    "voyage": "viagem",
+    "decouvrir": "descobrir",
+    "chateau": "castelo",
+    "insolite": "inusitado",
+    "patrimoine": "patrimônio",
+    "ecrire": "escrever",
+    "lire": "ler",
+    "voyager": "viajar",
+    "enjeux": "desafios",
+    "pauvrete": "pobreza",
+    "chomage": "desemprego",
+    "vieillissement": "envelhecimento",
+    "mondialisation": "globalização",
+    "desormais": "A partir de agora",
+    "aimer": "amar",
+    "manger": "comer",
+    "regarder": "assistir",
+    "cinema": "cinema",
+    "epanouissement": "florescimento",
+    "volonte": "vontade",
+    "franchir": "superar",
+    "contraintes": "obstáculos",
+    "tache": "tarefa"
+   }
+  }
+ ]
+}
