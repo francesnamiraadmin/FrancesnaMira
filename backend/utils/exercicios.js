@@ -39,7 +39,12 @@ function carregar() {
 function listar() {
   return [...carregar().values()]
     .sort((a, b) => (a.ordem || 99) - (b.ordem || 99))
-    .map(d => ({ slug: d.slug, titulo: d.titulo, nivel: d.nivel, descricao: d.descricao, modo: d.modo || "treino" }));
+    .map(d => ({
+      slug: d.slug, titulo: d.titulo, nivel: d.nivel, descricao: d.descricao, modo: d.modo || "treino",
+      origem: d.origem || null,
+      partes: d.secoes.map(s => s.titulo),
+      questoes: d.secoes.reduce((n, s) => n + (s.itens ? s.itens.length : 0), 0)
+    }));
 }
 
 function obter(slug) { return carregar().get(slug) || null; }

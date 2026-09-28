@@ -4,6 +4,7 @@
  "nivel": "A1",
  "titulo": "Vocabulaire de la semaine",
  "descricao": "As expressões da semana e as fórmulas que o professor espera ver nas suas produções.",
+ "origem": "Modèles TCF (decks Hebdomadaire e Attentes du professeur)",
  "secoes": [
   {
    "id": "aula",
