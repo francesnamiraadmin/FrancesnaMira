@@ -2,6 +2,8 @@
    Sobre os tokens de css/theme.css. Cada exercício tem abas (vídeo, aula, leitura,
    exercícios); o feedback de correção usa --success/--danger/--warning. */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+/* O atributo hidden precisa vencer os display:flex abaixo (modal, rodapé, datas). */
+[hidden] { display: none !important; }
 body { font-family: 'Poppins', sans-serif; min-height: 100vh; }
 
 .ex-wrap { max-width: 980px; margin: 0 auto; padding: 28px 18px 90px; }
