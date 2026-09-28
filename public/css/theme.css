@@ -102,6 +102,11 @@ body {
 :root[data-theme="light"] .tier-prata h3 { color: #4b5563; }
 :root[data-theme="light"] .tier-ouro h3 { color: #075985; }
 
+/* ---------- CONTORNO DOS CARDS DE PREÇO ----------
+   Linha preta fina em todos os tiers (e nos dois temas). !important porque cada
+   página redefine border-color por tier no próprio <style>, carregado depois. */
+.price-card-new { border: 1px solid #000 !important; }
+
 /* ---------- BOTÃO DE ALTERNAR TEMA (injetado por theme-toggle.js) ---------- */
 #themeToggleBtn {
   position: fixed;
