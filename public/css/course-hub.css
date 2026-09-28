@@ -39,14 +39,10 @@
 }
 
 /* ---- identidade por país (só desbloqueados) ----
-   Faixa fina com as cores da bandeira no topo + marca d'água discreta no canto:
-   Canadá (TCF/TEF) = folha de bordo, França (DELF/DALF) = faixa tricolor diagonal,
+   Marca d'água discreta no canto: Canadá (TCF) = folha de bordo,
+   França (DELF/TEF/DALF) = faixa tricolor diagonal,
    Francês geral (A1–B2) = Torre Eiffel. */
 .curso-card.desbloqueado > * { position: relative; z-index: 1; }
-.curso-bandeira {
-  position: absolute !important; top: 0; left: 0; right: 0; height: 5px; z-index: 2;
-  pointer-events: none;
-}
 .curso-card.desbloqueado::after {
   content: ""; position: absolute; pointer-events: none; z-index: 0;
   background-repeat: no-repeat; background-position: center; background-size: contain;
@@ -54,23 +50,17 @@
 }
 .curso-card.desbloqueado:hover::after { transform: rotate(-6deg) scale(1.06); }
 
-.pais-canada .curso-bandeira { background: linear-gradient(90deg, #d52b1e 0 25%, #fff 25% 75%, #d52b1e 75%); }
 .curso-card.desbloqueado.pais-canada::after {
   right: -18px; bottom: -14px; width: 130px; height: 130px; opacity: 0.13;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2015 -2000 4030 4030'%3E%3Cpath fill='%23d52b1e' d='m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z'/%3E%3C/svg%3E");
 }
 
-.pais-franca .curso-bandeira { background: linear-gradient(90deg, #0055a4 0 33.33%, #fff 33.33% 66.66%, #ef4135 66.66%); }
 .curso-card.desbloqueado.pais-franca::after {
   right: -46px; bottom: 22px; width: 190px; height: 34px; opacity: 0.16; transform: rotate(-38deg);
   background: linear-gradient(180deg, #0055a4 0 33.33%, #fff 33.33% 66.66%, #ef4135 66.66%);
 }
 .curso-card.desbloqueado.pais-franca:hover::after { transform: rotate(-44deg) scale(1.06); }
 
-.pais-paris .curso-bandeira {
-  height: 3px; left: 24px; right: auto; width: 54px; top: 0; border-radius: 0 0 3px 3px;
-  background: linear-gradient(90deg, #0055a4 0 33.33%, #fff 33.33% 66.66%, #ef4135 66.66%);
-}
 .curso-card.desbloqueado.pais-paris::after {
   right: 10px; bottom: -6px; width: 78px; height: 125px; opacity: 0.12;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 160'%3E%3Cpath fill='%230055a4' d='M50 0 53 20h3l4 35h6l1 7h-4l9 38h8l1 8h-5l16 52H70q-20-40-40 0H8l16-52h-5l1-8h8l9-38h-4l1-7h6l4-35h3z'/%3E%3C/svg%3E");
