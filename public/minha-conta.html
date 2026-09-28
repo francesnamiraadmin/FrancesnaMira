@@ -537,11 +537,12 @@ const AVATAR_PADRAO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="#3b96ff"/><circle cx="48" cy="38" r="18" fill="#ffffff"/><ellipse cx="48" cy="88" rx="30" ry="24" fill="#ffffff"/></svg>`
 );
 
-// Cada card de produto abre a seção correspondente ao ser clicado.
+// Cada card de produto leva à página do módulo (o mesmo hub de seleção de curso do
+// menu lateral — ver js/appShell.js), que já mostra quais cursos estão liberados.
 const PRODUTOS_DASHBOARD = [
-  { chave: "plataforma", nome: "Plataforma de Questões", icone: "img/icones/estatisticas.svg", secao: "secPlataforma" },
-  { chave: "producao", nome: "Ambiente de Produção Oral e Textual", icone: "img/icones/writing-hand.svg", secao: "secProducao" },
-  { chave: "aulasEspecializadas", nome: "Aulas Especializadas Online", icone: "img/icones/video.svg", secao: "secAulas" }
+  { chave: "plataforma", nome: "Plataforma de Questões", icone: "img/icones/estatisticas.svg", href: "plataforma-hub.html" },
+  { chave: "producao", nome: "Ambiente de Produção Oral e Textual", icone: "img/icones/writing-hand.svg", href: "producao-hub.html" },
+  { chave: "aulasEspecializadas", nome: "Aulas Especializadas Online", icone: "img/icones/video.svg", href: "aulas-hub.html" }
 ];
 
 const token = localStorage.getItem('token');
@@ -577,13 +578,6 @@ function salvarSecoes() {
     d.addEventListener('toggle', salvarSecoes);
   });
 })();
-
-function abrirSecao(id) {
-  const secao = document.getElementById(id);
-  if (!secao) return;
-  secao.open = true;
-  secao.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
 
 // ===================== CABEÇALHO E DADOS DO PERFIL =====================
 function metaItem(rotulo, valor) {
@@ -641,10 +635,10 @@ function renderSummaryCards(dados) {
     // Compra/renovação é sempre por curso (Pack Prestige de TCF, A1 etc.) — o CTA
     // leva para a escolha de curso.
     const cta = estado === 'ativo'
-      ? '<span class="card-ver-mais">Clique para ver detalhes</span>'
+      ? '<span class="card-ver-mais">Clique para acessar</span>'
       : `<a class="upgrade-btn" href="cursos.html">${estado === 'expirado' ? 'Renovar' : 'Adquirir'}</a>`;
 
-    return `<div class="dash-summary-card" role="button" tabindex="0" data-abrir-secao="${p.secao}">
+    return `<div class="dash-summary-card" role="link" tabindex="0" data-href="${p.href}">
       <h3>${p.nome}</h3>
       <div class="icone-wrap"><img class="icone" src="${p.icone}" alt=""></div>
       <div class="card-rodape">
@@ -658,13 +652,13 @@ function renderSummaryCards(dados) {
 
 document.getElementById('summaryCards').addEventListener('click', e => {
   if (e.target.closest('a')) return; // botão Adquirir/Renovar navega normalmente
-  const card = e.target.closest('[data-abrir-secao]');
-  if (card) abrirSecao(card.dataset.abrirSecao);
+  const card = e.target.closest('[data-href]');
+  if (card) window.location.href = card.dataset.href;
 });
 document.getElementById('summaryCards').addEventListener('keydown', e => {
   if (e.key !== 'Enter' && e.key !== ' ') return;
-  const card = e.target.closest('[data-abrir-secao]');
-  if (card) { e.preventDefault(); abrirSecao(card.dataset.abrirSecao); }
+  const card = e.target.closest('[data-href]');
+  if (card) { e.preventDefault(); window.location.href = card.dataset.href; }
 });
 
 // ===================== PAINEL DA EQUIPE =====================
