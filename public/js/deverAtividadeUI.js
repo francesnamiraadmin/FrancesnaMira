@@ -11,7 +11,7 @@ const DeverUI = (() => {
     producao_textual: 'Produção textual', producao_oral: 'Produção oral (áudio)',
     assistir_aula: 'Assistir aula gravada', assistir_modulo: 'Assistir conjunto de aulas',
     simulado: 'Fazer simulado', recurso_generico: 'Outro recurso da plataforma',
-    exercicio_interativo: 'Exercício interativo (corrigido na hora)'
+    exercicio_interativo: 'Dever completo (corrigido na hora)'
   };
 
   let modulosDisponiveis = [];
@@ -86,7 +86,7 @@ const DeverUI = (() => {
       <div class="campo campo-conteudo campo-modulo" style="display:none;"><label>Módulo</label><select data-conteudo="moduloId">${opcoesModulo(c.moduloId)}</select></div>
       <div class="campo campo-conteudo campo-aula" style="display:none;"><label>Aula</label><select data-conteudo="aulaId"><option value="">Selecione o módulo primeiro</option></select></div>
       <div class="campo campo-conteudo campo-conjunto" style="display:none;"><label>Conjunto de questões</label><select data-conteudo="conjuntoId">${opcoesConjunto(c.conjuntoId)}</select></div>
-      <div class="campo campo-conteudo campo-exercicio" style="display:none;"><label>Exercício interativo</label><select data-conteudo="exercicioSlug" data-atual="${c.exercicioSlug || ''}">${opcoesExercicio(c.exercicioSlug)}</select></div>
+      <div class="campo campo-conteudo campo-exercicio" style="display:none;"><label>Dever completo</label><select data-conteudo="exercicioSlug" data-atual="${c.exercicioSlug || ''}">${opcoesExercicio(c.exercicioSlug)}</select></div>
       ${comMaterialUpload ? `<div class="campo campo-conteudo campo-material-upload" style="display:none;">
         <label>Arquivo do material${c.arquivo?.nome ? ' (atual: ' + c.arquivo.nome + ')' : ''}</label>
         <div style="display:flex; gap:8px; align-items:center;">

@@ -25,7 +25,7 @@ function atividade(slug, extra = {}) {
 
 const PLANOS = [
   {
-    nome: "Parcours A1 · Francês na Mira",
+    nome: "Deveres completos · Parcours A1 (8 semanas)",
     curso: "A1",
     descricao: "Programa J1 a J8 do journal de classe: regulamento, fonética, être et avoir, o tempo, preposições, números, pronomes, família, simulado DELF A2, interrogativos, possessivos, adjetivos, negação, a cidade, c'est/il est e artigos.",
     semanas: [
@@ -45,7 +45,7 @@ const PLANOS = [
     ]
   },
   {
-    nome: "Atelier Dictée · TCF",
+    nome: "Deveres completos · Atelier Dictée TCF",
     curso: "TCF",
     descricao: "Ditado frase a frase de textos modelo do TCF (tâches 1, 2 e 3), com as expressões-chave anotadas.",
     semanas: [

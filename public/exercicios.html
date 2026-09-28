@@ -5,7 +5,7 @@
   <script src="js/htmlSeguro.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
-<title>Exercícios interativos - Francês na Mira</title>
+<title>Deveres completos - Francês na Mira</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
@@ -39,8 +39,8 @@
   <header class="ex-cabecalho">
     <div class="nivel">✏️</div>
     <div class="info">
-      <h1>Exercícios interativos</h1>
-      <p>Os exercícios adaptados dos scripts do Google Apps Script, agora dentro do site: com correção automática, explicação em cada questão e áudio Coqui. Abra qualquer um para ver como o aluno vê. Para mandar ao aluno, use um Plano-Base ou crie um dever na Gestão de Alunos com a atividade "Exercício interativo".</p>
+      <h1>Deveres completos</h1>
+      <p>Blocos de questões e formulários adaptados dos scripts do Google Apps Script: correção automática, explicação em cada questão e áudio Coqui. Abra qualquer um para ver como o aluno vê. Para mandar ao aluno, use um Plano-Base ou a ferramenta "Atribuir deveres completos" na Gestão de Alunos.</p>
     </div>
   </header>
   <div class="cat-grid" id="catGrid"><div class="skeleton skeleton-block"></div></div>
@@ -69,9 +69,9 @@
           ${x.origem ? `<div class="cat-origem"><strong>Script do Google de origem</strong>${esc(x.origem)}</div>` : ''}
           <div class="cat-partes">${x.partes.map(p => `<span>${esc(p)}</span>`).join('')}</div>
           <a class="ex-btn" href="exercicio.html?slug=${encodeURIComponent(x.slug)}">Abrir</a>
-        </article>`).join('') || '<p>Nenhum exercício cadastrado.</p>';
+        </article>`).join('') || '<p>Nenhum dever completo cadastrado.</p>';
     } catch (err) {
-      grid.innerHTML = '<p>Não foi possível carregar os exercícios.</p>';
+      grid.innerHTML = '<p>Não foi possível carregar os deveres completos.</p>';
     }
   }, { once: true });
 })();

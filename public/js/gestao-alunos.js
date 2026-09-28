@@ -13,9 +13,19 @@ let alunoAtual = null;
 let abaAtual = 'ativo';
 let filtrosOpcoesCarregadas = false;
 
+// Telas: lista, detalhe (ficha do aluno), acompanhamento e atribuir (as duas
+// últimas em js/gestao-alunos-ferramentas.js). A aba "Alunos" fica marcada
+// também na ficha, já que ela é aberta a partir da lista.
+const VIEWS = { lista: 'viewLista', detalhe: 'viewDetalhe', acompanhamento: 'viewAcompanhamento', atribuir: 'viewAtribuir' };
 function mostrarView(nome) {
-  document.getElementById('viewLista').style.display = nome === 'lista' ? 'block' : 'none';
-  document.getElementById('viewDetalhe').style.display = nome === 'detalhe' ? 'block' : 'none';
+  Object.entries(VIEWS).forEach(([k, id]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.hidden = k !== nome;
+    el.style.display = k === nome ? 'block' : 'none';
+  });
+  const aba = nome === 'detalhe' ? 'lista' : nome;
+  document.querySelectorAll('#navPrincipal [data-nav]').forEach(b => b.classList.toggle('ativa', b.dataset.nav === aba));
 }
 document.getElementById('voltarListaBtn').addEventListener('click', () => { mostrarView('lista'); carregarAlunos(); });
 
@@ -423,19 +433,50 @@ function labelEntrega(a, dever) {
   return a.entrega?.atrasada ? 'Pendente em atraso' : 'Pendente';
 }
 
+// Nota que o dever completo grava no texto da entrega ("Nota automática: 45/50 (90%)").
+function notaDeverCompleto(a) {
+  const m = /Nota automática: (\d+)\/(\d+) \((\d+)%\)/.exec(a.entrega?.texto || '');
+  return m ? Number(m[3]) : null;
+}
+function chipNota(pct) {
+  if (pct == null) return '';
+  return `<span class="nota-chip ${pct >= 80 ? 'alta' : pct >= 50 ? 'media' : 'baixa'}">${pct}%</span>`;
+}
+
+function renderResumoDeverAluno() {
+  const el = document.getElementById('deverResumoAluno');
+  if (!el) return;
+  const ativs = deveresDoAlunoAtual.flatMap(d => d.atividades);
+  if (!ativs.length) { el.innerHTML = ''; return; }
+  const entregues = ativs.filter(a => a.entrega?.status === 'enviado').length;
+  const notas = ativs.filter(a => a.tipo === 'exercicio_interativo').map(notaDeverCompleto).filter(n => n != null);
+  const atrasados = deveresDoAlunoAtual.filter(d => d.status === 'atrasado').length;
+  el.innerHTML = `<div class="kpi-row" style="margin-top:0;">
+    <div class="kpi"><div class="valor">${deveresDoAlunoAtual.length}</div><div class="rotulo">Semanas de dever</div></div>
+    <div class="kpi"><div class="valor">${Math.round((entregues / ativs.length) * 100)}%</div><div class="rotulo">Atividades entregues (${entregues}/${ativs.length})</div></div>
+    <div class="kpi"><div class="valor">${notas.length ? Math.round(notas.reduce((x, y) => x + y, 0) / notas.length) + '%' : '—'}</div><div class="rotulo">Média nos deveres completos</div></div>
+    <div class="kpi"><div class="valor" style="${atrasados ? 'color:var(--vermelho)' : ''}">${atrasados}</div><div class="rotulo">Semanas atrasadas</div></div>
+  </div>`;
+}
+
 function renderDeveresLista() {
   const lista = document.getElementById('deveresLista');
-  if (!deveresDoAlunoAtual.length) { lista.innerHTML = '<div class="vazio-box">Nenhum dever de casa ainda.</div>'; return; }
+  renderResumoDeverAluno();
+  if (!deveresDoAlunoAtual.length) { lista.innerHTML = '<div class="vazio-box">Nenhum dever de casa ainda. Use "Atribuir deveres completos" ou um Plano-Base.</div>'; return; }
   lista.innerHTML = deveresDoAlunoAtual.map(d => {
     const totalObrig = d.atividades.filter(a => a.obrigatoria).length;
     const feitasObrig = d.atividades.filter(a => a.obrigatoria && a.entrega?.status === 'enviado').length;
     const pct = totalObrig ? Math.round((feitasObrig / totalObrig) * 100) : 100;
-    const atividadesHtml = d.atividades.map((a, i) => `
+    const atividadesHtml = d.atividades.map((a, i) => {
+      const completo = a.tipo === 'exercicio_interativo';
+      const nomeTipo = (DeverUI.NOMES_TIPO[a.tipo] || a.tipo).replace(/ \(.*\)$/, '');
+      return `
       <div class="entrega-box">
         <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-          <strong style="font-size:0.88rem;">${a.titulo}${a.obrigatoria ? '' : ' <span style="font-weight:400; color:var(--cinza-400); font-size:0.78rem;">(opcional)</span>'}</strong>
-          <span class="entrega-status">${labelEntrega(a)}</span>
+          <strong style="font-size:0.88rem;">${a.titulo}<span class="tipo-chip ${completo ? 'completo' : ''}">${nomeTipo}</span>${a.obrigatoria ? '' : ' <span style="font-weight:400; color:var(--cinza-400); font-size:0.78rem;">(opcional)</span>'}</strong>
+          <span class="entrega-status">${completo ? chipNota(notaDeverCompleto(a)) + ' ' : ''}${labelEntrega(a)}${a.entrega?.enviadoEm ? ' · ' + new Date(a.entrega.enviadoEm).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : ''}</span>
         </div>
+        ${completo && a.conteudo?.exercicioSlug ? `<a href="exercicio.html?slug=${encodeURIComponent(a.conteudo.exercicioSlug)}" target="_blank" rel="noopener" style="font-size:0.78rem; font-weight:700; color:var(--azul);">Ver o dever completo como o aluno vê ↗</a>` : ''}
         ${a.descricao ? `<p style="font-size:0.84rem; color:var(--cinza-600); margin:4px 0;">${a.descricao}</p>` : ''}
         ${a.entrega?.texto ? `<div class="texto-box" style="margin:8px 0; background:var(--cinza-100); padding:10px; border-radius:8px; font-size:0.85rem;">${a.entrega.texto}</div>` : ''}
         ${a.entrega?.arquivo?.nome ? `<button class="btn secundario pequeno" data-baixar-entrega="${d._id}|${i}|${encodeURIComponent(a.entrega.arquivo.nome)}"><img class="titulo-icone-inline pequeno" src="img/icones/paperclip.svg" alt="">Baixar ${a.entrega.arquivo.nome}</button>` : ''}
@@ -444,11 +485,13 @@ function renderDeveresLista() {
           <textarea data-comentario-input="${d._id}|${i}">${a.entrega?.comentarioProfessor || ''}</textarea>
           <button class="btn secundario pequeno" style="align-self:flex-start; margin-top:6px;" data-salvar-comentario="${d._id}|${i}">Salvar comentário</button>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
     return `<div class="dever-card">
       <div class="dever-head" data-abrir-dever="${d._id}">
         <div><h4>Semana ${d.numeroSemana} — ${d.titulo}</h4>
-          <div class="meta">Prazo: ${new Date(d.dataLimite).toLocaleDateString('pt-BR')} · ${pct}% das obrigatórias concluídas</div></div>
+          <div class="meta">Prazo: ${new Date(d.dataLimite).toLocaleDateString('pt-BR')} · ${feitasObrig}/${totalObrig} obrigatórias entregues</div>
+          <div class="dever-progresso"><span style="width:${pct}%"></span></div></div>
         <span class="status-badge ${d.status}">${STATUS_DEVER_LABEL[d.status]}</span>
       </div>
       <div class="dever-corpo" id="deverCorpo${d._id}">

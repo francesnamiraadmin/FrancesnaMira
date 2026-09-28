@@ -155,7 +155,7 @@ function corrigir(def, respostas, secaoId) {
 
 // Texto guardado na entrega do dever (é o que o professor lê).
 function resumoEntrega(def, resultado, extra) {
-  const linhas = [`Exercício: ${def.titulo}`];
+  const linhas = [`Dever completo: ${def.titulo}`];
   if (resultado.total) linhas.push(`Nota automática: ${resultado.pontos}/${resultado.total} (${resultado.percentual}%)`);
   Object.values(resultado.porSecao).filter(s => s.total).forEach(s => linhas.push(`• ${s.titulo}: ${s.pontos}/${s.total}`));
   if (extra) linhas.push(extra);

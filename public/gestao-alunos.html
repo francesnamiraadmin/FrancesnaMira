@@ -163,6 +163,74 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .entrega-box .entrega-status { font-size: 0.78rem; font-weight: 700; }
 .titulo-icone-inline { width: 1em; height: 1em; object-fit: contain; vertical-align: -0.14em; margin-right: 8px; }
 .titulo-icone-inline.pequeno { margin-right: 5px; }
+
+/* ===================== REMODELAÇÃO: navegação, acompanhamento, deveres completos ===================== */
+.painel-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.painel-header .atalhos { display: flex; gap: 8px; flex-wrap: wrap; }
+.painel-header .atalhos a { padding: 8px 16px; border-radius: 30px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.4); color: #fff; font-weight: 700; font-size: 0.8rem; text-decoration: none; }
+.painel-header .atalhos a:hover { background: rgba(255,255,255,0.28); }
+.nav-principal { position: sticky; top: 0; z-index: 30; display: flex; gap: 6px; padding: 8px; margin-bottom: 22px; background: var(--branco); border: 1px solid var(--cinza-200); border-radius: 18px; box-shadow: var(--sombra); overflow-x: auto; }
+.nav-principal button { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; border: none; background: transparent; color: var(--cinza-600); font-family: inherit; font-weight: 700; font-size: 0.88rem; padding: 10px 18px; border-radius: 12px; cursor: pointer; transition: 0.2s; }
+.nav-principal button:hover { background: var(--cinza-100); color: var(--cinza-800); }
+.nav-principal button.ativa { background: var(--azul); color: #fff; }
+.nav-principal .badge-vivo { font-size: 0.66rem; padding: 2px 7px; border-radius: 10px; background: var(--verde-bg); color: var(--verde); }
+.nav-principal button.ativa .badge-vivo { background: rgba(255,255,255,0.25); color: #fff; }
+
+.subnav-aluno { position: sticky; top: 76px; z-index: 20; display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 10px; margin-bottom: 18px; background: var(--branco); border: 1px solid var(--cinza-200); border-radius: 14px; box-shadow: var(--sombra); }
+.subnav-aluno a { font-size: 0.8rem; font-weight: 600; color: var(--cinza-600); text-decoration: none; padding: 6px 12px; border-radius: 10px; }
+.subnav-aluno a:hover { background: var(--azul-claro); color: var(--azul-escuro); }
+.card[id] { scroll-margin-top: 150px; }
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+.grid-2 > .card { margin-bottom: 0; }
+.feed { list-style: none; max-height: 560px; overflow-y: auto; }
+.feed li { display: grid; grid-template-columns: 38px 1fr auto; gap: 12px; align-items: center; padding: 11px 4px; border-bottom: 1px solid var(--cinza-100); font-size: 0.85rem; }
+.feed li:last-child { border-bottom: none; }
+.feed .ic { width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: var(--azul-claro); font-size: 1.05rem; }
+.feed .ic.completo { background: var(--verde-bg); }
+.feed .quem { font-weight: 700; cursor: pointer; }
+.feed .quem:hover { color: var(--azul); }
+.feed .o-que { color: var(--cinza-600); font-size: 0.8rem; }
+.feed .quando { font-size: 0.74rem; color: var(--cinza-400); text-align: right; white-space: nowrap; }
+.feed li.novo { animation: brilho 2.5s ease-out; }
+@keyframes brilho { from { background: var(--verde-bg); } to { background: transparent; } }
+.nota-chip { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 2px 9px; border-radius: 10px; }
+.nota-chip.alta { background: var(--verde-bg); color: var(--verde); }
+.nota-chip.media { background: var(--amarelo-bg); color: var(--amarelo); }
+.nota-chip.baixa { background: var(--vermelho-bg); color: var(--vermelho); }
+.tabela-wrap { overflow-x: auto; }
+table.acomp { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+table.acomp th, table.acomp td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--cinza-100); white-space: nowrap; }
+table.acomp th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--cinza-600); cursor: pointer; user-select: none; }
+table.acomp tbody tr { cursor: pointer; }
+table.acomp tbody tr:hover { background: var(--azul-claro); }
+.mini-barra { width: 110px; height: 8px; border-radius: 6px; background: var(--cinza-100); overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 6px; }
+.mini-barra span { display: block; height: 100%; background: var(--azul); border-radius: 6px; }
+.alerta-txt { color: var(--vermelho); font-weight: 700; }
+
+.dc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.dc-card { position: relative; display: flex; gap: 12px; align-items: flex-start; padding: 14px; border: 2px solid var(--cinza-200); border-radius: 14px; cursor: pointer; transition: 0.15s; background: var(--branco); }
+.dc-card:hover { border-color: var(--azul); }
+.dc-card.marcado { border-color: var(--azul); background: var(--azul-claro); }
+.dc-card input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--azul); flex: 0 0 auto; }
+.dc-card h4 { font-size: 0.9rem; line-height: 1.25; }
+.dc-card .meta { font-size: 0.74rem; color: var(--cinza-400); margin-top: 3px; }
+.dc-card .ver { font-size: 0.74rem; font-weight: 700; color: var(--azul); text-decoration: none; }
+.dc-nivel { font-size: 0.66rem; font-weight: 700; padding: 2px 8px; border-radius: 8px; background: var(--cinza-100); color: var(--cinza-600); margin-right: 4px; }
+.passo { display: flex; align-items: center; gap: 10px; margin: 4px 0 14px; }
+.passo .n { width: 28px; height: 28px; border-radius: 50%; background: var(--azul); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+.passo h2 { margin: 0 !important; }
+.alunos-escolha { max-height: 340px; overflow-y: auto; border: 1px solid var(--cinza-200); border-radius: 12px; }
+.alunos-escolha label { display: flex; align-items: center; gap: 10px; padding: 9px 14px; border-bottom: 1px solid var(--cinza-100); font-size: 0.86rem; cursor: pointer; }
+.alunos-escolha label:hover { background: var(--cinza-50); }
+.alunos-escolha input { width: 17px; height: 17px; accent-color: var(--azul); }
+.resumo-atrib { position: sticky; bottom: 12px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 18px; border-radius: 16px; background: var(--cinza-800); color: var(--branco); box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
+[data-theme="dark"] .resumo-atrib { background: #0b1220; color: #e8ecf5; }
+.tipo-chip { font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 8px; background: var(--cinza-100); color: var(--cinza-600); margin-left: 6px; vertical-align: middle; }
+.tipo-chip.completo { background: var(--verde-bg); color: var(--verde); }
+.dever-progresso { height: 6px; border-radius: 4px; background: var(--cinza-200); overflow: hidden; margin-top: 8px; max-width: 320px; }
+.dever-progresso span { display: block; height: 100%; background: var(--verde); }
+[hidden] { display: none !important; }
 </style>
 </head>
 
@@ -194,9 +262,79 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
 <div class="wrap">
   <div class="painel-header">
-    <h1>Gestão de Alunos</h1>
-    <p>Veja os alunos inscritos, acompanhe as produções que enviaram, confira os textos e conceda créditos de correção.</p>
-    <a href="exercicios.html" style="display:inline-block; margin-top:12px; padding:8px 18px; border-radius:30px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.45); color:inherit; font-weight:700; font-size:0.85rem; text-decoration:none;">Exercícios interativos (vindos dos scripts do Google) →</a>
+    <div>
+      <h1>Gestão de Alunos</h1>
+      <p>Acompanhe o que cada aluno está fazendo, defina os deveres de casa e veja produções, aulas e notas em um só lugar.</p>
+    </div>
+    <div class="atalhos">
+      <a href="admin-planos-base.html">Planos-Base</a>
+      <a href="exercicios.html">Catálogo de deveres completos</a>
+      <a href="professor-correcoes.html">Fila de correção</a>
+    </div>
+  </div>
+
+  <nav class="nav-principal" id="navPrincipal" aria-label="Seções da gestão">
+    <button data-nav="lista" class="ativa"><img class="titulo-icone-inline pequeno" src="img/icones/students.svg" alt="">Alunos</button>
+    <button data-nav="acompanhamento"><img class="titulo-icone-inline pequeno" src="img/icones/estatisticas.svg" alt="">Acompanhamento <span class="badge-vivo">ao vivo</span></button>
+    <button data-nav="atribuir"><img class="titulo-icone-inline pequeno" src="img/icones/puzzle.svg" alt="">Atribuir deveres completos</button>
+  </nav>
+
+  <!-- ===================== ACOMPANHAMENTO ===================== -->
+  <div id="viewAcompanhamento" hidden>
+    <div class="kpi-row" id="acompKpis"></div>
+    <div class="grid-2">
+      <div class="card">
+        <h2>O que está sendo feito agora</h2>
+        <p style="font-size:0.8rem; color:var(--cinza-400); margin:-8px 0 12px;">Últimas entregas de todos os alunos. Atualiza sozinho quando alguém entrega uma atividade.</p>
+        <ul class="feed" id="acompFeed"><li>Carregando...</li></ul>
+      </div>
+      <div class="card">
+        <h2>Precisam de atenção</h2>
+        <div id="acompAlertas"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px;">
+        <h2 style="margin:0;">Progresso por aluno</h2>
+        <input type="text" id="acompBusca" placeholder="Filtrar por nome..." style="padding:8px 14px; border-radius:30px; border:1px solid var(--cinza-300); font-family:inherit; font-size:0.85rem; background:var(--branco); color:var(--cinza-800);">
+      </div>
+      <div class="tabela-wrap"><table class="acomp">
+        <thead><tr><th data-ord="nome">Aluno</th><th data-ord="semana">Semana atual</th><th data-ord="progresso">Progresso</th><th data-ord="atrasados">Atrasados</th><th data-ord="media">Média deveres completos</th><th data-ord="ultima">Última entrega</th></tr></thead>
+        <tbody id="acompTabela"></tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- ===================== ATRIBUIR DEVERES COMPLETOS ===================== -->
+  <div id="viewAtribuir" hidden>
+    <div class="card">
+      <div class="passo"><span class="n">1</span><h2>Escolha os deveres completos</h2></div>
+      <p style="font-size:0.84rem; color:var(--cinza-600); margin-bottom:14px;">Blocos de questões corrigidos na hora, com explicação e áudio. Clique para marcar; use "ver" para abrir como o aluno vê.</p>
+      <div class="dc-grid" id="dcGrid">Carregando...</div>
+    </div>
+    <div class="card">
+      <div class="passo"><span class="n">2</span><h2>Para quais alunos?</h2></div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+        <input type="text" id="atribBusca" placeholder="Buscar aluno..." style="flex:1; min-width:200px; padding:9px 14px; border-radius:30px; border:1px solid var(--cinza-300); font-family:inherit; background:var(--branco); color:var(--cinza-800);">
+        <button class="btn secundario pequeno" id="atribTodos">Marcar todos os ativos</button>
+        <button class="btn secundario pequeno" id="atribNenhum">Limpar</button>
+      </div>
+      <div class="alunos-escolha" id="atribAlunos">Carregando...</div>
+    </div>
+    <div class="card">
+      <div class="passo"><span class="n">3</span><h2>Prazo e detalhes</h2></div>
+      <div class="campo-row">
+        <div class="campo"><label>Título do dever</label><input type="text" id="atribTitulo" value="Deveres completos"></div>
+        <div class="campo"><label>Início</label><input type="date" id="atribInicio"></div>
+        <div class="campo"><label>Prazo</label><input type="date" id="atribPrazo"></div>
+        <div class="campo"><label>Prioridade</label><select id="atribPrioridade"><option value="media">Média</option><option value="alta">Alta</option><option value="baixa">Baixa</option></select></div>
+      </div>
+      <div class="campo"><label>Mensagem para o aluno (opcional)</label><textarea id="atribDescricao" placeholder="Ex.: Façam com calma e revisem as explicações antes da próxima aula."></textarea></div>
+    </div>
+    <div class="resumo-atrib">
+      <span id="atribResumo">Nenhum dever completo selecionado.</span>
+      <span style="display:flex; gap:10px; align-items:center;"><span id="atribMsg" style="font-size:0.85rem;"></span><button class="btn" id="atribEnviar">Atribuir</button></span>
+    </div>
   </div>
 
   <!-- ===================== LISTA ===================== -->
@@ -233,8 +371,13 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   <div id="viewDetalhe" style="display:none;">
     <span class="voltar-link" id="voltarListaBtn"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Voltar à lista de alunos</span>
 
+    <nav class="subnav-aluno" aria-label="Seções do aluno">
+      <a href="#secPerfil">Perfil</a><a href="#secDever">Dever de casa</a><a href="#secPlanos">Planos</a><a href="#secStats">Estatísticas</a>
+      <a href="#secAulas">Aulas</a><a href="#secProducoes">Produções</a><a href="#secHistorico">Histórico</a>
+    </nav>
+
     <!-- Dados pessoais -->
-    <div class="card">
+    <div class="card" id="secPerfil">
       <div class="aluno-header">
         <div style="display:flex; gap:18px; align-items:flex-start;">
           <div class="avatar-circle grande" id="detalheAvatar"></div>
@@ -254,36 +397,13 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div class="msg-inline" id="credMsg" style="display:none;"></div>
     </div>
 
-    <!-- Planos ativos -->
-    <div class="card">
-      <h2>Planos ativos</h2>
-      <div id="planosLista"></div>
-    </div>
-
-    <!-- Estatísticas -->
-    <div class="card">
-      <h2>Estatísticas</h2>
-      <div class="kpi-row" id="statsKpiRow"></div>
-      <div id="statsGraficos"></div>
-    </div>
-
-    <!-- Progressão nas Aulas -->
-    <div class="card">
-      <h2>Progressão nas Aulas</h2>
-      <div id="progressaoAulasBox"></div>
-    </div>
-
-    <!-- Produções -->
-    <div class="card">
-      <h2>Produções enviadas</h2>
-      <div id="producoesLista"></div>
-    </div>
-
-    <!-- Dever de Casa -->
-    <div class="card">
+    <!-- Dever de Casa (primeiro: é o que mais se acompanha no dia a dia) -->
+    <div class="card" id="secDever">
       <h2>Dever de Casa</h2>
+      <div id="deverResumoAluno"></div>
       <div id="deverAtribuicaoBox"></div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 18px;">
+        <button class="btn pequeno" id="atribuirDcAlunoBtn"><img class="titulo-icone-inline pequeno" src="img/icones/puzzle.svg" alt="">Atribuir deveres completos</button>
         <button class="btn secundario pequeno" id="abrirAtribuirBtn">Atribuir Plano-Base</button>
         <button class="btn secundario pequeno" id="abrirDeverManualBtn">+ Criar dever manual</button>
       </div>
@@ -335,8 +455,33 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div id="deveresLista"></div>
     </div>
 
+    <!-- Planos ativos -->
+    <div class="card" id="secPlanos">
+      <h2>Planos ativos</h2>
+      <div id="planosLista"></div>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="card" id="secStats">
+      <h2>Estatísticas</h2>
+      <div class="kpi-row" id="statsKpiRow"></div>
+      <div id="statsGraficos"></div>
+    </div>
+
+    <!-- Progressão nas Aulas -->
+    <div class="card" id="secAulas">
+      <h2>Progressão nas Aulas</h2>
+      <div id="progressaoAulasBox"></div>
+    </div>
+
+    <!-- Produções -->
+    <div class="card" id="secProducoes">
+      <h2>Produções enviadas</h2>
+      <div id="producoesLista"></div>
+    </div>
+
     <!-- Histórico -->
-    <div class="card">
+    <div class="card" id="secHistorico">
       <h2>Histórico</h2>
       <div id="historicoLista"></div>
     </div>
@@ -348,6 +493,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 <script src="js/deverAtividadeUI.js"></script>
 <script src="js/deverRealtime.js"></script>
 <script src="js/gestao-alunos.js"></script>
+<script src="js/gestao-alunos-ferramentas.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>
 </html>

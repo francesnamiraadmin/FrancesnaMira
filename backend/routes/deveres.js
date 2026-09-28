@@ -11,6 +11,8 @@ const { gerarSemanasPendentes, atualizarSemanasDoAluno, statusDever, enriquecerD
 const { montarNovaProducao } = require("./producoes");
 const { transmitir } = require("../utils/sse");
 const { ehObjectId } = require("../middleware/seguranca");
+const User = require("../models/user");
+const exerciciosUtil = require("../utils/exercicios");
 
 router.use(exigirAuth);
 
@@ -33,8 +35,22 @@ const POPULATE_CONTEUDO = [
 // ===================== ADMIN/PROFESSOR: PLANOS-BASE (templates) =====================
 router.get("/planos-base", exigirProfessor, async (req, res) => {
   try {
-    const planos = await PlanoBase.find({ ativo: true }).select("nome curso descricao semanas.numero criadoEm").sort({ nome: 1 });
-    res.json(planos.map(p => ({ _id: p._id, nome: p.nome, curso: p.curso, descricao: p.descricao, totalSemanas: p.semanas.length, criadoEm: p.criadoEm })));
+    const [planos, atribuicoes] = await Promise.all([
+      PlanoBase.find({ ativo: true }).select("nome curso descricao semanas.numero semanas.titulo semanas.atividades.tipo semanas.atividades.titulo criadoEm").sort({ nome: 1 }).lean(),
+      AtribuicaoPlanoBase.aggregate([{ $match: { ativo: true } }, { $group: { _id: "$planoBaseId", n: { $sum: 1 } } }])
+    ]);
+    const alunosPorPlano = Object.fromEntries(atribuicoes.map(a => [String(a._id), a.n]));
+    res.json(planos.map(p => {
+      const atividades = p.semanas.flatMap(s => s.atividades || []);
+      return {
+        _id: p._id, nome: p.nome, curso: p.curso, descricao: p.descricao, criadoEm: p.criadoEm,
+        totalSemanas: p.semanas.length,
+        totalAtividades: atividades.length,
+        totalDeveresCompletos: atividades.filter(a => a.tipo === "exercicio_interativo").length,
+        totalAlunos: alunosPorPlano[String(p._id)] || 0,
+        semanas: p.semanas.map(s => ({ numero: s.numero, titulo: s.titulo, atividades: (s.atividades || []).map(a => ({ tipo: a.tipo, titulo: a.titulo })) }))
+      };
+    }));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -75,6 +91,20 @@ router.put("/planos-base/:id", exigirProfessor, async (req, res) => {
     );
     if (!plano) return res.status(404).json({ msg: "Plano-base não encontrado." });
     res.json(plano);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// Cópia editável de um Plano-Base (mesmas semanas e atividades, nome "(cópia)").
+router.post("/planos-base/:id/duplicar", exigirProfessor, async (req, res) => {
+  try {
+    const plano = await PlanoBase.findById(req.params.id).lean();
+    if (!plano) return res.status(404).json({ msg: "Plano-base não encontrado." });
+    const semanas = plano.semanas.map(({ _id, ...s }) => ({ ...s, atividades: (s.atividades || []).map(({ _id: _a, ...a }) => a) }));
+    const copia = await PlanoBase.create({ nome: plano.nome + " (cópia)", curso: plano.curso, descricao: plano.descricao, semanas, criadoPor: req.userId });
+    res.json(copia);
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -289,6 +319,93 @@ router.get("/dashboard", exigirProfessor, async (req, res) => {
       quantidadeAlunosComAtraso: alunosComAtraso.size,
       semanasMaisCriticas
     });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// ===================== ADMIN/PROFESSOR: ACOMPANHAMENTO =====================
+// O que os alunos estão fazendo: feed das últimas entregas de todos os deveres
+// e um resumo por aluno (semana atual, progresso, atrasos, média nos deveres
+// completos). Tudo calculado a partir dos DeverSemanal já existentes.
+const notaDeverCompleto = texto => {
+  const m = /Nota automática: (\d+)\/(\d+) \((\d+)%\)/.exec(texto || "");
+  return m ? { pontos: Number(m[1]), total: Number(m[2]), percentual: Number(m[3]) } : null;
+};
+router.get("/acompanhamento", exigirProfessor, async (req, res) => {
+  try {
+    const deveres = await DeverSemanal.find()
+      .select("alunoId numeroSemana titulo dataInicio dataLimite concluidoEm atividades.tipo atividades.titulo atividades.obrigatoria atividades.conteudo.exercicioSlug atividades.entrega")
+      .populate("alunoId", "nome email").lean();
+    const hoje = new Date();
+    const feed = [];
+    const porAluno = new Map();
+    deveres.forEach(d => {
+      if (!d.alunoId) return;
+      const id = String(d.alunoId._id);
+      const r = porAluno.get(id) || { alunoId: id, nome: d.alunoId.nome, email: d.alunoId.email,
+        deveres: 0, concluidos: 0, atrasados: 0, atividades: 0, entregues: 0, notas: [], ultimaEntrega: null, semanaAtual: null };
+      r.deveres++;
+      const status = statusDever(d);
+      if (status === "concluido") r.concluidos++;
+      if (status === "atrasado") r.atrasados++;
+      if (new Date(d.dataInicio) <= hoje && (!r.semanaAtual || d.numeroSemana > r.semanaAtual.numero)) r.semanaAtual = { numero: d.numeroSemana, titulo: d.titulo };
+      (d.atividades || []).forEach(a => {
+        r.atividades++;
+        if (a.entrega?.status !== "enviado") return;
+        r.entregues++;
+        const nota = a.tipo === "exercicio_interativo" ? notaDeverCompleto(a.entrega.texto) : null;
+        if (nota) r.notas.push(nota.percentual);
+        const quando = a.entrega.enviadoEm ? new Date(a.entrega.enviadoEm) : null;
+        if (quando && (!r.ultimaEntrega || quando > r.ultimaEntrega)) r.ultimaEntrega = quando;
+        feed.push({ alunoId: id, aluno: d.alunoId.nome, deverId: String(d._id), semana: d.numeroSemana, dever: d.titulo,
+          atividade: a.titulo, tipo: a.tipo, slug: a.conteudo?.exercicioSlug || null, enviadoEm: quando, nota,
+          atrasada: !!(quando && quando > new Date(d.dataLimite)) });
+      });
+      porAluno.set(id, r);
+    });
+    const alunos = [...porAluno.values()].map(r => ({
+      ...r, notas: undefined,
+      progresso: r.atividades ? Math.round((r.entregues / r.atividades) * 100) : 0,
+      mediaDeveresCompletos: r.notas.length ? Math.round(r.notas.reduce((a, b) => a + b, 0) / r.notas.length) : null
+    })).sort((a, b) => (b.ultimaEntrega || 0) - (a.ultimaEntrega || 0));
+    feed.sort((a, b) => (b.enviadoEm || 0) - (a.enviadoEm || 0));
+    res.json({ feed: feed.slice(0, 60), alunos });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// Atribuição rápida: cria, para um ou vários alunos, um dever de casa feito só de
+// deveres completos (backend/data/exercicios), na próxima semana livre de cada um.
+router.post("/deveres-completos/atribuir", exigirProfessor, async (req, res) => {
+  try {
+    const { alunoIds, slugs, titulo, descricao, dataInicio, dataLimite, prioridade } = req.body || {};
+    const ids = [...new Set((Array.isArray(alunoIds) ? alunoIds : []).filter(ehObjectId))];
+    const lista = (Array.isArray(slugs) ? slugs : []).filter(s => typeof s === "string" && exerciciosUtil.obter(s));
+    if (!ids.length || !lista.length) return res.status(400).json({ msg: "Escolha ao menos um aluno e um dever completo." });
+    if (!dataInicio || !dataLimite || new Date(dataLimite) < new Date(dataInicio)) return res.status(400).json({ msg: "Informe datas válidas (o prazo não pode ser antes do início)." });
+    const alunos = await User.find({ _id: { $in: ids } }).select("_id").lean();
+    const atividades = lista.map(slug => {
+      const def = exerciciosUtil.obter(slug);
+      return { tipo: "exercicio_interativo", titulo: def.titulo, descricao: def.descricao, obrigatoria: true, dependeDe: null, conteudo: { exercicioSlug: slug }, entrega: { status: "pendente" } };
+    });
+    const criados = [];
+    for (const a of alunos) {
+      const ultimo = await DeverSemanal.findOne({ alunoId: a._id }).sort({ numeroSemana: -1 }).select("numeroSemana").lean();
+      const dever = await DeverSemanal.create({
+        alunoId: a._id, planoBaseId: null, numeroSemana: (ultimo?.numeroSemana || 0) + 1,
+        titulo: String(titulo || "Deveres completos").slice(0, 150), descricao: descricao ? String(descricao).slice(0, 2000) : undefined,
+        dataInicio: new Date(dataInicio), dataLimite: new Date(dataLimite),
+        prioridade: ["baixa", "media", "alta"].includes(prioridade) ? prioridade : "media",
+        professorId: req.userId, atividades
+      });
+      criados.push(String(dever._id));
+      transmitir("dever-atualizado", { alunoId: String(a._id) });
+    }
+    res.json({ msg: `Dever criado para ${criados.length} aluno(s).`, criados });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });

@@ -8,7 +8,9 @@ const DeverWorkspace = (() => {
     const token = localStorage.getItem('token');
     return { Authorization: 'Bearer ' + token, ...(json ? { 'Content-Type': 'application/json' } : {}) };
   }
-  const NOMES_TIPO = (typeof DeverUI !== 'undefined') ? DeverUI.NOMES_TIPO : {};
+  // "Dever completo" é o nome do lado da administração; para o aluno a
+  // atividade continua aparecendo como exercício interativo.
+  const NOMES_TIPO = { ...((typeof DeverUI !== 'undefined') ? DeverUI.NOMES_TIPO : {}), exercicio_interativo: 'Exercício interativo' };
   const NOMES_STATUS_PRODUCAO = {
     em_fila: 'Aguardando correção', em_correcao: 'Em correção', aguardando_revisao: 'Aguardando revisão',
     corrigido: 'Corrigida', devolvido: 'Devolvida', arquivado: 'Arquivada', cancelado: 'Cancelada'
