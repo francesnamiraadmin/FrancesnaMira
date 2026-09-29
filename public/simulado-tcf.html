@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+  <script src="js/htmlSeguro.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Simulação Completa de Prova - TCF - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/simulado.css">
+</head>
+
+<body style="visibility:hidden;">
+<script>
+window.CURSO_CONTEXTO_MODULO = "plataforma";
+window.CURSO_CONTEXTO_HUB = "plataforma-hub.html";
+</script>
+<script src="js/cursoContexto.js"></script>
+<script src="js/plataformaGate.js"></script>
+
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<!-- Barra fixa durante a prova -->
+<div class="sm-barra" id="barra" hidden>
+  <div>
+    <div class="prova-nome" id="barraProva"></div>
+    <div class="prova-sub" id="barraSub"></div>
+  </div>
+  <div class="sm-etapas" id="barraEtapas"></div>
+  <span class="espaco"></span>
+  <span class="sm-pill" id="pillConexao" hidden><span class="ponto"></span><span id="pillConexaoTexto"></span></span>
+  <button class="sm-btn chamar pequeno" id="btnChamar" type="button">Chamar professor</button>
+  <span class="sm-relogio" id="relogio">--:--</span>
+</div>
+
+<main class="sm-wrap">
+  <section id="vInicio" hidden></section>
+  <section id="vProva" hidden></section>
+  <section id="vResultado" hidden></section>
+  <div id="carregando" class="sm-card" style="text-align:center;"><div class="sm-spinner"></div><p class="sm-muted">Carregando…</p></div>
+</main>
+
+<!-- Painel ao vivo: professor, chat e chamada de voz -->
+<aside class="sm-dock recolhido" id="dock" hidden>
+  <div class="sm-dock-topo" id="dockTopo">
+    <img src="img/icones/teacher.svg" alt="" style="width:22px;height:22px;">
+    <strong id="dockTitulo">Professor</strong>
+    <span class="sm-badge" id="dockBadge" hidden>0</span>
+    <span id="dockSeta">▴</span>
+  </div>
+  <div class="sm-dock-corpo">
+    <div class="sm-chamada" id="dockChamada" hidden></div>
+    <div class="sm-msgs" id="dockMsgs"></div>
+    <form id="dockForm" autocomplete="off">
+      <input id="dockInput" maxlength="2000" placeholder="Escreva ao professor…">
+      <button class="sm-btn pequeno" type="submit">Enviar</button>
+    </form>
+  </div>
+</aside>
+<audio id="audioRemoto" autoplay playsinline></audio>
+
+<!-- Modal genérico -->
+<div class="sm-modal" id="modal" hidden>
+  <div class="caixa">
+    <h3 id="modalTitulo"></h3>
+    <div id="modalCorpo" class="sm-muted"></div>
+    <div class="acoes" id="modalAcoes"></div>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/audioFrances.js"></script>
+<script src="js/simuladoAoVivo.js"></script>
+<script src="js/simuladoTcf.js"></script>
+<script src="js/appShell.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

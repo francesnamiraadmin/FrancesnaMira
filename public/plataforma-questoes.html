@@ -37,6 +37,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .hub-card .icone { width: 64px; height: 64px; object-fit: contain; }
 .hub-card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
 .hub-card p { font-size: 0.92rem; opacity: 0.85; line-height: 1.5; }
+.hub-card-destaque { border-color: var(--accent); background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 16%, var(--glass-bg)), var(--glass-bg-2)); }
 .hub-card .indicador {
   margin-top: 4px; font-size: 0.78rem; font-weight: 700; padding: 4px 14px; border-radius: 20px;
   background: var(--warning-bg); color: var(--accent);
@@ -53,6 +54,9 @@ window.aoResolverCurso = function (curso) {
   document.title = 'Plataforma de Questões - ' + curso + ' - Francês na Mira';
   var titulo = document.getElementById('introTitulo');
   if (titulo) titulo.textContent = 'Plataforma de Questões - ' + curso;
+  // Simulação Completa de Prova: por enquanto só existe no formato TCF.
+  var simulado = document.getElementById('cardSimuladoCompleto');
+  if (simulado && curso === 'TCF') simulado.style.display = '';
 };
 </script>
 <script src="js/cursoContexto.js"></script>
@@ -82,6 +86,12 @@ window.aoResolverCurso = function (curso) {
       <img class="icone" src="img/icones/puzzle.svg" alt="">
       <h2>Questões Interativas</h2>
       <p>Em breve: novos formatos de questões para tornar a prática ainda mais dinâmica.</p>
+    </a>
+    <a class="hub-card hub-card-destaque" href="simulado-tcf.html?curso=TCF" id="cardSimuladoCompleto" style="display:none;">
+      <img class="icone" src="img/icones/simulados.svg" alt="">
+      <h2>Simulação Completa de Prova</h2>
+      <p>O TCF Canada inteiro, no tempo real: compreensões oral e escrita, expressões escrita e oral. Correção por IA ou por um professor ao vivo, com notas no formato TCF e NCLC.</p>
+      <span class="indicador">Novo</span>
     </a>
     <a class="hub-card" href="personalizar-conjunto.html">
       <img class="icone" src="img/icones/personalizar.svg" alt="">

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+  <script src="js/htmlSeguro.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Simulados ao Vivo - Francês na Mira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/simulado.css">
+</head>
+
+<body style="visibility:hidden;">
+<script>
+(async function protegerPagina() {
+  const token = localStorage.getItem('token');
+  function bloquear(msg) {
+    document.body.innerHTML = '<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;font-family:Poppins,sans-serif;"><h1 style="font-family:\'Playfair Display\',serif;font-size:2.2rem;margin-bottom:16px;">Acesso restrito</h1><p style="max-width:480px;margin-bottom:28px;">' + msg + '</p><a href="login.html" style="padding:14px 28px;background:#2563eb;color:white;border-radius:30px;text-decoration:none;font-weight:700;">Entrar</a></div>';
+    document.body.style.visibility = 'visible';
+  }
+  if (!token) return bloquear('Esta página é exclusiva para professores e administradores.');
+  try {
+    const res = await fetch('/api/auth/me', { headers: { Authorization: 'Bearer ' + token } });
+    if (!res.ok) return bloquear('Sessão expirada. Entre novamente.');
+    const data = await res.json();
+    if (data.role !== 'professor' && data.role !== 'admin') return bloquear('Esta página é exclusiva para professores e administradores.');
+    window.__eu = data;
+    document.body.style.visibility = 'visible';
+  } catch (err) { bloquear('Erro ao verificar sua conta.'); }
+})();
+</script>
+
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<main class="sm-wrap" style="max-width:1240px;">
+  <!-- ===================== PAINEL ===================== -->
+  <section id="vPainel">
+    <div class="sm-hero">
+      <h1>Simulados ao Vivo</h1>
+      <p>Acompanhe em tempo real os alunos fazendo a Simulação Completa do TCF, atenda chamados, seja o examinador da expressão oral e lance as notas no formato TCF.</p>
+      <p style="margin-top:10px;"><span class="sm-pill" id="pillStream"><span class="ponto"></span><span id="pillStreamTexto">Conectando…</span></span></p>
+    </div>
+    <div id="avisoIA"></div>
+    <div class="sm-colunas">
+      <div class="sm-card"><h2>Chamados e provas em andamento</h2><div class="sm-lista-t" id="listaAtivos"></div></div>
+      <div class="sm-card"><h2>Aguardando correção</h2><div class="sm-lista-t" id="listaAguardando"></div></div>
+      <div class="sm-card"><h2>Corrigidos recentemente</h2><div class="sm-lista-t" id="listaCorrigidos"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== SESSÃO ===================== -->
+  <section id="vSessao" hidden>
+    <p style="margin-bottom:14px;"><button class="sm-btn secundario pequeno" id="btnVoltar" type="button">← Voltar ao painel</button></p>
+    <div class="sm-sessao">
+      <div id="sessaoPrincipal"></div>
+      <div class="lateral">
+        <aside class="sm-dock" id="dock">
+          <div class="sm-dock-topo"><img src="img/icones/chat.svg" alt="" style="width:22px;height:22px;"><strong id="dockTitulo">Conversa com o aluno</strong></div>
+          <div class="sm-dock-corpo">
+            <div class="sm-chamada" id="dockChamada"></div>
+            <div class="sm-msgs" id="dockMsgs"></div>
+            <form id="dockForm" autocomplete="off">
+              <input id="dockInput" maxlength="2000" placeholder="Mensagem ao aluno…">
+              <button class="sm-btn pequeno" type="submit">Enviar</button>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+<audio id="audioRemoto" autoplay playsinline></audio>
+
+<div class="sm-modal" id="modal" hidden>
+  <div class="caixa">
+    <h3 id="modalTitulo"></h3>
+    <div id="modalCorpo" class="sm-muted"></div>
+    <div class="acoes" id="modalAcoes"></div>
+  </div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/simuladoAoVivo.js"></script>
+<script src="js/admin-simulados.js"></script>
+<script src="js/appShell.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>
