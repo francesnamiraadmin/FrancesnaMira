@@ -244,7 +244,7 @@
     const etapas = ordem().map(x => `<span class="${x === p && t.status === "em_andamento" ? "atual" : t.provas[x].status === "finalizada" ? "feita" : ""}">${SIGLAS[x]}</span>`).join("");
     let corpo = "";
     if (t.status !== "em_andamento") corpo = `<p class="sm-muted">O aluno terminou o simulado. Veja as respostas e corrija abaixo.</p>`;
-    else if (t.provas[p].status === "pendente") corpo = `<p class="sm-muted">Aguardando o aluno começar a <strong>${NOMES[p]}</strong>.</p>`;
+    else if (t.provas[p].status === "pendente") corpo = `<p class="sm-muted">Aguardando o aluno começar a <strong>${NOMES[p]}</strong>.</p>${p === "eo" ? roteiroEO() : ""}`;
     else if (ehCompreensao(p)) corpo = espelhoCompreensao(p, true);
     else if (p === "ee") corpo = espelhoEE();
     else corpo = roteiroEO();

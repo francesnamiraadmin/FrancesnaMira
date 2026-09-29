@@ -277,3 +277,29 @@ textarea.sm-campo { width: 100%; min-height: 70px; resize: vertical; }
 /* Painel do professor recolhido vira um botão compacto (não cobre as alternativas). */
 .sm-dock.recolhido { width: auto; }
 .sm-dock.recolhido .sm-dock-topo { border-bottom: none; }
+/* Documentos A1/A2 do simulado nº 2: placa, SMS, convite, e-mail, classificado, aviso. */
+.sm-doc-placa { background: #0d4fa3; color: #fff; text-align: center; padding: 22px 26px; border: 6px solid #fff; outline: 2px solid #0d4fa3; max-width: 440px; font-weight: 600; }
+.sm-doc-placa h4 { font-size: 1.35rem; letter-spacing: 0.04em; margin-bottom: 10px; }
+.sm-doc-aviso { background: #fff; border: 2px solid #f2c200; padding: 18px 22px; max-width: 520px; }
+.sm-doc-aviso h4 { background: #f2c200; margin: -18px -22px 12px; padding: 8px 22px; font-size: 1rem; }
+.sm-doc-anuncio { background: #fdfcf7; border: 1px dashed #777; padding: 18px 22px; font-family: 'Courier New', monospace; max-width: 480px; }
+.sm-doc-anuncio h4 { font-size: 1.2rem; text-align: center; border-bottom: 2px solid #1d1b16; padding-bottom: 6px; }
+.sm-doc-convite { background: linear-gradient(135deg, #ffe3ec, #e3f0ff); padding: 26px; text-align: center; border-radius: 14px; max-width: 420px; font-size: 1.02rem; }
+.sm-doc-convite h4 { font-family: 'Comic Sans MS', 'Segoe Print', cursive; font-size: 1.7rem; color: #c2185b; }
+.sm-doc-sms { background: #eef1f5; padding: 18px 16px; border-radius: 26px; max-width: 360px; border: 8px solid #222; }
+.sm-doc-sms small { display: block; text-align: center; font-weight: 700; margin-bottom: 10px; color: #444; }
+.sm-doc-sms .bolha { background: #fff; border-radius: 16px 16px 16px 4px; padding: 10px 14px; white-space: pre-line; }
+.sm-doc-email { background: #fff; border: 1px solid #cfd6df; max-width: 560px; }
+.sm-doc-email .cab { display: flex; flex-direction: column; gap: 2px; background: #f1f4f8; border-bottom: 1px solid #cfd6df; padding: 10px 18px; font-size: 0.85rem; white-space: normal; }
+.sm-doc-email > div:last-child { padding: 14px 18px; }
+/* Hub de escolha do simulado */
+.sm-hub { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 24px; }
+.sm-hub-card {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; text-decoration: none; color: var(--text);
+  background: linear-gradient(145deg, var(--glass-bg), var(--glass-bg-2)); border: 1px solid var(--glass-border); border-radius: 20px;
+  padding: 26px 24px 22px; box-shadow: var(--shadow); transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.sm-hub-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.sm-hub-card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; padding-right: 54px; }
+.sm-hub-card .sm-btn { margin-top: auto; }
+.sm-hub-num { position: absolute; top: 18px; right: 20px; width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; background: var(--accent); color: var(--accent-text); }

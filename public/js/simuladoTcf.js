@@ -83,7 +83,7 @@
         </div>
         ${dados.iaDisponivel ? "" : `<div class="sm-aviso">A correção por IA ainda está sendo configurada. Se escolher IA, um professor poderá corrigir no lugar dela.</div>`}` : "";
       return `<div class="sm-card" data-simulado="${esc(def.slug)}">
-        <h2>${esc(def.titulo)}</h2>
+        <h2>Formato da prova</h2>
         <p class="sm-muted">${descricao}</p>
         <div class="sm-formato">
           ${def.provas.map(p => `<div><strong>${esc(p.nome)}</strong><span>${p.id === "eo" ? "3 tarefas · ~12 min + preparação" : p.id === "ee" ? `3 tarefas · ${tempo(p.tempoSeg)}` : `${p.itens} questões · ${tempo(p.tempoSeg)}`}</span></div>`).join("")}
@@ -99,16 +99,64 @@
       </div>`;
     };
 
-    $("vInicio").innerHTML = `
-      <div class="sm-hero">
-        <h1>Simulação Completa de Prova</h1>
-        <p>Simulados completos do TCF, no tempo e no formato da prova oficial, com resultado no formato TCF (score de 0 a 699 e nível CECR).</p>
-      </div>
-      ${dados.simulados.map(cartao).join("")}
-      <div class="sm-card">
-        <h2>Meus simulados</h2>
-        ${dados.tentativas.length ? `<div class="sm-hist">${dados.tentativas.map(t => itemHistorico(t, dados.simulados)).join("")}</div>` : `<p class="sm-muted">Você ainda não fez nenhum simulado completo.</p>`}
-      </div>`;
+    // Hub: primeiro o aluno escolhe o simulado (?s=<slug> abre a página dele).
+    const escolhido = new URLSearchParams(location.search).get("s");
+    const def = dados.simulados.find(d => d.slug === escolhido);
+    const ultimo = slug => dados.tentativas.find(t => t.simuladoSlug === slug && t.status !== "em_andamento");
+    const minutos = d => Math.round(d.provas.reduce((s, p) => s + p.tempoSeg, 0) / 60);
+    const siglas = d => d.provas.map(p => `${SIGLAS[p.id]} ${p.id === "ee" || p.id === "eo" ? `${p.itens} tarefas` : p.itens}`).join(" · ");
+
+    const cardHub = (d, i) => {
+      const aberto = emAndamento(d.slug);
+      const fim = ultimo(d.slug);
+      const selo = aberto ? `<span class="sm-chip alerta">Em andamento — ${esc(NOMES[aberto.provaAtual] || "")}</span>`
+        : fim ? `<span class="sm-chip ok">Já realizado · ${fim.resultados && Object.values(fim.resultados).filter(Boolean).map(r => esc(r.nivel)).join(" / ") || "em correção"}</span>`
+        : `<span class="sm-chip">Novo</span>`;
+      return `<a class="sm-hub-card" href="?curso=TCF&s=${esc(d.slug)}" data-escolher="${esc(d.slug)}">
+        <span class="sm-hub-num">${i + 1}</span>
+        <h2>${esc(d.titulo)}</h2>
+        <p class="sm-muted">${esc(d.formato)} · ${siglas(d)}</p>
+        <p class="sm-muted">≈ ${minutos(d)} min de prova</p>
+        ${selo}
+        <span class="sm-btn pequeno">${aberto ? "Retomar" : fim ? "Fazer de novo" : "Escolher"}</span>
+      </a>`;
+    };
+
+    if (!def) {
+      $("vInicio").innerHTML = `
+        <div class="sm-hero">
+          <h1>Simulação Completa de Prova</h1>
+          <p>Escolha o simulado que você quer fazer. Cada um é uma prova completa do TCF, no tempo e no formato oficiais, com temas diferentes e resultado no formato TCF (0–699, 0–20, nível CECR e NCLC).</p>
+        </div>
+        <div class="sm-hub">${dados.simulados.map(cardHub).join("")}</div>
+        <div class="sm-card">
+          <h2>Meus simulados</h2>
+          ${dados.tentativas.length ? `<div class="sm-hist">${dados.tentativas.map(t => itemHistorico(t, dados.simulados)).join("")}</div>` : `<p class="sm-muted">Você ainda não fez nenhum simulado completo.</p>`}
+        </div>`;
+      document.querySelectorAll("[data-escolher]").forEach(a => a.addEventListener("click", ev => {
+        ev.preventDefault();
+        const url = new URL(location.href);
+        url.searchParams.set("s", a.dataset.escolher);
+        history.pushState(null, "", url);
+        carregarInicio();
+      }));
+    } else {
+      const historico = dados.tentativas.filter(t => t.simuladoSlug === def.slug);
+      $("vInicio").innerHTML = `
+        <p style="margin:6px 0 4px;"><a class="sm-btn secundario pequeno" href="?curso=TCF" id="btnHub">← Todos os simulados</a></p>
+        <div class="sm-hero" style="padding-top:14px;">
+          <h1>${esc(def.titulo)}</h1>
+        </div>
+        ${cartao(def)}
+        ${historico.length ? `<div class="sm-card"><h2>Suas tentativas neste simulado</h2><div class="sm-hist">${historico.map(t => itemHistorico(t, dados.simulados)).join("")}</div></div>` : ""}`;
+      $("btnHub").addEventListener("click", ev => {
+        ev.preventDefault();
+        const url = new URL(location.href);
+        url.searchParams.delete("s");
+        history.pushState(null, "", url);
+        carregarInicio();
+      });
+    }
 
     document.querySelectorAll(".sm-modo input").forEach(r => r.addEventListener("change", () => {
       document.querySelectorAll(`input[name="${r.name}"]`).forEach(x => x.closest(".sm-modo").classList.toggle("selecionado", x.checked));
@@ -316,7 +364,7 @@
         <small>${ouvido ? "Cada documento é ouvido uma única vez." : "Atenção: uma única escuta."}</small>
       </div>
       ${q.alternativasFaladas ? "" : `<p class="sm-pergunta">${esc(q.pergunta)}</p>`}
-      <div class="sm-alts ${q.alternativasFaladas ? "faladas" : ""}">${q.alternativas.map((a, i) => `<button type="button" class="sm-alt ${resp[q.n] === i ? "marcada" : ""}" data-alt="${i}"><span class="letra">${LETRAS[i]}</span>${a ? `<span>${esc(a)}</span>` : ""}</button>`).join("")}</div>
+      <div class="sm-alts ${q.alternativasFaladas ? "faladas" : ""}">${q.alternativas.map((a, i) => `<button type="button" class="sm-alt ${resp[q.n] === i ? "marcada" : ""}" data-alt="${i}"><span class="letra">${LETRAS[i]}</span>${a && !q.alternativasFaladas ? `<span>${esc(a)}</span>` : ""}</button>`).join("")}</div>
       <div class="sm-nav">
         <span class="sm-muted">${Object.keys(resp).length} de ${qs.length} respondidas</span>
         ${S.idx < qs.length - 1 ? `<button class="sm-btn" id="btnProx" type="button">Próxima questão →</button>` : `<button class="sm-btn" id="btnFim" type="button">Terminar a compreensão oral</button>`}
@@ -973,6 +1021,9 @@
     if (id && /^[a-f0-9]{24}$/i.test(id)) abrirTentativa(id);
     else carregarInicio();
   }
+  window.addEventListener("popstate", () => {
+    if (!new URLSearchParams(location.search).get("t") && S.t === null) carregarInicio();
+  });
   const esperarGate = setInterval(() => {
     if (document.body.style.visibility === "visible") { clearInterval(esperarGate); iniciar(); }
   }, 100);

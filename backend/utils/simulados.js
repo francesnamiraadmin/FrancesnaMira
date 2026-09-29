@@ -30,7 +30,8 @@ const obter = slug => todos().get(slug) || null;
 
 function listar(curso) {
   return [...todos().values()]
-    .filter(d => !curso || d.curso === curso)
+    // "oculto": versões retiradas do catálogo (as tentativas antigas continuam abrindo).
+    .filter(d => !d.oculto && (!curso || d.curso === curso))
     .map(d => ({
       slug: d.slug, titulo: d.titulo, curso: d.curso, formato: d.formato, temExpressoes: temExpressoes(d),
       provas: ordemDe(d).map(p => ({ id: p, nome: d.provas[p].nome, tempoSeg: d.provas[p].tempoSeg, itens: (d.provas[p].questoes || d.provas[p].tarefas).length }))

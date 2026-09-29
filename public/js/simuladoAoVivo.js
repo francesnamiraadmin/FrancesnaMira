@@ -214,6 +214,15 @@
         return `<div class="sm-doc sm-doc-festival"><h4>${esc(d.titulo)}</h4><div>${texto}</div></div>`;
       case "capitular":
         return `<div class="sm-doc sm-doc-capitular"><div>${texto}</div></div>`;
+      case "placa":
+      case "aviso":
+      case "anuncio":
+      case "convite":
+        return `<div class="sm-doc sm-doc-${d.estilo}"><h4>${esc(d.titulo || "")}</h4><div>${texto}</div></div>`;
+      case "sms":
+        return `<div class="sm-doc sm-doc-sms"><small>${esc(d.remetente || "")}</small><div class="bolha">${texto}</div></div>`;
+      case "email":
+        return `<div class="sm-doc sm-doc-email"><div class="cab"><span><b>De :</b> ${esc(d.de || "")}</span><span><b>Objet :</b> ${esc(d.assunto || "")}</span></div><div>${texto}</div></div>`;
       default: // bilhete, caderno, cartao, livro-antigo, papel-creme, citacao-rodape, jornal
         return `<div class="sm-doc sm-doc-${esc(d.estilo)}"><div>${texto}</div></div>`;
     }

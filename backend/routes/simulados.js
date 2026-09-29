@@ -216,7 +216,7 @@ router.post("/:slug/iniciar", async (req, res) => {
   try {
     if (!(await podeUsar(req))) return res.status(403).json({ msg: "Simulados disponíveis no plano Excellence do TCF." });
     const def = slugValido(req.params.slug) && sim.obter(req.params.slug);
-    if (!def) return res.status(404).json({ msg: "Simulado não encontrado." });
+    if (!def || def.oculto) return res.status(404).json({ msg: "Simulado não encontrado." });
     const modo = !sim.temExpressoes(def) ? "automatica" : req.body?.modoCorrecao === "professor" ? "professor" : "ia";
     const aberta = await SimuladoTentativa.findOne({ alunoId: req.userId, simuladoSlug: def.slug, status: "em_andamento" });
     if (aberta) return res.status(409).json({ msg: "Você já tem este simulado em andamento.", tentativaId: aberta._id });
