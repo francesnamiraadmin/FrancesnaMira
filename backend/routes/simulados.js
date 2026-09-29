@@ -296,7 +296,8 @@ router.patch("/tentativas/:id/progresso", async (req, res) => {
     await t.save();
     avisarTentativa(t, "progresso", {
       prova, questaoAtual: e.questaoAtual, respostas: e.respostas, ouvidos: e.ouvidos,
-      etapaEO: typeof req.body?.etapaEO === "string" ? req.body.etapaEO.slice(0, 80) : undefined
+      etapaEO: typeof req.body?.etapaEO === "string" ? req.body.etapaEO.slice(0, 80) : undefined,
+      perguntaEO: Number.isInteger(req.body?.perguntaEO) && req.body.perguntaEO >= 0 && req.body.perguntaEO < 20 ? req.body.perguntaEO : undefined
     });
     res.json({ ok: true, restanteSeg: Math.max(0, Math.round((prazo(def, t, prova).getTime() - Date.now()) / 1000)) });
   } catch (err) {

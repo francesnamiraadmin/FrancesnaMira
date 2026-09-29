@@ -529,7 +529,7 @@
       <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;"><button class="sm-btn secundario pequeno" type="button" id="eoRepetir">🔊 Ouvir</button>${temMais ? `<button class="sm-btn secundario pequeno" type="button" id="eoProxPerg">Próxima pergunta</button>` : ""}</div></div></div>`;
     $("eoRepetir").addEventListener("click", ev => window.falarFrances(p, ev.currentTarget));
     const prox = $("eoProxPerg");
-    if (prox) prox.addEventListener("click", () => { S.eo.pergunta++; renderExaminador(t); falarPergunta(t); });
+    if (prox) prox.addEventListener("click", () => { S.eo.pergunta++; renderExaminador(t); falarPergunta(t); salvar({ perguntaEO: S.eo.pergunta }); });
   }
 
   function falarPergunta(t) {
@@ -573,13 +573,14 @@
     S.eo.rec.ondataavailable = ev => { if (ev.data.size) S.eo.pedacos.push(ev.data); };
     S.eo.rec.start(1000);
     iniciarTranscricao();
-    salvar({ etapaEO: `${t.id} · falando` });
+    salvar({ etapaEO: `${t.id} · falando`, perguntaEO: 0 });
     renderEO();
     falarPergunta(t);
-    // Tarefa 1 (entretien): próxima pergunta do examinador gravado a cada ~30 s.
+    // Tarefa 1 (entretien): próxima pergunta do examinador gravado a cada ~30 s
+    // (o roteiro do professor em admin-simulados.js mostra os mesmos tempos).
     if (t.id === "t1" && !professorNaChamada()) {
       S.eo.autoPerg = setInterval(() => {
-        if (S.eo.pergunta < t.perguntasExaminador.length - 1) { S.eo.pergunta++; renderExaminador(t); falarPergunta(t); }
+        if (S.eo.pergunta < t.perguntasExaminador.length - 1) { S.eo.pergunta++; renderExaminador(t); falarPergunta(t); salvar({ perguntaEO: S.eo.pergunta }); }
       }, 30000);
     }
     contagem(t.duracaoSeg, r => { const el = $("eoRelogio"); if (el) el.textContent = mmss(r); }, () => pararGravacao(false));

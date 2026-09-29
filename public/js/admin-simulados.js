@@ -12,7 +12,7 @@
   const PROVAS = ["co", "ce", "ee", "eo"];
   const STATUS = { em_andamento: "Em andamento", aguardando_correcao: "Aguardando correção", corrigindo_ia: "IA corrigindo", corrigido: "Corrigido" };
 
-  const S = { painel: { ativos: [], aguardando: [], corrigidos: [] }, streamPainel: null, t: null, def: null, streamT: null, chamada: null, etapaEO: "", relogio: null, prazo: null, tituloOriginal: document.title };
+  const S = { painel: { ativos: [], aguardando: [], corrigidos: [] }, streamPainel: null, t: null, def: null, streamT: null, chamada: null, etapaEO: "", perguntaEO: null, relogio: null, prazo: null, tituloOriginal: document.title };
 
   function modal(titulo, corpoHtml, acoes) {
     $("modalTitulo").textContent = titulo;
@@ -131,7 +131,7 @@
   async function abrirSessao(id) {
     try {
       const t = await api(`/api/simulados/tentativas/${id}`);
-      S.t = t; S.def = t.definicao; S.etapaEO = ""; S.aluno = t.aluno;
+      S.t = t; S.def = t.definicao; S.etapaEO = ""; S.perguntaEO = null; S.aluno = t.aluno;
     } catch (err) { return aviso(err.message); }
     $("vPainel").hidden = true;
     $("vSessao").hidden = false;
@@ -243,7 +243,7 @@
     else if (t.provas[p].status === "pendente") corpo = `<p class="sm-muted">Aguardando o aluno começar a <strong>${NOMES[p]}</strong>.</p>`;
     else if (p === "co" || p === "ce") corpo = espelhoCompreensao(p, true);
     else if (p === "ee") corpo = espelhoEE();
-    else corpo = espelhoEO();
+    else corpo = roteiroEO();
     box.innerHTML = `<div class="sm-card">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
         <h2 style="margin:0;flex:1;">Ao vivo${t.status === "em_andamento" && p ? ` — ${NOMES[p]}` : ""}</h2>
@@ -256,6 +256,7 @@
         <button class="sm-btn perigo pequeno" type="button" id="bEncerrarProva">Encerrar esta épreuve</button>
       </div>` : ""}
       ${corpo}
+      ${t.status === "em_andamento" && p !== "eo" ? `<details style="margin-top:14px;"><summary class="sm-muted" style="cursor:pointer;">Roteiro do examinador da Expression orale (para se preparar)</summary>${roteiroEO()}</details>` : ""}
     </div>`;
     box.querySelectorAll("[data-extra]").forEach(b => b.addEventListener("click", () => controle({ acao: "tempoExtra", minutos: Number(b.dataset.extra) })));
     const bE = $("bEncerrarProva");
@@ -297,16 +298,43 @@
     }).join("");
   }
 
-  function espelhoEO() {
-    const e = S.t.provas.eo;
-    const feitas = e.respostas || {};
+  // Mesmo ritmo do examinador automático de simuladoTcf.js: na tarefa 1 a próxima
+  // pergunta entra a cada 30 s; nas tarefas 2 e 3 há uma única fala de abertura.
+  const INTERVALO_T1_SEG = 30;
+  const mmssCurto = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+
+  function roteiroTarefa(tf, tarefaAtual, perguntaAtual) {
+    const perguntas = tf.perguntasExaminador || [];
+    const quando = i => tf.id === "t1" ? `aos ${mmssCurto(i * INTERVALO_T1_SEG)}` : "ao começar";
+    const itens = perguntas.map((q, i) => {
+      const atual = tarefaAtual === tf.id && perguntaAtual === i;
+      return `<li style="margin:8px 0;${atual ? "font-weight:700;" : ""}">
+        <span class="sm-chip" style="margin-right:6px;">${quando(i)}</span>${esc(q)}
+        <button class="sm-btn secundario pequeno" type="button" data-ouvir="${esc(q)}" title="Ouvir (só você ouve)" style="margin-left:6px;padding:3px 10px;">🔊</button>
+        ${atual ? '<span class="sm-chip alerta" style="margin-left:4px;">o aluno está aqui</span>' : ""}
+      </li>`;
+    }).join("");
+    const depois = {
+      t1: "O candidato também pode passar sozinho à próxima pergunta. Se sobrar tempo depois da última, aprofunde o que ele disse (por quê? desde quando? como?).",
+      t2: `Depois de ${Math.round(tf.preparacaoSeg / 60)} min de preparação, esta é a única fala gravada: a partir daí o candidato conduz, fazendo as perguntas. Responda com as informações da ficha abaixo.`,
+      t3: "Na gravação, o examinador só lê a afirmação e o candidato argumenta sozinho até o fim do tempo. Ao vivo, use as relances da ficha se ele parar."
+    }[tf.id] || "";
+    return `<ol style="padding-left:20px;font-size:0.9rem;">${itens}</ol><p class="sm-muted" style="font-size:0.82rem;">${depois}</p>`;
+  }
+
+  function roteiroEO() {
+    const feitas = S.t.provas.eo.respostas || {};
+    const tarefaAtual = /^(t\d)/.exec(S.etapaEO || "")?.[1] || null;
     return `${S.etapaEO ? `<p><strong>Agora:</strong> ${esc(S.etapaEO)}</p>` : ""}
-      <p class="sm-muted" style="margin:6px 0 10px;">Para ser o examinador, conecte-se e use <strong>Ligar para o aluno</strong> no painel da conversa. A fala do aluno continua sendo gravada e transcrita.</p>
-      ${S.def.provas.eo.tarefas.map(tf => `<h3>${esc(tf.titulo)} ${feitas[tf.id] ? '<span class="sm-chip ok">gravada</span>' : ""}</h3>
-        <div class="sm-consigne" style="font-size:0.86rem;">${esc(tf.consigne)}</div>
+      <p class="sm-muted" style="margin:6px 0 10px;">Abaixo está exatamente o que o candidato ouviria do examinador gravado, sem chamada. Use como modelo quando for o examinador ao vivo: conecte-se e toque em <strong>Ligar para o aluno</strong> no painel da conversa. O 🔊 toca o áudio só para você. A fala do aluno continua sendo gravada e transcrita.</p>
+      ${S.def.provas.eo.tarefas.map(tf => `<div style="border-top:1px solid var(--glass-border);padding-top:10px;margin-top:10px;">
+        <h3 style="margin-top:0;">${esc(tf.titulo)} <small class="sm-muted">— ${mmssCurto(tf.duracaoSeg)} de fala${tf.preparacaoSeg ? ` + ${mmssCurto(tf.preparacaoSeg)} de preparação` : ""}</small> ${feitas[tf.id] ? '<span class="sm-chip ok">gravada</span>' : ""}</h3>
+        <div class="sm-consigne" style="font-size:0.86rem;"><strong>Consigne do candidato:</strong> ${esc(tf.consigne)}</div>
+        <p style="font-weight:600;font-size:0.88rem;margin-top:8px;">Roteiro do examinador</p>
+        ${roteiroTarefa(tf, tarefaAtual, S.perguntaEO)}
         ${tf.fichaExaminador ? `<div class="sm-ficha"><strong>Ficha do examinador:</strong> ${esc(tf.fichaExaminador)}</div>` : ""}
-        ${tf.perguntasExaminador?.length ? `<p class="sm-muted" style="font-size:0.82rem;">Perguntas sugeridas: ${tf.perguntasExaminador.map(esc).join(" · ")}</p>` : ""}
-        ${feitas[tf.id] ? blocoGravacao(tf.id) : ""}`).join("")}`;
+        ${feitas[tf.id] ? blocoGravacao(tf.id) : ""}
+      </div>`).join("")}`;
   }
 
   function blocoGravacao(id) {
@@ -314,6 +342,11 @@
     return `${S.t.provas.eo.audios?.[id] ? `<div data-audio-eo="${id}"><button class="sm-btn secundario pequeno" type="button" data-carregar-audio="${id}">▶ Carregar gravação</button></div>` : `<p class="sm-muted">Sem arquivo de áudio.</p>`}
       <div class="sm-comentario" style="margin-top:6px;">${esc(r?.transcricao || "") || '<span class="sm-muted">Sem transcrição automática.</span>'}</div>`;
   }
+
+  document.addEventListener("click", ev => {
+    const b = ev.target.closest("[data-ouvir]");
+    if (b && window.falarFrances) window.falarFrances(b.dataset.ouvir, b);
+  });
 
   document.addEventListener("click", async ev => {
     const b = ev.target.closest("[data-carregar-audio]");
@@ -476,7 +509,8 @@
       if (d.respostas) e.respostas = d.respostas;
       if (d.ouvidos) e.ouvidos = d.ouvidos;
       if (d.questaoAtual != null) e.questaoAtual = d.questaoAtual;
-      if (d.etapaEO) S.etapaEO = d.etapaEO;
+      if (d.etapaEO) { S.etapaEO = d.etapaEO; S.perguntaEO = d.perguntaEO ?? (/falando/.test(d.etapaEO) ? 0 : null); }
+      else if (d.perguntaEO != null) S.perguntaEO = d.perguntaEO;
       renderAoVivo();
     } else if (nome === "mensagem") {
       S.t.mensagens.push(d.mensagem);
