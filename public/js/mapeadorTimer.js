@@ -352,7 +352,7 @@ if (window.DeverRealtime) {
 // evento disparar, sem depender da ordem de carregamento dos scripts.
 document.addEventListener('appshell:ready', e => {
   const prefs = (e.detail && e.detail.preferencias) || {};
-  document.getElementById('exibirBarraToggle').checked = prefs.exibirBarraTimer !== false;
+  document.getElementById('exibirBarraToggle').checked = prefs.exibirBarraTimer === true;
 });
 document.getElementById('exibirBarraToggle').addEventListener('change', e => {
   window.EstudoTimerGlobal.definirVisibilidade(e.target.checked);

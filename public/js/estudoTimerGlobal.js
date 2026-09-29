@@ -95,7 +95,7 @@ window.EstudoTimerGlobal = (() => {
   // sessaoAtiva continua sendo rastreada normalmente: é o que mantém
   // sessaoAtivaAtual() funcionando pros cards ao vivo de mapeadorTimer.js
   // quando o usuário desliga a barra.
-  let exibirBarra = true;
+  let exibirBarra = false; // padrão: barra desligada até o aluno ligar
 
   // Dados do estado "preparação" — carregados uma vez no appshell:ready
   // (independente de exibirBarra, pra ligar o checkbox mostrar a barra na
@@ -443,7 +443,7 @@ window.EstudoTimerGlobal = (() => {
 
   document.addEventListener('appshell:ready', async e => {
     const prefs = (e.detail && e.detail.preferencias) || {};
-    exibirBarra = prefs.exibirBarraTimer !== false;
+    exibirBarra = prefs.exibirBarraTimer === true;
     // Sempre carrega sessão ativa e matérias, independente da preferência —
     // é o que deixa o checkbox "ligar" instantâneo em qualquer página, e
     // mantém sessaoAtivaAtual() funcionando pros cards ao vivo de

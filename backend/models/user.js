@@ -43,7 +43,7 @@ const UserSchema = new mongoose.Schema({
     idioma: { type: String, enum: ["pt-BR", "fr"], default: "pt-BR" },
     // Controla se a barra global do Timer de Estudos (public/js/estudoTimerGlobal.js)
     // aparece no rodapé de toda página logada — ver Mapeador de Estudos.
-    exibirBarraTimer: { type: Boolean, default: true },
+    exibirBarraTimer: { type: Boolean, default: false },
     notificacoes: {
       lembretes: { type: Boolean, default: true },
       novosDeveres: { type: Boolean, default: true },
