@@ -207,3 +207,73 @@ textarea.sm-campo { width: 100%; min-height: 70px; resize: vertical; }
   .sm-oral-relogio { font-size: 2rem; }
   .sm-dock.recolhido { width: auto; }
 }
+
+/* ===================== Livret TCF (simulado nº 2): instruções, imagens, lacunas e documentos ===================== */
+.sm-instrucao { font-weight: 700; font-size: 0.95rem; margin-bottom: 12px; }
+.sm-figura { margin: 0 0 14px; }
+.sm-figura img { display: block; max-width: 100%; border-radius: 12px; }
+.sm-figura-co img { max-height: 420px; width: auto; }
+.sm-credito { font-size: 0.7rem; color: var(--text-muted); margin: 4px 0 12px; }
+.sm-credito a { color: inherit; }
+/* Propostas só faladas: quatro letras lado a lado, sem texto. */
+.sm-alts.faladas { flex-direction: row; flex-wrap: wrap; }
+.sm-alts.faladas .sm-alt { flex: 1 1 70px; justify-content: center; padding: 16px 10px; }
+.sm-alts.faladas .sm-alt .letra { flex-basis: 34px; height: 34px; font-size: 1rem; }
+.sm-lacuna { font-size: 1.1rem; line-height: 1.8; background: var(--recessed); border-radius: 12px; padding: 16px 18px; margin-bottom: 16px; }
+.sm-lacuna .buraco { display: inline-block; min-width: 90px; border-bottom: 2px solid var(--accent); text-align: center; color: var(--accent); font-weight: 700; }
+
+/* Documentos da CE: cada estilo imita uma peça real e fica claro nos dois temas (é papel impresso). */
+.sm-doc { color: #1d1b16; border-radius: 6px; margin-bottom: 6px; white-space: pre-line; line-height: 1.6; max-width: 620px; box-shadow: 0 6px 18px rgba(0,0,0,0.12); overflow: hidden; }
+.sm-doc h4 { margin: 0 0 8px; line-height: 1.2; }
+.sm-doc-bilhete { background: #fff8c4; padding: 22px 26px; font-family: 'Comic Sans MS', 'Segoe Print', cursive; font-size: 1.05rem; transform: rotate(-0.6deg); max-width: 420px; }
+.sm-doc-fotofundo { margin: 0; min-height: 300px; background-size: cover; background-position: center; display: flex; align-items: center; padding: 30px; }
+.sm-doc-fotofundo div { color: #fff; font-style: italic; font-weight: 600; font-size: 1.05rem; text-shadow: 0 2px 8px rgba(0,0,0,0.75); max-width: 420px; }
+.sm-doc-cartaz { background: #1f3b73; color: #fff; padding: 26px; text-align: center; font-size: 1rem; }
+.sm-doc-cartaz h4 { font-family: 'Playfair Display', serif; font-size: 2rem; color: #ffd166; }
+.sm-doc-evento { background: #fdf3cc; padding: 24px 28px; font-family: Georgia, serif; }
+.sm-doc-evento small { font-weight: 700; letter-spacing: 0.08em; font-family: 'Poppins', sans-serif; }
+.sm-doc-evento h4 { font-size: 1.6rem; color: #8d1c1c; font-weight: 400; margin-top: 10px; }
+.sm-doc-festival { background: #fbeee6; padding: 26px 30px; font-size: 1.02rem; }
+.sm-doc-festival h4 { font-size: 1.45rem; font-weight: 800; }
+.sm-doc-fotolado { display: flex; background: #fff6df; font-family: Georgia, serif; font-size: 0.93rem; }
+.sm-doc-fotolado img { width: 38%; object-fit: cover; }
+.sm-doc-fotolado div { padding: 18px 20px; }
+.sm-doc-fototopo { background: #e9eaec; font-family: Georgia, serif; font-size: 0.9rem; }
+.sm-doc-fototopo img { display: block; width: 100%; max-height: 260px; object-fit: cover; }
+.sm-doc-fototopo div { padding: 16px 20px; }
+.sm-doc-caderno { background: #eeeae3 repeating-linear-gradient(transparent 0 27px, rgba(0,0,0,0.05) 27px 28px); padding: 22px 28px; font-family: 'Courier New', monospace; font-size: 0.98rem; text-align: justify; border-left: 3px dotted #b3aa98; }
+.sm-doc-cartao { background: #fff; border: 1px solid #d8d8d8; border-top: 4px solid #f39c12; border-bottom: 4px solid #f39c12; padding: 20px 24px 20px 70px; font-size: 1.02rem; position: relative; }
+.sm-doc-cartao::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 46px; background: linear-gradient(180deg, #ffd24a, #f39c12); }
+.sm-doc-livro { display: flex; gap: 18px; background: #fff; padding: 18px; font-family: Georgia, serif; font-size: 0.97rem; }
+.sm-doc-livro .capa { flex: 0 0 130px; height: 190px; background-size: cover; background-position: center; border-radius: 3px; display: flex; flex-direction: column; justify-content: flex-end; padding: 10px; color: #fff; text-shadow: 0 1px 4px #000; box-shadow: 3px 4px 10px rgba(0,0,0,0.3); }
+.sm-doc-livro .capa strong { font-size: 0.85rem; line-height: 1.2; }
+.sm-doc-livro .capa span { font-size: 0.7rem; }
+.sm-doc-livro-antigo { background: #efe9dc; color: #4a2c16; padding: 22px 26px; font-family: 'Book Antiqua', Palatino, Georgia, serif; font-weight: 700; font-size: 0.98rem; border-right: 6px double #4a2c16; }
+.sm-doc-capitular { background: #f3ead6; padding: 24px 28px; font-family: 'Trebuchet MS', sans-serif; text-align: justify; border-left: 2px solid #333; border-right: 2px solid #333; }
+.sm-doc-capitular div::first-letter { float: left; font-size: 5.2rem; line-height: 0.8; font-weight: 900; margin: 4px 10px 0 0; font-family: Arial Black, sans-serif; }
+.sm-doc-papel-creme { background: #e7dcc4; padding: 24px 28px; font-family: Garamond, Georgia, serif; font-size: 1.12rem; }
+.sm-doc-citacao-rodape { background: #f7f5f0; padding: 22px 26px 30px; font-size: 1rem; border-bottom: 5px solid #8c1c3a; }
+.sm-doc-jornal { background: #d7d9dc; padding: 20px 24px; font-family: 'Times New Roman', serif; font-size: 0.95rem; text-align: justify; }
+@media (max-width: 560px) {
+  .sm-doc-fotolado, .sm-doc-livro { flex-direction: column; }
+  .sm-doc-fotolado img { width: 100%; max-height: 200px; }
+  .sm-doc-livro .capa { flex-basis: auto; width: 130px; }
+  .sm-doc-cartao { padding-left: 24px; }
+  .sm-doc-cartao::before { width: 8px; }
+}
+
+/* Folha de respostas corrigida */
+.sm-corrige { display: flex; gap: 28px; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.sm-corrige .cab, .sm-corrige .lin { display: grid; grid-template-columns: 28px repeat(4, 24px); gap: 4px; align-items: center; margin-bottom: 4px; }
+.sm-corrige .cab b { text-align: center; font-size: 0.8rem; }
+.sm-corrige em { font-style: normal; text-align: right; font-size: 0.82rem; padding-right: 4px; }
+.sm-corrige .lin span { height: 22px; border: 1px solid var(--glass-border-strong); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+.sm-corrige .lin span.certa { background: var(--success-bg); color: var(--success-text); border-color: var(--success-text); }
+.sm-corrige .lin span.errada { background: var(--danger-bg); color: var(--danger-text); border-color: var(--danger-text); }
+.sm-boletim tr.global td { border-top: 2px solid var(--glass-border-strong); }
+/* Structure de la langue como no livret: início da frase, opções, final da frase. */
+.sm-lacuna-ini, .sm-lacuna-fim { font-size: 1.1rem; font-weight: 600; margin: 4px 0 12px; }
+.sm-lacuna-fim { margin: 12px 0 0; }
+/* Painel do professor recolhido vira um botão compacto (não cobre as alternativas). */
+.sm-dock.recolhido { width: auto; }
+.sm-dock.recolhido .sm-dock-topo { border-bottom: none; }

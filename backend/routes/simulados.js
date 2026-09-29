@@ -50,10 +50,15 @@ function finalizarProva(def, t, prova) {
   if (e.status === "finalizada") return;
   e.status = "finalizada";
   e.fim = new Date();
-  if (prova === "co" || prova === "ce") e.resultado = sim.corrigirCompreensao(def, prova, e.respostas || {});
-  const prox = sim.PROVAS[sim.PROVAS.indexOf(prova) + 1];
+  if (sim.ehCompreensao(prova)) e.resultado = sim.corrigirCompreensao(def, prova, e.respostas || {});
+  const ordem = sim.ordemDe(def);
+  const prox = ordem[ordem.indexOf(prova) + 1];
   t.provaAtual = prox || null;
-  if (!prox) t.status = "aguardando_correcao";
+  if (!prox) {
+    // Sem expressões, não há o que esperar: o resultado sai completo na hora.
+    if (sim.temExpressoes(def)) t.status = "aguardando_correcao";
+    else { t.status = "corrigido"; t.publicadoEm = new Date(); }
+  }
   t.markModified("provas");
 }
 
@@ -75,14 +80,14 @@ function serializar(def, t, req) {
   const equipe = ehEquipe(req);
   const concluido = t.status !== "em_andamento";
   const agora = Date.now();
-  for (const p of sim.PROVAS) {
+  for (const p of sim.ordemDe(def)) {
     const fim = prazo(def, t, p);
     o.provas[p].prazo = fim;
     o.provas[p].restanteSeg = fim && o.provas[p].status === "em_andamento" ? Math.max(0, Math.round((fim.getTime() - agora) / 1000)) : null;
     o.provas[p].audios = Object.fromEntries(Object.keys(o.provas[p].audios || {}).map(k => [k, true]));
     // Aluno: notas das compreensões só depois da prova inteira; expressões só depois de publicadas.
     if (!equipe) {
-      if ((p === "co" || p === "ce") && !concluido) o.provas[p].resultado = null;
+      if (sim.ehCompreensao(p) && !concluido) o.provas[p].resultado = null;
       if ((p === "ee" || p === "eo") && !t.publicadoEm) o.provas[p].resultado = null;
     }
   }
@@ -95,11 +100,13 @@ function serializar(def, t, req) {
 }
 
 function resumoPainel(t, aluno) {
+  const def = sim.obter(t.simuladoSlug);
   return {
     _id: t._id, aluno: aluno ? { _id: aluno._id, nome: aluno.nome, email: aluno.email } : null,
     simuladoSlug: t.simuladoSlug, modoCorrecao: t.modoCorrecao, status: t.status, provaAtual: t.provaAtual,
     questaoAtual: t.provaAtual ? t.provas[t.provaAtual].questaoAtual : null,
-    provasStatus: Object.fromEntries(sim.PROVAS.map(p => [p, t.provas[p].status])),
+    titulo: def?.titulo || t.simuladoSlug, ordem: sim.ordemDe(def),
+    provasStatus: Object.fromEntries(sim.ordemDe(def).map(p => [p, t.provas[p].status])),
     conexao: t.conexao, ultimaAtividade: t.ultimaAtividade, criadoEm: t.criadoEm, publicadoEm: t.publicadoEm,
     temSugestaoIA: !!t.sugestaoIA, erroIA: t.ia?.erro || ""
   };
@@ -170,7 +177,7 @@ async function rodarIA(def, t, { publicar }) {
 async function posFinalizacao(def, t) {
   avisarTentativa(t, "status", { status: t.status, provaAtual: t.provaAtual });
   await avisarEquipe(t, "progresso");
-  if (t.status === "aguardando_correcao" && t.modoCorrecao === "ia" && !t.publicadoEm) {
+  if (t.status === "aguardando_correcao" && t.modoCorrecao === "ia" && !t.publicadoEm && sim.temExpressoes(def)) {
     rodarIA(def, t, { publicar: true }); // assíncrono: o aluno recebe o evento "corrigido"
   }
 }
@@ -192,7 +199,7 @@ router.get("/", async (req, res) => {
     const resumo = tentativas.map(t => ({
       _id: t._id, simuladoSlug: t.simuladoSlug, modoCorrecao: t.modoCorrecao, status: t.status, provaAtual: t.provaAtual,
       criadoEm: t.criadoEm, publicadoEm: t.publicadoEm,
-      resultados: t.status === "em_andamento" ? null : Object.fromEntries(sim.PROVAS.map(p => {
+      resultados: t.status === "em_andamento" ? null : Object.fromEntries(sim.ordemDe(sim.obter(t.simuladoSlug)).map(p => {
         const r = t.provas?.[p]?.resultado;
         if (!r || ((p === "ee" || p === "eo") && !t.publicadoEm)) return [p, null];
         return [p, { pontos: r.pontos, nota: r.nota, nivel: r.nivel, nclc: r.nclc }];
@@ -210,7 +217,7 @@ router.post("/:slug/iniciar", async (req, res) => {
     if (!(await podeUsar(req))) return res.status(403).json({ msg: "Simulados disponíveis no plano Excellence do TCF." });
     const def = slugValido(req.params.slug) && sim.obter(req.params.slug);
     if (!def) return res.status(404).json({ msg: "Simulado não encontrado." });
-    const modo = req.body?.modoCorrecao === "professor" ? "professor" : "ia";
+    const modo = !sim.temExpressoes(def) ? "automatica" : req.body?.modoCorrecao === "professor" ? "professor" : "ia";
     const aberta = await SimuladoTentativa.findOne({ alunoId: req.userId, simuladoSlug: def.slug, status: "em_andamento" });
     if (aberta) return res.status(409).json({ msg: "Você já tem este simulado em andamento.", tentativaId: aberta._id });
     const t = await SimuladoTentativa.create({ alunoId: req.userId, simuladoSlug: def.slug, curso: def.curso, modoCorrecao: modo });
@@ -279,7 +286,7 @@ router.patch("/tentativas/:id/progresso", async (req, res) => {
     const e = t.provas[prova];
     const resp = req.body?.respostas && typeof req.body.respostas === "object" ? req.body.respostas : {};
     e.respostas = e.respostas || {};
-    if (prova === "co" || prova === "ce") {
+    if (sim.ehCompreensao(prova)) {
       for (const [n, v] of Object.entries(resp)) {
         const q = def.provas[prova].questoes.find(x => String(x.n) === String(n));
         if (q && Number.isInteger(v) && v >= 0 && v < q.alternativas.length) e.respostas[q.n] = v;
@@ -528,7 +535,7 @@ router.post("/tentativas/:id/conectar", exigirEquipe, async (req, res) => {
     const nome = await nomeDe(req.userId);
     t.conexao = { ...t.toObject().conexao, status: "ativa", professorId: req.userId, professorNome: nome, conectadoEm: new Date() };
     // Quem conecta assume a correção (a IA ainda pode gerar uma sugestão para o professor).
-    const mudouModo = t.modoCorrecao !== "professor" && !t.publicadoEm;
+    const mudouModo = sim.temExpressoes(def) && t.modoCorrecao !== "professor" && !t.publicadoEm;
     if (mudouModo) t.modoCorrecao = "professor";
     t.mensagens.push({ autor: "sistema", texto: `${nome || "Um professor"} conectou-se ao seu simulado.${mudouModo ? " A correção das expressões passa a ser feita por ele(a)." : ""}` });
     t.markModified("conexao");
@@ -599,6 +606,7 @@ router.post("/tentativas/:id/notas", exigirEquipe, async (req, res) => {
     const c = await carregar(req, res);
     if (!c) return;
     const { t, def } = c;
+    if (!sim.temExpressoes(def)) return res.status(400).json({ msg: "Este simulado não tem expressões para corrigir." });
     const nome = await nomeDe(req.userId);
     for (const prova of ["ee", "eo"]) {
       const entrada = req.body?.[prova];
@@ -629,6 +637,7 @@ router.post("/tentativas/:id/modo", exigirEquipe, async (req, res) => {
     if (!c) return;
     const { t, def } = c;
     if (t.publicadoEm) return res.status(400).json({ msg: "A correção já foi publicada." });
+    if (!sim.temExpressoes(def)) return res.status(400).json({ msg: "Este simulado é corrigido automaticamente." });
     t.modoCorrecao = req.body?.modoCorrecao === "ia" ? "ia" : "professor";
     await t.save();
     avisarTentativa(t, "conexao", { conexao: t.conexao, modoCorrecao: t.modoCorrecao });

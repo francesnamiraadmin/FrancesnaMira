@@ -174,5 +174,58 @@
   const contarPalavras = t => (String(t || "").match(/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu) || []).length;
   const mmss = s => { s = Math.max(0, Math.round(s)); return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; };
 
-  window.SimuladoAoVivo = { api, stream, Chamada, nivelExpressao, nclcExpressao, esc, contarPalavras, mmss };
+  // ---------------- Enunciados (compartilhado aluno / boletim / professor) ----------------
+  // Instrução do bloco, como no livret do TCF ("> Écoutez les 4 propositions…").
+  const INSTRUCOES = {
+    imagem: "Écoutez les 4 propositions. Choisissez celle qui correspond à l'image.",
+    extrait: "Écoutez l'extrait sonore et les 4 propositions. Choisissez la bonne réponse.",
+    documento: "Écoutez le document sonore et la question. Choisissez la bonne réponse.",
+    sl: "Choisissez la bonne réponse.",
+    ce: "Lisez le document. Choisissez la bonne réponse."
+  };
+
+  function credito(img) {
+    const c = img && img.credito;
+    if (!c) return "";
+    return `<figcaption class="sm-credito">Foto: ${esc(c.autor)} · <a href="${esc(c.fonte)}" target="_blank" rel="noopener">${esc(c.licenca)}</a></figcaption>`;
+  }
+  const figura = (img, classe = "") => img ? `<figure class="sm-figura ${classe}"><img src="${esc(img.src)}" alt="" loading="lazy">${credito(img)}</figure>` : "";
+
+  // Documento da compreensão escrita com o visual de uma peça real (anúncio, cartaz, revista…).
+  function documento(q) {
+    const d = q.doc;
+    if (!d) return `<div class="sm-documento">${esc(q.documento)}</div>`;
+    const texto = esc(d.texto);
+    const img = d.imagem;
+    switch (d.estilo) {
+      case "foto-fundo":
+        return `<figure class="sm-doc sm-doc-fotofundo" style="background-image:url('${esc(img.src)}')"><div>${texto}</div></figure>${credito(img)}`;
+      case "foto-lado":
+        return `<div class="sm-doc sm-doc-fotolado"><img src="${esc(img.src)}" alt=""><div>${texto}</div></div>${credito(img)}`;
+      case "foto-topo":
+        return `<div class="sm-doc sm-doc-fototopo"><img src="${esc(img.src)}" alt=""><div>${texto}</div></div>${credito(img)}`;
+      case "livro":
+        return `<div class="sm-doc sm-doc-livro"><div class="capa" style="background-image:url('${esc(img.src)}')"><strong>${esc(d.tituloLivro)}</strong><span>${esc(d.autorLivro)}</span></div><div><em>${esc(d.tituloLivro)}</em> — ${texto}</div></div>${credito(img)}`;
+      case "cartaz":
+        return `<div class="sm-doc sm-doc-cartaz"><h4>${esc(d.titulo)}</h4><div>${texto}</div></div>`;
+      case "evento":
+        return `<div class="sm-doc sm-doc-evento"><small>${esc(d.rubrica || "")}</small><h4>${esc(d.titulo)}</h4><div>${texto}</div></div>`;
+      case "festival":
+        return `<div class="sm-doc sm-doc-festival"><h4>${esc(d.titulo)}</h4><div>${texto}</div></div>`;
+      case "capitular":
+        return `<div class="sm-doc sm-doc-capitular"><div>${texto}</div></div>`;
+      default: // bilhete, caderno, cartao, livro-antigo, papel-creme, citacao-rodape, jornal
+        return `<div class="sm-doc sm-doc-${esc(d.estilo)}"><div>${texto}</div></div>`;
+    }
+  }
+
+  // Estímulo da questão (imagem, frase com lacuna, documento) — sem as alternativas.
+  function enunciado(q, prova) {
+    // Frase com lacuna (revisão): "início ____ fim", sem as reticências do livret.
+    if (prova === "sl") return `<p class="sm-lacuna">${esc(q.inicio.replace(/…$/, ""))} <span class="buraco">&nbsp;</span> ${esc(q.fim.replace(/^…\s*/, ""))}</p>`;
+    if (prova === "ce") return documento(q);
+    return q.imagem ? figura(q.imagem, "sm-figura-co") : "";
+  }
+
+  window.SimuladoAoVivo = { api, stream, Chamada, nivelExpressao, nclcExpressao, esc, contarPalavras, mmss, INSTRUCOES, enunciado, figura, documento };
 })();

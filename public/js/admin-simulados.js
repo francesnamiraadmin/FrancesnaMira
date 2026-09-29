@@ -5,11 +5,13 @@
 // de tempo e correção das expressões no formato TCF (0–20 → CECR/NCLC).
 // =====================================================================
 (function () {
-  const { api, stream, Chamada, esc, contarPalavras, mmss, nivelExpressao, nclcExpressao } = window.SimuladoAoVivo;
+  const { api, stream, Chamada, esc, contarPalavras, mmss, nivelExpressao, nclcExpressao, enunciado } = window.SimuladoAoVivo;
   const $ = id => document.getElementById(id);
-  const NOMES = { co: "Compréhension orale", ce: "Compréhension écrite", ee: "Expression écrite", eo: "Expression orale" };
-  const SIGLAS = { co: "CO", ce: "CE", ee: "EE", eo: "EO" };
-  const PROVAS = ["co", "ce", "ee", "eo"];
+  const NOMES = { co: "Compréhension orale", sl: "Structure de la langue", ce: "Compréhension écrite", ee: "Expression écrite", eo: "Expression orale" };
+  const SIGLAS = { co: "CO", sl: "SL", ce: "CE", ee: "EE", eo: "EO" };
+  const ordem = () => (S.def && S.def.ordem) || ["co", "ce", "ee", "eo"];
+  const ehCompreensao = p => p === "co" || p === "sl" || p === "ce";
+  const temExpressoes = () => ordem().some(p => p === "ee" || p === "eo");
   const STATUS = { em_andamento: "Em andamento", aguardando_correcao: "Aguardando correção", corrigindo_ia: "IA corrigindo", corrigido: "Corrigido" };
 
   const S = { painel: { ativos: [], aguardando: [], corrigidos: [] }, streamPainel: null, t: null, def: null, streamT: null, chamada: null, etapaEO: "", perguntaEO: null, relogio: null, prazo: null, tituloOriginal: document.title };
@@ -59,7 +61,8 @@
         ${chamando ? `<span class="sm-chip alerta">🔔 Chamando ${tempoRel(t.conexao.solicitadaEm)}</span>` : ""}
         ${conectado ? `<span class="sm-chip ok">Conectado: ${esc(t.conexao.professorNome || "")}</span>` : ""}
         <span class="sm-chip">${etapa}</span>
-        <span class="sm-chip">${t.modoCorrecao === "ia" ? "Correção IA" : "Correção professor"}</span>
+        <span class="sm-chip">${esc(t.titulo || "")}</span>
+        <span class="sm-chip">${{ ia: "Correção IA", professor: "Correção professor", automatica: "Correção automática" }[t.modoCorrecao]}</span>
         ${t.temSugestaoIA ? `<span class="sm-chip ok">Sugestão IA pronta</span>` : ""}
         ${t.erroIA ? `<span class="sm-chip perigo">IA falhou</span>` : ""}
       </div>
@@ -202,12 +205,12 @@
         </div>
         <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
           ${ativa ? `<button class="sm-btn secundario pequeno" id="bDesconectar" type="button">Encerrar conexão</button>` : `<button class="sm-btn chamar" id="bConectar" type="button">${c.status === "solicitada" ? "Atender chamado" : "Conectar-se ao aluno"}</button>`}
-          <label class="sm-muted" style="font-size:0.8rem;">Correção:
+          ${!temExpressoes() ? `<span class="sm-chip">Correção automática</span>` : `<label class="sm-muted" style="font-size:0.8rem;">Correção:
             <select class="sm-campo" id="bModo" ${t.publicadoEm ? "disabled" : ""}>
               <option value="professor" ${t.modoCorrecao === "professor" ? "selected" : ""}>Professor</option>
               <option value="ia" ${t.modoCorrecao === "ia" ? "selected" : ""}>Inteligência Artificial</option>
             </select>
-          </label>
+          </label>`}
         </div>
       </div>
       ${ativa && !souEu ? `<p class="sm-aviso">Outro professor (${esc(c.professorNome)}) está conectado. Você pode acompanhar, mas combine antes de ligar para o aluno.</p>` : ""}
@@ -224,7 +227,8 @@
       try { S.t = await api(`/api/simulados/tentativas/${t._id}/desconectar`, { method: "POST" }); renderCabecalho(); renderMensagens(); }
       catch (err) { aviso(err.message); }
     });
-    $("bModo").addEventListener("change", async ev => {
+    const bM = $("bModo");
+    if (bM) bM.addEventListener("change", async ev => {
       try { S.t = await api(`/api/simulados/tentativas/${t._id}/modo`, { method: "POST", body: { modoCorrecao: ev.target.value } }); renderCabecalho(); }
       catch (err) { aviso(err.message); }
     });
@@ -237,11 +241,11 @@
     const t = S.t;
     const p = t.provaAtual;
     const box = $("sAoVivo");
-    const etapas = PROVAS.map(x => `<span class="${x === p && t.status === "em_andamento" ? "atual" : t.provas[x].status === "finalizada" ? "feita" : ""}">${SIGLAS[x]}</span>`).join("");
+    const etapas = ordem().map(x => `<span class="${x === p && t.status === "em_andamento" ? "atual" : t.provas[x].status === "finalizada" ? "feita" : ""}">${SIGLAS[x]}</span>`).join("");
     let corpo = "";
     if (t.status !== "em_andamento") corpo = `<p class="sm-muted">O aluno terminou o simulado. Veja as respostas e corrija abaixo.</p>`;
     else if (t.provas[p].status === "pendente") corpo = `<p class="sm-muted">Aguardando o aluno começar a <strong>${NOMES[p]}</strong>.</p>`;
-    else if (p === "co" || p === "ce") corpo = espelhoCompreensao(p, true);
+    else if (ehCompreensao(p)) corpo = espelhoCompreensao(p, true);
     else if (p === "ee") corpo = espelhoEE();
     else corpo = roteiroEO();
     box.innerHTML = `<div class="sm-card">
@@ -256,7 +260,7 @@
         <button class="sm-btn perigo pequeno" type="button" id="bEncerrarProva">Encerrar esta épreuve</button>
       </div>` : ""}
       ${corpo}
-      ${t.status === "em_andamento" && p !== "eo" ? `<details style="margin-top:14px;"><summary class="sm-muted" style="cursor:pointer;">Roteiro do examinador da Expression orale (para se preparar)</summary>${roteiroEO()}</details>` : ""}
+      ${t.status === "em_andamento" && p !== "eo" && ordem().includes("eo") ? `<details style="margin-top:14px;"><summary class="sm-muted" style="cursor:pointer;">Roteiro do examinador da Expression orale (para se preparar)</summary>${roteiroEO()}</details>` : ""}
     </div>`;
     box.querySelectorAll("[data-extra]").forEach(b => b.addEventListener("click", () => controle({ acao: "tempoExtra", minutos: Number(b.dataset.extra) })));
     const bE = $("bEncerrarProva");
@@ -286,7 +290,7 @@
     return `<p class="sm-muted" style="margin-bottom:8px;">${Object.keys(resp).length}/${qs.length} respondidas · ${acertos} acertos · <strong>${pontos}/699 pts</strong> até agora (verde = certa, vermelho = errada)</p>
       <div class="sm-espelho">${celulas}</div>
       ${aoVivo && atual ? `<details style="margin-top:12px;"><summary class="sm-muted" style="cursor:pointer;">Questão atual do aluno (${atual.n}) — ver gabarito</summary>
-        <div style="margin-top:8px;font-size:0.88rem;">${p === "co" ? `<div class="sm-documento">${esc(atual.transcricao)}</div>` : `<div class="sm-documento">${esc(atual.documento)}</div>`}
+        <div style="margin-top:8px;font-size:0.88rem;">${enunciado(atual, p)}${p === "co" && atual.transcricao ? `<div class="sm-documento">${esc(atual.transcricao)}</div>` : ""}
         <p><strong>${esc(atual.pergunta)}</strong></p><p>Resposta certa: <strong>${esc(atual.alternativas[atual.correta])}</strong></p></div></details>` : ""}`;
   }
 
@@ -367,10 +371,10 @@
     if (el) el.innerHTML = htmlCompreensoes();
   }
   function htmlCompreensoes() {
-    return ["co", "ce"].map(p => {
+    return ordem().filter(ehCompreensao).map(p => {
       const r = S.t.provas[p].resultado;
       return `<div class="sm-hist-item" style="margin-bottom:8px;"><div class="info"><strong>${NOMES[p]}</strong><br><small>${r ? `${r.acertos}/${r.total} acertos` : S.t.provas[p].status === "finalizada" ? "" : "ainda não finalizada"}</small></div>
-        ${r ? `<span class="sm-chip ok">${r.pontos}/699 · ${esc(r.nivel)} · NCLC ${esc(r.nclc)}</span>` : ""}</div>
+        ${r ? `<span class="sm-chip ok">${r.pontos}/699 · ${esc(r.nivel)}${r.nclc ? ` · NCLC ${esc(r.nclc)}` : ""}</span>` : ""}</div>
         ${r && S.t.status !== "em_andamento" ? `<details style="margin-bottom:10px;"><summary class="sm-muted" style="cursor:pointer;">Ver respostas</summary>${espelhoCompreensao(p, false)}</details>` : ""}`;
     }).join("");
   }
@@ -379,6 +383,13 @@
     const t = S.t;
     const crit = t.criterios;
     const sug = t.sugestaoIA;
+    if (!temExpressoes()) {
+      // Simulado só de compreensões (TCF Tout Public): nada a lançar, tudo é corrigido na hora.
+      $("sCorrecao").innerHTML = `<div class="sm-card"><h2>Resultado (correção automática)</h2>
+        <div id="sCompreensoes">${htmlCompreensoes()}</div>
+        <p class="sm-muted">Este simulado não tem expressões: cada épreuve é corrigida automaticamente e convertida para a escala TCF (0–699) assim que o aluno a termina.</p></div>`;
+      return;
+    }
     const blocoProva = p => {
       const r = t.provas[p].resultado;
       const tarefas = S.def.provas[p].tarefas;

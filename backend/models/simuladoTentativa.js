@@ -29,11 +29,13 @@ const SimuladoTentativaSchema = new mongoose.Schema({
   alunoId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
   simuladoSlug: { type: String, required: true },
   curso: { type: String, default: "TCF" },
-  modoCorrecao: { type: String, enum: ["ia", "professor"], required: true },
+  // "automatica": simulado sem expressões (ex.: TCF Tout Public) — tudo corrigido na hora.
+  modoCorrecao: { type: String, enum: ["ia", "professor", "automatica"], required: true },
   status: { type: String, enum: ["em_andamento", "aguardando_correcao", "corrigindo_ia", "corrigido"], default: "em_andamento", index: true },
-  provaAtual: { type: String, enum: ["co", "ce", "ee", "eo", null], default: "co" },
+  provaAtual: { type: String, enum: ["co", "sl", "ce", "ee", "eo", null], default: "co" },
   provas: {
     co: { type: ProvaEstadoSchema, default: () => ({}) },
+    sl: { type: ProvaEstadoSchema, default: () => ({}) },
     ce: { type: ProvaEstadoSchema, default: () => ({}) },
     ee: { type: ProvaEstadoSchema, default: () => ({}) },
     eo: { type: ProvaEstadoSchema, default: () => ({}) }

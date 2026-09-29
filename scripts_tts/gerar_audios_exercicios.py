@@ -55,19 +55,69 @@ def gerar_textos(tts, textos):
     print(f"Manifest: {len(existentes)} existentes + {len(novos - existentes)} novos.", flush=True)
 
 
+def sinal_sonoro(taxa):
+    """Carrilhão curto (duas notas) que abre cada documento, como nas provas do TCF."""
+    import math
+    amostras = bytearray()
+    for freq, dur in ((880.0, 0.22), (1318.5, 0.34)):
+        n = int(taxa * dur)
+        for k in range(n):
+            env = min(1.0, k / (taxa * 0.01)) * math.exp(-4.0 * k / n)
+            v = int(9000 * env * math.sin(2 * math.pi * freq * k / taxa))
+            amostras += v.to_bytes(2, "little", signed=True)
+    return bytes(amostras)
+
+
+def frases(texto):
+    """Divide em frases e tira o ponto final de cada uma: o XTTS em francês às vezes lê
+    o ponto ("point") ou inventa sílabas na emenda entre frases longas."""
+    import re
+    partes = [p.strip() for p in re.split(r"(?<=[.!?])\s+", texto.strip()) if p.strip()]
+    return [re.sub(r"\.+$", "", p) for p in partes]
+
+
+def falar(tts, texto, voz, tmp):
+    """PCM de um texto, frase por frase, com uma pausa curta entre elas."""
+    pcm, taxa, canais, largura = b"", 24000, 1, 2
+    for k, frase in enumerate(frases(texto)):
+        tts.tts_to_file(text=frase, speaker=voz, language=IDIOMA, file_path=str(tmp), split_sentences=False)
+        with wave.open(str(tmp), "rb") as w:
+            taxa, canais, largura = w.getframerate(), w.getnchannels(), w.getsampwidth()
+            if k:
+                pcm += b"\x00" * int(taxa * 0.3) * canais * largura
+            pcm += w.readframes(w.getnframes())
+    return pcm, taxa, canais, largura
+
+
 def gerar_dialogo(tts, caminho):
+    # Cada item de "falas" é {"voz", "texto"[, "pausa"]}; também aceita {"pausa": s}
+    # (silêncio), {"sinal": true} (sinal sonoro) e {"arquivo": "wav"} (trecho pré-gravado,
+    # ex.: as letras A–D do narrador em scripts_tts/letras). "pausa" substitui a pausa
+    # padrão depois do item.
     d = json.loads(Path(caminho).read_text(encoding="utf-8"))
     destino = ROOT / d["saida"]
     destino.parent.mkdir(parents=True, exist_ok=True)
     tmp = ROOT / "scripts_tts" / "_tmp_fala.wav"
-    pcm, taxa, canais, largura = b"", None, None, None
+    # XTTS v2 gera WAV mono 16 bits a 24 kHz; sinais/pausas antes da 1ª fala usam isso.
+    pcm, taxa, canais, largura = b"", 24000, 1, 2
+    silencio = lambda s: b"\x00" * int(taxa * s) * canais * largura
     for i, fala in enumerate(d["falas"], 1):
+        if fala.get("sinal"):
+            pcm += sinal_sonoro(taxa) + silencio(0.5)
+            continue
+        if fala.get("arquivo"):
+            import soundfile as sf
+            dados, sr_arq = sf.read(str(ROOT / fala["arquivo"]), dtype="int16")
+            assert sr_arq == taxa, f"{fala['arquivo']}: {sr_arq} Hz (esperado {taxa})"
+            pcm += dados.tobytes() + silencio(float(fala.get("pausa", 0.3)))
+            continue
+        if "texto" not in fala:
+            pcm += silencio(float(fala.get("pausa", 1.0)))
+            continue
         voz = d["vozes"][fala["voz"]]
-        tts.tts_to_file(text=fala["texto"], speaker=voz, language=IDIOMA, file_path=str(tmp))
-        with wave.open(str(tmp), "rb") as w:
-            taxa, canais, largura = w.getframerate(), w.getnchannels(), w.getsampwidth()
-            pcm += w.readframes(w.getnframes())
-        pcm += b"\x00" * int(taxa * PAUSA_ENTRE_FALAS_S) * canais * largura
+        trecho, taxa, canais, largura = falar(tts, fala["texto"], voz, tmp)
+        pcm += trecho
+        pcm += silencio(float(fala.get("pausa", PAUSA_ENTRE_FALAS_S)))
         print(f"  fala {i}/{len(d['falas'])} ({voz})", flush=True)
     with wave.open(str(tmp), "wb") as w:
         w.setnchannels(canais); w.setsampwidth(largura); w.setframerate(taxa)

@@ -6,11 +6,12 @@
 // aluno pode chamar um professor (chat, acompanhamento ao vivo e chamada de voz).
 // =====================================================================
 (function () {
-  const { api, stream, Chamada, esc, contarPalavras, mmss } = window.SimuladoAoVivo;
+  const { api, stream, Chamada, esc, contarPalavras, mmss, INSTRUCOES, enunciado } = window.SimuladoAoVivo;
   const $ = id => document.getElementById(id);
-  const NOMES = { co: "Compréhension orale", ce: "Compréhension écrite", ee: "Expression écrite", eo: "Expression orale" };
-  const SIGLAS = { co: "CO", ce: "CE", ee: "EE", eo: "EO" };
-  const PROVAS = ["co", "ce", "ee", "eo"];
+  const NOMES = { co: "Compréhension orale", sl: "Structure de la langue", ce: "Compréhension écrite", ee: "Expression écrite", eo: "Expression orale" };
+  const SIGLAS = { co: "CO", sl: "SL", ce: "CE", ee: "EE", eo: "EO" };
+  // Ordem das épreuves do simulado aberto (TCF Canada: CO→CE→EE→EO; Tout Public: CO→SL→CE).
+  const ordem = () => (S.def && S.def.ordem) || ["co", "ce", "ee", "eo"];
   const LETRAS = ["A", "B", "C", "D"];
 
   const S = {
@@ -57,86 +58,94 @@
     let dados;
     try { dados = await api("/api/simulados"); }
     catch (err) { return erroTela(err.message); }
-    const def = dados.simulados[0];
-    if (!def) return erroTela("Nenhum simulado disponível no momento.");
-    const emAndamento = dados.tentativas.find(t => t.status === "em_andamento");
+    if (!dados.simulados.length) return erroTela("Nenhum simulado disponível no momento.");
     const tempo = s => `${Math.round(s / 60)} min`;
+    const emAndamento = slug => dados.tentativas.find(t => t.status === "em_andamento" && t.simuladoSlug === slug);
 
-    $("vInicio").innerHTML = `
-      <div class="sm-hero">
-        <h1>Simulação Completa de Prova</h1>
-        <p>O TCF Canada completo, na ordem e no tempo da prova oficial: as quatro épreuves, com notas no formato do TCF (0–699 e 0–20), nível CECR e equivalência NCLC.</p>
-      </div>
-      <div class="sm-card">
-        <h2>${esc(def.titulo)}</h2>
-        <div class="sm-formato">
-          ${def.provas.map(p => `<div><strong>${esc(p.nome)}</strong><span>${p.id === "eo" ? "3 tarefas · ~12 min + preparação" : p.id === "ee" ? `3 tarefas · ${tempo(p.tempoSeg)}` : `${p.itens} questões · ${tempo(p.tempoSeg)}`}</span></div>`).join("")}
-        </div>
-        <p class="sm-muted" style="margin-top:10px;">Como na prova real: as questões vão do A1 ao C2, cada áudio da compreensão oral toca <strong>uma única vez</strong> e não é possível voltar à questão anterior; o relógio continua correndo mesmo se você fechar a página. Para a expressão oral, use fone de ouvido e um navegador com microfone liberado (Chrome ou Edge transcrevem sua fala automaticamente).</p>
-      </div>
-      ${emAndamento ? `
-      <div class="sm-card">
-        <h2>Simulado em andamento</h2>
-        <p class="sm-muted">Você parou em <strong>${esc(NOMES[emAndamento.provaAtual] || "")}</strong>. Correção: ${emAndamento.modoCorrecao === "ia" ? "Inteligência Artificial" : "professor"}.</p>
-        <div style="margin-top:14px;"><button class="sm-btn" id="btnRetomar" type="button">Retomar simulado</button></div>
-      </div>` : `
-      <div class="sm-card">
-        <h2>Como você quer ser corrigido?</h2>
+    const cartao = def => {
+      const aberto = emAndamento(def.slug);
+      const canada = def.formato === "TCF Canada";
+      const descricao = canada
+        ? "O TCF Canada completo, na ordem e no tempo da prova oficial: as quatro épreuves, com notas no formato do TCF (0–699 e 0–20), nível CECR e equivalência NCLC."
+        : "No formato do livret d'entraînement do TCF Tout Public: compreensão oral com imagens e propostas faladas, estrutura da língua e compreensão escrita com documentos reais, folha de respostas e corrigé. Correção automática, com score de 0 a 699 e nível CECR.";
+      const modos = def.temExpressoes ? `
+        <h3>Como você quer ser corrigido?</h3>
         <p class="sm-muted">As compreensões são corrigidas na hora. A escolha vale para a expressão escrita e a expressão oral.</p>
         <div class="sm-modos">
-          <label class="sm-modo selecionado"><input type="radio" name="modo" value="ia" checked>
+          <label class="sm-modo selecionado"><input type="radio" name="modo-${def.slug}" value="ia" checked>
             <strong>Inteligência Artificial</strong>
             <p>Suas redações e as transcrições da sua fala são avaliadas pela IA com a grade do TCF assim que você termina. Resultado em poucos minutos, com comentários por tarefa.</p>
           </label>
-          <label class="sm-modo"><input type="radio" name="modo" value="professor">
+          <label class="sm-modo"><input type="radio" name="modo-${def.slug}" value="professor">
             <strong>Professor ao vivo</strong>
             <p>Um professor acompanha seu simulado em tempo real, pode conversar com você, é seu examinador na expressão oral (chamada de voz) e lança as notas no formato TCF.</p>
           </label>
         </div>
-        ${dados.iaDisponivel ? "" : `<div class="sm-aviso">A correção por IA ainda está sendo configurada. Se escolher IA, um professor poderá corrigir no lugar dela.</div>`}
-        <p class="sm-muted">Em qualquer momento da prova você pode tocar em <strong>Chamar professor</strong> para pedir ajuda ou que ele assuma a correção.</p>
-        <div style="margin-top:16px;"><button class="sm-btn" id="btnComecar" type="button">Começar o simulado</button></div>
-        <div id="inicioErro"></div>
-      </div>`}
+        ${dados.iaDisponivel ? "" : `<div class="sm-aviso">A correção por IA ainda está sendo configurada. Se escolher IA, um professor poderá corrigir no lugar dela.</div>`}` : "";
+      return `<div class="sm-card" data-simulado="${esc(def.slug)}">
+        <h2>${esc(def.titulo)}</h2>
+        <p class="sm-muted">${descricao}</p>
+        <div class="sm-formato">
+          ${def.provas.map(p => `<div><strong>${esc(p.nome)}</strong><span>${p.id === "eo" ? "3 tarefas · ~12 min + preparação" : p.id === "ee" ? `3 tarefas · ${tempo(p.tempoSeg)}` : `${p.itens} questões · ${tempo(p.tempoSeg)}`}</span></div>`).join("")}
+        </div>
+        <p class="sm-muted" style="margin-top:10px;">Como na prova real: as questões vão do A1 ao C2, cada áudio da compreensão oral toca <strong>uma única vez</strong> e não é possível voltar à questão anterior; o relógio continua correndo mesmo se você fechar a página.${def.temExpressoes ? " Para a expressão oral, use fone de ouvido e um navegador com microfone liberado (Chrome ou Edge transcrevem sua fala automaticamente)." : ""}</p>
+        ${aberto ? `
+          <div class="sm-aviso" style="margin-top:14px;">Você tem este simulado em andamento: parou em <strong>${esc(NOMES[aberto.provaAtual] || "")}</strong>.</div>
+          <button class="sm-btn" type="button" data-abrir="${aberto._id}">Retomar simulado</button>` : `
+          ${modos}
+          <p class="sm-muted" style="margin-top:10px;">Em qualquer momento da prova você pode tocar em <strong>Chamar professor</strong> para pedir ajuda${def.temExpressoes ? " ou que ele assuma a correção" : ""}.</p>
+          <div style="margin-top:14px;"><button class="sm-btn" type="button" data-comecar="${esc(def.slug)}">Começar este simulado</button></div>
+          <div data-erro="${esc(def.slug)}"></div>`}
+      </div>`;
+    };
+
+    $("vInicio").innerHTML = `
+      <div class="sm-hero">
+        <h1>Simulação Completa de Prova</h1>
+        <p>Simulados completos do TCF, no tempo e no formato da prova oficial, com resultado no formato TCF (score de 0 a 699 e nível CECR).</p>
+      </div>
+      ${dados.simulados.map(cartao).join("")}
       <div class="sm-card">
         <h2>Meus simulados</h2>
-        ${dados.tentativas.length ? `<div class="sm-hist">${dados.tentativas.map(itemHistorico).join("")}</div>` : `<p class="sm-muted">Você ainda não fez nenhum simulado completo.</p>`}
+        ${dados.tentativas.length ? `<div class="sm-hist">${dados.tentativas.map(t => itemHistorico(t, dados.simulados)).join("")}</div>` : `<p class="sm-muted">Você ainda não fez nenhum simulado completo.</p>`}
       </div>`;
 
     document.querySelectorAll(".sm-modo input").forEach(r => r.addEventListener("change", () => {
-      document.querySelectorAll(".sm-modo").forEach(l => l.classList.toggle("selecionado", l.contains(r) && r.checked));
+      document.querySelectorAll(`input[name="${r.name}"]`).forEach(x => x.closest(".sm-modo").classList.toggle("selecionado", x.checked));
     }));
-    const btnC = $("btnComecar");
-    if (btnC) btnC.addEventListener("click", async () => {
-      btnC.disabled = true;
-      const modo = document.querySelector('input[name="modo"]:checked').value;
+    document.querySelectorAll("[data-comecar]").forEach(btn => btn.addEventListener("click", async () => {
+      const slug = btn.dataset.comecar;
+      btn.disabled = true;
+      const marcado = document.querySelector(`input[name="modo-${slug}"]:checked`);
       try {
-        const r = await api(`/api/simulados/${def.slug}/iniciar`, { method: "POST", body: { modoCorrecao: modo } });
+        const r = await api(`/api/simulados/${slug}/iniciar`, { method: "POST", body: { modoCorrecao: marcado ? marcado.value : "ia" } });
         abrirTentativa(r.tentativaId);
       } catch (err) {
         if (err.dados?.tentativaId) return abrirTentativa(err.dados.tentativaId);
-        $("inicioErro").innerHTML = `<div class="sm-erro">${esc(err.message)}</div>`;
-        btnC.disabled = false;
+        document.querySelector(`[data-erro="${slug}"]`).innerHTML = `<div class="sm-erro">${esc(err.message)}</div>`;
+        btn.disabled = false;
       }
-    });
-    const btnR = $("btnRetomar");
-    if (btnR) btnR.addEventListener("click", () => abrirTentativa(emAndamento._id));
+    }));
     document.querySelectorAll("[data-abrir]").forEach(b => b.addEventListener("click", () => abrirTentativa(b.dataset.abrir)));
     mostrar("vInicio");
   }
 
+  const ehCompreensao = p => p === "co" || p === "sl" || p === "ce";
+
   function chipResultado(p, r) {
     if (!r) return `<span class="sm-chip">${SIGLAS[p]} · em correção</span>`;
-    const v = p === "co" || p === "ce" ? `${r.pontos}` : `${r.nota}/20`;
-    return `<span class="sm-chip ok">${SIGLAS[p]} ${v} · ${esc(r.nivel)} · NCLC ${esc(r.nclc)}</span>`;
+    const v = ehCompreensao(p) ? `${r.pontos}` : `${r.nota}/20`;
+    return `<span class="sm-chip ok">${SIGLAS[p]} ${v} · ${esc(r.nivel)}${r.nclc ? ` · NCLC ${esc(r.nclc)}` : ""}</span>`;
   }
 
-  function itemHistorico(t) {
+  function itemHistorico(t, simulados) {
     const data = new Date(t.criadoEm).toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
     const status = { em_andamento: "Em andamento", aguardando_correcao: "Aguardando correção", corrigindo_ia: "IA corrigindo", corrigido: "Corrigido" }[t.status];
+    const def = simulados.find(s => s.slug === t.simuladoSlug);
+    const correcao = { ia: "correção por IA", professor: "correção por professor", automatica: "correção automática" }[t.modoCorrecao];
     return `<div class="sm-hist-item">
-      <div class="info"><strong>Simulado de ${data}</strong><br><small>${status} · correção por ${t.modoCorrecao === "ia" ? "IA" : "professor"}</small></div>
-      <div class="sm-chips">${t.resultados ? PROVAS.map(p => chipResultado(p, t.resultados[p])).join("") : ""}</div>
+      <div class="info"><strong>${esc(def ? def.titulo : "Simulado")}</strong><br><small>${data} · ${status} · ${correcao}</small></div>
+      <div class="sm-chips">${t.resultados ? Object.keys(t.resultados).map(p => chipResultado(p, t.resultados[p])).join("") : ""}</div>
       <button class="sm-btn secundario pequeno" type="button" data-abrir="${t._id}">${t.status === "em_andamento" ? "Retomar" : "Ver resultado"}</button>
     </div>`;
   }
@@ -229,7 +238,7 @@
   function renderBarra() {
     const p = S.t.provaAtual;
     $("barraProva").textContent = NOMES[p];
-    $("barraEtapas").innerHTML = PROVAS.map(x => `<span class="${x === p ? "atual" : S.t.provas[x].status === "finalizada" ? "feita" : ""}">${SIGLAS[x]}</span>`).join("");
+    $("barraEtapas").innerHTML = ordem().map(x => `<span class="${x === p ? "atual" : S.t.provas[x].status === "finalizada" ? "feita" : ""}">${SIGLAS[x]}</span>`).join("");
   }
 
   function renderProva() {
@@ -240,7 +249,7 @@
     if (e.status === "pendente") return renderIntroProva(p);
     iniciarRelogio();
     if (p === "co") { S.idx = Math.min(e.questaoAtual || 0, S.def.provas.co.questoes.length - 1); renderCO(); }
-    else if (p === "ce") { S.idx = Math.min(e.questaoAtual || 0, S.def.provas.ce.questoes.length - 1); renderCE(); }
+    else if (p === "ce" || p === "sl") { S.idx = Math.min(e.questaoAtual || 0, S.def.provas[p].questoes.length - 1); renderLista(p); }
     else if (p === "ee") renderEE();
     else renderEO();
   }
@@ -249,17 +258,20 @@
     clearInterval(S.relogio);
     $("relogio").textContent = mmss(S.def.provas[p].tempoSeg);
     $("barraSub").textContent = "Aguardando início";
+    const nq = S.def.provas[p].questoes ? S.def.provas[p].questoes.length : 0;
     const regras = {
-      co: "39 questões de múltipla escolha, do A1 ao C2. Cada documento sonoro é ouvido <strong>uma única vez</strong>. Leia a pergunta, ouça o áudio e escolha a alternativa. Não é possível voltar à questão anterior.",
-      ce: "39 questões de múltipla escolha, do A1 ao C2, sobre documentos escritos (avisos, mensagens, artigos, textos argumentativos). Você pode navegar livremente entre as questões.",
+      co: `${nq} questões de múltipla escolha, do A1 ao C2. Cada documento sonoro é ouvido <strong>uma única vez</strong>. ${S.def.provas.co.questoes.some(q => q.alternativasFaladas) ? "Nas primeiras questões, as quatro propostas são apenas faladas: ouça e marque a letra. " : "Leia a pergunta, ouça o áudio e escolha a alternativa. "}Não é possível voltar à questão anterior.`,
+      sl: `${nq} frases com uma lacuna: escolha a palavra ou expressão que completa corretamente a frase. Você pode navegar livremente entre as questões.`,
+      ce: `${nq} questões de múltipla escolha, do A1 ao C2, sobre documentos escritos (avisos, anúncios, artigos, textos argumentativos). Você pode navegar livremente entre as questões.`,
       ee: "3 tarefas: uma mensagem (60–120 palavras), um artigo ou relato (120–150 palavras) e um texto argumentativo a partir de dois documentos (120–180 palavras). Seu texto é salvo automaticamente.",
       eo: "3 tarefas gravadas: entrevista dirigida (2 min), exercício em interação com 2 min de preparação (5 min 30) e expressão de um ponto de vista (4 min 30). Use fone de ouvido. Se um professor estiver conectado, ele será seu examinador pela chamada de voz."
     }[p];
     $("vProva").innerHTML = `<div class="sm-card" style="text-align:center;">
-      <p class="sm-oral-fase">Épreuve ${PROVAS.indexOf(p) + 1} de 4</p>
+      <p class="sm-oral-fase">Épreuve ${ordem().indexOf(p) + 1} de ${ordem().length}</p>
       <h2 style="font-size:1.8rem;margin:6px 0 10px;">${NOMES[p]}</h2>
       <p class="sm-muted" style="max-width:620px;margin:0 auto;">${regras}</p>
       <p style="margin:14px 0;font-weight:700;">Duração: ${Math.round(S.def.provas[p].tempoSeg / 60)} minutos</p>
+      ${p === "co" && S.def.audioConsignes?.co ? `<div class="sm-player" style="justify-content:center;margin:0 auto 14px;max-width:520px;"><button class="sm-btn secundario pequeno" type="button" id="btnConsignes">🔊 Ouvir as consignes gerais</button><small>Antes de começar; o relógio ainda não corre.</small></div>` : ""}
       ${p === "eo" ? `<div id="testeMic" class="sm-muted" style="margin-bottom:12px;"></div><button class="sm-btn secundario" id="btnTestarMic" type="button" style="margin-bottom:12px;">Testar microfone</button><br>` : ""}
       <button class="sm-btn" id="btnAbrirProva" type="button">Começar a épreuve</button>
     </div>`;
@@ -276,6 +288,14 @@
     });
     const bt = $("btnTestarMic");
     if (bt) bt.addEventListener("click", testarMicrofone);
+    const bc = $("btnConsignes");
+    if (bc) bc.addEventListener("click", () => {
+      pararAudioCO();
+      audioCO = new Audio(S.def.audioConsignes.co);
+      bc.textContent = "Tocando…";
+      audioCO.addEventListener("ended", () => { bc.textContent = "🔊 Ouvir de novo"; });
+      audioCO.play().catch(() => { bc.textContent = "Erro ao tocar o áudio"; });
+    });
   }
 
   // ---------------- CO ----------------
@@ -287,14 +307,16 @@
     const ouvido = (e.ouvidos || []).includes(q.n);
     $("barraSub").textContent = `Questão ${S.idx + 1} de ${qs.length}`;
     $("vProva").innerHTML = `<div class="sm-card">
+      ${q.tipo ? `<p class="sm-instrucao">› ${esc(INSTRUCOES[q.tipo])}</p>` : ""}
       <div class="sm-questao-topo"><strong>Question ${q.n}</strong><span class="sm-nivel">${esc(q.nivel)} · ${q.pontos} pts</span></div>
+      ${enunciado(q, "co")}
       <div class="sm-player" id="player">
         <button class="sm-btn pequeno" id="btnOuvir" type="button" ${ouvido ? "disabled" : ""}>${ouvido ? "Áudio já ouvido" : "▶ Ouvir o documento"}</button>
         <div class="barra"><span id="playerBarra" style="${ouvido ? "width:100%" : ""}"></span></div>
         <small>${ouvido ? "Cada documento é ouvido uma única vez." : "Atenção: uma única escuta."}</small>
       </div>
-      <p class="sm-pergunta">${esc(q.pergunta)}</p>
-      <div class="sm-alts">${q.alternativas.map((a, i) => `<button type="button" class="sm-alt ${resp[q.n] === i ? "marcada" : ""}" data-alt="${i}"><span class="letra">${LETRAS[i]}</span><span>${esc(a)}</span></button>`).join("")}</div>
+      ${q.alternativasFaladas ? "" : `<p class="sm-pergunta">${esc(q.pergunta)}</p>`}
+      <div class="sm-alts ${q.alternativasFaladas ? "faladas" : ""}">${q.alternativas.map((a, i) => `<button type="button" class="sm-alt ${resp[q.n] === i ? "marcada" : ""}" data-alt="${i}"><span class="letra">${LETRAS[i]}</span>${a ? `<span>${esc(a)}</span>` : ""}</button>`).join("")}</div>
       <div class="sm-nav">
         <span class="sm-muted">${Object.keys(resp).length} de ${qs.length} respondidas</span>
         ${S.idx < qs.length - 1 ? `<button class="sm-btn" id="btnProx" type="button">Próxima questão →</button>` : `<button class="sm-btn" id="btnFim" type="button">Terminar a compreensão oral</button>`}
@@ -339,46 +361,47 @@
       e.respostas = { ...(e.respostas || {}), [q.n]: i };
       document.querySelectorAll("[data-alt]").forEach(x => x.classList.toggle("marcada", x === b));
       salvar({ respostas: { [q.n]: i }, questaoAtual: S.idx });
-      if (prova === "ce") atualizarGradeCE();
+      if (prova === "ce" || prova === "sl") atualizarGrade(prova);
     }));
   }
 
-  // ---------------- CE ----------------
-  function renderCE() {
-    const qs = S.def.provas.ce.questoes;
+  // ---------------- SL / CE (navegação livre) ----------------
+  function renderLista(prova) {
+    const qs = S.def.provas[prova].questoes;
     const q = qs[S.idx];
-    const resp = S.t.provas.ce.respostas || {};
+    const resp = S.t.provas[prova].respostas || {};
     $("barraSub").textContent = `Questão ${S.idx + 1} de ${qs.length}`;
     $("vProva").innerHTML = `<div class="sm-card">
+      <p class="sm-instrucao">› ${esc(INSTRUCOES[prova])}</p>
       <div class="sm-questao-topo"><strong>Question ${q.n}</strong><span class="sm-nivel">${esc(q.nivel)} · ${q.pontos} pts</span></div>
-      <div class="sm-documento">${esc(q.documento)}</div>
-      <p class="sm-pergunta">${esc(q.pergunta)}</p>
+      ${prova === "sl" ? `<p class="sm-lacuna-ini">${esc(q.inicio)}</p>` : `${enunciado(q, prova)}<p class="sm-pergunta">${esc(q.pergunta)}</p>`}
       <div class="sm-alts">${q.alternativas.map((a, i) => `<button type="button" class="sm-alt ${resp[q.n] === i ? "marcada" : ""}" data-alt="${i}"><span class="letra">${LETRAS[i]}</span><span>${esc(a)}</span></button>`).join("")}</div>
+      ${prova === "sl" ? `<p class="sm-lacuna-fim">${esc(q.fim)}</p>` : ""}
       <div class="sm-nav">
         <button class="sm-btn secundario" id="btnAnt" type="button" ${S.idx === 0 ? "disabled" : ""}>← Anterior</button>
         ${S.idx < qs.length - 1 ? `<button class="sm-btn" id="btnProx" type="button">Próxima →</button>` : ""}
       </div>
-      <div class="sm-grade" id="gradeCE"></div>
-      <div style="text-align:right;margin-top:14px;"><button class="sm-btn secundario" id="btnFim" type="button">Terminar a compreensão escrita</button></div>
+      <div class="sm-grade" id="gradeLista"></div>
+      <div style="text-align:right;margin-top:14px;"><button class="sm-btn secundario" id="btnFim" type="button">Terminar: ${esc(NOMES[prova])}</button></div>
     </div>`;
-    ligarAlternativas("ce", q);
-    atualizarGradeCE();
-    const ir = i => { S.idx = i; salvar({ questaoAtual: i }); renderCE(); };
+    ligarAlternativas(prova, q);
+    atualizarGrade(prova);
+    const ir = i => { S.idx = i; salvar({ questaoAtual: i }); renderLista(prova); };
     $("btnAnt").addEventListener("click", () => ir(S.idx - 1));
     const prox = $("btnProx");
     if (prox) prox.addEventListener("click", () => ir(S.idx + 1));
     $("btnFim").addEventListener("click", () => {
-      const faltam = qs.length - Object.keys(S.t.provas.ce.respostas || {}).length;
+      const faltam = qs.length - Object.keys(S.t.provas[prova].respostas || {}).length;
       confirmarFim(faltam ? `Ainda há ${faltam} questão(ões) sem resposta.` : "Todas as questões foram respondidas.");
     });
-    $("gradeCE").addEventListener("click", ev => { const b = ev.target.closest("[data-ir]"); if (b) ir(Number(b.dataset.ir)); });
+    $("gradeLista").addEventListener("click", ev => { const b = ev.target.closest("[data-ir]"); if (b) ir(Number(b.dataset.ir)); });
   }
 
-  function atualizarGradeCE() {
-    const g = $("gradeCE");
+  function atualizarGrade(prova) {
+    const g = $("gradeLista");
     if (!g) return;
-    const resp = S.t.provas.ce.respostas || {};
-    g.innerHTML = S.def.provas.ce.questoes.map((q, i) => `<button type="button" data-ir="${i}" class="${resp[q.n] != null ? "respondida" : ""} ${i === S.idx ? "atual" : ""}">${q.n}</button>`).join("");
+    const resp = S.t.provas[prova].respostas || {};
+    g.innerHTML = S.def.provas[prova].questoes.map((q, i) => `<button type="button" data-ir="${i}" class="${resp[q.n] != null ? "respondida" : ""} ${i === S.idx ? "atual" : ""}">${q.n}</button>`).join("");
   }
 
   // ---------------- EE ----------------
@@ -659,11 +682,12 @@
     const t = S.t;
     const def = S.def;
     const r = p => t.provas[p].resultado;
+    const comNclc = def.formato === "TCF Canada";
     const linha = p => {
       const x = r(p);
-      if (!x) return `<tr><td>${NOMES[p]}</td><td colspan="3" class="sm-muted">${t.status === "corrigindo_ia" ? "A IA está corrigindo…" : "Aguardando correção"}</td></tr>`;
-      const score = p === "co" || p === "ce" ? `${x.pontos} <small class="sm-muted">/ 699</small>` : `${x.nota} <small class="sm-muted">/ 20</small>`;
-      return `<tr><td>${NOMES[p]}</td><td class="score">${score}</td><td><span class="niv">${esc(x.nivel)}</span></td><td><strong>${esc(x.nclc)}</strong></td></tr>`;
+      if (!x) return `<tr><td>${NOMES[p]}</td><td colspan="${comNclc ? 3 : 2}" class="sm-muted">${t.status === "corrigindo_ia" ? "A IA está corrigindo…" : "Aguardando correção"}</td></tr>`;
+      const score = ehCompreensao(p) ? `${x.pontos} <small class="sm-muted">/ 699</small>` : `${x.nota} <small class="sm-muted">/ 20</small>`;
+      return `<tr><td>${NOMES[p]}</td><td class="score">${score}</td><td><span class="niv">${esc(x.nivel)}</span></td>${comNclc ? `<td><strong>${esc(x.nclc || "–")}</strong></td>` : ""}</tr>`;
     };
     let status = "";
     if (t.status === "corrigindo_ia") status = `<div class="sm-card" style="text-align:center;"><div class="sm-spinner"></div><p>A Inteligência Artificial está corrigindo suas expressões escrita e oral. Isso leva de 1 a 3 minutos — pode ficar nesta página.</p></div>`;
@@ -672,20 +696,25 @@
         ? `<div class="sm-card"><div class="sm-aviso">${esc(t.ia.erro)}</div><div style="display:flex;gap:8px;flex-wrap:wrap;">${t.iaDisponivel ? `<button class="sm-btn" id="btnRefazerIA" type="button">Tentar a correção por IA de novo</button>` : ""}<button class="sm-btn chamar" id="btnChamar2" type="button">Pedir correção a um professor</button></div></div>`
         : `<div class="sm-card"><p>Suas compreensões já estão corrigidas abaixo. <strong>A expressão escrita e a expressão oral estão com o professor</strong>; você recebe o resultado completo nesta página assim que ele publicar.</p></div>`;
     }
-    const menor = PROVAS.map(p => r(p)?.nclc).filter(Boolean);
+    const menor = ordem().map(p => r(p)?.nclc).filter(Boolean);
+    const compreensoes = ordem().filter(ehCompreensao);
+    const global = !comNclc && compreensoes.every(p => r(p)) ? Math.round(compreensoes.reduce((s2, p) => s2 + r(p).pontos, 0) / compreensoes.length) : null;
     $("vResultado").innerHTML = `
-      <div class="sm-hero"><h1>Resultado do simulado</h1><p>${esc(def.titulo)} · ${new Date(t.criadoEm).toLocaleDateString("pt-BR")} · correção por ${t.modoCorrecao === "ia" ? "Inteligência Artificial" : "professor"}</p></div>
+      <div class="sm-hero"><h1>Resultado do simulado</h1><p>${esc(def.titulo)} · ${new Date(t.criadoEm).toLocaleDateString("pt-BR")} · ${{ ia: "correção por Inteligência Artificial", professor: "correção por professor", automatica: "correção automática" }[t.modoCorrecao]}</p></div>
       ${status}
       <div class="sm-card">
         <h2>Attestation de résultats (simulação)</h2>
         <div class="sm-tabela-scroll"><table class="sm-boletim">
-          <thead><tr><th>Épreuve</th><th>Score</th><th>Niveau CECR</th><th>NCLC</th></tr></thead>
-          <tbody>${PROVAS.map(linha).join("")}</tbody>
+          <thead><tr><th>Épreuve</th><th>Score</th><th>Niveau CECR</th>${comNclc ? "<th>NCLC</th>" : ""}</tr></thead>
+          <tbody>${ordem().map(linha).join("")}${global != null ? `<tr class="global"><td><strong>Score global</strong></td><td class="score">${global} <small class="sm-muted">/ 699</small></td><td><span class="niv">${esc(nivelDoScore(global))}</span></td></tr>` : ""}</tbody>
         </table></div>
-        <p class="sm-muted" style="margin-top:12px;">Compreensões: 0 a 699 pontos (itens ponderados pela dificuldade: A1 = 3 pts … C2 = 33 pts). Expressões: 0 a 20. Os níveis NCLC seguem a tabela de equivalência do TCF Canada usada pela imigração canadense.${menor.length === 4 ? ` Seu menor NCLC nesta simulação: <strong>${esc(menor.sort((a, b) => parseInt(a) - parseInt(b))[0])}</strong>.` : ""}</p>
+        <p class="sm-muted" style="margin-top:12px;">${comNclc
+          ? `Compreensões: 0 a 699 pontos (itens ponderados pela dificuldade: A1 = 3 pts … C2 = 33 pts). Expressões: 0 a 20. Os níveis NCLC seguem a tabela de equivalência do TCF Canada usada pela imigração canadense.${menor.length === 4 ? ` Seu menor NCLC nesta simulação: <strong>${esc(menor.sort((a, b) => parseInt(a) - parseInt(b))[0])}</strong>.` : ""}`
+          : "Cada épreuve é convertida para a escala do TCF (0 a 699), com itens ponderados pela dificuldade (A1 = 3 pts … C2 = 33 pts). Níveis: A1 100–199 · A2 200–299 · B1 300–399 · B2 400–499 · C1 500–599 · C2 600–699."}</p>
       </div>
-      ${["co", "ce"].map(p => blocoCompreensao(p)).join("")}
-      ${["ee", "eo"].map(p => blocoExpressao(p)).join("")}
+      ${compreensoes.length && compreensoes.every(p => r(p)) ? corrige(compreensoes) : ""}
+      ${compreensoes.map(p => blocoCompreensao(p)).join("")}
+      ${ordem().filter(p => p === "ee" || p === "eo").map(p => blocoExpressao(p)).join("")}
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
         <a class="sm-btn secundario" href="simulado-tcf.html">Voltar aos simulados</a>
         <a class="sm-btn secundario" href="plataforma-questoes.html">Plataforma de Questões</a>
@@ -695,6 +724,25 @@
     const b2 = $("btnChamar2");
     if (b2) b2.addEventListener("click", abrirChamado);
     document.querySelectorAll("[data-audio-eo]").forEach(el => carregarAudioEO(el));
+  }
+
+  function nivelDoScore(v) {
+    return v >= 600 ? "C2" : v >= 500 ? "C1" : v >= 400 ? "B2" : v >= 300 ? "B1" : v >= 200 ? "A2" : v >= 100 ? "A1" : "< A1";
+  }
+
+  // Folha de respostas corrigida, como a "Feuille de réponses / Corrigé" do livret.
+  function corrige(provas) {
+    const cel = (d, k) => {
+      const marcada = d.resposta === k, certa = d.correta === k;
+      return `<span class="${certa ? "certa" : ""} ${marcada && !certa ? "errada" : ""}">${marcada ? "✕" : certa ? "•" : ""}</span>`;
+    };
+    // Uma coluna por parte, como no livret (CO 1–15 · SL 16–25 · CE 26–40).
+    const colunas = provas.map(p => S.t.provas[p].resultado.detalhes);
+    return `<div class="sm-card">
+      <h2>Feuille de réponses — corrigé</h2>
+      <p class="sm-muted">✕ = sua resposta · verde = resposta certa · vermelho = marcação errada.</p>
+      <div class="sm-corrige">${colunas.map(col => `<div><div class="cab"><span></span>${LETRAS.map(l => `<b>${l}</b>`).join("")}</div>${col.map(d => `<div class="lin"><em>${d.n}</em>${[0, 1, 2, 3].map(k => cel(d, k)).join("")}</div>`).join("")}</div>`).join("")}</div>
+    </div>`;
   }
 
   function blocoCompreensao(p) {
@@ -707,8 +755,8 @@
       <div class="sm-nivel-barras">${niveis.map(n => `<div><strong>${x.porNivel[n]?.acertos ?? 0}/${x.porNivel[n]?.total ?? 0}</strong>${n}</div>`).join("")}</div>
       ${qs.map(q => {
         const d = x.detalhes.find(y => y.n === q.n) || {};
-        return `<details><summary>${d.certo ? "✅" : d.resposta == null ? "⚪" : "❌"} Questão ${q.n} · ${q.nivel} — ${esc(q.pergunta)}</summary><div class="corpo">
-          ${p === "co" ? `<audio controls preload="none" src="${esc(q.audio)}" style="width:100%;margin-bottom:8px;"></audio>${q.transcricao ? `<div class="sm-documento">${esc(q.transcricao)}</div>` : ""}` : `<div class="sm-documento">${esc(q.documento)}</div>`}
+        return `<details><summary>${d.certo ? "✅" : d.resposta == null ? "⚪" : "❌"} Questão ${q.n} · ${q.nivel} — ${esc(p === "sl" ? `${q.inicio.replace(/…$/, "")} ___ ${q.fim.replace(/^…\s*/, "")}` : q.pergunta)}</summary><div class="corpo">
+          ${p === "co" ? `${enunciado(q, "co")}<audio controls preload="none" src="${esc(q.audio)}" style="width:100%;margin-bottom:8px;"></audio>${q.transcricao ? `<div class="sm-documento">${esc(q.transcricao)}</div>` : ""}` : enunciado(q, p)}
           <div class="sm-alts">${q.alternativas.map((a, i) => `<button type="button" disabled class="sm-alt ${i === q.correta ? "certa" : i === d.resposta ? "errada" : ""}"><span class="letra">${LETRAS[i]}</span><span>${esc(a)}</span></button>`).join("")}</div>
           ${q.explicacao ? `<p style="margin-top:8px;"><strong>Explicação:</strong> ${esc(q.explicacao)}</p>` : ""}
         </div></details>`;

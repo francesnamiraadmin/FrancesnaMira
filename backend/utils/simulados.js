@@ -1,12 +1,19 @@
-// Simulados completos de prova (hoje: TCF Canada). Definições em backend/data/simulados/*.json,
+// Simulados completos de prova (TCF Canada e TCF Tout Public). Definições em backend/data/simulados/*.json,
 // geradas a partir de uma fonte com o conteúdo original. Aqui ficam o carregamento, a versão
 // pública (sem gabarito) e toda a conversão de resultados para o formato oficial do TCF.
 const fs = require("fs");
 const path = require("path");
 
 const DIR = path.join(__dirname, "..", "data", "simulados");
+// Ordem padrão (TCF Canada). Cada definição pode trazer a sua em `ordem` — o TCF Tout
+// Public, por exemplo, tem CO → Structure de la langue → CE e nenhuma expressão.
 const PROVAS = ["co", "ce", "ee", "eo"];
-const NOMES_PROVA = { co: "Compréhension orale", ce: "Compréhension écrite", ee: "Expression écrite", eo: "Expression orale" };
+const TODAS_PROVAS = ["co", "sl", "ce", "ee", "eo"];
+const COMPREENSOES = ["co", "sl", "ce"];
+const NOMES_PROVA = { co: "Compréhension orale", sl: "Structure de la langue", ce: "Compréhension écrite", ee: "Expression écrite", eo: "Expression orale" };
+const ordemDe = def => (def && def.ordem) || PROVAS;
+const ehCompreensao = p => COMPREENSOES.includes(p);
+const temExpressoes = def => ordemDe(def).some(p => p === "ee" || p === "eo");
 
 let cache = null;
 function todos() {
@@ -25,18 +32,22 @@ function listar(curso) {
   return [...todos().values()]
     .filter(d => !curso || d.curso === curso)
     .map(d => ({
-      slug: d.slug, titulo: d.titulo, curso: d.curso, formato: d.formato,
-      provas: PROVAS.map(p => ({ id: p, nome: d.provas[p].nome, tempoSeg: d.provas[p].tempoSeg, itens: (d.provas[p].questoes || d.provas[p].tarefas).length }))
+      slug: d.slug, titulo: d.titulo, curso: d.curso, formato: d.formato, temExpressoes: temExpressoes(d),
+      provas: ordemDe(d).map(p => ({ id: p, nome: d.provas[p].nome, tempoSeg: d.provas[p].tempoSeg, itens: (d.provas[p].questoes || d.provas[p].tarefas).length }))
     }));
 }
 
 // Remove gabarito, explicações, transcrições e a ficha do examinador (só a equipe vê).
 function versaoPublica(def) {
   const c = JSON.parse(JSON.stringify(def));
-  for (const p of ["co", "ce"]) {
-    c.provas[p].questoes.forEach(q => { delete q.correta; delete q.explicacao; delete q.transcricao; });
+  for (const p of ordemDe(def).filter(ehCompreensao)) {
+    c.provas[p].questoes.forEach(q => {
+      delete q.correta; delete q.explicacao; delete q.transcricao;
+      // Propostas só faladas (TCF: "Écoutez les 4 propositions"): o texto não pode ir ao aluno.
+      if (q.alternativasFaladas) q.alternativas = q.alternativas.map(() => "");
+    });
   }
-  c.provas.eo.tarefas.forEach(t => { delete t.fichaExaminador; });
+  if (c.provas.eo) c.provas.eo.tarefas.forEach(t => { delete t.fichaExaminador; });
   return c;
 }
 
@@ -69,20 +80,25 @@ function nivelExpressao(nota) {
 
 function corrigirCompreensao(def, prova, respostas = {}) {
   const questoes = def.provas[prova].questoes;
-  let pontos = 0, acertos = 0;
+  let pontos = 0, acertos = 0, maximo = 0;
   const porNivel = {};
   const detalhes = questoes.map(q => {
     const r = respostas[q.n];
     const certo = Number.isInteger(r) && r === q.correta;
+    maximo += q.pontos;
     if (certo) { pontos += q.pontos; acertos++; }
     porNivel[q.nivel] = porNivel[q.nivel] || { acertos: 0, total: 0 };
     porNivel[q.nivel].total++;
     if (certo) porNivel[q.nivel].acertos++;
     return { n: q.n, resposta: Number.isInteger(r) ? r : null, correta: q.correta, certo };
   });
+  // TCF Canada: 39 itens somam exatamente 699. Livrets mais curtos (TCF Tout Public)
+  // convertem a proporção de pontos obtidos para a mesma escala 0–699.
+  if (def.escala === "proporcional") pontos = Math.round((pontos / maximo) * 699);
+  const tabelaNclc = def.formato === "TCF Canada" ? (prova === "co" ? NCLC_CO : prova === "ce" ? NCLC_CE : null) : null;
   return {
     pontos, acertos, total: questoes.length, nivel: nivelCompreensao(pontos),
-    nclc: nclc(prova === "co" ? NCLC_CO : NCLC_CE, pontos), porNivel, detalhes
+    nclc: tabelaNclc ? nclc(tabelaNclc, pontos) : null, porNivel, detalhes
   };
 }
 
@@ -137,6 +153,7 @@ function montarResultadoExpressao(prova, def, entrada = {}, meta = {}) {
 const contarPalavras = t => (String(t || "").match(/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu) || []).length;
 
 module.exports = {
-  PROVAS, NOMES_PROVA, CRITERIOS, obter, listar, versaoPublica, corrigirCompreensao,
+  PROVAS, TODAS_PROVAS, NOMES_PROVA, CRITERIOS, ordemDe, ehCompreensao, temExpressoes,
+  obter, listar, versaoPublica, corrigirCompreensao,
   montarResultadoExpressao, nivelCompreensao, nivelExpressao, contarPalavras
 };
