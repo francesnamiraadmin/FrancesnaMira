@@ -1,0 +1,732 @@
+[
+ {
+  "slug": "a1-me-presenter",
+  "titulo": "Je me présente",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Apresente-se a um novo colega da aula de francês: nome, idade, cidade, profissão e gostos.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous êtes nouveau dans un cours de français. Vous écrivez un petit message pour vous présenter : votre nom, votre âge, votre ville, votre profession et ce que vous aimez. (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Bonjour, je m'appelle Léo »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "Bonjour ! Je m'appelle Léo. J'ai dix ans. J'habite à Nice, près de la mer. J'ai une sœur et un petit chien. Il s'appelle Pompon. J'aime le football et les crêpes au chocolat. Je n'aime pas la pluie. Et toi, comment tu t'appelles ?"
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Un cours de français pour les nouveaux habitants",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "À Lyon, la mairie propose un cours de français gratuit pour les nouveaux habitants. Le cours a lieu le mardi et le jeudi, à 18 heures. Les élèves viennent du Brésil, de l'Espagne, de la Chine et de l'Ukraine. Le premier jour, chaque élève se présente : son nom, son pays et sa profession."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Apprendre une langue à tout âge",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "On peut apprendre une nouvelle langue à tout âge. Les enfants apprennent vite à parler, mais les adultes apprennent bien la grammaire et le vocabulaire. Pour progresser, il faut pratiquer un peu chaque jour : lire, écouter, parler et écrire."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-me-presenter-1.jpg",
+    "legenda": "Uma aula de idiomas para adultos",
+    "credito": {
+     "autor": "COD Newsroom",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Continuing_Education_Adult_Education_Expo_at_College_of_DuPage_2015_54_(17255265145).jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-me-presenter-2.jpg",
+    "legenda": "A orla de Nice",
+    "credito": {
+     "autor": "Lspigon",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Nice,_Quai_des_%C3%89tats-Unis_and_Promenade_des_Anglais_FRANCE.jpg"
+    }
+   }
+  ],
+  "ordem": 1,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a1-ma-famille",
+  "titulo": "Ma famille",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Descreva sua família para um correspondente: quem são, onde moram e o que fazem.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous écrivez à un correspondant français. Vous présentez votre famille : combien vous êtes, les prénoms, l'âge et une activité de chaque personne. (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La famille Martin »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "La famille Martin habite dans une grande maison. Le père, Pierre, est professeur. La mère, Claire, est médecin. Ils ont trois enfants : Lucas, douze ans, Emma, huit ans, et le petit Jules, deux ans. Le dimanche, toute la famille mange chez la grand-mère."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le repas du dimanche en famille",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "En France, beaucoup de familles mangent ensemble le dimanche midi. Les grands-parents, les parents et les enfants sont à table. On mange un poulet, des légumes et un gâteau. Le repas est long : on parle, on rit et on raconte la semaine."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Les familles changent",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "Aujourd'hui, les familles sont différentes. Il y a des familles avec beaucoup d'enfants et des familles avec un seul enfant. Beaucoup de grands-parents habitent loin. Mais les familles restent en contact avec le téléphone et les appels vidéo."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-ma-famille-1.jpg",
+    "legenda": "Uma família reunida à mesa",
+    "credito": {
+     "autor": "Hans Bernhard Schwerin",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Schwerin_and_Freudenberg_family_at_the_dinner_table_circa_1920.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-ma-famille-2.jpg",
+    "legenda": "Avós e netos",
+    "credito": {
+     "autor": "sylviebliss",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Grandparents-1969824.jpg"
+    }
+   }
+  ],
+  "ordem": 2,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a1-invitation-anniversaire",
+  "titulo": "Invitation d'anniversaire",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Escreva um convite curto para seu aniversário: dia, hora, lugar e o que levar.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous organisez une fête pour votre anniversaire. Vous écrivez une invitation à vos amis : le jour, l'heure, le lieu et ce qu'il faut apporter. (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La fête de Zoé »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "Samedi, c'est l'anniversaire de Zoé. Elle a sept ans. Ses amis arrivent à trois heures avec des cadeaux. Il y a des ballons rouges et bleus. Maman apporte un grand gâteau au chocolat avec sept bougies. Tout le monde chante : « Joyeux anniversaire, Zoé ! »"
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les fêtes d'anniversaire au parc",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "Au printemps, beaucoup de familles organisent les anniversaires dans les parcs. C'est gratuit et les enfants jouent dehors. Chaque invité apporte quelque chose : des boissons, des fruits ou des chips. À la fin, tout le monde range et jette les papiers à la poubelle."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Pourquoi on aime les fêtes",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "Les fêtes sont importantes pour les relations entre les personnes. On voit ses amis, on mange ensemble et on partage des moments heureux. Les psychologues disent que ces moments donnent de bons souvenirs et aident à se sentir bien."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-invitation-anniversaire-1.jpg",
+    "legenda": "Um bolo de aniversário",
+    "credito": {
+     "autor": "Gnom",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Wikipedia_20_birthday_cake_virtual_party.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-invitation-anniversaire-2.jpg",
+    "legenda": "Balões de festa",
+    "credito": {
+     "autor": "Abinayasekar357",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Birthday_party_decoration.jpg"
+    }
+   }
+  ],
+  "ordem": 3,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a1-ma-journee",
+  "titulo": "Ma journée",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Conte como é um dia normal seu: horários, refeições, trabalho ou estudos.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous écrivez à un ami pour décrire une journée normale : l'heure du réveil, les repas, le travail ou les études, les activités du soir. (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La journée de Monsieur Petit »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "Monsieur Petit se lève à six heures. Il prend une douche et il boit un café. À sept heures, il prend le bus. Il travaille dans une banque. À midi, il mange un sandwich dans le parc. Le soir, il regarde la télévision et il se couche à dix heures."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les Français déjeunent à midi et demi",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "En France, on déjeune souvent vers midi et demi. Beaucoup de personnes mangent à la cantine ou au restaurant près du travail. Le dîner est vers vingt heures. Le petit-déjeuner est simple : du pain, du beurre, de la confiture et un café."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Bien dormir pour être en forme",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "Un adulte a besoin de sept à neuf heures de sommeil par nuit. Pour bien dormir, il est bon de se coucher à la même heure chaque soir et de ne pas regarder l'écran du téléphone au lit. Le matin, la lumière du jour aide à se réveiller."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-ma-journee-1.jpg",
+    "legenda": "O despertador de manhã",
+    "credito": {
+     "autor": "Shixart1985",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Morning_setting_with_a_banana,_vintage_clock,_and_smartphone_on_a_table_during_bright_daylight.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-ma-journee-2.jpg",
+    "legenda": "Pessoas no ponto de ônibus",
+    "credito": {
+     "autor": "Petri Sipilä",
+     "licenca": "CC BY 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:People_at_bus_stop_at_Pasila_railway_station_in_Helsinki,_Finland,_2022_September.jpg"
+    }
+   }
+  ],
+  "ordem": 4,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a1-mon-quartier",
+  "titulo": "Mon quartier",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Descreva seu bairro: o que existe perto de casa e o que você gosta de fazer lá.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous décrivez votre quartier à un nouvel ami : les magasins, les lieux importants et ce que vous aimez y faire. (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La rue des Lilas »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "J'habite rue des Lilas. Dans ma rue, il y a une boulangerie, une pharmacie et un petit café. Le matin, ça sent le pain chaud. Au bout de la rue, il y a un parc avec des arbres et des jeux pour les enfants. J'aime beaucoup mon quartier : il est calme et joli."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le marché revient sur la place",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "Tous les samedis matin, le marché revient sur la place du quartier. Il y a des fruits, des légumes, du fromage et des fleurs. Les habitants aiment faire leurs courses au marché. Les prix sont bons et les produits sont frais."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Marcher dans son quartier",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "Marcher trente minutes par jour est très bon pour la santé. Aller à pied à la boulangerie ou au marché, c'est un bon exercice. Les personnes qui marchent dans leur quartier connaissent aussi mieux leurs voisins."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-mon-quartier-1.jpg",
+    "legenda": "Uma rua com padaria e café",
+    "credito": {
+     "autor": "Globetrotter19",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Amber%27s_French_Bakery_%26_Cafe,_Fovam_Square,_2017_Budapest.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-mon-quartier-2.jpg",
+    "legenda": "A feira na praça",
+    "credito": {
+     "autor": "Elizabeth Schwegler",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Mirepoix_on_Market_day.JPG"
+    }
+   }
+  ],
+  "ordem": 5,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a1-au-restaurant",
+  "titulo": "Réserver au restaurant",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Escreva uma mensagem para reservar uma mesa: dia, hora, número de pessoas e um pedido especial.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous voulez réserver une table dans un restaurant. Vous écrivez un message : le jour, l'heure, le nombre de personnes et une demande spéciale (une place en terrasse, un plat sans viande…). (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Au Petit Bistrot »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "Le Petit Bistrot est un restaurant très simple. Il y a dix tables et une terrasse. Le chef prépare un plat du jour différent chaque jour. Le lundi, c'est le poulet ; le vendredi, c'est le poisson. Le dessert préféré des clients est la tarte aux pommes."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Réserver en ligne, c'est facile",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "Aujourd'hui, beaucoup de restaurants acceptent les réservations par message ou sur Internet. Le client indique la date, l'heure et le nombre de personnes. Le restaurant répond pour confirmer. Si on ne peut pas venir, il faut annuler : c'est plus poli."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Manger végétarien",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "De plus en plus de personnes mangent moins de viande. Les restaurants proposent des plats végétariens avec des légumes, des lentilles ou des œufs. Ces plats donnent de l'énergie et sont bons pour la santé quand ils sont variés."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-au-restaurant-1.jpg",
+    "legenda": "O terraço de um restaurante",
+    "credito": {
+     "autor": "Gerda Arendt",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Central_Park,_5_Rue_du_Jour,_75001_Paris,_2021.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-au-restaurant-2.jpg",
+    "legenda": "Um chef na cozinha",
+    "credito": {
+     "autor": "Sunnya343",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Chef_cooking_Mysore_masala_dosa_in_Mysuru,_July_2013.jpg"
+    }
+   }
+  ],
+  "ordem": 6,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a1-message-voisin",
+  "titulo": "Un message au voisin",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Deixe um recado para o vizinho: você vai viajar e pede um pequeno favor.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous partez en voyage pendant une semaine. Vous écrivez un petit mot à votre voisin pour lui demander de prendre votre courrier et d'arroser vos plantes. Vous le remerciez. (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Les plantes de Madame Blanc »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "Madame Blanc part chez sa fille pour les vacances. Elle donne sa clé à son voisin, Karim. « Il faut arroser les plantes le lundi et le jeudi, dit-elle. Et le chat mange le matin. » Karim dit oui. Quand elle revient, les plantes sont belles et le chat est content."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "L'entraide entre voisins",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "Beaucoup de voisins s'aident pendant les vacances. Ils prennent le courrier, ils arrosent les plantes ou ils donnent à manger aux animaux. Dans certains immeubles, il y a un tableau dans le hall pour laisser des messages."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Les plantes et l'eau",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "Les plantes d'intérieur ont besoin d'eau, mais pas trop. En été, il faut les arroser deux fois par semaine. Si on part longtemps, on peut les mettre dans la salle de bains, loin du soleil, avec un peu d'eau dans une assiette."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-message-voisin-1.jpg",
+    "legenda": "Regando as plantas",
+    "credito": {
+     "autor": "Morinimnas",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Monstera-adansonii-plantcutting-on-water_(1001_van_1).jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-message-voisin-2.jpg",
+    "legenda": "Caixas de correio do prédio",
+    "credito": {
+     "autor": "Philippe Alès",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Mailboxes,_France.jpg"
+    }
+   }
+  ],
+  "ordem": 7,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a1-mes-vacances",
+  "titulo": "Mes vacances préférées",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Conte quais são suas férias preferidas: lugar, companhia, atividades.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous écrivez un petit texte pour le blog de votre école de langues : où aimez-vous partir en vacances, avec qui et qu'est-ce que vous faites ? (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« À la montagne »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "Chaque été, nous partons à la montagne. Nous habitons dans un petit chalet en bois. Le matin, nous marchons dans la forêt. L'après-midi, nous nageons dans le lac. Le soir, nous mangeons du fromage et nous regardons les étoiles. J'adore la montagne !"
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les destinations préférées des Français",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "En été, beaucoup de Français partent à la mer, surtout en Bretagne et dans le sud. D'autres préfèrent la montagne ou la campagne. Les vacances durent souvent deux ou trois semaines, en juillet ou en août."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "La mer, bonne pour le moral",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "Selon des chercheurs, les personnes qui passent du temps près de la mer se sentent plus calmes. Le bruit des vagues, la couleur bleue et l'air frais aident à se reposer. Une promenade sur la plage est un bon remède contre le stress."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-mes-vacances-1.jpg",
+    "legenda": "Um chalé nas montanhas",
+    "credito": {
+     "autor": "Alexandre Calame",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Chalets_at_Rigi.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-mes-vacances-2.jpg",
+    "legenda": "Uma praia da Bretanha",
+    "credito": {
+     "autor": "Diliff",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Dinard_Beach_Panorama,_Brittany,_France_-_July_2011.jpg"
+    }
+   }
+  ],
+  "ordem": 8,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a1-mon-logement",
+  "titulo": "Mon logement",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Descreva onde você mora: tipo de casa, cômodos e o que você mais gosta nela.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous écrivez à un ami français pour décrire votre maison ou votre appartement : les pièces, les meubles et ce que vous aimez. (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le petit appartement »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "Sophie habite dans un petit appartement au quatrième étage. Il y a une chambre, un salon, une cuisine et une salle de bains. Dans le salon, il y a un canapé vert et beaucoup de livres. Le balcon est petit, mais il y a des fleurs et on voit la tour Eiffel."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les jeunes vivent dans de petits logements",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "Dans les grandes villes, les jeunes habitent souvent dans de petits appartements, des studios de vingt mètres carrés. Les loyers sont chers. Certains partagent un grand appartement avec des amis : c'est la colocation. Chacun a sa chambre et on partage la cuisine."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "La lumière dans la maison",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "La lumière naturelle est importante dans un logement. Une pièce avec une grande fenêtre est plus agréable et on consomme moins d'électricité. Les architectes conseillent de mettre le bureau et le salon du côté du soleil."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-mon-logement-1.jpg",
+    "legenda": "Uma varanda florida em Paris",
+    "credito": {
+     "autor": "Vania Teofilo",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Haussmannian_apartment_building_in_Paris_056.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-mon-logement-2.jpg",
+    "legenda": "Uma sala aconchegante",
+    "credito": {
+     "autor": "Shixart1985",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Cozy_living_room_with_a_gray_sofa.jpg"
+    }
+   }
+  ],
+  "ordem": 9,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a1-mon-sport",
+  "titulo": "Mon sport préféré",
+  "nivel": "A1",
+  "tipoProducao": "Tâche 1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 30,
+  "limitePalavrasMax": 60,
+  "descricao": "Fale do esporte ou da atividade física que você pratica ou gostaria de praticar.",
+  "objetivos": [
+   "Escrever frases simples e corretas",
+   "Usar o vocabulário do tema",
+   "Respeitar o destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne cumprida",
+   "Frases simples corretas",
+   "Vocabulário básico"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Artigos e concordância",
+   "Vocabulário do cotidiano"
+  ],
+  "instrucoes": "Vous répondez à un questionnaire de votre club de sport. Vous écrivez quel sport vous pratiquez, quand, où, avec qui et pourquoi vous l'aimez. (30 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le vélo de Nadia »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro, nível A1)",
+    "conteudo": "Nadia fait du vélo tous les dimanches. Elle part à huit heures avec ses amies. Elles roulent sur les petites routes, entre les champs et les villages. Après deux heures, elles s'arrêtent dans un café et boivent un chocolat chaud. Nadia dit : « Le vélo, c'est la liberté ! »"
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le football est le sport le plus pratiqué",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A1)",
+    "conteudo": "En France, le football est le sport avec le plus de licenciés. Beaucoup d'enfants jouent dans un club le mercredi et le samedi. Le tennis, l'équitation et le basket sont aussi très populaires. De plus en plus de filles jouent au football."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Le sport et la santé",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A1)",
+    "conteudo": "Les médecins conseillent de faire du sport au moins deux ou trois fois par semaine. Le sport est bon pour le cœur, les muscles et le moral. Il ne faut pas faire un sport difficile : marcher, nager ou danser, c'est très bien aussi."
+   }
+  ],
+  "courseType": "A1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a1-mon-sport-1.jpg",
+    "legenda": "Ciclistas numa estrada rural",
+    "credito": {
+     "autor": "David Marcu davidmarcu",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Cycling_in_the_countryside_(Unsplash).jpg"
+    }
+   },
+   {
+    "src": "img/temas/a1-mon-sport-2.jpg",
+    "legenda": "Crianças jogando futebol",
+    "credito": {
+     "autor": "Steffen Prößdorf",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:2019-05-30_Fussball,_Frauen_L%C3%A4nderspiel,_Deutschland_-_Chile_StP_1045_by_Stepro.jpg"
+    }
+   }
+  ],
+  "ordem": 10,
+  "creditosNecessarios": 1
+ }
+]

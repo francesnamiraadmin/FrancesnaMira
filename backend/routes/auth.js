@@ -538,6 +538,7 @@ router.get("/me", exigirAuth, async (req, res) => {
     }
 
     res.json({
+      _id: user._id,
       nome: user.nome,
       email: user.email,
       telefone,

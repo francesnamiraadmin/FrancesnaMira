@@ -5,7 +5,7 @@ const { TIPOS_CURSO } = require("../utils/tiposCurso");
 // em public/js/appShell.js (CASCATA_POR_TIER, client-side) — agora com uma única fonte
 // de verdade, reparametrizada por curso.
 const CASCATA_POR_TIER = {
-  producao: ["Essentiel", "Avancé", "Excellence"],
+  producao: ["Avancé", "Excellence"],
   aulas: ["Avancé", "Excellence"],
   plataforma: ["Excellence"]
 };

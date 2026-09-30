@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b2-04",
+ "titulo": "Exercício oral nº 4 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Les jeunes d'aujourd'hui",
+ "descricao": "Estereótipos sobre os jovens: engajamento, trabalho e voluntariado.",
+ "imagem": {
+  "src": "img/temas/b2-lettre-directeur-journal-2.jpg",
+  "credito": {
+   "autor": "NPS/Tom Engberg",
+   "licenca": "Public domain",
+   "urlLicenca": "",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Day_of_Service,_Charles_Young_Buffalo_Soldiers_NM,_2020_(09f20b83-e94d-47e1-aacc-bcf209b1e54b).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-04/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Reação crítica.",
+     "alternativas": [
+      "Non, je suis jeune.",
+      "Oui, j'ai un travail.",
+      "Oui, et je le trouve plein de clichés.",
+      "L'article est long."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as lu cet article qui dit que les jeunes ne veulent plus travailler ?\nA. Non, je suis jeune.\nB. Oui, j'ai un travail.\nC. Oui, et je le trouve plein de clichés.\nD. L'article est long.",
+     "audio": "audio/exercicios-orais/ex-b2-04/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« L'environnement et l'aide aux personnes ».",
+     "alternativas": [
+      "L'environnement et l'aide aux personnes.",
+      "La santé et l'éducation.",
+      "La politique et l'économie.",
+      "Le sport et la culture."
+     ],
+     "correta": 0,
+     "pergunta": "Quelles causes sont les plus citées ?",
+     "transcricao": "Selon une enquête, un jeune sur trois a fait du bénévolat au cours de l'année, une proportion plus élevée que dans les autres tranches d'âge. L'environnement et l'aide aux personnes sont les causes les plus citées.",
+     "audio": "audio/exercicios-orais/ex-b2-04/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Ce qu'on refuse, ce n'est pas le travail, c'est un travail qui n'a pas de sens ».",
+     "alternativas": [
+      "Les études.",
+      "Un travail sans sens qui prend toute la vie.",
+      "Le travail en général.",
+      "Le bénévolat."
+     ],
+     "correta": 1,
+     "pergunta": "Que refuse la jeune femme ?",
+     "transcricao": "On dit que ma génération est paresseuse. Moi, je travaille et j'étudie en même temps. Ce qu'on refuse, ce n'est pas le travail, c'est un travail qui n'a pas de sens ou qui nous prend toute notre vie.",
+     "audio": "audio/exercicios-orais/ex-b2-04/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Contra-argumento.",
+     "alternativas": [
+      "Oui, j'ai un réseau.",
+      "Non, ils sont jeunes.",
+      "Les réseaux sont lents.",
+      "Au contraire, les réseaux les aident souvent à se mobiliser."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Les jeunes passent leur vie sur les réseaux, ils ne s'engagent plus !\nA. Oui, j'ai un réseau.\nB. Non, ils sont jeunes.\nC. Les réseaux sont lents.\nD. Au contraire, les réseaux les aident souvent à se mobiliser.",
+     "audio": "audio/exercicios-orais/ex-b2-04/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Moins de choses sur les jeunes que sur l'inquiétude des adultes ».",
+     "alternativas": [
+      "Le déclin de la société.",
+      "L'insolence des jeunes.",
+      "La paresse réelle des jeunes.",
+      "L'inquiétude des adultes face au changement."
+     ],
+     "correta": 3,
+     "pergunta": "Que révèle ce discours sur la jeunesse, selon l'intervenant ?",
+     "transcricao": "Chaque génération s'est plainte de la suivante : on trouve des textes de l'Antiquité qui accusent la jeunesse de paresse et d'insolence. Ce discours dit sans doute moins de choses sur les jeunes que sur l'inquiétude des adultes face au changement.",
+     "audio": "audio/exercicios-orais/ex-b2-04/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Les jeunes d'aujourd'hui s'engagent moins que ceux d'hier. » Qu'en pensez-vous ? Vous donnez votre opinion, vous l'argumentez et vous l'illustrez d'exemples.",
+     "perguntasExaminador": [
+      "Les jeunes d'aujourd'hui s'engagent moins que ceux d'hier. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Quelles formes d'engagement connaissez-vous ? », « Et le vote ? », « Comment vous engagez-vous ? »"
+    }
+   ]
+  }
+ }
+}

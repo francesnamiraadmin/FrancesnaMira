@@ -7,3 +7,6 @@ backend/uploads/
 scripts_tts/_tmp.wav
 scripts_tts/__pycache__/
 scripts_tts/_tmp*.wav
+
+# Material de referência de terceiros (livrets/podcasts TV5Monde) — não versionar
+Provas Exemplo/

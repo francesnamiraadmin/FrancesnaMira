@@ -740,27 +740,26 @@
       "Après le dîner de Sophie."
      ],
      "correta": 0,
-     "explicacao": "« Au lit à 20 h 30 ». 19 h é o banho; 22 h é a volta da Sophie."
+     "explicacao": "« Au lit à 20 h 30 ». 19 h é o banho; 22 h é a volta da Sophie.",
+     "num": 1
     },
     {
-     "n": 2,
+     "n": 40,
      "nivel": "A1",
      "pontos": 3,
-     "documento": "Du lundi au samedi, de 8 h à 20 h\nDurée maximum : 2 heures",
-     "doc": {
-      "estilo": "placa",
-      "texto": "Du lundi au samedi, de 8 h à 20 h\nDurée maximum : 2 heures",
-      "titulo": "PARKING RÉSERVÉ AUX CLIENTS"
-     },
-     "pergunta": "Qui peut utiliser ce parking ?",
+     "tipo": "lacuna",
+     "inicio": "Cet été, nous partons en vacances…",
+     "fim": "… Portugal.",
+     "pergunta": "Cet été, nous partons en vacances ___ Portugal.",
      "alternativas": [
-      "Les employés seulement.",
-      "Les habitants du quartier.",
-      "Les clients du magasin.",
-      "Les touristes."
+      "au",
+      "dans",
+      "en",
+      "à"
      ],
-     "correta": 2,
-     "explicacao": "« Réservé aux clients »."
+     "correta": 0,
+     "explicacao": "Países masculinos pedem « au » (au Portugal, au Brésil).",
+     "num": 2
     },
     {
      "n": 3,
@@ -780,7 +779,8 @@
       "De jouer au foot avec lui."
      ],
      "correta": 0,
-     "explicacao": "« Tu peux prévenir l'entraîneur ? »"
+     "explicacao": "« Tu peux prévenir l'entraîneur ? »",
+     "num": 3
     },
     {
      "n": 4,
@@ -800,7 +800,8 @@
       "Pour dire si on vient."
      ],
      "correta": 3,
-     "explicacao": "« Réponse avant le 5 avril » = confirmar presença."
+     "explicacao": "« Réponse avant le 5 avril » = confirmar presença.",
+     "num": 4
     },
     {
      "n": 5,
@@ -828,7 +829,26 @@
       "Un cours de voile."
      ],
      "correta": 1,
-     "explicacao": "Duas noites de hotel com vista para o mar = uma estadia curta."
+     "explicacao": "Duas noites de hotel com vista para o mar = uma estadia curta.",
+     "num": 5
+    },
+    {
+     "n": 41,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "lacuna",
+     "inicio": "Le film était tellement…",
+     "fim": "… que je me suis endormi.",
+     "pergunta": "Le film était tellement ___ que je me suis endormi.",
+     "alternativas": [
+      "pressé",
+      "fatigué",
+      "occupé",
+      "ennuyeux"
+     ],
+     "correta": 3,
+     "explicacao": "Quem faz dormir é o filme « ennuyeux » (chato). « Fatigué » descreveria a pessoa, não o filme.",
+     "num": 6
     },
     {
      "n": 6,
@@ -848,7 +868,26 @@
       "Arriver à 17 h."
      ],
      "correta": 0,
-     "explicacao": "« Exposants : inscription à la mairie avant le 10 mai »."
+     "explicacao": "« Exposants : inscription à la mairie avant le 10 mai ».",
+     "num": 7
+    },
+    {
+     "n": 42,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "lacuna",
+     "inicio": "En rentrant, je suis passé…",
+     "fim": "… le boulanger pour acheter du pain.",
+     "pergunta": "En rentrant, je suis passé ___ le boulanger pour acheter du pain.",
+     "alternativas": [
+      "sur",
+      "en",
+      "chez",
+      "à"
+     ],
+     "correta": 2,
+     "explicacao": "Com pessoas/profissionais usa-se « chez » (chez le boulanger, chez le médecin).",
+     "num": 8
     },
     {
      "n": 7,
@@ -869,27 +908,8 @@
       "La salle."
      ],
      "correta": 3,
-     "explicacao": "Muda do subsolo para o primeiro andar; « l'horaire ne change pas »."
-    },
-    {
-     "n": 8,
-     "nivel": "A2",
-     "pontos": 9,
-     "documento": "Canapé trois places, gris, très bon état.\n120 €. À venir chercher sur place (3e étage sans ascenseur).\nVisible le soir après 18 h.\nContact : Sandrine, 07 81 22 45 60",
-     "doc": {
-      "estilo": "anuncio",
-      "texto": "Canapé trois places, gris, très bon état.\n120 €. À venir chercher sur place (3e étage sans ascenseur).\nVisible le soir après 18 h.\nContact : Sandrine, 07 81 22 45 60",
-      "titulo": "À VENDRE"
-     },
-     "pergunta": "Quand peut-on venir voir le canapé ?",
-     "alternativas": [
-      "Seulement le week-end.",
-      "Le matin.",
-      "À l'heure du déjeuner.",
-      "En fin de journée."
-     ],
-     "correta": 3,
-     "explicacao": "« Visible le soir après 18 h »."
+     "explicacao": "Muda do subsolo para o primeiro andar; « l'horaire ne change pas ».",
+     "num": 9
     },
     {
      "n": 9,
@@ -910,27 +930,8 @@
       "À la Pharmacie Centrale."
      ],
      "correta": 1,
-     "explicacao": "« Pharmacie de garde ce jour-là : Pharmacie du Port »."
-    },
-    {
-     "n": 10,
-     "nivel": "A2",
-     "pontos": 9,
-     "documento": "À partir du 1er juillet, les colis non retirés dans un délai de 15 jours seront renvoyés à l'expéditeur.\nPensez à présenter une pièce d'identité au guichet.",
-     "doc": {
-      "estilo": "aviso",
-      "texto": "À partir du 1er juillet, les colis non retirés dans un délai de 15 jours seront renvoyés à l'expéditeur.\nPensez à présenter une pièce d'identité au guichet.",
-      "titulo": "La Poste — Information clients"
-     },
-     "pergunta": "Qu'arrive-t-il aux colis non retirés ?",
-     "alternativas": [
-      "Ils sont livrés à domicile.",
-      "Ils sont vendus aux enchères.",
-      "Ils retournent à l'expéditeur.",
-      "Ils sont gardés un mois de plus."
-     ],
-     "correta": 2,
-     "explicacao": "« Seront renvoyés à l'expéditeur »."
+     "explicacao": "« Pharmacie de garde ce jour-là : Pharmacie du Port ».",
+     "num": 10
     },
     {
      "n": 11,
@@ -950,7 +951,8 @@
       "Tous les films ont été tournés dans les Alpes."
      ],
      "correta": 2,
-     "explicacao": "« Cette année, le Népal est à l'honneur »."
+     "explicacao": "« Cette année, le Népal est à l'honneur ».",
+     "num": 11
     },
     {
      "n": 12,
@@ -969,7 +971,26 @@
       "Les élèves gaspillent moins de nourriture."
      ],
      "correta": 3,
-     "explicacao": "« Les assiettes reviennent moins pleines » = menos desperdício."
+     "explicacao": "« Les assiettes reviennent moins pleines » = menos desperdício.",
+     "num": 12
+    },
+    {
+     "n": 43,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "lacuna",
+     "inicio": "Ta sœur ? Non, je ne…",
+     "fim": "… ai pas encore parlé de la fête.",
+     "pergunta": "Ta sœur ? Non, je ne ___ ai pas encore parlé de la fête.",
+     "alternativas": [
+      "la",
+      "lui",
+      "leur",
+      "l'"
+     ],
+     "correta": 1,
+     "explicacao": "« Parler à quelqu'un » → complemento indireto singular: « lui ».",
+     "num": 13
     },
     {
      "n": 13,
@@ -997,7 +1018,8 @@
       "Elle propose des plats très bon marché."
      ],
      "correta": 0,
-     "explicacao": "« Marie les produits de la mer bretons et les épices de son enfance »."
+     "explicacao": "« Marie les produits de la mer bretons et les épices de son enfance ».",
+     "num": 14
     },
     {
      "n": 14,
@@ -1016,7 +1038,26 @@
       "Pour remercier un chauffeur de bus."
      ],
      "correta": 3,
-     "explicacao": "« Je voudrais remercier le chauffeur de la ligne 12 »."
+     "explicacao": "« Je voudrais remercier le chauffeur de la ligne 12 ».",
+     "num": 15
+    },
+    {
+     "n": 44,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "lacuna",
+     "inicio": "Il faut que tu…",
+     "fim": "… me voir avant ton départ.",
+     "pergunta": "Il faut que tu ___ me voir avant ton départ.",
+     "alternativas": [
+      "viennes",
+      "viendras",
+      "venais",
+      "viens"
+     ],
+     "correta": 0,
+     "explicacao": "« Il faut que » exige o subjuntivo: « que tu viennes ».",
+     "num": 16
     },
     {
      "n": 15,
@@ -1035,28 +1076,8 @@
       "Ils transportaient des marchandises."
      ],
      "correta": 2,
-     "explicacao": "« La grève des chauffeurs en a décidé autrement »: não havia ônibus."
-    },
-    {
-     "n": 16,
-     "nivel": "B1",
-     "pontos": 15,
-     "documento": "Pas de panique : signalez la perte à l'accueil ou dans votre espace en ligne. Une nouvelle carte vous sera remise contre 3 €. Vos emprunts en cours restent enregistrés sur votre compte.",
-     "doc": {
-      "estilo": "evento",
-      "texto": "Pas de panique : signalez la perte à l'accueil ou dans votre espace en ligne. Une nouvelle carte vous sera remise contre 3 €. Vos emprunts en cours restent enregistrés sur votre compte.",
-      "titulo": "Carte perdue ?",
-      "rubrica": "BIBLIOTHÈQUES MUNICIPALES"
-     },
-     "pergunta": "Que se passe-t-il pour les livres déjà empruntés ?",
-     "alternativas": [
-      "Ils doivent être rendus immédiatement.",
-      "Ils sont facturés 3 €.",
-      "Ils restent enregistrés au nom du lecteur.",
-      "Ils sont annulés."
-     ],
-     "correta": 2,
-     "explicacao": "« Vos emprunts en cours restent enregistrés »."
+     "explicacao": "« La grève des chauffeurs en a décidé autrement »: não havia ônibus.",
+     "num": 17
     },
     {
      "n": 17,
@@ -1076,26 +1097,8 @@
       "Il faut avoir son propre logement."
      ],
      "correta": 1,
-     "explicacao": "« Horaires de nuit deux semaines par mois »."
-    },
-    {
-     "n": 18,
-     "nivel": "B1",
-     "pontos": 15,
-     "documento": "Je pensais que partir seule en voyage serait angoissant. J'avais tort : sans personne pour décider à ma place, j'ai osé parler aux gens, changer d'itinéraire, suivre les conseils d'une famille rencontrée dans un bus. Je suis rentrée avec moins de photos, mais beaucoup plus de souvenirs.",
-     "doc": {
-      "estilo": "citacao-rodape",
-      "texto": "Je pensais que partir seule en voyage serait angoissant. J'avais tort : sans personne pour décider à ma place, j'ai osé parler aux gens, changer d'itinéraire, suivre les conseils d'une famille rencontrée dans un bus. Je suis rentrée avec moins de photos, mais beaucoup plus de souvenirs."
-     },
-     "pergunta": "Qu'a apporté ce voyage à l'auteure ?",
-     "alternativas": [
-      "Un nouveau travail.",
-      "La peur de voyager seule.",
-      "De magnifiques photos.",
-      "Une plus grande ouverture aux autres."
-     ],
-     "correta": 3,
-     "explicacao": "Ela « a osé parler aux gens », seguiu conselhos de desconhecidos: abertura."
+     "explicacao": "« Horaires de nuit deux semaines par mois ».",
+     "num": 18
     },
     {
      "n": 19,
@@ -1115,7 +1118,8 @@
       "Les entraînements ont lieu le matin."
      ],
      "correta": 1,
-     "explicacao": "« Sans plaquage ni mêlée, ce rugby sans contact »."
+     "explicacao": "« Sans plaquage ni mêlée, ce rugby sans contact ».",
+     "num": 19
     },
     {
      "n": 20,
@@ -1134,7 +1138,8 @@
       "Le commerce de la laine brute."
      ],
      "correta": 2,
-     "explicacao": "Ele deixou a engenharia e hoje fabrica tapetes tecidos à mão."
+     "explicacao": "Ele deixou a engenharia e hoje fabrica tapetes tecidos à mão.",
+     "num": 20
     },
     {
      "n": 21,
@@ -1153,7 +1158,26 @@
       "Le manque d'intérêt des habitants."
      ],
      "correta": 1,
-     "explicacao": "« Reste la question du financement : la plupart dépendent… des subventions »."
+     "explicacao": "« Reste la question du financement : la plupart dépendent… des subventions ».",
+     "num": 21
+    },
+    {
+     "n": 45,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "lacuna",
+     "inicio": "Les travaux ont pris du retard…",
+     "fim": "… fortes pluies de l'hiver.",
+     "pergunta": "Les travaux ont pris du retard ___ fortes pluies de l'hiver.",
+     "alternativas": [
+      "malgré les",
+      "au lieu des",
+      "grâce aux",
+      "en raison des"
+     ],
+     "correta": 3,
+     "explicacao": "Causa negativa e neutra: « en raison de ». « Grâce à » é para causas positivas.",
+     "num": 22
     },
     {
      "n": 22,
@@ -1183,7 +1207,8 @@
       "Elle photographie les paysages."
      ],
      "correta": 0,
-     "explicacao": "A missão dela é « recenser les arbres malades »; o drama ela descobre por acaso."
+     "explicacao": "A missão dela é « recenser les arbres malades »; o drama ela descobre por acaso.",
+     "num": 23
     },
     {
      "n": 23,
@@ -1202,26 +1227,26 @@
       "Ses scènes d'action spectaculaires."
      ],
      "correta": 1,
-     "explicacao": "« Les grandes transformations du pays se jouent aussi dans l'intimité d'une cuisine »."
+     "explicacao": "« Les grandes transformations du pays se jouent aussi dans l'intimité d'une cuisine ».",
+     "num": 24
     },
     {
-     "n": 24,
+     "n": 46,
      "nivel": "B2",
      "pontos": 21,
-     "documento": "Contrairement à une idée répandue, les bébés ne naissent pas « page blanche ». Dès les premiers jours, ils distinguent la voix de leur mère et reconnaissent les sons de la langue entendue pendant la grossesse. Ce qui se construit ensuite n'est pas un apprentissage à partir de rien, mais un tri : l'enfant perd peu à peu la capacité d'entendre des sons qui n'existent pas dans sa langue.",
-     "doc": {
-      "estilo": "cartao",
-      "texto": "Contrairement à une idée répandue, les bébés ne naissent pas « page blanche ». Dès les premiers jours, ils distinguent la voix de leur mère et reconnaissent les sons de la langue entendue pendant la grossesse. Ce qui se construit ensuite n'est pas un apprentissage à partir de rien, mais un tri : l'enfant perd peu à peu la capacité d'entendre des sons qui n'existent pas dans sa langue."
-     },
-     "pergunta": "Selon le texte, que se passe-t-il au cours des premiers mois ?",
+     "tipo": "lacuna",
+     "inicio": "Bien qu'il…",
+     "fim": "… beaucoup travaillé, il n'a pas obtenu le poste.",
+     "pergunta": "Bien qu'il ___ beaucoup travaillé, il n'a pas obtenu le poste.",
      "alternativas": [
-      "L'enfant entend de mieux en mieux tous les sons.",
-      "L'enfant se spécialise dans les sons de sa langue.",
-      "L'enfant commence à reconnaître sa mère.",
-      "L'enfant apprend ses premiers mots."
+      "a",
+      "avait",
+      "ait",
+      "aura"
      ],
-     "correta": 1,
-     "explicacao": "« Un tri : l'enfant perd peu à peu la capacité d'entendre des sons qui n'existent pas dans sa langue »."
+     "correta": 2,
+     "explicacao": "« Bien que » exige o subjuntivo: « bien qu'il ait travaillé ».",
+     "num": 25
     },
     {
      "n": 25,
@@ -1240,7 +1265,8 @@
       "Le déclin de son commerce."
      ],
      "correta": 0,
-     "explicacao": "Fundação por marinheiros gregos e o papel do porto desde o início = origens."
+     "explicacao": "Fundação por marinheiros gregos e o papel do porto desde o início = origens.",
+     "num": 26
     },
     {
      "n": 26,
@@ -1259,7 +1285,8 @@
       "Encadrer ces locations plutôt que les interdire."
      ],
      "correta": 3,
-     "explicacao": "« Le problème tient moins à ces plateformes qu'à l'absence de règles »."
+     "explicacao": "« Le problème tient moins à ces plateformes qu'à l'absence de règles ».",
+     "num": 27
     },
     {
      "n": 27,
@@ -1280,7 +1307,8 @@
       "Faire traduire son permis."
      ],
      "correta": 0,
-     "explicacao": "« Au-delà, vous devez l'échanger… ». O exame só é exigido conforme o país (« peut exiger »)."
+     "explicacao": "« Au-delà, vous devez l'échanger… ». O exame só é exigido conforme o país (« peut exiger »).",
+     "num": 28
     },
     {
      "n": 28,
@@ -1299,26 +1327,8 @@
       "La nostalgie des objets anciens."
      ],
      "correta": 2,
-     "explicacao": "« Apprendre à ne plus dépendre du service après-vente… reprendre la main »."
-    },
-    {
-     "n": 29,
-     "nivel": "B2",
-     "pontos": 21,
-     "documento": "À soixante-dix ans, Gisèle Martin a repris des études de géologie à l'Université de Liège. « Je ne cherche pas un diplôme, dit-elle, mais des réponses aux questions que je me pose depuis l'enfance en regardant les falaises de ma région. » Ses camarades, qui ont l'âge de ses petits-enfants, l'ont vite adoptée : elle apporte des gâteaux les jours d'examen.",
-     "doc": {
-      "estilo": "papel-creme",
-      "texto": "À soixante-dix ans, Gisèle Martin a repris des études de géologie à l'Université de Liège. « Je ne cherche pas un diplôme, dit-elle, mais des réponses aux questions que je me pose depuis l'enfance en regardant les falaises de ma région. » Ses camarades, qui ont l'âge de ses petits-enfants, l'ont vite adoptée : elle apporte des gâteaux les jours d'examen."
-     },
-     "pergunta": "Pourquoi Gisèle a-t-elle repris des études ?",
-     "alternativas": [
-      "Pour accompagner ses petits-enfants.",
-      "Pour obtenir un diplôme.",
-      "Pour retrouver du travail.",
-      "Pour satisfaire une curiosité ancienne."
-     ],
-     "correta": 3,
-     "explicacao": "« Je ne cherche pas un diplôme, mais des réponses aux questions que je me pose depuis l'enfance »."
+     "explicacao": "« Apprendre à ne plus dépendre du service après-vente… reprendre la main ».",
+     "num": 29
     },
     {
      "n": 30,
@@ -1337,7 +1347,26 @@
       "Le rôle central de l'association étrangère."
      ],
      "correta": 1,
-     "explicacao": "« C'est surtout… » destaca a apropriação: a cooperativa local decide tudo sozinha."
+     "explicacao": "« C'est surtout… » destaca a apropriação: a cooperativa local decide tudo sozinha.",
+     "num": 30
+    },
+    {
+     "n": 47,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "lacuna",
+     "inicio": "Face à la colère des agriculteurs, le ministre a dû…",
+     "fim": "… sur sa décision.",
+     "pergunta": "Face à la colère des agriculteurs, le ministre a dû ___ sur sa décision.",
+     "alternativas": [
+      "reculer",
+      "revenir",
+      "renoncer",
+      "retirer"
+     ],
+     "correta": 1,
+     "explicacao": "A expressão fixa é « revenir sur une décision ». « Renoncer » pede « à ».",
+     "num": 31
     },
     {
      "n": 31,
@@ -1365,7 +1394,26 @@
       "La présentation des œuvres."
      ],
      "correta": 3,
-     "explicacao": "« On regrettera… un accrochage si sombre »: a crítica é à montagem/iluminação."
+     "explicacao": "« On regrettera… un accrochage si sombre »: a crítica é à montagem/iluminação.",
+     "num": 32
+    },
+    {
+     "n": 48,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "lacuna",
+     "inicio": "Ce rapport met…",
+     "fim": "… les difficultés rencontrées par les petites entreprises.",
+     "pergunta": "Ce rapport met ___ les difficultés rencontrées par les petites entreprises.",
+     "alternativas": [
+      "en lumière",
+      "en scène",
+      "en place",
+      "en œuvre"
+     ],
+     "correta": 0,
+     "explicacao": "« Mettre en lumière » = evidenciar. « Mettre en œuvre » = executar (um plano).",
+     "num": 33
     },
     {
      "n": 32,
@@ -1384,7 +1432,8 @@
       "Elle lui a inspiré ses personnages."
      ],
      "correta": 1,
-     "explicacao": "Ela descobriu « le manuscrit refusé partout ailleurs ». Quem traduz é a própria Marie."
+     "explicacao": "Ela descobriu « le manuscrit refusé partout ailleurs ». Quem traduz é a própria Marie.",
+     "num": 34
     },
     {
      "n": 33,
@@ -1403,45 +1452,8 @@
       "Il décourage les personnes en difficulté."
      ],
      "correta": 2,
-     "explicacao": "« C'est à chacun de s'adapter, et non plus aux institutions de prévenir les chocs »."
-    },
-    {
-     "n": 34,
-     "nivel": "C1",
-     "pontos": 26,
-     "documento": "Si nous oublions la plupart de nos rêves, ce n'est pas qu'ils soient insignifiants. Pendant le sommeil paradoxal, la noradrénaline, une substance qui aide à fixer les souvenirs, est presque absente du cerveau. Le rêve n'est donc pas effacé au réveil : il n'a, pour l'essentiel, jamais été enregistré.",
-     "doc": {
-      "estilo": "cartao",
-      "texto": "Si nous oublions la plupart de nos rêves, ce n'est pas qu'ils soient insignifiants. Pendant le sommeil paradoxal, la noradrénaline, une substance qui aide à fixer les souvenirs, est presque absente du cerveau. Le rêve n'est donc pas effacé au réveil : il n'a, pour l'essentiel, jamais été enregistré."
-     },
-     "pergunta": "Selon le texte, pourquoi oublie-t-on ses rêves ?",
-     "alternativas": [
-      "Ils sont trop insignifiants pour être retenus.",
-      "Le cerveau ne les enregistre pas pendant le sommeil.",
-      "La noradrénaline les efface pendant la nuit.",
-      "Ils sont effacés au moment du réveil."
-     ],
-     "correta": 1,
-     "explicacao": "« Il n'a, pour l'essentiel, jamais été enregistré » (não é apagado ao acordar)."
-    },
-    {
-     "n": 35,
-     "nivel": "C1",
-     "pontos": 26,
-     "documento": "Ce recueil de nouvelles se lit d'une traite, et c'est peut-être son défaut. Chaque récit est construit avec une telle efficacité, chaque chute si parfaitement amenée, qu'on finit par voir la mécanique plus que les personnages. On admire l'horloger ; on en oublie l'heure.",
-     "doc": {
-      "estilo": "livro-antigo",
-      "texto": "Ce recueil de nouvelles se lit d'une traite, et c'est peut-être son défaut. Chaque récit est construit avec une telle efficacité, chaque chute si parfaitement amenée, qu'on finit par voir la mécanique plus que les personnages. On admire l'horloger ; on en oublie l'heure."
-     },
-     "pergunta": "Quelle réserve le critique exprime-t-il ?",
-     "alternativas": [
-      "Les nouvelles sont trop longues.",
-      "Les chutes sont mal préparées.",
-      "La construction trop visible nuit à l'émotion.",
-      "Le style manque d'efficacité."
-     ],
-     "correta": 2,
-     "explicacao": "« On finit par voir la mécanique plus que les personnages »."
+     "explicacao": "« C'est à chacun de s'adapter, et non plus aux institutions de prévenir les chocs ».",
+     "num": 35
     },
     {
      "n": 36,
@@ -1460,7 +1472,26 @@
       "Produire des vins qui expriment leur terroir nordique."
      ],
      "correta": 3,
-     "explicacao": "« Loin de chercher à imiter les grands crus… des vins qui disent quelque chose de leur climat »."
+     "explicacao": "« Loin de chercher à imiter les grands crus… des vins qui disent quelque chose de leur climat ».",
+     "num": 36
+    },
+    {
+     "n": 49,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "lacuna",
+     "inicio": "Malgré les critiques, la directrice n'a pas…",
+     "fim": "… et a maintenu son projet.",
+     "pergunta": "Malgré les critiques, la directrice n'a pas ___ et a maintenu son projet.",
+     "alternativas": [
+      "branché",
+      "broché",
+      "brossé",
+      "bronché"
+     ],
+     "correta": 3,
+     "explicacao": "« Ne pas broncher » = não reagir, não se abalar. As outras são parônimas sem sentido aqui.",
+     "num": 37
     },
     {
      "n": 37,
@@ -1479,26 +1510,8 @@
       "Elle ne concerne que l'Amérique du Nord."
      ],
      "correta": 2,
-     "explicacao": "A expressão supõe perda total, ignorando remessas, redes e retornos. O custo da formação é uma ressalva do autor, não o motivo da crítica."
-    },
-    {
-     "n": 38,
-     "nivel": "C2",
-     "pontos": 33,
-     "documento": "Il y a, dans l'obsession contemporaine de la mesure, une forme de renoncement. À force de quantifier le bonheur, la santé ou la réussite, on finit par confondre ce qui compte avec ce qui se compte. L'indicateur, conçu pour éclairer une réalité, se substitue à elle : on ne soigne plus un malade, on améliore un chiffre.",
-     "doc": {
-      "estilo": "capitular",
-      "texto": "Il y a, dans l'obsession contemporaine de la mesure, une forme de renoncement. À force de quantifier le bonheur, la santé ou la réussite, on finit par confondre ce qui compte avec ce qui se compte. L'indicateur, conçu pour éclairer une réalité, se substitue à elle : on ne soigne plus un malade, on améliore un chiffre."
-     },
-     "pergunta": "Quel danger l'auteur dénonce-t-il ?",
-     "alternativas": [
-      "Les chiffres publiés sont souvent faux.",
-      "Les indicateurs finissent par remplacer la réalité qu'ils décrivent.",
-      "La santé coûte de plus en plus cher.",
-      "On mesure trop rarement le bonheur."
-     ],
-     "correta": 1,
-     "explicacao": "« L'indicateur… se substitue à elle : on ne soigne plus un malade, on améliore un chiffre »."
+     "explicacao": "A expressão supõe perda total, ignorando remessas, redes e retornos. O custo da formação é uma ressalva do autor, não o motivo da crítica.",
+     "num": 38
     },
     {
      "n": 39,
@@ -1517,7 +1530,8 @@
       "Le budget consacré au voyage."
      ],
      "correta": 2,
-     "explicacao": "« Ce n'est pas la distance parcourue qui a changé, mais la disponibilité à l'imprévu »."
+     "explicacao": "« Ce n'est pas la distance parcourue qui a changé, mais la disponibilité à l'imprévu ».",
+     "num": 39
     }
    ]
   },

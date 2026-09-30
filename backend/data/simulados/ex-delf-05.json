@@ -1,0 +1,143 @@
+{
+ "slug": "ex-delf-05",
+ "titulo": "Exercício oral nº 5 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Sauvons le parc !",
+ "descricao": "Um projeto ameaça um parque do bairro: reunião pública, testemunhos e uma chamada à prefeitura.",
+ "imagem": {
+  "src": "img/temas/delf-b1-lettre-mairie-parc-2.jpg",
+  "credito": {
+   "autor": "Tomwsulcer",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:New_York_City_parking_lot_structure_for_cars.JPG"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-05/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre a petição.",
+     "alternativas": [
+      "Oui, le parc est vert.",
+      "Je vais au parc à pied.",
+      "Oui, hier soir, sur Internet.",
+      "Non, je n'ai pas de stylo bleu."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as signé la pétition pour le parc ?\nA. Oui, le parc est vert.\nB. Je vais au parc à pied.\nC. Oui, hier soir, sur Internet.\nD. Non, je n'ai pas de stylo bleu.",
+     "audio": "audio/exercicios-orais/ex-delf-05/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Le projet de parking à la place du parc Beaulieu ».",
+     "alternativas": [
+      "Construire une salle polyvalente.",
+      "Agrandir le parc.",
+      "Construire un parking à la place du parc.",
+      "Fermer la mairie le mardi."
+     ],
+     "correta": 2,
+     "pergunta": "Quel est le projet de la mairie ?",
+     "transcricao": "La mairie organise une réunion publique mardi à dix-huit heures trente, à la salle polyvalente, pour présenter le projet de parking à la place du parc Beaulieu. Les habitants pourront poser leurs questions.",
+     "audio": "audio/exercicios-orais/ex-delf-05/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« C'est le seul endroit où mes enfants peuvent courir ».",
+     "alternativas": [
+      "Elle y gare sa voiture.",
+      "Ses enfants peuvent y courir.",
+      "Elle y travaille.",
+      "Il est près de l'école."
+     ],
+     "correta": 1,
+     "pergunta": "Pourquoi le parc est-il essentiel pour elle ?",
+     "transcricao": "Pour moi, ce parc, c'est essentiel. J'habite un petit appartement sans balcon ; c'est le seul endroit où mes enfants peuvent courir. Et l'été, il fait deux ou trois degrés de moins sous les arbres.",
+     "audio": "audio/exercicios-orais/ex-delf-05/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta que concede e propõe alternativa.",
+     "alternativas": [
+      "C'est vrai, mais on pourrait améliorer les bus plutôt.",
+      "Non, je n'ai pas de voiture rouge.",
+      "Le parc ferme à vingt heures.",
+      "Oui, j'aime les arbres."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Mais on manque vraiment de places de stationnement dans le quartier !\nA. C'est vrai, mais on pourrait améliorer les bus plutôt.\nB. Non, je n'ai pas de voiture rouge.\nC. Le parc ferme à vingt heures.\nD. Oui, j'aime les arbres.",
+     "audio": "audio/exercicios-orais/ex-delf-05/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Construire des parkings attire davantage de voitures ».",
+     "alternativas": [
+      "Elle résout le manque de places.",
+      "Elle rafraîchit le quartier.",
+      "Elle augmente la valeur des logements.",
+      "Elle attire davantage de voitures."
+     ],
+     "correta": 3,
+     "pergunta": "Selon l'intervenant, que produit la construction de parkings ?",
+     "transcricao": "Les urbanistes l'ont montré : construire des parkings attire davantage de voitures, sans résoudre durablement le manque de places. À l'inverse, un espace vert rafraîchit le quartier et augmente même la valeur des logements voisins.",
+     "audio": "audio/exercicios-orais/ex-delf-05/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Exercice en interaction",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 120,
+     "consigne": "Vous téléphonez au service d'urbanisme de la mairie pour protester contre le projet de parking à la place du parc de votre quartier. Vous expliquez pourquoi le parc est important et vous proposez une solution. L'examinateur joue le rôle de l'employé(e) de la mairie.",
+     "perguntasExaminador": [
+      "Mairie, service urbanisme, bonjour. Je vous écoute."
+     ],
+     "fichaExaminador": "Vous défendez le projet : 300 places manquent, les commerçants se plaignent. Vous acceptez de noter une proposition concrète et invitez l'habitant(e) à la réunion publique. Laissez le candidat mener l'échange et relancez-le s'il se tait."
+    }
+   ]
+  }
+ }
+}

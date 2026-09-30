@@ -1,0 +1,732 @@
+[
+ {
+  "slug": "a2-week-end-raconte",
+  "titulo": "Raconter un week-end",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 2 — récit court",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Conte a um amigo o que você fez no último fim de semana: onde foi, com quem e o que achou.",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Passé composé",
+   "Conectores temporais",
+   "E-mail informal"
+  ],
+  "instrucoes": "Vous écrivez un courriel à un ami pour lui raconter votre dernier week-end : où vous êtes allé(e), avec qui, ce que vous avez fait et ce que vous avez pensé de ce week-end. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Un dimanche à la campagne »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance, nível A2)",
+    "conteudo": "Dimanche, nous sommes partis tôt chez mes grands-parents, à la campagne. Il faisait beau. Le matin, nous avons ramassé des pommes dans le jardin. À midi, ma grand-mère a préparé une tarte délicieuse. L'après-midi, nous avons fait une longue promenade près de la rivière. Le soir, j'étais fatigué mais très content."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les Français aiment les week-ends à la campagne",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "Selon une enquête, beaucoup d'habitants des grandes villes partent le week-end à la campagne pour se reposer. Ils louent une petite maison ou vont chez des amis. Leurs activités préférées sont la marche, le vélo et les repas en plein air. Pour eux, c'est le meilleur moyen d'oublier le stress de la semaine."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "La nature réduit le stress",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "Des chercheurs ont montré que passer deux heures par semaine dans la nature améliore la santé et le moral. Les personnes qui marchent en forêt ou dans un parc se sentent plus calmes. Le bruit des oiseaux et la couleur verte aident le cerveau à se reposer après le travail."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-week-end-raconte-1.jpg",
+    "legenda": "Um passeio no campo",
+    "credito": {
+     "autor": "Forscher scs",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Harpenden,_countryside_from_Lea_Valley_Walk.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a2-week-end-raconte-2.jpg",
+    "legenda": "Colhendo maçãs",
+    "credito": {
+     "autor": "Digihum",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Apple_picking_time_at_Wincheap_Orchards.jpg"
+    }
+   }
+  ],
+  "ordem": 1,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a2-demander-information",
+  "titulo": "Demander des informations sur un cours",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 1 — courriel",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Escreva a uma escola pedindo informações sobre um curso (dias, horários, preço, nível).",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Perguntas formais",
+   "Registro formal",
+   "Vocabulário dos cursos"
+  ],
+  "instrucoes": "Vous voulez suivre un cours de cuisine (ou de danse, de photo…). Vous écrivez un courriel à l'école pour demander des informations : les jours et les horaires, le prix, le niveau et le matériel nécessaire. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le cours du jeudi »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance, nível A2)",
+    "conteudo": "Tous les jeudis soir, Marie va à son cours de cuisine. Au début, elle ne savait rien faire : ses gâteaux étaient trop cuits et ses sauces trop salées. Le professeur, un chef très patient, lui a appris les gestes simples. Aujourd'hui, elle invite ses amis le samedi et elle prépare des repas complets."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les cours du soir attirent les adultes",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "De plus en plus d'adultes suivent des cours après le travail : cuisine, langues, dessin, musique. Les écoles proposent des horaires en soirée et le samedi. Les prix varient beaucoup, mais certaines mairies proposent des cours à petit prix. Pour les participants, c'est une façon d'apprendre et de rencontrer de nouvelles personnes."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Apprendre de nouvelles choses à l'âge adulte",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "Le cerveau reste capable d'apprendre toute la vie. Apprendre une nouvelle activité, comme jouer d'un instrument ou cuisiner, crée de nouvelles connexions entre les neurones. Les scientifiques pensent que cela aide à garder une bonne mémoire en vieillissant."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-demander-information-1.jpg",
+    "legenda": "Uma aula de culinária",
+    "credito": {
+     "autor": "Thai Secret Cooking School",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Thai-Cooking-Class-Chiang-Mai-Thailand.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a2-demander-information-2.jpg",
+    "legenda": "Uma aula de dança",
+    "credito": {
+     "autor": "U.S. Embassy Tel Aviv",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:AXIS_Dance_Company_(24308975841).jpg"
+    }
+   }
+  ],
+  "ordem": 2,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a2-souvenir-enfance",
+  "titulo": "Un souvenir d'enfance",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 2 — récit",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Conte uma lembrança de infância: onde você morava, como era e o que aconteceu.",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Imparfait e passé composé",
+   "Descrição no passado",
+   "Narração"
+  ],
+  "instrucoes": "Pour le blog de votre cours de français, vous racontez un souvenir d'enfance : où vous habitiez, comment était votre vie à cette époque et un événement qui vous a marqué. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La maison de la plage »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance autobiográfico, nível A2)",
+    "conteudo": "Quand j'étais petite, nous habitions dans une maison près de la plage. Le matin, j'entendais la mer depuis ma chambre. Mon père était pêcheur et il rentrait le soir avec des poissons. Un été, nous avons trouvé un petit chat sur le sable. Nous l'avons appelé Moustache. Il a vécu avec nous pendant quinze ans."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Un musée des jouets anciens",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "Un nouveau musée présente des jouets du siècle dernier : poupées, trains en bois, petites voitures et jeux de société. Les visiteurs âgés reconnaissent les jouets de leur enfance et racontent des souvenirs à leurs petits-enfants. Le musée organise aussi des ateliers pour fabriquer des jouets simples."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Pourquoi on oublie ses premières années",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "La plupart des adultes n'ont presque aucun souvenir avant l'âge de trois ou quatre ans. Les scientifiques appellent cela l'« amnésie infantile ». À cet âge, le cerveau est encore en développement et le langage n'est pas complet. Les souvenirs deviennent plus précis quand l'enfant sait raconter ce qu'il vit."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-souvenir-enfance-1.jpg",
+    "legenda": "Crianças brincando na praia",
+    "credito": {
+     "autor": "Tomwsulcer",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Sandcastle_seen_from_lake_with_people_in_background.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a2-souvenir-enfance-2.jpg",
+    "legenda": "Brinquedos antigos de madeira",
+    "credito": {
+     "autor": "Nadine Doerle",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Games_wooden_games_wood_old_games_toy_library_old_of_pions-614681.jpg"
+    }
+   }
+  ],
+  "ordem": 3,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a2-remercier-cadeau",
+  "titulo": "Remercier pour un cadeau",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 1 — message",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Agradeça a um parente um presente recebido e conte como você está usando esse presente.",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Mensagem de agradecimento",
+   "Futuro próximo",
+   "Descrição de objetos"
+  ],
+  "instrucoes": "Votre tante vous a envoyé un cadeau pour votre anniversaire. Vous lui écrivez un message pour la remercier, décrire le cadeau et expliquer ce que vous allez faire avec. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le pull de grand-mère »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de conto, nível A2)",
+    "conteudo": "Pour mes quinze ans, ma grand-mère m'a tricoté un pull bleu avec un gros cerf sur le devant. Je l'ai trouvé horrible. Je l'ai remerciée avec un sourire et je l'ai rangé au fond de mon armoire. Des années plus tard, en hiver, je l'ai retrouvé. Il était chaud, doux, et il sentait un peu son parfum. Je le porte encore aujourd'hui."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les cadeaux faits main reviennent à la mode",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "Bijoux, bougies, confitures, carnets : de plus en plus de personnes offrent des cadeaux qu'elles ont fabriqués elles-mêmes. Pour elles, c'est plus personnel et moins cher. Les ateliers de fabrication se multiplient avant les fêtes, et ils sont souvent complets plusieurs semaines à l'avance."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Dire merci rend heureux",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "Des psychologues ont étudié l'effet de la gratitude. Les personnes qui écrivent régulièrement des messages de remerciement se sentent plus heureuses et dorment mieux. Recevoir un message de remerciement fait aussi plaisir, souvent plus que la personne qui l'écrit ne l'imagine."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-remercier-cadeau-1.jpg",
+    "legenda": "Um presente embrulhado",
+    "credito": {
+     "autor": "mattbuck (category)",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Wraxall_2013_MMB_97_Christmas.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a2-remercier-cadeau-2.jpg",
+    "legenda": "Tricô feito à mão",
+    "credito": {
+     "autor": "Sciencia58",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Dog_sweater_2.jpg"
+    }
+   }
+  ],
+  "ordem": 4,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a2-nouvelle-ville",
+  "titulo": "Ma nouvelle ville",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 2 — courriel",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Você se mudou de cidade: descreva a um amigo a nova cidade, o que já descobriu e o que planeja fazer.",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Passé composé",
+   "Futuro próximo",
+   "Descrição de uma cidade"
+  ],
+  "instrucoes": "Vous venez de déménager dans une nouvelle ville. Vous écrivez à un ami pour lui décrire la ville, raconter ce que vous avez déjà découvert et dire ce que vous allez faire le mois prochain. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Premiers jours à Bordeaux »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance, nível A2)",
+    "conteudo": "Je suis arrivé à Bordeaux un lundi de septembre. La ville m'a plu tout de suite : les grandes façades en pierre claire, les quais au bord de la Garonne, les petites rues pleines de cafés. La première semaine, je me suis perdu tous les jours. Maintenant, je connais mon quartier et je salue la boulangère par son prénom."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Bordeaux, une ville qui attire",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "Depuis l'arrivée du train à grande vitesse, Bordeaux n'est plus qu'à deux heures de Paris. Beaucoup de familles et de jeunes actifs s'y installent. La ville a rénové ses quais et développé le tramway. Mais les prix des logements ont beaucoup augmenté et certains habitants partent vivre en dehors de la ville."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Déménager : un grand changement",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "Selon les psychologues, un déménagement est un des grands changements de la vie, comme un nouveau travail. Il faut en moyenne plusieurs mois pour se sentir chez soi. Pour s'adapter plus vite, il est conseillé d'explorer son quartier à pied, de participer à des activités locales et de parler avec ses voisins."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-nouvelle-ville-1.jpg",
+    "legenda": "O Miroir d'eau de Bordeaux",
+    "credito": {
+     "autor": "Mariusz Strawinski",
+     "licenca": "CC BY 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Place_De_La_Bourse_Water_Mirror_Bordeaux_(134913857).jpeg"
+    }
+   },
+   {
+    "src": "img/temas/a2-nouvelle-ville-2.jpg",
+    "legenda": "O bonde de Bordeaux",
+    "credito": {
+     "autor": "Marc Ryckaert (MJJR)",
+     "licenca": "CC BY 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Bordeaux_Tram_R01.jpg"
+    }
+   }
+  ],
+  "ordem": 5,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a2-annonce-colocation",
+  "titulo": "Chercher un colocataire",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 1 — annonce",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Escreva um anúncio para encontrar alguém para dividir o apartamento: descrição, preço, regras.",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Anúncio",
+   "Descrição",
+   "Expressão da obrigação"
+  ],
+  "instrucoes": "Vous cherchez un(e) colocataire. Vous écrivez une annonce pour le site de votre université : décrivez l'appartement et la chambre, indiquez le prix et dites quel type de personne vous cherchez. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Trois dans l'appartement »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance, nível A2)",
+    "conteudo": "Dans notre colocation, il y avait trois règles : chacun fait la vaisselle le soir, pas de musique après minuit et le dimanche, on dîne ensemble. Paul cuisinait mal mais il riait beaucoup ; Inès était très organisée ; moi, j'apportais les desserts. Nous n'étions pas amis au début. Deux ans plus tard, nous étions comme une famille."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "La colocation, solution pour les étudiants",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "Dans les grandes villes, les étudiants choisissent souvent la colocation pour payer moins cher. Ils partagent la cuisine, le salon et la salle de bains. Les sites d'annonces spécialisés sont très utilisés. Les propriétaires demandent souvent un garant, c'est-à-dire une personne qui paie si le locataire ne peut pas payer."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Vivre avec d'autres, un apprentissage",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "Selon les sociologues, la colocation apprend à négocier, à partager et à respecter les autres. Les colocataires qui fixent des règles claires dès le début ont moins de conflits. Les problèmes les plus fréquents concernent le ménage, le bruit et le partage des dépenses."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-annonce-colocation-1.jpg",
+    "legenda": "Uma cozinha compartilhada",
+    "credito": {
+     "autor": "Tiia Monto",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Newport_Student_Village_kitchen.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a2-annonce-colocation-2.jpg",
+    "legenda": "Um quarto de estudante",
+    "credito": {
+     "autor": "English106",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Female_student_writing_and_studying_at_dorm_room_desk.jpg"
+    }
+   }
+  ],
+  "ordem": 6,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a2-probleme-commande",
+  "titulo": "Un problème avec une commande",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 1 — courriel de réclamation",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Reclame de um pedido que chegou errado: explique o problema e diga o que você quer.",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Reclamação formal",
+   "Passé composé",
+   "Expressão do desejo"
+  ],
+  "instrucoes": "Vous avez commandé un pull sur Internet, mais vous avez reçu la mauvaise taille et la mauvaise couleur. Vous écrivez au service clients pour expliquer le problème et demander une solution. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le colis »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de conto, nível A2)",
+    "conteudo": "Le colis est arrivé le mardi. Élodie l'a ouvert avec impatience : elle avait commandé une robe verte pour le mariage de sa cousine. Dans la boîte, il y avait… un pantalon orange, trois tailles trop grand. Elle a d'abord ri, puis elle a regardé le calendrier : le mariage était samedi. Elle a pris son téléphone."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Achats en ligne : vos droits",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "En Europe, quand on achète sur Internet, on a quatorze jours pour changer d'avis et renvoyer un produit. Si le produit reçu ne correspond pas à la commande, le vendeur doit l'échanger ou rembourser le client. Il est conseillé de garder la facture et de prendre une photo du produit reçu."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Les retours coûtent cher à la planète",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "Une grande partie des vêtements achetés en ligne est renvoyée. Chaque retour demande un nouveau transport, un nouvel emballage et parfois la destruction du produit. Pour réduire ces retours, les chercheurs conseillent de bien vérifier les tailles avant d'acheter."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-probleme-commande-1.jpg",
+    "legenda": "Uma encomenda entregue",
+    "credito": {
+     "autor": "Meanwell Packaging",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Signing_for_a_parcel_delivery_on_a_phone.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a2-probleme-commande-2.jpg",
+    "legenda": "Compras pela internet",
+    "credito": {
+     "autor": "Artem Beliaikin from Moscow, Russia",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Woman_online_shopping_concept._Woman_in_the_green_park_with_modern_laptop._Bali_island._(47798039732).jpg"
+    }
+   }
+  ],
+  "ordem": 7,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a2-fete-traditionnelle",
+  "titulo": "Une fête de mon pays",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 2 — article",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Apresente uma festa tradicional do seu país para o site de uma escola francesa.",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Presente de hábito",
+   "Vocabulário cultural",
+   "Texto informativo"
+  ],
+  "instrucoes": "Le site d'une école française publie des textes sur les fêtes du monde. Vous présentez une fête traditionnelle de votre pays : quand elle a lieu, ce qu'on fait, ce qu'on mange et pourquoi vous l'aimez. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le 14 juillet au village »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance, nível A2)",
+    "conteudo": "Le 14 juillet, tout le village se retrouvait sur la place. Le matin, il y avait un défilé avec les pompiers et la fanfare. L'après-midi, les enfants jouaient à des jeux. Le soir, on mangeait ensemble sur de grandes tables, puis on regardait le feu d'artifice au-dessus du lac. Ensuite, tout le monde dansait jusqu'à minuit."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "La Chandeleur : des crêpes dans toutes les cuisines",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "Le 2 février, c'est la Chandeleur. En France, on mange des crêpes ce jour-là. Selon une tradition, on fait sauter la première crêpe dans la poêle en tenant une pièce dans l'autre main : si la crêpe retombe bien, l'année sera heureuse. Les supermarchés vendent beaucoup de farine, d'œufs et de lait cette semaine-là."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Pourquoi les fêtes existent",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "Les anthropologues expliquent que les fêtes traditionnelles marquent les moments importants de l'année : la fin de l'hiver, les récoltes, l'histoire d'un pays. Elles rassemblent les personnes et transmettent une culture d'une génération à l'autre, souvent par la musique et la nourriture."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-fete-traditionnelle-1.jpg",
+    "legenda": "Fogos do 14 de julho",
+    "credito": {
+     "autor": "Shane McGregor",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Marsielle_-_Bastille_Day_fireworks_-_red.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a2-fete-traditionnelle-2.jpg",
+    "legenda": "Crepes da Chandeleur",
+    "credito": {
+     "autor": "French Recipes",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Cooking_Crepes.jpg"
+    }
+   }
+  ],
+  "ordem": 8,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a2-conseils-sante",
+  "titulo": "Conseils pour être en forme",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 2 — message de conseils",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Um amigo está cansado e estressado: dê conselhos para ele ficar em forma.",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Imperativo",
+   "Expressão do conselho",
+   "Vocabulário da saúde"
+  ],
+  "instrucoes": "Un ami vous écrit qu'il est fatigué et stressé à cause de son travail. Vous lui répondez pour lui donner des conseils : alimentation, sport, sommeil et loisirs. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Les conseils de tante Rose »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance, nível A2)",
+    "conteudo": "Tante Rose avait une réponse pour tout. « Tu es fatigué ? Couche-toi avant minuit. Tu es triste ? Va marcher au soleil. Tu es stressé ? Mange une soupe et appelle tes amis. » Nous nous moquions un peu d'elle. Mais elle a vécu jusqu'à quatre-vingt-dix-huit ans, toujours souriante."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le burn-out touche de plus en plus de salariés",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "De nombreux salariés disent être épuisés par leur travail. Les médecins parlent de burn-out quand la fatigue devient très forte et dure longtemps. Pour l'éviter, ils conseillent de faire des pauses, de ne pas lire ses courriels professionnels le soir et de garder du temps pour sa famille et ses loisirs."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Trente minutes de marche par jour",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "Les études montrent que trente minutes de marche par jour réduisent le stress et améliorent le sommeil. L'activité physique produit des substances qui donnent une sensation de bien-être. Une alimentation variée, avec des fruits et des légumes, aide aussi à avoir plus d'énergie."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-conseils-sante-1.jpg",
+    "legenda": "Corrida matinal no parque",
+    "credito": {
+     "autor": "Shixart1985",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Woman_jogging_in_the_park_during_daytime_with_trees_in_the_background.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a2-conseils-sante-2.jpg",
+    "legenda": "Um café da manhã saudável",
+    "credito": {
+     "autor": "www.Pixel.la Free Stock Photos",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Food-healthy-fruits-breakfast_(23958947859).jpg"
+    }
+   }
+  ],
+  "ordem": 9,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "a2-lettre-futur",
+  "titulo": "Mes projets pour l'année prochaine",
+  "nivel": "A2",
+  "tipoProducao": "Tâche 2 — texte personnel",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 100,
+  "descricao": "Conte seus planos para o próximo ano: estudos, trabalho, viagens e o que você quer mudar.",
+  "objetivos": [
+   "Contar ou descrever com frases ligadas",
+   "Usar o passado e o futuro próximo",
+   "Adaptar o registro ao destinatário"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Frases ligadas por conectores simples",
+   "Tempos verbais corretos"
+  ],
+  "competenciasAvaliadas": [
+   "Futur simple",
+   "Expressão da vontade",
+   "Texto pessoal"
+  ],
+  "instrucoes": "Votre professeur de français vous demande d'écrire un petit texte : « Mes projets pour l'année prochaine ». Parlez de vos études ou de votre travail, d'un voyage et d'une chose que vous voulez changer dans votre vie. (60 à 100 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La liste de Julie »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance, nível A2)",
+    "conteudo": "Le premier janvier, Julie a écrit une liste sur la porte du réfrigérateur : apprendre l'italien, courir dix kilomètres, lire un livre par mois, appeler plus souvent sa grand-mère. En février, elle avait oublié l'italien et la course. Mais elle a appelé sa grand-mère chaque dimanche, et ce petit projet a changé son année."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les bonnes résolutions ne durent pas longtemps",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem, nível A2)",
+    "conteudo": "Chaque année, beaucoup de personnes prennent de bonnes résolutions : faire du sport, manger mieux, arrêter de fumer. Selon une enquête, la majorité abandonne avant la fin du mois de février. Les spécialistes conseillent de choisir un seul objectif simple et précis plutôt qu'une longue liste."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Comment garder une nouvelle habitude",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação, nível A2)",
+    "conteudo": "Selon les chercheurs, il faut en moyenne plus de deux mois pour qu'un nouveau comportement devienne une habitude. Répéter l'action chaque jour au même moment et dans le même lieu aide beaucoup. Noter ses progrès dans un carnet augmente aussi la motivation."
+   }
+  ],
+  "courseType": "A2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/a2-lettre-futur-1.jpg",
+    "legenda": "Planejando o próximo ano",
+    "credito": {
+     "autor": "Shixart1985",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Working_on_a_planning_session_with_stationery_items,_notebook,_and_colorful_pencils_on_a_wooden_desk.jpg"
+    }
+   },
+   {
+    "src": "img/temas/a2-lettre-futur-2.jpg",
+    "legenda": "Uma viagem de avião",
+    "credito": {
+     "autor": "Արման Բարսեղյան",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:View_from_the_airplane_window.jpg"
+    }
+   }
+  ],
+  "ordem": 10,
+  "creditosNecessarios": 1
+ }
+]

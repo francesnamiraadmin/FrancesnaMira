@@ -1,0 +1,157 @@
+{
+ "slug": "ex-b2-05",
+ "titulo": "Exercício oral nº 5 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Jeunes et seniors",
+ "descricao": "Moradia intergeracional: estudantes que vivem com idosos; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/b2-habiter-colocation-seniors-2.jpg",
+  "credito": {
+   "autor": "Snyder, Frank R. Flickr: Miami U. Libraries - Digital Collections",
+   "licenca": "Public domain",
+   "urlLicenca": "",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Library_and_reading_room_of_Oxford_College_ca._1899_(3195489874).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-05/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta à surpresa.",
+     "alternativas": [
+      "Oui, et on s'entend très bien !",
+      "Elle habite à Lyon.",
+      "Oui, elle a un chat.",
+      "Non, j'ai vingt ans."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu habites vraiment chez une dame de quatre-vingts ans ?\nA. Oui, et on s'entend très bien !\nB. Elle habite à Lyon.\nC. Oui, elle a un chat.\nD. Non, j'ai vingt ans.",
+     "audio": "audio/exercicios-orais/ex-b2-05/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« En échange d'une présence le soir et de petits services ».",
+     "alternativas": [
+      "Le ménage de toute la maison.",
+      "Un loyer normal.",
+      "Une présence le soir et de petits services.",
+      "Des cours particuliers."
+     ],
+     "correta": 2,
+     "pergunta": "Que donne l'étudiant en échange d'un loyer faible ?",
+     "transcricao": "Le programme de logement intergénérationnel met en relation des étudiants et des personnes âgées qui ont une chambre libre. L'étudiant paie un loyer très faible en échange d'une présence le soir et de petits services.",
+     "audio": "audio/exercicios-orais/ex-b2-05/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« M'a appris à utiliser la tablette ».",
+     "alternativas": [
+      "À cuisiner.",
+      "À utiliser la tablette.",
+      "À jardiner.",
+      "À conduire."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'est-ce que Thomas a appris à la dame ?",
+     "transcricao": "Depuis la mort de mon mari, la maison était trop silencieuse. Thomas, l'étudiant qui vit chez moi, m'a appris à utiliser la tablette et moi, je lui apprends à cuisiner. On dîne ensemble trois soirs par semaine.",
+     "audio": "audio/exercicios-orais/ex-b2-05/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta prática.",
+     "alternativas": [
+      "La maison est grande.",
+      "Non, j'habite seul.",
+      "Oui, elle est âgée.",
+      "Il faut des règles claires dès le départ, et tout se passe bien."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Vivre avec une personne âgée, ce n'est pas trop contraignant ?\nA. La maison est grande.\nB. Non, j'habite seul.\nC. Oui, elle est âgée.\nD. Il faut des règles claires dès le départ, et tout se passe bien.",
+     "audio": "audio/exercicios-orais/ex-b2-05/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Pas seulement des vieux vers les jeunes, mais dans les deux sens ».",
+     "alternativas": [
+      "Les jeunes doivent aider les vieux.",
+      "Les générations doivent vivre séparées.",
+      "Les maisons de retraite sont inutiles.",
+      "La transmission se fait dans les deux sens."
+     ],
+     "correta": 3,
+     "pergunta": "Que rappellent ces initiatives, selon l'intervenant ?",
+     "transcricao": "Notre société a séparé les âges : crèches, écoles, entreprises, maisons de retraite. Chaque génération vit dans son monde. Les initiatives intergénérationnelles rappellent que la transmission ne va pas seulement des vieux vers les jeunes, mais dans les deux sens.",
+     "audio": "audio/exercicios-orais/ex-b2-05/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — article",
+     "min": 120,
+     "max": 180,
+     "consigne": "Pour le journal de votre université, vous écrivez un article sur le logement intergénérationnel : vous présentez le principe, ses avantages et ses limites. (120 à 180 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 630,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Vous êtes étudiant(e) et vous cherchez un logement. Vous téléphonez à une association de logement intergénérationnel pour vous renseigner (fonctionnement, loyer, obligations, choix de la personne, durée).",
+     "perguntasExaminador": [
+      "Association Deux Générations, bonjour !"
+     ],
+     "fichaExaminador": "Vous êtes le/la responsable. Loyer : 100 à 250 €/mois. Engagement : présence 4 soirs par semaine, pas de fêtes. Entretien préalable avec l'étudiant et le senior. Contrat d'un an maximum, renouvelable. Frais d'adhésion : 150 €. Laissez le candidat mener l'échange ; opposez quelques objections."
+    }
+   ]
+  }
+ }
+}

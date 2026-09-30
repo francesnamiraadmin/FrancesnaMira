@@ -1,0 +1,742 @@
+[
+ {
+  "slug": "tcf-t1-nouveau-voisin",
+  "titulo": "Accueillir un nouveau voisin",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 1 — message",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 120,
+  "descricao": "Escreva uma mensagem de boas-vindas a um vizinho recém-chegado, apresentando o bairro e oferecendo ajuda — a tarefa 1 do TCF Canada.",
+  "objetivos": [
+   "Apresentar-se e acolher alguém por escrito",
+   "Dar informações práticas sobre um lugar",
+   "Propor ajuda com cortesia"
+  ],
+  "criteriosResumo": [
+   "Consigne completa (acolher, informar, propor)",
+   "Registro amigável",
+   "Frases claras e bem ligadas"
+  ],
+  "competenciasAvaliadas": [
+   "Mensagem informal",
+   "Descrição de lugares",
+   "Imperativo e futuro próximo"
+  ],
+  "instrucoes": "Une nouvelle famille vient d'emménager dans votre immeuble. Vous leur écrivez un message pour leur souhaiter la bienvenue, leur présenter les commerces et services utiles du quartier et leur proposer votre aide. (60 à 120 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La première nuit »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Les cartons encombraient encore le couloir quand on frappa à la porte. Une vieille dame se tenait sur le palier, un plat couvert d'un torchon entre les mains. « C'est une tarte aux pommes, dit-elle. Le premier soir, on n'a jamais envie de cuisiner. » Elle nous expliqua où trouver la boulangerie qui ouvrait tôt, le médecin qui acceptait encore des patients et le marché du jeudi. Puis elle repartit sans entrer. Cette nuit-là, pour la première fois depuis le départ, la ville me sembla moins étrangère."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "La Fête des voisins rassemble des millions d'habitants",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Créée à Paris à la fin des années 1990, la Fête des voisins est devenue un rendez-vous incontournable du printemps. Dans les cours d'immeubles et les rues fermées à la circulation, chacun apporte un plat, une boisson ou une chaise. Les organisateurs rappellent que l'objectif n'est pas seulement de faire la fête : il s'agit de créer des liens qui serviront toute l'année, pour arroser des plantes pendant les vacances, garder un enfant ou rendre visite à une personne âgée isolée."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Liens de voisinage et bien-être : ce que disent les enquêtes",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Plusieurs enquêtes sociologiques montrent que le sentiment d'appartenance à un quartier dépend moins de sa beauté que de la qualité des relations qu'on y entretient. Les personnes qui connaissent au moins trois voisins par leur prénom se déclarent plus satisfaites de leur logement et moins anxieuses. Les chercheurs soulignent l'importance des premières semaines après un déménagement : un simple geste d'accueil augmente fortement la probabilité que le nouvel arrivant participe ensuite à la vie locale."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t1-nouveau-voisin-1.jpg",
+    "legenda": "Uma Fête des voisins",
+    "credito": {
+     "autor": "Christine und Hagen Graf from Fitou, France",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:F%C3%AAte_des_voisins_(2015-05-29_21.29.52_by_Christine_und_Hagen_Graf).jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t1-nouveau-voisin-2.jpg",
+    "legenda": "Caixas de mudança: os primeiros dias num novo lar",
+    "credito": {
+     "autor": "brownpau",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:An_Overview_of_Moving_Companies_and_Their_Use_of_Moving_Boxes.jpg"
+    }
+   }
+  ],
+  "ordem": 1,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tcf-t1-covoiturage-festival",
+  "titulo": "Proposer un covoiturage pour un festival",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 1 — message",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 120,
+  "descricao": "Organize, por mensagem, uma carona compartilhada para um festival: horário, ponto de encontro, divisão dos custos.",
+  "objetivos": [
+   "Propor um plano concreto",
+   "Dar informações práticas (hora, lugar, custo)",
+   "Pedir uma resposta"
+  ],
+  "criteriosResumo": [
+   "Informações completas",
+   "Organização da mensagem",
+   "Registro adequado a colegas"
+  ],
+  "competenciasAvaliadas": [
+   "Mensagem a colegas",
+   "Expressões de tempo e lugar",
+   "Pedido de confirmação"
+  ],
+  "instrucoes": "Vous allez à un festival de musique à 200 kilomètres de chez vous et vous avez une voiture avec trois places libres. Vous écrivez un message à vos collègues pour leur proposer de partager le trajet : date et heure de départ, lieu de rendez-vous, partage des frais. Demandez-leur de vous répondre rapidement. (60 à 120 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La route de l'été »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Nous étions quatre dans la vieille voiture de Mathieu, les genoux serrés contre les sacs de couchage. Personne ne se connaissait vraiment au départ : une collègue, un cousin, une amie d'amie. Au bout de deux heures, nous chantions ensemble les chansons de la radio, et à l'arrivée, sous les lumières du festival, il nous semblait que nous avions toujours voyagé ainsi. J'ai souvent pensé que ce trajet avait été le meilleur moment de l'été."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le covoiturage vers les festivals gagne du terrain",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Parkings saturés, routes embouteillées, carburant de plus en plus cher : les grands festivals d'été encouragent désormais leurs spectateurs à partager leur véhicule. Certains offrent une place de parking gratuite aux voitures qui arrivent avec au moins trois passagers. Sur les plateformes spécialisées, les annonces se multiplient dès l'ouverture de la billetterie. Les organisateurs y voient une solution écologique, mais aussi une manière de créer une ambiance conviviale avant même le premier concert."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Voyager à plusieurs : quel impact sur les émissions ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Selon les estimations des agences de l'environnement, une voiture transportant quatre personnes émet, par passager, environ quatre fois moins de gaz à effet de serre qu'un conducteur seul. Pour les événements culturels, les déplacements du public représentent souvent la majeure partie de l'empreinte carbone totale, bien devant l'électricité ou la restauration. Les chercheurs recommandent donc d'agir d'abord sur la manière dont les spectateurs arrivent sur place."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t1-covoiturage-festival-1.jpg",
+    "legenda": "O público de um festival de verão",
+    "credito": {
+     "autor": "Shixart1985",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Live_music_performance_at_a_summer_festival_with_energetic_crowd_and_talented_musicians_on_stage.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t1-covoiturage-festival-2.jpg",
+    "legenda": "Área de carona compartilhada (covoiturage) na França",
+    "credito": {
+     "autor": "Père Igor",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Salmiech_panneau_covoiturage.jpg"
+    }
+   }
+  ],
+  "ordem": 2,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tcf-t1-conseils-montreal",
+  "titulo": "Demander des conseils avant de s'installer à Montréal",
+  "nivel": "B2",
+  "tipoProducao": "Tâche 1 — message",
+  "dificuldade": "medio",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 120,
+  "descricao": "Escreva a uma amiga que mora em Montréal pedindo conselhos práticos para a sua mudança: moradia, bairros, inverno.",
+  "objetivos": [
+   "Contextualizar um pedido",
+   "Formular perguntas precisas",
+   "Agradecer e encerrar com cordialidade"
+  ],
+  "criteriosResumo": [
+   "Contexto claro",
+   "Perguntas variadas e pertinentes",
+   "Correção das estruturas interrogativas"
+  ],
+  "competenciasAvaliadas": [
+   "Mensagem pessoal",
+   "Interrogação direta e indireta",
+   "Vocabulário da mudança"
+  ],
+  "instrucoes": "Vous allez vous installer à Montréal dans trois mois. Une amie y habite depuis plusieurs années. Vous lui écrivez un message pour lui annoncer la nouvelle et lui demander des conseils : logement, quartiers, préparation à l'hiver. (60 à 120 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Lettre d'hiver »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance epistolar)",
+    "conteudo": "Ma chère Inès, tu m'avais prévenue pour le froid, mais personne n'avait parlé de la lumière. En janvier, le ciel de Montréal est d'un bleu si pur qu'on oublie les moins vingt degrés. J'ai appris à m'habiller en couches, à marcher dans les souterrains du centre-ville et à dire « tuque » plutôt que « bonnet ». Ce que je n'ai pas encore appris, c'est à rester chez moi le samedi : il y a toujours une fête d'hiver quelque part."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Montréal : la recherche de logement, première épreuve des nouveaux arrivants",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Chaque année, des milliers de nouveaux arrivants s'installent dans la métropole québécoise. Beaucoup découvrent une particularité locale : la plupart des baux se terminent le 30 juin, et le 1er juillet devient un immense jour de déménagement. Les organismes d'accueil conseillent de chercher un logement temporaire pour les premières semaines, de visiter plusieurs quartiers avant de signer et de se renseigner sur le chauffage, qui n'est pas toujours inclus dans le loyer."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "S'adapter au froid : le corps apprend",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des études en physiologie montrent que l'organisme s'adapte partiellement au froid en quelques semaines : la sensation d'inconfort diminue et la circulation sanguine des mains s'améliore. Mais l'adaptation psychologique compte autant que la physique. Les nouveaux arrivants qui pratiquent une activité extérieure dès le premier hiver, comme le patin ou la marche, déclarent un meilleur moral que ceux qui restent enfermés. La lumière du jour, même froide, aide à réguler le sommeil et l'humeur."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t1-conseils-montreal-1.jpg",
+    "legenda": "Montréal vista do Mont-Royal",
+    "credito": {
+     "autor": "Paolostefano1412",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Montreal_night_view.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t1-conseils-montreal-2.jpg",
+    "legenda": "Uma rua de Montréal no inverno",
+    "credito": {
+     "autor": "Exile on Ontario St from Montreal, Canada",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:March_2017_Blizzard_-_Car_buried_by_snow_in_Montreal_(33357062991).jpg"
+    }
+   }
+  ],
+  "ordem": 3,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tcf-t2-journee-sans-voiture",
+  "titulo": "Une journée sans voiture dans ma ville",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 2 — article",
+  "dificuldade": "medio",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 150,
+  "descricao": "Escreva um artigo para o jornal local contando como foi um dia sem carros na sua cidade e o que você achou da experiência.",
+  "objetivos": [
+   "Relatar um acontecimento",
+   "Descrever ambientes e impressões",
+   "Dar uma opinião simples"
+  ],
+  "criteriosResumo": [
+   "Relato organizado no tempo",
+   "Descrição viva",
+   "Opinião justificada"
+  ],
+  "competenciasAvaliadas": [
+   "Artigo de jornal local",
+   "Passé composé e imparfait",
+   "Conectores temporais"
+  ],
+  "instrucoes": "Votre ville a organisé une « journée sans voiture ». Vous écrivez un article pour le journal de votre quartier : racontez comment s'est passée cette journée, décrivez l'ambiance et donnez votre avis sur l'expérience. (120 à 150 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le silence des rues »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de crônica literária)",
+    "conteudo": "Ce dimanche-là, on entendit d'abord les oiseaux. Puis les voix des enfants, les roues des vélos, le rire d'une femme à une fenêtre. La grande avenue, d'habitude grise et bruyante, était devenue une place immense où les gens marchaient au milieu, étonnés de leur audace. Un vieil homme avait sorti sa chaise sur le trottoir et regardait passer la ville comme on regarde la mer. Le lendemain, les voitures sont revenues, mais quelque chose était resté dans nos oreilles."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Journée sans voiture : les commerçants partagés",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Pour la troisième année consécutive, le centre-ville a été fermé à la circulation de 10 heures à 18 heures. Les cafés et les marchands de glaces ont réalisé une excellente journée, grâce à l'afflux de promeneurs. En revanche, certains commerçants regrettent l'absence des clients qui viennent habituellement en voiture de la périphérie. La mairie réfléchit à l'organisation de navettes gratuites depuis les parkings extérieurs pour la prochaine édition."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Moins de voitures, un air plus sain en quelques heures",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les capteurs installés lors des journées sans voiture enregistrent des baisses rapides de la pollution : jusqu'à 40 % de dioxyde d'azote en moins sur les grands axes, et un niveau de bruit divisé par deux. Ces effets disparaissent dès le retour de la circulation, mais ils ont une valeur pédagogique : ils permettent aux habitants de percevoir concrètement la différence et favorisent l'acceptation de mesures plus durables, comme les rues piétonnes ou les pistes cyclables."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t2-journee-sans-voiture-1.jpg",
+    "legenda": "Uma avenida tomada por pedestres num dia sem carros",
+    "credito": {
+     "autor": "Deans Charbal",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:2024_Car-Free_Earth_Day_(April_20),_Broadway_between_17th_and_18th_Street,_Manhattan,_New_York_03.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t2-journee-sans-voiture-2.jpg",
+    "legenda": "Ciclistas ocupando a rua",
+    "credito": {
+     "autor": "Wilfredor",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Cyclist_on_a_Quebec_City_street_in_autumn.jpg"
+    }
+   }
+  ],
+  "ordem": 4,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tcf-t2-premier-hiver",
+  "titulo": "Mon premier hiver",
+  "nivel": "B2",
+  "tipoProducao": "Tâche 2 — récit de blog",
+  "dificuldade": "medio",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 150,
+  "descricao": "Conte, num post de blog, uma experiência marcante ligada ao clima ou a uma estação — e o que ela ensinou a você.",
+  "objetivos": [
+   "Narrar uma experiência pessoal",
+   "Expressar sentimentos e mudanças",
+   "Tirar uma conclusão"
+  ],
+  "criteriosResumo": [
+   "Narração coerente",
+   "Riqueza descritiva",
+   "Reflexão final"
+  ],
+  "competenciasAvaliadas": [
+   "Blog pessoal",
+   "Tempos do passado",
+   "Vocabulário das sensações"
+  ],
+  "instrucoes": "Sur votre blog, vous racontez une expérience marquante liée au climat : votre premier hiver dans un pays froid, une canicule, une tempête… Décrivez ce qui s'est passé, ce que vous avez ressenti et ce que cette expérience vous a appris. (120 à 150 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La première neige »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Je n'avais jamais vu tomber la neige. Elle est arrivée un mardi, sans bruit, pendant que je préparais mon café. Par la fenêtre, les toits disparaissaient lentement sous une couche blanche et douce. Je suis descendue en pyjama et en bottes, comme une enfant, et j'ai tendu les mains vers le ciel. Un voisin qui déblayait son entrée m'a regardée en souriant : « Profitez-en, dans trois mois vous la détesterez. » Il se trompait. Je ne l'ai jamais détestée."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Premier hiver au Québec : des ateliers pour bien s'équiper",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Plusieurs organismes communautaires proposent aux nouveaux arrivants des ateliers gratuits pour préparer leur premier hiver. On y apprend à choisir un manteau et des bottes adaptés, à reconnaître les signes d'engelure et à conduire sur la glace. Des sorties de raquette et de patin sont également organisées. « L'hiver fait peur avant d'arriver, explique une animatrice. Une fois qu'on sait s'habiller, il devient souvent la saison préférée. »"
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Le manque de lumière et l'humeur hivernale",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Aux latitudes élevées, la diminution de la lumière naturelle en hiver peut provoquer chez certaines personnes une baisse d'énergie et de moral, parfois appelée dépression saisonnière. Les chercheurs recommandent de passer au moins trente minutes dehors en milieu de journée, de pratiquer une activité physique et de maintenir des horaires de sommeil réguliers. Dans les cas plus marqués, la luminothérapie, qui consiste à s'exposer à une lampe très lumineuse le matin, donne de bons résultats."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t2-premier-hiver-1.jpg",
+    "legenda": "A cidade de Québec coberta de neve",
+    "credito": {
+     "autor": "Wilfredor",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Snow-covered_Quebec_City_skyline_in_fog.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t2-premier-hiver-2.jpg",
+    "legenda": "O palácio de gelo do Carnaval de Québec",
+    "credito": {
+     "autor": "Shapiros10",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Carnival_1.jpg"
+    }
+   }
+  ],
+  "ordem": 5,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tcf-t2-benevolat",
+  "titulo": "Le bénévolat qui m'a changé",
+  "nivel": "B2",
+  "tipoProducao": "Tâche 2 — article",
+  "dificuldade": "medio",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 150,
+  "descricao": "Escreva um artigo para o site de uma associação contando uma experiência de voluntariado e convidando os leitores a participar.",
+  "objetivos": [
+   "Relatar uma experiência",
+   "Explicar o que ela trouxe",
+   "Convencer o leitor a agir"
+  ],
+  "criteriosResumo": [
+   "Relato + reflexão + convite",
+   "Tom engajado",
+   "Coesão"
+  ],
+  "competenciasAvaliadas": [
+   "Artigo associativo",
+   "Expressão de sentimentos",
+   "Incitar à ação"
+  ],
+  "instrucoes": "Vous avez participé à une activité bénévole (banque alimentaire, aide aux devoirs, nettoyage d'un parc…). Vous écrivez un article pour le site de l'association : racontez votre expérience, expliquez ce qu'elle vous a apporté et encouragez les lecteurs à s'engager à leur tour. (120 à 150 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Les mardis de Lucien »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Je m'étais inscrit à l'aide aux devoirs pour remplir mes mardis soir. Le premier enfant qu'on m'a confié s'appelait Lucien ; il avait neuf ans et détestait les fractions. Nous avons passé trois semaines à couper des pizzas imaginaires. Le jour où il a compris, il a levé les bras comme un footballeur qui marque un but. Je suis rentré chez moi en souriant tout seul dans le bus. Je croyais donner deux heures par semaine ; en réalité, c'était moi qui recevais."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les jeunes retraités, piliers du bénévolat",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Selon une étude récente, près d'un quart des bénévoles réguliers ont entre 60 et 75 ans. Ils animent des ateliers, accompagnent des personnes âgées et gèrent la logistique des distributions alimentaires. Les associations cherchent pourtant à attirer davantage de jeunes adultes, souvent volontaires mais peu disponibles. Pour eux, de nouvelles formules apparaissent : missions courtes, engagement ponctuel le week-end, tâches réalisables à distance."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Donner de son temps, un bénéfice pour la santé ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "De nombreuses études observent que les personnes qui font du bénévolat déclarent un meilleur bien-être et moins de symptômes dépressifs. Les chercheurs avancent plusieurs explications : le sentiment d'utilité, l'élargissement du réseau social et l'activité physique liée à certaines missions. Ils restent toutefois prudents : les personnes en bonne santé sont aussi celles qui ont le plus de facilité à s'engager, ce qui rend difficile de distinguer la cause de l'effet."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t2-benevolat-1.jpg",
+    "legenda": "Voluntários separando doações num banco de alimentos",
+    "credito": {
+     "autor": "USEPA Environmental-Protection-Agency",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:November_15,_2012_Volunteers_at_the_Food_Bank_of_Delaware_sort_through_donations._(8266408915).jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t2-benevolat-2.jpg",
+    "legenda": "Uma horta comunitária mantida por voluntários",
+    "credito": {
+     "autor": "Oceanflynn",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Parkdale_Community_garden_volunteer_day.JPG"
+    }
+   }
+  ],
+  "ordem": 6,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tcf-t3-publicite-espace-public",
+  "titulo": "Faut-il limiter la publicité dans l'espace public ?",
+  "nivel": "B2",
+  "tipoProducao": "Tâche 3 — texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 180,
+  "descricao": "Tarefa 3 do TCF: apresente os pontos de vista dos documentos e dê sua opinião argumentada sobre a publicidade nas ruas.",
+  "objetivos": [
+   "Resumir posições opostas",
+   "Tomar posição e argumentar",
+   "Usar conectores de oposição e concessão"
+  ],
+  "criteriosResumo": [
+   "Parte 1: síntese dos dois pontos de vista (40–60 palavras)",
+   "Parte 2: opinião argumentada (80–120 palavras)",
+   "Articulação lógica"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Reformulação de documentos",
+   "Concessão e oposição"
+  ],
+  "instrucoes": "« Faut-il limiter la publicité dans les rues et les transports ? » Rédigez un texte en deux parties. 1) Présentez les points de vue exprimés dans les documents (40 à 60 mots). 2) Donnez votre opinion en l'argumentant (80 à 120 mots).",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La ville aux mille visages »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Dans le métro, elle comptait les visages. Pas ceux des voyageurs, qui regardaient leurs téléphones, mais ceux des affiches : des visages souriants qui vendaient des crèmes, des voitures, des vacances au soleil. Elle en compta cinquante-trois entre sa station et le bureau. Parfois, elle se demandait si la ville parlait encore d'autre chose que d'acheter. Un matin, une affiche avait été remplacée par un poème. Toute la rame s'était tue pour le lire."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Grenoble, la ville qui a remplacé ses panneaux publicitaires par des arbres",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Plusieurs villes ont décidé de réduire fortement l'affichage publicitaire dans leurs rues. Les panneaux ont été remplacés par des arbres, des informations municipales ou des espaces d'expression pour les associations. Les défenseurs de ces mesures parlent d'un « droit au calme visuel ». Les afficheurs, eux, dénoncent une perte de revenus pour les communes et rappellent que la publicité finance une partie du mobilier urbain, comme les abribus et les vélos en libre-service."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Exposition publicitaire : combien de messages par jour ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les estimations varient fortement selon les méthodes, mais un habitant d'une grande ville serait exposé chaque jour à plusieurs centaines, voire plusieurs milliers de messages commerciaux, en comptant les affiches, les écrans et les contenus en ligne. Les psychologues observent que la plupart de ces messages ne sont pas perçus consciemment, ce qui n'empêche pas leur influence : la simple répétition d'une marque suffit à la rendre plus familière, et donc plus rassurante."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t3-publicite-espace-public-1.jpg",
+    "legenda": "Painéis publicitários tomando uma praça",
+    "credito": {
+     "autor": "Rafi B. from Somewhere in Texas :)",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Times_square_at_night.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t3-publicite-espace-public-2.jpg",
+    "legenda": "Cartazes publicitários numa estação de metrô",
+    "credito": {
+     "autor": "Andrew Curtis",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Obey_mural,_Regent_Centre_Metro_Station_-_geograph.org.uk_-_5893118.jpg"
+    }
+   }
+  ],
+  "ordem": 7,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tcf-t3-ia-ecole",
+  "titulo": "L'intelligence artificielle à l'école : aide ou menace ?",
+  "nivel": "B2",
+  "tipoProducao": "Tâche 3 — texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 180,
+  "descricao": "Discuta o uso de ferramentas de inteligência artificial pelos alunos: apresente os dois lados e defenda sua posição.",
+  "objetivos": [
+   "Apresentar os argumentos dos documentos",
+   "Defender uma posição matizada",
+   "Dar exemplos concretos"
+  ],
+  "criteriosResumo": [
+   "Síntese fiel dos documentos",
+   "Argumentação pessoal com exemplos",
+   "Coesão e registro"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Vocabulário da educação e da tecnologia",
+   "Nuance e concessão"
+  ],
+  "instrucoes": "« Les élèves devraient-ils avoir le droit d'utiliser l'intelligence artificielle pour faire leurs devoirs ? » Rédigez un texte en deux parties. 1) Présentez les points de vue exprimés dans les documents (40 à 60 mots). 2) Donnez votre opinion en l'argumentant (80 à 120 mots).",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le devoir parfait »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de conto)",
+    "conteudo": "La dissertation d'Emma était parfaite : des idées claires, des exemples bien choisis, pas une seule faute. Le professeur la lui rendit sans note. « C'est un excellent texte, dit-il doucement. Mais ce n'est pas le tien. Je connais ta voix, Emma, tes phrases trop longues, tes points d'exclamation. Ici, je n'entends personne. » Emma rougit. Ce soir-là, elle reprit une feuille blanche et écrivit, pour la première fois depuis longtemps, avec ses propres fautes."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les enseignants face aux outils d'intelligence artificielle",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Depuis l'arrivée des assistants conversationnels, les enseignants doivent adapter leurs pratiques. Certains interdisent ces outils et privilégient les devoirs faits en classe, à la main. D'autres les intègrent : les élèves demandent à l'IA un premier plan, puis doivent le critiquer, le corriger et justifier leurs choix. Les syndicats d'enseignants réclament des consignes nationales claires, estimant qu'il est impossible de contrôler ce qui est fait à la maison."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Apprendre avec une machine : premiers résultats",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les premières études sur l'usage de l'IA par les élèves donnent des résultats contrastés. Lorsque l'outil fournit directement les réponses, les élèves réussissent mieux leurs exercices mais obtiennent de moins bons résultats aux évaluations sans assistance. En revanche, lorsqu'il est paramétré pour donner des indices et poser des questions plutôt que des solutions, les progrès sont durables. Les chercheurs concluent que l'effort de réflexion reste indispensable à l'apprentissage."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t3-ia-ecole-1.jpg",
+    "legenda": "Estudantes trabalhando com computadores em sala",
+    "credito": {
+     "autor": "Christ School",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Biology_Classroom_Christ_School.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t3-ia-ecole-2.jpg",
+    "legenda": "Um aluno fazendo a lição à mão",
+    "credito": {
+     "autor": "Galtzaundi Euskara Taldea",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Euskarazko_hitz_egiteagatik_zigortutako_Bedaioko_ikasle_baten_koadernoa_2.jpg"
+    }
+   }
+  ],
+  "ordem": 8,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tcf-t3-revenu-universel",
+  "titulo": "Faut-il instaurer un revenu universel ?",
+  "nivel": "C1",
+  "tipoProducao": "Tâche 3 — texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 180,
+  "descricao": "Tema de nível C1: discuta a ideia de uma renda básica paga a todos, com base nos documentos, e argumente sua posição.",
+  "objetivos": [
+   "Reformular argumentos econômicos e sociais",
+   "Argumentar com nuance",
+   "Usar vocabulário abstrato preciso"
+  ],
+  "criteriosResumo": [
+   "Síntese precisa",
+   "Argumentação sólida e matizada",
+   "Léxico abstrato e estruturas complexas"
+  ],
+  "competenciasAvaliadas": [
+   "Argumentação de nível C1",
+   "Hipótese e condicional",
+   "Vocabulário socioeconômico"
+  ],
+  "instrucoes": "« Faut-il verser à chaque citoyen un revenu de base, sans condition ? » Rédigez un texte en deux parties. 1) Présentez les points de vue exprimés dans les documents (40 à 60 mots). 2) Donnez votre opinion en l'argumentant (80 à 120 mots).",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« L'année où personne n'a démissionné »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance de antecipação)",
+    "conteudo": "Quand le premier versement arriva, beaucoup crurent à une erreur. Mille euros, sans formulaire, sans justificatif. On prédisait que la moitié du pays cesserait de travailler. Il n'en fut rien. Ma voisine, infirmière, réduisit ses heures pour s'occuper de sa mère. Le boulanger du coin ouvrit enfin l'atelier de pâtisserie dont il rêvait. Seul mon oncle quitta son emploi, pour écrire un roman que personne ne lut. Il disait pourtant n'avoir jamais été aussi heureux."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Revenu de base : les expériences se multiplient",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "De la Finlande au Kenya, plusieurs pays ont testé le versement d'un revenu sans condition à des groupes de citoyens. Les résultats montrent une amélioration du bien-être et de la santé mentale des bénéficiaires, sans baisse notable du temps de travail. Les opposants soulignent toutefois que ces expériences, limitées dans le temps et à quelques milliers de personnes, ne permettent pas de mesurer le coût réel d'une généralisation à toute la population."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Le coût d'un revenu universel : ordres de grandeur",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les économistes estiment qu'un revenu universel d'un niveau proche du seuil de pauvreté représenterait, dans un pays européen, une dépense équivalente à une part très importante de la richesse nationale annuelle. Son financement supposerait de réformer profondément la fiscalité et de supprimer une partie des aides existantes. Les partisans y voient une simplification et la fin du non-recours aux droits ; les critiques craignent que les plus fragiles y perdent des aides ciblées."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t3-revenu-universel-1.jpg",
+    "legenda": "Cédulas e moedas de euro",
+    "credito": {
+     "autor": "Avij (talk · contribs)",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Euro_coins_and_banknotes_(cropped).jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t3-revenu-universel-2.jpg",
+    "legenda": "Trabalhadores a caminho do trabalho",
+    "credito": {
+     "autor": "John Robert McPherson",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Commuters_and_grafittied_train_Platform_3_Central_Rail_Station_Brisbane_P1210848.jpg"
+    }
+   }
+  ],
+  "ordem": 9,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tcf-t3-langues-regionales",
+  "titulo": "Faut-il enseigner les langues régionales à l'école ?",
+  "nivel": "C1",
+  "tipoProducao": "Tâche 3 — texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 180,
+  "descricao": "Discuta o ensino das línguas regionais e minoritárias (bretão, occitano, línguas autóctones do Canadá) a partir dos documentos.",
+  "objetivos": [
+   "Sintetizar posições",
+   "Argumentar sobre identidade e utilidade",
+   "Exemplificar com casos concretos"
+  ],
+  "criteriosResumo": [
+   "Síntese dos documentos",
+   "Argumentação pessoal convincente",
+   "Riqueza lexical"
+  ],
+  "competenciasAvaliadas": [
+   "Argumentação C1",
+   "Vocabulário cultural e identitário",
+   "Articuladores lógicos variados"
+  ],
+  "instrucoes": "« Les écoles doivent-elles enseigner les langues régionales et autochtones ? » Rédigez un texte en deux parties. 1) Présentez les points de vue exprimés dans les documents (40 à 60 mots). 2) Donnez votre opinion en l'argumentant (80 à 120 mots).",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La langue de ma grand-mère »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance autobiográfico)",
+    "conteudo": "Ma grand-mère parlait breton aux vaches et français aux instituteurs. À l'école, on lui avait appris à avoir honte de sa première langue ; on punissait les enfants qui la parlaient dans la cour. Elle ne me l'a jamais transmise. Des années plus tard, à l'université, j'ai suivi un cours de breton pour retrouver les mots de ses chansons. Quand je lui ai chanté une berceuse, elle a pleuré. « Je croyais qu'elle était morte avec moi », a-t-elle dit."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Écoles immersives : un succès qui fait débat",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "En Bretagne, au Pays basque ou au Québec dans les communautés autochtones, des écoles enseignent la majorité des matières dans la langue locale. Leurs élèves obtiennent souvent d'excellents résultats, y compris en français. Leurs défenseurs y voient la seule manière de sauver des langues menacées. Leurs critiques estiment que l'école doit d'abord préparer aux langues les plus utiles pour l'emploi et s'inquiètent du coût de ces filières."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Bilinguisme précoce : quels effets sur les apprentissages ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les recherches en psycholinguistique montrent que l'apprentissage précoce de deux langues ne ralentit pas le développement de l'enfant, contrairement à une idée longtemps répandue. Les enfants bilingues développent souvent une meilleure conscience du fonctionnement du langage, ce qui facilite l'apprentissage d'autres langues. Les spécialistes rappellent aussi qu'une langue ne survit que si elle est parlée en dehors de l'école : famille, médias et vie sociale jouent un rôle décisif."
+   }
+  ],
+  "courseType": "TCF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tcf-t3-langues-regionales-1.jpg",
+    "legenda": "Placa bilíngue francês–bretão",
+    "credito": {
+     "autor": "自由馴鹿 (ZiYouXunLu)",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Panneau_Kerveguen_sur_voie_verte.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tcf-t3-langues-regionales-2.jpg",
+    "legenda": "Crianças numa sala de aula do ensino fundamental",
+    "credito": {
+     "autor": "Basile Morin",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Classroom_with_children_in_the_primary_school_of_Don_Puay,_Laos.jpg"
+    }
+   }
+  ],
+  "ordem": 10,
+  "exame": "TCF",
+  "creditosNecessarios": 1
+ }
+]

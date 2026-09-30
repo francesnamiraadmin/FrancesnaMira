@@ -5,7 +5,7 @@
   <script src="js/htmlSeguro.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
-<title>Painel Administrativo - Grade de Horários</title>
+<title>Sistema de Aulas — Francês na Mira</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
@@ -90,6 +90,35 @@ table.grade-admin td.slot-cel.inativo { background: var(--cinza-100); color: var
 .tipos-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
 .tipos-tags span { background: var(--azul-claro); color: var(--azul-escuro); border-radius: 8px; padding: 1px 6px; font-size: 0.68rem; font-weight: 700; }
 
+.secao-nav { display: flex; gap: 6px; padding: 6px; background: var(--branco); border: 1px solid var(--cinza-200); border-radius: 18px; margin-bottom: 22px; box-shadow: var(--sombra); flex-wrap: wrap; }
+.secao-btn { flex: 1; min-width: 150px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 16px; border-radius: 14px; border: none; background: transparent; color: var(--cinza-600); font-weight: 700; font-family: 'Poppins', sans-serif; font-size: 0.92rem; cursor: pointer; }
+.secao-btn.active { background: linear-gradient(135deg, var(--azul-escuro), var(--azul)); color: white; }
+.secao-btn img { width: 18px; height: 18px; }
+.secao-btn.active img { background: #fff; border-radius: 6px; padding: 2px; width: 22px; height: 22px; }
+.secao[hidden] { display: none !important; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.kpi { background: var(--branco); border: 1px solid var(--cinza-200); border-radius: 14px; padding: 16px 18px; box-shadow: var(--sombra); }
+.kpi .rot { font-size: 0.75rem; font-weight: 700; color: var(--cinza-400); text-transform: uppercase; letter-spacing: .04em; }
+.kpi .val { font-size: 1.6rem; font-weight: 700; margin-top: 4px; }
+.kpi .sub { font-size: 0.75rem; color: var(--cinza-400); }
+.barra { height: 6px; border-radius: 4px; background: var(--cinza-100); margin-top: 8px; overflow: hidden; }
+.barra > span { display: block; height: 100%; background: var(--azul); }
+.tabela-wrap { overflow-x: auto; }
+table.lista { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 640px; }
+table.lista th { text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .04em; color: var(--cinza-400); padding: 8px 10px; border-bottom: 1px solid var(--cinza-200); }
+table.lista td { padding: 11px 10px; border-bottom: 1px solid var(--cinza-100); vertical-align: middle; }
+table.lista td small { color: var(--cinza-400); display: block; }
+.pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; }
+.pill.ok { background: var(--verde-bg); color: var(--verde); }
+.pill.off { background: var(--cinza-100); color: var(--cinza-400); }
+.pill.aviso { background: var(--vermelho-bg); color: var(--vermelho); }
+.pill.azul { background: var(--azul-claro); color: var(--azul-escuro); }
+.codigo-cupom { font-family: ui-monospace, Consolas, monospace; font-weight: 700; letter-spacing: .06em; background: var(--cinza-100); padding: 4px 9px; border-radius: 8px; cursor: pointer; }
+.linha-acoes { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.gerar-row { display: flex; gap: 8px; }
+.gerar-row input { flex: 1; text-transform: uppercase; }
+.busca { padding: 9px 14px; border-radius: 20px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font-family: 'Poppins', sans-serif; min-width: 220px; }
+.previa-cupom { margin-top: 4px; padding: 12px 14px; border-radius: 12px; background: var(--azul-claro); color: var(--azul-escuro); font-size: 0.85rem; }
 footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
 </style>
 </head>
@@ -122,10 +151,19 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
 <div class="wrap">
   <div class="painel-header">
-    <h1>Painel Administrativo — Grade de Horários</h1>
-    <p>Gerencie os horários disponíveis para Aula Particular e Aula em Turma.</p>
+    <h1>Sistema de Aulas</h1>
+    <p>Horários de aula particular e em turma, alunos matriculados e cupons de desconto — tudo num lugar só.</p>
   </div>
 
+  <nav class="secao-nav" id="secaoNav">
+    <button class="secao-btn active" data-secao="grade"><img src="img/icones/calendar.svg" alt="">Grade de horários</button>
+    <button class="secao-btn" data-secao="alunos"><img src="img/icones/students.svg" alt="">Alunos matriculados</button>
+    <button class="secao-btn" data-secao="cupons"><img src="img/icones/credits.svg" alt="">Cupons de desconto</button>
+  </nav>
+
+  <div class="kpis" id="kpisAulas"></div>
+
+  <section class="secao" data-secao="grade">
   <div class="top-tabs">
     <button class="top-tab active" data-modalidade="particular">Aula Particular</button>
     <button class="top-tab" data-modalidade="turma">Aula em Turma</button>
@@ -149,6 +187,87 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--vermelho-bg); border:1px solid var(--vermelho);"></span> Ocupado (clique para ver quem reservou) ·
       <span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--cinza-100); border:1px solid var(--cinza-300);"></span> Inativo
     </p>
+  </div>
+  </section>
+
+  <!-- ===================== ALUNOS MATRICULADOS ===================== -->
+  <section class="secao" data-secao="alunos" hidden>
+    <div class="card">
+      <div class="card-head">
+        <h2>Alunos matriculados</h2>
+        <input type="search" class="busca" id="buscaAlunos" placeholder="Buscar por nome, e-mail ou curso">
+      </div>
+      <div class="tabela-wrap"><table class="lista" id="tabelaAlunos"></table></div>
+    </div>
+  </section>
+
+  <!-- ===================== CUPONS ===================== -->
+  <section class="secao" data-secao="cupons" hidden>
+    <div class="card">
+      <div class="card-head">
+        <h2>Cupons de desconto</h2>
+        <button class="btn pequeno" id="novoCupomBtn">+ Emitir cupom</button>
+      </div>
+      <p class="campo-hint" style="margin:-6px 0 14px;">O desconto é aplicado na cobrança (cartão, Pix e boleto) e o uso só é contado quando o pagamento é aprovado. Clique no código para copiá-lo.</p>
+      <div class="tabela-wrap"><table class="lista" id="tabelaCupons"></table></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== MODAL CUPOM ===================== -->
+<div class="modal-overlay" id="modalCupom">
+  <div class="modal-box" style="max-width:560px;">
+    <h3 id="cupomTitulo">Emitir cupom</h3>
+    <div class="campo">
+      <label>Código</label>
+      <div class="gerar-row">
+        <input type="text" id="cupomCodigo" maxlength="30" placeholder="EX.: BEMVINDO10">
+        <button type="button" class="btn secundario pequeno" id="gerarCodigoBtn">Gerar</button>
+      </div>
+    </div>
+    <div class="campo">
+      <label>Descrição interna (opcional)</label>
+      <input type="text" id="cupomDescricao" maxlength="200" placeholder="Ex.: campanha de volta às aulas">
+    </div>
+    <div class="campo-row">
+      <div class="campo">
+        <label>Tipo de desconto</label>
+        <select id="cupomTipo">
+          <option value="percentual">Percentual (%)</option>
+          <option value="valor_fixo">Valor fixo (R$)</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label id="cupomValorLabel">Desconto (%)</label>
+        <input type="number" id="cupomValor" min="1" step="0.01" placeholder="10">
+      </div>
+    </div>
+    <div class="campo-row">
+      <div class="campo">
+        <label>Válido até (opcional)</label>
+        <input type="date" id="cupomValidoAte">
+      </div>
+      <div class="campo">
+        <label>Limite de usos (opcional)</label>
+        <input type="number" id="cupomUsoMaximo" min="1" step="1" placeholder="Ilimitado">
+      </div>
+    </div>
+    <div class="campo">
+      <label>Vale para os cursos</label>
+      <div class="tipos-grid" id="cupomCursosGrid"></div>
+      <span class="campo-hint">Nada marcado = vale para todos os cursos.</span>
+    </div>
+    <div class="campo">
+      <label>Vale para os planos</label>
+      <div class="tipos-grid" id="cupomPlanosGrid"></div>
+      <span class="campo-hint">Nada marcado = vale para todos os planos.</span>
+    </div>
+    <div class="previa-cupom" id="cupomPrevia"></div>
+    <p class="field-error" id="cupomErro"></p>
+    <div class="modal-close-row">
+      <button class="btn secundario" id="fecharCupomBtn" type="button">Cancelar</button>
+      <button class="btn" id="salvarCupomBtn" type="button">Emitir cupom</button>
+    </div>
   </div>
 </div>
 
@@ -236,6 +355,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 <footer>© 2026 · Francês na Mira</footer>
 
 <script src="js/admin-horarios.js"></script>
+<script src="js/admin-sistema-aulas.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>
 </html>

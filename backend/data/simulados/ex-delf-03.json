@@ -1,0 +1,158 @@
+{
+ "slug": "ex-delf-03",
+ "titulo": "Exercício oral nº 3 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "A2",
+ "tema": "Premiers jours au travail",
+ "descricao": "Chegada a uma nova empresa: instruções, colegas e primeiras impressões; inclui um curto texto escrito.",
+ "imagem": {
+  "src": "img/temas/delf-a2-nouveau-travail-2.jpg",
+  "credito": {
+   "autor": "Clint Gordon-Carroll",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Novell_people_working_late_2007.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-03/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Resposta de apresentação.",
+     "alternativas": [
+      "C'est mardi.",
+      "Oui, je commence aujourd'hui.",
+      "Non, je suis grand.",
+      "Oui, j'ai vingt euros."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Bonjour, vous êtes le nouveau stagiaire ?\nA. C'est mardi.\nB. Oui, je commence aujourd'hui.\nC. Non, je suis grand.\nD. Oui, j'ai vingt euros.",
+     "audio": "audio/exercicios-orais/ex-delf-03/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Au deuxième étage, à côté de la salle de réunion ».",
+     "alternativas": [
+      "Au premier étage.",
+      "À côté de la cantine.",
+      "Au deuxième étage, à côté de la salle de réunion.",
+      "À l'entrée du bâtiment."
+     ],
+     "correta": 2,
+     "pergunta": "Où est le bureau ?",
+     "transcricao": "Bienvenue ! Votre bureau est au deuxième étage, à côté de la salle de réunion. La cantine ouvre à midi, et le badge vous permet d'entrer dans le bâtiment à partir de sept heures.",
+     "audio": "audio/exercicios-orais/ex-delf-03/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Aceitar o convite.",
+     "alternativas": [
+      "Je n'ai pas de bureau.",
+      "Avec plaisir, je vous suis !",
+      "Il est midi dix.",
+      "Oui, je travaille ici."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu veux déjeuner avec nous à la cantine ?\nA. Je n'ai pas de bureau.\nB. Avec plaisir, je vous suis !\nC. Il est midi dix.\nD. Oui, je travaille ici.",
+     "audio": "audio/exercicios-orais/ex-delf-03/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Le plus difficile, c'est de retenir le prénom de tout le monde ».",
+     "alternativas": [
+      "Retenir les prénoms de ses collègues.",
+      "Trouver la cantine.",
+      "Comprendre son travail.",
+      "Arriver à l'heure."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'est-ce qui est le plus difficile pour elle ?",
+     "transcricao": "Alors, ta première semaine ?\nIntense ! Il y a beaucoup de choses à apprendre, mais mes collègues sont très patients. Le plus difficile, c'est de retenir le prénom de tout le monde !",
+     "audio": "audio/exercicios-orais/ex-delf-03/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Répond à ses questions et lui présente les autres services ».",
+     "alternativas": [
+      "À organiser les fêtes.",
+      "À remplacer le chef.",
+      "À évaluer le nouveau salarié.",
+      "À aider le nouveau salarié à s'intégrer."
+     ],
+     "correta": 3,
+     "pergunta": "À quoi sert le parrain ?",
+     "transcricao": "Dans notre entreprise, chaque nouveau salarié a un parrain pendant un mois. C'est un collègue expérimenté qui répond à ses questions et lui présente les autres services. Les nouveaux se sentent plus vite à l'aise et restent plus longtemps chez nous.",
+     "audio": "audio/exercicios-orais/ex-delf-03/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 900,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production écrite",
+     "min": 60,
+     "max": 80,
+     "consigne": "Vous avez commencé un nouveau travail. Vous écrivez un e-mail à un ami pour raconter votre première semaine : vos collègues, vos tâches et vos impressions. (60 à 80 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 420,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Monologue suivi",
+     "duracaoSeg": 180,
+     "preparacaoSeg": 60,
+     "consigne": "Parlez de votre travail ou de vos études : ce que vous faites, une journée habituelle, ce que vous aimez et ce que vous n'aimez pas.",
+     "perguntasExaminador": [
+      "Bonjour. Parlez-moi de votre travail ou de vos études.",
+      "Comment se passe une journée habituelle ?",
+      "Qu'est-ce que vous aimez le plus ?"
+     ]
+    }
+   ]
+  }
+ }
+}

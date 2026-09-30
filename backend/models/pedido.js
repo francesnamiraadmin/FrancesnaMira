@@ -18,6 +18,11 @@ const PedidoSchema = new mongoose.Schema({
   plano: { type: String, required: true },
   upgrades: [{ type: String }],
   valor: { type: Number, required: true },
+  // Cupom aplicado: `valor` já é o valor com desconto (o que foi cobrado).
+  valorOriginal: { type: Number },
+  cupomCodigo: { type: String, default: null },
+  desconto: { type: Number, default: 0 },
+  cupomContabilizado: { type: Boolean, default: false },
   metodoPagamento: { type: String, enum: ["cartao_credito", "cartao_debito", "boleto", "pix"], required: true },
   cartaoFinal: { type: String },
   parcelas: { type: Number, default: 1 },

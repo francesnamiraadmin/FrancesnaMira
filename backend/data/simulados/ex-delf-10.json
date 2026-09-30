@@ -1,0 +1,143 @@
+{
+ "slug": "ex-delf-10",
+ "titulo": "Exercício oral nº 10 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Zéro gaspillage",
+ "descricao": "Gaspillage alimentaire: supermercados, aplicativos anti-desperdício e mudança de hábitos.",
+ "imagem": {
+  "src": "img/temas/delf-b2-gaspillage-alimentaire-2.jpg",
+  "credito": {
+   "autor": "U.S. Department of Agriculture",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Capital_Area_Food_Bank_Volunteers_-_Flickr_-_USDAgov.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-10/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Aceitar a observação e propor uso.",
+     "alternativas": [
+      "Non, il est blanc.",
+      "La boulangerie est fermée.",
+      "Oui, j'aime le pain.",
+      "Tu as raison, je vais en faire du pain perdu."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu jettes ce pain ? Il est d'hier seulement !\nA. Non, il est blanc.\nB. La boulangerie est fermée.\nC. Oui, j'aime le pain.\nD. Tu as raison, je vais en faire du pain perdu.",
+     "audio": "audio/exercicios-orais/ex-delf-10/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les invendus sont donnés chaque matin à une association ».",
+     "alternativas": [
+      "Ils sont donnés à une association.",
+      "Ils sont jetés.",
+      "Ils sont vendus le matin.",
+      "Ils sont rendus aux producteurs."
+     ],
+     "correta": 0,
+     "pergunta": "Que deviennent les invendus ?",
+     "transcricao": "Chers clients, retrouvez chaque soir à partir de dix-neuf heures nos paniers anti-gaspillage : des produits proches de leur date limite, à moitié prix. Les invendus sont donnés chaque matin à une association.",
+     "audio": "audio/exercicios-orais/ex-delf-10/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Je fais une liste avant les courses et j'achète moins, mais plus souvent ».",
+     "alternativas": [
+      "Elle ne cuisine plus.",
+      "Elle fait une liste et achète moins à la fois.",
+      "Elle a acheté un nouveau frigo.",
+      "Elle achète plus de légumes."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'a changé la femme dans ses habitudes ?",
+     "transcricao": "J'ai fait le test : pendant un mois, j'ai pesé tout ce que je jetais. Presque huit kilos ! Surtout des légumes oubliés au fond du frigo. Maintenant, je fais une liste avant les courses et j'achète moins, mais plus souvent.",
+     "audio": "audio/exercicios-orais/ex-delf-10/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que distingue os tipos de data.",
+     "alternativas": [
+      "Non, le yaourt est à la fraise.",
+      "Le frigo est plein.",
+      "Oui, j'ai deux jours de congé.",
+      "Oui, c'est une date de durabilité minimale, pas une date limite."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "La date sur le yaourt est dépassée de deux jours, on peut le manger ?\nA. Non, le yaourt est à la fraise.\nB. Le frigo est plein.\nC. Oui, j'ai deux jours de congé.\nD. Oui, c'est une date de durabilité minimale, pas une date limite.",
+     "audio": "audio/exercicios-orais/ex-delf-10/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Lutter efficacement suppose d'agir sur toute la chaîne ».",
+     "alternativas": [
+      "Manger uniquement des fruits calibrés.",
+      "Interdire les promotions.",
+      "Agir sur toute la chaîne alimentaire.",
+      "Culpabiliser davantage les consommateurs."
+     ],
+     "correta": 2,
+     "pergunta": "Que défend l'intervenante ?",
+     "transcricao": "On culpabilise volontiers les consommateurs, mais le gaspillage commence bien avant la cuisine : des fruits refusés parce qu'ils ne sont pas calibrés, des promotions qui poussent à acheter trop. Lutter efficacement suppose d'agir sur toute la chaîne, pas seulement sur le frigo des ménages.",
+     "audio": "audio/exercicios-orais/ex-delf-10/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Défendre un point de vue",
+     "duracaoSeg": 420,
+     "preparacaoSeg": 900,
+     "consigne": "Document déclencheur : « Faut-il obliger les restaurants et les supermarchés à ne rien jeter ? » Dégagez la problématique, présentez votre point de vue de manière organisée, puis défendez-le face à l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : quelle est la problématique et quel est votre point de vue ?"
+     ],
+     "fichaExaminador": "Débat : « Obligation = contraintes et coûts pour les petits commerces », « Et la sécurité sanitaire ? », « Les ménages gaspillent davantage »."
+    }
+   ]
+  }
+ }
+}

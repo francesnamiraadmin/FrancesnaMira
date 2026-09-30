@@ -1,0 +1,143 @@
+{
+ "slug": "ex-dalf-07",
+ "titulo": "Exercício oral nº 7 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "Sécurité ou vie privée ?",
+ "descricao": "Câmeras, reconhecimento facial e liberdades públicas.",
+ "imagem": {
+  "src": "img/temas/dalf-c1-essai-surveillance-2.jpg",
+  "credito": {
+   "autor": "4300streetcar",
+   "licenca": "CC BY 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Nation_Line_2_platform_May_2025_4.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-07/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Reação ao comentário.",
+     "alternativas": [
+      "Oui, depuis les travaux, c'est impressionnant.",
+      "Oui, la gare est loin.",
+      "Non, le train est à l'heure.",
+      "J'ai perdu mon billet."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Il y a des caméras partout dans cette gare !\nA. Oui, depuis les travaux, c'est impressionnant.\nB. Oui, la gare est loin.\nC. Non, le train est à l'heure.\nD. J'ai perdu mon billet.",
+     "audio": "audio/exercicios-orais/ex-dalf-07/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Semble s'être simplement déplacée vers les quartiers non équipés ».",
+     "alternativas": [
+      "Les vols ont augmenté.",
+      "Les caméras ne fonctionnent pas.",
+      "Une partie des délits s'est déplacée ailleurs.",
+      "Les caméras coûtent trop cher."
+     ],
+     "correta": 2,
+     "pergunta": "Quelle réserve est exprimée ?",
+     "transcricao": "La ville a installé deux cents nouvelles caméras de vidéosurveillance. Selon la mairie, les vols dans les transports ont baissé de dix pour cent ; mais une partie de ces délits semble s'être simplement déplacée vers les quartiers non équipés.",
+     "audio": "audio/exercicios-orais/ex-dalf-07/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Rien n'empêche un futur gouvernement d'en faire un tout autre usage ».",
+     "alternativas": [
+      "La lenteur de la technologie.",
+      "Les erreurs d'identification.",
+      "Le coût des caméras.",
+      "Un usage futur détourné de la technologie."
+     ],
+     "correta": 3,
+     "pergunta": "Quelle inquiétude exprime l'intervenante ?",
+     "transcricao": "La reconnaissance faciale n'est pas une caméra de plus : elle permet d'identifier une personne automatiquement, en temps réel, dans une foule. Une fois l'infrastructure installée, rien n'empêche un futur gouvernement d'en faire un tout autre usage.",
+     "audio": "audio/exercicios-orais/ex-dalf-07/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Contra-argumento clássico.",
+     "alternativas": [
+      "Non, j'ai peur du noir.",
+      "Tu caches quoi ?",
+      "La vie privée n'est pas faite pour cacher des fautes, mais pour rester libre.",
+      "Oui, je n'ai rien caché."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Si on n'a rien à cacher, on n'a rien à craindre, non ?\nA. Non, j'ai peur du noir.\nB. Tu caches quoi ?\nC. La vie privée n'est pas faite pour cacher des fautes, mais pour rester libre.\nD. Oui, je n'ai rien caché.",
+     "audio": "audio/exercicios-orais/ex-dalf-07/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Produire une autre forme d'insécurité, celle du citoyen face au pouvoir ».",
+     "alternativas": [
+      "Les deux sont impossibles à mesurer.",
+      "Trop de surveillance crée une insécurité face au pouvoir.",
+      "La sécurité est plus importante que la liberté.",
+      "La liberté menace la sécurité."
+     ],
+     "correta": 1,
+     "pergunta": "Pourquoi l'image de la balance est-elle trompeuse, selon l'intervenant ?",
+     "transcricao": "On présente souvent la sécurité et la liberté comme les deux plateaux d'une balance. Mais l'image est trompeuse : une société qui sacrifie trop de libertés au nom de la sécurité finit par produire une autre forme d'insécurité, celle du citoyen face au pouvoir.",
+     "audio": "audio/exercicios-orais/ex-dalf-07/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — exposé et entretien (C1)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "Document de départ : « Plusieurs villes expérimentent la reconnaissance faciale lors de grands événements. Faut-il accepter moins de vie privée pour plus de sécurité ? » Vous présentez un exposé structuré (problématique, plan, arguments illustrés d'exemples) puis vous répondez aux questions de l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre exposé."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : efficacité réelle, contrôle démocratique, données personnelles, exemples étrangers."
+    }
+   ]
+  }
+ }
+}

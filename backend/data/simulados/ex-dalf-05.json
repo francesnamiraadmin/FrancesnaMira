@@ -1,0 +1,143 @@
+{
+ "slug": "ex-dalf-05",
+ "titulo": "Exercício oral nº 5 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "À quoi servent les musées ?",
+ "descricao": "Museus hoje: gratuidade, públicos novos, restituição de obras e experiência digital.",
+ "imagem": {
+  "src": "img/temas/dalf-c1-essai-musees-2.jpg",
+  "credito": {
+   "autor": "Tom Parnell from Scottish Borders, Scotland",
+   "licenca": "CC BY-SA 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Aberdeen_Art_Gallery_(53533915342).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-05/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta com uma condição.",
+     "alternativas": [
+      "Non, j'aime la peinture.",
+      "Oui, le musée est grand.",
+      "Le dimanche, je dors.",
+      "Oui, mais il faut réserver un créneau en ligne."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Le musée est gratuit le premier dimanche du mois ?\nA. Non, j'aime la peinture.\nB. Oui, le musée est grand.\nC. Le dimanche, je dors.\nD. Oui, mais il faut réserver un créneau en ligne.",
+     "audio": "audio/exercicios-orais/ex-dalf-05/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Les adolescents de quinze à vingt ans restent très peu nombreux ».",
+     "alternativas": [
+      "Les touristes étrangers.",
+      "Les adolescents de quinze à vingt ans.",
+      "Les personnes âgées.",
+      "Les enfants avec leur école."
+     ],
+     "correta": 1,
+     "pergunta": "Quel public reste peu présent ?",
+     "transcricao": "Les musées de la ville ont accueilli un million de visiteurs l'an dernier, dont un tiers d'enfants venus avec leur école. En revanche, les adolescents de quinze à vingt ans restent très peu nombreux.",
+     "audio": "audio/exercicios-orais/ex-dalf-05/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Les œuvres, elles, n'ont pas changé ».",
+     "alternativas": [
+      "Les œuvres exposées restent les mêmes.",
+      "Les jeunes ne viennent pas pour la musique.",
+      "Le musée est devenu une boîte de nuit.",
+      "Les nocturnes vont être supprimées."
+     ],
+     "correta": 0,
+     "pergunta": "Comment la responsable répond-elle aux critiques ?",
+     "transcricao": "Pour attirer les jeunes, nous avons proposé des nocturnes avec des musiciens et des visites commentées par des étudiants. La fréquentation a doublé. Certains nous reprochent de transformer le musée en boîte de nuit ; je réponds que les œuvres, elles, n'ont pas changé.",
+     "audio": "audio/exercicios-orais/ex-dalf-05/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta matizada.",
+     "alternativas": [
+      "J'ai visité le Louvre.",
+      "Non, le musée est fermé.",
+      "Au cas par cas, après un vrai travail d'historiens.",
+      "Oui, les objets sont anciens."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Faut-il rendre les objets venus des anciennes colonies ?\nA. J'ai visité le Louvre.\nB. Non, le musée est fermé.\nC. Au cas par cas, après un vrai travail d'historiens.\nD. Oui, les objets sont anciens.",
+     "audio": "audio/exercicios-orais/ex-dalf-05/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« La démocratisation culturelle est passée de l'accès au sens ».",
+     "alternativas": [
+      "Acheter des œuvres aux princes.",
+      "Ouvrir leurs portes au public.",
+      "Devenir gratuits.",
+      "Donner à chacun les clés pour comprendre les œuvres."
+     ],
+     "correta": 3,
+     "pergunta": "Selon l'intervenant, quel est le défi actuel des musées ?",
+     "transcricao": "Le musée est né au dix-huitième siècle d'une idée audacieuse : offrir à tous ce que seuls les princes possédaient. Aujourd'hui, la question n'est plus d'ouvrir les portes, mais de donner à chacun les clés pour comprendre ce qu'il voit. La démocratisation culturelle est passée de l'accès au sens.",
+     "audio": "audio/exercicios-orais/ex-dalf-05/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — exposé et entretien (C1)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "Document de départ : « De plus en plus de musées proposent des expositions immersives et numériques. Le musée doit-il divertir pour attirer ? » Vous présentez un exposé structuré (problématique, plan, arguments illustrés d'exemples) puis vous répondez aux questions de l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre exposé."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : authenticité des œuvres, publics éloignés, financement, rôle éducatif."
+    }
+   ]
+  }
+ }
+}

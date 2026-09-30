@@ -479,7 +479,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   </details>
 
   <!-- ===================== PAINEL DA EQUIPE ===================== -->
-  <!-- Admin vê todas as ferramentas; professor vê só Gestão de Alunos e Fila de Correção. -->
+  <!-- Admin vê todas as ferramentas; professor vê só Gestão de Alunos e Sistema de Correção. -->
   <details class="dash-section-card acordeao" id="painelEquipeBox" data-secao="equipe" style="display:none;">
     <summary class="acordeao-cabecalho">
       <span class="acordeao-icone"><img src="img/icones/teacher.svg" alt=""></span>
@@ -494,13 +494,11 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
         <a href="gestao-alunos.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/students.svg" alt="">Gestão de Alunos</a>
         <a href="exercicios.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/puzzle.svg" alt="">Deveres completos</a>
         <a href="admin-simulados.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/simulados.svg" alt="">Simulados ao Vivo</a>
-        <a href="professor-correcoes.html" class="dash-btn secundario" id="linkFilaProfessor"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Fila de Correção</a>
+        <a href="professor-correcoes.html" class="dash-btn secundario" id="linkFilaProfessor"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Sistema de Correção</a>
         <a href="admin-correcoes.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/settings-gear.svg" alt="">Painel Administrativo</a>
         <a href="admin-financeiro.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/estatisticas.svg" alt="">Balanço Financeiro</a>
-        <a href="admin-matriculas.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/personalizar.svg" alt="">Matrículas e Turmas</a>
-        <a href="admin-agenda.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Agenda de Aulas</a>
         <a href="admin-aulas.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/video.svg" alt="">Aulas Especializadas</a>
-        <a href="admin-horarios.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Grade de Horários</a>
+        <a href="admin-horarios.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Sistema de Aulas</a>
         <a href="admin-depoimentos.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/chat.svg" alt="">Depoimentos</a>
         <a href="admin-erros-questoes.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/warning.svg" alt="">Erros de Questões</a>
         <a href="admin-seguranca.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/lock.svg" alt="">Segurança <span class="badge-seguranca" id="badgeSeguranca"></span></a>
@@ -665,7 +663,7 @@ document.getElementById('summaryCards').addEventListener('keydown', e => {
 });
 
 // ===================== PAINEL DA EQUIPE =====================
-// Admin: todas as ferramentas. Professor: só Gestão de Alunos e Fila de Correção.
+// Admin: todas as ferramentas. Professor: só Gestão de Alunos e Sistema de Correção.
 function renderPainelEquipe(dados) {
   const admin = dados.role === 'admin';
   const professor = dados.role === 'professor';

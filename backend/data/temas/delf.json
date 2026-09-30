@@ -1,0 +1,742 @@
+[
+ {
+  "slug": "delf-a1-carte-postale-vacances",
+  "titulo": "Carte postale de vacances",
+  "nivel": "A1",
+  "tipoProducao": "DELF A1 — message simple",
+  "dificuldade": "facil",
+  "tempoSugerido": 15,
+  "limitePalavrasMin": 40,
+  "limitePalavrasMax": 60,
+  "descricao": "Escreva um cartão-postal simples para um amigo contando onde você está, com quem e o que faz nas férias.",
+  "objetivos": [
+   "Descrever um lugar com frases simples",
+   "Dizer o que você faz",
+   "Usar fórmulas de saudação e despedida"
+  ],
+  "criteriosResumo": [
+   "Informações pedidas",
+   "Fórmulas de abertura e fechamento",
+   "Frases simples corretas"
+  ],
+  "competenciasAvaliadas": [
+   "Presente do indicativo",
+   "Vocabulário das férias",
+   "Cartão-postal"
+  ],
+  "instrucoes": "Vous êtes en vacances. Vous écrivez une carte postale à un ami. Vous dites où vous êtes, avec qui, quel temps il fait et ce que vous faites. (40 à 60 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Une carte de Marseille »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro infantojuvenil)",
+    "conteudo": "Chère Lili, je suis à Marseille avec ma grand-mère. Il fait très chaud ! Le matin, nous allons à la plage. L'après-midi, nous mangeons des glaces sur le port. Il y a beaucoup de bateaux blancs. Ce soir, nous allons au cinéma en plein air. Tu me manques ! Gros bisous, Nina."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les Français aiment toujours les cartes postales",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Beaucoup de Français envoient encore des cartes postales en été. Ils achètent la carte dans un petit magasin, ils écrivent quelques mots et ils mettent un timbre. Les grands-parents adorent recevoir une carte. Les jeunes préfèrent souvent les photos sur le téléphone, mais une carte, on la garde longtemps."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Pourquoi les vacances font du bien",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica simplificado)",
+    "conteudo": "Les médecins disent que les vacances sont bonnes pour la santé. On dort mieux, on marche plus et on est moins stressé. Après une ou deux semaines de repos, beaucoup de personnes ont plus d'énergie. Changer de lieu, voir la mer ou la montagne, aide aussi le cerveau à se reposer."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-a1-carte-postale-vacances-1.jpg",
+    "legenda": "O Vieux-Port de Marselha",
+    "credito": {
+     "autor": "Kdeifalla2026",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:The_old_Port_(Vieux_Port)_of_Marseille_During_early_spring_days.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-a1-carte-postale-vacances-2.jpg",
+    "legenda": "Cartões-postais",
+    "credito": {
+     "autor": "American Greeting Publishers, Cleveland, Ohio / Union News Co. / C.T. Art-Colortone (Curteich)",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Main_Avenue_Bridge_Looking_West,_Cleveland,_Ohio_Vintage_Postcard.jpg"
+    }
+   }
+  ],
+  "ordem": 1,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "delf-a2-annuler-sortie",
+  "titulo": "Annuler une sortie avec un ami",
+  "nivel": "A2",
+  "tipoProducao": "DELF A2 — message amical",
+  "dificuldade": "facil",
+  "tempoSugerido": 20,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 80,
+  "descricao": "Cancele um passeio combinado com um amigo: peça desculpas, explique o motivo e proponha outra data.",
+  "objetivos": [
+   "Pedir desculpas",
+   "Justificar com clareza",
+   "Propor uma alternativa"
+  ],
+  "criteriosResumo": [
+   "Desculpa + motivo + proposta",
+   "Registro amigável",
+   "Passé composé e futuro próximo"
+  ],
+  "competenciasAvaliadas": [
+   "Mensagem informal",
+   "Justificativa",
+   "Proposta de data"
+  ],
+  "instrucoes": "Samedi, vous deviez aller au musée avec votre ami Hugo, mais vous ne pouvez pas y aller. Vous lui écrivez un message pour vous excuser, expliquer pourquoi et proposer un autre jour. (60 à 80 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le rendez-vous manqué »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance juvenil)",
+    "conteudo": "Paul attendait devant le cinéma depuis vingt minutes. Il faisait froid et il commençait à pleuvoir. Enfin, son téléphone a sonné : « Désolé, mon bus est en panne ! On se voit dimanche ? » Paul a souri. Il n'était plus fâché : son ami avait pensé à le prévenir. Il a répondu : « D'accord, dimanche à 15 heures ! »"
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le dimanche, les musées sont gratuits",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Dans beaucoup de villes françaises, les musées sont gratuits le premier dimanche du mois. Ce jour-là, les familles et les étudiants viennent nombreux. Il y a parfois une longue file d'attente devant l'entrée. Les responsables conseillent d'arriver tôt le matin ou de réserver un créneau sur Internet."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Annuler un rendez-vous : la politesse compte",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação sobre psicologia)",
+    "conteudo": "Selon des psychologues, annuler un rendez-vous n'est pas grave si on respecte trois règles : prévenir le plus tôt possible, donner une raison sincère et proposer une autre date. Une personne qui annule sans explication donne l'impression de ne pas respecter l'autre. Au contraire, un message clair et gentil protège l'amitié."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-a2-annuler-sortie-1.jpg",
+    "legenda": "Visitantes num museu",
+    "credito": {
+     "autor": "Krzysztof Popławski",
+     "licenca": "CC BY 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Gallery_of_Polish_Painting_and_European_Decorative_Arts,_National_Museum_in_Kielce,_czerwiec_2025,_SOULinPIX_092.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-a2-annuler-sortie-2.jpg",
+    "legenda": "Uma mensagem no celular",
+    "credito": {
+     "autor": "Nenad Stojkovic",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Young_business_woman_with_curly_hair_in_uniform_using_smartphone_at_home._(51487906519).jpg"
+    }
+   }
+  ],
+  "ordem": 2,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "delf-a2-nouveau-travail",
+  "titulo": "Raconter sa première semaine de travail",
+  "nivel": "A2",
+  "tipoProducao": "DELF A2 — lettre / courriel",
+  "dificuldade": "medio",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 60,
+  "limitePalavrasMax": 80,
+  "descricao": "Conte num e-mail a um amigo como foi sua primeira semana num novo emprego: colegas, horários, impressões.",
+  "objetivos": [
+   "Narrar no passado",
+   "Descrever pessoas e lugares",
+   "Expressar impressões"
+  ],
+  "criteriosResumo": [
+   "Narração no passado",
+   "Descrição simples",
+   "Opinião pessoal"
+  ],
+  "competenciasAvaliadas": [
+   "E-mail pessoal",
+   "Passé composé e imparfait",
+   "Vocabulário do trabalho"
+  ],
+  "instrucoes": "Vous venez de commencer un nouveau travail. Vous écrivez un courriel à un ami pour lui raconter votre première semaine : vos collègues, vos horaires, ce que vous avez aimé ou non. (60 à 80 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Premier jour à la boulangerie »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Le premier jour, je suis arrivée à cinq heures du matin. Le boulanger, un grand homme calme, m'a montré le four, la farine et les différents pains. J'étais un peu perdue. Mais à sept heures, les premiers clients sont entrés, l'odeur des croissants a rempli la boutique, et j'ai compris que j'allais aimer ce travail."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Bien accueillir les nouveaux salariés",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "De plus en plus d'entreprises organisent une « semaine d'accueil » pour les nouveaux salariés. Chaque nouvel employé a un collègue « parrain » qui répond à ses questions. On lui présente l'équipe, on lui fait visiter les locaux et on déjeune avec lui. Les entreprises constatent que les nouveaux arrivants restent plus longtemps quand ils sont bien accueillis."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Les premiers jours au travail sont décisifs",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des études sur le travail montrent que les premières semaines dans un emploi influencent beaucoup la satisfaction à long terme. Un salarié qui se sent bien accueilli comprend plus vite son rôle et fait moins d'erreurs. Au contraire, un accueil désorganisé augmente le risque de démission pendant les premiers mois."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-a2-nouveau-travail-1.jpg",
+    "legenda": "Uma padaria francesa",
+    "credito": {
+     "autor": "Jdm-insane-cars",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Boulangerie_HK.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-a2-nouveau-travail-2.jpg",
+    "legenda": "Colegas numa reunião de equipe",
+    "credito": {
+     "autor": "Clint Gordon-Carroll",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Novell_people_working_late_2007.jpg"
+    }
+   }
+  ],
+  "ordem": 3,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "delf-b1-telephone-enfants",
+  "titulo": "À quel âge offrir un téléphone à un enfant ?",
+  "nivel": "B1",
+  "tipoProducao": "DELF B1 — essai / forum",
+  "dificuldade": "medio",
+  "tempoSugerido": 45,
+  "limitePalavrasMin": 160,
+  "limitePalavrasMax": 200,
+  "descricao": "Num fórum de pais, dê sua opinião sobre a idade certa para uma criança ter o próprio celular, com argumentos e exemplos.",
+  "objetivos": [
+   "Expressar e justificar uma opinião",
+   "Dar exemplos pessoais",
+   "Organizar o texto com conectores"
+  ],
+  "criteriosResumo": [
+   "Opinião clara e argumentada",
+   "Exemplos",
+   "Coerência e conectores"
+  ],
+  "competenciasAvaliadas": [
+   "Texto de opinião",
+   "Subjuntivo após expressões de opinião",
+   "Conectores lógicos"
+  ],
+  "instrucoes": "Sur un forum de parents, on pose la question : « À quel âge faut-il offrir un téléphone portable à un enfant ? » Vous répondez en donnant votre opinion, avec des arguments et des exemples. (160 à 180 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« L'écran de Théo »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Depuis qu'il avait son téléphone, Théo ne descendait plus au jardin. Sa mère le trouvait dans sa chambre, la tête penchée sur l'écran, les écouteurs sur les oreilles. Un soir, la batterie tomba en panne. Pendant une heure, Théo tourna en rond, puis il sortit son vieux ballon. Quand sa mère rentra, il jouait dans la cour avec les voisins, riant comme avant."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Premier téléphone : un âge qui recule",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Selon plusieurs enquêtes, les enfants reçoivent leur premier smartphone de plus en plus tôt, souvent à l'entrée au collège, vers onze ans. Les parents évoquent la sécurité : pouvoir joindre leur enfant sur le trajet de l'école. Mais certains collectifs de parents s'engagent à attendre quinze ans et proposent des téléphones simples, sans Internet, pour les plus jeunes."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Écrans et sommeil chez les préadolescents",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les chercheurs observent que les enfants qui gardent leur téléphone dans leur chambre la nuit dorment en moyenne moins longtemps que les autres. La lumière des écrans retarde l'endormissement et les notifications réveillent. Les pédiatres recommandent de laisser le téléphone hors de la chambre et de limiter les réseaux sociaux avant l'adolescence."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-b1-telephone-enfants-1.jpg",
+    "legenda": "Uma criança com um celular",
+    "credito": {
+     "autor": "Shixart1985",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Child_uses_smartphone_to_play_games_at_home_closeup.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-b1-telephone-enfants-2.jpg",
+    "legenda": "Crianças brincando ao ar livre",
+    "credito": {
+     "autor": "Julian Lupyan",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Children_Playing_with_Decommissioned_M1937_Anti-Tank_Gun_outside_Skopje_Fortress,_North_Macedonia.jpg"
+    }
+   }
+  ],
+  "ordem": 4,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "delf-b1-lettre-mairie-parc",
+  "titulo": "Écrire à la mairie pour sauver un parc",
+  "nivel": "B1",
+  "tipoProducao": "DELF B1 — lettre formelle",
+  "dificuldade": "medio",
+  "tempoSugerido": 45,
+  "limitePalavrasMin": 160,
+  "limitePalavrasMax": 200,
+  "descricao": "Escreva uma carta formal ao prefeito contra a construção de um estacionamento no lugar de um parque do bairro.",
+  "objetivos": [
+   "Usar o registro formal",
+   "Expor um problema e argumentar",
+   "Fazer uma proposta"
+  ],
+  "criteriosResumo": [
+   "Carta formal completa",
+   "Argumentos convincentes",
+   "Proposta concreta"
+  ],
+  "competenciasAvaliadas": [
+   "Carta formal",
+   "Argumentação",
+   "Condicional de cortesia"
+  ],
+  "instrucoes": "La mairie de votre ville veut remplacer le parc de votre quartier par un parking. Vous écrivez une lettre au maire pour exprimer votre désaccord, expliquer l'importance de ce parc et proposer une autre solution. (160 à 180 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le banc sous le tilleul »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Chaque après-midi, Madame Lefort s'asseyait sur le même banc, sous le grand tilleul du parc. Elle connaissait tous les enfants du quartier, les chiens et leurs maîtres, le jardinier qui taillait les rosiers. Pour elle, qui vivait seule depuis longtemps, ce banc était une fenêtre ouverte sur la vie. Le jour où elle apprit qu'on voulait couper l'arbre, elle écrivit sa première lettre de protestation."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les habitants se mobilisent pour leurs espaces verts",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Dans plusieurs villes, des projets de construction sur des espaces verts provoquent la colère des habitants. Pétitions, lettres aux élus, rassemblements : les associations de quartier se mobilisent. Dans certains cas, les mairies ont modifié leurs projets, en construisant le parking en sous-sol ou sur un terrain déjà bâti, et en conservant les arbres existants."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Les parcs, climatiseurs naturels des villes",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Pendant les vagues de chaleur, la température peut être inférieure de plusieurs degrés dans un parc arboré par rapport aux rues voisines. Les arbres rafraîchissent l'air grâce à leur ombre et à l'évaporation de l'eau par leurs feuilles. Les urbanistes recommandent qu'aucun habitant ne vive à plus de quelques minutes à pied d'un espace vert."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-b1-lettre-mairie-parc-1.jpg",
+    "legenda": "Um banco à sombra num parque",
+    "credito": {
+     "autor": "Sgreene24",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Tree_and_park_bench_in_fresh_snow.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-b1-lettre-mairie-parc-2.jpg",
+    "legenda": "Um estacionamento urbano",
+    "credito": {
+     "autor": "Tomwsulcer",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:New_York_City_parking_lot_structure_for_cars.JPG"
+    }
+   }
+  ],
+  "ordem": 5,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "delf-b1-voyage-seul",
+  "titulo": "Voyager seul : une bonne idée ?",
+  "nivel": "B1",
+  "tipoProducao": "DELF B1 — article de blog",
+  "dificuldade": "medio",
+  "tempoSugerido": 45,
+  "limitePalavrasMin": 160,
+  "limitePalavrasMax": 200,
+  "descricao": "Escreva um artigo de blog sobre viajar sozinho: conte uma experiência e dê sua opinião sobre vantagens e desvantagens.",
+  "objetivos": [
+   "Relatar uma experiência",
+   "Pesar vantagens e desvantagens",
+   "Concluir com uma opinião"
+  ],
+  "criteriosResumo": [
+   "Relato + reflexão",
+   "Argumentos pró e contra",
+   "Conclusão clara"
+  ],
+  "competenciasAvaliadas": [
+   "Artigo de blog",
+   "Tempos do passado",
+   "Expressão da concessão"
+  ],
+  "instrucoes": "Vous écrivez un article sur votre blog de voyage : « Voyager seul, est-ce une bonne idée ? » Racontez une expérience personnelle et donnez votre opinion sur les avantages et les inconvénients du voyage en solitaire. (160 à 180 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Seule à Lisbonne »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de relato de viagem)",
+    "conteudo": "Le premier soir, j'ai failli repartir. Personne à qui parler, un restaurant où je dînais face à une chaise vide. Puis, le deuxième jour, une vieille dame m'a demandé mon chemin, persuadée que j'habitais le quartier. Nous avons marché ensemble jusqu'au tramway. J'ai compris que, seule, j'étais disponible pour les rencontres. Je suis rentrée avec des adresses dans mon carnet et une confiance nouvelle."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le voyage en solo séduit de plus en plus",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Les agences de voyage constatent une forte hausse des réservations individuelles, en particulier chez les femmes de plus de cinquante ans et les jeunes adultes. Certaines proposent désormais des séjours sans supplément pour les chambres individuelles ou des circuits réservés aux voyageurs seuls. Les professionnels rappellent quelques précautions : informer ses proches de son itinéraire et garder des copies de ses documents."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Ce que la solitude choisie apporte",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des recherches en psychologie distinguent la solitude subie, source de souffrance, et la solitude choisie, qui peut favoriser la créativité et la connaissance de soi. Les voyageurs qui partent seuls déclarent souvent avoir développé leur autonomie et leur capacité d'adaptation. Les chercheurs notent toutefois que les bénéfices dépendent de la personnalité : pour certaines personnes, le voyage à plusieurs reste plus épanouissant."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-b1-voyage-seul-1.jpg",
+    "legenda": "O bonde de Lisboa",
+    "credito": {
+     "autor": "Ввласенко",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Tram_28_Lisbon_Portuguese.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-b1-voyage-seul-2.jpg",
+    "legenda": "Um viajante sozinho na montanha",
+    "credito": {
+     "autor": "Hermann",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Mountaineering_Man_Trail_Path_Mountains.jpg"
+    }
+   }
+  ],
+  "ordem": 6,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "delf-b2-semaine-quatre-jours",
+  "titulo": "La semaine de quatre jours au travail",
+  "nivel": "B2",
+  "tipoProducao": "DELF B2 — lettre ouverte argumentée",
+  "dificuldade": "dificil",
+  "tempoSugerido": 60,
+  "limitePalavrasMin": 250,
+  "limitePalavrasMax": 300,
+  "descricao": "Como representante dos funcionários, escreva à direção defendendo (ou não) a semana de quatro dias, com argumentos organizados.",
+  "objetivos": [
+   "Defender uma posição num registro formal",
+   "Organizar argumentos e contra-argumentos",
+   "Propor medidas concretas"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Registro formal",
+   "Riqueza e precisão lexical"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo B2",
+   "Concessão e refutação",
+   "Vocabulário do trabalho"
+  ],
+  "instrucoes": "Vous êtes représentant(e) du personnel dans votre entreprise. La direction hésite à mettre en place la semaine de quatre jours. Vous lui écrivez une lettre pour présenter votre position, argumentée et illustrée d'exemples, et faire des propositions concrètes. (250 mots minimum)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le vendredi retrouvé »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance contemporâneo)",
+    "conteudo": "Le premier vendredi libre, Claire ne sut pas quoi faire. Elle rangea la cuisine, répondit à deux courriels par réflexe, puis s'assit sur le balcon, désœuvrée. Le deuxième, elle emmena sa fille à la piscine. Le troisième, elle reprit le violon abandonné depuis vingt ans. Au bureau, on remarqua qu'elle arrivait le lundi avec une énergie nouvelle. Elle travaillait moins d'heures, mais mieux, disait son chef, un peu étonné."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Semaine de quatre jours : des résultats contrastés",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Plusieurs expériences menées au Royaume-Uni, en Espagne et en Belgique ont testé la semaine de quatre jours. Dans la majorité des entreprises participantes, la productivité est restée stable et les arrêts maladie ont diminué. Mais le modèle ne convient pas à tous les secteurs : dans les hôpitaux, les commerces ou les usines qui fonctionnent en continu, il suppose d'embaucher davantage, ce qui augmente les coûts."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Fatigue, concentration et durée du travail",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les études en ergonomie montrent que la productivité horaire diminue lorsque les journées s'allongent : au-delà d'un certain seuil, la fatigue augmente le nombre d'erreurs et d'accidents. Réduire le nombre de jours travaillés sans allonger excessivement les journées peut donc améliorer l'efficacité. Les chercheurs soulignent en revanche que compresser cinq jours de travail en quatre journées très longues produit l'effet inverse."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-b2-semaine-quatre-jours-1.jpg",
+    "legenda": "Um escritório em open space",
+    "credito": {
+     "autor": "Eric Jones",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Belfast_shop_and_office_workers_enjoying_the_fine_weather_at_the_City_Hall_War_Garden_of_Remembrance_-_geograph.org.uk_-_3744659.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-b2-semaine-quatre-jours-2.jpg",
+    "legenda": "Uma família aproveitando o tempo livre",
+    "credito": {
+     "autor": "mypubliclands",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:-mypubliclandsroadtrip_2016-_Something_Different,_Idaho_Boater_Parks_(29432299216).jpg"
+    }
+   }
+  ],
+  "ordem": 7,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "delf-b2-tourisme-masse",
+  "titulo": "Faut-il limiter le tourisme dans les villes historiques ?",
+  "nivel": "B2",
+  "tipoProducao": "DELF B2 — article argumenté",
+  "dificuldade": "dificil",
+  "tempoSugerido": 60,
+  "limitePalavrasMin": 250,
+  "limitePalavrasMax": 300,
+  "descricao": "Escreva um artigo para uma revista discutindo se as cidades históricas devem limitar o número de turistas.",
+  "objetivos": [
+   "Apresentar um problema atual",
+   "Argumentar com nuance",
+   "Concluir com uma posição clara"
+  ],
+  "criteriosResumo": [
+   "Problemática + argumentos + conclusão",
+   "Exemplos pertinentes",
+   "Coesão e registro"
+  ],
+  "competenciasAvaliadas": [
+   "Artigo de opinião",
+   "Vocabulário do turismo e da cidade",
+   "Articuladores lógicos"
+  ],
+  "instrucoes": "Vous écrivez un article pour un magazine de voyage : « Faut-il limiter le nombre de touristes dans les villes historiques ? » Vous présentez le problème, vous donnez votre opinion en l'appuyant sur des arguments et des exemples précis. (250 mots minimum)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La dernière habitante »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Dans la ruelle, toutes les maisons étaient devenues des locations pour touristes. Marta était la dernière à y vivre à l'année. Le matin, elle croisait des valises à roulettes, jamais des voisins. La boulangerie avait fermé, remplacée par une boutique de souvenirs. Un jour, un touriste lui demanda poliment de s'écarter de sa propre fenêtre : elle gâchait sa photo. Marta éclata de rire, puis, le soir, elle pleura."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Venise instaure un droit d'entrée pour les visiteurs à la journée",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Pour réguler l'afflux de visiteurs, Venise fait désormais payer un droit d'entrée aux touristes qui ne restent que la journée, certains jours de forte affluence. D'autres villes limitent le nombre de paquebots de croisière ou encadrent les locations de courte durée. Les commerçants craignent une baisse de leurs revenus, tandis que les habitants espèrent retrouver une ville où il est encore possible de vivre."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Mesurer la capacité de charge d'une ville",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les géographes parlent de « capacité de charge » pour désigner le nombre de visiteurs qu'un lieu peut accueillir sans dégradation de son patrimoine ni de la qualité de vie de ses habitants. Au-delà de ce seuil, les effets négatifs se multiplient : hausse des loyers, usure des monuments, départ des résidents. Les chercheurs proposent de mieux répartir les visiteurs dans le temps et dans l'espace plutôt que de simplement les exclure."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-b2-tourisme-masse-1.jpg",
+    "legenda": "Turistas em Veneza",
+    "credito": {
+     "autor": "Janina Glanc (1920-2004)",
+     "licenca": "CC BY 3.0 pl",
+     "urlLicenca": "https://creativecommons.org/licenses/by/3.0/pl/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Tourists_at_Piazzetta_San_Marco_(Venice)_in_1970.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-b2-tourisme-masse-2.jpg",
+    "legenda": "Um navio de cruzeiro no porto",
+    "credito": {
+     "autor": "Wilfredor",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:ZAANDAM_Cruise_in_Quebec_City.jpg"
+    }
+   }
+  ],
+  "ordem": 8,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "delf-b2-ecole-uniforme",
+  "titulo": "L'uniforme scolaire : pour ou contre ?",
+  "nivel": "B2",
+  "tipoProducao": "DELF B2 — contribution à un débat",
+  "dificuldade": "dificil",
+  "tempoSugerido": 60,
+  "limitePalavrasMin": 250,
+  "limitePalavrasMax": 300,
+  "descricao": "Participe de um debate no site do colégio sobre a volta do uniforme escolar: defenda sua posição com argumentos sólidos.",
+  "objetivos": [
+   "Defender uma posição num debate",
+   "Refutar argumentos contrários",
+   "Usar exemplos concretos"
+  ],
+  "criteriosResumo": [
+   "Posição clara e defendida",
+   "Refutação",
+   "Coesão e riqueza lexical"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Refutação",
+   "Vocabulário escolar"
+  ],
+  "instrucoes": "Le collège de votre ville envisage d'imposer un uniforme aux élèves. Sur le site de l'établissement, un espace de débat est ouvert aux parents et aux élèves. Vous rédigez une contribution dans laquelle vous prenez position, en répondant aux arguments du camp opposé. (250 mots minimum)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La veste bleue »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Au lycée de ma mère, tout le monde portait la même veste bleue. Elle m'a souvent raconté qu'on reconnaissait pourtant les riches aux chaussures, aux montres, à la façon de nouer la cravate. « L'uniforme ne supprime pas les différences, disait-elle, il les déplace. » Mais elle ajoutait, avec un sourire, que le matin, au moins, elle n'avait jamais perdu une minute devant son armoire."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "L'uniforme à l'école, une expérience suivie de près",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Plusieurs établissements testent le port d'une tenue commune. Les directions mettent en avant l'égalité entre élèves et un climat plus calme. Des familles s'inquiètent du coût des vêtements, en partie pris en charge par les collectivités. Du côté des élèves, les avis sont partagés : certains apprécient de ne plus être jugés sur leurs marques, d'autres regrettent de ne plus pouvoir exprimer leur personnalité."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Uniforme et résultats scolaires : ce que disent les études",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les travaux menés dans différents pays ne montrent pas d'effet clair de l'uniforme sur les résultats scolaires. Certaines études observent une légère amélioration du sentiment d'appartenance et une baisse des moqueries liées aux vêtements ; d'autres ne constatent aucune différence. Les chercheurs soulignent que l'uniforme n'agit pas seul : l'ambiance d'un établissement dépend surtout de l'encadrement et du projet éducatif."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-b2-ecole-uniforme-1.jpg",
+    "legenda": "Alunos de uniforme",
+    "credito": {
+     "autor": "TagaSanPedroAko",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:High_school_students_waiting_at_Aguinaldo_Highway,_Dasmari%C3%B1as,_Cavite_07-02-2019.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-b2-ecole-uniforme-2.jpg",
+    "legenda": "O corredor de um colégio",
+    "credito": {
+     "autor": "Hakamal",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Universal_secondary_education.jpg"
+    }
+   }
+  ],
+  "ordem": 9,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "delf-b2-gaspillage-alimentaire",
+  "titulo": "Lutter contre le gaspillage alimentaire",
+  "nivel": "B2",
+  "tipoProducao": "DELF B2 — lettre au courrier des lecteurs",
+  "dificuldade": "dificil",
+  "tempoSugerido": 60,
+  "limitePalavrasMin": 250,
+  "limitePalavrasMax": 300,
+  "descricao": "Reaja a um artigo sobre desperdício de alimentos com uma carta aos leitores: quem é responsável e o que fazer?",
+  "objetivos": [
+   "Reagir a um texto lido",
+   "Atribuir responsabilidades com argumentos",
+   "Propor soluções"
+  ],
+  "criteriosResumo": [
+   "Reação ao artigo",
+   "Argumentos e soluções",
+   "Registro formal"
+  ],
+  "competenciasAvaliadas": [
+   "Carta ao jornal",
+   "Expressão da causa e da consequência",
+   "Vocabulário do consumo"
+  ],
+  "instrucoes": "Vous avez lu dans un magazine un article sur le gaspillage alimentaire. Vous écrivez au courrier des lecteurs pour réagir : qui est responsable, selon vous, et quelles solutions faudrait-il mettre en place ? (250 mots minimum)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le pain de la veille »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Ma grand-mère ne jetait jamais rien. Le pain dur devenait du pain perdu, les restes du dimanche se transformaient en soupe du lundi, les épluchures nourrissaient les poules. Elle avait connu la guerre et les tickets de rationnement. Quand je laissais quelque chose dans mon assiette, elle ne disait rien ; elle me regardait simplement, et ce regard valait tous les discours."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Supermarchés : les invendus donnés aux associations",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "En France, les grandes surfaces ont l'interdiction de détruire leurs invendus alimentaires encore consommables : elles doivent les proposer à des associations d'aide alimentaire. Des applications permettent aussi aux consommateurs d'acheter à prix réduit des paniers de produits proches de la date limite. Mais selon les associations, l'essentiel du gaspillage se produit ailleurs : dans les foyers et dans la restauration."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Où se perd la nourriture ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Selon les estimations des organisations internationales, près d'un tiers de la nourriture produite dans le monde est perdue ou gaspillée. Dans les pays riches, une grande partie de ce gaspillage a lieu au stade de la consommation : produits oubliés au réfrigérateur, confusion entre date limite de consommation et date de durabilité minimale, portions trop grandes. Les campagnes d'information sur les dates ont un effet mesurable."
+   }
+  ],
+  "courseType": "DELF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/delf-b2-gaspillage-alimentaire-1.jpg",
+    "legenda": "Alimentos jogados fora",
+    "credito": {
+     "autor": "Sgroey",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Jeju_community_food_waste_disposal_bins.jpg"
+    }
+   },
+   {
+    "src": "img/temas/delf-b2-gaspillage-alimentaire-2.jpg",
+    "legenda": "Doações de alimentos",
+    "credito": {
+     "autor": "U.S. Department of Agriculture",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Capital_Area_Food_Bank_Volunteers_-_Flickr_-_USDAgov.jpg"
+    }
+   }
+  ],
+  "ordem": 10,
+  "exame": "DELF",
+  "creditosNecessarios": 1
+ }
+]

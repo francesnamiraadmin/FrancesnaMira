@@ -1,0 +1,159 @@
+{
+ "slug": "ex-tcf-03",
+ "titulo": "Exercício oral nº 3 — TCF",
+ "curso": "TCF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "S'installer au Canada",
+ "descricao": "Mensagens e reportagens sobre mudança para o Canadá; inclui uma breve tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/tcf-t1-conseils-montreal-2.jpg",
+  "credito": {
+   "autor": "Exile on Ontario St from Montreal, Canada",
+   "licenca": "CC BY-SA 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:March_2017_Blizzard_-_Car_buried_by_snow_in_Montreal_(33357062991).jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral convertida para a escala do TCF (0–699), com NCLC; expressões de 0 a 20, com nível CECR e NCLC.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tcf-03/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre o apartamento (« trois et demie » = apartamento de 2 quartos em Québec).",
+     "alternativas": [
+      "Je pars en juillet.",
+      "Non, il fait froid.",
+      "Oui, un trois et demie près du métro.",
+      "Oui, je parle français."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as trouvé un appartement à Montréal ?\nA. Je pars en juillet.\nB. Non, il fait froid.\nC. Oui, un trois et demie près du métro.\nD. Oui, je parle français.",
+     "audio": "audio/exercicios-orais/ex-tcf-03/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Apportez votre CV imprimé et une pièce d'identité ».",
+     "alternativas": [
+      "Un ordinateur portable.",
+      "Ses diplômes originaux.",
+      "Une lettre de recommandation.",
+      "Son CV imprimé et une pièce d'identité."
+     ],
+     "correta": 3,
+     "pergunta": "Que faut-il apporter ?",
+     "transcricao": "Bonjour, c'est l'organisme d'accueil. Votre atelier sur la recherche d'emploi est confirmé pour mardi à 14 heures. Apportez votre CV imprimé et une pièce d'identité.",
+     "audio": "audio/exercicios-orais/ex-tcf-03/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« La plupart des baux se terminent le 30 juin ».",
+     "alternativas": [
+      "Beaucoup de baux se terminent la veille.",
+      "C'est la fête nationale.",
+      "Les loyers baissent ce jour-là.",
+      "Les déménagements sont gratuits."
+     ],
+     "correta": 0,
+     "pergunta": "Pourquoi le 1er juillet est-il particulier au Québec ?",
+     "transcricao": "Au Québec, le 1er juillet est surnommé le jour du déménagement : la plupart des baux se terminent le 30 juin. Des milliers de familles changent de logement le même jour, les camions sont réservés des mois à l'avance et les trottoirs se couvrent de meubles abandonnés.",
+     "audio": "audio/exercicios-orais/ex-tcf-03/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que exprime um sentimento matizado.",
+     "alternativas": [
+      "Un peu, mais la lumière de janvier est magnifique.",
+      "Non, je n'ai jamais vu la mer.",
+      "Oui, je pars demain matin.",
+      "L'été dure trois mois."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Et l'hiver, tu ne regrettes pas le soleil du Brésil ?\nA. Un peu, mais la lumière de janvier est magnifique.\nB. Non, je n'ai jamais vu la mer.\nC. Oui, je pars demain matin.\nD. L'été dure trois mois.",
+     "audio": "audio/exercicios-orais/ex-tcf-03/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« La difficulté principale est souvent ailleurs : l'absence de réseau ».",
+     "alternativas": [
+      "La maîtrise de la langue.",
+      "Le manque de réseau professionnel.",
+      "La reconnaissance des diplômes.",
+      "Le climat."
+     ],
+     "correta": 1,
+     "pergunta": "Quelle est, selon l'intervenante, la principale difficulté ?",
+     "transcricao": "On parle beaucoup de la reconnaissance des diplômes des immigrants. Mais la difficulté principale est souvent ailleurs : l'absence de réseau professionnel. Un ingénieur qualifié peut attendre des mois un entretien, simplement parce que personne ne peut le recommander. Les programmes de mentorat tentent de combler ce vide.",
+     "audio": "audio/exercicios-orais/ex-tcf-03/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 900,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — message",
+     "min": 60,
+     "max": 120,
+     "consigne": "Vous venez d'arriver au Canada. Vous écrivez un message à un ami pour lui raconter votre première semaine et lui demander un conseil. (60 à 120 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 300,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur : vous parlez de vous, de votre parcours et de vos projets.",
+     "perguntasExaminador": [
+      "Bonjour. Pouvez-vous vous présenter, s'il vous plaît ?",
+      "Pourquoi avez-vous choisi d'apprendre le français ?",
+      "Où aimeriez-vous vivre dans cinq ans ?",
+      "Qu'est-ce qui vous manquerait le plus de votre pays ?"
+     ]
+    }
+   ]
+  }
+ }
+}

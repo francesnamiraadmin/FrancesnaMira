@@ -231,10 +231,13 @@
   // Estímulo da questão (imagem, frase com lacuna, documento) — sem as alternativas.
   function enunciado(q, prova) {
     // Frase com lacuna (revisão): "início ____ fim", sem as reticências do livret.
-    if (prova === "sl") return `<p class="sm-lacuna">${esc(q.inicio.replace(/…$/, ""))} <span class="buraco">&nbsp;</span> ${esc(q.fim.replace(/^…\s*/, ""))}</p>`;
+    if (prova === "sl" || q.tipo === "lacuna") return `<p class="sm-lacuna">${esc(q.inicio.replace(/…$/, ""))} <span class="buraco">&nbsp;</span> ${esc(q.fim.replace(/^…\s*/, ""))}</p>`;
     if (prova === "ce") return documento(q);
     return q.imagem ? figura(q.imagem, "sm-figura-co") : "";
   }
 
-  window.SimuladoAoVivo = { api, stream, Chamada, nivelExpressao, nclcExpressao, esc, contarPalavras, mmss, INSTRUCOES, enunciado, figura, documento };
+  // Número exibido: `num` (ordem na prova) quando existe; `n` é o identificador interno.
+  const numero = q => (q.num != null ? q.num : q.n);
+
+  window.SimuladoAoVivo = { numero, api, stream, Chamada, nivelExpressao, nclcExpressao, esc, contarPalavras, mmss, INSTRUCOES, enunciado, figura, documento };
 })();

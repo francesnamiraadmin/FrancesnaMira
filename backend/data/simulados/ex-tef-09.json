@@ -1,0 +1,157 @@
+{
+ "slug": "ex-tef-09",
+ "titulo": "Exercício oral nº 9 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "Un service civique pour tous ?",
+ "descricao": "Um serviço cívico obrigatório para jovens: governo, jovens voluntários e associações; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/tef-b-service-civique-2.jpg",
+  "credito": {
+   "autor": "Idd ninga",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Environment_cleaning.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-09/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre planos.",
+     "alternativas": [
+      "Un service civique de huit mois dans une association.",
+      "Le bac est en juin.",
+      "J'ai dix-huit ans.",
+      "Je vais au lycée."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu fais quoi après le bac ?\nA. Un service civique de huit mois dans une association.\nB. Le bac est en juin.\nC. J'ai dix-huit ans.\nD. Je vais au lycée.",
+     "audio": "audio/exercicios-orais/ex-tef-09/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Aucun diplôme n'est exigé ».",
+     "alternativas": [
+      "Une durée de mission.",
+      "Un âge minimum.",
+      "Une mission d'intérêt général.",
+      "Un diplôme."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'est-ce qui n'est pas exigé ?",
+     "transcricao": "Le service civique permet aux jeunes de seize à vingt-cinq ans de s'engager six à douze mois dans une mission d'intérêt général. Ils perçoivent une indemnité d'environ six cents euros par mois. Aucun diplôme n'est exigé.",
+     "audio": "audio/exercicios-orais/ex-tef-09/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Aujourd'hui, je suis en formation d'aide-soignant ».",
+     "alternativas": [
+      "Il a arrêté ses études.",
+      "Il a quitté l'association.",
+      "Il a trouvé sa voie professionnelle.",
+      "Il a gagné beaucoup d'argent."
+     ],
+     "correta": 2,
+     "pergunta": "Qu'a apporté le service civique à ce jeune ?",
+     "transcricao": "J'ai fait mon service civique dans une association d'aide aux personnes âgées. Au début, je le faisais surtout pour l'indemnité. Mais j'ai découvert que j'aimais ce contact. Aujourd'hui, je suis en formation d'aide-soignant.",
+     "audio": "audio/exercicios-orais/ex-tef-09/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Reconhece o paradoxo.",
+     "alternativas": [
+      "Oui, je suis engagée.",
+      "Justement, c'est tout le paradoxe du projet.",
+      "Le projet est long.",
+      "Non, c'est obligatoire."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Un engagement obligatoire, ce n'est plus vraiment un engagement, si ?\nA. Oui, je suis engagée.\nB. Justement, c'est tout le paradoxe du projet.\nC. Le projet est long.\nD. Non, c'est obligatoire.",
+     "audio": "audio/exercicios-orais/ex-tef-09/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Des volontaires contraints et démotivés, sans moyens pour les encadrer ».",
+     "alternativas": [
+      "D'accueillir des jeunes démotivés sans moyens de les encadrer.",
+      "De manquer de missions.",
+      "De perdre leurs bénévoles.",
+      "Que les jeunes ne se rencontrent pas."
+     ],
+     "correta": 0,
+     "pergunta": "Que craignent les associations ?",
+     "transcricao": "Les partisans d'un service obligatoire invoquent la cohésion nationale : faire se rencontrer des jeunes de milieux différents. Mais les associations craignent d'accueillir des volontaires contraints et démotivés, sans moyens pour les encadrer. La mixité sociale ne se décrète pas ; elle s'organise.",
+     "audio": "audio/exercicios-orais/ex-tef-09/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 1800,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section B — Exprimer une opinion",
+     "min": 200,
+     "max": 260,
+     "consigne": "Le gouvernement propose de rendre le service civique obligatoire pour tous les jeunes de 18 ans. Vous écrivez au courrier des lecteurs d'un journal pour donner votre avis argumenté. (200 mots minimum)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 840,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section B — Présenter et convaincre",
+     "duracaoSeg": 600,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Devenez volontaire ! Mission de service civique de 8 mois dans la protection de l'environnement : nettoyage de rivières, sensibilisation dans les écoles. Indemnité de 600 €/mois. » Vous présentez cette proposition à un(e) ami(e) et vous essayez de le/la convaincre d'y participer. L'examinateur joue l'ami(e) et présente des objections.",
+     "perguntasExaminador": [
+      "Alors, qu'est-ce que tu voulais me montrer ?"
+     ],
+     "fichaExaminador": "Vous êtes l'ami(e) sceptique. Objections possibles : « Je veux commencer mes études tout de suite », « 600 €, c'est trop peu », « Ramasser des déchets, ça ne sert à rien », « Je ne connais personne là-bas ». Laissez-vous convaincre seulement par de bons arguments."
+    }
+   ]
+  }
+ }
+}

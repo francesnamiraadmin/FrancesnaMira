@@ -1,0 +1,157 @@
+{
+ "slug": "ex-tef-07",
+ "titulo": "Exercício oral nº 7 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Le jeu vidéo, un art ?",
+ "descricao": "Videogames como arte: museus, criadores e críticos; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/tef-b-jeux-video-art-2.jpg",
+  "credito": {
+   "autor": "InclusiveGameLab",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:InclusiveGameLab_Person-Playing-Virtual-Reality_2_CC-BY-SA.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-07/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta que se justifica.",
+     "alternativas": [
+      "Non, je n'ai pas de jeu.",
+      "Oui, le week-end est court.",
+      "Le jeu est sur la table.",
+      "C'est vrai, mais l'histoire est passionnante."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu joues encore à ce jeu ? Tu y as passé tout le week-end !\nA. Non, je n'ai pas de jeu.\nB. Oui, le week-end est court.\nC. Le jeu est sur la table.\nD. C'est vrai, mais l'histoire est passionnante.",
+     "audio": "audio/exercicios-orais/ex-tef-07/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Postes de jeu en libre accès ».",
+     "alternativas": [
+      "Jouer sur des postes en libre accès.",
+      "Créer un jeu.",
+      "Rencontrer des joueurs professionnels.",
+      "Acheter des jeux."
+     ],
+     "correta": 0,
+     "pergunta": "Que peuvent faire les visiteurs ?",
+     "transcricao": "Le musée des arts décoratifs consacre une exposition aux jeux vidéo : dessins préparatoires, musiques, maquettes et postes de jeu en libre accès. L'exposition est ouverte jusqu'au quinze janvier.",
+     "audio": "audio/exercicios-orais/ex-tef-07/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Une œuvre qui rassemble tous les autres arts ».",
+     "alternativas": [
+      "Le jeu vidéo coûte cher.",
+      "Les joueurs sont nombreux.",
+      "Le jeu vidéo rassemble tous les autres arts.",
+      "Les musées exposent des jeux."
+     ],
+     "correta": 2,
+     "pergunta": "Quel est l'argument du créateur ?",
+     "transcricao": "Dans notre studio, un jeu mobilise des scénaristes, des illustrateurs, des musiciens, des architectes. Je ne vois pas pourquoi on refuserait le statut d'art à une œuvre qui rassemble tous les autres arts.",
+     "audio": "audio/exercicios-orais/ex-tef-07/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Contra-argumento.",
+     "alternativas": [
+      "Les films et les tableaux aussi se vendent, pourtant.",
+      "Non, le jeu est gratuit.",
+      "L'argent est dans la banque.",
+      "Oui, j'ai gagné."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Mais un jeu, c'est fait pour gagner de l'argent !\nA. Les films et les tableaux aussi se vendent, pourtant.\nB. Non, le jeu est gratuit.\nC. L'argent est dans la banque.\nD. Oui, j'ai gagné.",
+     "audio": "audio/exercicios-orais/ex-tef-07/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Le joueur ne contemple pas l'œuvre, il la fait exister ».",
+     "alternativas": [
+      "Sa musique.",
+      "L'interactivité : le joueur fait exister l'œuvre.",
+      "Son prix.",
+      "Sa durée."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'est-ce qui distingue le jeu vidéo, selon l'intervenant ?",
+     "transcricao": "Ce qui distingue le jeu vidéo, c'est l'interactivité : le joueur ne contemple pas l'œuvre, il la fait exister par ses choix. Certains critiques y voient une limite, d'autres au contraire la forme d'art la plus caractéristique de notre époque.",
+     "audio": "audio/exercicios-orais/ex-tef-07/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 1800,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section B — Exprimer une opinion",
+     "min": 200,
+     "max": 260,
+     "consigne": "Un journal publie : « Les jeux vidéo ne sont qu'un divertissement, pas un art. » Vous écrivez au journal pour donner votre opinion avec au moins trois arguments. (200 mots minimum)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 840,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section B — Présenter et convaincre",
+     "duracaoSeg": 600,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Festival du jeu vidéo indépendant : trois jours de rencontres avec des créateurs, tournois et ateliers. Pass 3 jours : 25 €. » Vous présentez cette proposition à un(e) ami(e) et vous essayez de le/la convaincre d'y participer. L'examinateur joue l'ami(e) et présente des objections.",
+     "perguntasExaminador": [
+      "Alors, qu'est-ce que tu voulais me montrer ?"
+     ],
+     "fichaExaminador": "Vous êtes l'ami(e) sceptique. Objections possibles : « Les jeux vidéo, c'est pour les enfants », « Je préfère un vrai festival de cinéma », « Il y aura trop de monde », « C'est une perte de temps ». Laissez-vous convaincre seulement par de bons arguments."
+    }
+   ]
+  }
+ }
+}

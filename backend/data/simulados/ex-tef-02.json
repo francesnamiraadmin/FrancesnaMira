@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tef-02",
+ "titulo": "Exercício oral nº 2 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Trésors du grenier",
+ "descricao": "Um objeto antigo encontrado num sótão vai a leilão: rádio, especialista e família.",
+ "imagem": {
+  "src": "img/temas/tef-a-tresor-grenier-2.jpg",
+  "credito": {
+   "autor": "Print made by: Thomas Rowlandson Published by: William Humphrey",
+   "licenca": "Public domain",
+   "urlLicenca": "",
+   "fonte": "https://commons.wikimedia.org/wiki/File:The_state_auction._(BM_1851,0901.183).jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-02/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "« Qu'est-ce que » pede um objeto.",
+     "alternativas": [
+      "Il fait chaud là-haut.",
+      "Une vieille boîte pleine de lettres.",
+      "Il est au troisième étage.",
+      "Je cherche mes clés."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Qu'est-ce que tu as trouvé dans le grenier ?\nA. Il fait chaud là-haut.\nB. Une vieille boîte pleine de lettres.\nC. Il est au troisième étage.\nD. Je cherche mes clés.",
+     "audio": "audio/exercicios-orais/ex-tef-02/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Exposition publique des objets vendredi de dix à dix-huit heures ».",
+     "alternativas": [
+      "Samedi matin.",
+      "Dimanche.",
+      "Vendredi de dix à dix-huit heures.",
+      "Samedi à quatorze heures."
+     ],
+     "correta": 2,
+     "pergunta": "Quand peut-on voir les objets ?",
+     "transcricao": "Vente aux enchères samedi à quatorze heures à l'hôtel des ventes. Exposition publique des objets vendredi de dix à dix-huit heures. Les enchères par téléphone sont possibles sur réservation.",
+     "audio": "audio/exercicios-orais/ex-tef-02/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Elles pensaient la jeter ».",
+     "alternativas": [
+      "L'encadrer.",
+      "La vendre.",
+      "La donner à un musée.",
+      "La jeter."
+     ],
+     "correta": 3,
+     "pergunta": "Que pensaient faire les sœurs avec la gravure ?",
+     "transcricao": "En vidant la maison de leur grand-mère, deux sœurs ont découvert une gravure ancienne roulée dans un tube. Elles pensaient la jeter. Estimée à trois cents euros, elle a finalement été vendue douze mille euros.",
+     "audio": "audio/exercicios-orais/ex-tef-02/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta emocional coerente.",
+     "alternativas": [
+      "Je vais au marché demain.",
+      "Les bijoux sont dans la boîte.",
+      "Oui, mamie a quatre-vingts ans.",
+      "Non, je les garde, ce sont des souvenirs."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu ne vas quand même pas vendre les bijoux de mamie ?\nA. Je vais au marché demain.\nB. Les bijoux sont dans la boîte.\nC. Oui, mamie a quatre-vingts ans.\nD. Non, je les garde, ce sont des souvenirs.",
+     "audio": "audio/exercicios-orais/ex-tef-02/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Un collectionneur au Japon peut enchérir ».",
+     "alternativas": [
+      "Des acheteurs du monde entier peuvent enchérir en ligne.",
+      "Les objets sont plus anciens.",
+      "Les commissaires-priseurs augmentent les prix.",
+      "Il y a moins d'objets à vendre."
+     ],
+     "correta": 0,
+     "pergunta": "Comment l'intervenante explique-t-elle certains prix spectaculaires ?",
+     "transcricao": "Le métier de commissaire-priseur a changé. Autrefois, on vendait dans une salle à quelques connaisseurs ; aujourd'hui, les ventes sont retransmises en ligne et un collectionneur au Japon peut enchérir sur un objet trouvé dans un village. C'est ce qui explique certains prix spectaculaires.",
+     "audio": "audio/exercicios-orais/ex-tef-02/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 540,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section A — Obtenir des informations",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Vide-grenier géant du quartier Saint-Jean, dimanche 12. Inscriptions ouvertes pour les exposants ! » Vous téléphonez pour obtenir des informations. Posez une dizaine de questions à l'examinateur.",
+     "perguntasExaminador": [
+      "Comité des fêtes Saint-Jean, bonjour !"
+     ],
+     "fichaExaminador": "Vous êtes le/la responsable. Emplacement : 12 € les 2 mètres, table non fournie. Installation dès 6 h, vente 8 h–18 h. Inscription avec pièce d'identité, à la mairie ou en ligne. Buvette sur place. Interdit : vendre de la nourriture maison. Annulé en cas de forte pluie, remboursement. Répondez brièvement ; ne donnez une information que si le candidat la demande."
+    }
+   ]
+  }
+ }
+}

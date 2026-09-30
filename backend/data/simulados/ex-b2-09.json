@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b2-09",
+ "titulo": "Exercício oral nº 9 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "La nature en ville",
+ "descricao": "Mais verde nas cidades: parques, telhados verdes e ilhas de calor.",
+ "imagem": {
+  "src": "img/temas/b2-espaces-verts-ville-2.jpg",
+  "credito": {
+   "autor": "John Phelan",
+   "licenca": "CC BY 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Parking_lot_at_330_Chestnut,_East_Longmeadow_MA.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-09/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta informativa.",
+     "alternativas": [
+      "Oui, les travaux commencent en septembre.",
+      "Oui, j'ai une voiture.",
+      "Non, le parc est vert.",
+      "Le parking est payant."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Ils vont vraiment transformer le parking en parc ?\nA. Oui, les travaux commencent en septembre.\nB. Oui, j'ai une voiture.\nC. Non, le parc est vert.\nD. Le parking est payant.",
+     "audio": "audio/exercicios-orais/ex-b2-09/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« En priorité près des écoles et dans les quartiers les plus chauds ».",
+     "alternativas": [
+      "Le long des autoroutes.",
+      "Dans les parcs existants.",
+      "Près des écoles et dans les quartiers les plus chauds.",
+      "Au centre-ville."
+     ],
+     "correta": 2,
+     "pergunta": "Où les arbres seront-ils plantés en priorité ?",
+     "transcricao": "La ville plantera vingt mille arbres d'ici cinq ans, en priorité près des écoles et dans les quartiers les plus chauds. Les habitants peuvent proposer des lieux sur le site de la mairie.",
+     "audio": "audio/exercicios-orais/ex-b2-09/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Cinq degrés de moins… jouent beaucoup plus calmement ».",
+     "alternativas": [
+      "Les enfants se salissent plus.",
+      "Il fait plus frais et les enfants jouent plus calmement.",
+      "Les enfants ne jouent plus dehors.",
+      "La cour est plus petite."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'a remarqué la mère ?",
+     "transcricao": "Dans la cour de l'école de mes enfants, on a remplacé le bitume par de la terre, de l'herbe et des arbres. En été, il y fait cinq degrés de moins, et les enfants jouent beaucoup plus calmement.",
+     "audio": "audio/exercicios-orais/ex-b2-09/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Conciliação de argumentos.",
+     "alternativas": [
+      "Oui, les arbres sont grands.",
+      "La ville est belle.",
+      "Non, j'ai un logement.",
+      "On peut construire des logements tout en gardant des espaces verts."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Des arbres, c'est bien, mais on a besoin de logements !\nA. Oui, les arbres sont grands.\nB. La ville est belle.\nC. Non, j'ai un logement.\nD. On peut construire des logements tout en gardant des espaces verts.",
+     "audio": "audio/exercicios-orais/ex-b2-09/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Ce n'est plus un luxe esthétique, c'est une question de santé publique ».",
+     "alternativas": [
+      "Un luxe esthétique.",
+      "Un problème pour les logements.",
+      "Une question de santé publique.",
+      "Une dépense inutile."
+     ],
+     "correta": 2,
+     "pergunta": "Selon l'intervenant, que représente la végétation en ville ?",
+     "transcricao": "Les îlots de chaleur urbains peuvent rendre une ville jusqu'à dix degrés plus chaude que la campagne voisine la nuit. La végétation rafraîchit l'air par l'ombre et l'évaporation : ce n'est plus un luxe esthétique, c'est une question de santé publique.",
+     "audio": "audio/exercicios-orais/ex-b2-09/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Les villes devraient consacrer plus d'espace à la nature qu'aux voitures. » Qu'en pensez-vous ? Vous donnez votre opinion, vous l'argumentez et vous l'illustrez d'exemples.",
+     "perguntasExaminador": [
+      "Les villes devraient consacrer plus d'espace à la nature qu'aux voitures. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et les commerçants ? », « Qui entretient les espaces verts ? », « Quel espace vert aimez-vous dans votre ville ? »"
+    }
+   ]
+  }
+ }
+}

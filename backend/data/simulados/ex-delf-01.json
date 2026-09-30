@@ -1,0 +1,147 @@
+{
+ "slug": "ex-delf-01",
+ "titulo": "Exercício oral nº 1 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "A1",
+ "tema": "Cartes postales de vacances",
+ "descricao": "Mensagens de férias, informações simples de hotel e uma conversa com um amigo que volta de viagem.",
+ "imagem": {
+  "src": "img/temas/delf-a1-carte-postale-vacances-2.jpg",
+  "credito": {
+   "autor": "American Greeting Publishers, Cleveland, Ohio / Union News Co. / C.T. Art-Colortone (Curteich)",
+   "licenca": "Public domain",
+   "urlLicenca": "",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Main_Avenue_Bridge_Looking_West,_Cleveland,_Ohio_Vintage_Postcard.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-01/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "« Où » pede um lugar.",
+     "alternativas": [
+      "J'aime le chocolat.",
+      "Je suis fatigué.",
+      "Je suis à la mer, à Biarritz.",
+      "Il est dix heures."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu es où en vacances ?\nA. J'aime le chocolat.\nB. Je suis fatigué.\nC. Je suis à la mer, à Biarritz.\nD. Il est dix heures.",
+     "audio": "audio/exercicios-orais/ex-delf-01/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Pergunta sobre o tempo.",
+     "alternativas": [
+      "Oui, il fait chaud et il y a du soleil.",
+      "Oui, j'ai deux frères.",
+      "C'est une grande maison.",
+      "Non, je n'ai pas faim."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Il fait beau là-bas ?\nA. Oui, il fait chaud et il y a du soleil.\nB. Oui, j'ai deux frères.\nC. C'est une grande maison.\nD. Non, je n'ai pas faim.",
+     "audio": "audio/exercicios-orais/ex-delf-01/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "documento",
+     "explicacao": "« Au premier étage ».",
+     "alternativas": [
+      "Au premier étage.",
+      "Sur la plage.",
+      "Au rez-de-chaussée.",
+      "Dans la chambre."
+     ],
+     "correta": 0,
+     "pergunta": "Où est servi le petit déjeuner ?",
+     "transcricao": "Bonjour et bienvenue à l'hôtel de la Plage. Le petit déjeuner est servi de sept heures à dix heures, au premier étage.",
+     "audio": "audio/exercicios-orais/ex-delf-01/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« On fait du vélo tous les jours ».",
+     "alternativas": [
+      "Du ski.",
+      "Du vélo.",
+      "Des courses.",
+      "De la natation."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'est-ce qu'Hugo fait tous les jours ?",
+     "transcricao": "Salut Léa ! C'est Hugo. Je suis à Annecy avec mes parents. Le lac est magnifique, on fait du vélo tous les jours. Je rentre samedi. Bisous !",
+     "audio": "audio/exercicios-orais/ex-delf-01/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Heureusement, on a visité des musées ».",
+     "alternativas": [
+      "Ils sont restés à l'hôtel.",
+      "Ils sont allés à la plage.",
+      "Ils sont rentrés à la maison.",
+      "Ils ont visité des musées."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'ont-ils fait quand il pleuvait ?",
+     "transcricao": "Alors, ces vacances en Bretagne ?\nSuper, mais il a plu trois jours ! Heureusement, on a visité des musées et on a mangé beaucoup de crêpes.",
+     "audio": "audio/exercicios-orais/ex-delf-01/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 420,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Entretien dirigé et échange d'informations",
+     "duracaoSeg": 180,
+     "preparacaoSeg": 60,
+     "consigne": "Vous répondez aux questions de l'examinateur sur vous et sur vos vacances. Ensuite, vous posez vous-même trois questions à l'examinateur sur ses vacances (lieu, activités, météo…).",
+     "perguntasExaminador": [
+      "Bonjour ! Comment vous appelez-vous ?",
+      "Où habitez-vous ?",
+      "Où aimez-vous partir en vacances ?",
+      "Qu'est-ce que vous faites pendant les vacances ?",
+      "Maintenant, posez-moi des questions sur mes vacances."
+     ],
+     "fichaExaminador": "Pour l'échange d'informations : vous êtes parti(e) une semaine à Marseille en juillet, en train, avec des amis ; soleil tous les jours ; baignade, promenade au Vieux-Port, visite du Mucem."
+    }
+   ]
+  }
+ }
+}

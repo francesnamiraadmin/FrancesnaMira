@@ -1,0 +1,145 @@
+{
+ "slug": "ex-a2-08",
+ "titulo": "Exercício oral nº 8 — A2",
+ "curso": "A2",
+ "categoria": "exercicio",
+ "nivel": "A2",
+ "tema": "La fête chez moi",
+ "descricao": "Festas tradicionais: a Chandeleur na França e as festas do seu país.",
+ "imagem": {
+  "src": "img/temas/a2-fete-traditionnelle-2.jpg",
+  "credito": {
+   "autor": "French Recipes",
+   "licenca": "CC BY-SA 3.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Cooking_Crepes.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-a2-08/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Aceitar a oferta.",
+     "alternativas": [
+      "Non, il fait froid.",
+      "Oui, je suis français.",
+      "La crêpe est ronde.",
+      "Oui, avec du sucre, s'il te plaît !"
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu veux une crêpe ?\nA. Non, il fait froid.\nB. Oui, je suis français.\nC. La crêpe est ronde.\nD. Oui, avec du sucre, s'il te plaît !",
+     "audio": "audio/exercicios-orais/ex-a2-08/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre costumes.",
+     "alternativas": [
+      "Noël est en décembre.",
+      "Mon pays est grand.",
+      "On se réunit en famille et on mange ensemble.",
+      "Je suis né en mai."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Qu'est-ce que vous faites pour Noël dans ton pays ?\nA. Noël est en décembre.\nB. Mon pays est grand.\nC. On se réunit en famille et on mange ensemble.\nD. Je suis né en mai.",
+     "audio": "audio/exercicios-orais/ex-a2-08/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Avec une pièce dans la main ».",
+     "alternativas": [
+      "Une cuillère.",
+      "Une pièce.",
+      "Une fleur.",
+      "Une crêpe."
+     ],
+     "correta": 1,
+     "pergunta": "Que faut-il tenir dans la main ?",
+     "transcricao": "Le deux février, en France, c'est la Chandeleur : on mange des crêpes. La tradition dit qu'il faut faire sauter la première crêpe avec une pièce dans la main pour avoir de la chance toute l'année.",
+     "audio": "audio/exercicios-orais/ex-a2-08/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« On mange du maïs sous toutes ses formes ».",
+     "alternativas": [
+      "Du poisson.",
+      "Du maïs.",
+      "Du chocolat.",
+      "Des crêpes."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'est-ce qu'on mange à la Festa Junina ?",
+     "transcricao": "Chez moi, au Brésil, la fête préférée, c'est la Festa Junina en juin. On danse, on porte des vêtements de campagne et on mange du maïs sous toutes ses formes.",
+     "audio": "audio/exercicios-orais/ex-a2-08/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« On garde le plaisir de se retrouver ».",
+     "alternativas": [
+      "Le plaisir de se retrouver.",
+      "Leur origine agricole.",
+      "Les récoltes.",
+      "Le retour de la lumière."
+     ],
+     "correta": 0,
+     "pergunta": "Selon l'intervenant, qu'est-ce qui reste des fêtes traditionnelles ?",
+     "transcricao": "Beaucoup de fêtes traditionnelles ont une origine agricole : on fêtait la fin de l'hiver, les récoltes ou le retour de la lumière. Aujourd'hui, on a souvent oublié ce sens, mais on garde le plaisir de se retrouver.",
+     "audio": "audio/exercicios-orais/ex-a2-08/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 330,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 150,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur sur vous, vos habitudes et vos expériences.",
+     "perguntasExaminador": [
+      "Bonjour ! Quelle est la fête la plus importante dans votre pays ?",
+      "Comment la fêtez-vous ?",
+      "Qu'est-ce qu'on mange ?",
+      "Racontez une fête dont vous vous souvenez."
+     ]
+    }
+   ]
+  }
+ }
+}

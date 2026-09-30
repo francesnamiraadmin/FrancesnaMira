@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tef-04",
+ "titulo": "Exercício oral nº 4 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Une lettre en retard",
+ "descricao": "Uma carta que chega cinquenta anos depois: reportagem, destinatários e o correio.",
+ "imagem": {
+  "src": "img/temas/tef-a-lettre-50-ans-2.jpg",
+  "credito": {
+   "autor": "Guilhem Vellut from Annecy, France",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Old_Town_@_Lyon_(36252704741).jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-04/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta à pergunta.",
+     "alternativas": [
+      "Le courrier est à dix heures.",
+      "Oui, une lettre et un colis.",
+      "Oui, le facteur est grand.",
+      "Non, j'habite ici."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Il y a du courrier pour moi ?\nA. Le courrier est à dix heures.\nB. Oui, une lettre et un colis.\nC. Oui, le facteur est grand.\nD. Non, j'habite ici.",
+     "audio": "audio/exercicios-orais/ex-tef-04/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Retrouvée derrière un meuble lors de la rénovation d'un bureau de poste ».",
+     "alternativas": [
+      "Dans un grenier.",
+      "Dans une boîte aux lettres.",
+      "Derrière un meuble dans un bureau de poste.",
+      "Dans un train."
+     ],
+     "correta": 2,
+     "pergunta": "Où la carte a-t-elle été retrouvée ?",
+     "transcricao": "À Lyon, une habitante a reçu une carte postale envoyée en 1974. Elle avait été retrouvée derrière un meuble lors de la rénovation d'un bureau de poste. La Poste l'a simplement remise dans le circuit.",
+     "audio": "audio/exercicios-orais/ex-tef-04/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« J'ai retrouvé la fille de cette amie ».",
+     "alternativas": [
+      "Elle a retrouvé la fille de l'expéditrice.",
+      "Elle est partie en Grèce.",
+      "Elle a rendu la carte à La Poste.",
+      "Elle a écrit à sa mère."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'a fait la destinataire après avoir lu la carte ?",
+     "transcricao": "La carte était adressée à ma mère, décédée il y a dix ans. C'était un mot de sa meilleure amie, en vacances en Grèce. Lire son écriture, cinquante ans après… J'ai été très émue. J'ai retrouvé la fille de cette amie et nous nous sommes rencontrées.",
+     "audio": "audio/exercicios-orais/ex-tef-04/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta matizada.",
+     "alternativas": [
+      "Oui, j'ai une main.",
+      "La lettre est arrivée.",
+      "Non, je n'ai pas de timbre bleu.",
+      "Rarement, mais pour les grandes occasions, oui."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu écris encore des lettres à la main, toi ?\nA. Oui, j'ai une main.\nB. La lettre est arrivée.\nC. Non, je n'ai pas de timbre bleu.\nD. Rarement, mais pour les grandes occasions, oui.",
+     "audio": "audio/exercicios-orais/ex-tef-04/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Un geste rare, donc précieux ».",
+     "alternativas": [
+      "Les entreprises en achètent beaucoup.",
+      "Le papier est moins cher.",
+      "La lettre manuscrite est devenue rare et précieuse.",
+      "Les gens écrivent davantage."
+     ],
+     "correta": 2,
+     "pergunta": "Comment l'intervenant explique-t-il la résistance des ventes de papier à lettres ?",
+     "transcricao": "Le nombre de lettres distribuées a été divisé par deux en quinze ans. Paradoxalement, les ventes de papier à lettres et de cartes illustrées résistent : on écrit moins, mais la lettre manuscrite est devenue un geste rare, donc précieux.",
+     "audio": "audio/exercicios-orais/ex-tef-04/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 540,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section A — Obtenir des informations",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Atelier calligraphie et écriture de lettres, le jeudi soir à la Maison des associations. Débutants bienvenus ! » Vous téléphonez pour obtenir des informations. Posez une dizaine de questions à l'examinateur.",
+     "perguntasExaminador": [
+      "Maison des associations, bonjour !"
+     ],
+     "fichaExaminador": "Vous êtes l'animateur/animatrice. Jeudi 19 h–21 h, 10 séances. Tarif : 120 € (80 € étudiants). Matériel fourni la première séance, ensuite environ 30 € de plumes et d'encre. 12 participants maximum, 3 places restantes. Séance d'essai gratuite. Répondez brièvement ; ne donnez une information que si le candidat la demande."
+    }
+   ]
+  }
+ }
+}

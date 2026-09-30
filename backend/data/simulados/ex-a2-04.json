@@ -1,0 +1,157 @@
+{
+ "slug": "ex-a2-04",
+ "titulo": "Exercício oral nº 4 — A2",
+ "curso": "A2",
+ "categoria": "exercicio",
+ "nivel": "A2",
+ "tema": "Merci pour le cadeau !",
+ "descricao": "Presentes, agradecimentos e trocas numa loja; inclui uma mensagem escrita.",
+ "imagem": {
+  "src": "img/temas/a2-remercier-cadeau-2.jpg",
+  "credito": {
+   "autor": "Sciencia58",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Dog_sweater_2.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-a2-04/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Reação ao presente.",
+     "alternativas": [
+      "Il fait beau.",
+      "Oui, j'ai trente ans.",
+      "Non, je ne veux pas.",
+      "Oh, merci ! Qu'est-ce que c'est ?"
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tiens, c'est pour toi. Joyeux anniversaire !\nA. Il fait beau.\nB. Oui, j'ai trente ans.\nC. Non, je ne veux pas.\nD. Oh, merci ! Qu'est-ce que c'est ?",
+     "audio": "audio/exercicios-orais/ex-a2-04/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta de agradecimento.",
+     "alternativas": [
+      "Oui, j'ai une écharpe.",
+      "Oui, elle est très douce, merci !",
+      "Elle est dans le sac.",
+      "Non, il fait chaud."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu aimes ton écharpe ?\nA. Oui, j'ai une écharpe.\nB. Oui, elle est très douce, merci !\nC. Elle est dans le sac.\nD. Non, il fait chaud.",
+     "audio": "audio/exercicios-orais/ex-a2-04/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Je le porte tous les dimanches quand je vais chez elle ».",
+     "alternativas": [
+      "Quand elle va chez sa grand-mère le dimanche.",
+      "Au travail.",
+      "Jamais.",
+      "Tous les jours."
+     ],
+     "correta": 0,
+     "pergunta": "Quand porte-t-elle le pull ?",
+     "transcricao": "Ma grand-mère m'a tricoté un pull pour Noël. Il est un peu grand, mais je le porte tous les dimanches quand je vais chez elle. Ça lui fait tellement plaisir !",
+     "audio": "audio/exercicios-orais/ex-a2-04/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Je voudrais échanger ce pantalon, il est trop petit ».",
+     "alternativas": [
+      "Pour acheter un cadeau.",
+      "Pour se faire rembourser.",
+      "Pour trouver son ticket.",
+      "Pour échanger un pantalon trop petit."
+     ],
+     "correta": 3,
+     "pergunta": "Pourquoi l'homme vient-il au magasin ?",
+     "transcricao": "Bonjour, je voudrais échanger ce pantalon, il est trop petit.\nVous avez le ticket de caisse ?\nOui, le voilà.\nTrès bien, vous pouvez choisir une autre taille.",
+     "audio": "audio/exercicios-orais/ex-a2-04/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Plus personnel et moins cher ».",
+     "alternativas": [
+      "Ils sont plus beaux.",
+      "Ils sont obligatoires.",
+      "Ils sont plus personnels et moins chers.",
+      "Ils sont plus rapides."
+     ],
+     "correta": 2,
+     "pergunta": "Pourquoi les cadeaux faits maison sont-ils à la mode ?",
+     "transcricao": "Offrir un cadeau fait maison, c'est de plus en plus à la mode. Confitures, bougies, tricots : les gens trouvent ça plus personnel et moins cher. Et c'est aussi une manière d'acheter moins d'objets inutiles.",
+     "audio": "audio/exercicios-orais/ex-a2-04/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 720,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — message",
+     "min": 60,
+     "max": 80,
+     "consigne": "Un(e) ami(e) vous a envoyé un cadeau pour votre anniversaire. Vous lui écrivez pour le/la remercier, dire ce que vous en pensez et raconter votre fête. (60 à 80 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 510,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 240,
+     "preparacaoSeg": 90,
+     "consigne": "Vous avez reçu un cadeau, mais il ne vous va pas. Vous allez au magasin pour l'échanger. L'examinateur joue le/la vendeur(se).",
+     "perguntasExaminador": [
+      "Bonjour ! Je peux vous aider ?"
+     ],
+     "fichaExaminador": "Vous êtes le/la vendeur(se). Échange possible 30 jours avec ticket. Pas de remboursement, seulement un avoir ou un échange. Demandez ce qui ne va pas, proposez une autre taille ou une autre couleur. Parlez clairement et laissez le candidat poser ses questions."
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tcf-02",
+ "titulo": "Exercício oral nº 2 — TCF",
+ "curso": "TCF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Partir en covoiturage",
+ "descricao": "Anúncios de estação, conversa entre colegas sobre carona e uma reportagem sobre mobilidade.",
+ "imagem": {
+  "src": "img/temas/tcf-t1-covoiturage-festival-2.jpg",
+  "credito": {
+   "autor": "Père Igor",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Salmiech_panneau_covoiturage.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral convertida para a escala do TCF (0–699), com NCLC; expressões de 0 a 20, com nível CECR e NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tcf-02/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre a vaga no carro.",
+     "alternativas": [
+      "Il fait beau samedi.",
+      "Non, je n'ai pas faim.",
+      "Oui, j'habite à Lyon.",
+      "Oui, je passe te prendre à huit heures."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Il reste une place dans ta voiture pour samedi ?\nA. Il fait beau samedi.\nB. Non, je n'ai pas faim.\nC. Oui, j'habite à Lyon.\nD. Oui, je passe te prendre à huit heures.",
+     "audio": "audio/exercicios-orais/ex-tcf-02/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Partira de la voie 7 et non de la voie 4 ».",
+     "alternativas": [
+      "Le prix du billet.",
+      "La destination.",
+      "L'heure de départ.",
+      "La voie de départ."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'est-ce qui change pour le train de 18 h 12 ?",
+     "transcricao": "Mesdames et messieurs, en raison de travaux, le train de 18 h 12 à destination de Lille partira de la voie 7 et non de la voie 4. Nous vous prions de nous excuser pour ce changement.",
+     "audio": "audio/exercicios-orais/ex-tcf-02/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "« Combien » pede um valor.",
+     "alternativas": [
+      "Je conduis depuis dix ans.",
+      "Vingt euros chacun, péages compris.",
+      "La voiture est rouge.",
+      "Deux heures de route."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "On partage l'essence, alors ? Ça fait combien chacun ?\nA. Je conduis depuis dix ans.\nB. Vingt euros chacun, péages compris.\nC. La voiture est rouge.\nD. Deux heures de route.",
+     "audio": "audio/exercicios-orais/ex-tcf-02/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« La mesure touche surtout ceux qui habitent près les uns des autres ».",
+     "alternativas": [
+      "Elle profite surtout aux salariés qui habitent près les uns des autres.",
+      "Elle coûte trop cher aux entreprises.",
+      "Elle est interdite par la loi.",
+      "Elle augmente les embouteillages."
+     ],
+     "correta": 0,
+     "pergunta": "Quelle limite de cette mesure est évoquée ?",
+     "transcricao": "Certaines entreprises offrent une prime aux salariés qui viennent en covoiturage ou à vélo. Résultat : le parking est moins saturé et les salariés économisent. Mais la mesure touche surtout ceux qui habitent près les uns des autres ; pour les autres, trouver un covoitureur reste compliqué.",
+     "audio": "audio/exercicios-orais/ex-tcf-02/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Ce n'est pas notre nature, mais les outils ».",
+     "alternativas": [
+      "La baisse du prix de l'essence.",
+      "L'obligation légale.",
+      "Des outils qui permettent la confiance entre inconnus.",
+      "Une plus grande générosité des gens."
+     ],
+     "correta": 2,
+     "pergunta": "Selon l'intervenante, qu'est-ce qui a rendu le covoiturage possible ?",
+     "transcricao": "Partager sa voiture avec des inconnus, c'était impensable il y a vingt ans. Les plateformes ont rendu cette confiance possible grâce aux évaluations et aux profils vérifiés. Ce qui a changé, ce n'est pas notre nature, mais les outils qui nous permettent de faire confiance à des gens que nous ne connaissons pas.",
+     "audio": "audio/exercicios-orais/ex-tcf-02/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Il faudrait rendre les transports en commun gratuits dans toutes les villes. » Qu'en pensez-vous ? Vous donnez votre opinion et vous l'argumentez à l'aide d'exemples.",
+     "perguntasExaminador": [
+      "Il faudrait rendre les transports en commun gratuits dans toutes les villes. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Qui paierait ? », « Et pour ceux qui vivent à la campagne ? », « La gratuité suffit-elle à faire laisser la voiture ? »"
+    }
+   ]
+  }
+ }
+}

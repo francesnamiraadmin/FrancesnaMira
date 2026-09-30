@@ -1,0 +1,143 @@
+{
+ "slug": "ex-dalf-08",
+ "titulo": "Exercício oral nº 8 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C2",
+ "tema": "Le droit à l'oubli",
+ "descricao": "A memória da internet, a reputação digital e o direito de ser esquecido.",
+ "imagem": {
+  "src": "img/temas/dalf-c2-memoire-oubli-2.jpg",
+  "credito": {
+   "autor": "BalticServers.com",
+   "licenca": "CC BY-SA 3.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-08/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta natural.",
+     "alternativas": [
+      "La recherche est longue.",
+      "Non, mon moteur est en panne.",
+      "Oui, et j'ai retrouvé des photos de mes vingt ans !",
+      "Oui, je m'appelle Paul."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as tapé ton nom dans un moteur de recherche ?\nA. La recherche est longue.\nB. Non, mon moteur est en panne.\nC. Oui, et j'ai retrouvé des photos de mes vingt ans !\nD. Oui, je m'appelle Paul.",
+     "audio": "audio/exercicios-orais/ex-dalf-08/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Environ la moitié des demandes sont acceptées ».",
+     "alternativas": [
+      "Un quart.",
+      "Toutes.",
+      "Aucune.",
+      "Environ la moitié."
+     ],
+     "correta": 3,
+     "pergunta": "Quelle proportion des demandes est acceptée ?",
+     "transcricao": "Depuis 2014, les citoyens européens peuvent demander aux moteurs de recherche de déréférencer des informations obsolètes ou inexactes les concernant. Environ la moitié des demandes sont acceptées.",
+     "audio": "audio/exercicios-orais/ex-dalf-08/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« L'article reste en ligne, il n'apparaît simplement plus ».",
+     "alternativas": [
+      "Il réécrit l'article.",
+      "Il rend l'information plus difficile à trouver par le nom.",
+      "Il condamne le journal.",
+      "Il supprime l'article."
+     ],
+     "correta": 1,
+     "pergunta": "Que fait concrètement le déréférencement ?",
+     "transcricao": "Il faut bien comprendre que le déréférencement ne supprime rien : l'article reste en ligne, il n'apparaît simplement plus quand on cherche le nom de la personne. On ne réécrit pas l'histoire, on limite son accessibilité.",
+     "audio": "audio/exercicios-orais/ex-dalf-08/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre o critério do interesse público.",
+     "alternativas": [
+      "Oui, il est très connu.",
+      "Non, il n'a pas d'ordinateur.",
+      "Non, l'intérêt du public prime pour les personnalités publiques.",
+      "Le passé est terminé."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Mais un homme politique aussi pourrait faire effacer son passé ?\nA. Oui, il est très connu.\nB. Non, il n'a pas d'ordinateur.\nC. Non, l'intérêt du public prime pour les personnalités publiques.\nD. Le passé est terminé.",
+     "audio": "audio/exercicios-orais/ex-dalf-08/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Désormais, c'est l'oubli qui demande un effort ».",
+     "alternativas": [
+      "L'oubli, autrefois naturel, demande désormais un effort.",
+      "Le pardon est devenu automatique.",
+      "La mémoire est devenue plus difficile.",
+      "Les archives ont disparu."
+     ],
+     "correta": 0,
+     "pergunta": "Quelle inversion l'intervenant décrit-il ?",
+     "transcricao": "Pendant des siècles, l'oubli fut la règle et la mémoire l'exception : il fallait des archives, des efforts, des institutions pour se souvenir. Le numérique a inversé la situation. Désormais, c'est l'oubli qui demande un effort, et cette inversion bouleverse notre rapport au pardon.",
+     "audio": "audio/exercicios-orais/ex-dalf-08/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — monologue suivi et débat (C2)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "À partir des idées évoquées dans les documents sonores de cet exercice, vous présentez un point de vue argumenté et nuancé sur la question suivante : « Le droit à l'oubli numérique protège-t-il l'individu ou menace-t-il la mémoire collective ? » Vous débattrez ensuite avec l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre point de vue."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : journalisme et liberté d'information, réhabilitation, erreurs de jeunesse, pouvoir des plateformes privées."
+    }
+   ]
+  }
+ }
+}

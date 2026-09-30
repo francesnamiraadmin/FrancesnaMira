@@ -5,7 +5,7 @@
 // de tempo e correção das expressões no formato TCF (0–20 → CECR/NCLC).
 // =====================================================================
 (function () {
-  const { api, stream, Chamada, esc, contarPalavras, mmss, nivelExpressao, nclcExpressao, enunciado } = window.SimuladoAoVivo;
+  const { api, stream, Chamada, esc, contarPalavras, mmss, nivelExpressao, nclcExpressao, enunciado, numero } = window.SimuladoAoVivo;
   const $ = id => document.getElementById(id);
   const NOMES = { co: "Compréhension orale", sl: "Structure de la langue", ce: "Compréhension écrite", ee: "Expression écrite", eo: "Expression orale" };
   const SIGLAS = { co: "CO", sl: "SL", ce: "CE", ee: "EE", eo: "EO" };
@@ -284,12 +284,12 @@
       const cls = r == null ? "" : r === q.correta ? "certa" : "errada";
       if (r === q.correta) { pontos += q.pontos; acertos++; }
       const ouvido = p === "co" && (e.ouvidos || []).includes(q.n) ? "🔊" : "";
-      return `<span class="${cls} ${aoVivo && i === e.questaoAtual ? "atual" : ""}" title="${esc(q.nivel)} · ${q.pontos} pts">${q.n}${ouvido}</span>`;
+      return `<span class="${cls} ${aoVivo && i === e.questaoAtual ? "atual" : ""}" title="${esc(q.nivel)} · ${q.pontos} pts${q.tipo === "lacuna" ? " · lacune" : ""}">${numero(q)}${ouvido}</span>`;
     }).join("");
     const atual = qs[e.questaoAtual || 0];
     return `<p class="sm-muted" style="margin-bottom:8px;">${Object.keys(resp).length}/${qs.length} respondidas · ${acertos} acertos · <strong>${pontos}/699 pts</strong> até agora (verde = certa, vermelho = errada)</p>
       <div class="sm-espelho">${celulas}</div>
-      ${aoVivo && atual ? `<details style="margin-top:12px;"><summary class="sm-muted" style="cursor:pointer;">Questão atual do aluno (${atual.n}) — ver gabarito</summary>
+      ${aoVivo && atual ? `<details style="margin-top:12px;"><summary class="sm-muted" style="cursor:pointer;">Questão atual do aluno (${numero(atual)}) — ver gabarito</summary>
         <div style="margin-top:8px;font-size:0.88rem;">${enunciado(atual, p)}${p === "co" && atual.transcricao ? `<div class="sm-documento">${esc(atual.transcricao)}</div>` : ""}
         <p><strong>${esc(atual.pergunta)}</strong></p><p>Resposta certa: <strong>${esc(atual.alternativas[atual.correta])}</strong></p></div></details>` : ""}`;
   }
@@ -420,7 +420,7 @@
     };
     $("sCorrecao").innerHTML = `
       <div class="sm-card">
-        <h2>Correção no formato TCF</h2>
+        <h2>${S.def.categoria === "exercicio" ? `Correção do exercício — ${esc(S.def.curso)} ${esc(S.def.nivel || "")}` : "Correção no formato TCF"}</h2>
         <div id="sCompreensoes">${htmlCompreensoes()}</div>
         <p class="sm-muted">Cada tarefa das expressões recebe 4 critérios de 0 a 5 (total 20). A nota final da épreuve é a média das 3 tarefas (0–20), convertida em nível CECR e NCLC como no TCF Canada — você pode ajustar a nota final.</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
@@ -430,8 +430,7 @@
           ${t.publicadoEm ? `<span class="sm-chip ok">Publicado em ${new Date(t.publicadoEm).toLocaleString("pt-BR")}</span>` : ""}
         </div>
       </div>
-      ${blocoProva("ee")}
-      ${blocoProva("eo")}
+      ${ordem().filter(p => p === "ee" || p === "eo").map(blocoProva).join("")}
       <div class="sm-card" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
         <span class="sm-muted" id="sSalvoMsg" style="flex:1;align-self:center;"></span>
         <button class="sm-btn secundario" type="button" id="bSalvarNotas">Salvar rascunho</button>
@@ -454,6 +453,19 @@
     $("bPublicar").addEventListener("click", () => modal("Publicar a correção?", "<p>O aluno verá imediatamente o boletim completo (CO, CE, EE e EO) com seus comentários.</p>", [
       { texto: "Cancelar", classe: "secundario" }, { texto: "Publicar", fn: () => salvarNotas(true) }
     ]));
+  }
+
+  // Exercícios do Ambiente de Produção mostram a nota convertida para a escala da prova do curso
+  // (o servidor faz a mesma conversão ao salvar — ver backend/utils/simulados.js).
+  function rotuloNota(final) {
+    const d = S.def || {};
+    if (d.categoria !== "exercicio" || d.curso === "TCF") return `${final}/20 · ${nivelExpressao(final)} · NCLC ${nclcExpressao(final)}`;
+    if (d.curso === "DELF" || d.curso === "DALF") {
+      const n = Math.round((final / 20) * 25 * 2) / 2;
+      return `${final}/20 → ${String(n).replace(".", ",")}/25 · ${n >= 12.5 ? "seção aprovada" : "abaixo de 12,5"}`;
+    }
+    if (d.curso === "TEF") return `${final}/20 → TEF ${Math.round((final / 20) * 450)}/450`;
+    return `${final}/20 · ${nivelExpressao(final)}`;
   }
 
   function lerProva(card) {
@@ -479,7 +491,7 @@
     const finalEl = card.querySelector("[data-final]");
     const final = finalEl.value === "" ? media : Math.max(0, Math.min(20, Math.round(Number(finalEl.value))));
     card.querySelector("[data-media]").textContent = `${media}/20`;
-    card.querySelector("[data-resultado]").textContent = `${final}/20 · ${nivelExpressao(final)} · NCLC ${nclcExpressao(final)}`;
+    card.querySelector("[data-resultado]").textContent = rotuloNota(final);
   }
 
   function preencher(sug) {

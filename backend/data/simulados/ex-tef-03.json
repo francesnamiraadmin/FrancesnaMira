@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tef-03",
+ "titulo": "Exercício oral nº 3 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Panne dans le métro",
+ "descricao": "Uma pane geral no metrô: anúncios, passageiros e a reação da empresa de transportes.",
+ "imagem": {
+  "src": "img/temas/tef-a-panne-metro-2.jpg",
+  "credito": {
+   "autor": "Alex Sorto alexsorto",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Train_station_in_red_and_gray_(Unsplash).jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-03/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta à pergunta.",
+     "alternativas": [
+      "Non, il y a une panne sur toute la ligne.",
+      "Je descends ici.",
+      "Le métro est bleu.",
+      "Oui, j'ai un ticket."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Excusez-moi, le métro fonctionne ?\nA. Non, il y a une panne sur toute la ligne.\nB. Je descends ici.\nC. Le métro est bleu.\nD. Oui, j'ai un ticket.",
+     "audio": "audio/exercicios-orais/ex-tef-03/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Des bus de remplacement sont mis en place ».",
+     "alternativas": [
+      "Des vélos.",
+      "Des taxis gratuits.",
+      "Un remboursement.",
+      "Des bus de remplacement."
+     ],
+     "correta": 3,
+     "pergunta": "Que propose la compagnie ?",
+     "transcricao": "En raison d'une panne électrique, le trafic est interrompu sur la ligne 4 entre Gare du Nord et Montparnasse. Des bus de remplacement sont mis en place. Nous vous conseillons d'utiliser les lignes 2 et 6.",
+     "audio": "audio/exercicios-orais/ex-tef-03/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les gens ont commencé à plaisanter, à partager de l'eau ».",
+     "alternativas": [
+      "Ils sont sortis du tunnel.",
+      "Ils se sont entraidés et ont plaisanté.",
+      "Ils ont paniqué.",
+      "Ils se sont disputés."
+     ],
+     "correta": 1,
+     "pergunta": "Comment se sont comportés les passagers ?",
+     "transcricao": "On est restés bloqués quarante minutes dans le tunnel, sans lumière. Au début, personne ne parlait, puis les gens ont commencé à plaisanter, à partager de l'eau. C'était presque sympathique, finalement !",
+     "audio": "audio/exercicios-orais/ex-tef-03/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Conselho prático.",
+     "alternativas": [
+      "Ton travail est intéressant.",
+      "Il est huit heures.",
+      "Demande une attestation de retard au guichet.",
+      "Prends un café."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Je vais être en retard au travail. Qu'est-ce que je fais ?\nA. Ton travail est intéressant.\nB. Il est huit heures.\nC. Demande une attestation de retard au guichet.\nD. Prends un café.",
+     "audio": "audio/exercicios-orais/ex-tef-03/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Surtout pendant les vagues de chaleur ».",
+     "alternativas": [
+      "Pendant les vagues de chaleur.",
+      "Pendant les travaux.",
+      "Pendant les vacances.",
+      "La nuit."
+     ],
+     "correta": 0,
+     "pergunta": "Selon l'intervenante, quand les pannes risquent-elles de se multiplier ?",
+     "transcricao": "Le réseau a plus de cent ans et certaines installations électriques datent des années soixante-dix. La compagnie a lancé un plan de modernisation de dix ans. En attendant, les pannes risquent de se multiplier, surtout pendant les vagues de chaleur.",
+     "audio": "audio/exercicios-orais/ex-tef-03/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 540,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section A — Obtenir des informations",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Loc'Trottinettes : louez une trottinette électrique au mois ! Idéal pour vos trajets domicile-travail. » Vous téléphonez pour obtenir des informations. Posez une dizaine de questions à l'examinateur.",
+     "perguntasExaminador": [
+      "Loc'Trottinettes, bonjour, je vous écoute !"
+     ],
+     "fichaExaminador": "Vous êtes l'employé(e). 35 €/mois, caution 200 €. Autonomie 30 km. Casque fourni, obligatoire. Assurance incluse, sauf vol (10 €/mois en option). Entretien gratuit. Livraison à domicile : 10 €. Engagement minimum : un mois. Répondez brièvement ; ne donnez une information que si le candidat la demande."
+    }
+   ]
+  }
+ }
+}

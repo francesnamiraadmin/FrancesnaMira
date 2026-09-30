@@ -1,0 +1,157 @@
+{
+ "slug": "ex-b1-07",
+ "titulo": "Exercício oral nº 7 — B1",
+ "curso": "B1",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Le voyage qui m'a marqué",
+ "descricao": "Relatos de viagem: Veneza de manhã, imprevistos e descobertas; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/b1-souvenir-voyage-2.jpg",
+  "credito": {
+   "autor": "Virtual-Pano",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Panoramic_view_from_Lido_die_Venezia_across_Venice_towards_the_Dolomites_in_90_kilometres_distance.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b1-07/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta à pergunta.",
+     "alternativas": [
+      "En avion.",
+      "Il est long.",
+      "Venise, sans hésiter !",
+      "Je pars demain."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Quel est le plus beau voyage que tu as fait ?\nA. En avion.\nB. Il est long.\nC. Venise, sans hésiter !\nD. Je pars demain.",
+     "audio": "audio/exercicios-orais/ex-b1-07/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« La ville est vide, la lumière est magique ».",
+     "alternativas": [
+      "Les musées ouvrent tôt.",
+      "Les bateaux partent à six heures.",
+      "La ville est vide et la lumière est belle.",
+      "Il fait trop chaud l'après-midi."
+     ],
+     "correta": 2,
+     "pergunta": "Pourquoi faut-il se lever tôt à Venise ?",
+     "transcricao": "Mon conseil pour Venise : levez-vous à six heures. La ville est vide, la lumière est magique sur la lagune. À dix heures, il y a déjà des milliers de touristes.",
+     "audio": "audio/exercicios-orais/ex-b1-07/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Une famille… m'a hébergée trois jours ».",
+     "alternativas": [
+      "La cuisine.",
+      "L'accueil d'une famille inconnue.",
+      "Le paysage.",
+      "La perte de son passeport."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'est-ce qui l'a le plus marquée ?",
+     "transcricao": "Au Maroc, j'ai perdu mon passeport. Une famille que je ne connaissais pas m'a hébergée trois jours pendant que j'attendais le nouveau. C'est le souvenir le plus fort de mes voyages.",
+     "audio": "audio/exercicios-orais/ex-b1-07/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Preferência.",
+     "alternativas": [
+      "J'improvise, c'est plus amusant.",
+      "J'ai un grand sac.",
+      "Le guide est rouge.",
+      "Non, je suis en France."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu voyages avec un guide ou tu improvises ?\nA. J'improvise, c'est plus amusant.\nB. J'ai un grand sac.\nC. Le guide est rouge.\nD. Non, je suis en France.",
+     "audio": "audio/exercicios-orais/ex-b1-07/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Parce qu'ils étaient vraiment disponibles et curieux ».",
+     "alternativas": [
+      "Dépenser beaucoup.",
+      "Partir longtemps.",
+      "Aller très loin.",
+      "Être disponible et curieux."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'est-ce qui rend un voyage marquant, selon l'intervenant ?",
+     "transcricao": "Ce ne sont pas toujours les destinations lointaines qui nous marquent le plus. Beaucoup de voyageurs racontent qu'un week-end dans une région voisine les a davantage touchés, parce qu'ils étaient vraiment disponibles et curieux.",
+     "audio": "audio/exercicios-orais/ex-b1-07/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 1200,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — récit",
+     "min": 120,
+     "max": 150,
+     "consigne": "Pour le blog d'un site de voyage, vous racontez le voyage qui vous a le plus marqué et expliquez pourquoi. (120 à 150 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 420,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 240,
+     "preparacaoSeg": 0,
+     "consigne": "« Voyager, c'est la meilleure école de la vie. » Qu'en pensez-vous ? Donnez votre opinion avec des arguments et des exemples.",
+     "perguntasExaminador": [
+      "Voyager, c'est la meilleure école de la vie. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et ceux qui n'ont pas les moyens de voyager ? », « Peut-on voyager sans partir loin ? », « Et l'impact de l'avion sur le climat ? »"
+    }
+   ]
+  }
+ }
+}

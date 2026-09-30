@@ -1,0 +1,143 @@
+{
+ "slug": "ex-a2-02",
+ "titulo": "Exercício oral nº 2 — A2",
+ "curso": "A2",
+ "categoria": "exercicio",
+ "nivel": "A2",
+ "tema": "S'inscrire à un cours",
+ "descricao": "Pedir informações sobre um curso de dança: horários, preços e níveis.",
+ "imagem": {
+  "src": "img/temas/a2-demander-information-2.jpg",
+  "credito": {
+   "autor": "U.S. Embassy Tel Aviv",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:AXIS_Dance_Company_(24308975841).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-a2-02/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "« Quel jour ».",
+     "alternativas": [
+      "C'est de la salsa.",
+      "Le mercredi soir.",
+      "À la salle 3.",
+      "Avec Marie."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Le cours de danse, c'est quel jour ?\nA. C'est de la salsa.\nB. Le mercredi soir.\nC. À la salle 3.\nD. Avec Marie.",
+     "audio": "audio/exercicios-orais/ex-a2-02/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pergunta sobre pré-requisito.",
+     "alternativas": [
+      "Il faut des chaussures.",
+      "Oui, je danse bien.",
+      "Non, il y a un cours pour débutants.",
+      "C'est vingt euros."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Il faut avoir déjà dansé pour s'inscrire ?\nA. Il faut des chaussures.\nB. Oui, je danse bien.\nC. Non, il y a un cours pour débutants.\nD. C'est vingt euros.",
+     "audio": "audio/exercicios-orais/ex-a2-02/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Du premier au quinze septembre ».",
+     "alternativas": [
+      "En août.",
+      "Toute l'année.",
+      "Le premier cours.",
+      "Du premier au quinze septembre."
+     ],
+     "correta": 3,
+     "pergunta": "Quand peut-on s'inscrire ?",
+     "transcricao": "L'école de danse propose des cours de salsa, de tango et de hip-hop. Les inscriptions ont lieu du premier au quinze septembre. Premier cours d'essai gratuit.",
+     "audio": "audio/exercicios-orais/ex-a2-02/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Ingrédients compris ».",
+     "alternativas": [
+      "Les ingrédients.",
+      "Le dîner au restaurant.",
+      "Le transport.",
+      "Le livre de recettes."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'est-ce qui est compris dans le prix ?",
+     "transcricao": "Bonjour, je voudrais des informations sur le cours de cuisine.\nIl a lieu le jeudi, de dix-huit heures trente à vingt heures trente. C'est trente-cinq euros la séance, ingrédients compris.",
+     "audio": "audio/exercicios-orais/ex-a2-02/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Ça m'a donné confiance en moi ».",
+     "alternativas": [
+      "Beaucoup d'argent.",
+      "De la timidité.",
+      "Un nouveau travail.",
+      "De la confiance en lui."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'est-ce que le théâtre lui a apporté ?",
+     "transcricao": "J'ai commencé le théâtre à quarante ans. Au début, j'étais très timide, je ne voulais pas monter sur scène. Maintenant, je joue dans un spectacle en juin ! Ça m'a donné confiance en moi.",
+     "audio": "audio/exercicios-orais/ex-a2-02/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 510,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 240,
+     "preparacaoSeg": 90,
+     "consigne": "Vous voulez vous inscrire à un cours de danse. Vous téléphonez à l'école pour avoir des informations : types de danse, niveau, jours, horaires, prix.",
+     "perguntasExaminador": [
+      "École Danse Passion, bonjour !"
+     ],
+     "fichaExaminador": "Vous êtes le/la secrétaire. Salsa (lundi 19 h), tango (mercredi 20 h), hip-hop (samedi 11 h). Débutants acceptés. 45 € par mois ou 400 € l'année. Premier cours gratuit. Chaussures souples obligatoires. Parlez clairement et laissez le candidat poser ses questions."
+    }
+   ]
+  }
+ }
+}

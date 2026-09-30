@@ -389,6 +389,7 @@
     const card = e.target.closest(".tier-card");
     if (!card) return;
     if (!state.slotsSelecionados.length) { showTopError("Escolha ao menos um horário antes de selecionar o plano."); return; }
+    if (state.tierEscolhido !== card.dataset.tier) state.cupom = null; // desconto calculado para outro preço
     state.tierEscolhido = card.dataset.tier;
     hideTopError();
     renderTierGrid();
@@ -480,7 +481,7 @@
     try {
       const res = await fetch("/api/matricula/validar-cupom", {
         method: "POST", headers: authHeaders(true),
-        body: JSON.stringify({ codigo, precoOriginal: precoOriginalAtual() })
+        body: JSON.stringify({ codigo, precoOriginal: precoOriginalAtual(), curso: cursoDoPedido(), plano: planoDoPedido() })
       });
       const data = await res.json();
       if (res.ok && data.valido) {
@@ -567,7 +568,16 @@
   // Monta o corpo comum enviado para /api/pagamentos/{pix,cartao,boleto} — usaHorarios manda
   // tipoMatricula+slotsEscolhidos; usaPackPrestige manda curso+"Pack Prestige" (preço fixo,
   // sempre recalculado no servidor); o fluxo antigo manda curso/plano/valor fixos.
+  function cursoDoPedido() { return usaHorarios ? cursoAtual() : planoInfo.curso; }
+  function planoDoPedido() { return usaHorarios ? state.tierEscolhido : usaPackPrestige ? "Pack Prestige" : planoInfo.plano; }
+
+  // O cupom vai junto; o servidor revalida e recalcula o desconto antes de cobrar.
   function corpoPagamentoBase(email, cpf) {
+    const corpo = corpoPagamentoSemCupom(email, cpf);
+    if (state.cupom) corpo.cupomCodigo = state.cupom.codigo;
+    return corpo;
+  }
+  function corpoPagamentoSemCupom(email, cpf) {
     if (usaHorarios) {
       return {
         curso: cursoAtual(), plano: state.tierEscolhido, valor: precoOriginalAtual(),
@@ -593,7 +603,8 @@
     if (!usaPackPrestige) { el.innerHTML = ""; return; }
     const nomeCursoResumo = planoInfo.curso === CURSO_COMBO_FLUENCIA ? "A1 ao B2" : planoInfo.curso;
     let html = linha("Produto adquirido", "Pack Prestige — " + nomeCursoResumo);
-    html += '<div class="resumo-total"><span class="label">Valor final</span><span class="valor">' + fmtMoeda(precoOriginalAtual()) + "</span></div>";
+    if (state.cupom) html += linha("Desconto (" + state.cupom.codigo + ")", "-" + fmtMoeda(state.cupom.desconto));
+    html += '<div class="resumo-total"><span class="label">Valor final</span><span class="valor">' + fmtMoeda(state.cupom ? state.cupom.precoFinal : precoOriginalAtual()) + "</span></div>";
     el.innerHTML = html;
   }
 

@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tcf-01",
+ "titulo": "Exercício oral nº 1 — TCF",
+ "curso": "TCF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Entre voisins",
+ "descricao": "Situações de vizinhança: recados, festa do prédio e um pedido de informações por telefone.",
+ "imagem": {
+  "src": "img/temas/tcf-t1-nouveau-voisin-2.jpg",
+  "credito": {
+   "autor": "brownpau",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:An_Overview_of_Moving_Companies_and_Their_Use_of_Moving_Boxes.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral convertida para a escala do TCF (0–699), com NCLC; expressões de 0 a 20, com nível CECR e NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tcf-01/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pergunta de identificação: « oui, je suis arrivé samedi ».",
+     "alternativas": [
+      "Non, je n'aime pas le troisième.",
+      "Oui, il fait beau aujourd'hui.",
+      "Oui, je suis arrivé samedi.",
+      "C'est au bout du couloir."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Excusez-moi, vous êtes le nouveau voisin du troisième ?\nA. Non, je n'aime pas le troisième.\nB. Oui, il fait beau aujourd'hui.\nC. Oui, je suis arrivé samedi.\nD. C'est au bout du couloir.",
+     "audio": "audio/exercicios-orais/ex-tcf-01/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Pedido educado de baixar a música: desculpar-se.",
+     "alternativas": [
+      "Je vais dormir à minuit.",
+      "Non, mon bébé a deux ans.",
+      "Oui, j'adore cette chanson.",
+      "Oh pardon, je baisse tout de suite."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Ça vous dérangerait de baisser un peu la musique ? Mon bébé dort.\nA. Je vais dormir à minuit.\nB. Non, mon bébé a deux ans.\nC. Oui, j'adore cette chanson.\nD. Oh pardon, je baisse tout de suite.",
+     "audio": "audio/exercicios-orais/ex-tcf-01/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« En cas de pluie, elle sera reportée à la semaine suivante ».",
+     "alternativas": [
+      "La fête sera reportée.",
+      "La fête aura lieu dans le hall.",
+      "La fête sera annulée.",
+      "La fête commencera plus tard."
+     ],
+     "correta": 0,
+     "pergunta": "Que se passera-t-il s'il pleut ?",
+     "transcricao": "Avis aux résidents : la fête des voisins aura lieu vendredi à partir de dix-neuf heures dans la cour. Chacun apporte un plat ou une boisson. En cas de pluie, elle sera reportée à la semaine suivante.",
+     "audio": "audio/exercicios-orais/ex-tcf-01/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« C'était bien plus qu'un gardien ».",
+     "alternativas": [
+      "Le départ des voisins.",
+      "Le rôle humain du gardien.",
+      "La saleté de l'immeuble.",
+      "Le prix de l'entreprise de nettoyage."
+     ],
+     "correta": 1,
+     "pergunta": "Que regrette l'homme ?",
+     "transcricao": "Tu as vu, le gardien part à la retraite.\nOui, et le syndic ne veut pas le remplacer : il propose une entreprise de nettoyage deux fois par semaine. Moi, je trouve dommage. Monsieur Paul, c'était bien plus qu'un gardien : il connaissait tout le monde, il gardait nos colis, il surveillait l'immeuble.",
+     "audio": "audio/exercicios-orais/ex-tcf-01/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Parce qu'ils nous relient à d'autres cercles que le nôtre ».",
+     "alternativas": [
+      "Ils sont plus durables que les liens forts.",
+      "Ils évitent les conflits.",
+      "Ils remplacent la famille.",
+      "Ils nous relient à d'autres cercles sociaux."
+     ],
+     "correta": 3,
+     "pergunta": "Selon l'intervenant, pourquoi les liens faibles sont-ils précieux ?",
+     "transcricao": "Les sociologues distinguent les liens forts, avec la famille et les amis proches, et les liens faibles, avec les voisins ou les commerçants. On croyait ces derniers secondaires. Or ce sont souvent eux qui apportent une information nouvelle, un emploi, une aide inattendue, précisément parce qu'ils nous relient à d'autres cercles que le nôtre.",
+     "audio": "audio/exercicios-orais/ex-tcf-01/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 630,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Vous venez d'emménager et vous voulez vous inscrire au jardin partagé de votre immeuble. Vous téléphonez au responsable pour obtenir des informations (parcelles, prix, horaires, règles, outils…).",
+     "perguntasExaminador": [
+      "Allô, bonjour ! Jardin partagé des Tilleuls, je vous écoute."
+     ],
+     "fichaExaminador": "Vous êtes le/la responsable du jardin partagé. Parcelles de 10 m² à 30 € par an. Ouvert tous les jours de 8 h à 20 h. Outils partagés dans un abri, eau de pluie récupérée. Réunion mensuelle le premier samedi. Liste d'attente : 2 mois environ. Pas de pesticides. Laissez le candidat mener l'échange ; relancez-le s'il se tait (« Autre chose ? »)."
+    }
+   ]
+  }
+ }
+}

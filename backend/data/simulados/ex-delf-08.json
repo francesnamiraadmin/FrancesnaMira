@@ -1,0 +1,143 @@
+{
+ "slug": "ex-delf-08",
+ "titulo": "Exercício oral nº 8 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Trop de touristes ?",
+ "descricao": "O turismo de massa nas cidades históricas: anúncios, moradores e especialistas.",
+ "imagem": {
+  "src": "img/temas/delf-b2-tourisme-masse-2.jpg",
+  "credito": {
+   "autor": "Wilfredor",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:ZAANDAM_Cruise_in_Quebec_City.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-08/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre a afluência.",
+     "alternativas": [
+      "Il est très long.",
+      "Encore plus : il faut venir tôt le matin.",
+      "Non, je n'aime pas l'été.",
+      "Oui, le pont est en pierre."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Il y a toujours autant de monde sur le pont en été ?\nA. Il est très long.\nB. Encore plus : il faut venir tôt le matin.\nC. Non, je n'aime pas l'été.\nD. Oui, le pont est en pierre.",
+     "audio": "audio/exercicios-orais/ex-delf-08/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Pour les visiteurs à la journée ».",
+     "alternativas": [
+      "Les habitants.",
+      "Tout le monde.",
+      "Les clients des hôtels.",
+      "Les visiteurs venus pour la journée."
+     ],
+     "correta": 3,
+     "pergunta": "Qui devra payer ?",
+     "transcricao": "À partir de cette année, l'accès à la vieille ville sera payant les jours de grande affluence pour les visiteurs à la journée : cinq euros par personne. Les habitants et les clients des hôtels ne seront pas concernés.",
+     "audio": "audio/exercicios-orais/ex-delf-08/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« On ne peut plus vivre normalement ».",
+     "alternativas": [
+      "Du bruit des voitures.",
+      "Du manque de touristes.",
+      "Du quartier transformé pour les touristes.",
+      "Des prix des hôtels."
+     ],
+     "correta": 2,
+     "pergunta": "De quoi se plaint cette habitante ?",
+     "transcricao": "J'habite ici depuis quarante ans. La boulangerie est devenue un magasin de souvenirs, la moitié des appartements de ma rue sont loués aux touristes. Je ne suis pas contre le tourisme, mais on ne peut plus vivre normalement.",
+     "audio": "audio/exercicios-orais/ex-delf-08/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que matiza com um argumento.",
+     "alternativas": [
+      "Pas forcément : des visiteurs moins nombreux restent souvent plus longtemps.",
+      "Le musée ferme le lundi.",
+      "Non, les touristes sont gentils.",
+      "Oui, les commerçants sont riches."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Si on limite les touristes, les commerçants vont perdre de l'argent, non ?\nA. Pas forcément : des visiteurs moins nombreux restent souvent plus longtemps.\nB. Le musée ferme le lundi.\nC. Non, les touristes sont gentils.\nD. Oui, les commerçants sont riches.",
+     "audio": "audio/exercicios-orais/ex-delf-08/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Cela demande seulement de renoncer à la logique du toujours plus ».",
+     "alternativas": [
+      "Fermer les sites célèbres.",
+      "Renoncer à la logique du toujours plus.",
+      "Interdire les vols à bas prix.",
+      "Construire plus d'hôtels."
+     ],
+     "correta": 1,
+     "pergunta": "Que faut-il, selon l'intervenant, pour lutter contre le surtourisme ?",
+     "transcricao": "Le surtourisme n'est pas une fatalité mais le résultat de choix : vols à bas prix, navires de croisière géants, promotion concentrée sur quelques sites. Répartir les visiteurs dans le temps et l'espace est possible ; cela demande seulement de renoncer à la logique du toujours plus.",
+     "audio": "audio/exercicios-orais/ex-delf-08/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Défendre un point de vue",
+     "duracaoSeg": 420,
+     "preparacaoSeg": 900,
+     "consigne": "Document déclencheur : « Venise, Dubrovnik, Barcelone : les villes historiques instaurent des quotas de visiteurs. » Dégagez la problématique, présentez votre point de vue de manière organisée, puis défendez-le face à l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : quelle est la problématique et quel est votre point de vue ?"
+     ],
+     "fichaExaminador": "Débat : « Le tourisme fait vivre ces villes », « Visiter le patrimoine est un droit », « Les quotas favorisent les riches »."
+    }
+   ]
+  }
+ }
+}

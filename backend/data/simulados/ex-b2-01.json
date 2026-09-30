@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b2-01",
+ "titulo": "Exercício oral nº 1 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "L'IA au bureau",
+ "descricao": "Inteligência artificial no trabalho: produtividade, empregos e novas competências.",
+ "imagem": {
+  "src": "img/temas/b2-intelligence-artificielle-emploi-2.jpg",
+  "credito": {
+   "autor": "Bench Accounting benchaccounting",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Man_at_a_laptop_in_an_office_(Unsplash).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-01/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta matizada.",
+     "alternativas": [
+      "Non, je n'ai pas de bureau.",
+      "Pour le premier jet, oui, mais je relis tout.",
+      "L'IA est à Paris.",
+      "Oui, mon rapport est long."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu utilises l'IA pour écrire tes rapports ?\nA. Non, je n'ai pas de bureau.\nB. Pour le premier jet, oui, mais je relis tout.\nC. L'IA est à Paris.\nD. Oui, mon rapport est long.",
+     "audio": "audio/exercicios-orais/ex-b2-01/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Elle est obligatoire pour les équipes du service client ».",
+     "alternativas": [
+      "Pour les nouveaux salariés.",
+      "Pour les directeurs.",
+      "Pour les équipes du service client.",
+      "Pour tous les salariés."
+     ],
+     "correta": 2,
+     "pergunta": "Pour qui la formation est-elle obligatoire ?",
+     "transcricao": "À partir du mois prochain, tous les salariés pourront suivre une formation de six heures sur les outils d'intelligence artificielle. Elle est obligatoire pour les équipes du service client.",
+     "audio": "audio/exercicios-orais/ex-b2-01/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« On me demande surtout de relire des traductions faites par des machines ».",
+     "alternativas": [
+      "Elle a changé de métier.",
+      "Elle traduit plus de livres.",
+      "Elle relit surtout des traductions automatiques.",
+      "Elle gagne plus."
+     ],
+     "correta": 2,
+     "pergunta": "Qu'est-ce qui a changé dans son travail ?",
+     "transcricao": "Je suis traductrice. Depuis deux ans, on me demande surtout de relire des traductions faites par des machines. C'est plus rapide, mais moins bien payé, et beaucoup moins intéressant.",
+     "audio": "audio/exercicios-orais/ex-b2-01/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta ponderada.",
+     "alternativas": [
+      "Oui, mon métier est difficile.",
+      "Non, je travaille demain.",
+      "Il disparaît à six heures.",
+      "Il va changer, mais le contact humain restera essentiel."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu crois que ton métier va disparaître ?\nA. Oui, mon métier est difficile.\nB. Non, je travaille demain.\nC. Il disparaît à six heures.\nD. Il va changer, mais le contact humain restera essentiel.",
+     "audio": "audio/exercicios-orais/ex-b2-01/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Elle touche des tâches intellectuelles ».",
+     "alternativas": [
+      "Elle touche des tâches intellectuelles.",
+      "Elle crée plus d'emplois.",
+      "Elle remplace les tâches manuelles.",
+      "Elle ne concerne que les usines."
+     ],
+     "correta": 0,
+     "pergunta": "Quelle est la nouveauté de l'IA, selon l'intervenant ?",
+     "transcricao": "Les révolutions techniques précédentes ont surtout remplacé des tâches manuelles. La nouveauté de l'IA, c'est qu'elle touche des tâches intellectuelles : rédiger, résumer, analyser. Les emplois qualifiés, longtemps protégés, sont désormais concernés.",
+     "audio": "audio/exercicios-orais/ex-b2-01/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« L'intelligence artificielle va créer plus d'emplois qu'elle n'en détruira. » Qu'en pensez-vous ? Vous donnez votre opinion, vous l'argumentez et vous l'illustrez d'exemples.",
+     "perguntasExaminador": [
+      "L'intelligence artificielle va créer plus d'emplois qu'elle n'en détruira. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Quels métiers sont menacés ? », « Qui doit financer la formation ? », « Utilisez-vous l'IA vous-même ? »"
+    }
+   ]
+  }
+ }
+}

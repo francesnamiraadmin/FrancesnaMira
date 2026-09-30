@@ -1,0 +1,143 @@
+{
+ "slug": "ex-dalf-10",
+ "titulo": "Exercício oral nº 10 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C2",
+ "tema": "Traduire",
+ "descricao": "O ofício do tradutor, a tradução automática e o que se perde (ou ganha) entre línguas.",
+ "imagem": {
+  "src": "img/temas/dalf-c2-traduction-2.jpg",
+  "credito": {
+   "autor": "Jonashtand",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:202401_Foreign_language_textbooks_in_a_bookstore_in_Saigon,_Vietnam.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-10/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre a leitura.",
+     "alternativas": [
+      "Non, je n'ai pas de version.",
+      "Non, en traduction, mais elle est excellente.",
+      "Il a trois cents pages.",
+      "Oui, le roman est original."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu lis ce roman en version originale ?\nA. Non, je n'ai pas de version.\nB. Non, en traduction, mais elle est excellente.\nC. Il a trois cents pages.\nD. Oui, le roman est original.",
+     "audio": "audio/exercicios-orais/ex-dalf-10/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Les traductions du japonais et du coréen progressent fortement ».",
+     "alternativas": [
+      "Celles de l'allemand.",
+      "Celles de l'espagnol.",
+      "Celles du japonais et du coréen.",
+      "Celles de l'anglais."
+     ],
+     "correta": 2,
+     "pergunta": "Quelles traductions progressent fortement ?",
+     "transcricao": "Chaque année, près d'un livre sur six publié en France est une traduction. L'anglais domine très largement, mais les traductions du japonais et du coréen progressent fortement, portées par le succès des mangas et des romans asiatiques.",
+     "audio": "audio/exercicios-orais/ex-dalf-10/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Ils traduisent ce que dit le texte, pas la manière dont il le dit ».",
+     "alternativas": [
+      "La manière, la voix du texte.",
+      "Le vocabulaire technique.",
+      "La rapidité.",
+      "La correction grammaticale."
+     ],
+     "correta": 0,
+     "pergunta": "Que manque-t-il aux traductions automatiques en littérature ?",
+     "transcricao": "Les logiciels de traduction sont devenus remarquables pour les textes techniques. En littérature, ils produisent des phrases correctes mais sans voix : ils traduisent ce que dit le texte, pas la manière dont il le dit. Or en littérature, la manière, c'est presque tout.",
+     "audio": "audio/exercicios-orais/ex-dalf-10/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre compensação na tradução.",
+     "alternativas": [
+      "Non, je joue aux cartes.",
+      "Le dictionnaire est lourd.",
+      "Oui, les mots sont difficiles.",
+      "Il faut parfois en inventer un autre qui produise le même effet."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Traduire un jeu de mots, c'est impossible, non ?\nA. Non, je joue aux cartes.\nB. Le dictionnaire est lourd.\nC. Oui, les mots sont difficiles.\nD. Il faut parfois en inventer un autre qui produise le même effet.",
+     "audio": "audio/exercicios-orais/ex-dalf-10/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Il rend son interprétation visible et la soumet au jugement des autres ».",
+     "alternativas": [
+      "Il lit plus lentement.",
+      "Il trahit davantage le texte.",
+      "Il n'interprète pas.",
+      "Il rend son interprétation visible."
+     ],
+     "correta": 3,
+     "pergunta": "Selon l'intervenant, qu'est-ce qui distingue le traducteur d'un lecteur ?",
+     "transcricao": "On répète le proverbe italien « traduttore, traditore » : traducteur, traître. Mais toute lecture est déjà une interprétation. Le traducteur ne trahit pas davantage qu'un lecteur attentif ; simplement, il rend son interprétation visible et la soumet au jugement des autres.",
+     "audio": "audio/exercicios-orais/ex-dalf-10/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — monologue suivi et débat (C2)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "À partir des idées évoquées dans les documents sonores de cet exercice, vous présentez un point de vue argumenté et nuancé sur la question suivante : « À l'heure de la traduction automatique, apprendre des langues étrangères a-t-il encore un sens ? » Vous débattrez ensuite avec l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre point de vue."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : rapport à l'autre, emploi des traducteurs, nuances culturelles, erreurs des machines, plaisir d'apprendre."
+    }
+   ]
+  }
+ }
+}

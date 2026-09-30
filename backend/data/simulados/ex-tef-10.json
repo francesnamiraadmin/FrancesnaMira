@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tef-10",
+ "titulo": "Exercício oral nº 10 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "Réseaux sociaux avant 15 ans",
+ "descricao": "Proibir redes sociais para menores de 15 anos? Pais, adolescentes, legisladores e pesquisadores.",
+ "imagem": {
+  "src": "img/temas/tef-b-reseaux-moins-15-2.jpg",
+  "credito": {
+   "autor": "Flame, not lame",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Male_Teenager_Holding_Red_iPhone.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-10/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta de mãe.",
+     "alternativas": [
+      "Oui, la classe est grande.",
+      "On en reparle quand tu auras quinze ans.",
+      "Non, j'ai un téléphone.",
+      "Le réseau est lent."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Maman, je peux m'inscrire sur ce réseau ? Toute la classe y est !\nA. Oui, la classe est grande.\nB. On en reparle quand tu auras quinze ans.\nC. Non, j'ai un téléphone.\nD. Le réseau est lent.",
+     "audio": "audio/exercicios-orais/ex-tef-10/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Qu'avec l'accord explicite d'un parent ».",
+     "alternativas": [
+      "Une inscription à l'école.",
+      "Aucune restriction.",
+      "Une interdiction totale.",
+      "Une inscription possible avec l'accord d'un parent."
+     ],
+     "correta": 3,
+     "pergunta": "Que prévoit le texte pour les moins de quinze ans ?",
+     "transcricao": "Le Parlement examine un texte qui obligerait les réseaux sociaux à vérifier l'âge de leurs utilisateurs. Les moins de quinze ans ne pourraient s'inscrire qu'avec l'accord explicite d'un parent.",
+     "audio": "audio/exercicios-orais/ex-tef-10/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Je créerai un compte avec une fausse date de naissance ».",
+     "alternativas": [
+      "Il en parlerait à ses parents.",
+      "Il écouterait moins de musique.",
+      "Il mentirait sur son âge.",
+      "Il arrêterait les réseaux."
+     ],
+     "correta": 2,
+     "pergunta": "Que ferait l'adolescent en cas d'interdiction ?",
+     "transcricao": "Moi, j'ai quatorze ans. Les réseaux, c'est là que je parle avec mes amis, que je découvre de la musique. Si on m'interdit, je créerai un compte avec une fausse date de naissance, comme tout le monde.",
+     "audio": "audio/exercicios-orais/ex-tef-10/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Contra-argumento.",
+     "alternativas": [
+      "Non, la loi est longue.",
+      "L'âge est un chiffre.",
+      "Oui, j'ai vérifié mon âge.",
+      "Elle pose au moins une norme sur laquelle les parents peuvent s'appuyer."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Une loi, ça ne sert à rien si on ne peut pas vérifier l'âge !\nA. Non, la loi est longue.\nB. L'âge est un chiffre.\nC. Oui, j'ai vérifié mon âge.\nD. Elle pose au moins une norme sur laquelle les parents peuvent s'appuyer.",
+     "audio": "audio/exercicios-orais/ex-tef-10/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Réguler la conception des plateformes serait sans doute plus efficace ».",
+     "alternativas": [
+      "Réguler la conception des plateformes.",
+      "Interdire totalement l'accès.",
+      "Réduire le temps d'écran à l'école.",
+      "Surveiller les adolescents."
+     ],
+     "correta": 0,
+     "pergunta": "Que propose l'intervenante ?",
+     "transcricao": "Le lien entre réseaux sociaux et mal-être adolescent est réel mais complexe : ce n'est pas le temps d'écran en soi qui nuit, mais certains usages, comme la comparaison permanente de son corps avec celui des autres. Réguler la conception des plateformes serait sans doute plus efficace que d'interdire l'accès.",
+     "audio": "audio/exercicios-orais/ex-tef-10/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 840,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section B — Présenter et convaincre",
+     "duracaoSeg": 600,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Atelier gratuit parents-ados « Bien vivre avec les réseaux sociaux » : deux soirées animées par une psychologue et un ancien développeur d'applications. » Vous présentez cette proposition à un(e) ami(e) et vous essayez de le/la convaincre d'y participer. L'examinateur joue l'ami(e) et présente des objections.",
+     "perguntasExaminador": [
+      "Alors, qu'est-ce que tu voulais me montrer ?"
+     ],
+     "fichaExaminador": "Vous êtes l'ami(e) sceptique. Objections possibles : « Je n'ai pas le temps le soir », « Mon ado ne voudra jamais venir », « Je sais déjà tout ça », « Les réseaux ne posent aucun problème chez nous ». Laissez-vous convaincre seulement par de bons arguments."
+    }
+   ]
+  }
+ }
+}

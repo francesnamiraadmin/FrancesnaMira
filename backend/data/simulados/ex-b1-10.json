@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b1-10",
+ "titulo": "Exercício oral nº 10 — B1",
+ "curso": "B1",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Fête de quartier",
+ "descricao": "Organizar uma festa de bairro: música, voluntários e autorização.",
+ "imagem": {
+  "src": "img/temas/b1-fete-quartier-2.jpg",
+  "credito": {
+   "autor": "Mykola Swarnyk",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Street_musicians_at_the_BWF_2019.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b1-10/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre tocar na festa.",
+     "alternativas": [
+      "La fête est grande.",
+      "Oui, j'ai un chapeau.",
+      "Non, je n'ai pas faim.",
+      "Oui, deux ou trois chansons."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu joues de l'accordéon à la fête samedi ?\nA. La fête est grande.\nB. Oui, j'ai un chapeau.\nC. Non, je n'ai pas faim.\nD. Oui, deux ou trois chansons.",
+     "audio": "audio/exercicios-orais/ex-b1-10/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« La rue sera fermée à la circulation ».",
+     "alternativas": [
+      "Elle sera décorée.",
+      "Elle sera fermée à la circulation.",
+      "Elle sera nettoyée.",
+      "Elle changera de nom."
+     ],
+     "correta": 1,
+     "pergunta": "Que se passera-t-il pour la rue ?",
+     "transcricao": "La fête du quartier Saint-Michel aura lieu samedi de quatorze heures à minuit. Au programme : brocante, jeux pour enfants, repas partagé et bal. La rue sera fermée à la circulation.",
+     "audio": "audio/exercicios-orais/ex-b1-10/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Ont décidé de créer un jardin partagé ensemble ».",
+     "alternativas": [
+      "Il y a eu moins de monde.",
+      "Les voisins se sont disputés.",
+      "La fête a été annulée.",
+      "Des voisins ont décidé de créer un jardin partagé."
+     ],
+     "correta": 3,
+     "pergunta": "Quelle conséquence a eu la fête ?",
+     "transcricao": "L'an dernier, on était cinquante. Cette année, plus de deux cents personnes sont venues ! Des voisins qui ne s'étaient jamais parlé ont décidé de créer un jardin partagé ensemble.",
+     "audio": "audio/exercicios-orais/ex-b1-10/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta prática.",
+     "alternativas": [
+      "Oui, au moins un mois à l'avance.",
+      "La fête est samedi.",
+      "Oui, la mairie est belle.",
+      "Non, je suis voisin."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Il faut demander une autorisation à la mairie ?\nA. Oui, au moins un mois à l'avance.\nB. La fête est samedi.\nC. Oui, la mairie est belle.\nD. Non, je suis voisin.",
+     "audio": "audio/exercicios-orais/ex-b1-10/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Elles créent une première occasion de se parler ».",
+     "alternativas": [
+      "Résoudre la solitude.",
+      "Faire connaître la ville.",
+      "Créer une première occasion de se parler.",
+      "Remplacer les associations."
+     ],
+     "correta": 2,
+     "pergunta": "Quel est le rôle des fêtes de quartier, selon l'intervenant ?",
+     "transcricao": "Dans les grandes villes, on peut vivre des années sans connaître ses voisins. Les fêtes de quartier ne résolvent pas la solitude, mais elles créent une première occasion de se parler, qui rend ensuite les échanges plus naturels.",
+     "audio": "audio/exercicios-orais/ex-b1-10/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 120,
+     "consigne": "Vous voulez organiser une fête dans votre rue. Vous téléphonez à la mairie pour savoir quelles démarches faire (autorisation, fermeture de la rue, matériel, bruit, sécurité).",
+     "perguntasExaminador": [
+      "Mairie, service des événements, bonjour !"
+     ],
+     "fichaExaminador": "Vous êtes l'employé(e). Demande écrite 6 semaines avant. Fermeture de rue possible jusqu'à 23 h. Prêt gratuit de tables, chaises et barrières. Musique amplifiée interdite après 22 h. Un responsable doit être désigné. Laissez le candidat mener l'échange ; relancez-le s'il se tait."
+    }
+   ]
+  }
+ }
+}

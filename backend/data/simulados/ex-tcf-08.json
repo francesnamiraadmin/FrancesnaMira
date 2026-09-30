@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tcf-08",
+ "titulo": "Exercício oral nº 8 — TCF",
+ "curso": "TCF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "L'école et l'intelligence artificielle",
+ "descricao": "Tecnologia na educação: anúncios escolares, conversa entre pais e uma análise de especialista.",
+ "imagem": {
+  "src": "img/temas/tcf-t3-ia-ecole-2.jpg",
+  "credito": {
+   "autor": "Galtzaundi Euskara Taldea",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Euskarazko_hitz_egiteagatik_zigortutako_Bedaioko_ikasle_baten_koadernoa_2.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral convertida para a escala do TCF (0–699), com NCLC; expressões de 0 a 20, com nível CECR e NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tcf-08/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre os deveres.",
+     "alternativas": [
+      "C'est à huit heures.",
+      "Non, je suis en France.",
+      "Presque, il me reste un exercice.",
+      "Oui, j'ai faim."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as fini tes devoirs de français ?\nA. C'est à huit heures.\nB. Non, je suis en France.\nC. Presque, il me reste un exercice.\nD. Oui, j'ai faim.",
+     "audio": "audio/exercicios-orais/ex-tcf-08/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les élèves devront les laisser éteints dans leur sac ».",
+     "alternativas": [
+      "Garder leur téléphone éteint dans leur sac.",
+      "Utiliser leur téléphone en récréation.",
+      "Donner leur téléphone au professeur.",
+      "Laisser leur téléphone à la maison."
+     ],
+     "correta": 0,
+     "pergunta": "Que devront faire les élèves ?",
+     "transcricao": "Information aux parents : à partir de la rentrée, les téléphones portables seront interdits dans l'établissement, y compris pendant les récréations. Les élèves devront les laisser éteints dans leur sac.",
+     "audio": "audio/exercicios-orais/ex-tcf-08/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Ils l'autorisent pour faire un plan, mais elle doit rédiger elle-même ».",
+     "alternativas": [
+      "Ils ne savent pas qu'elle l'utilise.",
+      "Elle est totalement interdite.",
+      "Elle peut rédiger les dissertations.",
+      "Elle peut servir pour le plan, mais la rédaction doit être personnelle."
+     ],
+     "correta": 3,
+     "pergunta": "Comment les professeurs encadrent-ils l'IA ?",
+     "transcricao": "Ma fille utilise l'IA pour ses dissertations.\nEt ses professeurs le savent ?\nOui, ils l'autorisent pour faire un plan, mais elle doit rédiger elle-même et expliquer ses choix à l'oral. Finalement, elle travaille plus qu'avant !",
+     "audio": "audio/exercicios-orais/ex-tcf-08/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que exprime dúvida e justifica.",
+     "alternativas": [
+      "Oui, les machines sont chères.",
+      "Je vais à l'école à pied.",
+      "J'en doute : on a besoin de quelqu'un qui nous motive.",
+      "Non, mon prof est grand."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu crois que les profs vont être remplacés par des machines ?\nA. Oui, les machines sont chères.\nB. Je vais à l'école à pied.\nC. J'en doute : on a besoin de quelqu'un qui nous motive.\nD. Non, mon prof est grand.",
+     "audio": "audio/exercicios-orais/ex-tcf-08/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« C'est la disparition de l'effort qui fait apprendre ».",
+     "alternativas": [
+      "Les erreurs des machines.",
+      "La disparition de l'effort nécessaire pour apprendre.",
+      "La triche aux examens.",
+      "Le coût des outils."
+     ],
+     "correta": 1,
+     "pergunta": "Quel est le vrai danger, selon l'intervenant ?",
+     "transcricao": "Le danger de l'IA à l'école n'est pas la triche en soi ; c'est la disparition de l'effort qui fait apprendre. Chercher, se tromper, recommencer : c'est dans ces moments pénibles que se construit la compréhension. Un outil qui supprime toute difficulté supprime aussi l'apprentissage.",
+     "audio": "audio/exercicios-orais/ex-tcf-08/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 630,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Votre enfant (ou vous-même) veut suivre des cours particuliers de mathématiques. Vous téléphonez à une école de soutien scolaire pour obtenir des informations (prix, horaires, niveau des professeurs, cours en ligne…).",
+     "perguntasExaminador": [
+      "Réussite Plus, soutien scolaire, bonjour !"
+     ],
+     "fichaExaminador": "Vous êtes le/la secrétaire de l'école. Cours individuel : 35 €/h ; en petit groupe (4 élèves max) : 18 €/h. Du lundi au samedi, 14 h–20 h. Professeurs diplômés. Cours en ligne possibles. Premier cours d'essai gratuit. Réduction de 50 % via le crédit d'impôt. Laissez le candidat mener l'échange ; relancez-le s'il se tait (« Autre chose ? »)."
+    }
+   ]
+  }
+ }
+}

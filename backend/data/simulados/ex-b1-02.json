@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b1-02",
+ "titulo": "Exercício oral nº 2 — B1",
+ "curso": "B1",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Une rencontre",
+ "descricao": "Encontros que mudam uma vida: um professor, um desconhecido no trem, um amigo de infância.",
+ "imagem": {
+  "src": "img/temas/b1-experience-marquante-2.jpg",
+  "credito": {
+   "autor": "delegateconnectimages",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Virtual_Graduation_Ceremony.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b1-02/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "« Comment » pede as circunstâncias.",
+     "alternativas": [
+      "Il est très gentil.",
+      "Il s'appelle Marc.",
+      "Dans un train, il y a dix ans.",
+      "On se voit demain."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Vous vous êtes connus comment, toi et Marc ?\nA. Il est très gentil.\nB. Il s'appelle Marc.\nC. Dans un train, il y a dix ans.\nD. On se voit demain.",
+     "audio": "audio/exercicios-orais/ex-b1-02/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Je lui ai écrit pour la remercier ».",
+     "alternativas": [
+      "Il est devenu professeur.",
+      "Il a écrit un livre.",
+      "Il a ouvert une école.",
+      "Il a écrit à sa professeure pour la remercier."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'a fait l'homme vingt ans après ?",
+     "transcricao": "Ma professeure de français au lycée m'a fait découvrir les livres. Sans elle, je ne serais jamais devenu libraire. Vingt ans après, je lui ai écrit pour la remercier.",
+     "audio": "audio/exercicios-orais/ex-b1-02/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Une dame m'a proposé de partager son taxi ».",
+     "alternativas": [
+      "À l'école.",
+      "Au travail.",
+      "En partageant un taxi.",
+      "Dans le train."
+     ],
+     "correta": 2,
+     "pergunta": "Comment ont-elles fait connaissance ?",
+     "transcricao": "J'avais raté mon train et j'étais désespérée. Une dame m'a proposé de partager son taxi. On a parlé pendant tout le trajet… Aujourd'hui, c'est ma meilleure amie.",
+     "audio": "audio/exercicios-orais/ex-b1-02/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta pessoal.",
+     "alternativas": [
+      "Oui, ça m'est arrivé avec ma voisine.",
+      "Oui, il y a de l'orage.",
+      "La foudre est dangereuse.",
+      "Non, je n'ai pas d'amis."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu crois aux coups de foudre en amitié ?\nA. Oui, ça m'est arrivé avec ma voisine.\nB. Oui, il y a de l'orage.\nC. La foudre est dangereuse.\nD. Non, je n'ai pas d'amis.",
+     "audio": "audio/exercicios-orais/ex-b1-02/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« À ces moments-là, on est plus ouvert aux autres ».",
+     "alternativas": [
+      "Elles sont rares.",
+      "On est plus ouvert aux autres dans les moments de transition.",
+      "Elles arrivent en vacances.",
+      "Elles sont plus longues."
+     ],
+     "correta": 1,
+     "pergunta": "Pourquoi ces rencontres nous marquent-elles davantage ?",
+     "transcricao": "Selon les psychologues, on se souvient surtout des rencontres qui arrivent à un moment de transition : un déménagement, un nouveau travail, une rupture. À ces moments-là, on est plus ouvert aux autres.",
+     "audio": "audio/exercicios-orais/ex-b1-02/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 420,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 240,
+     "preparacaoSeg": 0,
+     "consigne": "« Les amis sont plus importants que la famille. » Qu'en pensez-vous ? Donnez votre opinion avec des arguments et des exemples.",
+     "perguntasExaminador": [
+      "Les amis sont plus importants que la famille. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Peut-on choisir sa famille ? », « Que faire en cas de conflit ? », « Avez-vous un ami d'enfance ? »"
+    }
+   ]
+  }
+ }
+}

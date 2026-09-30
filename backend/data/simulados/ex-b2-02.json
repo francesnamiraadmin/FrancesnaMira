@@ -1,0 +1,157 @@
+{
+ "slug": "ex-b2-02",
+ "titulo": "Exercício oral nº 2 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "La voiture électrique",
+ "descricao": "Carro elétrico: preço, autonomia, recarga e impacto ambiental; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/b2-voiture-electrique-2.jpg",
+  "credito": {
+   "autor": "Jiří Sedláček",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Traffic_jam_after_massive_car_accident_at_D1_highway_at_March_2018.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-02/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Pergunta técnica.",
+     "alternativas": [
+      "Elle est garée dehors.",
+      "Je l'ai achetée en mai.",
+      "Elle est blanche.",
+      "Environ quatre cents kilomètres."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Ta voiture électrique, elle a quelle autonomie ?\nA. Elle est garée dehors.\nB. Je l'ai achetée en mai.\nC. Elle est blanche.\nD. Environ quatre cents kilomètres.",
+     "audio": "audio/exercicios-orais/ex-b2-02/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Elle reste plus élevée pour les ménages aux revenus modestes ».",
+     "alternativas": [
+      "Pour les ménages aux revenus modestes.",
+      "Pour les voitures d'occasion.",
+      "Pour les grandes familles.",
+      "Pour les jeunes conducteurs."
+     ],
+     "correta": 0,
+     "pergunta": "Pour qui la prime reste-t-elle plus élevée ?",
+     "transcricao": "La prime pour l'achat d'une voiture électrique neuve passera de cinq mille à quatre mille euros au premier juillet. Elle reste plus élevée pour les ménages aux revenus modestes.",
+     "audio": "audio/exercicios-orais/ex-b2-02/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Il faut prévoir les arrêts ».",
+     "alternativas": [
+      "Elle fait trop de bruit.",
+      "Elle coûte cher à recharger.",
+      "Il faut prévoir les arrêts pour recharger.",
+      "Elle n'est pas pratique en ville."
+     ],
+     "correta": 2,
+     "pergunta": "Quel inconvénient mentionne-t-elle ?",
+     "transcricao": "En ville, c'est parfait : silencieuse, pas chère à recharger. Mais pour partir en vacances, il faut prévoir les arrêts, et en été, il y a parfois la queue aux bornes. Ça demande de l'organisation.",
+     "audio": "audio/exercicios-orais/ex-b2-02/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Contra-argumento.",
+     "alternativas": [
+      "Non, je roule peu.",
+      "Leur fabrication pollue, mais sur toute sa vie, la voiture émet moins.",
+      "La batterie est lourde.",
+      "Oui, j'ai une batterie."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Mais les batteries, ce n'est pas écologique du tout !\nA. Non, je roule peu.\nB. Leur fabrication pollue, mais sur toute sa vie, la voiture émet moins.\nC. La batterie est lourde.\nD. Oui, j'ai une batterie.",
+     "audio": "audio/exercicios-orais/ex-b2-02/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Réduire notre dépendance à la voiture individuelle ».",
+     "alternativas": [
+      "Construire plus de bornes.",
+      "Remplacer toutes les voitures thermiques.",
+      "Réduire la dépendance à la voiture individuelle.",
+      "Baisser le prix de l'électricité."
+     ],
+     "correta": 2,
+     "pergunta": "Quelle est la vraie transition, selon l'intervenant ?",
+     "transcricao": "Remplacer chaque voiture thermique par une voiture électrique ne réglera pas les embouteillages ni l'étalement urbain. La vraie transition, c'est de réduire notre dépendance à la voiture individuelle, quelle que soit son énergie.",
+     "audio": "audio/exercicios-orais/ex-b2-02/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — texte argumentatif",
+     "min": 120,
+     "max": 180,
+     "consigne": "« La voiture électrique : vraie solution ou fausse bonne idée ? » Vous écrivez un texte pour le forum d'un journal en présentant les deux points de vue et votre opinion. (120 à 180 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« La voiture électrique est la solution aux problèmes de pollution. » Qu'en pensez-vous ? Vous donnez votre opinion, vous l'argumentez et vous l'illustrez d'exemples.",
+     "perguntasExaminador": [
+      "La voiture électrique est la solution aux problèmes de pollution. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et le prix pour les familles modestes ? », « Et à la campagne ? », « Les transports en commun ne sont-ils pas une meilleure solution ? »"
+    }
+   ]
+  }
+ }
+}

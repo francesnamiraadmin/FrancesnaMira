@@ -1,0 +1,159 @@
+{
+ "slug": "ex-tcf-06",
+ "titulo": "Exercício oral nº 6 — TCF",
+ "curso": "TCF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "S'engager comme bénévole",
+ "descricao": "Associações, voluntariado e engajamento local; inclui uma breve tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/tcf-t2-benevolat-2.jpg",
+  "credito": {
+   "autor": "Oceanflynn",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Parkdale_Community_garden_volunteer_day.JPG"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral convertida para a escala do TCF (0–699), com NCLC; expressões de 0 a 20, com nível CECR e NCLC.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tcf-06/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta à pergunta sobre voluntários.",
+     "alternativas": [
+      "Non, je ne travaille pas.",
+      "C'est trop cher.",
+      "Oui, j'aime le chocolat.",
+      "Oui, on commence à neuf heures."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Vous cherchez encore des bénévoles pour samedi ?\nA. Non, je ne travaille pas.\nB. C'est trop cher.\nC. Oui, j'aime le chocolat.\nD. Oui, on commence à neuf heures.",
+     "audio": "audio/exercicios-orais/ex-tcf-06/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Pour deux heures minimum ».",
+     "alternativas": [
+      "Donner de la nourriture.",
+      "S'inscrire pour deux heures.",
+      "Apporter un gilet.",
+      "Travailler tout le week-end."
+     ],
+     "correta": 1,
+     "pergunta": "Que doivent faire les bénévoles au minimum ?",
+     "transcricao": "La banque alimentaire organise une grande collecte ce week-end dans les supermarchés de la ville. Les bénévoles peuvent s'inscrire pour deux heures minimum. Un gilet et une formation rapide sont prévus sur place.",
+     "audio": "audio/exercicios-orais/ex-tcf-06/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Super ! … Je reviens la semaine prochaine ».",
+     "alternativas": [
+      "Elle veut arrêter.",
+      "Avec indifférence.",
+      "Positivement : elle va revenir.",
+      "Mal : l'enfant ne voulait pas travailler."
+     ],
+     "correta": 2,
+     "pergunta": "Comment la jeune femme a-t-elle vécu cette expérience ?",
+     "transcricao": "Alors, ton premier jour à l'aide aux devoirs ?\nSuper ! J'ai aidé un petit garçon en maths. Au début, il ne voulait pas travailler, mais quand il a réussi son exercice, il était tellement fier ! Je reviens la semaine prochaine.",
+     "audio": "audio/exercicios-orais/ex-tcf-06/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que concede e argumenta.",
+     "alternativas": [
+      "C'est vrai, mais en attendant, les gens ont besoin d'aide.",
+      "Non, je n'ai pas d'argent.",
+      "Oui, l'État est très bien.",
+      "Je suis bénévole le lundi."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu ne trouves pas que le bénévolat remplace le travail de l'État ?\nA. C'est vrai, mais en attendant, les gens ont besoin d'aide.\nB. Non, je n'ai pas d'argent.\nC. Oui, l'État est très bien.\nD. Je suis bénévole le lundi.",
+     "audio": "audio/exercicios-orais/ex-tcf-06/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Peinent à trouver des responsables prêts à s'engager dans la durée ».",
+     "alternativas": [
+      "Trouver des missions.",
+      "Obtenir de l'argent.",
+      "Utiliser les téléphones.",
+      "Trouver des responsables engagés sur la durée."
+     ],
+     "correta": 3,
+     "pergunta": "Quelle difficulté rencontrent les associations ?",
+     "transcricao": "L'engagement associatif change de forme. On adhère moins à une association pour des années ; on s'engage plutôt pour une mission précise, quelques heures, parfois depuis son téléphone. Les associations y gagnent en souplesse, mais peinent à trouver des responsables prêts à s'engager dans la durée.",
+     "audio": "audio/exercicios-orais/ex-tcf-06/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 900,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — message",
+     "min": 60,
+     "max": 120,
+     "consigne": "Vous écrivez à une association de votre quartier pour proposer votre aide comme bénévole : vos disponibilités, vos compétences et ce que vous aimeriez faire. (60 à 120 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 300,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur : vous parlez de vous, de votre parcours et de vos projets.",
+     "perguntasExaminador": [
+      "Bonjour. Pouvez-vous vous présenter ?",
+      "Avez-vous déjà fait du bénévolat ?",
+      "Qu'est-ce que vous faites pendant votre temps libre ?",
+      "Quelle cause vous tient à cœur ?"
+     ]
+    }
+   ]
+  }
+ }
+}

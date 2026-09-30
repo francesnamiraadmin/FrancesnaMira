@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b2-03",
+ "titulo": "Exercício oral nº 3 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Sport et argent",
+ "descricao": "Salários de atletas, clubes amadores e o sentido do esporte.",
+ "imagem": {
+  "src": "img/temas/b2-sport-professionnel-argent-2.jpg",
+  "credito": {
+   "autor": "Rehoboth 11",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Kids_Street_football_3.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-03/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Reação ao valor.",
+     "alternativas": [
+      "Oui, cent millions, c'est délirant !",
+      "Non, j'ai un ballon.",
+      "Le match est à vingt heures.",
+      "Oui, il joue bien."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as vu le prix du transfert de ce joueur ?\nA. Oui, cent millions, c'est délirant !\nB. Non, j'ai un ballon.\nC. Le match est à vingt heures.\nD. Oui, il joue bien.",
+     "audio": "audio/exercicios-orais/ex-b2-03/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Cherche des entraîneurs bénévoles ».",
+     "alternativas": [
+      "Des joueurs professionnels.",
+      "Des sponsors.",
+      "Un nouveau stade.",
+      "Des entraîneurs bénévoles."
+     ],
+     "correta": 3,
+     "pergunta": "Que cherche le club ?",
+     "transcricao": "Le club de football amateur de la ville cherche des entraîneurs bénévoles pour ses équipes de moins de douze ans. Une formation est offerte. Entraînements le mercredi et le samedi.",
+     "audio": "audio/exercicios-orais/ex-b2-03/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Ce sont nos clubs qui forment les futurs champions ! »",
+     "alternativas": [
+      "Les petits clubs forment les champions avec très peu d'argent.",
+      "Les matchs ne sont pas à la télévision.",
+      "La buvette coûte trop cher.",
+      "Les cotisations sont trop élevées."
+     ],
+     "correta": 0,
+     "pergunta": "Que regrette l'intervenante ?",
+     "transcricao": "Notre petit club vit avec quinze mille euros par an, grâce aux cotisations et à la buvette. Un seul match de football professionnel à la télévision rapporte des millions. Et ce sont nos clubs qui forment les futurs champions !",
+     "audio": "audio/exercicios-orais/ex-b2-03/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta matizada.",
+     "alternativas": [
+      "Le salaire est au bureau.",
+      "Leur carrière est courte, mais les écarts sont excessifs.",
+      "Non, j'aime le sport.",
+      "Oui, ils courent vite."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Les sportifs gagnent trop, tu ne trouves pas ?\nA. Le salaire est au bureau.\nB. Leur carrière est courte, mais les écarts sont excessifs.\nC. Non, j'aime le sport.\nD. Oui, ils courent vite.",
+     "audio": "audio/exercicios-orais/ex-b2-03/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Plus l'argent circule au sommet, plus le sport de base… paraît pauvre ».",
+     "alternativas": [
+      "Entre les supporters.",
+      "Entre la télévision et la radio.",
+      "Entre la richesse du sommet et la pauvreté du sport de base.",
+      "Entre les joueurs et les entraîneurs."
+     ],
+     "correta": 2,
+     "pergunta": "Quelle tension l'intervenant décrit-il ?",
+     "transcricao": "Le sport professionnel est devenu une industrie du spectacle. Ce n'est pas forcément un mal, mais cela crée une tension : plus l'argent circule au sommet, plus le sport de base, celui qui éduque et crée du lien social, paraît pauvre en comparaison.",
+     "audio": "audio/exercicios-orais/ex-b2-03/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Les salaires des sportifs professionnels devraient être plafonnés. » Qu'en pensez-vous ? Vous donnez votre opinion, vous l'argumentez et vous l'illustrez d'exemples.",
+     "perguntasExaminador": [
+      "Les salaires des sportifs professionnels devraient être plafonnés. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et les chanteurs ou les acteurs ? », « Qui en profiterait ? », « Le sport doit-il être un spectacle ? »"
+    }
+   ]
+  }
+ }
+}

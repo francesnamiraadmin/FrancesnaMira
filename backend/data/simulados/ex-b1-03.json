@@ -1,0 +1,157 @@
+{
+ "slug": "ex-b1-03",
+ "titulo": "Exercício oral nº 3 — B1",
+ "curso": "B1",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Réclamation à l'hôtel",
+ "descricao": "Uma estadia decepcionante: reclamações, resposta do hotel e direitos do cliente; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/b1-lettre-reclamation-hotel-2.jpg",
+  "credito": {
+   "autor": "Basile Morin",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Entrance_lounge_and_reception_desks_of_the_Carlton_Hotel_Downtown_Core_Singapore.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b1-03/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta de um recepcionista.",
+     "alternativas": [
+      "Oui, il fait chaud.",
+      "Le petit déjeuner est à huit heures.",
+      "Je suis désolé, j'envoie quelqu'un tout de suite.",
+      "La chambre est au troisième."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Excusez-moi, il n'y a pas d'eau chaude dans ma chambre.\nA. Oui, il fait chaud.\nB. Le petit déjeuner est à huit heures.\nC. Je suis désolé, j'envoie quelqu'un tout de suite.\nD. La chambre est au troisième.",
+     "audio": "audio/exercicios-orais/ex-b1-03/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« L'accès gratuit à la piscine municipale ».",
+     "alternativas": [
+      "Un dîner gratuit.",
+      "L'accès gratuit à la piscine municipale.",
+      "Une réduction sur la chambre.",
+      "Un changement d'hôtel."
+     ],
+     "correta": 1,
+     "pergunta": "Que propose l'hôtel ?",
+     "transcricao": "Madame, monsieur, suite à des travaux, la piscine de l'hôtel sera fermée du dix au vingt juillet. Pour vous excuser, nous vous offrons l'accès gratuit à la piscine municipale.",
+     "audio": "audio/exercicios-orais/ex-b1-03/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« J'ai quand même obtenu une réduction de trente pour cent ».",
+     "alternativas": [
+      "Une réduction de trente pour cent.",
+      "Une chambre avec vue sur la mer.",
+      "Une nuit gratuite.",
+      "Un remboursement complet."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'a obtenu la cliente ?",
+     "transcricao": "Sur le site, la chambre avait vue sur la mer. En réalité, elle donnait sur un parking ! À l'accueil, on m'a dit que l'hôtel était complet. J'ai quand même obtenu une réduction de trente pour cent.",
+     "audio": "audio/exercicios-orais/ex-b1-03/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Pedido educado.",
+     "alternativas": [
+      "Oui, j'ai onze ans.",
+      "Le départ est loin.",
+      "Non, je suis arrivé hier.",
+      "Serait-il possible de partir à midi ?"
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Je vous rappelle que le départ est à onze heures.\nA. Oui, j'ai onze ans.\nB. Le départ est loin.\nC. Non, je suis arrivé hier.\nD. Serait-il possible de partir à midi ?",
+     "audio": "audio/exercicios-orais/ex-b1-03/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Voit ses réservations baisser rapidement ».",
+     "alternativas": [
+      "Ils n'ont pas d'autres clients.",
+      "Les clients le demandent.",
+      "C'est obligatoire.",
+      "Les avis négatifs font baisser les réservations."
+     ],
+     "correta": 3,
+     "pergunta": "Pourquoi les hôtels répondent-ils aux critiques ?",
+     "transcricao": "Les avis en ligne ont changé le pouvoir des clients. Un hôtel qui reçoit plusieurs commentaires négatifs voit ses réservations baisser rapidement. Beaucoup d'établissements répondent donc personnellement à chaque critique.",
+     "audio": "audio/exercicios-orais/ex-b1-03/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 1200,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — lettre de réclamation",
+     "min": 120,
+     "max": 150,
+     "consigne": "Vous avez passé un week-end décevant dans un hôtel. Vous écrivez au directeur pour décrire les problèmes et demander un dédommagement. (120 à 150 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 120,
+     "consigne": "Vous êtes à l'hôtel. Votre chambre a plusieurs problèmes (bruit, chauffage en panne, salle de bain sale). Vous allez à la réception pour vous plaindre et obtenir une solution.",
+     "perguntasExaminador": [
+      "Bonsoir, que puis-je faire pour vous ?"
+     ],
+     "fichaExaminador": "Vous êtes le/la réceptionniste. L'hôtel est presque complet ; une seule chambre libre, plus petite, côté cour. Le technicien passe demain matin. Vous pouvez offrir le petit déjeuner, pas une réduction (sauf si le client insiste avec de bons arguments). Laissez le candidat mener l'échange ; relancez-le s'il se tait."
+    }
+   ]
+  }
+ }
+}

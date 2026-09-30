@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b2-10",
+ "titulo": "Exercício oral nº 10 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Le don d'organes",
+ "descricao": "Doação de órgãos: a lei, testemunhos e dilemas éticos.",
+ "imagem": {
+  "src": "img/temas/b2-don-organes-2.jpg",
+  "credito": {
+   "autor": "W.carter",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Corridor_on_the_second_level_-_N%C3%84L_hospital_1.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-10/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta à pergunta.",
+     "alternativas": [
+      "Oui, ma famille est grande.",
+      "Les organes sont importants.",
+      "Non, je suis en bonne santé.",
+      "Oui, on en a parlé l'année dernière."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as dit à ta famille que tu voulais donner tes organes ?\nA. Oui, ma famille est grande.\nB. Les organes sont importants.\nC. Non, je suis en bonne santé.\nD. Oui, on en a parlé l'année dernière.",
+     "audio": "audio/exercicios-orais/ex-b2-10/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Sauf si elle s'est inscrite sur le registre national des refus ».",
+     "alternativas": [
+      "Ne rien faire.",
+      "Écrire aux médecins.",
+      "S'inscrire sur le registre national des refus.",
+      "En parler à ses proches."
+     ],
+     "correta": 2,
+     "pergunta": "Que faut-il faire pour refuser le don ?",
+     "transcricao": "En France, toute personne est considérée comme donneuse d'organes après sa mort, sauf si elle s'est inscrite sur le registre national des refus. Les médecins consultent tout de même les proches.",
+     "audio": "audio/exercicios-orais/ex-b2-10/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Je sais seulement que c'était un homme de quarante ans ».",
+     "alternativas": [
+      "Sa profession.",
+      "C'était un homme de quarante ans.",
+      "Sa famille.",
+      "Son nom."
+     ],
+     "correta": 1,
+     "pergunta": "Que sait-elle du donneur ?",
+     "transcricao": "Il y a cinq ans, j'ai reçu un rein. Je ne connais pas le donneur, je sais seulement que c'était un homme de quarante ans. Chaque année, à la date de la greffe, je pense à sa famille et je lui dis merci en silence.",
+     "audio": "audio/exercicios-orais/ex-b2-10/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Explicação.",
+     "alternativas": [
+      "Parce qu'elles sont grandes.",
+      "Souvent parce qu'elles ne connaissent pas la volonté du défunt.",
+      "Parce que l'hôpital est loin.",
+      "Parce que le don est cher."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Pourquoi les familles refusent-elles parfois le don ?\nA. Parce qu'elles sont grandes.\nB. Souvent parce qu'elles ne connaissent pas la volonté du défunt.\nC. Parce que l'hôpital est loin.\nD. Parce que le don est cher.",
+     "audio": "audio/exercicios-orais/ex-b2-10/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« C'est un cadeau fait aussi à ses proches, qui n'auront pas à décider ».",
+     "alternativas": [
+      "Pour que les proches n'aient pas à décider seuls.",
+      "Pour s'inscrire sur le registre.",
+      "Parce que la loi l'exige.",
+      "Pour recevoir un organe."
+     ],
+     "correta": 0,
+     "pergunta": "Pourquoi est-il important d'en parler de son vivant ?",
+     "transcricao": "Le principe du consentement présumé ne résout pas tout : en pratique, près d'un tiers des prélèvements sont refusés, souvent par des familles qui ignorent ce que voulait le défunt. D'où l'importance d'en parler de son vivant : c'est un cadeau fait aussi à ses proches, qui n'auront pas à décider.",
+     "audio": "audio/exercicios-orais/ex-b2-10/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Tout le monde devrait être obligatoirement donneur d'organes. » Qu'en pensez-vous ? Vous donnez votre opinion, vous l'argumentez et vous l'illustrez d'exemples.",
+     "perguntasExaminador": [
+      "Tout le monde devrait être obligatoirement donneur d'organes. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et les convictions religieuses ? », « Et l'avis de la famille ? », « En avez-vous parlé avec vos proches ? »"
+    }
+   ]
+  }
+ }
+}

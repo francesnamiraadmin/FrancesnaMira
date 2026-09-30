@@ -1,0 +1,157 @@
+{
+ "slug": "ex-dalf-09",
+ "titulo": "Exercício oral nº 9 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C2",
+ "tema": "Le progrès nous libère-t-il ?",
+ "descricao": "Técnica, tempo livre e dependência: uma reflexão filosófica em vozes; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/dalf-c2-progres-liberte-2.jpg",
+  "credito": {
+   "autor": "Franck Michel from Antibes, France",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:KL_subway_commuters_-_Flickr_-_Franck_Michel.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-09/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta com efeito observado.",
+     "alternativas": [
+      "Oui, et je n'ai jamais été aussi tranquille.",
+      "Oui, mon téléphone est neuf.",
+      "Non, je n'ai pas de sonnerie.",
+      "Les notifications sont rouges."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as vraiment désactivé toutes tes notifications ?\nA. Oui, et je n'ai jamais été aussi tranquille.\nB. Oui, mon téléphone est neuf.\nC. Non, je n'ai pas de sonnerie.\nD. Les notifications sont rouges.",
+     "audio": "audio/exercicios-orais/ex-dalf-09/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Il s'agit d'un geste automatique ».",
+     "alternativas": [
+      "Elles répondent à un appel.",
+      "Elles sont liées au travail.",
+      "Elles durent longtemps.",
+      "Ce sont des gestes automatiques."
+     ],
+     "correta": 3,
+     "pergunta": "Que révèle l'étude sur la moitié des consultations ?",
+     "transcricao": "Selon une étude, nous consultons notre téléphone en moyenne cent cinquante fois par jour. La moitié de ces consultations ne répond à aucun besoin précis : il s'agit d'un geste automatique.",
+     "audio": "audio/exercicios-orais/ex-dalf-09/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Les normes de propreté se sont élevées en même temps ».",
+     "alternativas": [
+      "Les exigences de propreté ont augmenté en même temps.",
+      "Il consomme trop d'énergie.",
+      "Il a créé du chômage.",
+      "Il n'a libéré personne."
+     ],
+     "correta": 0,
+     "pergunta": "Que remarque l'intervenant à propos du lave-linge ?",
+     "transcricao": "Le lave-linge a libéré des millions de femmes d'heures de travail pénible. Voilà un progrès technique incontestablement émancipateur. Mais on remarque que les normes de propreté se sont élevées en même temps : on lave aujourd'hui bien plus souvent qu'autrefois.",
+     "audio": "audio/exercicios-orais/ex-dalf-09/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Contra-argumento filosófico.",
+     "alternativas": [
+      "Non, l'homme est grand.",
+      "Oui, sans téléphone.",
+      "Il serait surtout soumis à la nature, ce qui n'est pas la liberté.",
+      "La technique est chère."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Sans technique, l'homme ne serait-il pas plus libre ?\nA. Non, l'homme est grand.\nB. Oui, sans téléphone.\nC. Il serait surtout soumis à la nature, ce qui n'est pas la liberté.\nD. La technique est chère.",
+     "audio": "audio/exercicios-orais/ex-dalf-09/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Il interroge l'usage que nous faisons de la liberté qu'elle nous offre ».",
+     "alternativas": [
+      "L'efficacité de la technique.",
+      "L'usage que nous faisons de la liberté offerte par la technique.",
+      "La promesse de gagner du temps.",
+      "La valeur du travail."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'interroge ce paradoxe, selon l'intervenant ?",
+     "transcricao": "La technique promet toujours de nous faire gagner du temps, et elle tient sa promesse ; mais le temps gagné est aussitôt réinvesti dans de nouvelles activités, si bien que nous nous sentons plus pressés que jamais. Ce paradoxe ne condamne pas la technique : il interroge l'usage que nous faisons de la liberté qu'elle nous offre.",
+     "audio": "audio/exercicios-orais/ex-dalf-09/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 2700,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Texte argumentatif",
+     "min": 250,
+     "max": 350,
+     "consigne": "« Le progrès technique nous rend-il plus libres ? » Vous rédigez un texte argumenté et nuancé pour une revue d'idées. (250 mots minimum)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — monologue suivi et débat (C2)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "À partir des idées évoquées dans les documents sonores de cet exercice, vous présentez un point de vue argumenté et nuancé sur la question suivante : « Le progrès technique nous rend-il plus libres ou plus dépendants ? » Vous débattrez ensuite avec l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre point de vue."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : attention et notifications, autonomie, travail, dépendance aux grandes entreprises, exemples historiques."
+    }
+   ]
+  }
+ }
+}

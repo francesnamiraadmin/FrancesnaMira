@@ -1,0 +1,159 @@
+{
+ "slug": "ex-delf-06",
+ "titulo": "Exercício oral nº 6 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Partir seul",
+ "descricao": "Viajar sozinho: um aeroporto, relatos de viajantes e dicas de segurança; inclui um curto texto escrito.",
+ "imagem": {
+  "src": "img/temas/delf-b1-voyage-seul-2.jpg",
+  "credito": {
+   "autor": "Hermann",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Mountaineering_Man_Trail_Path_Mountains.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-06/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta à pergunta.",
+     "alternativas": [
+      "Non, il fait froid.",
+      "Le train part à midi.",
+      "Oui, j'ai une valise rouge.",
+      "Oui, c'est mon premier voyage seule."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Vous voyagez seule, madame ?\nA. Non, il fait froid.\nB. Le train part à midi.\nC. Oui, j'ai une valise rouge.\nD. Oui, c'est mon premier voyage seule.",
+     "audio": "audio/exercicios-orais/ex-delf-06/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Sont priés de se présenter porte 24 ».",
+     "alternativas": [
+      "Aller à la porte 24.",
+      "Changer d'avion.",
+      "Attendre dix heures.",
+      "Aller à Lisbonne en train."
+     ],
+     "correta": 0,
+     "pergunta": "Que doivent faire les passagers ?",
+     "transcricao": "Les passagers du vol AF 312 à destination de Lisbonne sont priés de se présenter porte 24. L'embarquement commencera dans dix minutes.",
+     "audio": "audio/exercicios-orais/ex-delf-06/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Je n'ai jamais autant parlé avec des inconnus ».",
+     "alternativas": [
+      "Elle préfère voyager à deux.",
+      "Elle a beaucoup parlé avec des inconnus.",
+      "Elle s'est beaucoup ennuyée.",
+      "Elle a eu très peur."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'a découvert la voyageuse ?",
+     "transcricao": "La première fois que je suis partie seule, j'avais peur de m'ennuyer. En fait, je n'ai jamais autant parlé avec des inconnus ! Quand on voyage à deux, on reste entre soi. Seule, on est obligée d'aller vers les autres.",
+     "audio": "audio/exercicios-orais/ex-delf-06/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta que admite e tranquiliza.",
+     "alternativas": [
+      "Non, je n'aime pas la mer.",
+      "Oui, le Mexique est grand.",
+      "Un peu, mais je me suis bien renseignée.",
+      "J'ai acheté des chaussures."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu n'as pas peur de partir seule au Mexique ?\nA. Non, je n'aime pas la mer.\nB. Oui, le Mexique est grand.\nC. Un peu, mais je me suis bien renseignée.\nD. J'ai acheté des chaussures.",
+     "audio": "audio/exercicios-orais/ex-delf-06/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Une confiance en eux qu'ils n'avaient pas en partant ».",
+     "alternativas": [
+      "Plus de liberté au travail.",
+      "De l'argent.",
+      "Beaucoup d'amis.",
+      "De la confiance en eux."
+     ],
+     "correta": 3,
+     "pergunta": "Que gagnent beaucoup de voyageurs solitaires, selon l'intervenant ?",
+     "transcricao": "Voyager seul, ce n'est pas seulement une question de liberté. C'est aussi un apprentissage : on prend toutes les décisions, on gère les imprévus sans pouvoir compter sur personne. Beaucoup reviennent avec une confiance en eux qu'ils n'avaient pas en partant.",
+     "audio": "audio/exercicios-orais/ex-delf-06/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production écrite",
+     "min": 140,
+     "max": 180,
+     "consigne": "Sur un forum, quelqu'un demande : « Voyager seul, c'est une bonne idée ? » Vous répondez en racontant une expérience et en donnant votre avis. (160 mots environ)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 360,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Entretien dirigé",
+     "duracaoSeg": 180,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur sur vos voyages et vos habitudes.",
+     "perguntasExaminador": [
+      "Bonjour. Présentez-vous en quelques mots.",
+      "Quel est le plus beau voyage que vous ayez fait ?",
+      "Préférez-vous voyager seul ou accompagné ? Pourquoi ?",
+      "Où aimeriez-vous aller et pourquoi ?"
+     ]
+    }
+   ]
+  }
+ }
+}

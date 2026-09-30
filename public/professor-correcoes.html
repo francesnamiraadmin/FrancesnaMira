@@ -5,7 +5,7 @@
   <script src="js/htmlSeguro.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
-<title>Painel do Professor - Francês na Mira</title>
+<title>Sistema de Correção - Francês na Mira</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
@@ -137,6 +137,54 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   .correcao-grid { grid-template-columns: 1fr; }
   .coluna-sticky { position: static; }
 }
+/* ===== abas, alunos e grade ===== */
+.abas { display: flex; gap: 6px; padding: 6px; background: var(--branco); border: 1px solid var(--cinza-200); border-radius: 18px; margin-bottom: 22px; box-shadow: var(--sombra); flex-wrap: wrap; }
+.aba { flex: 1; min-width: 170px; padding: 12px 16px; border-radius: 14px; border: none; background: transparent; color: var(--cinza-600); font-weight: 700; font-family: 'Poppins', sans-serif; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.aba.active { background: linear-gradient(135deg, var(--azul-escuro), var(--azul)); color: #fff; }
+.aba .contador { background: rgba(255,255,255,.25); border-radius: 10px; padding: 1px 8px; font-size: .75rem; }
+.aba:not(.active) .contador { background: var(--azul-claro); color: var(--azul-escuro); }
+.alunos-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.busca-aluno { width: 100%; padding: 11px 16px; border-radius: 12px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font-family: 'Poppins', sans-serif; margin-bottom: 12px; }
+.aluno-item { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; padding: 14px 16px; border: 1px solid var(--cinza-200); border-radius: 14px; background: var(--branco); margin-bottom: 10px; cursor: pointer; box-shadow: var(--sombra); transition: .15s; }
+.aluno-item:hover { border-color: var(--azul); }
+.aluno-item.sel { border-color: var(--azul); box-shadow: 0 0 0 3px var(--azul-claro); }
+.aluno-item .nome { font-weight: 700; }
+.aluno-item .email { font-size: .78rem; color: var(--cinza-400); }
+.aluno-item .cursos { grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; }
+.creditos-badge { text-align: center; min-width: 74px; padding: 6px 10px; border-radius: 12px; background: var(--azul-claro); color: var(--azul-escuro); }
+.creditos-badge strong { display: block; font-size: 1.3rem; line-height: 1.1; }
+.creditos-badge span { font-size: .68rem; font-weight: 700; text-transform: uppercase; }
+.creditos-badge.zero { background: var(--vermelho-bg); color: var(--vermelho); }
+.mini-stats { grid-column: 1 / -1; font-size: .78rem; color: var(--cinza-600); }
+.painel-aluno { position: sticky; top: 20px; }
+.add-creditos { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 12px 0 6px; }
+.add-creditos input { width: 90px; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font-family: 'Poppins', sans-serif; }
+.chip-rapido { padding: 7px 12px; border-radius: 20px; border: 1px solid var(--cinza-300); background: var(--cinza-100); color: var(--cinza-600); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: .8rem; }
+.prod-linha { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--cinza-100); font-size: .85rem; cursor: pointer; }
+.prod-linha:last-child { border-bottom: none; }
+.prod-linha small { display: block; color: var(--cinza-400); }
+.nota-pill { font-weight: 700; padding: 4px 10px; border-radius: 10px; background: var(--verde-bg); color: var(--verde); white-space: nowrap; }
+.tag.ia { background: #f3e8ff; color: #7e22ce; }
+[data-theme="dark"] .tag.ia { background: rgba(168,85,247,.2); color: #d8b4fe; }
+.tag.status { background: var(--cinza-100); color: var(--cinza-600); }
+.crit-grade { border: 1px solid var(--cinza-200); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+.crit-topo { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+.crit-topo .nome { font-weight: 700; }
+.crit-topo input { width: 78px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font-family: 'Poppins', sans-serif; font-weight: 700; text-align: center; }
+.crit-desc { font-size: .78rem; color: var(--cinza-400); margin: 4px 0 8px; }
+.crit-barra { height: 6px; border-radius: 4px; background: var(--cinza-100); overflow: hidden; margin-bottom: 8px; }
+.crit-barra span { display: block; height: 100%; background: var(--azul); transition: width .2s; }
+.crit-grade textarea, .correcao-linha input, .correcao-linha textarea { width: 100%; padding: 9px 11px; border-radius: 8px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font-family: 'Poppins', sans-serif; font-size: .84rem; resize: vertical; }
+.total-box { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; padding: 14px 16px; border-radius: 12px; background: var(--azul-claro); color: var(--azul-escuro); margin-bottom: 14px; }
+.total-box .valor-total { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; }
+.correcao-linha { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px; border: 1px dashed var(--cinza-300); border-radius: 10px; margin-bottom: 8px; }
+.correcao-linha textarea { grid-column: 1 / -1; min-height: 44px; }
+.correcao-linha .remover { grid-column: 1 / -1; justify-self: end; background: none; border: none; color: var(--vermelho); cursor: pointer; font-weight: 700; font-size: .78rem; }
+.somente-leitura .editavel { display: none !important; }
+.somente-leitura input, .somente-leitura textarea { pointer-events: none; background: var(--cinza-100) !important; }
+.aviso-leitura { display: none; padding: 12px 16px; border-radius: 12px; background: var(--amarelo-bg); color: var(--amarelo); font-weight: 600; font-size: .88rem; margin-bottom: 16px; }
+.somente-leitura .aviso-leitura { display: block; }
+@media(max-width: 900px) { .alunos-layout { grid-template-columns: 1fr; } .painel-aluno { position: static; } }
 .titulo-icone-inline { width: 1em; height: 1em; object-fit: contain; vertical-align: -0.14em; margin-right: 8px; }
 .titulo-icone-inline.pequeno { margin-right: 5px; }
 </style>
@@ -172,38 +220,45 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 <div class="wrap">
   <div class="painel-header">
     <div>
-      <h1>Painel do Professor</h1>
-      <p>Fila de correções, estatísticas pessoais e tela de correção com critérios oficiais por exame.</p>
+      <h1>Sistema de Correção</h1>
+      <p>Fila de redações e produções orais, correção pela grade oficial de cada prova e créditos de cada aluno.</p>
     </div>
   </div>
+
+  <nav class="abas" id="abasSistema">
+    <button class="aba active" data-aba="fila"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Fila de correção <span class="contador" id="contFila">0</span></button>
+    <button class="aba" data-aba="alunos"><img class="titulo-icone-inline pequeno" src="img/icones/students.svg" alt="">Alunos e créditos <span class="contador" id="contAlunos">0</span></button>
+  </nav>
 
   <!-- ===================== FILA ===================== -->
   <div id="viewFila">
     <div class="kpi-row" id="kpiRow"></div>
-
-    <div class="card">
-      <h2>Conceder créditos de correção a um aluno</h2>
-      <div class="filtros-card" style="box-shadow:none; padding:0; border:none; margin-bottom:0;">
-        <div class="campo-filtro"><label>E-mail do aluno</label><input type="email" id="credEmail" style="padding:9px 12px; border-radius:10px; border:1px solid var(--cinza-300);"></div>
-        <div class="campo-filtro"><label>Quantidade</label><input type="number" id="credQtd" value="1" style="padding:9px 12px; border-radius:10px; border:1px solid var(--cinza-300); max-width:100px;"></div>
-        <button class="btn pequeno" id="concederCreditosBtn">Conceder créditos</button>
-      </div>
-      <div class="msg-inline" id="credMsg" style="display:none;"></div>
-    </div>
-
     <div class="filtros-card">
-      <div class="campo-filtro"><label>Exame</label><select id="filtroExame"><option value="">Todos</option><option>TCF</option><option>TEF</option><option>DELF</option><option>DALF</option></select></div>
+      <div class="campo-filtro"><label>Curso</label><select id="filtroCurso"><option value="">Todos</option><option>TCF</option><option>TEF</option><option>DELF</option><option>DALF</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option></select></div>
       <div class="campo-filtro"><label>Status</label><select id="filtroStatus"><option value="">Todos</option><option value="em_fila">Em fila</option><option value="em_correcao">Em correção (minhas)</option></select></div>
       <div class="campo-filtro"><label>Prioridade</label><select id="filtroPrioridade"><option value="">Todas</option><option value="urgente">Urgente (prazo &lt; 2 dias)</option></select></div>
       <button class="btn secundario" id="atualizarFilaBtn"><img class="titulo-icone-inline pequeno" src="img/icones/repeat.svg" alt="">Atualizar</button>
     </div>
-
     <div id="filaLista"></div>
+  </div>
+
+  <!-- ===================== ALUNOS E CRÉDITOS ===================== -->
+  <div id="viewAlunos" style="display:none;">
+    <div class="alunos-layout">
+      <div>
+        <input type="search" class="busca-aluno" id="buscaAluno" placeholder="Buscar aluno por nome, e-mail ou curso">
+        <div id="listaAlunos"></div>
+      </div>
+      <div class="painel-aluno">
+        <div class="card" id="painelAluno"><div class="vazio-box" style="border:none;">Selecione um aluno para ver as redações dele e adicionar créditos.</div></div>
+      </div>
+    </div>
   </div>
 
   <!-- ===================== TELA DE CORREÇÃO ===================== -->
   <div id="viewCorrecao" style="display:none;">
-    <span class="voltar-link" id="voltarFilaBtn"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Voltar à fila</span>
+    <span class="voltar-link" id="voltarFilaBtn"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Voltar</span>
+    <div class="aviso-leitura" id="avisoLeitura">Esta produção já foi corrigida — você está vendo a avaliação enviada ao aluno.</div>
     <div class="correcao-grid">
       <div class="coluna-sticky">
         <div class="card">
@@ -211,48 +266,47 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
           <div id="dadosAluno"></div>
         </div>
         <div class="card">
-          <h2>Instrução da produção</h2>
+          <h2>Consigne</h2>
           <div class="instrucoes-box" id="instrucaoBox"></div>
         </div>
         <div class="card">
-          <h2>Coletânea utilizada</h2>
+          <h2>Coletânea do tema</h2>
           <div class="doc-lista" id="coletaneaCorrecao"></div>
         </div>
         <div class="card">
           <h2>Produção enviada</h2>
           <div id="producaoEnviadaBox"></div>
         </div>
-        <div class="card">
-          <h2>Histórico de produções deste aluno</h2>
-          <div id="historicoAluno"></div>
-        </div>
       </div>
 
       <div>
         <div class="card">
-          <h2>Área de avaliação — critérios oficiais</h2>
+          <h2 id="tituloGrade">Grade oficial</h2>
           <div id="criteriosLista"></div>
+          <div class="total-box"><span>Nota final</span><span class="valor-total" id="notaTotalView">0</span><span id="notaMaximaView">/ 20</span></div>
+          <div class="campo editavel">
+            <label>Ajustar a nota final (opcional — em branco usa a soma dos critérios)</label>
+            <input type="number" id="notaFinalInput" min="0" step="0.5" style="max-width:160px;">
+          </div>
         </div>
         <div class="card">
-          <h2>Nota final</h2>
-          <div class="nota-row">
-            <div class="campo">
-              <label>Nota total (0–20)</label>
-              <input type="number" id="notaTotalInput" min="0" max="20" step="0.5">
-            </div>
-            <button class="btn secundario pequeno" id="calcularNotaBtn">Calcular automaticamente</button>
-            <div class="campo">
-              <label>Nível estimado (CECRL)</label>
-              <select id="nivelEstimadoInput"><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option><option value="C1">C1</option><option value="C2">C2</option></select>
-            </div>
-          </div>
-          <div class="campo">
+          <h2>Comentários ao aluno</h2>
+          <div class="campo" style="margin-bottom:12px;">
             <label>Comentário geral</label>
-            <textarea id="comentarioGeralInput" placeholder="Impressão geral sobre a produção do aluno..."></textarea>
+            <textarea id="comentarioGeralInput" placeholder="Impressão geral sobre a produção…"></textarea>
+          </div>
+          <div class="campo-row" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="campo"><label>Pontos fortes (um por linha)</label><textarea id="pontosFortesInput"></textarea></div>
+            <div class="campo"><label>A melhorar (um por linha)</label><textarea id="aMelhorarInput"></textarea></div>
           </div>
         </div>
         <div class="card">
-          <h2>Arquivo corrigido</h2>
+          <h2>Correções linha a linha</h2>
+          <div id="correcoesLista"></div>
+          <button class="btn secundario pequeno editavel" id="addCorrecaoBtn" type="button">+ Adicionar correção</button>
+        </div>
+        <div class="card editavel">
+          <h2>Arquivo corrigido (opcional)</h2>
           <div class="upload-corrigido-box" id="uploadCorrigidoBox">
             <p id="uploadCorrigidoTexto">Clique para anexar o arquivo corrigido (PDF, DOCX ou ODT)</p>
           </div>

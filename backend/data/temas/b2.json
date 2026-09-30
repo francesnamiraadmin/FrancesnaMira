@@ -1,0 +1,732 @@
+[
+ {
+  "slug": "b2-intelligence-artificielle-emploi",
+  "titulo": "L'intelligence artificielle va-t-elle remplacer notre travail ?",
+  "nivel": "B2",
+  "tipoProducao": "Texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Discuta os efeitos da inteligência artificial sobre o emprego: ameaça, oportunidade ou as duas coisas?",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo B2",
+   "Hipótese e futuro",
+   "Vocabulário do trabalho e da tecnologia"
+  ],
+  "instrucoes": "Un magazine économique publie un dossier : « L'intelligence artificielle, menace ou chance pour l'emploi ? » Vous rédigez un article argumenté dans lequel vous présentez les enjeux et défendez votre position. (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La dernière traductrice »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance de antecipação)",
+    "conteudo": "Quand l'agence remplaça ses traducteurs par un logiciel, on garda Hélène « pour vérifier ». Elle relisait des milliers de pages traduites en quelques secondes, corrigeant ici un proverbe mal compris, là une ironie devenue insulte. Au bout d'un an, le directeur remarqua que les clients les plus fidèles demandaient toujours la même chose : que « la dame » relise leur texte. Hélène n'était plus traductrice. Elle était devenue ce que la machine ne savait pas être : un regard."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "L'IA transforme les métiers de bureau",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Selon plusieurs études internationales, une part importante des tâches administratives, comptables ou de rédaction pourrait être automatisée par l'intelligence artificielle dans les prochaines années. Les économistes insistent toutefois sur la différence entre tâches et métiers : la plupart des emplois seraient transformés plutôt que supprimés. La formation continue devient donc un enjeu majeur pour les salariés et les entreprises."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Automatisation et histoire du travail",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les historiens de l'économie rappellent que chaque grande vague d'automatisation, de la machine à vapeur à l'informatique, a détruit des emplois tout en en créant de nouveaux, souvent imprévisibles. Mais ces transitions ont été longues et douloureuses pour les travailleurs concernés. La différence avec l'intelligence artificielle tient à sa vitesse de diffusion et au fait qu'elle touche des métiers qualifiés, jusqu'ici épargnés."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-intelligence-artificielle-emploi-1.jpg",
+    "legenda": "Um braço robótico numa fábrica",
+    "credito": {
+     "autor": "Shixart1985",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Robot_arm_operates_machine_in_factory_setting.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-intelligence-artificielle-emploi-2.jpg",
+    "legenda": "Trabalho de escritório",
+    "credito": {
+     "autor": "Bench Accounting benchaccounting",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Man_at_a_laptop_in_an_office_(Unsplash).jpg"
+    }
+   }
+  ],
+  "ordem": 1,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b2-voiture-electrique",
+  "titulo": "La voiture électrique est-elle la solution ?",
+  "nivel": "B2",
+  "tipoProducao": "Texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Discuta se o carro elétrico é realmente a solução para a poluição e o clima.",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Concessão e oposição",
+   "Vocabulário do meio ambiente"
+  ],
+  "instrucoes": "Dans le cadre d'un débat organisé par votre ville, vous rédigez une contribution : « La voiture électrique est-elle la solution aux problèmes de pollution ? » Présentez les arguments et donnez votre opinion. (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Silence sur l'autoroute »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "La première chose qui frappa Marc, dans sa voiture électrique, fut le silence. Plus de ronflement de moteur, juste le souffle du vent et le bruit des pneus. Il se surprit à écouter la radio moins fort, à conduire plus doucement. Puis vint le premier long voyage : trois arrêts de quarante minutes pour recharger, des bornes en panne, une file d'attente sur une aire d'autoroute. Il arriva en retard, mais étonnamment reposé."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les ventes de voitures électriques progressent",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "En Europe, la part des voitures électriques dans les ventes de véhicules neufs augmente rapidement, soutenue par des aides publiques et la future interdiction de vendre des voitures neuves à moteur thermique. Les freins restent nombreux : prix d'achat élevé, autonomie limitée pour les longs trajets, réseau de recharge insuffisant dans certaines régions. Les constructeurs promettent des modèles plus abordables."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Le bilan carbone sur tout le cycle de vie",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les analyses de cycle de vie montrent que la fabrication d'une voiture électrique, notamment de sa batterie, émet davantage de gaz à effet de serre que celle d'une voiture thermique. Cette « dette carbone » est ensuite compensée pendant l'utilisation, d'autant plus vite que l'électricité est peu carbonée. Les chercheurs soulignent cependant que la meilleure solution reste de réduire le nombre et le poids des véhicules."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-voiture-electrique-1.jpg",
+    "legenda": "Um carro elétrico carregando",
+    "credito": {
+     "autor": "CEphoto, Uwe Aranas",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Cologne_Germany_Electric-Car-Charging-Point-at-TUV-Rheinland-01.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-voiture-electrique-2.jpg",
+    "legenda": "Congestionamento na rodovia",
+    "credito": {
+     "autor": "Jiří Sedláček",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Traffic_jam_after_massive_car_accident_at_D1_highway_at_March_2018.jpg"
+    }
+   }
+  ],
+  "ordem": 2,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b2-sport-professionnel-argent",
+  "titulo": "Le sport professionnel et l'argent",
+  "nivel": "B2",
+  "tipoProducao": "Texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Os salários e transferências milionários estão estragando o esporte? Argumente.",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Exemplificação",
+   "Vocabulário do esporte e da economia"
+  ],
+  "instrucoes": "Un magazine sportif pose la question à ses lecteurs : « L'argent est-il en train de tuer l'esprit du sport ? » Vous rédigez une réponse argumentée en vous appuyant sur des exemples précis. (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le terrain vague »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Nous jouions sur un terrain vague derrière la gare, avec deux cartables en guise de poteaux. Le ballon était dégonflé, les chaussures trouées, et le match durait jusqu'à ce que la dernière mère appelle son fils pour le dîner. Aujourd'hui, mon neveu joue dans un centre de formation. Il a un préparateur physique, un nutritionniste et un agent. Il a treize ans. Parfois, je me demande s'il a encore le droit de rater une passe."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Transferts record dans le football européen",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Les montants des transferts de joueurs de football atteignent des sommes vertigineuses, alimentées par les droits de télévision et l'arrivée d'investisseurs étrangers. Les supporters dénoncent la hausse du prix des billets et le sentiment que leur club appartient désormais à des intérêts lointains. Les dirigeants répondent que ces investissements permettent de rénover les stades et de rivaliser avec les meilleures équipes."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Inégalités de revenus dans le sport",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les économistes du sport observent une concentration extrême des revenus : une petite minorité d'athlètes et de clubs capte l'essentiel des gains, tandis que la grande majorité des sportifs professionnels gagne des salaires modestes et connaît des carrières courtes. Dans de nombreuses disciplines, les athlètes de haut niveau doivent même financer eux-mêmes une partie de leur préparation."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-sport-professionnel-argent-1.jpg",
+    "legenda": "Um estádio lotado",
+    "credito": {
+     "autor": "Tadpolefarm",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Mbombela_Stadium_crowd_leaving.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-sport-professionnel-argent-2.jpg",
+    "legenda": "Crianças jogando bola na rua",
+    "credito": {
+     "autor": "Rehoboth 11",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Kids_Street_football_3.jpg"
+    }
+   }
+  ],
+  "ordem": 3,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b2-lettre-directeur-journal",
+  "titulo": "Réagir à un article sur les jeunes",
+  "nivel": "B2",
+  "tipoProducao": "Lettre au courrier des lecteurs",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Reaja a um artigo que diz que os jovens de hoje não se interessam por nada: escreva ao jornal defendendo sua posição.",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Carta ao jornal",
+   "Refutação",
+   "Registro formal"
+  ],
+  "instrucoes": "Un journal a publié un article intitulé « Les jeunes d'aujourd'hui ne s'engagent plus ». Vous écrivez une lettre au courrier des lecteurs pour réagir, en nuançant ou en contestant cette affirmation avec des arguments et des exemples. (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Génération »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de crônica)",
+    "conteudo": "Mon grand-père disait que ma génération ne pensait qu'à s'amuser. Son père disait la même chose de lui. On trouve la même plainte chez les auteurs grecs, il y a vingt-cinq siècles. Chaque génération regarde la suivante avec inquiétude, parce qu'elle ne reconnaît pas ses propres formes d'engagement. Les miennes passent par des pétitions en ligne, des collectes organisées en une nuit, des manifestations pour le climat. Elles ne ressemblent pas aux siennes. Elles existent pourtant."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les jeunes votent moins mais s'engagent autrement",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Les enquêtes montrent que les jeunes votent moins que leurs aînés, en particulier aux élections locales. Mais ils sont nombreux à participer à des actions ponctuelles : bénévolat, pétitions, manifestations, boycott de certaines marques. Pour les sociologues, il ne s'agit pas d'un désintérêt pour la politique, mais d'une méfiance envers les institutions traditionnelles."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Le mythe du déclin de la jeunesse",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des chercheurs en psychologie ont montré que les adultes ont tendance à juger les jeunes plus sévèrement que ne le justifient les données, un phénomène qu'ils appellent le « biais du déclin ». Nous comparons les jeunes d'aujourd'hui à une image idéalisée de notre propre jeunesse. Les indicateurs objectifs, comme le niveau d'études ou l'engagement bénévole, ne montrent pas de dégradation générale."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-lettre-directeur-journal-1.jpg",
+    "legenda": "Jovens numa manifestação pelo clima",
+    "credito": {
+     "autor": "Stephan Sprinz",
+     "licenca": "CC BY 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Fridays_for_Future_Heidelberg_03.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-lettre-directeur-journal-2.jpg",
+    "legenda": "Jovens voluntários",
+    "credito": {
+     "autor": "NPS/Tom Engberg",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Day_of_Service,_Charles_Young_Buffalo_Soldiers_NM,_2020_(09f20b83-e94d-47e1-aacc-bcf209b1e54b).jpg"
+    }
+   }
+  ],
+  "ordem": 4,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b2-habiter-colocation-seniors",
+  "titulo": "Faire cohabiter jeunes et seniors",
+  "nivel": "B2",
+  "tipoProducao": "Texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Discuta a moradia intergeracional (estudantes que moram com idosos) como resposta à solidão e ao preço dos aluguéis.",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Vantagens e limites",
+   "Vocabulário social"
+  ],
+  "instrucoes": "Votre ville envisage de développer la colocation entre étudiants et personnes âgées. Pour le site de la mairie, vous rédigez un texte argumenté présentant les avantages et les limites de ce projet, et votre position. (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Madame Simone et moi »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Madame Simone avait quatre-vingt-trois ans, une chambre libre et une peur terrible de passer un autre hiver seule. Moi, j'avais vingt ans, une place à l'université et aucun moyen de payer un studio. Le contrat était simple : un loyer très bas, des courses le samedi et un dîner ensemble le mardi. Le premier mois, nous nous sommes évitées. Le troisième, elle m'apprenait le tarot. Quand j'ai eu mon diplôme, c'est elle qui a pleuré la première."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "La colocation intergénérationnelle se développe",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Des associations mettent en relation des personnes âgées disposant d'une chambre libre et des étudiants à la recherche d'un logement. En échange d'un loyer réduit ou gratuit, le jeune s'engage à une présence et à de petits services. Le nombre de binômes augmente chaque année, mais reste limité : il faut trouver des personnes compatibles et rassurer les familles des seniors."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Solitude et santé chez les personnes âgées",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "La solitude prolongée est aujourd'hui considérée comme un facteur de risque pour la santé, comparable à certains facteurs bien connus comme la sédentarité. Chez les personnes âgées, elle est associée à un déclin cognitif plus rapide et à davantage d'hospitalisations. Les programmes favorisant les contacts réguliers, en particulier avec des personnes plus jeunes, montrent des effets positifs sur le moral."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-habiter-colocation-seniors-1.jpg",
+    "legenda": "Avó e neta",
+    "credito": {
+     "autor": "Jim McKinney",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Granddaughter%27s_Love_for_the_Grandmother_Raising_Her.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-habiter-colocation-seniors-2.jpg",
+    "legenda": "O quarto de um estudante",
+    "credito": {
+     "autor": "Snyder, Frank R. Flickr: Miami U. Libraries - Digital Collections",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Library_and_reading_room_of_Oxford_College_ca._1899_(3195489874).jpg"
+    }
+   }
+  ],
+  "ordem": 5,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b2-tourisme-durable",
+  "titulo": "Voyager sans abîmer la planète",
+  "nivel": "B2",
+  "tipoProducao": "Article de blog argumenté",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Escreva um artigo de blog sobre turismo sustentável: é possível viajar sem prejudicar o planeta?",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Artigo de blog argumentativo",
+   "Propostas",
+   "Vocabulário do turismo"
+  ],
+  "instrucoes": "Sur votre blog de voyage, vous publiez un article argumenté : « Peut-on encore voyager sans abîmer la planète ? » Vous donnez votre opinion et proposez des solutions concrètes. (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le sentier »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de relato de viagem)",
+    "conteudo": "J'ai mis neuf jours pour traverser à pied les Pyrénées, d'un refuge à l'autre. Pas d'avion, pas de voiture, juste mes chaussures et un sac trop lourd. J'ai vu moins de monuments que lors de mes voyages précédents, mais j'ai vu mieux : les marmottes au lever du soleil, un berger qui m'a offert du fromage, l'orage qui avançait sur la vallée. Je suis rentré avec une conviction : la lenteur n'est pas une privation, c'est une autre façon de voir."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le tourisme de proximité gagne du terrain",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "De plus en plus de voyageurs choisissent des destinations accessibles en train ou à vélo, parfois à quelques dizaines de kilomètres de chez eux. Les régions rurales en profitent, avec le développement de gîtes, de circuits de randonnée et de voies vertes. Les professionnels du tourisme notent toutefois que les voyages lointains restent très demandés, en particulier chez les jeunes."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "L'empreinte carbone du tourisme",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Selon plusieurs études, le tourisme représente une part non négligeable des émissions mondiales de gaz à effet de serre, dont la majorité provient des transports, et surtout de l'avion. Un seul vol long-courrier aller-retour peut émettre autant qu'une année de chauffage d'un logement. Les chercheurs recommandent de voyager moins souvent mais plus longtemps, et de privilégier le train sur les courtes distances."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-tourisme-durable-1.jpg",
+    "legenda": "Uma trilha nos Pirineus",
+    "credito": {
+     "autor": "JLPC",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Bar%C3%A8ges_Granges_2011.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-tourisme-durable-2.jpg",
+    "legenda": "Viajar de trem",
+    "credito": {
+     "autor": "Stephen Craven",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Regional_train_approaching_Crewe_-_geograph.org.uk_-_8027744.jpg"
+    }
+   }
+  ],
+  "ordem": 6,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b2-lecture-jeunes",
+  "titulo": "Faire lire les adolescents",
+  "nivel": "B2",
+  "tipoProducao": "Texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Como fazer os adolescentes lerem mais? Discuta o papel da escola, da família e das telas.",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Propostas e exemplos",
+   "Vocabulário da educação"
+  ],
+  "instrucoes": "Une revue destinée aux parents publie un dossier sur la lecture. Vous rédigez un texte argumenté répondant à la question : « Comment redonner aux adolescents le goût de la lecture ? » (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le livre caché »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Ma mère m'avait interdit de lire après vingt-deux heures. Alors je lisais sous la couverture, avec une lampe de poche, le cœur battant à chaque bruit de pas dans le couloir. Rien n'a jamais rendu un livre aussi délicieux que cette interdiction. Aujourd'hui, j'oblige mes élèves à lire des œuvres qu'ils n'ont pas choisies, et je les vois s'ennuyer. Je me demande parfois s'il ne faudrait pas plutôt leur interdire de lire."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le quart d'heure de lecture à l'école",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Dans de nombreux collèges, tout s'arrête un quart d'heure par jour : élèves, professeurs et personnels lisent en silence le livre de leur choix, roman, bande dessinée ou magazine. Les établissements qui ont adopté ce dispositif constatent un climat plus calme et des élèves qui empruntent davantage de livres au centre de documentation."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Lecture plaisir et réussite scolaire",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les enquêtes internationales sur les compétences des élèves montrent que la lecture pour le plaisir est l'un des meilleurs prédicteurs de la réussite scolaire, quel que soit le milieu social. La liberté de choisir ses lectures joue un rôle important dans cette motivation. Les chercheurs observent aussi l'influence de l'exemple : les enfants qui voient leurs parents lire lisent davantage."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-lecture-jeunes-1.jpg",
+    "legenda": "Uma adolescente lendo",
+    "credito": {
+     "autor": "Auli Raha ( অলি রাহা)",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Gunjari_Kar,_A_teenager_is_reading_book.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-lecture-jeunes-2.jpg",
+    "legenda": "A biblioteca da escola",
+    "credito": {
+     "autor": "Ktkvtsh",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Student_wearing_mask_and_reading_in_library.jpg"
+    }
+   }
+  ],
+  "ordem": 7,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b2-publicite-enfants",
+  "titulo": "Protéger les enfants de la publicité",
+  "nivel": "B2",
+  "tipoProducao": "Texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Discuta se a publicidade dirigida a crianças deveria ser proibida.",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Tomada de posição",
+   "Vocabulário do consumo"
+  ],
+  "instrucoes": "Une association de consommateurs demande l'interdiction de la publicité destinée aux enfants. Pour son site, vous rédigez un texte argumenté dans lequel vous prenez position. (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le rayon des jouets »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de crônica)",
+    "conteudo": "Au supermarché, les bonbons sont toujours placés à la hauteur des yeux d'un enfant de cinq ans, juste à côté de la caisse. Mon fils le sait, moi aussi, et les responsables du magasin encore mieux que nous. Chaque passage devient une négociation. Je dis non, il pleure, les gens regardent. Je me demande parfois qui éduque vraiment mon enfant : moi, ou les dizaines de publicités qu'il a vues avant même de savoir lire."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "La publicité pour enfants encadrée à la télévision",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "En France, la publicité est interdite dans les programmes de la télévision publique destinés aux moins de douze ans. Mais les enfants passent de plus en plus de temps sur les plateformes vidéo et les réseaux sociaux, où la frontière entre contenu et publicité est floue : des influenceurs très jeunes présentent des jouets ou des produits alimentaires. Les associations demandent d'étendre les règles à Internet."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Les enfants et la persuasion publicitaire",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les travaux en psychologie du développement montrent qu'avant environ huit ans, la plupart des enfants ne comprennent pas l'intention persuasive d'une publicité : ils la perçoivent comme une information. L'exposition répétée à la publicité pour des aliments trop sucrés ou trop gras est associée à des préférences alimentaires moins saines. Ces données nourrissent les demandes de régulation."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-publicite-enfants-1.jpg",
+    "legenda": "Prateleiras de uma loja de brinquedos",
+    "credito": {
+     "autor": "Unknown artistUnknown artist",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Model_Of_Grocery_Store_(USA),_ca._1870_(CH_18563703).jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-publicite-enfants-2.jpg",
+    "legenda": "Uma criança com um tablet",
+    "credito": {
+     "autor": "Shixart1985",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Child_draws_on_tablet_while_sitting_indoors.jpg"
+    }
+   }
+  ],
+  "ordem": 8,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b2-espaces-verts-ville",
+  "titulo": "Plus de nature en ville",
+  "nivel": "B2",
+  "tipoProducao": "Texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Discuta: as cidades devem transformar estacionamentos e ruas em espaços verdes?",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Causa e consequência",
+   "Vocabulário urbano e ambiental"
+  ],
+  "instrucoes": "Votre ville veut transformer plusieurs parkings du centre en jardins et en espaces verts. Vous écrivez un texte argumenté pour le journal local afin de défendre ou de critiquer ce projet. (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le jardin sur le parking »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Là où, pendant trente ans, des voitures s'étaient garées sur le goudron brûlant, il y avait maintenant des tilleuls, des bancs et un petit bassin. Les premiers mois, les commerçants ont protesté : où garer les clients ? Puis les clients sont venus à pied, se sont assis sous les arbres, ont pris un café sur la place. Le boulanger, qui avait signé la pétition contre le projet, vend désormais des glaces au bord du bassin."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les villes « débitumisent » leurs cours et leurs places",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Pour lutter contre la chaleur et les inondations, plusieurs villes retirent le bitume de places, de cours d'école et de parkings pour les remplacer par de la terre, de l'herbe et des arbres. Ces projets sont souvent bien accueillis par les habitants, mais ils suscitent l'inquiétude des commerçants et des automobilistes, qui craignent de perdre des places de stationnement."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Îlots de chaleur urbains",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les surfaces minérales comme le bitume et le béton absorbent la chaleur le jour et la restituent la nuit, créant des « îlots de chaleur » où la température peut dépasser de plusieurs degrés celle des campagnes voisines. Les arbres réduisent ce phénomène grâce à leur ombre et à l'évapotranspiration. Les sols perméables permettent aussi à l'eau de pluie de s'infiltrer au lieu de saturer les égouts."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-espaces-verts-ville-1.jpg",
+    "legenda": "Uma praça verde na cidade",
+    "credito": {
+     "autor": "Jennifer Morrow from San Francisco",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Forsyth_Park_Fountain_(1).jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-espaces-verts-ville-2.jpg",
+    "legenda": "Um estacionamento asfaltado",
+    "credito": {
+     "autor": "John Phelan",
+     "licenca": "CC BY 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Parking_lot_at_330_Chestnut,_East_Longmeadow_MA.jpg"
+    }
+   }
+  ],
+  "ordem": 9,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b2-don-organes",
+  "titulo": "Le don d'organes",
+  "nivel": "B2",
+  "tipoProducao": "Texte argumentatif",
+  "dificuldade": "dificil",
+  "tempoSugerido": 40,
+  "limitePalavrasMin": 180,
+  "limitePalavrasMax": 250,
+  "descricao": "Discuta a regra do consentimento presumido na doação de órgãos: todos devem ser doadores, salvo recusa?",
+  "objetivos": [
+   "Argumentar com nuance",
+   "Apoiar-se nos documentos sem copiá-los",
+   "Estruturar o texto em introdução, desenvolvimento e conclusão"
+  ],
+  "criteriosResumo": [
+   "Argumentação estruturada",
+   "Uso crítico dos documentos",
+   "Riqueza e precisão da língua"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo",
+   "Vocabulário da saúde",
+   "Expressão da obrigação e da condição"
+  ],
+  "instrucoes": "Dans le cadre d'une campagne de sensibilisation, un site de santé publie des textes de lecteurs sur le don d'organes. Vous rédigez un texte argumenté : « Faut-il que chacun soit considéré comme donneur, sauf refus exprimé ? » (180 à 250 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le cœur de Léa »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "On m'a appelée à trois heures du matin : un cœur était disponible. J'avais attendu dix-huit mois, branchée à une machine, en comptant les jours. En me réveillant après l'opération, j'ai pensé à cette personne inconnue, morte la veille, et à sa famille qui avait dit oui au milieu du pire chagrin. Je ne connaîtrai jamais leur nom. Chaque matin, en sentant mon cœur battre, je leur dis merci."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le consentement présumé en question",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "En France, toute personne est présumée donneuse d'organes après sa mort, sauf si elle s'est inscrite sur un registre de refus. Dans les faits, les médecins consultent toujours les proches, et un refus de la famille est fréquent lorsque la personne n'a jamais exprimé sa volonté. Les associations encouragent donc chacun à parler de son choix à ses proches."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Pénurie de greffons",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Dans la plupart des pays, le nombre de patients en attente de greffe dépasse largement le nombre d'organes disponibles, et des patients meurent chaque année faute de greffon. Les comparaisons internationales montrent que le système juridique ne suffit pas à expliquer les différences entre pays : l'organisation des hôpitaux et la formation des équipes qui accompagnent les familles jouent un rôle déterminant."
+   }
+  ],
+  "courseType": "B2",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b2-don-organes-1.jpg",
+    "legenda": "Uma equipe cirúrgica",
+    "credito": {
+     "autor": "U.S. Army photo by 1st Lt. Katherine Sibilla",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:US_Army,_Burundian_surgeons_work_together_in_operating_room_(8558525).jpg"
+    }
+   },
+   {
+    "src": "img/temas/b2-don-organes-2.jpg",
+    "legenda": "O corredor de um hospital",
+    "credito": {
+     "autor": "W.carter",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Corridor_on_the_second_level_-_N%C3%84L_hospital_1.jpg"
+    }
+   }
+  ],
+  "ordem": 10,
+  "creditosNecessarios": 1
+ }
+]

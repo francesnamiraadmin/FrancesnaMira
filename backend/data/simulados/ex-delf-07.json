@@ -1,0 +1,143 @@
+{
+ "slug": "ex-delf-07",
+ "titulo": "Exercício oral nº 7 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Semaine de quatre jours",
+ "descricao": "Uma experiência de semana de quatro dias numa empresa: anúncios, testemunhos e análise.",
+ "imagem": {
+  "src": "img/temas/delf-b2-semaine-quatre-jours-2.jpg",
+  "credito": {
+   "autor": "mypubliclands",
+   "licenca": "Public domain",
+   "urlLicenca": "",
+   "fonte": "https://commons.wikimedia.org/wiki/File:-mypubliclandsroadtrip_2016-_Something_Different,_Idaho_Boater_Parks_(29432299216).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-07/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre a nova jornada.",
+     "alternativas": [
+      "Oui, je travaille le vendredi.",
+      "Non, je suis en vacances en août.",
+      "Mon bureau est fermé.",
+      "Oui, depuis que l'entreprise est passée aux quatre jours."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu es en repos le vendredi, maintenant ?\nA. Oui, je travaille le vendredi.\nB. Non, je suis en vacances en août.\nC. Mon bureau est fermé.\nD. Oui, depuis que l'entreprise est passée aux quatre jours.",
+     "audio": "audio/exercicios-orais/ex-delf-07/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Le temps de travail et les salaires restent identiques ».",
+     "alternativas": [
+      "La date du bilan.",
+      "Le nombre de jours travaillés.",
+      "Le nombre de salariés.",
+      "Le temps de travail et les salaires."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'est-ce qui ne change pas ?",
+     "transcricao": "Chers collaborateurs, à partir du premier mars, nous testerons la semaine de quatre jours pendant six mois. Le temps de travail et les salaires restent identiques. Un bilan sera fait en septembre.",
+     "audio": "audio/exercicios-orais/ex-delf-07/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Épuisantes. Mais… ça change la vie. Je ne reviendrais pas en arrière ».",
+     "alternativas": [
+      "Positif malgré la fatigue des journées longues.",
+      "Elle veut revenir à cinq jours.",
+      "Elle ne voit aucune différence.",
+      "Négatif à cause de la fatigue."
+     ],
+     "correta": 0,
+     "pergunta": "Quel est le bilan de cette salariée ?",
+     "transcricao": "Honnêtement, les journées de neuf heures sont épuisantes. Mais avoir trois jours de week-end, ça change la vie : je vois mes parents, je fais du sport. Je ne reviendrais pas en arrière.",
+     "audio": "audio/exercicios-orais/ex-delf-07/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que corrige um mal-entendido.",
+     "alternativas": [
+      "Non, le vendredi est cher.",
+      "On n'est pas fermés : les équipes se relaient.",
+      "On travaille à neuf heures.",
+      "Oui, les clients sont gentils."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Et les clients, ils acceptent qu'on soit fermés le vendredi ?\nA. Non, le vendredi est cher.\nB. On n'est pas fermés : les équipes se relaient.\nC. On travaille à neuf heures.\nD. Oui, les clients sont gentils.",
+     "audio": "audio/exercicios-orais/ex-delf-07/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Ce qui est nouveau, c'est la manière d'en parler ».",
+     "alternativas": [
+      "Le nombre d'heures travaillées.",
+      "L'idée même de la semaine de quatre jours.",
+      "La manière de justifier cette mesure.",
+      "Les salaires des employés."
+     ],
+     "correta": 2,
+     "pergunta": "Qu'est-ce qui a changé, selon l'intervenante ?",
+     "transcricao": "La semaine de quatre jours n'est pas une idée neuve ; ce qui est nouveau, c'est la manière d'en parler. On ne la présente plus comme un partage du travail pour créer des emplois, mais comme un moyen d'attirer les salariés et d'améliorer leur bien-être.",
+     "audio": "audio/exercicios-orais/ex-delf-07/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Défendre un point de vue",
+     "duracaoSeg": 420,
+     "preparacaoSeg": 900,
+     "consigne": "Document déclencheur : « Travailler quatre jours au lieu de cinq : un progrès social ou une fausse bonne idée ? » Dégagez la problématique, présentez votre point de vue de manière organisée (introduction, arguments, exemples, conclusion), puis défendez-le face à l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : quelle est la problématique et quel est votre point de vue ?"
+     ],
+     "fichaExaminador": "Débat : défendez la position opposée. « Tous les métiers ne peuvent pas passer à quatre jours (hôpitaux, commerces) », « Les journées plus longues fatiguent », « Et la productivité ? »"
+    }
+   ]
+  }
+ }
+}

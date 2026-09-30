@@ -37,7 +37,7 @@
   };
   // Mesma cascata de backend/middleware/acessoCurso.js e public/js/cursoContexto.js.
   const CASCATA_POR_TIER = {
-    producao: ["Essentiel", "Avancé", "Excellence"],
+    producao: ["Avancé", "Excellence"],
     aulas: ["Avancé", "Excellence"],
     plataforma: ["Excellence"]
   };

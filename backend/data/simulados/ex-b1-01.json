@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b1-01",
+ "titulo": "Exercício oral nº 1 — B1",
+ "curso": "B1",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "À vélo en ville",
+ "descricao": "Bicicleta na cidade: ciclovias, segurança e testemunhos de ciclistas.",
+ "imagem": {
+  "src": "img/temas/b1-velo-en-ville-2.jpg",
+  "credito": {
+   "autor": "KarlaCruzVillalobos",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Bicycle_Parking_Lot.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b1-01/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta com justificação.",
+     "alternativas": [
+      "À neuf heures.",
+      "Oui, depuis qu'il y a une piste cyclable.",
+      "Non, j'ai un chat.",
+      "Oui, mon bureau est grand."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu viens au bureau à vélo, maintenant ?\nA. À neuf heures.\nB. Oui, depuis qu'il y a une piste cyclable.\nC. Non, j'ai un chat.\nD. Oui, mon bureau est grand.",
+     "audio": "audio/exercicios-orais/ex-b1-01/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Dix euros par mois pour les étudiants ».",
+     "alternativas": [
+      "Vingt euros par mois.",
+      "C'est gratuit.",
+      "Quarante euros par mois.",
+      "Dix euros par mois."
+     ],
+     "correta": 3,
+     "pergunta": "Combien paient les étudiants ?",
+     "transcricao": "La ville lance un service de location de vélos électriques : dix euros par mois pour les étudiants, vingt euros pour les autres habitants. Les vélos sont disponibles dans quarante stations.",
+     "audio": "audio/exercicios-orais/ex-b1-01/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Le seul problème, c'est la pluie ! »",
+     "alternativas": [
+      "Les voitures.",
+      "La salle de sport.",
+      "La pluie.",
+      "Le temps de trajet."
+     ],
+     "correta": 2,
+     "pergunta": "Quel est le seul problème pour elle ?",
+     "transcricao": "Au début, j'avais peur des voitures. Maintenant, je gagne vingt minutes chaque matin et je n'ai plus besoin d'aller à la salle de sport. Le seul problème, c'est la pluie !",
+     "audio": "audio/exercicios-orais/ex-b1-01/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta que matiza.",
+     "alternativas": [
+      "Il faut un ticket.",
+      "Non, la ville est grande.",
+      "Moins qu'avant, grâce aux nouvelles pistes séparées.",
+      "Oui, j'ai un vélo bleu."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Mais le vélo en ville, c'est dangereux, non ?\nA. Il faut un ticket.\nB. Non, la ville est grande.\nC. Moins qu'avant, grâce aux nouvelles pistes séparées.\nD. Oui, j'ai un vélo bleu.",
+     "audio": "audio/exercicios-orais/ex-b1-01/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Plus il y a de cyclistes, moins il y a d'accidents par cycliste ».",
+     "alternativas": [
+      "Plus de cyclistes rend chaque cycliste plus en sécurité.",
+      "Les cyclistes roulent en groupe.",
+      "Plus de voitures sur les routes.",
+      "Plus d'accidents avec plus de vélos."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'est-ce que l'effet de masse ?",
+     "transcricao": "Plus il y a de cyclistes, moins il y a d'accidents par cycliste. Les automobilistes s'habituent à leur présence et deviennent plus attentifs. C'est ce que les spécialistes appellent l'effet de masse.",
+     "audio": "audio/exercicios-orais/ex-b1-01/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 420,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 240,
+     "preparacaoSeg": 0,
+     "consigne": "« Il faudrait interdire les voitures dans le centre des villes. » Qu'en pensez-vous ? Donnez votre opinion avec des arguments et des exemples.",
+     "perguntasExaminador": [
+      "Il faudrait interdire les voitures dans le centre des villes. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et les personnes âgées ou handicapées ? », « Et les livraisons ? », « Comment vous déplacez-vous, vous ? »"
+    }
+   ]
+  }
+ }
+}

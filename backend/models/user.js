@@ -68,6 +68,8 @@ const UserSchema = new mongoose.Schema({
   ultimoAcessoEm: { type: Date },
   primeiroLoginEm: { type: Date },
   creditosCorrecao: { type: Number, default: 0 },
+  // Quando recebeu os 20 créditos de boas-vindas do Ambiente de Produção (uma vez só).
+  creditosBoasVindasEm: { type: Date, default: null },
   especialidades: [{ type: String, enum: TIPOS_CURSO }],
   temasFavoritos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tema" }],
   aulasFavoritas: [{ type: mongoose.Schema.Types.ObjectId, ref: "Aula" }],

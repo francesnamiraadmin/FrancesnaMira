@@ -1,0 +1,143 @@
+{
+ "slug": "ex-a2-06",
+ "titulo": "Exercício oral nº 6 — A2",
+ "curso": "A2",
+ "categoria": "exercicio",
+ "nivel": "A2",
+ "tema": "Cherche colocataire",
+ "descricao": "Dividir apartamento: anúncios, visitas e regras da casa.",
+ "imagem": {
+  "src": "img/temas/a2-annonce-colocation-2.jpg",
+  "credito": {
+   "autor": "English106",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Female_student_writing_and_studying_at_dorm_room_desk.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-a2-06/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Resposta à pergunta.",
+     "alternativas": [
+      "Non, je suis libre.",
+      "Elle est au deuxième.",
+      "Oui, vous voulez la visiter ?",
+      "Oui, elle est grande."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "La chambre est encore libre ?\nA. Non, je suis libre.\nB. Elle est au deuxième.\nC. Oui, vous voulez la visiter ?\nD. Oui, elle est grande.",
+     "audio": "audio/exercicios-orais/ex-a2-06/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pergunta sobre despesas.",
+     "alternativas": [
+      "Oui, j'ai payé.",
+      "C'est à gauche.",
+      "Non, le loyer est bleu.",
+      "Oui, internet et électricité compris."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Les charges sont comprises dans le loyer ?\nA. Oui, j'ai payé.\nB. C'est à gauche.\nC. Non, le loyer est bleu.\nD. Oui, internet et électricité compris.",
+     "audio": "audio/exercicios-orais/ex-a2-06/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Non-fumeur de préférence ».",
+     "alternativas": [
+      "Un musicien.",
+      "Un étudiant en médecine.",
+      "Une personne avec un chat.",
+      "Un non-fumeur."
+     ],
+     "correta": 3,
+     "pergunta": "Quel colocataire cherche-t-on de préférence ?",
+     "transcricao": "Cherche colocataire pour grand appartement près de l'université. Chambre meublée de douze mètres carrés. Quatre cent vingt euros par mois, charges comprises. Non-fumeur de préférence.",
+     "audio": "audio/exercicios-orais/ex-a2-06/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« On fait les courses ensemble le samedi ».",
+     "alternativas": [
+      "Une semaine sur trois.",
+      "Le samedi.",
+      "Le dimanche.",
+      "Chaque jour."
+     ],
+     "correta": 1,
+     "pergunta": "Quand fait-on les courses ?",
+     "transcricao": "Chez nous, on fait les courses ensemble le samedi et chacun fait le ménage une semaine sur trois. Et pas de bruit après vingt-trois heures !",
+     "audio": "audio/exercicios-orais/ex-a2-06/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les loyers sont trop chers et beaucoup apprécient de ne pas vivre seuls ».",
+     "alternativas": [
+      "Les loyers sont chers et on ne veut pas vivre seul.",
+      "Les appartements sont plus grands.",
+      "Les étudiants sont plus nombreux.",
+      "C'est obligatoire."
+     ],
+     "correta": 0,
+     "pergunta": "Pourquoi la colocation se développe-t-elle ?",
+     "transcricao": "La colocation n'est plus réservée aux étudiants. De plus en plus de trentenaires et même de retraités partagent un logement : les loyers sont trop chers et beaucoup apprécient de ne pas vivre seuls.",
+     "audio": "audio/exercicios-orais/ex-a2-06/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 510,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 240,
+     "preparacaoSeg": 90,
+     "consigne": "Vous avez vu une annonce pour une chambre en colocation. Vous téléphonez pour poser des questions : prix, charges, taille de la chambre, colocataires, règles, visite.",
+     "perguntasExaminador": [
+      "Allô, oui ? C'est pour la chambre ?"
+     ],
+     "fichaExaminador": "Vous êtes le/la colocataire. Chambre de 12 m², meublée, 420 €/mois charges comprises. Deux autres colocataires (une infirmière, un étudiant). Pas d'animaux. Ménage en rotation. Visite possible jeudi à 18 h. Parlez clairement et laissez le candidat poser ses questions."
+    }
+   ]
+  }
+ }
+}

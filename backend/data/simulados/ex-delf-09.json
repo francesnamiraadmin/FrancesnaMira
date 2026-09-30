@@ -1,0 +1,157 @@
+{
+ "slug": "ex-delf-09",
+ "titulo": "Exercício oral nº 9 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "L'uniforme à l'école",
+ "descricao": "Um liceu testa o uniforme: pais, alunos e uma socióloga opinam; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/delf-b2-ecole-uniforme-2.jpg",
+  "credito": {
+   "autor": "Hakamal",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Universal_secondary_education.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-09/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Reação à notícia.",
+     "alternativas": [
+      "Oui, j'ai reçu le courrier. Je ne suis pas ravi.",
+      "L'an prochain, j'ai quinze ans.",
+      "Oui, mon pull est bleu.",
+      "Non, l'école est fermée."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as vu ? On va devoir porter un uniforme l'an prochain.\nA. Oui, j'ai reçu le courrier. Je ne suis pas ravi.\nB. L'an prochain, j'ai quinze ans.\nC. Oui, mon pull est bleu.\nD. Non, l'école est fermée.",
+     "audio": "audio/exercicios-orais/ex-delf-09/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les chaussures restent au choix des familles ».",
+     "alternativas": [
+      "Les pulls.",
+      "Les polos.",
+      "Les pantalons.",
+      "Les chaussures."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'est-ce qui reste au choix des familles ?",
+     "transcricao": "Madame, Monsieur, notre établissement participe à l'expérimentation de la tenue unique. Chaque élève recevra gratuitement cinq polos, deux pulls et deux pantalons. Les chaussures restent au choix des familles.",
+     "audio": "audio/exercicios-orais/ex-delf-09/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Elle subissait des moqueries parce qu'elle ne portait pas de marques ».",
+     "alternativas": [
+      "Il est obligatoire.",
+      "Sa fille aime les uniformes.",
+      "Il évite les moqueries liées aux marques.",
+      "Il coûte moins cher."
+     ],
+     "correta": 2,
+     "pergunta": "Pourquoi cette mère est-elle favorable à l'uniforme ?",
+     "transcricao": "Moi, je suis pour. Ma fille passait vingt minutes chaque matin à choisir ses vêtements et elle subissait des moqueries parce qu'elle ne portait pas de marques. Avec l'uniforme, c'est fini.",
+     "audio": "audio/exercicios-orais/ex-delf-09/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Contra-argumento.",
+     "alternativas": [
+      "Je n'ai pas de personnalité.",
+      "La personnalité ne se résume pas aux vêtements, quand même.",
+      "Oui, les jeunes sont grands.",
+      "L'uniforme est bleu marine."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Mais l'uniforme, ça empêche les jeunes d'exprimer leur personnalité !\nA. Je n'ai pas de personnalité.\nB. La personnalité ne se résume pas aux vêtements, quand même.\nC. Oui, les jeunes sont grands.\nD. L'uniforme est bleu marine.",
+     "audio": "audio/exercicios-orais/ex-delf-09/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Son effet principal semble être symbolique : il renforce le sentiment d'appartenance ».",
+     "alternativas": [
+      "Réduire les dépenses des familles.",
+      "Améliorer les résultats.",
+      "Renforcer le sentiment d'appartenance.",
+      "Dégrader les résultats."
+     ],
+     "correta": 2,
+     "pergunta": "Quel est l'effet principal de l'uniforme, selon les études citées ?",
+     "transcricao": "Les études disponibles sont décevantes pour les deux camps : l'uniforme n'améliore pas nettement les résultats scolaires, mais il ne les dégrade pas non plus. Son effet principal semble être symbolique : il renforce le sentiment d'appartenance à l'établissement.",
+     "audio": "audio/exercicios-orais/ex-delf-09/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 2100,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production écrite",
+     "min": 230,
+     "max": 280,
+     "consigne": "Le conseil d'administration de votre lycée envisage d'imposer l'uniforme. Vous écrivez une lettre au proviseur pour donner votre opinion argumentée. (250 mots environ)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Défendre un point de vue",
+     "duracaoSeg": 420,
+     "preparacaoSeg": 900,
+     "consigne": "Document déclencheur : « Uniforme scolaire : l'égalité passe-t-elle par la tenue ? » Dégagez la problématique, présentez votre point de vue de manière organisée, puis défendez-le face à l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : quelle est la problématique et quel est votre point de vue ?"
+     ],
+     "fichaExaminador": "Débat : « Les inégalités se voient ailleurs (téléphone, chaussures) », « Qui paie l'uniforme ? », « Avez-vous porté un uniforme ? »"
+    }
+   ]
+  }
+ }
+}

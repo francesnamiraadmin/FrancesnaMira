@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tcf-04",
+ "titulo": "Exercício oral nº 4 — TCF",
+ "curso": "TCF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "La ville sans voiture",
+ "descricao": "Um dia sem carros: anúncios, entrevistas com moradores e um debate sobre mobilidade.",
+ "imagem": {
+  "src": "img/temas/tcf-t2-journee-sans-voiture-2.jpg",
+  "credito": {
+   "autor": "Wilfredor",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Cyclist_on_a_Quebec_City_street_in_autumn.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral convertida para a escala do TCF (0–699), com NCLC; expressões de 0 a 20, com nível CECR e NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tcf-04/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pergunta sobre o fechamento da rua.",
+     "alternativas": [
+      "Il y a un bus.",
+      "Oui, jusqu'à dix-huit heures.",
+      "Oui, la voiture est garée.",
+      "Non, j'ai un vélo rouge."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "La rue est fermée aux voitures aujourd'hui ?\nA. Il y a un bus.\nB. Oui, jusqu'à dix-huit heures.\nC. Oui, la voiture est garée.\nD. Non, j'ai un vélo rouge.",
+     "audio": "audio/exercicios-orais/ex-tcf-04/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les bus et les tramways seront gratuits ».",
+     "alternativas": [
+      "Les musées.",
+      "Le parking.",
+      "Les vélos en location.",
+      "Les bus et les tramways."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'est-ce qui sera gratuit dimanche ?",
+     "transcricao": "Dimanche, journée sans voiture : le centre-ville sera fermé à la circulation de dix heures à dix-huit heures. Les bus et les tramways seront gratuits toute la journée.",
+     "audio": "audio/exercicios-orais/ex-tcf-04/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Il y avait plus de monde que d'habitude ».",
+     "alternativas": [
+      "Les boutiques étaient fermées.",
+      "Il y avait plus de clients que d'habitude.",
+      "Les gens étaient pressés.",
+      "Elle a perdu des clients."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'a constaté la commerçante ?",
+     "transcricao": "Moi, au début, j'étais contre. Je suis commerçante et j'avais peur de perdre mes clients. Mais finalement, il y avait plus de monde que d'habitude : les gens se promenaient, prenaient leur temps et entraient dans les boutiques.",
+     "audio": "audio/exercicios-orais/ex-tcf-04/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que oferece uma solução.",
+     "alternativas": [
+      "Je travaille le samedi.",
+      "Ta voiture est très jolie.",
+      "Il y a des navettes depuis les parkings extérieurs.",
+      "Le bureau ferme à midi."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Franchement, sans ma voiture, comment je fais pour aller travailler ?\nA. Je travaille le samedi.\nB. Ta voiture est très jolie.\nC. Il y a des navettes depuis les parkings extérieurs.\nD. Le bureau ferme à midi.",
+     "audio": "audio/exercicios-orais/ex-tcf-04/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Elles permettent aux habitants d'imaginer autrement l'espace public ».",
+     "alternativas": [
+      "Faire imaginer autrement l'espace public.",
+      "Réduire définitivement la pollution.",
+      "Augmenter le commerce.",
+      "Interdire les voitures."
+     ],
+     "correta": 0,
+     "pergunta": "Quelle est, selon l'intervenante, la fonction principale de ces journées ?",
+     "transcricao": "Les journées sans voiture ont surtout une fonction symbolique : elles permettent aux habitants d'imaginer autrement l'espace public. Beaucoup découvrent que la chaussée représente la majeure partie de leur rue. Cette prise de conscience prépare souvent l'acceptation de mesures plus durables.",
+     "audio": "audio/exercicios-orais/ex-tcf-04/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 630,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Vous voulez louer un vélo électrique pour vous rendre au travail pendant un mois. Vous appelez un service de location pour obtenir des informations (prix, durée, entretien, assurance, antivol…).",
+     "perguntasExaminador": [
+      "Vélos en ville, bonjour ! Que puis-je faire pour vous ?"
+     ],
+     "fichaExaminador": "Vous êtes l'employé(e) du service. Location au mois : 40 € (20 € pour les étudiants). Caution 150 €. Entretien gratuit en atelier. Antivol fourni. Assurance vol +5 €/mois. Batterie : environ 60 km. Retrait en agence, du lundi au samedi, 9 h–19 h. Laissez le candidat mener l'échange ; relancez-le s'il se tait (« Autre chose ? »)."
+    }
+   ]
+  }
+ }
+}

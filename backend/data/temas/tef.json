@@ -1,0 +1,742 @@
+[
+ {
+  "slug": "tef-a-chien-300-km",
+  "titulo": "Le chien qui avait parcouru 300 kilomètres",
+  "nivel": "B1",
+  "tipoProducao": "TEF — Section A : suite d'un fait divers",
+  "dificuldade": "medio",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 80,
+  "limitePalavrasMax": 150,
+  "descricao": "Seção A do TEF: continue a notícia de um cachorro que reencontrou o dono depois de percorrer 300 km.",
+  "objetivos": [
+   "Narrar a continuação de um fato",
+   "Respeitar o estilo jornalístico",
+   "Organizar a narrativa no tempo"
+  ],
+  "criteriosResumo": [
+   "Continuidade com o início",
+   "Narração coerente e completa",
+   "Tempos do passado"
+  ],
+  "competenciasAvaliadas": [
+   "Fait divers",
+   "Passé composé, imparfait e plus-que-parfait",
+   "Conectores temporais"
+  ],
+  "instrucoes": "Section A — Vous lisez le début de cet article dans un journal. Écrivez la suite de l'article (80 mots minimum), en racontant ce qui s'est passé et comment l'histoire se termine. Début de l'article : « Mardi matin, les habitants d'un petit village du Jura ont vu arriver un chien épuisé, les pattes blessées. Sur son collier, une adresse… à trois cents kilomètres de là. »",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le retour de Filou »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de conto)",
+    "conteudo": "Filou avait disparu le jour du déménagement, dans l'agitation des cartons et du camion. Pendant des semaines, Lucas avait collé des affiches, appelé les refuges, fouillé les bois autour de l'ancienne maison. On lui disait d'oublier, qu'un chien perdu si loin ne revient jamais. Un soir de novembre, on gratta à la porte. Maigre, boueux, la queue battant l'air, Filou se tenait sur le paillasson, comme s'il rentrait d'une simple promenade."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les puces électroniques ont permis de retrouver des milliers d'animaux",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "L'identification par puce électronique, obligatoire pour les chiens en France, permet chaque année de rendre des milliers d'animaux perdus à leurs propriétaires. Il suffit qu'un vétérinaire ou un refuge lise la puce pour retrouver les coordonnées enregistrées dans le fichier national. Encore faut-il que les propriétaires pensent à mettre à jour leur adresse et leur numéro de téléphone après un déménagement, ce qui n'est pas toujours le cas."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Comment les animaux retrouvent-ils leur chemin ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les capacités d'orientation de certains animaux intriguent les scientifiques. Les chiens utiliseraient surtout leur odorat, capable de suivre des traces très anciennes, mais aussi des repères visuels. Une étude a observé que certains chiens semblaient sensibles au champ magnétique terrestre lorsqu'ils cherchaient à revenir vers leur point de départ. Les chercheurs restent prudents : les longs retours spectaculaires restent rares et difficiles à expliquer."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-a-chien-300-km-1.jpg",
+    "legenda": "Um cachorro numa estrada do interior",
+    "credito": {
+     "autor": "Vieve Forward",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Walking_the_dog_on_the_lane_to_Avon_-_geograph.org.uk_-_6072448.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tef-a-chien-300-km-2.jpg",
+    "legenda": "Uma aldeia do Jura",
+    "credito": {
+     "autor": "MHM55",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Meyrin-Village-arr%C3%AAt_de_tram-3.jpg"
+    }
+   }
+  ],
+  "ordem": 1,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tef-a-tresor-grenier",
+  "titulo": "Un trésor dans le grenier",
+  "nivel": "B1",
+  "tipoProducao": "TEF — Section A : suite d'un fait divers",
+  "dificuldade": "medio",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 80,
+  "limitePalavrasMax": 150,
+  "descricao": "Seção A do TEF: continue a notícia de uma família que encontrou um objeto valioso ao arrumar o sótão.",
+  "objetivos": [
+   "Imaginar uma sequência plausível",
+   "Manter o registro de jornal",
+   "Criar um desfecho"
+  ],
+  "criteriosResumo": [
+   "Coerência com o início",
+   "Riqueza da narração",
+   "Correção"
+  ],
+  "competenciasAvaliadas": [
+   "Narração jornalística",
+   "Discurso relatado",
+   "Tempos do passado"
+  ],
+  "instrucoes": "Section A — Vous lisez le début de cet article dans un journal. Écrivez la suite de l'article (80 mots minimum), en racontant ce qui s'est passé et comment l'histoire se termine. Début de l'article : « En vidant le grenier de leur grand-mère, décédée l'hiver dernier, deux frères de Nantes ont découvert, sous une pile de vieux journaux, une petite toile signée d'un nom célèbre. »",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le grenier »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Le grenier sentait la poussière et la lavande. Chaque carton était une époque : les jouets de notre père, les robes de bal de notre grand-mère, des lettres ficelées par paquets. Nous avions prévu une journée pour tout vider ; il nous en fallut cinq. On ne jette pas une vie en quelques heures. Au fond, derrière la malle, il y avait un cadre enveloppé dans un drap. Mon frère le retourna lentement, et nous restâmes un long moment silencieux."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Ventes aux enchères : les découvertes de grenier font le bonheur des experts",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Chaque année, des objets découverts par hasard dans des greniers ou des caves atteignent des prix étonnants lors de ventes aux enchères : tableaux, bijoux, manuscrits. Les commissaires-priseurs conseillent de ne jamais jeter un objet ancien sans l'avoir fait estimer. Ils rappellent aussi que l'authentification d'une œuvre peut prendre des mois et nécessite l'avis de plusieurs spécialistes."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Comment authentifie-t-on un tableau ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Pour déterminer si un tableau est authentique, les experts combinent plusieurs méthodes. L'analyse des pigments permet de vérifier que les matériaux utilisés existaient à l'époque supposée. La radiographie révèle parfois des esquisses cachées sous la peinture. Enfin, les historiens de l'art étudient la provenance de l'œuvre, c'est-à-dire l'histoire de ses propriétaires successifs, souvent décisive pour écarter les faux."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-a-tresor-grenier-1.jpg",
+    "legenda": "Um sótão cheio de objetos antigos",
+    "credito": {
+     "autor": "Rosendahl",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Attic_hatch_in_old_house.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tef-a-tresor-grenier-2.jpg",
+    "legenda": "Uma gravura antiga de um leilão",
+    "credito": {
+     "autor": "Print made by: Thomas Rowlandson Published by: William Humphrey",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:The_state_auction._(BM_1851,0901.183).jpg"
+    }
+   }
+  ],
+  "ordem": 2,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tef-a-panne-metro",
+  "titulo": "Panne géante dans le métro",
+  "nivel": "B1",
+  "tipoProducao": "TEF — Section A : suite d'un fait divers",
+  "dificuldade": "medio",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 80,
+  "limitePalavrasMax": 150,
+  "descricao": "Seção A do TEF: continue a notícia de uma pane no metrô que deixou centenas de passageiros presos — e solidários.",
+  "objetivos": [
+   "Narrar ações sucessivas",
+   "Descrever reações das pessoas",
+   "Concluir a notícia"
+  ],
+  "criteriosResumo": [
+   "Continuidade",
+   "Narração organizada",
+   "Vocabulário adequado"
+  ],
+  "competenciasAvaliadas": [
+   "Fait divers",
+   "Descrição de ações",
+   "Conectores"
+  ],
+  "instrucoes": "Section A — Vous lisez le début de cet article dans un journal. Écrivez la suite de l'article (80 mots minimum), en racontant ce qui s'est passé et comment l'histoire se termine. Début de l'article : « Jeudi, à 18 heures, en pleine heure de pointe, une panne d'électricité a immobilisé une rame de métro entre deux stations. À l'intérieur, plus de quatre cents voyageurs se sont retrouvés dans l'obscurité. »",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Dans le noir »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Quand la lumière s'éteignit, quelqu'un cria, puis tout le wagon se tut. On n'entendait plus que la respiration des voyageurs et, au loin, le grondement d'un autre train. Une petite lampe s'alluma : celle d'un téléphone, tenu par une adolescente. Puis une autre, et une autre encore. En quelques secondes, le wagon fut éclairé par des dizaines de petites étoiles bleues. Un vieil homme se mit à raconter une blague, et le rire courut d'un bout à l'autre de la rame."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Incidents dans les transports : les consignes de sécurité",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "En cas d'arrêt prolongé d'un train entre deux stations, les exploitants rappellent qu'il ne faut jamais descendre sur les voies sans l'autorisation des agents, car le courant peut être rétabli à tout moment. Les voyageurs doivent attendre les instructions diffusées par haut-parleur. Les équipes d'intervention se rendent sur place pour organiser, si nécessaire, l'évacuation à pied par les tunnels, sous surveillance."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Pourquoi les foules restent souvent calmes",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Contrairement à une idée répandue, les situations d'urgence provoquent rarement la panique collective. Les recherches en psychologie des foules montrent que les personnes présentes développent souvent une identité commune face au danger, qui favorise l'entraide : on partage de l'eau, on rassure les enfants, on aide les personnes âgées. Les chercheurs recommandent donc d'informer clairement le public plutôt que de lui cacher la situation par peur de la panique."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-a-panne-metro-1.jpg",
+    "legenda": "Um metrô parado no túnel",
+    "credito": {
+     "autor": "DXR",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Paris_Metro_Line_6_train_northeast_of_Pasteur_station_140207_5.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tef-a-panne-metro-2.jpg",
+    "legenda": "Passageiros esperando na plataforma",
+    "credito": {
+     "autor": "Alex Sorto alexsorto",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Train_station_in_red_and_gray_(Unsplash).jpg"
+    }
+   }
+  ],
+  "ordem": 3,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tef-a-lettre-50-ans",
+  "titulo": "Une lettre arrivée avec cinquante ans de retard",
+  "nivel": "B2",
+  "tipoProducao": "TEF — Section A : suite d'un fait divers",
+  "dificuldade": "medio",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 80,
+  "limitePalavrasMax": 150,
+  "descricao": "Seção A do TEF: continue a notícia de uma carta de amor entregue meio século depois de enviada.",
+  "objetivos": [
+   "Narrar com emoção sem perder o tom jornalístico",
+   "Criar uma investigação e um desfecho",
+   "Variar os tempos verbais"
+  ],
+  "criteriosResumo": [
+   "Coerência",
+   "Riqueza narrativa",
+   "Tempos e registro"
+  ],
+  "competenciasAvaliadas": [
+   "Fait divers",
+   "Plus-que-parfait",
+   "Discurso indireto"
+  ],
+  "instrucoes": "Section A — Vous lisez le début de cet article dans un journal. Écrivez la suite de l'article (80 mots minimum), en racontant ce qui s'est passé et comment l'histoire se termine. Début de l'article : « Une habitante de Lyon a reçu la semaine dernière une lettre postée… en 1975. L'enveloppe, jaunie, était adressée à une jeune femme qui habitait autrefois son appartement. »",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Ma chère Jeanne »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance epistolar)",
+    "conteudo": "Ma chère Jeanne, je t'écris depuis la gare, avant que le train m'emporte vers le nord. Je n'ai pas eu le courage de te le dire hier soir : je t'attendrai. Si tu veux de moi, écris-moi à l'adresse ci-dessous, et je reviendrai au printemps. Si tu ne réponds pas, je comprendrai. Je garderai simplement le souvenir de la fenêtre ouverte sur la place, et de ta voix qui chantait en arrosant les géraniums."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Courriers retrouvés : la Poste explique les retards exceptionnels",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Il arrive que des lettres soient distribuées des années, voire des décennies après leur envoi. Selon les services postaux, ces cas s'expliquent le plus souvent par des courriers restés coincés derrière un meuble lors de travaux dans un bureau de poste, ou oubliés au fond d'un sac. Lorsqu'ils sont retrouvés, ils sont remis en circulation et distribués à l'adresse indiquée, même si le destinataire a changé."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "L'écriture manuscrite et la mémoire affective",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des chercheurs en psychologie ont étudié la valeur que nous accordons aux objets écrits à la main. Une lettre manuscrite est perçue comme plus personnelle et plus sincère qu'un message électronique, car elle garde la trace du geste de son auteur. Ces objets deviennent souvent des supports de mémoire affective : on les conserve pendant des décennies, et leur relecture réactive des souvenirs émotionnels intenses."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-a-lettre-50-ans-1.jpg",
+    "legenda": "Cartas antigas escritas à mão",
+    "credito": {
+     "autor": "Scan by NYPL",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Ticknor,_(William_D.),_3_envelopes_of_letters_to_(NYPL_b15823745-5071452).jpg"
+    }
+   },
+   {
+    "src": "img/temas/tef-a-lettre-50-ans-2.jpg",
+    "legenda": "Uma rua do centro antigo de Lyon",
+    "credito": {
+     "autor": "Guilhem Vellut from Annecy, France",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Old_Town_@_Lyon_(36252704741).jpg"
+    }
+   }
+  ],
+  "ordem": 4,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tef-a-grele-ete",
+  "titulo": "Un orage de grêle en plein mois d'août",
+  "nivel": "B2",
+  "tipoProducao": "TEF — Section A : suite d'un fait divers",
+  "dificuldade": "medio",
+  "tempoSugerido": 25,
+  "limitePalavrasMin": 80,
+  "limitePalavrasMax": 150,
+  "descricao": "Seção A do TEF: continue a notícia de uma tempestade de granizo que atingiu uma região de vinhedos em pleno verão.",
+  "objetivos": [
+   "Descrever um fenômeno e suas consequências",
+   "Relatar reações e testemunhos",
+   "Concluir com perspectivas"
+  ],
+  "criteriosResumo": [
+   "Coerência e completude",
+   "Vocabulário do clima",
+   "Tempos e conectores"
+  ],
+  "competenciasAvaliadas": [
+   "Fait divers",
+   "Vocabulário meteorológico",
+   "Causa e consequência"
+  ],
+  "instrucoes": "Section A — Vous lisez le début de cet article dans un journal. Écrivez la suite de l'article (80 mots minimum), en racontant ce qui s'est passé et comment l'histoire se termine. Début de l'article : « Samedi après-midi, en quelques minutes à peine, des grêlons gros comme des balles de golf se sont abattus sur les vignobles de Bourgogne, à trois semaines des vendanges. »",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La vigne de mon père »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Mon père regardait le ciel comme d'autres regardent leur compte en banque. Au moindre nuage noir, il sortait sur le pas de la porte, les mains dans les poches, silencieux. Ce jour-là, le vent se leva d'un coup et la lumière devint verte. Quand la grêle cessa, il marcha longtemps entre les rangs, ramassant une grappe éclatée, puis une autre. Il ne dit rien. Le soir, il sortit une bouteille de l'année de ma naissance et nous la bûmes lentement."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les viticulteurs s'équipent contre la grêle",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Face à la multiplication des épisodes de grêle, de plus en plus de viticulteurs installent des filets de protection au-dessus des vignes ou participent à des réseaux de générateurs qui tentent de réduire la taille des grêlons. Ces équipements coûtent cher et leur efficacité fait débat. Les assurances contre les aléas climatiques, elles, deviennent indispensables, mais leur prix augmente d'année en année."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Le réchauffement favorise-t-il la grêle ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les climatologues observent en Europe une augmentation de la fréquence des orages violents et des gros grêlons dans certaines régions. Un air plus chaud contient davantage de vapeur d'eau, ce qui fournit plus d'énergie aux orages. Les chercheurs soulignent toutefois que la grêle reste un phénomène très localisé, difficile à prévoir et à mesurer, ce qui rend les tendances à long terme encore incertaines."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-a-grele-ete-1.jpg",
+    "legenda": "Vinhedos da Borgonha",
+    "credito": {
+     "autor": "FrogsLegs71",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Vineyards_in_Burgundy_France.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tef-a-grele-ete-2.jpg",
+    "legenda": "Pedras de granizo",
+    "credito": {
+     "autor": "Kevain25460",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Gr%C3%AAle.jpg"
+    }
+   }
+  ],
+  "ordem": 5,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tef-b-coder-primaire",
+  "titulo": "Apprendre à coder dès l'école primaire",
+  "nivel": "B2",
+  "tipoProducao": "TEF — Section B : lettre argumentée",
+  "dificuldade": "dificil",
+  "tempoSugerido": 35,
+  "limitePalavrasMin": 200,
+  "limitePalavrasMax": 280,
+  "descricao": "Seção B do TEF: escreva ao jornal defendendo sua posição sobre ensinar programação a crianças.",
+  "objetivos": [
+   "Defender um ponto de vista em carta",
+   "Desenvolver três argumentos com exemplos",
+   "Usar o registro formal"
+  ],
+  "criteriosResumo": [
+   "Três argumentos desenvolvidos",
+   "Exemplos concretos",
+   "Forma da carta"
+  ],
+  "competenciasAvaliadas": [
+   "Carta argumentativa",
+   "Vocabulário da educação e da tecnologia",
+   "Conectores de enumeração"
+  ],
+  "instrucoes": "Section B — Vous avez lu dans un journal la phrase suivante : « Tous les enfants devraient apprendre à programmer dès l'école primaire. » Vous écrivez une lettre au journal pour donner votre point de vue (200 mots minimum). Vous développez au moins trois arguments, illustrés d'exemples.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le robot de Mila »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de livro infantojuvenil)",
+    "conteudo": "Mila avait passé tout le mercredi à apprendre à son petit robot à sortir du labyrinthe dessiné sur le carrelage de la cuisine. Avancer, tourner à gauche, avancer deux fois. Le robot se cognait, repartait, se cognait encore. À six heures, il atteignit enfin la sortie. Mila hurla de joie. Ce qu'elle avait appris ce jour-là, pensa son père, ce n'était pas seulement à commander une machine : c'était à décomposer un problème, à se tromper et à recommencer."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "L'initiation au code entre dans les programmes",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Plusieurs pays, dont la France, ont introduit l'initiation à la programmation dans les programmes de l'école primaire et du collège, souvent sous forme de jeux et de petits robots. Les enseignants saluent l'enthousiasme des élèves, mais beaucoup reconnaissent manquer de formation et de matériel. Certains parents s'inquiètent de voir le temps d'écran augmenter encore, même si une grande partie des activités se fait sans ordinateur, avec des cartes et des exercices de logique."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Pensée informatique et compétences transversales",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les chercheurs en sciences de l'éducation parlent de « pensée informatique » pour désigner un ensemble de compétences : décomposer un problème, repérer des régularités, construire une suite d'instructions. Certaines études suggèrent que ces activités améliorent la résolution de problèmes en mathématiques. D'autres travaux nuancent ce résultat, en montrant que les bénéfices dépendent surtout de la qualité de l'enseignement et ne se transfèrent pas automatiquement aux autres matières."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-b-coder-primaire-1.jpg",
+    "legenda": "Oficina de robótica",
+    "credito": {
+     "autor": "Jannua",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Kids_Constructing_Robotics_5.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tef-b-coder-primaire-2.jpg",
+    "legenda": "Aula de programação",
+    "credito": {
+     "autor": "Peace Corps",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Zambian_kids_learning_how_to_use_computers.jpg"
+    }
+   }
+  ],
+  "ordem": 6,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tef-b-jeux-video-art",
+  "titulo": "Les jeux vidéo sont-ils un art ?",
+  "nivel": "B2",
+  "tipoProducao": "TEF — Section B : lettre argumentée",
+  "dificuldade": "dificil",
+  "tempoSugerido": 35,
+  "limitePalavrasMin": 200,
+  "limitePalavrasMax": 280,
+  "descricao": "Seção B do TEF: reaja numa carta à afirmação de que os videogames são uma forma de arte como o cinema.",
+  "objetivos": [
+   "Tomar posição sobre um tema cultural",
+   "Argumentar com exemplos",
+   "Concluir com firmeza"
+  ],
+  "criteriosResumo": [
+   "Posição clara",
+   "Três argumentos ilustrados",
+   "Registro e coesão"
+  ],
+  "competenciasAvaliadas": [
+   "Carta ao jornal",
+   "Vocabulário cultural",
+   "Comparação"
+  ],
+  "instrucoes": "Section B — Vous avez lu dans un journal la phrase suivante : « Les jeux vidéo sont un art, au même titre que le cinéma ou la littérature. » Vous écrivez une lettre au journal pour donner votre point de vue (200 mots minimum). Vous développez au moins trois arguments, illustrés d'exemples.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La dernière partie »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Mon fils joue à un jeu étrange. Il n'y a ni ennemis ni points à gagner : on y guide une petite silhouette à travers un désert immense, et l'on rencontre parfois d'autres voyageurs, anonymes, avec qui l'on ne peut communiquer que par un chant. Hier, il m'a appelé pour que je regarde la fin. La musique montait, la silhouette gravissait une montagne dans la neige. J'ai été surpris de sentir mes yeux s'embuer. Je n'avais jamais pleuré devant un écran de jeu."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les jeux vidéo entrent au musée",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "De grands musées consacrent désormais des expositions aux jeux vidéo, présentés comme des œuvres à part entière. Certains ont même intégré des jeux à leurs collections permanentes, aux côtés du design et de l'architecture. Pour les commissaires, le jeu vidéo associe l'image, la musique, le récit et l'interaction, ce qui en fait une forme d'expression originale. Des critiques jugent au contraire que l'industrie du jeu, dominée par la logique commerciale, reste avant tout un divertissement."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Jouer, une expérience émotionnelle",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des études en psychologie des médias montrent que les jeux vidéo peuvent susciter des émotions complexes, comme la culpabilité, la nostalgie ou l'émerveillement, en partie parce que le joueur agit lui-même au lieu de regarder. Cette participation renforce l'identification aux personnages. Les chercheurs notent toutefois que la grande majorité des jeux reposent sur des mécanismes de compétition et de récompense, et que les œuvres à forte ambition artistique restent minoritaires."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-b-jeux-video-art-1.jpg",
+    "legenda": "Uma exposição sobre videogames",
+    "credito": {
+     "autor": "Marcin Wichary from San Francisco, Calif.",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Commodore_64_at_Video_Game_Museum_in_Berlin_(45946155851).jpg"
+    }
+   },
+   {
+    "src": "img/temas/tef-b-jeux-video-art-2.jpg",
+    "legenda": "Jogando videogame",
+    "credito": {
+     "autor": "InclusiveGameLab",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:InclusiveGameLab_Person-Playing-Virtual-Reality_2_CC-BY-SA.jpg"
+    }
+   }
+  ],
+  "ordem": 7,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tef-b-vacances-ete",
+  "titulo": "Les vacances d'été sont-elles trop longues ?",
+  "nivel": "B2",
+  "tipoProducao": "TEF — Section B : lettre argumentée",
+  "dificuldade": "dificil",
+  "tempoSugerido": 35,
+  "limitePalavrasMin": 200,
+  "limitePalavrasMax": 280,
+  "descricao": "Seção B do TEF: responda ao jornal sobre a proposta de encurtar as férias escolares de verão.",
+  "objetivos": [
+   "Argumentar sobre educação e família",
+   "Considerar vários pontos de vista",
+   "Propor uma solução"
+  ],
+  "criteriosResumo": [
+   "Argumentação completa",
+   "Exemplos",
+   "Carta formal"
+  ],
+  "competenciasAvaliadas": [
+   "Carta argumentativa",
+   "Vocabulário escolar",
+   "Condicional"
+  ],
+  "instrucoes": "Section B — Vous avez lu dans un journal la phrase suivante : « Les vacances scolaires d'été sont trop longues : elles font oublier aux élèves ce qu'ils ont appris et creusent les inégalités. » Vous écrivez une lettre au journal pour donner votre point de vue (200 mots minimum). Vous développez au moins trois arguments, illustrés d'exemples.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« L'été chez mon oncle »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Chaque été, mes parents m'envoyaient chez mon oncle, à la ferme. Deux mois sans cahiers ni horloge : on se levait avec les vaches, on se baignait dans la rivière, on lisait sous les pommiers les livres de la bibliothèque du village. En septembre, j'avais oublié mes tables de multiplication, mais je savais reconnaître les oiseaux à leur chant, réparer une chambre à air et raconter une histoire à la veillée. Je ne suis pas sûr d'avoir perdu mon temps."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Faut-il réduire les grandes vacances ? Le débat revient",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "La question de la durée des vacances d'été revient régulièrement dans le débat public. Les partisans d'un raccourcissement rappellent que la France a l'une des années scolaires les plus courtes d'Europe en nombre de jours, avec des journées plus chargées. Les professionnels du tourisme, eux, défendent un calendrier qui fait vivre de nombreuses régions. Les syndicats d'enseignants demandent avant tout de réduire la fatigue des élèves pendant l'année."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "La « perte estivale » des apprentissages",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des chercheurs ont mesuré le niveau des élèves avant et après les vacances d'été. Ils observent une légère baisse des acquis, surtout en mathématiques, que l'on appelle parfois la « perte estivale ». Cette baisse est plus marquée chez les enfants issus de milieux défavorisés, qui ont moins accès aux activités culturelles et éducatives pendant l'été. Les programmes de lecture et les colonies éducatives semblent réduire cet écart."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-b-vacances-ete-1.jpg",
+    "legenda": "Crianças no rio durante as férias",
+    "credito": {
+     "autor": "Syed Touhid Hassan from Dhaka, Bangladesh",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Bangladeshi_children_swimming.jpg"
+    }
+   },
+   {
+    "src": "img/temas/tef-b-vacances-ete-2.jpg",
+    "legenda": "Uma sala de aula vazia",
+    "credito": {
+     "autor": "Paul The Writer",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Rows_of_Desks_in_Lecture_Theatre.jpg"
+    }
+   }
+  ],
+  "ordem": 8,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tef-b-service-civique",
+  "titulo": "Un service civique obligatoire pour les jeunes ?",
+  "nivel": "C1",
+  "tipoProducao": "TEF — Section B : lettre argumentée",
+  "dificuldade": "dificil",
+  "tempoSugerido": 35,
+  "limitePalavrasMin": 200,
+  "limitePalavrasMax": 280,
+  "descricao": "Seção B do TEF: argumente numa carta sobre a obrigatoriedade de alguns meses de serviço cívico para os jovens.",
+  "objetivos": [
+   "Argumentar sobre cidadania",
+   "Refutar a posição contrária",
+   "Usar vocabulário abstrato"
+  ],
+  "criteriosResumo": [
+   "Argumentação e refutação",
+   "Exemplos pertinentes",
+   "Riqueza lexical"
+  ],
+  "competenciasAvaliadas": [
+   "Carta argumentativa C1",
+   "Vocabulário cívico",
+   "Concessão"
+  ],
+  "instrucoes": "Section B — Vous avez lu dans un journal la phrase suivante : « Chaque jeune de 18 ans devrait consacrer six mois à un service civique obligatoire au service de la collectivité. » Vous écrivez une lettre au journal pour donner votre point de vue (200 mots minimum). Vous développez au moins trois arguments, illustrés d'exemples.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Six mois à l'hôpital »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance de formação)",
+    "conteudo": "Je voulais faire du droit, j'ai atterri pendant six mois dans un service de gériatrie. Je portais les plateaux, je lisais le journal aux patients qui ne voyaient plus, je poussais les fauteuils jusqu'au jardin. Madame Rossi, quatre-vingt-dix ans, me corrigeait mon italien. Monsieur Paul me racontait la guerre en se trompant de date. Quand je suis entré à l'université, j'étais le seul de mon amphithéâtre à savoir ce qu'était la solitude d'un vieil homme un dimanche après-midi."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Service civique : un dispositif volontaire qui séduit",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "En France, le service civique permet aux jeunes de 16 à 25 ans de s'engager pendant six à douze mois dans une mission d'intérêt général — solidarité, environnement, culture, éducation — en échange d'une indemnité. Des dizaines de milliers de jeunes y participent chaque année. Certains responsables politiques proposent de le rendre obligatoire pour renforcer la cohésion nationale ; d'autres estiment qu'un engagement imposé perdrait son sens et coûterait très cher."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Engagement des jeunes et mixité sociale",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: estudo sociológico de divulgação)",
+    "conteudo": "Les sociologues observent que les jeunes de milieux sociaux différents se croisent de moins en moins, en raison de la ségrégation résidentielle et scolaire. Les dispositifs d'engagement collectif, lorsqu'ils réunissent réellement des profils variés, favorisent la connaissance mutuelle et réduisent les préjugés. Les études montrent cependant que les dispositifs volontaires attirent surtout des jeunes déjà diplômés, ce qui limite leur effet sur la mixité."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-b-service-civique-1.jpg",
+    "legenda": "Atividade com idosas numa casa de repouso",
+    "credito": {
+     "autor": "U.S. Army photo by Pvt. Vincent Gibson",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:U_S_Soldiers_engage_with_Romanian_community_(5299456).jpg"
+    }
+   },
+   {
+    "src": "img/temas/tef-b-service-civique-2.jpg",
+    "legenda": "Jovens num mutirão ambiental",
+    "credito": {
+     "autor": "Idd ninga",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Environment_cleaning.jpg"
+    }
+   }
+  ],
+  "ordem": 9,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "tef-b-reseaux-moins-15",
+  "titulo": "Interdire les réseaux sociaux aux moins de 15 ans ?",
+  "nivel": "C1",
+  "tipoProducao": "TEF — Section B : lettre argumentée",
+  "dificuldade": "dificil",
+  "tempoSugerido": 35,
+  "limitePalavrasMin": 200,
+  "limitePalavrasMax": 280,
+  "descricao": "Seção B do TEF: escreva ao jornal sobre a proibição das redes sociais antes dos 15 anos.",
+  "objetivos": [
+   "Argumentar sobre saúde e liberdade",
+   "Apoiar-se em dados",
+   "Propor alternativas"
+  ],
+  "criteriosResumo": [
+   "Três argumentos fortes",
+   "Uso de dados e exemplos",
+   "Coesão"
+  ],
+  "competenciasAvaliadas": [
+   "Carta argumentativa C1",
+   "Vocabulário digital",
+   "Hipótese"
+  ],
+  "instrucoes": "Section B — Vous avez lu dans un journal la phrase suivante : « Les réseaux sociaux devraient être interdits aux jeunes de moins de 15 ans. » Vous écrivez une lettre au journal pour donner votre point de vue (200 mots minimum). Vous développez au moins trois arguments, illustrés d'exemples.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Mille regards »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance juvenil)",
+    "conteudo": "Inès avait treize ans et mille abonnés. Chaque photo était une épreuve : la lumière, l'angle, le sourire. Elle en prenait trente avant d'en publier une. Puis elle attendait, le téléphone sous l'oreiller, que les cœurs s'allument. Un soir, une camarade avait écrit sous sa photo un commentaire de trois mots. Inès ne l'avait pas montré à ses parents. Elle l'avait relu jusqu'au matin, jusqu'à le savoir par cœur, comme on apprend une leçon."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Plusieurs pays veulent fixer un âge minimum",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "L'Australie a adopté une loi interdisant l'accès à plusieurs grands réseaux sociaux aux moins de 16 ans, et d'autres pays étudient des mesures comparables. Leurs partisans invoquent la protection de la santé mentale des adolescents et la lutte contre le harcèlement. Les critiques soulignent les difficultés de vérification de l'âge, les risques pour la vie privée et l'intérêt de ces plateformes pour les jeunes isolés, qui y trouvent parfois du soutien."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Réseaux sociaux et santé mentale des adolescents",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les études sur le lien entre réseaux sociaux et santé mentale des adolescents donnent des résultats débattus. Plusieurs travaux associent un usage intensif à davantage de troubles du sommeil, d'anxiété et d'insatisfaction corporelle, en particulier chez les jeunes filles. D'autres chercheurs rappellent qu'une corrélation n'est pas une causalité et que l'effet moyen reste modeste. La plupart s'accordent sur l'importance de limiter l'usage nocturne et de former les jeunes à un usage critique."
+   }
+  ],
+  "courseType": "TEF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/tef-b-reseaux-moins-15-1.jpg",
+    "legenda": "Uma adolescente nas redes sociais",
+    "credito": {
+     "autor": "Biswarup Ganguly",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Teenage_2345.JPG"
+    }
+   },
+   {
+    "src": "img/temas/tef-b-reseaux-moins-15-2.jpg",
+    "legenda": "Adolescentes reunidos",
+    "credito": {
+     "autor": "Flame, not lame",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Male_Teenager_Holding_Red_iPhone.jpg"
+    }
+   }
+  ],
+  "ordem": 10,
+  "exame": "TEF",
+  "creditosNecessarios": 1
+ }
+]

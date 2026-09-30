@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tef-05",
+ "titulo": "Exercício oral nº 5 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Orage de grêle",
+ "descricao": "Um temporal de granizo em pleno agosto: alertas, agricultores e clima.",
+ "imagem": {
+  "src": "img/temas/tef-a-grele-ete-2.jpg",
+  "credito": {
+   "autor": "Kevain25460",
+   "licenca": "CC BY-SA 3.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Gr%C3%AAle.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-05/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Reação imediata.",
+     "alternativas": [
+      "Oui, le toit est rouge.",
+      "C'est la radio.",
+      "Oui, c'est de la grêle ! Rentre la voiture !",
+      "Non, je n'ai pas de toit."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as entendu ce bruit sur le toit ?\nA. Oui, le toit est rouge.\nB. C'est la radio.\nC. Oui, c'est de la grêle ! Rentre la voiture !\nD. Non, je n'ai pas de toit.",
+     "audio": "audio/exercicios-orais/ex-tef-05/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Mettre les véhicules à l'abri ».",
+     "alternativas": [
+      "Acheter de l'eau.",
+      "Quitter la région.",
+      "Fermer les écoles.",
+      "Mettre les véhicules à l'abri."
+     ],
+     "correta": 3,
+     "pergunta": "Que recommande-t-on ?",
+     "transcricao": "Vigilance orange orages sur huit départements à partir de seize heures. Risque de grêle et de rafales à cent kilomètres-heure. Il est recommandé de mettre les véhicules à l'abri et d'éviter les déplacements.",
+     "audio": "audio/exercicios-orais/ex-tef-05/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« L'assurance coûte trop cher ».",
+     "alternativas": [
+      "La grêle est rare.",
+      "L'assurance coûte trop cher.",
+      "Ils ne connaissent pas l'assurance.",
+      "Ils n'ont pas de récolte."
+     ],
+     "correta": 1,
+     "pergunta": "Pourquoi beaucoup de jeunes viticulteurs ne sont-ils pas assurés ?",
+     "transcricao": "En dix minutes, j'ai perdu la moitié de ma récolte de raisins. Des grêlons gros comme des balles de ping-pong. Heureusement, j'étais assuré, mais beaucoup de jeunes viticulteurs ne le sont pas : l'assurance coûte trop cher.",
+     "audio": "audio/exercicios-orais/ex-tef-05/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta informativa.",
+     "alternativas": [
+      "Ça arrive, mais les épisodes deviennent plus violents.",
+      "Il fait trente degrés.",
+      "Non, je suis en vacances.",
+      "Oui, août est un mois."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "La grêle en août, c'est normal ?\nA. Ça arrive, mais les épisodes deviennent plus violents.\nB. Il fait trente degrés.\nC. Non, je suis en vacances.\nD. Oui, août est un mois.",
+     "audio": "audio/exercicios-orais/ex-tef-05/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Il augmente leur intensité… des grêlons plus gros ».",
+     "alternativas": [
+      "La disparition de la grêle.",
+      "Des grêlons plus gros et des orages plus intenses.",
+      "Des orages uniquement en hiver.",
+      "Beaucoup plus d'orages."
+     ],
+     "correta": 1,
+     "pergunta": "Quel effet du réchauffement l'intervenant décrit-il ?",
+     "transcricao": "Le réchauffement ne multiplie pas forcément le nombre d'orages de grêle, mais il augmente leur intensité : une atmosphère plus chaude contient plus d'énergie et d'humidité, ce qui permet la formation de grêlons plus gros. Or les dégâts augmentent très vite avec la taille des grêlons.",
+     "audio": "audio/exercicios-orais/ex-tef-05/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 540,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section A — Obtenir des informations",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Filets anti-grêle pour jardins et vergers — conseils et installation à domicile. Devis gratuit. » Vous téléphonez pour obtenir des informations. Posez une dizaine de questions à l'examinateur.",
+     "perguntasExaminador": [
+      "Protecta Jardin, bonjour !"
+     ],
+     "fichaExaminador": "Vous êtes le/la commercial(e). Filet : 4 €/m². Installation : 150 € pour un jardin jusqu'à 200 m². Délai : 2 semaines. Garantie 5 ans. Structure démontable l'hiver. Visite gratuite pour le devis, du lundi au vendredi. Répondez brièvement ; ne donnez une information que si le candidat la demande."
+    }
+   ]
+  }
+ }
+}

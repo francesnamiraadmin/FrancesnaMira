@@ -10,7 +10,7 @@ const ArquivoTemaSchema = new mongoose.Schema({
 const DocumentoApoioSchema = new mongoose.Schema({
   tipo: {
     type: String,
-    enum: ["artigo", "noticia", "estatistica", "infografico", "entrevista", "cartum", "grafico", "fotografia", "tabela", "documento_oficial"],
+    enum: ["artigo", "noticia", "estatistica", "infografico", "entrevista", "cartum", "grafico", "fotografia", "tabela", "documento_oficial", "trecho_livro", "artigo_cientifico"],
     required: true
   },
   titulo: { type: String, required: true },
@@ -22,7 +22,17 @@ const DocumentoApoioSchema = new mongoose.Schema({
   permiteDownload: { type: Boolean, default: false }
 }, { _id: false });
 
+// Imagem da coletânea (licença livre, com crédito) — também é a capa do card do tema.
+const ImagemTemaSchema = new mongoose.Schema({
+  src: { type: String, required: true },
+  legenda: { type: String },
+  credito: { autor: String, licenca: String, urlLicenca: String, fonte: String }
+}, { _id: false });
+
 const TemaSchema = new mongoose.Schema({
+  // Temas versionados em backend/data/temas/*.json têm slug estável e são sincronizados
+  // na subida do servidor (utils/sincronizarTemas.js). Temas criados pelo admin não têm.
+  slug: { type: String, unique: true, sparse: true },
   titulo: { type: String, required: true },
   // Curso ao qual este tema pertence — filtra o que o aluno enxerga e decide o acesso
   // (ver backend/middleware/acessoCurso.js). Campo universal, sempre preenchido.
@@ -51,6 +61,8 @@ const TemaSchema = new mongoose.Schema({
   creditosNecessarios: { type: Number, default: 1 },
   competenciasAvaliadas: [{ type: String }],
   coletanea: [DocumentoApoioSchema],
+  imagens: [ImagemTemaSchema],
+  ordem: { type: Number, default: 0 },
   ativo: { type: Boolean, default: true },
   criadoPor: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   criadoEm: { type: Date, default: Date.now }

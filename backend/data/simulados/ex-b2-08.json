@@ -1,0 +1,157 @@
+{
+ "slug": "ex-b2-08",
+ "titulo": "Exercício oral nº 8 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Enfants et publicité",
+ "descricao": "Publicidade para crianças: regras, influenciadores e o papel dos pais; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/b2-publicite-enfants-2.jpg",
+  "credito": {
+   "autor": "Shixart1985",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Child_draws_on_tablet_while_sitting_indoors.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-08/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta de uma mãe.",
+     "alternativas": [
+      "La pub est à la télé.",
+      "Non, j'ai faim.",
+      "Oui, le jouet est rouge.",
+      "Encore une pub ? Tu n'en as pas besoin, mon chéri."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Maman, j'ai vu une pub pour un super jouet !\nA. La pub est à la télé.\nB. Non, j'ai faim.\nC. Oui, le jouet est rouge.\nD. Encore une pub ? Tu n'en as pas besoin, mon chéri.",
+     "audio": "audio/exercicios-orais/ex-b2-08/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Elles restent autorisées sur les chaînes privées et sur Internet ».",
+     "alternativas": [
+      "Sur les chaînes publiques.",
+      "Sur les chaînes privées et sur Internet.",
+      "Seulement le soir.",
+      "Nulle part."
+     ],
+     "correta": 1,
+     "pergunta": "Où les publicités restent-elles autorisées ?",
+     "transcricao": "Depuis cette année, les publicités sont interdites pendant les programmes pour enfants sur les chaînes publiques. En revanche, elles restent autorisées sur les chaînes privées et sur Internet.",
+     "audio": "audio/exercicios-orais/ex-b2-08/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Pour lui, c'est un copain qui montre ses cadeaux ».",
+     "alternativas": [
+      "Il croit voir un copain qui montre ses cadeaux.",
+      "La vidéo est trop courte.",
+      "Il ne regarde pas la vidéo.",
+      "Il est trop âgé."
+     ],
+     "correta": 0,
+     "pergunta": "Pourquoi l'enfant ne reconnaît-il pas la publicité ?",
+     "transcricao": "Le problème aujourd'hui, ce sont les enfants influenceurs. Mon fils regarde un garçon de son âge qui ouvre des jouets en vidéo. Il ne comprend pas que c'est de la publicité : pour lui, c'est un copain qui montre ses cadeaux.",
+     "audio": "audio/exercicios-orais/ex-b2-08/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta matizada.",
+     "alternativas": [
+      "Non, l'État est grand.",
+      "La publicité est chère.",
+      "Oui, j'ai des enfants.",
+      "Les deux : les parents ne peuvent pas tout contrôler seuls."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "C'est aux parents de protéger leurs enfants, pas à l'État !\nA. Non, l'État est grand.\nB. La publicité est chère.\nC. Oui, j'ai des enfants.\nD. Les deux : les parents ne peuvent pas tout contrôler seuls.",
+     "audio": "audio/exercicios-orais/ex-b2-08/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Il ne comprend pas l'intention de vendre ».",
+     "alternativas": [
+      "Elle passe trop tard.",
+      "Elle concerne des jouets.",
+      "Les jeunes enfants ne comprennent pas l'intention de vendre.",
+      "Elle est trop chère."
+     ],
+     "correta": 2,
+     "pergunta": "Pourquoi cette publicité serait-elle déloyale ?",
+     "transcricao": "Avant sept ou huit ans, un enfant ne distingue pas clairement un programme d'une publicité, et il ne comprend pas l'intention de vendre. C'est pourquoi de nombreux spécialistes considèrent la publicité ciblant les jeunes enfants comme déloyale par nature.",
+     "audio": "audio/exercicios-orais/ex-b2-08/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — texte argumentatif",
+     "min": 120,
+     "max": 180,
+     "consigne": "« Faut-il interdire toute publicité destinée aux enfants de moins de 12 ans ? » Vous présentez les arguments des deux côtés et votre opinion. (120 à 180 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Il faut interdire toute publicité destinée aux enfants. » Qu'en pensez-vous ? Vous donnez votre opinion, vous l'argumentez et vous l'illustrez d'exemples.",
+     "perguntasExaminador": [
+      "Il faut interdire toute publicité destinée aux enfants. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et les influenceurs ? », « Qui financerait les programmes pour enfants ? », « Les enfants ne doivent-ils pas apprendre à résister ? »"
+    }
+   ]
+  }
+ }
+}

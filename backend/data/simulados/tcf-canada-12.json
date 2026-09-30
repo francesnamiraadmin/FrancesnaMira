@@ -1,0 +1,1583 @@
+{
+ "slug": "tcf-canada-12",
+ "titulo": "Simulado TCF Canada nº 12",
+ "curso": "TCF",
+ "formato": "TCF Canada",
+ "audioConsignes": {
+  "co": "audio/simulados/tcf-canada-12/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 2100,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "No mercado: « voilà, ça fait deux euros ».",
+     "alternativas": [
+      "Non, je suis français.",
+      "Au revoir, à demain.",
+      "Il est dix heures.",
+      "Voilà, ça fait deux euros."
+     ],
+     "correta": 3,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Bonjour, je voudrais un kilo de pommes.\nA. Non, je suis français.\nB. Au revoir, à demain.\nC. Il est dix heures.\nD. Voilà, ça fait deux euros.",
+     "audio": "audio/simulados/tcf-canada-12/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Pergunta do nome: « il s'appelle Rex ».",
+     "alternativas": [
+      "Il est dans le jardin.",
+      "Il a cinq ans.",
+      "Il s'appelle Rex.",
+      "Il mange beaucoup."
+     ],
+     "correta": 2,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Comment s'appelle ton chien ?\nA. Il est dans le jardin.\nB. Il a cinq ans.\nC. Il s'appelle Rex.\nD. Il mange beaucoup.",
+     "audio": "audio/simulados/tcf-canada-12/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "« Où » pede um lugar: « dans une banque ».",
+     "alternativas": [
+      "Avec mon frère.",
+      "Le lundi et le mardi.",
+      "Dans une banque, en ville.",
+      "Je suis fatiguée."
+     ],
+     "correta": 2,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Tu travailles où ?\nA. Avec mon frère.\nB. Le lundi et le mardi.\nC. Dans une banque, en ville.\nD. Je suis fatiguée.",
+     "audio": "audio/simulados/tcf-canada-12/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Pergunta do tempo: « il fait beau ».",
+     "alternativas": [
+      "C'est lundi.",
+      "Il fait beau et chaud.",
+      "Il est midi.",
+      "Il fait ses devoirs."
+     ],
+     "correta": 1,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Quel temps fait-il aujourd'hui ?\nA. C'est lundi.\nB. Il fait beau et chaud.\nC. Il est midi.\nD. Il fait ses devoirs.",
+     "audio": "audio/simulados/tcf-canada-12/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Na recepção do hotel: « il nous reste une chambre double ».",
+     "alternativas": [
+      "Oui, il nous reste une chambre double.",
+      "Le restaurant ferme à dix heures.",
+      "Oui, j'ai réservé hier.",
+      "Non, je ne fume pas."
+     ],
+     "correta": 0,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Vous avez une chambre libre pour ce soir ?\nA. Oui, il nous reste une chambre double.\nB. Le restaurant ferme à dix heures.\nC. Oui, j'ai réservé hier.\nD. Non, je ne fume pas.",
+     "audio": "audio/simulados/tcf-canada-12/co05.mp3"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pergunta de preferência: « la montagne ».",
+     "alternativas": [
+      "Oui, avec plaisir.",
+      "C'est loin d'ici.",
+      "La montagne, j'adore marcher.",
+      "Je pars demain."
+     ],
+     "correta": 2,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Tu préfères la mer ou la montagne ?\nA. Oui, avec plaisir.\nB. C'est loin d'ici.\nC. La montagne, j'adore marcher.\nD. Je pars demain.",
+     "audio": "audio/simulados/tcf-canada-12/co06.mp3"
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Tu peux descendre m'ouvrir ? ».",
+     "pergunta": "Que demande Thomas ?",
+     "alternativas": [
+      "Le numéro de l'appartement.",
+      "L'adresse de Marie.",
+      "Que Marie lui ouvre la porte.",
+      "Que Marie l'appelle."
+     ],
+     "correta": 2,
+     "transcricao": "Salut Marie, c'est Thomas. Je suis devant ton immeuble, mais j'ai oublié le code de la porte. Tu peux descendre m'ouvrir ?",
+     "audio": "audio/simulados/tcf-canada-12/co07.mp3"
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Partira de la porte vingt-deux et non de la porte douze ».",
+     "pergunta": "Qu'est-ce qui a changé ?",
+     "alternativas": [
+      "La porte d'embarquement.",
+      "L'heure de départ.",
+      "La destination.",
+      "La compagnie."
+     ],
+     "correta": 0,
+     "transcricao": "Mesdames et messieurs, le vol pour Montréal partira de la porte vingt-deux et non de la porte douze. L'embarquement commencera à quinze heures dix.",
+     "audio": "audio/simulados/tcf-canada-12/co08.mp3"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Il était beaucoup trop long ».",
+     "pergunta": "Qu'est-ce que la femme n'a pas aimé ?",
+     "alternativas": [
+      "L'histoire.",
+      "Les acteurs.",
+      "La musique.",
+      "La durée du film."
+     ],
+     "correta": 3,
+     "transcricao": "Tu as aimé le film ?\nL'histoire était belle, mais il était beaucoup trop long : presque trois heures ! J'ai failli m'endormir.",
+     "audio": "audio/simulados/tcf-canada-12/co09.mp3"
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Peuvent utiliser gratuitement la piscine des Iris ».",
+     "pergunta": "Que peuvent faire les abonnés pendant la fermeture ?",
+     "alternativas": [
+      "Prolonger leur abonnement.",
+      "Se faire rembourser.",
+      "Nager le soir seulement.",
+      "Aller gratuitement dans une autre piscine."
+     ],
+     "correta": 3,
+     "transcricao": "La piscine Jean-Bouin sera fermée pour vidange du lundi deux au dimanche huit. Les abonnés peuvent utiliser gratuitement la piscine des Iris pendant cette période.",
+     "audio": "audio/simulados/tcf-canada-12/co10.mp3"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Sans payer d'emplacement ».",
+     "pergunta": "Quelle est la nouveauté de cette année ?",
+     "alternativas": [
+      "Un parking gratuit.",
+      "Une ouverture jusqu'à deux heures.",
+      "Un marché le samedi.",
+      "Un espace gratuit pour les jeunes créateurs."
+     ],
+     "correta": 3,
+     "transcricao": "Le marché de nuit de Bordeaux revient cet été, le jeudi soir de dix-neuf heures à minuit, sur les quais. Nouveauté : un espace réservé aux jeunes créateurs, qui pourront vendre leurs produits sans payer d'emplacement.",
+     "audio": "audio/simulados/tcf-canada-12/co11.mp3"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Comment on vivait seul face à la mer ».",
+     "pergunta": "Qu'est-ce qui intéresse surtout les touristes ?",
+     "alternativas": [
+      "La vie du gardien pendant les tempêtes.",
+      "L'histoire de la ville.",
+      "Le fonctionnement automatique.",
+      "Les poissons de la région."
+     ],
+     "correta": 0,
+     "transcricao": "Je suis gardien de phare à la retraite. Aujourd'hui, les phares sont automatiques. Je fais visiter celui où j'ai travaillé vingt ans : les touristes veulent surtout savoir comment on vivait seul face à la mer, pendant les tempêtes.",
+     "audio": "audio/simulados/tcf-canada-12/co12.mp3"
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Une gourde marquée à leur nom ».",
+     "pergunta": "Que doivent apporter les enfants ?",
+     "alternativas": [
+      "Une gourde avec leur nom.",
+      "Leur repas.",
+      "Une serviette.",
+      "Un gobelet en plastique."
+     ],
+     "correta": 0,
+     "transcricao": "Avis aux parents : à partir de lundi, les enfants de l'école Jules-Ferry devront apporter une gourde marquée à leur nom. Les gobelets en plastique ne seront plus distribués à la cantine.",
+     "audio": "audio/simulados/tcf-canada-12/co13.mp3"
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« C'est exactement le métier que je veux faire ».",
+     "pergunta": "Pourquoi l'homme est-il content ?",
+     "alternativas": [
+      "Le stage est très bien payé.",
+      "Il a fini ses études.",
+      "Il part en vacances à Lyon.",
+      "Le stage correspond au métier qu'il veut faire."
+     ],
+     "correta": 3,
+     "transcricao": "Tu as l'air content !\nOui, j'ai enfin trouvé un stage pour cet été, dans un studio d'animation à Lyon. Ce ne sera pas payé beaucoup, mais c'est exactement le métier que je veux faire.",
+     "audio": "audio/simulados/tcf-canada-12/co14.mp3"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Se faire aider pour leurs démarches administratives en ligne ».",
+     "pergunta": "Quel autre service propose ce bus ?",
+     "alternativas": [
+      "La vente de journaux.",
+      "Des consultations médicales.",
+      "Une aide pour les démarches en ligne.",
+      "Des cours de conduite."
+     ],
+     "correta": 2,
+     "transcricao": "À Saint-Étienne, un bus-bibliothèque se déplace chaque semaine dans les quartiers éloignés du centre. Les habitants peuvent y emprunter des livres, mais aussi se faire aider pour leurs démarches administratives en ligne.",
+     "audio": "audio/simulados/tcf-canada-12/co15.mp3"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Six heures par jour… mal aux pieds ».",
+     "pergunta": "Que dit la danseuse de son métier ?",
+     "alternativas": [
+      "Il est facile et agréable.",
+      "Il laisse beaucoup de temps libre.",
+      "Il est physiquement très dur.",
+      "Il est mal payé."
+     ],
+     "correta": 2,
+     "transcricao": "Je suis danseuse dans une compagnie de ballet. Le public imagine un métier plein de grâce ; en réalité, on s'entraîne six heures par jour et on a souvent mal aux pieds. Mais quand le rideau se lève, on oublie tout.",
+     "audio": "audio/simulados/tcf-canada-12/co16.mp3"
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Pour réduire les embouteillages à la sortie des écoles ».",
+     "pergunta": "Pourquoi certaines rues sont-elles fermées ?",
+     "alternativas": [
+      "Pour éviter les embouteillages devant les écoles.",
+      "Pour une fête scolaire.",
+      "Pour un marché.",
+      "Pour des travaux."
+     ],
+     "correta": 0,
+     "transcricao": "Pour réduire les embouteillages à la sortie des écoles, la ville d'Orléans ferme certaines rues aux voitures quinze minutes avant et après les cours. Les parents sont invités à venir à pied ou à vélo.",
+     "audio": "audio/simulados/tcf-canada-12/co17.mp3"
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Ça m'empêchait de dormir ».",
+     "pergunta": "Pourquoi la femme a-t-elle changé ses habitudes ?",
+     "alternativas": [
+      "Le journal est moins cher.",
+      "Elle travaille le soir.",
+      "Elle n'a plus de télévision.",
+      "Les informations du soir perturbaient son sommeil."
+     ],
+     "correta": 3,
+     "transcricao": "Moi, je ne regarde plus les informations le soir. Ça m'empêchait de dormir. Maintenant, je lis le journal le matin, avec mon café : je suis tout aussi informée, mais beaucoup plus calme.",
+     "audio": "audio/simulados/tcf-canada-12/co18.mp3"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Une piste de luge sur rail est accessible dès trois ans ».",
+     "pergunta": "Qu'est-ce qui est accessible aux jeunes enfants ?",
+     "alternativas": [
+      "Les grandes randonnées.",
+      "Une piste de luge.",
+      "Les remontées sans parents.",
+      "Les pistes de VTT."
+     ],
+     "correta": 1,
+     "transcricao": "La station de ski de Métabief ouvre ses pistes en été aux randonneurs et aux cyclistes. Les remontées mécaniques transportent aussi les vélos, et une piste de luge sur rail est accessible dès trois ans.",
+     "audio": "audio/simulados/tcf-canada-12/co19.mp3"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Encore faut-il que les acheteurs vérifient ce numéro ».",
+     "pergunta": "Quelle condition rend le marquage efficace ?",
+     "alternativas": [
+      "Que les vélos soient neufs.",
+      "Que les acheteurs vérifient le numéro.",
+      "Que la police surveille Internet.",
+      "Que les vélos soient assurés."
+     ],
+     "correta": 1,
+     "transcricao": "Les ventes de vélos d'occasion explosent, mais les vols aussi. Beaucoup de vélos volés sont revendus en ligne. Depuis quelques années, le marquage des vélos neufs est obligatoire : un numéro gravé permet de retrouver le propriétaire. Encore faut-il que les acheteurs vérifient ce numéro.",
+     "audio": "audio/simulados/tcf-canada-12/co20.mp3"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Caler le texte français sur les mouvements des lèvres ».",
+     "pergunta": "Qu'est-ce qui est le plus difficile dans ce métier ?",
+     "alternativas": [
+      "Imiter la voix de l'actrice.",
+      "Apprendre l'anglais.",
+      "Adapter le texte aux mouvements des lèvres.",
+      "Travailler la nuit."
+     ],
+     "correta": 2,
+     "transcricao": "Je suis doubleuse : je prête ma voix à des actrices américaines. Le plus difficile, ce n'est pas de jouer, c'est de caler le texte français sur les mouvements des lèvres. On réécrit parfois une phrase dix fois pour qu'elle tombe juste.",
+     "audio": "audio/simulados/tcf-canada-12/co21.mp3"
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Certaines communes rachètent la dernière pompe du village ».",
+     "pergunta": "Que font certaines communes ?",
+     "alternativas": [
+      "Elles construisent des autoroutes.",
+      "Elles interdisent les voitures.",
+      "Elles distribuent de l'essence gratuite.",
+      "Elles rachètent la station du village."
+     ],
+     "correta": 3,
+     "transcricao": "Les stations-service disparaissent des campagnes : il en reste deux fois moins qu'il y a vingt ans. Pour les habitants, faire le plein peut désormais demander un détour de trente kilomètres. Certaines communes rachètent la dernière pompe du village pour la maintenir ouverte.",
+     "audio": "audio/simulados/tcf-canada-12/co22.mp3"
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« La première expérience d'autonomie ».",
+     "pergunta": "Que rappelle le document sur les colonies ?",
+     "alternativas": [
+      "Elles sont dangereuses.",
+      "Elles sont gratuites.",
+      "Elles sont réservées aux adolescents.",
+      "Elles offrent une première expérience d'autonomie."
+     ],
+     "correta": 3,
+     "transcricao": "Les jeunes Français partent de moins en moins en colonie de vacances. Le coût est souvent cité, mais aussi l'inquiétude des parents, qui hésitent à confier leur enfant à des inconnus. Pourtant, les colonies restent pour beaucoup d'enfants la première expérience d'autonomie.",
+     "audio": "audio/simulados/tcf-canada-12/co23.mp3"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Un bébé change de taille tous les trois mois ».",
+     "pergunta": "Pourquoi la femme trouve-t-elle l'idée intelligente ?",
+     "alternativas": [
+      "Les magasins sont trop loin.",
+      "Les vêtements pour bébé sont laids.",
+      "Les bébés abîment leurs vêtements.",
+      "Les bébés grandissent très vite."
+     ],
+     "correta": 3,
+     "transcricao": "Tu as vu qu'on peut maintenant louer des vêtements pour bébé ?\nOui, et c'est malin : un bébé change de taille tous les trois mois. Plutôt que d'acheter des habits portés quelques semaines, on les loue, puis on les rend pour la taille suivante.",
+     "audio": "audio/simulados/tcf-canada-12/co24.mp3"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Elles retrouvaient rapidement un chant plus grave et plus doux ».",
+     "pergunta": "Qu'ont observé les chercheurs pendant les confinements ?",
+     "alternativas": [
+      "De nouvelles espèces sont apparues.",
+      "Les oiseaux chantaient à nouveau plus doucement.",
+      "Les oiseaux chantaient plus fort.",
+      "Les oiseaux ont quitté les villes."
+     ],
+     "correta": 1,
+     "transcricao": "Le chant des oiseaux en ville a changé : certaines espèces chantent plus fort ou plus aigu pour se faire entendre malgré le bruit de la circulation. Pendant les confinements, les chercheurs ont observé qu'elles retrouvaient rapidement un chant plus grave et plus doux.",
+     "audio": "audio/simulados/tcf-canada-12/co25.mp3"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Peut masquer des rapports de pouvoir bien réels ».",
+     "pergunta": "Que peut masquer le tutoiement généralisé ?",
+     "alternativas": [
+      "Des relations de pouvoir réelles.",
+      "Une ambiance trop froide.",
+      "Un manque de politesse.",
+      "Des difficultés de langue."
+     ],
+     "correta": 0,
+     "transcricao": "Les entreprises qui imposent le vouvoiement ou le tutoiement à tous leurs employés se heurtent souvent à des résistances. Le tutoiement généralisé, censé rapprocher, peut masquer des rapports de pouvoir bien réels ; le vouvoiement, lui, protège parfois une distance que certains salariés apprécient.",
+     "audio": "audio/simulados/tcf-canada-12/co26.mp3"
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Avoir vu davantage qu'en visitant tout le musée ».",
+     "pergunta": "Que disent les participants aux visites lentes ?",
+     "alternativas": [
+      "Ils n'ont pas eu assez de temps.",
+      "Ils préfèrent photographier.",
+      "Ils ont vu davantage en regardant moins d'œuvres.",
+      "Ils se sont ennuyés."
+     ],
+     "correta": 2,
+     "transcricao": "Dans les musées, les visiteurs passent en moyenne moins de trente secondes devant une œuvre, souvent le temps de la photographier. Certains musées proposent désormais des visites « lentes » : une heure devant cinq tableaux seulement. Les participants disent avoir vu davantage qu'en visitant tout le musée.",
+     "audio": "audio/simulados/tcf-canada-12/co27.mp3"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« S'ajoute à des journées déjà longues ».",
+     "pergunta": "Quelle difficulté de la vente directe est mentionnée ?",
+     "alternativas": [
+      "Elle alourdit des journées déjà longues.",
+      "Elle est interdite dans les villages.",
+      "Le lait est de moins bonne qualité.",
+      "Les clients n'achètent pas."
+     ],
+     "correta": 0,
+     "transcricao": "Les producteurs de lait se tournent de plus en plus vers la vente directe : distributeurs automatiques dans les villages, livraison de paniers. Ils gagnent mieux leur vie, mais ce travail commercial s'ajoute à des journées déjà longues, et tous ne peuvent pas l'assumer.",
+     "audio": "audio/simulados/tcf-canada-12/co28.mp3"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Choisir où vendre leur pêche et éviter de partir en mer par gros temps ».",
+     "pergunta": "À quoi sert cette application ?",
+     "alternativas": [
+      "À réserver un bateau.",
+      "À apprendre à pêcher.",
+      "À commander du poisson.",
+      "À choisir le meilleur marché et à éviter le mauvais temps."
+     ],
+     "correta": 3,
+     "transcricao": "Au Sénégal, une application permet aux pêcheurs de consulter la météo marine et les prix du poisson sur les différents marchés avant de rentrer au port. Ils peuvent ainsi choisir où vendre leur pêche et éviter de partir en mer par gros temps.",
+     "audio": "audio/simulados/tcf-canada-12/co29.mp3"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Toutes les formes de vie… pas seulement celles des élites ».",
+     "pergunta": "Selon l'intervenant, qu'est-ce qui est en jeu ?",
+     "alternativas": [
+      "La rénovation des châteaux.",
+      "La reconnaissance de la vie de tous, pas seulement des élites.",
+      "La destruction des usines.",
+      "Le développement du tourisme."
+     ],
+     "correta": 1,
+     "transcricao": "Le patrimoine ne se limite plus aux châteaux et aux cathédrales. On protège aujourd'hui des usines, des cités ouvrières, des stations-service des années cinquante. Ce qui est en jeu, c'est la reconnaissance de toutes les formes de vie qui ont façonné un territoire, pas seulement celles des élites.",
+     "audio": "audio/simulados/tcf-canada-12/co30.mp3"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« C'est aussi le rapport au risque et à la nature qui se transforme ».",
+     "pergunta": "Selon l'intervenante, qu'est-ce qui se transforme aussi ?",
+     "alternativas": [
+      "Le temps passé à l'école.",
+      "Le nombre de jouets.",
+      "Le rapport des enfants au risque et à la nature.",
+      "La taille des enfants."
+     ],
+     "correta": 2,
+     "transcricao": "Les enfants d'aujourd'hui passent beaucoup moins de temps dehors que leurs grands-parents au même âge. Les causes sont multiples : peur des parents, écrans, disparition des espaces libres. Les conséquences ne sont pas seulement physiques : c'est aussi le rapport au risque et à la nature qui se transforme.",
+     "audio": "audio/simulados/tcf-canada-12/co31.mp3"
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« On ne se fait pas d'amis à travers un traducteur ».",
+     "pergunta": "Que défend l'intervenant ?",
+     "alternativas": [
+      "Il faut interdire les traducteurs automatiques.",
+      "La traduction automatique suffit.",
+      "Les menus sont mal traduits.",
+      "Apprendre une langue reste nécessaire pour créer des liens."
+     ],
+     "correta": 3,
+     "transcricao": "La traduction automatique progresse de façon spectaculaire. Faut-il pour autant cesser d'apprendre les langues ? Ce serait confondre l'information et la relation : on peut comprendre un menu grâce à une machine, mais on ne se fait pas d'amis à travers un traducteur.",
+     "audio": "audio/simulados/tcf-canada-12/co32.mp3"
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Quelque chose d'un mépris de classe ».",
+     "pergunta": "Que suggère l'intervenante ?",
+     "alternativas": [
+      "Les riches ne voyagent plus.",
+      "Le tourisme de masse doit être interdit.",
+      "La critique du tourisme de masse cache parfois un mépris social.",
+      "Les congés payés sont trop longs."
+     ],
+     "correta": 2,
+     "transcricao": "On critique volontiers le tourisme de masse, en oubliant qu'il est né d'une conquête sociale : les congés payés. Avant eux, le voyage était réservé aux riches. Le mépris pour le « touriste » a toujours eu quelque chose d'un mépris de classe.",
+     "audio": "audio/simulados/tcf-canada-12/co33.mp3"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Repose sur un engagement bénévole qui s'épuise ».",
+     "pergunta": "Sur quoi repose la démocratie locale, selon l'intervenant ?",
+     "alternativas": [
+      "Sur des professionnels bien payés.",
+      "Sur les partis politiques.",
+      "Sur un engagement bénévole qui s'épuise.",
+      "Sur les grandes villes."
+     ],
+     "correta": 2,
+     "transcricao": "La fonction de maire est de plus en plus difficile à pourvoir dans les petites communes. Les candidats manquent, découragés par la complexité administrative, la responsabilité juridique et, de plus en plus, par les agressions verbales. La démocratie locale repose sur un engagement bénévole qui s'épuise.",
+     "audio": "audio/simulados/tcf-canada-12/co34.mp3"
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Chaque carte fait des choix ».",
+     "pergunta": "Que montre l'intervenante ?",
+     "alternativas": [
+      "Les cartes sont parfaitement objectives.",
+      "L'Europe est au centre du monde.",
+      "Les cartes sont inutiles.",
+      "Une carte reflète des choix et un point de vue."
+     ],
+     "correta": 3,
+     "transcricao": "Les cartes géographiques semblent objectives. Pourtant, chaque carte fait des choix : ce qu'elle place au centre, ce qu'elle agrandit, ce qu'elle omet. La carte du monde que nous connaissons, avec l'Europe au milieu, raconte une histoire autant qu'elle décrit un espace.",
+     "audio": "audio/simulados/tcf-canada-12/co35.mp3"
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« La profondeur avec laquelle on habite chacune d'elles ».",
+     "pergunta": "Selon l'intervenant, qu'est-ce qui fait l'intérêt d'une vie ?",
+     "alternativas": [
+      "La profondeur avec laquelle on vit chaque expérience.",
+      "La réussite professionnelle.",
+      "Le nombre de voyages.",
+      "L'accumulation d'expériences."
+     ],
+     "correta": 0,
+     "transcricao": "Nous voulons des vies intéressantes. Mais l'intérêt d'une vie ne se mesure pas au nombre d'expériences accumulées, comme on remplit un album. Il tient plutôt à la profondeur avec laquelle on habite chacune d'elles. On peut voyager partout et n'avoir rien vu.",
+     "audio": "audio/simulados/tcf-canada-12/co36.mp3"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Elle lie… à un avenir qu'il ne connaît pas ».",
+     "pergunta": "Qu'est-ce qui fait la grandeur de la promesse, selon l'intervenante ?",
+     "alternativas": [
+      "Elle engage malgré l'incertitude de l'avenir.",
+      "Elle peut être rompue facilement.",
+      "Elle rend libre.",
+      "Elle prévoit l'avenir."
+     ],
+     "correta": 0,
+     "transcricao": "Une promesse lie celui qui la fait à un avenir qu'il ne connaît pas. C'est là sa grandeur et son risque : promettre, c'est accepter d'être tenu par ce qu'on était au moment de promettre, même lorsqu'on a changé. Sans cette fidélité à soi, aucune confiance durable ne serait possible.",
+     "audio": "audio/simulados/tcf-canada-12/co37.mp3"
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Elle en est l'une des conditions ».",
+     "pergunta": "Que suggèrent les neurosciences ?",
+     "alternativas": [
+      "Les émotions sont dangereuses.",
+      "La raison suffit pour décider.",
+      "L'émotion empêche de bien juger.",
+      "L'émotion est nécessaire à la décision."
+     ],
+     "correta": 3,
+     "transcricao": "On oppose volontiers la raison et l'émotion, comme si penser juste exigeait de ne rien ressentir. Les neurosciences suggèrent l'inverse : les patients privés d'émotions à la suite d'une lésion deviennent incapables de décider. L'émotion n'est pas l'ennemie du jugement ; elle en est l'une des conditions.",
+     "audio": "audio/simulados/tcf-canada-12/co38.mp3"
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Nous devenons en partie ce que nous paraissons ».",
+     "pergunta": "Que défend l'intervenant ?",
+     "alternativas": [
+      "Il faut se méfier des moines.",
+      "Les vêtements sont sans importance.",
+      "L'apparence ne compte pas.",
+      "L'apparence contribue à nous transformer."
+     ],
+     "correta": 3,
+     "transcricao": "Le proverbe dit que l'habit ne fait pas le moine. Il le fait pourtant un peu : nous devenons en partie ce que nous paraissons, parce que le regard des autres nous façonne. L'apparence n'est pas seulement un masque ; elle est aussi un rôle que l'on finit par habiter.",
+     "audio": "audio/simulados/tcf-canada-12/co39.mp3"
+    }
+   ]
+  },
+  "ce": {
+   "nome": "Compréhension écrite",
+   "tempoSeg": 3600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Le lundi.",
+      "Le dimanche.",
+      "Le mardi.",
+      "Le samedi."
+     ],
+     "correta": 0,
+     "explicacao": "« Fermé le lundi ».",
+     "documento": "Ouvert du mardi au dimanche\n7 h – 13 h\nFermé le lundi",
+     "doc": {
+      "estilo": "placa",
+      "texto": "Ouvert du mardi au dimanche\n7 h – 13 h\nFermé le lundi",
+      "titulo": "MARCHÉ COUVERT"
+     },
+     "pergunta": "Quel jour le marché est-il fermé ?"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "allez",
+      "vais",
+      "va",
+      "vont"
+     ],
+     "correta": 3,
+     "explicacao": "« Ils » → « vont ».",
+     "tipo": "lacuna",
+     "inicio": "Ils…",
+     "fim": "… au cinéma ce soir.",
+     "pergunta": "Ils ___ au cinéma ce soir."
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "De venir chez elle.",
+      "D'aller danser avec elle.",
+      "D'acheter des médicaments.",
+      "De prévenir le professeur."
+     ],
+     "correta": 3,
+     "explicacao": "« Tu peux dire au professeur ? ».",
+     "documento": "Je suis malade, je ne viens pas au cours de danse. Tu peux dire au professeur ? Merci !",
+     "doc": {
+      "estilo": "sms",
+      "texto": "Je suis malade, je ne viens pas au cours de danse. Tu peux dire au professeur ? Merci !",
+      "remetente": "Julie"
+     },
+     "pergunta": "Que demande Julie ?"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Une boisson.",
+      "Un plat.",
+      "Un cadeau.",
+      "Une chaise."
+     ],
+     "correta": 1,
+     "explicacao": "« Chacun apporte un plat ».",
+     "documento": "Dimanche 18 juin à midi\ndans la cour de l'immeuble\n\nChacun apporte un plat !",
+     "doc": {
+      "estilo": "convite",
+      "texto": "Dimanche 18 juin à midi\ndans la cour de l'immeuble\n\nChacun apporte un plat !",
+      "titulo": "Pique-nique des voisins"
+     },
+     "pergunta": "Que doit apporter chaque voisin ?"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Le 2 septembre à 17 h.",
+      "Le dimanche.",
+      "Le vendredi soir.",
+      "Le samedi matin."
+     ],
+     "correta": 2,
+     "explicacao": "« Dépôt des livres : vendredi de 17 h à 19 h ».",
+     "documento": "Samedi 2 septembre, 9 h – 17 h\ngymnase du collège\n\nVendez et achetez vos manuels d'occasion.\nDépôt des livres : vendredi de 17 h à 19 h.",
+     "doc": {
+      "estilo": "cartaz",
+      "texto": "Samedi 2 septembre, 9 h – 17 h\ngymnase du collège\n\nVendez et achetez vos manuels d'occasion.\nDépôt des livres : vendredi de 17 h à 19 h.",
+      "titulo": "Bourse aux livres scolaires"
+     },
+     "pergunta": "Quand faut-il déposer les livres ?"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "allais",
+      "irai",
+      "vais",
+      "suis allé"
+     ],
+     "correta": 0,
+     "explicacao": "Hábito no passado: imparfait « j'allais ».",
+     "tipo": "lacuna",
+     "inicio": "Quand j'étais petit, je…",
+     "fim": "… souvent chez mes grands-parents.",
+     "pergunta": "Quand j'étais petit, je ___ souvent chez mes grands-parents."
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Garder le livre sans limite.",
+      "Acheter le livre.",
+      "Prolonger le prêt en ligne.",
+      "Payer une amende en ligne."
+     ],
+     "correta": 2,
+     "explicacao": "« Prolonger le prêt une fois sur notre site ».",
+     "documento": "Bonjour,\n\nLe livre « Le Petit Prince » devait être rendu le 5 mars. Merci de le rapporter rapidement. Vous pouvez aussi prolonger le prêt une fois sur notre site.\n\nCordialement",
+     "doc": {
+      "estilo": "email",
+      "texto": "Bonjour,\n\nLe livre « Le Petit Prince » devait être rendu le 5 mars. Merci de le rapporter rapidement. Vous pouvez aussi prolonger le prêt une fois sur notre site.\n\nCordialement",
+      "de": "Bibliothèque Aragon",
+      "assunto": "Livre à rendre"
+     },
+     "pergunta": "Que peut faire le lecteur ?"
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Un chaton.",
+      "Une récompense.",
+      "Une promenade.",
+      "Un repas."
+     ],
+     "correta": 1,
+     "explicacao": "« Récompense ».",
+     "documento": "Chat gris et blanc, très gentil,\nrépond au nom de Moustache.\nPerdu le 12 mai, quartier des Brotteaux.\nRécompense. Tél. : 06 55 80 12 43",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Chat gris et blanc, très gentil,\nrépond au nom de Moustache.\nPerdu le 12 mai, quartier des Brotteaux.\nRécompense. Tél. : 06 55 80 12 43",
+      "titulo": "PERDU"
+     },
+     "pergunta": "Que propose le propriétaire ?"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "trop",
+      "plus",
+      "très",
+      "beaucoup"
+     ],
+     "correta": 1,
+     "explicacao": "Comparativo: « plus… que ».",
+     "tipo": "lacuna",
+     "inicio": "Cette robe est…",
+     "fim": "… chère que l'autre.",
+     "pergunta": "Cette robe est ___ chère que l'autre."
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "On ne peut plus réserver de repas.",
+      "La cantine ferme.",
+      "Les inscriptions commencent.",
+      "Les repas sont gratuits."
+     ],
+     "correta": 0,
+     "explicacao": "« Aucun repas ne pourra être réservé ».",
+     "documento": "Les inscriptions pour le mois d'octobre\nsont ouvertes jusqu'au 25 septembre.\nAprès cette date, aucun repas ne pourra être réservé.",
+     "doc": {
+      "estilo": "aviso",
+      "texto": "Les inscriptions pour le mois d'octobre\nsont ouvertes jusqu'au 25 septembre.\nAprès cette date, aucun repas ne pourra être réservé.",
+      "titulo": "Cantine scolaire — Information"
+     },
+     "pergunta": "Que se passe-t-il après le 25 septembre ?"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "En bateau uniquement.",
+      "Par un pont.",
+      "En téléphérique.",
+      "Par un tunnel."
+     ],
+     "correta": 1,
+     "explicacao": "« Reliée à la terre par un pont ».",
+     "documento": "Dans le port de Concarneau, la ville close, entourée de remparts, se trouve sur une petite île reliée à la terre par un pont. On peut faire le tour des remparts à pied en une demi-heure et découvrir le musée de la pêche.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "Dans le port de Concarneau, la ville close, entourée de remparts, se trouve sur une petite île reliée à la terre par un pont. On peut faire le tour des remparts à pied en une demi-heure et découvrir le musée de la pêche."
+     },
+     "pergunta": "Comment accède-t-on à la ville close ?"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "qui",
+      "dont",
+      "que",
+      "où"
+     ],
+     "correta": 0,
+     "explicacao": "Sujeito do verbo « soit »: « qui ».",
+     "tipo": "lacuna",
+     "inicio": "Je cherche un appartement…",
+     "fim": "… soit proche de mon travail.",
+     "pergunta": "Je cherche un appartement ___ soit proche de mon travail."
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Elle achète plus de plats tout prêts.",
+      "Elle mange au restaurant.",
+      "Elle a arrêté ses études.",
+      "Elle cuisine plus souvent."
+     ],
+     "correta": 3,
+     "explicacao": "« Je cuisine désormais trois fois par semaine ».",
+     "documento": "Courrier des lecteurs\nBravo pour votre numéro spécial sur les recettes à petit prix ! Étudiante, je cuisine désormais trois fois par semaine au lieu d'acheter des plats tout prêts.\nLéna, Poitiers",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Courrier des lecteurs\nBravo pour votre numéro spécial sur les recettes à petit prix ! Étudiante, je cuisine désormais trois fois par semaine au lieu d'acheter des plats tout prêts.\nLéna, Poitiers"
+     },
+     "pergunta": "Qu'a changé Léna ?"
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Une muselière.",
+      "Un collier électronique.",
+      "Un manteau.",
+      "Un billet de 1re classe."
+     ],
+     "correta": 0,
+     "explicacao": "« Tenus en laisse et porter une muselière ».",
+     "documento": "Les petits animaux (moins de 6 kg) voyagent dans un panier pour 7 €. Les grands chiens doivent être tenus en laisse et porter une muselière ; ils paient la moitié d'un billet de 2e classe.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "Les petits animaux (moins de 6 kg) voyagent dans un panier pour 7 €. Les grands chiens doivent être tenus en laisse et porter une muselière ; ils paient la moitié d'un billet de 2e classe.",
+      "titulo": "Voyager avec un animal en train",
+      "rubrica": "TRANSPORTS"
+     },
+     "pergunta": "Que doivent porter les grands chiens ?"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "La terre était de mauvaise qualité.",
+      "Le tour était cassé.",
+      "Il faut beaucoup de temps pour maîtriser le geste.",
+      "Il fallait travailler plus vite."
+     ],
+     "correta": 2,
+     "explicacao": "« Il faut des semaines pour centrer la terre ».",
+     "documento": "Stage de poterie en Provence. Le premier jour, tous mes bols se sont effondrés sur le tour ! La potière m'a dit que c'était normal : il faut des semaines pour « centrer » la terre. Le quatrième jour, j'ai enfin réussi un petit pot.",
+     "doc": {
+      "estilo": "caderno",
+      "texto": "Stage de poterie en Provence. Le premier jour, tous mes bols se sont effondrés sur le tour ! La potière m'a dit que c'était normal : il faut des semaines pour « centrer » la terre. Le quatrième jour, j'ai enfin réussi un petit pot."
+     },
+     "pergunta": "Qu'a expliqué la potière ?"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Travailler tous les week-ends.",
+      "Un cheval.",
+      "Un diplôme d'équitation.",
+      "Le permis de conduire."
+     ],
+     "correta": 3,
+     "explicacao": "« Permis B indispensable ».",
+     "documento": "Ferme équestre (Normandie) cherche soigneur(se) de chevaux, CDD 6 mois.\nTravail un week-end sur deux.\nPermis B indispensable.",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Ferme équestre (Normandie) cherche soigneur(se) de chevaux, CDD 6 mois.\nTravail un week-end sur deux.\nPermis B indispensable.",
+      "titulo": "OFFRE D'EMPLOI"
+     },
+     "pergunta": "Qu'est-ce qui est indispensable ?"
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "aussi vite",
+      "si vite",
+      "très vite",
+      "tellement de"
+     ],
+     "correta": 1,
+     "explicacao": "Consequência: « si + advérbio + que ».",
+     "tipo": "lacuna",
+     "inicio": "Elle parle…",
+     "fim": "… qu'on ne comprend rien.",
+     "pergunta": "Elle parle ___ qu'on ne comprend rien."
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "D'apporter un coussin.",
+      "De réserver au cinéma.",
+      "D'apporter un parapluie.",
+      "De venir en voiture."
+     ],
+     "correta": 0,
+     "explicacao": "« Apportez votre coussin ! ».",
+     "documento": "Du 10 au 15 juin, à Annemasse.\nProjections en plein air chaque soir.\nApportez votre coussin !\nEn cas de pluie, les séances ont lieu au cinéma Le Rex.",
+     "doc": {
+      "estilo": "festival",
+      "texto": "Du 10 au 15 juin, à Annemasse.\nProjections en plein air chaque soir.\nApportez votre coussin !\nEn cas de pluie, les séances ont lieu au cinéma Le Rex.",
+      "titulo": "Festival du film d'animation"
+     },
+     "pergunta": "Que conseille le festival ?"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Ils appellent la police.",
+      "Ils préviennent la famille.",
+      "Ils rappellent le lendemain.",
+      "Ils se rendent chez elle."
+     ],
+     "correta": 1,
+     "explicacao": "« Alertent la famille si quelqu'un ne répond pas ».",
+     "documento": "À Montpellier, une association propose aux personnes âgées isolées de recevoir un appel téléphonique chaque jour. Des bénévoles prennent des nouvelles, discutent quelques minutes et alertent la famille si quelqu'un ne répond pas.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Montpellier, une association propose aux personnes âgées isolées de recevoir un appel téléphonique chaque jour. Des bénévoles prennent des nouvelles, discutent quelques minutes et alertent la famille si quelqu'un ne répond pas."
+     },
+     "pergunta": "Que font les bénévoles si une personne ne répond pas ?"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Ils sont réservés aux retraités.",
+      "Ils sont devenus gratuits.",
+      "Ils ont été supprimés.",
+      "Ils attirent un public plus jeune."
+     ],
+     "correta": 3,
+     "explicacao": "« Ils attirent désormais de jeunes couples ».",
+     "documento": "Les jardins familiaux, ces parcelles louées à bas prix par les villes, connaissent un succès tel que les listes d'attente dépassent parfois cinq ans. Longtemps réservés aux retraités, ils attirent désormais de jeunes couples en quête de légumes frais et de contact avec la terre.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les jardins familiaux, ces parcelles louées à bas prix par les villes, connaissent un succès tel que les listes d'attente dépassent parfois cinq ans. Longtemps réservés aux retraités, ils attirent désormais de jeunes couples en quête de légumes frais et de contact avec la terre."
+     },
+     "pergunta": "Qu'est-ce qui a changé dans les jardins familiaux ?"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "disais",
+      "dis",
+      "dises",
+      "diras"
+     ],
+     "correta": 2,
+     "explicacao": "« Il faut que » + subjuntivo: « que tu dises ».",
+     "tipo": "lacuna",
+     "inicio": "Il faut que tu…",
+     "fim": "… la vérité à tes parents.",
+     "pergunta": "Il faut que tu ___ la vérité à tes parents."
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "La vente en ligne.",
+      "L'affichage des prix.",
+      "Les cartes de fidélité.",
+      "La livraison gratuite."
+     ],
+     "correta": 1,
+     "explicacao": "« Les prix sont affichés ».",
+     "documento": "Au XIXe siècle, les grands magasins parisiens inventent une nouvelle façon d'acheter : les prix sont affichés, on peut entrer sans obligation d'achat, et les articles peuvent être rendus. Ces innovations, aujourd'hui banales, ont bouleversé le commerce de l'époque.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "Au XIXe siècle, les grands magasins parisiens inventent une nouvelle façon d'acheter : les prix sont affichés, on peut entrer sans obligation d'achat, et les articles peuvent être rendus. Ces innovations, aujourd'hui banales, ont bouleversé le commerce de l'époque."
+     },
+     "pergunta": "Quelle innovation des grands magasins est citée ?"
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les enfants aiment la voiture.",
+      "Les écoles sont assez sûres.",
+      "Certains parents n'ont pas d'alternative à la voiture.",
+      "La pollution n'existe pas."
+     ],
+     "correta": 2,
+     "explicacao": "« Faute de transports en commun ».",
+     "documento": "Faut-il interdire les voitures devant les écoles ? Les partisans parlent de sécurité et de pollution. Les opposants rappellent que certains parents n'ont pas d'autre choix, faute de transports en commun, et qu'on risque de pénaliser ceux qui vivent loin.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "Faut-il interdire les voitures devant les écoles ? Les partisans parlent de sécurité et de pollution. Les opposants rappellent que certains parents n'ont pas d'autre choix, faute de transports en commun, et qu'on risque de pénaliser ceux qui vivent loin."
+     },
+     "pergunta": "Quel argument avancent les opposants ?"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les pieuvres ne changent pas de couleur.",
+      "La peau des pieuvres perçoit la lumière.",
+      "Les pieuvres imitent d'autres animaux.",
+      "Les pieuvres voient très bien les couleurs."
+     ],
+     "correta": 1,
+     "explicacao": "« Leur peau elle-même contient des cellules sensibles à la lumière ».",
+     "documento": "Les pieuvres peuvent changer de couleur en une fraction de seconde, alors qu'elles ne perçoivent pas les couleurs. Les chercheurs pensent que leur peau elle-même contient des cellules sensibles à la lumière, capables de « voir » l'environnement.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "Les pieuvres peuvent changer de couleur en une fraction de seconde, alors qu'elles ne perçoivent pas les couleurs. Les chercheurs pensent que leur peau elle-même contient des cellules sensibles à la lumière, capables de « voir » l'environnement."
+     },
+     "pergunta": "Quelle hypothèse font les chercheurs ?"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "La musique.",
+      "La durée des épisodes.",
+      "La qualité de l'écriture.",
+      "Les décors."
+     ],
+     "correta": 2,
+     "explicacao": "« C'est surtout l'écriture qui séduit ».",
+     "documento": "La nouvelle série de la télévision belge suit une famille de boulangers sur trois générations. Les comédiens sont excellents, mais c'est surtout l'écriture qui séduit : les dialogues, justes et drôles, évitent le piège de la nostalgie facile.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "La nouvelle série de la télévision belge suit une famille de boulangers sur trois générations. Les comédiens sont excellents, mais c'est surtout l'écriture qui séduit : les dialogues, justes et drôles, évitent le piège de la nostalgie facile."
+     },
+     "pergunta": "Qu'est-ce qui séduit surtout le critique ?"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "pour",
+      "de",
+      "à",
+      "que"
+     ],
+     "correta": 1,
+     "explicacao": "« De peur de » + infinitivo.",
+     "tipo": "lacuna",
+     "inicio": "Il est parti tôt de peur…",
+     "fim": "… manquer son train.",
+     "pergunta": "Il est parti tôt de peur ___ manquer son train."
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les moments où les salariés peuvent ne pas répondre.",
+      "Le nombre de courriels autorisés.",
+      "Les salaires du week-end.",
+      "Les horaires de bureau."
+     ],
+     "correta": 0,
+     "explicacao": "« Les moments où les employés ne sont pas tenus de répondre ».",
+     "documento": "Dans les entreprises de plus de 50 salariés, un accord doit préciser les moments où les employés ne sont pas tenus de répondre aux courriels et appels professionnels, en particulier le soir et le week-end.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "Dans les entreprises de plus de 50 salariés, un accord doit préciser les moments où les employés ne sont pas tenus de répondre aux courriels et appels professionnels, en particulier le soir et le week-end.",
+      "titulo": "Le droit à la déconnexion",
+      "rubrica": "TRAVAIL"
+     },
+     "pergunta": "Que doit préciser l'accord ?"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "La livraison rapide.",
+      "Le conseil aux lecteurs.",
+      "Les prix bas.",
+      "Le grand choix de jeux."
+     ],
+     "correta": 1,
+     "explicacao": "« Leur force : le conseil ».",
+     "documento": "Les librairies indépendantes résistent mieux que prévu à la concurrence d'Internet. Leur force : le conseil. Beaucoup de lecteurs viennent y chercher non pas un livre précis, mais une recommandation, ce qu'aucun algorithme ne remplace vraiment à leurs yeux.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les librairies indépendantes résistent mieux que prévu à la concurrence d'Internet. Leur force : le conseil. Beaucoup de lecteurs viennent y chercher non pas un livre précis, mais une recommandation, ce qu'aucun algorithme ne remplace vraiment à leurs yeux."
+     },
+     "pergunta": "Quelle est la force des librairies indépendantes ?"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Un vêtement réparé et un savoir-faire.",
+      "Des tissus gratuits.",
+      "Des vêtements neufs.",
+      "Un emploi de couturière."
+     ],
+     "correta": 0,
+     "explicacao": "« Repartent avec leur vêtement et un savoir-faire ».",
+     "documento": "À Lausanne, des « cafés-couture » permettent de réparer ses vêtements avec l'aide de couturières bénévoles. On y apprend à recoudre un bouton, à faire un ourlet ou à rapiécer un jean. Les participants repartent avec leur vêtement et un savoir-faire.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Lausanne, des « cafés-couture » permettent de réparer ses vêtements avec l'aide de couturières bénévoles. On y apprend à recoudre un bouton, à faire un ourlet ou à rapiécer un jean. Les participants repartent avec leur vêtement et un savoir-faire."
+     },
+     "pergunta": "Qu'apportent ces cafés aux participants ?"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Les villages étaient toujours heureux.",
+      "La vie au village pouvait être oppressante.",
+      "La ville est un exil.",
+      "Les traditions sont indispensables."
+     ],
+     "correta": 1,
+     "explicacao": "« Ce qu'ils avaient d'étouffant ».",
+     "documento": "La nostalgie des villages d'autrefois oublie souvent ce qu'ils avaient d'étouffant : le contrôle social, l'impossibilité d'échapper au regard des voisins, le poids des traditions. La ville a été, pour beaucoup, une libération avant d'être un exil.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "La nostalgie des villages d'autrefois oublie souvent ce qu'ils avaient d'étouffant : le contrôle social, l'impossibilité d'échapper au regard des voisins, le poids des traditions. La ville a été, pour beaucoup, une libération avant d'être un exil."
+     },
+     "pergunta": "Que rappelle l'auteur ?"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "aurait",
+      "ait",
+      "avait",
+      "a"
+     ],
+     "correta": 1,
+     "explicacao": "« À supposer que » + subjuntivo.",
+     "tipo": "lacuna",
+     "inicio": "À supposer qu'il…",
+     "fim": "… raison, cela ne change rien à notre décision.",
+     "pergunta": "À supposer qu'il ___ raison, cela ne change rien à notre décision."
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "La mobilité des jeunes répond à celle des entreprises.",
+      "Les parents changeaient souvent d'emploi.",
+      "Les jeunes manquent de sérieux.",
+      "Les entreprises garantissent une carrière."
+     ],
+     "correta": 0,
+     "explicacao": "« Les entreprises… ont cessé de promettre une carrière entière ».",
+     "documento": "Les jeunes générations changent plus souvent d'emploi que leurs parents. On y voit volontiers de l'instabilité ou un manque de fidélité. C'est oublier que les entreprises, elles, ont cessé depuis longtemps de promettre une carrière entière à leurs salariés.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les jeunes générations changent plus souvent d'emploi que leurs parents. On y voit volontiers de l'instabilité ou un manque de fidélité. C'est oublier que les entreprises, elles, ont cessé depuis longtemps de promettre une carrière entière à leurs salariés."
+     },
+     "pergunta": "Que suggère l'article ?"
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Un roman d'aventure.",
+      "Une enquête intime sur la transmission.",
+      "Un roman policier classique.",
+      "Un récit spectaculaire."
+     ],
+     "correta": 1,
+     "explicacao": "« Une véritable enquête sur ce que l'on transmet sans le dire ».",
+     "documento": "Ce premier roman raconte le retour d'une femme dans la maison familiale après la mort de sa mère. Rien de spectaculaire : des objets, des lettres, des silences. Mais l'autrice parvient à faire de ce tri banal une véritable enquête sur ce que l'on transmet sans le dire.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "Ce premier roman raconte le retour d'une femme dans la maison familiale après la mort de sa mère. Rien de spectaculaire : des objets, des lettres, des silences. Mais l'autrice parvient à faire de ce tri banal une véritable enquête sur ce que l'on transmet sans le dire."
+     },
+     "pergunta": "Comment le critique décrit-il ce roman ?"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "qu'elle",
+      "qu'elle ne",
+      "d'elle",
+      "pour elle"
+     ],
+     "correta": 0,
+     "explicacao": "« De crainte que » + subjuntivo, com « ne » expletivo: « de crainte qu'elle ne le prenne mal ».",
+     "tipo": "lacuna",
+     "inicio": "Il s'est tu, de crainte…",
+     "fim": "… ne le prenne mal.",
+     "pergunta": "Il s'est tu, de crainte ___ ne le prenne mal."
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "La production mesure tout.",
+      "Une part essentielle du travail n'est pas comptabilisée.",
+      "Les femmes travaillent moins.",
+      "Le bénévolat est inutile."
+     ],
+     "correta": 1,
+     "explicacao": "« Ce qui fait tenir une société échappe à ces chiffres ».",
+     "documento": "On mesure la richesse d'un pays à sa production. Mais une grande partie de ce qui fait tenir une société échappe à ces chiffres : le soin des enfants, l'aide aux proches, le bénévolat. Ce travail invisible, souvent assuré par des femmes, n'en est pas moins indispensable.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "On mesure la richesse d'un pays à sa production. Mais une grande partie de ce qui fait tenir une société échappe à ces chiffres : le soin des enfants, l'aide aux proches, le bénévolat. Ce travail invisible, souvent assuré par des femmes, n'en est pas moins indispensable."
+     },
+     "pergunta": "Que souligne l'auteur ?"
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Les nouvelles années.",
+      "L'enthousiasme des débuts.",
+      "La persévérance au-delà de l'enthousiasme initial.",
+      "Le changement permanent."
+     ],
+     "correta": 2,
+     "explicacao": "« Persévérer est un choix, renouvelé chaque jour ».",
+     "documento": "Nous aimons les commencements : les rentrées, les nouvelles années, les premières fois. Mais le véritable courage est peut-être celui de continuer, quand l'enthousiasme du début s'est dissipé. Commencer est un élan ; persévérer est un choix, renouvelé chaque jour.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "Nous aimons les commencements : les rentrées, les nouvelles années, les premières fois. Mais le véritable courage est peut-être celui de continuer, quand l'enthousiasme du début s'est dissipé. Commencer est un élan ; persévérer est un choix, renouvelé chaque jour."
+     },
+     "pergunta": "Que valorise l'auteur ?"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "ait",
+      "eût",
+      "avait",
+      "aurait eu"
+     ],
+     "correta": 1,
+     "explicacao": "Expressão literária fixa com subjuntivo mais-que-perfeito: « qui l'eût cru ? ».",
+     "tipo": "lacuna",
+     "inicio": "Personne ne l'attendait à ce niveau. Qui l'…",
+     "fim": "… cru ?",
+     "pergunta": "Personne ne l'attendait à ce niveau. Qui l' ___ cru ?"
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "La publication de toutes les informations.",
+      "Le secret coupable.",
+      "La valeur de l'intimité face à l'exigence de transparence.",
+      "La transparence totale."
+     ],
+     "correta": 2,
+     "explicacao": "« L'intimité n'est pas un secret coupable ».",
+     "documento": "La transparence est devenue une exigence morale : tout devrait être visible, publié, justifié. Mais une vie sans zone d'ombre serait-elle encore humaine ? L'intimité n'est pas un secret coupable ; elle est l'espace où l'on se forme à l'abri du jugement.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "La transparence est devenue une exigence morale : tout devrait être visible, publié, justifié. Mais une vie sans zone d'ombre serait-elle encore humaine ? L'intimité n'est pas un secret coupable ; elle est l'espace où l'on se forme à l'abri du jugement."
+     },
+     "pergunta": "Que défend l'auteur ?"
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "S'accrocher à son poste.",
+      "Préserver son œuvre à tout prix.",
+      "Partir avant d'y être forcé.",
+      "Refuser toute fonction."
+     ],
+     "correta": 2,
+     "explicacao": "« Savoir quitter une fonction avant d'y être contraint ».",
+     "documento": "Il y a une élégance du renoncement : savoir quitter une fonction avant d'y être contraint, laisser la place quand on pourrait encore la tenir. Ceux qui s'accrochent croient préserver leur œuvre ; ils ne font souvent que la ternir.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Il y a une élégance du renoncement : savoir quitter une fonction avant d'y être contraint, laisser la place quand on pourrait encore la tenir. Ceux qui s'accrochent croient préserver leur œuvre ; ils ne font souvent que la ternir."
+     },
+     "pergunta": "Qu'est-ce qui est élégant, selon l'auteur ?"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 3600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1",
+     "min": 60,
+     "max": 120,
+     "consigne": "Vous avez emprunté un livre à un(e) ami(e) et vous l'avez abîmé. Vous lui écrivez un message pour vous excuser, expliquer ce qui s'est passé et proposer une solution."
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2",
+     "min": 120,
+     "max": 150,
+     "consigne": "Vous avez assisté à un spectacle (concert, pièce de théâtre, match…) qui vous a beaucoup marqué(e). Vous le racontez sur votre blog et vous expliquez pourquoi vous le recommandez."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3",
+     "min": 120,
+     "max": 180,
+     "consigne": "« Faut-il rendre les transports en commun gratuits ? » Rédigez un texte en deux parties. 1) Présentez les deux points de vue des documents ci-dessous (40 à 60 mots). 2) Donnez votre opinion en l'argumentant (80 à 120 mots).",
+     "documentos": [
+      {
+       "titulo": "Document 1 — Pour l'environnement et l'égalité",
+       "texto": "Rendre les bus et les trams gratuits encourage les habitants à laisser leur voiture, réduit la pollution et aide les familles modestes. Plusieurs villes l'ont déjà fait avec succès."
+      },
+      {
+       "titulo": "Document 2 — Rien n'est gratuit",
+       "texto": "La gratuité a un coût : ce sont les impôts qui paient. L'argent serait mieux utilisé pour augmenter le nombre de lignes et la fréquence des bus, car c'est surtout le manque de service qui décourage les usagers."
+      }
+     ]
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 900,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur : vous parlez de vous, de votre parcours, de vos activités et de vos projets.",
+     "perguntasExaminador": [
+      "Bonjour. Pouvez-vous vous présenter, s'il vous plaît ?",
+      "Qu'est-ce que vous faites pour vous détendre ?",
+      "Parlez-moi d'une personne de votre famille.",
+      "Où aimeriez-vous vivre dans dix ans ?"
+     ]
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Vous voulez faire du bénévolat dans une association d'aide alimentaire. Vous téléphonez à l'association pour obtenir des informations (missions, horaires, engagement, formation, conditions, etc.).",
+     "perguntasExaminador": [
+      "Association Les Paniers solidaires, bonjour ! Que puis-je faire pour vous ?"
+     ],
+     "fichaExaminador": "Vous êtes le/la coordinateur(trice) des bénévoles. Missions : tri des dons, distribution de colis, accueil des bénéficiaires, collectes en supermarché. Distribution le mardi et le vendredi de 14 h à 18 h ; tri le samedi matin. Engagement minimum : une demi-journée par semaine pendant trois mois. Formation d'accueil de deux heures obligatoire (hygiène, écoute). Âge minimum : 16 ans. Pas besoin d'expérience. Laissez le candidat mener l'échange ; relancez-le s'il se tait (« Autre chose ? »)."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« On apprend davantage en voyageant qu'à l'école. » Qu'en pensez-vous ? Vous donnez votre opinion et vous l'argumentez à l'aide d'exemples.",
+     "perguntasExaminador": [
+      "On apprend davantage en voyageant qu'à l'école. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et ceux qui n'ont pas les moyens de voyager ? », « Qu'avez-vous appris lors d'un voyage ? », « L'école ne pourrait-elle pas organiser plus de voyages ? »."
+    }
+   ]
+  }
+ }
+}

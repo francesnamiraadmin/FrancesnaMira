@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tef-01",
+ "titulo": "Exercício oral nº 1 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Retrouvailles inattendues",
+ "descricao": "Um cão perdido que volta para casa: notícia de rádio, recados e uma conversa entre vizinhos.",
+ "imagem": {
+  "src": "img/temas/tef-a-chien-300-km-2.jpg",
+  "credito": {
+   "autor": "MHM55",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Meyrin-Village-arr%C3%AAt_de_tram-3.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-01/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta à pergunta.",
+     "alternativas": [
+      "La rue est longue.",
+      "Il fait noir ce soir.",
+      "Non, désolé, je n'ai rien vu.",
+      "Oui, j'ai un chat."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Vous avez vu un petit chien noir dans la rue ?\nA. La rue est longue.\nB. Il fait noir ce soir.\nC. Non, désolé, je n'ai rien vu.\nD. Oui, j'ai un chat.",
+     "audio": "audio/exercicios-orais/ex-tef-01/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Vue pour la dernière fois près de la gare ».",
+     "alternativas": [
+      "Chez le vétérinaire.",
+      "Au parc.",
+      "Près de la gare.",
+      "Devant l'école."
+     ],
+     "correta": 2,
+     "pergunta": "Où la chienne a-t-elle été vue pour la dernière fois ?",
+     "transcricao": "Perdu : chienne beige, nommée Praline, portant un collier rouge, vue pour la dernière fois près de la gare samedi. Récompense à qui la ramènera. Appelez le zéro six, douze, trente-quatre, cinquante-six, soixante-dix-huit.",
+     "audio": "audio/exercicios-orais/ex-tef-01/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Ce sont les nouveaux habitants qui ont appelé ».",
+     "alternativas": [
+      "Les nouveaux habitants de la maison.",
+      "La police.",
+      "Un vétérinaire.",
+      "Un voisin."
+     ],
+     "correta": 0,
+     "pergunta": "Qui a prévenu les maîtres du chien ?",
+     "transcricao": "Incroyable histoire dans le Jura : un chien, perdu pendant un déménagement, a parcouru trois cents kilomètres en trois semaines pour retrouver sa maison. Ce sont les nouveaux habitants qui ont appelé ses anciens maîtres.",
+     "audio": "audio/exercicios-orais/ex-tef-01/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta explicativa.",
+     "alternativas": [
+      "Le chemin est très beau.",
+      "Il a pris le train.",
+      "Mon chien s'appelle Max.",
+      "On pense qu'il se guide avec son odorat et le champ magnétique."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Comment un chien peut-il retrouver son chemin sur une telle distance ?\nA. Le chemin est très beau.\nB. Il a pris le train.\nC. Mon chien s'appelle Max.\nD. On pense qu'il se guide avec son odorat et le champ magnétique.",
+     "audio": "audio/exercicios-orais/ex-tef-01/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« On ne parle que des animaux qui reviennent ».",
+     "alternativas": [
+      "Les histoires sont inventées.",
+      "On ne parle que des animaux qui reviennent.",
+      "Le champ magnétique n'existe pas.",
+      "Les chiens ne s'orientent pas."
+     ],
+     "correta": 1,
+     "pergunta": "Pourquoi les scientifiques restent-ils prudents ?",
+     "transcricao": "Les scientifiques restent prudents face à ces histoires. On ne parle que des animaux qui reviennent, jamais des milliers qui se perdent définitivement. Cela dit, des études montrent que certains chiens utilisent effectivement le champ magnétique terrestre pour s'orienter.",
+     "audio": "audio/exercicios-orais/ex-tef-01/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 540,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section A — Obtenir des informations",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Refuge des Quatre Pattes : adoptez un compagnon ! Chiens et chats vaccinés. Journées portes ouvertes ce week-end. » Vous téléphonez pour obtenir des informations. Posez une dizaine de questions à l'examinateur.",
+     "perguntasExaminador": [
+      "Refuge des Quatre Pattes, bonjour !"
+     ],
+     "fichaExaminador": "Vous êtes bénévole au refuge. 40 chiens, 25 chats. Frais d'adoption : 150 € (chien), 90 € (chat), vaccins et puce inclus. Entretien obligatoire avant adoption. Portes ouvertes samedi et dimanche 10 h–17 h. Promenades de chiens possibles pour les bénévoles. Répondez brièvement ; ne donnez une information que si le candidat la demande."
+    }
+   ]
+  }
+ }
+}

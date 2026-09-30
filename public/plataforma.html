@@ -323,6 +323,34 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
 }
 
+/* ===== Pack Prestige — card premium, aparência invertida por tema ===== */
+:root[data-theme="light"] .price-card-new.pack-prestige {
+  background: linear-gradient(160deg, #2b2b2b, #0d0d0d);
+  border-color: rgba(217, 163, 0, 0.5);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.4), 0 0 0 1px rgba(217,163,0,0.12) inset;
+  color: #f5f5f5;
+}
+:root[data-theme="light"] .price-card-new.pack-prestige h3 { color: #e8b923; }
+:root[data-theme="light"] .price-card-new.pack-prestige .price-value { color: #ffffff; }
+:root[data-theme="light"] .price-card-new.pack-prestige li { border-top-color: rgba(255,255,255,0.14); }
+:root[data-theme="light"] .price-card-new.pack-prestige li.feature-yes { color: #f5f5f5; }
+:root[data-theme="light"] .price-card-new.pack-prestige li.feature-yes .feature-icon { color: #e8b923; }
+:root[data-theme="light"] .price-card-new.pack-prestige a { background: #e8b923; color: #0d0d0d; }
+:root[data-theme="light"] .price-card-new.pack-prestige a:hover { background: #c99e12; }
+
+:root[data-theme="dark"] .price-card-new.pack-prestige {
+  background: linear-gradient(160deg, #ececec, #d8d8da);
+  border-color: rgba(0,0,0,0.1);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.55);
+  color: #17171a;
+}
+:root[data-theme="dark"] .price-card-new.pack-prestige h3 { color: #8a6a00; }
+:root[data-theme="dark"] .price-card-new.pack-prestige .price-value { color: #17171a; }
+:root[data-theme="dark"] .price-card-new.pack-prestige li { border-top-color: rgba(0,0,0,0.1); }
+:root[data-theme="dark"] .price-card-new.pack-prestige li.feature-yes { color: #17171a; }
+:root[data-theme="dark"] .price-card-new.pack-prestige li.feature-yes .feature-icon { color: #a37c00; }
+:root[data-theme="dark"] .price-card-new.pack-prestige a { background: #17171a; color: #f0d78a; }
+:root[data-theme="dark"] .price-card-new.pack-prestige a:hover { background: #2a2a2e; }
 </style>
 </head>
 
@@ -456,53 +484,20 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <div class="feature-row">
  <div class="feature-container">
   <h2 class="feature-title">Escolha seu plano</h2>
-  <p class="excellence-note">O plano <strong>Excellence</strong> inclui acompanhamento particular, curso gravado e acesso completo à plataforma de questões — a forma mais completa de chegar preparado para a prova.</p>
+  <p class="excellence-note">Este recurso agora faz parte do <strong>Pack Prestige</strong> de cada curso (e dos planos que o incluem).</p>
   <div class="feature-price">
     <div class="price-carousel">
-      <button class="price-nav price-prev" aria-label="Plano anterior">‹</button>
       <div class="price-track">
-        <div class="price-card-new tier-bronze">
-          
-          <h3>Essentiel</h3>
-          <p class="price-value">R$129</p>
+        <div class="price-card-new pack-prestige active">
+          <h3>Incluído no Pack Prestige</h3>
+          <p class="price-value" style="font-size:1.3rem;">Agora dentro do Pack Prestige de cada curso</p>
           <ul>
-            <li class="feature-hours">Autogerenciado · 200 questões</li>
-            <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Correção de textos</li>
-            <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Acompanhamento particular</li>
-            <li class="feature-no"><img class="feature-icon" src="img/icones/x-mark.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Curso gravado disponível</li>
-          </ul>
-          <a href="pagamento-plataforma.html">Assine o plano</a>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Mais de 500 questões comentadas</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">TCF, DELF, TEF e DALF, por competência e nível</li>
+          <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Acesso autogerenciado, no seu ritmo</li>
+        </ul>
+          <a href="cursos.html">Ver planos por curso</a>
         </div>
-        <div class="price-card-new tier-prata">
-          
-          <h3>Avancé</h3>
-          <p class="price-value">R$179</p>
-          <ul>
-            <li class="feature-hours">Autogerenciado · 350 questões</li>
-            <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Correção de textos</li>
-            <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Acompanhamento particular</li>
-            <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Curso gravado disponível</li>
-          </ul>
-          <a href="pagamento-plataforma.html">Assine o plano</a>
-        </div>
-        <div class="price-card-new tier-ouro active">
-          <span class="excellence-badge"><img src="img/icones/star-filled.svg" alt="" style="width:1em; height:1em; vertical-align:-0.15em; margin-right:6px;">Mais escolhido</span>
-          <h3>Excellence</h3>
-          <p class="price-value">R$229</p>
-          <ul>
-            <li class="feature-hours">Autogerenciado · 500 questões</li>
-            <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Correção de textos</li>
-            <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Acompanhamento particular</li>
-            <li class="feature-yes"><img class="feature-icon" src="img/icones/check.svg" alt="" style="width:1.1em; height:1.1em; vertical-align:-0.15em;">Curso gravado disponível</li>
-          </ul>
-          <a href="pagamento-plataforma.html">Assine o plano</a>
-        </div>
-      </div>
-      <button class="price-nav price-next" aria-label="Próximo plano">›</button>
-      <div class="price-dots">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot active"></span>
       </div>
     </div>
   </div>

@@ -1,0 +1,157 @@
+{
+ "slug": "ex-dalf-06",
+ "titulo": "Exercício oral nº 6 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "Éduquer aux médias",
+ "descricao": "Desinformação, algoritmos e educação midiática na escola; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/dalf-c1-essai-education-medias-2.jpg",
+  "credito": {
+   "autor": "DFID - UK Department for International Development",
+   "licenca": "CC BY-SA 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Connecting_classrooms_around_the_world_(3677773417).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-06/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Reação crítica.",
+     "alternativas": [
+      "Non, je n'ai pas de télévision.",
+      "Oui, mais d'où vient-elle ? Tu as vérifié ?",
+      "La vidéo est longue.",
+      "Oui, j'ai un million d'amis."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as vu cette vidéo ? Elle a été partagée un million de fois !\nA. Non, je n'ai pas de télévision.\nB. Oui, mais d'où vient-elle ? Tu as vérifié ?\nC. La vidéo est longue.\nD. Oui, j'ai un million d'amis.",
+     "audio": "audio/exercicios-orais/ex-dalf-06/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Distinguer un fait d'une opinion ».",
+     "alternativas": [
+      "À distinguer un fait d'une opinion.",
+      "À écrire des articles.",
+      "À devenir journalistes.",
+      "À créer des vidéos."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'apprennent notamment les élèves ?",
+     "transcricao": "Au collège, les élèves de quatrième participent à un atelier de trois séances avec des journalistes. Ils apprennent à identifier la source d'une information, à retrouver l'origine d'une photo et à distinguer un fait d'une opinion.",
+     "audio": "audio/exercicios-orais/ex-dalf-06/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Les jeunes ne sont pas plus crédules que leurs aînés ».",
+     "alternativas": [
+      "Que les seniors utilisent Internet.",
+      "Que les fausses informations circulent.",
+      "Que l'éducation aux médias est utile.",
+      "Que les jeunes seraient plus crédules que leurs aînés."
+     ],
+     "correta": 3,
+     "pergunta": "Quelle idée l'intervenant conteste-t-il ?",
+     "transcricao": "Contrairement à une idée répandue, les jeunes ne sont pas plus crédules que leurs aînés. Les études montrent même que les plus de soixante-cinq ans partagent davantage de fausses informations. L'éducation aux médias ne devrait donc pas s'arrêter à la sortie de l'école.",
+     "audio": "audio/exercicios-orais/ex-dalf-06/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Objeção pertinente.",
+     "alternativas": [
+      "Oui, les plateformes sont grandes.",
+      "Le faux est interdit.",
+      "Non, je n'ai pas de compte.",
+      "Encore faudrait-il savoir qui décide de ce qui est faux."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu ne crois pas qu'il suffirait d'obliger les plateformes à supprimer les fausses informations ?\nA. Oui, les plateformes sont grandes.\nB. Le faux est interdit.\nC. Non, je n'ai pas de compte.\nD. Encore faudrait-il savoir qui décide de ce qui est faux.",
+     "audio": "audio/exercicios-orais/ex-dalf-06/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Certains finissent par ne plus rien croire du tout ».",
+     "alternativas": [
+      "Qu'une seule fausse nouvelle circule.",
+      "Que les médias disparaissent.",
+      "Que certains citoyens ne croient plus rien.",
+      "Que l'école enseigne trop le doute."
+     ],
+     "correta": 2,
+     "pergunta": "Quel danger l'intervenant souligne-t-il ?",
+     "transcricao": "Le danger n'est pas tant la fausse nouvelle isolée que l'épuisement du doute. À force d'apprendre que tout peut être manipulé, certains finissent par ne plus rien croire du tout. Or une démocratie a besoin de citoyens capables non seulement de douter, mais aussi d'accorder leur confiance à bon escient.",
+     "audio": "audio/exercicios-orais/ex-dalf-06/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 2400,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Essai argumenté",
+     "min": 220,
+     "max": 300,
+     "consigne": "Dans une revue d'éducation, vous répondez à la question : « L'éducation aux médias doit-elle devenir une matière à part entière ? » (220 mots minimum)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — exposé et entretien (C1)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "Document de départ : « Un adolescent sur deux s'informe d'abord par les réseaux sociaux. L'école peut-elle former des citoyens critiques face à l'information ? » Vous présentez un exposé structuré (problématique, plan, arguments illustrés d'exemples) puis vous répondez aux questions de l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre exposé."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : neutralité de l'enseignant, rôle des familles, algorithmes, formation des professeurs."
+    }
+   ]
+  }
+ }
+}

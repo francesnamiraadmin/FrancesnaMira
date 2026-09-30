@@ -1,0 +1,145 @@
+{
+ "slug": "ex-a2-03",
+ "titulo": "Exercício oral nº 3 — A2",
+ "curso": "A2",
+ "categoria": "exercicio",
+ "nivel": "A2",
+ "tema": "Souvenirs d'enfance",
+ "descricao": "Lembranças de infância: brinquedos, escola e férias com os avós.",
+ "imagem": {
+  "src": "img/temas/a2-souvenir-enfance-2.jpg",
+  "credito": {
+   "autor": "Nadine Doerle",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Games_wooden_games_wood_old_games_toy_library_old_of_pions-614681.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-a2-03/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Imperfeito para hábitos passados.",
+     "alternativas": [
+      "Je joue au tennis.",
+      "Je jouais aux petites voitures.",
+      "Je vais jouer demain.",
+      "J'étais grand."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Quand tu étais petit, tu jouais à quoi ?\nA. Je joue au tennis.\nB. Je jouais aux petites voitures.\nC. Je vais jouer demain.\nD. J'étais grand.",
+     "audio": "audio/exercicios-orais/ex-a2-03/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Lugar no passado.",
+     "alternativas": [
+      "Avec mes amis.",
+      "J'avais dix ans.",
+      "J'habite à Paris.",
+      "Dans un petit village près de Lyon."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu habitais où quand tu étais enfant ?\nA. Avec mes amis.\nB. J'avais dix ans.\nC. J'habite à Paris.\nD. Dans un petit village près de Lyon.",
+     "audio": "audio/exercicios-orais/ex-a2-03/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« On faisait des confitures l'après-midi ».",
+     "alternativas": [
+      "Des courses.",
+      "Des gâteaux.",
+      "Des confitures.",
+      "Du vélo."
+     ],
+     "correta": 2,
+     "pergunta": "Qu'est-ce qu'elles faisaient l'après-midi ?",
+     "transcricao": "Quand j'étais petite, je passais tous les étés chez ma grand-mère, à la campagne. On allait chercher les œufs le matin et on faisait des confitures l'après-midi.",
+     "audio": "audio/exercicios-orais/ex-a2-03/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« J'ai vu un éléphant pour la première fois ».",
+     "alternativas": [
+      "Une girafe.",
+      "Un lion.",
+      "Un éléphant.",
+      "Un singe."
+     ],
+     "correta": 2,
+     "pergunta": "Qu'est-ce qu'il a vu pour la première fois ?",
+     "transcricao": "Mon meilleur souvenir d'école ? Le jour où la maîtresse nous a emmenés au zoo. J'ai vu un éléphant pour la première fois !",
+     "audio": "audio/exercicios-orais/ex-a2-03/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« On s'amusait très bien sans écran ».",
+     "alternativas": [
+      "Qu'on pouvait s'amuser sans écran.",
+      "Les jeux vidéo anciens.",
+      "L'histoire des écrans.",
+      "Comment fabriquer des jouets."
+     ],
+     "correta": 0,
+     "pergunta": "Que découvrent les enfants au musée ?",
+     "transcricao": "Ce musée présente des jouets anciens : poupées en bois, trains en métal, jeux de société. Les parents adorent retrouver les jouets de leur enfance et les enfants découvrent qu'on s'amusait très bien sans écran.",
+     "audio": "audio/exercicios-orais/ex-a2-03/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 330,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 150,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur sur vous, vos habitudes et vos expériences.",
+     "perguntasExaminador": [
+      "Bonjour ! Où avez-vous grandi ?",
+      "Comment était votre maison quand vous étiez enfant ?",
+      "À quoi jouiez-vous ?",
+      "Quel est votre meilleur souvenir d'enfance ?"
+     ]
+    }
+   ]
+  }
+ }
+}

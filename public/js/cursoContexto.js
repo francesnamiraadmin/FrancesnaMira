@@ -17,7 +17,7 @@
   // client-side seguindo o mesmo padrão que o código já aceita (o hub roda antes de qualquer
   // chamada de API, então não dá pra confiar só no backend aqui).
   const CASCATA_POR_TIER = {
-    producao: ["Essentiel", "Avancé", "Excellence"],
+    producao: ["Avancé", "Excellence"],
     aulas: ["Avancé", "Excellence"],
     plataforma: ["Excellence"]
   };

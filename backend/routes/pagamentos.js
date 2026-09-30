@@ -19,6 +19,9 @@ const { TIPOS_CURSO } = require("../utils/tiposCurso");
 const { enviarEmailPagamentoAprovado } = require("../utils/mailer");
 const { ehObjectId, normalizarEmail, textoSeguro, limitarTaxa } = require("../middleware/seguranca");
 const { registrar } = require("../utils/monitorSeguranca");
+const Cupom = require("../models/cupom");
+const { aplicarCupom } = require("../utils/cupons");
+const { ativarComBoasVindas } = require("../utils/creditosProducao");
 
 // O front sempre manda o mesmo preço que o servidor calcula; divergência significa
 // requisição editada à mão tentando pagar menos. A cobrança já usa o valor do servidor —
@@ -36,19 +39,11 @@ const limitePagamento = limitarTaxa({
   msg: "Muitas tentativas de pagamento. Aguarde alguns minutos e tente novamente."
 });
 
-// Preço mensal dos planos por curso quando NÃO há horários escolhidos (fluxo dos cards
-// de preço). Fonte de verdade no servidor — espelha os valores exibidos nas páginas de
-// cada curso (public/{curso}.html). Ao mudar um preço lá, mude aqui também.
-const PRECO_PLANO_FIXO = {
-  TCF: { Essentiel: 149, "Avancé": 199, Excellence: 249 },
-  TEF: { Essentiel: 169, "Avancé": 219, Excellence: 279 },
-  DELF: { Essentiel: 159, "Avancé": 209, Excellence: 269 },
-  DALF: { Essentiel: 179, "Avancé": 229, Excellence: 289 },
-  A1: { Essentiel: 89, "Avancé": 119, Excellence: 149 },
-  A2: { Essentiel: 99, "Avancé": 129, Excellence: 159 },
-  B1: { Essentiel: 109, "Avancé": 139, Excellence: 169 },
-  B2: { Essentiel: 119, "Avancé": 149, Excellence: 179 }
-};
+// Preço mensal dos planos por curso quando NÃO há horários escolhidos. Espelha o "a partir
+// de" dos cards de preço (index.html e páginas de cada curso): 1 aula por semana.
+const PRECO_PLANO_FIXO = Object.fromEntries(TIPOS_CURSO.map(curso => [curso, {
+  Essentiel: precoPorTier(1, "Essentiel"), "Avancé": precoPorTier(1, "Avancé"), Excellence: precoPorTier(1, "Excellence")
+}]));
 const TIERS = ["Essentiel", "Avancé", "Excellence"];
 
 // Valida e normaliza tudo que vem do cliente num pedido de pagamento. Lança erro
@@ -118,6 +113,23 @@ async function valorAutoritativo(plano, slotsEscolhidos, curso, turmaId) {
   const preco = PRECO_PLANO_FIXO[curso]?.[plano];
   if (!preco) throw new Error("Plano indisponível para este curso.");
   return preco;
+}
+
+// Preço final com cupom (se houver). `verificarAdulteracaoPreco` compara com o preço
+// cheio — o navegador manda o valor antes do desconto.
+async function precoDoPedido(req, dados) {
+  const valorOriginal = await valorAutoritativo(dados.plano, dados.slotsEscolhidos, dados.curso, dados.turmaId);
+  verificarAdulteracaoPreco(req, valorOriginal);
+  const { cupom, desconto, valorFinal } = await aplicarCupom(req.body.cupomCodigo, valorOriginal, dados.curso, dados.plano);
+  return { valorOriginal, valorFinal, desconto, cupomCodigo: cupom ? cupom.codigo : null };
+}
+
+// Conta o uso do cupom uma única vez, quando o pagamento é aprovado (o webhook pode chegar
+// repetido; o flag no pedido garante que não conta duas vezes).
+async function contabilizarCupom(pedido) {
+  if (!pedido?.cupomCodigo) return;
+  const r = await Pedido.updateOne({ _id: pedido._id, cupomContabilizado: { $ne: true } }, { $set: { cupomContabilizado: true } });
+  if (r.modifiedCount) await Cupom.updateOne({ codigo: pedido.cupomCodigo }, { $inc: { usosAtuais: 1 } });
 }
 
 // Faz upsert (match-then-push) de uma entrada em User.planos por courseType, dentro de
@@ -209,7 +221,7 @@ async function ativarPackPrestige(userId, curso, metodoPagamento, precoFinal, me
   const dataInicio = new Date();
   const dataVencimento = new Date(dataInicio.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-  await upsertPlanoCurso(userId, curso, { packPrestige: { ativo: true, dataVencimento, mercadoPagoId } });
+  await ativarComBoasVindas(userId, () => upsertPlanoCurso(userId, curso, { packPrestige: { ativo: true, dataVencimento, mercadoPagoId } }));
 
   const user = await User.findById(userId).select("nome email");
   if (user?.email) {
@@ -234,9 +246,11 @@ async function ativarPackPrestigeCombo(userId, metodoPagamento, precoFinal, merc
   const dataInicio = new Date();
   const dataVencimento = new Date(dataInicio.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-  for (const curso of CURSOS_DO_COMBO_FLUENCIA) {
-    await upsertPlanoCurso(userId, curso, { packPrestige: { ativo: true, dataVencimento, mercadoPagoId } });
-  }
+  await ativarComBoasVindas(userId, async () => {
+    for (const curso of CURSOS_DO_COMBO_FLUENCIA) {
+      await upsertPlanoCurso(userId, curso, { packPrestige: { ativo: true, dataVencimento, mercadoPagoId } });
+    }
+  });
 
   const user = await User.findById(userId).select("nome email");
   if (user?.email) {
@@ -277,10 +291,12 @@ async function ativarPlano(userId, curso, plano, metodoPagamento, cartaoFinal, t
   const existente = await User.findOne({ _id: userId, "planos.courseType": curso }, { "planos.$": 1 });
   const ehRenovacao = existente?.planos?.[0]?.tier === plano;
 
-  await upsertPlanoCurso(userId, curso, {
+  // Primeira vez com o Ambiente de Produção: 20 créditos de boas-vindas (no lugar dos
+  // créditos mensais do plano nesse primeiro mês). Renovações seguem com os do plano.
+  const boasVindas = await ativarComBoasVindas(userId, () => upsertPlanoCurso(userId, curso, {
     tier: plano, ativo: true, metodoPagamento, cartaoFinal, autoRenovacao: false, dataInicio, dataVencimento
-  });
-  if (creditosGanhos) await User.updateOne({ _id: userId }, { $inc: { creditosCorrecao: creditosGanhos } });
+  }));
+  if (creditosGanhos && !boasVindas) await User.updateOne({ _id: userId }, { $inc: { creditosCorrecao: creditosGanhos } });
 
   const user = await User.findById(userId).select("nome email");
   if (user?.email) {
@@ -343,11 +359,11 @@ router.post("/cartao", exigirAuth, limitePagamento, async (req, res) => {
     const parcelas = Number(installments) || 1;
     if (!Number.isInteger(parcelas) || parcelas < 1 || parcelas > 12) return res.status(400).json({ msg: "Número de parcelas inválido." });
 
-    let dados, valorFinal;
+    let dados, valorFinal, preco;
     try {
       dados = validarPedido(req.body);
-      valorFinal = await valorAutoritativo(dados.plano, dados.slotsEscolhidos, dados.curso, dados.turmaId);
-      verificarAdulteracaoPreco(req, valorFinal);
+      preco = await precoDoPedido(req, dados);
+      valorFinal = preco.valorFinal;
       await validarSlotsDisponiveis(dados.slotsEscolhidos);
     } catch (err) {
       return res.status(409).json({ msg: err.message });
@@ -380,12 +396,14 @@ router.post("/cartao", exigirAuth, limitePagamento, async (req, res) => {
       slotsEscolhidos: slotsEscolhidos || undefined,
       dadosPessoais: dadosPessoais || undefined,
       curso, plano, valor: valorFinal, email,
+      valorOriginal: preco.valorOriginal, cupomCodigo: preco.cupomCodigo, desconto: preco.desconto,
       metodoPagamento, cartaoFinal, parcelas,
       status: aprovado ? "aprovado" : "rejeitado",
       mercadoPagoId: resultado.id
     });
 
     if (aprovado) {
+      await contabilizarCupom(pedido);
       await ativarPlano(req.userId, curso, plano, metodoPagamento, cartaoFinal, turmaId, pedido.tipo, slotsEscolhidos, valorFinal, dadosPessoais, resultado.id);
     }
 
@@ -403,11 +421,11 @@ router.post("/pix", exigirAuth, limitePagamento, async (req, res) => {
       return res.status(400).json({ msg: "Preencha todos os campos" });
     }
 
-    let dados, valorFinal;
+    let dados, valorFinal, preco;
     try {
       dados = validarPedido(req.body);
-      valorFinal = await valorAutoritativo(dados.plano, dados.slotsEscolhidos, dados.curso, dados.turmaId);
-      verificarAdulteracaoPreco(req, valorFinal);
+      preco = await precoDoPedido(req, dados);
+      valorFinal = preco.valorFinal;
       await validarSlotsDisponiveis(dados.slotsEscolhidos);
     } catch (err) {
       return res.status(409).json({ msg: err.message });
@@ -433,6 +451,7 @@ router.post("/pix", exigirAuth, limitePagamento, async (req, res) => {
       slotsEscolhidos: slotsEscolhidos || undefined,
       dadosPessoais: dadosPessoais || undefined,
       curso, plano, valor: valorFinal, email,
+      valorOriginal: preco.valorOriginal, cupomCodigo: preco.cupomCodigo, desconto: preco.desconto,
       metodoPagamento: "pix",
       status: "pendente",
       mercadoPagoId: resultado.id
@@ -465,11 +484,11 @@ router.post("/boleto", exigirAuth, limitePagamento, async (req, res) => {
       return res.status(400).json({ msg: "Preencha todos os campos, incluindo o endereço (exigido pelo Mercado Pago para gerar o boleto)." });
     }
 
-    let dados, valorFinal;
+    let dados, valorFinal, preco;
     try {
       dados = validarPedido(req.body);
-      valorFinal = await valorAutoritativo(dados.plano, dados.slotsEscolhidos, dados.curso, dados.turmaId);
-      verificarAdulteracaoPreco(req, valorFinal);
+      preco = await precoDoPedido(req, dados);
+      valorFinal = preco.valorFinal;
       await validarSlotsDisponiveis(dados.slotsEscolhidos);
     } catch (err) {
       return res.status(409).json({ msg: err.message });
@@ -508,6 +527,7 @@ router.post("/boleto", exigirAuth, limitePagamento, async (req, res) => {
       slotsEscolhidos: slotsEscolhidos || undefined,
       dadosPessoais: dadosPessoais || undefined,
       curso, plano, valor: valorFinal, email,
+      valorOriginal: preco.valorOriginal, cupomCodigo: preco.cupomCodigo, desconto: preco.desconto,
       metodoPagamento: "boleto",
       status: "pendente",
       mercadoPagoId: resultado.id
@@ -577,14 +597,18 @@ router.post("/webhook", async (req, res) => {
       const info = await payment.get({ id: String(data.id) });
       const novoStatus = info.status === "approved" ? "aprovado" : info.status === "rejected" ? "rejeitado" : "pendente";
 
+      // Devolve o pedido ANTES da atualização: o plano só é ativado na transição para
+      // "aprovado". O MP reenvia a notificação e também notifica pagamentos de cartão já
+      // aprovados na hora — sem isso o plano (e os créditos de correção) seriam somados de novo.
       const pedido = await Pedido.findOneAndUpdate(
         { mercadoPagoId: String(data.id) },
         { status: novoStatus },
-        { new: true }
+        { returnDocument: "before" }
       );
 
       if (pedido) {
-        if (novoStatus === "aprovado") {
+        if (novoStatus === "aprovado" && pedido.status !== "aprovado") {
+          await contabilizarCupom(pedido);
           await ativarPlano(pedido.userId, pedido.curso, pedido.plano, pedido.metodoPagamento, pedido.cartaoFinal, pedido.turmaId, pedido.tipo, pedido.slotsEscolhidos, pedido.valor, pedido.dadosPessoais, pedido.mercadoPagoId);
         }
       } else {

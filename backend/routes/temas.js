@@ -50,7 +50,7 @@ router.get("/", exigirAuth, (req, res, next) => {
     if (modalidade) filtro.modalidade = modalidade;
     if (busca) filtro.titulo = { $regex: escaparRegex(String(busca)), $options: "i" };
 
-    const temas = await Tema.find(filtro).select("-coletanea").sort({ criadoEm: -1 });
+    const temas = await Tema.find(filtro).select("-coletanea").sort({ ordem: 1, criadoEm: -1 });
     res.json(temas);
   } catch (err) {
     console.error(err);

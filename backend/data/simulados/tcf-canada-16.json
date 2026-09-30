@@ -1,0 +1,1583 @@
+{
+ "slug": "tcf-canada-16",
+ "titulo": "Simulado TCF Canada nº 16",
+ "curso": "TCF",
+ "formato": "TCF Canada",
+ "audioConsignes": {
+  "co": "audio/simulados/tcf-canada-16/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 2100,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Pergunta de nacionalidade: « je suis brésilienne ».",
+     "alternativas": [
+      "J'ai vingt ans.",
+      "J'habite ici.",
+      "Je suis étudiante.",
+      "Je suis brésilienne."
+     ],
+     "correta": 3,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Tu es de quelle nationalité ?\nA. J'ai vingt ans.\nB. J'habite ici.\nC. Je suis étudiante.\nD. Je suis brésilienne.",
+     "audio": "audio/simulados/tcf-canada-16/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Oferta: « oui, avec plaisir ».",
+     "alternativas": [
+      "C'est mon frère.",
+      "Oui, j'ai un vélo.",
+      "Non, il est midi.",
+      "Oui, avec plaisir !"
+     ],
+     "correta": 3,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Tu veux un peu de gâteau ?\nA. C'est mon frère.\nB. Oui, j'ai un vélo.\nC. Non, il est midi.\nD. Oui, avec plaisir !",
+     "audio": "audio/simulados/tcf-canada-16/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "« Où » pede um lugar: « sur la chaise ».",
+     "alternativas": [
+      "Elle est bleue.",
+      "Demain matin.",
+      "Elle coûte cher.",
+      "Sur la chaise, là-bas."
+     ],
+     "correta": 3,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Où est ma veste ?\nA. Elle est bleue.\nB. Demain matin.\nC. Elle coûte cher.\nD. Sur la chaise, là-bas.",
+     "audio": "audio/simulados/tcf-canada-16/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Pergunta da hora.",
+     "alternativas": [
+      "Il est trois heures et quart.",
+      "Il fait froid.",
+      "C'est le trois mars.",
+      "Il est très grand."
+     ],
+     "correta": 0,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Il est quelle heure ?\nA. Il est trois heures et quart.\nB. Il fait froid.\nC. C'est le trois mars.\nD. Il est très grand.",
+     "audio": "audio/simulados/tcf-canada-16/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pedido para falar devagar: « bien sûr, excusez-moi ».",
+     "alternativas": [
+      "Oui, je parle trois langues.",
+      "Non, je suis pressé de partir demain.",
+      "Je n'ai pas de voiture.",
+      "Bien sûr, excusez-moi."
+     ],
+     "correta": 3,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Vous pourriez parler un peu plus lentement, s'il vous plaît ?\nA. Oui, je parle trois langues.\nB. Non, je suis pressé de partir demain.\nC. Je n'ai pas de voiture.\nD. Bien sûr, excusez-moi.",
+     "audio": "audio/simulados/tcf-canada-16/co05.mp3"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Duração até agora: « depuis deux ans ».",
+     "alternativas": [
+      "Dans deux ans.",
+      "Pendant les vacances prochaines.",
+      "Il y a deux heures.",
+      "Depuis deux ans."
+     ],
+     "correta": 3,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Ça fait longtemps que tu apprends le français ?\nA. Dans deux ans.\nB. Pendant les vacances prochaines.\nC. Il y a deux heures.\nD. Depuis deux ans.",
+     "audio": "audio/simulados/tcf-canada-16/co06.mp3"
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Il sera remplacé samedi à dix heures ».",
+     "pergunta": "Quand aura lieu le cours de remplacement ?",
+     "alternativas": [
+      "Mercredi.",
+      "Dimanche matin.",
+      "La semaine prochaine.",
+      "Samedi à dix heures."
+     ],
+     "correta": 3,
+     "transcricao": "Bonjour, ici l'école de musique. Le cours de violon de votre fille est annulé mercredi, car le professeur est malade. Il sera remplacé samedi à dix heures.",
+     "audio": "audio/simulados/tcf-canada-16/co07.mp3"
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Avec les embouteillages, on risque d'arriver en retard ».",
+     "pergunta": "Pourquoi l'homme préfère-t-il le métro ?",
+     "alternativas": [
+      "Parce qu'il aime le métro.",
+      "Parce qu'il est moins cher.",
+      "Pour ne pas être en retard.",
+      "Parce que le bus est sale."
+     ],
+     "correta": 2,
+     "transcricao": "On prend le métro ou le bus ?\nLe métro. Le bus est plus agréable, mais avec les embouteillages, on risque d'arriver en retard.",
+     "audio": "audio/simulados/tcf-canada-16/co08.mp3"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Le repas des lions aura lieu dans dix minutes ».",
+     "pergunta": "Que se passera-t-il dans dix minutes ?",
+     "alternativas": [
+      "Le repas des lions.",
+      "La fermeture du zoo.",
+      "Un spectacle d'oiseaux.",
+      "Une visite guidée."
+     ],
+     "correta": 0,
+     "transcricao": "Chers visiteurs, le zoo fermera ses portes dans trente minutes. Le repas des lions aura lieu dans dix minutes, près de l'entrée principale. Ne le manquez pas !",
+     "audio": "audio/simulados/tcf-canada-16/co09.mp3"
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« On apporte le dessert ? ».",
+     "pergunta": "Que propose Claire ?",
+     "alternativas": [
+      "D'arriver en avance.",
+      "D'apporter le dessert.",
+      "D'annuler la soirée.",
+      "De venir seule."
+     ],
+     "correta": 1,
+     "transcricao": "Salut Omar, c'est Claire. Merci pour ton invitation ! Je viendrai avec mon copain, si ça ne te dérange pas. On apporte le dessert ?",
+     "audio": "audio/simulados/tcf-canada-16/co10.mp3"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« On peut essayer trois instruments pendant un mois ».",
+     "pergunta": "Que peuvent faire les adultes avant de choisir ?",
+     "alternativas": [
+      "Assister à des concerts.",
+      "Rencontrer les professeurs.",
+      "Acheter un instrument.",
+      "Essayer plusieurs instruments."
+     ],
+     "correta": 3,
+     "transcricao": "Le conservatoire de Tours propose des cours d'instruments aux adultes débutants. On peut essayer trois instruments pendant un mois avant de choisir. Les instruments sont prêtés la première année.",
+     "audio": "audio/simulados/tcf-canada-16/co11.mp3"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Je vais frapper à sa porte ».",
+     "pergunta": "Que fait la gardienne quand une personne âgée ne sort pas ?",
+     "alternativas": [
+      "Elle attend qu'elle descende.",
+      "Elle va voir si tout va bien.",
+      "Elle prévient les voisins.",
+      "Elle appelle la police."
+     ],
+     "correta": 1,
+     "transcricao": "Je suis gardienne d'immeuble à Paris. Je distribue le courrier, je sors les poubelles, mais surtout, je connais tout le monde. Quand une personne âgée ne descend pas pendant deux jours, je vais frapper à sa porte.",
+     "audio": "audio/simulados/tcf-canada-16/co12.mp3"
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« À cause de la marée haute ».",
+     "pergunta": "Pourquoi la route sera-t-elle fermée ?",
+     "alternativas": [
+      "À cause du brouillard.",
+      "À cause d'un accident.",
+      "Pour des travaux.",
+      "À cause de la marée haute."
+     ],
+     "correta": 3,
+     "transcricao": "Attention, à cause de la marée haute, la route du passage du Gois vers l'île de Noirmoutier sera fermée de quatorze heures à dix-sept heures. Les automobilistes sont invités à emprunter le pont.",
+     "audio": "audio/simulados/tcf-canada-16/co13.mp3"
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Il n'y avait pas de réseau au refuge ».",
+     "pergunta": "Pourquoi l'homme n'avait-il pas de téléphone ?",
+     "alternativas": [
+      "Il l'avait perdu.",
+      "Il était cassé.",
+      "Il n'y avait pas de réseau.",
+      "Il l'avait laissé chez lui."
+     ],
+     "correta": 2,
+     "transcricao": "Tu as bonne mine ! Tu reviens de vacances ?\nOui, une semaine dans les Pyrénées sans téléphone : il n'y avait pas de réseau au refuge. Au début c'était dur, mais finalement, je me suis vraiment reposé.",
+     "audio": "audio/simulados/tcf-canada-16/co14.mp3"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Celles qui sont accessibles aux personnes en fauteuil roulant ».",
+     "pergunta": "Que précise l'application ?",
+     "alternativas": [
+      "Les toilettes accessibles aux fauteuils roulants.",
+      "Le prix des toilettes.",
+      "Les horaires des parcs.",
+      "Les parcs les plus propres."
+     ],
+     "correta": 0,
+     "transcricao": "La ville de Grenoble installe des toilettes publiques gratuites dans tous les parcs. Une application indique les toilettes les plus proches et précise celles qui sont accessibles aux personnes en fauteuil roulant.",
+     "audio": "audio/simulados/tcf-canada-16/co15.mp3"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Quand un vieux piano oublié retrouve sa voix ».",
+     "pergunta": "Qu'est-ce que l'accordeur préfère dans son métier ?",
+     "alternativas": [
+      "Voyager à l'étranger.",
+      "Jouer dans des salles de concert.",
+      "Vendre des pianos.",
+      "Redonner vie à de vieux pianos."
+     ],
+     "correta": 3,
+     "transcricao": "Je suis accordeur de pianos. Je voyage dans toute la région, chez les particuliers, dans les écoles, les salles de concert. Ce que je préfère, c'est quand un vieux piano oublié retrouve sa voix : les familles sont souvent très émues.",
+     "audio": "audio/simulados/tcf-canada-16/co16.mp3"
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Des jumelles sont prêtées à chaque participant ».",
+     "pergunta": "Qu'est-ce qui est prêté aux participants ?",
+     "alternativas": [
+      "Un appareil photo.",
+      "Des jumelles.",
+      "Un guide des poissons.",
+      "Un maillot de bain."
+     ],
+     "correta": 1,
+     "transcricao": "Nouveau au port de Brest : des sorties en bateau pour observer les dauphins, le week-end. La sortie dure deux heures. Les enfants de moins de six ans ne sont pas admis, et des jumelles sont prêtées à chaque participant.",
+     "audio": "audio/simulados/tcf-canada-16/co17.mp3"
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Elle les garde toutes dans une boîte ».",
+     "pergunta": "Que fait la grand-mère des cartes postales ?",
+     "alternativas": [
+      "Elle les conserve toutes.",
+      "Elle les jette.",
+      "Elle les met sur Internet.",
+      "Elle les envoie à d'autres."
+     ],
+     "correta": 0,
+     "transcricao": "Moi, j'écris une carte postale à ma grand-mère à chaque voyage. Elle n'a pas Internet, et elle les garde toutes dans une boîte. L'année dernière, elle m'a montré la première, envoyée quand j'avais sept ans !",
+     "audio": "audio/simulados/tcf-canada-16/co18.mp3"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Des signaux sonores les aident à s'orienter ».",
+     "pergunta": "Qu'est-ce qui aide les participants à s'orienter ?",
+     "alternativas": [
+      "Des chiens guides.",
+      "Des cartes en relief.",
+      "Des signaux sonores.",
+      "Un GPS."
+     ],
+     "correta": 2,
+     "transcricao": "À Nice, une école de voile propose des stages pour les personnes malvoyantes. Un moniteur est à bord avec elles, et des signaux sonores les aident à s'orienter. Les participants disent y trouver un grand sentiment de liberté.",
+     "audio": "audio/simulados/tcf-canada-16/co19.mp3"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« La hiérarchie s'efface le temps d'une chanson ».",
+     "pergunta": "Qu'apportent ces chorales, selon les participants ?",
+     "alternativas": [
+      "Une meilleure voix.",
+      "Des revenus supplémentaires.",
+      "Des liens qui dépassent la hiérarchie.",
+      "Plus de réunions."
+     ],
+     "correta": 2,
+     "transcricao": "Les chorales d'entreprise se développent. Chanter ensemble, disent les participants, crée des liens que les réunions ne créent pas : le directeur et le stagiaire sont côte à côte, et la hiérarchie s'efface le temps d'une chanson.",
+     "audio": "audio/simulados/tcf-canada-16/co20.mp3"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Il vaut mieux consulter tôt ».",
+     "pergunta": "Que conseille l'orthophoniste ?",
+     "alternativas": [
+      "Parler moins à l'enfant.",
+      "Consulter tôt en cas de doute.",
+      "Ne pas s'inquiéter du tout.",
+      "Attendre que l'enfant grandisse."
+     ],
+     "correta": 1,
+     "transcricao": "Je suis orthophoniste. Beaucoup de parents s'inquiètent quand leur enfant parle tard. Dans la majorité des cas, il n'y a pas de problème ; mais il vaut mieux consulter tôt, car plus une difficulté est prise en charge rapidement, plus elle se corrige facilement.",
+     "audio": "audio/simulados/tcf-canada-16/co21.mp3"
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Jugée plus durable que la construction de digues ».",
+     "pergunta": "Pourquoi envisage-t-on de déplacer des immeubles ?",
+     "alternativas": [
+      "Les immeubles sont trop vieux.",
+      "Les habitants le demandent.",
+      "C'est jugé plus durable que les digues.",
+      "C'est moins cher."
+     ],
+     "correta": 2,
+     "transcricao": "Les villes côtières sont menacées par la montée de la mer. À Lacanau, en Gironde, les autorités envisagent de déplacer des immeubles entiers vers l'intérieur des terres. Une solution coûteuse, mais jugée plus durable que la construction de digues toujours plus hautes.",
+     "audio": "audio/simulados/tcf-canada-16/co22.mp3"
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« On ne change pas son visage ».",
+     "pergunta": "Que rappellent les spécialistes ?",
+     "alternativas": [
+      "Les empreintes sont faciles à changer.",
+      "Les mots de passe sont inutiles.",
+      "La reconnaissance faciale est parfaite.",
+      "On ne peut pas changer son visage s'il est piraté."
+     ],
+     "correta": 3,
+     "transcricao": "Les jeunes utilisent de moins en moins les mots de passe compliqués : ils préfèrent la reconnaissance faciale ou l'empreinte digitale. C'est plus pratique, mais les spécialistes rappellent qu'un mot de passe volé se change, alors qu'on ne change pas son visage.",
+     "audio": "audio/simulados/tcf-canada-16/co23.mp3"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« C'est surtout le manque de confiance ».",
+     "pergunta": "Selon le professeur, pourquoi chante-t-on faux ?",
+     "alternativas": [
+      "Surtout par manque de confiance.",
+      "Par manque de souffle.",
+      "À cause d'une mauvaise oreille.",
+      "À cause de l'âge."
+     ],
+     "correta": 0,
+     "transcricao": "Tu vas vraiment prendre des cours de chant ?\nOui ! Tout le monde me dit que je chante faux. Mon professeur affirme que c'est rarement une question d'oreille : c'est surtout le manque de confiance qui fait chanter faux.",
+     "audio": "audio/simulados/tcf-canada-16/co24.mp3"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Beaucoup de voyageurs veulent un interlocuteur humain ».",
+     "pergunta": "Pourquoi les agences de voyage connaissent-elles un regain ?",
+     "alternativas": [
+      "Elles proposent des destinations exclusives.",
+      "Elles sont moins chères qu'Internet.",
+      "Internet ne vend plus de voyages.",
+      "Les voyageurs veulent un interlocuteur en cas de problème."
+     ],
+     "correta": 3,
+     "transcricao": "Les agences de voyage physiques semblaient condamnées par Internet. Elles connaissent pourtant un regain : après des annulations en série et des difficultés à joindre les plateformes, beaucoup de voyageurs veulent un interlocuteur humain en cas de problème.",
+     "audio": "audio/simulados/tcf-canada-16/co25.mp3"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« A rendu Kigali célèbre pour sa propreté ».",
+     "pergunta": "Quel a été l'effet de cette mesure ?",
+     "alternativas": [
+      "Kigali est devenue réputée pour sa propreté.",
+      "Les sacs sont devenus plus chers.",
+      "Les touristes ne viennent plus.",
+      "La mesure a été abandonnée."
+     ],
+     "correta": 0,
+     "transcricao": "Au Rwanda, les sacs en plastique sont interdits depuis 2008. Les voyageurs voient leurs sacs confisqués à l'aéroport. La mesure, d'abord jugée sévère, a rendu Kigali célèbre pour sa propreté, et d'autres pays africains s'en sont inspirés.",
+     "audio": "audio/simulados/tcf-canada-16/co26.mp3"
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Distinguent vivre seul et être isolé ».",
+     "pergunta": "Quelle distinction font les sociologues ?",
+     "alternativas": [
+      "Vivre seul ne signifie pas être isolé.",
+      "Le marché ignore les personnes seules.",
+      "Les personnes seules sont toujours isolées.",
+      "Les personnes seules voyagent moins."
+     ],
+     "correta": 0,
+     "transcricao": "Les personnes qui vivent seules sont de plus en plus nombreuses. Le marché s'adapte : portions individuelles, petits logements, voyages en solo. Mais les sociologues distinguent vivre seul et être isolé : beaucoup de personnes seules ont une vie sociale très riche.",
+     "audio": "audio/simulados/tcf-canada-16/co27.mp3"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Disent souvent avoir mieux profité du concert ».",
+     "pergunta": "Que disent souvent les spectateurs après le concert ?",
+     "alternativas": [
+      "Qu'ils ont perdu leur téléphone.",
+      "Qu'ils en ont mieux profité.",
+      "Qu'ils veulent être remboursés.",
+      "Qu'ils n'ont rien entendu."
+     ],
+     "correta": 1,
+     "transcricao": "Dans les salles de concert, les téléphones levés pour filmer agacent de plus en plus d'artistes. Certains obligent le public à placer son téléphone dans une pochette fermée. Les spectateurs protestent d'abord, puis disent souvent avoir mieux profité du concert.",
+     "audio": "audio/simulados/tcf-canada-16/co28.mp3"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Dépend moins de leur logique que de leur adoption par les jeunes ».",
+     "pergunta": "De quoi dépend le succès de ces mots ?",
+     "alternativas": [
+      "De leur origine anglaise.",
+      "De leur adoption par les jeunes.",
+      "De leur longueur.",
+      "De leur logique."
+     ],
+     "correta": 1,
+     "transcricao": "Au Québec, l'Office de la langue française propose des équivalents français aux mots anglais : « courriel » pour e-mail, « clavardage » pour chat. Certains sont entrés dans l'usage, d'autres font sourire. Leur succès dépend moins de leur logique que de leur adoption par les jeunes.",
+     "audio": "audio/simulados/tcf-canada-16/co29.mp3"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Ces années sont marquées par des émotions intenses ».",
+     "pergunta": "Pourquoi la musique de l'adolescence nous marque-t-elle autant ?",
+     "alternativas": [
+      "Elle est associée à des émotions intenses.",
+      "Elle est plus simple.",
+      "Elle est de meilleure qualité.",
+      "On l'écoute plus souvent."
+     ],
+     "correta": 0,
+     "transcricao": "La musique que nous écoutons à l'adolescence nous accompagne toute la vie : c'est à cet âge que se fixent nos goûts. Les chercheurs expliquent que ces années sont marquées par des émotions intenses, qui s'associent durablement aux chansons entendues à ce moment-là.",
+     "audio": "audio/simulados/tcf-canada-16/co30.mp3"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« La décroissance choisie plutôt que subie ».",
+     "pergunta": "Quel renversement l'intervenante souligne-t-elle ?",
+     "alternativas": [
+      "Les entreprises quittent les villes.",
+      "Les villes grandissent plus vite.",
+      "Des villes choisissent de ne plus grandir.",
+      "Les villes perdent tous leurs habitants."
+     ],
+     "correta": 2,
+     "transcricao": "On mesure la réussite d'une ville à sa croissance : plus d'habitants, plus d'entreprises. Certaines villes moyennes choisissent pourtant de ne plus grandir, pour préserver leur qualité de vie. C'est un renversement profond : la décroissance choisie plutôt que subie.",
+     "audio": "audio/simulados/tcf-canada-16/co31.mp3"
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Maintenir la langue familiale favorise les apprentissages ».",
+     "pergunta": "Que sait-on aujourd'hui du bilinguisme de ces enfants ?",
+     "alternativas": [
+      "Garder la langue familiale est bénéfique.",
+      "Il retarde les apprentissages.",
+      "Il éloigne les générations.",
+      "Il faut abandonner la langue familiale."
+     ],
+     "correta": 0,
+     "transcricao": "Le bilinguisme des enfants de migrants a longtemps été vu comme un handicap : on conseillait aux parents de ne parler que la langue du pays d'accueil. On sait aujourd'hui que c'était une erreur : maintenir la langue familiale favorise les apprentissages et le lien entre générations.",
+     "audio": "audio/simulados/tcf-canada-16/co32.mp3"
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Favorise les morceaux courts, efficaces ».",
+     "pergunta": "Quel effet a ce mode de rémunération sur la musique ?",
+     "alternativas": [
+      "Il fait disparaître les plateformes.",
+      "Il favorise des morceaux courts et efficaces.",
+      "Il enrichit tous les musiciens.",
+      "Il encourage les longues œuvres."
+     ],
+     "correta": 1,
+     "transcricao": "Les grandes plateformes de musique rémunèrent les artistes au nombre d'écoutes. Or une écoute rapporte une fraction de centime. Pour vivre, un musicien doit être écouté des millions de fois, ce qui favorise les morceaux courts, efficaces, conçus pour ne pas être passés.",
+     "audio": "audio/simulados/tcf-canada-16/co33.mp3"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Des générations et des milieux différents partagent le même plaisir ».",
+     "pergunta": "Selon l'intervenant, qu'est-ce qui fait l'intérêt des bals populaires ?",
+     "alternativas": [
+      "Ils rassemblent des publics très différents.",
+      "Ils sont réservés aux jeunes.",
+      "Ils enseignent des danses difficiles.",
+      "Ils rapportent de l'argent aux villages."
+     ],
+     "correta": 0,
+     "transcricao": "Les bals populaires, qu'on croyait disparus, reviennent sur les places des villages et des quartiers. On y croise des adolescents, des retraités, des familles. Ce qui s'y joue dépasse la danse : c'est l'un des rares espaces où des générations et des milieux différents partagent le même plaisir, sans rien avoir à prouver.",
+     "audio": "audio/simulados/tcf-canada-16/co34.mp3"
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« On regrette leur disparition, tout en pénalisant ceux qui les conservent ».",
+     "pergunta": "Quel paradoxe l'intervenante relève-t-elle ?",
+     "alternativas": [
+      "Les accents sont de plus en plus marqués.",
+      "Les employeurs recherchent des accents.",
+      "On regrette les accents mais on pénalise ceux qui les ont.",
+      "Les médias favorisent les accents."
+     ],
+     "correta": 2,
+     "transcricao": "Les accents régionaux s'effacent peu à peu sous l'influence des médias nationaux. Pourtant, des enquêtes montrent qu'ils restent source de discriminations à l'embauche. On peut y voir un paradoxe : on regrette leur disparition, tout en pénalisant ceux qui les conservent.",
+     "audio": "audio/simulados/tcf-canada-16/co35.mp3"
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« C'est peut-être parce qu'elle échappe au sens ».",
+     "pergunta": "Selon l'intervenant, pourquoi la musique touche-t-elle si directement ?",
+     "alternativas": [
+      "Parce qu'elle raconte des histoires.",
+      "Parce qu'elle est facile à comprendre.",
+      "Parce qu'elle imite la nature.",
+      "Parce qu'elle ne représente rien de précis."
+     ],
+     "correta": 3,
+     "transcricao": "La musique est peut-être le seul art qui ne représente rien. Un tableau montre, un roman raconte ; une sonate, elle, ne désigne aucun objet. Et pourtant, elle nous bouleverse. C'est peut-être parce qu'elle échappe au sens qu'elle touche si directement l'émotion.",
+     "audio": "audio/simulados/tcf-canada-16/co36.mp3"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Le temps utile s'oublie ; le temps gratuit reste ».",
+     "pergunta": "Que suggère l'intervenante ?",
+     "alternativas": [
+      "Le temps « perdu » est souvent le plus mémorable.",
+      "Rêver est une perte de temps.",
+      "Il faut toujours être productif.",
+      "Le temps utile est inoubliable."
+     ],
+     "correta": 0,
+     "transcricao": "Nous parlons volontiers de « perdre du temps », comme si le temps était un capital à placer. Mais le temps que l'on croit perdu, à rêver, à flâner, à converser sans but, est souvent celui dont on se souvient le mieux. Le temps utile s'oublie ; le temps gratuit reste.",
+     "audio": "audio/simulados/tcf-canada-16/co37.mp3"
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Une langue est moins une prison qu'une maison ».",
+     "pergunta": "Comment l'intervenant présente-t-il la langue ?",
+     "alternativas": [
+      "Comme une invention des poètes.",
+      "Comme une maison dont on peut sortir.",
+      "Comme un obstacle à la traduction.",
+      "Comme une prison de la pensée."
+     ],
+     "correta": 1,
+     "transcricao": "Toute langue découpe le monde à sa manière. Mais elle n'enferme pas pour autant la pensée : les traducteurs, les poètes, les enfants bilingues le prouvent chaque jour. Une langue est moins une prison qu'une maison ; on peut en sortir, et l'on y revient changé.",
+     "audio": "audio/simulados/tcf-canada-16/co38.mp3"
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« C'est cette asymétrie qui la rend si précieuse ».",
+     "pergunta": "Qu'est-ce qui rend la confiance précieuse, selon l'intervenante ?",
+     "alternativas": [
+      "Elle se construit lentement mais se perd vite.",
+      "Elle se décrète facilement.",
+      "Elle est gratuite.",
+      "Elle ne se perd jamais."
+     ],
+     "correta": 0,
+     "transcricao": "La confiance ne se décrète pas ; elle se prouve, lentement, et se perd en un instant. C'est cette asymétrie qui la rend si précieuse : ce qui a mis des années à se construire peut être détruit par une seule trahison.",
+     "audio": "audio/simulados/tcf-canada-16/co39.mp3"
+    }
+   ]
+  },
+  "ce": {
+   "nome": "Compréhension écrite",
+   "tempoSeg": 3600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Venir le dimanche.",
+      "Prendre des photos.",
+      "Manger au restaurant.",
+      "Nourrir les animaux."
+     ],
+     "correta": 3,
+     "explicacao": "« Ne pas donner à manger aux animaux ».",
+     "documento": "Ne pas donner à manger aux animaux\nChiens interdits\nOuvert tous les jours",
+     "doc": {
+      "estilo": "placa",
+      "texto": "Ne pas donner à manger aux animaux\nChiens interdits\nOuvert tous les jours",
+      "titulo": "ZOO DE LA BARBEN"
+     },
+     "pergunta": "Qu'est-ce qui est interdit ?"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Au rez-de-chaussée.",
+      "Au 20e étage.",
+      "Au 5e étage.",
+      "Au 2e étage."
+     ],
+     "correta": 3,
+     "explicacao": "« 2e étage ».",
+     "documento": "La fête commence à 20 h. Mon adresse : 5, rue Victor-Hugo, 2e étage. Sonne à « Benali ».",
+     "doc": {
+      "estilo": "sms",
+      "texto": "La fête commence à 20 h. Mon adresse : 5, rue Victor-Hugo, 2e étage. Sonne à « Benali ».",
+      "remetente": "Omar"
+     },
+     "pergunta": "À quel étage habite Omar ?"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "pars",
+      "partent",
+      "partons",
+      "part"
+     ],
+     "correta": 0,
+     "explicacao": "« Tu » → « pars ».",
+     "tipo": "lacuna",
+     "inicio": "Tu…",
+     "fim": "… à quelle heure ?",
+     "pergunta": "Tu ___ à quelle heure ?"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "5 €.",
+      "17 €.",
+      "Rien.",
+      "10 €."
+     ],
+     "correta": 2,
+     "explicacao": "« Entrée gratuite ».",
+     "documento": "École de musique Mozart\nSamedi 17 juin à 17 h\nSalle des fêtes\nEntrée gratuite",
+     "doc": {
+      "estilo": "convite",
+      "texto": "École de musique Mozart\nSamedi 17 juin à 17 h\nSalle des fêtes\nEntrée gratuite",
+      "titulo": "Concert de fin d'année"
+     },
+     "pergunta": "Combien coûte l'entrée ?"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Venir le mardi.",
+      "Aimer chanter.",
+      "Savoir lire la musique.",
+      "Habiter le quartier."
+     ],
+     "correta": 2,
+     "explicacao": "« Pas besoin de savoir lire la musique ».",
+     "documento": "Vous aimez chanter ?\nRejoignez-nous le mardi à 19 h\nà la maison des associations.\nPas besoin de savoir lire la musique !",
+     "doc": {
+      "estilo": "cartaz",
+      "texto": "Vous aimez chanter ?\nRejoignez-nous le mardi à 19 h\nà la maison des associations.\nPas besoin de savoir lire la musique !",
+      "titulo": "Chorale du quartier"
+     },
+     "pergunta": "Qu'est-ce qui n'est pas nécessaire ?"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "lever",
+      "levée",
+      "levé",
+      "lève"
+     ],
+     "correta": 1,
+     "explicacao": "Verbo pronominal, sujeito feminino: « elle s'est levée ».",
+     "tipo": "lacuna",
+     "inicio": "Elle s'est…",
+     "fim": "… à six heures ce matin.",
+     "pergunta": "Elle s'est ___ à six heures ce matin."
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Le réserver à l'avance.",
+      "Arriver avant 7 h.",
+      "Rien, il n'y a pas de parking.",
+      "Le payer à l'arrivée."
+     ],
+     "correta": 0,
+     "explicacao": "« Il faut le réserver à l'avance ».",
+     "documento": "Bonjour,\n\nNous confirmons votre chambre du 3 au 5 août. Le petit-déjeuner est servi de 7 h à 10 h. Le parking est gratuit, mais il faut le réserver à l'avance.\n\nÀ bientôt !",
+     "doc": {
+      "estilo": "email",
+      "texto": "Bonjour,\n\nNous confirmons votre chambre du 3 au 5 août. Le petit-déjeuner est servi de 7 h à 10 h. Le parking est gratuit, mais il faut le réserver à l'avance.\n\nÀ bientôt !",
+      "de": "Hôtel Les Mouettes",
+      "assunto": "Votre réservation"
+     },
+     "pergunta": "Que faut-il faire pour le parking ?"
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Un magasin.",
+      "L'accordeur.",
+      "L'acheteur.",
+      "Le vendeur."
+     ],
+     "correta": 2,
+     "explicacao": "« Transport à prévoir par l'acheteur ».",
+     "documento": "Piano droit, bon état, accordé en mars.\n600 €.\nTransport à prévoir par l'acheteur.\nTél. : 06 23 45 90 18",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Piano droit, bon état, accordé en mars.\n600 €.\nTransport à prévoir par l'acheteur.\nTél. : 06 23 45 90 18",
+      "titulo": "À VENDRE"
+     },
+     "pergunta": "Qui doit s'occuper du transport ?"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "pendant",
+      "il y a",
+      "dans",
+      "depuis"
+     ],
+     "correta": 3,
+     "explicacao": "Ação que continua: « depuis cinq ans ».",
+     "tipo": "lacuna",
+     "inicio": "Nous habitons ici…",
+     "fim": "… cinq ans.",
+     "pergunta": "Nous habitons ici ___ cinq ans."
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "À la mairie.",
+      "À l'accueil.",
+      "À n'importe quelle heure dans la boîte.",
+      "Dans la boîte."
+     ],
+     "correta": 1,
+     "explicacao": "« Les DVD doivent être rendus à l'accueil ».",
+     "documento": "Nouveau : les livres peuvent être rendus 24 h/24\ndans la boîte située à droite de l'entrée.\nLes DVD doivent être rendus à l'accueil.",
+     "doc": {
+      "estilo": "aviso",
+      "texto": "Nouveau : les livres peuvent être rendus 24 h/24\ndans la boîte située à droite de l'entrée.\nLes DVD doivent être rendus à l'accueil.",
+      "titulo": "Médiathèque — Information"
+     },
+     "pergunta": "Où faut-il rendre les DVD ?"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Se promener au sommet.",
+      "Prendre des photos.",
+      "S'approcher du bord des falaises.",
+      "Visiter Étretat en été."
+     ],
+     "correta": 2,
+     "explicacao": "« Il est interdit de s'approcher du bord ».",
+     "documento": "À Étretat, en Normandie, les falaises de craie blanche attirent chaque année des foules de visiteurs. Pour protéger le site et éviter les accidents, la promenade au sommet est limitée aux sentiers balisés, et il est interdit de s'approcher du bord.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Étretat, en Normandie, les falaises de craie blanche attirent chaque année des foules de visiteurs. Pour protéger le site et éviter les accidents, la promenade au sommet est limitée aux sentiers balisés, et il est interdit de s'approcher du bord."
+     },
+     "pergunta": "Qu'est-ce qui est interdit ?"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "venez",
+      "veniez",
+      "viendrez",
+      "viendriez"
+     ],
+     "correta": 1,
+     "explicacao": "« Vouloir que » + subjuntivo: « que vous veniez ».",
+     "tipo": "lacuna",
+     "inicio": "Je voudrais que vous…",
+     "fim": "… plus tôt demain.",
+     "pergunta": "Je voudrais que vous ___ plus tôt demain."
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Des amis musiciens.",
+      "Un nouveau travail.",
+      "De la confiance en elle.",
+      "Une belle voix."
+     ],
+     "correta": 2,
+     "explicacao": "« Aujourd'hui, j'ose prendre la parole ».",
+     "documento": "Courrier des lecteurs\nJ'ai adoré votre article sur les chorales. Timide depuis toujours, j'ai rejoint une chorale il y a un an. Aujourd'hui, j'ose prendre la parole en réunion au travail !\nIsabelle, Lorient",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Courrier des lecteurs\nJ'ai adoré votre article sur les chorales. Timide depuis toujours, j'ai rejoint une chorale il y a un an. Aujourd'hui, j'ose prendre la parole en réunion au travail !\nIsabelle, Lorient"
+     },
+     "pergunta": "Qu'a apporté la chorale à Isabelle ?"
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Des places assises pour tous.",
+      "Des boissons gratuites.",
+      "Des bouchons d'oreille gratuits.",
+      "Des casques audio."
+     ],
+     "correta": 2,
+     "explicacao": "« Distribuer gratuitement des bouchons d'oreille ».",
+     "documento": "Dans les concerts et les discothèques, le volume sonore ne doit pas dépasser 102 décibels en moyenne. Les organisateurs doivent distribuer gratuitement des bouchons d'oreille et prévoir une zone de repos, plus calme.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "Dans les concerts et les discothèques, le volume sonore ne doit pas dépasser 102 décibels en moyenne. Les organisateurs doivent distribuer gratuitement des bouchons d'oreille et prévoir une zone de repos, plus calme.",
+      "titulo": "Protéger son audition",
+      "rubrica": "SANTÉ"
+     },
+     "pergunta": "Que doivent fournir les organisateurs ?"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Le voyage en Irlande.",
+      "Le repas écossais.",
+      "La grande parade du dimanche.",
+      "Le concert d'ouverture."
+     ],
+     "correta": 2,
+     "explicacao": "« Le plus beau moment : la grande parade du dimanche ».",
+     "documento": "Trois jours au Festival interceltique de Lorient. J'ai découvert des musiques d'Écosse, d'Irlande et de Galice. Le plus beau moment : la grande parade du dimanche, avec des milliers de musiciens en costume traditionnel.",
+     "doc": {
+      "estilo": "caderno",
+      "texto": "Trois jours au Festival interceltique de Lorient. J'ai découvert des musiques d'Écosse, d'Irlande et de Galice. Le plus beau moment : la grande parade du dimanche, avec des milliers de musiciens en costume traditionnel."
+     },
+     "pergunta": "Quel a été le moment préféré de l'auteur ?"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "L'échange dure trois mois.",
+      "La famille cherche un appartement à Paris.",
+      "La voiture n'est pas comprise.",
+      "Les animaux ne sont pas acceptés."
+     ],
+     "correta": 3,
+     "explicacao": "« Animaux non acceptés ».",
+     "documento": "Famille de Québec (2 enfants) propose d'échanger sa maison contre un logement en Bretagne, 3 semaines en juillet.\nVoiture comprise dans l'échange.\nAnimaux non acceptés (allergie).",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Famille de Québec (2 enfants) propose d'échanger sa maison contre un logement en Bretagne, 3 semaines en juillet.\nVoiture comprise dans l'échange.\nAnimaux non acceptés (allergie).",
+      "titulo": "ÉCHANGE DE MAISON"
+     },
+     "pergunta": "Qu'est-ce qui est précisé ?"
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "pour",
+      "par",
+      "de",
+      "à"
+     ],
+     "correta": 3,
+     "explicacao": "« Grâce à ».",
+     "tipo": "lacuna",
+     "inicio": "Elle a réussi grâce…",
+     "fim": "… l'aide de ses amis.",
+     "pergunta": "Elle a réussi grâce ___ l'aide de ses amis."
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Ceux du midi.",
+      "Aucun concert.",
+      "Ceux du Théâtre antique.",
+      "Tous les concerts."
+     ],
+     "correta": 2,
+     "explicacao": "« Billets pour le Théâtre antique : réservation obligatoire ».",
+     "documento": "Du 8 au 14 juillet, à Arles.\nMusiques du monde dans les cours et places de la ville.\nConcerts gratuits le midi.\nBillets pour le Théâtre antique : réservation obligatoire.",
+     "doc": {
+      "estilo": "festival",
+      "texto": "Du 8 au 14 juillet, à Arles.\nMusiques du monde dans les cours et places de la ville.\nConcerts gratuits le midi.\nBillets pour le Théâtre antique : réservation obligatoire.",
+      "titulo": "Festival des Suds"
+     },
+     "pergunta": "Pour quels concerts faut-il réserver ?"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Il remplace les médicaments.",
+      "Il guérit la maladie.",
+      "Il les aide à travailler la voix et la respiration.",
+      "Il leur permet de gagner de l'argent."
+     ],
+     "correta": 2,
+     "explicacao": "« Chanter les aide à travailler leur voix et leur respiration ».",
+     "documento": "À Angers, une chorale réunit des personnes atteintes de la maladie de Parkinson. Chanter les aide à travailler leur voix et leur respiration, souvent affaiblies par la maladie. Le groupe donne même un concert chaque année à Noël.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Angers, une chorale réunit des personnes atteintes de la maladie de Parkinson. Chanter les aide à travailler leur voix et leur respiration, souvent affaiblies par la maladie. Le groupe donne même un concert chaque année à Noël."
+     },
+     "pergunta": "Qu'apporte le chant aux membres de cette chorale ?"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les salaires baissent.",
+      "Elles manquent de profils parlant allemand.",
+      "L'Allemagne n'est plus un partenaire.",
+      "Les élèves apprennent trop l'allemand."
+     ],
+     "correta": 1,
+     "explicacao": "« Elles peinent à recruter des profils bilingues ».",
+     "documento": "Le nombre d'élèves apprenant l'allemand recule en France, alors que l'Allemagne reste le premier partenaire économique du pays. Les entreprises s'inquiètent : elles peinent à recruter des profils bilingues, pourtant très recherchés.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Le nombre d'élèves apprenant l'allemand recule en France, alors que l'Allemagne reste le premier partenaire économique du pays. Les entreprises s'inquiètent : elles peinent à recruter des profils bilingues, pourtant très recherchés."
+     },
+     "pergunta": "Pourquoi les entreprises s'inquiètent-elles ?"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "saurait",
+      "savait",
+      "sache",
+      "sait"
+     ],
+     "correta": 1,
+     "explicacao": "« Comme si » + imparfait: « comme s'il savait ».",
+     "tipo": "lacuna",
+     "inicio": "Il parle comme s'il…",
+     "fim": "… tout.",
+     "pergunta": "Il parle comme s'il ___ tout."
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "À gagner de l'argent.",
+      "À former des musiciens.",
+      "À célébrer la gloire du roi.",
+      "À divertir le peuple."
+     ],
+     "correta": 2,
+     "explicacao": "« Servaient à célébrer la gloire du roi ».",
+     "documento": "Au XVIIe siècle, Louis XIV fonda l'Académie royale de musique, ancêtre de l'Opéra de Paris. La musique devint alors un instrument de prestige politique : les grands spectacles servaient à célébrer la gloire du roi devant la cour et les ambassadeurs étrangers.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "Au XVIIe siècle, Louis XIV fonda l'Académie royale de musique, ancêtre de l'Opéra de Paris. La musique devint alors un instrument de prestige politique : les grands spectacles servaient à célébrer la gloire du roi devant la cour et les ambassadeurs étrangers."
+     },
+     "pergunta": "À quoi servaient les grands spectacles ?"
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Ils favorisent l'anglais.",
+      "Ils interdisent les chansons étrangères.",
+      "Ils entraînent la répétition des mêmes titres.",
+      "Ils coûtent cher aux auditeurs."
+     ],
+     "correta": 2,
+     "explicacao": "« Poussent les radios à diffuser toujours les mêmes titres ».",
+     "documento": "Faut-il imposer des quotas de chansons francophones à la radio ? Pour leurs défenseurs, ils protègent la création locale face aux géants anglophones. Pour leurs critiques, ils poussent les radios à diffuser toujours les mêmes titres, et ne favorisent pas vraiment les nouveaux talents.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "Faut-il imposer des quotas de chansons francophones à la radio ? Pour leurs défenseurs, ils protègent la création locale face aux géants anglophones. Pour leurs critiques, ils poussent les radios à diffuser toujours les mêmes titres, et ne favorisent pas vraiment les nouveaux talents."
+     },
+     "pergunta": "Que reprochent les critiques aux quotas ?"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les chants se transmettent d'un groupe à l'autre.",
+      "Les chants restent toujours identiques.",
+      "Les baleines ne chantent qu'une fois.",
+      "Les baleines chantent pour les humains."
+     ],
+     "correta": 0,
+     "explicacao": "« Peut se propager à d'autres groupes… comme une mode ».",
+     "documento": "Les baleines à bosse chantent des chants complexes qui évoluent chaque année. Fait surprenant : une nouvelle chanson apparue dans une population peut se propager à d'autres groupes, à des milliers de kilomètres, comme une mode.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "Les baleines à bosse chantent des chants complexes qui évoluent chaque année. Fait surprenant : une nouvelle chanson apparue dans une population peut se propager à d'autres groupes, à des milliers de kilomètres, comme une mode."
+     },
+     "pergunta": "Qu'est-ce qui est surprenant ?"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Le prix des billets.",
+      "Les récits de la chanteuse.",
+      "Les musiciens.",
+      "Les décors."
+     ],
+     "correta": 1,
+     "explicacao": "« Ce sont surtout ses histoires… qui ont conquis le public ».",
+     "documento": "Le nouveau spectacle de la chanteuse québécoise Émilie Tremblay alterne chansons et récits de sa jeunesse en Gaspésie. Sa voix est magnifique, mais ce sont surtout ses histoires, drôles et touchantes, qui ont conquis le public parisien.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Le nouveau spectacle de la chanteuse québécoise Émilie Tremblay alterne chansons et récits de sa jeunesse en Gaspésie. Sa voix est magnifique, mais ce sont surtout ses histoires, drôles et touchantes, qui ont conquis le public parisien."
+     },
+     "pergunta": "Qu'est-ce qui a surtout conquis le public ?"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "de",
+      "par",
+      "pour",
+      "à"
+     ],
+     "correta": 0,
+     "explicacao": "« En raison de ».",
+     "tipo": "lacuna",
+     "inicio": "Le concert a été annulé en raison…",
+     "fim": "… la tempête.",
+     "pergunta": "Le concert a été annulé en raison ___ la tempête."
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Acheter un siège supplémentaire.",
+      "Le démonter.",
+      "Le laisser dans le compartiment à bagages.",
+      "Le mettre en soute."
+     ],
+     "correta": 0,
+     "explicacao": "« Il faut acheter un siège supplémentaire ».",
+     "documento": "La plupart des compagnies aériennes acceptent en cabine un petit instrument, comme un violon, s'il tient dans le compartiment à bagages. Pour un violoncelle, il faut acheter un siège supplémentaire à son nom : l'instrument voyage alors comme un passager.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "La plupart des compagnies aériennes acceptent en cabine un petit instrument, comme un violon, s'il tient dans le compartiment à bagages. Pour un violoncelle, il faut acheter un siège supplémentaire à son nom : l'instrument voyage alors comme un passager.",
+      "titulo": "Voyager avec un instrument",
+      "rubrica": "VOYAGE"
+     },
+     "pergunta": "Que faut-il faire pour voyager avec un violoncelle en cabine ?"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les vinyles sont gratuits.",
+      "Beaucoup d'acheteurs n'ont pas de quoi écouter leurs disques.",
+      "Les pochettes sont laides.",
+      "Les artistes refusent les vinyles."
+     ],
+     "correta": 1,
+     "explicacao": "« Une grande partie des acheteurs ne possède pas de platine ».",
+     "documento": "Les disques vinyles, qu'on croyait disparus, se vendent à nouveau. Paradoxe : une grande partie des acheteurs ne possède pas de platine. Le vinyle est devenu un objet de collection, que l'on achète pour soutenir un artiste ou pour la beauté de la pochette.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les disques vinyles, qu'on croyait disparus, se vendent à nouveau. Paradoxe : une grande partie des acheteurs ne possède pas de platine. Le vinyle est devenu un objet de collection, que l'on achète pour soutenir un artiste ou pour la beauté de la pochette."
+     },
+     "pergunta": "Quel paradoxe est relevé ?"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les familles viennent moins.",
+      "Les enfants sont fatigués.",
+      "Les résidents sont plus actifs et souriants.",
+      "Les résidents sont gênés par le bruit."
+     ],
+     "correta": 2,
+     "explicacao": "« Les résidents sont plus souriants et plus actifs ».",
+     "documento": "À Genève, une maison de retraite accueille une crèche dans ses murs. Chaque matin, enfants et résidents partagent des activités : chant, dessin, jardinage. Les soignants observent que les résidents sont plus souriants et plus actifs.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Genève, une maison de retraite accueille une crèche dans ses murs. Chaque matin, enfants et résidents partagent des activités : chant, dessin, jardinage. Les soignants observent que les résidents sont plus souriants et plus actifs."
+     },
+     "pergunta": "Qu'observent les soignants ?"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Les monuments sont inutiles.",
+      "Les chansons conservent une mémoire que l'histoire écrite néglige.",
+      "Les chansons déforment l'histoire.",
+      "Les livres d'histoire sont complets."
+     ],
+     "correta": 1,
+     "explicacao": "« Ils conservent parfois des événements que les livres d'histoire ont oubliés ».",
+     "documento": "On croit que la mémoire des peuples se trouve dans les monuments. Elle vit aussi dans les chansons : berceuses, chants de travail, refrains de manifestation. Transmis de bouche à oreille, ils conservent parfois des événements que les livres d'histoire ont oubliés.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "On croit que la mémoire des peuples se trouve dans les monuments. Elle vit aussi dans les chansons : berceuses, chants de travail, refrains de manifestation. Transmis de bouche à oreille, ils conservent parfois des événements que les livres d'histoire ont oubliés."
+     },
+     "pergunta": "Que suggère l'auteur ?"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "de",
+      "à",
+      "par",
+      "pour"
+     ],
+     "correta": 2,
+     "explicacao": "« Non par manque de…, mais faute de… »: causa introduzida por « par ».",
+     "tipo": "lacuna",
+     "inicio": "Le projet a échoué, non…",
+     "fim": "… manque de moyens, mais faute de volonté.",
+     "pergunta": "Le projet a échoué, non ___ manque de moyens, mais faute de volonté."
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Elles favorisent le mariage.",
+      "Elles rendent l'engagement plus difficile.",
+      "Elles sont peu utilisées.",
+      "Elles réduisent les possibilités."
+     ],
+     "correta": 1,
+     "explicacao": "« Certains utilisateurs ont du mal à s'engager ».",
+     "documento": "Les applications de rencontre ont bouleversé la vie amoureuse. Elles élargissent les possibilités, mais transforment aussi la rencontre en catalogue : face à une offre apparemment infinie, certains utilisateurs ont du mal à s'engager, persuadés qu'une meilleure option existe ailleurs.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les applications de rencontre ont bouleversé la vie amoureuse. Elles élargissent les possibilités, mais transforment aussi la rencontre en catalogue : face à une offre apparemment infinie, certains utilisateurs ont du mal à s'engager, persuadés qu'une meilleure option existe ailleurs."
+     },
+     "pergunta": "Quel effet des applications l'article souligne-t-il ?"
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Comme une source de richesse.",
+      "Comme un lien fragile avec le passé.",
+      "Comme un remède miracle.",
+      "Comme un obstacle."
+     ],
+     "correta": 1,
+     "explicacao": "« Un fil fragile qui relie le personnage à ce qu'il a perdu ».",
+     "documento": "Ce roman suit un jeune violoniste syrien réfugié à Vienne, qui tente de reconstruire sa vie par la musique. L'auteur évite le misérabilisme : la musique n'y est pas un remède miracle, mais un fil fragile qui relie le personnage à ce qu'il a perdu.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "Ce roman suit un jeune violoniste syrien réfugié à Vienne, qui tente de reconstruire sa vie par la musique. L'auteur évite le misérabilisme : la musique n'y est pas un remède miracle, mais un fil fragile qui relie le personnage à ce qu'il a perdu."
+     },
+     "pergunta": "Comment la musique est-elle présentée dans ce roman ?"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "qu'il",
+      "s'il",
+      "qui",
+      "comme il"
+     ],
+     "correta": 0,
+     "explicacao": "« Tout + adjectif + que » + subjuntivo (concessão): « tout talentueux qu'il soit ».",
+     "tipo": "lacuna",
+     "inicio": "Tout talentueux…",
+     "fim": "… soit, il doit encore travailler sa technique.",
+     "pergunta": "Tout talentueux ___ soit, il doit encore travailler sa technique."
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Dans les discours politiques.",
+      "Dans les réseaux sociaux.",
+      "Dans les familles uniquement.",
+      "Dans les lieux ordinaires de rencontre."
+     ],
+     "correta": 3,
+     "explicacao": "« Il se construit dans des lieux ordinaires ».",
+     "documento": "Le vivre-ensemble ne se décrète pas par des discours. Il se construit dans des lieux ordinaires : le marché, le club de sport, la cour d'école, où des gens différents se croisent sans l'avoir choisi. Supprimer ces lieux, c'est condamner chacun à ne rencontrer que ses semblables.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "Le vivre-ensemble ne se décrète pas par des discours. Il se construit dans des lieux ordinaires : le marché, le club de sport, la cour d'école, où des gens différents se croisent sans l'avoir choisi. Supprimer ces lieux, c'est condamner chacun à ne rencontrer que ses semblables."
+     },
+     "pergunta": "Où se construit le vivre-ensemble, selon l'auteur ?"
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Il faut préparer ses réponses.",
+      "Parler est plus difficile qu'écouter.",
+      "Les conversations sont toujours sincères.",
+      "La plupart des gens n'écoutent pas vraiment."
+     ],
+     "correta": 3,
+     "explicacao": "« Des monologues alternés ».",
+     "documento": "Écouter est plus difficile que parler. Il faut suspendre ses propres certitudes, accepter que l'autre nous surprenne, renoncer à préparer sa réponse pendant qu'il s'exprime. La plupart des conversations ne sont que des monologues alternés.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "Écouter est plus difficile que parler. Il faut suspendre ses propres certitudes, accepter que l'autre nous surprenne, renoncer à préparer sa réponse pendant qu'il s'exprime. La plupart des conversations ne sont que des monologues alternés."
+     },
+     "pergunta": "Que suggère l'auteur ?"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "par",
+      "à",
+      "pour",
+      "de"
+     ],
+     "correta": 1,
+     "explicacao": "« Jusqu'à » (inclusive): « jusqu'à sa santé ».",
+     "tipo": "lacuna",
+     "inicio": "Il a tout sacrifié à la musique, jusqu'…",
+     "fim": "… sa santé.",
+     "pergunta": "Il a tout sacrifié à la musique, jusqu' ___ sa santé."
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "L'admiration fait souffrir.",
+      "L'admiration se réjouit d'une grandeur sans vouloir la posséder.",
+      "Elles n'ont aucun point commun.",
+      "L'envie élève celui qui l'éprouve."
+     ],
+     "correta": 1,
+     "explicacao": "« Admirer, c'est reconnaître une grandeur sans vouloir la posséder ».",
+     "documento": "L'admiration et l'envie naissent du même regard porté sur ce qui nous dépasse. Mais l'une s'en réjouit, l'autre en souffre. Admirer, c'est reconnaître une grandeur sans vouloir la posséder ; envier, c'est ne pas supporter qu'elle appartienne à un autre. La première élève, la seconde ronge.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "L'admiration et l'envie naissent du même regard porté sur ce qui nous dépasse. Mais l'une s'en réjouit, l'autre en souffre. Admirer, c'est reconnaître une grandeur sans vouloir la posséder ; envier, c'est ne pas supporter qu'elle appartienne à un autre. La première élève, la seconde ronge."
+     },
+     "pergunta": "Qu'est-ce qui distingue l'admiration de l'envie ?"
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Comme une forme d'égoïsme.",
+      "Comme le refus de tout changement.",
+      "Comme une contrainte.",
+      "Comme la capacité d'évoluer avec ce qu'on aime."
+     ],
+     "correta": 3,
+     "explicacao": "« Accepter qu'ils changent, et changer avec eux ».",
+     "documento": "La fidélité n'est pas l'immobilité. Rester fidèle à un ami, à une idée, à une vocation, c'est accepter qu'ils changent, et changer avec eux. La fidélité rigide, qui refuse toute évolution, n'est souvent qu'un attachement à soi-même.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "La fidélité n'est pas l'immobilité. Rester fidèle à un ami, à une idée, à une vocation, c'est accepter qu'ils changent, et changer avec eux. La fidélité rigide, qui refuse toute évolution, n'est souvent qu'un attachement à soi-même."
+     },
+     "pergunta": "Comment l'auteur conçoit-il la fidélité ?"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 3600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1",
+     "min": 60,
+     "max": 120,
+     "consigne": "Vous organisez une petite fête pour l'anniversaire d'un(e) collègue. Vous écrivez un message aux autres collègues pour les inviter, sans que la personne le sache, et leur demander de participer au cadeau."
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2",
+     "min": 120,
+     "max": 150,
+     "consigne": "Une chanson ou une musique a marqué un moment important de votre vie. Vous racontez ce souvenir dans un article pour le blog d'une radio et vous expliquez pourquoi cette musique compte pour vous."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3",
+     "min": 120,
+     "max": 180,
+     "consigne": "« Faut-il apprendre une langue étrangère dès l'école maternelle ? » Rédigez un texte en deux parties. 1) Présentez les deux points de vue des documents ci-dessous (40 à 60 mots). 2) Donnez votre opinion en l'argumentant (80 à 120 mots).",
+     "documentos": [
+      {
+       "titulo": "Document 1 — Le plus tôt possible",
+       "texto": "Les jeunes enfants apprennent les langues naturellement, sans effort, et acquièrent un meilleur accent. Commencer dès la maternelle ouvre l'esprit à d'autres cultures et facilite l'apprentissage d'autres langues plus tard."
+      },
+      {
+       "titulo": "Document 2 — D'abord la langue maternelle",
+       "texto": "À trois ou quatre ans, l'enfant maîtrise encore mal sa propre langue. Quelques minutes d'anglais par semaine, souvent avec des enseignants peu formés, ne servent pas à grand-chose. Mieux vaut consolider les bases."
+      }
+     ]
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 900,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur : vous parlez de vous, de votre parcours, de vos activités et de vos projets.",
+     "perguntasExaminador": [
+      "Bonjour. Pouvez-vous vous présenter, s'il vous plaît ?",
+      "Jouez-vous d'un instrument de musique ?",
+      "Pourquoi apprenez-vous le français ?",
+      "Comment imaginez-vous votre vie au Canada ?"
+     ]
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Vous voulez louer un piano numérique pour apprendre à jouer. Vous téléphonez à un magasin de musique pour obtenir des informations (modèles, prix, durée, livraison, entretien, achat, cours, etc.).",
+     "perguntasExaminador": [
+      "Magasin Harmonie, bonjour ! Que puis-je faire pour vous ?"
+     ],
+     "fichaExaminador": "Vous êtes le/la vendeur(se) du magasin Harmonie. Location de pianos numériques : modèle débutant 29 € par mois, modèle avec toucher lourd 45 € par mois ; durée minimum de six mois. Livraison et installation : 40 € (gratuites pour un an de location). Casque audio offert. Option d'achat : les loyers payés sont déduits du prix si vous achetez dans l'année. Pas d'entretien nécessaire ; garantie incluse. Le magasin propose aussi des cours (25 € la demi-heure). Laissez le candidat mener l'échange ; relancez-le s'il se tait (« Autre chose ? »)."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Pour bien s'intégrer dans un nouveau pays, il faut d'abord en maîtriser la langue. » Qu'en pensez-vous ? Vous donnez votre opinion et vous l'argumentez à l'aide d'exemples.",
+     "perguntasExaminador": [
+      "Pour bien s'intégrer dans un nouveau pays, il faut d'abord en maîtriser la langue. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et le travail, n'est-il pas plus important ? », « Peut-on s'intégrer sans parler parfaitement ? », « Que fait votre pays pour accueillir les nouveaux arrivants ? »."
+    }
+   ]
+  }
+ }
+}

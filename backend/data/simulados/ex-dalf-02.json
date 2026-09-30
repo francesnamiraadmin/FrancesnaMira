@@ -1,0 +1,143 @@
+{
+ "slug": "ex-dalf-02",
+ "titulo": "Exercício oral nº 2 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "Télétravail et territoires",
+ "descricao": "O teletrabalho redesenha as cidades: migrações para cidades médias, escritórios vazios, desigualdades.",
+ "imagem": {
+  "src": "img/temas/dalf-c1-synthese-teletravail-ville-2.jpg",
+  "credito": {
+   "autor": "Elliott Brown from Birmingham, United Kingdom",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Town_Hall,_Market_Place,_Wells_(3662857247).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-02/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que explica a mudança.",
+     "alternativas": [
+      "Non, je suis né à Lyon.",
+      "Oui, Paris est une capitale.",
+      "Oui, je télétravaille trois jours sur cinq.",
+      "Angers est une ville."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as vraiment quitté Paris pour Angers ?\nA. Non, je suis né à Lyon.\nB. Oui, Paris est une capitale.\nC. Oui, je télétravaille trois jours sur cinq.\nD. Angers est une ville.",
+     "audio": "audio/exercicios-orais/ex-dalf-02/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Les prix de l'immobilier y ont augmenté de près de vingt pour cent ».",
+     "alternativas": [
+      "La construction de bureaux.",
+      "La baisse de la population.",
+      "La fermeture des gares.",
+      "La hausse des prix de l'immobilier."
+     ],
+     "correta": 3,
+     "pergunta": "Quelle conséquence est évoquée ?",
+     "transcricao": "Depuis 2020, les villes moyennes situées à moins de deux heures de train des métropoles ont vu arriver de nouveaux habitants. Conséquence : les prix de l'immobilier y ont augmenté de près de vingt pour cent.",
+     "audio": "audio/exercicios-orais/ex-dalf-02/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Une fracture entre ceux qui choisissent leur lieu de vie et ceux qui le subissent ».",
+     "alternativas": [
+      "Une fracture entre ceux qui peuvent choisir leur lieu de vie et les autres.",
+      "La baisse des salaires des cadres.",
+      "La disparition des métiers manuels.",
+      "La fin du travail en équipe."
+     ],
+     "correta": 0,
+     "pergunta": "Quel risque l'intervenante souligne-t-elle ?",
+     "transcricao": "Le télétravail profite surtout aux cadres. Une caissière, un infirmier, un ouvrier ne peuvent pas travailler depuis chez eux. On risque de voir se creuser une fracture entre ceux qui choisissent leur lieu de vie et ceux qui le subissent.",
+     "audio": "audio/exercicios-orais/ex-dalf-02/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta com uma solução concreta.",
+     "alternativas": [
+      "Le centre-ville est joli.",
+      "Certaines villes les transforment déjà en logements.",
+      "Je travaille au bureau le mardi.",
+      "Ils sont très grands."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Les bureaux vides en centre-ville, on en fait quoi ?\nA. Le centre-ville est joli.\nB. Certaines villes les transforment déjà en logements.\nC. Je travaille au bureau le mardi.\nD. Ils sont très grands.",
+     "audio": "audio/exercicios-orais/ex-dalf-02/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« C'est un lieu de rencontres imprévues ».",
+     "alternativas": [
+      "Le télétravail y est interdit.",
+      "Elles offrent des rencontres imprévues.",
+      "Elles sont moins chères.",
+      "Elles concentrent les emplois."
+     ],
+     "correta": 1,
+     "pergunta": "Pourquoi les villes résistent-elles, selon l'intervenante ?",
+     "transcricao": "On a annoncé la mort des villes à chaque innovation : le téléphone, puis Internet. Chaque fois, elles ont résisté, parce que la ville n'est pas seulement un lieu de travail, c'est un lieu de rencontres imprévues. Le télétravail modifie leur géographie ; il ne supprime pas ce besoin.",
+     "audio": "audio/exercicios-orais/ex-dalf-02/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — exposé et entretien (C1)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "Document de départ : « Avec le télétravail, un cadre sur quatre envisage de quitter la métropole. Le télétravail est-il une chance pour les territoires ? » Vous présentez un exposé structuré (problématique, plan, arguments illustrés d'exemples) puis vous répondez aux questions de l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre exposé."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : désertification des centres, prix de l'immobilier local, isolement des salariés, services publics dans les villes moyennes."
+    }
+   ]
+  }
+ }
+}

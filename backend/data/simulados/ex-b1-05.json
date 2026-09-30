@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b1-05",
+ "titulo": "Exercício oral nº 5 — B1",
+ "curso": "B1",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Moins de déchets",
+ "descricao": "Reduzir o lixo: compostagem, compras a granel e novas regras da prefeitura.",
+ "imagem": {
+  "src": "img/temas/b1-zero-dechet-2.jpg",
+  "credito": {
+   "autor": "Michal Klajban",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Richmond_Community_Garden_-_compost_bins,_Richmond,_Christchurch,_New_Zealand.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b1-05/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre o lixo orgânico.",
+     "alternativas": [
+      "Les épluchures sont vertes.",
+      "Dans le frigo.",
+      "Je les mange.",
+      "Dans le composteur, au fond du jardin."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Où est-ce que je mets les épluchures ?\nA. Les épluchures sont vertes.\nB. Dans le frigo.\nC. Je les mange.\nD. Dans le composteur, au fond du jardin.",
+     "audio": "audio/exercicios-orais/ex-b1-05/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Collectés séparément dans des bacs marron ».",
+     "alternativas": [
+      "Ils seront collectés une fois par mois.",
+      "Ils ne seront plus collectés.",
+      "Ils iront avec les ordures ménagères.",
+      "Ils seront collectés séparément dans des bacs marron."
+     ],
+     "correta": 3,
+     "pergunta": "Que se passe-t-il pour les déchets alimentaires ?",
+     "transcricao": "À partir du premier janvier, la collecte des ordures ménagères passera à une fois par semaine. Les déchets alimentaires seront collectés séparément dans des bacs marron, deux fois par semaine.",
+     "audio": "audio/exercicios-orais/ex-b1-05/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Notre poubelle a diminué de moitié ».",
+     "alternativas": [
+      "Sa poubelle a diminué de moitié.",
+      "Elle économise beaucoup d'argent.",
+      "Elle achète plus de produits.",
+      "Elle n'a plus de poubelle."
+     ],
+     "correta": 0,
+     "pergunta": "Quel résultat a-t-elle obtenu ?",
+     "transcricao": "Depuis un an, j'achète en vrac, avec mes bocaux. Notre poubelle a diminué de moitié. Ce n'est pas toujours moins cher, mais j'achète seulement ce dont j'ai besoin.",
+     "audio": "audio/exercicios-orais/ex-b1-05/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Correção de uma ideia falsa.",
+     "alternativas": [
+      "Le recyclage est vert.",
+      "Oui, j'ai trié mes livres.",
+      "C'est une idée fausse : les matières triées sont vraiment recyclées.",
+      "Non, je n'ai pas de poubelle."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Le tri, ça ne sert à rien si tout finit au même endroit !\nA. Le recyclage est vert.\nB. Oui, j'ai trié mes livres.\nC. C'est une idée fausse : les matières triées sont vraiment recyclées.\nD. Non, je n'ai pas de poubelle.",
+     "audio": "audio/exercicios-orais/ex-b1-05/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Réduire à la source… est bien plus efficace ».",
+     "alternativas": [
+      "Construire des usines de tri.",
+      "Réduire les déchets à la source.",
+      "Brûler les déchets.",
+      "Recycler davantage."
+     ],
+     "correta": 1,
+     "pergunta": "Selon l'intervenant, qu'est-ce qui est le plus efficace ?",
+     "transcricao": "Le meilleur déchet est celui qu'on ne produit pas. Recycler consomme de l'énergie et de l'eau ; réduire à la source, en évitant les emballages ou en réparant les objets, est bien plus efficace pour l'environnement.",
+     "audio": "audio/exercicios-orais/ex-b1-05/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 120,
+     "consigne": "Vous voulez réduire vos déchets. Vous allez dans une épicerie en vrac pour la première fois et vous posez des questions au vendeur (fonctionnement, produits, prix, contenants).",
+     "perguntasExaminador": [
+      "Bonjour ! C'est votre première visite chez nous ?"
+     ],
+     "fichaExaminador": "Vous êtes le/la vendeur(se). On pèse d'abord son contenant vide. Bocaux en vente 2 € ou prêtés contre consigne. Produits : pâtes, riz, céréales, épices, savon, huile. Prix au kilo, souvent 10–20 % moins chers. Carte de fidélité : 10e achat -10 %. Laissez le candidat mener l'échange ; relancez-le s'il se tait."
+    }
+   ]
+  }
+ }
+}

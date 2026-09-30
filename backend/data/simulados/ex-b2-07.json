@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b2-07",
+ "titulo": "Exercício oral nº 7 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Faire lire les ados",
+ "descricao": "Leitura na adolescência: bibliotecas escolares, mangás e clubes de leitura.",
+ "imagem": {
+  "src": "img/temas/b2-lecture-jeunes-2.jpg",
+  "credito": {
+   "autor": "Ktkvtsh",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Student_wearing_mask_and_reading_in_library.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-07/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta com evolução.",
+     "alternativas": [
+      "Oui, il a quatorze ans.",
+      "Oui, et maintenant il lit aussi des romans !",
+      "Le manga est japonais.",
+      "Non, il est au collège."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Ton fils lit encore des mangas ?\nA. Oui, il a quatorze ans.\nB. Oui, et maintenant il lit aussi des romans !\nC. Le manga est japonais.\nD. Non, il est au collège.",
+     "audio": "audio/exercicios-orais/ex-b2-07/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Tout le monde lit : élèves, professeurs, cuisiniers, directeur ».",
+     "alternativas": [
+      "Tout le monde dans le collège.",
+      "Seulement les élèves.",
+      "Les professeurs de français.",
+      "Seulement les bons lecteurs."
+     ],
+     "correta": 0,
+     "pergunta": "Qui participe à ce quart d'heure de lecture ?",
+     "transcricao": "Dans notre collège, chaque jour de dix heures à dix heures quinze, tout le monde lit : élèves, professeurs, cuisiniers, directeur. Le livre est au choix, même une bande dessinée.",
+     "audio": "audio/exercicios-orais/ex-b2-07/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« C'est une série fantastique conseillée par la bibliothécaire ».",
+     "alternativas": [
+      "Les classiques du collège.",
+      "Une série fantastique conseillée par la bibliothécaire.",
+      "Ses parents.",
+      "Un film."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'est-ce qui l'a réconciliée avec la lecture ?",
+     "transcricao": "Je détestais lire parce qu'au collège, on m'imposait des classiques trop difficiles. C'est une série fantastique conseillée par la bibliothécaire qui m'a réconciliée avec la lecture.",
+     "audio": "audio/exercicios-orais/ex-b2-07/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Contra-argumento.",
+     "alternativas": [
+      "Le manga est court.",
+      "Oui, j'ai des mangas.",
+      "Pourquoi pas ? C'est déjà une porte d'entrée vers les livres.",
+      "Non, je lis le soir."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Les mangas, ce n'est pas de la vraie lecture !\nA. Le manga est court.\nB. Oui, j'ai des mangas.\nC. Pourquoi pas ? C'est déjà une porte d'entrée vers les livres.\nD. Non, je lis le soir.",
+     "audio": "audio/exercicios-orais/ex-b2-07/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Construire des ponts entre elles et les œuvres littéraires ».",
+     "alternativas": [
+      "Interdire les mangas.",
+      "Obliger les élèves à lire des classiques.",
+      "Supprimer les fils de discussion.",
+      "Construire des ponts entre les lectures des ados et la littérature."
+     ],
+     "correta": 3,
+     "pergunta": "Quel est le défi pour l'école, selon l'intervenant ?",
+     "transcricao": "Les adolescents ne lisent pas moins qu'avant ; ils lisent autrement : des fan-fictions, des mangas, des fils de discussion. Le défi pour l'école n'est pas de combattre ces lectures, mais de construire des ponts entre elles et les œuvres littéraires.",
+     "audio": "audio/exercicios-orais/ex-b2-07/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 630,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Vous voulez créer un club de lecture pour adolescents dans la bibliothèque de votre quartier. Vous présentez votre projet au/à la directeur(trice) de la bibliothèque et vous le/la convainquez.",
+     "perguntasExaminador": [
+      "Bonjour, entrez ! Alors, de quoi vouliez-vous me parler ?"
+     ],
+     "fichaExaminador": "Vous êtes le/la directeur(trice). Objections : les ados ne viennent jamais, pas de salle libre le samedi, pas de budget pour acheter des livres. Vous acceptez un essai de 3 mois si le projet est précis (horaires, livres, communication). Laissez le candidat mener l'échange ; opposez quelques objections."
+    }
+   ]
+  }
+ }
+}

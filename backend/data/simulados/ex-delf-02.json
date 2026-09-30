@@ -1,0 +1,143 @@
+{
+ "slug": "ex-delf-02",
+ "titulo": "Exercício oral nº 2 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "A2",
+ "tema": "Changer ses plans",
+ "descricao": "Recados de voz, convites adiados e uma conversa para remarcar um encontro.",
+ "imagem": {
+  "src": "img/temas/delf-a2-annuler-sortie-2.jpg",
+  "credito": {
+   "autor": "Nenad Stojkovic",
+   "licenca": "CC BY 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Young_business_woman_with_curly_hair_in_uniform_using_smartphone_at_home._(51487906519).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-02/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "« À quelle heure » pede um horário.",
+     "alternativas": [
+      "Devant la gare.",
+      "Le film est drôle.",
+      "Avec mon frère.",
+      "À vingt heures, ça te va ?"
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "On se retrouve à quelle heure devant le cinéma ?\nA. Devant la gare.\nB. Le film est drôle.\nC. Avec mon frère.\nD. À vingt heures, ça te va ?",
+     "audio": "audio/exercicios-orais/ex-delf-02/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Ma sœur est malade et je dois garder ses enfants ».",
+     "alternativas": [
+      "Elle est malade.",
+      "Elle doit garder les enfants de sa sœur.",
+      "Elle travaille ce soir.",
+      "Le concert est annulé."
+     ],
+     "correta": 1,
+     "pergunta": "Pourquoi Inès annule-t-elle ?",
+     "transcricao": "Salut Paul, c'est Inès. Désolée, je ne peux pas venir au concert ce soir : ma sœur est malade et je dois garder ses enfants. On peut y aller ensemble la semaine prochaine ?",
+     "audio": "audio/exercicios-orais/ex-delf-02/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Aceitar a nova data.",
+     "alternativas": [
+      "Non, je ne cuisine pas.",
+      "Oui, j'ai mangé à midi.",
+      "Pas de problème, jeudi me convient.",
+      "Le restaurant est loin."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Désolé, j'ai un empêchement. On peut remettre notre dîner à jeudi ?\nA. Non, je ne cuisine pas.\nB. Oui, j'ai mangé à midi.\nC. Pas de problème, jeudi me convient.\nD. Le restaurant est loin.",
+     "audio": "audio/exercicios-orais/ex-delf-02/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Est déplacé dans la salle des fêtes. L'horaire ne change pas ».",
+     "alternativas": [
+      "Le lieu.",
+      "Le prix.",
+      "L'horaire.",
+      "La date."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'est-ce qui change pour le spectacle ?",
+     "transcricao": "Information aux spectateurs : en raison de la pluie, le spectacle en plein air de ce soir est déplacé dans la salle des fêtes. L'horaire ne change pas : vingt et une heures.",
+     "audio": "audio/exercicios-orais/ex-delf-02/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Ce n'est pas l'annulation, c'est que tu m'as prévenu au dernier moment ».",
+     "alternativas": [
+      "D'avoir été prévenu au dernier moment.",
+      "Que la table soit réservée.",
+      "Que son amie ait annulé.",
+      "Le prix du restaurant."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'est-ce qui dérange l'homme ?",
+     "transcricao": "Tu es fâché que j'aie annulé samedi ?\nUn peu, oui. Ce n'est pas l'annulation, c'est que tu m'as prévenu au dernier moment. J'avais déjà réservé la table.",
+     "audio": "audio/exercicios-orais/ex-delf-02/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 540,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Exercice en interaction",
+     "duracaoSeg": 240,
+     "preparacaoSeg": 120,
+     "consigne": "Vous aviez prévu d'aller au cinéma avec un ami samedi, mais vous ne pouvez plus. Vous lui téléphonez : vous vous excusez, vous expliquez pourquoi et vous proposez une autre date et une autre activité. L'examinateur joue le rôle de l'ami.",
+     "perguntasExaminador": [
+      "Allô ? Salut ! Ça va ? On se voit toujours samedi ?"
+     ],
+     "fichaExaminador": "Vous êtes l'ami(e) un peu déçu(e). Vous aviez déjà acheté les places. Vous n'êtes pas libre le dimanche. Vous finissez par accepter une autre proposition si elle est précise. Laissez le candidat mener l'échange et relancez-le s'il se tait."
+    }
+   ]
+  }
+ }
+}

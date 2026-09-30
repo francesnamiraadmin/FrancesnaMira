@@ -19,7 +19,7 @@
   // plataforma-questoes.html): um plano de curso ativo já libera esses recursos por tier,
   // independentemente de uma compra avulsa do Pack Prestige — os dois caminhos são independentes.
   const CASCATA_POR_TIER = {
-    producao: ["Essentiel", "Avancé", "Excellence"],
+    producao: ["Avancé", "Excellence"],
     aulasEspecializadas: ["Avancé", "Excellence"],
     plataforma: ["Excellence"]
   };

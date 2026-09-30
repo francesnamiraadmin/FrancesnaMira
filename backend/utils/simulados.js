@@ -14,6 +14,11 @@ const NOMES_PROVA = { co: "Compréhension orale", sl: "Structure de la langue", 
 const ordemDe = def => (def && def.ordem) || PROVAS;
 const ehCompreensao = p => COMPREENSOES.includes(p);
 const temExpressoes = def => ordemDe(def).some(p => p === "ee" || p === "eo");
+// Exercícios do Ambiente de Produção Oral: mesmo motor, mas fora do catálogo de simulados,
+// liberados pelo módulo "producao" do curso e com notas na escala da prova do curso.
+const ehExercicio = def => !!def && def.categoria === "exercicio";
+const gradesProva = require("./gradesProva");
+const NIVEIS_CECR = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
 let cache = null;
 function todos() {
@@ -31,9 +36,22 @@ const obter = slug => todos().get(slug) || null;
 function listar(curso) {
   return [...todos().values()]
     // "oculto": versões retiradas do catálogo (as tentativas antigas continuam abrindo).
-    .filter(d => !d.oculto && (!curso || d.curso === curso))
+    .filter(d => !d.oculto && !ehExercicio(d) && (!curso || d.curso === curso))
+    // Ordem natural (nº 2 antes do nº 10), não a alfabética dos arquivos.
+    .sort((a, b) => a.slug.localeCompare(b.slug, "pt", { numeric: true }))
     .map(d => ({
       slug: d.slug, titulo: d.titulo, curso: d.curso, formato: d.formato, temExpressoes: temExpressoes(d),
+      provas: ordemDe(d).map(p => ({ id: p, nome: d.provas[p].nome, tempoSeg: d.provas[p].tempoSeg, itens: (d.provas[p].questoes || d.provas[p].tarefas).length }))
+    }));
+}
+
+function listarExercicios(curso) {
+  return [...todos().values()]
+    .filter(d => ehExercicio(d) && !d.oculto && (!curso || d.curso === curso))
+    .sort((a, b) => a.slug.localeCompare(b.slug, "pt", { numeric: true }))
+    .map(d => ({
+      slug: d.slug, titulo: d.titulo, curso: d.curso, nivel: d.nivel, tema: d.tema, descricao: d.descricao,
+      imagem: d.imagem || null, temExpressoes: temExpressoes(d),
       provas: ordemDe(d).map(p => ({ id: p, nome: d.provas[p].nome, tempoSeg: d.provas[p].tempoSeg, itens: (d.provas[p].questoes || d.provas[p].tarefas).length }))
     }));
 }
@@ -95,7 +113,16 @@ function corrigirCompreensao(def, prova, respostas = {}) {
   });
   // TCF Canada: 39 itens somam exatamente 699. Livrets mais curtos (TCF Tout Public)
   // convertem a proporção de pontos obtidos para a mesma escala 0–699.
-  if (def.escala === "proporcional") pontos = Math.round((pontos / maximo) * 699);
+  // (também por prova: a CE com lacunas de "structure de la langue" tem 49 itens).
+  if (ehExercicio(def)) {
+    const teto = NIVEIS_CECR.filter(n => questoes.some(q => q.nivel === n)).pop();
+    const r = gradesProva.resultadoCompreensao(def.curso, pontos, maximo, def.nivel, teto);
+    return {
+      pontos: r.pontos, escala: r.escala, acertos, total: questoes.length, nivel: r.nivel || nivelCompreensao(r.pontos),
+      nclc: r.nclc, aprovado: r.aprovado, porNivel, detalhes
+    };
+  }
+  if (def.escala === "proporcional" || def.provas[prova].escala === "proporcional") pontos = Math.round((pontos / maximo) * 699);
   const tabelaNclc = def.formato === "TCF Canada" ? (prova === "co" ? NCLC_CO : prova === "ce" ? NCLC_CE : null) : null;
   return {
     pontos, acertos, total: questoes.length, nivel: nivelCompreensao(pontos),
@@ -118,6 +145,28 @@ const CRITERIOS = {
     { id: "fluencia", nome: "Aisance et phonologie" }
   ]
 };
+
+// Nomes dos 4 critérios conforme a prova do exercício (os ids não mudam: professor, IA e
+// tela de resultado continuam iguais). DELF/DALF/TEF convertem a nota /20 para a própria escala.
+const NOMES_CRITERIOS = {
+  DELF: {
+    ee: { tarefa: "Respect de la consigne et capacité à informer / argumenter", coerencia: "Cohérence et cohésion", lexico: "Compétence lexicale", gramatica: "Compétence grammaticale" },
+    eo: { tarefa: "Réalisation de la tâche (monologue et interaction)", lexico: "Lexique", gramatica: "Morphosyntaxe", fluencia: "Maîtrise du système phonologique" }
+  },
+  DALF: {
+    ee: { tarefa: "Respect de la consigne et argumentation", coerencia: "Cohérence et cohésion", lexico: "Compétence lexicale", gramatica: "Compétence grammaticale" },
+    eo: { tarefa: "Exposé et débat", lexico: "Lexique", gramatica: "Morphosyntaxe", fluencia: "Phonologie et aisance" }
+  },
+  TEF: {
+    ee: { tarefa: "Respect de la tâche et structure", coerencia: "Argumentation et cohérence", lexico: "Richesse lexicale", gramatica: "Correction grammaticale" },
+    eo: { tarefa: "Obtenir des informations / convaincre", lexico: "Lexique et correction", gramatica: "Interaction et cohérence", fluencia: "Fluidité et prononciation" }
+  }
+};
+function criteriosDe(def) {
+  const nomes = ehExercicio(def) ? NOMES_CRITERIOS[def.curso] : null;
+  if (!nomes) return CRITERIOS;
+  return Object.fromEntries(Object.entries(CRITERIOS).map(([p, lista]) => [p, lista.map(c => ({ ...c, nome: nomes[p]?.[c.id] || c.nome }))]));
+}
 
 const limitar = (v, min, max) => Math.min(max, Math.max(min, Number(v) || 0));
 
@@ -143,6 +192,21 @@ function montarResultadoExpressao(prova, def, entrada = {}, meta = {}) {
   }
   const media = Math.round(notas.reduce((s, n) => s + n, 0) / notas.length);
   const nota = entrada.nota != null && entrada.nota !== "" ? Math.round(limitar(entrada.nota, 0, 20)) : media;
+  if (ehExercicio(def) && def.curso !== "TCF") {
+    // Nota interna /20 → escala da prova do curso (DELF/DALF /25, TEF 0–450, A1–B2 modelo TCF).
+    const exame = gradesProva.exameDoCurso(def.curso);
+    const max = exame === "DELF" || exame === "DALF" ? 25 : 20;
+    const notaProva = Math.round((nota / 20) * max * 2) / 2;
+    const conv = gradesProva.interpretarExpressao(def.curso, notaProva, max, def.nivel);
+    const tef = exame === "TEF"; // TEF: mostra direto a pontuação oficial 0–450
+    return {
+      tarefas, nota, media, notaProva: tef ? conv.pontuacaoOficial : notaProva, notaMaximaProva: tef ? 450 : max, pontuacaoOficial: conv.pontuacaoOficial, aprovado: conv.aprovado,
+      nivel: exame === "TCF" ? nivelExpressao(nota) : conv.nivel, nclc: conv.nclc,
+      comentario: String(entrada.comentario || "").slice(0, 5000),
+      corretor: meta.corretor || null, corretorNome: meta.corretorNome || null, porIA: !!meta.porIA,
+      corrigidoEm: new Date()
+    };
+  }
   return {
     tarefas, nota, media, nivel: nivelExpressao(nota), nclc: nclc(NCLC_EXPR, nota),
     comentario: String(entrada.comentario || "").slice(0, 5000),
@@ -154,7 +218,7 @@ function montarResultadoExpressao(prova, def, entrada = {}, meta = {}) {
 const contarPalavras = t => (String(t || "").match(/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu) || []).length;
 
 module.exports = {
-  PROVAS, TODAS_PROVAS, NOMES_PROVA, CRITERIOS, ordemDe, ehCompreensao, temExpressoes,
-  obter, listar, versaoPublica, corrigirCompreensao,
+  PROVAS, TODAS_PROVAS, NOMES_PROVA, CRITERIOS, criteriosDe, ordemDe, ehCompreensao, temExpressoes, ehExercicio,
+  obter, listar, listarExercicios, versaoPublica, corrigirCompreensao,
   montarResultadoExpressao, nivelCompreensao, nivelExpressao, contarPalavras
 };

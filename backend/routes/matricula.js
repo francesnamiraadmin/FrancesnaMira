@@ -4,6 +4,7 @@ const Matricula = require("../models/matricula");
 const Turma = require("../models/turma");
 const Disponibilidade = require("../models/disponibilidade");
 const Cupom = require("../models/cupom");
+const { aplicarCupom, calcularDesconto, motivoInvalido, normalizarCodigo } = require("../utils/cupons");
 const { exigirAuth } = require("../middleware/auth");
 const { transmitir } = require("../utils/sse");
 const { ehObjectId, normalizarEmail, textoSeguro } = require("../middleware/seguranca");
@@ -66,9 +67,9 @@ router.post("/iniciar", exigirAuth, async (req, res) => {
     let desconto = 0;
     let cupomValido = null;
     if (cupomCodigo) {
-      const cupom = await Cupom.findOne({ codigo: String(cupomCodigo).toUpperCase().slice(0, 50), ativo: true });
-      if (cupom && (!cupom.validoAte || cupom.validoAte > new Date()) && (cupom.usoMaximo === null || cupom.usosAtuais < cupom.usoMaximo)) {
-        desconto = Math.min(cupom.tipo === "percentual" ? precoOriginal * (cupom.valor / 100) : cupom.valor, precoOriginal);
+      const cupom = await Cupom.findOne({ codigo: normalizarCodigo(cupomCodigo) });
+      if (!motivoInvalido(cupom, null, null)) {
+        desconto = calcularDesconto(cupom, precoOriginal).desconto;
         cupomValido = cupom;
       }
     }
@@ -102,14 +103,16 @@ router.post("/iniciar", exigirAuth, async (req, res) => {
 // ===================== VALIDAR CUPOM (preview, sem consumir uso) =====================
 router.post("/validar-cupom", exigirAuth, async (req, res) => {
   try {
-    const codigo = String(req.body.codigo || "").toUpperCase().slice(0, 50);
+    // Prévia só: a cobrança recalcula tudo no servidor (ver utils/cupons.js e /api/pagamentos).
     const precoOriginal = Math.max(0, Number(req.body.precoOriginal) || 0);
-    const cupom = await Cupom.findOne({ codigo, ativo: true });
-    if (!cupom || (cupom.validoAte && cupom.validoAte < new Date()) || (cupom.usoMaximo !== null && cupom.usosAtuais >= cupom.usoMaximo)) {
-      return res.status(404).json({ msg: "Cupom inválido ou expirado." });
+    const curso = typeof req.body.curso === "string" ? req.body.curso : null;
+    const plano = typeof req.body.plano === "string" ? req.body.plano : null;
+    try {
+      const { desconto, valorFinal } = await aplicarCupom(req.body.codigo, precoOriginal, curso, plano);
+      res.json({ valido: true, desconto, precoFinal: valorFinal });
+    } catch (e) {
+      res.status(404).json({ msg: e.message || "Cupom inválido ou expirado." });
     }
-    const desconto = Math.min(cupom.tipo === "percentual" ? precoOriginal * (cupom.valor / 100) : cupom.valor, precoOriginal);
-    res.json({ valido: true, desconto, precoFinal: Math.max(0, precoOriginal - desconto) });
   } catch (err) {
     res.status(500).json({ msg: "Erro no servidor." });
   }

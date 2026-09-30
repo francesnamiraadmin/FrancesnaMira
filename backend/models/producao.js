@@ -8,10 +8,20 @@ const ArquivoSchema = new mongoose.Schema({
   enviadoEm: { type: Date }
 }, { _id: false });
 
+// Critério da grade da prova (ver backend/utils/gradesProva.js): cada um tem seu máximo
+// (TCF 0–5; DELF/DALF até 8 pontos). Avaliações antigas só têm nome/nota/comentario.
 const CriterioAvaliadoSchema = new mongoose.Schema({
+  id: { type: String },
   nome: { type: String, required: true },
-  nota: { type: Number, min: 0, max: 5 },
+  max: { type: Number },
+  nota: { type: Number, min: 0 },
   comentario: { type: String }
+}, { _id: false });
+
+const CorrecaoPontualSchema = new mongoose.Schema({
+  trecho: { type: String },
+  correcao: { type: String },
+  explicacao: { type: String }
 }, { _id: false });
 
 const MensagemSchema = new mongoose.Schema({
@@ -48,16 +58,34 @@ const ProducaoSchema = new mongoose.Schema({
   observacoesAluno: { type: String },
 
   creditosUtilizados: { type: Number, default: 1 },
+  // Quem corrige: professor (fila do Sistema de Correção, alguns dias) ou IA (na hora).
+  modoCorrecao: { type: String, enum: ["professor", "ia"], default: "professor" },
+  ia: {
+    status: { type: String, enum: ["pendente", "concluida", "erro"] },
+    erro: { type: String },
+    modelo: { type: String },
+    em: { type: Date }
+  },
   prazoEstimado: { type: Date },
   dataEnvio: { type: Date, default: Date.now },
   dataCorrecao: { type: Date },
 
   arquivoCorrigido: ArquivoSchema,
   avaliacao: {
+    exame: { type: String },
     criterios: [CriterioAvaliadoSchema],
     notaTotal: { type: Number },
+    notaMaxima: { type: Number },
     nivelEstimado: { type: String },
-    comentarioGeral: { type: String }
+    nclc: { type: String },
+    aprovado: { type: Boolean },
+    pontuacaoOficial: { type: Number },
+    comentarioGeral: { type: String },
+    pontosFortes: [{ type: String }],
+    aMelhorar: [{ type: String }],
+    correcoes: [CorrecaoPontualSchema],
+    corretor: { type: String, enum: ["professor", "ia"] },
+    corretorNome: { type: String }
   },
 
   mensagens: [MensagemSchema],

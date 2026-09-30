@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tcf-05",
+ "titulo": "Exercício oral nº 5 — TCF",
+ "curso": "TCF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Le premier hiver",
+ "descricao": "Clima, meteorologia e experiências de inverno em Québec e na Europa.",
+ "imagem": {
+  "src": "img/temas/tcf-t2-premier-hiver-2.jpg",
+  "credito": {
+   "autor": "Shapiros10",
+   "licenca": "CC BY-SA 3.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Carnival_1.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral convertida para a escala do TCF (0–699), com NCLC; expressões de 0 a 20, com nível CECR e NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tcf-05/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta ligada ao tempo.",
+     "alternativas": [
+      "Je n'ai pas de chapeau.",
+      "Non, j'ai des gants.",
+      "Oui, il fait trente degrés.",
+      "Oui, il a neigé toute la nuit."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Il faut mettre des bottes aujourd'hui ?\nA. Je n'ai pas de chapeau.\nB. Non, j'ai des gants.\nC. Oui, il fait trente degrés.\nD. Oui, il a neigé toute la nuit.",
+     "audio": "audio/exercicios-orais/ex-tcf-05/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les écoles resteront fermées demain ».",
+     "alternativas": [
+      "Les magasins fermeront.",
+      "Il fera beau.",
+      "Les écoles seront fermées.",
+      "Les routes seront gratuites."
+     ],
+     "correta": 2,
+     "pergunta": "Que se passera-t-il demain ?",
+     "transcricao": "Bulletin météo : tempête de neige prévue cette nuit dans la région de Québec, avec jusqu'à trente centimètres de neige. Les écoles resteront fermées demain. Évitez les déplacements inutiles.",
+     "audio": "audio/exercicios-orais/ex-tcf-05/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Je me suis mis au ski de fond et au patin. Tout a changé ».",
+     "alternativas": [
+      "Pratiquer des sports d'hiver.",
+      "Acheter un manteau épais.",
+      "Partir en vacances au soleil.",
+      "Rester à la maison."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'est-ce qui a changé son rapport à l'hiver ?",
+     "transcricao": "Mon premier hiver, j'ai fait l'erreur classique : j'ai acheté un manteau très épais et je suis resté enfermé. Au printemps, j'étais épuisé. L'hiver suivant, je me suis mis au ski de fond et au patin. Tout a changé : l'hiver est devenu ma saison préférée.",
+     "audio": "audio/exercicios-orais/ex-tcf-05/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que confirma e acrescenta uma solução.",
+     "alternativas": [
+      "Non, décembre a trente et un jours.",
+      "Si, j'ai acheté une lampe de luminothérapie.",
+      "Il neige depuis mardi.",
+      "Oui, je travaille la nuit."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu ne trouves pas que les journées sont trop courtes en décembre ?\nA. Non, décembre a trente et un jours.\nB. Si, j'ai acheté une lampe de luminothérapie.\nC. Il neige depuis mardi.\nD. Oui, je travaille la nuit.",
+     "audio": "audio/exercicios-orais/ex-tcf-05/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« C'est surtout le manque de lumière qui pèse sur l'humeur ».",
+     "alternativas": [
+      "La neige.",
+      "Le froid.",
+      "Le manque de lumière.",
+      "Les fêtes."
+     ],
+     "correta": 2,
+     "pergunta": "Selon l'intervenante, qu'est-ce qui pèse surtout sur l'humeur ?",
+     "transcricao": "On pense que le froid fatigue. En réalité, c'est surtout le manque de lumière qui pèse sur l'humeur. Les pays nordiques l'ont compris depuis longtemps : ils multiplient les éclairages publics chaleureux, les fêtes d'hiver et les activités en plein air, comme si la vie sociale devait compenser l'obscurité.",
+     "audio": "audio/exercicios-orais/ex-tcf-05/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Vivre dans un pays au climat difficile, cela forge le caractère. » Qu'en pensez-vous ? Vous donnez votre opinion et vous l'argumentez à l'aide d'exemples.",
+     "perguntasExaminador": [
+      "Vivre dans un pays au climat difficile, cela forge le caractère. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et les personnes âgées ? », « Le climat influence-t-il vraiment la personnalité ? », « Quelle saison préférez-vous et pourquoi ? »"
+    }
+   ]
+  }
+ }
+}

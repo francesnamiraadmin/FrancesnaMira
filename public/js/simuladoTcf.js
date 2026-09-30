@@ -6,13 +6,17 @@
 // aluno pode chamar um professor (chat, acompanhamento ao vivo e chamada de voz).
 // =====================================================================
 (function () {
-  const { api, stream, Chamada, esc, contarPalavras, mmss, INSTRUCOES, enunciado } = window.SimuladoAoVivo;
+  const { api, stream, Chamada, esc, contarPalavras, mmss, INSTRUCOES, enunciado, numero } = window.SimuladoAoVivo;
   const $ = id => document.getElementById(id);
   const NOMES = { co: "Compréhension orale", sl: "Structure de la langue", ce: "Compréhension écrite", ee: "Expression écrite", eo: "Expression orale" };
   const SIGLAS = { co: "CO", sl: "SL", ce: "CE", ee: "EE", eo: "EO" };
   // Ordem das épreuves do simulado aberto (TCF Canada: CO→CE→EE→EO; Tout Public: CO→SL→CE).
   const ordem = () => (S.def && S.def.ordem) || ["co", "ce", "ee", "eo"];
   const LETRAS = ["A", "B", "C", "D"];
+  // Modo exercício (producao-oral-exercicios.html): mesmo motor, mas a galeria é da própria
+  // página e as notas saem na escala da prova do curso do exercício.
+  const MODO_EXERCICIO = window.SIMULADO_MODO === "exercicio";
+  const urlVoltar = () => MODO_EXERCICIO ? `producao-oral-exercicios.html?curso=${encodeURIComponent(S.def?.curso || "")}` : "simulado-tcf.html";
 
   const S = {
     t: null, def: null, meuId: null,
@@ -307,10 +311,16 @@
     $("relogio").textContent = mmss(S.def.provas[p].tempoSeg);
     $("barraSub").textContent = "Aguardando início";
     const nq = S.def.provas[p].questoes ? S.def.provas[p].questoes.length : 0;
-    const regras = {
-      co: `${nq} questões de múltipla escolha, do A1 ao C2. Cada documento sonoro é ouvido <strong>uma única vez</strong>. ${S.def.provas.co.questoes.some(q => q.alternativasFaladas) ? "Nas primeiras questões, as quatro propostas são apenas faladas: ouça e marque a letra. " : "Leia a pergunta, ouça o áudio e escolha a alternativa. "}Não é possível voltar à questão anterior.`,
+    const min = sg => { const m = Math.floor(sg / 60), r = sg % 60; return r ? `${m} min ${String(r).padStart(2, "0")}` : `${m} min`; };
+    const tarefas = S.def.provas[p].tarefas || [];
+    const regrasExercicio = {
+      ee: `${tarefas.length === 1 ? "1 tarefa" : `${tarefas.length} tarefas`}: ${tarefas.map(t => `${esc(t.titulo)} (${t.min}–${t.max} palavras)`).join("; ")}. Seu texto é salvo automaticamente.`,
+      eo: `${tarefas.length === 1 ? "1 tarefa gravada" : `${tarefas.length} tarefas gravadas`}: ${tarefas.map(t => `${esc(t.titulo)} (${t.preparacaoSeg ? `${min(t.preparacaoSeg)} de preparação + ` : ""}${min(t.duracaoSeg)})`).join("; ")}. Use fone de ouvido. Se um professor estiver conectado, ele será seu examinador pela chamada de voz.`
+    };
+    const regras = MODO_EXERCICIO && regrasExercicio[p] ? regrasExercicio[p] : {
+      co: `${nq} questões de múltipla escolha${MODO_EXERCICIO ? "" : ", do A1 ao C2"}. Cada documento sonoro é ouvido <strong>uma única vez</strong>. ${S.def.provas.co.questoes.some(q => q.alternativasFaladas) ? (MODO_EXERCICIO ? "Em algumas questões" : "Nas primeiras questões") + ", as quatro propostas são apenas faladas: ouça e marque a letra. " : "Leia a pergunta, ouça o áudio e escolha a alternativa. "}Não é possível voltar à questão anterior.`,
       sl: `${nq} frases com uma lacuna: escolha a palavra ou expressão que completa corretamente a frase. Você pode navegar livremente entre as questões.`,
-      ce: `${nq} questões de múltipla escolha, do A1 ao C2, sobre documentos escritos (avisos, anúncios, artigos, textos argumentativos). Você pode navegar livremente entre as questões.`,
+      ce: `${nq} questões de múltipla escolha, do A1 ao C2, sobre documentos escritos (avisos, anúncios, artigos, textos argumentativos)${S.def.provas.ce?.questoes.some(q => q.tipo === "lacuna") ? ", com frases para completar ao longo da prova" : ""}. Você pode navegar livremente entre as questões.`,
       ee: "3 tarefas: uma mensagem (60–120 palavras), um artigo ou relato (120–150 palavras) e um texto argumentativo a partir de dois documentos (120–180 palavras). Seu texto é salvo automaticamente.",
       eo: "3 tarefas gravadas: entrevista dirigida (2 min), exercício em interação com 2 min de preparação (5 min 30) e expressão de um ponto de vista (4 min 30). Use fone de ouvido. Se um professor estiver conectado, ele será seu examinador pela chamada de voz."
     }[p];
@@ -356,7 +366,7 @@
     $("barraSub").textContent = `Questão ${S.idx + 1} de ${qs.length}`;
     $("vProva").innerHTML = `<div class="sm-card">
       ${q.tipo ? `<p class="sm-instrucao">› ${esc(INSTRUCOES[q.tipo])}</p>` : ""}
-      <div class="sm-questao-topo"><strong>Question ${q.n}</strong><span class="sm-nivel">${esc(q.nivel)} · ${q.pontos} pts</span></div>
+      <div class="sm-questao-topo"><strong>Question ${numero(q)}</strong><span class="sm-nivel">${esc(q.nivel)} · ${q.pontos} pts</span></div>
       ${enunciado(q, "co")}
       <div class="sm-player" id="player">
         <button class="sm-btn pequeno" id="btnOuvir" type="button" ${ouvido ? "disabled" : ""}>${ouvido ? "Áudio já ouvido" : "▶ Ouvir o documento"}</button>
@@ -417,14 +427,15 @@
   function renderLista(prova) {
     const qs = S.def.provas[prova].questoes;
     const q = qs[S.idx];
+    const lacuna = prova === "sl" || q.tipo === "lacuna";
     const resp = S.t.provas[prova].respostas || {};
     $("barraSub").textContent = `Questão ${S.idx + 1} de ${qs.length}`;
     $("vProva").innerHTML = `<div class="sm-card">
-      <p class="sm-instrucao">› ${esc(INSTRUCOES[prova])}</p>
-      <div class="sm-questao-topo"><strong>Question ${q.n}</strong><span class="sm-nivel">${esc(q.nivel)} · ${q.pontos} pts</span></div>
-      ${prova === "sl" ? `<p class="sm-lacuna-ini">${esc(q.inicio)}</p>` : `${enunciado(q, prova)}<p class="sm-pergunta">${esc(q.pergunta)}</p>`}
+      <p class="sm-instrucao">› ${esc(lacuna ? INSTRUCOES.sl : INSTRUCOES[prova])}</p>
+      <div class="sm-questao-topo"><strong>Question ${numero(q)}</strong><span class="sm-nivel">${esc(q.nivel)} · ${q.pontos} pts</span></div>
+      ${lacuna ? `<p class="sm-lacuna-ini">${esc(q.inicio)}</p>` : `${enunciado(q, prova)}<p class="sm-pergunta">${esc(q.pergunta)}</p>`}
       <div class="sm-alts">${q.alternativas.map((a, i) => `<button type="button" class="sm-alt ${resp[q.n] === i ? "marcada" : ""}" data-alt="${i}"><span class="letra">${LETRAS[i]}</span><span>${esc(a)}</span></button>`).join("")}</div>
-      ${prova === "sl" ? `<p class="sm-lacuna-fim">${esc(q.fim)}</p>` : ""}
+      ${lacuna ? `<p class="sm-lacuna-fim">${esc(q.fim)}</p>` : ""}
       <div class="sm-nav">
         <button class="sm-btn secundario" id="btnAnt" type="button" ${S.idx === 0 ? "disabled" : ""}>← Anterior</button>
         ${S.idx < qs.length - 1 ? `<button class="sm-btn" id="btnProx" type="button">Próxima →</button>` : ""}
@@ -449,7 +460,7 @@
     const g = $("gradeLista");
     if (!g) return;
     const resp = S.t.provas[prova].respostas || {};
-    g.innerHTML = S.def.provas[prova].questoes.map((q, i) => `<button type="button" data-ir="${i}" class="${resp[q.n] != null ? "respondida" : ""} ${i === S.idx ? "atual" : ""}">${q.n}</button>`).join("");
+    g.innerHTML = S.def.provas[prova].questoes.map((q, i) => `<button type="button" data-ir="${i}" class="${resp[q.n] != null ? "respondida" : ""} ${i === S.idx ? "atual" : ""}">${numero(q)}</button>`).join("");
   }
 
   // ---------------- EE ----------------
@@ -730,11 +741,11 @@
     const t = S.t;
     const def = S.def;
     const r = p => t.provas[p].resultado;
-    const comNclc = def.formato === "TCF Canada";
+    const comNclc = def.formato === "TCF Canada" || ordem().some(p => r(p)?.nclc);
     const linha = p => {
       const x = r(p);
       if (!x) return `<tr><td>${NOMES[p]}</td><td colspan="${comNclc ? 3 : 2}" class="sm-muted">${t.status === "corrigindo_ia" ? "A IA está corrigindo…" : "Aguardando correção"}</td></tr>`;
-      const score = ehCompreensao(p) ? `${x.pontos} <small class="sm-muted">/ 699</small>` : `${x.nota} <small class="sm-muted">/ 20</small>`;
+      const score = ehCompreensao(p) ? `${x.pontos} <small class="sm-muted">/ ${x.escala || 699}</small>` : `${x.notaProva ?? x.nota} <small class="sm-muted">/ ${x.notaMaximaProva || 20}</small>`;
       return `<tr><td>${NOMES[p]}</td><td class="score">${score}</td><td><span class="niv">${esc(x.nivel)}</span></td>${comNclc ? `<td><strong>${esc(x.nclc || "–")}</strong></td>` : ""}</tr>`;
     };
     let status = "";
@@ -746,9 +757,9 @@
     }
     const menor = ordem().map(p => r(p)?.nclc).filter(Boolean);
     const compreensoes = ordem().filter(ehCompreensao);
-    const global = !comNclc && compreensoes.every(p => r(p)) ? Math.round(compreensoes.reduce((s2, p) => s2 + r(p).pontos, 0) / compreensoes.length) : null;
+    const global = !MODO_EXERCICIO && !comNclc && compreensoes.every(p => r(p)) ? Math.round(compreensoes.reduce((s2, p) => s2 + r(p).pontos, 0) / compreensoes.length) : null;
     $("vResultado").innerHTML = `
-      <div class="sm-hero"><h1>Resultado do simulado</h1><p>${esc(def.titulo)} · ${new Date(t.criadoEm).toLocaleDateString("pt-BR")} · ${{ ia: "correção por Inteligência Artificial", professor: "correção por professor", automatica: "correção automática" }[t.modoCorrecao]}</p></div>
+      <div class="sm-hero"><h1>${MODO_EXERCICIO ? "Resultado do exercício" : "Resultado do simulado"}</h1><p>${esc(def.titulo)} · ${new Date(t.criadoEm).toLocaleDateString("pt-BR")} · ${{ ia: "correção por Inteligência Artificial", professor: "correção por professor", automatica: "correção automática" }[t.modoCorrecao]}</p></div>
       ${status}
       <div class="sm-card">
         <h2>Attestation de résultats (simulação)</h2>
@@ -756,7 +767,7 @@
           <thead><tr><th>Épreuve</th><th>Score</th><th>Niveau CECR</th>${comNclc ? "<th>NCLC</th>" : ""}</tr></thead>
           <tbody>${ordem().map(linha).join("")}${global != null ? `<tr class="global"><td><strong>Score global</strong></td><td class="score">${global} <small class="sm-muted">/ 699</small></td><td><span class="niv">${esc(nivelDoScore(global))}</span></td></tr>` : ""}</tbody>
         </table></div>
-        <p class="sm-muted" style="margin-top:12px;">${comNclc
+        <p class="sm-muted" style="margin-top:12px;">${MODO_EXERCICIO ? esc(def.explicacaoEscala || "Notas convertidas para a escala da prova do seu curso.") : comNclc
           ? `Compreensões: 0 a 699 pontos (itens ponderados pela dificuldade: A1 = 3 pts … C2 = 33 pts). Expressões: 0 a 20. Os níveis NCLC seguem a tabela de equivalência do TCF Canada usada pela imigração canadense.${menor.length === 4 ? ` Seu menor NCLC nesta simulação: <strong>${esc(menor.sort((a, b) => parseInt(a) - parseInt(b))[0])}</strong>.` : ""}`
           : "Cada épreuve é convertida para a escala do TCF (0 a 699), com itens ponderados pela dificuldade (A1 = 3 pts … C2 = 33 pts). Níveis: A1 100–199 · A2 200–299 · B1 300–399 · B2 400–499 · C1 500–599 · C2 600–699."}</p>
       </div>
@@ -764,8 +775,8 @@
       ${compreensoes.map(p => blocoCompreensao(p)).join("")}
       ${ordem().filter(p => p === "ee" || p === "eo").map(p => blocoExpressao(p)).join("")}
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-        <a class="sm-btn secundario" href="simulado-tcf.html">Voltar aos simulados</a>
-        <a class="sm-btn secundario" href="plataforma-questoes.html">Plataforma de Questões</a>
+        <a class="sm-btn secundario" href="${urlVoltar()}">${MODO_EXERCICIO ? "Voltar aos exercícios" : "Voltar aos simulados"}</a>
+        ${MODO_EXERCICIO ? `<a class="sm-btn secundario" href="producao.html?curso=${encodeURIComponent(def.curso)}">Ambiente de Produção</a>` : `<a class="sm-btn secundario" href="plataforma-questoes.html">Plataforma de Questões</a>`}
       </div>`;
     const b1 = $("btnRefazerIA");
     if (b1) b1.addEventListener("click", async () => { b1.disabled = true; try { await api(`/api/simulados/tentativas/${t._id}/corrigir-ia`, { method: "POST" }); S.t.status = "corrigindo_ia"; renderResultado(); } catch (err) { b1.disabled = false; modal("Erro", `<p>${esc(err.message)}</p>`, [{ texto: "Fechar" }]); } });
@@ -785,11 +796,13 @@
       return `<span class="${certa ? "certa" : ""} ${marcada && !certa ? "errada" : ""}">${marcada ? "✕" : certa ? "•" : ""}</span>`;
     };
     // Uma coluna por parte, como no livret (CO 1–15 · SL 16–25 · CE 26–40).
-    const colunas = provas.map(p => S.t.provas[p].resultado.detalhes);
+    const colunas = provas.map(p => S.def.provas[p].questoes.map(q => ({
+      ...(S.t.provas[p].resultado.detalhes.find(d => d.n === q.n) || { resposta: null, correta: q.correta }), rotulo: numero(q)
+    })));
     return `<div class="sm-card">
       <h2>Feuille de réponses — corrigé</h2>
       <p class="sm-muted">✕ = sua resposta · verde = resposta certa · vermelho = marcação errada.</p>
-      <div class="sm-corrige">${colunas.map(col => `<div><div class="cab"><span></span>${LETRAS.map(l => `<b>${l}</b>`).join("")}</div>${col.map(d => `<div class="lin"><em>${d.n}</em>${[0, 1, 2, 3].map(k => cel(d, k)).join("")}</div>`).join("")}</div>`).join("")}</div>
+      <div class="sm-corrige">${colunas.map(col => `<div><div class="cab"><span></span>${LETRAS.map(l => `<b>${l}</b>`).join("")}</div>${col.map(d => `<div class="lin"><em>${d.rotulo}</em>${[0, 1, 2, 3].map(k => cel(d, k)).join("")}</div>`).join("")}</div>`).join("")}</div>
     </div>`;
   }
 
@@ -803,7 +816,7 @@
       <div class="sm-nivel-barras">${niveis.map(n => `<div><strong>${x.porNivel[n]?.acertos ?? 0}/${x.porNivel[n]?.total ?? 0}</strong>${n}</div>`).join("")}</div>
       ${qs.map(q => {
         const d = x.detalhes.find(y => y.n === q.n) || {};
-        return `<details><summary>${d.certo ? "✅" : d.resposta == null ? "⚪" : "❌"} Questão ${q.n} · ${q.nivel} — ${esc(p === "sl" ? `${q.inicio.replace(/…$/, "")} ___ ${q.fim.replace(/^…\s*/, "")}` : q.pergunta)}</summary><div class="corpo">
+        return `<details><summary>${d.certo ? "✅" : d.resposta == null ? "⚪" : "❌"} Questão ${numero(q)} · ${q.nivel} — ${esc(p === "sl" || q.tipo === "lacuna" ? `${q.inicio.replace(/…$/, "")} ___ ${q.fim.replace(/^…\s*/, "")}` : q.pergunta)}</summary><div class="corpo">
           ${p === "co" ? `${enunciado(q, "co")}<audio controls preload="none" src="${esc(q.audio)}" style="width:100%;margin-bottom:8px;"></audio>${q.transcricao ? `<div class="sm-documento">${esc(q.transcricao)}</div>` : ""}` : enunciado(q, p)}
           <div class="sm-alts">${q.alternativas.map((a, i) => `<button type="button" disabled class="sm-alt ${i === q.correta ? "certa" : i === d.resposta ? "errada" : ""}"><span class="letra">${LETRAS[i]}</span><span>${esc(a)}</span></button>`).join("")}</div>
           ${q.explicacao ? `<p style="margin-top:8px;"><strong>Explicação:</strong> ${esc(q.explicacao)}</p>` : ""}
@@ -822,7 +835,7 @@
     const tarefas = S.def.provas[p].tarefas;
     const resp = S.t.provas[p].respostas || {};
     return `<div class="sm-card">
-      <h2>${NOMES[p]}${x ? ` — ${x.nota}/20 · ${esc(x.nivel)} · NCLC ${esc(x.nclc)}` : ""}</h2>
+      <h2>${NOMES[p]}${x ? ` — ${x.notaProva ?? x.nota}/${x.notaMaximaProva || 20} · ${esc(x.nivel)}${x.nclc ? ` · NCLC ${esc(x.nclc)}` : ""}` : ""}</h2>
       ${x ? `<p class="sm-muted">Corrigido por ${esc(x.corretorNome || (x.porIA ? "IA" : "professor"))}.</p>` : ""}
       ${tarefas.map(tf => {
         const rt = x?.tarefas?.[tf.id];
@@ -1014,19 +1027,22 @@
   // BOOT (depois do gate liberar a página)
   // =====================================================================
   function iniciar() {
-    if (window.CursoContexto?.curso && window.CursoContexto.curso !== "TCF") {
+    if (!MODO_EXERCICIO && window.CursoContexto?.curso && window.CursoContexto.curso !== "TCF") {
       return erroTela("A Simulação Completa de Prova está disponível para o curso TCF.");
     }
     const id = new URLSearchParams(location.search).get("t");
     if (id && /^[a-f0-9]{24}$/i.test(id)) abrirTentativa(id);
+    else if (MODO_EXERCICIO) window.ExerciciosOrais?.galeria();
     else carregarInicio();
   }
   window.addEventListener("popstate", () => {
-    if (!new URLSearchParams(location.search).get("t") && S.t === null) carregarInicio();
+    if (!new URLSearchParams(location.search).get("t") && S.t === null) { if (MODO_EXERCICIO) window.ExerciciosOrais?.galeria(); else carregarInicio(); }
   });
   const esperarGate = setInterval(() => {
     if (document.body.style.visibility === "visible") { clearInterval(esperarGate); iniciar(); }
   }, 100);
+
+  window.SimuladoRunner = { abrirTentativa, mostrar };
 
   // Evita perder a expressão escrita ao fechar a aba no meio da digitação.
   window.addEventListener("beforeunload", ev => {

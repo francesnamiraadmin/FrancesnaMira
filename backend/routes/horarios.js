@@ -56,6 +56,42 @@ router.get("/admin/slots/:id/ocupantes", exigirAuth, exigirAdmin, async (req, re
   }
 });
 
+// Sistema de Aulas: matrículas confirmadas por horário + resumo de ocupação e receita mensal.
+router.get("/admin/matriculas", exigirAuth, exigirAdmin, async (req, res) => {
+  try {
+    const [matriculas, slots] = await Promise.all([
+      Matricula.find({ status: "confirmada", "slotsEscolhidos.0": { $exists: true } })
+        .populate("alunoId", "nome email")
+        .select("alunoId dadosPessoais tipo curso slotsEscolhidos precoFinal cupomCodigo criadoEm")
+        .sort({ criadoEm: -1 }).lean(),
+      HorarioSlot.find({ ativo: true }).select("modalidade capacidadeMaxima").lean()
+    ]);
+    const vagas = slots.reduce((t, s) => t + (s.modalidade === "turma" ? s.capacidadeMaxima : 1), 0);
+    const ocupadas = matriculas.reduce((t, m) => t + m.slotsEscolhidos.length, 0);
+    res.json({
+      resumo: {
+        alunos: new Set(matriculas.map(m => String(m.alunoId?._id || m.dadosPessoais?.email))).size,
+        matriculas: matriculas.length,
+        horariosAtivos: slots.length,
+        vagas, ocupadas,
+        receitaMensal: matriculas.reduce((t, m) => t + (m.precoFinal || 0), 0)
+      },
+      matriculas: matriculas.map(m => ({
+        matriculaId: m._id,
+        nome: m.alunoId?.nome || m.dadosPessoais?.nome,
+        email: m.alunoId?.email || m.dadosPessoais?.email,
+        telefone: m.dadosPessoais?.telefone || "",
+        tipo: m.tipo, curso: m.curso,
+        horarios: m.slotsEscolhidos.map(s => ({ diaSemana: s.diaSemana, horaInicio: s.horaInicio })),
+        precoFinal: m.precoFinal, cupomCodigo: m.cupomCodigo || null, criadoEm: m.criadoEm
+      }))
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
 router.post("/admin/slots", exigirAuth, exigirAdmin, async (req, res) => {
   try {
     const { modalidade, diaSemana, horaInicio, periodo, capacidadeMaxima, cursos } = req.body;

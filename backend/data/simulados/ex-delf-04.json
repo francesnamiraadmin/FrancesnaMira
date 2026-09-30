@@ -1,0 +1,143 @@
+{
+ "slug": "ex-delf-04",
+ "titulo": "Exercício oral nº 4 — DELF",
+ "curso": "DELF",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Enfants et écrans",
+ "descricao": "Um debate familiar sobre o primeiro celular, com conselhos de especialistas e testemunhos de pais.",
+ "imagem": {
+  "src": "img/temas/delf-b1-telephone-enfants-2.jpg",
+  "credito": {
+   "autor": "Julian Lupyan",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Children_Playing_with_Decommissioned_M1937_Anti-Tank_Gun_outside_Skopje_Fortress,_North_Macedonia.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DELF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-delf-04/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta natural de uma mãe.",
+     "alternativas": [
+      "Il est cassé.",
+      "Oui, j'ai faim.",
+      "Tous ? Tu es sûr ?",
+      "Ton copain est gentil."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Maman, tous mes copains ont un téléphone !\nA. Il est cassé.\nB. Oui, j'ai faim.\nC. Tous ? Tu es sûr ?\nD. Ton copain est gentil.",
+     "audio": "audio/exercicios-orais/ex-delf-04/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Parce qu'elle prend le bus seule ».",
+     "alternativas": [
+      "Pour qu'elle joue.",
+      "Parce qu'elle prend le bus seule.",
+      "Pour son anniversaire.",
+      "Parce que ses amis en ont un."
+     ],
+     "correta": 1,
+     "pergunta": "Pourquoi ont-ils donné un téléphone à leur fille ?",
+     "transcricao": "Nous avons donné un téléphone à notre fille pour son entrée au collège, parce qu'elle prend le bus seule. Mais c'est un modèle simple : elle peut appeler et envoyer des messages, pas plus.",
+     "audio": "audio/exercicios-orais/ex-delf-04/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta que concede e justifica.",
+     "alternativas": [
+      "Oui, il a un vélo.",
+      "Non, il est très grand.",
+      "Le smartphone est noir.",
+      "Peut-être, mais on a fixé des règles précises."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu ne crois pas qu'il est un peu jeune pour avoir un smartphone ?\nA. Oui, il a un vélo.\nB. Non, il est très grand.\nC. Le smartphone est noir.\nD. Peut-être, mais on a fixé des règles précises.",
+     "audio": "audio/exercicios-orais/ex-delf-04/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Regretter de ne pas avoir attendu plus longtemps ».",
+     "alternativas": [
+      "D'avoir attendu trop longtemps.",
+      "D'avoir acheté un téléphone trop cher.",
+      "De ne pas avoir attendu plus longtemps.",
+      "Que leur enfant n'ait pas de téléphone."
+     ],
+     "correta": 2,
+     "pergunta": "Que regrettent beaucoup de parents ?",
+     "transcricao": "Selon une enquête récente, les enfants reçoivent leur premier téléphone vers dix ans en moyenne. Plus de la moitié des parents disent regretter de ne pas avoir attendu plus longtemps.",
+     "audio": "audio/exercicios-orais/ex-delf-04/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Ce qui compte, ce n'est pas l'âge, c'est l'accompagnement ».",
+     "alternativas": [
+      "L'accompagnement par les parents.",
+      "L'interdiction.",
+      "L'âge de l'enfant.",
+      "Le modèle de téléphone."
+     ],
+     "correta": 0,
+     "pergunta": "Selon l'intervenante, qu'est-ce qui compte le plus ?",
+     "transcricao": "Interdire, c'est facile. Accompagner, c'est plus exigeant. Un enfant qui découvre Internet seul à quatorze ans n'est pas mieux protégé qu'un enfant de dix ans guidé par ses parents. Ce qui compte, ce n'est pas l'âge, c'est l'accompagnement.",
+     "audio": "audio/exercicios-orais/ex-delf-04/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1080,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Expression d'un point de vue",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 600,
+     "consigne": "Document déclencheur : « Pas de smartphone avant quinze ans : de plus en plus de familles signent un pacte collectif. » Dégagez le thème du document et présentez votre opinion de façon argumentée. L'examinateur pourra vous poser quelques questions.",
+     "perguntasExaminador": [
+      "Quel est le thème de ce document ? Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances : « À quel âge avez-vous eu votre premier téléphone ? », « Comment un enfant peut-il se protéger ? », « Est-ce aux parents ou à l'école d'agir ? »"
+    }
+   ]
+  }
+ }
+}

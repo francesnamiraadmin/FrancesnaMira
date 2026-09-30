@@ -8,18 +8,21 @@ const MODELO_PADRAO = "claude-sonnet-5";
 const iaConfigurada = () => !!process.env.ANTHROPIC_API_KEY;
 
 function montarPrompt(def, tentativa) {
-  const ee = def.provas.ee.tarefas.map(t => {
+  const tem = p => sim.ordemDe(def).includes(p);
+  const ee = !tem("ee") ? "" : def.provas.ee.tarefas.map(t => {
     const texto = String(tentativa.provas.ee.respostas?.[t.id] || "").trim();
     const docs = (t.documentos || []).map(d => `${d.titulo}\n${d.texto}`).join("\n\n");
     return `### EE ${t.id} — ${t.titulo} (${t.min}–${t.max} mots)\nConsigne : ${t.consigne}${docs ? "\n\n" + docs : ""}\n\nProduction du candidat (${sim.contarPalavras(texto)} mots) :\n"""\n${texto || "(aucune réponse)"}\n"""`;
   }).join("\n\n");
-  const eo = def.provas.eo.tarefas.map(t => {
+  const eo = !tem("eo") ? "" : def.provas.eo.tarefas.map(t => {
     const tr = String(tentativa.provas.eo.respostas?.[t.id]?.transcricao || "").trim();
     return `### EO ${t.id} — ${t.titulo} (${Math.round(t.duracaoSeg / 60 * 10) / 10} min)\nConsigne : ${t.consigne}\n\nTranscription automatique de la réponse orale :\n"""\n${tr || "(aucune transcription disponible)"}\n"""`;
   }).join("\n\n");
 
-  const crit = p => sim.CRITERIOS[p].map(c => `"${c.id}" (${c.nome})`).join(", ");
-  return `Tu es examinateur certifié du TCF Canada (France Éducation international). Évalue les productions ci-dessous exactement comme lors de l'examen officiel.
+  const crits = sim.criteriosDe(def);
+  const crit = p => crits[p].map(c => `"${c.id}" (${c.nome})`).join(", ");
+  const exame = sim.ehExercicio(def) ? ({ DELF: "DELF", DALF: "DALF", TEF: "TEF", TCF: "TCF Canada" }[def.curso] || `français niveau ${def.nivel} (grille du TCF)`) : "TCF Canada";
+  return `Tu es examinateur certifié du ${exame}. Évalue les productions ci-dessous exactement comme lors de l'examen officiel${sim.ehExercicio(def) ? `, pour le niveau visé ${def.nivel}` : ""}.
 
 Pour CHAQUE tâche, attribue une note de 0 à 5 (demi-points autorisés) à chacun des 4 critères :
 - Expression écrite : ${crit("ee")}
@@ -35,8 +38,14 @@ ${ee}
 ${eo}
 
 Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, de la forme :
-{"ee":{"tarefas":{"t1":{"criterios":{"tarefa":0,"coerencia":0,"lexico":0,"gramatica":0},"comentario":"..."},"t2":{...},"t3":{...}},"comentario":"bilan général de l'expression écrite"},
- "eo":{"tarefas":{"t1":{"criterios":{"tarefa":0,"lexico":0,"gramatica":0,"fluencia":0},"comentario":"..."},"t2":{...},"t3":{...}},"comentario":"bilan général de l'expression orale"}}`;
+${formatoJson(def, tem)}`;
+}
+
+// Exemplo do JSON esperado, só com as provas e tarefas que existem nesta definição.
+function formatoJson(def, tem) {
+  const zeros = p => "{" + sim.criteriosDe(def)[p].map(c => `"${c.id}":0`).join(",") + "}";
+  const bloco = (p, nome) => `"${p}":{"tarefas":{${def.provas[p].tarefas.map(t => `"${t.id}":{"criterios":${zeros(p)},"comentario":"..."}`).join(",")}},"comentario":"bilan général de l'${nome}"}`;
+  return "{" + [tem("ee") && bloco("ee", "expression écrite"), tem("eo") && bloco("eo", "expression orale")].filter(Boolean).join(",\n ") + "}";
 }
 
 function extrairJson(texto) {
@@ -74,9 +83,10 @@ async function corrigirExpressoesComIA(def, tentativa) {
     const texto = (dados.content || []).filter(b => b.type === "text").map(b => b.text).join("");
     const bruto = extrairJson(texto);
     const meta = { porIA: true, corretorNome: "Correção automática (IA)" };
+    const tem = p => sim.ordemDe(def).includes(p);
     return {
-      ee: sim.montarResultadoExpressao("ee", def, bruto.ee || {}, meta),
-      eo: sim.montarResultadoExpressao("eo", def, bruto.eo || {}, meta)
+      ee: tem("ee") ? sim.montarResultadoExpressao("ee", def, bruto.ee || {}, meta) : undefined,
+      eo: tem("eo") ? sim.montarResultadoExpressao("eo", def, bruto.eo || {}, meta) : undefined
     };
   } finally {
     clearTimeout(timer);

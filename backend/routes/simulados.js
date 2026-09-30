@@ -26,6 +26,18 @@ const CANAL_EQUIPE = "simulados:equipe";
 const canalTentativa = id => "simulado:" + id;
 const GRACA_MS = 8000;
 const slugValido = s => typeof s === "string" && /^[a-z0-9-]{2,60}$/.test(s);
+
+// Simulado/exercício só fica disponível quando todos os áudios da CO já foram gerados (o aluno ouve
+// cada áudio uma única vez: um arquivo faltando queimaria a escuta). Resultado positivo em cache.
+const PUBLIC_DIR = path.join(__dirname, "..", "..", "public");
+const audiosProntos = new Set();
+function audioPronto(def) {
+  if (audiosProntos.has(def.slug) || process.env.SIMULADOS_SEM_CHECAR_AUDIO === "1") return true; // (variável só para testes)
+  const arquivos = [...Object.values(def.audioConsignes || {}), ...(def.provas.co?.questoes || []).map(q => q.audio)].filter(Boolean);
+  const ok = arquivos.every(a => fs.existsSync(path.join(PUBLIC_DIR, a)));
+  if (ok) audiosProntos.add(def.slug);
+  return ok;
+}
 const tarefaValida = (def, prova, id) => def.provas[prova].tarefas.some(t => t.id === id);
 
 function exigirEquipe(req, res, next) {
@@ -94,7 +106,7 @@ function serializar(def, t, req) {
   if (!equipe) delete o.sugestaoIA;
   else o.eu = req.userId;
   o.definicao = equipe || concluido ? def : sim.versaoPublica(def);
-  o.criterios = sim.CRITERIOS;
+  o.criterios = sim.criteriosDe(def);
   o.iaDisponivel = iaConfigurada();
   return o;
 }
@@ -147,8 +159,8 @@ async function rodarIA(def, t, { publicar }) {
     const atual = await SimuladoTentativa.findById(id);
     atual.ia = { erro: "", tentativas: (atual.ia?.tentativas || 0) + 1, geradoEm: new Date() };
     if (publicar && atual.modoCorrecao === "ia") {
-      atual.provas.ee.resultado = r.ee;
-      atual.provas.eo.resultado = r.eo;
+      if (r.ee) atual.provas.ee.resultado = r.ee;
+      if (r.eo) atual.provas.eo.resultado = r.eo;
       atual.status = "corrigido";
       atual.publicadoEm = new Date();
       atual.markModified("provas");
@@ -185,10 +197,39 @@ async function posFinalizacao(def, t) {
 // =====================================================================
 // ALUNO
 // =====================================================================
-async function podeUsar(req) {
+async function podeUsar(req, def) {
   if (ehEquipe(req)) return true;
+  // Exercício do Ambiente de Produção: liberado pelo módulo "producao" do curso dele.
+  if (def && sim.ehExercicio(def)) return usuarioTemAcesso(req.userId, "producao", def.curso);
   return usuarioTemAcesso(req.userId, "plataforma", "TCF");
 }
+
+// EXERCÍCIOS DO AMBIENTE DE PRODUÇÃO ORAL (por curso), com o que o aluno já fez.
+router.get("/exercicios", async (req, res) => {
+  try {
+    const curso = String(req.query.curso || "");
+    const exercicios = sim.listarExercicios(curso);
+    if (!exercicios.length) return res.json({ exercicios: [], iaDisponivel: iaConfigurada() });
+    if (!(await podeUsar(req, sim.obter(exercicios[0].slug)))) return res.status(403).json({ msg: "Exercícios disponíveis para quem tem o Ambiente de Produção deste curso." });
+    const tentativas = await SimuladoTentativa.find({ alunoId: req.userId, simuladoSlug: { $in: exercicios.map(e => e.slug) } })
+      .select("simuladoSlug status provas publicadoEm criadoEm modoCorrecao").sort({ criadoEm: -1 }).lean();
+    res.json({
+      iaDisponivel: iaConfigurada(),
+      exercicios: exercicios.map(e => {
+        const ts = tentativas.filter(x => x.simuladoSlug === e.slug);
+        const aberta = ts.find(x => x.status === "em_andamento");
+        const feita = ts.find(x => x.status !== "em_andamento");
+        const co = feita?.provas?.co?.resultado;
+        return { ...e, disponivel: audioPronto(sim.obter(e.slug)), feito: !!feita, emAndamento: aberta ? aberta._id : null, ultimaTentativa: feita ? feita._id : null,
+          resultadoCO: co ? { pontos: co.pontos, escala: co.escala, acertos: co.acertos, total: co.total } : null,
+          corrigido: !!feita?.publicadoEm };
+      })
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
 
 router.get("/", async (req, res) => {
   try {
@@ -205,7 +246,7 @@ router.get("/", async (req, res) => {
         return [p, { pontos: r.pontos, nota: r.nota, nivel: r.nivel, nclc: r.nclc }];
       }))
     }));
-    res.json({ simulados: sim.listar("TCF"), tentativas: resumo, iaDisponivel: iaConfigurada() });
+    res.json({ simulados: sim.listar("TCF").filter(x => audioPronto(sim.obter(x.slug))), tentativas: resumo, iaDisponivel: iaConfigurada() });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -214,9 +255,10 @@ router.get("/", async (req, res) => {
 
 router.post("/:slug/iniciar", async (req, res) => {
   try {
-    if (!(await podeUsar(req))) return res.status(403).json({ msg: "Simulados disponíveis no plano Excellence do TCF." });
     const def = slugValido(req.params.slug) && sim.obter(req.params.slug);
     if (!def || def.oculto) return res.status(404).json({ msg: "Simulado não encontrado." });
+    if (!(await podeUsar(req, def))) return res.status(403).json({ msg: sim.ehExercicio(def) ? "Exercício disponível para quem tem o Ambiente de Produção deste curso." : "Simulados disponíveis no plano Excellence do TCF." });
+    if (!audioPronto(def)) return res.status(409).json({ msg: `Os áudios deste ${sim.ehExercicio(def) ? "exercício" : "simulado"} ainda estão sendo preparados. Tente novamente em breve.` });
     const modo = !sim.temExpressoes(def) ? "automatica" : req.body?.modoCorrecao === "professor" ? "professor" : "ia";
     const aberta = await SimuladoTentativa.findOne({ alunoId: req.userId, simuladoSlug: def.slug, status: "em_andamento" });
     if (aberta) return res.status(409).json({ msg: "Você já tem este simulado em andamento.", tentativaId: aberta._id });
@@ -608,7 +650,8 @@ router.post("/tentativas/:id/notas", exigirEquipe, async (req, res) => {
     const { t, def } = c;
     if (!sim.temExpressoes(def)) return res.status(400).json({ msg: "Este simulado não tem expressões para corrigir." });
     const nome = await nomeDe(req.userId);
-    for (const prova of ["ee", "eo"]) {
+    const expressoes = sim.ordemDe(def).filter(p => p === "ee" || p === "eo");
+    for (const prova of expressoes) {
       const entrada = req.body?.[prova];
       if (!entrada || typeof entrada !== "object") continue;
       t.provas[prova].resultado = sim.montarResultadoExpressao(prova, def, entrada, { corretor: req.userId, corretorNome: nome });
@@ -616,7 +659,7 @@ router.post("/tentativas/:id/notas", exigirEquipe, async (req, res) => {
     t.markModified("provas");
     if (req.body?.publicar) {
       if (t.status === "em_andamento") return res.status(400).json({ msg: "O aluno ainda não terminou o simulado — salve como rascunho e publique ao final." });
-      if (!t.provas.ee.resultado || !t.provas.eo.resultado) return res.status(400).json({ msg: "Avalie a Expression écrite e a Expression orale antes de publicar." });
+      if (expressoes.some(p => !t.provas[p].resultado)) return res.status(400).json({ msg: expressoes.length > 1 ? "Avalie a Expression écrite e a Expression orale antes de publicar." : "Avalie a expressão antes de publicar." });
       t.status = "corrigido";
       t.publicadoEm = new Date();
       t.mensagens.push({ autor: "sistema", texto: `${nome || "O professor"} publicou a correção do simulado.` });

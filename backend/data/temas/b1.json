@@ -1,0 +1,732 @@
+[
+ {
+  "slug": "b1-velo-en-ville",
+  "titulo": "Se déplacer à vélo en ville",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 3 — opinion",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Dê sua opinião: a cidade deveria fazer mais para incentivar o uso da bicicleta?",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "Texto de opinião",
+   "Conectores de causa e consequência",
+   "Vocabulário urbano"
+  ],
+  "instrucoes": "Le journal de votre ville demande aux lecteurs : « La ville doit-elle faire plus pour encourager le vélo ? » Vous répondez en donnant votre opinion, avec des arguments et des exemples. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le vélo rouge »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Tous les matins, je traverse la ville sur mon vieux vélo rouge. Je dépasse les voitures bloquées aux feux, je salue le vendeur de journaux, je sens l'odeur du café des terrasses. En vingt minutes, j'arrive au bureau, réveillée et de bonne humeur. Mes collègues arrivent énervés par les bouchons. Parfois, sous la pluie, je les envie un peu. Mais seulement un peu."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les pistes cyclables se multiplient",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "De nombreuses villes françaises ont créé des centaines de kilomètres de pistes cyclables ces dernières années. Le nombre de cyclistes a fortement augmenté, en particulier pour aller au travail. Mais les accidents restent nombreux aux carrefours, et beaucoup d'habitants demandent des pistes séparées des voitures et des parkings sécurisés pour éviter les vols."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Le vélo, bon pour la santé et pour l'air",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des études montrent que les personnes qui vont au travail à vélo ont moins de problèmes cardiaques et moins de stress. Chaque trajet en voiture remplacé par le vélo réduit aussi la pollution de l'air et le bruit. Les chercheurs rappellent que les bénéfices pour la santé sont largement supérieurs aux risques, surtout quand les infrastructures sont sûres."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-velo-en-ville-1.jpg",
+    "legenda": "Ciclistas numa ciclovia",
+    "credito": {
+     "autor": "d26b73 from Vienna, Austria",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:No_handed_(panning)_-_Flickr_-_d26b73.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b1-velo-en-ville-2.jpg",
+    "legenda": "Bicicletas estacionadas",
+    "credito": {
+     "autor": "KarlaCruzVillalobos",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Bicycle_Parking_Lot.jpg"
+    }
+   }
+  ],
+  "ordem": 1,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b1-experience-marquante",
+  "titulo": "Une rencontre qui a compté",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 2 — récit",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Conte uma encontro que mudou algo na sua vida e explique o que você aprendeu.",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "Narração no passado",
+   "Expressão de sentimentos",
+   "Conclusão reflexiva"
+  ],
+  "instrucoes": "Un magazine publie des témoignages sur le thème « Une rencontre qui a changé ma vie ». Vous racontez votre histoire : qui était cette personne, dans quelles circonstances vous l'avez rencontrée et ce que vous avez appris. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Monsieur Duval »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "J'avais dix-sept ans et je voulais quitter l'école. C'est alors que Monsieur Duval est arrivé : un professeur d'histoire qui racontait la Révolution comme un feuilleton. Un jour, il m'a gardé après le cours et m'a dit : « Tu poses les meilleures questions de la classe. Ne gaspille pas ça. » Personne ne m'avait jamais dit une chose pareille. Je suis restée. Aujourd'hui, je suis professeure à mon tour."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le mentorat aide les jeunes à réussir",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Des associations mettent en relation des jeunes avec des adultes bénévoles, appelés mentors, qui les accompagnent pendant leurs études ou leur recherche d'emploi. Une fois par semaine, ils discutent, préparent des entretiens ou visitent des entreprises. Selon ces associations, les jeunes accompagnés réussissent mieux et prennent davantage confiance en eux."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Le pouvoir des encouragements",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des recherches en psychologie de l'éducation montrent que les attentes d'un adulte influencent les résultats d'un élève. Quand un enseignant croit aux capacités d'un élève et le lui dit, celui-ci s'investit davantage. Les chercheurs conseillent de féliciter l'effort et les progrès plutôt que le talent naturel."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-experience-marquante-1.jpg",
+    "legenda": "Uma conversa entre professor e aluno",
+    "credito": {
+     "autor": "Jonathan Schilling",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Professor_Warner_R_Schilling_talking_to_students_after_class_2008.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b1-experience-marquante-2.jpg",
+    "legenda": "Um encontro que marca",
+    "credito": {
+     "autor": "delegateconnectimages",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Virtual_Graduation_Ceremony.jpg"
+    }
+   }
+  ],
+  "ordem": 2,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b1-lettre-reclamation-hotel",
+  "titulo": "Réclamation après un séjour",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 1 — lettre formelle",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Escreva uma carta de reclamação a um hotel que não correspondeu ao anúncio e peça uma compensação.",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "Carta formal",
+   "Expressão da insatisfação",
+   "Condicional de cortesia"
+  ],
+  "instrucoes": "Vous avez passé un week-end dans un hôtel, mais la chambre ne correspondait pas du tout à l'annonce. Vous écrivez une lettre à la direction pour expliquer les problèmes et demander une compensation. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Vue sur mer »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de conto humorístico)",
+    "conteudo": "L'annonce promettait une « chambre avec vue sur mer ». Il y avait bien une fenêtre, et au loin, entre deux immeubles et une grue, on devinait un petit triangle bleu. La douche coulait goutte à goutte, le lit grinçait à chaque mouvement et le petit-déjeuner « continental » se composait d'une biscotte et d'un café tiède. Mon mari, qui a de l'humour, a dit : « Au moins, on se souviendra de ces vacances. »"
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les avis en ligne influencent les réservations",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Avant de réserver un hôtel, la majorité des voyageurs lisent les avis des autres clients sur Internet. Une mauvaise note peut faire baisser fortement les réservations. Les professionnels conseillent aux clients mécontents de contacter d'abord l'hôtel directement : beaucoup d'établissements préfèrent proposer un remboursement partiel ou une nuit gratuite plutôt que recevoir un avis négatif."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Les droits du voyageur",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: guia prático)",
+    "conteudo": "Lorsqu'une prestation ne correspond pas à la description, le client peut demander une réduction du prix, voire un remboursement. Il est conseillé de signaler le problème sur place, de prendre des photos et de conserver les documents de réservation. Une réclamation écrite, claire et polie, a plus de chances d'aboutir qu'un message agressif."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-lettre-reclamation-hotel-1.jpg",
+    "legenda": "Um quarto de hotel",
+    "credito": {
+     "autor": "Basile Morin",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Restaurant_room_of_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b1-lettre-reclamation-hotel-2.jpg",
+    "legenda": "A recepção do hotel",
+    "credito": {
+     "autor": "Basile Morin",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Entrance_lounge_and_reception_desks_of_the_Carlton_Hotel_Downtown_Core_Singapore.jpg"
+    }
+   }
+  ],
+  "ordem": 3,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b1-apprendre-langue",
+  "titulo": "Pourquoi apprendre une langue étrangère ?",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 3 — opinion",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Explique, num texto de opinião, por que aprender uma língua estrangeira vale a pena (ou não) hoje em dia.",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "Texto de opinião",
+   "Exemplos pessoais",
+   "Concessão simples"
+  ],
+  "instrucoes": "Sur un forum, quelqu'un écrit : « Avec les traducteurs automatiques, apprendre une langue étrangère ne sert plus à rien. » Vous répondez en donnant votre opinion, avec des arguments et des exemples personnels. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La première conversation »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Après six mois de cours, j'ai osé ma première vraie conversation en français, dans une boulangerie de Montréal. J'ai demandé une baguette et un pain au chocolat, et la vendeuse m'a répondu en me demandant d'où je venais. Nous avons parlé cinq minutes du Brésil, de la neige et du carnaval. En sortant, j'avais les jambes qui tremblaient et un sourire énorme. Aucune application ne m'avait jamais donné ce sentiment."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les entreprises recherchent des profils multilingues",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Selon plusieurs études, parler au moins deux langues étrangères reste un atout important pour trouver un emploi, en particulier dans le tourisme, le commerce international et la santé. Les recruteurs expliquent que la langue ne sert pas seulement à traduire : elle permet de comprendre une culture, de créer une relation de confiance et de négocier."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Apprendre une langue stimule le cerveau",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des recherches en neurosciences montrent que l'apprentissage d'une langue étrangère active de nombreuses zones du cerveau et renforce la mémoire et l'attention. Chez les personnes âgées, le bilinguisme semble retarder l'apparition de certains troubles de la mémoire. Les traducteurs automatiques, eux, ne produisent pas ces effets."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-apprendre-langue-1.jpg",
+    "legenda": "Uma padaria em Montréal",
+    "credito": {
+     "autor": "Andre Carrotflower",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:20181013_-_26_-_Montreal_(Plateau)_-_%22Garden_Walk_Montreal%22.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b1-apprendre-langue-2.jpg",
+    "legenda": "Um café à noite",
+    "credito": {
+     "autor": "PattayaPatrol",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:DSC_8386_A_cozy_neon-lit_street_caf%C3%A9_at_night_with_people_chatting_inside_and_shoppers_browsing_clothes_at_a_nearby_stall.jpg"
+    }
+   }
+  ],
+  "ordem": 4,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b1-zero-dechet",
+  "titulo": "Réduire ses déchets",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 2 — article",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Escreva um artigo para o boletim do prédio com dicas para reduzir o lixo e convencer os vizinhos.",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "Artigo informativo",
+   "Imperativo e conselhos",
+   "Vocabulário do meio ambiente"
+  ],
+  "instrucoes": "Vous écrivez un article pour le bulletin de votre immeuble afin d'encourager vos voisins à réduire leurs déchets. Expliquez pourquoi c'est important et donnez des conseils pratiques. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le bocal de verre »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de crônica)",
+    "conteudo": "Ma voisine Lucie a un bocal de verre dans sa cuisine. Dedans, il y a tous les déchets qu'elle n'a pas pu éviter en un an : quelques étiquettes, un bouchon, un emballage de médicament. Le bocal n'est même pas plein. Quand je lui ai demandé comment elle faisait, elle m'a montré ses sacs en tissu, ses pots pour le marché et sa petite boîte à compost. « Ce n'est pas difficile, m'a-t-elle dit. C'est juste une habitude. »"
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le compost bientôt obligatoire pour tous",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "En France, les collectivités doivent désormais proposer à tous les habitants une solution pour trier leurs déchets alimentaires : composteurs collectifs dans les immeubles, bacs spéciaux ou collecte séparée. Les déchets de cuisine représentent environ un tiers de nos poubelles. Transformés en compost, ils servent d'engrais pour les jardins et les espaces verts."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Combien de déchets produisons-nous ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Chaque habitant d'un pays européen produit en moyenne plusieurs centaines de kilos de déchets ménagers par an. Les emballages, souvent utilisés quelques minutes, représentent une part importante de ce volume. Les chercheurs rappellent que le meilleur déchet est celui qu'on ne produit pas : réduire et réutiliser sont plus efficaces que recycler."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-zero-dechet-1.jpg",
+    "legenda": "Uma loja a granel",
+    "credito": {
+     "autor": "Raysonho @ Open Grid Scheduler / Scalable Grid Engine",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:BulkBarnRichmondHill.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b1-zero-dechet-2.jpg",
+    "legenda": "Uma composteira",
+    "credito": {
+     "autor": "Michal Klajban",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Richmond_Community_Garden_-_compost_bins,_Richmond,_Christchurch,_New_Zealand.jpg"
+    }
+   }
+  ],
+  "ordem": 5,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b1-choisir-metier",
+  "titulo": "Choisir son métier : passion ou salaire ?",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 3 — opinion",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Discuta: na escolha da profissão, deve-se priorizar a paixão ou o salário?",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "Texto de opinião",
+   "Comparação",
+   "Vocabulário do trabalho"
+  ],
+  "instrucoes": "Dans un magazine pour étudiants, on pose la question : « Pour choisir son métier, vaut-il mieux suivre sa passion ou penser au salaire ? » Vous donnez votre opinion en l'illustrant d'exemples. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le luthier »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Mon grand-père était luthier. Il gagnait peu, travaillait tard et ses mains étaient couvertes de petites cicatrices. Mais je ne l'ai jamais entendu se plaindre. Quand un violon qu'il avait fabriqué jouait pour la première fois, son visage s'illuminait comme celui d'un enfant. Mon père, lui, a choisi la banque. Il a gagné beaucoup d'argent. Le dimanche, il venait dans l'atelier et regardait son père travailler, en silence."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les jeunes veulent un travail qui a du sens",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Selon plusieurs enquêtes, les jeunes diplômés accordent une importance croissante au sens de leur travail : utilité sociale, respect de l'environnement, équilibre avec la vie personnelle. Certains acceptent un salaire plus bas pour travailler dans une association ou une entreprise engagée. D'autres rappellent que tout le monde ne peut pas se permettre ce choix, surtout avec des loyers élevés."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Argent et satisfaction au travail",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Les économistes ont observé que l'augmentation du revenu améliore le bien-être, surtout quand elle permet de sortir de difficultés financières. Au-delà d'un certain niveau, cependant, d'autres facteurs deviennent plus importants : l'autonomie, les relations avec les collègues, le sentiment d'être utile. Un travail passionnant mais très mal payé peut aussi devenir une source de stress."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-choisir-metier-1.jpg",
+    "legenda": "A oficina de um luthier",
+    "credito": {
+     "autor": "Kritzolina",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:A_luthier_at_work_on_a_violin_02.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b1-choisir-metier-2.jpg",
+    "legenda": "Um bairro de escritórios",
+    "credito": {
+     "autor": "Infrogmation of New Orleans",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Baronne_Street,_New_Orleans_Central_Business_District,_15_December_2022_-_04.jpg"
+    }
+   }
+  ],
+  "ordem": 6,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b1-souvenir-voyage",
+  "titulo": "Le voyage qui m'a le plus marqué",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 2 — récit de blog",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Conte, no seu blog, a viagem que mais marcou você e o que ela mudou no seu jeito de ver as coisas.",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "Narração no passado",
+   "Descrição",
+   "Reflexão pessoal"
+  ],
+  "instrucoes": "Sur votre blog, vous racontez le voyage qui vous a le plus marqué : où, quand, avec qui, ce qui s'est passé et ce que ce voyage a changé pour vous. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le train de nuit »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de relato de viagem)",
+    "conteudo": "Le train de nuit pour Venise partait à vingt heures. Dans notre compartiment, il y avait une vieille dame italienne, un étudiant allemand et un couple de retraités belges. Personne ne parlait la même langue, mais la vieille dame a sorti du pain, du fromage et une bouteille de vin, et nous avons partagé ce repas en riant, avec des gestes. Au matin, la lagune est apparue dans la brume. Je n'ai jamais oublié ces inconnus."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le retour des trains de nuit en Europe",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Après avoir presque disparu, les trains de nuit reviennent en Europe. De nouvelles lignes relient Paris à Vienne, Berlin ou Venise. Les voyageurs apprécient de dormir pendant le trajet et d'arriver en centre-ville le matin. Les défenseurs de l'environnement rappellent que le train émet beaucoup moins de CO₂ que l'avion."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Pourquoi les voyages nous transforment",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des psychologues ont étudié l'effet des voyages sur la personnalité. Les étudiants qui passent plusieurs mois à l'étranger deviennent en moyenne plus ouverts et plus tolérants face à la nouveauté. Les expériences inattendues, et même les petites difficultés, jouent un rôle important : elles obligent à s'adapter et à sortir de ses habitudes."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-souvenir-voyage-1.jpg",
+    "legenda": "Um trem noturno",
+    "credito": {
+     "autor": "JIP",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Sleeping_cabin_aboard_a_Finnish_night_train.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b1-souvenir-voyage-2.jpg",
+    "legenda": "A laguna de Veneza pela manhã",
+    "credito": {
+     "autor": "Virtual-Pano",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Panoramic_view_from_Lido_die_Venezia_across_Venice_towards_the_Dolomites_in_90_kilometres_distance.jpg"
+    }
+   }
+  ],
+  "ordem": 7,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b1-ecrans-famille",
+  "titulo": "Les écrans à table",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 3 — opinion",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Dê sua opinião sobre o uso de telas durante as refeições em família.",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "Texto de opinião",
+   "Expressão da obrigação",
+   "Conectores de oposição"
+  ],
+  "instrucoes": "Une association de parents publie un débat : « Faut-il interdire les écrans pendant les repas en famille ? » Vous donnez votre avis de manière argumentée, avec des exemples. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le panier à téléphones »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Chez les Moreau, il y a un panier en osier à l'entrée de la salle à manger. Avant de s'asseoir, chacun y dépose son téléphone, même le père, même la grand-mère. Les premières semaines, les enfants ont protesté. Puis ils ont commencé à raconter leur journée, à se disputer sur des films, à rire des blagues de leur oncle. Aujourd'hui, ce sont eux qui rappellent aux invités de laisser leur portable dans le panier."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "La télévision allumée pendant le dîner",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Selon une enquête, dans près d'une famille sur deux, la télévision ou un écran reste allumé pendant les repas. Les pédiatres regrettent cette habitude, car le repas est un moment important pour la conversation et l'apprentissage du langage chez les enfants. Certains parents expliquent que les écrans permettent de calmer les plus petits ou de regarder les informations."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Manger devant un écran fait manger plus",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Des études montrent que les personnes qui mangent devant un écran mangent en moyenne plus et plus vite, car elles font moins attention aux signaux de satiété. Chez les enfants, les repas pris sans écran sont associés à une meilleure alimentation et à de meilleures compétences de communication."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-ecrans-famille-1.jpg",
+    "legenda": "O celular à mesa",
+    "credito": {
+     "autor": "Infrogmation of New Orleans",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Burritos_Grill_Eastern_New_Orleans_Sept_2017_5.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b1-ecrans-famille-2.jpg",
+    "legenda": "Uma refeição em família",
+    "credito": {
+     "autor": "PattayaPatrol",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:DSC_7089_Three_friends_laugh_and_toast_over_drinks_during_a_lively_evening_dinner_at_a_cozy_plant-filled_restaurant.jpg"
+    }
+   }
+  ],
+  "ordem": 8,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b1-proposer-activite",
+  "titulo": "Proposer une activité au club",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 1 — courriel",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Escreva ao responsável de um clube propondo uma nova atividade e explicando por que ela interessaria aos membros.",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "E-mail formal-amigável",
+   "Proposta e justificativa",
+   "Futuro e condicional"
+  ],
+  "instrucoes": "Vous êtes membre d'un club (sport, lecture, randonnée…). Vous écrivez au responsable pour proposer une nouvelle activité : décrivez-la, expliquez pourquoi elle intéresserait les membres et comment l'organiser. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le club de lecture »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Le club de lecture se réunissait le premier jeudi du mois, dans l'arrière-salle de la librairie. Au début, ils étaient cinq, tous retraités. Un jour, Samia, une étudiante, a proposé de lire aussi des bandes dessinées et des romans graphiques. Certains ont froncé les sourcils. Le mois suivant, trois jeunes sont arrivés, et la discussion a duré jusqu'à minuit."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les associations cherchent à attirer de nouveaux membres",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Beaucoup de clubs et d'associations voient leur nombre de membres diminuer. Pour attirer un nouveau public, ils proposent des activités plus courtes, des sorties le week-end ou des rencontres en ligne. Les responsables expliquent que les meilleures idées viennent souvent des membres eux-mêmes."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Les activités de groupe et le bien-être",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo de divulgação científica)",
+    "conteudo": "Participer régulièrement à une activité de groupe améliore le moral et réduit le sentiment de solitude. Selon les chercheurs, ce ne sont pas seulement les activités elles-mêmes qui comptent, mais aussi le sentiment d'appartenir à un groupe et d'y avoir un rôle. Proposer une idée ou organiser un événement renforce encore cet effet."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-proposer-activite-1.jpg",
+    "legenda": "Um clube de leitura",
+    "credito": {
+     "autor": "VOITAN Jaurès Didier",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Club_de_lecture_enfant.jpg"
+    }
+   },
+   {
+    "src": "img/temas/b1-proposer-activite-2.jpg",
+    "legenda": "Um grupo de caminhada",
+    "credito": {
+     "autor": "NPS Photo",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Group_of_hikers_climbing_(e396d280-121c-47fa-868a-407df56b208d).jpg"
+    }
+   }
+  ],
+  "ordem": 9,
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "b1-fete-quartier",
+  "titulo": "Une fête de quartier réussie",
+  "nivel": "B1",
+  "tipoProducao": "Tâche 2 — article",
+  "dificuldade": "medio",
+  "tempoSugerido": 30,
+  "limitePalavrasMin": 120,
+  "limitePalavrasMax": 160,
+  "descricao": "Relate, para o site da prefeitura, uma festa de bairro de que você participou e o que ela trouxe aos moradores.",
+  "objetivos": [
+   "Expressar uma opinião e justificá-la",
+   "Organizar o texto em parágrafos",
+   "Usar conectores lógicos"
+  ],
+  "criteriosResumo": [
+   "Consigne completa",
+   "Organização e conectores",
+   "Vocabulário e gramática do nível B1"
+  ],
+  "competenciasAvaliadas": [
+   "Artigo narrativo",
+   "Descrição de ambientes",
+   "Passé composé e imparfait"
+  ],
+  "instrucoes": "Vous avez participé à une fête organisée dans votre quartier. Vous écrivez un article pour le site de la mairie : racontez comment s'est passée la fête, décrivez l'ambiance et expliquez ce qu'elle a apporté aux habitants. (120 à 160 mots)",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La grande table »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de crônica)",
+    "conteudo": "Pour la fête, on avait installé une seule table, immense, au milieu de la rue fermée aux voitures. Chacun avait apporté un plat de chez lui : un couscous, une quiche, des nems, un gâteau au yaourt. Les enfants couraient entre les chaises, un voisin jouait de l'accordéon. À la fin de la soirée, madame Nguyen et monsieur Leroy, qui ne s'étaient jamais parlé en vingt ans, échangeaient leurs recettes."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les fêtes de quartier renforcent les liens",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "De plus en plus de mairies aident les habitants à organiser des fêtes de quartier : prêt de tables et de chaises, fermeture des rues, petites subventions. Les organisateurs constatent que ces événements permettent aux nouveaux habitants de s'intégrer et aux personnes âgées de sortir de l'isolement."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "La cohésion sociale dans les villes",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: estudo sociológico de divulgação)",
+    "conteudo": "Les sociologues parlent de « cohésion sociale » pour décrire la qualité des liens entre les habitants d'un territoire. Les quartiers où les habitants se connaissent ont en général moins de problèmes de sécurité et plus d'entraide en cas de difficulté. Les événements festifs, même ponctuels, contribuent à créer ces liens."
+   }
+  ],
+  "courseType": "B1",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/b1-fete-quartier-1.jpg",
+    "legenda": "Festa na rua do bairro",
+    "credito": {
+     "autor": "Romainbehar",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Lyon_3e_-_Place_Rouget_de_l%27Isle_-_F%C3%AAte_du_quartier_Sans_Souci_2021_-_Fanfare.jpeg"
+    }
+   },
+   {
+    "src": "img/temas/b1-fete-quartier-2.jpg",
+    "legenda": "Um acordeonista na festa",
+    "credito": {
+     "autor": "Mykola Swarnyk",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Street_musicians_at_the_BWF_2019.jpg"
+    }
+   }
+  ],
+  "ordem": 10,
+  "creditosNecessarios": 1
+ }
+]

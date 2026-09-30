@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b2-06",
+ "titulo": "Exercício oral nº 6 — B2",
+ "curso": "B2",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Voyager autrement",
+ "descricao": "Viagens de trem, turismo lento e o impacto ecológico das férias.",
+ "imagem": {
+  "src": "img/temas/b2-tourisme-durable-2.jpg",
+  "credito": {
+   "autor": "Stephen Craven",
+   "licenca": "CC BY-SA 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Regional_train_approaching_Crewe_-_geograph.org.uk_-_8027744.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b2-06/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Duração.",
+     "alternativas": [
+      "Le train est rouge.",
+      "Oui, j'aime les pâtes.",
+      "Rome est en Italie.",
+      "Onze heures, avec un train de nuit."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu vas à Rome en train ? Ça prend combien de temps ?\nA. Le train est rouge.\nB. Oui, j'aime les pâtes.\nC. Rome est en Italie.\nD. Onze heures, avec un train de nuit.",
+     "audio": "audio/exercicios-orais/ex-b2-06/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Trois fois par semaine ».",
+     "alternativas": [
+      "Tous les jours.",
+      "Une fois par semaine.",
+      "Trois fois par semaine.",
+      "Le week-end seulement."
+     ],
+     "correta": 2,
+     "pergunta": "Combien de fois par semaine le train circule-t-il ?",
+     "transcricao": "Nouveau : un train de nuit relie Paris à Berlin trois fois par semaine. Départ à vingt heures, arrivée à neuf heures. Des couchettes à partir de quarante-neuf euros.",
+     "audio": "audio/exercicios-orais/ex-b2-06/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Le trajet fait partie du voyage ».",
+     "alternativas": [
+      "Comme une contrainte.",
+      "Comme une partie du voyage.",
+      "Comme une perte de temps.",
+      "Comme trop cher."
+     ],
+     "correta": 1,
+     "pergunta": "Comment voit-elle le trajet aujourd'hui ?",
+     "transcricao": "J'ai arrêté de prendre l'avion pour les vacances. Au début, c'était une contrainte. Maintenant, le trajet fait partie du voyage : je regarde les paysages, je lis, je rencontre des gens. Je ne reviendrais pas en arrière.",
+     "audio": "audio/exercicios-orais/ex-b2-06/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Concordância com argumento.",
+     "alternativas": [
+      "C'est vrai, et c'est injuste : l'avion devrait payer sa pollution.",
+      "Le billet est perdu.",
+      "Oui, le train est long.",
+      "Non, j'aime l'avion."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Le train, c'est bien, mais c'est souvent plus cher que l'avion !\nA. C'est vrai, et c'est injuste : l'avion devrait payer sa pollution.\nB. Le billet est perdu.\nC. Oui, le train est long.\nD. Non, j'aime l'avion.",
+     "audio": "audio/exercicios-orais/ex-b2-06/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Ces choix réduisent l'empreinte bien plus que les petits gestes sur place ».",
+     "alternativas": [
+      "Partir moins souvent, plus longtemps et plus près.",
+      "Faire de petits gestes sur place.",
+      "Choisir des hôtels écologiques.",
+      "Voyager en avion la nuit."
+     ],
+     "correta": 0,
+     "pergunta": "Quels choix réduisent le plus l'empreinte du voyage ?",
+     "transcricao": "Le tourisme représente près de dix pour cent des émissions mondiales de gaz à effet de serre, surtout à cause des transports. Partir moins souvent mais plus longtemps, choisir des destinations proches : ces choix réduisent l'empreinte bien plus que les petits gestes sur place.",
+     "audio": "audio/exercicios-orais/ex-b2-06/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Il faudrait limiter le nombre de voyages en avion par personne. » Qu'en pensez-vous ? Vous donnez votre opinion, vous l'argumentez et vous l'illustrez d'exemples.",
+     "perguntasExaminador": [
+      "Il faudrait limiter le nombre de voyages en avion par personne. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et les familles qui vivent loin les unes des autres ? », « Et le tourisme dans les pays pauvres ? », « Seriez-vous prêt(e) à renoncer à l'avion ? »"
+    }
+   ]
+  }
+ }
+}

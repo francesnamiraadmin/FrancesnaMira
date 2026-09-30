@@ -1,0 +1,1609 @@
+{
+ "slug": "tcf-canada-13",
+ "titulo": "Simulado TCF Canada nº 13",
+ "curso": "TCF",
+ "formato": "TCF Canada",
+ "audioConsignes": {
+  "co": "audio/simulados/tcf-canada-13/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 2100,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "imagem",
+     "explicacao": "Cena de aeroporto: « votre carte d'embarquement ».",
+     "alternativas": [
+      "Le magasin ouvre à neuf heures.",
+      "Je voudrais une glace à la vanille.",
+      "Votre carte d'embarquement, s'il vous plaît.",
+      "Ferme la fenêtre, il fait froid."
+     ],
+     "correta": 2,
+     "alternativasFaladas": true,
+     "imagem": {
+      "src": "img/simulados/serie/aeroporto.jpg",
+      "credito": {
+       "autor": "Saptarshi Pal",
+       "licenca": "CC BY-SA 4.0",
+       "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+       "fonte": "https://commons.wikimedia.org/wiki/File:Lufthansa_Check-In_counter_at_Frankfurt_Airport_(2007).jpg"
+      }
+     },
+     "pergunta": "Regardez l'image 1.",
+     "transcricao": "A. Le magasin ouvre à neuf heures.\nB. Je voudrais une glace à la vanille.\nC. Votre carte d'embarquement, s'il vous plaît.\nD. Ferme la fenêtre, il fait froid.",
+     "audio": "audio/simulados/tcf-canada-13/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "imagem",
+     "explicacao": "Jogadores de futebol: « passe-moi le ballon ».",
+     "alternativas": [
+      "Passe-moi le ballon, je suis seul !",
+      "Le musée est fermé le mardi.",
+      "Tu veux du thé ou du café ?",
+      "J'ai perdu mes lunettes."
+     ],
+     "correta": 0,
+     "alternativasFaladas": true,
+     "imagem": {
+      "src": "img/simulados/serie/futebol.jpg",
+      "credito": {
+       "autor": "Francis ackson soko",
+       "licenca": "CC BY-SA 4.0",
+       "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+       "fonte": "https://commons.wikimedia.org/wiki/File:Children_playing_football_01.jpg"
+      }
+     },
+     "pergunta": "Regardez l'image 2.",
+     "transcricao": "A. Passe-moi le ballon, je suis seul !\nB. Le musée est fermé le mardi.\nC. Tu veux du thé ou du café ?\nD. J'ai perdu mes lunettes.",
+     "audio": "audio/simulados/tcf-canada-13/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "imagem",
+     "explicacao": "Uma pessoa modela argila: « mouille un peu la terre ».",
+     "alternativas": [
+      "Mouille un peu la terre avec tes mains.",
+      "Il faut acheter du lait.",
+      "Le train part dans dix minutes.",
+      "Je suis malade aujourd'hui."
+     ],
+     "correta": 0,
+     "alternativasFaladas": true,
+     "imagem": {
+      "src": "img/simulados/serie/ceramica.jpg",
+      "credito": {
+       "autor": "Arjit Chowdhury",
+       "licenca": "CC BY-SA 4.0",
+       "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+       "fonte": "https://commons.wikimedia.org/wiki/File:Play_with_a_wheel.jpg"
+      }
+     },
+     "pergunta": "Regardez l'image 3.",
+     "transcricao": "A. Mouille un peu la terre avec tes mains.\nB. Il faut acheter du lait.\nC. Le train part dans dix minutes.\nD. Je suis malade aujourd'hui.",
+     "audio": "audio/simulados/tcf-canada-13/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Pergunta sobre moradia: « non, dans un appartement ».",
+     "alternativas": [
+      "Non, je suis étudiant.",
+      "Oui, à huit heures.",
+      "Non, dans un appartement.",
+      "Oui, j'ai faim."
+     ],
+     "correta": 2,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Tu habites dans une maison ?\nA. Non, je suis étudiant.\nB. Oui, à huit heures.\nC. Non, dans un appartement.\nD. Oui, j'ai faim.",
+     "audio": "audio/simulados/tcf-canada-13/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pedido de direção: « la deuxième rue à droite ».",
+     "alternativas": [
+      "Tu prends la deuxième rue à droite, c'est tout droit.",
+      "Le train part à midi.",
+      "Je n'aime pas le train.",
+      "Il y a beaucoup de monde."
+     ],
+     "correta": 0,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Tu peux m'expliquer comment aller à la gare ?\nA. Tu prends la deuxième rue à droite, c'est tout droit.\nB. Le train part à midi.\nC. Je n'aime pas le train.\nD. Il y a beaucoup de monde.",
+     "audio": "audio/simulados/tcf-canada-13/co05.mp3"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Futuro próximo: « je vais aller voir un match ».",
+     "alternativas": [
+      "Je vais aller voir un match avec mon père.",
+      "C'était très bien.",
+      "J'ai joué au tennis.",
+      "Je suis allé à la plage."
+     ],
+     "correta": 0,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Qu'est-ce que tu vas faire ce week-end ?\nA. Je vais aller voir un match avec mon père.\nB. C'était très bien.\nC. J'ai joué au tennis.\nD. Je suis allé à la plage.",
+     "audio": "audio/simulados/tcf-canada-13/co06.mp3"
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Vos bols sont cuits, vous pouvez venir les chercher ».",
+     "pergunta": "Pourquoi l'atelier appelle-t-il ?",
+     "alternativas": [
+      "Le cours est annulé.",
+      "Il faut payer le cours.",
+      "L'atelier déménage.",
+      "Les bols sont prêts."
+     ],
+     "correta": 3,
+     "transcricao": "Bonjour, ici l'atelier de céramique de la rue Pasteur. Vos bols sont cuits, vous pouvez venir les chercher. Nous sommes ouverts du mardi au samedi, de dix heures à dix-huit heures.",
+     "audio": "audio/simulados/tcf-canada-13/co07.mp3"
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Samedi, je suis libre ».",
+     "pergunta": "Quand la femme est-elle libre ?",
+     "alternativas": [
+      "Dimanche.",
+      "Vendredi.",
+      "Samedi.",
+      "Jamais."
+     ],
+     "correta": 2,
+     "transcricao": "Tu viens avec nous au restaurant vendredi ?\nVendredi, je ne peux pas, j'ai un cours d'anglais. Mais samedi, je suis libre.",
+     "audio": "audio/simulados/tcf-canada-13/co08.mp3"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Se présenter immédiatement à la porte quinze ».",
+     "pergunta": "Que doit faire le passager ?",
+     "alternativas": [
+      "Changer de vol.",
+      "Récupérer ses bagages.",
+      "Aller tout de suite à la porte quinze.",
+      "Attendre une heure."
+     ],
+     "correta": 2,
+     "transcricao": "Le passager Martin Lefèvre, voyageant à destination de Casablanca, est prié de se présenter immédiatement à la porte quinze. Embarquement immédiat.",
+     "audio": "audio/simulados/tcf-canada-13/co09.mp3"
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Après le match, goûter pour tout le monde ».",
+     "pergunta": "Que se passera-t-il après le match ?",
+     "alternativas": [
+      "Une remise de médailles.",
+      "Un goûter.",
+      "Un repas au restaurant.",
+      "Un concert."
+     ],
+     "correta": 1,
+     "transcricao": "Samedi, match de football des enfants de l'école contre les parents ! Rendez-vous au stade municipal à quatorze heures. Après le match, goûter pour tout le monde.",
+     "audio": "audio/simulados/tcf-canada-13/co10.mp3"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Voyageurs qui prennent l'avion pour la première fois ou qui ne parlent pas français ».",
+     "pergunta": "À qui s'adresse ce service ?",
+     "alternativas": [
+      "Aux pilotes.",
+      "Aux enfants seuls uniquement.",
+      "Aux voyageurs qui ont besoin d'aide.",
+      "Aux voyageurs d'affaires."
+     ],
+     "correta": 2,
+     "transcricao": "L'aéroport de Nantes met des bénévoles à disposition des voyageurs qui prennent l'avion pour la première fois ou qui ne parlent pas français. Ils les accompagnent de l'enregistrement jusqu'à la porte d'embarquement.",
+     "audio": "audio/simulados/tcf-canada-13/co11.mp3"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les petites filles veulent toutes jouer ».",
+     "pergunta": "Qu'est-ce qui a changé, selon l'entraîneuse ?",
+     "alternativas": [
+      "Beaucoup plus de filles veulent jouer.",
+      "L'équipe a gagné la Coupe du monde.",
+      "Il manque des entraîneurs.",
+      "Les matchs ne passent plus à la télévision."
+     ],
+     "correta": 0,
+     "transcricao": "Je suis entraîneuse d'une équipe de football féminin. Il y a dix ans, on avait du mal à trouver des joueuses. Aujourd'hui, on refuse du monde : depuis la Coupe du monde diffusée à la télévision, les petites filles veulent toutes jouer.",
+     "audio": "audio/simulados/tcf-canada-13/co12.mp3"
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Consulter le site de leur compagnie avant de se rendre à l'aéroport ».",
+     "pergunta": "Que doivent faire les passagers ?",
+     "alternativas": [
+      "Arriver très tôt à l'aéroport.",
+      "Prendre le train.",
+      "Appeler les contrôleurs.",
+      "Vérifier leur vol sur Internet avant de partir."
+     ],
+     "correta": 3,
+     "transcricao": "En raison d'une grève des contrôleurs aériens, de nombreux vols sont annulés demain. Les passagers concernés sont invités à consulter le site de leur compagnie avant de se rendre à l'aéroport.",
+     "audio": "audio/simulados/tcf-canada-13/co13.mp3"
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Je ne pense à rien d'autre ».",
+     "pergunta": "Qu'est-ce que l'homme apprécie dans ce cours ?",
+     "alternativas": [
+      "Il lui permet d'oublier ses soucis.",
+      "Il y rencontre des amis.",
+      "Il est facile.",
+      "Il vend ses poteries."
+     ],
+     "correta": 0,
+     "transcricao": "Alors, ton cours de poterie ?\nC'est plus difficile que je pensais ! Mais ça me fait un bien fou : pendant deux heures, je ne pense à rien d'autre. C'est mieux que n'importe quelle méditation.",
+     "audio": "audio/simulados/tcf-canada-13/co14.mp3"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« On lance des harengs depuis le balcon de la mairie ».",
+     "pergunta": "Que lance-t-on depuis le balcon de la mairie ?",
+     "alternativas": [
+      "Des confettis.",
+      "Des harengs.",
+      "Des bonbons.",
+      "Des fleurs."
+     ],
+     "correta": 1,
+     "transcricao": "La ville de Dunkerque organise chaque hiver un carnaval de plusieurs semaines. Les habitants se déguisent et défilent en chantant dans les rues. La tradition veut qu'on lance des harengs depuis le balcon de la mairie.",
+     "audio": "audio/simulados/tcf-canada-13/co15.mp3"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les rencontres avec les passagers compensent beaucoup ».",
+     "pergunta": "Qu'est-ce qui compense les difficultés du métier ?",
+     "alternativas": [
+      "Les voyages gratuits.",
+      "Les rencontres avec les passagers.",
+      "Le salaire.",
+      "Les longues vacances."
+     ],
+     "correta": 1,
+     "transcricao": "Je suis hôtesse de l'air depuis douze ans. On imagine un métier glamour, mais on dort peu, on mange à des heures bizarres, et on passe beaucoup de temps loin de sa famille. Heureusement, les rencontres avec les passagers compensent beaucoup.",
+     "audio": "audio/simulados/tcf-canada-13/co16.mp3"
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Prête gratuitement des sièges-auto ».",
+     "pergunta": "Que prête la ville ?",
+     "alternativas": [
+      "Des poussettes.",
+      "Des sièges-auto pour enfants.",
+      "Des vélos.",
+      "Des voitures."
+     ],
+     "correta": 1,
+     "transcricao": "Depuis ce mois-ci, la ville de Limoges prête gratuitement des sièges-auto pour les familles qui accueillent un enfant de passage : petits-enfants, neveux. On peut les emprunter pour deux semaines à la maison des familles.",
+     "audio": "audio/simulados/tcf-canada-13/co17.mp3"
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Je suis parti sans mon chargeur de téléphone ».",
+     "pergunta": "Qu'est-il arrivé à l'homme ?",
+     "alternativas": [
+      "Il a perdu son téléphone.",
+      "Il a oublié son passeport.",
+      "Il a oublié son chargeur.",
+      "Il a raté son avion."
+     ],
+     "correta": 2,
+     "transcricao": "Moi, je fais toujours une liste avant de partir en voyage. La dernière fois, je l'ai oubliée à la maison, et je suis parti sans mon chargeur de téléphone. J'ai passé une journée entière à en chercher un !",
+     "audio": "audio/simulados/tcf-canada-13/co18.mp3"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Donnent des cours gratuits aux habitants ».",
+     "pergunta": "Qu'offrent les artistes aux habitants ?",
+     "alternativas": [
+      "Des repas.",
+      "Des œuvres gratuites.",
+      "Un logement.",
+      "Des cours gratuits."
+     ],
+     "correta": 3,
+     "transcricao": "Dans le Périgord, une ancienne école a été transformée en résidence d'artistes. Chaque année, cinq potiers et céramistes y vivent six mois et donnent des cours gratuits aux habitants du village.",
+     "audio": "audio/simulados/tcf-canada-13/co19.mp3"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Le prix affiché n'a souvent plus grand-chose à voir avec le prix final ».",
+     "pergunta": "Que reproche-t-on à ces compagnies ?",
+     "alternativas": [
+      "Le prix final est bien plus élevé que le prix affiché.",
+      "Elles refusent les valises.",
+      "Les avions sont en retard.",
+      "Elles ne vont pas assez loin."
+     ],
+     "correta": 0,
+     "transcricao": "Les compagnies aériennes à bas prix ont démocratisé le voyage, mais elles facturent désormais tout : la valise, le choix du siège, l'impression de la carte d'embarquement. Le prix affiché n'a souvent plus grand-chose à voir avec le prix final payé par le voyageur.",
+     "audio": "audio/simulados/tcf-canada-13/co20.mp3"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Pour qu'il comprenne la difficulté de la tâche ».",
+     "pergunta": "Pourquoi certains clubs imposent-ils une journée d'arbitrage ?",
+     "alternativas": [
+      "Pour faire comprendre la difficulté de ce rôle.",
+      "Pour punir les joueurs.",
+      "Pour remplacer les arbitres.",
+      "Pour économiser de l'argent."
+     ],
+     "correta": 0,
+     "transcricao": "Dans le football amateur, les arbitres manquent partout. Beaucoup abandonnent après quelques saisons, découragés par les insultes des joueurs et des parents. Certains clubs imposent désormais une journée d'arbitrage à chaque joueur, pour qu'il comprenne la difficulté de la tâche.",
+     "audio": "audio/simulados/tcf-canada-13/co21.mp3"
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« On veut produire quelque chose de concret ».",
+     "pergunta": "Comment les sociologues expliquent-ils cet engouement ?",
+     "alternativas": [
+      "Par le besoin de produire quelque chose de concret.",
+      "Par la recherche d'un nouveau métier.",
+      "Par la mode des réseaux sociaux.",
+      "Par le faible prix des cours."
+     ],
+     "correta": 0,
+     "transcricao": "La céramique connaît un véritable engouement chez les trentenaires. Les ateliers affichent complet des mois à l'avance. Les sociologues y voient une réaction à des métiers de plus en plus abstraits : on veut produire quelque chose de concret, qu'on peut toucher.",
+     "audio": "audio/simulados/tcf-canada-13/co22.mp3"
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« On dort pendant le trajet et on arrive en plein centre-ville ».",
+     "pergunta": "Pourquoi la femme pense-t-elle ne pas perdre de temps ?",
+     "alternativas": [
+      "Le train est moins cher.",
+      "Elle dort pendant le trajet et arrive au centre.",
+      "Elle travaille à Berlin.",
+      "Le train est plus rapide que l'avion."
+     ],
+     "correta": 1,
+     "transcricao": "Tu as entendu ? Les trains de nuit reviennent entre Paris et Berlin.\nOui ! Je vais le prendre en mai. C'est plus long que l'avion, c'est vrai, mais on dort pendant le trajet et on arrive en plein centre-ville. Au final, je ne perds pas vraiment de temps.",
+     "audio": "audio/simulados/tcf-canada-13/co23.mp3"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Le fait d'une petite minorité ».",
+     "pergunta": "Que dit le document sur les supporters ?",
+     "alternativas": [
+      "Ils ne chantent plus.",
+      "Ils changent souvent de club.",
+      "Seule une minorité est violente.",
+      "Ils sont tous violents."
+     ],
+     "correta": 2,
+     "transcricao": "Les supporters de football sont souvent présentés comme violents. La réalité est plus nuancée : la plupart des tribunes sont des lieux de sociabilité, de chants et de fidélité à une ville. Les violences, réelles, sont le fait d'une petite minorité.",
+     "audio": "audio/simulados/tcf-canada-13/co24.mp3"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Elle concerne peu de lignes, mais elle a une forte valeur symbolique ».",
+     "pergunta": "Que dit le document de cette mesure ?",
+     "alternativas": [
+      "Elle a surtout une valeur symbolique.",
+      "Elle concerne tous les vols.",
+      "Elle interdit les trains.",
+      "Elle réduit fortement la pollution."
+     ],
+     "correta": 0,
+     "transcricao": "À partir de l'an prochain, les vols intérieurs seront interdits en France quand le même trajet peut se faire en train en moins de deux heures trente. La mesure concerne peu de lignes, mais elle a une forte valeur symbolique.",
+     "audio": "audio/simulados/tcf-canada-13/co25.mp3"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Des heures de travail et des pertes à la cuisson ».",
+     "pergunta": "Selon les artisans, que reflète le prix élevé ?",
+     "alternativas": [
+      "La rareté de l'argile.",
+      "Les frais de livraison.",
+      "Le temps de travail et les pertes.",
+      "La célébrité de l'artiste."
+     ],
+     "correta": 2,
+     "transcricao": "Les objets en céramique fabriqués à la main coûtent beaucoup plus cher que ceux produits en usine. Pour les artisans, ce prix reflète des heures de travail et des pertes à la cuisson. Pour beaucoup de clients, il reste difficile à accepter pour un simple bol.",
+     "audio": "audio/simulados/tcf-canada-13/co26.mp3"
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Ils servent surtout à quelques lignes touristiques à bas prix ».",
+     "pergunta": "Que répondent les critiques de ces aéroports ?",
+     "alternativas": [
+      "Ils servent surtout des lignes touristiques bon marché.",
+      "Ils sont trop grands.",
+      "Ils désenclavent les territoires.",
+      "Ils rapportent beaucoup d'argent."
+     ],
+     "correta": 0,
+     "transcricao": "Les petits aéroports régionaux coûtent cher aux collectivités, qui les financent souvent à perte. Leurs défenseurs affirment qu'ils désenclavent des territoires isolés ; leurs critiques répondent qu'ils servent surtout à quelques lignes touristiques à bas prix.",
+     "audio": "audio/simulados/tcf-canada-13/co27.mp3"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Les enfants… abandonnent plus tôt leur sport ».",
+     "pergunta": "Selon les études, quel effet a cette pression ?",
+     "alternativas": [
+      "Les enfants gagnent plus de matchs.",
+      "Les enfants progressent plus vite.",
+      "Les enfants deviennent arbitres.",
+      "Les enfants abandonnent leur sport plus tôt."
+     ],
+     "correta": 3,
+     "transcricao": "Les parents qui crient au bord des terrains de sport font plus de mal qu'ils ne le pensent. Des études montrent que les enfants soumis à cette pression abandonnent plus tôt leur sport. Le plaisir de jouer disparaît sous la peur de décevoir.",
+     "audio": "audio/simulados/tcf-canada-13/co28.mp3"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Des cours de design et de vente en ligne ».",
+     "pergunta": "Qu'ajoute l'école au savoir-faire traditionnel ?",
+     "alternativas": [
+      "Des cours de langues.",
+      "Des machines industrielles.",
+      "Du design et de la vente en ligne.",
+      "Des stages à l'étranger."
+     ],
+     "correta": 2,
+     "transcricao": "Au Maroc, la poterie de Safi est reconnue dans le monde entier. Mais les jeunes se détournent de ce métier jugé pénible et mal payé. Une école a ouvert pour former de nouveaux artisans, en ajoutant au savoir-faire traditionnel des cours de design et de vente en ligne.",
+     "audio": "audio/simulados/tcf-canada-13/co29.mp3"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Des espaces de passage, conçus pour la circulation plutôt que pour la rencontre ».",
+     "pergunta": "Que désigne l'expression « non-lieux » ?",
+     "alternativas": [
+      "Des pays sans frontières.",
+      "Des lieux abandonnés.",
+      "Des lieux sans nom.",
+      "Des espaces conçus pour passer, non pour se rencontrer."
+     ],
+     "correta": 3,
+     "transcricao": "Les aéroports sont devenus des lieux étranges : on y passe des heures sans y habiter, entouré de milliers de personnes à qui l'on ne parle pas. Certains anthropologues parlent de « non-lieux » : des espaces de passage, conçus pour la circulation plutôt que pour la rencontre.",
+     "audio": "audio/simulados/tcf-canada-13/co30.mp3"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« C'est souvent choisir de ne pas voir les enjeux qu'il porte ».",
+     "pergunta": "Que pense l'intervenante de la neutralité du sport ?",
+     "alternativas": [
+      "C'est une obligation pour les athlètes.",
+      "C'est une manière d'ignorer ses enjeux politiques.",
+      "C'est une réalité.",
+      "C'est une invention récente."
+     ],
+     "correta": 1,
+     "transcricao": "Le sport a toujours été politique, malgré ceux qui voudraient l'en préserver. Les boycotts, les gestes des athlètes sur les podiums, le choix des pays hôtes le montrent. Prétendre que le sport doit rester « neutre », c'est souvent choisir de ne pas voir les enjeux qu'il porte.",
+     "audio": "audio/simulados/tcf-canada-13/co31.mp3"
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Les blessures ne sont pas à effacer ».",
+     "pergunta": "Que symbolise le kintsugi, selon l'intervenant ?",
+     "alternativas": [
+      "Les blessures font partie de notre histoire.",
+      "Il faut jeter les objets cassés.",
+      "L'or rend les objets précieux.",
+      "Il faut cacher ses défauts."
+     ],
+     "correta": 0,
+     "transcricao": "Au Japon, on répare les céramiques cassées avec de l'or, en soulignant les fissures au lieu de les cacher. Cette technique, le kintsugi, est devenue une métaphore : les blessures ne sont pas à effacer, elles font partie de l'histoire de l'objet, et peut-être de la nôtre.",
+     "audio": "audio/simulados/tcf-canada-13/co32.mp3"
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« On achète surtout le droit de ne rien changer ».",
+     "pergunta": "Que reproche l'intervenant à la compensation carbone ?",
+     "alternativas": [
+      "Elle est obligatoire.",
+      "Elle ne plante pas d'arbres.",
+      "Elle coûte trop cher.",
+      "Elle dispense de modifier ses comportements."
+     ],
+     "correta": 3,
+     "transcricao": "La compensation carbone permet aux voyageurs de payer pour planter des arbres en échange de leurs émissions. L'idée rassure, mais elle pose un problème : un arbre met des décennies à absorber ce qu'un vol émet en quelques heures. On achète surtout le droit de ne rien changer.",
+     "audio": "audio/simulados/tcf-canada-13/co33.mp3"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Le sentiment d'être devenus des figurants ».",
+     "pergunta": "Quel sentiment éprouvent certains supporters locaux ?",
+     "alternativas": [
+      "Celui d'être mieux considérés.",
+      "Celui d'être devenus secondaires.",
+      "Celui d'être les propriétaires du club.",
+      "Celui de gagner plus souvent."
+     ],
+     "correta": 1,
+     "transcricao": "Les grands clubs de football sont devenus des marques mondiales, détenues par des fonds d'investissement ou des États. Les supporters locaux, qui faisaient autrefois l'identité du club, ont parfois le sentiment d'être devenus des figurants dans un spectacle destiné à des téléspectateurs lointains.",
+     "audio": "audio/simulados/tcf-canada-13/co34.mp3"
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« La tradition n'y est jamais une répétition, mais une base ».",
+     "pergunta": "Selon l'intervenant, qu'est-ce que la tradition pour les artisans ?",
+     "alternativas": [
+      "Une base pour inventer.",
+      "Un savoir figé.",
+      "Un obstacle à la création.",
+      "Une répétition fidèle."
+     ],
+     "correta": 0,
+     "transcricao": "Les artisans d'art sont souvent présentés comme les gardiens d'un savoir-faire immuable. C'est méconnaître leur métier : la tradition n'y est jamais une répétition, mais une base à partir de laquelle chaque génération invente. Un savoir-faire qui ne se transforme plus est un savoir-faire qui meurt.",
+     "audio": "audio/simulados/tcf-canada-13/co35.mp3"
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Nous y avons peut-être perdu l'expérience même du voyage ».",
+     "pergunta": "Que suggère l'intervenante ?",
+     "alternativas": [
+      "Les cartes rendent le voyage plus riche.",
+      "Il faut interdire les téléphones.",
+      "Le voyage est devenu dangereux.",
+      "Ne plus se perdre appauvrit l'expérience du voyage."
+     ],
+     "correta": 3,
+     "transcricao": "Voyager, disait-on, c'était se perdre. Aujourd'hui, grâce aux cartes sur nos téléphones, nous ne nous perdons plus jamais. Nous y avons gagné en sécurité ; nous y avons peut-être perdu l'expérience même du voyage, faite de désorientation et de découverte imprévue.",
+     "audio": "audio/simulados/tcf-canada-13/co36.mp3"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« L'individualisme… perd aussi, très concrètement, en efficacité ».",
+     "pergunta": "Que défend l'intervenant ?",
+     "alternativas": [
+      "L'individualisme est plus efficace.",
+      "Il faut toujours briller seul.",
+      "Le collectif est aussi plus efficace que l'individualisme.",
+      "L'école enseigne bien le travail d'équipe."
+     ],
+     "correta": 2,
+     "transcricao": "Le jeu collectif enseigne une leçon que l'école a du mal à transmettre : on peut réussir ensemble ce qu'on échouerait seul, mais à condition d'accepter de n'être parfois qu'un maillon. L'individualisme ne perd pas seulement en morale ; il perd aussi, très concrètement, en efficacité.",
+     "audio": "audio/simulados/tcf-canada-13/co37.mp3"
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« La matière ne ment pas ».",
+     "pergunta": "Que l'intervenante dit-elle de l'argile ?",
+     "alternativas": [
+      "Elle ne garde aucune trace.",
+      "Elle est facile à travailler.",
+      "Elle révèle chaque geste du potier.",
+      "Elle cache les erreurs."
+     ],
+     "correta": 2,
+     "transcricao": "L'argile se souvient de chaque geste : une pression trop forte, une hésitation, et la forme en garde la trace. Le potier apprend ainsi une forme d'honnêteté ; la matière ne ment pas, elle rend visible ce qu'on a voulu cacher.",
+     "audio": "audio/simulados/tcf-canada-13/co38.mp3"
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Une société qui ne sait plus attendre risque de ne plus savoir espérer ».",
+     "pergunta": "Que redoute l'intervenant ?",
+     "alternativas": [
+      "Perdre la capacité d'espérer en perdant celle d'attendre.",
+      "Une société trop lente.",
+      "Attendre trop longtemps.",
+      "Les files d'attente."
+     ],
+     "correta": 0,
+     "transcricao": "L'attente a mauvaise réputation : on la tue, on l'occupe, on la fuit. Pourtant, attendre, c'est aussi se tenir disponible pour ce qui n'est pas encore là. Une société qui ne sait plus attendre risque de ne plus savoir espérer.",
+     "audio": "audio/simulados/tcf-canada-13/co39.mp3"
+    }
+   ]
+  },
+  "ce": {
+   "nome": "Compréhension écrite",
+   "tempoSeg": 3600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "De l'eau.",
+      "Son manteau.",
+      "Un billet de train.",
+      "Son passeport."
+     ],
+     "correta": 3,
+     "explicacao": "« Préparez votre passeport ».",
+     "documento": "Liquides : 100 ml maximum\nPréparez votre passeport\nEnlevez votre manteau",
+     "doc": {
+      "estilo": "placa",
+      "texto": "Liquides : 100 ml maximum\nPréparez votre passeport\nEnlevez votre manteau",
+      "titulo": "AÉROPORT — ZONE D'EMBARQUEMENT"
+     },
+     "pergunta": "Que faut-il préparer ?"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "une",
+      "le",
+      "la",
+      "les"
+     ],
+     "correta": 1,
+     "explicacao": "« Livre » é masculino singular: « le livre ».",
+     "tipo": "lacuna",
+     "inicio": "C'est…",
+     "fim": "… livre de Pierre.",
+     "pergunta": "C'est ___ livre de Pierre."
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Au club.",
+      "Devant le stade.",
+      "Dans le bus.",
+      "À la maison."
+     ],
+     "correta": 1,
+     "explicacao": "« Je t'attends devant le stade ».",
+     "documento": "Le match commence à 15 h. Je t'attends devant le stade, porte B. Prends ton écharpe du club !",
+     "doc": {
+      "estilo": "sms",
+      "texto": "Le match commence à 15 h. Je t'attends devant le stade, porte B. Prends ton écharpe du club !",
+      "remetente": "Karim"
+     },
+     "pergunta": "Où Karim attend-il ?"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Dans la cuisine.",
+      "Au restaurant.",
+      "Au cours de poterie.",
+      "Au travail."
+     ],
+     "correta": 2,
+     "explicacao": "« Je suis au cours de poterie ».",
+     "documento": "Chéri,\nJe suis au cours de poterie.\nLe dîner est dans le four.\nÀ ce soir !\nSophie",
+     "doc": {
+      "estilo": "bilhete",
+      "texto": "Chéri,\nJe suis au cours de poterie.\nLe dîner est dans le four.\nÀ ce soir !\nSophie"
+     },
+     "pergunta": "Où est Sophie ?"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "5 €.",
+      "10 €.",
+      "Le prix d'une pièce.",
+      "Rien, elle est gratuite."
+     ],
+     "correta": 3,
+     "explicacao": "« Entrée libre ».",
+     "documento": "Samedi 20 et dimanche 21 mai\n10 h – 18 h\n\nDémonstrations de tournage\nVente de pièces uniques\nEntrée libre",
+     "doc": {
+      "estilo": "cartaz",
+      "texto": "Samedi 20 et dimanche 21 mai\n10 h – 18 h\n\nDémonstrations de tournage\nVente de pièces uniques\nEntrée libre",
+      "titulo": "Portes ouvertes de l'atelier Terre & Feu"
+     },
+     "pergunta": "Combien coûte l'entrée ?"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "faisons",
+      "avons",
+      "sommes",
+      "allons"
+     ],
+     "correta": 3,
+     "explicacao": "Futuro próximo: « nous allons partir ».",
+     "tipo": "lacuna",
+     "inicio": "Demain, nous…",
+     "fim": "… partir à six heures.",
+     "pergunta": "Demain, nous ___ partir à six heures."
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Le 11 juin à midi.",
+      "À l'aéroport seulement.",
+      "Une semaine avant.",
+      "24 heures avant le départ."
+     ],
+     "correta": 3,
+     "explicacao": "« L'enregistrement en ligne ouvre 24 h avant le départ ».",
+     "documento": "Bonjour M. Da Silva,\n\nVotre vol Paris – Lisbonne du 12 juin est confirmé. L'enregistrement en ligne ouvre 24 h avant le départ. Bagage en soute : 1 valise de 23 kg maximum.\n\nBon voyage !",
+     "doc": {
+      "estilo": "email",
+      "texto": "Bonjour M. Da Silva,\n\nVotre vol Paris – Lisbonne du 12 juin est confirmé. L'enregistrement en ligne ouvre 24 h avant le départ. Bagage en soute : 1 valise de 23 kg maximum.\n\nBon voyage !",
+      "de": "Air Horizon",
+      "assunto": "Votre vol AH 204"
+     },
+     "pergunta": "Quand peut-on s'enregistrer en ligne ?"
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Un maillot.",
+      "Les chaussures.",
+      "Le premier mois.",
+      "Un ballon."
+     ],
+     "correta": 2,
+     "explicacao": "« Premier mois gratuit ».",
+     "documento": "Le FC Les Aubiers cherche joueurs et joueuses\nde 10 à 14 ans.\nEntraînements mercredi et samedi.\nPremier mois gratuit !",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Le FC Les Aubiers cherche joueurs et joueuses\nde 10 à 14 ans.\nEntraînements mercredi et samedi.\nPremier mois gratuit !",
+      "titulo": "CLUB DE FOOT — RECRUTE"
+     },
+     "pergunta": "Qu'est-ce qui est offert ?"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "la",
+      "les",
+      "lui",
+      "leur"
+     ],
+     "correta": 1,
+     "explicacao": "Pronome COD plural: « tu les as vues ».",
+     "tipo": "lacuna",
+     "inicio": "Je ne trouve pas mes clés. Tu…",
+     "fim": "… as vues ?",
+     "pergunta": "Je ne trouve pas mes clés. Tu ___ as vues ?"
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Au stade.",
+      "Au gymnase.",
+      "Ils sont annulés.",
+      "À la piscine."
+     ],
+     "correta": 1,
+     "explicacao": "« Les entraînements ont lieu au gymnase ».",
+     "documento": "Le terrain est fermé jusqu'à nouvel ordre\nen raison des fortes pluies.\nLes entraînements ont lieu au gymnase.",
+     "doc": {
+      "estilo": "aviso",
+      "texto": "Le terrain est fermé jusqu'à nouvel ordre\nen raison des fortes pluies.\nLes entraînements ont lieu au gymnase.",
+      "titulo": "Stade municipal — Avis"
+     },
+     "pergunta": "Où ont lieu les entraînements ?"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Elle a fait fermer les ateliers.",
+      "Elle a relancé l'activité des potiers.",
+      "Elle a attiré des peintres.",
+      "Elle a créé un musée de peinture."
+     ],
+     "correta": 1,
+     "explicacao": "« Sa présence a relancé l'activité des potiers ».",
+     "documento": "À Vallauris, sur la Côte d'Azur, Picasso a découvert la céramique après la guerre. Il y a créé des milliers de pièces, et sa présence a relancé l'activité des potiers de la ville, alors en déclin.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Vallauris, sur la Côte d'Azur, Picasso a découvert la céramique après la guerre. Il y a créé des milliers de pièces, et sa présence a relancé l'activité des potiers de la ville, alors en déclin."
+     },
+     "pergunta": "Quel effet a eu la présence de Picasso ?"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "t'es couché",
+      "te coucheras",
+      "te couchais",
+      "te couches"
+     ],
+     "correta": 2,
+     "explicacao": "« Si + imparfait » → condicional presente.",
+     "tipo": "lacuna",
+     "inicio": "Si tu…",
+     "fim": "… plus tôt, tu ne serais pas fatigué.",
+     "pergunta": "Si tu ___ plus tôt, tu ne serais pas fatigué."
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Le prix élevé des billets.",
+      "Les retards fréquents.",
+      "La pollution des avions.",
+      "L'utilité de ces aéroports pour les régions isolées."
+     ],
+     "correta": 3,
+     "explicacao": "« Le seul moyen de rejoindre Paris en moins de six heures ».",
+     "documento": "Courrier des lecteurs\nVotre article sur les aéroports régionaux oubliait un point : pour nous, habitants du Cantal, c'est parfois le seul moyen de rejoindre Paris en moins de six heures.\nGérard, Aurillac",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Courrier des lecteurs\nVotre article sur les aéroports régionaux oubliait un point : pour nous, habitants du Cantal, c'est parfois le seul moyen de rejoindre Paris en moins de six heures.\nGérard, Aurillac"
+     },
+     "pergunta": "Que veut rappeler Gérard ?"
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "À l'aéroport.",
+      "Au moment de l'achat du billet.",
+      "Après l'arrivée.",
+      "Une heure avant le vol."
+     ],
+     "correta": 1,
+     "explicacao": "« Réservé au moment de l'achat du billet ».",
+     "documento": "Les enfants de 5 à 11 ans peuvent voyager seuls en avion grâce au service d'accompagnement. Un membre de l'équipage s'occupe d'eux du départ jusqu'à l'arrivée. Le service doit être réservé au moment de l'achat du billet.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "Les enfants de 5 à 11 ans peuvent voyager seuls en avion grâce au service d'accompagnement. Un membre de l'équipage s'occupe d'eux du départ jusqu'à l'arrivée. Le service doit être réservé au moment de l'achat du billet.",
+      "titulo": "Enfants voyageant seuls",
+      "rubrica": "VOYAGE"
+     },
+     "pergunta": "Quand faut-il réserver ce service ?"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Ils sont restés à l'aéroport.",
+      "Ils ont visité le centre-ville.",
+      "Ils ont dormi à l'hôtel.",
+      "Ils ont raté leur vol."
+     ],
+     "correta": 1,
+     "explicacao": "« Nous avons pris le métro jusqu'au centre ».",
+     "documento": "Escale de huit heures à Istanbul. Plutôt que d'attendre à l'aéroport, nous avons pris le métro jusqu'au centre. Deux heures pour voir la mosquée Bleue et manger un kebab, puis retour à temps pour notre vol. Une escale bien remplie !",
+     "doc": {
+      "estilo": "caderno",
+      "texto": "Escale de huit heures à Istanbul. Plutôt que d'attendre à l'aéroport, nous avons pris le métro jusqu'au centre. Deux heures pour voir la mosquée Bleue et manger un kebab, puis retour à temps pour notre vol. Une escale bien remplie !"
+     },
+     "pergunta": "Qu'ont fait les voyageurs pendant l'escale ?"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Travailler l'après-midi.",
+      "Avoir une voiture.",
+      "Parler trois langues.",
+      "Parler couramment anglais."
+     ],
+     "correta": 3,
+     "explicacao": "« Anglais courant obligatoire ».",
+     "documento": "Aéroport de Lyon recrute agents d'accueil pour l'été.\nHoraires décalés (tôt le matin ou tard le soir).\nAnglais courant obligatoire.\nUne autre langue est un plus.",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Aéroport de Lyon recrute agents d'accueil pour l'été.\nHoraires décalés (tôt le matin ou tard le soir).\nAnglais courant obligatoire.\nUne autre langue est un plus.",
+      "titulo": "OFFRE D'EMPLOI"
+     },
+     "pergunta": "Qu'est-ce qui est obligatoire ?"
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "si",
+      "qu'est-ce que",
+      "que",
+      "ce que"
+     ],
+     "correta": 0,
+     "explicacao": "Pergunta indireta sim/não: « si ».",
+     "tipo": "lacuna",
+     "inicio": "Il m'a demandé…",
+     "fim": "… j'avais fini mon travail.",
+     "pergunta": "Il m'a demandé ___ j'avais fini mon travail."
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Les habitants de Montélimar.",
+      "Les enfants dès 4 ans.",
+      "Uniquement les adultes.",
+      "Les potiers professionnels."
+     ],
+     "correta": 1,
+     "explicacao": "« Ateliers pour enfants dès 4 ans ».",
+     "documento": "Les 3 et 4 août, à Dieulefit (Drôme).\n80 potiers venus de toute l'Europe.\nAteliers pour enfants dès 4 ans.\nNavette depuis Montélimar.",
+     "doc": {
+      "estilo": "festival",
+      "texto": "Les 3 et 4 août, à Dieulefit (Drôme).\n80 potiers venus de toute l'Europe.\nAteliers pour enfants dès 4 ans.\nNavette depuis Montélimar.",
+      "titulo": "Fête de la céramique"
+     },
+     "pergunta": "Qui peut participer aux ateliers ?"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "On joue seulement à deux.",
+      "Les matchs durent deux heures.",
+      "On joue sans ballon.",
+      "Il est interdit de courir."
+     ],
+     "correta": 3,
+     "explicacao": "« Il est interdit de courir ».",
+     "documento": "À Marseille, un club de football propose des entraînements le dimanche matin aux personnes de plus de 50 ans. On y joue en marchant : il est interdit de courir. Les participants retrouvent le plaisir du ballon sans risque de blessure.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Marseille, un club de football propose des entraînements le dimanche matin aux personnes de plus de 50 ans. On y joue en marchant : il est interdit de courir. Les participants retrouvent le plaisir du ballon sans risque de blessure."
+     },
+     "pergunta": "Quelle règle particulière existe dans ce club ?"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les voyages de loisirs.",
+      "Les visioconférences.",
+      "Le nombre total de passagers.",
+      "Les voyages d'affaires."
+     ],
+     "correta": 3,
+     "explicacao": "« Les voyages d'affaires ont nettement diminué ».",
+     "documento": "Le nombre de passagers aériens a retrouvé son niveau d'avant la pandémie. Mais les habitudes ont changé : les voyages d'affaires ont nettement diminué, remplacés par les visioconférences, tandis que les voyages de loisirs ont fortement augmenté.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Le nombre de passagers aériens a retrouvé son niveau d'avant la pandémie. Mais les habitudes ont changé : les voyages d'affaires ont nettement diminué, remplacés par les visioconférences, tandis que les voyages de loisirs ont fortement augmenté."
+     },
+     "pergunta": "Qu'est-ce qui a diminué ?"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "pourra",
+      "pourrait",
+      "puisse",
+      "peut"
+     ],
+     "correta": 2,
+     "explicacao": "« J'aurais aimé que » + subjuntivo: « qu'il puisse ».",
+     "tipo": "lacuna",
+     "inicio": "J'aurais aimé qu'il…",
+     "fim": "… venir à mon mariage.",
+     "pergunta": "J'aurais aimé qu'il ___ venir à mon mariage."
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les joueurs ne parlaient pas la même langue.",
+      "Chaque école avait ses propres règles.",
+      "Les terrains étaient trop petits.",
+      "Il n'y avait pas de ballons."
+     ],
+     "correta": 1,
+     "explicacao": "« Chaque établissement avait ses propres règles ».",
+     "documento": "Le football moderne est né en Angleterre au XIXe siècle, dans les écoles privées. Chaque établissement avait ses propres règles, ce qui rendait les rencontres compliquées. En 1863, une association fixa des règles communes, dont celle interdisant de toucher le ballon avec les mains.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "Le football moderne est né en Angleterre au XIXe siècle, dans les écoles privées. Chaque établissement avait ses propres règles, ce qui rendait les rencontres compliquées. En 1863, une association fixa des règles communes, dont celle interdisant de toucher le ballon avec les mains."
+     },
+     "pergunta": "Pourquoi les rencontres étaient-elles compliquées ?"
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Elle enrichirait les compagnies.",
+      "Elle pénaliserait les familles modestes.",
+      "Les billets sont déjà gratuits.",
+      "L'avion ne pollue pas."
+     ],
+     "correta": 1,
+     "explicacao": "« Elle pénaliserait surtout les familles modestes ».",
+     "documento": "Faut-il taxer davantage les billets d'avion ? Pour les uns, c'est une mesure écologique juste, car l'avion pollue beaucoup. Pour les autres, elle pénaliserait surtout les familles modestes, pour qui l'avion est parfois le seul moyen de rendre visite à des proches éloignés.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "Faut-il taxer davantage les billets d'avion ? Pour les uns, c'est une mesure écologique juste, car l'avion pollue beaucoup. Pour les autres, elle pénaliserait surtout les familles modestes, pour qui l'avion est parfois le seul moyen de rendre visite à des proches éloignés."
+     },
+     "pergunta": "Qu'avancent les opposants à la taxe ?"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "L'agriculture est née en Chine.",
+      "Les humains ne cuisaient pas.",
+      "Les poteries servaient à décorer.",
+      "La poterie est plus ancienne que l'agriculture."
+     ],
+     "correta": 3,
+     "explicacao": "« Bien avant l'invention de l'agriculture ».",
+     "documento": "Des archéologues ont découvert en Chine des fragments de poterie vieux de 20 000 ans. Ils montrent que les humains fabriquaient des récipients bien avant l'invention de l'agriculture, probablement pour cuire des aliments et les rendre plus digestes.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "Des archéologues ont découvert en Chine des fragments de poterie vieux de 20 000 ans. Ils montrent que les humains fabriquaient des récipients bien avant l'invention de l'agriculture, probablement pour cuire des aliments et les rendre plus digestes."
+     },
+     "pergunta": "Qu'est-ce que cette découverte montre ?"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "La victoire de l'équipe.",
+      "Un joueur célèbre.",
+      "Les techniques de jeu.",
+      "Le rôle social du club."
+     ],
+     "correta": 3,
+     "explicacao": "« Ce que le club apporte à des jeunes ».",
+     "documento": "Le documentaire « Onze » suit une équipe de football amateur d'un quartier de Lille pendant une saison. Pas de victoire finale ni de héros : le film montre plutôt ce que le club apporte à des jeunes qui y trouvent un cadre, des amis et parfois une seconde famille.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Le documentaire « Onze » suit une équipe de football amateur d'un quartier de Lille pendant une saison. Pas de victoire finale ni de héros : le film montre plutôt ce que le club apporte à des jeunes qui y trouvent un cadre, des amis et parfois une seconde famille."
+     },
+     "pergunta": "Qu'est-ce que le documentaire met en avant ?"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "avoir",
+      "ayant",
+      "a",
+      "être"
+     ],
+     "correta": 0,
+     "explicacao": "« Faute de + infinitivo passado »: « faute d'avoir vérifié ».",
+     "tipo": "lacuna",
+     "inicio": "Il a raté l'avion, faute d'…",
+     "fim": "… vérifié l'heure du départ.",
+     "pergunta": "Il a raté l'avion, faute d' ___ vérifié l'heure du départ."
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Si le retard dépasse trois heures.",
+      "Si le vol est long.",
+      "Si le retard est dû à une tempête.",
+      "Si le billet est bon marché."
+     ],
+     "correta": 2,
+     "explicacao": "« Aucune indemnité… circonstances extraordinaires, comme une tempête ».",
+     "documento": "En Europe, un passager dont le vol arrive avec plus de trois heures de retard peut obtenir une indemnisation de 250 à 600 €, selon la distance. Aucune indemnité n'est due si le retard est causé par des circonstances extraordinaires, comme une tempête.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "En Europe, un passager dont le vol arrive avec plus de trois heures de retard peut obtenir une indemnisation de 250 à 600 €, selon la distance. Aucune indemnité n'est due si le retard est causé par des circonstances extraordinaires, comme une tempête.",
+      "titulo": "Retards d'avion",
+      "rubrica": "DROITS"
+     },
+     "pergunta": "Dans quel cas aucune indemnité n'est-elle due ?"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Ils manquent de terrains.",
+      "Ils ont trop de joueurs.",
+      "Ils sont trop riches.",
+      "Ils ne trouvent pas de nouveaux bénévoles."
+     ],
+     "correta": 3,
+     "explicacao": "« Sans relève, plusieurs clubs ont dû fusionner ».",
+     "documento": "Les clubs de football amateur perdent des bénévoles. Entraîneurs, dirigeants, chauffeurs du samedi : ce sont souvent les mêmes personnes, depuis trente ans. Sans relève, plusieurs clubs ont dû fusionner, et certains villages ont perdu leur équipe.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les clubs de football amateur perdent des bénévoles. Entraîneurs, dirigeants, chauffeurs du samedi : ce sont souvent les mêmes personnes, depuis trente ans. Sans relève, plusieurs clubs ont dû fusionner, et certains villages ont perdu leur équipe."
+     },
+     "pergunta": "Quel est le problème de ces clubs ?"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Des tasses gratuites.",
+      "Des tasses neuves moins chères.",
+      "Des cours de céramique.",
+      "De l'argile."
+     ],
+     "correta": 1,
+     "explicacao": "« Des tasses neuves, à prix réduit ».",
+     "documento": "À Montréal, une céramiste recycle les tasses cassées des cafés du quartier pour fabriquer de nouvelles pièces. Les fragments sont broyés et mélangés à l'argile. Les cafés qui participent reçoivent en échange des tasses neuves, à prix réduit.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Montréal, une céramiste recycle les tasses cassées des cafés du quartier pour fabriquer de nouvelles pièces. Les fragments sont broyés et mélangés à l'argile. Les cafés qui participent reçoivent en échange des tasses neuves, à prix réduit."
+     },
+     "pergunta": "Que reçoivent les cafés participants ?"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Les voyages sont trop rares.",
+      "Le voyage ne transforme plus forcément le voyageur.",
+      "Les voyages sont trop chers.",
+      "On ne prend plus de photos."
+     ],
+     "correta": 1,
+     "explicacao": "« Voyager ne transforme plus nécessairement celui qui part ».",
+     "documento": "Le voyage d'agrément était autrefois une aventure rare. Il est devenu un produit de consommation courante, que l'on collectionne et que l'on montre. Voyager ne transforme plus nécessairement celui qui part ; il arrive qu'on revienne exactement tel qu'on était parti, avec quelques photos en plus.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "Le voyage d'agrément était autrefois une aventure rare. Il est devenu un produit de consommation courante, que l'on collectionne et que l'on montre. Voyager ne transforme plus nécessairement celui qui part ; il arrive qu'on revienne exactement tel qu'on était parti, avec quelques photos en plus."
+     },
+     "pergunta": "Que regrette l'auteur ?"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "contrairement à",
+      "bien que",
+      "à l'inverse",
+      "au lieu de"
+     ],
+     "correta": 0,
+     "explicacao": "« Contrairement à ce que » + indicativo.",
+     "tipo": "lacuna",
+     "inicio": "Il a gagné le match,…",
+     "fim": "… ce que tout le monde avait prédit.",
+     "pergunta": "Il a gagné le match, ___ ce que tout le monde avait prédit."
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Le talent des footballeurs.",
+      "La concentration des revenus sur quelques personnes.",
+      "Le montant des salaires.",
+      "Le prix des billets."
+     ],
+     "correta": 1,
+     "explicacao": "« C'est moins le montant que cette concentration extrême ».",
+     "documento": "Les salaires des footballeurs choquent. Pourtant, ils suivent la même logique que ceux des stars du cinéma ou de la musique : un marché mondial où quelques talents rares captent l'essentiel des revenus. Ce qui devrait interroger, c'est moins le montant que cette concentration extrême.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les salaires des footballeurs choquent. Pourtant, ils suivent la même logique que ceux des stars du cinéma ou de la musique : un marché mondial où quelques talents rares captent l'essentiel des revenus. Ce qui devrait interroger, c'est moins le montant que cette concentration extrême."
+     },
+     "pergunta": "Qu'est-ce qui devrait interroger, selon l'article ?"
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Sa réflexion sur l'échec et la patience.",
+      "Son intrigue riche.",
+      "Ses nombreux personnages.",
+      "Son rythme rapide."
+     ],
+     "correta": 0,
+     "explicacao": "« La méditation sur l'échec et la patience est d'une grande profondeur ».",
+     "documento": "Ce roman suit un potier japonais qui, pendant quarante ans, tente de reproduire un bol vu dans son enfance. Chaque tentative échoue, et chacune le rapproche pourtant d'une vérité sur lui-même. L'intrigue est mince, mais la méditation sur l'échec et la patience est d'une grande profondeur.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "Ce roman suit un potier japonais qui, pendant quarante ans, tente de reproduire un bol vu dans son enfance. Chaque tentative échoue, et chacune le rapproche pourtant d'une vérité sur lui-même. L'intrigue est mince, mais la méditation sur l'échec et la patience est d'une grande profondeur."
+     },
+     "pergunta": "Quelle est la qualité du roman, selon le critique ?"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "accorde pas",
+      "accordait",
+      "accordera",
+      "accorde"
+     ],
+     "correta": 3,
+     "explicacao": "« À moins que (ne) » + subjuntivo: « qu'on ne lui accorde ».",
+     "tipo": "lacuna",
+     "inicio": "Il ne partira pas en voyage, à moins qu'on ne lui…",
+     "fim": "… un congé.",
+     "pergunta": "Il ne partira pas en voyage, à moins qu'on ne lui ___ un congé."
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "L'art a toujours été libre.",
+      "Les peintres n'ont jamais été artisans.",
+      "La hiérarchie entre art et artisanat est historiquement récente.",
+      "L'artisanat est supérieur à l'art."
+     ],
+     "correta": 2,
+     "explicacao": "« Cette hiérarchie est récente ».",
+     "documento": "On oppose souvent l'art et l'artisanat : l'un serait création libre, l'autre simple fabrication utile. Cette hiérarchie est récente. Pendant des siècles, les peintres étaient des artisans parmi d'autres ; c'est la Renaissance qui a inventé la figure de l'artiste génial, au-dessus des métiers.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "On oppose souvent l'art et l'artisanat : l'un serait création libre, l'autre simple fabrication utile. Cette hiérarchie est récente. Pendant des siècles, les peintres étaient des artisans parmi d'autres ; c'est la Renaissance qui a inventé la figure de l'artiste génial, au-dessus des métiers."
+     },
+     "pergunta": "Que montre l'auteur ?"
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Un moment de grâce.",
+      "Une question de chance.",
+      "Le fruit d'un long travail invisible.",
+      "Un don inné."
+     ],
+     "correta": 2,
+     "explicacao": "« Une patience dont on a oublié les traces ».",
+     "documento": "On croit que le talent se révèle ; il se construit plutôt dans l'ennui des gestes répétés. Le public ne voit que la grâce de l'instant ; il ignore les milliers d'heures qui l'ont rendue possible. Le génie, peut-être, n'est qu'une patience dont on a oublié les traces.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "On croit que le talent se révèle ; il se construit plutôt dans l'ennui des gestes répétés. Le public ne voit que la grâce de l'instant ; il ignore les milliers d'heures qui l'ont rendue possible. Le génie, peut-être, n'est qu'une patience dont on a oublié les traces."
+     },
+     "pergunta": "Selon l'auteur, qu'est-ce que le génie ?"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "tout",
+      "peu",
+      "rien",
+      "cela"
+     ],
+     "correta": 2,
+     "explicacao": "Expressão fixa: « comme si de rien n'était ».",
+     "tipo": "lacuna",
+     "inicio": "Il accepta la défaite avec élégance, comme si de…",
+     "fim": "… n'était.",
+     "pergunta": "Il accepta la défaite avec élégance, comme si de ___ n'était."
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Comme une invention inutile.",
+      "Comme une simple ligne de séparation.",
+      "Comme un lieu d'échanges autant que de séparation.",
+      "Comme un lieu dangereux."
+     ],
+     "correta": 2,
+     "explicacao": "« Elle est aussi un lieu de contact, de passage, d'échanges ».",
+     "documento": "La frontière est souvent pensée comme une ligne qui sépare. Elle est aussi un lieu de contact, de passage, d'échanges : les langues s'y mêlent, les cuisines s'y empruntent. Ceux qui vivent aux frontières savent que l'on y est toujours un peu des deux côtés à la fois.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "La frontière est souvent pensée comme une ligne qui sépare. Elle est aussi un lieu de contact, de passage, d'échanges : les langues s'y mêlent, les cuisines s'y empruntent. Ceux qui vivent aux frontières savent que l'on y est toujours un peu des deux côtés à la fois."
+     },
+     "pergunta": "Comment l'auteur présente-t-il la frontière ?"
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Elle est facile.",
+      "Elle est moins importante que la victoire.",
+      "Elle est réservée aux champions.",
+      "Elle révèle mieux le caractère que la victoire."
+     ],
+     "correta": 3,
+     "explicacao": "« L'élégance dans la défaite dit davantage d'un caractère que toutes les victoires ».",
+     "documento": "Perdre avec grâce est un art plus rare que gagner avec modestie. Le vainqueur a tout pour être généreux ; le vaincu, rien. C'est pourquoi l'élégance dans la défaite dit davantage d'un caractère que toutes les victoires.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Perdre avec grâce est un art plus rare que gagner avec modestie. Le vainqueur a tout pour être généreux ; le vaincu, rien. C'est pourquoi l'élégance dans la défaite dit davantage d'un caractère que toutes les victoires."
+     },
+     "pergunta": "Que pense l'auteur de l'élégance dans la défaite ?"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 3600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1",
+     "min": 60,
+     "max": 120,
+     "consigne": "Votre vol a été annulé et vous ne pourrez pas arriver à temps pour le mariage d'un(e) ami(e). Vous lui écrivez un message pour le/la prévenir, expliquer la situation et proposer de le/la voir plus tard."
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2",
+     "min": 120,
+     "max": 150,
+     "consigne": "Vous avez participé à un événement sportif (match, course, tournoi…) comme joueur, bénévole ou spectateur. Vous racontez cette journée dans un article pour le journal de votre quartier."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3",
+     "min": 120,
+     "max": 180,
+     "consigne": "« Faut-il limiter les voyages en avion pour protéger la planète ? » Rédigez un texte en deux parties. 1) Présentez les deux points de vue des documents ci-dessous (40 à 60 mots). 2) Donnez votre opinion en l'argumentant (80 à 120 mots).",
+     "documentos": [
+      {
+       "titulo": "Document 1 — L'urgence climatique",
+       "texto": "Un seul aller-retour Paris – New York émet autant de CO₂ qu'une année de chauffage. Tant que les avions ne seront pas propres, il faudra voyager moins souvent, et préférer le train pour les courtes distances."
+      },
+      {
+       "titulo": "Document 2 — Le droit de découvrir le monde",
+       "texto": "L'avion rapproche les familles dispersées, permet les échanges culturels et fait vivre des pays entiers grâce au tourisme. Il vaut mieux investir dans des carburants moins polluants que de limiter la liberté de voyager."
+      }
+     ]
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 900,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur : vous parlez de vous, de votre parcours, de vos activités et de vos projets.",
+     "perguntasExaminador": [
+      "Bonjour. Pouvez-vous vous présenter, s'il vous plaît ?",
+      "Quel sport regardez-vous ou pratiquez-vous ?",
+      "Quel est le plus long voyage que vous ayez fait ?",
+      "Avez-vous déjà fabriqué quelque chose de vos mains ?"
+     ]
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Vous voulez inscrire votre enfant (ou vous inscrire) à un stage de poterie pendant les vacances. Vous téléphonez à l'atelier pour obtenir des informations (âge, dates, horaires, prix, matériel, niveau, etc.).",
+     "perguntasExaminador": [
+      "Atelier Terre & Feu, bonjour ! Je vous écoute."
+     ],
+     "fichaExaminador": "Vous êtes le/la responsable de l'atelier. Stages de 5 jours pendant les vacances scolaires, du lundi au vendredi. Enfants (6–12 ans) : 9 h 30 – 12 h, 140 € ; adultes : 14 h – 17 h, 190 €. Terre, émaux et cuissons inclus ; prévoir un tablier. Groupes de 8 personnes maximum. Débutants bienvenus. Les pièces sont récupérées deux semaines après le stage (temps de séchage et de cuisson). Réduction de 10 % pour deux inscriptions. Laissez le candidat mener l'échange ; relancez-le s'il se tait (« Autre chose ? »)."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Les sportifs professionnels gagnent beaucoup trop d'argent. » Qu'en pensez-vous ? Vous donnez votre opinion et vous l'argumentez à l'aide d'exemples.",
+     "perguntasExaminador": [
+      "Les sportifs professionnels gagnent beaucoup trop d'argent. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et les artistes ou les chefs d'entreprise ? », « Leur carrière est courte : cela justifie-t-il ces salaires ? », « Et les sportifs de disciplines moins médiatisées ? »."
+    }
+   ]
+  }
+ }
+}

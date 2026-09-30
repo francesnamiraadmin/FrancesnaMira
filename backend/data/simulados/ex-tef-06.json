@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tef-06",
+ "titulo": "Exercício oral nº 6 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Coder dès l'école",
+ "descricao": "Programação na escola primária: professores, pais e especialistas.",
+ "imagem": {
+  "src": "img/temas/tef-b-coder-primaire-2.jpg",
+  "credito": {
+   "autor": "Peace Corps",
+   "licenca": "Public domain",
+   "urlLicenca": "",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Zambian_kids_learning_how_to_use_computers.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-06/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Reação natural.",
+     "alternativas": [
+      "Il est l'heure de dormir.",
+      "Le robot est gris.",
+      "Bravo ! Qu'est-ce qu'il sait faire ?",
+      "Oui, j'ai un ordinateur."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Papa, aujourd'hui, j'ai programmé un robot !\nA. Il est l'heure de dormir.\nB. Le robot est gris.\nC. Bravo ! Qu'est-ce qu'il sait faire ?\nD. Oui, j'ai un ordinateur.",
+     "audio": "audio/exercicios-orais/ex-tef-06/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Majoritairement sans écran ».",
+     "alternativas": [
+      "Sans écran, avec des jeux et des robots.",
+      "À la maison.",
+      "Sur ordinateur.",
+      "Sur tablette."
+     ],
+     "correta": 0,
+     "pergunta": "Comment se dérouleront majoritairement les séances ?",
+     "transcricao": "À partir de la rentrée, une heure d'initiation à la programmation sera proposée chaque semaine aux élèves de CM1 et CM2. Les séances se feront majoritairement sans écran, avec des jeux et des petits robots.",
+     "audio": "audio/exercicios-orais/ex-tef-06/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« La programmation m'aide à enseigner les maths ».",
+     "alternativas": [
+      "Les enfants n'aiment pas les robots.",
+      "Les bons élèves à l'écrit sont les meilleurs.",
+      "C'est une matière de trop.",
+      "La programmation aide à enseigner les maths."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'a constaté l'enseignante ?",
+     "transcricao": "Je craignais que ce soit une matière de plus. En fait, la programmation m'aide à enseigner les maths : pour faire avancer le robot, les enfants doivent mesurer, compter, anticiper. Et ceux qui ont du mal à l'écrit sont souvent très à l'aise.",
+     "audio": "audio/exercicios-orais/ex-tef-06/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta argumentativa.",
+     "alternativas": [
+      "Parce que l'IA est chère.",
+      "Pour comprendre la logique des outils qu'on utilise.",
+      "Je n'ai pas d'ordinateur.",
+      "Le code est long."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Pourquoi apprendre à coder si l'IA écrit déjà le code ?\nA. Parce que l'IA est chère.\nB. Pour comprendre la logique des outils qu'on utilise.\nC. Je n'ai pas d'ordinateur.\nD. Le code est long.",
+     "audio": "audio/exercicios-orais/ex-tef-06/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Développer une pensée algorithmique ».",
+     "alternativas": [
+      "Remplacer les mathématiques.",
+      "Développer une pensée algorithmique.",
+      "Vendre des robots aux écoles.",
+      "Former des informaticiens."
+     ],
+     "correta": 1,
+     "pergunta": "Quel est l'objectif, selon l'intervenant ?",
+     "transcricao": "L'objectif n'est pas de former des informaticiens à dix ans, mais de développer une pensée algorithmique : décomposer un problème, tester, corriger ses erreurs. Ces compétences servent bien au-delà de l'informatique.",
+     "audio": "audio/exercicios-orais/ex-tef-06/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 840,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section B — Présenter et convaincre",
+     "duracaoSeg": 600,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Stage d'été « Petits codeurs » : une semaine pour créer son premier jeu vidéo, pour les 9-12 ans. Places limitées ! » Vous présentez cette proposition à un(e) ami(e) et vous essayez de le/la convaincre d'y participer. L'examinateur joue l'ami(e) et présente des objections.",
+     "perguntasExaminador": [
+      "Alors, qu'est-ce que tu voulais me montrer ?"
+     ],
+     "fichaExaminador": "Vous êtes l'ami(e) sceptique. Objections possibles : « Mon enfant passe déjà trop de temps sur les écrans », « C'est cher (250 €) », « Il préfère le sport », « Ce n'est pas un vrai métier pour un enfant ». Laissez-vous convaincre seulement par de bons arguments."
+    }
+   ]
+  }
+ }
+}

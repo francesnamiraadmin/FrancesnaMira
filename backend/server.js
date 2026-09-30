@@ -87,7 +87,13 @@ app.use(tratadorErros);
 mongoose.set("strictQuery", true);
 iniciarMonitor();
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB conectado"))
+.then(() => {
+  console.log("MongoDB conectado");
+  // Temas do Ambiente de Produção versionados no repositório (backend/data/temas).
+  require("./utils/sincronizarTemas").sincronizarTemas()
+    .then(r => r.total && console.log(`Temas sincronizados: ${r.total} (${r.criados} novos, ${r.atualizados} atualizados)`))
+    .catch(err => console.error("Erro ao sincronizar temas:", err.message));
+})
 .catch(err => console.log("Erro ao conectar ao MongoDB:", err.message));
 
 const PORT = process.env.PORT || 5000;

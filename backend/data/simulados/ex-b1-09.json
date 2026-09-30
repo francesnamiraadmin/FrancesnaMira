@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b1-09",
+ "titulo": "Exercício oral nº 9 — B1",
+ "curso": "B1",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Une activité au club",
+ "descricao": "Propor uma atividade num clube: caminhadas, reuniões e organização.",
+ "imagem": {
+  "src": "img/temas/b1-proposer-activite-2.jpg",
+  "credito": {
+   "autor": "NPS Photo",
+   "licenca": "Public domain",
+   "urlLicenca": "",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Group_of_hikers_climbing_(e396d280-121c-47fa-868a-407df56b208d).jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b1-09/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta ao convite.",
+     "alternativas": [
+      "Oui, j'aime les chaussures.",
+      "Oui, s'il ne pleut pas !",
+      "Dimanche est un jour.",
+      "Non, je suis grand."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu viens à la randonnée dimanche ?\nA. Oui, j'aime les chaussures.\nB. Oui, s'il ne pleut pas !\nC. Dimanche est un jour.\nD. Non, je suis grand.",
+     "audio": "audio/exercicios-orais/ex-b1-09/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Prévoyez un pique-nique, de l'eau et de bonnes chaussures ».",
+     "alternativas": [
+      "Un maillot de bain.",
+      "De l'argent pour le restaurant.",
+      "Un vélo.",
+      "Un pique-nique, de l'eau et de bonnes chaussures."
+     ],
+     "correta": 3,
+     "pergunta": "Que faut-il prévoir ?",
+     "transcricao": "Randonnée du club dimanche : départ à huit heures devant la mairie. Douze kilomètres, niveau facile. Prévoyez un pique-nique, de l'eau et de bonnes chaussures. Retour prévu vers seize heures.",
+     "audio": "audio/exercicios-orais/ex-b1-09/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Pour ceux qui travaillent le week-end ».",
+     "alternativas": [
+      "Pour ceux qui travaillent le week-end.",
+      "Pour les enfants.",
+      "Pour les débutants.",
+      "Pour les touristes."
+     ],
+     "correta": 0,
+     "pergunta": "Pour qui propose-t-elle des sorties le soir ?",
+     "transcricao": "Je propose qu'on organise aussi des sorties le soir en été, pour ceux qui travaillent le week-end. On pourrait marcher deux heures au coucher du soleil.",
+     "audio": "audio/exercicios-orais/ex-b1-09/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Oferecer-se.",
+     "alternativas": [
+      "Le car est blanc.",
+      "Il part à huit heures.",
+      "Je peux m'en charger, je connais la compagnie.",
+      "Oui, je vais en car."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Qui va s'occuper de réserver le car ?\nA. Le car est blanc.\nB. Il part à huit heures.\nC. Je peux m'en charger, je connais la compagnie.\nD. Oui, je vais en car.",
+     "audio": "audio/exercicios-orais/ex-b1-09/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Et, surtout, une façon de rencontrer des gens ».",
+     "alternativas": [
+      "Découvrir de nouveaux écrans.",
+      "Faire des compétitions.",
+      "Perdre du poids.",
+      "Rencontrer des gens en dehors du travail."
+     ],
+     "correta": 3,
+     "pergunta": "Que cherchent surtout les jeunes actifs ?",
+     "transcricao": "Les clubs de randonnée attirent de plus en plus de jeunes actifs. Ils cherchent à la fois une activité physique, une déconnexion des écrans et, surtout, une façon de rencontrer des gens en dehors du travail.",
+     "audio": "audio/exercicios-orais/ex-b1-09/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 300,
+     "preparacaoSeg": 120,
+     "consigne": "Vous êtes membre d'un club de randonnée. Vous proposez au président du club d'organiser une nouvelle activité (sortie de nuit, week-end en montagne, randonnée avec des enfants…). Vous le convainquez et vous organisez les détails ensemble.",
+     "perguntasExaminador": [
+      "Ah, bonjour ! Vous vouliez me parler ?"
+     ],
+     "fichaExaminador": "Vous êtes le/la président(e). Budget limité (300 € pour l'activité). Assurance du club : sorties de nuit seulement avec un guide. Posez des questions sur le prix, la sécurité, le nombre de participants et la date. Laissez le candidat mener l'échange ; relancez-le s'il se tait."
+    }
+   ]
+  }
+ }
+}

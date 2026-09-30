@@ -651,22 +651,26 @@
       "Devant la boulangerie."
      ],
      "correta": 3,
-     "explicacao": "« Je t'attends devant la boulangerie ». O cinema é o destino depois."
+     "explicacao": "« Je t'attends devant la boulangerie ». O cinema é o destino depois.",
+     "num": 1
     },
     {
-     "n": 2,
+     "n": 40,
      "nivel": "A1",
      "pontos": 3,
-     "documento": "PISCINE MUNICIPALE\nOuverte du mardi au dimanche, de 9 h à 19 h.\nFermée le lundi.\nBonnet de bain obligatoire.",
-     "pergunta": "Quel jour la piscine est-elle fermée ?",
+     "tipo": "lacuna",
+     "inicio": "Demain, je vais…",
+     "fim": "… piscine avec mes amis.",
+     "pergunta": "Demain, je vais ___ piscine avec mes amis.",
      "alternativas": [
-      "Le dimanche.",
-      "Le lundi.",
-      "Le mardi.",
-      "Le samedi."
+      "à la",
+      "au",
+      "à",
+      "en"
      ],
-     "correta": 1,
-     "explicacao": "« Fermée le lundi »."
+     "correta": 0,
+     "explicacao": "« Piscine » é feminino: « à la piscine ».",
+     "num": 2
     },
     {
      "n": 3,
@@ -681,7 +685,8 @@
       "Il ne peut pas entrer chez lui."
      ],
      "correta": 3,
-     "explicacao": "Esqueceu as chaves: não consegue entrar em casa e espera na vizinha."
+     "explicacao": "Esqueceu as chaves: não consegue entrar em casa e espera na vizinha.",
+     "num": 3
     },
     {
      "n": 4,
@@ -696,7 +701,8 @@
       "La boisson."
      ],
      "correta": 3,
-     "explicacao": "« Boisson non comprise » = bebida não incluída."
+     "explicacao": "« Boisson non comprise » = bebida não incluída.",
+     "num": 4
     },
     {
      "n": 5,
@@ -711,7 +717,26 @@
       "La cuisine n'est pas équipée."
      ],
      "correta": 0,
-     "explicacao": "« 2e étage sans ascenseur ». O resto é vantagem (tram perto, cozinha equipada, charges comprises)."
+     "explicacao": "« 2e étage sans ascenseur ». O resto é vantagem (tram perto, cozinha equipada, charges comprises).",
+     "num": 5
+    },
+    {
+     "n": 41,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "lacuna",
+     "inicio": "Hier soir, nous sommes…",
+     "fim": "… au restaurant italien.",
+     "pergunta": "Hier soir, nous sommes ___ au restaurant italien.",
+     "alternativas": [
+      "allons",
+      "aller",
+      "irons",
+      "allés"
+     ],
+     "correta": 3,
+     "explicacao": "Passé composé com « être »: « nous sommes allés » (concordância no plural).",
+     "num": 6
     },
     {
      "n": 6,
@@ -726,7 +751,26 @@
       "L'heure."
      ],
      "correta": 0,
-     "explicacao": "« Reportée au mardi 17, à la même heure »: só muda a data."
+     "explicacao": "« Reportée au mardi 17, à la même heure »: só muda a data.",
+     "num": 7
+    },
+    {
+     "n": 42,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "lacuna",
+     "inicio": "Ce pull est trop…",
+     "fim": "… pour moi, je ne l'achète pas.",
+     "pergunta": "Ce pull est trop ___ pour moi, je ne l'achète pas.",
+     "alternativas": [
+      "chers",
+      "chère",
+      "cher",
+      "chèrement"
+     ],
+     "correta": 2,
+     "explicacao": "« Pull » é masculino singular: « trop cher ».",
+     "num": 8
     },
     {
      "n": 7,
@@ -741,22 +785,8 @@
       "Organiser un défilé de mode."
      ],
      "correta": 2,
-     "explicacao": "As roupas « seront données aux familles en difficulté »."
-    },
-    {
-     "n": 8,
-     "nivel": "A2",
-     "pontos": 9,
-     "documento": "MODE D'EMPLOI\nAvant la première utilisation, chargez complètement la batterie pendant 4 heures. Ne laissez pas l'appareil au soleil. Pour l'éteindre, appuyez 3 secondes sur le bouton rouge.",
-     "pergunta": "Que faut-il faire avant d'utiliser l'appareil pour la première fois ?",
-     "alternativas": [
-      "Lire la garantie.",
-      "Le laisser au soleil.",
-      "Appuyer sur le bouton rouge.",
-      "Charger la batterie."
-     ],
-     "correta": 3,
-     "explicacao": "« Avant la première utilisation, chargez complètement la batterie »."
+     "explicacao": "As roupas « seront données aux familles en difficulté ».",
+     "num": 9
     },
     {
      "n": 9,
@@ -771,22 +801,8 @@
       "Un logement pour les vacances."
      ],
      "correta": 2,
-     "explicacao": "Cuidar do gato « 10 euros par jour » = trabalho pago."
-    },
-    {
-     "n": 10,
-     "nivel": "A2",
-     "pontos": 9,
-     "documento": "MÉDIATHÈQUE VICTOR-HUGO\nNouveaux horaires à partir du 1er janvier :\n— du mardi au vendredi : 10 h – 18 h\n— le samedi : 10 h – 17 h\nLe mercredi, l'espace enfants est ouvert jusqu'à 19 h.",
-     "pergunta": "Quel jour l'espace enfants ferme-t-il plus tard ?",
-     "alternativas": [
-      "Le mercredi.",
-      "Le vendredi.",
-      "Le samedi.",
-      "Le mardi."
-     ],
-     "correta": 0,
-     "explicacao": "« Le mercredi, l'espace enfants est ouvert jusqu'à 19 h »."
+     "explicacao": "Cuidar do gato « 10 euros par jour » = trabalho pago.",
+     "num": 10
     },
     {
      "n": 11,
@@ -801,7 +817,8 @@
       "La mairie arrête le projet."
      ],
      "correta": 2,
-     "explicacao": "Todas as bicicletas alugadas + « liste d'attente » = procura maior que oferta."
+     "explicacao": "Todas as bicicletas alugadas + « liste d'attente » = procura maior que oferta.",
+     "num": 11
     },
     {
      "n": 12,
@@ -816,22 +833,26 @@
       "Faire une réclamation."
      ],
      "correta": 3,
-     "explicacao": "Produto com defeito + pedido de troca ou reembolso = reclamação."
+     "explicacao": "Produto com defeito + pedido de troca ou reembolso = reclamação.",
+     "num": 12
     },
     {
-     "n": 13,
+     "n": 43,
      "nivel": "B1",
      "pontos": 15,
-     "documento": "RÉSIDENCE LES TILLEULS — RAPPEL\nLes vélos doivent être rangés dans le local prévu à cet effet et non dans les couloirs. Les poubelles doivent être sorties le mardi soir uniquement. Tout bruit excessif est interdit après 22 h.",
-     "pergunta": "Que doivent faire les résidents avec leurs vélos ?",
+     "tipo": "lacuna",
+     "inicio": "C'est le livre…",
+     "fim": "… je t'ai parlé hier.",
+     "pergunta": "C'est le livre ___ je t'ai parlé hier.",
      "alternativas": [
-      "Les monter dans leur appartement.",
-      "Les ranger dans un local spécial.",
-      "Les laisser dans les couloirs.",
-      "Les garer devant l'immeuble."
+      "que",
+      "dont",
+      "où",
+      "qui"
      ],
      "correta": 1,
-     "explicacao": "« Rangés dans le local prévu à cet effet »."
+     "explicacao": "« Parler de quelque chose » → pronome relativo « dont ».",
+     "num": 13
     },
     {
      "n": 14,
@@ -846,7 +867,8 @@
       "La conversation entre ses membres."
      ],
      "correta": 3,
-     "explicacao": "« Ce n'est pas le repas… mais le moment d'échange »."
+     "explicacao": "« Ce n'est pas le repas… mais le moment d'échange ».",
+     "num": 14
     },
     {
      "n": 15,
@@ -861,7 +883,26 @@
       "Parler anglais."
      ],
      "correta": 1,
-     "explicacao": "« Diplôme BAFA exigé ». Experiência não é necessária (« débutants acceptés »)."
+     "explicacao": "« Diplôme BAFA exigé ». Experiência não é necessária (« débutants acceptés »).",
+     "num": 15
+    },
+    {
+     "n": 44,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "lacuna",
+     "inicio": "Si j'avais plus de temps, je…",
+     "fim": "… davantage.",
+     "pergunta": "Si j'avais plus de temps, je ___ davantage.",
+     "alternativas": [
+      "voyagerais",
+      "voyageais",
+      "voyage",
+      "voyagerai"
+     ],
+     "correta": 0,
+     "explicacao": "« Si + imparfait » pede o condicional: « je voyagerais ».",
+     "num": 16
     },
     {
      "n": 16,
@@ -876,22 +917,8 @@
       "Une compétition."
      ],
      "correta": 2,
-     "explicacao": "Um programa que alterna caminhada e corrida = nova metodologia."
-    },
-    {
-     "n": 17,
-     "nivel": "B1",
-     "pontos": 15,
-     "documento": "À partir du 1er juin, les sacs en plastique seront interdits sur tous les marchés de la ville. Les commerçants pourront proposer des sacs en papier ou en tissu, éventuellement payants. La municipalité distribuera gratuitement 5 000 sacs réutilisables le premier week-end.",
-     "pergunta": "Que fera la municipalité pour accompagner la mesure ?",
-     "alternativas": [
-      "Fermer certains marchés.",
-      "Vendre des sacs en plastique.",
-      "Offrir des sacs réutilisables.",
-      "Indemniser les commerçants."
-     ],
-     "correta": 2,
-     "explicacao": "« Distribuera gratuitement 5 000 sacs réutilisables »."
+     "explicacao": "Um programa que alterna caminhada e corrida = nova metodologia.",
+     "num": 17
     },
     {
      "n": 18,
@@ -906,7 +933,8 @@
       "De livrer le client lui-même."
      ],
      "correta": 1,
-     "explicacao": "« Vérifier… si c'est réalisable et me répondre avant demain midi »."
+     "explicacao": "« Vérifier… si c'est réalisable et me répondre avant demain midi ».",
+     "num": 18
     },
     {
      "n": 19,
@@ -921,7 +949,8 @@
       "Le manque d'originalité."
      ],
      "correta": 2,
-     "explicacao": "« Service un peu lent le samedi soir, lorsque la salle est pleine »."
+     "explicacao": "« Service un peu lent le samedi soir, lorsque la salle est pleine ».",
+     "num": 19
     },
     {
      "n": 20,
@@ -936,7 +965,8 @@
       "Pour remplacer les commerces du centre-ville."
      ],
      "correta": 0,
-     "explicacao": "Duas razões: « attentes des voyageurs » e « impératif économique »."
+     "explicacao": "Duas razões: « attentes des voyageurs » e « impératif économique ».",
+     "num": 20
     },
     {
      "n": 21,
@@ -951,7 +981,26 @@
       "Il nie tout effet des réseaux sociaux."
      ],
      "correta": 1,
-     "explicacao": "« Plutôt que d'agiter la peur, mieux vaudrait apprendre aux adolescents… ». Ele não nega os efeitos: diz que são « modestes »."
+     "explicacao": "« Plutôt que d'agiter la peur, mieux vaudrait apprendre aux adolescents… ». Ele não nega os efeitos: diz que são « modestes ».",
+     "num": 21
+    },
+    {
+     "n": 45,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "lacuna",
+     "inicio": "Il est parti…",
+     "fim": "… personne ne s'en aperçoive.",
+     "pergunta": "Il est parti ___ personne ne s'en aperçoive.",
+     "alternativas": [
+      "afin de",
+      "pour",
+      "avant de",
+      "sans que"
+     ],
+     "correta": 3,
+     "explicacao": "Com sujeito diferente e subjuntivo (« s'aperçoive »): « sans que ».",
+     "num": 22
     },
     {
      "n": 22,
@@ -966,7 +1015,8 @@
       "Des personnes qui manquaient de temps pour lire."
      ],
      "correta": 3,
-     "explicacao": "« Des personnes qui lisaient peu faute de temps »."
+     "explicacao": "« Des personnes qui lisaient peu faute de temps ».",
+     "num": 23
     },
     {
      "n": 23,
@@ -981,22 +1031,26 @@
       "Célébrer le succès des entrepreneurs."
      ],
      "correta": 0,
-     "explicacao": "« Il convient de nuancer ce chiffre… le dynamisme affiché masque une réalité plus fragile »."
+     "explicacao": "« Il convient de nuancer ce chiffre… le dynamisme affiché masque une réalité plus fragile ».",
+     "num": 24
     },
     {
-     "n": 24,
+     "n": 46,
      "nivel": "B2",
      "pontos": 21,
-     "documento": "Dans plusieurs pays européens, des supermarchés testent des rayons « zéro emballage » où les clients viennent avec leurs propres contenants. Si l'initiative séduit une clientèle engagée, elle se heurte à des obstacles pratiques : normes d'hygiène, temps de passage en caisse plus long et prix souvent supérieurs.",
-     "pergunta": "Que souligne le texte à propos des rayons zéro emballage ?",
+     "tipo": "lacuna",
+     "inicio": "Les résultats de l'enquête seront publiés…",
+     "fim": "… la réunion de lundi.",
+     "pergunta": "Les résultats de l'enquête seront publiés ___ la réunion de lundi.",
      "alternativas": [
-      "Ils ont remplacé les rayons classiques.",
-      "Ils sont interdits par les normes d'hygiène.",
-      "Des difficultés pratiques limitent leur développement.",
-      "Ils sont moins chers que les rayons classiques."
+      "au lieu de",
+      "faute de",
+      "à l'issue de",
+      "à force de"
      ],
      "correta": 2,
-     "explicacao": "« Se heurte à des obstacles pratiques ». As normas são obstáculo, não proibição."
+     "explicacao": "« À l'issue de » = ao final de. As outras não têm sentido temporal.",
+     "num": 25
     },
     {
      "n": 25,
@@ -1011,7 +1065,8 @@
       "D'avoir oublié de parler des capteurs."
      ],
      "correta": 1,
-     "explicacao": "« Pas une ligne sur ceux qui y vivront »."
+     "explicacao": "« Pas une ligne sur ceux qui y vivront ».",
+     "num": 26
     },
     {
      "n": 26,
@@ -1026,7 +1081,8 @@
       "Une baisse du bénévolat chez les jeunes."
      ],
      "correta": 1,
-     "explicacao": "Idosos recuam, jovens avançam, mas de forma « plus ponctuelle »."
+     "explicacao": "Idosos recuam, jovens avançam, mas de forma « plus ponctuelle ».",
+     "num": 27
     },
     {
      "n": 27,
@@ -1041,22 +1097,8 @@
       "Supprimer les limitations de vitesse."
      ],
      "correta": 0,
-     "explicacao": "« Former les conducteurs serait peut-être plus efficace que de modifier les panneaux »."
-    },
-    {
-     "n": 28,
-     "nivel": "B2",
-     "pontos": 21,
-     "documento": "Contrairement à une croyance répandue, nous n'utilisons pas seulement 10 % de notre cerveau. L'imagerie cérébrale montre que toutes les zones sont actives au cours d'une journée, même si elles ne le sont pas toutes en même temps.",
-     "pergunta": "Quel est le but de ce texte ?",
-     "alternativas": [
-      "Présenter une nouvelle technique médicale.",
-      "Encourager l'entraînement cérébral.",
-      "Expliquer une maladie.",
-      "Corriger une idée fausse."
-     ],
-     "correta": 3,
-     "explicacao": "« Contrairement à une croyance répandue » introduz a correção de um mito."
+     "explicacao": "« Former les conducteurs serait peut-être plus efficace que de modifier les panneaux ».",
+     "num": 28
     },
     {
      "n": 29,
@@ -1071,7 +1113,8 @@
       "Les musées manquent de visiteurs."
      ],
      "correta": 1,
-     "explicacao": "« La gratuité, seule, ne suffit pas à lever les barrières culturelles »."
+     "explicacao": "« La gratuité, seule, ne suffit pas à lever les barrières culturelles ».",
+     "num": 29
     },
     {
      "n": 30,
@@ -1086,7 +1129,26 @@
       "L'usage excessif de mots étrangers."
      ],
      "correta": 1,
-     "explicacao": "A vida tratada como « une entreprise dont chacun serait le comptable »."
+     "explicacao": "A vida tratada como « une entreprise dont chacun serait le comptable ».",
+     "num": 30
+    },
+    {
+     "n": 47,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "lacuna",
+     "inicio": "Cette nouvelle loi risque de…",
+     "fim": "… à la liberté de la presse.",
+     "pergunta": "Cette nouvelle loi risque de ___ à la liberté de la presse.",
+     "alternativas": [
+      "porter conseil",
+      "porter atteinte",
+      "porter secours",
+      "porter plainte"
+     ],
+     "correta": 1,
+     "explicacao": "« Porter atteinte à » = prejudicar, ferir (um direito).",
+     "num": 31
     },
     {
      "n": 31,
@@ -1101,7 +1163,26 @@
       "La virtuosité technique ne compense pas un propos insuffisant."
      ],
      "correta": 3,
-     "explicacao": "« La forme ne vaut que par ce qu'elle sert »: técnica brilhante, conteúdo fraco."
+     "explicacao": "« La forme ne vaut que par ce qu'elle sert »: técnica brilhante, conteúdo fraco.",
+     "num": 32
+    },
+    {
+     "n": 48,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "lacuna",
+     "inicio": "Quoi qu'il…",
+     "fim": "…, le projet devra être terminé avant l'été.",
+     "pergunta": "Quoi qu'il ___ , le projet devra être terminé avant l'été.",
+     "alternativas": [
+      "en soit",
+      "soit",
+      "fût",
+      "en est"
+     ],
+     "correta": 0,
+     "explicacao": "Expressão fixa: « quoi qu'il en soit » = de qualquer forma.",
+     "num": 33
     },
     {
      "n": 32,
@@ -1116,37 +1197,8 @@
       "Connaître un risque peut être aussi utile que nuisible."
      ],
      "correta": 3,
-     "explicacao": "« Peut éclairer certains choix… mais aussi empoisonner une existence »."
-    },
-    {
-     "n": 33,
-     "nivel": "C1",
-     "pontos": 26,
-     "documento": "La lenteur n'est pas l'inverse de l'efficacité ; elle en est parfois la condition. Les décisions prises dans l'urgence produisent souvent des corrections coûteuses, là où un temps de réflexion aurait permis d'anticiper les difficultés.",
-     "pergunta": "Quelle idée l'auteur défend-il ?",
-     "alternativas": [
-      "La lenteur est un défaut à corriger.",
-      "Il faut toujours décider vite.",
-      "L'urgence améliore la réflexion.",
-      "Prendre son temps peut éviter des erreurs coûteuses."
-     ],
-     "correta": 3,
-     "explicacao": "A lentidão como « condition » da eficácia."
-    },
-    {
-     "n": 34,
-     "nivel": "C1",
-     "pontos": 26,
-     "documento": "L'évaluation des politiques publiques souffre d'un biais structurel : elle est trop souvent confiée aux administrations qui les ont conçues. Sans instance indépendante, il est illusoire d'attendre des conclusions qui remettent en cause des choix dans lesquels ces administrations ont engagé leur crédibilité.",
-     "pergunta": "Quelle réforme ce passage appelle-t-il implicitement ?",
-     "alternativas": [
-      "Laisser les administrations s'évaluer elles-mêmes.",
-      "Supprimer l'évaluation des politiques.",
-      "Augmenter le budget des administrations.",
-      "Confier l'évaluation à un organisme indépendant."
-     ],
-     "correta": 3,
-     "explicacao": "« Sans instance indépendante, il est illusoire… »."
+     "explicacao": "« Peut éclairer certains choix… mais aussi empoisonner une existence ».",
+     "num": 34
     },
     {
      "n": 35,
@@ -1161,7 +1213,8 @@
       "Leur grande fidélité historique."
      ],
      "correta": 2,
-     "explicacao": "« Projeter nos inquiétudes contemporaines… le passé devient un miroir »."
+     "explicacao": "« Projeter nos inquiétudes contemporaines… le passé devient un miroir ».",
+     "num": 35
     },
     {
      "n": 36,
@@ -1176,7 +1229,26 @@
       "La déconnexion est techniquement impossible."
      ],
      "correta": 2,
-     "explicacao": "O elogio da desconexão « se propage par les réseaux mêmes qu'il prétend fuir »."
+     "explicacao": "O elogio da desconexão « se propage par les réseaux mêmes qu'il prétend fuir ».",
+     "num": 36
+    },
+    {
+     "n": 49,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "lacuna",
+     "inicio": "Ses propos, pour le moins…",
+     "fim": "…, n'ont éclairé personne sur ses intentions.",
+     "pergunta": "Ses propos, pour le moins ___ , n'ont éclairé personne sur ses intentions.",
+     "alternativas": [
+      "sidéraux",
+      "sismiques",
+      "sybarites",
+      "sibyllins"
+     ],
+     "correta": 3,
+     "explicacao": "« Sibyllin » = obscuro, enigmático. As outras são parônimas sem relação.",
+     "num": 37
     },
     {
      "n": 37,
@@ -1191,22 +1263,8 @@
       "Comme un projet de restauration efficace."
      ],
      "correta": 2,
-     "explicacao": "« La peur de l'avenir déguisée en fidélité »."
-    },
-    {
-     "n": 38,
-     "nivel": "C2",
-     "pontos": 33,
-     "documento": "L'érudition, lorsqu'elle se contente d'accumuler, confine à la manie du collectionneur ; elle ne devient savoir qu'au moment où elle consent à hiérarchiser, c'est-à-dire à renoncer. Tout savoir véritable est fait d'oublis choisis.",
-     "pergunta": "Selon l'auteur, qu'est-ce qui distingue le savoir de l'érudition ?",
-     "alternativas": [
-      "La qualité de la mémoire.",
-      "La quantité d'informations retenues.",
-      "La capacité à trier et à écarter.",
-      "La passion du collectionneur."
-     ],
-     "correta": 2,
-     "explicacao": "O saber surge ao « hiérarchiser, c'est-à-dire renoncer »: « oublis choisis »."
+     "explicacao": "« La peur de l'avenir déguisée en fidélité ».",
+     "num": 38
     },
     {
      "n": 39,
@@ -1221,7 +1279,8 @@
       "Il écrit sans réfléchir."
      ],
      "correta": 1,
-     "explicacao": "« Le dépouillement est une conquête »: a sobriedade é fruto de trabalho."
+     "explicacao": "« Le dépouillement est une conquête »: a sobriedade é fruto de trabalho.",
+     "num": 39
     }
    ]
   },

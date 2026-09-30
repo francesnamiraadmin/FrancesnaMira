@@ -1,0 +1,143 @@
+{
+ "slug": "ex-dalf-01",
+ "titulo": "Exercício oral nº 1 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "Lire à l'ère des écrans",
+ "descricao": "Leitura em papel e em telas: uma bibliotecária, um neurocientista e um editor.",
+ "imagem": {
+  "src": "img/temas/dalf-c1-synthese-lecture-numerique-2.jpg",
+  "credito": {
+   "autor": "picjumbo.com",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Person_reading_an_ebook.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-01/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta matizada.",
+     "alternativas": [
+      "Oui, j'ai un papier.",
+      "Pour les romans, oui ; pour le travail, je lis sur tablette.",
+      "La bibliothèque est fermée.",
+      "Non, je n'ai pas de livres rouges."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu lis encore des livres papier, toi ?\nA. Oui, j'ai un papier.\nB. Pour les romans, oui ; pour le travail, je lis sur tablette.\nC. La bibliothèque est fermée.\nD. Non, je n'ai pas de livres rouges.",
+     "audio": "audio/exercicios-orais/ex-dalf-01/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Les nouveaux lecteurs viennent en plus des anciens ».",
+     "alternativas": [
+      "Elles ont attiré de nouveaux lecteurs sans réduire le papier.",
+      "Elles ont fait baisser les emprunts.",
+      "Elles n'ont eu aucun effet.",
+      "Elles ont remplacé les livres papier."
+     ],
+     "correta": 0,
+     "pergunta": "Quel effet ont eu les liseuses ?",
+     "transcricao": "Depuis que notre médiathèque prête des liseuses, le nombre d'emprunteurs a augmenté de quinze pour cent. Mais les prêts de livres papier n'ont pas baissé : les nouveaux lecteurs viennent en plus des anciens.",
+     "audio": "audio/exercicios-orais/ex-dalf-01/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Efficace pour chercher une information, moins pour suivre un raisonnement ».",
+     "alternativas": [
+      "Le suivi d'un raisonnement.",
+      "La lecture de romans.",
+      "Les textes longs et complexes.",
+      "La recherche rapide d'une information."
+     ],
+     "correta": 3,
+     "pergunta": "Pour quel type de lecture l'écran est-il adapté, selon l'intervenant ?",
+     "transcricao": "Les expériences comparant la lecture sur papier et sur écran aboutissent à un résultat constant : pour les textes longs et complexes, la compréhension est meilleure sur papier. L'écran favorise une lecture en diagonale, efficace pour chercher une information, moins pour suivre un raisonnement.",
+     "audio": "audio/exercicios-orais/ex-dalf-01/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta que desloca a questão.",
+     "alternativas": [
+      "Oui, les jeunes sont nombreux.",
+      "Non, ils écrivent des livres.",
+      "Ils lisent énormément, mais pas forcément des livres.",
+      "Je lis le journal le matin."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Alors, d'après toi, les jeunes ne lisent plus ?\nA. Oui, les jeunes sont nombreux.\nB. Non, ils écrivent des livres.\nC. Ils lisent énormément, mais pas forcément des livres.\nD. Je lis le journal le matin.",
+     "audio": "audio/exercicios-orais/ex-dalf-01/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Il l'est en tant qu'expérience de concentration ».",
+     "alternativas": [
+      "L'industrie de l'édition.",
+      "Les écrans numériques.",
+      "Le livre en tant qu'objet.",
+      "L'expérience de concentration que permet le livre."
+     ],
+     "correta": 3,
+     "pergunta": "Qu'est-ce qui est menacé, selon l'intervenant ?",
+     "transcricao": "Opposer le livre à l'écran est une facilité. Ce qui se joue, c'est notre capacité d'attention prolongée, que tout, dans notre environnement numérique, conspire à fragmenter. Le livre n'est pas menacé en tant qu'objet ; il l'est en tant qu'expérience de concentration.",
+     "audio": "audio/exercicios-orais/ex-dalf-01/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — exposé et entretien (C1)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "Document de départ : « Selon une étude, les adolescents qui lisent sur papier comprennent mieux les textes longs que ceux qui lisent sur écran. Faut-il revenir au livre papier à l'école ? » Vous présentez un exposé structuré (problématique, plan, arguments illustrés d'exemples) puis vous répondez aux questions de l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre exposé."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : manuels numériques et coût, accessibilité (dyslexie, malvoyance), place du plaisir de lire, rôle des enseignants."
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,1609 @@
+{
+ "slug": "tcf-canada-15",
+ "titulo": "Simulado TCF Canada nº 15",
+ "curso": "TCF",
+ "formato": "TCF Canada",
+ "audioConsignes": {
+  "co": "audio/simulados/tcf-canada-15/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 2100,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "imagem",
+     "explicacao": "Pessoas plantam mudas no campo: « on met les petites plantes ici ».",
+     "alternativas": [
+      "On met les petites plantes ici, bien alignées.",
+      "Mon bureau est au troisième étage.",
+      "Tu veux un verre d'eau ?",
+      "Le cinéma est complet ce soir."
+     ],
+     "correta": 0,
+     "alternativasFaladas": true,
+     "imagem": {
+      "src": "img/simulados/serie/plantio.jpg",
+      "credito": {
+       "autor": "Hillebrand Steve, U.S. Fish and Wildlife Service",
+       "licenca": "Public domain",
+       "urlLicenca": "",
+       "fonte": "https://commons.wikimedia.org/wiki/File:Volunteers_enjoy_planting_trees.jpg"
+      }
+     },
+     "pergunta": "Regardez l'image 1.",
+     "transcricao": "A. On met les petites plantes ici, bien alignées.\nB. Mon bureau est au troisième étage.\nC. Tu veux un verre d'eau ?\nD. Le cinéma est complet ce soir.",
+     "audio": "audio/simulados/tcf-canada-15/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "imagem",
+     "explicacao": "Bombeiros combatem um incêndio: « il faut éteindre le feu ».",
+     "alternativas": [
+      "Je voudrais une chambre pour deux nuits.",
+      "On joue aux cartes ?",
+      "Il y a des croissants ?",
+      "Vite, il faut éteindre le feu !"
+     ],
+     "correta": 3,
+     "alternativasFaladas": true,
+     "imagem": {
+      "src": "img/simulados/serie/bombeiros.jpg",
+      "credito": {
+       "autor": "Roland Dobbins from Singapore, Singapore",
+       "licenca": "CC BY 2.0",
+       "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+       "fonte": "https://commons.wikimedia.org/wiki/File:Thai_fire_engine_and_firefighters_during_2010_Thai_political_protests.jpg"
+      }
+     },
+     "pergunta": "Regardez l'image 2.",
+     "transcricao": "A. Je voudrais une chambre pour deux nuits.\nB. On joue aux cartes ?\nC. Il y a des croissants ?\nD. Vite, il faut éteindre le feu !",
+     "audio": "audio/simulados/tcf-canada-15/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "imagem",
+     "explicacao": "Um pintor diante de uma tela: « j'ajoute un peu de bleu pour le ciel ».",
+     "alternativas": [
+      "Tu as fini tes devoirs ?",
+      "Il fait nuit, on rentre.",
+      "Le bus numéro cinq, s'il vous plaît.",
+      "J'ajoute un peu de bleu pour le ciel."
+     ],
+     "correta": 3,
+     "alternativasFaladas": true,
+     "imagem": {
+      "src": "img/simulados/serie/pintor.jpg",
+      "credito": {
+       "autor": "Claude Monet",
+       "licenca": "Public domain",
+       "urlLicenca": "",
+       "fonte": "https://commons.wikimedia.org/wiki/File:Claude_Monet_-_In_the_Woods_at_Giverny-_Blanche_Hosched%C3%A9_at_Her_Easel_with_Suzanne_Hosched%C3%A9_Reading_-_Google_Art_Project.jpg"
+      }
+     },
+     "pergunta": "Regardez l'image 3.",
+     "transcricao": "A. Tu as fini tes devoirs ?\nB. Il fait nuit, on rentre.\nC. Le bus numéro cinq, s'il vous plaît.\nD. J'ajoute un peu de bleu pour le ciel.",
+     "audio": "audio/simulados/tcf-canada-15/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Pergunta de gosto: « non, je préfère la viande ».",
+     "alternativas": [
+      "Il est six heures.",
+      "Non, je suis en retard.",
+      "Non, je préfère la viande.",
+      "Oui, j'ai un chien."
+     ],
+     "correta": 2,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Tu aimes le poisson ?\nA. Il est six heures.\nB. Non, je suis en retard.\nC. Non, je préfère la viande.\nD. Oui, j'ai un chien.",
+     "audio": "audio/simulados/tcf-canada-15/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pedido de informação: « celle de la place de la Gare ».",
+     "alternativas": [
+      "Oui, le dimanche je dors.",
+      "Oui, celle de la place de la Gare.",
+      "Non, je n'ai pas mal à la tête.",
+      "Elle coûte dix euros."
+     ],
+     "correta": 1,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Il y a une pharmacie ouverte le dimanche près d'ici ?\nA. Oui, le dimanche je dors.\nB. Oui, celle de la place de la Gare.\nC. Non, je n'ai pas mal à la tête.\nD. Elle coûte dix euros.",
+     "audio": "audio/simulados/tcf-canada-15/co05.mp3"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "« Tu as trouvé ton cadeau ? » — « un livre de cuisine ».",
+     "alternativas": [
+      "Oui, elle a vingt ans.",
+      "Non, elle habite à Lille.",
+      "Je l'ai vue hier.",
+      "Oui, je lui ai acheté un livre de cuisine."
+     ],
+     "correta": 3,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Tu as trouvé ton cadeau pour Julie ?\nA. Oui, elle a vingt ans.\nB. Non, elle habite à Lille.\nC. Je l'ai vue hier.\nD. Oui, je lui ai acheté un livre de cuisine.",
+     "audio": "audio/simulados/tcf-canada-15/co06.mp3"
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Apportez des gants et des bottes ».",
+     "pergunta": "Que faut-il apporter ?",
+     "alternativas": [
+      "Des arbres.",
+      "Une pelle.",
+      "Des gants et des bottes.",
+      "Un pique-nique."
+     ],
+     "correta": 2,
+     "transcricao": "Bonjour, c'est la mairie de Saint-Rémy. Vous êtes inscrit à la journée de plantation d'arbres dimanche. Rendez-vous à neuf heures au parking du stade. Apportez des gants et des bottes.",
+     "audio": "audio/simulados/tcf-canada-15/co07.mp3"
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« J'irai samedi matin ».",
+     "pergunta": "Quand l'homme ira-t-il à l'exposition ?",
+     "alternativas": [
+      "Samedi matin.",
+      "Ce soir.",
+      "Jamais.",
+      "Dimanche."
+     ],
+     "correta": 0,
+     "transcricao": "Tu vas à l'exposition de peinture ce soir ?\nNon, je suis trop fatigué. J'irai samedi matin, il y aura moins de monde.",
+     "audio": "audio/simulados/tcf-canada-15/co08.mp3"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Sur le parking de la mairie, juste en face ».",
+     "pergunta": "Où peut-on se garer demain ?",
+     "alternativas": [
+      "Dans la rue.",
+      "Au parking du magasin.",
+      "Au parking de la mairie.",
+      "Nulle part."
+     ],
+     "correta": 2,
+     "transcricao": "Chers clients, nous vous informons que le parking du magasin sera fermé demain toute la journée pour des travaux de peinture. Vous pourrez vous garer sur le parking de la mairie, juste en face.",
+     "audio": "audio/simulados/tcf-canada-15/co09.mp3"
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Les enfants pourront monter dans le camion ».",
+     "pergunta": "Que pourront faire les enfants ?",
+     "alternativas": [
+      "Monter dans le camion.",
+      "Éteindre un vrai feu.",
+      "Conduire le camion.",
+      "Dormir à la caserne."
+     ],
+     "correta": 0,
+     "transcricao": "Portes ouvertes à la caserne des pompiers samedi ! Les enfants pourront monter dans le camion et essayer le casque. Démonstration de sauvetage à quinze heures.",
+     "audio": "audio/simulados/tcf-canada-15/co10.mp3"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les haies protègent les cultures du vent ».",
+     "pergunta": "Quel est l'un des rôles des haies ?",
+     "alternativas": [
+      "Décorer les routes.",
+      "Produire du bois de chauffage.",
+      "Séparer les villages.",
+      "Protéger les cultures du vent."
+     ],
+     "correta": 3,
+     "transcricao": "Dans le département du Gers, une association plante des haies le long des champs avec l'aide des écoles. Les haies protègent les cultures du vent, abritent les oiseaux et limitent l'érosion des sols.",
+     "audio": "audio/simulados/tcf-canada-15/co11.mp3"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Ma femme me remplace au magasin ».",
+     "pergunta": "Qui remplace l'homme quand il part en intervention ?",
+     "alternativas": [
+      "Sa femme.",
+      "Son fils.",
+      "Un autre boulanger.",
+      "Personne, il ferme."
+     ],
+     "correta": 0,
+     "transcricao": "Je suis pompier volontaire depuis dix ans. À côté, je suis boulanger. Quand mon bip sonne, je laisse tout et je pars. Mon employeur, c'est-à-dire moi-même, a dû s'organiser : ma femme me remplace au magasin.",
+     "audio": "audio/simulados/tcf-canada-15/co12.mp3"
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les barbecues sont interdits partout, y compris dans les jardins privés ».",
+     "pergunta": "Qu'est-ce qui est interdit dans les jardins privés ?",
+     "alternativas": [
+      "Les fêtes.",
+      "Les barbecues.",
+      "Le jardinage.",
+      "L'arrosage."
+     ],
+     "correta": 1,
+     "transcricao": "Vigilance orange aux incendies dans le département. L'accès aux massifs forestiers est interdit de onze heures à dix-huit heures. Les barbecues sont interdits partout, y compris dans les jardins privés.",
+     "audio": "audio/simulados/tcf-canada-15/co13.mp3"
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Ce qui compte, c'est d'oser mettre des couleurs ».",
+     "pergunta": "Qu'est-ce qui compte, selon le professeur ?",
+     "alternativas": [
+      "Bien dessiner.",
+      "Peindre très vite.",
+      "Copier les grands peintres.",
+      "Oser utiliser les couleurs."
+     ],
+     "correta": 3,
+     "transcricao": "Tu as commencé les cours de peinture ?\nOui, et j'adore ! Je ne dessine pas très bien, mais le professeur dit que ce n'est pas grave : ce qui compte, c'est d'oser mettre des couleurs.",
+     "audio": "audio/simulados/tcf-canada-15/co14.mp3"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Aider les abeilles et les papillons ».",
+     "pergunta": "Quel est l'objectif de cette distribution ?",
+     "alternativas": [
+      "Aider les insectes pollinisateurs.",
+      "Vendre des fleurs.",
+      "Embellir la mairie.",
+      "Nourrir les oiseaux."
+     ],
+     "correta": 0,
+     "transcricao": "La ville de Montpellier distribue gratuitement des graines de fleurs sauvages aux habitants qui ont un balcon ou un jardin. L'objectif : aider les abeilles et les papillons, dont le nombre diminue fortement.",
+     "audio": "audio/simulados/tcf-canada-15/co15.mp3"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« La préparation prend plus de temps que la peinture elle-même ».",
+     "pergunta": "Que dit la peintre de son travail ?",
+     "alternativas": [
+      "La préparation prend beaucoup de temps.",
+      "Elle travaille seulement dehors.",
+      "La peinture est la partie la plus longue.",
+      "Le métier est très simple."
+     ],
+     "correta": 0,
+     "transcricao": "Je suis peintre en bâtiment. Les gens pensent que c'est simple, mais la préparation prend plus de temps que la peinture elle-même : il faut boucher les trous, poncer, protéger les sols. Un mur bien préparé, c'est la moitié du travail.",
+     "audio": "audio/simulados/tcf-canada-15/co16.mp3"
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« N'hésitez pas à la demander ».",
+     "pergunta": "Que conseille-t-on aux habitants ?",
+     "alternativas": [
+      "D'acheter plusieurs calendriers.",
+      "De ne pas ouvrir la porte.",
+      "D'appeler la mairie.",
+      "De demander la carte professionnelle des pompiers."
+     ],
+     "correta": 3,
+     "transcricao": "Avis aux habitants : les pompiers passeront dans les rues du quartier du vingt au vingt-cinq novembre pour vendre leur calendrier. Ils portent toujours leur carte professionnelle : n'hésitez pas à la demander.",
+     "audio": "audio/simulados/tcf-canada-15/co17.mp3"
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Les tomates ne poussent pas dans les supermarchés ».",
+     "pergunta": "Qu'ont compris les enfants ?",
+     "alternativas": [
+      "D'où viennent les légumes.",
+      "Comment cuisiner les tomates.",
+      "Qu'il faut arroser tous les jours.",
+      "Que les supermarchés sont chers."
+     ],
+     "correta": 0,
+     "transcricao": "Moi, j'ai un potager sur mon balcon : tomates, salades, herbes aromatiques. Ce n'est pas beaucoup, mais mes enfants ont enfin compris que les tomates ne poussent pas dans les supermarchés !",
+     "audio": "audio/simulados/tcf-canada-15/co18.mp3"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Crayons et papier sont fournis ».",
+     "pergunta": "Qu'est-ce qui est fourni ?",
+     "alternativas": [
+      "Un professeur.",
+      "Des peintures.",
+      "Un chevalet.",
+      "Des crayons et du papier."
+     ],
+     "correta": 3,
+     "transcricao": "Le musée des Beaux-Arts de Lyon propose aux visiteurs de dessiner devant les tableaux, le dimanche matin. Crayons et papier sont fournis. Aucun niveau n'est exigé : il s'agit simplement de regarder autrement.",
+     "audio": "audio/simulados/tcf-canada-15/co19.mp3"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Échangent avec leurs collègues du Sud ».",
+     "pergunta": "Comment les pompiers s'adaptent-ils ?",
+     "alternativas": [
+      "En achetant des avions.",
+      "En interdisant les forêts.",
+      "En se formant auprès de collègues expérimentés.",
+      "En quittant les régions touchées."
+     ],
+     "correta": 2,
+     "transcricao": "Les incendies de forêt touchent désormais des régions qui en étaient épargnées, comme la Bretagne ou le Jura. Les pompiers doivent s'adapter : ils suivent des formations spécifiques et échangent avec leurs collègues du Sud, habitués à ces feux depuis longtemps.",
+     "audio": "audio/simulados/tcf-canada-15/co20.mp3"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Il vaut mieux laisser la forêt se régénérer d'elle-même ».",
+     "pergunta": "Que conseillent parfois les forestiers ?",
+     "alternativas": [
+      "Planter une seule espèce.",
+      "Laisser la forêt se régénérer naturellement.",
+      "Planter partout.",
+      "Couper les vieux arbres."
+     ],
+     "correta": 1,
+     "transcricao": "Planter des arbres est devenu très populaire, mais les forestiers mettent en garde : un arbre planté au mauvais endroit, ou une seule espèce sur de grandes surfaces, peut faire plus de mal que de bien. Parfois, il vaut mieux laisser la forêt se régénérer d'elle-même.",
+     "audio": "audio/simulados/tcf-canada-15/co21.mp3"
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« L'immense majorité des artistes ne vivent pas de leur travail ».",
+     "pergunta": "Que dit le document sur la majorité des artistes ?",
+     "alternativas": [
+      "Ils sont très riches.",
+      "Ils ne vivent pas de leur art.",
+      "Ils vendent à des prix record.",
+      "Ils ont arrêté de créer."
+     ],
+     "correta": 1,
+     "transcricao": "Le marché de l'art contemporain atteint des sommes record, mais l'immense majorité des artistes ne vivent pas de leur travail. Beaucoup enseignent, travaillent dans la restauration ou dans des métiers sans rapport avec l'art, pour pouvoir continuer à créer.",
+     "audio": "audio/simulados/tcf-canada-15/co22.mp3"
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« La ligne est occupée pour de vraies urgences ».",
+     "pergunta": "Pourquoi ces appels posent-ils problème ?",
+     "alternativas": [
+      "Ils occupent la ligne au détriment des vraies urgences.",
+      "Les pompiers refusent de répondre.",
+      "Ils coûtent cher aux appelants.",
+      "Les chats sont dangereux."
+     ],
+     "correta": 0,
+     "transcricao": "Tu as vu, les pompiers de Paris lancent une campagne contre les appels inutiles.\nOui : des gens appellent pour un chat dans un arbre ou pour une clé perdue ! Pendant ce temps, la ligne est occupée pour de vraies urgences.",
+     "audio": "audio/simulados/tcf-canada-15/co23.mp3"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Ne peuvent pas encore vendre leurs produits sous ce label ».",
+     "pergunta": "Pourquoi les premières années sont-elles difficiles ?",
+     "alternativas": [
+      "Les récoltes sont plus abondantes.",
+      "Les clients refusent le bio.",
+      "Les produits ne peuvent pas encore être vendus comme bio.",
+      "Les règles sont plus souples."
+     ],
+     "correta": 2,
+     "transcricao": "Les agriculteurs qui passent à l'agriculture biologique connaissent souvent trois années difficiles : ils doivent respecter les règles du bio, mais ne peuvent pas encore vendre leurs produits sous ce label. Des aides existent, mais elles arrivent souvent avec retard.",
+     "audio": "audio/simulados/tcf-canada-15/co24.mp3"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Donne souvent envie de la voir en vrai ».",
+     "pergunta": "Quel effet a eu la mise en ligne des collections ?",
+     "alternativas": [
+      "Elle incite à visiter les musées.",
+      "Elle a abîmé les œuvres.",
+      "Elle a vidé les musées.",
+      "Elle a fait baisser les prix."
+     ],
+     "correta": 0,
+     "transcricao": "Les musées numérisent leurs collections et les mettent en ligne gratuitement. Certains craignaient que cela vide les salles. C'est l'inverse qui se produit : découvrir une œuvre à l'écran donne souvent envie de la voir en vrai.",
+     "audio": "audio/simulados/tcf-canada-15/co25.mp3"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« De plus en plus difficile de concilier cet engagement avec un emploi ».",
+     "pergunta": "Pourquoi le nombre de volontaires diminue-t-il ?",
+     "alternativas": [
+      "Le salaire a baissé.",
+      "L'engagement est difficile à concilier avec un emploi.",
+      "Ils ne sont plus nécessaires.",
+      "La formation est trop longue."
+     ],
+     "correta": 1,
+     "transcricao": "Les pompiers volontaires représentent près de quatre-vingts pour cent des effectifs en France. Mais leur nombre diminue : il est de plus en plus difficile de concilier cet engagement avec un emploi, surtout quand on travaille loin de chez soi.",
+     "audio": "audio/simulados/tcf-canada-15/co26.mp3"
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Les habitants les considèrent comme les leurs ».",
+     "pergunta": "Pourquoi les fresques sont-elles rarement dégradées ?",
+     "alternativas": [
+      "Elles sont protégées par un vernis.",
+      "Elles sont surveillées par des caméras.",
+      "Les habitants se les sont appropriées.",
+      "Elles sont trop hautes."
+     ],
+     "correta": 2,
+     "transcricao": "Dans certains quartiers, des artistes sont invités à peindre des fresques géantes sur les murs des immeubles. Les habitants sont consultés sur le thème. Résultat : les fresques sont rarement dégradées, car les habitants les considèrent comme les leurs.",
+     "audio": "audio/simulados/tcf-canada-15/co27.mp3"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Plus résistantes à la sécheresse ».",
+     "pergunta": "Quel avantage présentent ces semences ?",
+     "alternativas": [
+      "Elles sont moins chères à l'achat.",
+      "Elles sont plus productives.",
+      "Elles poussent plus vite.",
+      "Elles résistent mieux à la sécheresse."
+     ],
+     "correta": 3,
+     "transcricao": "Les semences paysannes, reproduites par les agriculteurs eux-mêmes, reviennent dans les champs. Elles sont moins productives que les variétés industrielles, mais mieux adaptées au climat local et plus résistantes à la sécheresse.",
+     "audio": "audio/simulados/tcf-canada-15/co28.mp3"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Des touristes viennent désormais spécialement pour les découvrir ».",
+     "pergunta": "Qu'est-ce qui attire désormais les touristes ?",
+     "alternativas": [
+      "Les plages.",
+      "Les concerts.",
+      "Les musées de la ville.",
+      "Les peintures murales d'Abidjan."
+     ],
+     "correta": 3,
+     "transcricao": "En Côte d'Ivoire, un collectif de jeunes peintres transforme les murs d'Abidjan en galeries à ciel ouvert. Les œuvres parlent de la vie quotidienne, de la musique, de la politique. Des touristes viennent désormais spécialement pour les découvrir.",
+     "audio": "audio/simulados/tcf-canada-15/co29.mp3"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Chaque euro investi en prévention en épargne plusieurs en lutte ».",
+     "pergunta": "Que souligne l'intervenant ?",
+     "alternativas": [
+      "La prévention est rentable mais peu valorisée.",
+      "Les forêts ne doivent pas être entretenues.",
+      "Les caméras aident à prévenir les incendies.",
+      "La lutte contre le feu est inutile."
+     ],
+     "correta": 0,
+     "transcricao": "La prévention des incendies est moins spectaculaire que la lutte contre le feu. Débroussailler, entretenir les forêts, aménager des coupe-feux : ce travail patient n'attire ni les caméras ni les budgets. Pourtant, chaque euro investi en prévention en épargne plusieurs en lutte.",
+     "audio": "audio/simulados/tcf-canada-15/co30.mp3"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« La simplicité apparente est souvent le résultat d'un long cheminement ».",
+     "pergunta": "Que répond l'intervenante à la critique « un enfant aurait pu le faire » ?",
+     "alternativas": [
+      "Les enfants peignent mieux que les artistes.",
+      "Les peintres abstraits ne savent pas dessiner.",
+      "L'art abstrait n'a pas de valeur.",
+      "La simplicité apparente résulte d'un long travail."
+     ],
+     "correta": 3,
+     "transcricao": "On dit volontiers d'un tableau abstrait qu'un enfant aurait pu le faire. C'est oublier que la simplicité apparente est souvent le résultat d'un long cheminement : les peintres abstraits ont d'abord maîtrisé la figuration, puis s'en sont libérés. Ce qui semble spontané est souvent l'aboutissement d'une vie.",
+     "audio": "audio/simulados/tcf-canada-15/co31.mp3"
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Tout dépend… de la manière de la pratiquer ».",
+     "pergunta": "Selon l'intervenant, de quoi dépend l'impact de l'agriculture ?",
+     "alternativas": [
+      "De la manière de la pratiquer.",
+      "De l'activité elle-même.",
+      "Du nombre d'agriculteurs.",
+      "Du prix des produits."
+     ],
+     "correta": 0,
+     "transcricao": "L'agriculture est souvent accusée d'abîmer l'environnement. Elle peut aussi en être la gardienne : les prairies pâturées, les haies, les vergers traditionnels abritent une biodiversité remarquable. Tout dépend moins de l'activité elle-même que de la manière de la pratiquer.",
+     "audio": "audio/simulados/tcf-canada-15/co32.mp3"
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Elle tend à faire oublier les conditions de travail ».",
+     "pergunta": "Quel revers de l'admiration l'intervenante souligne-t-elle ?",
+     "alternativas": [
+      "Elle masque les conditions de travail difficiles.",
+      "Elle rend les héros arrogants.",
+      "Elle crée des jalousies.",
+      "Elle décourage les vocations."
+     ],
+     "correta": 0,
+     "transcricao": "Le héros en uniforme est une figure rassurante : le pompier qui sauve, le soignant qui guérit. Mais cette admiration a un revers : elle tend à faire oublier les conditions de travail de ces métiers, comme si le dévouement dispensait de les rémunérer correctement.",
+     "audio": "audio/simulados/tcf-canada-15/co33.mp3"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« L'œuvre, ou la signature ? ».",
+     "pergunta": "Quelle question pose l'intervenant ?",
+     "alternativas": [
+      "Comment reconnaître un faux ?",
+      "Faut-il interdire les copies ?",
+      "Admirons-nous l'œuvre ou le nom de l'artiste ?",
+      "Les musées sont-ils honnêtes ?"
+     ],
+     "correta": 2,
+     "transcricao": "Les faux en peinture révèlent une vérité gênante : de nombreux experts, collectionneurs et musées ont été trompés pendant des décennies. Si une copie parfaite procure la même émotion que l'original, qu'est-ce que nous admirons vraiment : l'œuvre, ou la signature ?",
+     "audio": "audio/simulados/tcf-canada-15/co34.mp3"
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« C'est une décision presque irréversible ».",
+     "pergunta": "Pourquoi l'intervenante s'inquiète-t-elle ?",
+     "alternativas": [
+      "Les villes manquent de parkings.",
+      "Bétonner une terre est presque irréversible.",
+      "Les agriculteurs vendent trop cher.",
+      "Les entrepôts sont vides."
+     ],
+     "correta": 1,
+     "transcricao": "La terre agricole disparaît sous le béton : chaque année, l'équivalent d'un département est artificialisé tous les dix ans en France. On construit des entrepôts, des lotissements, des parkings. Or une terre bétonnée l'est pour des siècles : c'est une décision presque irréversible.",
+     "audio": "audio/simulados/tcf-canada-15/co35.mp3"
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Il nous apprend à voir ».",
+     "pergunta": "Que défend l'intervenant ?",
+     "alternativas": [
+      "Monet peignait uniquement l'eau.",
+      "L'art transforme notre regard sur le réel.",
+      "La réalité est plus belle que l'art.",
+      "L'art copie fidèlement la réalité."
+     ],
+     "correta": 1,
+     "transcricao": "Le peintre ne reproduit pas ce qu'il voit ; il nous apprend à voir. Après avoir regardé les toiles de Monet, on ne regarde plus de la même manière un reflet sur l'eau. L'art ne copie pas la réalité : il la rend visible.",
+     "audio": "audio/simulados/tcf-canada-15/co36.mp3"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Agir pour ceux qui viendront, sans attendre leur reconnaissance ».",
+     "pergunta": "Que symbolise le fait de planter un arbre, selon l'intervenante ?",
+     "alternativas": [
+      "Agir pour les générations futures sans rien attendre.",
+      "Un investissement rentable.",
+      "Un geste inutile.",
+      "Le désir de reconnaissance."
+     ],
+     "correta": 0,
+     "transcricao": "Celui qui plante un arbre n'en verra peut-être jamais l'ombre. Ce geste, qui semble dérisoire à l'échelle d'une vie, dit pourtant quelque chose d'essentiel : notre capacité à agir pour ceux qui viendront, sans attendre leur reconnaissance.",
+     "audio": "audio/simulados/tcf-canada-15/co37.mp3"
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Là où la peur se fait sentir, et où l'on choisit d'agir malgré elle ».",
+     "pergunta": "Comment l'intervenant définit-il le courage ?",
+     "alternativas": [
+      "Éviter le danger.",
+      "Agir malgré la peur.",
+      "Ne jamais avoir peur.",
+      "Obéir aux ordres."
+     ],
+     "correta": 1,
+     "transcricao": "Le courage n'est pas l'absence de peur ; celui qui ne craint rien n'a aucun mérite à avancer. Le courage commence précisément là où la peur se fait sentir, et où l'on choisit d'agir malgré elle.",
+     "audio": "audio/simulados/tcf-canada-15/co38.mp3"
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« C'est l'œil… qui transforme un simple pays en paysage ».",
+     "pergunta": "Que montre l'intervenante ?",
+     "alternativas": [
+      "Les champs ne sont pas des paysages.",
+      "Le paysage dépend du regard qu'on porte sur lui.",
+      "Seuls les peintres voient les paysages.",
+      "Le paysage est identique pour tous."
+     ],
+     "correta": 1,
+     "transcricao": "Un paysage n'existe pas sans un regard. Le même champ est un outil pour le paysan, un obstacle pour le voyageur, un tableau pour le peintre. C'est l'œil, et la culture qui l'a formé, qui transforme un simple pays en paysage.",
+     "audio": "audio/simulados/tcf-canada-15/co39.mp3"
+    }
+   ]
+  },
+  "ce": {
+   "nome": "Compréhension écrite",
+   "tempoSeg": 3600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Entrer dans la caserne.",
+      "Garer sa voiture ici.",
+      "Appeler les pompiers.",
+      "Marcher sur le trottoir."
+     ],
+     "correta": 1,
+     "explicacao": "« Ne pas stationner ».",
+     "documento": "Sortie de véhicules\nNe pas stationner\nJour et nuit",
+     "doc": {
+      "estilo": "placa",
+      "texto": "Sortie de véhicules\nNe pas stationner\nJour et nuit",
+      "titulo": "CASERNE DES POMPIERS"
+     },
+     "pergunta": "Qu'est-ce qui est interdit ?"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Elle mange des tomates.",
+      "Elle est à l'école.",
+      "Elle plante des tomates.",
+      "Elle fait ses devoirs."
+     ],
+     "correta": 2,
+     "explicacao": "« On plante des tomates ! ».",
+     "documento": "Je suis au jardin avec papi. On plante des tomates ! Viens nous aider après l'école.",
+     "doc": {
+      "estilo": "sms",
+      "texto": "Je suis au jardin avec papi. On plante des tomates ! Viens nous aider après l'école.",
+      "remetente": "Lina"
+     },
+     "pergunta": "Que fait Lina ?"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "porte",
+      "portons",
+      "portes",
+      "portent"
+     ],
+     "correta": 0,
+     "explicacao": "« Elle » → « porte ».",
+     "tipo": "lacuna",
+     "inicio": "Elle…",
+     "fim": "… une robe rouge.",
+     "pergunta": "Elle ___ une robe rouge."
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Dans la boîte aux lettres.",
+      "Chez la gardienne.",
+      "Au syndic.",
+      "Chez le peintre."
+     ],
+     "correta": 1,
+     "explicacao": "« Laisser les clés chez la gardienne ».",
+     "documento": "Madame, Monsieur,\nLe peintre vient mardi à 8 h.\nMerci de laisser les clés chez la gardienne.\nLe syndic",
+     "doc": {
+      "estilo": "bilhete",
+      "texto": "Madame, Monsieur,\nLe peintre vient mardi à 8 h.\nMerci de laisser les clés chez la gardienne.\nLe syndic"
+     },
+     "pergunta": "Où faut-il laisser les clés ?"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Suivre un cours payant.",
+      "Visiter une ferme.",
+      "Échanger des graines.",
+      "Acheter des arbres."
+     ],
+     "correta": 2,
+     "explicacao": "« Apportez vos graines, repartez avec d'autres ».",
+     "documento": "Dimanche 19 mars, 10 h – 13 h\nJardin partagé des Capucins\n\nApportez vos graines, repartez avec d'autres !\nConseils de jardiniers sur place",
+     "doc": {
+      "estilo": "cartaz",
+      "texto": "Dimanche 19 mars, 10 h – 13 h\nJardin partagé des Capucins\n\nApportez vos graines, repartez avec d'autres !\nConseils de jardiniers sur place",
+      "titulo": "Troc de graines"
+     },
+     "pergunta": "Que peut-on faire à cet événement ?"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "rentré",
+      "rentrer",
+      "rentrés",
+      "rentrent"
+     ],
+     "correta": 2,
+     "explicacao": "Particípio com « être », sujeito masculino plural: « rentrés ».",
+     "tipo": "lacuna",
+     "inicio": "Ils sont…",
+     "fim": "… à la maison à minuit.",
+     "pergunta": "Ils sont ___ à la maison à minuit."
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Un tablier et son repas.",
+      "Du papier.",
+      "Des peintures.",
+      "Des pinceaux."
+     ],
+     "correta": 0,
+     "explicacao": "« Apporter un tablier et votre déjeuner ».",
+     "documento": "Bonjour Paul,\n\nVotre inscription au stage d'aquarelle des 8 et 9 avril est confirmée. Le matériel est fourni. Pensez seulement à apporter un tablier et votre déjeuner.\n\nÀ bientôt !",
+     "doc": {
+      "estilo": "email",
+      "texto": "Bonjour Paul,\n\nVotre inscription au stage d'aquarelle des 8 et 9 avril est confirmée. Le matériel est fourni. Pensez seulement à apporter un tablier et votre déjeuner.\n\nÀ bientôt !",
+      "de": "Atelier Couleurs",
+      "assunto": "Inscription au stage d'aquarelle"
+     },
+     "pergunta": "Que doit apporter Paul ?"
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Deux heures par mois.",
+      "Deux jours par semaine.",
+      "Deux heures par semaine.",
+      "Tous les jours."
+     ],
+     "correta": 2,
+     "explicacao": "« 2 heures par semaine ».",
+     "documento": "Personne âgée cherche jardinier\npour entretenir un petit jardin,\n2 heures par semaine.\nQuartier Saint-Michel. Tél. : 05 56 33 71 28",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Personne âgée cherche jardinier\npour entretenir un petit jardin,\n2 heures par semaine.\nQuartier Saint-Michel. Tél. : 05 56 33 71 28",
+      "titulo": "CHERCHE JARDINIER"
+     },
+     "pergunta": "Combien de temps de travail est proposé ?"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "qu'à",
+      "de",
+      "comme",
+      "que"
+     ],
+     "correta": 3,
+     "explicacao": "Comparativo: « plus grand que ».",
+     "tipo": "lacuna",
+     "inicio": "Tu es plus grand…",
+     "fim": "… ton frère.",
+     "pergunta": "Tu es plus grand ___ ton frère."
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Le 15.",
+      "Le 17.",
+      "Le 18.",
+      "Le 112 uniquement."
+     ],
+     "correta": 2,
+     "explicacao": "« Appelez le 18 ».",
+     "documento": "Risque d'incendie élevé.\nInterdit de fumer et de faire du feu.\nEn cas d'incendie, appelez le 18.",
+     "doc": {
+      "estilo": "aviso",
+      "texto": "Risque d'incendie élevé.\nInterdit de fumer et de faire du feu.\nEn cas d'incendie, appelez le 18.",
+      "titulo": "Forêt domaniale — Attention"
+     },
+     "pergunta": "Quel numéro faut-il appeler en cas d'incendie ?"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "La Normandie.",
+      "Le bassin aux nymphéas.",
+      "Sa maison.",
+      "Les visiteurs."
+     ],
+     "correta": 1,
+     "explicacao": "« Le bassin aux nymphéas… plus de deux cents tableaux ».",
+     "documento": "À Giverny, en Normandie, la maison et les jardins de Claude Monet accueillent chaque année des milliers de visiteurs. On y retrouve le fameux bassin aux nymphéas que le peintre a représenté dans plus de deux cents tableaux.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Giverny, en Normandie, la maison et les jardins de Claude Monet accueillent chaque année des milliers de visiteurs. On y retrouve le fameux bassin aux nymphéas que le peintre a représenté dans plus de deux cents tableaux."
+     },
+     "pergunta": "Qu'est-ce que Monet a peint de nombreuses fois ?"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "depuis",
+      "pendant",
+      "après",
+      "avant"
+     ],
+     "correta": 3,
+     "explicacao": "« Avant que » + subjuntivo (ne expletivo).",
+     "tipo": "lacuna",
+     "inicio": "Il faut arroser les plantes…",
+     "fim": "… qu'elles ne sèchent.",
+     "pergunta": "Il faut arroser les plantes ___ qu'elles ne sèchent."
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Les familles des pompiers sont aussi concernées.",
+      "Les pompiers sont mal payés.",
+      "Le reportage était inexact.",
+      "Les alertes sont rares."
+     ],
+     "correta": 0,
+     "explicacao": "« On oublie souvent les familles ».",
+     "documento": "Courrier des lecteurs\nMerci pour votre reportage sur les pompiers volontaires. Mon mari l'est depuis quinze ans, et on oublie souvent les familles, qui vivent au rythme des alertes, même la nuit de Noël !\nSandrine, Épinal",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Courrier des lecteurs\nMerci pour votre reportage sur les pompiers volontaires. Mon mari l'est depuis quinze ans, et on oublie souvent les familles, qui vivent au rythme des alertes, même la nuit de Noël !\nSandrine, Épinal"
+     },
+     "pergunta": "Que souhaite rappeler Sandrine ?"
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Les pompiers.",
+      "L'occupant du logement.",
+      "La mairie.",
+      "Le propriétaire."
+     ],
+     "correta": 1,
+     "explicacao": "« C'est à l'occupant… de changer les piles ».",
+     "documento": "Tout logement doit être équipé d'au moins un détecteur de fumée. C'est au propriétaire de l'installer, mais c'est à l'occupant de vérifier régulièrement qu'il fonctionne et de changer les piles.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "Tout logement doit être équipé d'au moins un détecteur de fumée. C'est au propriétaire de l'installer, mais c'est à l'occupant de vérifier régulièrement qu'il fonctionne et de changer les piles.",
+      "titulo": "Détecteur de fumée",
+      "rubrica": "SÉCURITÉ"
+     },
+     "pergunta": "Qui doit changer les piles du détecteur ?"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Le soleil.",
+      "Un massage.",
+      "Le salaire.",
+      "Le repas avec l'équipe."
+     ],
+     "correta": 3,
+     "explicacao": "« Le repas partagé avec l'équipe m'a fait tout oublier ».",
+     "documento": "Journée de bénévolat dans une ferme bio près de Nantes. Nous avons planté trois cents poireaux sous la pluie ! Le soir, j'avais mal au dos, mais le repas partagé avec l'équipe m'a fait tout oublier.",
+     "doc": {
+      "estilo": "caderno",
+      "texto": "Journée de bénévolat dans une ferme bio près de Nantes. Nous avons planté trois cents poireaux sous la pluie ! Le soir, j'avais mal au dos, mais le repas partagé avec l'équipe m'a fait tout oublier."
+     },
+     "pergunta": "Qu'est-ce qui a fait oublier la fatigue à l'auteur ?"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Un logement.",
+      "La formation.",
+      "Un véhicule.",
+      "Un salaire fixe."
+     ],
+     "correta": 1,
+     "explicacao": "« Formation assurée ».",
+     "documento": "Le SDIS recrute des sapeurs-pompiers volontaires.\nConditions : avoir entre 16 et 55 ans, être en bonne santé.\nFormation assurée.\nRéunion d'information le 3 mai à 19 h.",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Le SDIS recrute des sapeurs-pompiers volontaires.\nConditions : avoir entre 16 et 55 ans, être en bonne santé.\nFormation assurée.\nRéunion d'information le 3 mai à 19 h.",
+      "titulo": "RECRUTEMENT"
+     },
+     "pergunta": "Qu'est-ce qui est assuré ?"
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "afin que",
+      "bien que",
+      "parce que",
+      "pour que"
+     ],
+     "correta": 2,
+     "explicacao": "Causa com indicativo: « parce que ».",
+     "tipo": "lacuna",
+     "inicio": "Je n'ai pas pu venir…",
+     "fim": "… j'étais malade.",
+     "pergunta": "Je n'ai pas pu venir ___ j'étais malade."
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Entrer dans les jardins.",
+      "Venir avec son chien.",
+      "Visiter gratuitement.",
+      "Prendre un plan."
+     ],
+     "correta": 1,
+     "explicacao": "« Chiens non admis ».",
+     "documento": "Samedi 23 septembre, dans 40 jardins privés de la ville.\nLes propriétaires ouvrent leurs portes gratuitement.\nPlan disponible à l'office de tourisme.\nChiens non admis.",
+     "doc": {
+      "estilo": "festival",
+      "texto": "Samedi 23 septembre, dans 40 jardins privés de la ville.\nLes propriétaires ouvrent leurs portes gratuitement.\nPlan disponible à l'office de tourisme.\nChiens non admis.",
+      "titulo": "Fête des jardins"
+     },
+     "pergunta": "Qu'est-ce qui n'est pas autorisé ?"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Exposer ses œuvres.",
+      "Suivre un cours de peinture.",
+      "Rencontrer les artistes.",
+      "Acheter des médicaments."
+     ],
+     "correta": 2,
+     "explicacao": "« Discuter avec les artistes ».",
+     "documento": "À Nancy, un ancien hôpital a été transformé en ateliers pour artistes. Une soixantaine de peintres, sculpteurs et photographes y travaillent. Une fois par mois, les ateliers sont ouverts au public, qui peut discuter avec les artistes.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Nancy, un ancien hôpital a été transformé en ateliers pour artistes. Une soixantaine de peintres, sculpteurs et photographes y travaillent. Une fois par mois, les ateliers sont ouverts au public, qui peut discuter avec les artistes."
+     },
+     "pergunta": "Que peut faire le public une fois par mois ?"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Elles retardent les départs à la retraite.",
+      "Elles achètent les fermes.",
+      "Elles aident des jeunes à devenir agriculteurs.",
+      "Elles aident les grandes exploitations."
+     ],
+     "correta": 2,
+     "explicacao": "« Aident des jeunes non issus du milieu agricole à s'installer ».",
+     "documento": "Les agriculteurs sont de moins en moins nombreux : un sur deux partira à la retraite dans les dix ans. Faute de repreneurs, de nombreuses fermes risquent d'être absorbées par de grandes exploitations. Des associations aident des jeunes non issus du milieu agricole à s'installer.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les agriculteurs sont de moins en moins nombreux : un sur deux partira à la retraite dans les dix ans. Faute de repreneurs, de nombreuses fermes risquent d'être absorbées par de grandes exploitations. Des associations aident des jeunes non issus du milieu agricole à s'installer."
+     },
+     "pergunta": "Que font certaines associations ?"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "connaît",
+      "connaîtra",
+      "connaisse",
+      "connaissait"
+     ],
+     "correta": 2,
+     "explicacao": "« Il est indispensable que » + subjuntivo.",
+     "tipo": "lacuna",
+     "inicio": "Il est indispensable que chacun…",
+     "fim": "… les consignes de sécurité.",
+     "pergunta": "Il est indispensable que chacun ___ les consignes de sécurité."
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "De peindre en extérieur.",
+      "De peindre plus lentement.",
+      "De vendre plus de tableaux.",
+      "De fabriquer des pigments."
+     ],
+     "correta": 0,
+     "explicacao": "« A permis aux impressionnistes de peindre en plein air ».",
+     "documento": "Avant l'invention des tubes de peinture au XIXe siècle, les peintres fabriquaient eux-mêmes leurs couleurs en broyant des pigments. Le tube, facile à transporter, a permis aux impressionnistes de peindre en plein air, directement devant leur sujet.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "Avant l'invention des tubes de peinture au XIXe siècle, les peintres fabriquaient eux-mêmes leurs couleurs en broyant des pigments. Le tube, facile à transporter, a permis aux impressionnistes de peindre en plein air, directement devant leur sujet."
+     },
+     "pergunta": "Qu'a permis l'invention du tube de peinture ?"
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Ils sont bruyants.",
+      "Ils sont interdits.",
+      "Ils coûtent plus cher.",
+      "Ils sont dangereux."
+     ],
+     "correta": 2,
+     "explicacao": "« Mais beaucoup plus coûteux ».",
+     "documento": "Faut-il interdire les feux d'artifice pour protéger les animaux et prévenir les incendies ? Les uns y voient une tradition populaire à préserver. Les autres proposent des spectacles de drones lumineux, silencieux et sans risque, mais beaucoup plus coûteux.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "Faut-il interdire les feux d'artifice pour protéger les animaux et prévenir les incendies ? Les uns y voient une tradition populaire à préserver. Les autres proposent des spectacles de drones lumineux, silencieux et sans risque, mais beaucoup plus coûteux."
+     },
+     "pergunta": "Quel inconvénient ont les spectacles de drones ?"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Elles préparent leurs défenses.",
+      "Elles changent de couleur.",
+      "Elles attirent les insectes.",
+      "Elles meurent."
+     ],
+     "correta": 0,
+     "explicacao": "« Produisent alors des défenses chimiques ».",
+     "documento": "Certaines plantes communiquent entre elles : attaquées par des insectes, elles libèrent des substances dans l'air qui alertent leurs voisines. Celles-ci produisent alors des défenses chimiques avant même d'être touchées.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "Certaines plantes communiquent entre elles : attaquées par des insectes, elles libèrent des substances dans l'air qui alertent leurs voisines. Celles-ci produisent alors des défenses chimiques avant même d'être touchées."
+     },
+     "pergunta": "Que font les plantes voisines alertées ?"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Elle présente les œuvres de Manet.",
+      "Elle expose des photos.",
+      "Elle rend à Berthe Morisot sa place dans l'histoire de l'art.",
+      "Elle critique l'impressionnisme."
+     ],
+     "correta": 2,
+     "explicacao": "« Elle retrouve enfin la place qui lui revient ».",
+     "documento": "L'exposition consacrée à la peintre Berthe Morisot rappelle qu'elle fut l'une des fondatrices de l'impressionnisme. Longtemps réduite au rôle d'amie de Manet, elle retrouve enfin la place qui lui revient, grâce à une centaine de toiles lumineuses.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "L'exposition consacrée à la peintre Berthe Morisot rappelle qu'elle fut l'une des fondatrices de l'impressionnisme. Longtemps réduite au rôle d'amie de Manet, elle retrouve enfin la place qui lui revient, grâce à une centaine de toiles lumineuses."
+     },
+     "pergunta": "Que fait cette exposition ?"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "que",
+      "lesquels",
+      "qui",
+      "dont"
+     ],
+     "correta": 3,
+     "explicacao": "Complemento do nome (« l'intervention des pompiers ») → « dont ».",
+     "tipo": "lacuna",
+     "inicio": "Les pompiers,…",
+     "fim": "… l'intervention a duré toute la nuit, sont épuisés.",
+     "pergunta": "Les pompiers, ___ l'intervention a duré toute la nuit, sont épuisés."
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les laisser dans la rue.",
+      "Les brûler le soir.",
+      "Les déposer en déchetterie ou les composter.",
+      "Les jeter à la poubelle ordinaire."
+     ],
+     "correta": 2,
+     "explicacao": "« Déposés en déchetterie ou compostés ».",
+     "documento": "Il est interdit de brûler dans son jardin les feuilles mortes, les branches ou l'herbe coupée. Ces déchets doivent être déposés en déchetterie ou compostés. Les contrevenants risquent une amende de 750 €.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "Il est interdit de brûler dans son jardin les feuilles mortes, les branches ou l'herbe coupée. Ces déchets doivent être déposés en déchetterie ou compostés. Les contrevenants risquent une amende de 750 €.",
+      "titulo": "Le brûlage des déchets verts",
+      "rubrica": "ENVIRONNEMENT"
+     },
+     "pergunta": "Que faut-il faire des déchets verts ?"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Parce qu'il fait trop froid.",
+      "Par manque de lumière et de soins.",
+      "Parce qu'elles sont malades à l'achat.",
+      "Parce qu'on les arrose trop peu en été seulement."
+     ],
+     "correta": 1,
+     "explicacao": "« Faute de lumière et de soins adaptés ».",
+     "documento": "Les ventes de plantes d'intérieur ont doublé en dix ans. Les psychologues y voient un besoin de nature chez des citadins qui vivent dans de petits logements. Mais beaucoup de ces plantes meurent en quelques mois, faute de lumière et de soins adaptés.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les ventes de plantes d'intérieur ont doublé en dix ans. Les psychologues y voient un besoin de nature chez des citadins qui vivent dans de petits logements. Mais beaucoup de ces plantes meurent en quelques mois, faute de lumière et de soins adaptés."
+     },
+     "pergunta": "Pourquoi beaucoup de plantes meurent-elles ?"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "En bateau.",
+      "En parachute.",
+      "En camion.",
+      "À cheval."
+     ],
+     "correta": 1,
+     "explicacao": "« Parfois parachutés dans des zones isolées ».",
+     "documento": "Au Canada, les pompiers forestiers sont parfois parachutés dans des zones isolées pour combattre les feux dès leur départ. Ils peuvent rester plusieurs jours en pleine forêt, avec leur équipement, avant d'être récupérés par hélicoptère.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "Au Canada, les pompiers forestiers sont parfois parachutés dans des zones isolées pour combattre les feux dès leur départ. Ils peuvent rester plusieurs jours en pleine forêt, avec leur équipement, avant d'être récupérés par hélicoptère."
+     },
+     "pergunta": "Comment ces pompiers arrivent-ils sur les lieux ?"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "L'art est un luxe inutile.",
+      "L'art est essentiel, surtout en temps de crise.",
+      "Les budgets culturels sont trop élevés.",
+      "Les crises détruisent l'art."
+     ],
+     "correta": 1,
+     "explicacao": "« Dans les périodes de crise, c'est vers les chansons… que les hommes se tournent ».",
+     "documento": "L'art est souvent présenté comme un luxe, qu'on peut supprimer quand les budgets se resserrent. C'est méconnaître son rôle : dans les périodes de crise, c'est vers les chansons, les récits et les images que les hommes se tournent pour donner un sens à ce qu'ils vivent.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "L'art est souvent présenté comme un luxe, qu'on peut supprimer quand les budgets se resserrent. C'est méconnaître son rôle : dans les périodes de crise, c'est vers les chansons, les récits et les images que les hommes se tournent pour donner un sens à ce qu'ils vivent."
+     },
+     "pergunta": "Que soutient l'auteur ?"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "serait",
+      "est",
+      "sera",
+      "soit"
+     ],
+     "correta": 3,
+     "explicacao": "« Pourvu que » + subjuntivo: « pourvu que le sol ne soit pas gelé ».",
+     "tipo": "lacuna",
+     "inicio": "Nous replanterons la haie cet hiver, pourvu que le sol ne…",
+     "fim": "… pas gelé.",
+     "pergunta": "Nous replanterons la haie cet hiver, pourvu que le sol ne ___ pas gelé."
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Augmenter le nombre de pompiers uniquement.",
+      "Attendre la pluie.",
+      "Interdire les forêts.",
+      "Repenser l'aménagement du territoire."
+     ],
+     "correta": 3,
+     "explicacao": "« Il faut repenser l'aménagement du territoire ».",
+     "documento": "Les mégafeux qui ravagent l'Australie, le Canada ou la Grèce ne sont plus des accidents isolés. Ils résultent de la combinaison de sécheresses plus longues, de températures record et d'une végétation accumulée. Les combattre ne suffit plus : il faut repenser l'aménagement du territoire.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les mégafeux qui ravagent l'Australie, le Canada ou la Grèce ne sont plus des accidents isolés. Ils résultent de la combinaison de sécheresses plus longues, de températures record et d'une végétation accumulée. Les combattre ne suffit plus : il faut repenser l'aménagement du territoire."
+     },
+     "pergunta": "Que faut-il faire, selon l'article ?"
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Il célèbre le tracteur.",
+      "Il est lucide et nuancé sur le progrès.",
+      "Il condamne le progrès.",
+      "Il est nostalgique."
+     ],
+     "correta": 1,
+     "explicacao": "« Plutôt que la nostalgie, l'auteur choisit la lucidité ».",
+     "documento": "Ce roman raconte l'histoire d'une famille de paysans du Limousin sur un siècle, de la charrue au tracteur connecté. Plutôt que la nostalgie, l'auteur choisit la lucidité : il montre ce que le progrès a apporté et ce qu'il a coûté, sans jamais trancher.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "Ce roman raconte l'histoire d'une famille de paysans du Limousin sur un siècle, de la charrue au tracteur connecté. Plutôt que la nostalgie, l'auteur choisit la lucidité : il montre ce que le progrès a apporté et ce qu'il a coûté, sans jamais trancher."
+     },
+     "pergunta": "Comment le critique caractérise-t-il le roman ?"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "pour",
+      "en",
+      "de",
+      "à"
+     ],
+     "correta": 3,
+     "explicacao": "Expressão « quitte à + infinitivo ».",
+     "tipo": "lacuna",
+     "inicio": "Il a accepté la mission, quitte…",
+     "fim": "… y passer tout l'été.",
+     "pergunta": "Il a accepté la mission, quitte ___ y passer tout l'été."
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Il lui attribue une valeur morale qu'elle n'a pas.",
+      "Il favorise les produits chimiques.",
+      "Il est trop scientifique.",
+      "Il oublie les bienfaits de la nature."
+     ],
+     "correta": 0,
+     "explicacao": "« Lui prêter une intention qu'elle n'a pas ».",
+     "documento": "On invoque sans cesse la « nature » pour justifier nos choix : aliments naturels, remèdes naturels. Mais la nature n'est ni bonne ni mauvaise : elle produit aussi les poisons et les virus. Faire de la nature une norme morale, c'est lui prêter une intention qu'elle n'a pas.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "On invoque sans cesse la « nature » pour justifier nos choix : aliments naturels, remèdes naturels. Mais la nature n'est ni bonne ni mauvaise : elle produit aussi les poisons et les virus. Faire de la nature une norme morale, c'est lui prêter une intention qu'elle n'a pas."
+     },
+     "pergunta": "Que reproche l'auteur au recours à la « nature » ?"
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "À la refuser.",
+      "À revenir au feu.",
+      "À l'adopter sans limite.",
+      "À en maîtriser l'usage."
+     ],
+     "correta": 3,
+     "explicacao": "« Moins à la refuser qu'à en maîtriser l'usage ».",
+     "documento": "Le feu fut la première technique de l'humanité, et peut-être la plus ambivalente : il réchauffe et il détruit, il rassemble autour du foyer et il chasse de la maison. Toute technique, depuis, porte en elle cette double nature ; la sagesse consiste moins à la refuser qu'à en maîtriser l'usage.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "Le feu fut la première technique de l'humanité, et peut-être la plus ambivalente : il réchauffe et il détruit, il rassemble autour du foyer et il chasse de la maison. Toute technique, depuis, porte en elle cette double nature ; la sagesse consiste moins à la refuser qu'à en maîtriser l'usage."
+     },
+     "pergunta": "Selon l'auteur, en quoi consiste la sagesse face à la technique ?"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "a-il",
+      "il a-t-il",
+      "il a",
+      "a-t-il"
+     ],
+     "correta": 3,
+     "explicacao": "Após « à peine » no início da oração, inversão do sujeito: « à peine a-t-il esquissé ».",
+     "tipo": "lacuna",
+     "inicio": "Il n'a pas protesté ; à peine…",
+     "fim": "… esquissé un sourire.",
+     "pergunta": "Il n'a pas protesté ; à peine ___ esquissé un sourire."
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Ils rendent les œuvres plus vivantes.",
+      "Ils protègent les œuvres tout en les coupant de leur sens premier.",
+      "Ils doivent fermer.",
+      "Ils détruisent les œuvres."
+     ],
+     "correta": 1,
+     "explicacao": "« À la fois un sanctuaire et un tombeau ».",
+     "documento": "Le musée arrache les œuvres à leur contexte : le retable quitte l'église, le masque quitte le rituel. Il les protège, mais il les transforme aussi en objets de contemplation, séparés de la vie qui leur donnait sens. Tout musée est à la fois un sanctuaire et un tombeau.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Le musée arrache les œuvres à leur contexte : le retable quitte l'église, le masque quitte le rituel. Il les protège, mais il les transforme aussi en objets de contemplation, séparés de la vie qui leur donnait sens. Tout musée est à la fois un sanctuaire et un tombeau."
+     },
+     "pergunta": "Que suggère l'auteur à propos des musées ?"
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Les saisons peuvent être accélérées.",
+      "Le jardinier est impatient.",
+      "Il faut remplir son temps.",
+      "La patience du jardinier est une forme de liberté."
+     ],
+     "correta": 3,
+     "explicacao": "« Il y a dans cette patience une forme de liberté ».",
+     "documento": "Nous croyons dominer le temps en le remplissant. Le jardinier, lui, sait qu'on ne presse pas une saison : on sème, on attend, on accepte. Il y a dans cette patience une forme de liberté que notre impatience ignore.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Nous croyons dominer le temps en le remplissant. Le jardinier, lui, sait qu'on ne presse pas une saison : on sème, on attend, on accepte. Il y a dans cette patience une forme de liberté que notre impatience ignore."
+     },
+     "pergunta": "Que suggère l'auteur ?"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 3600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1",
+     "min": 60,
+     "max": 120,
+     "consigne": "Vous partez en vacances pendant deux semaines. Vous écrivez un message à votre voisin(e) pour lui demander d'arroser vos plantes, en expliquant ce qu'il faut faire et où trouver les clés."
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2",
+     "min": 120,
+     "max": 150,
+     "consigne": "Vous avez été témoin d'une situation d'urgence (accident, incendie, malaise…) et vous avez aidé une personne. Vous racontez cet événement dans un article pour le journal de votre ville."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3",
+     "min": 120,
+     "max": 180,
+     "consigne": "« L'art doit-il être financé par l'argent public ? » Rédigez un texte en deux parties. 1) Présentez les deux points de vue des documents ci-dessous (40 à 60 mots). 2) Donnez votre opinion en l'argumentant (80 à 120 mots).",
+     "documentos": [
+      {
+       "titulo": "Document 1 — Un bien commun",
+       "texto": "Sans aide publique, seuls les artistes qui plaisent au grand public pourraient vivre. Les subventions permettent la création audacieuse, les théâtres dans les petites villes et l'accès de tous à la culture."
+      },
+      {
+       "titulo": "Document 2 — D'autres priorités",
+       "texto": "Quand les hôpitaux et les écoles manquent de moyens, est-il raisonnable de financer des œuvres que peu de gens voient ? Les mécènes privés et le public peuvent soutenir les artistes qu'ils aiment."
+      }
+     ]
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 900,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur : vous parlez de vous, de votre parcours, de vos activités et de vos projets.",
+     "perguntasExaminador": [
+      "Bonjour. Pouvez-vous vous présenter, s'il vous plaît ?",
+      "Avez-vous un jardin ou des plantes chez vous ?",
+      "Quel artiste ou quelle œuvre aimez-vous ?",
+      "Quels sont vos projets pour l'année prochaine ?"
+     ]
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Vous voulez louer une parcelle dans un jardin partagé de votre ville. Vous téléphonez à l'association qui gère le jardin pour obtenir des informations (taille, prix, règles, outils, eau, disponibilité, etc.).",
+     "perguntasExaminador": [
+      "Association Les Jardins du Canal, bonjour ! Je vous écoute."
+     ],
+     "fichaExaminador": "Vous êtes le/la responsable de l'association. Parcelles de 20 m² : 40 € par an, adhésion à l'association comprise. Liste d'attente d'environ six mois ; une parcelle se libère parfois plus tôt. Règles : culture sans pesticides, entretien régulier, participation à deux journées collectives par an. Outils partagés dans l'abri ; récupérateurs d'eau de pluie et un robinet. Ouvert de 8 h à 21 h. Fête du jardin en juin. Laissez le candidat mener l'échange ; relancez-le s'il se tait (« Autre chose ? »)."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Les élèves devraient pouvoir choisir la plupart de leurs matières dès le collège. » Qu'en pensez-vous ? Vous donnez votre opinion et vous l'argumentez à l'aide d'exemples.",
+     "perguntasExaminador": [
+      "Les élèves devraient pouvoir choisir la plupart de leurs matières dès le collège. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Un enfant de onze ans sait-il ce qui est bon pour lui ? », « Quelles matières devraient rester obligatoires ? », « Et vous, qu'auriez-vous choisi ? »."
+    }
+   ]
+  }
+ }
+}

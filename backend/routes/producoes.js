@@ -11,6 +11,8 @@ const { usuarioTemAcesso } = require("../middleware/acessoCurso");
 const { uploadOriginal, uploadCorrigido, moverParaPastaDefinitiva, comTratamentoDeErro } = require("../middleware/upload");
 const { transmitir } = require("../utils/sse");
 const { validarIds, textoSeguro, ehObjectId } = require("../middleware/seguranca");
+const { grade, avaliar } = require("../utils/gradesProva");
+const { corrigirProducaoComIA, iaConfigurada } = require("../utils/correcaoProducaoIA");
 
 const MAX_TEXTO_PRODUCAO = 50000;
 
@@ -35,7 +37,8 @@ function contarPalavras(texto) {
 // Ambiente de Produção — não faz sentido negar o envio de um dever já atribuído por
 // causa da entitlement do módulo avulso. O fluxo de auto-atendimento (POST / e
 // POST /:id/reenviar aqui embaixo) sempre passa pela checagem normal.
-async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAluno, file, origemId, duracaoSegundos, pularChecagemAcesso }) {
+async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAluno, file, origemId, duracaoSegundos, pularChecagemAcesso, modoCorrecao }) {
+  const porIA = modoCorrecao === "ia";
   if (textoDigitado !== undefined && typeof textoDigitado !== "string") throw { status: 400, msg: "Texto inválido." };
   if (textoDigitado && textoDigitado.length > MAX_TEXTO_PRODUCAO) throw { status: 400, msg: "Seu texto é longo demais." };
   observacoesAluno = textoSeguro(observacoesAluno, 2000);
@@ -58,6 +61,11 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
     if (!file.mimetype.startsWith("audio/")) throw { status: 400, msg: "Envie um arquivo de áudio (MP3, WAV ou WebM)." };
   } else if (!file && !textoDigitado?.trim()) {
     throw { status: 400, msg: "Envie um arquivo ou digite seu texto." };
+  }
+  // A IA lê o texto digitado; áudio e arquivos anexados vão para o professor.
+  if (porIA) {
+    if (modalidade !== "textual" || !textoDigitado?.trim()) throw { status: 400, msg: "A correção por IA vale para redações digitadas na plataforma. Para arquivo ou áudio, escolha a correção por professor." };
+    if (!iaConfigurada()) throw { status: 503, msg: "A correção por IA está indisponível no momento. Escolha a correção por professor." };
   }
 
   const user = await User.findById(userId);
@@ -89,7 +97,9 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
     alunoId: userId,
     temaId,
     origemId: origemId || null,
-    status: "em_fila",
+    status: porIA ? "em_correcao" : "em_fila",
+    modoCorrecao: porIA ? "ia" : "professor",
+    ia: porIA ? { status: "pendente" } : undefined,
     modalidade,
     arquivoOriginal,
     textoDigitado: modalidade === "textual" ? (textoDigitado?.trim() || undefined) : undefined,
@@ -97,29 +107,55 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
     duracaoSegundos: modalidade === "oral" ? (Number(duracaoSegundos) || undefined) : undefined,
     observacoesAluno,
     creditosUtilizados: tema.creditosNecessarios,
-    prazoEstimado: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+    prazoEstimado: new Date(Date.now() + (porIA ? 10 * 60 * 1000 : 5 * 24 * 60 * 60 * 1000)),
     dataEnvio: new Date(),
-    historicoStatus: [{ status: "em_fila", data: new Date() }]
+    historicoStatus: [{ status: porIA ? "em_correcao" : "em_fila", data: new Date() }]
   });
 
   user.creditosCorrecao -= tema.creditosNecessarios;
   await user.save();
 
   transmitir("producao-atualizada", { alunoId: String(userId), producaoId: String(producao._id) });
+  if (porIA) setImmediate(() => processarCorrecaoIA(producao._id).catch(err => console.error("Correção IA:", err.message)));
   return producao;
+}
+
+// Corrige em segundo plano. Se a IA falhar, a produção vai para a fila do professor
+// (o crédito já pago continua valendo) e o aluno é avisado no histórico.
+async function processarCorrecaoIA(producaoId) {
+  const producao = await Producao.findById(producaoId);
+  if (!producao || producao.modoCorrecao !== "ia" || producao.status === "corrigido") return;
+  const tema = await Tema.findById(producao.temaId);
+  try {
+    const avaliacao = await corrigirProducaoComIA(tema, producao.textoDigitado || "");
+    producao.avaliacao = avaliacao;
+    producao.status = "corrigido";
+    producao.dataCorrecao = new Date();
+    producao.ia = { status: "concluida", modelo: avaliacao.modelo, em: new Date() };
+    producao.historicoStatus.push({ status: "corrigido", data: new Date() });
+  } catch (err) {
+    producao.modoCorrecao = "professor";
+    producao.status = "em_fila";
+    producao.prazoEstimado = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000);
+    producao.ia = { status: "erro", erro: String(err.message || err).slice(0, 300), em: new Date() };
+    producao.historicoStatus.push({ status: "em_fila", data: new Date() });
+    producao.mensagens.push({ autor: "professor", texto: "A correção automática não pôde ser concluída agora. Sua redação foi encaminhada a um professor, sem custo adicional.", data: new Date() });
+  }
+  await producao.save();
+  transmitir("producao-atualizada", { alunoId: String(producao.alunoId), producaoId: String(producao._id) });
 }
 
 // ===================== ALUNO: ENVIAR PRODUÇÃO =====================
 router.post("/", exigirAuth, comTratamentoDeErro(uploadOriginal.single("arquivo")), async (req, res) => {
   const limparTemp = () => { if (req.file) fs.unlink(req.file.path, () => {}); };
   try {
-    const { temaId, textoDigitado, observacoesAluno, duracaoSegundos } = req.body;
+    const { temaId, textoDigitado, observacoesAluno, duracaoSegundos, modoCorrecao } = req.body;
     if (!temaId || typeof temaId !== "string" || !/^[a-f0-9]{24}$/i.test(temaId)) {
       limparTemp(); return res.status(400).json({ msg: "Selecione um tema." });
     }
 
     const producao = await montarNovaProducao({
-      userId: req.userId, temaId, textoDigitado, observacoesAluno, file: req.file, duracaoSegundos
+      userId: req.userId, temaId, textoDigitado, observacoesAluno, file: req.file, duracaoSegundos, modoCorrecao
     });
     res.json({ msg: "Produção enviada com sucesso! Protocolo: " + producao.protocolo, producao });
   } catch (err) {
@@ -206,6 +242,17 @@ router.get("/professor/stats", exigirAuth, exigirProfessor, async (req, res) => 
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
   }
+});
+
+// ===================== CONFIGURAÇÃO E GRADE DA PROVA =====================
+router.get("/config", exigirAuth, (req, res) => {
+  res.json({ iaDisponivel: iaConfigurada() });
+});
+
+// Grade oficial usada na correção (critérios e pontuação máxima) — para o aluno ver
+// como será avaliado e para o professor lançar a nota.
+router.get("/grade/:curso", exigirAuth, (req, res) => {
+  res.json(grade(String(req.params.curso), req.query.modalidade === "oral" ? "oral" : "textual"));
 });
 
 // ===================== DETALHE DE UMA PRODUÇÃO =====================
@@ -370,6 +417,26 @@ router.post("/:id/corrigir", exigirAuth, exigirProfessor, validarIds("id"), comT
         enviadoEm: new Date()
       };
     }
+    // Critérios com id = grade da prova (gradesProva): o total, o nível e o NCLC são
+    // recalculados aqui. Avaliações no formato antigo (só nome/nota) passam como vieram.
+    if (avaliacao.criterios.every(c => c && c.id)) {
+      const tema = await Tema.findById(producao.temaId).select("courseType nivel");
+      const notas = Object.fromEntries(avaliacao.criterios.map(c => [c.id, c.nota]));
+      const comentarios = Object.fromEntries(avaliacao.criterios.map(c => [c.id, c.comentario]));
+      const av = avaliar(tema?.courseType, producao.modalidade, notas, { nivelAlvo: tema?.nivel, comentarios, notaFinal: avaliacao.notaFinal });
+      const professor = await User.findById(req.userId).select("nome");
+      avaliacao = {
+        exame: av.exame, criterios: av.criterios, notaTotal: av.notaTotal, notaMaxima: av.notaMaxima,
+        nivelEstimado: av.nivel, nclc: av.nclc, aprovado: av.aprovado, pontuacaoOficial: av.pontuacaoOficial,
+        comentarioGeral: textoSeguro(avaliacao.comentarioGeral, 5000),
+        pontosFortes: (Array.isArray(avaliacao.pontosFortes) ? avaliacao.pontosFortes : []).slice(0, 5).map(x => textoSeguro(x, 500)).filter(Boolean),
+        aMelhorar: (Array.isArray(avaliacao.aMelhorar) ? avaliacao.aMelhorar : []).slice(0, 5).map(x => textoSeguro(x, 500)).filter(Boolean),
+        correcoes: (Array.isArray(avaliacao.correcoes) ? avaliacao.correcoes : []).slice(0, 20).map(c => ({
+          trecho: textoSeguro(c?.trecho, 400), correcao: textoSeguro(c?.correcao, 400), explicacao: textoSeguro(c?.explicacao, 600)
+        })).filter(c => c.trecho),
+        corretor: "professor", corretorNome: professor?.nome || "Professor"
+      };
+    }
     producao.avaliacao = avaliacao;
     producao.status = "corrigido";
     producao.dataCorrecao = new Date();
@@ -389,3 +456,4 @@ router.post("/:id/corrigir", exigirAuth, exigirProfessor, validarIds("id"), comT
 // lógica de validação/criação aqui.
 module.exports = router;
 module.exports.montarNovaProducao = montarNovaProducao;
+module.exports.processarCorrecaoIA = processarCorrecaoIA;

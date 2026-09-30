@@ -1,0 +1,145 @@
+{
+ "slug": "ex-a2-10",
+ "titulo": "Exercício oral nº 10 — A2",
+ "curso": "A2",
+ "categoria": "exercicio",
+ "nivel": "A2",
+ "tema": "L'année prochaine",
+ "descricao": "Projetos para o próximo ano: viagem, estudos e mudanças.",
+ "imagem": {
+  "src": "img/temas/a2-lettre-futur-2.jpg",
+  "credito": {
+   "autor": "Արման Բարսեղյան",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:View_from_the_airplane_window.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-a2-10/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Futur proche.",
+     "alternativas": [
+      "J'ai étudié l'année dernière.",
+      "L'année est longue.",
+      "Je vais partir étudier au Canada.",
+      "Je suis au Canada."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Qu'est-ce que tu vas faire l'année prochaine ?\nA. J'ai étudié l'année dernière.\nB. L'année est longue.\nC. Je vais partir étudier au Canada.\nD. Je suis au Canada.",
+     "audio": "audio/exercicios-orais/ex-a2-10/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta com « pas encore ».",
+     "alternativas": [
+      "Non, je n'aime pas le train.",
+      "Pas encore, je cherche un vol moins cher.",
+      "Oui, l'avion est grand.",
+      "Il part à midi."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu as déjà réservé ton billet d'avion ?\nA. Non, je n'aime pas le train.\nB. Pas encore, je cherche un vol moins cher.\nC. Oui, l'avion est grand.\nD. Il part à midi.",
+     "audio": "audio/exercicios-orais/ex-a2-10/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Dans quinze minutes ».",
+     "alternativas": [
+      "Dans cinq minutes.",
+      "Dans douze minutes.",
+      "Dans une heure.",
+      "Dans quinze minutes."
+     ],
+     "correta": 3,
+     "pergunta": "Quand commence l'embarquement ?",
+     "transcricao": "Les passagers du vol pour Montréal sont priés de se présenter à la porte douze. L'embarquement commence dans quinze minutes.",
+     "audio": "audio/exercicios-orais/ex-a2-10/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Apprendre à jouer de la guitare ».",
+     "alternativas": [
+      "Le piano.",
+      "La guitare.",
+      "Le violon.",
+      "La batterie."
+     ],
+     "correta": 1,
+     "pergunta": "Quel instrument veut-il apprendre ?",
+     "transcricao": "L'année prochaine, j'aimerais apprendre à jouer de la guitare et arrêter de fumer. Et je voudrais aussi voir plus souvent mes parents.",
+     "audio": "audio/exercicios-orais/ex-a2-10/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Choisir des objectifs précis et modestes ».",
+     "alternativas": [
+      "Choisir des objectifs précis et modestes.",
+      "En parler à ses amis.",
+      "Commencer en mars.",
+      "Prendre beaucoup de résolutions."
+     ],
+     "correta": 0,
+     "pergunta": "Quel est le secret pour tenir ses résolutions ?",
+     "transcricao": "Selon un sondage, huit Français sur dix prennent de bonnes résolutions en janvier. Mais seulement un sur quatre les tient plus de trois mois. Le secret ? Choisir des objectifs précis et modestes.",
+     "audio": "audio/exercicios-orais/ex-a2-10/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 330,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 150,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur sur vous, vos habitudes et vos expériences.",
+     "perguntasExaminador": [
+      "Bonjour ! Quels sont vos projets pour l'année prochaine ?",
+      "Vous aimeriez voyager ? Où ?",
+      "Pourquoi apprenez-vous le français ?",
+      "Qu'est-ce que vous voulez changer dans votre vie ?"
+     ]
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,742 @@
+[
+ {
+  "slug": "dalf-c1-synthese-lecture-numerique",
+  "titulo": "Lire à l'ère des écrans",
+  "nivel": "C1",
+  "tipoProducao": "DALF C1 — synthèse de documents",
+  "dificuldade": "dificil",
+  "tempoSugerido": 60,
+  "limitePalavrasMin": 200,
+  "limitePalavrasMax": 240,
+  "descricao": "Síntese do DALF C1: reúna as ideias dos três documentos sobre a leitura na era digital num texto neutro e organizado.",
+  "objetivos": [
+   "Identificar as ideias principais de cada documento",
+   "Reorganizar as informações num plano próprio",
+   "Reformular sem copiar e sem opinar"
+  ],
+  "criteriosResumo": [
+   "Síntese fiel e neutra",
+   "Plano temático (não documento por documento)",
+   "Reformulação e título"
+  ],
+  "competenciasAvaliadas": [
+   "Síntese de documentos",
+   "Reformulação",
+   "Conectores de síntese"
+  ],
+  "instrucoes": "Rédigez une synthèse des documents du dossier, d'environ 220 mots. Vous dégagerez les idées principales, sans ajouter d'informations ni donner votre opinion, en donnant un titre à votre texte. Thème du dossier : la lecture à l'ère du numérique.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La bibliothèque de mon père »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de ensaio literário)",
+    "conteudo": "Mon père lisait lentement, un crayon à la main, cornant les pages et couvrant les marges de remarques. Chaque livre de sa bibliothèque portait la trace d'une conversation silencieuse. Aujourd'hui, je lis beaucoup plus que lui : des articles, des messages, des fils interminables. Pourtant, je me souviens de moins de choses. Il m'arrive de refermer mon téléphone après une heure de lecture sans pouvoir dire ce que j'ai lu. Ce n'est pas la quantité qui a changé, c'est la profondeur : lire, pour lui, c'était habiter un texte ; pour moi, c'est souvent le traverser."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les jeunes lisent-ils moins ? Les chiffres nuancent le constat",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Les enquêtes sur les pratiques culturelles montrent un recul régulier de la lecture de livres chez les adolescents, surtout après l'entrée au lycée. Mais elles révèlent aussi l'essor de nouvelles formes de lecture : mangas, romans publiés en ligne, bandes dessinées numériques. Les libraires observent par ailleurs l'effet des réseaux sociaux, où de jeunes lecteurs recommandent des romans à des milliers d'abonnés, faisant parfois d'un titre oublié un succès de librairie. Pour les sociologues, on assiste moins à une disparition de la lecture qu'à une transformation de ses supports et de ses usages."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Papier ou écran : ce que montrent les études de compréhension",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo científico de divulgação)",
+    "conteudo": "Plusieurs méta-analyses comparant la lecture sur papier et sur écran indiquent un léger avantage du papier pour la compréhension des textes longs et informatifs, en particulier lorsque le temps de lecture est limité. Les chercheurs attribuent cet écart à une lecture plus rapide et plus superficielle sur écran, favorisée par l'habitude du défilement et des interruptions. L'écart disparaît pour les textes narratifs courts. Les auteurs recommandent d'entraîner explicitement les élèves à la lecture approfondie sur écran plutôt que d'opposer les deux supports."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c1-synthese-lecture-numerique-1.jpg",
+    "legenda": "Uma biblioteca tradicional",
+    "credito": {
+     "autor": "National Photo Company Collection",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:U.S._Army,_Y.M.C.A._Reading_Room_LCCN2016826250.jpg"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c1-synthese-lecture-numerique-2.jpg",
+    "legenda": "Leitura num tablet",
+    "credito": {
+     "autor": "picjumbo.com",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Person_reading_an_ebook.jpg"
+    }
+   }
+  ],
+  "ordem": 1,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "dalf-c1-synthese-teletravail-ville",
+  "titulo": "Télétravail et nouvelle géographie des villes",
+  "nivel": "C1",
+  "tipoProducao": "DALF C1 — synthèse de documents",
+  "dificuldade": "dificil",
+  "tempoSugerido": 60,
+  "limitePalavrasMin": 200,
+  "limitePalavrasMax": 240,
+  "descricao": "Síntese do DALF C1 sobre como o teletrabalho está mudando as cidades, o campo e o mercado imobiliário.",
+  "objetivos": [
+   "Confrontar pontos de vista",
+   "Construir um plano temático",
+   "Manter a neutralidade"
+  ],
+  "criteriosResumo": [
+   "Fidelidade aos documentos",
+   "Organização temática",
+   "Reformulação precisa"
+  ],
+  "competenciasAvaliadas": [
+   "Síntese",
+   "Vocabulário urbano e do trabalho",
+   "Nominalização"
+  ],
+  "instrucoes": "Rédigez une synthèse des documents du dossier, d'environ 220 mots. Vous dégagerez les idées principales, sans ajouter d'informations ni donner votre opinion, en donnant un titre à votre texte. Thème du dossier : le télétravail et la transformation des territoires.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La maison du bout du chemin »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance contemporâneo)",
+    "conteudo": "Nous avons quitté Paris un mois de mars, avec deux ordinateurs, un chat et la promesse d'une meilleure vie. La maison était au bout d'un chemin, face aux collines. Les premiers mois furent une révélation : le silence, le potager, les enfants qui rentraient de l'école à vélo. Puis vint l'hiver. La connexion tombait à chaque orage, la gare la plus proche était à quarante minutes, et les réunions à l'écran avaient un goût d'exil. Nous n'avons pas regretté notre choix ; nous avons simplement compris qu'on n'échappe pas à la ville : on l'emporte avec soi."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les villes moyennes attirent les télétravailleurs",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Depuis la généralisation du travail à distance, de nombreuses villes moyennes situées à moins de deux heures de train des métropoles voient arriver de nouveaux habitants. Les prix de l'immobilier y ont fortement augmenté, au point que certains habitants de longue date ne parviennent plus à se loger. Les élus se félicitent du dynamisme retrouvé des centres-villes, mais s'inquiètent de la pression sur les écoles, les services de santé et les transports, pensés pour une population plus réduite."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Le télétravail réduit-il vraiment les déplacements ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo científico de divulgação)",
+    "conteudo": "Les études de mobilité montrent que les télétravailleurs se déplacent moins souvent pour aller au travail, mais qu'ils vivent en moyenne plus loin de leur employeur. Les jours de présence au bureau, les trajets sont donc plus longs, ce qui compense une partie des bénéfices attendus en matière d'émissions. Par ailleurs, les déplacements de loisirs et d'achats augmentent légèrement les jours travaillés à domicile. Les chercheurs concluent que l'effet environnemental du télétravail dépend surtout de l'organisation du territoire et de l'offre de transports publics."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c1-synthese-teletravail-ville-1.jpg",
+    "legenda": "Trabalhando de casa",
+    "credito": {
+     "autor": "Wagner Tamanaha from Sao Paulo, Brazil",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Home_office_(suporte_para_laptop_em_papel%C3%A3o)_(4875984286).jpg"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c1-synthese-teletravail-ville-2.jpg",
+    "legenda": "Uma cidade média francesa",
+    "credito": {
+     "autor": "Elliott Brown from Birmingham, United Kingdom",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Town_Hall,_Market_Place,_Wells_(3662857247).jpg"
+    }
+   }
+  ],
+  "ordem": 2,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "dalf-c1-synthese-alimentation-vegetale",
+  "titulo": "Vers une alimentation plus végétale ?",
+  "nivel": "C1",
+  "tipoProducao": "DALF C1 — synthèse de documents",
+  "dificuldade": "dificil",
+  "tempoSugerido": 60,
+  "limitePalavrasMin": 200,
+  "limitePalavrasMax": 240,
+  "descricao": "Síntese do DALF C1 sobre a redução do consumo de carne: saúde, ambiente e tradições culinárias.",
+  "objetivos": [
+   "Extrair e hierarquizar informações",
+   "Reformular dados científicos",
+   "Construir um texto coeso e neutro"
+  ],
+  "criteriosResumo": [
+   "Seleção das ideias",
+   "Plano coerente",
+   "Neutralidade e título"
+  ],
+  "competenciasAvaliadas": [
+   "Síntese",
+   "Vocabulário da alimentação e da saúde",
+   "Conectores de oposição"
+  ],
+  "instrucoes": "Rédigez une synthèse des documents du dossier, d'environ 220 mots. Vous dégagerez les idées principales, sans ajouter d'informations ni donner votre opinion, en donnant un titre à votre texte. Thème du dossier : la place de la viande dans l'alimentation.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le rôti du dimanche »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de crônica literária)",
+    "conteudo": "Dans ma famille, le dimanche avait une odeur : celle du rôti qui dorait lentement au four pendant qu'on mettait la table. La viande n'était pas un simple aliment, c'était une fête, un signe que la semaine avait été bonne. Mes grands-parents, qui en avaient manqué, la regardaient avec respect. Quand ma fille m'a annoncé qu'elle ne mangerait plus de viande, j'ai d'abord pensé qu'elle refusait tout cela. Puis elle a cuisiné pour nous un plat de lentilles aux épices, et j'ai compris qu'elle ne rejetait pas la fête ; elle en inventait une autre."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "La consommation de viande recule lentement",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "En France, la consommation de viande par habitant diminue lentement depuis une vingtaine d'années, tandis que les ventes de produits végétariens progressent. Les consommateurs disent vouloir manger « moins mais mieux », en privilégiant la qualité et l'origine locale. Les éleveurs, eux, dénoncent des discours qui opposent l'agriculture et l'environnement, et rappellent le rôle des prairies dans le maintien des paysages et de la biodiversité. Les cantines scolaires, désormais tenues de proposer un menu végétarien hebdomadaire, sont au cœur du débat."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Régimes alimentaires et empreinte environnementale",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo científico de divulgação)",
+    "conteudo": "Selon de nombreuses analyses du cycle de vie, la production de viande de bœuf émet en moyenne beaucoup plus de gaz à effet de serre par kilogramme que celle des légumineuses ou des céréales. Les nutritionnistes rappellent cependant que la viande apporte des protéines de qualité, du fer et de la vitamine B12, et qu'un régime végétal exige une certaine attention pour éviter les carences. La plupart des recommandations de santé publique convergent vers une réduction modérée de la viande rouge plutôt que vers sa suppression."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c1-synthese-alimentation-vegetale-1.jpg",
+    "legenda": "Legumes numa feira",
+    "credito": {
+     "autor": "Dosseman",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Pieter_Aertsen_Pieter_Aertsen_The_vegetable_seller_1567_9885.jpg"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c1-synthese-alimentation-vegetale-2.jpg",
+    "legenda": "Gado pastando",
+    "credito": {
+     "autor": "N Chadwick",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Cattle_grazing,_Port_Meadow_-_geograph.org.uk_-_5961743.jpg"
+    }
+   }
+  ],
+  "ordem": 3,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "dalf-c1-essai-animaux",
+  "titulo": "Quelle place pour les animaux dans nos sociétés ?",
+  "nivel": "C1",
+  "tipoProducao": "DALF C1 — essai argumenté",
+  "dificuldade": "dificil",
+  "tempoSugerido": 90,
+  "limitePalavrasMin": 250,
+  "limitePalavrasMax": 320,
+  "descricao": "Ensaio argumentado do DALF C1: a partir do dossiê, defenda sua posição sobre o lugar dos animais (zoológicos, criação, estimação).",
+  "objetivos": [
+   "Construir uma problemática",
+   "Argumentar com exemplos e nuances",
+   "Concluir com uma abertura"
+  ],
+  "criteriosResumo": [
+   "Introdução, desenvolvimento e conclusão",
+   "Argumentação sólida e matizada",
+   "Estilo e precisão"
+  ],
+  "competenciasAvaliadas": [
+   "Ensaio argumentativo C1",
+   "Concessão e refutação",
+   "Vocabulário ético"
+  ],
+  "instrucoes": "Un magazine consacre un numéro spécial à la relation entre les humains et les animaux. Vous rédigez un essai argumenté (250 mots minimum) dans lequel vous répondez à la question : « Faut-il accorder davantage de droits aux animaux ? » Appuyez-vous sur des exemples précis.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le regard du vieux chien »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Il y avait dans le regard du vieux chien quelque chose qui ressemblait à une question. Depuis quinze ans, il nous avait suivis de maison en maison, avait accueilli chaque enfant comme un nouveau membre de la meute. Maintenant qu'il ne pouvait plus monter l'escalier, il nous attendait en bas, le museau posé sur la première marche. Le vétérinaire parlait de « fin de vie » avec les mots qu'on emploie pour les humains. Personne, dans la famille, ne trouva cela étrange."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Le statut juridique de l'animal évolue",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Plusieurs pays européens ont modifié leur droit pour reconnaître que les animaux sont des êtres vivants doués de sensibilité, et non de simples biens. Des lois récentes interdisent progressivement certaines pratiques, comme la présentation d'animaux sauvages dans les cirques itinérants ou la vente de chiens et de chats en animalerie. Les associations de protection animale saluent ces avancées mais jugent insuffisantes les mesures concernant l'élevage intensif, qui concerne l'immense majorité des animaux."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Ce que la science sait de la sensibilité animale",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo científico de divulgação)",
+    "conteudo": "Les travaux en éthologie et en neurosciences ont profondément modifié notre connaissance des animaux. De nombreuses espèces, des mammifères aux oiseaux et à certains invertébrés comme les pieuvres, présentent des capacités de souffrance, d'apprentissage et parfois de résolution de problèmes complexes. En 2012, un groupe de scientifiques a signé une déclaration affirmant que les humains ne sont pas les seuls êtres à posséder les substrats neurologiques de la conscience. Ces découvertes nourrissent les débats éthiques sans les trancher."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c1-essai-animaux-1.jpg",
+    "legenda": "Um velho cão de família",
+    "credito": {
+     "autor": "Louis van Engelen",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Louis_Van_Engelen_-_Portrait_of_a_dog.jpg"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c1-essai-animaux-2.jpg",
+    "legenda": "Galinhas criadas ao ar livre",
+    "credito": {
+     "autor": "Bill Boaden",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Farm_with_free_range_hens_-_geograph.org.uk_-_1729447.jpg"
+    }
+   }
+  ],
+  "ordem": 4,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "dalf-c1-essai-musees",
+  "titulo": "À quoi servent les musées aujourd'hui ?",
+  "nivel": "C1",
+  "tipoProducao": "DALF C1 — essai argumenté",
+  "dificuldade": "dificil",
+  "tempoSugerido": 90,
+  "limitePalavrasMin": 250,
+  "limitePalavrasMax": 320,
+  "descricao": "Ensaio do DALF C1 sobre o papel dos museus: conservar, educar, atrair turistas ou devolver obras aos países de origem?",
+  "objetivos": [
+   "Problematizar um tema cultural",
+   "Articular argumentos variados",
+   "Usar exemplos precisos"
+  ],
+  "criteriosResumo": [
+   "Problemática clara",
+   "Argumentos hierarquizados",
+   "Riqueza lexical"
+  ],
+  "competenciasAvaliadas": [
+   "Ensaio C1",
+   "Vocabulário cultural",
+   "Estruturas complexas"
+  ],
+  "instrucoes": "Dans le cadre d'un débat organisé par une revue culturelle, vous rédigez un essai argumenté (250 mots minimum) sur la question suivante : « Les musées doivent-ils avant tout conserver le passé ou s'adresser au public d'aujourd'hui ? »",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La salle vide »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "Le gardien de la salle 14 voyait passer chaque jour des centaines de visiteurs qui ne regardaient rien. Ils photographiaient la toile célèbre au fond de la salle, puis repartaient. Un matin d'hiver, le musée était presque désert. Une petite fille resta vingt minutes devant un tableau que personne ne remarquait jamais : un simple bouquet de fleurs fanées. Quand sa mère voulut l'emmener, elle demanda pourquoi le peintre avait choisi des fleurs mortes. Le gardien se dit que, pour cette question-là, le musée existait."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Restitutions : les musées européens face à leur histoire",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Plusieurs musées européens ont commencé à restituer des objets acquis pendant la période coloniale à leurs pays d'origine. Les partisans de ces restitutions y voient une réparation historique et un moyen de permettre aux populations concernées d'accéder à leur patrimoine. D'autres craignent que les collections universelles, où se croisent les cultures du monde entier, se vident progressivement. Entre ces positions, des solutions intermédiaires apparaissent : prêts de longue durée, expositions itinérantes, numérisation partagée."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Qui fréquente les musées ?",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: estudo sociológico de divulgação)",
+    "conteudo": "Les études sociologiques montrent que la fréquentation des musées reste fortement liée au niveau de diplôme et à l'origine sociale, malgré les politiques de gratuité. Le prix n'est donc pas le principal obstacle : beaucoup de non-visiteurs expliquent qu'ils ne se sentent « pas à leur place » dans ces lieux. Les dispositifs de médiation, les visites commentées et les partenariats avec les écoles et les associations de quartier se révèlent plus efficaces pour diversifier le public que la seule suppression du billet d'entrée."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c1-essai-musees-1.jpg",
+    "legenda": "Visitantes no Louvre",
+    "credito": {
+     "autor": "Oleg Lastochkin / Олег Ласточкин",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:RIAN_archive_437105_Visitors_of_the_Louvre_Museum.jpg"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c1-essai-musees-2.jpg",
+    "legenda": "Uma criança diante de um quadro",
+    "credito": {
+     "autor": "Tom Parnell from Scottish Borders, Scotland",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Aberdeen_Art_Gallery_(53533915342).jpg"
+    }
+   }
+  ],
+  "ordem": 5,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "dalf-c1-essai-education-medias",
+  "titulo": "Éduquer aux médias à l'école",
+  "nivel": "C1",
+  "tipoProducao": "DALF C1 — essai argumenté",
+  "dificuldade": "dificil",
+  "tempoSugerido": 90,
+  "limitePalavrasMin": 250,
+  "limitePalavrasMax": 320,
+  "descricao": "Ensaio do DALF C1: a escola deve ensinar a decifrar a informação e as notícias falsas? Como e com que prioridade?",
+  "objetivos": [
+   "Defender uma posição sobre educação",
+   "Propor medidas concretas",
+   "Antecipar objeções"
+  ],
+  "criteriosResumo": [
+   "Tese clara",
+   "Argumentos e contra-argumentos",
+   "Coesão e registro"
+  ],
+  "competenciasAvaliadas": [
+   "Ensaio C1",
+   "Vocabulário da informação",
+   "Hipótese e condição"
+  ],
+  "instrucoes": "À la suite d'une campagne de fausses informations qui a fortement marqué l'opinion, un journal ouvre ses colonnes à ses lecteurs. Vous rédigez un essai argumenté (250 mots minimum) : « L'éducation aux médias doit-elle devenir une matière à part entière à l'école ? »",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La rumeur »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance)",
+    "conteudo": "La rumeur naquit un mardi, dans un groupe de messagerie de parents d'élèves. On disait que l'eau du quartier était contaminée. Personne ne savait qui l'avait écrit le premier, mais le message portait le logo de la mairie, et cela suffisait. Le soir, les supermarchés étaient vides de bouteilles. Le lendemain, un démenti officiel fut publié ; il fut beaucoup moins partagé que la rumeur. Ma voisine, qui avait acheté quarante litres d'eau, me dit qu'elle préférait « ne pas prendre de risque »."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "En Finlande, l'esprit critique s'apprend dès le primaire",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "La Finlande est souvent citée comme l'un des pays les mieux préparés face à la désinformation. L'éducation aux médias y est intégrée dans plusieurs matières dès l'école primaire : en mathématiques, on apprend à repérer les statistiques trompeuses ; en histoire, à analyser la propagande ; en langue, à vérifier une source. Plutôt qu'une matière isolée, il s'agit d'une compétence transversale. D'autres pays s'en inspirent, mais les enseignants réclament du temps et une formation spécifique."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Pourquoi les fausses nouvelles se propagent plus vite",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo científico de divulgação)",
+    "conteudo": "Une étude portant sur des millions de messages publiés sur un réseau social a montré que les fausses informations se diffusaient plus loin et plus rapidement que les vraies. Les chercheurs ont établi que ce phénomène n'était pas dû aux robots, mais au comportement humain : les informations fausses sont plus surprenantes et suscitent davantage d'émotions, ce qui incite à les partager. D'autres travaux suggèrent qu'un simple rappel invitant à vérifier l'exactitude d'une information avant de la partager réduit sensiblement leur diffusion."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c1-essai-education-medias-1.jpg",
+    "legenda": "Jornais impressos",
+    "credito": {
+     "autor": "Print made by: Robert Seymour Printed by: Maguire, Lemercier &amp; Co Published by: Thomas McLean",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:The_price_of_Irish_tithes!!!_(BM_1868,0808.12322).jpg"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c1-essai-education-medias-2.jpg",
+    "legenda": "Uma aula em debate",
+    "credito": {
+     "autor": "DFID - UK Department for International Development",
+     "licenca": "CC BY-SA 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Connecting_classrooms_around_the_world_(3677773417).jpg"
+    }
+   }
+  ],
+  "ordem": 6,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "dalf-c1-essai-surveillance",
+  "titulo": "Sécurité ou vie privée : faut-il choisir ?",
+  "nivel": "C1",
+  "tipoProducao": "DALF C1 — essai argumenté",
+  "dificuldade": "dificil",
+  "tempoSugerido": 90,
+  "limitePalavrasMin": 250,
+  "limitePalavrasMax": 320,
+  "descricao": "Ensaio do DALF C1 sobre câmeras, reconhecimento facial e dados pessoais: até onde vai a segurança sem ferir a liberdade?",
+  "objetivos": [
+   "Articular dois valores em tensão",
+   "Construir uma posição nuançada",
+   "Exemplificar com casos reais"
+  ],
+  "criteriosResumo": [
+   "Problemática e tese",
+   "Nuance e contra-argumentos",
+   "Precisão lexical"
+  ],
+  "competenciasAvaliadas": [
+   "Ensaio C1",
+   "Vocabulário do direito e da tecnologia",
+   "Concessão"
+  ],
+  "instrucoes": "Votre ville envisage d'installer des caméras équipées de reconnaissance faciale dans les transports publics. Vous rédigez, pour le bulletin d'une association de citoyens, un essai argumenté (250 mots minimum) : « Doit-on accepter moins de vie privée pour plus de sécurité ? »",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Les yeux de la ville »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de romance de antecipação)",
+    "conteudo": "Dans la ville, plus personne ne perdait ses clés : les caméras savaient toujours où on les avait posées. Plus personne ne se perdait non plus, ni ne disparaissait, ni ne commettait de petits vols. On disait que c'était la ville la plus sûre du monde. Mais les gens avaient cessé de flâner. Ils marchaient droit, le visage neutre, comme on marche devant un examinateur. Le soir, dans les appartements, on baissait la voix sans savoir pourquoi."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Reconnaissance faciale : l'Europe encadre les usages",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Le règlement européen sur l'intelligence artificielle limite fortement l'usage de la reconnaissance faciale en temps réel dans l'espace public, en l'autorisant seulement dans des cas précis, comme la recherche de victimes d'enlèvement ou la prévention d'une menace terroriste imminente. Les défenseurs des libertés jugent ces exceptions trop larges ; certaines forces de l'ordre estiment au contraire qu'elles les privent d'un outil efficace. Plusieurs villes ont choisi de renoncer totalement à cette technologie."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "L'effet de la surveillance sur les comportements",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo científico de divulgação)",
+    "conteudo": "Des recherches en psychologie sociale ont mis en évidence un « effet dissuasif » de la surveillance : lorsqu'elles se savent observées, les personnes modifient leurs comportements, y compris lorsqu'ils sont parfaitement légaux, par exemple en évitant certaines recherches en ligne ou certaines manifestations. Par ailleurs, les évaluations de la vidéosurveillance montrent des effets variables sur la délinquance : réels dans les parkings, beaucoup plus limités dans les espaces ouverts. Les chercheurs soulignent que l'efficacité dépend surtout de la présence humaine qui accompagne les caméras."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c1-essai-surveillance-1.jpg",
+    "legenda": "Câmeras de vigilância",
+    "credito": {
+     "autor": "Punit Rajpal",
+     "licenca": "CC0",
+     "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+     "fonte": "https://commons.wikimedia.org/wiki/File:CCTV_cameras_in_Mumbai.jpg"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c1-essai-surveillance-2.jpg",
+    "legenda": "Multidão numa estação",
+    "credito": {
+     "autor": "4300streetcar",
+     "licenca": "CC BY 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Nation_Line_2_platform_May_2025_4.jpg"
+    }
+   }
+  ],
+  "ordem": 7,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "dalf-c2-memoire-oubli",
+  "titulo": "Le droit à l'oubli à l'ère d'Internet",
+  "nivel": "C2",
+  "tipoProducao": "DALF C2 — article de fond",
+  "dificuldade": "dificil",
+  "tempoSugerido": 150,
+  "limitePalavrasMin": 600,
+  "limitePalavrasMax": 750,
+  "descricao": "DALF C2: escreva um artigo de fundo estruturado sobre memória digital e direito ao esquecimento, integrando as ideias do dossiê.",
+  "objetivos": [
+   "Integrar o dossiê numa reflexão pessoal",
+   "Construir um texto longo e estruturado",
+   "Dominar o estilo jornalístico elaborado"
+  ],
+  "criteriosResumo": [
+   "Aproveitamento crítico do dossiê",
+   "Estrutura e progressão",
+   "Estilo, precisão e riqueza"
+  ],
+  "competenciasAvaliadas": [
+   "Texto argumentativo C2",
+   "Estruturas complexas",
+   "Registro elaborado"
+  ],
+  "instrucoes": "Une revue d'idées vous demande un article de fond (environ 700 mots) sur le thème : « Internet n'oublie rien : faut-il un droit à l'oubli ? » Vous vous appuierez sur les documents du dossier, sans les résumer, pour construire une réflexion personnelle, argumentée et nuancée, et vous donnerez un titre à votre article.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Ce que ma grand-mère avait oublié »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de ensaio literário)",
+    "conteudo": "Ma grand-mère avait oublié beaucoup de choses, et c'était sa force. Elle avait oublié la dispute qui l'avait séparée de sa sœur pendant dix ans, l'humiliation d'un premier emploi, les mots durs d'un mari pourtant aimé. On croit que la mémoire fait l'identité ; mais l'oubli la fait aussi, en choisissant ce qu'il laisse derrière nous. Une vie entièrement conservée serait peut-être une vie impossible à vivre, comme une maison où l'on n'aurait jamais rien jeté : on y étoufferait sous le poids de tout ce qu'on a été."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Déréférencement : des milliers de demandes chaque année",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Depuis une décision de la Cour de justice de l'Union européenne en 2014, les citoyens européens peuvent demander aux moteurs de recherche de ne plus afficher certains résultats les concernant lorsque ces informations sont inexactes, dépassées ou excessives. Des centaines de milliers de demandes ont été déposées ; une partie seulement est acceptée, après un examen au cas par cas. Les médias rappellent que ce droit doit être concilié avec la liberté d'informer : effacer le passé d'un responsable politique n'a pas le même sens qu'oublier l'erreur de jeunesse d'un particulier."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "L'oubli, une fonction active du cerveau",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo científico de divulgação)",
+    "conteudo": "Les neurosciences ont longtemps considéré l'oubli comme une défaillance de la mémoire. Des travaux récents montrent au contraire qu'il s'agit d'un processus actif : le cerveau affaiblit certaines traces pour faciliter la généralisation, l'adaptation à des situations nouvelles et la réduction des interférences entre souvenirs. Chez les personnes souffrant de stress post-traumatique, c'est précisément l'impossibilité d'oublier qui fait souffrir. Certains chercheurs en tirent un parallèle avec nos archives numériques, qui conservent tout sans hiérarchie."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c2-memoire-oubli-1.jpg",
+    "legenda": "Fotografias de família antigas",
+    "credito": {
+     "autor": "Unknown authorUnknown author",
+     "licenca": "Public domain",
+     "urlLicenca": "",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Hungarian_family_photo_album_1920s,_30s,_page_01.jpg"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c2-memoire-oubli-2.jpg",
+    "legenda": "Um data center",
+    "credito": {
+     "autor": "BalticServers.com",
+     "licenca": "CC BY-SA 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg"
+    }
+   }
+  ],
+  "ordem": 8,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "dalf-c2-progres-liberte",
+  "titulo": "Le progrès technique nous rend-il plus libres ?",
+  "nivel": "C2",
+  "tipoProducao": "DALF C2 — éditorial",
+  "dificuldade": "dificil",
+  "tempoSugerido": 150,
+  "limitePalavrasMin": 600,
+  "limitePalavrasMax": 750,
+  "descricao": "DALF C2: um editorial estruturado sobre técnica e liberdade, com base no dossiê, para uma revista de ideias.",
+  "objetivos": [
+   "Tomar posição num tom editorial",
+   "Mobilizar referências variadas",
+   "Controlar um texto longo"
+  ],
+  "criteriosResumo": [
+   "Tese forte e matizada",
+   "Uso crítico do dossiê",
+   "Domínio do estilo"
+  ],
+  "competenciasAvaliadas": [
+   "Editorial C2",
+   "Retórica argumentativa",
+   "Vocabulário filosófico"
+  ],
+  "instrucoes": "Pour le numéro anniversaire d'une revue, vous rédigez un éditorial (environ 700 mots) répondant à la question : « Le progrès technique nous rend-il plus libres ? » Vous exploiterez les documents du dossier dans une réflexion personnelle et structurée, et vous donnerez un titre à votre texte.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« La machine à laver »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de ensaio)",
+    "conteudo": "On a beaucoup écrit sur l'ordinateur et sur la conquête spatiale ; on a moins célébré la machine à laver. Pourtant, pour ma mère et des millions de femmes de sa génération, elle a rendu des heures entières, chaque semaine, arrachées à la lessive au lavoir, aux mains gercées, au dos brisé. Ces heures, elles les ont consacrées à étudier, à travailler, à lire. Aucune révolution politique ne leur avait jamais offert autant de temps libre. Il faut s'en souvenir quand on parle, avec mépris, du confort moderne."
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Déconnexion : les « retraites numériques » font recette",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Des séjours payants proposent désormais de passer quelques jours sans téléphone ni Internet, dans des monastères, des gîtes de montagne ou des îles isolées. Les participants, souvent cadres ou étudiants, disent chercher à « reprendre le contrôle de leur attention ». Le succès de ces formules interroge : il faut désormais payer pour se libérer d'outils présentés, il y a vingt ans, comme des instruments d'émancipation. Certains sociologues y voient le signe d'une dépendance ; d'autres, d'une simple recherche d'équilibre."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Économie de l'attention et conception des applications",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo científico de divulgação)",
+    "conteudo": "Les chercheurs en informatique et en sciences cognitives décrivent comment de nombreuses applications sont conçues pour maximiser le temps passé par l'utilisateur : notifications imprévisibles, défilement infini, récompenses sociales. Ces mécanismes s'appuient sur des biais connus de notre système de récompense. Certains travaux montrent que la simple présence d'un téléphone sur la table diminue les performances dans des tâches exigeant de la concentration. Des chercheurs plaident pour une conception « éthique » des technologies, respectueuse du temps et de l'autonomie des utilisateurs."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c2-progres-liberte-1.jpg",
+    "legenda": "Uma máquina de lavar antiga",
+    "credito": {
+     "autor": "Dddeco",
+     "licenca": "CC BY 2.5",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.5",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Japan%27s_First_Electric_products.JPG"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c2-progres-liberte-2.jpg",
+    "legenda": "Passageiros absortos nos celulares",
+    "credito": {
+     "autor": "Franck Michel from Antibes, France",
+     "licenca": "CC BY 2.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/2.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:KL_subway_commuters_-_Flickr_-_Franck_Michel.jpg"
+    }
+   }
+  ],
+  "ordem": 9,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ },
+ {
+  "slug": "dalf-c2-traduction",
+  "titulo": "Traduire : trahir ou créer ?",
+  "nivel": "C2",
+  "tipoProducao": "DALF C2 — article pour une revue littéraire",
+  "dificuldade": "dificil",
+  "tempoSugerido": 150,
+  "limitePalavrasMin": 600,
+  "limitePalavrasMax": 750,
+  "descricao": "DALF C2: um artigo para uma revista literária sobre a arte de traduzir na era da tradução automática.",
+  "objetivos": [
+   "Refletir sobre língua e cultura",
+   "Argumentar com exemplos literários",
+   "Escrever com estilo e precisão"
+  ],
+  "criteriosResumo": [
+   "Reflexão pessoal apoiada no dossiê",
+   "Plano rigoroso",
+   "Estilo e riqueza lexical"
+  ],
+  "competenciasAvaliadas": [
+   "Artigo C2",
+   "Vocabulário da linguagem e da literatura",
+   "Estruturas complexas"
+  ],
+  "instrucoes": "Une revue littéraire prépare un dossier sur la traduction. Vous rédigez un article (environ 700 mots) sur la question : « À l'heure de la traduction automatique, le traducteur est-il encore un créateur ? » Vous vous appuierez sur les documents du dossier et sur vos propres exemples, et vous donnerez un titre à votre article.",
+  "coletanea": [
+   {
+    "tipo": "trecho_livro",
+    "titulo": "« Le mot manquant »",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: trecho de ensaio literário)",
+    "conteudo": "Pendant trois jours, j'ai cherché un mot. Dans le roman que je traduisais, une vieille femme regardait la pluie avec un sentiment que la langue d'origine désignait d'un seul terme : un mélange de mélancolie et de gratitude, la joie triste de voir tomber enfin l'eau attendue. Le français n'avait rien de tel. J'ai essayé des périphrases, des images, des silences. Finalement, j'ai réécrit toute la phrase autour du geste de la femme, qui ouvrait la fenêtre. L'auteur, à qui j'ai envoyé ma version, m'a répondu : « C'est exactement cela. Mieux, peut-être. »"
+   },
+   {
+    "tipo": "noticia",
+    "titulo": "Les traducteurs littéraires face à l'intelligence artificielle",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: reportagem)",
+    "conteudo": "Plusieurs maisons d'édition expérimentent la traduction automatique pour des ouvrages pratiques ou des romans de genre, en confiant ensuite le texte à un traducteur chargé de le « post-éditer ». Les associations de traducteurs dénoncent une baisse de la qualité et de leur rémunération, et réclament que les livres traduits par une machine soient clairement signalés aux lecteurs. Les éditeurs de littérature exigeante, eux, affirment que le style d'un auteur ne peut être transmis que par un regard humain."
+   },
+   {
+    "tipo": "artigo_cientifico",
+    "titulo": "Comment fonctionnent les systèmes de traduction neuronale",
+    "fonte": "Texto de apoio elaborado para o Francês na Mira (gênero: artigo científico de divulgação)",
+    "conteudo": "Les systèmes de traduction automatique actuels reposent sur des réseaux de neurones entraînés sur d'immenses corpus de textes déjà traduits. Ils ne « comprennent » pas le texte au sens humain : ils calculent la suite de mots la plus probable dans la langue cible. Leurs performances sont remarquables pour les textes standardisés, mais diminuent face à l'ironie, aux jeux de mots, aux références culturelles et aux choix stylistiques rares. Les chercheurs notent aussi une tendance à uniformiser le vocabulaire, au détriment des tournures singulières."
+   }
+  ],
+  "courseType": "DALF",
+  "modalidade": "textual",
+  "imagens": [
+   {
+    "src": "img/temas/dalf-c2-traduction-1.jpg",
+    "legenda": "Dicionários sobre a mesa",
+    "credito": {
+     "autor": "Kicior99",
+     "licenca": "CC BY 3.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by/3.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:Mydesk.JPG"
+    }
+   },
+   {
+    "src": "img/temas/dalf-c2-traduction-2.jpg",
+    "legenda": "Livros numa livraria",
+    "credito": {
+     "autor": "Jonashtand",
+     "licenca": "CC BY-SA 4.0",
+     "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+     "fonte": "https://commons.wikimedia.org/wiki/File:202401_Foreign_language_textbooks_in_a_bookstore_in_Saigon,_Vietnam.jpg"
+    }
+   }
+  ],
+  "ordem": 10,
+  "exame": "DALF",
+  "creditosNecessarios": 1
+ }
+]

@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tef-08",
+ "titulo": "Exercício oral nº 8 — TEF",
+ "curso": "TEF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "Vacances d'été",
+ "descricao": "Férias escolares longas demais? Pais, professores e cronobiólogos debatem.",
+ "imagem": {
+  "src": "img/temas/tef-b-vacances-ete-2.jpg",
+  "credito": {
+   "autor": "Paul The Writer",
+   "licenca": "CC0",
+   "urlLicenca": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Rows_of_Desks_in_Lecture_Theatre.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral na escala do TEF Canada (0–360) e expressões na escala 0–450, com equivalência NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tef-08/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre as férias.",
+     "alternativas": [
+      "Oui, deux semaines à la montagne.",
+      "Non, l'été est chaud.",
+      "Oui, ils ont dix ans.",
+      "La colonie est grande."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Les enfants partent en colonie cet été ?\nA. Oui, deux semaines à la montagne.\nB. Non, l'été est chaud.\nC. Oui, ils ont dix ans.\nD. La colonie est grande.",
+     "audio": "audio/exercicios-orais/ex-tef-08/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Le tarif dépend des revenus des familles ».",
+     "alternativas": [
+      "De l'âge des enfants.",
+      "Des revenus des familles.",
+      "Du nombre d'enfants.",
+      "De la durée du séjour."
+     ],
+     "correta": 1,
+     "pergunta": "De quoi dépend le tarif ?",
+     "transcricao": "Les inscriptions aux centres de loisirs pour juillet et août sont ouvertes jusqu'au trente mai. Le tarif dépend des revenus des familles. Attention : les places sont limitées.",
+     "audio": "audio/exercicios-orais/ex-tef-08/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« On jongle entre les grands-parents, les centres de loisirs et nos propres congés ».",
+     "alternativas": [
+      "Occuper les grands-parents.",
+      "Organiser la garde des enfants pendant l'été.",
+      "Trouver des vacances au soleil.",
+      "Payer les voyages."
+     ],
+     "correta": 1,
+     "pergunta": "Quelle difficulté la mère exprime-t-elle ?",
+     "transcricao": "Huit semaines, c'est long quand on travaille. On jongle entre les grands-parents, les centres de loisirs et nos propres congés. Et les familles qui n'ont ni les moyens ni la famille à proximité, comment font-elles ?",
+     "audio": "audio/exercicios-orais/ex-tef-08/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta com condição.",
+     "alternativas": [
+      "L'école est fermée.",
+      "Oui, l'été est long.",
+      "À condition d'alléger aussi les journées de classe.",
+      "Non, j'aime les vacances."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Raccourcir les vacances d'été, ça ferait gagner du temps d'apprentissage, non ?\nA. L'école est fermée.\nB. Oui, l'été est long.\nC. À condition d'alléger aussi les journées de classe.\nD. Non, j'aime les vacances.",
+     "audio": "audio/exercicios-orais/ex-tef-08/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Surtout ceux issus de milieux défavorisés ».",
+     "alternativas": [
+      "Les élèves qui partent en colonie.",
+      "Les meilleurs élèves.",
+      "Les enseignants.",
+      "Les élèves de milieux défavorisés."
+     ],
+     "correta": 3,
+     "pergunta": "Qui est le plus touché par le « glissement estival » ?",
+     "transcricao": "Les chercheurs parlent de « glissement estival » : pendant les longues vacances, les élèves perdent une partie de leurs acquis, surtout ceux issus de milieux défavorisés, qui ont moins accès aux activités culturelles. Les vacances longues creusent donc les inégalités scolaires.",
+     "audio": "audio/exercicios-orais/ex-tef-08/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 840,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Section B — Présenter et convaincre",
+     "duracaoSeg": 600,
+     "preparacaoSeg": 60,
+     "consigne": "Annonce : « Colonie de vacances « Nature et sciences » : deux semaines en montagne pour les 10-14 ans, astronomie, randonnée et expériences. Aides de la CAF acceptées. » Vous présentez cette proposition à un(e) ami(e) et vous essayez de le/la convaincre d'y participer. L'examinateur joue l'ami(e) et présente des objections.",
+     "perguntasExaminador": [
+      "Alors, qu'est-ce que tu voulais me montrer ?"
+     ],
+     "fichaExaminador": "Vous êtes l'ami(e) sceptique. Objections possibles : « Deux semaines loin de la maison, c'est long », « C'est trop cher », « Il va s'ennuyer, il n'aime pas la science », « Je préfère partir en famille ». Laissez-vous convaincre seulement par de bons arguments."
+    }
+   ]
+  }
+ }
+}

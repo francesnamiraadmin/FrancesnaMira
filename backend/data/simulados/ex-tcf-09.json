@@ -1,0 +1,157 @@
+{
+ "slug": "ex-tcf-09",
+ "titulo": "Exercício oral nº 9 — TCF",
+ "curso": "TCF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "Travailler moins, vivre mieux ?",
+ "descricao": "Trabalho, renda e qualidade de vida; inclui uma tarefa escrita argumentativa curta.",
+ "imagem": {
+  "src": "img/temas/tcf-t3-revenu-universel-2.jpg",
+  "credito": {
+   "autor": "John Robert McPherson",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Commuters_and_grafittied_train_Platform_3_Central_Rail_Station_Brisbane_P1210848.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral convertida para a escala do TCF (0–699), com NCLC; expressões de 0 a 20, com nível CECR e NCLC.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tcf-09/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre a nova jornada.",
+     "alternativas": [
+      "C'est lundi aujourd'hui.",
+      "Oui, j'ai quatre enfants.",
+      "Oui, à partir du mois prochain, avec le même salaire.",
+      "Non, je travaille à Paris."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu passes à quatre jours par semaine ?\nA. C'est lundi aujourd'hui.\nB. Oui, j'ai quatre enfants.\nC. Oui, à partir du mois prochain, avec le même salaire.\nD. Non, je travaille à Paris.",
+     "audio": "audio/exercicios-orais/ex-tcf-09/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Notamment aux parents de jeunes enfants ».",
+     "alternativas": [
+      "Pour les jeunes salariés.",
+      "Pour les salariés malades.",
+      "Pour la direction.",
+      "Pour les parents de jeunes enfants."
+     ],
+     "correta": 3,
+     "pergunta": "Pour qui les journées plus longues posent-elles problème ?",
+     "transcricao": "Dans l'entreprise où la semaine de quatre jours a été testée, les salariés se disent moins fatigués et les arrêts maladie ont diminué d'un tiers. La direction note toutefois que les journées plus longues ne conviennent pas à tous, notamment aux parents de jeunes enfants.",
+     "audio": "audio/exercicios-orais/ex-tcf-09/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Les plus pauvres risquent d'y perdre ».",
+     "alternativas": [
+      "Que les plus pauvres y perdent.",
+      "Que les riches paient moins.",
+      "Que les gens arrêtent de travailler.",
+      "Que l'idée soit trop simple."
+     ],
+     "correta": 0,
+     "pergunta": "Quelle crainte exprime la femme ?",
+     "transcricao": "Tu as lu l'article sur le revenu universel ?\nOui. L'idée me plaît, mais je me demande comment on le financerait. Si on supprime toutes les autres aides pour le payer, les plus pauvres risquent d'y perdre.",
+     "audio": "audio/exercicios-orais/ex-tcf-09/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta que matiza a afirmação.",
+     "alternativas": [
+      "Non, je gagne peu.",
+      "Pas seulement : il donne aussi une place dans la société.",
+      "Le travail commence à neuf heures.",
+      "Oui, je travaille le matin."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Au fond, le travail, c'est seulement un moyen de gagner sa vie, non ?\nA. Non, je gagne peu.\nB. Pas seulement : il donne aussi une place dans la société.\nC. Le travail commence à neuf heures.\nD. Oui, je travaille le matin.",
+     "audio": "audio/exercicios-orais/ex-tcf-09/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Au lieu de gagner du temps, nous avons préféré consommer davantage ».",
+     "alternativas": [
+      "Nous avons choisi de consommer plus plutôt que de travailler moins.",
+      "Les entreprises ont refusé.",
+      "La productivité n'a pas augmenté.",
+      "Keynes s'est trompé dans ses calculs."
+     ],
+     "correta": 0,
+     "pergunta": "Comment l'intervenante explique-t-elle l'échec de la prédiction ?",
+     "transcricao": "Keynes prédisait qu'au vingt et unième siècle, nous travaillerions quinze heures par semaine. La productivité a bien augmenté comme il l'avait prévu ; mais au lieu de gagner du temps, nous avons préféré consommer davantage. Ce n'est pas l'économie qui nous a trahis, c'est notre désir qui s'est déplacé.",
+     "audio": "audio/exercicios-orais/ex-tcf-09/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — texte argumentatif court",
+     "min": 120,
+     "max": 180,
+     "consigne": "« Faut-il réduire le temps de travail ? » Donnez votre opinion en l'argumentant. (120 à 180 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Le travail est la chose la plus importante dans la vie. » Qu'en pensez-vous ? Vous donnez votre opinion et vous l'argumentez à l'aide d'exemples.",
+     "perguntasExaminador": [
+      "Le travail est la chose la plus importante dans la vie. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et la famille ? », « Peut-on s'épanouir sans travailler ? », « Quel métier rêviez-vous de faire enfant ? »"
+    }
+   ]
+  }
+ }
+}

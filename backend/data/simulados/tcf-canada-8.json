@@ -1,0 +1,1582 @@
+{
+ "slug": "tcf-canada-8",
+ "titulo": "Simulado TCF Canada nº 8",
+ "curso": "TCF",
+ "formato": "TCF Canada",
+ "audioConsignes": {
+  "co": "audio/simulados/tcf-canada-8/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 2100,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Pergunta sobre disponibilidade: « il nous reste une chambre double ».",
+     "alternativas": [
+      "Oui, il nous reste une chambre double.",
+      "Non, je n'ai pas de frère.",
+      "Il est dans le jardin.",
+      "Le petit-déjeuner est délicieux."
+     ],
+     "correta": 0,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Bonsoir, vous avez une chambre pour cette nuit ?\nA. Oui, il nous reste une chambre double.\nB. Non, je n'ai pas de frère.\nC. Il est dans le jardin.\nD. Le petit-déjeuner est délicieux.",
+     "audio": "audio/simulados/tcf-canada-8/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "« Comment tu t'appelles ? » pede o nome.",
+     "alternativas": [
+      "Je vais bien.",
+      "J'habite ici.",
+      "Je m'appelle Samir.",
+      "J'ai dix ans."
+     ],
+     "correta": 2,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Comment tu t'appelles ?\nA. Je vais bien.\nB. J'habite ici.\nC. Je m'appelle Samir.\nD. J'ai dix ans.",
+     "audio": "audio/simulados/tcf-canada-8/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "« Combien » pede o preço: « un euro vingt ».",
+     "alternativas": [
+      "Il est encore chaud.",
+      "Un euro vingt.",
+      "C'est du pain de campagne.",
+      "À la boulangerie."
+     ],
+     "correta": 1,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "C'est combien, ce pain ?\nA. Il est encore chaud.\nB. Un euro vingt.\nC. C'est du pain de campagne.\nD. À la boulangerie.",
+     "audio": "audio/simulados/tcf-canada-8/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "tipo": "extrait",
+     "explicacao": "Pedido: « oui, tout de suite ».",
+     "alternativas": [
+      "Elle est bleue.",
+      "Oui, tout de suite.",
+      "Il fait jour.",
+      "Je suis là."
+     ],
+     "correta": 1,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Tu peux fermer la porte, s'il te plaît ?\nA. Elle est bleue.\nB. Oui, tout de suite.\nC. Il fait jour.\nD. Je suis là.",
+     "audio": "audio/simulados/tcf-canada-8/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pergunta sobre o futuro próximo: « je vais rendre visite… ».",
+     "alternativas": [
+      "Il fera beau samedi.",
+      "Je vais rendre visite à mes grands-parents.",
+      "C'est le week-end prochain.",
+      "J'ai joué au tennis hier."
+     ],
+     "correta": 1,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Qu'est-ce que tu vas faire ce week-end ?\nA. Il fera beau samedi.\nB. Je vais rendre visite à mes grands-parents.\nC. C'est le week-end prochain.\nD. J'ai joué au tennis hier.",
+     "audio": "audio/simulados/tcf-canada-8/co05.mp3"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Pergunta de localização: « au bout de la rue, à droite ».",
+     "alternativas": [
+      "Non, je ne suis pas malade.",
+      "Oui, j'ai mal à la tête.",
+      "Oui, au bout de la rue, à droite.",
+      "Je prends le bus."
+     ],
+     "correta": 2,
+     "alternativasFaladas": true,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "transcricao": "Excusez-moi, il y a une pharmacie près d'ici ?\nA. Non, je ne suis pas malade.\nB. Oui, j'ai mal à la tête.\nC. Oui, au bout de la rue, à droite.\nD. Je prends le bus.",
+     "audio": "audio/simulados/tcf-canada-8/co06.mp3"
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Pensez à le renouveler avant le départ ».",
+     "pergunta": "Que doit faire le client ?",
+     "alternativas": [
+      "Changer sa date de retour.",
+      "Réserver un hôtel.",
+      "Renouveler son passeport.",
+      "Payer son voyage."
+     ],
+     "correta": 2,
+     "transcricao": "Bonjour, c'est Marion, de l'agence de voyages. Votre passeport doit être valable au moins six mois après votre retour. Le vôtre expire en mars : pensez à le renouveler avant le départ.",
+     "audio": "audio/simulados/tcf-canada-8/co07.mp3"
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Il est interdit de manger et de boire ».",
+     "pergunta": "Qu'est-ce qui est interdit dans le bus ?",
+     "alternativas": [
+      "S'asseoir.",
+      "Téléphoner.",
+      "Écouter de la musique.",
+      "Manger et boire."
+     ],
+     "correta": 3,
+     "transcricao": "Chers passagers, bienvenue à bord de la ligne douze. Nous vous rappelons qu'il est interdit de manger et de boire dans le bus. Merci de laisser les places assises aux personnes âgées.",
+     "audio": "audio/simulados/tcf-canada-8/co08.mp3"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Tu peux m'aider ? »",
+     "pergunta": "Que demande la fille ?",
+     "alternativas": [
+      "De l'aide pour un exercice.",
+      "Un livre de mathématiques.",
+      "De finir ses devoirs plus tard.",
+      "La permission de sortir."
+     ],
+     "correta": 0,
+     "transcricao": "Tu as fini tes devoirs ?\nPresque, il me reste l'exercice de maths. Tu peux m'aider ? Je ne comprends pas la question trois.",
+     "audio": "audio/simulados/tcf-canada-8/co09.mp3"
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "documento",
+     "explicacao": "« Les inscriptions se font auprès de l'Office national des forêts ».",
+     "pergunta": "Comment participer aux balades ?",
+     "alternativas": [
+      "En payant un guide.",
+      "En venant sans réservation.",
+      "En s'inscrivant auprès de l'Office des forêts.",
+      "En achetant un billet."
+     ],
+     "correta": 2,
+     "transcricao": "Le vingt et un mars, c'est la Journée internationale des forêts. Dans toute la région, des balades guidées gratuites sont organisées. Les inscriptions se font auprès de l'Office national des forêts.",
+     "audio": "audio/simulados/tcf-canada-8/co10.mp3"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Prendre la nationale sept ou… retarder votre départ ».",
+     "pergunta": "Que conseille-t-on aux automobilistes ?",
+     "alternativas": [
+      "Rester sur l'autoroute.",
+      "Appeler les secours.",
+      "Prendre le train.",
+      "Prendre une autre route ou partir plus tard."
+     ],
+     "correta": 3,
+     "transcricao": "Informations routières : sur l'autoroute A7, un accident provoque dix kilomètres de bouchon dans le sens Lyon-Marseille. Il est conseillé de prendre la nationale sept ou de retarder votre départ d'une heure.",
+     "audio": "audio/simulados/tcf-canada-8/co11.mp3"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Quand l'un d'eux ne vient pas, je m'inquiète ».",
+     "pergunta": "Qu'est-ce que la serveuse remarque ?",
+     "alternativas": [
+      "L'absence de ses habitués.",
+      "La qualité du café.",
+      "Les prix du quartier.",
+      "Le nombre de touristes."
+     ],
+     "correta": 0,
+     "transcricao": "Je suis serveuse dans un café de Montmartre depuis douze ans. Les touristes changent, mais j'ai des habitués qui viennent tous les jours à la même heure. Quand l'un d'eux ne vient pas, je m'inquiète : parfois, je suis la seule à remarquer son absence.",
+     "audio": "audio/simulados/tcf-canada-8/co12.mp3"
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Accompagnés d'un adulte muni d'un billet ».",
+     "pergunta": "Quelle est la condition ?",
+     "alternativas": [
+      "Avoir un abonnement.",
+      "Voyager le week-end.",
+      "Habiter en Bretagne.",
+      "Être accompagné d'un adulte qui a un billet."
+     ],
+     "correta": 3,
+     "transcricao": "À partir de lundi, les enfants de moins de douze ans pourront voyager gratuitement dans les trains régionaux de Bretagne, à condition d'être accompagnés d'un adulte muni d'un billet.",
+     "audio": "audio/simulados/tcf-canada-8/co13.mp3"
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Ouverte vingt-quatre heures sur vingt-quatre ».",
+     "pergunta": "Qu'est-ce qui a décidé l'homme à s'inscrire ?",
+     "alternativas": [
+      "Les conseils d'un ami.",
+      "Le prix de l'abonnement.",
+      "Les cours collectifs.",
+      "Les horaires d'ouverture."
+     ],
+     "correta": 3,
+     "transcricao": "Tu as vu la nouvelle salle de sport en bas de chez toi ?\nOui, je me suis inscrit. Ce qui m'a décidé, c'est qu'elle est ouverte vingt-quatre heures sur vingt-quatre : je peux y aller après le travail, même à minuit.",
+     "audio": "audio/simulados/tcf-canada-8/co14.mp3"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Toucher un public qui n'a jamais osé franchir sa porte ».",
+     "pergunta": "Quel est l'objectif de ces diffusions ?",
+     "alternativas": [
+      "Remplacer les spectacles en salle.",
+      "Vendre des enregistrements.",
+      "Former des chanteurs.",
+      "Toucher un nouveau public."
+     ],
+     "correta": 3,
+     "transcricao": "L'Opéra de Paris diffuse désormais gratuitement certains de ses spectacles en direct sur Internet. L'objectif : toucher un public qui n'a jamais osé franchir sa porte, parce que le lieu lui paraissait trop intimidant ou trop cher.",
+     "audio": "audio/simulados/tcf-canada-8/co15.mp3"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« C'est surtout eux qui m'apprennent ».",
+     "pergunta": "Qu'est-ce que le grand-père a découvert ?",
+     "alternativas": [
+      "Ses petits-enfants lui apprennent beaucoup.",
+      "Les tablettes sont dangereuses.",
+      "Il manque de temps.",
+      "Il n'aime pas garder les enfants."
+     ],
+     "correta": 0,
+     "transcricao": "Depuis que je suis grand-père, je garde mes petits-enfants le mercredi. Je pensais leur apprendre des choses ; c'est surtout eux qui m'apprennent : à utiliser une tablette, à regarder les insectes de près, à prendre le temps.",
+     "audio": "audio/simulados/tcf-canada-8/co16.mp3"
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Dessiner le trajet qu'il faisait pour aller à l'école ».",
+     "pergunta": "Que peuvent faire les visiteurs ?",
+     "alternativas": [
+      "Dessiner un trajet de leur enfance sur une carte.",
+      "Acheter des cartes anciennes.",
+      "Rencontrer des explorateurs.",
+      "Voyager gratuitement."
+     ],
+     "correta": 0,
+     "transcricao": "Cette année, le Festival international de géographie de Saint-Dié invite le public à participer à une grande carte collective : chaque visiteur peut y dessiner le trajet qu'il faisait pour aller à l'école quand il était enfant. Les dessins seront exposés à la fin du festival.",
+     "audio": "audio/simulados/tcf-canada-8/co17.mp3"
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Il y a aussi les contraintes ».",
+     "pergunta": "Que veut montrer cet homme ?",
+     "alternativas": [
+      "Que cette vie a aussi des inconvénients.",
+      "Qu'il veut vendre sa péniche.",
+      "Que la vie sur l'eau est parfaite.",
+      "Qu'il n'aime pas Paris."
+     ],
+     "correta": 0,
+     "transcricao": "Je vis sur une péniche à Paris depuis cinq ans. Les gens imaginent une vie romantique. C'est vrai, mais il y a aussi les contraintes : l'humidité, l'entretien du bateau, et l'hiver, le froid qui traverse la coque.",
+     "audio": "audio/simulados/tcf-canada-8/co18.mp3"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Avoir pris confiance en eux ».",
+     "pergunta": "Qu'est-ce que les grands élèves y gagnent ?",
+     "alternativas": [
+      "Du temps libre.",
+      "De meilleures notes.",
+      "Une récompense financière.",
+      "De la confiance en eux."
+     ],
+     "correta": 3,
+     "transcricao": "Dans un collège de Rouen, les élèves de troisième parrainent les nouveaux élèves de sixième pendant leur première année. Les plus jeunes se sentent moins perdus, et les plus grands disent avoir pris confiance en eux en devenant responsables de quelqu'un.",
+     "audio": "audio/simulados/tcf-canada-8/co19.mp3"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Ce qui retarde surtout l'endormissement, c'est le contenu ».",
+     "pergunta": "Selon les études récentes, qu'est-ce qui retarde surtout le sommeil ?",
+     "alternativas": [
+      "La lumière bleue.",
+      "Le contenu consulté à l'écran.",
+      "La taille de l'écran.",
+      "Le bruit des appareils."
+     ],
+     "correta": 1,
+     "transcricao": "On accuse souvent la lumière bleue des écrans de perturber le sommeil. Les études récentes nuancent : l'effet de la lumière existe, mais il est modeste. Ce qui retarde surtout l'endormissement, c'est le contenu : une série captivante ou une discussion animée tient le cerveau éveillé bien plus qu'une lumière.",
+     "audio": "audio/simulados/tcf-canada-8/co20.mp3"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Les salaires, jugés trop bas, restent un frein ».",
+     "pergunta": "Quel frein est mentionné ?",
+     "alternativas": [
+      "Le refus des patients.",
+      "La durée des études.",
+      "Le niveau des salaires.",
+      "L'absence d'écoles."
+     ],
+     "correta": 2,
+     "transcricao": "Les hommes restent très minoritaires parmi les infirmiers et les aides-soignants. Les écoles essaient de changer cette image, car beaucoup de patients, notamment âgés, apprécient d'avoir le choix. Mais les salaires, jugés trop bas, restent un frein pour tout le monde, hommes comme femmes.",
+     "audio": "audio/simulados/tcf-canada-8/co21.mp3"
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Les aider à respirer ensemble ».",
+     "pergunta": "Comment la cheffe d'orchestre conçoit-elle son rôle ?",
+     "alternativas": [
+      "Attirer l'attention du public.",
+      "Donner des ordres précis.",
+      "Aider les musiciens à jouer ensemble.",
+      "Jouer de tous les instruments."
+     ],
+     "correta": 2,
+     "transcricao": "Diriger un orchestre, ce n'est pas donner des ordres. Les musiciens savent jouer ; mon rôle est de les écouter, de trouver ce qu'ils ont en commun et de les aider à respirer ensemble. Un bon chef se fait presque oublier pendant le concert.",
+     "audio": "audio/simulados/tcf-canada-8/co22.mp3"
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Tient moins à la qualité qu'au budget publicitaire ».",
+     "pergunta": "Qu'est-ce qui explique en partie la différence de prix ?",
+     "alternativas": [
+      "Les dépenses publicitaires des grandes marques.",
+      "Le transport.",
+      "La qualité des ingrédients.",
+      "Le lieu de fabrication."
+     ],
+     "correta": 0,
+     "transcricao": "Les produits à marque de distributeur sont souvent fabriqués dans les mêmes usines que ceux des grandes marques. La différence de prix tient moins à la qualité qu'au budget publicitaire : sans le savoir, le consommateur paie en partie les campagnes de publicité.",
+     "audio": "audio/simulados/tcf-canada-8/co23.mp3"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Elle frappe aussi fortement les étudiants ».",
+     "pergunta": "Que révèlent les enquêtes ?",
+     "alternativas": [
+      "Les étudiants sortent trop.",
+      "Seules les personnes âgées sont seules.",
+      "Les familles rendent souvent visite aux étudiants.",
+      "Beaucoup d'étudiants souffrent de solitude."
+     ],
+     "correta": 3,
+     "transcricao": "On pense souvent que la solitude touche surtout les personnes âgées. Les enquêtes montrent qu'elle frappe aussi fortement les étudiants, notamment ceux qui ont quitté leur région. Loin de leur famille, dans une ville inconnue, beaucoup passent des semaines sans véritable conversation.",
+     "audio": "audio/simulados/tcf-canada-8/co24.mp3"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Ça ne me paraît pas du temps perdu ».",
+     "pergunta": "Comment la mère voit-elle ce projet aujourd'hui ?",
+     "alternativas": [
+      "Elle y reste opposée.",
+      "Elle veut partir avec lui.",
+      "Elle le trouve trop cher.",
+      "Elle le juge utile."
+     ],
+     "correta": 3,
+     "transcricao": "Tu as vu ? Notre fils veut faire une année de césure avant l'université.\nOui. Au début, j'étais contre. Mais s'il part travailler dans une ferme en Australie, il apprendra l'anglais et l'autonomie. Finalement, ça ne me paraît pas du temps perdu.",
+     "audio": "audio/simulados/tcf-canada-8/co25.mp3"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Résistent… mieux aux maladies et à la sécheresse ».",
+     "pergunta": "Quel intérêt présentent ces anciennes variétés ?",
+     "alternativas": [
+      "Elles se conservent plus longtemps.",
+      "Elles sont moins chères.",
+      "Elles sont plus grosses.",
+      "Certaines résistent mieux aux conditions difficiles."
+     ],
+     "correta": 3,
+     "transcricao": "Des pépiniéristes sauvent d'anciennes variétés de pommes et de poires, abandonnées parce qu'elles se conservaient mal ou n'avaient pas la taille réglementaire. Certaines résistent pourtant mieux aux maladies et à la sécheresse que les variétés modernes.",
+     "audio": "audio/simulados/tcf-canada-8/co26.mp3"
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Une seconde vie à un objet devenu inutile ».",
+     "pergunta": "Qu'ont fait certains villages ?",
+     "alternativas": [
+      "Ils ont donné un nouvel usage aux cabines.",
+      "Ils ont réinstallé des téléphones.",
+      "Ils les ont vendues.",
+      "Ils ont détruit les cabines."
+     ],
+     "correta": 0,
+     "transcricao": "Les cabines téléphoniques ont presque disparu. Dans certains villages, les habitants les ont transformées en boîtes à livres, en abris pour un défibrillateur ou en mini-musées. Une façon de donner une seconde vie à un objet devenu inutile, tout en créant un point de rencontre.",
+     "audio": "audio/simulados/tcf-canada-8/co27.mp3"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Certains y voient un service… d'autres, une surveillance ».",
+     "pergunta": "Comment ces publicités sont-elles perçues ?",
+     "alternativas": [
+      "Comme totalement inutiles.",
+      "Comme un service par les uns, une surveillance par les autres.",
+      "Comme trop chères.",
+      "Comme illégales."
+     ],
+     "correta": 1,
+     "transcricao": "Les publicités qui nous suivent d'un site à l'autre ne doivent rien au hasard : elles reposent sur les traces que nous laissons en naviguant. Certains y voient un service, puisque les annonces correspondent à leurs goûts ; d'autres, une surveillance permanente dont on mesure mal l'étendue.",
+     "audio": "audio/simulados/tcf-canada-8/co28.mp3"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Saisissent… la tension d'un regard ou l'émotion d'une salle ».",
+     "pergunta": "Que souligne le document à propos des dessinateurs ?",
+     "alternativas": [
+      "Ils travaillent très lentement.",
+      "Ils utilisent des caméras.",
+      "Ils remplacent les juges.",
+      "Ils savent rendre l'émotion des procès."
+     ],
+     "correta": 3,
+     "transcricao": "Dans les tribunaux où les caméras sont interdites, les dessinateurs d'audience restent les seuls à fixer les images des procès. Leurs croquis, réalisés en quelques minutes, saisissent parfois mieux qu'une photo la tension d'un regard ou l'émotion d'une salle.",
+     "audio": "audio/simulados/tcf-canada-8/co29.mp3"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Résiste bien mieux au temps que la mémoire des faits ».",
+     "pergunta": "Que montre l'exemple du pianiste ?",
+     "alternativas": [
+      "La mémoire des dates est plus solide.",
+      "On oublie toujours comment jouer.",
+      "La mémoire des gestes résiste mieux au temps.",
+      "Il faut jouer tous les jours."
+     ],
+     "correta": 2,
+     "transcricao": "Un pianiste qui a cessé de jouer depuis vingt ans retrouve souvent ses morceaux dès qu'il pose les mains sur le clavier. Cette mémoire des gestes, dite procédurale, résiste bien mieux au temps que la mémoire des faits : on peut oublier une date, rarement la manière de faire du vélo.",
+     "audio": "audio/simulados/tcf-canada-8/co30.mp3"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« C'est ainsi qu'elle oriente nos choix ».",
+     "pergunta": "Que veut montrer l'intervenant ?",
+     "alternativas": [
+      "La voiture est indispensable.",
+      "Les outils orientent nos comportements.",
+      "Les technologies sont neutres.",
+      "La marche est interdite en ville."
+     ],
+     "correta": 1,
+     "transcricao": "On présente souvent les technologies comme de simples outils, ni bons ni mauvais. Mais un outil n'est jamais neutre : il rend certaines actions faciles et d'autres difficiles. Une ville conçue pour la voiture ne rend pas la marche impossible ; elle la rend simplement pénible, et c'est ainsi qu'elle oriente nos choix.",
+     "audio": "audio/simulados/tcf-canada-8/co31.mp3"
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Une part de l'histoire que l'écrit ne retient pas ».",
+     "pergunta": "Pourquoi enregistrer les sons du quotidien ?",
+     "alternativas": [
+      "Pour composer de la musique.",
+      "Pour préserver une mémoire que l'écrit ne conserve pas.",
+      "Pour étudier les accents modernes.",
+      "Pour remplacer les archives écrites."
+     ],
+     "correta": 1,
+     "transcricao": "On conserve depuis des siècles les textes et les images. Les sons, eux, ont longtemps échappé à la mémoire : le cri d'un marchand, le bruit d'un atelier, l'accent d'un village disparaissent sans laisser de trace. Enregistrer les sons du quotidien, c'est préserver une part de l'histoire que l'écrit ne retient pas.",
+     "audio": "audio/simulados/tcf-canada-8/co32.mp3"
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Au-delà d'un certain point, c'est l'inverse ».",
+     "pergunta": "Que montre cet exemple ?",
+     "alternativas": [
+      "Il faut toujours plus de choix.",
+      "Trop de choix peut rendre insatisfait.",
+      "La confiture coûte trop cher.",
+      "Les consommateurs choisissent vite."
+     ],
+     "correta": 1,
+     "transcricao": "On croit qu'avoir plus de choix rend plus heureux. Au-delà d'un certain point, c'est l'inverse : face à trente sortes de confitures, on hésite, on doute, et l'on reste insatisfait, persuadé qu'une autre option aurait été meilleure.",
+     "audio": "audio/simulados/tcf-canada-8/co33.mp3"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Ont d'abord pensé à l'usage des équipements une fois les Jeux terminés ».",
+     "pergunta": "Qu'est-ce qui distingue les rares réussites ?",
+     "alternativas": [
+      "Elles ont construit plus de stades.",
+      "Elles ont attiré plus de touristes.",
+      "Elles ont prévu l'usage des équipements après les Jeux.",
+      "Elles ont dépensé davantage."
+     ],
+     "correta": 2,
+     "transcricao": "Accueillir les Jeux olympiques est présenté comme une chance pour une ville. Les bilans sont plus contrastés : stades sous-utilisés après l'événement, dépenses dépassant largement les prévisions. Les rares réussites sont celles qui ont d'abord pensé à l'usage des équipements une fois les Jeux terminés.",
+     "audio": "audio/simulados/tcf-canada-8/co34.mp3"
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Le public y voit souvent une preuve d'incohérence ».",
+     "pergunta": "Quel paradoxe l'intervenant souligne-t-il ?",
+     "alternativas": [
+      "Les scientifiques refusent de se corriger.",
+      "Ce qui fait la force de la science passe pour une faiblesse.",
+      "La science ne se trompe jamais.",
+      "Le public fait trop confiance à la science."
+     ],
+     "correta": 1,
+     "transcricao": "La science ne produit pas de certitudes définitives ; elle avance en se corrigeant. Paradoxalement, c'est cette capacité à reconnaître ses erreurs qui devrait inspirer confiance. Mais le public y voit souvent une preuve d'incohérence : « ils ont encore changé d'avis ».",
+     "audio": "audio/simulados/tcf-canada-8/co35.mp3"
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Une tristesse lucide… la compagne des esprits créateurs ».",
+     "pergunta": "Comment l'intervenante présente-t-elle la mélancolie ?",
+     "alternativas": [
+      "Comme une mode récente.",
+      "Comme un défaut.",
+      "Comme une maladie grave.",
+      "Comme une tristesse lucide et féconde."
+     ],
+     "correta": 3,
+     "transcricao": "La mélancolie a mauvaise presse ; on la confond avec la dépression. Elle fut pourtant longtemps considérée comme la compagne des esprits créateurs : une tristesse lucide, capable de contempler ce qui passe sans s'y dérober.",
+     "audio": "audio/simulados/tcf-canada-8/co36.mp3"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Une invention culturelle… ailleurs… presque impoli ».",
+     "pergunta": "Que suggère l'intervenant ?",
+     "alternativas": [
+      "Les trains sont toujours en retard.",
+      "Il faut toujours arriver en retard.",
+      "Le rapport au temps dépend des cultures.",
+      "La ponctualité est universelle."
+     ],
+     "correta": 2,
+     "transcricao": "La ponctualité passe pour une vertu universelle. Elle est pourtant une invention culturelle assez récente, liée aux horaires des trains et des usines. Ailleurs, arriver exactement à l'heure peut sembler presque impoli : le temps y est une relation à négocier plutôt qu'une grille à respecter.",
+     "audio": "audio/simulados/tcf-canada-8/co37.mp3"
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Notre époque, qui célèbre l'autonomie, remercie si mal ».",
+     "pergunta": "Pourquoi, selon l'intervenante, remercions-nous mal ?",
+     "alternativas": [
+      "Parce que nous sommes pressés.",
+      "Parce que les autres ne font rien pour nous.",
+      "Parce que notre époque valorise l'autonomie.",
+      "Parce que remercier est inutile."
+     ],
+     "correta": 2,
+     "transcricao": "Remercier semble le plus simple des gestes. C'est pourtant reconnaître que l'on doit quelque chose à autrui, que l'on ne s'est pas fait seul. Voilà peut-être pourquoi notre époque, qui célèbre l'autonomie, remercie si mal.",
+     "audio": "audio/simulados/tcf-canada-8/co38.mp3"
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Le pardon suppose… que l'on se souvienne de l'offense ».",
+     "pergunta": "Qu'est-ce qui distingue, selon l'intervenant, le pardon de l'oubli ?",
+     "alternativas": [
+      "Le pardon suppose le souvenir de l'offense.",
+      "L'oubli est plus généreux.",
+      "Le pardon efface le souvenir.",
+      "Le pardon exige une réparation."
+     ],
+     "correta": 0,
+     "transcricao": "Pardonner n'est pas oublier. Celui qui oublie n'a plus rien à pardonner ; le pardon suppose au contraire que l'on se souvienne de l'offense, et que l'on renonce, en connaissance de cause, à en faire payer le prix.",
+     "audio": "audio/simulados/tcf-canada-8/co39.mp3"
+    }
+   ]
+  },
+  "ce": {
+   "nome": "Compréhension écrite",
+   "tempoSeg": 3600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "parlent",
+      "parle",
+      "parlons",
+      "parlez"
+     ],
+     "correta": 2,
+     "explicacao": "Sujeito « nous »: « nous parlons ».",
+     "tipo": "lacuna",
+     "inicio": "Nous…",
+     "fim": "… français et anglais à la maison.",
+     "pergunta": "Nous ___ français et anglais à la maison."
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Le matin.",
+      "Toute la journée.",
+      "L'après-midi.",
+      "Jamais."
+     ],
+     "correta": 0,
+     "explicacao": "« Samedi : 9 h – 12 h ».",
+     "documento": "Du lundi au vendredi : 9 h – 18 h\nSamedi : 9 h – 12 h\nFermé le dimanche",
+     "doc": {
+      "estilo": "placa",
+      "texto": "Du lundi au vendredi : 9 h – 18 h\nSamedi : 9 h – 12 h\nFermé le dimanche",
+      "titulo": "BUREAU DE POSTE"
+     },
+     "pergunta": "Quand la poste est-elle ouverte le samedi ?"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "À la maison.",
+      "À l'aéroport.",
+      "Au travail.",
+      "À la gare."
+     ],
+     "correta": 3,
+     "explicacao": "« Je suis à la gare ».",
+     "documento": "Je suis à la gare. Mon train part à 18 h 10. Je t'appelle ce soir !",
+     "doc": {
+      "estilo": "sms",
+      "texto": "Je suis à la gare. Mon train part à 18 h 10. Je t'appelle ce soir !",
+      "remetente": "Nora"
+     },
+     "pergunta": "Où est Nora ?"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "A1",
+     "pontos": 3,
+     "alternativas": [
+      "Faire la cuisine.",
+      "Sortir la poubelle.",
+      "Appeler sa mère.",
+      "Donner à manger au chat."
+     ],
+     "correta": 1,
+     "explicacao": "« N'oublie pas de sortir la poubelle ».",
+     "documento": "Cher Victor,\nLe chat a déjà mangé.\nN'oublie pas de sortir la poubelle ce soir !\nMaman",
+     "doc": {
+      "estilo": "bilhete",
+      "texto": "Cher Victor,\nLe chat a déjà mangé.\nN'oublie pas de sortir la poubelle ce soir !\nMaman"
+     },
+     "pergunta": "Que doit faire Victor ?"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Un appareil photo.",
+      "Un panier et des bottes.",
+      "Un pique-nique.",
+      "Un livre sur les champignons."
+     ],
+     "correta": 1,
+     "explicacao": "« Apportez un panier et des bottes ».",
+     "documento": "Dimanche 19 octobre\nRendez-vous à 9 h au parking du bois de Vincennes\nAvec un guide spécialiste\n\nApportez un panier et des bottes !",
+     "doc": {
+      "estilo": "cartaz",
+      "texto": "Dimanche 19 octobre\nRendez-vous à 9 h au parking du bois de Vincennes\nAvec un guide spécialiste\n\nApportez un panier et des bottes !",
+      "titulo": "Sortie aux champignons"
+     },
+     "pergunta": "Que faut-il apporter ?"
+    },
+    {
+     "n": 6,
+     "num": 6,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "L'argent du billet.",
+      "Un repas pour leur enfant.",
+      "Un appareil photo.",
+      "Le transport."
+     ],
+     "correta": 1,
+     "explicacao": "« Merci de prévoir un pique-nique ».",
+     "documento": "Chers parents,\n\nLa classe de CM1 visitera le musée de la Marine jeudi. Merci de prévoir un pique-nique et une tenue confortable. Retour à l'école à 16 h 30.\n\nMme Garnier",
+     "doc": {
+      "estilo": "email",
+      "texto": "Chers parents,\n\nLa classe de CM1 visitera le musée de la Marine jeudi. Merci de prévoir un pique-nique et une tenue confortable. Retour à l'école à 16 h 30.\n\nMme Garnier",
+      "de": "Mme Garnier — École Jean-Jaurès",
+      "assunto": "Sortie au musée"
+     },
+     "pergunta": "Que doivent prévoir les parents ?"
+    },
+    {
+     "n": 7,
+     "num": 7,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "en",
+      "dans",
+      "à",
+      "au"
+     ],
+     "correta": 0,
+     "explicacao": "Ano: « en 1995 ».",
+     "tipo": "lacuna",
+     "inicio": "Je suis né…",
+     "fim": "… 1995, à Casablanca.",
+     "pergunta": "Je suis né ___ 1995, à Casablanca."
+    },
+    {
+     "n": 8,
+     "num": 8,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Un téléphone.",
+      "Un ticket de bus.",
+      "Des lunettes.",
+      "Un sac rouge."
+     ],
+     "correta": 2,
+     "explicacao": "« Lunettes de soleil dans un étui rouge ».",
+     "documento": "Trouvé mardi dans le bus 21 : lunettes de soleil dans un étui rouge.\nPour les récupérer : 06 55 30 18 72",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Trouvé mardi dans le bus 21 : lunettes de soleil dans un étui rouge.\nPour les récupérer : 06 55 30 18 72",
+      "titulo": "TROUVÉ"
+     },
+     "pergunta": "Qu'est-ce qui a été trouvé ?"
+    },
+    {
+     "n": 9,
+     "num": 9,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "de",
+      "le",
+      "des",
+      "du"
+     ],
+     "correta": 0,
+     "explicacao": "Depois de « trop », usa-se « de »: « trop de monde ».",
+     "tipo": "lacuna",
+     "inicio": "Il y a trop…",
+     "fim": "… monde dans ce magasin.",
+     "pergunta": "Il y a trop ___ monde dans ce magasin."
+    },
+    {
+     "n": 10,
+     "num": 10,
+     "nivel": "A2",
+     "pontos": 9,
+     "alternativas": [
+      "Le signaler à l'accueil.",
+      "Le ranger.",
+      "Le payer.",
+      "Le nettoyer."
+     ],
+     "correta": 3,
+     "explicacao": "« Nettoyer les appareils après utilisation ».",
+     "documento": "Merci de nettoyer les appareils après utilisation.\nServiette obligatoire.\nVestiaires fermés à 21 h 45.",
+     "doc": {
+      "estilo": "aviso",
+      "texto": "Merci de nettoyer les appareils après utilisation.\nServiette obligatoire.\nVestiaires fermés à 21 h 45.",
+      "titulo": "Salle de sport — Rappel"
+     },
+     "pergunta": "Que doivent faire les clients après avoir utilisé un appareil ?"
+    },
+    {
+     "n": 11,
+     "num": 11,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Le deuxième café est moins cher.",
+      "Le café est gratuit le lundi.",
+      "Un client paie un café pour quelqu'un d'autre.",
+      "La mairie paie les cafés."
+     ],
+     "correta": 2,
+     "explicacao": "« Ils en paient deux, et le second est offert ».",
+     "documento": "À Besançon, un café propose à ses clients de laisser un café « suspendu » : ils en paient deux, et le second est offert plus tard à une personne qui n'en a pas les moyens. Chaque mois, plus de trois cents cafés sont ainsi offerts.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Besançon, un café propose à ses clients de laisser un café « suspendu » : ils en paient deux, et le second est offert plus tard à une personne qui n'en a pas les moyens. Chaque mois, plus de trois cents cafés sont ainsi offerts."
+     },
+     "pergunta": "Comment fonctionne ce système ?"
+    },
+    {
+     "n": 12,
+     "num": 12,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Pour corriger une information.",
+      "Pour demander une nouvelle ligne.",
+      "Pour remercier le journal.",
+      "Pour se plaindre d'un chauffeur."
+     ],
+     "correta": 0,
+     "explicacao": "« Une précision : la ligne N4 ne dessert plus l'hôpital ».",
+     "documento": "Courrier des lecteurs\nJ'ai beaucoup aimé votre article sur les bus de nuit, mais une précision : la ligne N4 ne dessert plus l'hôpital depuis janvier. Plusieurs lecteurs risquent d'attendre en vain !\nFatima, Rennes",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Courrier des lecteurs\nJ'ai beaucoup aimé votre article sur les bus de nuit, mais une précision : la ligne N4 ne dessert plus l'hôpital depuis janvier. Plusieurs lecteurs risquent d'attendre en vain !\nFatima, Rennes"
+     },
+     "pergunta": "Pourquoi Fatima écrit-elle ?"
+    },
+    {
+     "n": 13,
+     "num": 13,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "accepte",
+      "acceptais",
+      "accepterais",
+      "accepterai"
+     ],
+     "correta": 2,
+     "explicacao": "« Si + imparfait » → condicional: « j'accepterais ».",
+     "tipo": "lacuna",
+     "inicio": "Si j'étais toi, j'…",
+     "fim": "… ce travail sans hésiter.",
+     "pergunta": "Si j'étais toi, j' ___ ce travail sans hésiter."
+    },
+    {
+     "n": 14,
+     "num": 14,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Prendre un bus de remplacement.",
+      "Échanger ou se faire rembourser leur billet sans frais.",
+      "Acheter un billet moins cher.",
+      "Voyager gratuitement."
+     ],
+     "correta": 1,
+     "explicacao": "« Échangés ou remboursés sans frais ».",
+     "documento": "En raison d'un mouvement social, le trafic sera fortement perturbé : un train sur trois circulera. Les billets pourront être échangés ou remboursés sans frais jusqu'au 20 mai.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "En raison d'un mouvement social, le trafic sera fortement perturbé : un train sur trois circulera. Les billets pourront être échangés ou remboursés sans frais jusqu'au 20 mai.",
+      "titulo": "Grève du 12 mai",
+      "rubrica": "INFO VOYAGEURS"
+     },
+     "pergunta": "Que peuvent faire les voyageurs ?"
+    },
+    {
+     "n": 15,
+     "num": 15,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Emmener les enfants à l'école.",
+      "Garder les enfants le soir.",
+      "Faire le ménage.",
+      "Donner des cours."
+     ],
+     "correta": 0,
+     "explicacao": "« Accompagner les enfants à l'école le matin ».",
+     "documento": "Famille avec deux enfants (7 et 10 ans) cherche étudiant(e) pour accompagner les enfants à l'école le matin, du lundi au vendredi, de 8 h à 8 h 45.\n12 € de l'heure. Quartier des Chartrons.",
+     "doc": {
+      "estilo": "anuncio",
+      "texto": "Famille avec deux enfants (7 et 10 ans) cherche étudiant(e) pour accompagner les enfants à l'école le matin, du lundi au vendredi, de 8 h à 8 h 45.\n12 € de l'heure. Quartier des Chartrons.",
+      "titulo": "RECHERCHE ÉTUDIANT(E)"
+     },
+     "pergunta": "Que devra faire la personne recrutée ?"
+    },
+    {
+     "n": 16,
+     "num": 16,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "suis",
+      "sois",
+      "serai",
+      "étais"
+     ],
+     "correta": 2,
+     "explicacao": "« Dès que » + futuro (futuro anterior): « dès que je serai arrivé ».",
+     "tipo": "lacuna",
+     "inicio": "Je te téléphonerai dès que je…",
+     "fim": "… arrivé à l'hôtel.",
+     "pergunta": "Je te téléphonerai dès que je ___ arrivé à l'hôtel."
+    },
+    {
+     "n": 17,
+     "num": 17,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Éviter les grandes places.",
+      "Visiter le souk la nuit.",
+      "Demander son chemin aux commerçants.",
+      "Prendre un guide payant."
+     ],
+     "correta": 2,
+     "explicacao": "« Demandez votre chemin aux commerçants ».",
+     "documento": "Première visite à Marrakech : le souk est un vrai labyrinthe, nous nous y sommes perdus trois fois ! Un conseil : repérez une grande place ou un monument, et demandez votre chemin aux commerçants plutôt qu'aux jeunes qui proposent de vous guider contre de l'argent.",
+     "doc": {
+      "estilo": "caderno",
+      "texto": "Première visite à Marrakech : le souk est un vrai labyrinthe, nous nous y sommes perdus trois fois ! Un conseil : repérez une grande place ou un monument, et demandez votre chemin aux commerçants plutôt qu'aux jeunes qui proposent de vous guider contre de l'argent."
+     },
+     "pergunta": "Quel conseil l'auteur donne-t-il ?"
+    },
+    {
+     "n": 18,
+     "num": 18,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Acheter des recueils à moitié prix.",
+      "Suivre des cours d'écriture.",
+      "Proposer ses propres poèmes.",
+      "Rencontrer des poètes étrangers."
+     ],
+     "correta": 2,
+     "explicacao": "« Chacun peut aussi proposer les siens ».",
+     "documento": "Du 8 au 24 mars, la poésie s'installe partout : dans les bus, les boulangeries, les salles d'attente, où des poèmes courts sont affichés. Chacun peut aussi proposer les siens sur le site du festival.",
+     "doc": {
+      "estilo": "festival",
+      "texto": "Du 8 au 24 mars, la poésie s'installe partout : dans les bus, les boulangeries, les salles d'attente, où des poèmes courts sont affichés. Chacun peut aussi proposer les siens sur le site du festival.",
+      "titulo": "Le Printemps des poètes"
+     },
+     "pergunta": "Que peut faire le public ?"
+    },
+    {
+     "n": 19,
+     "num": 19,
+     "nivel": "B1",
+     "pontos": 15,
+     "alternativas": [
+      "Faire baisser les prix.",
+      "Encourager la consommation locale.",
+      "Remplacer l'euro.",
+      "Attirer les touristes étrangers."
+     ],
+     "correta": 1,
+     "explicacao": "« Encourage les habitants à consommer local ».",
+     "documento": "À Annecy, les commerçants ont lancé une monnaie locale. Elle ne peut être dépensée que dans les boutiques de la région, ce qui encourage les habitants à consommer local plutôt que dans les grandes surfaces ou sur Internet.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "À Annecy, les commerçants ont lancé une monnaie locale. Elle ne peut être dépensée que dans les boutiques de la région, ce qui encourage les habitants à consommer local plutôt que dans les grandes surfaces ou sur Internet."
+     },
+     "pergunta": "Quel est l'objectif de cette monnaie ?"
+    },
+    {
+     "n": 20,
+     "num": 20,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Des médecins bénévoles.",
+      "Un nouveau public.",
+      "Des œuvres supplémentaires.",
+      "Des subventions."
+     ],
+     "correta": 1,
+     "explicacao": "« Attirer un public qui ne serait jamais venu ».",
+     "documento": "Au Canada, des médecins peuvent prescrire des visites au musée à des patients qui souffrent d'anxiété ou de solitude. Les premiers résultats montrent une amélioration du moral. Pour les musées, c'est aussi l'occasion d'attirer un public qui ne serait jamais venu.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Au Canada, des médecins peuvent prescrire des visites au musée à des patients qui souffrent d'anxiété ou de solitude. Les premiers résultats montrent une amélioration du moral. Pour les musées, c'est aussi l'occasion d'attirer un public qui ne serait jamais venu."
+     },
+     "pergunta": "Qu'est-ce que les musées y gagnent ?"
+    },
+    {
+     "n": 21,
+     "num": 21,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Il a connu un succès rapide.",
+      "Il circulait seulement la nuit.",
+      "Les voyageurs l'ont refusé.",
+      "Il était réservé aux riches."
+     ],
+     "correta": 0,
+     "explicacao": "« En quelques années, le métro devient le moyen de transport le plus populaire ».",
+     "documento": "En 1900, lorsque le métro parisien ouvre sa première ligne, certains ingénieurs craignent que les voyageurs refusent de descendre sous terre. C'est l'inverse qui se produit : en quelques années, le métro devient le moyen de transport le plus populaire de la capitale.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "En 1900, lorsque le métro parisien ouvre sa première ligne, certains ingénieurs craignent que les voyageurs refusent de descendre sous terre. C'est l'inverse qui se produit : en quelques années, le métro devient le moyen de transport le plus populaire de la capitale."
+     },
+     "pergunta": "Qu'apprend-on sur le métro de Paris ?"
+    },
+    {
+     "n": 22,
+     "num": 22,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "pouvait",
+      "peut",
+      "pourra",
+      "puisse"
+     ],
+     "correta": 3,
+     "explicacao": "« Douter que » exige o subjuntivo: « qu'il puisse ».",
+     "tipo": "lacuna",
+     "inicio": "Je doute qu'il…",
+     "fim": "… venir à la réunion demain.",
+     "pergunta": "Je doute qu'il ___ venir à la réunion demain."
+    },
+    {
+     "n": 23,
+     "num": 23,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les prix ont fortement augmenté.",
+      "Les consommateurs ont protesté.",
+      "Les prix n'ont pas augmenté comme on le craignait.",
+      "Les pièces ont été réintroduites."
+     ],
+     "correta": 2,
+     "explicacao": "« La hausse des prix redoutée ne s'est pas produite ».",
+     "documento": "Faut-il supprimer les pièces de un et deux centimes ? Elles coûtent plus cher à fabriquer qu'elles ne valent, et beaucoup finissent au fond des tiroirs. Plusieurs pays les ont retirées en arrondissant le total à payer : la hausse des prix redoutée ne s'est pas produite.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "Faut-il supprimer les pièces de un et deux centimes ? Elles coûtent plus cher à fabriquer qu'elles ne valent, et beaucoup finissent au fond des tiroirs. Plusieurs pays les ont retirées en arrondissant le total à payer : la hausse des prix redoutée ne s'est pas produite."
+     },
+     "pergunta": "Qu'apprend-on sur les pays qui les ont supprimées ?"
+    },
+    {
+     "n": 24,
+     "num": 24,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Des enfants fréquentaient aussi ces grottes.",
+      "Les grottes étaient réservées aux adultes.",
+      "Des animaux vivaient dans les grottes.",
+      "Les enfants peignaient seuls."
+     ],
+     "correta": 0,
+     "explicacao": "« Les enfants participaient aux activités de ces grottes ».",
+     "documento": "Dans une grotte du sud de la France, des archéologues ont découvert des empreintes d'enfants vieilles de plus de 20 000 ans, à côté de peintures d'animaux. Elles suggèrent que les enfants participaient aux activités de ces grottes, longtemps imaginées comme réservées à quelques adultes.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "Dans une grotte du sud de la France, des archéologues ont découvert des empreintes d'enfants vieilles de plus de 20 000 ans, à côté de peintures d'animaux. Elles suggèrent que les enfants participaient aux activités de ces grottes, longtemps imaginées comme réservées à quelques adultes."
+     },
+     "pergunta": "Que suggère cette découverte ?"
+    },
+    {
+     "n": 25,
+     "num": 25,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Elle ne parle pas de Montréal.",
+      "Elle est trop rapide.",
+      "Elle déçoit du début à la fin.",
+      "Elle s'améliore au fil des épisodes."
+     ],
+     "correta": 3,
+     "explicacao": "« Les premiers épisodes sont lents, mais la série gagne peu à peu en profondeur ».",
+     "documento": "La nouvelle série québécoise « Les Voisins » raconte une année dans la vie d'un immeuble de Montréal. Les premiers épisodes sont lents, mais la série gagne peu à peu en profondeur, jusqu'à devenir un portrait très juste de la solitude urbaine.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "La nouvelle série québécoise « Les Voisins » raconte une année dans la vie d'un immeuble de Montréal. Les premiers épisodes sont lents, mais la série gagne peu à peu en profondeur, jusqu'à devenir un portrait très juste de la solitude urbaine."
+     },
+     "pergunta": "Comment le critique juge-t-il la série ?"
+    },
+    {
+     "n": 26,
+     "num": 26,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "dont",
+      "laquelle",
+      "pour laquelle",
+      "que"
+     ],
+     "correta": 2,
+     "explicacao": "« Pour une raison » → « la raison pour laquelle ».",
+     "tipo": "lacuna",
+     "inicio": "C'est la raison…",
+     "fim": "… j'ai démissionné.",
+     "pergunta": "C'est la raison ___ j'ai démissionné."
+    },
+    {
+     "n": 27,
+     "num": 27,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Payer un abonnement.",
+      "Passer par son médecin traitant.",
+      "Avoir plus de 60 ans.",
+      "Habiter à la campagne."
+     ],
+     "correta": 1,
+     "explicacao": "« À condition de passer par votre médecin traitant ».",
+     "documento": "Vous pouvez consulter un médecin par vidéo, depuis chez vous. La téléconsultation est remboursée comme une consultation classique, à condition de passer par votre médecin traitant, sauf en cas d'urgence.",
+     "doc": {
+      "estilo": "evento",
+      "texto": "Vous pouvez consulter un médecin par vidéo, depuis chez vous. La téléconsultation est remboursée comme une consultation classique, à condition de passer par votre médecin traitant, sauf en cas d'urgence.",
+      "titulo": "La téléconsultation",
+      "rubrica": "SANTÉ"
+     },
+     "pergunta": "À quelle condition est-elle remboursée ?"
+    },
+    {
+     "n": 28,
+     "num": 28,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "Les voitures sont interdites partout.",
+      "La rue était autrefois un lieu de vie.",
+      "Les enfants n'aiment pas jouer dehors.",
+      "Les rues sont trop étroites."
+     ],
+     "correta": 1,
+     "explicacao": "« La rue a longtemps été un espace de vie ».",
+     "documento": "Les villes françaises multiplient les « rues aux enfants » : le temps d'une journée, une rue est fermée aux voitures et rendue aux jeux. L'expérience rappelle que la rue a longtemps été un espace de vie, avant de devenir un simple lieu de passage.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Les villes françaises multiplient les « rues aux enfants » : le temps d'une journée, une rue est fermée aux voitures et rendue aux jeux. L'expérience rappelle que la rue a longtemps été un espace de vie, avant de devenir un simple lieu de passage."
+     },
+     "pergunta": "Que rappelle cette expérience ?"
+    },
+    {
+     "n": 29,
+     "num": 29,
+     "nivel": "B2",
+     "pontos": 21,
+     "alternativas": [
+      "La formation des employés.",
+      "La rapidité des ordinateurs.",
+      "La sécurité des bâtiments.",
+      "L'indépendance vis-à-vis des entreprises privées."
+     ],
+     "correta": 3,
+     "explicacao": "« Elles mettent en avant l'indépendance ».",
+     "documento": "Plusieurs mairies ont remplacé leurs logiciels payants par des logiciels libres. Au-delà des économies, elles mettent en avant l'indépendance : les données publiques ne dépendent plus d'une entreprise privée étrangère, qui pourrait changer ses conditions du jour au lendemain.",
+     "doc": {
+      "estilo": "cartao",
+      "texto": "Plusieurs mairies ont remplacé leurs logiciels payants par des logiciels libres. Au-delà des économies, elles mettent en avant l'indépendance : les données publiques ne dépendent plus d'une entreprise privée étrangère, qui pourrait changer ses conditions du jour au lendemain."
+     },
+     "pergunta": "Quel avantage est mis en avant, au-delà des économies ?"
+    },
+    {
+     "n": 30,
+     "num": 30,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Oublier le passé.",
+      "Faire de la souffrance un simple décor touristique.",
+      "Fermer ces lieux au public.",
+      "Attirer trop peu de visiteurs."
+     ],
+     "correta": 1,
+     "explicacao": "« Transformer la souffrance en décor ».",
+     "documento": "Les lieux de mémoire — champs de bataille, anciens camps, prisons — attirent un nombre croissant de visiteurs. Il y a là un besoin légitime de comprendre ; mais aussi le risque de transformer la souffrance en décor, et la visite en simple étape d'un circuit touristique.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "Les lieux de mémoire — champs de bataille, anciens camps, prisons — attirent un nombre croissant de visiteurs. Il y a là un besoin légitime de comprendre ; mais aussi le risque de transformer la souffrance en décor, et la visite en simple étape d'un circuit touristique."
+     },
+     "pergunta": "Quel risque l'auteur évoque-t-il ?"
+    },
+    {
+     "n": 31,
+     "num": 31,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "Reconnaître la place des immigrés dans l'histoire nationale.",
+      "Attirer les touristes étrangers.",
+      "Encourager l'immigration.",
+      "Remplacer les musées nationaux."
+     ],
+     "correta": 0,
+     "explicacao": "« Ceux qui sont venus d'ailleurs ont eux aussi fait la nation ».",
+     "documento": "Longtemps, l'histoire de l'immigration est restée en marge des musées nationaux, comme si elle ne faisait pas partie de l'histoire du pays. Lui consacrer un musée, c'est reconnaître que ceux qui sont venus d'ailleurs ont eux aussi fait la nation.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "Longtemps, l'histoire de l'immigration est restée en marge des musées nationaux, comme si elle ne faisait pas partie de l'histoire du pays. Lui consacrer un musée, c'est reconnaître que ceux qui sont venus d'ailleurs ont eux aussi fait la nation."
+     },
+     "pergunta": "Que signifie, selon l'article, la création d'un tel musée ?"
+    },
+    {
+     "n": 32,
+     "num": 32,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "voudrai",
+      "veux",
+      "veuille",
+      "voulais"
+     ],
+     "correta": 2,
+     "explicacao": "« Ce n'est pas que » + subjuntivo: « ce n'est pas que je ne veuille pas ».",
+     "tipo": "lacuna",
+     "inicio": "Ce n'est pas que je ne…",
+     "fim": "… pas t'aider, mais je n'ai vraiment pas le temps.",
+     "pergunta": "Ce n'est pas que je ne ___ pas t'aider, mais je n'ai vraiment pas le temps."
+    },
+    {
+     "n": 33,
+     "num": 33,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "L'absence d'argot.",
+      "L'idéalisation de la banlieue.",
+      "Le ton misérabiliste.",
+      "Le refus des clichés sur la banlieue."
+     ],
+     "correta": 3,
+     "explicacao": "« Ni misérabilisme ni idéalisation ».",
+     "documento": "Ce premier roman raconte l'enfance d'un garçon dans une cité de banlieue, loin des clichés habituels. Ni misérabilisme ni idéalisation : l'auteur montre les amitiés, l'ennui, les rêves, dans une langue qui mêle argot et poésie sans jamais forcer le trait.",
+     "doc": {
+      "estilo": "livro-antigo",
+      "texto": "Ce premier roman raconte l'enfance d'un garçon dans une cité de banlieue, loin des clichés habituels. Ni misérabilisme ni idéalisation : l'auteur montre les amitiés, l'ennui, les rêves, dans une langue qui mêle argot et poésie sans jamais forcer le trait."
+     },
+     "pergunta": "Qu'apprécie le critique ?"
+    },
+    {
+     "n": 34,
+     "num": 34,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "L'idée que les jeunes maîtrisent naturellement l'information.",
+      "L'existence des rumeurs.",
+      "La capacité des jeunes à utiliser un téléphone.",
+      "L'utilité d'Internet."
+     ],
+     "correta": 0,
+     "explicacao": "« Savoir utiliser une application n'est pas comprendre… ».",
+     "documento": "On célèbre les « enfants du numérique », nés avec Internet. Mais savoir utiliser une application n'est pas comprendre comment circule l'information : beaucoup manient parfaitement leur téléphone sans savoir distinguer une source fiable d'une rumeur.",
+     "doc": {
+      "estilo": "citacao-rodape",
+      "texto": "On célèbre les « enfants du numérique », nés avec Internet. Mais savoir utiliser une application n'est pas comprendre comment circule l'information : beaucoup manient parfaitement leur téléphone sans savoir distinguer une source fiable d'une rumeur."
+     },
+     "pergunta": "Que conteste l'auteur ?"
+    },
+    {
+     "n": 35,
+     "num": 35,
+     "nivel": "C1",
+     "pontos": 26,
+     "alternativas": [
+      "ait",
+      "aura",
+      "avait",
+      "a"
+     ],
+     "correta": 0,
+     "explicacao": "« Sans que » + subjuntivo: « sans qu'on lui ait donné ».",
+     "tipo": "lacuna",
+     "inicio": "Il a été licencié sans qu'on lui…",
+     "fim": "… donné la moindre explication.",
+     "pergunta": "Il a été licencié sans qu'on lui ___ donné la moindre explication."
+    },
+    {
+     "n": 36,
+     "num": 36,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Entre les minutes et les heures.",
+      "Entre un temps libre et un temps simplement disponible.",
+      "Entre progrès et tradition.",
+      "Entre le travail et les loisirs."
+     ],
+     "correta": 1,
+     "explicacao": "« Le temps libéré n'est pas libre, il est disponible ».",
+     "documento": "Le progrès technique nous promet de gagner du temps. Jamais pourtant nous n'avons eu autant le sentiment d'en manquer. C'est que chaque minute gagnée est aussitôt réinvestie dans une nouvelle tâche : le temps libéré n'est pas libre, il est disponible, ce qui n'est pas la même chose.",
+     "doc": {
+      "estilo": "capitular",
+      "texto": "Le progrès technique nous promet de gagner du temps. Jamais pourtant nous n'avons eu autant le sentiment d'en manquer. C'est que chaque minute gagnée est aussitôt réinvestie dans une nouvelle tâche : le temps libéré n'est pas libre, il est disponible, ce qui n'est pas la même chose."
+     },
+     "pergunta": "Quelle distinction l'auteur établit-il ?"
+    },
+    {
+     "n": 37,
+     "num": 37,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Elle emploie trop de mots étrangers.",
+      "Elle est trop familière.",
+      "Elle est trop précise.",
+      "Elle masque la réalité sous des formules adoucies."
+     ],
+     "correta": 3,
+     "explicacao": "« Elle l'adoucit au point de la rendre invisible ».",
+     "documento": "La langue administrative se veut neutre et précise ; elle est souvent opaque. En remplaçant « licencier » par « se séparer de collaborateurs », elle ne décrit pas mieux la réalité : elle l'adoucit au point de la rendre invisible. Mal nommer les choses, c'est aussi une manière de ne pas les voir.",
+     "doc": {
+      "estilo": "jornal",
+      "texto": "La langue administrative se veut neutre et précise ; elle est souvent opaque. En remplaçant « licencier » par « se séparer de collaborateurs », elle ne décrit pas mieux la réalité : elle l'adoucit au point de la rendre invisible. Mal nommer les choses, c'est aussi une manière de ne pas les voir."
+     },
+     "pergunta": "Que reproche l'auteur à la langue administrative ?"
+    },
+    {
+     "n": 38,
+     "num": 38,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "soucieuse",
+      "soucieux",
+      "souciant",
+      "soucis"
+     ],
+     "correta": 1,
+     "explicacao": "Adjetivo (« soucieux de ») concordando com « il ».",
+     "tipo": "lacuna",
+     "inicio": "Il travaille d'arrache-pied,…",
+     "fim": "… de réussir coûte que coûte.",
+     "pergunta": "Il travaille d'arrache-pied, ___ de réussir coûte que coûte."
+    },
+    {
+     "n": 39,
+     "num": 39,
+     "nivel": "C2",
+     "pontos": 33,
+     "alternativas": [
+      "Nous produisons beaucoup de traces qui risquent de disparaître.",
+      "Nous écrivons moins qu'autrefois.",
+      "Les greniers sont pleins de serveurs.",
+      "Les lettres anciennes ont toutes disparu."
+     ],
+     "correta": 0,
+     "explicacao": "« L'abondance n'est pas la conservation ».",
+     "documento": "Nous n'avons jamais produit autant de traces, et jamais été aussi menacés d'amnésie. Les lettres d'autrefois dorment encore dans les greniers ; nos messages, eux, disparaîtront avec les serveurs qui les hébergent. L'abondance n'est pas la conservation.",
+     "doc": {
+      "estilo": "papel-creme",
+      "texto": "Nous n'avons jamais produit autant de traces, et jamais été aussi menacés d'amnésie. Les lettres d'autrefois dorment encore dans les greniers ; nos messages, eux, disparaîtront avec les serveurs qui les hébergent. L'abondance n'est pas la conservation."
+     },
+     "pergunta": "Quel paradoxe l'auteur souligne-t-il ?"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 3600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1",
+     "min": 60,
+     "max": 120,
+     "consigne": "Votre voisin fait des travaux bruyants très tôt le matin. Vous lui écrivez un message poli pour lui expliquer le problème et lui proposer une solution."
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2",
+     "min": 120,
+     "max": 150,
+     "consigne": "Vous avez fait une rencontre marquante (une personne âgée, un voyageur, un artiste…). Vous racontez cette rencontre sur votre blog et vous expliquez ce qu'elle vous a appris."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3",
+     "min": 120,
+     "max": 180,
+     "consigne": "« Faut-il rendre le permis de conduire gratuit pour les jeunes ? » Rédigez un texte en deux parties. 1) Présentez les deux points de vue des documents ci-dessous (40 à 60 mots). 2) Donnez votre opinion en l'argumentant (80 à 120 mots).",
+     "documentos": [
+      {
+       "titulo": "Document 1 — Une question d'égalité",
+       "texto": "Le permis de conduire coûte souvent plus de 1 500 euros. Pour beaucoup de jeunes, notamment à la campagne, il est pourtant indispensable pour trouver un emploi. Le rendre gratuit serait une mesure d'égalité."
+      },
+      {
+       "titulo": "Document 2 — Investir dans les transports",
+       "texto": "Financer le permis de tous coûterait cher à l'État et encouragerait l'usage de la voiture. Mieux vaudrait investir dans les transports en commun, en particulier dans les zones rurales mal desservies."
+      }
+     ]
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 900,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 1 — Entretien dirigé",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 0,
+     "consigne": "Vous répondez aux questions de l'examinateur : vous parlez de vous, de votre parcours, de vos activités et de vos projets.",
+     "perguntasExaminador": [
+      "Bonjour. Pouvez-vous vous présenter, s'il vous plaît ?",
+      "Comment se passe une journée ordinaire pour vous ?",
+      "Parlez-moi d'un objet auquel vous tenez beaucoup.",
+      "Qu'aimeriez-vous changer dans votre ville ?"
+     ]
+    },
+    {
+     "id": "t2",
+     "titulo": "Tâche 2 — Exercice en interaction",
+     "duracaoSeg": 330,
+     "preparacaoSeg": 120,
+     "consigne": "Vous voulez inscrire vos parents à un cours d'informatique pour seniors. Vous téléphonez à l'association pour obtenir des informations (contenu, horaires, lieu, prix, matériel, inscription, etc.).",
+     "perguntasExaminador": [
+      "Association Clic et Seniors, bonjour ! Je peux vous renseigner ?"
+     ],
+     "fichaExaminador": "Vous êtes le/la responsable de l'association « Clic & Seniors ». Cours pour débutants : utiliser une tablette, envoyer des courriels, faire des démarches en ligne, appeler en vidéo. Mardi et vendredi, 10 h – 11 h 30, salle de la mairie annexe. Groupes de 6. Prix : 60 € le trimestre (adhésion de 10 € comprise). Tablettes prêtées pendant les cours. Inscription sur place ou par téléphone ; un cours d'essai gratuit. Laissez le candidat mener l'échange ; relancez-le s'il se tait (« Autre chose ? »)."
+    },
+    {
+     "id": "t3",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Il faudrait apprendre aux enfants à gérer leur argent dès l'école. » Qu'en pensez-vous ? Vous donnez votre opinion et vous l'argumentez à l'aide d'exemples.",
+     "perguntasExaminador": [
+      "Il faudrait apprendre aux enfants à gérer leur argent dès l'école. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « N'est-ce pas le rôle des parents ? », « À partir de quel âge ? », « L'argent de poche est-il une bonne école ? »."
+    }
+   ]
+  }
+ }
+}

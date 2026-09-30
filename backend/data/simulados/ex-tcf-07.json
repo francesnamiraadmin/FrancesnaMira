@@ -1,0 +1,143 @@
+{
+ "slug": "ex-tcf-07",
+ "titulo": "Exercício oral nº 7 — TCF",
+ "curso": "TCF",
+ "categoria": "exercicio",
+ "nivel": "B2",
+ "tema": "La publicité autour de nous",
+ "descricao": "Anúncios, consumo e o debate sobre publicidade no espaço público.",
+ "imagem": {
+  "src": "img/temas/tcf-t3-publicite-espace-public-2.jpg",
+  "credito": {
+   "autor": "Andrew Curtis",
+   "licenca": "CC BY-SA 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Obey_mural,_Regent_Centre_Metro_Station_-_geograph.org.uk_-_5893118.jpg"
+  }
+ },
+ "explicacaoEscala": "Compreensão oral convertida para a escala do TCF (0–699), com NCLC; expressões de 0 a 20, com nível CECR e NCLC.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-tcf-07/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Resposta sobre a promoção.",
+     "alternativas": [
+      "Oui, en coton.",
+      "Oui, moins trente pour cent.",
+      "Non, il est bleu.",
+      "C'est à gauche."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "C'est en promotion, ce pull ?\nA. Oui, en coton.\nB. Oui, moins trente pour cent.\nC. Non, il est bleu.\nD. C'est à gauche.",
+     "audio": "audio/exercicios-orais/ex-tcf-07/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Livraison offerte pour tout achat supérieur à cent euros ».",
+     "alternativas": [
+      "Pour l'électroménager uniquement.",
+      "Pour tous les achats.",
+      "Le dimanche.",
+      "Pour un achat de plus de cent euros."
+     ],
+     "correta": 3,
+     "pergunta": "Quand la livraison est-elle offerte ?",
+     "transcricao": "Profitez de nos soldes ! Jusqu'à cinquante pour cent de réduction sur tout le rayon électroménager, jusqu'à dimanche. Livraison offerte pour tout achat supérieur à cent euros.",
+     "audio": "audio/exercicios-orais/ex-tcf-07/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Captaient mon attention sans que je le veuille ».",
+     "alternativas": [
+      "Elle regrette les affiches.",
+      "Les affiches captaient son attention malgré elle.",
+      "Elle achète moins de produits.",
+      "La ville est plus sale."
+     ],
+     "correta": 1,
+     "pergunta": "Qu'a remarqué l'intervenante ?",
+     "transcricao": "Depuis que ma ville a retiré les panneaux publicitaires, je me promène différemment : je regarde les façades, les arbres, les gens. Je ne m'étais pas rendu compte à quel point toutes ces affiches captaient mon attention sans que je le veuille.",
+     "audio": "audio/exercicios-orais/ex-tcf-07/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta que propõe uma alternativa.",
+     "alternativas": [
+      "La publicité est interdite le dimanche.",
+      "Les abribus sont bleus.",
+      "La ville pourrait les payer avec les impôts locaux.",
+      "Je prends le bus tous les jours."
+     ],
+     "correta": 2,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Sans publicité, comment financerait-on les abribus ?\nA. La publicité est interdite le dimanche.\nB. Les abribus sont bleus.\nC. La ville pourrait les payer avec les impôts locaux.\nD. Je prends le bus tous les jours.",
+     "audio": "audio/exercicios-orais/ex-tcf-07/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« C'est ce pouvoir diffus… qui pose question ».",
+     "alternativas": [
+      "Le pouvoir diffus de la publicité sur nos désirs.",
+      "Un message publicitaire précis.",
+      "Les images de réussite professionnelle.",
+      "Le prix des produits."
+     ],
+     "correta": 0,
+     "pergunta": "Qu'est-ce qui pose question, selon l'intervenante ?",
+     "transcricao": "La publicité ne se contente pas de vendre des produits ; elle vend des modèles de vie. En répétant les mêmes images de réussite et de bonheur, elle façonne nos désirs avant même que nous ayons conscience d'en avoir. C'est ce pouvoir diffus, bien plus que tel ou tel message, qui pose question.",
+     "audio": "audio/exercicios-orais/ex-tcf-07/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 450,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 270,
+     "preparacaoSeg": 0,
+     "consigne": "« Il faudrait interdire la publicité dans les rues des villes. » Qu'en pensez-vous ? Vous donnez votre opinion et vous l'argumentez à l'aide d'exemples.",
+     "perguntasExaminador": [
+      "Il faudrait interdire la publicité dans les rues des villes. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et les commerçants locaux ? », « La publicité en ligne n'est-elle pas plus envahissante ? », « Une publicité peut-elle être utile ? »"
+    }
+   ]
+  }
+ }
+}

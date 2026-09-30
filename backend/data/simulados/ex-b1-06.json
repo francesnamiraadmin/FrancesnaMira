@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b1-06",
+ "titulo": "Exercício oral nº 6 — B1",
+ "curso": "B1",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Passion ou salaire ?",
+ "descricao": "Escolher uma profissão: orientação, mudança de carreira e salário.",
+ "imagem": {
+  "src": "img/temas/b1-choisir-metier-2.jpg",
+  "credito": {
+   "autor": "Infrogmation of New Orleans",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Baronne_Street,_New_Orleans_Central_Business_District,_15_December_2022_-_04.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b1-06/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "Profissão.",
+     "alternativas": [
+      "Je travaille le matin.",
+      "Mon métier est loin.",
+      "J'aime mon chat.",
+      "Je suis infirmière à l'hôpital."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu fais quel métier ?\nA. Je travaille le matin.\nB. Mon métier est loin.\nC. J'aime mon chat.\nD. Je suis infirmière à l'hôpital.",
+     "audio": "audio/exercicios-orais/ex-b1-06/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Aideront les jeunes à préparer leur CV ».",
+     "alternativas": [
+      "Vendre des billets.",
+      "Présenter deux cents entreprises.",
+      "Aider les jeunes à préparer leur CV.",
+      "Donner des emplois."
+     ],
+     "correta": 2,
+     "pergunta": "Que feront les conseillers ?",
+     "transcricao": "Le salon de l'orientation aura lieu samedi au parc des expositions. Plus de deux cents métiers y seront présentés. Des conseillers aideront les jeunes à préparer leur CV. Entrée gratuite.",
+     "audio": "audio/exercicios-orais/ex-b1-06/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Je gagne moins et je me lève à quatre heures ».",
+     "alternativas": [
+      "Elle n'est pas fière.",
+      "Elle gagne moins et se lève très tôt.",
+      "Elle travaille avec des chiffres.",
+      "Elle s'ennuie."
+     ],
+     "correta": 1,
+     "pergunta": "Quel inconvénient de son nouveau métier mentionne-t-elle ?",
+     "transcricao": "J'étais comptable, bien payée, mais je m'ennuyais. À trente-cinq ans, je suis devenue boulangère. Je gagne moins et je me lève à quatre heures, mais je suis fière de mon travail.",
+     "audio": "audio/exercicios-orais/ex-b1-06/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Escolha justificada.",
+     "alternativas": [
+      "Idéalement les deux, mais je choisirais la passion.",
+      "Non, j'ai un métier.",
+      "Le métier est à Paris.",
+      "Oui, je suis payé."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu préfères un métier passionnant ou bien payé ?\nA. Idéalement les deux, mais je choisirais la passion.\nB. Non, j'ai un métier.\nC. Le métier est à Paris.\nD. Oui, je suis payé.",
+     "audio": "audio/exercicios-orais/ex-b1-06/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« C'est en devenant compétent qu'on finit par aimer ce qu'on fait ».",
+     "alternativas": [
+      "Il faut toujours suivre sa passion.",
+      "La passion peut naître de la compétence.",
+      "Le salaire est le plus important.",
+      "Il faut changer souvent de métier."
+     ],
+     "correta": 1,
+     "pergunta": "Que suggère l'intervenant ?",
+     "transcricao": "Suivre sa passion, c'est un beau conseil, mais il ne fonctionne pas pour tout le monde. Beaucoup de gens développent leur passion en exerçant un métier : c'est en devenant compétent qu'on finit par aimer ce qu'on fait.",
+     "audio": "audio/exercicios-orais/ex-b1-06/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 420,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 240,
+     "preparacaoSeg": 0,
+     "consigne": "« Il vaut mieux choisir un métier bien payé qu'un métier passionnant. » Qu'en pensez-vous ? Donnez votre opinion avec des arguments et des exemples.",
+     "perguntasExaminador": [
+      "Il vaut mieux choisir un métier bien payé qu'un métier passionnant. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et si la passion ne permet pas de vivre ? », « Peut-on changer de métier à 40 ans ? », « Quel était votre métier de rêve enfant ? »"
+    }
+   ]
+  }
+ }
+}

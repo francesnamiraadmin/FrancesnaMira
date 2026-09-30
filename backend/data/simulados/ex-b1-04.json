@@ -1,0 +1,143 @@
+{
+ "slug": "ex-b1-04",
+ "titulo": "Exercício oral nº 4 — B1",
+ "curso": "B1",
+ "categoria": "exercicio",
+ "nivel": "B1",
+ "tema": "Pourquoi apprendre une langue ?",
+ "descricao": "Aprender línguas: motivações, métodos e encontros de conversação.",
+ "imagem": {
+  "src": "img/temas/b1-apprendre-langue-2.jpg",
+  "credito": {
+   "autor": "PattayaPatrol",
+   "licenca": "CC BY-SA 4.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/4.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:DSC_8386_A_cozy_neon-lit_street_caf%C3%A9_at_night_with_people_chatting_inside_and_shoppers_browsing_clothes_at_a_nearby_stall.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas no modelo do TCF: compreensão de 0 a 699 e expressões de 0 a 20, com nível CECR.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-b1-04/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "A2",
+     "pontos": 9,
+     "tipo": "extrait",
+     "explicacao": "« Combien » pede um número.",
+     "alternativas": [
+      "Trois : portugais, anglais et un peu de français.",
+      "La langue est rose.",
+      "J'ai trois frères.",
+      "Je parle vite."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu parles combien de langues ?\nA. Trois : portugais, anglais et un peu de français.\nB. La langue est rose.\nC. J'ai trois frères.\nD. Je parle vite.",
+     "audio": "audio/exercicios-orais/ex-b1-04/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Il suffit de prendre une boisson ».",
+     "alternativas": [
+      "Payer une inscription.",
+      "Réserver une table.",
+      "Prendre une boisson.",
+      "Parler trois langues."
+     ],
+     "correta": 2,
+     "pergunta": "Qu'est-ce qu'il faut faire pour participer ?",
+     "transcricao": "Café des langues tous les mercredis à dix-neuf heures au Bar du Port. Chaque table a une langue : français, anglais, espagnol, italien. Entrée libre, il suffit de prendre une boisson.",
+     "audio": "audio/exercicios-orais/ex-b1-04/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "documento",
+     "explicacao": "« Pour lire les romans de ma grand-mère ».",
+     "alternativas": [
+      "Pour voyager.",
+      "Pour regarder des films.",
+      "Pour son travail.",
+      "Pour lire les romans de sa grand-mère."
+     ],
+     "correta": 3,
+     "pergunta": "Pourquoi a-t-elle commencé l'italien ?",
+     "transcricao": "J'ai commencé l'italien pour lire les romans de ma grand-mère. Maintenant, je le parle avec mes cousins, je regarde des films sans sous-titres… J'ai l'impression d'avoir une deuxième personnalité !",
+     "audio": "audio/exercicios-orais/ex-b1-04/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "B1",
+     "pontos": 15,
+     "tipo": "extrait",
+     "explicacao": "Argumento.",
+     "alternativas": [
+      "Non, je parle français.",
+      "Oui, j'ai un traducteur.",
+      "La langue est difficile.",
+      "Une machine ne remplace pas une vraie conversation."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "À quoi bon apprendre une langue avec les traducteurs automatiques ?\nA. Non, je parle français.\nB. Oui, j'ai un traducteur.\nC. La langue est difficile.\nD. Une machine ne remplace pas une vraie conversation.",
+     "audio": "audio/exercicios-orais/ex-b1-04/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« De meilleures capacités d'attention ».",
+     "alternativas": [
+      "Une meilleure mémoire des chiffres.",
+      "De meilleures capacités d'attention.",
+      "Un salaire plus élevé.",
+      "Une meilleure vue."
+     ],
+     "correta": 1,
+     "pergunta": "Quel avantage du bilinguisme est mentionné ?",
+     "transcricao": "Des chercheurs ont montré que les personnes bilingues développent de meilleures capacités d'attention et changent plus facilement de tâche. Certaines études suggèrent même que le bilinguisme retarde les effets du vieillissement cérébral.",
+     "audio": "audio/exercicios-orais/ex-b1-04/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 420,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Tâche 3 — Expression d'un point de vue",
+     "duracaoSeg": 240,
+     "preparacaoSeg": 0,
+     "consigne": "« Aujourd'hui, parler anglais suffit ; apprendre d'autres langues est inutile. » Qu'en pensez-vous ? Donnez votre opinion avec des arguments et des exemples.",
+     "perguntasExaminador": [
+      "Aujourd'hui, parler anglais suffit ; apprendre d'autres langues est inutile. Qu'en pensez-vous ?"
+     ],
+     "fichaExaminador": "Relances possibles : « Et pour comprendre une culture ? », « Et au travail ? », « Pourquoi apprenez-vous le français ? »"
+    }
+   ]
+  }
+ }
+}

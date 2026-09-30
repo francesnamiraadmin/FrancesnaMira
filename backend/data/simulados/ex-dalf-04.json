@@ -1,0 +1,143 @@
+{
+ "slug": "ex-dalf-04",
+ "titulo": "Exercício oral nº 4 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "Les animaux et nous",
+ "descricao": "Bem-estar animal, criação e o lugar dos animais na sociedade.",
+ "imagem": {
+  "src": "img/temas/dalf-c1-essai-animaux-2.jpg",
+  "credito": {
+   "autor": "Bill Boaden",
+   "licenca": "CC BY-SA 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Farm_with_free_range_hens_-_geograph.org.uk_-_1729447.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-04/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta com a informação do código.",
+     "alternativas": [
+      "Il y en a douze.",
+      "Oui, c'est indiqué par le chiffre 1 sur la coquille.",
+      "Oui, les poules sont blanches.",
+      "Non, les œufs sont frais."
+     ],
+     "correta": 1,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Ces œufs viennent de poules élevées en plein air ?\nA. Il y en a douze.\nB. Oui, c'est indiqué par le chiffre 1 sur la coquille.\nC. Oui, les poules sont blanches.\nD. Non, les œufs sont frais.",
+     "audio": "audio/exercicios-orais/ex-dalf-04/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« N'a pourtant pas modifié les règles de l'élevage ».",
+     "alternativas": [
+      "La sensibilité des animaux.",
+      "Le statut des animaux.",
+      "Les règles de l'élevage.",
+      "Le Code civil."
+     ],
+     "correta": 2,
+     "pergunta": "Qu'est-ce que ce changement n'a pas modifié ?",
+     "transcricao": "Depuis le premier janvier, les animaux ne sont plus considérés comme des biens meubles par le Code civil, mais comme des êtres vivants doués de sensibilité. Ce changement symbolique n'a pourtant pas modifié les règles de l'élevage.",
+     "audio": "audio/exercicios-orais/ex-dalf-04/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Plus la frontière… devient difficile à tracer ».",
+     "alternativas": [
+      "La frontière entre l'homme et l'animal est plus difficile à tracer.",
+      "Les poissons ne ressentent pas la douleur.",
+      "L'éthologie est une science récente.",
+      "Les poules sont plus intelligentes que les corbeaux."
+     ],
+     "correta": 0,
+     "pergunta": "Quelle conclusion l'intervenante tire-t-elle des recherches ?",
+     "transcricao": "Les recherches en éthologie ont bouleversé notre regard : on sait aujourd'hui que les poules comptent, que les poissons ressentent la douleur, que les corbeaux fabriquent des outils. Plus nous en savons, plus la frontière entre l'homme et l'animal devient difficile à tracer.",
+     "audio": "audio/exercicios-orais/ex-dalf-04/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta condicional.",
+     "alternativas": [
+      "Oui, j'y vais le dimanche.",
+      "Le zoo ferme à dix-huit heures.",
+      "Non, je n'aime pas les lions.",
+      "Seulement s'ils participent vraiment à la protection des espèces."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Les zoos, pour toi, c'est encore défendable ?\nA. Oui, j'y vais le dimanche.\nB. Le zoo ferme à dix-huit heures.\nC. Non, je n'aime pas les lions.\nD. Seulement s'ils participent vraiment à la protection des espèces.",
+     "audio": "audio/exercicios-orais/ex-dalf-04/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Notre compassion dépend moins de l'animal que de sa proximité avec nous ».",
+     "alternativas": [
+      "De la proximité de l'animal avec nous.",
+      "Du prix de l'animal.",
+      "De l'intelligence de l'animal.",
+      "De la taille de l'animal."
+     ],
+     "correta": 0,
+     "pergunta": "De quoi dépend notre compassion, selon l'intervenant ?",
+     "transcricao": "Notre rapport aux animaux est traversé de contradictions : nous dépensons des fortunes pour nos chats et nos chiens et nous ignorons le sort de millions d'animaux d'élevage. Cette incohérence n'est pas de l'hypocrisie ; elle révèle que notre compassion dépend moins de l'animal que de sa proximité avec nous.",
+     "audio": "audio/exercicios-orais/ex-dalf-04/co05.mp3"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — exposé et entretien (C1)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "Document de départ : « Plusieurs pays interdisent les animaux sauvages dans les cirques et les delphinariums. Jusqu'où faut-il aller dans la protection des animaux ? » Vous présentez un exposé structuré (problématique, plan, arguments illustrés d'exemples) puis vous répondez aux questions de l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre exposé."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : traditions (corrida, chasse), emplois concernés, recherche médicale, cohérence des choix individuels."
+    }
+   ]
+  }
+ }
+}

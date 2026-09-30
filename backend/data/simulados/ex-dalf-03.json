@@ -1,0 +1,157 @@
+{
+ "slug": "ex-dalf-03",
+ "titulo": "Exercício oral nº 3 — DALF",
+ "curso": "DALF",
+ "categoria": "exercicio",
+ "nivel": "C1",
+ "tema": "Manger moins de viande ?",
+ "descricao": "Alimentação mais vegetal: cantinas, agricultores e nutricionistas em debate; inclui uma tarefa escrita.",
+ "imagem": {
+  "src": "img/temas/dalf-c1-synthese-alimentation-vegetale-2.jpg",
+  "credito": {
+   "autor": "N Chadwick",
+   "licenca": "CC BY-SA 2.0",
+   "urlLicenca": "https://creativecommons.org/licenses/by-sa/2.0",
+   "fonte": "https://commons.wikimedia.org/wiki/File:Cattle_grazing,_Port_Meadow_-_geograph.org.uk_-_5961743.jpg"
+  }
+ },
+ "explicacaoEscala": "Notas na escala do DALF: cada seção vale 25 pontos e é aprovada a partir de 12,5.",
+ "ordem": [
+  "co",
+  "ee",
+  "eo"
+ ],
+ "audioConsignes": {
+  "co": "audio/exercicios-orais/ex-dalf-03/co00.mp3"
+ },
+ "provas": {
+  "co": {
+   "nome": "Compréhension orale",
+   "tempoSeg": 600,
+   "questoes": [
+    {
+     "n": 1,
+     "num": 1,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "extrait",
+     "explicacao": "Resposta informativa.",
+     "alternativas": [
+      "Oui, la cantine est grande.",
+      "Non, j'ai déjà mangé.",
+      "La viande est rouge.",
+      "Oui, une fois par semaine, et il a du succès."
+     ],
+     "correta": 3,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Il y a un menu végétarien à la cantine, maintenant ?\nA. Oui, la cantine est grande.\nB. Non, j'ai déjà mangé.\nC. La viande est rouge.\nD. Oui, une fois par semaine, et il a du succès.",
+     "audio": "audio/exercicios-orais/ex-dalf-03/co01.mp3"
+    },
+    {
+     "n": 2,
+     "num": 2,
+     "nivel": "B2",
+     "pontos": 21,
+     "tipo": "documento",
+     "explicacao": "« Beaucoup plus quand il s'agit de simples substituts industriels ».",
+     "alternativas": [
+      "Le vendredi.",
+      "Quand les plats sont bien cuisinés.",
+      "Quand on sert des substituts industriels.",
+      "Quand il y a de la viande."
+     ],
+     "correta": 2,
+     "pergunta": "Quand le gaspillage augmente-t-il ?",
+     "transcricao": "Dans les cantines scolaires, un menu végétarien hebdomadaire est désormais obligatoire. Les gestionnaires constatent moins de gaspillage quand les plats sont bien cuisinés, mais beaucoup plus quand il s'agit de simples substituts industriels.",
+     "audio": "audio/exercicios-orais/ex-dalf-03/co02.mp3"
+    },
+    {
+     "n": 3,
+     "num": 3,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "documento",
+     "explicacao": "« Je demande qu'on distingue ».",
+     "alternativas": [
+      "Qu'on mange plus de viande.",
+      "Qu'on distingue les différents types d'élevage.",
+      "Qu'on interdise le soja.",
+      "Qu'on supprime l'élevage industriel immédiatement."
+     ],
+     "correta": 1,
+     "pergunta": "Que demande l'éleveur ?",
+     "transcricao": "Je suis éleveur, et je ne suis pas contre manger moins de viande. Mais je demande qu'on distingue : un élevage de plein air entretient les prairies et les haies ; un élevage industriel importe du soja et pollue. Mettre tout le monde dans le même sac, c'est injuste.",
+     "audio": "audio/exercicios-orais/ex-dalf-03/co03.mp3"
+    },
+    {
+     "n": 4,
+     "num": 4,
+     "nivel": "C1",
+     "pontos": 26,
+     "tipo": "extrait",
+     "explicacao": "Resposta com uma condição.",
+     "alternativas": [
+      "Oui, à condition de bien associer légumineuses et céréales.",
+      "Oui, j'aime les légumes verts.",
+      "Le régime commence lundi.",
+      "Non, je n'ai pas faim."
+     ],
+     "correta": 0,
+     "pergunta": "Écoutez l'extrait et choisissez la bonne réponse.",
+     "alternativasFaladas": true,
+     "transcricao": "Tu penses qu'un régime sans viande est équilibré ?\nA. Oui, à condition de bien associer légumineuses et céréales.\nB. Oui, j'aime les légumes verts.\nC. Le régime commence lundi.\nD. Non, je n'ai pas faim.",
+     "audio": "audio/exercicios-orais/ex-dalf-03/co04.mp3"
+    },
+    {
+     "n": 5,
+     "num": 5,
+     "nivel": "C2",
+     "pontos": 33,
+     "tipo": "documento",
+     "explicacao": "« Confier aux consommateurs une responsabilité qu'ils ne peuvent assumer seuls ».",
+     "alternativas": [
+      "Les traditions culinaires.",
+      "Le prix élevé de la viande.",
+      "Faire reposer le changement sur les seuls consommateurs.",
+      "La publicité pour les légumes."
+     ],
+     "correta": 2,
+     "pergunta": "Que critique l'intervenant ?",
+     "transcricao": "Nos habitudes alimentaires ne relèvent pas seulement du choix individuel : elles sont façonnées par les prix, la publicité, les traditions. Exhorter chacun à la vertu sans modifier ces structures revient à confier aux consommateurs une responsabilité qu'ils ne peuvent assumer seuls.",
+     "audio": "audio/exercicios-orais/ex-dalf-03/co05.mp3"
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Expression écrite",
+   "tempoSeg": 2400,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Essai argumenté",
+     "min": 220,
+     "max": 300,
+     "consigne": "Vous écrivez un bref article pour le journal de votre ville : « Faut-il imposer deux repas végétariens par semaine dans les cantines ? » Vous prenez position de manière argumentée. (220 mots minimum)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Expression orale",
+   "tempoSeg": 1860,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production orale — exposé et entretien (C1)",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 1200,
+     "consigne": "Document de départ : « Réduire notre consommation de viande serait l'un des gestes les plus efficaces pour le climat. Doit-on légiférer sur nos assiettes ? » Vous présentez un exposé structuré (problématique, plan, arguments illustrés d'exemples) puis vous répondez aux questions de l'examinateur.",
+     "perguntasExaminador": [
+      "Je vous écoute : présentez votre exposé."
+     ],
+     "fichaExaminador": "Entretien / débat — pistes : liberté individuelle, emploi agricole, santé publique, dimension culturelle des repas."
+    }
+   ]
+  }
+ }
+}
