@@ -696,7 +696,7 @@ F.obterDossierSujet = async (ctx, tache, id) => {
   const modelo = M.ehManual(tache, id) ? sujet : await lerModeloIA(id);
   const { obterDossier } = require("../utils/dossierSujet");
   const d = await obterDossier(tache, sujet, (modelo && modelo.k) || []);
-  return { textos: d.textos || [], imagem: d.imagem || null };
+  return { textos: d.textos || [] };
 };
 
 // ---------------- sala ao vivo (aluno faz o sujet com um professor acompanhando) ----------------

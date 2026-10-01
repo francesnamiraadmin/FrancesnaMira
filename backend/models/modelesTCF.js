@@ -202,12 +202,11 @@ const RecordeTCF = mongoose.model("RecordeTCF", new Schema({
 }, { minimize: false }));
 
 // Dossiê de leitura de um sujet: dois textos de referência (Wikipédia em francês, licença livre,
-// com link e crédito) e uma imagem do Wikimedia Commons — montado na primeira abertura e guardado.
+// com link e crédito) — montado na primeira abertura e guardado.
 const DossierSujetTCF = mongoose.model("DossierSujetTCF", new Schema({
   sujetId: { type: String, required: true, unique: true },
   tache: String,
   textos: [{ titulo: String, texto: String, url: String, fonte: String, licenca: String, _id: false }],
-  imagem: { src: String, legenda: String, autor: String, licenca: String, url: String },
   origem: String,
   criadoEm: { type: Date, default: Date.now }
 }));

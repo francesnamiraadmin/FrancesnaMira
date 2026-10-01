@@ -49,13 +49,13 @@
       // ver abrirDestino em backend/seed/modeles-site/extensoes.js); o curso vem do hub.
       chave: "producao", nome: "Ambiente de Produção", href: "producao-hub.html", curso: "Ambiente de Produção Oral e Textual",
       submenu: [
-        { nome: "Production écrite", href: "producao.html#ecrit", icone: "img/icones/writing-hand.svg" },
-        { nome: "Production orale", href: "producao.html#oral", icone: "img/icones/mic.svg" },
-        { nome: "Dictée", href: "producao.html#dictee", icone: "img/icones/keyboard.svg" },
-        { nome: "Modèles écrits", href: "producao.html#modeles", icone: "img/icones/document.svg" },
-        { nome: "Vocabulaire", href: "producao.html#vocab", icone: "img/icones/book.svg" },
-        { nome: "Attentes du professeur", href: "producao.html#attentes", icone: "img/icones/cap.svg" },
-        { nome: "Mon espace", href: "producao.html#espace", icone: "img/icones/profile.svg" }
+        { nome: "Produção escrita", href: "producao.html#ecrit", icone: "img/icones/writing-hand.svg" },
+        { nome: "Produção oral", href: "producao.html#oral", icone: "img/icones/mic.svg" },
+        { nome: "Ditado", href: "producao.html#dictee", icone: "img/icones/keyboard.svg" },
+        { nome: "Modelos escritos", href: "producao.html#modeles", icone: "img/icones/document.svg" },
+        { nome: "Vocabulário", href: "producao.html#vocab", icone: "img/icones/book.svg" },
+        { nome: "O que o professor espera", href: "producao.html#attentes", icone: "img/icones/cap.svg" },
+        { nome: "Meu espaço", href: "producao.html#espace", icone: "img/icones/profile.svg" }
       ],
       paginas: ["producao.html", "producao-textual.html", "producao-oral-exercicios.html"]
     },

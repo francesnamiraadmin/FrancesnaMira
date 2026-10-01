@@ -21,9 +21,11 @@
     ".contexto p", ".aspectos span", ".guia-pistes p", ".grav-consigne p", ".previa-item span[data-previa]", ".voc-pergunta", ".voc-mot",
     ".mot-carnet b", ".erro-item", ".carnet-item b", ".dica", ".lacuna", ".conteudo-lacunas", ".av-tache .prod-texto", ".gl-viva",
     ".grav-transcricao p", ".passo-dica p", ".painel-dictee .dt-texto", ".rs-consigne", ".mot",
-    ".tm-leitura h4", ".tm-leitura p", ".tm-leitura small", ".tm-figura figcaption", ".av-m span", ".av-sala-tit", ".av-roteiro p", ".av-roteiro li", ".av-sala-topo small"
+    ".tm-leitura h4", ".tm-leitura p", ".tm-leitura small", ".av-m span", ".av-sala-tit", ".av-roteiro p", ".av-roteiro li", ".av-sala-topo small"
   ].join(",");
   window.FNM_PRESERVAR = PRESERVAR;
+  // Títulos dentro de blocos preservados (o conteúdo segue em francês, o título é traduzido).
+  var SEMPRE = ".boite > div > b";
 
   // Nomes dos eixos temáticos (o dado vem do script, em francês).
   var EIXOS = {
@@ -41,6 +43,14 @@
     [/^(Oral|Écrit) · Tâche (\d) · (.+)$/, function (m, a, n, s) { return (a === "Oral" ? "Oral" : "Escrita") + " · Tarefa " + n + " · " + (TAREFA[s] || s); }],
     [/^Tâche (\d)$/, "Tarefa $1"],
     [/^Lecture (\d)$/, "Leitura $1"],
+    [/^Tombé récemment \((.+)\)$/, "Caiu recentemente ($1)"],
+    [/^(\d+) \/ (\d+) thèmes cochés · (\d+) affichés$/, "$1 / $2 temas marcados · $3 exibidos"],
+    [/^Les trois textes partent dans le Sistema de Correção à la fin de l'épreuve \(1 crédit par tâche · vous avez (\d+) crédits?\)\.$/, "Os três textos vão para o Sistema de Correção no fim da prova (1 crédito por tarefa · você tem $1 crédito(s))."],
+    [/^Autres thèmes$/, "Outros temas"],
+    [/^(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre) (\d{4})$/i, function (m, mes, ano) {
+      var pt = { janvier: "Janeiro", "février": "Fevereiro", mars: "Março", avril: "Abril", mai: "Maio", juin: "Junho", juillet: "Julho", "août": "Agosto", septembre: "Setembro", octobre: "Outubro", novembre: "Novembro", "décembre": "Dezembro" };
+      return pt[mes.toLowerCase()] + " de " + ano;
+    }],
     [/^\((\d+) à faire\)$/, "($1 a fazer)"],
     [/^avec (.+)$/, "com $1"],
     [/^Élèves qui demandent un professeur en direct : (\d+)$/, "Alunos pedindo um professor ao vivo: $1"],
@@ -125,7 +135,7 @@
     return mudou ? novo : null;
   }
 
-  function preservado(el) { return el && el.closest && !!el.closest(PRESERVAR); }
+  function preservado(el) { return el && el.closest && !!el.closest(PRESERVAR) && !el.closest(SEMPRE); }
 
   function traduzirNo(no) {
     if (no.nodeType === 3) {
@@ -137,7 +147,7 @@
       return;
     }
     if (no.nodeType !== 1 || no.tagName === "SCRIPT" || no.tagName === "STYLE") return;
-    if (no.matches && no.matches(PRESERVAR)) return;
+    if (no.matches && no.matches(PRESERVAR)) { if (no.querySelectorAll) no.querySelectorAll(SEMPRE).forEach(function (t) { for (var c = t.firstChild; c; c = c.nextSibling) traduzirNo(c); }); return; }
     ["placeholder", "title", "aria-label"].forEach(function (a) {
       var v = no.getAttribute && no.getAttribute(a);
       if (v && !no.hasAttribute("data-fr-" + a)) {

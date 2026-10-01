@@ -180,9 +180,6 @@
 .fnm-app .tm-sub { font-size: 1rem; margin: 22px 0 12px; color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .06em; }
 .fnm-app .tm-leituras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 @media (max-width: 640px) { .fnm-app .tm-leituras { grid-template-columns: 1fr; } }
-.fnm-app .tm-figura { margin: 0; grid-column: 1 / -1; border-radius: 16px; overflow: hidden; background: rgba(var(--branco-rgb), .5); }
-.fnm-app .tm-figura img { display: block; width: 100%; max-height: 340px; object-fit: cover; }
-.fnm-app .tm-figura figcaption { padding: 8px 12px; font-size: .78rem; color: var(--tinta-suave); }
 .fnm-app .tm-leitura { padding: 16px 18px; border-radius: 16px; background: rgba(var(--branco-rgb), .55); border: 1px solid var(--linha); }
 .fnm-app .tm-leitura h4 { margin: 4px 0 8px; font-size: 1.02rem; }
 .fnm-app .tm-leitura p { margin: 0 0 10px; line-height: 1.6; font-size: .95rem; }

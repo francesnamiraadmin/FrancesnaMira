@@ -6061,14 +6061,12 @@ function abasEspace(ativa) {
       });
     }
     
-    // Dossiê de leitura do sujet: dois textos de referência e uma imagem, com créditos.
+    // Dossiê de leitura do sujet: dois textos de referência, com créditos.
     function carregarDossier(alvo, tache, m) {
       if (!alvo) return;
       google.script.run.withSuccessHandler(function (d) {
-        if (!d || (!d.textos.length && !d.imagem)) { alvo.innerHTML = ''; return; }
-        var img = d.imagem ? '<figure class="tm-figura"><img src="' + esc(d.imagem.src) + '" alt="' + esc(d.imagem.legenda || '') + '" loading="lazy" referrerpolicy="no-referrer">' +
-          '<figcaption>' + (d.imagem.legenda ? esc(d.imagem.legenda) + ' · ' : '') + 'Image : ' + esc(d.imagem.autor) + ' · ' + esc(d.imagem.licenca) + ' · <a href="' + esc(d.imagem.url) + '" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>' : '';
-        alvo.innerHTML = '<h3 class="tm-sub">Pour mieux comprendre le thème</h3><div class="tm-leituras">' + img +
+        if (!d || !d.textos.length) { alvo.innerHTML = ''; return; }
+        alvo.innerHTML = '<h3 class="tm-sub">Pour mieux comprendre le thème</h3><div class="tm-leituras">' +
           d.textos.map(function (t, i) {
             return '<article class="tm-leitura"><span class="tm-leitura-n">Lecture ' + (i + 1) + '</span><h4>' + esc(t.titulo) + '</h4><p>' + esc(t.texto) + '</p>' +
               '<small>Extrait de l\'article « ' + esc(t.titulo) + ' » · ' + esc(t.fonte) + ' · ' + esc(t.licenca) + ' · <a href="' + esc(t.url) + '" target="_blank" rel="noopener">lire l\'article complet ↗</a></small></article>';

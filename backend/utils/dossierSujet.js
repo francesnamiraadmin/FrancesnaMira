@@ -1,6 +1,5 @@
 // Dossiê de leitura de um sujet do Ambiente de Produção: dois textos de referência reais
-// (introdução de artigos da Wikipédia em francês, CC BY-SA, com link) e uma imagem livre do
-// Wikimedia Commons com autor e licença. Escolha dos artigos, nesta ordem:
+// (introdução de artigos da Wikipédia em francês, CC BY-SA, com link). Escolha dos artigos, nesta ordem:
 //   1) títulos sugeridos pela IA para o sujet (quando a IA está configurada);
 //   2) palavras-chave do modelo (m.k) buscadas na Wikipédia;
 //   3) dois artigos de referência do eixo temático (lista fixa abaixo).
@@ -11,7 +10,6 @@ const M = require("./modelesTCF");
 
 const UA = { "User-Agent": "FrancesNaMira/1.0 (francesnamira.com.br; ambiente de produção)" };
 const WIKI = "https://fr.wikipedia.org/w/api.php";
-const COMMONS = "https://commons.wikimedia.org/w/api.php";
 
 // Artigos de referência por eixo (conferidos na Wikipédia em francês).
 const ARTIGOS_EIXO = {
@@ -50,7 +48,7 @@ const ehObra = p => OBRA.test(String(p.extract || "").slice(0, 220)) || /homonym
 
 async function paginasPorTitulo(titulos) {
   if (!titulos.length) return [];
-  const j = await api(WIKI, { action: "query", redirects: "1", titles: titulos.join("|"), prop: "extracts|pageimages|info", exintro: "1", explaintext: "1", exsentences: "6", piprop: "name|original", inprop: "url" });
+  const j = await api(WIKI, { action: "query", redirects: "1", titles: titulos.join("|"), prop: "extracts|info", exintro: "1", explaintext: "1", exsentences: "6", inprop: "url" });
   const ps = Object.values(j.query?.pages || {}).filter(p => p.missing === undefined && p.extract && p.extract.length > 120 && !ehObra(p));
   // mantém a ordem pedida
   const ordem = titulos.map(t => t.toLowerCase());
@@ -60,20 +58,6 @@ async function buscarTitulo(termo) {
   // alguns resultados, para pular as obras homônimas (filtradas em paginasPorTitulo)
   const j = await api(WIKI, { action: "query", list: "search", srsearch: termo, srlimit: "3", srnamespace: "0" });
   return (j.query?.search || []).map(r => r.title);
-}
-
-async function imagemCommons(nomeArquivo) {
-  if (!nomeArquivo || !/\.(jpe?g|png|webp)$/i.test(nomeArquivo)) return null;
-  const j = await api(COMMONS, { action: "query", titles: "File:" + nomeArquivo, prop: "imageinfo", iiprop: "url|extmetadata", iiurlwidth: "960" });
-  const p = Object.values(j.query?.pages || {})[0];
-  const info = p?.imageinfo?.[0];
-  if (!info) return null;   // arquivo local da Wikipédia (às vezes não livre): não usa
-  const meta = info.extmetadata || {};
-  const tirarTags = s => String(s || "").replace(/<[^>]+>/g, "").trim();
-  const licenca = tirarTags(meta.LicenseShortName?.value);
-  if (!licenca || /fair use|non-free/i.test(licenca)) return null;
-  return { src: info.thumburl || info.url, autor: tirarTags(meta.Artist?.value).slice(0, 120) || "Wikimedia Commons", licenca, url: info.descriptionurl,
-    legenda: tirarTags(meta.ImageDescription?.value).slice(0, 160) };
 }
 
 async function titulosPelaIA(sujet) {
@@ -108,16 +92,7 @@ async function montarDossier(tache, sujet, chaves) {
   paginas = paginas.filter(p => !usados.has(p.title) && usados.add(p.title)).slice(0, 2);
   const textos = paginas.map(p => ({ titulo: p.title, texto: limpar(p.extract).slice(0, 1400), url: p.fullurl || `https://fr.wikipedia.org/wiki/${encodeURIComponent(p.title)}`,
     fonte: "Wikipédia", licenca: "CC BY-SA 4.0" }));
-  let imagem = null;
-  for (const p of paginas) { imagem = await imagemCommons(p.pageimage).catch(() => null); if (imagem) break; }
-  if (!imagem) {
-    for (const t of ARTIGOS_EIXO[sujet.e] || []) {
-      const [p] = await paginasPorTitulo([t]).catch(() => []);
-      imagem = p && await imagemCommons(p.pageimage).catch(() => null);
-      if (imagem) break;
-    }
-  }
-  return { textos, imagem: imagem || undefined, origem };
+  return { textos, origem };
 }
 
 const montando = new Map();
