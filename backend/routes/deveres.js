@@ -438,7 +438,8 @@ router.get("/minhas-semanas/:id", async (req, res) => {
 // do player embutido, direto na API real de aulas (ver public/js/aulaPlayerEmbed.js),
 // pra nunca duplicar o dado que já mora em ProgressoAula.
 // exercicio_interativo registra a entrega sozinho em POST /api/exercicios/:slug/corrigir.
-const TIPOS_SEM_ENVIO_MANUAL = ["assistir_aula", "assistir_modulo", "exercicio_interativo"];
+// "producao_ambiente" é feita (e concluída) no Ambiente de Produção.
+const TIPOS_SEM_ENVIO_MANUAL = ["assistir_aula", "assistir_modulo", "exercicio_interativo", "producao_ambiente"];
 
 router.post("/minhas-semanas/:deverId/atividades/:index/enviar", comTratamentoDeErro(uploadEntregaDever.single("arquivo")), async (req, res) => {
   const limparTemp = () => { if (req.file) fs.unlink(req.file.path, () => {}); };

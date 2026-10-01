@@ -11,8 +11,28 @@ const DeverUI = (() => {
     producao_textual: 'Produção textual', producao_oral: 'Produção oral (áudio)',
     assistir_aula: 'Assistir aula gravada', assistir_modulo: 'Assistir conjunto de aulas',
     simulado: 'Fazer simulado', recurso_generico: 'Outro recurso da plataforma',
-    exercicio_interativo: 'Dever completo (corrigido na hora)'
+    exercicio_interativo: 'Dever completo (corrigido na hora)',
+    producao_ambiente: 'Tema do Ambiente de Produção'
   };
+  // Tema do Ambiente de Produção: tarefas e atividades (o mesmo devoir aparece no app do aluno).
+  const TACHES_AMB = { ET1: 'Escrita · Tarefa 1 · Mensagem curta', ET2: 'Escrita · Tarefa 2 · Relato, artigo ou carta', ET3: 'Escrita · Tarefa 3 · Texto argumentativo', T1: 'Oral · Tarefa 1 · Entrevista dirigida', T2: 'Oral · Tarefa 2 · Interação', T3: 'Oral · Tarefa 3 · Ponto de vista' };
+  const ATIV_AMB = { ecrit: 'Reescrever e pedir correção', oral: 'Treinar o oral (gravar)', dictee: 'Ditado', etude: 'Estudar o modelo' };
+  const sujetsAmb = {};
+  async function carregarSujetsAmb(tache) {
+    if (!sujetsAmb[tache]) {
+      sujetsAmb[tache] = fetch('/api/modeles/rpc/quadroTemas', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + localStorage.getItem('token') }, body: JSON.stringify({ args: [tache] }) })
+        .then(r => r.ok ? r.json() : { r: [] }).then(d => (d.r || []).sort((a, b) => (b.f || 1) - (a.f || 1))).catch(() => []);
+    }
+    return sujetsAmb[tache];
+  }
+  async function preencherSujetsAmb(box, selecionado) {
+    const tache = box.querySelector('[data-conteudo="tache"]').value, sel = box.querySelector('[data-conteudo="sujetId"]'), busca = (box.querySelector('[data-amb-busca]').value || '').toLowerCase();
+    sel.innerHTML = '<option value="">Carregando…</option>';
+    const l = await carregarSujetsAmb(tache);
+    const atual = selecionado || sel.dataset.atual || '';
+    const filtrados = l.filter(x => !busca || String(x.t).toLowerCase().includes(busca) || x.id === atual).slice(0, 300);
+    sel.innerHTML = '<option value="">Selecione o tema…</option>' + filtrados.map(x => `<option value="${x.id}" ${x.id === atual ? 'selected' : ''}>${String(x.t).replace(/</g, '&lt;').slice(0, 140)}${x.f > 1 ? ' · caiu ' + x.f + '×' : ''}</option>`).join('');
+  }
 
   let modulosDisponiveis = [];
   let temasDisponiveis = [];
@@ -86,6 +106,12 @@ const DeverUI = (() => {
       <div class="campo campo-conteudo campo-modulo" style="display:none;"><label>Módulo</label><select data-conteudo="moduloId">${opcoesModulo(c.moduloId)}</select></div>
       <div class="campo campo-conteudo campo-aula" style="display:none;"><label>Aula</label><select data-conteudo="aulaId"><option value="">Selecione o módulo primeiro</option></select></div>
       <div class="campo campo-conteudo campo-conjunto" style="display:none;"><label>Conjunto de questões</label><select data-conteudo="conjuntoId">${opcoesConjunto(c.conjuntoId)}</select></div>
+      <div class="campo campo-conteudo campo-ambiente" style="display:none; flex-direction:column; gap:8px;">
+        <label>Tarefa do Ambiente de Produção</label><select data-conteudo="tache">${Object.entries(TACHES_AMB).map(([k, v]) => `<option value="${k}" ${c.tache === k ? 'selected' : ''}>${v}</option>`).join('')}</select>
+        <label>Tema</label><input type="search" data-amb-busca placeholder="Filtrar temas…"><select data-conteudo="sujetId" data-atual="${c.sujetId || ''}"><option value="">Selecione a tarefa…</option></select>
+        <label>Atividade</label><select data-conteudo="atividadeTcf">${Object.entries(ATIV_AMB).map(([k, v]) => `<option value="${k}" ${c.atividadeTcf === k ? 'selected' : ''}>${v}</option>`).join('')}</select>
+        ${c.devoirProducaoId ? `<input type="hidden" data-conteudo="devoirProducaoId" value="${c.devoirProducaoId}"><small>Já está nas tarefas do aluno no Ambiente de Produção.</small>` : '<small>Ao salvar, o tema também aparece em « Minhas tarefas » no Ambiente de Produção do aluno.</small>'}
+      </div>
       <div class="campo campo-conteudo campo-exercicio" style="display:none;"><label>Dever completo</label><select data-conteudo="exercicioSlug" data-atual="${c.exercicioSlug || ''}">${opcoesExercicio(c.exercicioSlug)}</select></div>
       ${comMaterialUpload ? `<div class="campo campo-conteudo campo-material-upload" style="display:none;">
         <label>Arquivo do material${c.arquivo?.nome ? ' (atual: ' + c.arquivo.nome + ')' : ''}</label>
@@ -115,6 +141,16 @@ const DeverUI = (() => {
     if (tipo === 'assistir_aula') { mostrar('.campo-modulo'); mostrar('.campo-aula'); }
     if (['questoes_plataforma', 'exercicio_lista', 'simulado'].includes(tipo)) mostrar('.campo-conjunto');
     if (tipo === 'exercicio_interativo') mostrar('.campo-exercicio');
+    if (tipo === 'producao_ambiente') {
+      mostrar('.campo-ambiente');
+      const t = box.querySelector('[data-conteudo="tache"]'), b = box.querySelector('[data-amb-busca]');
+      if (!t.dataset.ligado) {
+        t.dataset.ligado = '1';
+        t.addEventListener('change', () => preencherSujetsAmb(box, ''));
+        let espera = null; b.addEventListener('input', () => { clearTimeout(espera); espera = setTimeout(() => preencherSujetsAmb(box), 250); });
+      }
+      preencherSujetsAmb(box);
+    }
   }
 
   async function preencherAulasDoModulo(box, moduloId, aulaSelecionada, authHeadersFn) {
@@ -280,7 +316,10 @@ const DeverUI = (() => {
     return boxes.map(atBox => {
       const tipo = atBox.querySelector('[data-campo="tipo"]').value;
       const conteudo = {};
-      atBox.querySelectorAll('[data-conteudo]').forEach(el => { if (el.value) conteudo[el.dataset.conteudo] = el.value; });
+      atBox.querySelectorAll('[data-conteudo]').forEach(el => {
+        if (!el.value || (tipo !== 'producao_ambiente' && el.closest('.campo-ambiente'))) return;
+        conteudo[el.dataset.conteudo] = el.value;
+      });
       const dependeBoxId = atBox.querySelector('[data-campo="dependeDe"]')?.value || '';
       const dependeDe = dependeBoxId && boxIdParaIndice[dependeBoxId] !== undefined ? boxIdParaIndice[dependeBoxId] : null;
       return {

@@ -62,6 +62,8 @@ const DevoirTCF = mongoose.model("DevoirTCF", new Schema({
   alvo: Alvo,
   ativo: { type: Boolean, default: true },
   feitos: [{ alunoId: { type: Schema.Types.ObjectId, ref: "User" }, score: Number, total: Number, data: Date }],
+  // "site": criado pelo Dever de Casa do site (atividade "producao_ambiente"), não é espelhado de volta.
+  origem: { type: String, enum: ["app", "site"], default: "app" },
   criadoPor: { type: Schema.Types.ObjectId, ref: "User" },
   criadoPorNome: String,
   criadoEm: { type: Date, default: Date.now }
@@ -199,7 +201,37 @@ const RecordeTCF = mongoose.model("RecordeTCF", new Schema({
   dados: { type: Schema.Types.Mixed, default: {} }
 }, { minimize: false }));
 
+// Dossiê de leitura de um sujet: dois textos de referência (Wikipédia em francês, licença livre,
+// com link e crédito) e uma imagem do Wikimedia Commons — montado na primeira abertura e guardado.
+const DossierSujetTCF = mongoose.model("DossierSujetTCF", new Schema({
+  sujetId: { type: String, required: true, unique: true },
+  tache: String,
+  textos: [{ titulo: String, texto: String, url: String, fonte: String, licenca: String, _id: false }],
+  imagem: { src: String, legenda: String, autor: String, licenca: String, url: String },
+  origem: String,
+  criadoEm: { type: Date, default: Date.now }
+}));
+
+// Sala ao vivo: o aluno faz um sujet e chama um professor, que acompanha o texto (ou a fala
+// transcrita) em tempo real, com o roteiro do tema, e pode falar com ele por voz.
+const SalaAoVivoTCF = mongoose.model("SalaAoVivoTCF", new Schema({
+  alunoId: { type: Schema.Types.ObjectId, ref: "User", index: true },
+  courseType: String,
+  tache: String,
+  sujetId: String,
+  titulo: String,
+  status: { type: String, enum: ["aguardando", "atendimento", "encerrada"], default: "aguardando", index: true },
+  professorId: { type: Schema.Types.ObjectId, ref: "User" },
+  professorNome: String,
+  texto: { type: String, default: "" },
+  transcricao: { type: String, default: "" },
+  mensagens: [{ de: String, texto: String, data: { type: Date, default: Date.now }, _id: false }],
+  inicio: { type: Date, default: Date.now },
+  atualizadoEm: { type: Date, default: Date.now }
+}));
+
 module.exports = {
+  DossierSujetTCF, SalaAoVivoTCF,
   TACHES, ModeleIA, EpreuveTCF, SessaoTCF, DevoirTCF, CarnetProducao, TemaMesTCF, PostBlogTCF, AvisoTCF,
   MensagemTCF, CompetenciaTCF, CorrecaoIATCF, PartilhaTCF, CartaVocabTCF, ProgressoVocabTCF, ConfigModelesTCF, RecordeTCF
 };

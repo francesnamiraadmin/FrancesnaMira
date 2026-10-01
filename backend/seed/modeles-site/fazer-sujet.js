@@ -1,0 +1,173 @@
+// ================= página do sujet: « Faire ce sujet », dossiê e professor ao vivo =================
+
+// Escolha de quem corrige (aparece dentro de « Faire ce sujet »).
+function htmlEscolhaFazer(oral) {
+  return '<fieldset class="escolha-correcao tm-correcao"><legend>Qui corrige ?</legend>' +
+    (B.ia && B.ia.ativa ? '<label><input type="radio" name="tm-correcao" value="ia" checked><span><b>L\'IA, tout de suite</b><small>Entraînement : note sur 20, trame, corrections et version améliorée' + (oral ? ' à partir de la transcription' : '') + '. Sans crédit.</small></span></label>' : '') +
+    '<label><input type="radio" name="tm-correcao" value="professor"' + (B.ia && B.ia.ativa ? '' : ' checked') + '><span><b>Un professeur (Sistema de Correção)</b><small>Correction détaillée sur la grille de l\'examen, dans « Mes corrections ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
+    '<label><input type="radio" name="tm-correcao" value="aovivo"><span><b>Un professeur en direct</b><small>Il suit votre ' + (oral ? 'parole (transcription) et peut vous parler par la voix' : 'texte pendant que vous écrivez et peut vous parler par la voix') + '. À la fin, la production lui est envoyée pour la correction.</small></span></label></fieldset>';
+}
+function correcaoFazer() { var r = document.querySelector('input[name="tm-correcao"]:checked'); return r ? r.value : 'professor'; }
+
+function ligarFazer(raiz, tache, m, oral) {
+  if (SALA) { google.script.run.encerrarSala(EMAIL, SALA.id); salaFim(); }   // outra página de sujet: fecha a sala anterior
+  var bt = $('tm-fazer-bt'), sec = $('tm-fazer');
+  bt.addEventListener('click', function () {
+    var abrir = sec.hidden;
+    sec.hidden = false;
+    bt.classList.add('ativo');
+    bt.querySelector('b').textContent = 'Sujet en cours';
+    if (abrir) {
+      // cronômetro no modo prova, ligado ao começar
+      var ex = sec.querySelector('[data-crono="exame"]'), play = sec.querySelector('[data-crono="play"]');
+      if (ex && !ex.checked) { ex.checked = true; ex.dispatchEvent(new Event('change', { bubbles: true })); }
+      if (play && !/Pause|Arrêter/.test(play.textContent)) play.click();
+    }
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var ed = sec.querySelector('.editor'); if (ed) setTimeout(function () { ed.focus(); }, 500);
+  });
+  sec.querySelectorAll('input[name="tm-correcao"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      var vivo = correcaoFazer() === 'aovivo';
+      $('tm-aovivo').hidden = !vivo;
+      if (vivo && !SALA) desenharSalaAluno(tache, m);
+      var env = $('tm-enviar'); if (env) env.textContent = correcaoFazer() === 'ia' ? 'Corriger avec l\'IA' : 'Envoyer au professeur';
+    });
+  });
+  var env0 = $('tm-enviar'); if (env0) env0.textContent = correcaoFazer() === 'ia' ? 'Corriger avec l\'IA' : 'Envoyer au professeur';
+  if (oral) return;
+  // Escrita: o editor da épreuve (contador, linhas), com rascunho guardado neste aparelho.
+  var ed = sec.querySelector('.editor'), chave = 'fnm_rasc_' + EMAIL + '_' + m.id, envioTimer = null;
+  var salvo = lerLocal(chave, null);
+  ligarEditor(ed, salvo ? salvo.t : '', salvo ? salvo.h : '', function (texto, html) {
+    gravarLocal(chave, { t: texto, h: html });
+    if (SALA && SALA.id) { clearTimeout(envioTimer); envioTimer = setTimeout(function () { salaEnviar({ texto: texto }); }, 1200); }
+  });
+  $('tm-enviar').addEventListener('click', function () {
+    var texto = textoDoEditor(ed), b = this, st = $('tm-enviar-st');
+    if (contarPalavras(texto) < 15) { st.textContent = 'Écrivez votre texte avant de le faire corriger.'; return; }
+    if (correcaoFazer() === 'ia') { pedirCorrecaoIA(tache, m.id, texto, $('tm-ia-res'), b); return; }
+    if (!confirm('Envoyer ce texte à un professeur ? 1 crédit sera utilisé (vous en avez ' + (B.creditos || 0) + ').')) return;
+    b.disabled = true; st.textContent = 'Envoi…';
+    google.script.run.withSuccessHandler(function (r) {
+      B.creditos = r.creditos;
+      st.innerHTML = '✓ Envoyé · protocole ' + esc(r.protocolo) + ' · <a href="correcoes.html">suivre la correction</a>';
+      if (SALA && SALA.id) salaEnviar({ texto: texto, fim: true });
+    }).withFailureHandler(function (er) { b.disabled = false; st.textContent = er.message || er; }).enviarTextoCorrecao(EMAIL, { tache: tache, sujet: m.id, texte: texto, modo: 'professor' });
+  });
+}
+
+// Dossiê de leitura do sujet: dois textos de referência e uma imagem, com créditos.
+function carregarDossier(alvo, tache, m) {
+  if (!alvo) return;
+  google.script.run.withSuccessHandler(function (d) {
+    if (!d || (!d.textos.length && !d.imagem)) { alvo.innerHTML = ''; return; }
+    var img = d.imagem ? '<figure class="tm-figura"><img src="' + esc(d.imagem.src) + '" alt="' + esc(d.imagem.legenda || '') + '" loading="lazy" referrerpolicy="no-referrer">' +
+      '<figcaption>' + (d.imagem.legenda ? esc(d.imagem.legenda) + ' · ' : '') + 'Image : ' + esc(d.imagem.autor) + ' · ' + esc(d.imagem.licenca) + ' · <a href="' + esc(d.imagem.url) + '" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>' : '';
+    alvo.innerHTML = '<h3 class="tm-sub">Pour mieux comprendre le thème</h3><div class="tm-leituras">' + img +
+      d.textos.map(function (t, i) {
+        return '<article class="tm-leitura"><span class="tm-leitura-n">Lecture ' + (i + 1) + '</span><h4>' + esc(t.titulo) + '</h4><p>' + esc(t.texto) + '</p>' +
+          '<small>Extrait de l\'article « ' + esc(t.titulo) + ' » · ' + esc(t.fonte) + ' · ' + esc(t.licenca) + ' · <a href="' + esc(t.url) + '" target="_blank" rel="noopener">lire l\'article complet ↗</a></small></article>';
+      }).join('') + '</div>';
+  }).withFailureHandler(function () { alvo.innerHTML = ''; }).obterDossierSujet(EMAIL, tache, m.id);
+}
+
+// ---------- professor ao vivo (lado do aluno) ----------
+var SALA = null;   // { id, stream, chamada, ultimoEnvio }
+function salaEnviar(dados) {
+  if (!SALA || !SALA.id) return;
+  google.script.run.withSuccessHandler(function (r) { if (r && r.encerrada) salaFim(); }).atualizarSalaAoVivo(EMAIL, SALA.id, dados);
+}
+function salaFim() {
+  if (!SALA) return;
+  try { SALA.stream && SALA.stream.fechar(); } catch (e) {}
+  try { SALA.chamada && SALA.chamada.encerrar(false); } catch (e) {}
+  SALA = null;
+  var a = $('tm-aovivo'); if (a) a.innerHTML = '<div class="av-sala-fim">La séance en direct est terminée.</div>';
+}
+function desenharSalaAluno(tache, m) {
+  var a = $('tm-aovivo');
+  a.innerHTML = '<div class="av-sala"><div class="av-sala-cab"><span class="av-ponto"></span><div><b>Professeur en direct</b><small id="av-estado">Appelez un professeur : il verra votre ' + (tache.indexOf('ET') === 0 ? 'texte' : 'transcription') + ' en temps réel.</small></div>' +
+    '<button class="botao-principal" type="button" id="av-chamar">Appeler un professeur</button></div>' +
+    '<div class="av-chamada" id="av-chamada" hidden></div><div class="av-chat" id="av-chat" hidden><div class="av-msgs" id="av-msgs"></div>' +
+    '<div class="av-msg-linha"><input id="av-msg" placeholder="Écrire au professeur…"><button class="ferramenta" type="button" id="av-msg-bt">Envoyer</button><button class="ferramenta sutil" type="button" id="av-fim">Terminer la séance</button></div></div></div>';
+  $('av-chamar').addEventListener('click', function () {
+    var b = this; b.disabled = true; b.textContent = 'Appel…';
+    google.script.run.withSuccessHandler(function (s) {
+      SALA = { id: s.id };
+      b.remove();
+      $('av-estado').textContent = 'En attente d\'un professeur… Vous pouvez commencer : il verra tout dès qu\'il entrera.';
+      $('av-chat').hidden = false;
+      ligarSalaAluno();
+      var ed = document.querySelector('#tm-fazer .editor');
+      if (ed) salaEnviar({ texto: textoDoEditor(ed) });
+    }).withFailureHandler(function (e) { b.disabled = false; b.textContent = 'Appeler un professeur'; avisar({ titulo: 'Appel impossible', texto: e.message || e, icone: '', som: false }); })
+      .chamarProfessorAoVivo(EMAIL, tache, m.id);
+  });
+}
+function ligarSalaAluno() {
+  var addMsg = function (de, nome, texto) {
+    var l = $('av-msgs'); if (!l) return;
+    l.insertAdjacentHTML('beforeend', '<div class="av-m ' + de + '"><b>' + esc(de === 'professor' ? (nome || 'Professeur') : 'Vous') + '</b><span>' + esc(texto) + '</span></div>');
+    l.scrollTop = l.scrollHeight;
+  };
+  // Chamada de voz: a mesma de « Simulação completa », com a sinalização desta sala.
+  if (window.SimuladoAoVivo && SimuladoAoVivo.Chamada) {
+    var ch = new SimuladoAoVivo.Chamada(SALA.id, 'aluno', {
+      onEstado: function (e2) { var c = $('av-chamada'); if (c && e2 === 'livre') c.hidden = true; if (c && e2 === 'conectada') c.innerHTML = '<span>🔊 En communication avec le professeur</span><button class="ferramenta" type="button" id="av-desligar">Raccrocher</button>', $('av-desligar') && $('av-desligar').addEventListener('click', function () { ch.encerrar(true); }); },
+      onRemoto: function (stream) { var au = document.getElementById('av-audio') || document.body.appendChild(Object.assign(document.createElement('audio'), { id: 'av-audio', autoplay: true })); au.srcObject = stream; },
+      onConvite: function () {
+        var c = $('av-chamada'); c.hidden = false;
+        c.innerHTML = '<span>📞 Le professeur vous appelle</span><button class="botao-principal" type="button" id="av-aceitar">Répondre</button><button class="ferramenta" type="button" id="av-recusar">Refuser</button>';
+        $('av-aceitar').addEventListener('click', function () { ch.aceitar(); c.innerHTML = '<span>Connexion…</span>'; });
+        $('av-recusar').addEventListener('click', function () { ch.recusar(); c.hidden = true; });
+        somSuave();
+      }
+    });
+    ch._enviar = function (dados) {
+      return fetch('/api/modeles/salas/' + SALA.id + '/sinal', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + localStorage.getItem('token') }, body: JSON.stringify({ dados: dados }) }).catch(function () {});
+    };
+    SALA.chamada = ch;
+  }
+  SALA.stream = SimuladoAoVivo.stream('/api/modeles/salas/' + SALA.id + '/stream', function (ev, d) {
+    if (ev === 'estado') {
+      if (d.status === 'atendimento') { $('av-estado').textContent = (d.professorNome || 'Un professeur') + ' suit votre production en direct.'; avisar({ titulo: 'Professeur connecté', texto: d.professorNome || '', icone: '', som: true, duracao: 6 }); }
+      if (d.status === 'encerrada') salaFim();
+    } else if (ev === 'msg') { if (d.de === 'professor') { addMsg('professor', d.nome, d.texto); somSuave(); } }
+    else if (ev === 'sinal' && SALA && SALA.chamada) SALA.chamada.receber(d);
+  });
+  $('av-msg-bt').addEventListener('click', function () {
+    var i = $('av-msg'); if (!i.value.trim()) return;
+    var t = i.value; i.value = '';
+    addMsg('aluno', '', t);
+    google.script.run.mensagemSala(EMAIL, SALA.id, t);
+  });
+  $('av-msg').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('av-msg-bt').click(); });
+  $('av-fim').addEventListener('click', function () {
+    if (!confirm('Terminer la séance en direct ?')) return;
+    google.script.run.encerrarSala(EMAIL, SALA.id);
+    salaFim();
+  });
+}
+
+// ---------- devoirs: também os do Dever de Casa do site ----------
+// Item com `link` (tema do catálogo do site) abre a página do dever; os demais abrem o sujet.
+ligarDevoirs = function (raiz) {
+  raiz.querySelectorAll('[data-dv-id]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var d = DEVOIRS.filter(function (x) { return x.id === b.dataset.dvId; })[0];
+      if (!d) return;
+      if (d.link || !d.modelo) { window.location.href = d.link || 'meus-deveres.html'; return; }
+      abrirModelo(d.tache, d.modelo, { tipo: 'devoir', devoir: d });
+    });
+  });
+};
+// producao.html#devoir=<id>: vindo do Dever de Casa do site, abre direto o devoir.
+function abrirDevoirPorId(id) {
+  google.script.run.withSuccessHandler(function (l) {
+    DEVOIRS = l || [];
+    var d = DEVOIRS.filter(function (x) { return x.id === id; })[0];
+    if (d && d.modelo) abrirModelo(d.tache, d.modelo, { tipo: 'devoir', devoir: d });
+    else abrirTarefas();
+  }).withFailureHandler(function () { abrirTarefas(); }).meusDevoirs(EMAIL);
+}

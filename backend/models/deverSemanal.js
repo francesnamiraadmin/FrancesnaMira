@@ -25,5 +25,12 @@ const DeverSemanalSchema = new mongoose.Schema({
 });
 
 DeverSemanalSchema.index({ alunoId: 1, numeroSemana: 1 });
+DeverSemanalSchema.index({ "atividades.conteudo.devoirProducaoId": 1 });
+
+// Atividade "producao_ambiente" criada no Dever de Casa → cria o devoir correspondente no
+// Ambiente de Produção (só para este aluno), para o aluno vê-lo nos dois lugares.
+DeverSemanalSchema.pre("save", async function () {
+  await require("../utils/devoirsSync").criarDevoirsDasAtividades(this);
+});
 
 module.exports = mongoose.model("DeverSemanal", DeverSemanalSchema);

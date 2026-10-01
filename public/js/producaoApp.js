@@ -184,6 +184,7 @@ function entrar() {
       google.script.run
         .withSuccessHandler(function (banco) {
           B = banco;
+          if (window.FNM_TRADUZIR_BANCO) window.FNM_TRADUZIR_BANCO(B);   // pt-BR: eixos (js/producaoI18n.js)
           B.audios = B.audios || {};
           B.ttsAtivo = true;   // áudios Coqui pré-gerados (audio/modeles), ver extensões
           prepararDestaques();
@@ -865,7 +866,7 @@ function irAccueil() {
         botoes.forEach(function (b) { b.setAttribute('aria-pressed', String(ligado)); });
         painel.hidden = !ligado;
         raiz.classList.toggle('com-dictee', ligado);
-        if (!ligado) { Voz.parar(); if (raiz._abrirReescrita) raiz._abrirReescrita(); return; }
+        if (!ligado) { Voz.parar(); return; }
         if (raiz._fecharReescrita) raiz._fecharReescrita();
         desenhar();
         painel.scrollIntoView && window.innerWidth < 960 && painel.scrollIntoView({ block: 'start' });
@@ -1091,8 +1092,6 @@ function irAccueil() {
       });
       if ($('rascunho-ia')) $('rascunho-ia').addEventListener('click', function () { pedirCorrecaoIA(tache, m.id, textoDoEditor(ed), $('rascunho-ia-res'), $('rascunho-ia')); });
       ligarEnvioSistema(raiz.querySelector('[data-envio="rs"]'), function () { return { tache: tache, sujet: m.id, texte: textoDoEditor(ed) }; });
-      // o propósito dos modelos é reescrever: a folha já abre ao lado
-      raiz._abrirReescrita();
     }
 
 
@@ -1336,6 +1335,9 @@ function irAccueil() {
       if (autoGerar) bt.click();
     }
 
+// Página do sujet, na ordem de estudo: título → « Faire ce sujet » (cronômetro, correção, escrita
+    // ou gravação, professor ao vivo) → Sujet (enunciado, documentos, dossiê de leitura com imagem)
+    // → Pistes pour compléter (dicas + trame, ao clicar) → Réponse modèle (ao clicar, legenda ao lado).
     function renderizarModelo(tache, m, origem) {
       origem = origem || { tipo: 'liste' };
       if (origem.tipo === 'atelier') origem.tipo = 'modeles-page';
@@ -1345,9 +1347,9 @@ function irAccueil() {
       var pos = -1;
       itens.forEach(function (x, i) { if (x.id === m.id) pos = i; });
       estado.origem = origem;
-      var info = TACHES[tache], e = eixo(m.e);
+      var info = TACHES[tache], e = eixo(m.e), oral = tache.indexOf('ET') !== 0;
       var sorteio = origem.tipo === 'sorteio';
-
+    
       var partes = [PARTE_ACCUEIL()];
       if (origem.tipo === 'dictee-page') partes.push({ rotulo: 'Dictée', fn: abrirDicteePage });
       else if (origem.tipo === 'modeles-page') partes.push({ rotulo: 'Modèles de production écrite', fn: abrirModelesEcrits });
@@ -1356,45 +1358,84 @@ function irAccueil() {
       else if (origem.tipo === 'eixo' || (sorteio && origem.de === 'eixo')) partes.push({ rotulo: e.icone + ' ' + e.nome, fn: function () { abrirEixo(m.e); } });
       else partes.push({ rotulo: nomeTache(tache), fn: function () { abrirLista(tache, true); } });
       partes.push({ rotulo: m.titre });
-
+    
+      // Peças do script, montadas e redistribuídas nos blocos da nova ordem.
+      var corpo = tache === 'T2' ? corpoDialogo(m) : (tache === 'T3' || tache === 'T1') ? corpoT3(m, tache) : corpoEscrito(m, tache);
+      var tmp = document.createElement('div');
+      tmp.innerHTML = corpo;
+      var tirar = function (sel) { var el = tmp.querySelector(sel); if (el) el.remove(); return el ? el.outerHTML : ''; };
+      var htmlCrono = tirar('.crono-bloco'), htmlContexto = tirar('.contexto'), htmlGravador = tirar('.gravador-livre');
+      var htmlDocsModelo = '';
+      Array.prototype.slice.call(tmp.querySelectorAll('.bloco')).forEach(function (b) {
+        if (b.querySelector('.docs') && !b.classList.contains('modelo-conteudo')) { htmlDocsModelo = b.querySelector('.docs').outerHTML; b.remove(); }
+      });
+      Array.prototype.slice.call(tmp.children).forEach(function (p) { if (p.tagName === 'P' && /tombé/.test(p.textContent)) p.remove(); });
+      var htmlModelo = tmp.innerHTML;
+      var lat = document.createElement('div');
+      lat.innerHTML = lateral(m, tache);
+      var blocosLat = lat.querySelectorAll('.lateral > .bloco');
+      var htmlLegenda = blocosLat[0] ? blocosLat[0].outerHTML : '', htmlVocab = '', htmlTrame = '';
+      for (var bi = 1; bi < blocosLat.length; bi++) { if (blocosLat[bi].querySelector('.trame-lista')) htmlTrame = blocosLat[bi].outerHTML; else htmlVocab += blocosLat[bi].outerHTML; }
+    
       var html = trilha(partes);
       if (sorteio) {
         html += '<div class="faixa-sorteio"><span>Sujet tiré au sort' + (origem.eixo ? ' · ' + esc(eixo(origem.eixo).nome) : '') +
           (origem.reiniciou ? ' · tous les sujets avaient déjà été tirés, on recommence' : '') + '</span>' +
           '<button class="botao-sorteio" type="button" data-nav="sortear">Un autre sujet</button></div>';
       }
-      html += '<div class="modele-grade modele-raiz' + (sorteio ? ' modelo-oculto' : '') + '" id="modele-raiz"><div class="coluna-principal">';
-      html += '<div class="etiquetas"><span class="etiqueta">' + nomeTache(tache) + ' · ' + info.sous + '</span>' +
+      html += '<div class="modele-grade modele-raiz tm-pagina" id="modele-raiz"><div class="coluna-principal">';
+      html += '<header class="tm-cab"><div class="etiquetas"><span class="etiqueta">' + nomeTache(tache) + ' · ' + info.sous + '</span>' +
         '<span class="etiqueta eixo" style="--cor:' + e.cor + '">' + e.icone + ' ' + esc(e.nome) + '</span>' +
-        (m.reg ? '<span class="etiqueta">' + (m.reg === 'tu' ? 'Registre familier (tu)' : 'Registre formel (vous)') + '</span>' : '') + '</div>';
-      html += '<h1 class="modele-titulo">' + esc(m.titre) + '</h1>';
-      html += '<div class="acoes-modelo"><button class="botao-cahier' + (CARNET_IDS[m.id] ? ' marcado' : '') + '" type="button" id="bt-carnet">' +
+        (m.reg ? '<span class="etiqueta">' + (m.reg === 'tu' ? 'Registre familier (tu)' : 'Registre formel (vous)') + '</span>' : '') +
+        (m.f > 1 ? '<span class="etiqueta">tombé ' + m.f + ' fois</span>' : '') + '</div>' +
+        '<h1 class="modele-titulo">' + esc(m.titre) + '</h1>' +
+        '<div class="tm-acoes"><button class="tm-fazer-bt" type="button" id="tm-fazer-bt"><span class="tm-play">▶</span><span><b>Faire ce sujet</b><small>Lance le chronomètre et ouvre ' + (oral ? 'l\'enregistrement' : 'la feuille de réponse') + '</small></span></button>' +
+        '<button class="botao-cahier' + (CARNET_IDS[m.id] ? ' marcado' : '') + '" type="button" id="bt-carnet">' +
         (CARNET_IDS[m.id] ? 'Enregistré dans mon cahier <small>toucher pour retirer</small>' : 'Enregistrer dans mon cahier <small>pour le réviser plus tard (dictée, oral, écrit)</small>') + '</button>' +
         (B.professor ? '<button class="ferramenta" type="button" id="bt-devoir">Proposer en devoir</button><button class="ferramenta" type="button" id="bt-partilhar">Partager ce modèle</button>' : '') + '</div>' +
-        (B.professor ? '<div id="painel-partilha" hidden></div>' : '');
+        (B.professor ? '<div id="painel-partilha" hidden></div>' : '') + '</header>';
       if (origem && origem.tipo === 'devoir') {
         var dv = origem.devoir;
         html += '<div class="faixa-devoir"><div><b>Devoir : ' + esc(dv.tipoNome) + '</b>' + (dv.mensagem ? '<span>« ' + esc(dv.mensagem) + ' »</span>' : '') + '</div>' +
           (dv.feito ? '<em>✓ Fait' + (dv.score !== '' ? ' · ' + dv.score + '/' + dv.total : '') + '</em>' : dv.tipo === 'dictee' ? '<em>Terminez la dictée : le devoir sera validé automatiquement.</em>' : '<button class="ferramenta destaque" type="button" id="bt-devoir-feito">✓ J\'ai terminé</button>') + '</div>';
       }
-      if (m.guia && m.pistes && (m.pistes.pour.length || m.pistes.docs.length) && tache !== 'T3') html += '<div class="bloco guia-pistes"><h3>Pistes pour compléter</h3>' +
+    
+      // Faire ce sujet (aparece ao clicar no botão do topo)
+      html += '<section class="tm-bloco tm-fazer" id="tm-fazer" hidden><div class="tm-bloco-cab"><span class="tm-num">✎</span><div><h2>Faire ce sujet</h2><p>Choisissez qui corrigera votre production, puis ' + (oral ? 'enregistrez-vous' : 'écrivez') + '. Vous pouvez ouvrir les pistes et le modèle en même temps.</p></div></div>' +
+        htmlCrono + htmlEscolhaFazer(oral) + '<div id="tm-aovivo" hidden></div>' +
+        (oral ? htmlGravador : '<div class="tm-escrita">' + editorHtml(tache) + '<div class="tm-escrita-acoes"><button class="botao-principal" type="button" id="tm-enviar">Faire corriger</button><span class="aviso" id="tm-enviar-st"></span></div><div class="ia-resultado" id="tm-ia-res"></div></div>') +
+        '</section>';
+    
+      // 1. Sujet
+      html += '<section class="tm-bloco tm-sujet"><div class="tm-bloco-cab"><span class="tm-num">1</span><div><h2>' + (tache === 'T3' || tache === 'T1' ? 'Sujet' : 'Consigne') + '</h2><p>Lisez le sujet et les documents pour bien comprendre le thème avant de commencer.</p></div></div>' +
+        (m.c ? '<div class="bloco consigne"><p>' + esc(m.c) + '</p></div>' : '') +
+        (m.d1 ? '<div class="docs"><div class="doc"><h4>Document 1</h4><p>' + destacar(m.d1, m.k) + '</p></div><div class="doc"><h4>Document 2</h4><p>' + destacar(m.d2, m.k) + '</p></div></div>' : htmlDocsModelo) +
+        '<div class="tm-dossier" id="tm-dossier"><p class="aviso">Chargement des lectures sur le thème…</p></div></section>';
+      if (sorteio) html += '<div class="bloco revelar"><p>Préparez-vous avec la consigne et le chronomètre, puis découvrez le modèle.</p><button class="botao-principal" type="button" data-nav="revelar">Voir le modèle</button></div>';
+    
+      // 2. Pistes (dicas) + trame, ao clicar
+      var pistas = '';
+      if (m.guia && m.pistes && (m.pistes.pour.length || m.pistes.docs.length)) pistas += '<div class="bloco guia-pistes">' +
         (m.pistes.docs.length ? '<p><b>Dans les documents :</b> ' + m.pistes.docs.map(function (d) { return '« ' + esc(d) + ' »'; }).join(' · ') + '</p>' : '') +
         (m.pistes.pour.length ? '<p><b>Arguments possibles pour :</b> ' + m.pistes.pour.map(esc).join(' · ') + '</p>' : '') +
         (m.pistes.contre.length ? '<p><b>Arguments possibles contre :</b> ' + m.pistes.contre.map(esc).join(' · ') + '</p>' : '') + '</div>';
+      else if (e.argumentsPour) pistas += '<div class="bloco guia-pistes"><p><b>Arguments possibles pour :</b> ' + e.argumentsPour.map(esc).join(' · ') + '</p>' +
+        '<p><b>Arguments possibles contre :</b> ' + (e.argumentsContre || []).map(esc).join(' · ') + '</p></div>';
+      html += '<details class="tm-bloco tm-dicas" id="tm-dicas"><summary class="tm-bloco-cab"><span class="tm-num">2</span><div><h2>Pistes pour compléter</h2><p>Idées, contexte, vocabulaire clé et la trame de la tâche.</p></div><span class="tm-seta" aria-hidden="true"></span></summary>' +
+        '<div class="tm-dicas-corpo">' + pistas + htmlContexto + htmlVocab + htmlTrame + '</div></details>';
+    
+      // 3. Réponse modèle (+ légende ao lado), ao clicar
+      html += '<details class="tm-bloco tm-modele" id="tm-modele"' + (sorteio ? ' data-sorteio="1"' : '') + '><summary class="tm-bloco-cab"><span class="tm-num">3</span><div><h2>Réponse modèle</h2><p>' +
+        (oral ? 'Le modèle avec l\'audio, à écouter, masquer et répéter.' : 'La production modèle commentée, à lire, écouter et réécrire.') + '</p></div><span class="tm-seta" aria-hidden="true"></span></summary>';
       if (m.guia) html += '<div class="guia-faixa"><b>Modèle-guide</b><span>Construit avec la trame et les formules Français na Mira pour ce sujet : complétez les parties entre [crochets] avec vos idées.' +
         (B.professor ? ' La version entièrement rédigée apparaîtra ici dès qu\'elle sera générée (Espace professeur → Modèles de tous les sujets).' : '') + '</span>' +
         (B.professor ? '<button class="ferramenta destaque" type="button" id="bt-redigir-ia">Rédiger la version complète</button>' : '') + '</div>';
       else if (m.gerado) html += '<p class="aviso selo-gerado">Modèle rédigé par l\'IA selon la méthode Français na Mira</p>';
-      if (m.c) html += '<div class="bloco consigne"><h3>' + (tache === 'T3' || tache === 'T1' ? 'Sujet' : 'Consigne') + '</h3><p>' + esc(m.c) + '</p></div>';
-      if (sorteio) html += '<div class="bloco revelar"><p>Préparez-vous avec la consigne et le chronomètre, puis découvrez le modèle.</p><button class="botao-principal" type="button" data-nav="revelar">Voir le modèle</button></div>';
-
-      if (tache === 'T2') html += corpoDialogo(m);
-      else if (tache === 'T3' || tache === 'T1') html += corpoT3(m, tache);
-      else html += corpoEscrito(m, tache);
-
+      html += '<div class="tm-modele-grade"><div class="tm-modele-corpo">' + htmlModelo + '</div><aside class="lateral tm-legenda">' + htmlLegenda + '</aside></div></details>';
+    
       html += navegacaoRodape(pos, itens.length);
-      html += '</div>' + lateral(m, tache) + painelDictee() + (/^ET/.test(tache) ? painelReescrita(info, tache, m) : '') + '</div>';
-
+      html += '</div>' + painelDictee() + (/^ET/.test(tache) ? painelReescrita(info, tache, m) : '') + '</div>';
+    
       var tela = $('tela-modele');
       tela.innerHTML = html;
       ligarTrilha(tela, partes);
@@ -1408,14 +1449,13 @@ function irAccueil() {
           if (marcado) CARNET_IDS[m.id] = { tache: tache, id: m.id, titre: m.titre, e: m.e }; else delete CARNET_IDS[m.id];
           bt.classList.toggle('marcado', marcado);
           bt.innerHTML = marcado ? 'Enregistré dans mon cahier <small>toucher pour retirer</small>' : 'Enregistrer dans mon cahier <small>pour le réviser plus tard (dictée, oral, écrit)</small>';
-          avisar({ titulo: marcado ? 'Enregistré dans votre cahier' : 'Retiré du cahier', texto: m.titre, icone: '', som: false, duracao: 6,
-            acao: marcado ? { rotulo: 'Ouvrir mon cahier', fn: abrirCarnet } : null });
+          avisar({ titulo: marcado ? 'Enregistré dans votre cahier' : 'Retiré du cahier', texto: m.titre, icone: '', som: false, duracao: 6, acao: marcado ? { rotulo: 'Ouvrir mon cahier', fn: abrirCarnet } : null });
         }).withFailureHandler(function () { bt.disabled = false; }).alternarCarnet(EMAIL, { tache: tache, id: m.id, titre: m.titre, e: m.e });
       });
       if ($('bt-redigir-ia')) $('bt-redigir-ia').addEventListener('click', function () {
         var bt = this; bt.disabled = true; bt.textContent = 'Rédaction… (30 à 60 s)';
         google.script.run.withSuccessHandler(function (m2) { renderizarModelo(tache, m2, origem); })
-          .withFailureHandler(function (e) { bt.disabled = false; bt.textContent = 'Rédiger la version complète'; avisar({ titulo: 'Impossible de rédiger', texto: e.message || e, icone: '', som: false, duracao: 12 }); })
+          .withFailureHandler(function (er) { bt.disabled = false; bt.textContent = 'Rédiger la version complète'; avisar({ titulo: 'Impossible de rédiger', texto: er.message || er, icone: '', som: false, duracao: 12 }); })
           .gerarModeloIA(EMAIL, tache, m.id);
       });
       if ($('bt-devoir')) $('bt-devoir').addEventListener('click', function () { PREFILL_DEVOIR = { tache: tache, id: m.id }; abrirProf('devoirs'); });
@@ -1436,7 +1476,6 @@ function irAccueil() {
           raiz.classList.toggle('off-' + b.dataset.cat, ativo);
         });
       });
-
       var voltar = partes[partes.length - 2].fn;
       tela.querySelectorAll('[data-nav]').forEach(function (b) {
         b.addEventListener('click', function () {
@@ -1446,7 +1485,7 @@ function irAccueil() {
           else if (acao === 'topo') window.scrollTo({ top: 0, behavior: 'smooth' });
           else if (acao === 'sortear' && noAtelier) { var outro = itens[Math.floor(Math.random() * itens.length)]; renderizarModelo(outro.tache, outro, { tipo: 'atelier', foco: origem.foco }); }
           else if (acao === 'sortear') sortear(tache, origem.eixo || (origem.tipo === 'eixo' ? origem.eixo : estado.filtroEixo), origem.de || origem.tipo, origem.busca);
-          else if (acao === 'revelar') { raiz.classList.remove('modelo-oculto'); b.closest('.revelar').hidden = true; }
+          else if (acao === 'revelar') { $('tm-modele').open = true; b.closest('.revelar').hidden = true; }
           else if (acao === 'ant' || acao === 'prox') {
             var alvoNav = itens[pos + (acao === 'prox' ? 1 : -1)];
             if (alvoNav && noAtelier) renderizarModelo(alvoNav.tache, alvoNav, { tipo: 'atelier', foco: origem.foco });
@@ -1454,17 +1493,21 @@ function irAccueil() {
           }
         });
       });
-
+    
       if (tache === 'T2') ligarDialogo(m);
       else if (tache === 'T3' || tache === 'T1') ligarT3(m, tache);
       else ligarEscrito(m, tache);
-      if (tache.indexOf('ET') !== 0) ligarGravadorLivre(raiz, tache, m);
+      if (oral) ligarGravadorLivre(raiz, tache, m);
+      ligarFazer(raiz, tache, m, oral);
+      carregarDossier($('tm-dossier'), tache, m);
+      // Ditado e reescrita leem o modelo: abrir um deles abre também a Réponse modèle.
+      raiz.querySelectorAll('[data-abrir-dictee], [data-abrir-reescrita]').forEach(function (b) { b.addEventListener('click', function () { $('tm-modele').open = true; }, true); });
       mostrar('tela-modele');
       // Devoir / carnet: vai direto para a atividade pedida.
       var foco = origem && (origem.foco || (origem.tipo === 'devoir' && origem.devoir.tipo));
-      if (foco === 'dictee') { var bd = raiz.querySelector('[data-abrir-dictee]'); if (bd) { if (raiz.classList.contains('modelo-oculto')) raiz.classList.remove('modelo-oculto'); bd.click(); } }
-      else if (foco === 'oral') { var g = $('grav-livre'); if (g) g.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-      else if (foco === 'ecrit') { var rs = $('rascunho'); if (rs) { rs.scrollIntoView({ behavior: 'smooth', block: 'center' }); rs.focus(); } }
+      if (foco === 'dictee') { $('tm-modele').open = true; var bd = raiz.querySelector('[data-abrir-dictee]'); if (bd) bd.click(); }
+      else if (foco === 'oral' || foco === 'ecrit') $('tm-fazer-bt').click();
+      else if (foco === 'etude' || (origem && origem.tipo === 'modeles-page')) $('tm-modele').open = true;
     }
 
     function navegacaoRodape(pos, total) {
@@ -4344,6 +4387,7 @@ function abasEspace(ativa) {
           ligarMensagens(tela, atualizarSeloTarefas);
           ligarAbasEspace(tela);
           $('esp-epreuves').addEventListener('click', abrirEpreuve);
+          resumoEspace(tela, pend.length, mPend.length);
           $('chave-bt').addEventListener('click', function () {
             var msg = $('chave-msg'); msg.textContent = 'Vérification…';
             google.script.run.withSuccessHandler(function (r) {
@@ -4849,6 +4893,7 @@ function abasEspace(ativa) {
         tela.innerHTML = html;
         ligarTrilha(tela, partes);
         tela.querySelectorAll('[data-aba]').forEach(function (b) { b.addEventListener('click', function () { abrirProf(b.dataset.aba); }); });
+        organizarProf(tela, aba);
         if (aba === 'aovivo') ligarAoVivo(); else if (aba === 'ecrit') ligarProfEscrita(); else if (aba === 'oral') ligarProfOral(); else if (aba === 'devoirs') ligarProfDevoirs(); else if (aba === 'eleves') ligarProfEleves();
         else if (aba === 'suivi') ligarSuivi(); else if (aba === 'online') ligarOnline(); else if (aba === 'temas') ligarTemasMes(); else if (aba === 'blog') ligarBlogProf(); else if (aba === 'aconf') ligarAConfirmar(); else if (aba === 'geracao') ligarGeracao(); else if (aba === 'avis') ligarAvisProf(); else if (aba === 'testes') ligarTestesProf(); else if (aba === 'quadro') ligarQuadroTemas(); else if (aba === 'vocab') ligarVocabProf(); else if (aba === 'vitesse') ligarVitesse(); else if (aba === 'finances') ligarFinances(); else ligarProfSessoes();
       });
@@ -5530,8 +5575,9 @@ function abasEspace(ativa) {
       var partes = [PARTE_ACCUEIL(), { rotulo: 'Boîte à outils' }];
       var html = trilha(partes);
       html += '<h1 class="titulo-pagina">Boîte à outils</h1><p class="intro">Les trames des six tâches, les connecteurs clés et la formule de conclusion utilisés dans tous les modèles.</p>';
-      html += '<div class="grade-trames">';
+      html += '<h2 class="secao-titulo outils-secao"><i class="oral"></i>Oral</h2><div class="grade-trames">';
       ORDEM_TACHES.forEach(function (t) {
+        if (t === 'ET1') html += '</div><h2 class="secao-titulo outils-secao"><i class="ecrit"></i>Écrit</h2><div class="grade-trames">';
         var tr = B.trames[t]; if (!tr) return;
         html += '<div class="bloco"><div class="etiquetas"><span class="etiqueta">' + nomeTache(t) + '</span></div>' +
           '<h3>' + esc(tr.titulo) + '</h3>' + (tr.sousTitre ? '<p class="aviso" style="margin-top:0">' + esc(tr.sousTitre) + '</p>' : '') +
@@ -5611,6 +5657,8 @@ function abasEspace(ativa) {
             else parcial += r[0].transcript;
           }
           aoMudar((finais + parcial).trim());
+          // professor ao vivo: a fala transcrita vai para a sala (a cada ~1 s)
+          if (typeof SALA !== 'undefined' && SALA && SALA.id) { var tx = (finais + parcial).trim(); clearTimeout(Transcricao.envio); Transcricao.envio = setTimeout(function () { salaEnviar({ transcricao: tx }); }, 1000); }
         };
         rec.onend = function () { if (ativo) { try { rec.start(); } catch (e) {} } };
         rec.onerror = function () {};
@@ -5666,6 +5714,7 @@ function abasEspace(ativa) {
         vocab: abrirVocab, attentes: function () { abrirAttentes(); }, espace: abrirTarefas, notes: abrirNotes, carnet: abrirCarnet,
         epreuve: abrirEpreuve, simulados: abrirSimulados, outils: abrirOutils, prof: function () { abrirProf(); }
       };
+      if (/^devoir=/.test(d)) { abrirDevoirPorId(d.slice(7)); return; }
       if (mapa[d]) mapa[d](); else if (B && B.professor && window.FNM_ABRIR === 'prof') abrirProf(); else irAccueil();
     }
     window.addEventListener('hashchange', function () { if (B) abrirDestino(location.hash.replace(/^#/, '')); });
@@ -5767,16 +5816,31 @@ function abasEspace(ativa) {
       return '<div class="atalhos-equipe">' + l.map(function (x) { return '<a class="chip" href="' + x[0] + '">' + x[1] + ' ↗</a>'; }).join('') + '</div>';
     }
     
-    // ---------- espace professeur: acompanhamento ao vivo das épreuves ----------
+    // ---------- espace professeur: ao vivo (salas com professor + épreuves de 60 min) ----------
     var AO_VIVO = null;
     function ligarAoVivo() {
       var alvo = $('aovivo'); if (!alvo) return;
       if (AO_VIVO && AO_VIVO.parar) AO_VIVO.parar();
-      var estado = {}, relTimer = null;
+      alvo.innerHTML = '<div id="av-salas"></div><div id="av-sala-aberta"></div><div id="av-epreuves"></div>';
+      var estado = {}, salas = {}, relTimer = null, salaAberta = null;
+    
+      var desenharSalas = function () {
+        var box = $('av-salas'); if (!box) return;
+        var l = Object.keys(salas).map(function (k) { return salas[k]; }).sort(function (a, b) { return new Date(a.inicio) - new Date(b.inicio); });
+        box.innerHTML = '<div class="bloco av-salas-bloco"><h3>Élèves qui demandent un professeur en direct : ' + l.length + '</h3>' +
+          '<p class="aviso" style="margin-top:0">L\'élève fait un sujet du Ambiente de Produção et vous suivez son texte ou sa parole (transcription) en temps réel, avec le roteiro du sujet. Vous pouvez lui écrire et l\'appeler par la voix.</p>' +
+          (l.length ? '<div class="av-grade">' + l.map(function (s) {
+            return '<div class="av-card sala ' + s.status + '"><div class="av-cab"><b>' + esc(s.nome || '') + '</b><span class="av-status">' + (s.status === 'aguardando' ? '● en attente' : 'avec ' + esc(s.professorNome || '')) + '</span></div>' +
+              '<small>' + esc(nomeTache(s.tache)) + (s.curso ? ' · ' + esc(s.curso) : '') + '</small><p class="av-sala-tit">' + esc(s.titulo || '') + '</p>' +
+              '<button class="botao-principal" type="button" data-av-entrar="' + s.id + '">' + (s.status === 'aguardando' ? 'Entrer dans la salle' : 'Ouvrir la salle') + '</button></div>';
+          }).join('') + '</div>' : '<p class="vazio">Personne n\'attend pour le moment.</p>') + '</div>';
+        box.querySelectorAll('[data-av-entrar]').forEach(function (b) { b.addEventListener('click', function () { abrirSalaProf(b.dataset.avEntrar); }); });
+      };
+    
       var desenhar = function () {
-        if (!$('aovivo')) { if (relTimer) clearInterval(relTimer); return; }
+        var box = $('av-epreuves'); if (!box) { if (relTimer) clearInterval(relTimer); return; }
         var l = Object.keys(estado).map(function (k) { return estado[k]; }).sort(function (a, b) { return (a.nome || '').localeCompare(b.nome || ''); });
-        alvo.innerHTML = '<div class="bloco"><h3>Épreuves écrites en cours : ' + l.length + '</h3><p class="aviso" style="margin-top:0">Les textes s\'actualisent à chaque enregistrement automatique (environ toutes les 20 secondes). Les productions orales envoyées arrivent dans « Noter l\'oral » et dans le Sistema de Correção.</p>' +
+        box.innerHTML = '<div class="bloco"><h3>Épreuves écrites en cours : ' + l.length + '</h3><p class="aviso" style="margin-top:0">Les textes s\'actualisent à chaque enregistrement automatique (environ toutes les 20 secondes). Les productions orales envoyées arrivent dans « Noter l\'oral » et dans le Sistema de Correção.</p>' +
           (l.length ? '<div class="av-grade">' + l.map(function (e) {
             var resta = Math.max(0, Math.round((e.fim - Date.now()) / 1000));
             return '<div class="av-card"><div class="av-cab"><b>' + esc(e.nome || '') + '</b><span class="av-tempo' + (resta < 300 ? ' fim' : '') + '">' + formatarTempo(resta) + '</span></div>' +
@@ -5788,9 +5852,9 @@ function abasEspace(ativa) {
               }).join('') +
               '<div class="av-msg"><input placeholder="Message à l\'élève…" data-av-msg="' + esc(e.alunoId) + '"><button class="ferramenta" type="button" data-av-env="' + esc(e.alunoId) + '">Envoyer</button></div></div>';
           }).join('') + '</div>' : '<p class="vazio">Aucune épreuve en cours pour le moment.</p>') + '</div>';
-        alvo.querySelectorAll('[data-av-env]').forEach(function (b) {
+        box.querySelectorAll('[data-av-env]').forEach(function (b) {
           b.addEventListener('click', function () {
-            var inp = alvo.querySelector('[data-av-msg="' + b.dataset.avEnv + '"]');
+            var inp = box.querySelector('[data-av-msg="' + b.dataset.avEnv + '"]');
             if (!inp.value.trim()) return;
             b.disabled = true;
             google.script.run.withSuccessHandler(function () { inp.value = ''; b.disabled = false; avisar({ titulo: 'Message envoyé', icone: '', som: false, duracao: 4 }); })
@@ -5798,10 +5862,63 @@ function abasEspace(ativa) {
           });
         });
       };
+    
+      // Sala aberta: roteiro do sujet + produção ao vivo + chat + chamada de voz.
+      var abrirSalaProf = function (id) {
+        google.script.run.withSuccessHandler(function (s) {
+          if (salaAberta) salaAberta.fechar();
+          salas[s.id] = s; desenharSalas();
+          var box = $('av-sala-aberta'), oral = s.tache.indexOf('ET') !== 0;
+          box.innerHTML = '<div class="bloco av-sala-prof"><div class="av-sala-topo"><div><span class="tm-selo">Salle en direct</span><h3>' + esc(s.nome || '') + ' · ' + esc(nomeTache(s.tache)) + '</h3><small>' + esc(s.titulo || '') + '</small></div>' +
+            '<div class="av-sala-bts"><button class="botao-principal" type="button" id="avp-ligar">📞 Appeler l\'élève</button><button class="ferramenta" type="button" id="avp-desligar" hidden>Raccrocher</button><button class="ferramenta sutil" type="button" id="avp-fim">Terminer la séance</button></div></div>' +
+            '<span class="aviso" id="avp-chamada"></span>' +
+            '<div class="av-sala-grade"><div><h4>' + (oral ? 'Ce que dit l\'élève (transcription en direct)' : 'Ce que l\'élève écrit (en direct)') + '</h4><div class="av-ao-vivo prod-texto" id="avp-texto">' + esc(oral ? s.transcricao : s.texto).replace(/\n/g, '<br>') + '</div>' +
+            '<small id="avp-contagem"></small><div class="av-msgs" id="avp-msgs"></div><div class="av-msg-linha"><input id="avp-msg" placeholder="Écrire à l\'élève…"><button class="ferramenta" type="button" id="avp-msg-bt">Envoyer</button></div></div>' +
+            '<div class="av-roteiro"><h4>Roteiro du sujet</h4><div id="avp-roteiro"><p class="aviso">Chargement…</p></div></div></div></div>';
+          box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          var contar = function () { var t = $('avp-texto').innerText; $('avp-contagem').textContent = contarPalavras(t) + ' mots'; };
+          contar();
+          var addMsg = function (de, nome, texto) { var l = $('avp-msgs'); if (!l) return; l.insertAdjacentHTML('beforeend', '<div class="av-m ' + de + '"><b>' + esc(de === 'aluno' ? (s.nome || 'Élève') : 'Vous') + '</b><span>' + esc(texto) + '</span></div>'); l.scrollTop = l.scrollHeight; };
+          (s.mensagens || []).forEach(function (mm) { addMsg(mm.de, '', mm.texto); });
+          google.script.run.withSuccessHandler(function (r) { $('avp-roteiro').innerHTML = htmlRoteiro(r); }).roteiroSujet(EMAIL, s.tache, s.sujetId);
+          var ch = null;
+          if (window.SimuladoAoVivo && SimuladoAoVivo.Chamada) {
+            ch = new SimuladoAoVivo.Chamada(s.id, 'professor', {
+              onEstado: function (e2, d) {
+                var st = $('avp-chamada'); if (!st) return;
+                st.textContent = { chamando: 'Appel en cours… l\'élève doit répondre.', conectando: 'Connexion…', conectada: '🔊 En communication avec l\'élève', instavel: 'Connexion instable…', falhou: d || 'Échec de l\'appel.', erro: d || 'Erreur.', livre: '' }[e2] || '';
+                $('avp-desligar').hidden = !(e2 === 'chamando' || e2 === 'conectando' || e2 === 'conectada' || e2 === 'instavel');
+              },
+              onRemoto: function (stream) { var au = document.getElementById('avp-audio') || document.body.appendChild(Object.assign(document.createElement('audio'), { id: 'avp-audio', autoplay: true })); au.srcObject = stream; }
+            });
+            ch._enviar = function (dados) { return fetch('/api/modeles/salas/' + s.id + '/sinal', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + localStorage.getItem('token') }, body: JSON.stringify({ dados: dados }) }).catch(function () {}); };
+          }
+          $('avp-ligar').addEventListener('click', function () { if (ch) ch.ligar(); });
+          $('avp-desligar').addEventListener('click', function () { if (ch) ch.encerrar(true); });
+          $('avp-msg-bt').addEventListener('click', function () { var i = $('avp-msg'); if (!i.value.trim()) return; var t = i.value; i.value = ''; addMsg('professor', '', t); google.script.run.mensagemSala(EMAIL, s.id, t); });
+          $('avp-msg').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('avp-msg-bt').click(); });
+          var stream = SimuladoAoVivo.stream('/api/modeles/salas/' + s.id + '/stream', function (ev, d) {
+            if (!$('avp-texto')) { stream.fechar(); return; }
+            if (ev === 'conteudo') { $('avp-texto').innerHTML = esc(oral ? d.transcricao : d.texto).replace(/\n/g, '<br>'); contar(); }
+            else if (ev === 'msg' && d.de === 'aluno') { addMsg('aluno', d.nome, d.texto); somSuave(); }
+            else if (ev === 'sinal' && ch) ch.receber(d);
+            else if (ev === 'estado' && d.status === 'encerrada') { $('avp-chamada').textContent = 'L\'élève a terminé la séance.'; if (ch) ch.encerrar(false); }
+          });
+          salaAberta = { fechar: function () { try { stream.fechar(); } catch (e) {} try { ch && ch.encerrar(false); } catch (e) {} } };
+          $('avp-fim').addEventListener('click', function () {
+            if (!confirm('Terminer la séance en direct ?')) return;
+            google.script.run.encerrarSala(EMAIL, s.id);
+            salaAberta.fechar(); salaAberta = null; delete salas[s.id];
+            $('av-sala-aberta').innerHTML = ''; desenharSalas();
+          });
+        }).withFailureHandler(function (e) { alert(e.message || e); }).entrarSala(EMAIL, id);
+      };
+    
+      google.script.run.withSuccessHandler(function (l) { (l || []).forEach(function (s) { salas[s.id] = s; }); desenharSalas(); }).listarSalasAoVivo(EMAIL);
       google.script.run.withSuccessHandler(function (l) {
         (l || []).forEach(function (e) { estado[e.id] = e; });
         desenhar();
-        relTimer = setInterval(function () { if (!$('aovivo')) { clearInterval(relTimer); return; } alvo.querySelectorAll('.av-tempo').length && desenhar(); }, 15000);
+        relTimer = setInterval(function () { if (!$('aovivo')) { clearInterval(relTimer); return; } if ($('av-epreuves') && $('av-epreuves').querySelectorAll('.av-tempo').length) desenhar(); }, 15000);
       }).listarEpreuvesAoVivo(EMAIL);
       if (window.SimuladoAoVivo && SimuladoAoVivo.stream) {
         var ctrl = SimuladoAoVivo.stream('/api/modeles/equipe/stream', function (ev, d) {
@@ -5810,10 +5927,253 @@ function abasEspace(ativa) {
             if (d.acao === 'fim') delete estado[d.id];
             else if (d.acao === 'rascunho' || d.acao === 'inicio') estado[d.id] = Object.assign(estado[d.id] || {}, { id: d.id, alunoId: d.alunoId, nome: d.nome, fim: d.fim || Date.now() + 3600000, sessao: d.sessao, textes: d.textes || (estado[d.id] || {}).textes || {} });
             desenhar();
+          } else if (ev === 'sala') {
+            if (d.acao === 'nova') { salas[d.id] = d; avisar({ titulo: 'Un élève demande un professeur en direct', texto: (d.nome || '') + ' · ' + nomeTache(d.tache), icone: '', som: true, duracao: 12, acao: { rotulo: 'Entrer', fn: function () { abrirSalaProf(d.id); } } }); }
+            else if (d.acao === 'fim') delete salas[d.id];
+            else if (d.acao === 'atendimento' && salas[d.id]) { salas[d.id].status = 'atendimento'; salas[d.id].professorNome = d.professorNome; }
+            if (d.acao !== 'conteudo') desenharSalas();
           } else if (ev === 'oral') avisar({ titulo: 'Nouvel enregistrement', texto: (d.nome || '') + ' · ' + d.tache, icone: '', som: true, duracao: 8 });
         });
-        AO_VIVO = { parar: function () { if (ctrl && ctrl.fechar) ctrl.fechar(); } };
+        AO_VIVO = { parar: function () { if (ctrl && ctrl.fechar) ctrl.fechar(); if (salaAberta) salaAberta.fechar(); } };
       }
+    }
+    
+    // Roteiro do professor para uma sala: enunciado, documentos, modelo, trame e argumentos do eixo.
+    function htmlRoteiro(r) {
+      var m = r.modelo || {}, partes = [];
+      partes.push('<div class="ro-bloco"><b>' + esc(r.nomeTache) + ' · ' + esc(r.eixo) + '</b><p>' + esc(r.consigne) + '</p>' + (r.d1 ? '<details><summary>Documents 1 et 2</summary><p>' + esc(r.d1) + '</p><p>' + esc(r.d2) + '</p></details>' : '') + '</div>');
+      if (r.tache === 'T2' && m.ech) partes.push('<details class="ro-bloco" open><summary>Questions modèles du candidat</summary><ol>' + m.ech.map(function (x) { return '<li>' + esc(x.q) + '<small>' + esc(x.r) + '</small></li>'; }).join('') + '</ol></details>');
+      else if (m.etapes) partes.push('<details class="ro-bloco" open><summary>Réponse modèle, étape par étape</summary><ol>' + m.etapes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol>' +
+        (m.rel && m.rel.length ? '<b>Questions de relance</b><ul>' + m.rel.map(function (x) { return '<li>' + esc(x.q) + '</li>'; }).join('') + '</ul>' : '') + '</details>');
+      else if (m.p) partes.push('<details class="ro-bloco"><summary>Production modèle</summary>' + String(m.p).split(/\n+/).map(function (x) { return '<p>' + esc(x) + '</p>'; }).join('') + '</details>');
+      if (r.trame && r.trame.etapes) partes.push('<details class="ro-bloco"><summary>La trame</summary><ol>' + r.trame.etapes.map(function (e) { return '<li><b>' + esc(e.rotulo) + '</b> ' + esc(e.texte) + '</li>'; }).join('') + '</ol></details>');
+      if (r.argumentos.pour.length) partes.push('<details class="ro-bloco"><summary>Arguments de l\'axe</summary><b>Pour</b><ul>' + r.argumentos.pour.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul><b>Contre</b><ul>' + r.argumentos.contre.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></details>');
+      return partes.join('');
+    }
+    
+    // ---------- espace professeur: menu lateral agrupado ----------
+    var GRUPOS_PROF = [
+      ['Suivre', ['aovivo', 'online', 'suivi']],
+      ['Corriger', ['ecrit', 'oral']],
+      ['Proposer aux élèves', ['sessoes', 'devoirs', 'avis']],
+      ['Contenus', ['temas', 'blog', 'quadro', 'geracao', 'vocab']]
+    ];
+    function organizarProf(tela, aba) {
+      var abas = tela.querySelector('.abas-prof'), atalhos = tela.querySelector('.atalhos-equipe');
+      if (!abas || tela.querySelector('.prof-layout')) return;
+      var menu = document.createElement('nav');
+      menu.className = 'prof-menu';
+      menu.setAttribute('aria-label', 'Espace professeur');
+      GRUPOS_PROF.forEach(function (g) {
+        var bloco = document.createElement('div');
+        bloco.className = 'prof-grupo';
+        bloco.innerHTML = '<span class="prof-grupo-tit">' + g[0] + '</span>';
+        g[1].forEach(function (id) { var b = abas.querySelector('[data-aba="' + id + '"]'); if (b) { b.className = 'prof-item'; bloco.appendChild(b); } });
+        if (bloco.children.length > 1) menu.appendChild(bloco);
+      });
+      if (atalhos) {
+        var out = document.createElement('div');
+        out.className = 'prof-grupo';
+        out.innerHTML = "<span class=\"prof-grupo-tit\">Autres pages de l’équipe</span>";
+        Array.prototype.slice.call(atalhos.querySelectorAll('a')).forEach(function (a) { a.className = 'prof-item link'; out.appendChild(a); });
+        menu.appendChild(out);
+        atalhos.remove();
+      }
+      var principal = document.createElement('div');
+      principal.className = 'prof-conteudo';
+      var depois = abas.nextSibling;
+      while (depois) { var prox = depois.nextSibling; if (!(depois.classList && depois.classList.contains('abas-prof'))) principal.appendChild(depois); else depois.remove(); depois = prox; }
+      var layout = document.createElement('div');
+      layout.className = 'prof-layout';
+      layout.appendChild(menu);
+      layout.appendChild(principal);
+      abas.replaceWith(layout);
+    }
+    
+    // ---------- mon espace: resumo no topo ----------
+    function resumoEspace(tela, devoirs, mensagens) {
+      var h = tela.querySelector('.abas-espace');
+      if (!h) return;
+      var r = document.createElement('div');
+      r.className = 'espace-resumo';
+      r.innerHTML = [[devoirs, 'devoirs à faire', 'abrirTarefas'], [mensagens, 'messages à lire', 'abrirTarefas'], [CARNET.filter(function (x) { return x.tipo === 'erreur'; }).length, 'erreurs dans mon cahier', 'abrirCarnet']]
+        .map(function (x) { return '<button type="button" class="er-item' + (x[0] ? ' on' : '') + '" data-er="' + x[2] + '"><b>' + x[0] + '</b><span>' + x[1] + '</span></button>'; }).join('');
+      h.insertAdjacentElement('afterend', r);
+      r.querySelectorAll('[data-er]').forEach(function (b) { b.addEventListener('click', function () { if (b.dataset.er === 'abrirCarnet') abrirCarnet(); else { var alvo = tela.querySelector('.devoirs-lista, .msgs-lista, .secao-titulo'); if (alvo) alvo.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }); });
+    }
+    
+    // ================= página do sujet: « Faire ce sujet », dossiê e professor ao vivo =================
+    
+    // Escolha de quem corrige (aparece dentro de « Faire ce sujet »).
+    function htmlEscolhaFazer(oral) {
+      return '<fieldset class="escolha-correcao tm-correcao"><legend>Qui corrige ?</legend>' +
+        (B.ia && B.ia.ativa ? '<label><input type="radio" name="tm-correcao" value="ia" checked><span><b>L\'IA, tout de suite</b><small>Entraînement : note sur 20, trame, corrections et version améliorée' + (oral ? ' à partir de la transcription' : '') + '. Sans crédit.</small></span></label>' : '') +
+        '<label><input type="radio" name="tm-correcao" value="professor"' + (B.ia && B.ia.ativa ? '' : ' checked') + '><span><b>Un professeur (Sistema de Correção)</b><small>Correction détaillée sur la grille de l\'examen, dans « Mes corrections ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
+        '<label><input type="radio" name="tm-correcao" value="aovivo"><span><b>Un professeur en direct</b><small>Il suit votre ' + (oral ? 'parole (transcription) et peut vous parler par la voix' : 'texte pendant que vous écrivez et peut vous parler par la voix') + '. À la fin, la production lui est envoyée pour la correction.</small></span></label></fieldset>';
+    }
+    function correcaoFazer() { var r = document.querySelector('input[name="tm-correcao"]:checked'); return r ? r.value : 'professor'; }
+    
+    function ligarFazer(raiz, tache, m, oral) {
+      if (SALA) { google.script.run.encerrarSala(EMAIL, SALA.id); salaFim(); }   // outra página de sujet: fecha a sala anterior
+      var bt = $('tm-fazer-bt'), sec = $('tm-fazer');
+      bt.addEventListener('click', function () {
+        var abrir = sec.hidden;
+        sec.hidden = false;
+        bt.classList.add('ativo');
+        bt.querySelector('b').textContent = 'Sujet en cours';
+        if (abrir) {
+          // cronômetro no modo prova, ligado ao começar
+          var ex = sec.querySelector('[data-crono="exame"]'), play = sec.querySelector('[data-crono="play"]');
+          if (ex && !ex.checked) { ex.checked = true; ex.dispatchEvent(new Event('change', { bubbles: true })); }
+          if (play && !/Pause|Arrêter/.test(play.textContent)) play.click();
+        }
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        var ed = sec.querySelector('.editor'); if (ed) setTimeout(function () { ed.focus(); }, 500);
+      });
+      sec.querySelectorAll('input[name="tm-correcao"]').forEach(function (r) {
+        r.addEventListener('change', function () {
+          var vivo = correcaoFazer() === 'aovivo';
+          $('tm-aovivo').hidden = !vivo;
+          if (vivo && !SALA) desenharSalaAluno(tache, m);
+          var env = $('tm-enviar'); if (env) env.textContent = correcaoFazer() === 'ia' ? 'Corriger avec l\'IA' : 'Envoyer au professeur';
+        });
+      });
+      var env0 = $('tm-enviar'); if (env0) env0.textContent = correcaoFazer() === 'ia' ? 'Corriger avec l\'IA' : 'Envoyer au professeur';
+      if (oral) return;
+      // Escrita: o editor da épreuve (contador, linhas), com rascunho guardado neste aparelho.
+      var ed = sec.querySelector('.editor'), chave = 'fnm_rasc_' + EMAIL + '_' + m.id, envioTimer = null;
+      var salvo = lerLocal(chave, null);
+      ligarEditor(ed, salvo ? salvo.t : '', salvo ? salvo.h : '', function (texto, html) {
+        gravarLocal(chave, { t: texto, h: html });
+        if (SALA && SALA.id) { clearTimeout(envioTimer); envioTimer = setTimeout(function () { salaEnviar({ texto: texto }); }, 1200); }
+      });
+      $('tm-enviar').addEventListener('click', function () {
+        var texto = textoDoEditor(ed), b = this, st = $('tm-enviar-st');
+        if (contarPalavras(texto) < 15) { st.textContent = 'Écrivez votre texte avant de le faire corriger.'; return; }
+        if (correcaoFazer() === 'ia') { pedirCorrecaoIA(tache, m.id, texto, $('tm-ia-res'), b); return; }
+        if (!confirm('Envoyer ce texte à un professeur ? 1 crédit sera utilisé (vous en avez ' + (B.creditos || 0) + ').')) return;
+        b.disabled = true; st.textContent = 'Envoi…';
+        google.script.run.withSuccessHandler(function (r) {
+          B.creditos = r.creditos;
+          st.innerHTML = '✓ Envoyé · protocole ' + esc(r.protocolo) + ' · <a href="correcoes.html">suivre la correction</a>';
+          if (SALA && SALA.id) salaEnviar({ texto: texto, fim: true });
+        }).withFailureHandler(function (er) { b.disabled = false; st.textContent = er.message || er; }).enviarTextoCorrecao(EMAIL, { tache: tache, sujet: m.id, texte: texto, modo: 'professor' });
+      });
+    }
+    
+    // Dossiê de leitura do sujet: dois textos de referência e uma imagem, com créditos.
+    function carregarDossier(alvo, tache, m) {
+      if (!alvo) return;
+      google.script.run.withSuccessHandler(function (d) {
+        if (!d || (!d.textos.length && !d.imagem)) { alvo.innerHTML = ''; return; }
+        var img = d.imagem ? '<figure class="tm-figura"><img src="' + esc(d.imagem.src) + '" alt="' + esc(d.imagem.legenda || '') + '" loading="lazy" referrerpolicy="no-referrer">' +
+          '<figcaption>' + (d.imagem.legenda ? esc(d.imagem.legenda) + ' · ' : '') + 'Image : ' + esc(d.imagem.autor) + ' · ' + esc(d.imagem.licenca) + ' · <a href="' + esc(d.imagem.url) + '" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>' : '';
+        alvo.innerHTML = '<h3 class="tm-sub">Pour mieux comprendre le thème</h3><div class="tm-leituras">' + img +
+          d.textos.map(function (t, i) {
+            return '<article class="tm-leitura"><span class="tm-leitura-n">Lecture ' + (i + 1) + '</span><h4>' + esc(t.titulo) + '</h4><p>' + esc(t.texto) + '</p>' +
+              '<small>Extrait de l\'article « ' + esc(t.titulo) + ' » · ' + esc(t.fonte) + ' · ' + esc(t.licenca) + ' · <a href="' + esc(t.url) + '" target="_blank" rel="noopener">lire l\'article complet ↗</a></small></article>';
+          }).join('') + '</div>';
+      }).withFailureHandler(function () { alvo.innerHTML = ''; }).obterDossierSujet(EMAIL, tache, m.id);
+    }
+    
+    // ---------- professor ao vivo (lado do aluno) ----------
+    var SALA = null;   // { id, stream, chamada, ultimoEnvio }
+    function salaEnviar(dados) {
+      if (!SALA || !SALA.id) return;
+      google.script.run.withSuccessHandler(function (r) { if (r && r.encerrada) salaFim(); }).atualizarSalaAoVivo(EMAIL, SALA.id, dados);
+    }
+    function salaFim() {
+      if (!SALA) return;
+      try { SALA.stream && SALA.stream.fechar(); } catch (e) {}
+      try { SALA.chamada && SALA.chamada.encerrar(false); } catch (e) {}
+      SALA = null;
+      var a = $('tm-aovivo'); if (a) a.innerHTML = '<div class="av-sala-fim">La séance en direct est terminée.</div>';
+    }
+    function desenharSalaAluno(tache, m) {
+      var a = $('tm-aovivo');
+      a.innerHTML = '<div class="av-sala"><div class="av-sala-cab"><span class="av-ponto"></span><div><b>Professeur en direct</b><small id="av-estado">Appelez un professeur : il verra votre ' + (tache.indexOf('ET') === 0 ? 'texte' : 'transcription') + ' en temps réel.</small></div>' +
+        '<button class="botao-principal" type="button" id="av-chamar">Appeler un professeur</button></div>' +
+        '<div class="av-chamada" id="av-chamada" hidden></div><div class="av-chat" id="av-chat" hidden><div class="av-msgs" id="av-msgs"></div>' +
+        '<div class="av-msg-linha"><input id="av-msg" placeholder="Écrire au professeur…"><button class="ferramenta" type="button" id="av-msg-bt">Envoyer</button><button class="ferramenta sutil" type="button" id="av-fim">Terminer la séance</button></div></div></div>';
+      $('av-chamar').addEventListener('click', function () {
+        var b = this; b.disabled = true; b.textContent = 'Appel…';
+        google.script.run.withSuccessHandler(function (s) {
+          SALA = { id: s.id };
+          b.remove();
+          $('av-estado').textContent = 'En attente d\'un professeur… Vous pouvez commencer : il verra tout dès qu\'il entrera.';
+          $('av-chat').hidden = false;
+          ligarSalaAluno();
+          var ed = document.querySelector('#tm-fazer .editor');
+          if (ed) salaEnviar({ texto: textoDoEditor(ed) });
+        }).withFailureHandler(function (e) { b.disabled = false; b.textContent = 'Appeler un professeur'; avisar({ titulo: 'Appel impossible', texto: e.message || e, icone: '', som: false }); })
+          .chamarProfessorAoVivo(EMAIL, tache, m.id);
+      });
+    }
+    function ligarSalaAluno() {
+      var addMsg = function (de, nome, texto) {
+        var l = $('av-msgs'); if (!l) return;
+        l.insertAdjacentHTML('beforeend', '<div class="av-m ' + de + '"><b>' + esc(de === 'professor' ? (nome || 'Professeur') : 'Vous') + '</b><span>' + esc(texto) + '</span></div>');
+        l.scrollTop = l.scrollHeight;
+      };
+      // Chamada de voz: a mesma de « Simulação completa », com a sinalização desta sala.
+      if (window.SimuladoAoVivo && SimuladoAoVivo.Chamada) {
+        var ch = new SimuladoAoVivo.Chamada(SALA.id, 'aluno', {
+          onEstado: function (e2) { var c = $('av-chamada'); if (c && e2 === 'livre') c.hidden = true; if (c && e2 === 'conectada') c.innerHTML = '<span>🔊 En communication avec le professeur</span><button class="ferramenta" type="button" id="av-desligar">Raccrocher</button>', $('av-desligar') && $('av-desligar').addEventListener('click', function () { ch.encerrar(true); }); },
+          onRemoto: function (stream) { var au = document.getElementById('av-audio') || document.body.appendChild(Object.assign(document.createElement('audio'), { id: 'av-audio', autoplay: true })); au.srcObject = stream; },
+          onConvite: function () {
+            var c = $('av-chamada'); c.hidden = false;
+            c.innerHTML = '<span>📞 Le professeur vous appelle</span><button class="botao-principal" type="button" id="av-aceitar">Répondre</button><button class="ferramenta" type="button" id="av-recusar">Refuser</button>';
+            $('av-aceitar').addEventListener('click', function () { ch.aceitar(); c.innerHTML = '<span>Connexion…</span>'; });
+            $('av-recusar').addEventListener('click', function () { ch.recusar(); c.hidden = true; });
+            somSuave();
+          }
+        });
+        ch._enviar = function (dados) {
+          return fetch('/api/modeles/salas/' + SALA.id + '/sinal', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + localStorage.getItem('token') }, body: JSON.stringify({ dados: dados }) }).catch(function () {});
+        };
+        SALA.chamada = ch;
+      }
+      SALA.stream = SimuladoAoVivo.stream('/api/modeles/salas/' + SALA.id + '/stream', function (ev, d) {
+        if (ev === 'estado') {
+          if (d.status === 'atendimento') { $('av-estado').textContent = (d.professorNome || 'Un professeur') + ' suit votre production en direct.'; avisar({ titulo: 'Professeur connecté', texto: d.professorNome || '', icone: '', som: true, duracao: 6 }); }
+          if (d.status === 'encerrada') salaFim();
+        } else if (ev === 'msg') { if (d.de === 'professor') { addMsg('professor', d.nome, d.texto); somSuave(); } }
+        else if (ev === 'sinal' && SALA && SALA.chamada) SALA.chamada.receber(d);
+      });
+      $('av-msg-bt').addEventListener('click', function () {
+        var i = $('av-msg'); if (!i.value.trim()) return;
+        var t = i.value; i.value = '';
+        addMsg('aluno', '', t);
+        google.script.run.mensagemSala(EMAIL, SALA.id, t);
+      });
+      $('av-msg').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('av-msg-bt').click(); });
+      $('av-fim').addEventListener('click', function () {
+        if (!confirm('Terminer la séance en direct ?')) return;
+        google.script.run.encerrarSala(EMAIL, SALA.id);
+        salaFim();
+      });
+    }
+    
+    // ---------- devoirs: também os do Dever de Casa do site ----------
+    // Item com `link` (tema do catálogo do site) abre a página do dever; os demais abrem o sujet.
+    ligarDevoirs = function (raiz) {
+      raiz.querySelectorAll('[data-dv-id]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var d = DEVOIRS.filter(function (x) { return x.id === b.dataset.dvId; })[0];
+          if (!d) return;
+          if (d.link || !d.modelo) { window.location.href = d.link || 'meus-deveres.html'; return; }
+          abrirModelo(d.tache, d.modelo, { tipo: 'devoir', devoir: d });
+        });
+      });
+    };
+    // producao.html#devoir=<id>: vindo do Dever de Casa do site, abre direto o devoir.
+    function abrirDevoirPorId(id) {
+      google.script.run.withSuccessHandler(function (l) {
+        DEVOIRS = l || [];
+        var d = DEVOIRS.filter(function (x) { return x.id === id; })[0];
+        if (d && d.modelo) abrirModelo(d.tache, d.modelo, { tipo: 'devoir', devoir: d });
+        else abrirTarefas();
+      }).withFailureHandler(function () { abrirTarefas(); }).meusDevoirs(EMAIL);
     }
     
     // Só começa depois que a página confirmou o acesso e o curso (window.FNM_PRONTO).

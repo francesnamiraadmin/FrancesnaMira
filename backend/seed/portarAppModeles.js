@@ -48,7 +48,7 @@ function trocar(de, para, todas) {
 }
 
 // ---- funções substituídas (uma por arquivo, com o mesmo nome) ----
-const subst = ler("funcoes.js").split(/\n(?=\/\/@@ )/);
+const subst = (ler("funcoes.js") + "\n" + ler("pagina-sujet.js")).split(/\n(?=\/\/@@ )/);
 for (const bloco of subst) {
   const m = bloco.match(/^\/\/@@ (\w+)\n([\s\S]*)$/);
   if (!m) continue;
@@ -61,8 +61,9 @@ trocar("document.body.appendChild(", "(document.getElementById('fnm-raiz') || do
 // "Mon espace" começa nas tarefas (o journal de aulas/pagamento do script não existe no site).
 trocar("var PARTE_ESPACE = function () { return { rotulo: 'Mon espace', fn: abrirJournal }; };",
   "var PARTE_ESPACE = function () { return { rotulo: 'Mon espace', fn: abrirTarefas }; };");
-// O gravador livre precisa do modelo aberto (para enviar a gravação sobre o sujet certo).
-trocar("if (tache.indexOf('ET') !== 0) ligarGravadorLivre(raiz, tache);", "if (tache.indexOf('ET') !== 0) ligarGravadorLivre(raiz, tache, m);");
+// Na página do tema a folha de resposta é « Faire ce sujet »: a reescrita do modelo só abre pelo botão.
+trocar("      // o propósito dos modelos é reescrever: a folha já abre ao lado\n      raiz._abrirReescrita();\n", "");
+trocar("if (!ligado) { Voz.parar(); if (raiz._abrirReescrita) raiz._abrirReescrita(); return; }", "if (!ligado) { Voz.parar(); return; }");
 // Réécriture: além da correção de treino pela IA, pode ir ao Sistema de Correção.
 trocar("'<div id=\"reescrita-res\" class=\"rs-res\"></div>' + botaoIA('rascunho-ia') + '<div class=\"ia-resultado\" id=\"rascunho-ia-res\"></div></aside>';",
   "'<div id=\"reescrita-res\" class=\"rs-res\"></div>' + botaoIA('rascunho-ia') + '<div class=\"ia-resultado\" id=\"rascunho-ia-res\"></div>' + htmlEnvioSistema('rs') + '</aside>';");
@@ -102,8 +103,16 @@ trocar("      // Treino livre: a IA corrige cada tâche (a prova da professora �
 trocar("      if (EP && !EP.sessao) {\n        var comTexto",
   "      ligarEnvioEpreuve(r);\n      if (EP && !EP.sessao && EP.correcao !== 'professor') {\n        var comTexto");
 
+// ---- telas reorganizadas para leitura (espace professeur, mon espace, boîte à outils) ----
+trocar("tela.querySelectorAll('[data-aba]').forEach(function (b) { b.addEventListener('click', function () { abrirProf(b.dataset.aba); }); });",
+  "tela.querySelectorAll('[data-aba]').forEach(function (b) { b.addEventListener('click', function () { abrirProf(b.dataset.aba); }); });\n        organizarProf(tela, aba);");
+trocar("          $('esp-epreuves').addEventListener('click', abrirEpreuve);",
+  "          $('esp-epreuves').addEventListener('click', abrirEpreuve);\n          resumoEspace(tela, pend.length, mPend.length);");
+trocar("html += '<div class=\"grade-trames\">';", "html += '<h2 class=\"secao-titulo outils-secao\"><i class=\"oral\"></i>Oral</h2><div class=\"grade-trames\">';");
+trocar("        var tr = B.trames[t]; if (!tr) return;", "        if (t === 'ET1') html += '</div><h2 class=\"secao-titulo outils-secao\"><i class=\"ecrit\"></i>Écrit</h2><div class=\"grade-trames\">';\n        var tr = B.trames[t]; if (!tr) return;");
+
 // ---- extensões do site (dentro do mesmo escopo do App) ----
-trocar("    document.addEventListener('DOMContentLoaded', iniciar);", ler("extensoes.js").replace(/^/gm, "    ") +
+trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("extensoes.js") + "\n" + ler("fazer-sujet.js")).replace(/^/gm, "    ") +
   "\n    // Só começa depois que a página confirmou o acesso e o curso (window.FNM_PRONTO).\n" +
   "    (window.FNM_PRONTO || Promise.resolve()).then(function () { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar(); });");
 trocar("abrirOral: function () { abrirHub('oral'); },", "abrirOral: function () { abrirHub('oral'); }, abrirDestino: abrirDestino,");

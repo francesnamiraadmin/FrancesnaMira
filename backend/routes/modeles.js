@@ -395,6 +395,7 @@ F.enviarTextoCorrecao = async (ctx, dados) => {
     userId: ctx.userId, temaId: String(tema._id), textoDigitado: String(dados.texte || ""), modoCorrecao: dados.modo === "ia" ? "ia" : "professor",
     origem: { tipo: "modeles", tache: t, sujetId: dados.sujet, eixo: (M.acharTema(t, dados.sujet) || {}).e }, aceitarForaDoLimite: true
   });
+  await concluirDevoirsDoSujet(ctx, t, dados.sujet).catch(() => {});
   const u = await User.findById(ctx.userId).select("creditosCorrecao");
   return { ok: true, protocolo: p.protocolo, id: String(p._id), creditos: u.creditosCorrecao || 0 };
 };
@@ -463,7 +464,23 @@ async function meusDevoirs(ctx) {
     return { id: String(d._id), titre: d.titre, tache: d.tache, modelo: d.modelo, tipo: d.tipo, tipoNome: M.TIPOS_DEVOIR[d.tipo] || d.tipo, mensagem: d.mensagem, data: d.criadoEm, feito: !!f, score: f ? f.score : "", total: f ? f.total : "" };
   });
 }
-F.meusDevoirs = ctx => meusDevoirs(ctx);
+// « Mes devoirs » do app: os devoirs + as atividades de produção do Dever de Casa do site
+// (produção textual/oral de um tema do catálogo). Essas são entregues na página do dever,
+// onde a Producao fica ligada à atividade.
+F.meusDevoirs = async ctx => {
+  const lista = await meusDevoirs(ctx);
+  const DeverSemanal = require("../models/deverSemanal");
+  const deveres = await DeverSemanal.find({ alunoId: ctx.userId, "atividades.tipo": { $in: ["producao_textual", "producao_oral"] } })
+    .populate("atividades.conteudo.temaId", "titulo").sort({ dataInicio: -1 }).limit(8).lean();
+  deveres.forEach(dv => dv.atividades.forEach((a, i) => {
+    if (!["producao_textual", "producao_oral"].includes(a.tipo)) return;
+    const tema = a.conteudo?.temaId;
+    lista.push({ id: "site:" + dv._id + ":" + i, titre: a.titulo || tema?.titulo || "Produção", tache: a.tipo === "producao_oral" ? "T3" : "ET3",
+      modelo: "", tipo: a.tipo === "producao_oral" ? "oral" : "ecrit", tipoNome: "Dever de Casa · " + (a.tipo === "producao_oral" ? "Produção oral" : "Produção escrita"),
+      mensagem: dv.titulo, data: dv.dataInicio, feito: a.entrega?.status === "enviado", score: "", total: "", link: "meus-deveres.html" });
+  }));
+  return lista;
+};
 F.concluirDevoir = async (ctx, id, score, total) => {
   const d = await T.DevoirTCF.findById(oid(id));
   if (!d || !alvoInclui(d.alvo, ctx.userId)) throw erro("Devoir introuvable.");
@@ -472,8 +489,17 @@ F.concluirDevoir = async (ctx, id, score, total) => {
   if (f) { if (s === undefined || s >= (f.score || 0)) { f.score = s; f.total = tt; f.data = new Date(); } }
   else d.feitos.push({ alunoId: ctx.userId, score: s, total: tt, data: new Date() });
   await d.save();
+  await require("../utils/devoirsSync").marcarFeitoNoSite(d._id, ctx.userId);
   return true;
 };
+// Produção enviada sobre um sujet que é devoir do aluno (escrita/oral) → devoir feito nos dois lados.
+async function concluirDevoirsDoSujet(ctx, tache, sujetId) {
+  const tipo = M.ehEscrita(tache) ? "ecrit" : "oral";
+  const ds = await T.DevoirTCF.find({ ativo: true, modelo: sujetId, tipo }).select("_id alvo feitos").lean();
+  for (const d of ds) {
+    if (alvoInclui(d.alvo, ctx.userId) && !(d.feitos || []).some(f => String(f.alunoId) === String(ctx.userId))) await F.concluirDevoir(ctx, String(d._id));
+  }
+}
 const fmtMsg = m => ({ id: String(m._id), data: m.criadoEm, texto: m.texto, de: m.de, feito: m.feito, atualizado: m.atualizadoEm });
 F.mesMessages = async ctx => (await T.MensagemTCF.find({ alunoId: ctx.userId }).sort({ criadoEm: -1 }).lean()).map(fmtMsg);
 F.marcarMensagem = async (ctx, id, feito) => {
@@ -663,6 +689,68 @@ F.registrarAudiosFaltantes = async (ctx, chaves) => {
   return novas.length;
 };
 
+// ---------------- dossiê de leitura do sujet ----------------
+F.obterDossierSujet = async (ctx, tache, id) => {
+  const sujet = M.acharTema(tache, id);
+  if (!sujet) throw erro("Sujet introuvable.", 404);
+  const modelo = M.ehManual(tache, id) ? sujet : await lerModeloIA(id);
+  const { obterDossier } = require("../utils/dossierSujet");
+  const d = await obterDossier(tache, sujet, (modelo && modelo.k) || []);
+  return { textos: d.textos || [], imagem: d.imagem || null };
+};
+
+// ---------------- sala ao vivo (aluno faz o sujet com um professor acompanhando) ----------------
+const canalSala = id => "modeles:sala:" + id;
+const fmtSala = (s, nomes) => ({ id: String(s._id), alunoId: String(s.alunoId), nome: nomes ? nomes[String(s.alunoId)] || "" : "", curso: s.courseType, tache: s.tache, sujetId: s.sujetId,
+  titulo: s.titulo, status: s.status, professorNome: s.professorNome || "", texto: s.texto, transcricao: s.transcricao, mensagens: s.mensagens || [], inicio: s.inicio, atualizadoEm: s.atualizadoEm });
+async function salaDoAluno(ctx, id) {
+  const s = await T.SalaAoVivoTCF.findOne({ _id: oid(id), alunoId: ctx.userId });
+  if (!s) throw erro("Salle introuvable.", 404);
+  return s;
+}
+F.chamarProfessorAoVivo = async (ctx, tache, sujetId) => {
+  const sujet = M.acharTema(tache, sujetId);
+  if (!sujet) throw erro("Sujet introuvable.", 404);
+  await T.SalaAoVivoTCF.updateMany({ alunoId: ctx.userId, status: { $ne: "encerrada" } }, { status: "encerrada" });
+  const u = await usuario(ctx);
+  const s = await T.SalaAoVivoTCF.create({ alunoId: ctx.userId, courseType: ctx.courseType, tache, sujetId, titulo: String(sujet.titre || M.temaCurto(M.consigneDe(sujet))).slice(0, 160) });
+  avisarEquipe("sala", { ...fmtSala(s, { [ctx.userId]: u.nome }), acao: "nova" });
+  return fmtSala(s);
+};
+F.atualizarSalaAoVivo = async (ctx, id, dados) => {
+  const s = await salaDoAluno(ctx, id);
+  if (s.status === "encerrada") return { encerrada: true };
+  if (typeof dados?.texto === "string") s.texto = dados.texto.slice(0, 8000);
+  if (typeof dados?.transcricao === "string") s.transcricao = dados.transcricao.slice(0, 8000);
+  s.atualizadoEm = new Date();
+  await s.save();
+  const evt = { id: String(s._id), texto: s.texto, transcricao: s.transcricao, tempo: dados?.tempo || "" };
+  canais.enviar(canalSala(s._id), "conteudo", evt);
+  avisarEquipe("sala", { ...evt, acao: "conteudo" });
+  return { ok: true, status: s.status, professorNome: s.professorNome };
+};
+F.mensagemSala = async (ctx, id, texto) => {
+  texto = String(texto || "").trim().slice(0, 1000);
+  if (!texto) return false;
+  const s = ctx.prof ? await T.SalaAoVivoTCF.findById(oid(id)) : await salaDoAluno(ctx, id);
+  if (!s) throw erro("Salle introuvable.", 404);
+  const u = await usuario(ctx);
+  const m = { de: ctx.prof ? "professor" : "aluno", texto, data: new Date() };
+  s.mensagens.push(m); s.atualizadoEm = new Date();
+  await s.save();
+  canais.enviar(canalSala(s._id), "msg", { ...m, nome: u.nome });
+  return true;
+};
+F.encerrarSala = async (ctx, id) => {
+  const s = ctx.prof ? await T.SalaAoVivoTCF.findById(oid(id)) : await salaDoAluno(ctx, id);
+  if (!s) return true;
+  s.status = "encerrada"; s.atualizadoEm = new Date();
+  await s.save();
+  canais.enviar(canalSala(s._id), "estado", { status: "encerrada" });
+  avisarEquipe("sala", { id: String(s._id), acao: "fim" });
+  return true;
+};
+
 // ------------------------------------------------------------------ funções (professor)
 prof("listarAlunos", async () => (await alunosProducao()).map(a => ({ email: a.id, nome: a.nome, doc: true, ativo: true, grupo: a.cursos.join(" · "), eixos: M.EIXOS.ordem, acesso: {}, emailReal: a.email })));
 
@@ -698,6 +786,9 @@ prof("criarDevoir", async (ctx, dados) => {
   const u = await usuario(ctx);
   const d = await T.DevoirTCF.create({ titre: dados.titre || tema.titre || String(tema.t).slice(0, 90), tache: dados.tache, modelo: dados.modelo, tipo: dados.tipo,
     mensagem: String(dados.mensagem || "").slice(0, 500), eixo: tema.e, alvo: alvoDe(dados.alunos), criadoPor: ctx.userId, criadoPorNome: u.nome });
+  // Também aparece no Dever de Casa do site de cada aluno.
+  const ids = d.alvo.todos ? (await alunosProducao()).map(a => a.id) : d.alvo.alunos.map(String);
+  await require("../utils/devoirsSync").espelharDevoirNoSite(d, ids).catch(e => console.error("devoir→dever:", e.message));
   return String(d._id);
 });
 prof("listarDevoirsProf", async () => {
@@ -710,8 +801,14 @@ prof("listarDevoirsProf", async () => {
       feitos: alvo.filter(a => quem.has(a.id)).map(a => a.nome), faltam: alvo.filter(a => !quem.has(a.id)).map(a => a.nome), tipoNome: M.TIPOS_DEVOIR[d.tipo] || d.tipo };
   });
 });
-prof("alternarDevoir", async (ctx, id, ativo) => { await T.DevoirTCF.updateOne({ _id: oid(id) }, { ativo: !!ativo }); return true; });
-prof("apagarDevoir", async (ctx, id) => { await T.DevoirTCF.deleteOne({ _id: oid(id) }); return true; });
+prof("alternarDevoir", async (ctx, id, ativo) => {
+  const d = await T.DevoirTCF.findByIdAndUpdate(oid(id), { ativo: !!ativo }, { new: true });
+  const sync = require("../utils/devoirsSync");
+  if (d && !ativo) await sync.removerEspelho(d._id);
+  if (d && ativo) await sync.espelharDevoirNoSite(d, d.alvo.todos ? (await alunosProducao()).map(a => a.id) : d.alvo.alunos.map(String));
+  return true;
+});
+prof("apagarDevoir", async (ctx, id) => { await T.DevoirTCF.deleteOne({ _id: oid(id) }); await require("../utils/devoirsSync").removerEspelho(oid(id)); return true; });
 
 prof("adicionarTemaDoMes", async (ctx, item) => {
   const tema = M.acharTema(item.tache, item.id);
@@ -803,6 +900,31 @@ prof("listarOnline", async () => {
     vivos.push({ ...d, id, ha: Math.round((agora - d.t) / 1000), min: Math.round((agora - d.desde) / 60000), g: d.curso });
   }
   return vivos.sort((a, b) => a.n.localeCompare(b.n));
+});
+
+prof("listarSalasAoVivo", async () => {
+  const ss = await T.SalaAoVivoTCF.find({ status: { $ne: "encerrada" }, atualizadoEm: { $gte: new Date(Date.now() - 3 * 3600 * 1000) } }).sort({ inicio: -1 }).lean();
+  const nomes = await mapaNomes(ss.map(s => s.alunoId));
+  return ss.map(s => fmtSala(s, nomes));
+});
+prof("entrarSala", async (ctx, id) => {
+  const s = await T.SalaAoVivoTCF.findById(oid(id));
+  if (!s || s.status === "encerrada") throw erro("Cette salle est fermée.");
+  const u = await usuario(ctx);
+  s.status = "atendimento"; s.professorId = ctx.userId; s.professorNome = u.nome; s.atualizadoEm = new Date();
+  await s.save();
+  canais.enviar(canalSala(s._id), "estado", { status: "atendimento", professorNome: u.nome });
+  avisarEquipe("sala", { id: String(s._id), acao: "atendimento", professorNome: u.nome });
+  const nomes = await mapaNomes([s.alunoId]);
+  return fmtSala(s, nomes);
+});
+// Roteiro do professor: consigne, documentos, modelo (manual, IA ou guia) e trame da tâche.
+prof("roteiroSujet", async (ctx, tache, id) => {
+  const sujet = M.acharTema(tache, id);
+  if (!sujet) throw erro("Sujet introuvable.", 404);
+  const modelo = M.ehManual(tache, id) ? sujet : (await lerModeloIA(id)) || M.modeloGuia(tache, sujet);
+  return { tache, nomeTache: M.NOMES_TACHE[tache], consigne: M.consigneDe(sujet), d1: sujet.d1 || "", d2: sujet.d2 || "", modelo, trame: M.OUTILS.trames[tache] || null,
+    eixo: (M.EIXOS.eixos[sujet.e] || {}).nome || sujet.e, argumentos: { pour: (M.EIXOS.eixos[sujet.e] || {}).argumentsPour || [], contre: (M.EIXOS.eixos[sujet.e] || {}).argumentsContre || [] } };
 });
 
 // Épreuves em andamento agora (acompanhamento ao vivo pela equipe).
@@ -1016,6 +1138,7 @@ router.post("/oral", comTratamentoDeErro(uploadAudio.single("audio")), async (re
       modoCorrecao: sessaoId ? "professor" : (modo === "ia" ? "ia" : "professor"), pularChecagemAcesso: !!sessaoId, semCredito: !!sessaoId,
       origem: { tipo: "modeles", tache, sujetId: sujet, eixo: M.acharTema(tache, sujet).e, sessaoId: sessaoId || undefined }
     });
+    await concluirDevoirsDoSujet(ctx, tache, sujet).catch(() => {});
     const u = await User.findById(ctx.userId).select("creditosCorrecao nome");
     avisarEquipe("oral", { alunoId: ctx.userId, nome: u.nome, tache, producaoId: String(p._id) });
     res.json({ ok: true, protocolo: p.protocolo, id: String(p._id), creditos: u.creditosCorrecao || 0 });
@@ -1035,6 +1158,27 @@ router.get("/audio/:id", async (req, res) => {
     if (!p || !p.arquivoOriginal?.caminho || (!ehEquipe(req.userRole) && String(p.alunoId) !== req.userId)) return res.status(404).end();
     res.type(p.arquivoOriginal.mimetype || "audio/webm");
     res.sendFile(p.arquivoOriginal.caminho, err => { if (err && !res.headersSent) res.status(404).end(); });
+  } catch (err) { res.status(500).end(); }
+});
+
+// Canal de uma sala ao vivo (o aluno dono e a equipe) + sinalização da chamada de voz (WebRTC).
+router.get("/salas/:id/stream", async (req, res) => {
+  try {
+    if (!ehObjectId(req.params.id)) return res.status(400).end();
+    const s = await T.SalaAoVivoTCF.findById(req.params.id).select("alunoId");
+    if (!s || (!ehEquipe(req.userRole) && String(s.alunoId) !== req.userId)) return res.status(404).json({ msg: "Salle introuvable." });
+    canais.abrir(req, res, canalSala(s._id));
+  } catch (err) { res.status(500).end(); }
+});
+router.post("/salas/:id/sinal", async (req, res) => {
+  try {
+    if (!ehObjectId(req.params.id)) return res.status(400).end();
+    const s = await T.SalaAoVivoTCF.findById(req.params.id).select("alunoId status");
+    if (!s || s.status === "encerrada" || (!ehEquipe(req.userRole) && String(s.alunoId) !== req.userId)) return res.status(404).json({ msg: "Salle introuvable." });
+    const dados = req.body?.dados;
+    if (!dados || typeof dados !== "object" || JSON.stringify(dados).length > 20000) return res.status(400).json({ msg: "Signal invalide." });
+    canais.enviar(canalSala(s._id), "sinal", { de: ehEquipe(req.userRole) ? "professor" : "aluno", dados });
+    res.json({ ok: true });
   } catch (err) { res.status(500).end(); }
 });
 

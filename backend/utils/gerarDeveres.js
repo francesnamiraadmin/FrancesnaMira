@@ -127,6 +127,7 @@ async function statusEntregaReal(atividade, alunoId) {
     if (!producao) return null;
     return { status: "enviado", producaoReal: { status: producao.status, notaTotal: producao.avaliacao?.notaTotal ?? null } };
   }
+  if (atividade.tipo === "producao_ambiente") return require("./devoirsSync").statusAtividade(atividade, alunoId);
   if (["questoes_plataforma", "exercicio_lista", "simulado"].includes(atividade.tipo) && atividade.conteudo?.conjuntoId) {
     const conjuntoId = atividade.conteudo.conjuntoId._id || atividade.conteudo.conjuntoId;
     const tentativa = await Tentativa.findOne({ alunoId, conjuntoId }).sort({ finalizadaEm: -1 }).select("percentualAcertos finalizadaEm");
@@ -159,7 +160,8 @@ async function enriquecerDever(deverDoc) {
       },
       ...(derivado?.progressoReal !== undefined ? { progressoReal: derivado.progressoReal } : {}),
       ...(derivado?.producaoReal !== undefined ? { producaoReal: derivado.producaoReal } : {}),
-      ...(derivado?.tentativaReal !== undefined ? { tentativaReal: derivado.tentativaReal } : {})
+      ...(derivado?.tentativaReal !== undefined ? { tentativaReal: derivado.tentativaReal } : {}),
+      ...(derivado?.devoirReal !== undefined ? { devoirReal: derivado.devoirReal } : {})
     };
   }));
 

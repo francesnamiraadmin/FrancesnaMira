@@ -226,6 +226,12 @@ const DeverWorkspace = (() => {
           }
         });
       }
+    } else if (atividade.tipo === 'producao_ambiente' && atividade.conteudo?.devoirProducaoId) {
+      // Feita no Ambiente de Produção: o status vem do devoir de lá.
+      const feito = atividade.devoirReal?.feito || atividade.entrega?.status === 'enviado';
+      const curso = (window.CursoContexto && window.CursoContexto.curso) ? '?curso=' + encodeURIComponent(window.CursoContexto.curso) : '';
+      widgetEl.innerHTML = `<div class="embed-aviso" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;"><span>${feito ? '✓ Feita no Ambiente de Produção' + (atividade.devoirReal?.score != null ? ' · ' + atividade.devoirReal.score + '/' + atividade.devoirReal.total : '') : 'Esta tarefa é feita no Ambiente de Produção: tema, modelo, correção e professor ao vivo.'}</span>` +
+        `<a class="btn" href="producao.html${curso}#devoir=${atividade.conteudo.devoirProducaoId}">${feito ? 'Rever no Ambiente de Produção' : 'Abrir no Ambiente de Produção'} →</a></div>`;
     } else if (atividade.tipo === 'exercicio_interativo' && atividade.conteudo?.exercicioSlug) {
       renderExercicioInterativo(widgetEl, atividade, deverId, index);
     } else if (['questoes_plataforma', 'exercicio_lista', 'simulado'].includes(atividade.tipo) && atividade.conteudo?.conjuntoId?._id) {

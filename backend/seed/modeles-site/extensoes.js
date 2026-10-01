@@ -52,6 +52,8 @@ var Transcricao = {
         else parcial += r[0].transcript;
       }
       aoMudar((finais + parcial).trim());
+      // professor ao vivo: a fala transcrita vai para a sala (a cada ~1 s)
+      if (typeof SALA !== 'undefined' && SALA && SALA.id) { var tx = (finais + parcial).trim(); clearTimeout(Transcricao.envio); Transcricao.envio = setTimeout(function () { salaEnviar({ transcricao: tx }); }, 1000); }
     };
     rec.onend = function () { if (ativo) { try { rec.start(); } catch (e) {} } };
     rec.onerror = function () {};
@@ -107,6 +109,7 @@ function abrirDestino(d) {
     vocab: abrirVocab, attentes: function () { abrirAttentes(); }, espace: abrirTarefas, notes: abrirNotes, carnet: abrirCarnet,
     epreuve: abrirEpreuve, simulados: abrirSimulados, outils: abrirOutils, prof: function () { abrirProf(); }
   };
+  if (/^devoir=/.test(d)) { abrirDevoirPorId(d.slice(7)); return; }
   if (mapa[d]) mapa[d](); else if (B && B.professor && window.FNM_ABRIR === 'prof') abrirProf(); else irAccueil();
 }
 window.addEventListener('hashchange', function () { if (B) abrirDestino(location.hash.replace(/^#/, '')); });
@@ -208,16 +211,31 @@ function htmlAtalhosEquipe() {
   return '<div class="atalhos-equipe">' + l.map(function (x) { return '<a class="chip" href="' + x[0] + '">' + x[1] + ' ↗</a>'; }).join('') + '</div>';
 }
 
-// ---------- espace professeur: acompanhamento ao vivo das épreuves ----------
+// ---------- espace professeur: ao vivo (salas com professor + épreuves de 60 min) ----------
 var AO_VIVO = null;
 function ligarAoVivo() {
   var alvo = $('aovivo'); if (!alvo) return;
   if (AO_VIVO && AO_VIVO.parar) AO_VIVO.parar();
-  var estado = {}, relTimer = null;
+  alvo.innerHTML = '<div id="av-salas"></div><div id="av-sala-aberta"></div><div id="av-epreuves"></div>';
+  var estado = {}, salas = {}, relTimer = null, salaAberta = null;
+
+  var desenharSalas = function () {
+    var box = $('av-salas'); if (!box) return;
+    var l = Object.keys(salas).map(function (k) { return salas[k]; }).sort(function (a, b) { return new Date(a.inicio) - new Date(b.inicio); });
+    box.innerHTML = '<div class="bloco av-salas-bloco"><h3>Élèves qui demandent un professeur en direct : ' + l.length + '</h3>' +
+      '<p class="aviso" style="margin-top:0">L\'élève fait un sujet du Ambiente de Produção et vous suivez son texte ou sa parole (transcription) en temps réel, avec le roteiro du sujet. Vous pouvez lui écrire et l\'appeler par la voix.</p>' +
+      (l.length ? '<div class="av-grade">' + l.map(function (s) {
+        return '<div class="av-card sala ' + s.status + '"><div class="av-cab"><b>' + esc(s.nome || '') + '</b><span class="av-status">' + (s.status === 'aguardando' ? '● en attente' : 'avec ' + esc(s.professorNome || '')) + '</span></div>' +
+          '<small>' + esc(nomeTache(s.tache)) + (s.curso ? ' · ' + esc(s.curso) : '') + '</small><p class="av-sala-tit">' + esc(s.titulo || '') + '</p>' +
+          '<button class="botao-principal" type="button" data-av-entrar="' + s.id + '">' + (s.status === 'aguardando' ? 'Entrer dans la salle' : 'Ouvrir la salle') + '</button></div>';
+      }).join('') + '</div>' : '<p class="vazio">Personne n\'attend pour le moment.</p>') + '</div>';
+    box.querySelectorAll('[data-av-entrar]').forEach(function (b) { b.addEventListener('click', function () { abrirSalaProf(b.dataset.avEntrar); }); });
+  };
+
   var desenhar = function () {
-    if (!$('aovivo')) { if (relTimer) clearInterval(relTimer); return; }
+    var box = $('av-epreuves'); if (!box) { if (relTimer) clearInterval(relTimer); return; }
     var l = Object.keys(estado).map(function (k) { return estado[k]; }).sort(function (a, b) { return (a.nome || '').localeCompare(b.nome || ''); });
-    alvo.innerHTML = '<div class="bloco"><h3>Épreuves écrites en cours : ' + l.length + '</h3><p class="aviso" style="margin-top:0">Les textes s\'actualisent à chaque enregistrement automatique (environ toutes les 20 secondes). Les productions orales envoyées arrivent dans « Noter l\'oral » et dans le Sistema de Correção.</p>' +
+    box.innerHTML = '<div class="bloco"><h3>Épreuves écrites en cours : ' + l.length + '</h3><p class="aviso" style="margin-top:0">Les textes s\'actualisent à chaque enregistrement automatique (environ toutes les 20 secondes). Les productions orales envoyées arrivent dans « Noter l\'oral » et dans le Sistema de Correção.</p>' +
       (l.length ? '<div class="av-grade">' + l.map(function (e) {
         var resta = Math.max(0, Math.round((e.fim - Date.now()) / 1000));
         return '<div class="av-card"><div class="av-cab"><b>' + esc(e.nome || '') + '</b><span class="av-tempo' + (resta < 300 ? ' fim' : '') + '">' + formatarTempo(resta) + '</span></div>' +
@@ -229,9 +247,9 @@ function ligarAoVivo() {
           }).join('') +
           '<div class="av-msg"><input placeholder="Message à l\'élève…" data-av-msg="' + esc(e.alunoId) + '"><button class="ferramenta" type="button" data-av-env="' + esc(e.alunoId) + '">Envoyer</button></div></div>';
       }).join('') + '</div>' : '<p class="vazio">Aucune épreuve en cours pour le moment.</p>') + '</div>';
-    alvo.querySelectorAll('[data-av-env]').forEach(function (b) {
+    box.querySelectorAll('[data-av-env]').forEach(function (b) {
       b.addEventListener('click', function () {
-        var inp = alvo.querySelector('[data-av-msg="' + b.dataset.avEnv + '"]');
+        var inp = box.querySelector('[data-av-msg="' + b.dataset.avEnv + '"]');
         if (!inp.value.trim()) return;
         b.disabled = true;
         google.script.run.withSuccessHandler(function () { inp.value = ''; b.disabled = false; avisar({ titulo: 'Message envoyé', icone: '', som: false, duracao: 4 }); })
@@ -239,10 +257,63 @@ function ligarAoVivo() {
       });
     });
   };
+
+  // Sala aberta: roteiro do sujet + produção ao vivo + chat + chamada de voz.
+  var abrirSalaProf = function (id) {
+    google.script.run.withSuccessHandler(function (s) {
+      if (salaAberta) salaAberta.fechar();
+      salas[s.id] = s; desenharSalas();
+      var box = $('av-sala-aberta'), oral = s.tache.indexOf('ET') !== 0;
+      box.innerHTML = '<div class="bloco av-sala-prof"><div class="av-sala-topo"><div><span class="tm-selo">Salle en direct</span><h3>' + esc(s.nome || '') + ' · ' + esc(nomeTache(s.tache)) + '</h3><small>' + esc(s.titulo || '') + '</small></div>' +
+        '<div class="av-sala-bts"><button class="botao-principal" type="button" id="avp-ligar">📞 Appeler l\'élève</button><button class="ferramenta" type="button" id="avp-desligar" hidden>Raccrocher</button><button class="ferramenta sutil" type="button" id="avp-fim">Terminer la séance</button></div></div>' +
+        '<span class="aviso" id="avp-chamada"></span>' +
+        '<div class="av-sala-grade"><div><h4>' + (oral ? 'Ce que dit l\'élève (transcription en direct)' : 'Ce que l\'élève écrit (en direct)') + '</h4><div class="av-ao-vivo prod-texto" id="avp-texto">' + esc(oral ? s.transcricao : s.texto).replace(/\n/g, '<br>') + '</div>' +
+        '<small id="avp-contagem"></small><div class="av-msgs" id="avp-msgs"></div><div class="av-msg-linha"><input id="avp-msg" placeholder="Écrire à l\'élève…"><button class="ferramenta" type="button" id="avp-msg-bt">Envoyer</button></div></div>' +
+        '<div class="av-roteiro"><h4>Roteiro du sujet</h4><div id="avp-roteiro"><p class="aviso">Chargement…</p></div></div></div></div>';
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var contar = function () { var t = $('avp-texto').innerText; $('avp-contagem').textContent = contarPalavras(t) + ' mots'; };
+      contar();
+      var addMsg = function (de, nome, texto) { var l = $('avp-msgs'); if (!l) return; l.insertAdjacentHTML('beforeend', '<div class="av-m ' + de + '"><b>' + esc(de === 'aluno' ? (s.nome || 'Élève') : 'Vous') + '</b><span>' + esc(texto) + '</span></div>'); l.scrollTop = l.scrollHeight; };
+      (s.mensagens || []).forEach(function (mm) { addMsg(mm.de, '', mm.texto); });
+      google.script.run.withSuccessHandler(function (r) { $('avp-roteiro').innerHTML = htmlRoteiro(r); }).roteiroSujet(EMAIL, s.tache, s.sujetId);
+      var ch = null;
+      if (window.SimuladoAoVivo && SimuladoAoVivo.Chamada) {
+        ch = new SimuladoAoVivo.Chamada(s.id, 'professor', {
+          onEstado: function (e2, d) {
+            var st = $('avp-chamada'); if (!st) return;
+            st.textContent = { chamando: 'Appel en cours… l\'élève doit répondre.', conectando: 'Connexion…', conectada: '🔊 En communication avec l\'élève', instavel: 'Connexion instable…', falhou: d || 'Échec de l\'appel.', erro: d || 'Erreur.', livre: '' }[e2] || '';
+            $('avp-desligar').hidden = !(e2 === 'chamando' || e2 === 'conectando' || e2 === 'conectada' || e2 === 'instavel');
+          },
+          onRemoto: function (stream) { var au = document.getElementById('avp-audio') || document.body.appendChild(Object.assign(document.createElement('audio'), { id: 'avp-audio', autoplay: true })); au.srcObject = stream; }
+        });
+        ch._enviar = function (dados) { return fetch('/api/modeles/salas/' + s.id + '/sinal', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + localStorage.getItem('token') }, body: JSON.stringify({ dados: dados }) }).catch(function () {}); };
+      }
+      $('avp-ligar').addEventListener('click', function () { if (ch) ch.ligar(); });
+      $('avp-desligar').addEventListener('click', function () { if (ch) ch.encerrar(true); });
+      $('avp-msg-bt').addEventListener('click', function () { var i = $('avp-msg'); if (!i.value.trim()) return; var t = i.value; i.value = ''; addMsg('professor', '', t); google.script.run.mensagemSala(EMAIL, s.id, t); });
+      $('avp-msg').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('avp-msg-bt').click(); });
+      var stream = SimuladoAoVivo.stream('/api/modeles/salas/' + s.id + '/stream', function (ev, d) {
+        if (!$('avp-texto')) { stream.fechar(); return; }
+        if (ev === 'conteudo') { $('avp-texto').innerHTML = esc(oral ? d.transcricao : d.texto).replace(/\n/g, '<br>'); contar(); }
+        else if (ev === 'msg' && d.de === 'aluno') { addMsg('aluno', d.nome, d.texto); somSuave(); }
+        else if (ev === 'sinal' && ch) ch.receber(d);
+        else if (ev === 'estado' && d.status === 'encerrada') { $('avp-chamada').textContent = 'L\'élève a terminé la séance.'; if (ch) ch.encerrar(false); }
+      });
+      salaAberta = { fechar: function () { try { stream.fechar(); } catch (e) {} try { ch && ch.encerrar(false); } catch (e) {} } };
+      $('avp-fim').addEventListener('click', function () {
+        if (!confirm('Terminer la séance en direct ?')) return;
+        google.script.run.encerrarSala(EMAIL, s.id);
+        salaAberta.fechar(); salaAberta = null; delete salas[s.id];
+        $('av-sala-aberta').innerHTML = ''; desenharSalas();
+      });
+    }).withFailureHandler(function (e) { alert(e.message || e); }).entrarSala(EMAIL, id);
+  };
+
+  google.script.run.withSuccessHandler(function (l) { (l || []).forEach(function (s) { salas[s.id] = s; }); desenharSalas(); }).listarSalasAoVivo(EMAIL);
   google.script.run.withSuccessHandler(function (l) {
     (l || []).forEach(function (e) { estado[e.id] = e; });
     desenhar();
-    relTimer = setInterval(function () { if (!$('aovivo')) { clearInterval(relTimer); return; } alvo.querySelectorAll('.av-tempo').length && desenhar(); }, 15000);
+    relTimer = setInterval(function () { if (!$('aovivo')) { clearInterval(relTimer); return; } if ($('av-epreuves') && $('av-epreuves').querySelectorAll('.av-tempo').length) desenhar(); }, 15000);
   }).listarEpreuvesAoVivo(EMAIL);
   if (window.SimuladoAoVivo && SimuladoAoVivo.stream) {
     var ctrl = SimuladoAoVivo.stream('/api/modeles/equipe/stream', function (ev, d) {
@@ -251,8 +322,77 @@ function ligarAoVivo() {
         if (d.acao === 'fim') delete estado[d.id];
         else if (d.acao === 'rascunho' || d.acao === 'inicio') estado[d.id] = Object.assign(estado[d.id] || {}, { id: d.id, alunoId: d.alunoId, nome: d.nome, fim: d.fim || Date.now() + 3600000, sessao: d.sessao, textes: d.textes || (estado[d.id] || {}).textes || {} });
         desenhar();
+      } else if (ev === 'sala') {
+        if (d.acao === 'nova') { salas[d.id] = d; avisar({ titulo: 'Un élève demande un professeur en direct', texto: (d.nome || '') + ' · ' + nomeTache(d.tache), icone: '', som: true, duracao: 12, acao: { rotulo: 'Entrer', fn: function () { abrirSalaProf(d.id); } } }); }
+        else if (d.acao === 'fim') delete salas[d.id];
+        else if (d.acao === 'atendimento' && salas[d.id]) { salas[d.id].status = 'atendimento'; salas[d.id].professorNome = d.professorNome; }
+        if (d.acao !== 'conteudo') desenharSalas();
       } else if (ev === 'oral') avisar({ titulo: 'Nouvel enregistrement', texto: (d.nome || '') + ' · ' + d.tache, icone: '', som: true, duracao: 8 });
     });
-    AO_VIVO = { parar: function () { if (ctrl && ctrl.fechar) ctrl.fechar(); } };
+    AO_VIVO = { parar: function () { if (ctrl && ctrl.fechar) ctrl.fechar(); if (salaAberta) salaAberta.fechar(); } };
   }
+}
+
+// Roteiro do professor para uma sala: enunciado, documentos, modelo, trame e argumentos do eixo.
+function htmlRoteiro(r) {
+  var m = r.modelo || {}, partes = [];
+  partes.push('<div class="ro-bloco"><b>' + esc(r.nomeTache) + ' · ' + esc(r.eixo) + '</b><p>' + esc(r.consigne) + '</p>' + (r.d1 ? '<details><summary>Documents 1 et 2</summary><p>' + esc(r.d1) + '</p><p>' + esc(r.d2) + '</p></details>' : '') + '</div>');
+  if (r.tache === 'T2' && m.ech) partes.push('<details class="ro-bloco" open><summary>Questions modèles du candidat</summary><ol>' + m.ech.map(function (x) { return '<li>' + esc(x.q) + '<small>' + esc(x.r) + '</small></li>'; }).join('') + '</ol></details>');
+  else if (m.etapes) partes.push('<details class="ro-bloco" open><summary>Réponse modèle, étape par étape</summary><ol>' + m.etapes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol>' +
+    (m.rel && m.rel.length ? '<b>Questions de relance</b><ul>' + m.rel.map(function (x) { return '<li>' + esc(x.q) + '</li>'; }).join('') + '</ul>' : '') + '</details>');
+  else if (m.p) partes.push('<details class="ro-bloco"><summary>Production modèle</summary>' + String(m.p).split(/\n+/).map(function (x) { return '<p>' + esc(x) + '</p>'; }).join('') + '</details>');
+  if (r.trame && r.trame.etapes) partes.push('<details class="ro-bloco"><summary>La trame</summary><ol>' + r.trame.etapes.map(function (e) { return '<li><b>' + esc(e.rotulo) + '</b> ' + esc(e.texte) + '</li>'; }).join('') + '</ol></details>');
+  if (r.argumentos.pour.length) partes.push('<details class="ro-bloco"><summary>Arguments de l\'axe</summary><b>Pour</b><ul>' + r.argumentos.pour.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul><b>Contre</b><ul>' + r.argumentos.contre.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></details>');
+  return partes.join('');
+}
+
+// ---------- espace professeur: menu lateral agrupado ----------
+var GRUPOS_PROF = [
+  ['Suivre', ['aovivo', 'online', 'suivi']],
+  ['Corriger', ['ecrit', 'oral']],
+  ['Proposer aux élèves', ['sessoes', 'devoirs', 'avis']],
+  ['Contenus', ['temas', 'blog', 'quadro', 'geracao', 'vocab']]
+];
+function organizarProf(tela, aba) {
+  var abas = tela.querySelector('.abas-prof'), atalhos = tela.querySelector('.atalhos-equipe');
+  if (!abas || tela.querySelector('.prof-layout')) return;
+  var menu = document.createElement('nav');
+  menu.className = 'prof-menu';
+  menu.setAttribute('aria-label', 'Espace professeur');
+  GRUPOS_PROF.forEach(function (g) {
+    var bloco = document.createElement('div');
+    bloco.className = 'prof-grupo';
+    bloco.innerHTML = '<span class="prof-grupo-tit">' + g[0] + '</span>';
+    g[1].forEach(function (id) { var b = abas.querySelector('[data-aba="' + id + '"]'); if (b) { b.className = 'prof-item'; bloco.appendChild(b); } });
+    if (bloco.children.length > 1) menu.appendChild(bloco);
+  });
+  if (atalhos) {
+    var out = document.createElement('div');
+    out.className = 'prof-grupo';
+    out.innerHTML = "<span class=\"prof-grupo-tit\">Autres pages de l’équipe</span>";
+    Array.prototype.slice.call(atalhos.querySelectorAll('a')).forEach(function (a) { a.className = 'prof-item link'; out.appendChild(a); });
+    menu.appendChild(out);
+    atalhos.remove();
+  }
+  var principal = document.createElement('div');
+  principal.className = 'prof-conteudo';
+  var depois = abas.nextSibling;
+  while (depois) { var prox = depois.nextSibling; if (!(depois.classList && depois.classList.contains('abas-prof'))) principal.appendChild(depois); else depois.remove(); depois = prox; }
+  var layout = document.createElement('div');
+  layout.className = 'prof-layout';
+  layout.appendChild(menu);
+  layout.appendChild(principal);
+  abas.replaceWith(layout);
+}
+
+// ---------- mon espace: resumo no topo ----------
+function resumoEspace(tela, devoirs, mensagens) {
+  var h = tela.querySelector('.abas-espace');
+  if (!h) return;
+  var r = document.createElement('div');
+  r.className = 'espace-resumo';
+  r.innerHTML = [[devoirs, 'devoirs à faire', 'abrirTarefas'], [mensagens, 'messages à lire', 'abrirTarefas'], [CARNET.filter(function (x) { return x.tipo === 'erreur'; }).length, 'erreurs dans mon cahier', 'abrirCarnet']]
+    .map(function (x) { return '<button type="button" class="er-item' + (x[0] ? ' on' : '') + '" data-er="' + x[2] + '"><b>' + x[0] + '</b><span>' + x[1] + '</span></button>'; }).join('');
+  h.insertAdjacentElement('afterend', r);
+  r.querySelectorAll('[data-er]').forEach(function (b) { b.addEventListener('click', function () { if (b.dataset.er === 'abrirCarnet') abrirCarnet(); else { var alvo = tela.querySelector('.devoirs-lista, .msgs-lista, .secao-titulo'); if (alvo) alvo.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }); });
 }

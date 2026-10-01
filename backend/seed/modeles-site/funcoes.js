@@ -9,6 +9,7 @@ function entrar() {
   google.script.run
     .withSuccessHandler(function (banco) {
       B = banco;
+      if (window.FNM_TRADUZIR_BANCO) window.FNM_TRADUZIR_BANCO(B);   // pt-BR: eixos (js/producaoI18n.js)
       B.audios = B.audios || {};
       B.ttsAtivo = true;   // áudios Coqui pré-gerados (audio/modeles), ver extensões
       prepararDestaques();

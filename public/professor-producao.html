@@ -87,6 +87,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     medir();
   })();
 </script>
+<script src="js/producaoI18n.js"></script>
+<script>window.FNM_PRONTO = Promise.all([window.FNM_PRONTO, window.FNM_I18N_PRONTO]).then(function (r) { return r[0]; });</script>
 <script src="js/gasShim.js"></script>
 <script src="js/simuladoAoVivo.js"></script>
 <script src="js/producaoApp.js"></script>
