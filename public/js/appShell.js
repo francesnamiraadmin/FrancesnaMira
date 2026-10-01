@@ -39,10 +39,26 @@
         { nome: "Questões Interativas", href: "questoes-interativas.html", icone: "img/icones/puzzle.svg" },
         { nome: "Personalize", href: "personalizar-conjunto.html", icone: "img/icones/personalizar.svg" },
         { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "img/icones/caderno.svg" },
-        { nome: "Estatísticas", href: "estatisticas-questoes.html", icone: "img/icones/estatisticas.svg" }
-      ]
+        { nome: "Estatísticas", href: "estatisticas-questoes.html", icone: "img/icones/estatisticas.svg" },
+        { nome: "Simulação Completa", href: "simulado-tcf.html", icone: "img/icones/simulados.svg" }
+      ],
+      paginas: ["plataforma-questoes.html", "resolver-conjunto.html"]
     },
-    { chave: "producao", nome: "Ambiente de Produção", href: "producao-hub.html", curso: "Ambiente de Produção Oral e Textual" },
+    {
+      // Itens abrem direto a parte do app do Ambiente de Produção (producao.html#<destino>,
+      // ver abrirDestino em backend/seed/modeles-site/extensoes.js); o curso vem do hub.
+      chave: "producao", nome: "Ambiente de Produção", href: "producao-hub.html", curso: "Ambiente de Produção Oral e Textual",
+      submenu: [
+        { nome: "Production écrite", href: "producao.html#ecrit", icone: "img/icones/writing-hand.svg" },
+        { nome: "Production orale", href: "producao.html#oral", icone: "img/icones/mic.svg" },
+        { nome: "Dictée", href: "producao.html#dictee", icone: "img/icones/keyboard.svg" },
+        { nome: "Modèles écrits", href: "producao.html#modeles", icone: "img/icones/document.svg" },
+        { nome: "Vocabulaire", href: "producao.html#vocab", icone: "img/icones/book.svg" },
+        { nome: "Attentes du professeur", href: "producao.html#attentes", icone: "img/icones/cap.svg" },
+        { nome: "Mon espace", href: "producao.html#espace", icone: "img/icones/profile.svg" }
+      ],
+      paginas: ["producao.html", "producao-textual.html", "producao-oral-exercicios.html"]
+    },
     { chave: "aulasEspecializadas", nome: "Aulas Especializadas", href: "aulas-hub.html", curso: "Aulas Especializadas Online" }
   ];
 
@@ -206,10 +222,13 @@
   // qualquer produto futuro poder ganhar submenu só preenchendo `produto.submenu`.
   function montarNavLinkComSubmenu(p) {
     const paginaAtual = location.pathname.split("/").pop() || "index.html";
-    const paginasDoModulo = [p.href, "plataforma-questoes.html", ...p.submenu.map(s => s.href), "resolver-conjunto.html"];
+    const semHash = h => h.split("#")[0];
+    const paginasDoModulo = [p.href, ...(p.paginas || []), ...p.submenu.map(s => semHash(s.href))];
     const ativoNoModulo = paginasDoModulo.includes(paginaAtual);
+    // Item ativo: mesma página e, nos itens com #destino, o mesmo destino.
+    const ativo = s => semHash(s.href) === paginaAtual && (!s.href.includes("#") || s.href.split("#")[1] === location.hash.slice(1));
     const itens = p.submenu.map(s =>
-      `<a class="app-nav-submenu-item ${s.href === paginaAtual ? "active" : ""}" href="${s.href}"><img class="icone" src="${s.icone}" alt=""> ${s.nome}</a>`
+      `<a class="app-nav-submenu-item ${ativo(s) ? "active" : ""}" href="${s.href}"><img class="icone" src="${s.icone}" alt=""> ${s.nome}</a>`
     ).join("");
     return `
       <div class="app-nav-item app-nav-submenu-wrap">

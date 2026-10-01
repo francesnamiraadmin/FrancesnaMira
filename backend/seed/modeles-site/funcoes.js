@@ -56,6 +56,7 @@ function irAccueil() {
   carregarMensagensAccueil();
   if (!B.professor) atualizarSeloTarefas(function (devs) {
     var n = devs.filter(function (d) { return !d.feito; }).length + (MENSAGENS || []).filter(function (m) { return !m.feito; }).length;
+    if ($('he-espace-n')) $('he-espace-n').textContent = n ? n + ' tâche' + (n > 1 ? 's' : '') + ' à faire' : 'devoirs, notes et cahier';
     if (!n || !$('acc-pendencias')) return;
     $('acc-pendencias').innerHTML = '<button class="faixa-pend" type="button" id="acc-pend">Vous avez <b>' + n + '</b> tâche' + (n > 1 ? 's' : '') + ' de votre professeur(e) à faire <span>Mon espace →</span></button>';
     $('acc-pend').addEventListener('click', abrirTarefas);
@@ -296,15 +297,18 @@ function carregarDestaques() {
     var posts = (r && r.posts) || [], sujets = (r && r.sujets) || [];
     if (!posts.length && !sujets.length) { alvo.innerHTML = ''; return; }
     var mes = new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+    // Administrador: ✕ em cada item (artigo apagado; sujet sai do destaque).
+    var apagar = function (tipo, ref) { return B.admin ? '<button class="alu-apagar" type="button" data-une-del="' + tipo + '|' + esc(ref) + '" title="Retirer de « À la une »" aria-label="Retirer de « À la une »">✕</button>' : ''; };
     var html = '<section class="alu alu2"><header class="alu-cab"><div><span class="tm-selo">À la une</span><h2>' + esc(mes.charAt(0).toUpperCase() + mes.slice(1)) + '</h2></div>' +
-      '<p>Les sujets à travailler en priorité ce mois-ci : un par tâche, choisis par votre professeure ou parmi ceux qui tombent le plus.</p></header>';
+      '<p>Les sujets à travailler en priorité ce mois-ci : un par tâche, choisis par votre professeure ou parmi ceux qui tombent le plus.' +
+      (B.admin && r.ocultos ? ' <button class="alu-restaurar" type="button" id="alu-restaurar">Réafficher ' + r.ocultos + ' sujet' + (r.ocultos > 1 ? 's' : '') + ' retiré' + (r.ocultos > 1 ? 's' : '') + '</button>' : '') + '</p></header>';
     if (posts.length) {
       var p0 = posts[0];
       html += '<article class="alu-post alu-destaque" ' + (p0.tache && p0.id ? 'data-bl-t="' + p0.tache + '" data-bl-id="' + esc(p0.id) + '" tabindex="0" role="button"' : '') + '>' +
-        '<div class="alu-post-img">' + imagemBlog(p0) + '</div><div class="alu-post-txt"><span class="alu-rot">Le mot de votre professeure</span><h3>' + esc(p0.titre) + '</h3>' +
+        apagar('post', p0.ref) + '<div class="alu-post-img">' + imagemBlog(p0) + '</div><div class="alu-post-txt"><span class="alu-rot">Le mot de votre professeure</span><h3>' + esc(p0.titre) + '</h3>' +
         (p0.texto ? '<p>' + esc(String(p0.texto).slice(0, 320)) + '</p>' : '') + (p0.tache && p0.id ? '<b class="alu-link">Lire le modèle →</b>' : '') + '</div></article>';
       if (posts.length > 1) html += '<div class="alu-mini">' + posts.slice(1, 4).map(function (p) {
-        return '<article ' + (p.tache && p.id ? 'data-bl-t="' + p.tache + '" data-bl-id="' + esc(p.id) + '" tabindex="0" role="button"' : '') + '><div class="alu-mini-img">' + imagemBlog(p) + '</div><div><b>' + esc(p.titre) + '</b>' + (p.texto ? '<small>' + esc(String(p.texto).slice(0, 110)) + '</small>' : '') + '</div></article>';
+        return '<article ' + (p.tache && p.id ? 'data-bl-t="' + p.tache + '" data-bl-id="' + esc(p.id) + '" tabindex="0" role="button"' : '') + '>' + apagar('post', p.ref) + '<div class="alu-mini-img">' + imagemBlog(p) + '</div><div><b>' + esc(p.titre) + '</b>' + (p.texto ? '<small>' + esc(String(p.texto).slice(0, 110)) + '</small>' : '') + '</div></article>';
       }).join('') + '</div>';
     }
     var linha = function (rotulo, taches, classe) {
@@ -314,7 +318,7 @@ function carregarDestaques() {
         if (x.vazio) return '<div class="alu-card vazio"><span class="alu-tache">' + info.nom + ' · ' + info.sous + '</span><p>Aucun sujet ouvert pour cette tâche.</p></div>';
         var e = eixo(x.e), titulo = x.titre && x.tache !== 'T2' ? x.titre : tituloCurto(x.texto || x.titre);
         return '<article class="alu-card" style="--cor:' + (e.cor || '#E4C043') + '" data-bl-t="' + x.tache + '" data-bl-id="' + esc(x.id) + '" tabindex="0" role="button">' +
-          '<div class="alu-card-topo"><span class="alu-num">' + info.nom.slice(-1) + '</span><span class="alu-tache">' + info.sous + '</span><span class="alu-ico">' + (e.icone || '') + '</span></div>' +
+          apagar('sujet', x.id) + '<div class="alu-card-topo"><span class="alu-num">' + info.nom.slice(-1) + '</span><span class="alu-tache">' + info.sous + '</span><span class="alu-ico">' + (e.icone || '') + '</span></div>' +
           '<h5>' + esc(titulo) + '</h5>' +
           '<div class="alu-meta">' + (x.mes ? '<em class="alu-chip mes">Thème du mois</em>' : x.tr ? '<em class="alu-chip tr">Tendance</em>' : '') +
           '<span>' + esc(e.nome || '') + (x.f > 1 ? ' · tombé ' + x.f + '×' : '') + '</span></div><b class="alu-link">Lire le modèle →</b></article>';
@@ -322,6 +326,20 @@ function carregarDestaques() {
     };
     html += '<div class="alu-sujets">' + linha('Expression orale', ['T1', 'T2', 'T3'], 'oral') + linha('Expression écrite', ['ET1', 'ET2', 'ET3'], 'ecrit') + '</div></section>';
     alvo.innerHTML = html;
+    alvo.querySelectorAll('[data-une-del]').forEach(function (b) {
+      b.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        var p = b.dataset.uneDel.split('|'), tipo = p[0], ref = p.slice(1).join('|');
+        if (!confirm(tipo === 'post' ? 'Supprimer cet article du blog « À la une » ?' : 'Retirer ce sujet de « À la une » ? Le sujet suivant le plus fréquent de cette tâche prendra sa place.')) return;
+        b.disabled = true;
+        google.script.run.withSuccessHandler(function () { carregarDestaques(); avisar({ titulo: 'Retiré de « À la une »', icone: '', som: false, duracao: 4 }); })
+          .withFailureHandler(function (e) { b.disabled = false; alert(e.message || e); }).removerDaUne(EMAIL, tipo, ref);
+      });
+    });
+    if ($('alu-restaurar')) $('alu-restaurar').addEventListener('click', function () {
+      this.disabled = true;
+      google.script.run.withSuccessHandler(function () { carregarDestaques(); }).restaurarUne(EMAIL);
+    });
     alvo.querySelectorAll('[data-bl-id]').forEach(function (c) {
       var abrir = function () { abrirModelo(c.dataset.blT, c.dataset.blId, { tipo: 'liste' }); };
       c.addEventListener('click', abrir);

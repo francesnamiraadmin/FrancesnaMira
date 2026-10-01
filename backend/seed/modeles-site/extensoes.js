@@ -89,10 +89,13 @@ function htmlHubEscolhas() {
     modeles: ((B.partilhadas && B.partilhadas.modelos) || []).length + ' modèles',
     vocab: 'quiz et cartes', attentes: 'le guide de la méthode'
   };
-  return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + HUB_ESCOLHAS.map(function (h) {
-    return '<button class="hub-escolha" type="button" data-hub-ir="' + h.id + '" style="--cor:' + h.cor + '">' +
+  var espaco = B.professor
+    ? { id: 'prof', titulo: 'Espace professeur', texto: 'Épreuves en direct, corrections, devoirs, suivi des élèves, thèmes du mois et À la une.', cor: '#1C2B3A', extra: 'ouvrir →', svg: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>' }
+    : { id: 'espace', titulo: 'Mon espace', texto: 'Mes tâches et messages de la professeure, mes notes, mes corrections et mon cahier d\'erreurs.', cor: '#1C2B3A', extra: '<span id="he-espace-n">devoirs, notes et cahier</span> →', svg: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>' };
+  return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + HUB_ESCOLHAS.concat([espaco]).map(function (h) {
+    return '<button class="hub-escolha' + (h.id === 'espace' || h.id === 'prof' ? ' hub-escolha-espace' : '') + '" type="button" data-hub-ir="' + h.id + '" style="--cor:' + h.cor + '">' +
       '<span class="he-ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + h.svg + '</svg></span>' +
-      '<b>' + h.titulo + '</b><small>' + h.texto + '</small><em>' + extra[h.id] + ' →</em></button>';
+      '<b>' + h.titulo + '</b><small>' + h.texto + '</small><em>' + (h.extra || extra[h.id] + ' →') + '</em></button>';
   }).join('') + '</nav>';
 }
 function ligarHubEscolhas(raiz) {

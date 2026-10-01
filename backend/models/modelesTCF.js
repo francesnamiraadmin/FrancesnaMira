@@ -186,6 +186,8 @@ const ConfigModelesTCF = mongoose.model("ConfigModelesTCF", new Schema({
   ocultos: { type: Schema.Types.Mixed, default: {} },
   iaDia: { type: Number, default: 10 },
   geracaoAlunos: { type: Boolean, default: true },
+  // Sujets retirados do "À la une" por um administrador (o destaque passa ao próximo da tâche).
+  ocultosUne: { type: Schema.Types.Mixed, default: {} },
   // Frases que o app tocou sem áudio Coqui (chave "A|frase" / "B|frase"), para a próxima geração.
   audiosFaltantes: { type: Schema.Types.Mixed, default: {} },
   geracaoLote: { ativa: { type: Boolean, default: false }, iniciadaEm: Date, feitos: Number, erros: Number, falhas: { type: Schema.Types.Mixed, default: {} } }

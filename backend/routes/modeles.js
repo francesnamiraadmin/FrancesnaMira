@@ -138,8 +138,9 @@ async function listasPartilhadas(ctx) {
 
 // ------------------------------------------------------------------ funções (aluno)
 const F = {};
-const PROF = new Set();
+const PROF = new Set(), ADMIN = new Set();
 const prof = (nome, fn) => { F[nome] = fn; PROF.add(nome); };
+const admin = (nome, fn) => { F[nome] = fn; ADMIN.add(nome); };
 
 F.obterBanco = async ctx => {
   const [u, vis, mes, parts, ia, lp] = await Promise.all([usuario(ctx), filtroVisivel(ctx), temasMesIds(ctx), partilhasTipos(ctx), statusIA(ctx), listasPartilhadas(ctx)]);
@@ -157,7 +158,7 @@ F.obterBanco = async ctx => {
     orale: filtrar(M.MODELES.orale), ecrite: filtrar(M.MODELES.ecrite), audios: {}, ttsAtivo: false,
     atelier: M.MODELES.atelier.filter(m => vis(m.tache, m.e, m.id)), atelierTotal: M.MODELES.atelier.length,
     partilhadas: lp, partilhadasIds, pesos, prioridadeEixos: M.EIXOS.prioridade, tendMes: M.EIXOS.tendances.mois, contagens,
-    avisos: [], ia, versao: VERSAO, courseType: ctx.courseType, creditos: u.creditosCorrecao || 0, iaCorrecaoSite: iaConfigurada()
+    avisos: [], ia, versao: VERSAO, admin: ctx.role === "admin", courseType: ctx.courseType, creditos: u.creditosCorrecao || 0, iaCorrecaoSite: iaConfigurada()
   };
 };
 
@@ -497,24 +498,50 @@ F.obterDestaques = async ctx => {
   const postsOut = posts.map(p => {
     let tema = p.tache && p.sujetId ? M.acharTema(p.tache, p.sujetId) : null;
     if (tema && !vis(p.tache, tema.e, p.sujetId)) tema = null;
-    return { tache: tema ? p.tache : "", id: tema ? p.sujetId : "", titre: p.titre, texto: p.texto || (tema ? M.consigneDe(tema) : ""), e: tema ? tema.e : "", f: tema ? (tema.f || 1) : 1, imagem: imagemBlog(p.imagem), post: 1 };
+    return { ref: String(p._id), tache: tema ? p.tache : "", id: tema ? p.sujetId : "", titre: p.titre, texto: p.texto || (tema ? M.consigneDe(tema) : ""), e: tema ? tema.e : "", f: tema ? (tema.f || 1) : 1, imagem: imagemBlog(p.imagem), post: 1 };
   });
   const temas = await temasDoMes(ctx), idsMes = await temasMesIds(ctx);
+  const ocultosUne = (await config()).ocultosUne || {};
   const saida = [];
   for (const t of M.TACHES) {
-    let esc = temas.filter(x => x.tache === t).slice(0, 1).map(x => {
+    let esc = temas.filter(x => x.tache === t && !ocultosUne[x.id]).slice(0, 1).map(x => {
       const s = M.acharTema(t, x.id) || {};
       return { tache: t, id: x.id, titre: x.titre, texto: M.consigneDe(s), e: x.e, f: s.f || 1, mes: 1, tr: M.ehTendencia(t, `${s.t || ""} ${s.titre || ""}`) ? 1 : 0 };
     });
     if (!esc.length) {
-      const pool = M.modelosManuais(t).concat(M.sujetsDaTache(t)).filter(s => vis(t, s.e, s.id));
+      const pool = M.modelosManuais(t).concat(M.sujetsDaTache(t)).filter(s => vis(t, s.e, s.id) && !ocultosUne[s.id]);
       pool.sort((a, b) => M.pesoTema(t, b, idsMes) - M.pesoTema(t, a, idsMes));
       esc = pool.slice(0, 1).map(s => ({ tache: t, id: s.id, titre: s.titre || "", texto: M.consigneDe(s), e: s.e, f: s.f || 1, mes: 0, tr: M.ehTendencia(t, `${s.t || ""} ${s.titre || ""} ${s.c || ""}`) ? 1 : 0 }));
     }
     saida.push(...esc);
   }
-  return { posts: postsOut, sujets: saida };
+  return { posts: postsOut, sujets: saida, ocultos: Object.keys(ocultosUne).length };
 };
+
+// Administrador: tira um item do "À la une". Artigo → apagado do blog; sujet → sai do destaque
+// (e da seleção do mês, se estava nela) e o próximo sujet da tâche toma o lugar.
+admin("removerDaUne", async (ctx, tipo, ref) => {
+  if (tipo === "post") {
+    if (!oid(ref)) throw erro("Article introuvable.");
+    await T.PostBlogTCF.deleteOne({ _id: oid(ref) });
+  } else {
+    const id = String(ref || "").slice(0, 40);
+    if (!id) throw erro("Sujet introuvable.");
+    const cfg = await config();
+    cfg.ocultosUne = { ...(cfg.ocultosUne || {}), [id]: 1 };
+    cfg.markModified("ocultosUne");
+    await cfg.save();
+    await T.TemaMesTCF.deleteOne({ mes: mesAtual(), sujetId: id });
+  }
+  ctx._cache = {};
+  return F.obterDestaques(ctx);
+});
+admin("restaurarUne", async ctx => {
+  const cfg = await config();
+  cfg.ocultosUne = {}; cfg.markModified("ocultosUne");
+  await cfg.save();
+  return F.obterDestaques(ctx);
+});
 function imagemBlog(v) {
   v = String(v || "").trim();
   if (!v) return "";
@@ -943,6 +970,7 @@ router.post("/rpc/:fn", async (req, res) => {
   const fn = Object.prototype.hasOwnProperty.call(F, nome) ? F[nome] : null;
   if (!fn) return res.status(404).json({ msg: "Fonction inconnue : " + nome });
   if (PROF.has(nome) && !ehEquipe(req.userRole)) return res.status(403).json({ msg: "Réservé à l'équipe pédagogique." });
+  if (ADMIN.has(nome) && req.userRole !== "admin") return res.status(403).json({ msg: "Réservé aux administrateurs." });
   try {
     const ctx = await contexto(req);
     const args = Array.isArray(req.body?.args) ? req.body.args : [];

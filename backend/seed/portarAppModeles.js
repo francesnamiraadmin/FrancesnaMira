@@ -14,7 +14,8 @@ let js = fs.readFileSync(path.join(origem, "App.html"), "utf8");
 js = js.replace(/^\s*<script>\s*/, "").replace(/\s*<\/script>\s*$/, "\n");
 
 const DIR = path.join(__dirname, "modeles-site");
-const ler = n => fs.readFileSync(path.join(DIR, n), "utf8");
+// Aceita CRLF (arquivos salvos no Windows) e LF.
+const ler = n => fs.readFileSync(path.join(DIR, n), "utf8").replace(/\r\n/g, "\n");
 
 // Acha "function nome(" no nível do App e devolve [início, fim] (até a chave que fecha).
 function limitesFuncao(src, nome) {
