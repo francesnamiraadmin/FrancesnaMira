@@ -48,7 +48,7 @@ function formatoJson(def, tem) {
 
 // Devolve { ee, eo } já no formato de montarResultadoExpressao.
 async function corrigirExpressoesComIA(def, tentativa) {
-  if (!iaConfigurada()) throw Object.assign(new Error("Correção por IA não configurada no servidor (ANTHROPIC_API_KEY)."), { naoConfigurada: true });
+  if (!iaConfigurada()) throw Object.assign(new Error("Correção por IA não configurada no servidor (GEMINI_API_KEY ou ANTHROPIC_API_KEY)."), { naoConfigurada: true });
   const { json: bruto } = await pedirJson({ usuario: montarPrompt(def, tentativa), maxTokens: 6000 });
   const meta = { porIA: true, corretorNome: "Correção automática (IA)" };
   const tem = p => sim.ordemDe(def).includes(p);

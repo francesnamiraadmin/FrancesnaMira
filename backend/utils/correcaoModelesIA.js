@@ -7,7 +7,18 @@
 const Tema = require("../models/tema");
 const { CorrecaoIATCF, CarnetProducao } = require("../models/modelesTCF");
 const M = require("./modelesTCF");
-const { pedirJson } = require("./claude");
+const { pedirJson, iaOuveAudio } = require("./claude");
+const fs = require("fs");
+
+// Áudio de um arquivo gravado, para a IA ouvir (até 15 MB, o limite do envio direto).
+function lerAudio(caminho, mime) {
+  try {
+    if (!caminho || !iaOuveAudio()) return undefined;
+    const st = fs.statSync(caminho);
+    if (!st.size || st.size > 15 * 1024 * 1024) return undefined;
+    return { mime: String(mime || "audio/webm").split(";")[0], base64: fs.readFileSync(caminho).toString("base64") };
+  } catch (e) { return undefined; }
+}
 const { avaliar } = require("./gradesProva");
 
 const NIVEL_CURSO = { TCF: "B2", DELF: "B2", DALF: "C1", TEF: "B2", A1: "A1", A2: "A2", B1: "B1", B2: "B2" };
@@ -49,9 +60,12 @@ async function garantirTemaSujet(courseType, tache, sujetId) {
 }
 
 // Chama a IA e devolve a correção no formato do script (r.note, r.criteres, r.corrections…).
-async function corrigirTexto(tache, sujet, texte) {
-  const p = M.promptCorrecao(tache, sujet, texte);
-  const { json: r, modelo } = await pedirJson({ sistema: p.sistema, usuario: p.usuario, maxTokens: 4000 });
+// `audio` ({ mime, base64 }): a gravação da produção oral, ouvida pela IA quando o provedor aceita áudio.
+async function corrigirTexto(tache, sujet, texte, audio) {
+  const comAudio = !!(audio && iaOuveAudio());
+  const p = M.promptCorrecao(tache, sujet, texte, comAudio);
+  const { json: r, modelo } = await pedirJson({ sistema: p.sistema, usuario: p.usuario, maxTokens: 4000, audio: comAudio ? audio : undefined });
+  r.ouviuAudio = comAudio;
   r.note = Math.max(0, Math.min(20, Math.round((Number(r.note) || 0) * 2) / 2));
   r.nclc = M.nclc(r.note);
   r.mots = p.mots;
@@ -71,10 +85,10 @@ async function registrarNoCarnet(alunoId, tache, r, { courseType, producaoId, ei
   if (itens.length) await CarnetProducao.insertMany(itens);
 }
 
-async function corrigirTreino({ alunoId, tache, sujetId, texte, courseType, modalidade }) {
+async function corrigirTreino({ alunoId, tache, sujetId, texte, courseType, modalidade, audio }) {
   const sujet = M.acharTema(tache, sujetId);
   if (!sujet) throw { status: 404, msg: "Sujet introuvable." };
-  const r = await corrigirTexto(tache, sujet, texte);
+  const r = await corrigirTexto(tache, sujet, texte, audio);
   await CorrecaoIATCF.create({ alunoId, tache, sujetId, sujet: String(sujet.titre || sujet.t || "").slice(0, 300), modalidade: modalidade || (M.ehEscrita(tache) ? "textual" : "oral"),
     mots: r.mots, note: r.note, nclc: r.nclc, texte: String(texte).slice(0, 12000), correcao: r });
   await registrarNoCarnet(alunoId, tache, r, { courseType, eixo: sujet.e });
@@ -88,14 +102,15 @@ async function corrigirProducaoModeles(producao, tema) {
   if (!sujet) throw new Error("Sujet introuvable.");
   const oral = producao.modalidade === "oral";
   const texte = oral ? (producao.transcricao || "") : (producao.textoDigitado || "");
-  const r = await corrigirTexto(tache, sujet, texte);
+  const audio = oral ? lerAudio(producao.arquivoOriginal?.caminho, producao.arquivoOriginal?.mimetype) : undefined;
+  const r = await corrigirTexto(tache, sujet, texte, audio);
   // Critérios do script ("x/5", na ordem da grade) → grade TCF do site.
   const nota = c => Number(String((c || {}).note || "").split("/")[0].replace(",", ".")) || 0;
   const cr = r.criteres || [];
   const ids = oral ? ["tarefa", "coerencia_oral", "lexico", "gramatica"] : ["tarefa", "coerencia", "lexico", "gramatica"];
   const notas = {}, comentarios = {};
   ids.forEach((id, i) => { notas[id] = nota(cr[i]); comentarios[id] = (cr[i] || {}).commentaire || ""; });
-  if (oral) { notas.fluencia = notas.coerencia_oral; comentarios.fluencia = "Estimé à partir de la transcription (la prononciation n'est pas évaluée par l'IA). " + (comentarios.coerencia_oral || ""); }
+  if (oral) { notas.fluencia = notas.coerencia_oral; comentarios.fluencia = (r.ouviuAudio ? "Évalué à partir de l'enregistrement et de la transcription. " : "Estimé à partir de la transcription (la prononciation n'est pas évaluée par l'IA). ") + (comentarios.coerencia_oral || ""); }
   const av = avaliar("TCF", oral ? "oral" : "textual", notas, { nivelAlvo: tema.nivel, notaFinal: r.note, comentarios });
   await CorrecaoIATCF.create({ alunoId: producao.alunoId, tache, sujetId: sujet.id, sujet: String(sujet.titre || sujet.t || "").slice(0, 300), modalidade: producao.modalidade,
     mots: r.mots, note: r.note, nclc: r.nclc, texte: texte.slice(0, 12000), correcao: r, producaoId: producao._id });
@@ -111,4 +126,4 @@ async function corrigirProducaoModeles(producao, tema) {
   };
 }
 
-module.exports = { garantirTemaSujet, corrigirTreino, corrigirProducaoModeles, registrarNoCarnet };
+module.exports = { lerAudio, garantirTemaSujet, corrigirTreino, corrigirProducaoModeles, registrarNoCarnet };

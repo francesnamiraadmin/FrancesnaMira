@@ -19,7 +19,7 @@ const { cursosComAcesso, usuarioTemAcesso } = require("../middleware/acessoCurso
 const { comTratamentoDeErro, pastaUpload } = require("../middleware/upload");
 const { ehObjectId } = require("../middleware/seguranca");
 const { iaConfigurada, pedirJson } = require("../utils/claude");
-const { garantirTemaSujet, corrigirTreino } = require("../utils/correcaoModelesIA");
+const { garantirTemaSujet, corrigirTreino, lerAudio } = require("../utils/correcaoModelesIA");
 const { TIPOS_CURSO } = require("../utils/tiposCurso");
 const canais = require("../utils/sseCanais");
 
@@ -902,6 +902,29 @@ prof("listarOnline", async () => {
   return vivos.sort((a, b) => a.n.localeCompare(b.n));
 });
 
+// Fila do Sistema de Correção vista do Espace professeur (as mesmas Producao: corrigir aqui ou lá
+// dá no mesmo). situacao: "pendentes" (em fila / em correção) ou "corrigidas".
+prof("filaCorrecao", async (ctx, filtro) => {
+  const f = filtro || {};
+  const q = { status: f.situacao === "corrigidas" ? { $in: ["corrigido", "devolvido"] } : { $in: ["em_fila", "em_correcao"] } };
+  if (f.modalidade === "oral") q.modalidade = "oral";
+  else if (f.modalidade === "textual") q.modalidade = { $ne: "oral" };
+  if (f.alunoId && oid(f.alunoId)) q.alunoId = oid(f.alunoId);
+  const ps = await Producao.find(q).populate("temaId", "titulo courseType nivel").populate("alunoId", "nome email").populate("professorId", "nome")
+    .select("protocolo temaId alunoId professorId modalidade status modoCorrecao contagemPalavras dataEnvio dataCorrecao origem avaliacao.notaTotal avaliacao.notaMaxima avaliacao.corretor avaliacao.corretorNome")
+    .sort(f.situacao === "corrigidas" ? { dataCorrecao: -1 } : { dataEnvio: 1 }).limit(200).lean();
+  return ps.map(p => ({
+    id: String(p._id), protocolo: p.protocolo, aluno: p.alunoId?.nome || p.alunoId?.email || "", alunoId: String(p.alunoId?._id || ""),
+    titulo: p.temaId?.titulo || "", curso: p.temaId?.courseType || "", nivel: p.temaId?.nivel || "", tache: p.origem?.tache || "",
+    modalidade: p.modalidade || "textual", status: p.status, minha: p.status === "em_correcao" && String(p.professorId?._id || "") === ctx.userId,
+    outro: p.status === "em_correcao" && String(p.professorId?._id || "") !== ctx.userId ? (p.professorId?.nome || "outro professor") : "",
+    data: p.dataEnvio, dataCorrecao: p.dataCorrecao, palavras: p.contagemPalavras || 0,
+    nota: p.avaliacao?.notaTotal ?? null, notaMax: p.avaliacao?.notaMaxima || 20,
+    corretor: p.avaliacao?.corretor === "ia" || p.modoCorrecao === "ia" ? "IA" : (p.avaliacao?.corretorNome || p.professorId?.nome || "")
+  }));
+});
+prof("alunosCorrecao", async () => (await alunosProducao()).map(a => ({ id: a.id, nome: a.nome })));
+
 prof("listarSalasAoVivo", async () => {
   const ss = await T.SalaAoVivoTCF.find({ status: { $ne: "encerrada" }, atualizadoEm: { $gte: new Date(Date.now() - 3 * 3600 * 1000) } }).sort({ inicio: -1 }).lean();
   const nomes = await mapaNomes(ss.map(s => s.alunoId));
@@ -1059,7 +1082,7 @@ prof("statusGeracaoApp", async () => {
   return { prontos, total, ativa: !!lote, feitos: lote?.feitos || 0, erros: lote?.erros || 0, iaAtiva: iaConfigurada(), geracaoAlunos: cfg.geracaoAlunos !== false, iaDia: cfg.iaDia };
 });
 prof("iniciarGeracaoApp", async ctx => {
-  if (!iaConfigurada()) throw erro("L'IA n'est pas configurée sur le serveur (ANTHROPIC_API_KEY).");
+  if (!iaConfigurada()) throw erro("L'IA n'est pas configurée sur le serveur (GEMINI_API_KEY ou ANTHROPIC_API_KEY).");
   if (lote) return F.statusGeracaoApp(ctx);
   const prontos = new Set((await T.ModeleIA.find({}).select("sujetId").lean()).map(x => x.sujetId));
   const fila = [];
@@ -1147,6 +1170,32 @@ router.post("/oral", comTratamentoDeErro(uploadAudio.single("audio")), async (re
     if (err.status || err.msg) return res.status(err.status || 400).json({ msg: err.msg || err.message });
     console.error("modeles/oral:", err);
     res.status(500).json({ msg: "Erreur du serveur. Réessayez." });
+  }
+});
+
+// Correção de treino de um essai oral pela IA: transcrição + gravação (a IA ouve o áudio quando o
+// provedor aceita; senão corrige pela transcrição). O arquivo não fica guardado.
+router.post("/oral-ia", comTratamentoDeErro(uploadAudio.single("audio")), async (req, res) => {
+  const limpar = () => { if (req.file) fs.unlink(req.file.path, () => {}); };
+  try {
+    const ctx = await contexto(req);
+    const { tache, sujet, transcricao } = req.body || {};
+    if (!["T1", "T2", "T3"].includes(tache) || !M.acharTema(tache, sujet)) { limpar(); return res.status(400).json({ msg: "Sujet invalide." }); }
+    const st = await statusIA(ctx);
+    if (!st.ativa) { limpar(); return res.status(400).json({ msg: "La correction par l'IA n'est pas activée. Demandez à votre professeur(e)." }); }
+    if (st.restantes <= 0) { limpar(); return res.status(400).json({ msg: `Vous avez utilisé vos ${st.limite} corrections par l'IA aujourd'hui. Revenez demain !` }); }
+    const texte = String(transcricao || "").trim().slice(0, 6000);
+    const audio = req.file ? lerAudio(req.file.path, req.file.mimetype) : undefined;
+    if (M.contarPalavras(texte) < 15 && !audio) { limpar(); return res.status(400).json({ msg: "La transcription est trop courte : parlez un peu plus ou complétez-la avant l'envoi." }); }
+    const r = await corrigirTreino({ alunoId: ctx.userId, tache, sujetId: sujet, texte: texte || "(transcription vide : écoute l'enregistrement)", courseType: ctx.courseType, modalidade: "oral", audio });
+    limpar();
+    r.restantes = Math.max(0, st.restantes - 1);
+    res.json(r);
+  } catch (err) {
+    limpar();
+    if (err.status || err.msg) return res.status(err.status || 400).json({ msg: err.msg || err.message });
+    console.error("modeles/oral-ia:", err);
+    res.status(500).json({ msg: "La correction par l'IA a échoué. Réessayez dans un instant." });
   }
 });
 

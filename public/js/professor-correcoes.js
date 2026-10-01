@@ -20,12 +20,20 @@ let arquivoCorrigidoSelecionado = null;
 let alunos = [];
 let alunoSelecionado = null;
 let voltarPara = 'fila';
+
+// Tarefa (tâche) das produções do Ambiente de Produção: ET1–ET3 escritas, T1–T3 orais.
+const NOMES_TAREFA = { ET1: 'Tarefa 1 escrita · Mensagem curta', ET2: 'Tarefa 2 escrita · Relato, artigo ou carta', ET3: 'Tarefa 3 escrita · Texto argumentativo',
+  T1: 'Tarefa 1 oral · Entrevista dirigida', T2: 'Tarefa 2 oral · Exercício de interação', T3: 'Tarefa 3 oral · Ponto de vista' };
+const tarefaDe = p => (p && p.origem && NOMES_TAREFA[p.origem.tache]) || '';
+const tagTarefa = p => tarefaDe(p) ? `<span class="tag tarefa">${esc(tarefaDe(p))}</span>` : '';
 const euPronto = fetch('/api/auth/me', { headers: H() }).then(r => r.ok ? r.json() : null).then(u => { window.__eu = u; }).catch(() => {});
 
 // ===================== ABAS =====================
 function mostrarView(nome) {
   document.getElementById('viewFila').style.display = nome === 'fila' ? 'block' : 'none';
   document.getElementById('viewAlunos').style.display = nome === 'alunos' ? 'block' : 'none';
+  document.getElementById('viewCorrigidas').style.display = nome === 'corrigidas' ? 'block' : 'none';
+  document.getElementById('viewAoVivo').style.display = nome === 'aovivo' ? 'block' : 'none';
   document.getElementById('viewCorrecao').style.display = nome === 'correcao' ? 'block' : 'none';
   document.getElementById('abasSistema').style.display = nome === 'correcao' ? 'none' : 'flex';
   document.querySelectorAll('#abasSistema .aba').forEach(a => a.classList.toggle('active', a.dataset.aba === nome));
@@ -35,15 +43,20 @@ document.getElementById('abasSistema').addEventListener('click', e => {
   if (!aba) return;
   mostrarView(aba.dataset.aba);
   if (aba.dataset.aba === 'alunos') carregarAlunos();
+  else if (aba.dataset.aba === 'corrigidas') carregarCorrigidas();
+  else if (aba.dataset.aba === 'aovivo') { if (window.CorrecaoAoVivo) CorrecaoAoVivo.carregar(); }
   else { carregarFila(); carregarStats(); }
 });
 document.getElementById('voltarFilaBtn').addEventListener('click', () => {
   mostrarView(voltarPara);
   if (voltarPara === 'alunos') { carregarAlunos(); if (alunoSelecionado) abrirAluno(alunoSelecionado); }
+  else if (voltarPara === 'corrigidas') carregarCorrigidas();
   else { carregarFila(); carregarStats(); }
 });
 document.getElementById('atualizarFilaBtn').addEventListener('click', carregarFila);
-['filtroCurso', 'filtroStatus', 'filtroPrioridade'].forEach(id => document.getElementById(id).addEventListener('change', carregarFila));
+['filtroCurso', 'filtroStatus', 'filtroPrioridade', 'filtroModalidade', 'filtroAluno'].forEach(id => document.getElementById(id).addEventListener('change', carregarFila));
+['corrCurso', 'corrModalidade', 'corrAluno'].forEach(id => document.getElementById(id).addEventListener('change', carregarCorrigidas));
+document.getElementById('atualizarCorrBtn').addEventListener('click', carregarCorrigidas);
 
 // ===================== ESTATÍSTICAS =====================
 async function carregarStats() {
@@ -67,6 +80,9 @@ async function carregarFila() {
   if (curso) params.set('courseType', curso);
   if (status) params.set('status', status);
   if (prioridade) params.set('prioridade', prioridade);
+  const modalidade = document.getElementById('filtroModalidade').value, aluno = document.getElementById('filtroAluno').value;
+  if (modalidade) params.set('modalidade', modalidade);
+  if (aluno) params.set('alunoId', aluno);
   const lista = document.getElementById('filaLista');
   lista.innerHTML = '<p style="opacity:0.6;">Carregando fila…</p>';
   try {
@@ -94,6 +110,7 @@ function renderFilaItem(p) {
       <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
         <span class="tag exame">${esc(t.courseType || t.exame || '')} · ${esc(t.nivel || '')}</span>
         <span class="tag status">${p.modalidade === 'oral' ? 'Produção oral' : 'Redação'}</span>
+        ${tagTarefa(p)}
         ${p.ia?.status === 'erro' ? '<span class="tag ia">IA indisponível → professor</span>' : ''}
         ${urgente ? '<span class="tag urgente">Urgente</span>' : ''}
         ${minha ? '<span class="tag minha">Assumida por mim</span>' : ''}
@@ -107,6 +124,53 @@ document.getElementById('filaLista').addEventListener('click', e => {
   if (btn) { voltarPara = 'fila'; abrirProducao(btn.dataset.abrir, btn.closest('.fila-item')?.dataset.status === 'em_fila'); }
 });
 
+// ===================== CORRIGIDAS =====================
+async function carregarCorrigidas() {
+  const params = new URLSearchParams();
+  const curso = document.getElementById('corrCurso').value, modalidade = document.getElementById('corrModalidade').value, aluno = document.getElementById('corrAluno').value;
+  if (curso) params.set('courseType', curso);
+  if (modalidade) params.set('modalidade', modalidade);
+  if (aluno) params.set('alunoId', aluno);
+  const lista = document.getElementById('corrLista');
+  lista.innerHTML = '<p style="opacity:0.6;">Carregando…</p>';
+  try {
+    const res = await fetch(`/api/producoes/professor/corrigidas?${params}`, { headers: H() });
+    const producoes = res.ok ? await res.json() : [];
+    document.getElementById('contCorrigidas').textContent = producoes.length;
+    lista.innerHTML = producoes.length ? producoes.map(p => {
+      const t = p.temaId || {};
+      const quem = p.avaliacao?.corretor === 'ia' || p.modoCorrecao === 'ia' ? 'IA' : (p.avaliacao?.corretorNome || p.professorId?.nome || 'professor');
+      return `<div class="fila-item corrigida" data-id="${p._id}">
+        <div>
+          <h4>${esc(t.titulo || 'Tema')}</h4>
+          <div class="meta">Aluno: ${esc(p.alunoId?.nome || '—')} · Enviado em ${fmtData(p.dataEnvio)} · Corrigido em ${fmtData(p.dataCorrecao)} por ${esc(quem)}</div>
+          <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+            <span class="tag exame">${esc(t.courseType || t.exame || '')} · ${esc(t.nivel || '')}</span>
+            <span class="tag status">${p.modalidade === 'oral' ? 'Produção oral' : 'Redação'}</span>
+            ${tagTarefa(p)}
+            ${p.avaliacao?.notaTotal !== undefined ? `<span class="nota-pill">${p.avaliacao.notaTotal}/${p.avaliacao.notaMaxima || 20}</span>` : ''}
+          </div>
+        </div>
+        <button class="btn secundario pequeno" data-ver="${p._id}">Ver correção</button>
+      </div>`;
+    }).join('') : '<div class="vazio-box">Nenhuma produção corrigida com estes filtros.</div>';
+  } catch (err) {
+    lista.innerHTML = '<div class="vazio-box">Erro ao carregar as corrigidas.</div>';
+  }
+}
+document.getElementById('corrLista').addEventListener('click', e => {
+  const btn = e.target.closest('[data-ver]');
+  if (btn) { voltarPara = 'corrigidas'; abrirProducao(btn.dataset.ver, false); }
+});
+
+// Filtros « Aluno » (fila e corrigidas) com a mesma lista da aba Alunos.
+function preencherFiltrosAluno() {
+  document.querySelectorAll('select.filtro-aluno').forEach(sel => {
+    const atual = sel.value;
+    sel.innerHTML = '<option value="">Todos os alunos</option>' + alunos.map(a => `<option value="${a._id}" ${a._id === atual ? 'selected' : ''}>${esc(a.nome)}${a.producoes?.pendentes ? ' · ' + a.producoes.pendentes + ' aguardando' : ''}</option>`).join('');
+  });
+}
+
 // ===================== ALUNOS E CRÉDITOS =====================
 async function carregarAlunos() {
   const el = document.getElementById('listaAlunos');
@@ -116,6 +180,7 @@ async function carregarAlunos() {
     alunos = res.ok ? await res.json() : [];
   } catch (err) { alunos = []; }
   document.getElementById('contAlunos').textContent = alunos.length;
+  preencherFiltrosAluno();
   renderAlunos();
 }
 function renderAlunos() {
@@ -164,10 +229,12 @@ function renderPainelAluno(a) {
     </div>
     <div class="msg-inline" id="credMsg" style="display:none;"></div>
     <h2 style="margin-top:20px;">Redações e produções (${a.producoes.length})</h2>
+    <p style="font-size:.85rem; color:var(--cinza-400); margin-bottom:8px;">${a.producoes.filter(p => ['em_fila', 'em_correcao'].includes(p.status)).length} aguardando correção · ${a.producoes.filter(p => ['corrigido', 'devolvido'].includes(p.status)).length} corrigida(s)
+      · <a href="#" data-fila-aluno="${a._id}">ver na fila</a> · <a href="#" data-corr-aluno="${a._id}">ver corrigidas</a></p>
     ${a.producoes.length ? a.producoes.map(p => `
       <div class="prod-linha" data-prod="${p._id}" data-status="${p.status}">
         <div><strong>${esc(p.temaId?.titulo || 'Tema')}</strong>
-          <small>${esc(p.temaId?.courseType || '')} ${esc(p.temaId?.nivel || '')} · ${p.modalidade === 'oral' ? 'oral' : 'redação'} · ${fmtData(p.dataEnvio)} · ${NOMES_STATUS[p.status] || p.status}${p.modoCorrecao === 'ia' ? ' · corrigida pela IA' : ''}</small></div>
+          <small>${esc(p.temaId?.courseType || '')} ${esc(p.temaId?.nivel || '')} · ${p.modalidade === 'oral' ? 'oral' : 'redação'}${tarefaDe(p) ? ' · ' + esc(tarefaDe(p)) : ''} · ${fmtData(p.dataEnvio)} · ${NOMES_STATUS[p.status] || p.status}${p.modoCorrecao === 'ia' ? ' · corrigida pela IA' : ''}</small></div>
         ${p.avaliacao?.notaTotal !== undefined && ['corrigido', 'devolvido'].includes(p.status)
           ? `<span class="nota-pill">${p.avaliacao.notaTotal}/${p.avaliacao.notaMaxima || 20}</span>`
           : `<span class="tag status">${NOMES_STATUS[p.status] || p.status}</span>`}
@@ -177,6 +244,9 @@ document.getElementById('painelAluno').addEventListener('click', async e => {
   const rapido = e.target.closest('[data-rapido]');
   if (rapido) { document.getElementById('qtdCreditos').value = rapido.dataset.rapido; return; }
   if (e.target.closest('#addCreditosBtn')) { adicionarCreditos(); return; }
+  const fa = e.target.closest('[data-fila-aluno]'), ca = e.target.closest('[data-corr-aluno]');
+  if (fa) { e.preventDefault(); document.getElementById('filtroAluno').value = fa.dataset.filaAluno; mostrarView('fila'); carregarFila(); return; }
+  if (ca) { e.preventDefault(); document.getElementById('corrAluno').value = ca.dataset.corrAluno; mostrarView('corrigidas'); carregarCorrigidas(); return; }
   const prod = e.target.closest('[data-prod]');
   if (prod) { voltarPara = 'alunos'; abrirProducao(prod.dataset.prod, false); }
 });
@@ -239,6 +309,7 @@ function renderCorrecao(p) {
     <div class="dado-linha"><span class="rotulo">E-mail</span><span class="valor">${esc(p.alunoId.email)}</span></div>
     <div class="dado-linha"><span class="rotulo">Protocolo</span><span class="valor">${esc(p.protocolo)}</span></div>
     <div class="dado-linha"><span class="rotulo">Tema</span><span class="valor">${esc(tema.titulo)}</span></div>
+    ${tarefaDe(p) ? `<div class="dado-linha"><span class="rotulo">Tarefa</span><span class="valor">${esc(tarefaDe(p))}</span></div>` : ''}
     <div class="dado-linha"><span class="rotulo">Curso / nível</span><span class="valor">${esc(tema.courseType || tema.exame)} · ${esc(tema.nivel)}</span></div>
     <div class="dado-linha"><span class="rotulo">Correção pedida</span><span class="valor">${p.modoCorrecao === 'ia' ? 'IA' : 'Professor'}</span></div>
     <div class="dado-linha"><span class="rotulo">Enviado em</span><span class="valor">${new Date(p.dataEnvio).toLocaleString('pt-BR')}</span></div>
@@ -252,7 +323,8 @@ function renderCorrecao(p) {
 
   let producaoHtml = '';
   if (p.modalidade === 'oral' && p.arquivoOriginal?.nome) {
-    producaoHtml = `<div style="font-weight:700; margin-bottom:8px;">Gravação do aluno${p.duracaoSegundos ? ' — ' + formatarDuracao(p.duracaoSegundos) : ''}</div><audio controls id="audioProducaoOriginal" style="width:100%;"></audio>`;
+    producaoHtml = `<div style="font-weight:700; margin-bottom:8px;">Gravação do aluno${p.duracaoSegundos ? ' — ' + formatarDuracao(p.duracaoSegundos) : ''}</div><audio controls id="audioProducaoOriginal" style="width:100%;"></audio>` +
+      (p.transcricao ? `<div style="font-weight:700; margin:14px 0 6px;">Transcrição automática (revisada pelo aluno)</div><div class="texto-enviado-box" lang="fr">${esc(p.transcricao)}</div>` : '');
   } else if (p.arquivoOriginal?.nome) {
     producaoHtml = `<div class="arquivo-baixar-box"><img src="img/icones/document.svg" alt="" style="width:1.6rem; height:1.6rem;"><div style="flex:1;"><div style="font-weight:700;">${esc(p.arquivoOriginal.nome)}</div><div style="font-size:0.8rem; color:var(--cinza-400);">${(p.arquivoOriginal.tamanho / 1024).toFixed(0)} KB</div></div><button class="btn pequeno" id="baixarOriginalBtn">Baixar</button></div>`;
   } else if (p.textoDigitado) {
@@ -439,3 +511,11 @@ carregarStats();
 carregarFila();
 carregarAlunos();
 if (location.hash === '#alunos') mostrarView('alunos');
+if (location.hash === '#corrigidas') { mostrarView('corrigidas'); carregarCorrigidas(); }
+if (location.hash === '#aovivo') mostrarView('aovivo');
+const idPedido = new URLSearchParams(location.search).get('producao');
+if (idPedido) {
+  const assumir = new URLSearchParams(location.search).get('assumir') === '1';
+  voltarPara = 'fila';
+  euPronto.then(() => abrirProducao(idPedido, assumir));
+}

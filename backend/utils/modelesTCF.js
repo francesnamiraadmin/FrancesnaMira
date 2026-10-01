@@ -260,8 +260,9 @@ function modeloReferencia(tache, eixoAlvo) {
 }
 
 // Correção de treino (corrigirComIA do script). Escrita: texto digitado. Oral: a transcrição
-// automática da gravação, avaliada como production orale (fluidez e pronúncia não são ouvidas).
-function promptCorrecao(tache, sujet, texte) {
+// automática da gravação, avaliada como production orale; com `comAudio` a IA também ouve a gravação
+// (fluidez e pronúncia entram na avaliação).
+function promptCorrecao(tache, sujet, texte, comAudio) {
   const oral = !ehEscrita(tache);
   const lim = LIMITES_ESCRITA[tache];
   const mots = contarPalavras(texte);
@@ -269,9 +270,10 @@ function promptCorrecao(tache, sujet, texte) {
   const b = OUTILS.boite;
   const boite = `Il est essentiel que [agent : ${b.agents.slice(0, 6).join(", ")}] + [action au subjonctif : ${b.actions.slice(0, 6).join(", ")}] + [complément : ${b.complements.join(", ")}] + [domaine]. Parvenant ainsi à…`;
   const sistema = [
+    `Tu es un correcteur de ${oral ? "productions orales" : "rédactions"} en français, pour des apprenants brésiliens qui préparent les examens de français (TCF, TEF, DELF, DALF). Tu réponds toujours en tant que correcteur : tu évalues la production de l'élève et tu ne fais rien d'autre.`,
     `Tu es un correcteur expert du TCF Canada (expression ${oral ? "orale" : "écrite"}) et professeur de FLE chez Français na Mira.`,
     "Tu corriges avec bienveillance mais avec exigence, selon la grille du TCF Canada (note sur 20).",
-    oral ? "Critères : 1) réalisation de la tâche (respect de la consigne et de la durée) ; 2) cohérence et organisation du discours ; 3) étendue et maîtrise du lexique ; 4) morphosyntaxe ; 5) respect de la trame Français na Mira. Tu évalues une TRANSCRIPTION automatique : ne pénalise ni la ponctuation ni les petites erreurs de reconnaissance vocale évidentes, et ne note pas la prononciation."
+    oral ? "Critères : 1) réalisation de la tâche (respect de la consigne et de la durée) ; 2) cohérence et organisation du discours ; 3) étendue et maîtrise du lexique ; 4) morphosyntaxe ; 5) respect de la trame Français na Mira. Tu évalues une TRANSCRIPTION automatique : ne pénalise ni la ponctuation ni les petites erreurs de reconnaissance vocale évidentes" + (comAudio ? ". L'ENREGISTREMENT AUDIO de l'élève est joint : écoute-le, sers-t'en pour corriger la transcription si elle est fausse, et commente aussi la prononciation, l'intonation et la fluidité (dans « a_ameliorer » et dans le critère Cohérence)." : ", et ne note pas la prononciation.")
       : "Critères : 1) réalisation de la tâche (respect de la consigne, du type de texte et du nombre de mots) ; 2) cohérence et cohésion (plan, paragraphes, connecteurs) ; 3) étendue et maîtrise du lexique ; 4) morphosyntaxe et orthographe ; 5) respect de la trame Français na Mira.",
     `Tu t'appuies TOUJOURS sur la trame de la tâche fournie : la version améliorée doit suivre exactement cette trame, réutiliser les mots-clés de la consigne${ehEscrita(tache) ? " (et des documents pour la tâche 3), rester dans la limite de mots indiquée" : ""} et garder les idées de l'élève autant que possible.`,
     "Tu écris tous les commentaires en français simple (niveau B1-B2), avec, pour chaque correction, une courte explication.",

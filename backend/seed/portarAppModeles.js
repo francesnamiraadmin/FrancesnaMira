@@ -64,6 +64,10 @@ trocar("var PARTE_ESPACE = function () { return { rotulo: 'Mon espace', fn: abri
 // Na página do tema a folha de resposta é « Faire ce sujet »: a reescrita do modelo só abre pelo botão.
 trocar("      // o propósito dos modelos é reescrever: a folha já abre ao lado\n      raiz._abrirReescrita();\n", "");
 trocar("if (!ligado) { Voz.parar(); if (raiz._abrirReescrita) raiz._abrirReescrita(); return; }", "if (!ligado) { Voz.parar(); return; }");
+// Production orale: sem o cartão do cronômetro (o tempo corre na página do tema).
+trocar("        (oral ? '<button class=\"hub-acao\" type=\"button\" data-hub=\"chrono\"><span></span><b>Chronomètre de l\\'oral</b><small>Préparation et prise de parole, comme à l\\'examen.</small></button>' : '') + '</div>';", "        '</div>';");
+// Ao enviar a produção, a página do tema para o cronômetro.
+trocar("var parar = function () { if (h) { clearInterval(h); h = null; } };", "var parar = function () { if (h) { clearInterval(h); h = null; } };\n      raiz._pararCrono = function () { parar(); desenhar(); el.fase.textContent = 'Production envoyée'; };");
 // Réécriture: além da correção de treino pela IA, pode ir ao Sistema de Correção.
 trocar("'<div id=\"reescrita-res\" class=\"rs-res\"></div>' + botaoIA('rascunho-ia') + '<div class=\"ia-resultado\" id=\"rascunho-ia-res\"></div></aside>';",
   "'<div id=\"reescrita-res\" class=\"rs-res\"></div>' + botaoIA('rascunho-ia') + '<div class=\"ia-resultado\" id=\"rascunho-ia-res\"></div>' + htmlEnvioSistema('rs') + '</aside>';");
@@ -112,7 +116,7 @@ trocar("html += '<div class=\"grade-trames\">';", "html += '<h2 class=\"secao-ti
 trocar("        var tr = B.trames[t]; if (!tr) return;", "        if (t === 'ET1') html += '</div><h2 class=\"secao-titulo outils-secao\"><i class=\"ecrit\"></i>Écrit</h2><div class=\"grade-trames\">';\n        var tr = B.trames[t]; if (!tr) return;");
 
 // ---- extensões do site (dentro do mesmo escopo do App) ----
-trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("extensoes.js") + "\n" + ler("fazer-sujet.js")).replace(/^/gm, "    ") +
+trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("extensoes.js") + "\n" + ler("fazer-sujet.js") + "\n" + ler("correcao-equipe.js")).replace(/^/gm, "    ") +
   "\n    // Só começa depois que a página confirmou o acesso e o curso (window.FNM_PRONTO).\n" +
   "    (window.FNM_PRONTO || Promise.resolve()).then(function () { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar(); });");
 trocar("abrirOral: function () { abrirHub('oral'); },", "abrirOral: function () { abrirHub('oral'); }, abrirDestino: abrirDestino,");

@@ -1,7 +1,8 @@
 //@@ renderizarModelo
 // Página do sujet, na ordem de estudo: título → « Faire ce sujet » (cronômetro, correção, escrita
 // ou gravação, professor ao vivo) → Sujet (enunciado, documentos, dossiê de leitura com imagem)
-// → Pistes pour compléter (dicas + trame, ao clicar) → Réponse modèle (ao clicar, legenda ao lado).
+// → Pistes pour compléter (dicas + trame) → Réponse modèle (legenda ao lado). Pistas e modelo ficam
+// sempre abertos; o ditado não aparece nesta página.
 function renderizarModelo(tache, m, origem) {
   origem = origem || { tipo: 'liste' };
   if (origem.tipo === 'atelier') origem.tipo = 'modeles-page';
@@ -29,6 +30,7 @@ function renderizarModelo(tache, m, origem) {
   tmp.innerHTML = corpo;
   var tirar = function (sel) { var el = tmp.querySelector(sel); if (el) el.remove(); return el ? el.outerHTML : ''; };
   var htmlCrono = tirar('.crono-bloco'), htmlContexto = tirar('.contexto'), htmlGravador = tirar('.gravador-livre');
+  tmp.querySelectorAll('[data-abrir-dictee]').forEach(function (b) { b.remove(); });   // sem ditado nesta página
   var htmlDocsModelo = '';
   Array.prototype.slice.call(tmp.querySelectorAll('.bloco')).forEach(function (b) {
     if (b.querySelector('.docs') && !b.classList.contains('modelo-conteudo')) { htmlDocsModelo = b.querySelector('.docs').outerHTML; b.remove(); }
@@ -85,20 +87,21 @@ function renderizarModelo(tache, m, origem) {
     (m.pistes.contre.length ? '<p><b>Arguments possibles contre :</b> ' + m.pistes.contre.map(esc).join(' · ') + '</p>' : '') + '</div>';
   else if (e.argumentsPour) pistas += '<div class="bloco guia-pistes"><p><b>Arguments possibles pour :</b> ' + e.argumentsPour.map(esc).join(' · ') + '</p>' +
     '<p><b>Arguments possibles contre :</b> ' + (e.argumentsContre || []).map(esc).join(' · ') + '</p></div>';
-  html += '<details class="tm-bloco tm-dicas" id="tm-dicas"><summary class="tm-bloco-cab"><span class="tm-num">2</span><div><h2>Pistes pour compléter</h2><p>Idées, contexte, vocabulaire clé et la trame de la tâche.</p></div><span class="tm-seta" aria-hidden="true"></span></summary>' +
-    '<div class="tm-dicas-corpo">' + pistas + htmlContexto + htmlVocab + htmlTrame + '</div></details>';
+  html += '<section class="tm-bloco tm-dicas" id="tm-dicas"><div class="tm-bloco-cab"><span class="tm-num">2</span><div><h2>Pistes pour compléter</h2><p>Idées, contexte, vocabulaire clé et la trame de la tâche.</p></div></div>' +
+    '<div class="tm-dicas-corpo">' + pistas + htmlContexto + htmlVocab + htmlTrame + '</div></section>';
 
   // 3. Réponse modèle (+ légende ao lado), ao clicar
-  html += '<details class="tm-bloco tm-modele" id="tm-modele"' + (sorteio ? ' data-sorteio="1"' : '') + '><summary class="tm-bloco-cab"><span class="tm-num">3</span><div><h2>Réponse modèle</h2><p>' +
-    (oral ? 'Le modèle avec l\'audio, à écouter, masquer et répéter.' : 'La production modèle commentée, à lire, écouter et réécrire.') + '</p></div><span class="tm-seta" aria-hidden="true"></span></summary>';
+  // No sorteio o modelo só aparece depois de « Voir le modèle ».
+  html += '<section class="tm-bloco tm-modele" id="tm-modele"' + (sorteio ? ' hidden' : '') + '><div class="tm-bloco-cab"><span class="tm-num">3</span><div><h2>Réponse modèle</h2><p>' +
+    (oral ? 'Le modèle avec l\'audio, à écouter, masquer et répéter.' : 'La production modèle commentée, à lire, écouter et réécrire.') + '</p></div></div>';
   if (m.guia) html += '<div class="guia-faixa"><b>Modèle-guide</b><span>Construit avec la trame et les formules Français na Mira pour ce sujet : complétez les parties entre [crochets] avec vos idées.' +
     (B.professor ? ' La version entièrement rédigée apparaîtra ici dès qu\'elle sera générée (Espace professeur → Modèles de tous les sujets).' : '') + '</span>' +
     (B.professor ? '<button class="ferramenta destaque" type="button" id="bt-redigir-ia">Rédiger la version complète</button>' : '') + '</div>';
   else if (m.gerado) html += '<p class="aviso selo-gerado">Modèle rédigé par l\'IA selon la méthode Français na Mira</p>';
-  html += '<div class="tm-modele-grade"><div class="tm-modele-corpo">' + htmlModelo + '</div><aside class="lateral tm-legenda">' + htmlLegenda + '</aside></div></details>';
+  html += '<div class="tm-modele-grade"><div class="tm-modele-corpo">' + htmlModelo + '</div><aside class="lateral tm-legenda">' + htmlLegenda + '</aside></div></section>';
 
   html += navegacaoRodape(pos, itens.length);
-  html += '</div>' + painelDictee() + (/^ET/.test(tache) ? painelReescrita(info, tache, m) : '') + '</div>';
+  html += '</div>' + '<div hidden>' + painelDictee() + '</div>' +(/^ET/.test(tache) ? painelReescrita(info, tache, m) : '') + '</div>';
 
   var tela = $('tela-modele');
   tela.innerHTML = html;
@@ -149,7 +152,7 @@ function renderizarModelo(tache, m, origem) {
       else if (acao === 'topo') window.scrollTo({ top: 0, behavior: 'smooth' });
       else if (acao === 'sortear' && noAtelier) { var outro = itens[Math.floor(Math.random() * itens.length)]; renderizarModelo(outro.tache, outro, { tipo: 'atelier', foco: origem.foco }); }
       else if (acao === 'sortear') sortear(tache, origem.eixo || (origem.tipo === 'eixo' ? origem.eixo : estado.filtroEixo), origem.de || origem.tipo, origem.busca);
-      else if (acao === 'revelar') { $('tm-modele').open = true; b.closest('.revelar').hidden = true; }
+      else if (acao === 'revelar') { $('tm-modele').hidden = false; b.closest('.revelar').hidden = true; $('tm-modele').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       else if (acao === 'ant' || acao === 'prox') {
         var alvoNav = itens[pos + (acao === 'prox' ? 1 : -1)];
         if (alvoNav && noAtelier) renderizarModelo(alvoNav.tache, alvoNav, { tipo: 'atelier', foco: origem.foco });
@@ -164,12 +167,9 @@ function renderizarModelo(tache, m, origem) {
   if (oral) ligarGravadorLivre(raiz, tache, m);
   ligarFazer(raiz, tache, m, oral);
   carregarDossier($('tm-dossier'), tache, m);
-  // Ditado e reescrita leem o modelo: abrir um deles abre também a Réponse modèle.
-  raiz.querySelectorAll('[data-abrir-dictee], [data-abrir-reescrita]').forEach(function (b) { b.addEventListener('click', function () { $('tm-modele').open = true; }, true); });
   mostrar('tela-modele');
   // Devoir / carnet: vai direto para a atividade pedida.
   var foco = origem && (origem.foco || (origem.tipo === 'devoir' && origem.devoir.tipo));
-  if (foco === 'dictee') { $('tm-modele').open = true; var bd = raiz.querySelector('[data-abrir-dictee]'); if (bd) bd.click(); }
-  else if (foco === 'oral' || foco === 'ecrit') $('tm-fazer-bt').click();
-  else if (foco === 'etude' || (origem && origem.tipo === 'modeles-page')) $('tm-modele').open = true;
+  if (foco === 'oral' || foco === 'ecrit') $('tm-fazer-bt').click();
+  else if (foco === 'etude' || foco === 'dictee' || (origem && origem.tipo === 'modeles-page')) $('tm-modele').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

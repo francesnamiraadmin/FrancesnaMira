@@ -58,7 +58,7 @@
     return [...resultado];
   }
 
-  function renderCardDesbloqueado(curso, proximaPagina) {
+  function renderCardDesbloqueado(curso, proximaPagina, comProgresso) {
     return `
       <a class="curso-card desbloqueado pais-${PAIS[curso]}" style="--curso-cor:${CORES[curso]};" href="${proximaPagina}?curso=${encodeURIComponent(curso)}">
         <div class="curso-card-topo">
@@ -69,10 +69,10 @@
           </div>
         </div>
         <p class="curso-card-desc">${DESCRICOES[curso]}</p>
-        <div class="curso-progresso" data-progresso-curso="${curso}">
+        ${comProgresso ? `<div class="curso-progresso" data-progresso-curso="${curso}">
           <div class="rotulo"><span>Progresso</span><span class="valor">—</span></div>
           <div class="barra"><div class="preenchimento" style="width:0%;"></div></div>
-        </div>
+        </div>` : ""}
       </a>`;
   }
 
@@ -105,7 +105,7 @@
         <h3 class="hub-cursos-grupo-titulo">${grupo.titulo}</h3>
         <div class="hub-cursos-grid">
           ${grupo.cursos.map(c =>
-            cursosDesbloqueados.includes(c) ? renderCardDesbloqueado(c, config.proximaPagina) : renderCardBloqueado(c)
+            cursosDesbloqueados.includes(c) ? renderCardDesbloqueado(c, config.proximaPagina, typeof config.progresso === "function") : renderCardBloqueado(c)
           ).join("")}
         </div>
       </div>`).join("");

@@ -71,7 +71,7 @@ router.get("/alunos/:id", async (req, res) => {
     const producoes = await Producao.find({ alunoId: aluno._id })
       .populate("temaId", "titulo courseType nivel tipoProducao")
       .populate("professorId", "nome")
-      .select("protocolo temaId professorId modalidade status modoCorrecao contagemPalavras dataEnvio dataCorrecao avaliacao.notaTotal avaliacao.notaMaxima avaliacao.nivelEstimado creditosUtilizados")
+      .select("protocolo temaId professorId modalidade status origem.tache modoCorrecao contagemPalavras dataEnvio dataCorrecao avaliacao.notaTotal avaliacao.notaMaxima avaliacao.nivelEstimado creditosUtilizados")
       .sort({ dataEnvio: -1 }).lean();
     res.json({ _id: aluno._id, nome: aluno.nome, email: aluno.email, creditos: aluno.creditosCorrecao || 0, cursos: cursosComProducao(aluno), producoes });
   } catch (err) {

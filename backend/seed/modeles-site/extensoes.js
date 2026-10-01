@@ -69,7 +69,7 @@ function enviarGravacao(o) {
   fd.append('audio', o.blob, o.tache + ext);
   ['tache', 'sujet', 'sessao', 'duree', 'transcricao', 'modo'].forEach(function (k) { if (o[k] !== undefined && o[k] !== null) fd.append(k, o[k]); });
   if (window.FNM_CURSO) fd.append('courseType', window.FNM_CURSO);
-  return fetch('/api/modeles/oral', { method: 'POST', headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }, body: fd })
+  return fetch(o.url || '/api/modeles/oral', { method: 'POST', headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }, body: fd })
     .then(function (res) { return res.json().catch(function () { return {}; }).then(function (d) { if (!res.ok) throw new Error(d.msg || 'Erreur ' + res.status); return d; }); });
 }
 

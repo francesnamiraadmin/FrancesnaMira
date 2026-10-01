@@ -1,23 +1,46 @@
 // ================= página do sujet: « Faire ce sujet », dossiê e professor ao vivo =================
 
-// Escolha de quem corrige (aparece dentro de « Faire ce sujet »).
+// Escolha de quem corrige (aparece dentro de « Faire ce sujet »): IA, professor (fila do Sistema de
+// Correção) ou professor ao vivo (acompanha e, no envio, recebe a produção na mesma fila).
 function htmlEscolhaFazer(oral) {
+  var ia = !!(B.ia && B.ia.ativa);
   return '<fieldset class="escolha-correcao tm-correcao"><legend>Qui corrige ?</legend>' +
-    (B.ia && B.ia.ativa ? '<label><input type="radio" name="tm-correcao" value="ia" checked><span><b>L\'IA, tout de suite</b><small>Entraînement : note sur 20, trame, corrections et version améliorée' + (oral ? ' à partir de la transcription' : '') + '. Sans crédit.</small></span></label>' : '') +
-    '<label><input type="radio" name="tm-correcao" value="professor"' + (B.ia && B.ia.ativa ? '' : ' checked') + '><span><b>Un professeur (Sistema de Correção)</b><small>Correction détaillée sur la grille de l\'examen, dans « Mes corrections ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
-    '<label><input type="radio" name="tm-correcao" value="aovivo"><span><b>Un professeur en direct</b><small>Il suit votre ' + (oral ? 'parole (transcription) et peut vous parler par la voix' : 'texte pendant que vous écrivez et peut vous parler par la voix') + '. À la fin, la production lui est envoyée pour la correction.</small></span></label></fieldset>';
+    '<label' + (ia ? '' : ' class="indisponivel"') + '><input type="radio" name="tm-correcao" value="ia"' + (ia ? ' checked' : ' disabled') + '><span><b>L\'IA</b><small>' +
+      (ia ? 'Correction immédiate : note sur 20, trame, corrections et version améliorée' + (oral ? ', à partir de l\'enregistrement et de la transcription' : '') + '. Sans crédit.' : 'Indisponible pour le moment.') + '</small></span></label>' +
+    '<label><input type="radio" name="tm-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Attendre la correction d\'un professeur</b><small>La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l\'examen. Vous la retrouvez dans « Mes corrections ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
+    '<label><input type="radio" name="tm-correcao" value="aovivo"><span><b>Un professeur en direct</b><small>Il suit votre ' + (oral ? 'parole (transcription)' : 'texte pendant que vous écrivez') + ' et peut vous parler par la voix. À l\'envoi, la production lui est envoyée pour la correction (1 crédit).</small></span></label></fieldset>';
 }
 function correcaoFazer() { var r = document.querySelector('input[name="tm-correcao"]:checked'); return r ? r.value : 'professor'; }
+function rotuloEnviar(oral) {
+  return oral ? 'Envoyer l\'enregistrement et la transcription' : correcaoFazer() === 'ia' ? 'Corriger avec l\'IA' : 'Envoyer au professeur';
+}
+
+// Produção enviada: o cronômetro para e o tema deixa de estar « en cours ».
+var FAZER = { emCurso: false };
+function finalizarFazer() {
+  FAZER.emCurso = false;
+  var raiz = $('modele-raiz');
+  if (raiz && raiz._pararCrono) raiz._pararCrono();
+  var bt = $('tm-fazer-bt');
+  if (bt) {
+    bt.classList.remove('ativo');
+    bt.classList.add('enviado');
+    bt.querySelector('b').textContent = 'Production envoyée';
+    bt.querySelector('small').textContent = 'Cliquez pour refaire ce sujet';
+  }
+}
 
 function ligarFazer(raiz, tache, m, oral) {
   if (SALA) { google.script.run.encerrarSala(EMAIL, SALA.id); salaFim(); }   // outra página de sujet: fecha a sala anterior
+  FAZER = { emCurso: false };
   var bt = $('tm-fazer-bt'), sec = $('tm-fazer');
   bt.addEventListener('click', function () {
-    var abrir = sec.hidden;
     sec.hidden = false;
-    bt.classList.add('ativo');
-    bt.querySelector('b').textContent = 'Sujet en cours';
-    if (abrir) {
+    if (!FAZER.emCurso) {
+      FAZER.emCurso = true;
+      bt.classList.remove('enviado');
+      bt.classList.add('ativo');
+      bt.querySelector('b').textContent = 'Sujet en cours';
       // cronômetro no modo prova, ligado ao começar
       var ex = sec.querySelector('[data-crono="exame"]'), play = sec.querySelector('[data-crono="play"]');
       if (ex && !ex.checked) { ex.checked = true; ex.dispatchEvent(new Event('change', { bubbles: true })); }
@@ -26,15 +49,19 @@ function ligarFazer(raiz, tache, m, oral) {
     sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
     var ed = sec.querySelector('.editor'); if (ed) setTimeout(function () { ed.focus(); }, 500);
   });
+  var atualizarRotulos = function () {
+    var env = $('tm-enviar'); if (env) env.textContent = rotuloEnviar(false);
+    sec.querySelectorAll('[data-gl-enviar]').forEach(function (b) { b.textContent = rotuloEnviar(true); });
+  };
   sec.querySelectorAll('input[name="tm-correcao"]').forEach(function (r) {
     r.addEventListener('change', function () {
       var vivo = correcaoFazer() === 'aovivo';
       $('tm-aovivo').hidden = !vivo;
       if (vivo && !SALA) desenharSalaAluno(tache, m);
-      var env = $('tm-enviar'); if (env) env.textContent = correcaoFazer() === 'ia' ? 'Corriger avec l\'IA' : 'Envoyer au professeur';
+      atualizarRotulos();
     });
   });
-  var env0 = $('tm-enviar'); if (env0) env0.textContent = correcaoFazer() === 'ia' ? 'Corriger avec l\'IA' : 'Envoyer au professeur';
+  atualizarRotulos();
   if (oral) return;
   // Escrita: o editor da épreuve (contador, linhas), com rascunho guardado neste aparelho.
   var ed = sec.querySelector('.editor'), chave = 'fnm_rasc_' + EMAIL + '_' + m.id, envioTimer = null;
@@ -46,15 +73,54 @@ function ligarFazer(raiz, tache, m, oral) {
   $('tm-enviar').addEventListener('click', function () {
     var texto = textoDoEditor(ed), b = this, st = $('tm-enviar-st');
     if (contarPalavras(texto) < 15) { st.textContent = 'Écrivez votre texte avant de le faire corriger.'; return; }
-    if (correcaoFazer() === 'ia') { pedirCorrecaoIA(tache, m.id, texto, $('tm-ia-res'), b); return; }
+    if (correcaoFazer() === 'ia') {
+      var res = $('tm-ia-res');
+      pedirCorrecaoIA(tache, m.id, texto, res, b, function () { if (!res.querySelector('.alerta')) finalizarFazer(); });
+      return;
+    }
     if (!confirm('Envoyer ce texte à un professeur ? 1 crédit sera utilisé (vous en avez ' + (B.creditos || 0) + ').')) return;
     b.disabled = true; st.textContent = 'Envoi…';
     google.script.run.withSuccessHandler(function (r) {
       B.creditos = r.creditos;
       st.innerHTML = '✓ Envoyé · protocole ' + esc(r.protocolo) + ' · <a href="correcoes.html">suivre la correction</a>';
       if (SALA && SALA.id) salaEnviar({ texto: texto, fim: true });
+      finalizarFazer();
+      b.disabled = false;
     }).withFailureHandler(function (er) { b.disabled = false; st.textContent = er.message || er; }).enviarTextoCorrecao(EMAIL, { tache: tache, sujet: m.id, texte: texto, modo: 'professor' });
   });
+}
+
+// Oral: o essai gravado (áudio + transcrição) vai para a correção escolhida.
+function enviarEssaiOral(b, d) {
+  var escolha = correcaoFazer();
+  if (escolha === 'ia') {
+    b.disabled = true;
+    var original = b.innerHTML;
+    b.innerHTML = '<span class="ia-brilho"></span>Analyse en cours…<small>Environ 20 à 40 secondes</small>';
+    d.res.innerHTML = '<div class="ia-carregando"><i></i><i></i><i></i><span>L\'IA écoute votre enregistrement, relit la transcription et prépare vos conseils…</span></div>';
+    enviarGravacao({ url: '/api/modeles/oral-ia', blob: d.blob, tache: d.tache, sujet: d.m.id, duree: d.duree, transcricao: d.transcricao }).then(function (r) {
+      if (B.ia) B.ia.restantes = r.restantes;
+      d.res.innerHTML = cartaoCorrecaoIA(r, d.tache);
+      ligarLexicoCarnet(d.res);
+      ligarDicas(d.res);
+      b.innerHTML = original; b.disabled = false;
+      d.st.textContent = '✓ Corrigé par l\'IA';
+      d.res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      finalizarFazer();
+    }).catch(function (e) {
+      b.innerHTML = original; b.disabled = false;
+      d.res.innerHTML = '<div class="alerta">' + esc(e.message || e) + '</div>';
+    });
+    return;
+  }
+  if (!confirm('Envoyer cet enregistrement et sa transcription à un professeur ? 1 crédit de correction sera utilisé (vous en avez ' + (B.creditos || 0) + ').')) return;
+  b.disabled = true; d.st.textContent = 'Envoi…';
+  enviarGravacao({ blob: d.blob, tache: d.tache, sujet: d.m.id, duree: d.duree, transcricao: d.transcricao, modo: 'professor' }).then(function (r) {
+    B.creditos = r.creditos;
+    d.st.innerHTML = '✓ Envoyé (protocole ' + esc(r.protocolo) + ') · <a href="correcoes.html">suivre la correction</a>';
+    if (SALA && SALA.id) salaEnviar({ transcricao: d.transcricao, fim: true });
+    finalizarFazer();
+  }).catch(function (e) { b.disabled = false; d.st.textContent = e.message || e; });
 }
 
 // Dossiê de leitura do sujet: dois textos de referência, com créditos.

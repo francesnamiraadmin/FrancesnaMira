@@ -84,12 +84,10 @@ function abrirSimulados() {
   tela.innerHTML = trilha(partes) + '<h1 class="titulo-pagina">Simulados</h1>' +
     '<p class="intro">Passez les épreuves dans les conditions de l\'examen. L\'épreuve écrite de 60 minutes présente les trois tâches en même temps, avec le chronomètre en haut de l\'écran.</p>' +
     '<div class="hub-acoes"><button class="hub-acao" type="button" id="sm-ep"><span></span><b>Épreuve écrite et enregistrements</b><small>Écrit (60 min, 3 tâches simultanées) et tâches orales, dont les épreuves proposées par votre professeur(e).</small></button>' +
-    '<button class="hub-acao" type="button" id="sm-chrono"><span></span><b>Chronomètre de l\'oral</b><small>Tâches 1, 2 et 3 avec le temps de préparation et de parole de l\'examen.</small></button>' +
     '<a class="hub-acao" href="simulado-tcf.html"><span></span><b>Simulation complète de l\'examen</b><small>Compréhension orale et écrite, expression écrite et orale, avec correction et suivi en direct.</small></a></div>';
   ligarTrilha(tela, partes);
   mostrar('tela-hub');
   $('sm-ep').addEventListener('click', abrirEpreuve);
-  $('sm-chrono').addEventListener('click', function () { abrirChrono(); });
 }
 //@@ abrirGravacao
 function abrirGravacao(sessao, tarefa) {
@@ -237,7 +235,7 @@ function abrirGravacao(sessao, tarefa) {
 function htmlGravadorLivre(tache) {
   var lim = { T1: 120, T2: 210, T3: 270 }[tache];
   return '<div class="bloco gravador-livre" id="grav-livre"><h3>M\'entraîner à l\'oral</h3>' +
-    '<p class="aviso" style="margin-top:0">Enregistrez-vous (' + formatarTempo(lim) + ' max.), réécoutez-vous et comparez avec le modèle. Votre parole est transcrite : vous pouvez corriger la transcription et faire corriger l\'essai par l\'IA (entraînement) ou l\'envoyer à un professeur (Sistema de Correção).</p>' +
+    '<p class="aviso" style="margin-top:0">Enregistrez-vous (' + formatarTempo(lim) + ' max.), réécoutez-vous et comparez avec le modèle. Votre parole est transcrite : vous pouvez la corriger, puis envoyer l\'enregistrement et la transcription à la correction choisie ci-dessus (IA ou professeur).</p>' +
     '<div class="gl-linha"><button class="ferramenta destaque" type="button" data-gl="gravar">● Enregistrer</button><button class="ferramenta" type="button" data-gl="parar" hidden>■ Arrêter</button>' +
     '<span class="gl-tempo" data-gl="tempo">0:00 / ' + formatarTempo(lim) + '</span></div><p class="gl-viva" data-gl="viva" hidden></p><div data-gl="lista"></div></div>';
 }
@@ -264,20 +262,12 @@ function ligarGravadorLivre(raiz, tache, m) {
         item.className = 'gl-item';
         item.innerHTML = '<div class="gl-cab"><span>Essai ' + n + ' · ' + formatarTempo(dur) + '</span><audio controls src="' + url + '"></audio></div>' +
           '<label class="grav-trans-edit">Transcription<textarea rows="4">' + esc(texto) + '</textarea></label>' +
-          '<div class="gl-acoes">' + (B.ia && B.ia.ativa ? '<button class="ferramenta destaque" type="button" data-gl-ia>Corriger avec l\'IA (entraînement)</button>' : '') +
-          '<button class="ferramenta" type="button" data-gl-prof>Envoyer à un professeur <small>(1 crédit)</small></button><span class="aviso" data-gl-st></span></div><div class="ia-resultado" data-gl-res></div>';
+          '<div class="gl-acoes"><button class="botao-principal" type="button" data-gl-enviar>Envoyer l\'enregistrement et la transcription</button><span class="aviso" data-gl-st></span></div><div class="ia-resultado" data-gl-res></div>';
         q('lista').insertBefore(item, q('lista').firstChild);
-        var ta = item.querySelector('textarea'), st2 = item.querySelector('[data-gl-st]');
-        var bIA = item.querySelector('[data-gl-ia]');
-        if (bIA) bIA.addEventListener('click', function () { pedirCorrecaoIA(tache, m.id, ta.value, item.querySelector('[data-gl-res]'), bIA); });
-        item.querySelector('[data-gl-prof]').addEventListener('click', function () {
-          var b = this;
-          if (!confirm('Envoyer cet enregistrement à un professeur ? 1 crédit de correction sera utilisé.')) return;
-          b.disabled = true; st2.textContent = 'Envoi…';
-          enviarGravacao({ blob: blob, tache: tache, sujet: m.id, duree: dur, transcricao: ta.value, modo: 'professor' }).then(function (r) {
-            st2.textContent = '✓ Envoyé (protocole ' + r.protocolo + '). Suivez la correction dans « Mes corrections ».';
-            B.creditos = r.creditos;
-          }).catch(function (e) { b.disabled = false; st2.textContent = e.message || e; });
+        var ta = item.querySelector('textarea');
+        // Um só envio: áudio + transcrição para quem o aluno escolheu em « Qui corrige ? ».
+        item.querySelector('[data-gl-enviar]').addEventListener('click', function () {
+          enviarEssaiOral(this, { blob: blob, tache: tache, m: m, duree: dur, transcricao: ta.value, st: item.querySelector('[data-gl-st]'), res: item.querySelector('[data-gl-res]') });
         });
         q('gravar').hidden = false; q('parar').hidden = true; caixa.classList.remove('gravando-livre');
       };

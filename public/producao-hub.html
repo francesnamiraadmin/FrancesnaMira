@@ -38,35 +38,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <script>
 CursoHub.iniciar({
   modulo: "producao",
-  proximaPagina: "producao.html",
-  async progresso(cursos) {
-    const token = localStorage.getItem("token");
-    const headers = { Authorization: "Bearer " + token };
-    const mapa = new Map();
-    try {
-      // Quantidade de produções do curso = temas ativos disponíveis nele.
-      const [resProducoes, ...resTemas] = await Promise.all([
-        fetch("/api/producoes/minhas", { headers }),
-        ...cursos.map(c => fetch("/api/temas?courseType=" + encodeURIComponent(c), { headers }))
-      ]);
-      if (!resProducoes.ok) return mapa;
-      const producoes = await resProducoes.json();
-      await Promise.all(cursos.map(async (curso, i) => {
-        const temas = resTemas[i].ok ? await resTemas[i].json() : [];
-        // Conta temas distintos: reenviar o mesmo tema não soma de novo.
-        const idsTemas = new Set(temas.map(t => t._id));
-        const enviadas = new Set(producoes
-          .filter(p => p.temaId?.courseType === curso && idsTemas.has(p.temaId._id))
-          .map(p => p.temaId._id)).size;
-        const total = temas.length;
-        mapa.set(curso, {
-          rotulo: `${enviadas}/${total}`,
-          percentual: total ? Math.round((enviadas / total) * 100) : 0
-        });
-      }));
-    } catch (err) { /* progresso é só um bônus visual */ }
-    return mapa;
-  }
+  proximaPagina: "producao.html"
 });
 </script>
 <script src="js/appShell.js"></script>

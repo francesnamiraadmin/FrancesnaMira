@@ -47,6 +47,13 @@
     [/^(\d+) \/ (\d+) thèmes cochés · (\d+) affichés$/, "$1 / $2 temas marcados · $3 exibidos"],
     [/^Les trois textes partent dans le Sistema de Correção à la fin de l'épreuve \(1 crédit par tâche · vous avez (\d+) crédits?\)\.$/, "Os três textos vão para o Sistema de Correção no fim da prova (1 crédito por tarefa · você tem $1 crédito(s))."],
     [/^Autres thèmes$/, "Outros temas"],
+    [/^La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l'examen\. Vous la retrouvez dans « Mes corrections »\. 1 crédit · vous en avez (\d+)\.$/, "A produção entra na fila do Sistema de Correção e é corrigida com a grade da prova. Você a encontra em « Minhas correções ». 1 crédito · você tem $1."],
+    [/^Envoyer cet enregistrement et sa transcription à un professeur \? 1 crédit de correction sera utilisé \(vous en avez (\d+)\)\.$/, "Enviar esta gravação e a transcrição a um professor? Será usado 1 crédito de correção (você tem $1)."],
+    [/^✓ Envoyé \(protocole (.+)\) ·$/, "✓ Enviado (protocolo $1) ·"],
+    [/^Envoyée le (.+) · corrigée le (.+) par (.+)$/, "Enviada em $1 · corrigida em $2 por $3"],
+    [/^Envoyée le (.+) · corrigée le (.+)$/, "Enviada em $1 · corrigida em $2"],
+    [/^Envoyée le (.+)$/, "Enviada em $1"],
+    [/^Avec (.+)$/, "Com $1"],
     [/^(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre) (\d{4})$/i, function (m, mes, ano) {
       var pt = { janvier: "Janeiro", "février": "Fevereiro", mars: "Março", avril: "Abril", mai: "Maio", juin: "Junho", juillet: "Julho", "août": "Agosto", septembre: "Setembro", octobre: "Outubro", novembre: "Novembro", "décembre": "Dezembro" };
       return pt[mes.toLowerCase()] + " de " + ano;

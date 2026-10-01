@@ -210,11 +210,11 @@ router.get("/minhas", exigirAuth, async (req, res) => {
 // ===================== PROFESSOR: FILA =====================
 router.get("/professor/fila", exigirAuth, exigirProfessor, async (req, res) => {
   try {
-    const { exame, courseType, tema: temaFiltro, status, prioridade } = req.query;
+    const { exame, courseType, tema: temaFiltro, status, prioridade, alunoId, modalidade } = req.query;
 
     let producoes = await Producao.find({ status: { $in: ["em_fila", "em_correcao"] } })
       .populate("temaId", "titulo exame courseType nivel tempoSugerido")
-      .populate("alunoId", "nome")
+      .populate("alunoId", "nome email")
       .sort({ dataEnvio: 1 });
 
     producoes = producoes.filter(p => {
@@ -226,11 +226,37 @@ router.get("/professor/fila", exigirAuth, exigirProfessor, async (req, res) => {
     if (courseType) producoes = producoes.filter(p => p.temaId?.courseType === courseType);
     if (temaFiltro) producoes = producoes.filter(p => p.temaId?._id.toString() === temaFiltro);
     if (status) producoes = producoes.filter(p => p.status === status);
+    if (alunoId) producoes = producoes.filter(p => String(p.alunoId?._id || p.alunoId) === String(alunoId));
+    if (modalidade) producoes = producoes.filter(p => (p.modalidade || "textual") === modalidade);
     if (prioridade === "urgente") {
       const agora = Date.now();
       producoes = producoes.filter(p => p.prazoEstimado && (new Date(p.prazoEstimado).getTime() - agora) < 2 * 24 * 60 * 60 * 1000);
     }
 
+    res.json(producoes);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// ===================== PROFESSOR: CORRIGIDAS =====================
+// Produções que já saíram da fila (corrigidas pelo professor ou pela IA), as mais recentes primeiro.
+router.get("/professor/corrigidas", exigirAuth, exigirProfessor, async (req, res) => {
+  try {
+    const { courseType, alunoId, modalidade } = req.query;
+    const filtro = { status: { $in: ["corrigido", "devolvido"] } };
+    if (alunoId && /^[a-f0-9]{24}$/i.test(String(alunoId))) filtro.alunoId = alunoId;
+    if (modalidade === "oral") filtro.modalidade = "oral";
+    else if (modalidade === "textual") filtro.modalidade = { $ne: "oral" };
+    let producoes = await Producao.find(filtro)
+      .populate("temaId", "titulo exame courseType nivel")
+      .populate("alunoId", "nome email")
+      .populate("professorId", "nome")
+      .select("-textoDigitado -transcricao")
+      .sort({ dataCorrecao: -1, dataEnvio: -1 })
+      .limit(300);
+    if (courseType) producoes = producoes.filter(p => p.temaId?.courseType === courseType);
     res.json(producoes);
   } catch (err) {
     console.error(err);

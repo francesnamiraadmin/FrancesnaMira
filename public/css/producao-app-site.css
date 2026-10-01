@@ -24,6 +24,7 @@
   padding: 22px 22px 18px; border-radius: 24px; border: 1px solid rgba(var(--branco-rgb), .85); background: var(--vidro-forte);
   box-shadow: var(--sombra); color: var(--tinta); overflow: hidden; transition: transform .18s, box-shadow .18s;
 }
+.fnm-app .hub-escolha::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--cor); }
 .fnm-app .hub-escolha::after { content: ""; position: absolute; right: -40px; bottom: -40px; width: 140px; height: 140px; border-radius: 50%; background: var(--cor); opacity: .14; transition: transform .25s; }
 .fnm-app .hub-escolha:hover { transform: translateY(-3px); box-shadow: 0 22px 50px -26px rgba(28,43,58,.7); }
 .fnm-app .hub-escolha:hover::after { transform: scale(1.25); }
@@ -35,6 +36,7 @@
 
 /* "Mon espace" (aluno) / "Espace professeur" (equipe): card largo, na última linha do hub. */
 .fnm-app .hub-escolha-espace { grid-column: 1 / -1; min-height: 0; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; column-gap: 16px; align-items: center; }
+.fnm-app .hub-escolha-espace::before { background: linear-gradient(90deg, #94C4EC, #E4C043, #D51E28); }
 .fnm-app .hub-escolha-espace .he-ico { grid-row: 1 / 3; margin: 0; background: #1C2B3A; color: #E4C043; }
 .fnm-app .hub-escolha-espace small { grid-column: 2; }
 .fnm-app .hub-escolha-espace em { grid-column: 3; grid-row: 1 / 3; margin: 0; }
@@ -300,5 +302,25 @@
 .fnm-app a.hub-acao[href^="producao-oral-exercicios"] { --cor: #3C7DD9; }
 .fnm-app a.hub-acao[href^="producao-oral-exercicios"] > span::before { content: "🎧"; }
 
-/* cards do hub sem a faixa colorida no topo (parecia uma barra de progresso) */
-.fnm-app .hub-tache { border-top: 0; }
+/* « Fazer este tema »: produção enviada e IA indisponível */
+.fnm-app .tm-fazer-bt.enviado { background: linear-gradient(135deg, #2E8B62, #3CB179); }
+.fnm-app .tm-fazer-bt.enviado .tm-play { background: #fff; color: #2E8B62; }
+.fnm-app .escolha-correcao label.indisponivel { opacity: .55; cursor: not-allowed; }
+
+/* Espace professeur: fila do Sistema de Correção */
+.fnm-app .ce-filtros { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.fnm-app .ce-abas { display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: rgba(var(--branco-rgb), .6); border: 1px solid var(--linha); }
+.fnm-app .ce-aluno { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: .9rem; }
+.fnm-app .ce-aluno select { padding: 8px 12px; border-radius: 12px; border: 1px solid var(--linha); background: var(--vidro-forte); color: var(--tinta); font: inherit; min-width: 200px; }
+.fnm-app .ce-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.fnm-app .ce-item { display: flex; flex-direction: column; gap: 8px; padding: 16px 18px; border-radius: 18px; background: var(--vidro-forte); border: 1px solid var(--linha); border-left: 5px solid #E0524A; box-shadow: var(--sombra); }
+.fnm-app .ce-item.corrigida { border-left-color: #3CB179; }
+.fnm-app .ce-topo { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.fnm-app .ce-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.fnm-app .ce-tarefa { background: #fff3d6; color: #8a5a00; font-weight: 700; }
+.fnm-app .ce-minha { background: rgba(60,177,121,.16); color: #2E8B62; }
+.fnm-app .ce-fila { background: rgba(224,82,74,.12); color: #b7322b; }
+.fnm-app .ce-nota { font-weight: 800; font-size: 1.1rem; color: #2E8B62; }
+.fnm-app .ce-titulo { margin: 0; font-size: .95rem; line-height: 1.45; }
+.fnm-app .ce-item small { color: var(--tinta-suave); }
+.fnm-app .ce-item a { align-self: flex-start; text-decoration: none; }
