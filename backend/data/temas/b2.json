@@ -2,6 +2,7 @@
  {
   "slug": "b2-intelligence-artificielle-emploi",
   "titulo": "L'intelligence artificielle va-t-elle remplacer notre travail ?",
+  "eixo": "tech",
   "nivel": "B2",
   "tipoProducao": "Texte argumentatif",
   "dificuldade": "dificil",
@@ -75,6 +76,7 @@
  {
   "slug": "b2-voiture-electrique",
   "titulo": "La voiture électrique est-elle la solution ?",
+  "eixo": "transports",
   "nivel": "B2",
   "tipoProducao": "Texte argumentatif",
   "dificuldade": "dificil",
@@ -148,6 +150,7 @@
  {
   "slug": "b2-sport-professionnel-argent",
   "titulo": "Le sport professionnel et l'argent",
+  "eixo": "sport",
   "nivel": "B2",
   "tipoProducao": "Texte argumentatif",
   "dificuldade": "dificil",
@@ -221,6 +224,7 @@
  {
   "slug": "b2-lettre-directeur-journal",
   "titulo": "Réagir à un article sur les jeunes",
+  "eixo": "medias",
   "nivel": "B2",
   "tipoProducao": "Lettre au courrier des lecteurs",
   "dificuldade": "dificil",
@@ -294,6 +298,7 @@
  {
   "slug": "b2-habiter-colocation-seniors",
   "titulo": "Faire cohabiter jeunes et seniors",
+  "eixo": "log",
   "nivel": "B2",
   "tipoProducao": "Texte argumentatif",
   "dificuldade": "dificil",
@@ -367,6 +372,7 @@
  {
   "slug": "b2-tourisme-durable",
   "titulo": "Voyager sans abîmer la planète",
+  "eixo": "voyages",
   "nivel": "B2",
   "tipoProducao": "Article de blog argumenté",
   "dificuldade": "dificil",
@@ -440,6 +446,7 @@
  {
   "slug": "b2-lecture-jeunes",
   "titulo": "Faire lire les adolescents",
+  "eixo": "culture",
   "nivel": "B2",
   "tipoProducao": "Texte argumentatif",
   "dificuldade": "dificil",
@@ -513,6 +520,7 @@
  {
   "slug": "b2-publicite-enfants",
   "titulo": "Protéger les enfants de la publicité",
+  "eixo": "medias",
   "nivel": "B2",
   "tipoProducao": "Texte argumentatif",
   "dificuldade": "dificil",
@@ -586,6 +594,7 @@
  {
   "slug": "b2-espaces-verts-ville",
   "titulo": "Plus de nature en ville",
+  "eixo": "env",
   "nivel": "B2",
   "tipoProducao": "Texte argumentatif",
   "dificuldade": "dificil",
@@ -659,6 +668,7 @@
  {
   "slug": "b2-don-organes",
   "titulo": "Le don d'organes",
+  "eixo": "sante",
   "nivel": "B2",
   "tipoProducao": "Texte argumentatif",
   "dificuldade": "dificil",

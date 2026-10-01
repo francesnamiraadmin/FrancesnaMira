@@ -37,7 +37,11 @@ function contarPalavras(texto) {
 // Ambiente de Produção — não faz sentido negar o envio de um dever já atribuído por
 // causa da entitlement do módulo avulso. O fluxo de auto-atendimento (POST / e
 // POST /:id/reenviar aqui embaixo) sempre passa pela checagem normal.
-async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAluno, file, origemId, duracaoSegundos, pularChecagemAcesso, modoCorrecao }) {
+// Opções do Ambiente de Produção (modelo "Modèles TCF"): `origem` (sujet/épreuve de onde veio),
+// `transcricao` (produção oral), `semCredito` (épreuve proposta pelo professor não consome
+// crédito) e `aceitarForaDoLimite` (na épreuve cronometrada o texto vai como está, curto ou longo).
+async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAluno, file, origemId, duracaoSegundos, pularChecagemAcesso, modoCorrecao,
+  origem, transcricao, semCredito, aceitarForaDoLimite }) {
   const porIA = modoCorrecao === "ia";
   if (textoDigitado !== undefined && typeof textoDigitado !== "string") throw { status: 400, msg: "Texto inválido." };
   if (textoDigitado && textoDigitado.length > MAX_TEXTO_PRODUCAO) throw { status: 400, msg: "Seu texto é longo demais." };
@@ -62,24 +66,27 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
   } else if (!file && !textoDigitado?.trim()) {
     throw { status: 400, msg: "Envie um arquivo ou digite seu texto." };
   }
-  // A IA lê o texto digitado; áudio e arquivos anexados vão para o professor.
+  transcricao = typeof transcricao === "string" ? transcricao.trim().slice(0, 10000) : "";
+  // A IA lê o texto digitado (ou a transcrição da fala); arquivos anexados vão para o professor.
   if (porIA) {
-    if (modalidade !== "textual" || !textoDigitado?.trim()) throw { status: 400, msg: "A correção por IA vale para redações digitadas na plataforma. Para arquivo ou áudio, escolha a correção por professor." };
+    const temTexto = modalidade === "textual" ? !!textoDigitado?.trim() : !!transcricao;
+    if (!temTexto) throw { status: 400, msg: modalidade === "oral" ? "A correção por IA da produção oral usa a transcrição da sua fala. Grave pelo Chrome ou Edge (que transcrevem) ou escolha a correção por professor." : "A correção por IA vale para redações digitadas na plataforma. Para arquivo ou áudio, escolha a correção por professor." };
     if (!iaConfigurada()) throw { status: 503, msg: "A correção por IA está indisponível no momento. Escolha a correção por professor." };
   }
 
   const user = await User.findById(userId);
-  if ((user.creditosCorrecao || 0) < tema.creditosNecessarios) {
+  const custo = semCredito ? 0 : tema.creditosNecessarios;
+  if ((user.creditosCorrecao || 0) < custo) {
     throw { status: 400, msg: "Você não tem créditos suficientes para esta correção." };
   }
 
   let contagemPalavras = null;
   if (modalidade === "textual" && textoDigitado?.trim()) {
     contagemPalavras = contarPalavras(textoDigitado);
-    if (contagemPalavras < tema.limitePalavrasMin) {
+    if (!aceitarForaDoLimite && contagemPalavras < tema.limitePalavrasMin) {
       throw { status: 400, msg: `Seu texto tem ${contagemPalavras} palavras. O mínimo exigido é ${tema.limitePalavrasMin}.` };
     }
-    if (contagemPalavras > tema.limitePalavrasMax) {
+    if (!aceitarForaDoLimite && contagemPalavras > tema.limitePalavrasMax) {
       throw { status: 400, msg: `Seu texto tem ${contagemPalavras} palavras. O máximo permitido é ${tema.limitePalavrasMax}.` };
     }
   }
@@ -105,15 +112,19 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
     textoDigitado: modalidade === "textual" ? (textoDigitado?.trim() || undefined) : undefined,
     contagemPalavras,
     duracaoSegundos: modalidade === "oral" ? (Number(duracaoSegundos) || undefined) : undefined,
+    transcricao: modalidade === "oral" ? (transcricao || undefined) : undefined,
     observacoesAluno,
-    creditosUtilizados: tema.creditosNecessarios,
+    origem: origem || { tipo: "tema" },
+    creditosUtilizados: custo,
     prazoEstimado: new Date(Date.now() + (porIA ? 10 * 60 * 1000 : 5 * 24 * 60 * 60 * 1000)),
     dataEnvio: new Date(),
     historicoStatus: [{ status: porIA ? "em_correcao" : "em_fila", data: new Date() }]
   });
 
-  user.creditosCorrecao -= tema.creditosNecessarios;
-  await user.save();
+  if (custo) {
+    user.creditosCorrecao -= custo;
+    await user.save();
+  }
 
   transmitir("producao-atualizada", { alunoId: String(userId), producaoId: String(producao._id) });
   if (porIA) setImmediate(() => processarCorrecaoIA(producao._id).catch(err => console.error("Correção IA:", err.message)));
@@ -127,7 +138,11 @@ async function processarCorrecaoIA(producaoId) {
   if (!producao || producao.modoCorrecao !== "ia" || producao.status === "corrigido") return;
   const tema = await Tema.findById(producao.temaId);
   try {
-    const avaliacao = await corrigirProducaoComIA(tema, producao.textoDigitado || "");
+    // Sujets do Ambiente de Produção: correção no formato do app de modelos (trame, léxico,
+    // versão melhorada), que também alimenta o carnet de erros do aluno.
+    const avaliacao = producao.origem?.tipo === "modeles"
+      ? await require("../utils/correcaoModelesIA").corrigirProducaoModeles(producao, tema)
+      : await corrigirProducaoComIA(tema, producao.textoDigitado || "");
     producao.avaliacao = avaliacao;
     producao.status = "corrigido";
     producao.dataCorrecao = new Date();
@@ -443,6 +458,13 @@ router.post("/:id/corrigir", exigirAuth, exigirProfessor, validarIds("id"), comT
     producao.historicoStatus.push({ status: "corrigido", data: new Date() });
     await producao.save();
     transmitir("producao-atualizada", { alunoId: String(producao.alunoId), producaoId: String(producao._id) });
+    // As correções pontuais do professor entram no carnet de erros do aluno (Caderno de Revisão).
+    if (avaliacao?.correcoes?.length) {
+      const tema = await Tema.findById(producao.temaId).select("courseType eixo");
+      require("../utils/correcaoModelesIA").registrarNoCarnet(producao.alunoId, producao.origem?.tache || "",
+        { corrections: avaliacao.correcoes.map(c => ({ original: c.trecho, corrige: c.correcao, explication: c.explicacao })) },
+        { courseType: tema?.courseType, producaoId: producao._id, eixo: producao.origem?.eixo || tema?.eixo, origem: "professor" }).catch(e => console.error("carnet:", e.message));
+    }
 
     res.json({ msg: "Correção enviada ao aluno!", producao });
   } catch (err) {

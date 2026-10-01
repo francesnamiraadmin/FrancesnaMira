@@ -57,6 +57,14 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.92rem;
 }
 .q-btn.secundario { background: var(--glass-hover); color: var(--text); border: 1px solid var(--glass-border-strong); }
+.cp-titulo { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 34px 0 6px; }
+.cp-sub { opacity: .8; margin-bottom: 16px; }
+.cp-erro { display: flex; gap: 14px; align-items: flex-start; justify-content: space-between; }
+.cp-antes { text-decoration: line-through; color: var(--danger-text); }
+.cp-depois { color: var(--success-text); font-weight: 700; }
+.cp-mots { display: flex; flex-wrap: wrap; gap: 8px; }
+.cp-mot { background: var(--glass-input); border: 1px solid var(--glass-border); border-radius: 14px; padding: 6px 12px; font-size: .9rem; }
+.cp-mot small { display: block; opacity: .75; }
 .q-gabarito { margin-top: 14px; padding: 14px 16px; background: var(--recessed); border-radius: 12px; font-size: 0.95rem; line-height: 1.6; border-left: 3px solid var(--accent); }
 </style>
 </head>
@@ -76,6 +84,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <div class="pagina-wrap">
   <div id="cadernoLista"><p class="conjuntos-vazio">Carregando...</p></div>
+  <section id="cadernoProducao" hidden></section>
 </div>
 
 <footer>© 2026 · Francês na Mira</footer>

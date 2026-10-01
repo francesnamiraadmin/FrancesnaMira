@@ -3,9 +3,7 @@
 // A IA devolve a mesma grade usada pelo professor (4 critérios de 0 a 5 por tarefa),
 // então a nota final sai no formato TCF (0–20 → CECR e NCLC) pelo mesmo cálculo.
 const sim = require("./simulados");
-
-const MODELO_PADRAO = "claude-sonnet-5";
-const iaConfigurada = () => !!process.env.ANTHROPIC_API_KEY;
+const { pedirJson, iaConfigurada } = require("./claude");
 
 function montarPrompt(def, tentativa) {
   const tem = p => sim.ordemDe(def).includes(p);
@@ -48,49 +46,16 @@ function formatoJson(def, tem) {
   return "{" + [tem("ee") && bloco("ee", "expression écrite"), tem("eo") && bloco("eo", "expression orale")].filter(Boolean).join(",\n ") + "}";
 }
 
-function extrairJson(texto) {
-  const ini = texto.indexOf("{");
-  const fim = texto.lastIndexOf("}");
-  if (ini < 0 || fim <= ini) throw new Error("Resposta da IA sem JSON.");
-  return JSON.parse(texto.slice(ini, fim + 1));
-}
-
 // Devolve { ee, eo } já no formato de montarResultadoExpressao.
 async function corrigirExpressoesComIA(def, tentativa) {
   if (!iaConfigurada()) throw Object.assign(new Error("Correção por IA não configurada no servidor (ANTHROPIC_API_KEY)."), { naoConfigurada: true });
-  const controle = new AbortController();
-  const timer = setTimeout(() => controle.abort(), 120000);
-  try {
-    const res = await fetch(`${process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com"}/v1/messages`, {
-      method: "POST",
-      signal: controle.signal,
-      headers: {
-        "content-type": "application/json",
-        "x-api-key": process.env.ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01"
-      },
-      body: JSON.stringify({
-        model: process.env.ANTHROPIC_MODEL || MODELO_PADRAO,
-        max_tokens: 6000,
-        messages: [{ role: "user", content: montarPrompt(def, tentativa) }]
-      })
-    });
-    if (!res.ok) {
-      const corpo = await res.text().catch(() => "");
-      throw new Error(`API da IA respondeu ${res.status}: ${corpo.slice(0, 300)}`);
-    }
-    const dados = await res.json();
-    const texto = (dados.content || []).filter(b => b.type === "text").map(b => b.text).join("");
-    const bruto = extrairJson(texto);
-    const meta = { porIA: true, corretorNome: "Correção automática (IA)" };
-    const tem = p => sim.ordemDe(def).includes(p);
-    return {
-      ee: tem("ee") ? sim.montarResultadoExpressao("ee", def, bruto.ee || {}, meta) : undefined,
-      eo: tem("eo") ? sim.montarResultadoExpressao("eo", def, bruto.eo || {}, meta) : undefined
-    };
-  } finally {
-    clearTimeout(timer);
-  }
+  const { json: bruto } = await pedirJson({ usuario: montarPrompt(def, tentativa), maxTokens: 6000 });
+  const meta = { porIA: true, corretorNome: "Correção automática (IA)" };
+  const tem = p => sim.ordemDe(def).includes(p);
+  return {
+    ee: tem("ee") ? sim.montarResultadoExpressao("ee", def, bruto.ee || {}, meta) : undefined,
+    eo: tem("eo") ? sim.montarResultadoExpressao("eo", def, bruto.eo || {}, meta) : undefined
+  };
 }
 
 module.exports = { corrigirExpressoesComIA, iaConfigurada };

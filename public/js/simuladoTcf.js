@@ -21,7 +21,7 @@
   const S = {
     t: null, def: null, meuId: null,
     prazo: null, relogio: null, finalizando: false,
-    idx: 0, abaEE: 0, salvarEE: null,
+    idx: 0, salvarEE: null, eeSujas: {}, painelEE: null,
     stream: null, chamada: null, naoLidas: 0,
     eo: null // estado local da gravação
   };
@@ -318,7 +318,7 @@
       eo: `${tarefas.length === 1 ? "1 tarefa gravada" : `${tarefas.length} tarefas gravadas`}: ${tarefas.map(t => `${esc(t.titulo)} (${t.preparacaoSeg ? `${min(t.preparacaoSeg)} de preparação + ` : ""}${min(t.duracaoSeg)})`).join("; ")}. Use fone de ouvido. Se um professor estiver conectado, ele será seu examinador pela chamada de voz.`
     };
     const regras = MODO_EXERCICIO && regrasExercicio[p] ? regrasExercicio[p] : {
-      co: `${nq} questões de múltipla escolha${MODO_EXERCICIO ? "" : ", do A1 ao C2"}. Cada documento sonoro é ouvido <strong>uma única vez</strong>. ${S.def.provas.co.questoes.some(q => q.alternativasFaladas) ? (MODO_EXERCICIO ? "Em algumas questões" : "Nas primeiras questões") + ", as quatro propostas são apenas faladas: ouça e marque a letra. " : "Leia a pergunta, ouça o áudio e escolha a alternativa. "}Não é possível voltar à questão anterior.`,
+      co: `${nq} questões de múltipla escolha${MODO_EXERCICIO ? "" : ", do A1 ao C2"}. Cada documento sonoro é ouvido <strong>uma única vez</strong>. ${S.def.provas.co.questoes.some(q => q.alternativasFaladas) ? (MODO_EXERCICIO ? "Em algumas questões" : "Nas primeiras questões") + ", as quatro propostas são apenas faladas: ouça e marque a letra. " : "Leia a pergunta, ouça o áudio e escolha a alternativa. "}Você pode navegar livremente entre as questões pelo painel, mas cada áudio só pode ser ouvido uma vez.`,
       sl: `${nq} frases com uma lacuna: escolha a palavra ou expressão que completa corretamente a frase. Você pode navegar livremente entre as questões.`,
       ce: `${nq} questões de múltipla escolha, do A1 ao C2, sobre documentos escritos (avisos, anúncios, artigos, textos argumentativos)${S.def.provas.ce?.questoes.some(q => q.tipo === "lacuna") ? ", com frases para completar ao longo da prova" : ""}. Você pode navegar livremente entre as questões.`,
       ee: "3 tarefas: uma mensagem (60–120 palavras), um artigo ou relato (120–150 palavras) e um texto argumentativo a partir de dois documentos (120–180 palavras). Seu texto é salvo automaticamente.",
@@ -376,22 +376,34 @@
       ${q.alternativasFaladas ? "" : `<p class="sm-pergunta">${esc(q.pergunta)}</p>`}
       <div class="sm-alts ${q.alternativasFaladas ? "faladas" : ""}">${q.alternativas.map((a, i) => `<button type="button" class="sm-alt ${resp[q.n] === i ? "marcada" : ""}" data-alt="${i}"><span class="letra">${LETRAS[i]}</span>${a && !q.alternativasFaladas ? `<span>${esc(a)}</span>` : ""}</button>`).join("")}</div>
       <div class="sm-nav">
-        <span class="sm-muted">${Object.keys(resp).length} de ${qs.length} respondidas</span>
-        ${S.idx < qs.length - 1 ? `<button class="sm-btn" id="btnProx" type="button">Próxima questão →</button>` : `<button class="sm-btn" id="btnFim" type="button">Terminar a compreensão oral</button>`}
+        <button class="sm-btn secundario" id="btnAnt" type="button" ${S.idx === 0 ? "disabled" : ""}>← Anterior</button>
+        <span class="sm-muted" id="contagemCO">${Object.keys(resp).length} de ${qs.length} respondidas</span>
+        ${S.idx < qs.length - 1 ? `<button class="sm-btn" id="btnProx" type="button">Próxima →</button>` : ""}
       </div>
+      <div class="sm-grade" id="gradeLista"></div>
+      <p class="sm-muted sm-grade-legenda">Verde = respondida · <span class="ouvida-ico">🔊</span> = áudio já ouvido</p>
+      <div style="text-align:right;margin-top:14px;"><button class="sm-btn secundario" id="btnFim" type="button">Terminar a compreensão oral</button></div>
     </div>`;
     ligarAlternativas("co", q);
+    atualizarGrade("co");
     $("btnOuvir").addEventListener("click", () => tocarUmaVez(q));
-    const prox = $("btnProx");
-    if (prox) prox.addEventListener("click", () => {
+    const ir = i => {
+      if (i < 0 || i >= qs.length || i === S.idx) return;
       pararAudioCO();
-      S.idx++;
-      S.t.provas.co.questaoAtual = S.idx;
-      salvar({ questaoAtual: S.idx });
+      S.idx = i;
+      S.t.provas.co.questaoAtual = i;
+      salvar({ questaoAtual: i });
       renderCO();
+    };
+    $("btnAnt").addEventListener("click", () => ir(S.idx - 1));
+    const prox = $("btnProx");
+    if (prox) prox.addEventListener("click", () => ir(S.idx + 1));
+    $("gradeLista").addEventListener("click", ev => { const b = ev.target.closest("[data-ir]"); if (b) ir(Number(b.dataset.ir)); });
+    $("btnFim").addEventListener("click", () => {
+      pararAudioCO();
+      const faltam = qs.length - Object.keys(S.t.provas.co.respostas || {}).length;
+      confirmarFim(faltam ? `Ainda há ${faltam} questão(ões) sem resposta.` : "Todas as questões foram respondidas.");
     });
-    const fim = $("btnFim");
-    if (fim) fim.addEventListener("click", () => { pararAudioCO(); confirmarFim(); });
   }
 
   let audioCO = null;
@@ -403,6 +415,7 @@
     const e = S.t.provas.co;
     e.ouvidos = [...(e.ouvidos || []), q.n];
     salvar({ ouvido: q.n, questaoAtual: S.idx });
+    atualizarGrade("co");
     audioCO = new Audio(q.audio);
     audioCO.addEventListener("timeupdate", () => {
       const b = $("playerBarra");
@@ -419,7 +432,7 @@
       e.respostas = { ...(e.respostas || {}), [q.n]: i };
       document.querySelectorAll("[data-alt]").forEach(x => x.classList.toggle("marcada", x === b));
       salvar({ respostas: { [q.n]: i }, questaoAtual: S.idx });
-      if (prova === "ce" || prova === "sl") atualizarGrade(prova);
+      atualizarGrade(prova);
     }));
   }
 
@@ -460,66 +473,137 @@
     const g = $("gradeLista");
     if (!g) return;
     const resp = S.t.provas[prova].respostas || {};
-    g.innerHTML = S.def.provas[prova].questoes.map((q, i) => `<button type="button" data-ir="${i}" class="${resp[q.n] != null ? "respondida" : ""} ${i === S.idx ? "atual" : ""}">${numero(q)}</button>`).join("");
+    const ouvidos = prova === "co" ? (S.t.provas.co.ouvidos || []) : [];
+    g.innerHTML = S.def.provas[prova].questoes.map((q, i) => `<button type="button" data-ir="${i}" class="${resp[q.n] != null ? "respondida" : ""} ${i === S.idx ? "atual" : ""} ${ouvidos.includes(q.n) ? "ouvida" : ""}" title="${ouvidos.includes(q.n) ? "Áudio já ouvido" : "Áudio ainda não ouvido"}">${numero(q)}</button>`).join("");
+    const c = $("contagemCO");
+    if (prova === "co" && c) c.textContent = `${Object.keys(resp).length} de ${S.def.provas.co.questoes.length} respondidas`;
   }
 
   // ---------------- EE ----------------
+  // As três tâches ficam na tela ao mesmo tempo (como no app "Modèles TCF"): um painel fixo
+  // no topo mostra o tempo restante, a etapa aconselhada e o andamento de cada tâche.
+  // Tempo aconselhado no TCF (60 min): T1 10 · T2 15 · T3 25 · relecture 10. Em outros
+  // formatos, reparte o tempo pelo tamanho máximo de cada tâche e reserva ~15% para reler.
+  function etapasEE() {
+    const p = S.def.provas.ee, tarefas = p.tarefas, total = Math.round(p.tempoSeg / 60);
+    if (total === 60 && tarefas.length === 3) return [...tarefas.map((t, i) => ({ id: t.id, t: t.titulo, min: [10, 15, 25][i] })), { t: "Relecture", min: 10 }];
+    const reler = tarefas.length > 1 ? Math.max(2, Math.round(total * 0.15)) : 0;
+    const soma = tarefas.reduce((a, t) => a + (t.max || 1), 0);
+    const et = tarefas.map(t => ({ id: t.id, t: t.titulo, min: Math.max(1, Math.round((total - reler) * (t.max || 1) / soma)) }));
+    return reler ? [...et, { t: "Relecture", min: reler }] : et;
+  }
+
   function renderEE() {
     const tarefas = S.def.provas.ee.tarefas;
-    const t = tarefas[S.abaEE];
     const resp = S.t.provas.ee.respostas || {};
-    $("barraSub").textContent = `${t.titulo} de 3`;
-    $("vProva").innerHTML = `<div class="sm-card">
-      <div class="sm-abas">${tarefas.map((x, i) => `<button type="button" class="sm-aba ${i === S.abaEE ? "ativa" : ""}" data-aba="${i}">${esc(x.titulo)} · ${contarPalavras(resp[x.id])} mots</button>`).join("")}</div>
-      <div class="sm-consigne"><strong>${esc(t.titulo)}</strong> (${t.min} à ${t.max} mots)<br>${esc(t.consigne)}</div>
-      ${t.documentos ? `<div class="sm-docs">${t.documentos.map(d => `<div><strong>${esc(d.titulo)}</strong>${esc(d.texto)}</div>`).join("")}</div>` : ""}
-      <textarea class="sm-textarea" id="textoEE" spellcheck="false" autocorrect="off" autocapitalize="sentences" placeholder="Rédigez votre texte ici…">${esc(resp[t.id] || "")}</textarea>
-      <div class="sm-contador"><span id="contadorEE"></span><span id="salvoEE"></span></div>
-      <div class="sm-nav">
-        <span></span>
-        <button class="sm-btn secundario" id="btnFim" type="button">Terminar a expressão escrita</button>
+    const etapas = etapasEE();
+    const minDe = id => (etapas.find(e => e.id === id) || {}).min;
+    $("barraSub").textContent = `${tarefas.length} tâche${tarefas.length > 1 ? "s" : ""} simultâneas`;
+    $("vProva").innerHTML = `
+      <div class="ee-painel" id="eePainel">
+        <div class="ee-relogio"><span class="tempo" id="eeTempo">--:--</span><span id="eeFase">Épreuve en cours</span></div>
+        <div class="ee-etapas">${etapas.map(e => `<span style="flex:${e.min}"><i></i>${esc(e.t)} · ${e.min} min</span>`).join("")}<b id="eeCursor"></b></div>
+        <div class="ee-resumo">${tarefas.map(t => `<button type="button" class="ee-chip" data-ir-tarefa="${t.id}"><b>${esc(t.titulo.replace(/^Tâche\s*/i, "T"))}</b><span id="eeChip-${t.id}">0 mots</span></button>`).join("")}</div>
+        <span class="ee-salvo" id="salvoEE">Rascunho salvo</span>
+        <button class="sm-btn" id="btnFim" type="button">Terminar e enviar</button>
       </div>
-    </div>`;
-    const ta = $("textoEE");
-    const contar = () => {
+      ${tarefas.map((t, i) => `
+      <section class="sm-card ee-tache" data-tarefa="${t.id}">
+        <div class="ee-cab"><span class="ee-selo">${i + 1}</span><div>
+          <h2>${esc(t.titulo)}</h2>
+          <small>${t.min} mots minimum · ${t.max} mots maximum${minDe(t.id) ? ` · temps conseillé : ${minDe(t.id)} min` : ""}</small>
+        </div></div>
+        <div class="sm-consigne">${esc(t.consigne)}</div>
+        ${t.documentos ? `<div class="sm-docs">${t.documentos.map(d => `<div><strong>${esc(d.titulo)}</strong>${esc(d.texto)}</div>`).join("")}</div>` : ""}
+        <textarea class="sm-textarea" data-texto="${t.id}" spellcheck="false" autocorrect="off" autocapitalize="sentences" placeholder="Rédigez votre texte ici…">${esc(resp[t.id] || "")}</textarea>
+        <div class="ee-medidor"><i data-medidor="${t.id}"></i><b class="min" style="left:${Math.round(100 * t.min / (t.max * 1.25))}%"></b><b class="max" style="left:80%"></b></div>
+        <div class="sm-contador"><span data-contador="${t.id}"></span></div>
+      </section>`).join("")}`;
+
+    const contar = t => {
+      const ta = document.querySelector(`[data-texto="${t.id}"]`);
       const n = contarPalavras(ta.value);
-      const fora = n < t.min || n > t.max;
-      $("contadorEE").innerHTML = `<span class="${n === 0 ? "" : fora ? "fora" : "dentro"}">${n} mots</span> · attendu : ${t.min} à ${t.max}`;
+      const estado = n === 0 ? "" : n < t.min ? "baixo" : n > t.max ? "alto" : "ok";
+      document.querySelector(`[data-contador="${t.id}"]`).innerHTML = `<span class="${estado === "ok" ? "dentro" : estado ? "fora" : ""}">${n} mots</span> · attendu : ${t.min} à ${t.max}`;
+      document.querySelector(`[data-medidor="${t.id}"]`).style.width = `${Math.min(100, 100 * n / (t.max * 1.25))}%`;
+      const chip = $(`eeChip-${t.id}`);
+      chip.textContent = `${n} mots`;
+      chip.parentElement.dataset.estado = estado;
     };
-    contar();
-    ta.addEventListener("input", () => {
-      contar();
-      S.t.provas.ee.respostas = { ...(S.t.provas.ee.respostas || {}), [t.id]: ta.value };
-      $("salvoEE").textContent = "Salvando…";
-      clearTimeout(S.salvarEE);
-      S.salvarEE = setTimeout(() => salvarTextoEE(), 1500);
+    tarefas.forEach(t => {
+      contar(t);
+      const ta = document.querySelector(`[data-texto="${t.id}"]`);
+      ta.addEventListener("input", () => {
+        contar(t);
+        S.t.provas.ee.respostas = { ...(S.t.provas.ee.respostas || {}), [t.id]: ta.value };
+        S.eeSujas = { ...(S.eeSujas || {}), [t.id]: true };
+        $("salvoEE").textContent = "Salvando…";
+        clearTimeout(S.salvarEE);
+        S.salvarEE = setTimeout(() => salvarTextoEE(), 1500);
+      });
+      // Colar texto de fora não vale na prova (mesma regra do app de modelos).
+      ta.addEventListener("paste", ev => ev.preventDefault());
+      ta.addEventListener("drop", ev => ev.preventDefault());
     });
-    document.querySelectorAll("[data-aba]").forEach(b => b.addEventListener("click", async () => {
-      await salvarTextoEE(true);
-      S.abaEE = Number(b.dataset.aba);
-      renderEE();
+    document.querySelectorAll("[data-ir-tarefa]").forEach(b => b.addEventListener("click", () => {
+      const sec = document.querySelector(`[data-tarefa="${b.dataset.irTarefa}"]`);
+      sec.scrollIntoView({ behavior: "smooth", block: "start" });
+      sec.classList.add("destaque");
+      setTimeout(() => sec.classList.remove("destaque"), 2500);
+      sec.querySelector("textarea").focus({ preventScroll: true });
     }));
     $("btnFim").addEventListener("click", () => {
       const r = S.t.provas.ee.respostas || {};
       const aviso = tarefas.map(x => { const n = contarPalavras(r[x.id]); return n < x.min ? `${x.titulo}: ${n} mots (mínimo ${x.min})` : null; }).filter(Boolean);
-      confirmarFim(aviso.length ? `Atenção — ${aviso.join("; ")}.` : "Os três textos estão dentro do tamanho pedido.");
+      confirmarFim(aviso.length ? `Atenção — ${aviso.join("; ")}.` : "Os textos estão dentro do tamanho pedido.");
     });
+    iniciarPainelEE(etapas);
+  }
+
+  // Relógio do painel da EE: acompanha o prazo da épreuve (S.prazo) e move o cursor pelas etapas.
+  function iniciarPainelEE(etapas) {
+    clearInterval(S.painelEE);
+    // O painel fica logo abaixo da navbar fixa do site (a altura muda entre desktop e celular).
+    const posicionar = () => {
+      const p = $("eePainel"), nav = document.getElementById("app-navbar");
+      if (!p) { window.removeEventListener("resize", posicionar); return; }
+      const topo = nav ? Math.round(nav.getBoundingClientRect().height) : 0;
+      p.style.top = (topo + 8) + "px";
+      document.querySelectorAll(".ee-tache").forEach(sec => { sec.style.scrollMarginTop = (topo + p.offsetHeight + 20) + "px"; });
+    };
+    posicionar();
+    window.addEventListener("resize", posicionar);
+    const totalSeg = S.def.provas.ee.tempoSeg;
+    const tick = () => {
+      const tempo = $("eeTempo");
+      if (!tempo) { clearInterval(S.painelEE); return; }
+      if (!S.prazo) return;
+      const resta = Math.max(0, Math.round((S.prazo - Date.now()) / 1000));
+      const decorrido = totalSeg - resta;
+      tempo.textContent = mmss(resta);
+      tempo.classList.toggle("fim", resta <= 300);
+      let acc = 0, etapa = etapas[etapas.length - 1].t;
+      for (const e of etapas) { acc += e.min * 60; if (decorrido < acc) { etapa = e.t; break; } }
+      $("eeFase").textContent = resta > 0 ? `Étape conseillée : ${etapa}` : "Temps écoulé";
+      $("eeCursor").style.left = `${Math.min(100, Math.max(0, 100 * decorrido / totalSeg))}%`;
+    };
+    tick();
+    S.painelEE = setInterval(tick, 1000);
   }
 
   async function salvarTextoEE(imediato) {
     clearTimeout(S.salvarEE);
-    const tarefas = S.def.provas.ee.tarefas;
-    const t = tarefas[S.abaEE];
-    const ta = $("textoEE");
-    if (!ta || S.t.provaAtual !== "ee") return;
     S.salvarEE = null;
-    await salvar({ respostas: { [t.id]: ta.value } });
+    if (S.t.provaAtual !== "ee") return;
+    const respostas = {};
+    document.querySelectorAll("[data-texto]").forEach(ta => {
+      if (imediato || (S.eeSujas || {})[ta.dataset.texto]) respostas[ta.dataset.texto] = ta.value;
+    });
+    if (!Object.keys(respostas).length) return;
+    S.eeSujas = {};
+    await salvar({ respostas });
     const s = $("salvoEE");
-    if (s) s.textContent = "Salvo ✓";
-    if (!imediato) {
-      const aba = document.querySelector(`[data-aba="${S.abaEE}"]`);
-      if (aba) aba.textContent = `${t.titulo} · ${contarPalavras(ta.value)} mots`;
-    }
+    if (s) s.textContent = `Salvo às ${new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
   }
 
   // ---------------- EO ----------------

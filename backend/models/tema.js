@@ -62,6 +62,12 @@ const TemaSchema = new mongoose.Schema({
   competenciasAvaliadas: [{ type: String }],
   coletanea: [DocumentoApoioSchema],
   imagens: [ImagemTemaSchema],
+  // Eixo temático (mesmas chaves do app "Modèles TCF": imm, trav, env…) — agrupa os temas por eixo.
+  eixo: { type: String },
+  // Temas criados sob demanda para um sujet do Ambiente de Produção (um por curso × sujet): servem
+  // para a produção passar pelo Sistema de Correção, mas não aparecem no catálogo de temas.
+  catalogo: { type: Boolean, default: true },
+  origemModeles: { tache: { type: String }, sujetId: { type: String } },
   ordem: { type: Number, default: 0 },
   ativo: { type: Boolean, default: true },
   criadoPor: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

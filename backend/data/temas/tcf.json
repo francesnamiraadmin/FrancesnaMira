@@ -2,6 +2,7 @@
  {
   "slug": "tcf-t1-nouveau-voisin",
   "titulo": "Accueillir un nouveau voisin",
+  "eixo": "relations",
   "nivel": "B1",
   "tipoProducao": "Tâche 1 — message",
   "dificuldade": "facil",
@@ -76,6 +77,7 @@
  {
   "slug": "tcf-t1-covoiturage-festival",
   "titulo": "Proposer un covoiturage pour un festival",
+  "eixo": "transports",
   "nivel": "B1",
   "tipoProducao": "Tâche 1 — message",
   "dificuldade": "facil",
@@ -150,6 +152,7 @@
  {
   "slug": "tcf-t1-conseils-montreal",
   "titulo": "Demander des conseils avant de s'installer à Montréal",
+  "eixo": "imm",
   "nivel": "B2",
   "tipoProducao": "Tâche 1 — message",
   "dificuldade": "medio",
@@ -224,6 +227,7 @@
  {
   "slug": "tcf-t2-journee-sans-voiture",
   "titulo": "Une journée sans voiture dans ma ville",
+  "eixo": "transports",
   "nivel": "B1",
   "tipoProducao": "Tâche 2 — article",
   "dificuldade": "medio",
@@ -298,6 +302,7 @@
  {
   "slug": "tcf-t2-premier-hiver",
   "titulo": "Mon premier hiver",
+  "eixo": "imm",
   "nivel": "B2",
   "tipoProducao": "Tâche 2 — récit de blog",
   "dificuldade": "medio",
@@ -372,6 +377,7 @@
  {
   "slug": "tcf-t2-benevolat",
   "titulo": "Le bénévolat qui m'a changé",
+  "eixo": "soc",
   "nivel": "B2",
   "tipoProducao": "Tâche 2 — article",
   "dificuldade": "medio",
@@ -446,6 +452,7 @@
  {
   "slug": "tcf-t3-publicite-espace-public",
   "titulo": "Faut-il limiter la publicité dans l'espace public ?",
+  "eixo": "medias",
   "nivel": "B2",
   "tipoProducao": "Tâche 3 — texte argumentatif",
   "dificuldade": "dificil",
@@ -520,6 +527,7 @@
  {
   "slug": "tcf-t3-ia-ecole",
   "titulo": "L'intelligence artificielle à l'école : aide ou menace ?",
+  "eixo": "edu",
   "nivel": "B2",
   "tipoProducao": "Tâche 3 — texte argumentatif",
   "dificuldade": "dificil",
@@ -594,6 +602,7 @@
  {
   "slug": "tcf-t3-revenu-universel",
   "titulo": "Faut-il instaurer un revenu universel ?",
+  "eixo": "soc",
   "nivel": "C1",
   "tipoProducao": "Tâche 3 — texte argumentatif",
   "dificuldade": "dificil",
@@ -668,6 +677,7 @@
  {
   "slug": "tcf-t3-langues-regionales",
   "titulo": "Faut-il enseigner les langues régionales à l'école ?",
+  "eixo": "culture",
   "nivel": "C1",
   "tipoProducao": "Tâche 3 — texte argumentatif",
   "dificuldade": "dificil",

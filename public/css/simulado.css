@@ -99,6 +99,9 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .sm-grade button { height: 36px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text); font-family: inherit; font-weight: 600; font-size: 0.8rem; cursor: pointer; }
 .sm-grade button.respondida { background: var(--success-bg); color: var(--success-text); border-color: transparent; }
 .sm-grade button.atual { outline: 2px solid var(--accent); }
+.sm-grade button { position: relative; }
+.sm-grade button.ouvida::after { content: "🔊"; position: absolute; top: -7px; right: -5px; font-size: 0.62rem; line-height: 1; }
+.sm-grade-legenda { font-size: 0.76rem; margin-top: 8px; }
 
 /* ---- player de áudio único (CO) ---- */
 .sm-player { display: flex; align-items: center; gap: 14px; background: var(--recessed); border-radius: 14px; padding: 14px 16px; margin-bottom: 16px; flex-wrap: wrap; }
@@ -116,6 +119,46 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .sm-docs strong { display: block; margin-bottom: 4px; }
 .sm-textarea { width: 100%; min-height: 280px; resize: vertical; border-radius: 14px; border: 1px solid var(--glass-border-strong); background: var(--glass-input); color: var(--text); font-family: inherit; font-size: 0.98rem; line-height: 1.65; padding: 14px 16px; }
 .sm-contador { display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 6px; color: var(--text-muted); }
+
+/* ---- EE: três tâches simultâneas + painel de tempo (modelo do app "Modèles TCF") ---- */
+.ee-painel {
+  position: sticky; top: 64px; z-index: 40; display: grid; grid-template-columns: auto 1fr auto auto; grid-template-areas: "relogio etapas salvo enviar" "relogio resumo resumo resumo";
+  align-items: center; gap: 8px 18px; margin-bottom: 18px; padding: 14px 18px; border-radius: 18px;
+  background: var(--overlay-strong); border: 1px solid var(--glass-border-strong); box-shadow: var(--shadow);
+}
+.ee-relogio { grid-area: relogio; display: flex; flex-direction: column; align-items: flex-start; min-width: 150px; }
+.ee-relogio .tempo { font-size: 2.1rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.ee-relogio .tempo.fim { color: var(--danger-text); animation: ee-pulsar 1.2s ease-in-out infinite; }
+.ee-relogio span:last-child { font-size: 0.78rem; color: var(--text-muted); }
+@keyframes ee-pulsar { 50% { opacity: 0.55; } }
+.ee-etapas { grid-area: etapas; position: relative; display: flex; gap: 4px; min-width: 0; }
+.ee-etapas span { display: flex; flex-direction: column; gap: 4px; font-size: 0.7rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ee-etapas span i { display: block; height: 6px; border-radius: 4px; background: var(--recessed); }
+.ee-etapas span:nth-child(1) i { background: #94C4EC; }
+.ee-etapas span:nth-child(2) i { background: #E4C043; }
+.ee-etapas span:nth-child(3) i { background: #8FBFA9; }
+.ee-etapas span:nth-child(4) i { background: #D51E28; opacity: 0.7; }
+.ee-etapas b { position: absolute; top: -4px; width: 3px; height: 14px; border-radius: 2px; background: var(--text); transform: translateX(-1px); transition: left 1s linear; }
+.ee-resumo { grid-area: resumo; display: flex; gap: 8px; flex-wrap: wrap; }
+.ee-chip { display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text); font-family: inherit; font-size: 0.78rem; padding: 5px 12px; border-radius: 20px; cursor: pointer; }
+.ee-chip[data-estado="ok"] { background: var(--success-bg); color: var(--success-text); border-color: transparent; }
+.ee-chip[data-estado="baixo"], .ee-chip[data-estado="alto"] { background: var(--warning-bg); color: var(--warning-text); border-color: transparent; }
+.ee-salvo { grid-area: salvo; font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
+.ee-painel #btnFim { grid-area: enviar; }
+.ee-tache { scroll-margin-top: 190px; transition: box-shadow 0.3s; margin-bottom: 18px; }
+.ee-tache.destaque { box-shadow: 0 0 0 3px var(--accent), var(--shadow); }
+.ee-cab { display: flex; gap: 14px; align-items: center; margin-bottom: 12px; }
+.ee-cab h2 { font-size: 1.15rem; margin: 0; }
+.ee-cab small { color: var(--text-muted); font-size: 0.8rem; }
+.ee-selo { width: 40px; height: 40px; flex: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; background: var(--accent); color: var(--accent-text); }
+.ee-medidor { position: relative; height: 6px; margin-top: 8px; border-radius: 4px; background: var(--recessed); }
+.ee-medidor i { display: block; height: 100%; width: 0; border-radius: 4px; background: var(--accent); transition: width 0.2s; }
+.ee-medidor b { position: absolute; top: -3px; width: 2px; height: 12px; background: var(--text-muted); }
+@media (max-width: 760px) {
+  .ee-painel { grid-template-columns: 1fr auto; grid-template-areas: "relogio enviar" "etapas etapas" "resumo resumo" "salvo salvo"; top: 56px; }
+  .ee-relogio .tempo { font-size: 1.6rem; }
+  .ee-etapas span { font-size: 0; }
+}
 .sm-contador .fora { color: var(--danger-text); font-weight: 700; }
 .sm-contador .dentro { color: var(--success-text); font-weight: 700; }
 

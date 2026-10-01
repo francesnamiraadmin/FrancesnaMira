@@ -2,6 +2,7 @@
  {
   "slug": "delf-a1-carte-postale-vacances",
   "titulo": "Carte postale de vacances",
+  "eixo": "voyages",
   "nivel": "A1",
   "tipoProducao": "DELF A1 — message simple",
   "dificuldade": "facil",
@@ -76,6 +77,7 @@
  {
   "slug": "delf-a2-annuler-sortie",
   "titulo": "Annuler une sortie avec un ami",
+  "eixo": "relations",
   "nivel": "A2",
   "tipoProducao": "DELF A2 — message amical",
   "dificuldade": "facil",
@@ -150,6 +152,7 @@
  {
   "slug": "delf-a2-nouveau-travail",
   "titulo": "Raconter sa première semaine de travail",
+  "eixo": "trav",
   "nivel": "A2",
   "tipoProducao": "DELF A2 — lettre / courriel",
   "dificuldade": "medio",
@@ -224,6 +227,7 @@
  {
   "slug": "delf-b1-telephone-enfants",
   "titulo": "À quel âge offrir un téléphone à un enfant ?",
+  "eixo": "tech",
   "nivel": "B1",
   "tipoProducao": "DELF B1 — essai / forum",
   "dificuldade": "medio",
@@ -298,6 +302,7 @@
  {
   "slug": "delf-b1-lettre-mairie-parc",
   "titulo": "Écrire à la mairie pour sauver un parc",
+  "eixo": "ville",
   "nivel": "B1",
   "tipoProducao": "DELF B1 — lettre formelle",
   "dificuldade": "medio",
@@ -372,6 +377,7 @@
  {
   "slug": "delf-b1-voyage-seul",
   "titulo": "Voyager seul : une bonne idée ?",
+  "eixo": "voyages",
   "nivel": "B1",
   "tipoProducao": "DELF B1 — article de blog",
   "dificuldade": "medio",
@@ -446,6 +452,7 @@
  {
   "slug": "delf-b2-semaine-quatre-jours",
   "titulo": "La semaine de quatre jours au travail",
+  "eixo": "trav",
   "nivel": "B2",
   "tipoProducao": "DELF B2 — lettre ouverte argumentée",
   "dificuldade": "dificil",
@@ -520,6 +527,7 @@
  {
   "slug": "delf-b2-tourisme-masse",
   "titulo": "Faut-il limiter le tourisme dans les villes historiques ?",
+  "eixo": "voyages",
   "nivel": "B2",
   "tipoProducao": "DELF B2 — article argumenté",
   "dificuldade": "dificil",
@@ -594,6 +602,7 @@
  {
   "slug": "delf-b2-ecole-uniforme",
   "titulo": "L'uniforme scolaire : pour ou contre ?",
+  "eixo": "edu",
   "nivel": "B2",
   "tipoProducao": "DELF B2 — contribution à un débat",
   "dificuldade": "dificil",
@@ -668,6 +677,7 @@
  {
   "slug": "delf-b2-gaspillage-alimentaire",
   "titulo": "Lutter contre le gaspillage alimentaire",
+  "eixo": "alim",
   "nivel": "B2",
   "tipoProducao": "DELF B2 — lettre au courrier des lecteurs",
   "dificuldade": "dificil",

@@ -2,6 +2,7 @@
  {
   "slug": "b1-velo-en-ville",
   "titulo": "Se déplacer à vélo en ville",
+  "eixo": "transports",
   "nivel": "B1",
   "tipoProducao": "Tâche 3 — opinion",
   "dificuldade": "medio",
@@ -75,6 +76,7 @@
  {
   "slug": "b1-experience-marquante",
   "titulo": "Une rencontre qui a compté",
+  "eixo": "relations",
   "nivel": "B1",
   "tipoProducao": "Tâche 2 — récit",
   "dificuldade": "medio",
@@ -148,6 +150,7 @@
  {
   "slug": "b1-lettre-reclamation-hotel",
   "titulo": "Réclamation après un séjour",
+  "eixo": "conso",
   "nivel": "B1",
   "tipoProducao": "Tâche 1 — lettre formelle",
   "dificuldade": "medio",
@@ -221,6 +224,7 @@
  {
   "slug": "b1-apprendre-langue",
   "titulo": "Pourquoi apprendre une langue étrangère ?",
+  "eixo": "edu",
   "nivel": "B1",
   "tipoProducao": "Tâche 3 — opinion",
   "dificuldade": "medio",
@@ -294,6 +298,7 @@
  {
   "slug": "b1-zero-dechet",
   "titulo": "Réduire ses déchets",
+  "eixo": "env",
   "nivel": "B1",
   "tipoProducao": "Tâche 2 — article",
   "dificuldade": "medio",
@@ -367,6 +372,7 @@
  {
   "slug": "b1-choisir-metier",
   "titulo": "Choisir son métier : passion ou salaire ?",
+  "eixo": "trav",
   "nivel": "B1",
   "tipoProducao": "Tâche 3 — opinion",
   "dificuldade": "medio",
@@ -440,6 +446,7 @@
  {
   "slug": "b1-souvenir-voyage",
   "titulo": "Le voyage qui m'a le plus marqué",
+  "eixo": "voyages",
   "nivel": "B1",
   "tipoProducao": "Tâche 2 — récit de blog",
   "dificuldade": "medio",
@@ -513,6 +520,7 @@
  {
   "slug": "b1-ecrans-famille",
   "titulo": "Les écrans à table",
+  "eixo": "tech",
   "nivel": "B1",
   "tipoProducao": "Tâche 3 — opinion",
   "dificuldade": "medio",
@@ -586,6 +594,7 @@
  {
   "slug": "b1-proposer-activite",
   "titulo": "Proposer une activité au club",
+  "eixo": "loisirs",
   "nivel": "B1",
   "tipoProducao": "Tâche 1 — courriel",
   "dificuldade": "medio",
@@ -659,6 +668,7 @@
  {
   "slug": "b1-fete-quartier",
   "titulo": "Une fête de quartier réussie",
+  "eixo": "ville",
   "nivel": "B1",
   "tipoProducao": "Tâche 2 — article",
   "dificuldade": "medio",

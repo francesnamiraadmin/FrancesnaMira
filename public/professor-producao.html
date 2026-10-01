@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<script src="js/htmlSeguro.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Espace professeur — Francês na Mira</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/producao-app.css">
+<link rel="stylesheet" href="css/producao-app-site.css">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg-gradient); background-attachment: fixed; min-height: 100vh; color: var(--text); }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
+</style>
+</head>
+<body style="visibility:hidden;">
+<script>
+  // Espace professeur do Ambiente de Produção (painel da equipe): o mesmo app, aberto no modo professor.
+  window.FNM_ABRIR = "prof";
+  window.FNM_PRONTO = (async function () {
+    const token = localStorage.getItem("token");
+    const res = token ? await fetch("/api/auth/me", { headers: { Authorization: "Bearer " + token } }).catch(() => null) : null;
+    const conta = res && res.ok ? await res.json() : null;
+    if (!conta || (conta.role !== "professor" && conta.role !== "admin")) { window.location.href = conta ? "minha-conta.html" : "login.html"; return new Promise(() => {}); }
+    window.FNM_CURSO = "TCF";
+    document.body.style.visibility = "visible";
+    return { conta, curso: "TCF" };
+  })();
+</script>
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<div class="fnm-app" id="fnm-raiz">
+  <header class="barra fnm-barra">
+    <button class="marca" type="button" onclick="App.irAccueil()" aria-label="Accueil">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="20" cy="20" r="11" fill="none" stroke="#E4C043" stroke-width="2.5"/><circle cx="20" cy="20" r="4" fill="#D51E28"/></svg>
+      <span><b>Espace professeur</b><small id="fnm-curso-rotulo">Ambiente de Produção</small></span>
+    </button>
+    <nav class="barra-nav" id="barra-nav" hidden>
+      <button type="button" onclick="App.irAccueil()">Accueil</button>
+      <button type="button" onclick="App.abrirEcrit()">Production écrite</button>
+      <button type="button" onclick="App.abrirOral()">Production orale</button>
+      <button type="button" onclick="App.abrirDictee()">Dictée</button>
+      <button type="button" onclick="App.abrirModeles()">Modèles écrits</button>
+      <button type="button" onclick="App.abrirSimulados()">Simulados</button>
+      <button type="button" onclick="App.abrirVocab()">Vocabulaire</button>
+      <button type="button" id="nav-attentes" onclick="App.abrirAttentes()">Attentes du professeur</button>
+      <button type="button" id="nav-intro" onclick="App.abrirIntro()" hidden>Introduction</button>
+      <button type="button" id="nav-taches" onclick="App.abrirTarefas()" hidden>Mon espace <span class="selo-nav" id="selo-tarefas" hidden></span></button>
+      <button type="button" id="nav-prof" onclick="App.abrirProf()" hidden>Espace professeur</button>
+      <a class="sair" href="minha-conta.html">Painel da equipe</a>
+    </nav>
+  </header>
+
+  <div id="avisos-globais" class="avisos-globais" hidden></div>
+
+  <main id="app">
+    <section id="tela-accueil" class="tela ativa"><p class="vazio">Chargement de votre espace…</p></section>
+    <section id="tela-liste" class="tela"></section>
+    <section id="tela-modele" class="tela"></section>
+    <section id="tela-axe" class="tela"></section>
+    <section id="tela-outils" class="tela"></section>
+    <section id="tela-epreuve" class="tela"></section>
+    <section id="tela-notes" class="tela"></section>
+    <section id="tela-prof" class="tela"></section>
+    <section id="tela-carnet" class="tela"></section>
+    <section id="tela-taches" class="tela"></section>
+    <section id="tela-atelier" class="tela"></section>
+    <section id="tela-hub" class="tela"></section>
+  </main>
+
+  <div id="dica" class="dica" role="tooltip" hidden></div>
+</div>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script>
+  // Altura da navbar fixa do site → --topo-site (barras fixas do app ficam logo abaixo dela).
+  (function () {
+    var medir = function () { var n = document.getElementById("app-navbar"); if (n) document.documentElement.style.setProperty("--topo-site", n.getBoundingClientRect().height + "px"); };
+    window.addEventListener("resize", medir);
+    if (window.ResizeObserver) new ResizeObserver(medir).observe(document.getElementById("app-navbar"));
+    medir();
+  })();
+</script>
+<script src="js/gasShim.js"></script>
+<script src="js/simuladoAoVivo.js"></script>
+<script src="js/producaoApp.js"></script>
+<script src="js/appShell.js"></script>
+<script src="js/estudoTimerGlobal.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

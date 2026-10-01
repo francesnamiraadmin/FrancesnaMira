@@ -2,6 +2,7 @@
  {
   "slug": "a2-week-end-raconte",
   "titulo": "Raconter un week-end",
+  "eixo": "loisirs",
   "nivel": "A2",
   "tipoProducao": "Tâche 2 — récit court",
   "dificuldade": "facil",
@@ -75,6 +76,7 @@
  {
   "slug": "a2-demander-information",
   "titulo": "Demander des informations sur un cours",
+  "eixo": "edu",
   "nivel": "A2",
   "tipoProducao": "Tâche 1 — courriel",
   "dificuldade": "facil",
@@ -148,6 +150,7 @@
  {
   "slug": "a2-souvenir-enfance",
   "titulo": "Un souvenir d'enfance",
+  "eixo": "fam",
   "nivel": "A2",
   "tipoProducao": "Tâche 2 — récit",
   "dificuldade": "facil",
@@ -221,6 +224,7 @@
  {
   "slug": "a2-remercier-cadeau",
   "titulo": "Remercier pour un cadeau",
+  "eixo": "relations",
   "nivel": "A2",
   "tipoProducao": "Tâche 1 — message",
   "dificuldade": "facil",
@@ -294,6 +298,7 @@
  {
   "slug": "a2-nouvelle-ville",
   "titulo": "Ma nouvelle ville",
+  "eixo": "ville",
   "nivel": "A2",
   "tipoProducao": "Tâche 2 — courriel",
   "dificuldade": "facil",
@@ -367,6 +372,7 @@
  {
   "slug": "a2-annonce-colocation",
   "titulo": "Chercher un colocataire",
+  "eixo": "log",
   "nivel": "A2",
   "tipoProducao": "Tâche 1 — annonce",
   "dificuldade": "facil",
@@ -440,6 +446,7 @@
  {
   "slug": "a2-probleme-commande",
   "titulo": "Un problème avec une commande",
+  "eixo": "conso",
   "nivel": "A2",
   "tipoProducao": "Tâche 1 — courriel de réclamation",
   "dificuldade": "facil",
@@ -513,6 +520,7 @@
  {
   "slug": "a2-fete-traditionnelle",
   "titulo": "Une fête de mon pays",
+  "eixo": "culture",
   "nivel": "A2",
   "tipoProducao": "Tâche 2 — article",
   "dificuldade": "facil",
@@ -586,6 +594,7 @@
  {
   "slug": "a2-conseils-sante",
   "titulo": "Conseils pour être en forme",
+  "eixo": "sante",
   "nivel": "A2",
   "tipoProducao": "Tâche 2 — message de conseils",
   "dificuldade": "facil",
@@ -659,6 +668,7 @@
  {
   "slug": "a2-lettre-futur",
   "titulo": "Mes projets pour l'année prochaine",
+  "eixo": "trav",
   "nivel": "A2",
   "tipoProducao": "Tâche 2 — texte personnel",
   "dificuldade": "facil",

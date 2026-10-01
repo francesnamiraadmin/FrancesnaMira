@@ -43,6 +43,7 @@ router.get("/", exigirAuth, (req, res, next) => {
     if (req.courseType) filtro.courseType = req.courseType;
     else if (courseType) filtro.courseType = courseType;
     if (!(todos === "1" && req.userRole === "admin")) filtro.ativo = true;
+    filtro.catalogo = { $ne: false };
     if (exame) filtro.exame = exame;
     if (nivel) filtro.nivel = nivel;
     if (tipoProducao) filtro.tipoProducao = tipoProducao;

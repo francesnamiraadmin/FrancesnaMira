@@ -1,0 +1,2963 @@
+{
+ "temas": [
+  [
+   "Mots de la semaine",
+   "📅",
+   "La semaine"
+  ],
+  [
+   "Connecteurs logiques",
+   "🔗",
+   "Guide des attentes du professeur"
+  ],
+  [
+   "Expressions de l'argumentation",
+   "✍️",
+   "Guide des attentes du professeur"
+  ],
+  [
+   "Adverbes et locutions",
+   "🧭",
+   "Guide des attentes du professeur"
+  ],
+  [
+   "Formules de la méthode",
+   "🎯",
+   "Guide des attentes du professeur"
+  ],
+  [
+   "Adaptation et interculturalité",
+   "🌍",
+   "Guide des attentes du professeur"
+  ],
+  [
+   "Ville et commerces",
+   "🏙️",
+   "Vocabulaire thématique"
+  ],
+  [
+   "Tâches ménagères",
+   "🧹",
+   "Vocabulaire thématique"
+  ],
+  [
+   "Famille",
+   "👨‍👩‍👧",
+   "Vocabulaire thématique"
+  ],
+  [
+   "Relations",
+   "🤝",
+   "Vocabulaire thématique"
+  ],
+  [
+   "Alimentation",
+   "🥖",
+   "Vocabulaire thématique"
+  ],
+  [
+   "Boissons",
+   "☕",
+   "Vocabulaire thématique"
+  ],
+  [
+   "Politique",
+   "🏛️",
+   "Vocabulaire thématique"
+  ],
+  [
+   "Loisirs et sport",
+   "⚽",
+   "Vocabulaire thématique"
+  ],
+  [
+   "Marché du travail",
+   "💼",
+   "Vocabulaire thématique"
+  ],
+  [
+   "Verbes du 1er groupe",
+   "1️⃣",
+   "Grammaire"
+  ],
+  [
+   "Verbes du 2e groupe",
+   "2️⃣",
+   "Grammaire"
+  ],
+  [
+   "Verbes du 3e groupe",
+   "3️⃣",
+   "Grammaire"
+  ],
+  [
+   "Prépositions",
+   "📍",
+   "Grammaire"
+  ]
+ ],
+ "renomear": {
+  "Hebdomadaire": "Mots de la semaine",
+  "Attentes du professeur": "Formules de la méthode"
+ },
+ "cartas": [
+  [
+   "Mots de la semaine",
+   "avoir besoin de",
+   "precisar de",
+   "J'ai besoin de renseignements sur vos horaires.",
+   "Latim: habere (ter), mesma raiz de « haver » e do inglês have. Besoin vem do frâncico, sem parente latino.\nPortuguês: haver, hábito, hábil (todos de habere)."
+  ],
+  [
+   "Mots de la semaine",
+   "se rendre à",
+   "ir a, dirigir-se a",
+   "Je me rends au travail en métro.",
+   "Latim: reddere (devolver, entregar), que deu « render » e « render-se ». Inglês: render, surrender.\nPortuguês: render-se, rendição, renda (de reddere)."
+  ],
+  [
+   "Mots de la semaine",
+   "prendre rendez-vous",
+   "marcar um horário",
+   "J'aimerais prendre rendez-vous pour jeudi.",
+   "Latim: prehendere (agarrar), que deu « prender » e « apreender ». Inglês: rendezvous (usado igual), comprehend.\nPortuguês: prender, apreender, compreender, presa, empresa (de prehendere)."
+  ],
+  [
+   "Mots de la semaine",
+   "un renseignement",
+   "uma informação",
+   "Pourriez-vous me donner un renseignement ?",
+   "Latim: signum (sinal), que deu « sinal » e « ensinar ». Inglês: sign, signal.\nPortuguês: ensinar, sinal, insígnia, assinar (de signum)."
+  ],
+  [
+   "Mots de la semaine",
+   "il vaut mieux",
+   "é melhor",
+   "Il vaut mieux réserver à l'avance.",
+   "Latim: valere (valer) e melius (melhor). Inglês: value, valid, ameliorate.\nPortuguês: valer, valor, válido; melhor, melhorar (de melius)."
+  ],
+  [
+   "Mots de la semaine",
+   "se débrouiller",
+   "virar-se, dar conta",
+   "Je me débrouille bien en français.",
+   "Origem germânica: brouiller (misturar, embaralhar). Débrouiller = desembaraçar o que está confuso. Inglês: broil (confusão, briga).\nPortuguês: sem parente direto; pense em « desembrulhar » uma situação complicada."
+  ],
+  [
+   "Mots de la semaine",
+   "un quartier",
+   "um bairro",
+   "Mon quartier est calme et bien desservi.",
+   "Latim: quartarius (a quarta parte), de quattuor (quatro). Inglês: quarter (bairro e quarto), como the French Quarter.\nPortuguês: quarto, quarteirão, quartel, quarta-feira (de quartus)."
+  ],
+  [
+   "Mots de la semaine",
+   "déménager",
+   "mudar de casa",
+   "Nous allons déménager à Montréal en juillet.",
+   "Latim: mansio (morada), que deu « mansão ». Inglês: mansion, manor.\nPortuguês: mansão (de mansio, morada)."
+  ],
+  [
+   "Mots de la semaine",
+   "la fenêtre",
+   "a janela",
+   "Ouvre la fenêtre, il fait chaud.",
+   "Latim: fenestra (janela). Inglês: defenestration (o ato de atirar alguém pela janela).\nPortuguês: defenestrar, defenestração (atirar pela janela!), fenestra e fenestração (termos de anatomia e arquitetura)."
+  ],
+  [
+   "Connecteurs logiques",
+   "parce que",
+   "porque",
+   "Je reste à la maison parce que je suis malade.",
+   "Latim: per (por) + causa (motivo). Inglês: because (by + cause), a mesma construção!\nPortuguês: causa, causar, acusar, escusa (de causa).\nCausa. ✓ Básico. Responde à pergunta « pourquoi ? » e vem depois da consequência."
+  ],
+  [
+   "Connecteurs logiques",
+   "comme (cause)",
+   "como (já que), no início da frase",
+   "Comme il pleuvait, nous sommes restés à la maison.",
+   "Latim: quomodo (de que modo), que também deu o português « como ». Inglês: não tem parente direto; o sentido é o de as ou since.\nPortuguês: como (do mesmo quomodo).\nCausa. ✓ Básico. Fica sempre no início da frase, antes da consequência."
+  ],
+  [
+   "Connecteurs logiques",
+   "puisque",
+   "já que (causa evidente)",
+   "Puisque tu es là, aide-moi un peu.",
+   "Latim: post (depois) + quod (que). Inglês: post, como em postpone e postscript.\nPortuguês: pois (do latim post, a mesma origem!), posterior, póstumo.\nCausa. ✓ Causa que o interlocutor já conhece ou que é evidente para ele."
+  ],
+  [
+   "Connecteurs logiques",
+   "car",
+   "pois",
+   "Je dois partir, car il est tard.",
+   "Latim: quare (por que razão). Não tem ligação com o inglês car (automóvel), que vem de carrus.\nPortuguês: sem parente de uso comum; pense em « porque » escrito e formal.\nCausa. ♥ Favorito da professora. Mais escrito que parce que e nunca começa a frase."
+  ],
+  [
+   "Connecteurs logiques",
+   "en effet",
+   "de fato, com efeito",
+   "Le télétravail séduit. En effet, il fait gagner du temps.",
+   "Latim: effectus (resultado, o que foi feito), de ex + facere. Inglês: effect, in effect.\nPortuguês: efeito, efetivo, efetuar, fazer (de facere).\nCausa. ♥ Favorito da professora. Confirma e explica a frase anterior."
+  ],
+  [
+   "Connecteurs logiques",
+   "à cause de",
+   "por causa de (sentido negativo)",
+   "Le vol a été annulé à cause de la tempête.",
+   "Latim: causa (motivo). Inglês: cause, because.\nPortuguês: causa, causar, acusar.\nCausa. Conotação negativa, seguida de substantivo."
+  ],
+  [
+   "Connecteurs logiques",
+   "grâce à",
+   "graças a (sentido positivo)",
+   "Grâce à ton aide, j'ai réussi l'examen.",
+   "Latim: gratia (favor, agradecimento), que deu « graça » e « grátis ». Inglês: grace, grateful, gratitude.\nPortuguês: graça, grátis, gratuito, grato, gratidão, agraciar.\nCausa. Conotação positiva. Pense em « graça »: algo bom que aconteceu."
+  ],
+  [
+   "Connecteurs logiques",
+   "alors",
+   "então",
+   "Il faisait beau, alors nous sommes sortis.",
+   "Latim: ad illam horam (naquela hora). Inglês: hour vem da mesma hora latina.\nPortuguês: hora, agora (hac hora), outrora.\nConsequência. ✓ Básico. Mais usado no oral."
+  ],
+  [
+   "Connecteurs logiques",
+   "donc",
+   "portanto",
+   "Je pense, donc je suis.",
+   "Latim: dunc, forma popular de tunc (então). Inglês: sem parente direto; use therefore.\nPortuguês: então (do latim in tunc, a mesma família).\nConsequência. ✓ Básico. Lembre da frase de Descartes."
+  ],
+  [
+   "Connecteurs logiques",
+   "par conséquent",
+   "consequentemente",
+   "Les loyers augmentent ; par conséquent, les jeunes restent chez leurs parents.",
+   "Latim: consequi (seguir junto), de cum + sequi. Inglês: consequently, sequence, sequel.\nPortuguês: consequência, seguir, sequela, séquito, obséquio.\nConsequência. Registro escrito, ótima para a Tâche 3."
+  ],
+  [
+   "Connecteurs logiques",
+   "de sorte que",
+   "de modo que",
+   "Il a parlé lentement, de sorte que tout le monde a compris.",
+   "Latim: sors, sortis (sorte, destino, maneira). Inglês: sort (tipo, maneira), so that.\nPortuguês: sorte, sortear, sortido, consorte.\nConsequência. Com subjuntivo, passa a indicar finalidade."
+  ],
+  [
+   "Connecteurs logiques",
+   "si bien que",
+   "tanto que, de modo que",
+   "Il a beaucoup neigé, si bien que les écoles ont fermé.",
+   "Latim: sic (assim) e bene (bem). Inglês: benefit, benevolent.\nPortuguês: assim (de ad sic), bem, benefício, benévolo.\nConsequência. ♥ Favorito da professora. Sempre com indicativo."
+  ],
+  [
+   "Connecteurs logiques",
+   "c'est la raison pour laquelle",
+   "é por isso que (escrito)",
+   "Le coût de la vie augmente. C'est la raison pour laquelle les familles dépensent moins.",
+   "Latim: ratio (cálculo, razão). Inglês: reason, rational, ratio.\nPortuguês: razão, racional, ração (também de ratio: a porção calculada!).\nConsequência. Versão elegante de « c'est pourquoi », ideal na escrita."
+  ],
+  [
+   "Connecteurs logiques",
+   "c'est pourquoi",
+   "é por isso que",
+   "Je veux immigrer au Canada, c'est pourquoi j'apprends le français.",
+   "Latim: pro (por) + quid (o quê), literalmente « por quê ». Inglês: why, quid pro quo.\nPortuguês: por quê, quiproquó (de quid pro quo).\nConsequência. ♥ Favorito da professora. Consequência clara e elegante."
+  ],
+  [
+   "Connecteurs logiques",
+   "c'est pour ça que",
+   "é por isso que (oral)",
+   "J'étais fatigué, c'est pour ça que je suis rentré.",
+   "Latim: pro (por) e ecce hoc (eis isto), que virou ça. Inglês: that's why.\nPortuguês: eis (de ecce), isso.\nConsequência. Oral e familiar: evite na escrita formal."
+  ],
+  [
+   "Connecteurs logiques",
+   "pour faire face à cet enjeu, il est crucial que",
+   "para enfrentar esse desafio, é crucial que",
+   "Pour faire face à cet enjeu, il est crucial que l'État investisse dans l'éducation.",
+   "Latim: facies (rosto) e crux, crucis (cruz, encruzilhada decisiva). Inglês: face, crucial, crux.\nPortuguês: face, fachada, faceta; cruz, crucial, encruzilhada, cruzada.\nFinalidade. Depois de « il est crucial que », o verbo vai no subjuntivo."
+  ],
+  [
+   "Connecteurs logiques",
+   "mais",
+   "mas",
+   "C'est cher, mais c'est pratique.",
+   "Latim: magis (mais). O « mais » virou « mas » também em português. Inglês: magistrate, majority (mesma família de magis).\nPortuguês: mais e mas (os dois vêm de magis!), magistério, magistrado.\nOposição. ✓ Básico."
+  ],
+  [
+   "Connecteurs logiques",
+   "en revanche",
+   "em compensação, por outro lado",
+   "Le loyer est cher ; en revanche, le quartier est calme.",
+   "Latim: vindicare (vingar, reivindicar). Inglês: revenge, vindicate.\nPortuguês: vingança, vingar, vindicar, reivindicar.\nOposição. Registro cuidado. « Par contre » diz o mesmo, mais oral."
+  ],
+  [
+   "Connecteurs logiques",
+   "par contre",
+   "por outro lado",
+   "J'aime la ville, par contre je déteste le bruit.",
+   "Latim: contra (contra). Inglês: contrary, contrast, counter.\nPortuguês: contra, contrário, contraste, encontro, contrariar.\nOposição. Registro neutro."
+  ],
+  [
+   "Connecteurs logiques",
+   "tandis que / alors que",
+   "enquanto (comparação)",
+   "Mon frère aime la ville, tandis que je préfère la campagne.",
+   "Latim: tamdiu (por tanto tempo). Inglês: while; a ideia é « durante o tempo em que ».\nPortuguês: tanto, tão (de tam), tamanho.\nOposição. Compara duas situações que acontecem ao mesmo tempo."
+  ],
+  [
+   "Connecteurs logiques",
+   "pourtant",
+   "no entanto",
+   "Il a beaucoup étudié, pourtant il a échoué.",
+   "Latim: pro (por) + tantum (tanto). Inglês: yet, however; tantamount vem da mesma raiz tantum.\nPortuguês: portanto (mesma formação pour + tant). Cuidado: falso amigo! Pourtant = no entanto, e não portanto.\nConcessão. ✓ Básico. A realidade contraria o que se esperava."
+  ],
+  [
+   "Connecteurs logiques",
+   "néanmoins",
+   "não obstante, contudo",
+   "Le projet est ambitieux ; néanmoins, il reste réalisable.",
+   "Latim: nec (nem) + minus (menos): « nem por isso menos ». Inglês: nevertheless, none the less, a mesma lógica!\nPortuguês: nem, menos, menor, minúsculo, diminuir (de minus).\nConcessão. ♥ Favorito da professora. Abre a antítese na Tâche 3."
+  ],
+  [
+   "Connecteurs logiques",
+   "cependant",
+   "entretanto, contudo",
+   "Cette mesure est utile. Cependant, elle coûte cher.",
+   "Latim: pendere (pender, estar suspenso): « isso estando pendente ». Inglês: pending, pendant.\nPortuguês: pender, pendente, pêndulo, depender, suspender.\nConcessão. Registro formal."
+  ],
+  [
+   "Connecteurs logiques",
+   "toutefois",
+   "todavia",
+   "Le télétravail a des avantages ; toutefois, il isole les salariés.",
+   "Latim: totus (todo) + vicis (vez): « todas as vezes ». Inglês: total e vice (em vice-versa).\nPortuguês: todo, total, vez, vicissitude, vice-versa.\nConcessão. Formal, sinônimo de cependant."
+  ],
+  [
+   "Connecteurs logiques",
+   "bien que",
+   "embora (+ subjuntivo)",
+   "Bien qu'il soit riche, il vit simplement.",
+   "Latim: bene (bem) + quod (que). Inglês: although; bene está em benefit, benefactor.\nPortuguês: bem, benfeitor, bendito, benévolo.\nConcessão. Sempre com subjuntivo, exatamente como « embora »."
+  ],
+  [
+   "Connecteurs logiques",
+   "malgré",
+   "apesar de",
+   "Malgré la pluie, nous sommes sortis.",
+   "Latim: malum (mal) + gratum (agradável): « mal grado ». Inglês: malgré lui é usado às vezes; malice, malign.\nPortuguês: malgrado (existe em português: apesar de!), mal, grado, agradar.\nConcessão. Seguido de substantivo, nunca de verbo conjugado."
+  ],
+  [
+   "Connecteurs logiques",
+   "de plus",
+   "além disso",
+   "Ce logement est grand. De plus, il est bien situé.",
+   "Latim: plus (mais). Inglês: plus (o sinal +), surplus.\nPortuguês: plus (um plus), plural, pluralidade.\nAdição. ✓ Básico. Acrescenta um argumento."
+  ],
+  [
+   "Connecteurs logiques",
+   "en plus",
+   "além disso (mais oral)",
+   "En plus, il fait beau aujourd'hui.",
+   "Latim: plus (mais). Inglês: plus, plural.\nPortuguês: plus (dar um plus), plural, pluralidade.\nAdição. ✓ Básico. Mesmo sentido de de plus, mais usado no oral."
+  ],
+  [
+   "Connecteurs logiques",
+   "en outre",
+   "além disso (formal)",
+   "En outre, cette mesure protège l'environnement.",
+   "Latim: ultra (além). Inglês: ultra, outrage (passar do limite).\nPortuguês: ultra, ultrapassar, ultramar, ultrajar.\nAdição. ♥ Favorito da professora. Registro formal."
+  ],
+  [
+   "Connecteurs logiques",
+   "de surcroît",
+   "além do mais (muito formal)",
+   "De surcroît, le petit déjeuner n'a jamais été servi.",
+   "Latim: super (acima) + crescere (crescer): um acréscimo por cima. Inglês: increase, crescent.\nPortuguês: crescer, acréscimo, crescente, excrescência.\nAdição. ♥ Favorito da professora. Pense em « acréscimo »."
+  ],
+  [
+   "Connecteurs logiques",
+   "d'ailleurs",
+   "aliás",
+   "Je connais bien Lyon ; d'ailleurs, j'y ai vécu deux ans.",
+   "Latim: aliorsum (em outra direção), de alius (outro). Inglês: alias, alien.\nPortuguês: aliás (do latim alias, a mesma raiz!), alheio, alienar, alienígena.\nAdição. Registro sobretudo de cartas e textos pessoais."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "il s'agit de",
+   "trata-se de",
+   "Il s'agit d'un enjeu majeur pour notre société.",
+   "Latim: agere (agir, conduzir, tratar). Inglês: act, agent, agenda.\nPortuguês: agir, agente, ágil, agenda, ação.\nImpessoal: sempre « il s'agit », nunca « elle s'agit »."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "aborder (un sujet)",
+   "abordar (um tema)",
+   "Ce texte aborde la question du logement.",
+   "Origem germânica: bord (borda do navio). Abordar = chegar ao lado do navio. Inglês: board, aboard.\nPortuguês: borda, bordo, abordar, transbordar, bordejar.\nMesma ideia de abordar um navio: chegar perto do assunto."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "qui porte sur / portant sur",
+   "que trata de",
+   "Le débat portant sur le télétravail suscite de vives discussions.",
+   "Latim: portare (carregar, levar). Inglês: portable, transport, import.\nPortuguês: portar, porte, portátil, transporte, importar, suporte.\nApresenta o tema de um texto ou debate."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "évoquer",
+   "evocar, mencionar",
+   "L'auteur évoque les difficultés des jeunes.",
+   "Latim: evocare (chamar para fora), de vox (voz). Inglês: evoke, vocal, voice.\nPortuguês: evocar, invocar, vocação, voz, vocal, vocabulário.\nMesma raiz de « evocar », chamar à memória."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "susciter",
+   "suscitar, provocar",
+   "Cette décision suscite de nombreuses critiques.",
+   "Latim: suscitare (levantar, despertar). Inglês: resuscitate (ressuscitar).\nPortuguês: suscitar, ressuscitar, excitar, citar.\nMuito usado com débat, intérêt, inquiétude."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "mentionner",
+   "mencionar",
+   "Le document mentionne plusieurs chiffres.",
+   "Latim: mentio (lembrança, menção), de mens (mente). Inglês: mention, mental.\nPortuguês: menção, mente, mental, comentar, demente.\nCognato direto do português."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "saisir",
+   "compreender, aproveitar",
+   "Il faut saisir cette occasion.",
+   "Origem germânica (frâncico sazjan, pôr, tomar posse). Inglês: seize, seizure.\nPortuguês: sem parente latino (origem germânica); pense em « agarrar » uma ideia.\nSentido de agarrar: uma ideia (entender) ou uma chance (aproveitar)."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "mener à",
+   "levar a",
+   "Cette politique peut mener à des inégalités.",
+   "Latim: minare (tocar o gado para frente). Inglês: menace e amenable têm a mesma raiz.\nPortuguês: ameaça (de minacia, da mesma família de minari).\nO caminho que conduz a um resultado."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "aboutir à",
+   "resultar em, culminar em",
+   "Les négociations ont abouti à un accord.",
+   "Origem germânica: bout (ponta, extremidade). Aboutir = chegar à ponta. Inglês: butt (a ponta), abut.\nPortuguês: botão (do francês bouton, da mesma raiz de bout, ponta).\nChegar ao fim (au bout) de um processo."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "cela représente",
+   "isso representa",
+   "Cela représente un défi pour les familles.",
+   "Latim: repraesentare (tornar presente de novo). Inglês: represent, present.\nPortuguês: representar, presente, presença, apresentar.\nÚtil para comentar um dado ou um fato."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "constituer",
+   "constituir",
+   "Le chômage constitue un problème majeur.",
+   "Latim: constituere (estabelecer, montar), de cum + statuere (colocar de pé). Inglês: constitute, constitution, statue.\nPortuguês: constituição, instituir, estátua, estatuto, restituir.\nFormal, substitui « être » e enriquece o texto."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "consister à",
+   "consistir em",
+   "Mon travail consiste à accueillir les clientes.",
+   "Latim: consistere (ficar firme), de cum + sistere (parar). Inglês: consist, consistent.\nPortuguês: consistir, consistente, insistir, existir, resistir (todos de sistere).\nCom verbo no infinitivo: consister à + verbo."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "prendre conscience de",
+   "tomar consciência de",
+   "Les citoyens prennent conscience de l'urgence climatique.",
+   "Latim: conscientia (saber junto), de cum + scire (saber). Inglês: conscious, science.\nPortuguês: consciência, ciência, cônscio, inconsciente.\nExpressão fixa, muito útil na Tâche 3."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "mettre en place",
+   "implementar, pôr em prática",
+   "La ville a mis en place un nouveau service.",
+   "Latim: mittere (enviar, soltar) e platea (praça larga). Inglês: place, plaza, permit.\nPortuguês: meter (de mittere!), remeter, missão, prometer; praça (de platea).\nColocar no lugar: criar e fazer funcionar."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "mettre en évidence",
+   "evidenciar",
+   "L'étude met en évidence une hausse des prix.",
+   "Latim: evidens (que se vê claramente), de videre (ver). Inglês: evident, evidence, video.\nPortuguês: evidência, evidente, ver, visão, vídeo.\nColocar em evidência, mostrar claramente."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "mettre en avant",
+   "destacar",
+   "Il convient de mettre en avant les bénéfices du sport.",
+   "Latim: ab ante (de diante). Inglês: advance, advantage.\nPortuguês: avante, avançar, vantagem, diante.\nColocar na frente: dar destaque."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "vu que",
+   "visto que",
+   "Vu que le magasin est fermé, revenons demain.",
+   "Latim: videre (ver), particípio visum. Inglês: view, vision, visible.\nPortuguês: visto, vista, visão, visível.\nCausa, equivalente a puisque."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "étant donné que",
+   "dado que",
+   "Étant donné que les prix augmentent, il faut économiser.",
+   "Latim: stare (estar de pé) e donare (dar). Inglês: status, donate, given that.\nPortuguês: estar, estado, estável; dado, doar, doação, dom.\nCausa em registro formal."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "subir",
+   "sofrer, ser submetido a",
+   "Les habitants subissent le bruit de l'autoroute.",
+   "Latim: subire (ir por baixo, sofrer). Inglês: submit, subject (quem está por baixo de algo).\nPortuguês: subir vem do mesmo subire, mas em francês significa sofrer. Falso amigo! Sub aparece em submeter, súdito.\nFalso amigo: subir em francês não é « subir », é sofrer algo."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "faire face à ce défi",
+   "enfrentar esse desafio",
+   "Pour faire face à ce défi, il faut agir ensemble.",
+   "Latim: facies (rosto) e diffidare (desconfiar, desafiar). Inglês: face, defy, defiance.\nPortuguês: face, desafio, desafiar, fiar, confiar.\nFace = rosto: encarar de frente."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "face à cette réalité",
+   "diante dessa realidade",
+   "Face à cette réalité, les écoles s'adaptent.",
+   "Latim: facies (rosto) e res (coisa, realidade). Inglês: face, reality, real.\nPortuguês: realidade, real, república (res publica, a coisa pública).\nÓtimo começo de parágrafo na escrita."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "issu(e) de",
+   "proveniente de, oriundo de",
+   "Ces produits sont issus de l'agriculture locale.",
+   "Latim: exire (sair), de ex + ire. Inglês: issue, exit.\nPortuguês: êxito (de exitus, a saída), exit.\nParticípio de « issir », sair de."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "parvenir à",
+   "conseguir, chegar a",
+   "Il est parvenu à trouver un emploi.",
+   "Latim: pervenire (chegar até o fim), de per + venire (vir). Inglês: parvenu (novo-rico), event, venue.\nPortuguês: provir, advir, porvir, evento, convenção.\nChegar ao objetivo depois de esforço."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "la hausse",
+   "o aumento, a alta",
+   "On observe une hausse du chômage.",
+   "Latim: altus (alto), que deu hausser (levantar). Inglês: altitude, exalt.\nPortuguês: alto, altura, exaltar, altitude, altar.\nO contrário é « la baisse »."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "l'accroissement",
+   "o crescimento, o aumento",
+   "L'accroissement de la population pose problème.",
+   "Latim: crescere (crescer). Inglês: increase, crescent, crescendo.\nPortuguês: crescer, acréscimo, crescimento, excrescência.\nVem de « croître », crescer."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "croître",
+   "crescer",
+   "Le nombre d'étudiants ne cesse de croître.",
+   "Latim: crescere (crescer). Inglês: crescent, crescendo, increase.\nPortuguês: crescer, crescente, crescendo, acrescentar.\nFormal. Mesma família de « crescer » e « acréscimo »."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "prôner",
+   "defender, preconizar",
+   "Ce parti prône la réduction des impôts.",
+   "Vem de prône, o sermão lido na missa: pregar uma ideia em público. Inglês: preach tem o mesmo sentido (não a mesma raiz).\nPortuguês: sem parente direto; pense em « pregar » uma ideia.\nDefender publicamente uma ideia."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "remettre en question",
+   "pôr em questão",
+   "Cette étude remet en question nos habitudes.",
+   "Latim: mittere (enviar) e quaestio (busca, pergunta), de quaerere (procurar). Inglês: question, quest, query.\nPortuguês: questão, questionar, inquérito, requerer, querer (todos de quaerere!).\nSinônimo: remettre en cause."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "axé sur",
+   "focado em",
+   "Un programme axé sur la santé.",
+   "Latim: axis (eixo). Inglês: axis, axle.\nPortuguês: eixo, axial, áxis.\nAxe = eixo: organizado em torno de um eixo."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "ancré dans",
+   "enraizado em",
+   "Une tradition ancrée dans la culture québécoise.",
+   "Latim: ancora (âncora), do grego. Inglês: anchor, anchored.\nPortuguês: âncora, ancorar, ancoradouro.\nAncre = âncora: bem fixado."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "percevoir",
+   "perceber",
+   "Le télétravail est perçu comme un avantage.",
+   "Latim: percipere (captar inteiramente), de per + capere (pegar). Inglês: perceive, perception, capture.\nPortuguês: perceber, receber, conceber, capturar, cativo (de capere).\nMuito usado na voz passiva: être perçu comme."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "le biais",
+   "o viés",
+   "Cette étude présente un biais.",
+   "Origem provável: provençal biais (oblíquo). Inglês: bias, a mesma palavra.\nPortuguês: viés (a mesma palavra, pelo provençal).\nTambém « par le biais de »: por meio de."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "pousser à",
+   "levar a, incentivar",
+   "La crise pousse les jeunes à partir.",
+   "Latim: pulsare (empurrar, bater). Inglês: push, pulse.\nPortuguês: pulso, pulsar, impulso, expulsar, repulsa.\nEmpurrar alguém a fazer algo."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "fournir",
+   "fornecer",
+   "L'entreprise fournit un ordinateur à ses salariés.",
+   "Origem germânica (frâncico frumjan, executar). Inglês: furnish, furniture.\nPortuguês: fornecer, fornecedor, fornido.\nCognato de fornecer. Verbo do 2º grupo: nous fournissons."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "garantir",
+   "garantir",
+   "La loi garantit l'égalité des chances.",
+   "Origem germânica (frâncico warjan, proteger). Inglês: guarantee, warrant: o « w » germânico virou « g » em francês.\nPortuguês: garantia, garante.\nCognato direto."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "la livraison",
+   "a entrega",
+   "La livraison est gratuite dès 50 dollars.",
+   "Latim: liberare (libertar, entregar), de liber (livre). Inglês: deliver, delivery, liberty.\nPortuguês: livrar, livre, liberdade, libertar, deliberar.\nVem de « livrer », entregar."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "envisager de",
+   "considerar, planejar",
+   "J'envisage de m'installer à Québec.",
+   "Latim: visus (rosto, aspecto), de videre (ver). Inglês: envisage, envision, visage.\nPortuguês: visagem (careta!), visão, visual, visar.\nEncarar uma possibilidade futura."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "avoir l'intention de",
+   "ter a intenção de",
+   "J'ai l'intention de reprendre mes études.",
+   "Latim: intendere (estender em direção a, visar). Inglês: intention, intend.\nPortuguês: intenção, intento, tender, tensão, entender.\nMuito útil na Tâche 2 para explicar seus planos."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "songer à",
+   "pensar em",
+   "Elle songe à changer de métier.",
+   "Latim: somniare (sonhar), de somnium (sonho). Inglês: insomnia tem a mesma raiz somnus.\nPortuguês: sonho, sonhar, sono, insônia, sonâmbulo.\nSonge = sonho: pensar em algo, imaginar."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "toucher (concerner)",
+   "afetar, dizer respeito a",
+   "Ce problème touche surtout les jeunes.",
+   "Latim popular: toccare (bater, tocar). Inglês: touch.\nPortuguês: tocar, toque, intocável, retocar.\nTocar alguém: atingir, afetar."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "répandu",
+   "difundido, comum",
+   "C'est une idée très répandue.",
+   "Latim: expandere (estender, espalhar). Inglês: expand, expanse.\nPortuguês: expandir, expansão, expandido.\nVem de « répandre », espalhar."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "constater",
+   "constatar",
+   "On constate une baisse des ventes.",
+   "Latim: constat (é certo, consta), de cum + stare. Inglês: constant, constat (termo jurídico).\nPortuguês: constatar, constar, constante, custar (de constare!).\nCognato direto, ótimo para apresentar dados."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "une approche",
+   "uma abordagem",
+   "Il faut une approche plus humaine.",
+   "Latim: appropiare (aproximar), de prope (perto). Inglês: approach, proximity.\nPortuguês: próximo, aproximar, propínquo (raro: vizinho, próximo).\nAproximar-se de um problema."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "incontournable",
+   "incontornável, indispensável",
+   "Le numérique est devenu incontournable.",
+   "Latim: tornare (tornear, girar). Inglês: turn, tour, tournament.\nPortuguês: contornar, torno, tornar, torneio, retorno.\nO que não se pode contornar."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "dû à",
+   "devido a",
+   "Le retard est dû à la neige.",
+   "Latim: debere (dever). Inglês: due, due to, debt.\nPortuguês: devido, dever, dívida, débito.\nParticípio de devoir: dû, due, dus, dues."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "demeurer",
+   "permanecer",
+   "Le problème demeure entier.",
+   "Latim: demorari (demorar, permanecer). Inglês: demur (hesitar) e sojourn na ideia.\nPortuguês: demorar, demora, morar, morada (de morari).\nFormal, sinônimo de rester. Pense em « morada »."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "surmonter",
+   "superar (um obstáculo)",
+   "Elle a surmonté ses difficultés.",
+   "Latim: super (acima) + mons, montis (monte). Inglês: surmount, mount, mountain.\nPortuguês: monte, montanha, montar, remontar.\nSubir por cima (sur + monter) de um obstáculo."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "surpasser",
+   "superar, ultrapassar",
+   "Les résultats ont surpassé nos attentes.",
+   "Latim: super (acima) + passus (passo). Inglês: surpass, pass.\nPortuguês: passar, passo, ultrapassar, passagem.\nPassar por cima: ir além."
+  ],
+  [
+   "Expressions de l'argumentation",
+   "franchir",
+   "transpor, atravessar",
+   "Il a franchi une étape importante.",
+   "De franc (livre), da origem germânica do nome dos francos. Inglês: frank, franchise (liberdade de passar).\nPortuguês: franco, franquia, franquear (liberar a passagem).\nAtravessar um limite ou uma fronteira."
+  ],
+  [
+   "Adverbes et locutions",
+   "apparemment",
+   "aparentemente",
+   "Apparemment, le magasin est fermé.",
+   "Latim: apparere (aparecer). Inglês: apparently, appear.\nPortuguês: aparecer, aparente, aparição, aparência.\nCognato direto."
+  ],
+  [
+   "Adverbes et locutions",
+   "la quête",
+   "a busca",
+   "La quête du bonheur.",
+   "Latim: quaerere (procurar), particípio quaesitum. Inglês: quest, question, request.\nPortuguês: questão, conquista, inquérito, requerer, querer (de quaerere).\nMesma raiz de « conquista » e do inglês quest."
+  ],
+  [
+   "Adverbes et locutions",
+   "effectivement",
+   "efetivamente, de fato",
+   "Effectivement, vous avez raison.",
+   "Latim: effectus (efeito, resultado). Inglês: effectively, effect.\nPortuguês: efetivamente, efeito, efetivo.\nConfirma o que foi dito."
+  ],
+  [
+   "Adverbes et locutions",
+   "sûrement",
+   "certamente, provavelmente",
+   "Il viendra sûrement demain.",
+   "Latim: securus (sem preocupação), de se + cura. Inglês: surely, sure, secure.\nPortuguês: seguro, segurança, assegurar (de securus).\nVem de sûr, seguro."
+  ],
+  [
+   "Adverbes et locutions",
+   "notamment",
+   "notadamente, em especial",
+   "Plusieurs pays, notamment le Canada.",
+   "Latim: notare (marcar, notar), de nota (sinal). Inglês: notably, note, notice.\nPortuguês: notar, nota, notável, notório, anotar.\nIntroduz um exemplo em destaque."
+  ],
+  [
+   "Adverbes et locutions",
+   "surtout",
+   "sobretudo",
+   "J'aime les fruits, surtout les fraises.",
+   "Latim: super (acima) + totus (tudo). Inglês: total, super.\nPortuguês: sobretudo (a mesma construção: sobre + tudo!).\nSur + tout: acima de tudo."
+  ],
+  [
+   "Adverbes et locutions",
+   "nuisible",
+   "nocivo, prejudicial",
+   "Le tabac est nuisible à la santé.",
+   "Latim: nocere (prejudicar). Inglês: nuisance, innocent (o que não prejudica).\nPortuguês: nocivo, inócuo, nocividade.\nVem de « nuire », prejudicar."
+  ],
+  [
+   "Adverbes et locutions",
+   "nuire à",
+   "prejudicar",
+   "Le bruit nuit à la concentration.",
+   "Latim: nocere (prejudicar). Inglês: nuisance, noxious, innocent.\nPortuguês: nocivo, inócuo (o que não faz mal).\nSempre com « à »: nuire à quelqu'un."
+  ],
+  [
+   "Adverbes et locutions",
+   "autrement",
+   "de outro modo, senão",
+   "Dépêche-toi, autrement tu seras en retard.",
+   "Latim: alter (outro entre dois). Inglês: alter, alternative.\nPortuguês: outro (de alterum!), alterar, alternativa, altruísmo.\nAutre + ment: de outra maneira."
+  ],
+  [
+   "Adverbes et locutions",
+   "au-delà de",
+   "além de",
+   "Au-delà de l'aspect financier, il y a l'aspect humain.",
+   "Latim: de illac (de lá). Inglês: beyond; a ideia é « do lado de lá ».\nPortuguês: lá (de illac, a mesma origem!).\nÓtimo para ampliar um argumento."
+  ],
+  [
+   "Adverbes et locutions",
+   "forcément",
+   "necessariamente",
+   "Ce n'est pas forcément vrai.",
+   "Latim: fortia (força), de fortis (forte). Inglês: force, forcibly, fort.\nPortuguês: força, forçosamente, forte, fortaleza, esforço.\nVem de « force »: por força, obrigatoriamente."
+  ],
+  [
+   "Adverbes et locutions",
+   "c'est-à-dire",
+   "ou seja",
+   "Il est bilingue, c'est-à-dire qu'il parle deux langues.",
+   "Latim: dicere (dizer). Inglês: that is to say; dicere está em dictate, dictionary.\nPortuguês: dizer, dito, ditado, dicionário, predizer.\nExplica ou reformula."
+  ],
+  [
+   "Adverbes et locutions",
+   "par rapport à",
+   "em relação a",
+   "Les prix ont augmenté par rapport à l'an dernier.",
+   "Latim: reportare (trazer de volta). Inglês: report, rapport (relação de harmonia).\nPortuguês: reportar, reportagem, aporte, portar.\nCompara duas coisas."
+  ],
+  [
+   "Adverbes et locutions",
+   "à l'égard de",
+   "em relação a, para com",
+   "Il est gentil à l'égard de ses voisins.",
+   "Origem germânica: garder (vigiar, olhar), de wardon. Inglês: regard, with regard to, guard.\nPortuguês: guarda, guardar, aguardar, resguardo (origem germânica).\nFormal. Pense em « olhar para »."
+  ],
+  [
+   "Adverbes et locutions",
+   "en ce qui concerne",
+   "no que diz respeito a",
+   "En ce qui concerne le logement, la situation est difficile.",
+   "Latim: concernere (peneirar junto, dizer respeito). Inglês: concerning, concern.\nPortuguês: concernir e concernente (existem!), no que concerne.\nIntroduz o tema de um parágrafo."
+  ],
+  [
+   "Adverbes et locutions",
+   "concernant",
+   "sobre, a respeito de",
+   "J'ai une question concernant votre offre.",
+   "Latim: concernere (dizer respeito). Inglês: concerning, concern.\nPortuguês: concernente, concernir.\nMuito útil na Tâche 2."
+  ],
+  [
+   "Adverbes et locutions",
+   "voire",
+   "e até mesmo",
+   "Cela prendra des mois, voire des années.",
+   "Latim: vera (coisas verdadeiras), de verus (verdadeiro). Inglês: very, verify, verdict.\nPortuguês: verdade, vero, verídico, veredito, verificar.\nReforça: vai além do que foi dito."
+  ],
+  [
+   "Adverbes et locutions",
+   "quoique",
+   "embora (+ subjuntivo)",
+   "Quoiqu'il soit tard, je continue.",
+   "Latim: quid (o quê) + quod (que). Inglês: quid pro quo; o sentido é although.\nPortuguês: que, quê (de quid).\nJunto = embora. Separado (quoi que) = o que quer que."
+  ],
+  [
+   "Adverbes et locutions",
+   "cibler",
+   "mirar, ter como alvo",
+   "Cette campagne cible les jeunes.",
+   "Vem de cible (alvo), do suíço-alemão schibe (disco de tiro). Inglês: target no sentido. Cible é bem Français na Mira!\nPortuguês: sem parente; pense em « alvo », o centro da mira.\nCible = alvo. Bem Français na Mira!"
+  ],
+  [
+   "Adverbes et locutions",
+   "lors de",
+   "durante, por ocasião de",
+   "Lors de mon séjour à Paris, j'ai visité le Louvre.",
+   "Latim: illa hora (naquela hora). Inglês: hour tem a mesma origem hora.\nPortuguês: hora, agora, outrora (de hora).\nSeguido de substantivo."
+  ],
+  [
+   "Adverbes et locutions",
+   "lorsque",
+   "quando",
+   "Lorsque je suis arrivé, il pleuvait.",
+   "Latim: illa hora (naquela hora) + que. Inglês: hour; o sentido é when.\nPortuguês: hora, agora, outrora.\nMais formal que quand, seguido de verbo."
+  ],
+  [
+   "Adverbes et locutions",
+   "or",
+   "ora, porém",
+   "Il voulait venir. Or, il était malade.",
+   "Latim: hac hora (nesta hora, agora). Inglês: hour tem a mesma origem.\nPortuguês: agora (de hac hora, a mesma origem!), ora.\nIntroduz um dado que muda o raciocínio."
+  ],
+  [
+   "Adverbes et locutions",
+   "permettant ainsi",
+   "permitindo assim",
+   "Le métro relie les quartiers, permettant ainsi de réduire la pollution.",
+   "Latim: permittere (deixar passar), de per + mittere. Inglês: permit, permission.\nPortuguês: permitir, permissão, remeter, meter.\nFecha uma frase mostrando a consequência positiva."
+  ],
+  [
+   "Adverbes et locutions",
+   "ainsi que",
+   "bem como",
+   "Les enfants ainsi que les parents sont invités.",
+   "Latim: in sic (assim). Inglês: as well as; sic aparece em textos citados.\nPortuguês: assim (de ad sic), sic.\nAcrescenta um elemento."
+  ],
+  [
+   "Adverbes et locutions",
+   "davantage",
+   "mais (em maior quantidade)",
+   "Il faut investir davantage dans l'éducation.",
+   "Vem de avantage, do latim ab ante (de diante). Inglês: advantage. Escreve-se junto: davantage.\nPortuguês: vantagem, avante, avançar.\nEscreve-se junto: davantage. « d'avantage » é outra coisa."
+  ],
+  [
+   "Adverbes et locutions",
+   "à l'instar de",
+   "a exemplo de",
+   "À l'instar du Canada, d'autres pays accueillent des immigrants.",
+   "Latim: instar (semelhança, equivalente). Inglês: sem parente comum; o sentido é like, following the example of.\nPortuguês: sem parente de uso comum; pense em « a exemplo de ».\nFormal: como, seguindo o exemplo de."
+  ],
+  [
+   "Adverbes et locutions",
+   "autrefois",
+   "antigamente",
+   "Autrefois, on écrivait des lettres.",
+   "Latim: alter (outro) + vicis (vez): « outra vez, em outros tempos ». Inglês: alternative, vice versa.\nPortuguês: outrora (outra hora: a mesma ideia!), outro, vez.\nOutra vez, em outros tempos."
+  ],
+  [
+   "Adverbes et locutions",
+   "en guise de",
+   "à guisa de, como",
+   "En guise de conclusion, je dirais que…",
+   "Origem germânica: wisa (maneira). Inglês: guise (aparência, disfarce), wise (maneira, como em likewise).\nPortuguês: guisa (« à guisa de » existe em português!), guisar.\nServe como, faz o papel de."
+  ],
+  [
+   "Adverbes et locutions",
+   "en raison de",
+   "em razão de",
+   "Le match est annulé en raison de la pluie.",
+   "Latim: ratio (cálculo, razão). Inglês: reason, by reason of.\nPortuguês: razão, em razão de, ração, racional.\nCausa, formal, seguido de substantivo."
+  ],
+  [
+   "Adverbes et locutions",
+   "désormais",
+   "a partir de agora, doravante",
+   "Désormais, les magasins ferment à 20 h.",
+   "Latim: de ex ipsa hora + magis: « desta hora em diante ». Inglês: hour; o sentido é from now on.\nPortuguês: doravante (de hora avante: a mesma construção!), hora, mais.\n♥ Favorito da professora. Marca uma mudança."
+  ],
+  [
+   "Adverbes et locutions",
+   "plutôt que",
+   "em vez de",
+   "Je préfère marcher plutôt que prendre le bus.",
+   "Latim: plus (mais) + tostum (torrado, rápido): « mais cedo, antes ». Inglês: rather than; plus em surplus.\nPortuguês: plus, tostar, tostado (de tostum).\nCompara duas escolhas."
+  ],
+  [
+   "Adverbes et locutions",
+   "plutôt",
+   "de preferência, um tanto",
+   "Il fait plutôt froid aujourd'hui.",
+   "Latim: plus (mais) + tostum (rápido): « antes, de preferência ». Inglês: rather; plus em plural.\nPortuguês: plus, tostar (de tostum).\nIndica tendência ou preferência."
+  ],
+  [
+   "Adverbes et locutions",
+   "ainsi",
+   "assim, desta forma",
+   "Ainsi, nous pourrons économiser de l'argent.",
+   "Latim: in sic (assim). Inglês: thus; sic aparece em citações.\nPortuguês: assim (de ad sic).\nResume ou conclui."
+  ],
+  [
+   "Adverbes et locutions",
+   "constamment",
+   "constantemente",
+   "Les prix changent constamment.",
+   "Latim: constans (firme, que fica de pé), de cum + stare. Inglês: constantly, constant.\nPortuguês: constante, constância, constar, estar.\nCognato direto."
+  ],
+  [
+   "Adverbes et locutions",
+   "en permanence",
+   "permanentemente",
+   "Les caméras filment en permanence.",
+   "Latim: permanere (ficar até o fim), de per + manere. Inglês: permanent, remain, mansion.\nPortuguês: permanecer, permanente, remanescente, mansão (de manere).\nO tempo todo, sem parar."
+  ],
+  [
+   "Adverbes et locutions",
+   "à plusieurs reprises",
+   "repetidas vezes",
+   "Je l'ai appelé à plusieurs reprises.",
+   "Latim: pluriores (mais numerosos) e prehendere (pegar de novo). Inglês: plural, reprise (retomada, em música).\nPortuguês: plural, pluralidade; repreender, represa, presa (de prehendere).\nReprise = retomada: várias vezes."
+  ],
+  [
+   "Adverbes et locutions",
+   "certes",
+   "certamente, é verdade que",
+   "Certes, c'est cher, mais c'est de qualité.",
+   "Latim: certus (certo, decidido). Inglês: certain, certify.\nPortuguês: certo, certeza, certificar, incerto.\nReconhece um ponto antes de contrapor."
+  ],
+  [
+   "Adverbes et locutions",
+   "bien entendu",
+   "evidentemente",
+   "Bien entendu, vous êtes les bienvenus.",
+   "Latim: bene (bem) + intendere (estender a atenção). Inglês: intend, attend.\nPortuguês: entender, atender, intenção, tender.\nBem entendido: claro."
+  ],
+  [
+   "Adverbes et locutions",
+   "une tranche d'âge",
+   "uma faixa etária",
+   "Cette tranche d'âge utilise beaucoup les réseaux sociaux.",
+   "Latim: trinicare (cortar em três) e aetas (idade). Inglês: trench (vala cortada), age.\nPortuguês: trinchar (cortar a carne, do francês trancher), trincheira; idade (de aetas).\nTranche = fatia: uma fatia da população."
+  ],
+  [
+   "Adverbes et locutions",
+   "pourvu que",
+   "contanto que (+ subjuntivo)",
+   "Je viendrai, pourvu qu'il fasse beau.",
+   "Latim: providere (ver antes, prover), de pro + videre. Inglês: provided that, provide, provision.\nPortuguês: prover, provisão, providência, provedor.\nCondição, com subjuntivo."
+  ],
+  [
+   "Adverbes et locutions",
+   "à condition que",
+   "com a condição de que (+ subjuntivo)",
+   "Tu peux sortir à condition que tu rentres tôt.",
+   "Latim: condicio (acordo, condição), de cum + dicere. Inglês: condition, on condition that.\nPortuguês: condição, condicional, dizer (de dicere).\nCondição, com subjuntivo."
+  ],
+  [
+   "Adverbes et locutions",
+   "à défaut de",
+   "na falta de",
+   "À défaut de voiture, je prends le bus.",
+   "Latim: fallere (falhar, enganar). Inglês: default, fail, fault.\nPortuguês: falha, falta, falhar, falácia, falência (de fallere).\nDéfaut = falta."
+  ],
+  [
+   "Adverbes et locutions",
+   "à cet égard",
+   "nesse sentido, a esse respeito",
+   "À cet égard, il convient de mettre en avant que…",
+   "Origem germânica: wardon (vigiar, olhar), que deu garder e regarder. Inglês: regard, in this regard.\nPortuguês: guarda, aguardar, resguardo.\nFórmula da professora para a tese da Tâche 3."
+  ],
+  [
+   "Adverbes et locutions",
+   "assez",
+   "bastante, suficiente",
+   "J'ai assez dormi. Il est assez grand.",
+   "Latim: ad satis (até o suficiente), de satis (bastante). Inglês: satisfy, satiate e assets (do francês antigo asez: bens suficientes para pagar as dívidas).\nPortuguês: assaz (bastante: pouco usado hoje, mas existe!), saciar, satisfazer, satisfeito (de satis).\nAssez de + substantivo: assez de temps, assez d'argent."
+  ],
+  [
+   "Formules de la méthode",
+   "Dans un contexte marqué par…",
+   "Num contexto marcado por… (abertura da T3)",
+   "Dans un contexte marqué par les profondes mutations des sociétés contemporaines, …",
+   "Latim: contextus (tecido junto), de cum + texere (tecer). Inglês: context, textile, text. Marqué vem do germânico marka (sinal): inglês mark.\nPortuguês: contexto, texto, tecer, tecido, têxtil; marca, marcar."
+  ],
+  [
+   "Formules de la méthode",
+   "Dès lors, le débat portant sur… suscite de vives discussions",
+   "Assim, o debate sobre… provoca discussões acaloradas",
+   "Dès lors, le débat portant sur le télétravail suscite de vives discussions.",
+   "Latim: battuere (bater) deu débat; discutere (sacudir, examinar) deu discussion. Inglês: debate, battle, discussion.\nPortuguês: debate, bater, combater, batalha; discutir, discussão."
+  ],
+  [
+   "Formules de la méthode",
+   "À cet égard, il convient de mettre en avant que…",
+   "Nesse sentido, convém destacar que… (tese)",
+   "À cet égard, il convient de mettre en avant que le sport favorise la santé.",
+   "Latim: convenire (vir junto, ser adequado). Inglês: convenient, convene, convention.\nPortuguês: convir, conveniente, convenção, convento, vir."
+  ],
+  [
+   "Formules de la méthode",
+   "Néanmoins, il convient également de souligner que…",
+   "Contudo, convém também sublinhar que… (antítese)",
+   "Néanmoins, il convient également de souligner que ce mode de vie a un coût.",
+   "Latim: sub (sob) + linea (linha): sublinhar. Inglês: underline, line.\nPortuguês: sublinhar, linha, alinhar, delinear."
+  ],
+  [
+   "Formules de la méthode",
+   "Pour répondre durablement à cet enjeu, il est essentiel que…",
+   "Para responder de forma duradoura a esse desafio, é essencial que… (+ subjuntivo)",
+   "Pour répondre durablement à cet enjeu, il est essentiel que l'État agisse.",
+   "Latim: respondere (responder) e durare (durar) e essentia (essência). Inglês: respond, durable, essential.\nPortuguês: responder, esposo (os dois de spondere, prometer!), durável, duração, essência."
+  ],
+  [
+   "Formules de la méthode",
+   "en coopération avec",
+   "em cooperação com",
+   "Les municipalités, en coopération avec les associations, …",
+   "Latim: cooperari (trabalhar junto), de cum + opus (obra). Inglês: cooperation, operate, opera.\nPortuguês: cooperar, operário, operar, obra, ópera (de opus)."
+  ],
+  [
+   "Formules de la méthode",
+   "Parvenant ainsi à…",
+   "Chegando assim a… (fecho da conclusão)",
+   "Parvenant ainsi à une société éthique, morale et respectueuse.",
+   "Latim: pervenire (chegar até o fim), de per + venire. Inglês: event, venue, parvenu.\nPortuguês: provir, advir, porvir, evento."
+  ],
+  [
+   "Formules de la méthode",
+   "je fais appel à vos services car…",
+   "recorro aos seus serviços porque… (abertura da T2)",
+   "Bonjour Madame, je fais appel à vos services car j'ai l'intention de voyager.",
+   "Latim: appellare (chamar) e servitium (serviço). Inglês: appeal, service, servant.\nPortuguês: apelar, apelo, apelido; serviço, servir, servo."
+  ],
+  [
+   "Formules de la méthode",
+   "J'aimerais également avoir des précisions concernant…",
+   "Gostaria também de ter mais detalhes sobre…",
+   "J'aimerais également avoir des précisions concernant les tarifs.",
+   "Latim: praecisus (cortado com exatidão). Inglês: precise, precision.\nPortuguês: preciso, precisão, conciso, decisão (de caedere, cortar)."
+  ],
+  [
+   "Formules de la méthode",
+   "Je n'hésiterai pas à vous contacter",
+   "Não hesitarei em entrar em contato",
+   "Je n'hésiterai pas à vous contacter si j'ai d'autres questions.",
+   "Latim: haesitare (ficar preso, hesitar) e contactus (toque). Inglês: hesitate, contact.\nPortuguês: hesitar, aderir, coerente (de haerere); contato, tato, tangente, intacto (de tangere)."
+  ],
+  [
+   "Formules de la méthode",
+   "Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées",
+   "Atenciosamente (fórmula formal de carta)",
+   "Dans l'attente d'une réponse favorable, veuillez agréer…",
+   "Latim: gratus (agradável) deu agréer; salutatio (saudação) e distinguere (separar, destacar). Inglês: agree, salutation, distinguished.\nPortuguês: agradar, agrado, grato; saudação, saúde, salvar; distinguir, distinto."
+  ],
+  [
+   "Formules de la méthode",
+   "De surcroît",
+   "Além disso (registro formal)",
+   "De surcroît, le petit déjeuner n'a jamais été servi.",
+   "Latim: super (acima) + crescere (crescer): um acréscimo. Inglês: increase, crescent.\nPortuguês: crescer, acréscimo, crescente."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "s'adapter à une nouvelle réalité",
+   "adaptar-se a uma nova realidade",
+   "Les immigrants doivent s'adapter à une nouvelle réalité.",
+   "Latim: adaptare (ajustar a), de ad + aptus (apto). Inglês: adapt, apt.\nPortuguês: adaptar, apto, aptidão, inepto.\nMuito útil na Tâche 3 sobre imigração."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "les codes sociaux",
+   "os códigos sociais",
+   "Il faut du temps pour comprendre les codes sociaux.",
+   "Latim: codex (livro de leis) e socius (companheiro). Inglês: code, social, society.\nPortuguês: código, codificar; social, sócio, sociedade.\nAs regras não escritas de convivência."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "les codes vestimentaires",
+   "os códigos de vestimenta",
+   "Les codes vestimentaires varient selon les pays.",
+   "Latim: vestimentum (roupa), de vestis. Inglês: vest, vestment, invest (vestir de poder).\nPortuguês: vestir, veste, vestimenta, investir, travesti.\nVêtement = roupa."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "les codes alimentaires",
+   "os hábitos alimentares",
+   "S'habituer aux codes alimentaires prend du temps.",
+   "Latim: alimentum (alimento), de alere (nutrir). Inglês: aliment, alimony.\nPortuguês: alimento, alimentar; aluno (alumnus: aquele que é nutrido!).\nO que, como e quando se come."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "s'adapter à une nouvelle culture",
+   "adaptar-se a uma nova cultura",
+   "Il s'est vite adapté à une nouvelle culture.",
+   "Latim: cultura (cultivo), de colere (cultivar). Inglês: culture, cultivate, agriculture.\nPortuguês: cultura, cultivar, culto, colono, agricultura (de colere).\nExpressão-chave do tema imigração."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "élargir ses centres d'intérêt",
+   "ampliar os seus interesses",
+   "Voyager permet d'élargir ses centres d'intérêt.",
+   "Latim: largus (amplo, generoso) e interesse (estar entre, importar). Inglês: large, enlarge, interest.\nPortuguês: largo, alargar, largueza; interesse (inter + esse, estar entre).\nÉlargir = alargar."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "acquérir de nouvelles compétences linguistiques",
+   "adquirir novas competências linguísticas",
+   "Vivre à l'étranger permet d'acquérir de nouvelles compétences linguistiques.",
+   "Latim: acquirere (obter), competere (ser capaz) e lingua (língua). Inglês: acquire, competence, linguistics.\nPortuguês: adquirir, aquisição; competir, competente; língua, linguagem, linguística.\nAcquérir: j'acquiers, nous acquérons."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "le savoir-faire",
+   "o saber-fazer, a competência prática",
+   "Cet artisan a un grand savoir-faire.",
+   "Latim: sapere (ter sabor, saber) + facere (fazer). Inglês: savvy e savoir-faire (usado igual), fact.\nPortuguês: saber e sabor (os dois de sapere!), sábio; fazer, fato, feito.\nSaber fazer bem um trabalho."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "le savoir-vivre",
+   "as boas maneiras",
+   "Le savoir-vivre change d'un pays à l'autre.",
+   "Latim: sapere (saber) + vivere (viver). Inglês: savvy, vivid, survive.\nPortuguês: saber, sabor, sábio; viver, vida, vívido.\nSaber viver com os outros: educação e cortesia."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "multiculturel",
+   "multicultural",
+   "Montréal est une ville multiculturelle.",
+   "Latim: multus (muito) + cultura. Inglês: multicultural, multiply.\nPortuguês: múltiplo, multidão, multiplicar; cultura.\nCognato direto."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "pluriethnique",
+   "pluriétnico",
+   "Une société pluriethnique.",
+   "Latim: plus, pluris (mais) + grego ethnos (povo). Inglês: plural, ethnic.\nPortuguês: plural, pluralidade; étnico, etnia.\nVárias etnias convivendo."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "s'intégrer",
+   "integrar-se",
+   "Il est important de s'intégrer dans son quartier.",
+   "Latim: integrare (tornar inteiro), de integer (inteiro, intacto). Inglês: integrate, integer, integrity.\nPortuguês: integrar, íntegro, inteiro (de integrum!), integral, integridade.\nVerbo pronominal: je m'intègre."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "le mal du pays",
+   "a saudade da terra natal",
+   "Les premiers mois, j'avais le mal du pays.",
+   "Latim: malum (mal) e pagus (aldeia, região), que deu pays e « país ». Inglês: pagan (quem vivia no campo), homesickness no sentido.\nPortuguês: mal, maligno; país (de pagensis), paisagem, paisano, pagão.\nLiteralmente « a dor do país »."
+  ],
+  [
+   "Adaptation et interculturalité",
+   "un nouvel arrivant",
+   "um recém-chegado",
+   "La ville offre des cours aux nouveaux arrivants.",
+   "Latim: novellus (novinho) e ad ripam (à margem, chegar à terra). Inglês: novel, new, arrive, river.\nPortuguês: novo, novidade, novela; arribar (chegar ao porto), ribeira, ribeirinho (de ripa, margem).\nMuito usado no Québec para imigrantes."
+  ],
+  [
+   "Ville et commerces",
+   "une boulangerie",
+   "uma padaria",
+   "J'achète mon pain à la boulangerie du coin.",
+   "Pense em boule (bola, do latim bulla): o pão redondo saindo do forno. Inglês: ball, bowl, bullet (bolinha).\nPortuguês: bola, bolha e bula (a bula papal tinha um selo redondo), todas de bulla."
+  ],
+  [
+   "Ville et commerces",
+   "une épicerie / un dépanneur (Québec)",
+   "uma mercearia / loja de conveniência",
+   "Le dépanneur est ouvert jusqu'à minuit.",
+   "Épice vem do latim species (tipo de mercadoria, especiaria). Inglês: spice, species. Dépanneur: quem tira da panne (pane, apuro).\nPortuguês: especiaria, espécie, especial (de species); pane (dépanneur tira você da pane)."
+  ],
+  [
+   "Ville et commerces",
+   "une pharmacie",
+   "uma farmácia",
+   "La pharmacie se trouve en face de la banque.",
+   "Grego: pharmakon (remédio), pelo latim pharmacia. Inglês: pharmacy, pharmaceutical.\nPortuguês: farmácia, fármaco, farmacêutico."
+  ],
+  [
+   "Ville et commerces",
+   "un centre commercial",
+   "um shopping",
+   "Le centre commercial est bondé le samedi.",
+   "Latim: centrum (centro) e commercium (troca de mercadorias), de cum + merx. Inglês: center, commercial, merchant.\nPortuguês: centro, central; comércio, mercado, mercadoria, mercê."
+  ],
+  [
+   "Ville et commerces",
+   "faire les courses",
+   "fazer compras (supermercado)",
+   "Je fais les courses le dimanche matin.",
+   "Latim: cursus (corrida, percurso), de currere (correr). Inglês: course, current, courier.\nPortuguês: curso, correr, corrida, corrente, correio, currículo."
+  ],
+  [
+   "Ville et commerces",
+   "le caissier / la caissière",
+   "o caixa / a caixa",
+   "La caissière m'a rendu la monnaie.",
+   "Latim: capsa (caixa). Inglês: cash, cashier, case.\nPortuguês: caixa, caixeiro, cápsula (de capsa)."
+  ],
+  [
+   "Ville et commerces",
+   "rendre la monnaie",
+   "dar o troco",
+   "Pouvez-vous me rendre la monnaie, s'il vous plaît ?",
+   "Latim: moneta (moeda), da deusa Juno Moneta, em cujo templo se cunhavam moedas. Inglês: money, monetary.\nPortuguês: moeda, monetário."
+  ],
+  [
+   "Ville et commerces",
+   "les soldes",
+   "as liquidações",
+   "Les soldes commencent la semaine prochaine.",
+   "Latim: solidus (moeda de ouro maciça). Inglês: sold, soldier (quem recebia soldo), solid.\nPortuguês: saldo (a mesma origem: solidus!), soldo, soldado, sólido."
+  ],
+  [
+   "Ville et commerces",
+   "un reçu / un ticket de caisse",
+   "um recibo / cupom fiscal",
+   "Gardez votre reçu pour un échange.",
+   "Latim: recipere (receber), de re + capere. Inglês: receipt, receive, recipe.\nPortuguês: receber, recibo, receita (de recepta!), recepção."
+  ],
+  [
+   "Ville et commerces",
+   "le centre-ville",
+   "o centro da cidade",
+   "J'habite au centre-ville, près de tout.",
+   "Latim: centrum (centro) e villa (casa de campo, depois cidade). Inglês: center, village, villa.\nPortuguês: vila, vilarejo, vilão (de villanus, o morador da vila)."
+  ],
+  [
+   "Ville et commerces",
+   "une piste cyclable",
+   "uma ciclovia",
+   "La ville a construit de nouvelles pistes cyclables.",
+   "Grego: kyklos (círculo, roda). Inglês: cycle, bicycle, cyclist.\nPortuguês: ciclo, bicicleta, ciclone, ciclista."
+  ],
+  [
+   "Ville et commerces",
+   "les transports en commun",
+   "o transporte público",
+   "Je prends les transports en commun pour aller au travail.",
+   "Latim: trans (além) + portare (levar) e communis (comum). Inglês: transport, common, community.\nPortuguês: transportar, portar, porte; comum, comunidade, comungar."
+  ],
+  [
+   "Ville et commerces",
+   "bien desservi",
+   "bem servido (por transporte)",
+   "Le quartier est bien desservi par le métro.",
+   "Latim: servire (servir). Inglês: serve, service.\nPortuguês: servir, serviço, servo, servidor."
+  ],
+  [
+   "Ville et commerces",
+   "un embouteillage",
+   "um engarrafamento",
+   "Il y a toujours des embouteillages à l'heure de pointe.",
+   "Vem de bouteille (garrafa), do latim buticula: os carros presos como líquido numa garrafa. Inglês: bottle, bottleneck (a mesma imagem!).\nPortuguês: botelha (garrafa, palavra antiga), botija."
+  ],
+  [
+   "Ville et commerces",
+   "la mairie / l'hôtel de ville",
+   "a prefeitura",
+   "Il faut s'inscrire à la mairie.",
+   "Latim: maior (maior), que deu maire. Inglês: mayor, major. Hôtel vem de hospitale: hotel, hospital.\nPortuguês: maior, majoritário, mordomo (de maior domus); hotel, hospital, hóspede."
+  ],
+  [
+   "Ville et commerces",
+   "un commerce de proximité",
+   "um comércio de bairro",
+   "Je préfère les commerces de proximité aux grandes surfaces.",
+   "Latim: proximus (o mais próximo). Inglês: proximity, approximate.\nPortuguês: próximo, proximidade, aproximar."
+  ],
+  [
+   "Ville et commerces",
+   "une librairie",
+   "uma livraria",
+   "J'ai acheté ce roman à la librairie.",
+   "Latim: liber, libri (livro), mesma raiz de library. Falso amigo: biblioteca em francês é bibliothèque.\nPortuguês: livro, livraria, libreto (de liber).\nFalso amigo! Biblioteca é « bibliothèque »."
+  ],
+  [
+   "Ville et commerces",
+   "une boucherie",
+   "um açougue",
+   "Le boucher coupe la viande à la boucherie.",
+   "Vem de bouc (bode): o boucher era quem abatia os bodes. Inglês: butcher, a mesma palavra.\nPortuguês: pense em « bode », o animal que o boucher abatia.\nBoucher = açougueiro."
+  ],
+  [
+   "Ville et commerces",
+   "une poissonnerie",
+   "uma peixaria",
+   "On trouve du saumon frais à la poissonnerie.",
+   "Latim: piscis (peixe). Inglês: Pisces (o signo), piscine, fish (mesma raiz indo-europeia).\nPortuguês: peixe, piscina (antes: viveiro de peixes!), piscicultura.\nPoisson = peixe (com dois s)."
+  ],
+  [
+   "Ville et commerces",
+   "une fromagerie",
+   "uma queijaria",
+   "La fromagerie propose des fromages du Québec.",
+   "Latim: formaticus (feito na forma), de forma. Inglês: form, format. O queijo era moldado numa forma.\nPortuguês: forma, fôrma, formato, formar.\nFromage = queijo."
+  ],
+  [
+   "Ville et commerces",
+   "un marché",
+   "uma feira, um mercado",
+   "Le samedi, je vais au marché.",
+   "Latim: mercatus (comércio), de merx (mercadoria). Inglês: market, merchant, commerce.\nPortuguês: mercado, mercador, mercadoria, comércio, mercê.\nFrutas e legumes ao ar livre."
+  ],
+  [
+   "Ville et commerces",
+   "une quincaillerie",
+   "uma loja de ferragens",
+   "J'ai acheté des clous à la quincaillerie.",
+   "Vem de clinquaille (objetos de metal que tilintam), imitando o som clinc. Inglês: clink, jingle no som.\nPortuguês: quinquilharia (a mesma palavra, pelo francês!).\nFerramentas, parafusos e tintas."
+  ],
+  [
+   "Ville et commerces",
+   "un pressing / une teinturerie",
+   "uma lavanderia a seco",
+   "J'ai laissé mon manteau au pressing.",
+   "Latim: premere (apertar) e tingere (tingir). Inglês: press, pressing, tint, tincture.\nPortuguês: pressão, prensa, imprimir; tinta, tingir, tintura.\nNo Québec, diz-se « nettoyeur »."
+  ],
+  [
+   "Ville et commerces",
+   "une grande surface",
+   "um hipermercado",
+   "Les grandes surfaces sont en périphérie.",
+   "Latim: grandis (grande) e superficies (superfície). Inglês: grand, surface, superficial.\nPortuguês: grande; superfície, face.\nGrande superfície de venda."
+  ],
+  [
+   "Ville et commerces",
+   "un magasin",
+   "uma loja",
+   "Ce magasin vend des vêtements.",
+   "Árabe: makhazin (depósitos), pelo italiano magazzino. Inglês: magazine (antes armazém, depois revista).\nPortuguês: armazém (a mesma palavra árabe: al-makhzan!).\nFalso amigo: não é revista (revista = magazine)."
+  ],
+  [
+   "Ville et commerces",
+   "le trottoir",
+   "a calçada",
+   "Les piétons marchent sur le trottoir.",
+   "Vem de trotter (trotar, andar a passo rápido), de origem germânica. Inglês: trot, trotter.\nPortuguês: trotar, trote.\nOnde se anda a trote, a pé."
+  ],
+  [
+   "Ville et commerces",
+   "un feu (de circulation)",
+   "um semáforo",
+   "Tournez à droite au feu rouge.",
+   "Latim: focus (lareira, fogo). Inglês: focus, fuel.\nPortuguês: fogo, fogão, fogueira, foco (todos de focus!).\nFeu = fogo: a luz do sinal."
+  ],
+  [
+   "Ville et commerces",
+   "un carrefour",
+   "um cruzamento",
+   "Le café est au carrefour.",
+   "Latim: quadrifurcum (quatro forquilhas), de quattuor + furca. Inglês: fork (bifurcação), quarter.\nPortuguês: quatro, quadra; forca, bifurcar, bifurcação (de furca).\nQuatro caminhos que se cruzam."
+  ],
+  [
+   "Ville et commerces",
+   "la banlieue",
+   "o subúrbio, a periferia",
+   "Beaucoup de familles habitent en banlieue.",
+   "Germânico ban (jurisdição) + latim leuca (légua): a área de uma légua sob a autoridade da cidade. Inglês: ban, league.\nPortuguês: banir, banimento; légua (de leuca).\nAo redor da cidade."
+  ],
+  [
+   "Ville et commerces",
+   "le guichet",
+   "o guichê",
+   "Achetez votre billet au guichet.",
+   "Origem germânica (antigo nórdico vik, abertura). Inglês: wicket (portinhola, e a baliza do críquete).\nPortuguês: guichê (a mesma palavra).\nCognato: guichê."
+  ],
+  [
+   "Tâches ménagères",
+   "faire le ménage",
+   "fazer a faxina",
+   "Je fais le ménage le samedi matin.",
+   "Latim: mansio (morada), que deu ménage (casa, lar). Inglês: mansion, menagerie (a « casa » dos animais).\nPortuguês: mansão (de mansio)."
+  ],
+  [
+   "Tâches ménagères",
+   "passer l'aspirateur",
+   "passar o aspirador",
+   "Mon fils passe l'aspirateur dans le salon.",
+   "Latim: aspirare (soprar, aspirar), de spirare (respirar). Inglês: aspire, inspire, spirit.\nPortuguês: aspirar, respirar, inspirar, suspiro, espírito (de spirare)."
+  ],
+  [
+   "Tâches ménagères",
+   "faire la vaisselle",
+   "lavar a louça",
+   "Après le dîner, je fais la vaisselle.",
+   "Latim: vascella (vasinhos), de vas (vaso). Inglês: vessel, vase.\nPortuguês: vaso, vasilha, vasilhame, vascular (de vas)."
+  ],
+  [
+   "Tâches ménagères",
+   "faire la lessive",
+   "lavar a roupa",
+   "Je fais la lessive deux fois par semaine.",
+   "Latim: lixivia (água com cinza usada para lavar roupa). Inglês: lixiviate (lavar com água e cinzas).\nPortuguês: lixívia (existe: a água sanitária!)."
+  ],
+  [
+   "Tâches ménagères",
+   "étendre le linge",
+   "estender a roupa",
+   "En été, j'étends le linge dehors.",
+   "Latim: extendere (estender) e lineus (de linho). Inglês: extend, linen, lingerie.\nPortuguês: estender, extensão; linho, linha, linhagem."
+  ],
+  [
+   "Tâches ménagères",
+   "repasser",
+   "passar (roupa)",
+   "Je déteste repasser les chemises.",
+   "Latim: passus (passo), re + passer: passar de novo o ferro. Inglês: pass, passage.\nPortuguês: passar, repassar, passo."
+  ],
+  [
+   "Tâches ménagères",
+   "sortir les poubelles",
+   "levar o lixo para fora",
+   "C'est mon tour de sortir les poubelles.",
+   "Vem do prefeito Eugène Poubelle, que obrigou o uso de lixeiras em Paris em 1884. Inglês: sem parente; aprenda pela história!\nPortuguês: sem parente (é o nome de uma pessoa)."
+  ],
+  [
+   "Tâches ménagères",
+   "le recyclage",
+   "a reciclagem",
+   "Le recyclage est ramassé le mardi.",
+   "Latim re (de novo) + grego kyklos (círculo). Inglês: recycling, cycle.\nPortuguês: reciclagem, ciclo, bicicleta."
+  ],
+  [
+   "Tâches ménagères",
+   "ranger",
+   "arrumar, guardar",
+   "Les enfants doivent ranger leur chambre.",
+   "Origem germânica: rang (fileira, ordem). Inglês: range, rank, arrange.\nPortuguês: arranjar (pelo francês arranger, da mesma raiz rang!), ranque."
+  ],
+  [
+   "Tâches ménagères",
+   "mettre la table",
+   "pôr a mesa",
+   "Peux-tu mettre la table, s'il te plaît ?",
+   "Latim: mittere (enviar, pôr) e tabula (tábua). Inglês: table, tablet.\nPortuguês: meter; tábua, tabela, tablado (de tabula)."
+  ],
+  [
+   "Tâches ménagères",
+   "partager les tâches",
+   "dividir as tarefas",
+   "Chez nous, nous partageons les tâches ménagères.",
+   "Latim: partire (dividir) e taxare (avaliar, taxar). Inglês: part, partition, task, tax.\nPortuguês: partilhar, parte, partir; taxa, taxar (de taxare)."
+  ],
+  [
+   "Tâches ménagères",
+   "le lave-vaisselle",
+   "a lava-louças",
+   "Le lave-vaisselle est en panne.",
+   "Latim: lavare (lavar) e vascella (vasinhos). Inglês: lavatory, lava, vessel.\nPortuguês: lavar, lavabo, lavanderia; vasilha."
+  ],
+  [
+   "Tâches ménagères",
+   "arroser les plantes",
+   "regar as plantas",
+   "Pendant mon absence, ma voisine arrose les plantes.",
+   "Latim: ros, roris (orvalho), que deu arroser (orvalhar, regar). Inglês: rosemary (orvalho do mar).\nPortuguês: rocio (orvalho, de ros), rosmaninho (o alecrim: ros marinus, orvalho do mar)."
+  ],
+  [
+   "Tâches ménagères",
+   "une corvée",
+   "uma tarefa chata",
+   "Faire les vitres, c'est une vraie corvée !",
+   "Latim: corrogata (pedida em conjunto): trabalho obrigatório para o senhor feudal. Inglês: corvée (trabalho forçado), rogation.\nPortuguês: rogar, rogo, interrogar, prorrogar (de rogare)."
+  ],
+  [
+   "Tâches ménagères",
+   "nettoyer",
+   "limpar",
+   "Je nettoie la cuisine après le repas.",
+   "Latim: nitidus (brilhante, limpo), que deu net. Inglês: neat, net (líquido, limpo).\nPortuguês: nítido, nitidez (de nitidus, limpo e brilhante).\nNet = limpo."
+  ],
+  [
+   "Tâches ménagères",
+   "balayer",
+   "varrer",
+   "Il balaie le plancher.",
+   "Vem de balai (vassoura), de origem celta (bretão balazn, giesta). Inglês: sem parente; imagine a vassoura de giesta.\nPortuguês: sem parente latino (origem celta).\nBalai = vassoura."
+  ],
+  [
+   "Tâches ménagères",
+   "faire le lit",
+   "arrumar a cama",
+   "Les enfants font leur lit le matin.",
+   "Latim: lectus (leito, cama). Inglês: sem parente direto; lembre do português « leito ».\nPortuguês: leito (de lectus).\nFazer a cama."
+  ],
+  [
+   "Tâches ménagères",
+   "laver les vitres",
+   "lavar as janelas",
+   "Au printemps, je lave les vitres.",
+   "Latim: lavare (lavar) e vitrum (vidro). Inglês: lavatory, vitreous, vitrine.\nPortuguês: vidro, vitral, vitrine, vítreo (de vitrum).\nVitre = vidro."
+  ],
+  [
+   "Tâches ménagères",
+   "essuyer",
+   "enxugar, secar",
+   "J'essuie la vaisselle.",
+   "Latim: exsucare (tirar o suco, secar), de ex + sucus. Inglês: succulent (cheio de suco).\nPortuguês: enxugar (do mesmo exsucare!), suco, suculento.\nPassar o pano para secar."
+  ],
+  [
+   "Tâches ménagères",
+   "faire la poussière",
+   "tirar o pó",
+   "Je fais la poussière une fois par semaine.",
+   "Latim: pulvis, pulveris (pó). Inglês: pulverize, powder.\nPortuguês: pó (de pulvis!), pólvora, pulverizar.\nPoussière = poeira."
+  ],
+  [
+   "Tâches ménagères",
+   "plier le linge",
+   "dobrar a roupa",
+   "Après la lessive, je plie le linge.",
+   "Latim: plicare (dobrar). Inglês: ply, pliable, duplicate, complicate.\nPortuguês: prega (dobra de tecido), explicar, complicar, duplicar e até chegar (de plicare!).\nPlier = dobrar."
+  ],
+  [
+   "Famille",
+   "les parents",
+   "os pais (ou os parentes)",
+   "Mes parents habitent au Brésil.",
+   "Latim: parens (quem gera), de parere (dar à luz). Inglês: parent, parental.\nPortuguês: parente, parto, parir, parturiente.\nPode ser os pais ou toda a família."
+  ],
+  [
+   "Famille",
+   "le frère / la sœur",
+   "o irmão / a irmã",
+   "J'ai un frère et deux sœurs.",
+   "Latim: frater e soror. Inglês: fraternal, fraternity, sorority; brother e sister vêm da mesma raiz indo-europeia.\nPortuguês: frei, frade, fraterno, fraternidade; sóror (título de freira), sororidade.\nSœur com o « œ » ligado."
+  ],
+  [
+   "Famille",
+   "les grands-parents",
+   "os avós",
+   "Mes grands-parents ont quatre-vingts ans.",
+   "Latim: grandis (grande) e parens (quem gera). Inglês: grandparents, a mesma construção!\nPortuguês: grande; parente.\nGrand-père = avô, grand-mère = avó."
+  ],
+  [
+   "Famille",
+   "le petit-fils / la petite-fille",
+   "o neto / a neta",
+   "Ma grand-mère adore sa petite-fille.",
+   "Latim: filius, filia (filho, filha). Inglês: filial, affiliate; grandson é a mesma lógica.\nPortuguês: filho, filha, filial, afilhado, filiação.\nPetite-fille com hífen = neta. Sem hífen = menininha."
+  ],
+  [
+   "Famille",
+   "l'oncle / la tante",
+   "o tio / a tia",
+   "Mon oncle vit à Montréal.",
+   "Latim: avunculus (tio materno) e amita (tia paterna). Inglês: uncle e aunt vêm dessas mesmas palavras, pelo francês.\nPortuguês: avuncular (relativo ao tio, palavra rara, de avunculus).\nParecidos com o inglês uncle e aunt."
+  ],
+  [
+   "Famille",
+   "le cousin / la cousine",
+   "o primo / a prima",
+   "Ma cousine vient passer l'été chez nous.",
+   "Latim: consobrinus (filho da irmã da mãe). Inglês: cousin, a mesma palavra.\nPortuguês: consobrinho (primo, palavra rara e jurídica, de consobrinus).\nCognato do inglês cousin."
+  ],
+  [
+   "Famille",
+   "le neveu / la nièce",
+   "o sobrinho / a sobrinha",
+   "J'ai offert un livre à mon neveu.",
+   "Latim: nepos (neto, sobrinho) e neptis. Inglês: nephew, niece, nepotism (favorecer os sobrinhos).\nPortuguês: neto, neta (de nepos!), nepotismo.\nInglês: nephew, niece."
+  ],
+  [
+   "Famille",
+   "le beau-père / la belle-mère",
+   "o sogro / a sogra (ou padrasto / madrasta)",
+   "Je m'entends bien avec ma belle-mère.",
+   "Latim: bellus (bonito) e pater, mater. Beau/belle era cortesia para a família do cônjuge. Inglês: father-in-law, paternal, maternal.\nPortuguês: belo, beleza; pai, paterno; mãe, materno.\nBeau/belle indica parentesco por casamento."
+  ],
+  [
+   "Famille",
+   "le gendre / la belle-fille",
+   "o genro / a nora",
+   "Leur gendre est médecin.",
+   "Latim: gener (genro). Inglês: sem parente comum; lembre de « genro ».\nPortuguês: genro (de gener, a mesma palavra).\nBelle-fille também pode ser enteada."
+  ],
+  [
+   "Famille",
+   "le mari / la femme",
+   "o marido / a esposa",
+   "Mon mari travaille à la maison.",
+   "Latim: maritus (casado) e femina (mulher). Inglês: marry, marital, feminine, female.\nPortuguês: marido, marital; fêmea, feminino.\nFemme = mulher e também esposa."
+  ],
+  [
+   "Famille",
+   "l'époux / l'épouse",
+   "o cônjuge",
+   "Les époux se sont mariés en juin.",
+   "Latim: sponsus, sponsa (prometido em casamento). Inglês: spouse, sponsor.\nPortuguês: esposo, esposa, esponsais (de sponsus).\nFormal, usado em documentos."
+  ],
+  [
+   "Famille",
+   "un enfant unique",
+   "um filho único",
+   "Je suis enfant unique.",
+   "Latim: infans (quem ainda não fala) e unicus (único). Inglês: infant, infancy, unique.\nPortuguês: infante, infância, infantil; único, unidade.\nSem irmãos."
+  ],
+  [
+   "Famille",
+   "une famille nombreuse",
+   "uma família numerosa",
+   "Les familles nombreuses ont des réductions.",
+   "Latim: familia (os da casa) e numerosus. Inglês: family, numerous, number.\nPortuguês: família, familiar; número, numeroso.\nTrês filhos ou mais."
+  ],
+  [
+   "Famille",
+   "une famille monoparentale",
+   "uma família monoparental",
+   "Elle élève seule ses enfants dans une famille monoparentale.",
+   "Grego monos (um só) + latim parens. Inglês: monoparental, monologue, parent.\nPortuguês: monólogo, monopólio; parente.\nMono = um só pai ou mãe."
+  ],
+  [
+   "Famille",
+   "une famille recomposée",
+   "uma família reconstituída",
+   "Dans une famille recomposée, il y a des demi-frères.",
+   "Latim: re (de novo) + componere (pôr junto). Inglês: recompose, compose, component.\nPortuguês: compor, recompor, composição, componente.\nPais separados que formam nova família."
+  ],
+  [
+   "Famille",
+   "élever un enfant",
+   "criar um filho",
+   "Élever un enfant demande de la patience.",
+   "Latim: elevare (levantar), de levis (leve). Inglês: elevate, elevator.\nPortuguês: elevar, elevador, levantar, leve.\nÉlever = educar, criar (também elevar)."
+  ],
+  [
+   "Famille",
+   "les proches",
+   "os familiares próximos, os entes queridos",
+   "Il a fêté son anniversaire avec ses proches.",
+   "Latim: prope (perto), comparativo propius. Inglês: approach, propinquity.\nPortuguês: próximo, aproximar, propínquo (raro: próximo).\nOs que estão perto de nós."
+  ],
+  [
+   "Famille",
+   "le demi-frère / la demi-sœur",
+   "o meio-irmão / a meia-irmã",
+   "Mon demi-frère a dix ans.",
+   "Latim: dimidius (metade) e frater. Inglês: demigod, fraternal; half-brother no sentido.\nPortuguês: meio (a ideia); frade, fraterno.\nDemi = meio."
+  ],
+  [
+   "Relations",
+   "un copain / une copine",
+   "um amigo / uma amiga (ou namorado/a)",
+   "Je sors avec des copains ce soir.",
+   "Latim: cum (com) + panis (pão): quem divide o pão. Inglês: companion, company, a mesma raiz!\nPortuguês: companheiro, companhia, pão (cum + panis!).\nDepende do contexto: « ma copine » pode ser a namorada."
+  ],
+  [
+   "Relations",
+   "un voisin / une voisine",
+   "um vizinho / uma vizinha",
+   "Ma voisine arrose mes plantes.",
+   "Latim: vicinus (vizinho), de vicus (bairro). Inglês: vicinity.\nPortuguês: vizinho, vicinal (estrada vicinal!), vizinhança.\nMesma raiz de « vizinho »."
+  ],
+  [
+   "Relations",
+   "se lier d'amitié",
+   "fazer amizade",
+   "Ils se sont liés d'amitié au travail.",
+   "Latim: ligare (ligar) e amicitia (amizade), de amare. Inglês: ligament, league, amicable.\nPortuguês: ligar, liga, ligamento; amizade, amigo, amável.\nCriar um laço (lien) de amizade."
+  ],
+  [
+   "Relations",
+   "s'entendre bien avec",
+   "dar-se bem com",
+   "Je m'entends bien avec mes collègues.",
+   "Latim: intendere (estender a atenção). Inglês: intend, attend.\nPortuguês: entender, tender, atender.\nEntender-se com alguém."
+  ],
+  [
+   "Relations",
+   "se disputer",
+   "brigar, discutir",
+   "Les enfants se disputent souvent.",
+   "Latim: disputare (discutir, examinar). Inglês: dispute.\nPortuguês: disputar, disputa.\nDisputar: brigar com palavras."
+  ],
+  [
+   "Relations",
+   "se réconcilier",
+   "fazer as pazes",
+   "Après la dispute, ils se sont réconciliés.",
+   "Latim: reconciliare (reunir de novo), de concilium (assembleia). Inglês: reconcile, council.\nPortuguês: conciliar, reconciliar, concílio.\nReconciliar-se."
+  ],
+  [
+   "Relations",
+   "tomber amoureux de",
+   "apaixonar-se por",
+   "Il est tombé amoureux de sa voisine.",
+   "Latim: amor (amor). Tomber vem de uma raiz imitativa (tumb, o som da queda). Inglês: amorous, tumble; fall in love é a mesma imagem!\nPortuguês: tombo, tombar (também imitativo: tomb!); amor, amoroso.\nCair apaixonado."
+  ],
+  [
+   "Relations",
+   "rompre",
+   "terminar (um relacionamento)",
+   "Ils ont rompu après deux ans.",
+   "Latim: rumpere (quebrar). Inglês: rupture, interrupt, bankrupt.\nPortuguês: romper, ruptura, roto, rota (o caminho aberto, de rupta).\nRomper."
+  ],
+  [
+   "Relations",
+   "faire confiance à",
+   "confiar em",
+   "Je fais confiance à mes amis.",
+   "Latim: confidere (confiar plenamente), de cum + fides (fé). Inglês: confidence, confide, fidelity.\nPortuguês: confiar, confiança, fé, fiel, fidelidade (de fides).\nSempre com « à »."
+  ],
+  [
+   "Relations",
+   "rendre visite à",
+   "visitar (alguém)",
+   "Je rends visite à ma grand-mère le dimanche.",
+   "Latim: visitare (ir ver com frequência), de videre. Inglês: visit, visitor, vision.\nPortuguês: visitar, visita, ver, visão.\nPara pessoas: rendre visite. Para lugares: visiter."
+  ],
+  [
+   "Relations",
+   "prendre des nouvelles de",
+   "pedir notícias de",
+   "J'ai appelé pour prendre des nouvelles de ta mère.",
+   "Latim: novellus (novinho), de novus. Inglês: news, novel, new.\nPortuguês: novo, novidade, novela, renovar (de novus).\nPerguntar como alguém está."
+  ],
+  [
+   "Relations",
+   "garder le contact",
+   "manter contato",
+   "Nous avons gardé le contact après le lycée.",
+   "Origem germânica: wardon (vigiar). Inglês: guard, ward. Contact: latim contactus (toque), inglês contact.\nPortuguês: guardar, aguardar; contato, tato, intacto.\nGuardar o contato."
+  ],
+  [
+   "Relations",
+   "un malentendu",
+   "um mal-entendido",
+   "C'était un simple malentendu.",
+   "Latim: male (mal) + intendere. Inglês: misunderstanding na construção, malfunction, malpractice.\nPortuguês: mal-entendido (a mesma construção!).\nMal + entendido."
+  ],
+  [
+   "Relations",
+   "le soutien",
+   "o apoio",
+   "Merci pour ton soutien.",
+   "Latim: sustinere (segurar por baixo), de sub + tenere. Inglês: sustain, sustainable, support no sentido.\nPortuguês: suster, sustentar, sustento, sustentável (de sustinere).\nVem de « soutenir », sustentar."
+  ],
+  [
+   "Relations",
+   "la solitude",
+   "a solidão",
+   "La solitude touche beaucoup de personnes âgées.",
+   "Latim: solitudo, de solus (sozinho). Inglês: solitude, solo, sole.\nPortuguês: solidão, só, sozinho, solitário, solo.\nCognato direto."
+  ],
+  [
+   "Relations",
+   "un lien",
+   "um vínculo, um laço",
+   "Il existe un lien fort entre eux.",
+   "Latim: ligamen (laço), de ligare (ligar). Inglês: ligament, league.\nPortuguês: liame (existe: laço, vínculo!), ligar, liga.\nTambém « link » na internet."
+  ],
+  [
+   "Alimentation",
+   "le pain",
+   "o pão",
+   "J'achète du pain frais tous les matins.",
+   "Latim: panis (pão). Inglês: pantry (a despensa do pão), companion.\nPortuguês: pão, panificadora, empanar, companheiro (cum + panis).\nMesma raiz de pão."
+  ],
+  [
+   "Alimentation",
+   "la viande",
+   "a carne",
+   "Je mange peu de viande.",
+   "Latim: vivenda (o que serve para viver), de vivere. Inglês: viands (víveres), vivid.\nPortuguês: vianda (existe em português: alimento, comida!), vida, viver.\nViande não é « vianda » de marmita: é carne."
+  ],
+  [
+   "Alimentation",
+   "le poulet",
+   "o frango",
+   "Nous mangeons du poulet rôti le dimanche.",
+   "Latim: pullus (filhote de animal). Inglês: poultry, pullet.\nPortuguês: sem parente de uso comum (em espanhol: pollo).\nPoule = galinha."
+  ],
+  [
+   "Alimentation",
+   "le poisson",
+   "o peixe",
+   "Le poisson est riche en oméga-3.",
+   "Latim: piscis (peixe). Inglês: Pisces, fish (mesma raiz indo-europeia). Poison (um s) é veneno!\nPortuguês: peixe, piscina, piscicultura, piscoso.\nPoisson com dois s. Poison (um s) é veneno!"
+  ],
+  [
+   "Alimentation",
+   "les fruits de mer",
+   "os frutos do mar",
+   "Il est allergique aux fruits de mer.",
+   "Latim: fructus (fruto, proveito) e mare (mar). Inglês: fruit, marine, maritime; seafood no sentido.\nPortuguês: fruto, fruta, fruir (aproveitar!), usufruto; mar, marinho, marítimo.\nTradução literal."
+  ],
+  [
+   "Alimentation",
+   "les légumes",
+   "os legumes, as verduras",
+   "Il faut manger des légumes chaque jour.",
+   "Latim: legumen (vagem, leguminosa). Inglês: legume.\nPortuguês: legume, leguminosa.\nCognato."
+  ],
+  [
+   "Alimentation",
+   "le fromage",
+   "o queijo",
+   "La France produit des centaines de fromages.",
+   "Latim: formaticus (feito na forma). Inglês: form, format; o queijo era moldado numa fôrma.\nPortuguês: forma, fôrma, formato.\nMesma raiz do italiano formaggio."
+  ],
+  [
+   "Alimentation",
+   "les œufs",
+   "os ovos",
+   "Je prends deux œufs au petit déjeuner.",
+   "Latim: ovum (ovo). Inglês: oval, ovary, ovulation.\nPortuguês: ovo, oval, óvulo, ovário.\nNo plural, o « f » não se pronuncia."
+  ],
+  [
+   "Alimentation",
+   "le riz",
+   "o arroz",
+   "Le riz et les haricots, c'est brésilien !",
+   "Grego: oryza, pelo latim oryza e o italiano riso. Inglês: rice.\nPortuguês: arroz (pelo árabe ar-ruzz, da mesma palavra grega).\nCognato do inglês rice."
+  ],
+  [
+   "Alimentation",
+   "les haricots",
+   "o feijão",
+   "Au Brésil, on mange des haricots noirs.",
+   "Origem incerta; uma hipótese é o náuatle (asteca) ayacotl, pois o feijão veio da América. Inglês: haricot bean também existe.\nPortuguês: sem parente em português.\nHaricots verts = vagem."
+  ],
+  [
+   "Alimentation",
+   "la pomme de terre",
+   "a batata",
+   "Les frites sont faites avec des pommes de terre.",
+   "Latim: pomum (fruto) e terra: « fruto da terra ». Inglês: pomegranate (romã, fruto com grãos), terrain, territory.\nPortuguês: pomo e pomar (de pomum, fruto!), pomada; terra, território.\nLiteralmente « maçã da terra »."
+  ],
+  [
+   "Alimentation",
+   "l'oignon",
+   "a cebola",
+   "Coupez l'oignon en petits morceaux.",
+   "Latim: unio, unionis (cebola; também pérola única). Inglês: onion, a mesma palavra.\nPortuguês: sem parente direto; pense em « união »: camadas unidas (unio significava as duas coisas).\nPronuncia-se « onhon »."
+  ],
+  [
+   "Alimentation",
+   "l'ail",
+   "o alho",
+   "J'ajoute de l'ail dans la sauce.",
+   "Latim: allium (alho). Inglês: allium é o nome científico do alho e da cebola.\nPortuguês: alho (de allium, a mesma palavra).\nParecido com « alho »."
+  ],
+  [
+   "Alimentation",
+   "le beurre",
+   "a manteiga",
+   "Une tartine avec du beurre.",
+   "Grego: boutyron (queijo de vaca), pelo latim butyrum. Inglês: butter.\nPortuguês: butírico (ácido da manteiga, de butyrum).\nInglês: butter."
+  ],
+  [
+   "Alimentation",
+   "la farine",
+   "a farinha",
+   "Il faut de la farine pour faire un gâteau.",
+   "Latim: farina (farinha), de far (trigo). Inglês: farina, farinaceous.\nPortuguês: farinha, farináceo.\nCognato."
+  ],
+  [
+   "Alimentation",
+   "les pâtes",
+   "as massas (macarrão)",
+   "Les enfants adorent les pâtes.",
+   "Latim tardio: pasta (massa). Inglês: pasta, paste, pastry.\nPortuguês: pasta, pastel, pastoso.\nPâte = massa."
+  ],
+  [
+   "Alimentation",
+   "les produits laitiers",
+   "os laticínios",
+   "Les produits laitiers sont riches en calcium.",
+   "Latim: lac, lactis (leite). Inglês: lactose, lactation, lactic.\nPortuguês: leite, lácteo, laticínio, Via Láctea, lactose.\nLait = leite."
+  ],
+  [
+   "Alimentation",
+   "un plat surgelé",
+   "um prato congelado",
+   "Le soir, je mange souvent un plat surgelé.",
+   "Latim: gelare (congelar), de gelu (gelo). Inglês: gel, gelatin, congeal.\nPortuguês: gelo, gelar, congelar, geleia, gelatina.\nGel = gelo."
+  ],
+  [
+   "Alimentation",
+   "un repas équilibré",
+   "uma refeição equilibrada",
+   "Un repas équilibré contient des légumes.",
+   "Latim: aequus (igual) + libra (balança). Repas vem de pastus (alimento). Inglês: equilibrium, equal, repast, pasture.\nPortuguês: equilíbrio, igual, libra; repasto (existe: refeição farta!), pasto.\nÚtil nos temas de saúde."
+  ],
+  [
+   "Alimentation",
+   "la poutine",
+   "a poutine (prato do Québec)",
+   "La poutine est faite de frites, de fromage et de sauce.",
+   "Palavra do Québec, talvez do inglês pudding. Inglês: pudding é a pista mais provável.\nPortuguês: sem parente (palavra do Québec).\nBatata frita, queijo em grãos e molho: símbolo do Québec."
+  ],
+  [
+   "Boissons",
+   "l'eau plate / l'eau gazeuse",
+   "a água sem gás / com gás",
+   "Une bouteille d'eau gazeuse, s'il vous plaît.",
+   "Latim: aqua (água), que virou eau. Grego platys (plano) e gaz, criado a partir do grego chaos. Inglês: aquatic, plate, gas.\nPortuguês: água, aquático, aquário; prato (do latim plattus, plano); gás.\nPlate = plana, sem bolhas."
+  ],
+  [
+   "Boissons",
+   "le jus d'orange",
+   "o suco de laranja",
+   "Un jus d'orange pressé.",
+   "Latim: jus (caldo) e árabe naranj (laranja). Inglês: juice, orange.\nPortuguês: laranja (pelo árabe naranj).\nJus = suco."
+  ],
+  [
+   "Boissons",
+   "le lait",
+   "o leite",
+   "Je bois un verre de lait.",
+   "Latim: lac, lactis (leite). Inglês: lactose, latte (do italiano).\nPortuguês: leite, lácteo, laticínio.\nMesma raiz de laticínio."
+  ],
+  [
+   "Boissons",
+   "un café au lait",
+   "um café com leite",
+   "Le matin, je prends un café au lait.",
+   "Árabe: qahwa, pelo turco kahve. Inglês: coffee, café.\nPortuguês: café, cafeteria, cafezal; leite.\nNa França, também « un crème »."
+  ],
+  [
+   "Boissons",
+   "le thé",
+   "o chá",
+   "Voulez-vous du thé ?",
+   "Chinês (dialeto min): te. Inglês: tea, a mesma origem.\nPortuguês: chá (é a mesma palavra chinesa, em outra pronúncia!).\nChá preto ou verde."
+  ],
+  [
+   "Boissons",
+   "une tisane",
+   "um chá de ervas",
+   "Une tisane de camomille avant de dormir.",
+   "Grego: ptisane (cevada descascada), pelo latim ptisana. Inglês: tisane (chá de ervas), ptisan.\nPortuguês: tisana (existe em português, a mesma palavra).\nInfusão sem folha de chá."
+  ],
+  [
+   "Boissons",
+   "le vin rouge / blanc",
+   "o vinho tinto / branco",
+   "Un verre de vin rouge avec le fromage.",
+   "Latim: vinum (vinho) e rubeus (vermelho). Blanc é germânico (blank, brilhante). Inglês: wine, vine, ruby, blank.\nPortuguês: vinho, vinha, vindima; rubro, rubi, ruborizar; branco (do mesmo germânico blank!).\nRouge = vermelho: vinho tinto."
+  ],
+  [
+   "Boissons",
+   "la bière",
+   "a cerveja",
+   "Une bière bien fraîche.",
+   "Origem germânica: bier. Inglês: beer, a mesma palavra.\nPortuguês: sem parente (cerveja vem do latim cervisia).\nInglês: beer."
+  ],
+  [
+   "Boissons",
+   "une boisson gazeuse",
+   "um refrigerante",
+   "Les boissons gazeuses contiennent beaucoup de sucre.",
+   "Latim: bibere (beber), que deu boisson. Inglês: beverage, imbibe.\nPortuguês: beber, bebida, bebedouro, embeber (de bibere).\nNo Québec, também « une liqueur »."
+  ],
+  [
+   "Boissons",
+   "le chocolat chaud",
+   "o chocolate quente",
+   "En hiver, je bois un chocolat chaud.",
+   "Náuatle (asteca): xocolatl. Chaud vem do latim calidus (quente). Inglês: chocolate, caldron, calorie.\nPortuguês: chocolate; cálido, caldo, caldeira, calor.\nChaud = quente."
+  ],
+  [
+   "Boissons",
+   "un apéritif",
+   "um aperitivo",
+   "On prend l'apéritif avant le dîner.",
+   "Latim: aperire (abrir): abre o apetite. Inglês: aperitif, aperture.\nPortuguês: abrir, aperitivo, abertura (de aperire).\nBebida antes da refeição, abre (aperire) o apetite."
+  ],
+  [
+   "Boissons",
+   "trinquer",
+   "brindar",
+   "Trinquons à ta réussite !",
+   "Origem germânica: trinken (beber). Inglês: drink, a mesma raiz.\nPortuguês: sem parente direto; pense no som dos copos: trinc!.\nBater os copos."
+  ],
+  [
+   "Boissons",
+   "Santé ! / À la vôtre !",
+   "Saúde! (brinde)",
+   "À la vôtre, et bonne année !",
+   "Latim: sanitas (saúde), de sanus (são). Inglês: sanity, sanitary.\nPortuguês: saúde, são, sanitário, sanatório (de sanus).\nÀ la tienne para quem você trata por tu."
+  ],
+  [
+   "Boissons",
+   "avoir soif",
+   "ter sede",
+   "J'ai soif, je vais boire de l'eau.",
+   "Latim: sitis (sede). Inglês: sem parente comum; lembre de « sede », que vem da mesma sitis.\nPortuguês: sede (de sitis, a mesma palavra).\nCom avoir, como avoir faim."
+  ],
+  [
+   "Politique",
+   "le gouvernement",
+   "o governo",
+   "Le gouvernement a annoncé une réforme.",
+   "Latim: gubernare (pilotar um navio), do grego kybernan. Inglês: govern, government, cybernetics.\nPortuguês: governo, governar, governanta; cibernética (do mesmo grego).\nCognato."
+  ],
+  [
+   "Politique",
+   "l'État",
+   "o Estado",
+   "L'État finance les écoles publiques.",
+   "Latim: status (posição, condição), de stare (estar de pé). Inglês: state, status, statue.\nPortuguês: estado, estar, estátua, estatuto (de stare).\nCom maiúscula quando é o poder público."
+  ],
+  [
+   "Politique",
+   "le Premier ministre",
+   "o primeiro-ministro",
+   "Le Premier ministre du Canada.",
+   "Latim: primarius (o primeiro) e minister (servidor, de minus). Inglês: prime minister, primary, minister.\nPortuguês: primeiro, primário, primo; ministro, ministério, menos (minister vem de minus!).\nChefe do governo no Canadá."
+  ],
+  [
+   "Politique",
+   "le député",
+   "o deputado",
+   "Les députés votent les lois.",
+   "Latim: deputare (designar, podar), de putare. Inglês: deputy, depute.\nPortuguês: deputado; computar, reputação (de putare).\nEleito para o parlamento."
+  ],
+  [
+   "Politique",
+   "le maire / la mairesse",
+   "o prefeito / a prefeita",
+   "Le maire de Montréal.",
+   "Latim: maior (maior). Inglês: mayor, major, majority.\nPortuguês: maior, majoritário, mordomo (maior domus).\nMairie = prefeitura."
+  ],
+  [
+   "Politique",
+   "une élection",
+   "uma eleição",
+   "Les élections ont lieu en octobre.",
+   "Latim: eligere (escolher), de ex + legere. Inglês: election, elect, elite.\nPortuguês: eleição, eleger, elite, seleção, ler (de legere!).\nCognato."
+  ],
+  [
+   "Politique",
+   "voter",
+   "votar",
+   "Les citoyens votent pour élire leurs représentants.",
+   "Latim: votum (promessa, desejo), de vovere. Inglês: vote, vow, devote.\nPortuguês: voto, devoto, devoção (de votum).\nCognato."
+  ],
+  [
+   "Politique",
+   "le scrutin",
+   "o escrutínio, a votação",
+   "Le scrutin est ouvert jusqu'à 21 h.",
+   "Latim: scrutinium (exame minucioso), de scrutari (vasculhar). Inglês: scrutiny, scrutinize.\nPortuguês: escrutínio, perscrutar, escrutinar.\nO momento da votação."
+  ],
+  [
+   "Politique",
+   "un parti politique",
+   "um partido político",
+   "Il est membre d'un parti politique.",
+   "Latim: partire (dividir) e grego polis (cidade). Inglês: party, part, political, metropolis.\nPortuguês: partido, parte, partir; política, polícia (as duas de polis!).\nCognato."
+  ],
+  [
+   "Politique",
+   "une loi",
+   "uma lei",
+   "Le Parlement a adopté une nouvelle loi.",
+   "Latim: lex, legis (lei). Inglês: legal, legislation, legitimate.\nPortuguês: lei, legal, legislação, legítimo, leal.\nAdopter une loi = aprovar uma lei."
+  ],
+  [
+   "Politique",
+   "une réforme",
+   "uma reforma",
+   "La réforme des retraites suscite des débats.",
+   "Latim: reformare (dar nova forma). Inglês: reform, form, format.\nPortuguês: reforma, forma, formar, formato.\nCognato."
+  ],
+  [
+   "Politique",
+   "les impôts",
+   "os impostos",
+   "Les impôts financent les services publics.",
+   "Latim: imponere (colocar sobre), de in + ponere. Inglês: impose, imposition.\nPortuguês: imposto, impor, pôr, posição, depósito (de ponere).\nPayer ses impôts."
+  ],
+  [
+   "Politique",
+   "le citoyen / la citoyenne",
+   "o cidadão / a cidadã",
+   "Chaque citoyen a le droit de voter.",
+   "Latim: civitas (cidade, conjunto dos cidadãos), de civis. Inglês: citizen, city, civil.\nPortuguês: cidadão, cidade, civil, civismo.\nCité = cidade."
+  ],
+  [
+   "Politique",
+   "la citoyenneté",
+   "a cidadania",
+   "Il a obtenu la citoyenneté canadienne.",
+   "Latim: civitas, de civis (cidadão). Inglês: citizenship, civic, civilization.\nPortuguês: cidadania, cidade, civilização.\nObjetivo de muitos alunos!"
+  ],
+  [
+   "Politique",
+   "les droits",
+   "os direitos",
+   "Les droits de l'homme.",
+   "Latim: directus (reto, direito). Inglês: direct, direction; right tem a mesma ideia de reto.\nPortuguês: direito, direto, dirigir, endereço.\nDroit = direito (e também reto)."
+  ],
+  [
+   "Politique",
+   "manifester",
+   "manifestar-se, protestar",
+   "Des milliers de personnes ont manifesté.",
+   "Latim: manifestus (pego com a mão, evidente), de manus. Inglês: manifest, manifestation, manual.\nPortuguês: manifestar, manifesto; mão, manual, manusear (de manus).\nUne manifestation = um protesto."
+  ],
+  [
+   "Politique",
+   "une grève",
+   "uma greve",
+   "Les enseignants sont en grève.",
+   "Vem da Place de Grève em Paris, praça à beira do Sena onde os desempregados esperavam trabalho. Grève = areal, cascalho. Inglês: gravel, da mesma raiz.\nPortuguês: sem parente latino; lembre da Place de Grève em Paris.\nFaire grève = fazer greve."
+  ],
+  [
+   "Politique",
+   "la démocratie",
+   "a democracia",
+   "La démocratie repose sur le vote.",
+   "Grego: demos (povo) + kratos (poder). Inglês: democracy, demographic, bureaucracy.\nPortuguês: democracia, demografia, epidemia, pandemia (demos: povo!).\nCognato."
+  ],
+  [
+   "Politique",
+   "le pouvoir",
+   "o poder",
+   "Le parti au pouvoir.",
+   "Latim popular: potere (poder), de posse. Inglês: power, potent, potential.\nPortuguês: poder, potência, potente, possível.\nTambém o verbo poder."
+  ],
+  [
+   "Politique",
+   "les politiques publiques",
+   "as políticas públicas",
+   "Les politiques publiques doivent protéger les plus fragiles.",
+   "Grego polis (cidade) e latim publicus (do povo). Inglês: policy, politics, public.\nPortuguês: política, polícia, metrópole; público, publicar.\nMuito útil na Tâche 3."
+  ],
+  [
+   "Loisirs et sport",
+   "faire de la randonnée",
+   "fazer trilha",
+   "Le week-end, nous faisons de la randonnée dans les Laurentides.",
+   "Vem de randir (correr com ímpeto), de origem germânica. Inglês: random (antes: correr sem rumo).\nPortuguês: sem parente direto; pense em andar « ao acaso » (random)."
+  ],
+  [
+   "Loisirs et sport",
+   "s'inscrire à un club",
+   "inscrever-se num clube",
+   "Je me suis inscrit à un club de natation.",
+   "Latim: inscribere (escrever em), de in + scribere. Inglês: inscribe, inscription, script. Club vem do inglês.\nPortuguês: inscrever, escrever, escrita, escritura, inscrição."
+  ],
+  [
+   "Loisirs et sport",
+   "un abonnement",
+   "uma assinatura / mensalidade",
+   "L'abonnement à la salle de sport coûte 40 dollars par mois.",
+   "Vem de borne (marco, limite), do latim tardio bodina: acertar um limite e um preço fixo. Inglês: bound, boundary (limite).\nPortuguês: abonar e abono (pelo francês abonner)."
+  ],
+  [
+   "Loisirs et sport",
+   "une salle de sport / un gym",
+   "uma academia",
+   "Je vais à la salle de sport trois fois par semaine.",
+   "Origem germânica: sal (sala). Sport vem do inglês, que tirou do francês antigo desport (diversão). Inglês: saloon, sport, disport.\nPortuguês: sala, salão; desporto (o nome em Portugal, do mesmo desport!)."
+  ],
+  [
+   "Loisirs et sport",
+   "se détendre",
+   "relaxar",
+   "La lecture m'aide à me détendre.",
+   "Latim: tendere (esticar); dé-tendre = afrouxar a tensão. Inglês: tension, tend, détente.\nPortuguês: tender, tensão, distender, distensão, estender."
+  ],
+  [
+   "Loisirs et sport",
+   "un spectacle",
+   "um espetáculo",
+   "Nous avons assisté à un spectacle de danse.",
+   "Latim: spectaculum (o que se vê), de spectare (olhar). Inglês: spectacle, spectator, inspect.\nPortuguês: espetáculo, espectador, espectro, inspecionar, especular (de spectare)."
+  ],
+  [
+   "Loisirs et sport",
+   "une équipe",
+   "uma equipe / um time",
+   "Mon équipe a gagné le match.",
+   "Origem germânica: skip (barco); équiper = equipar um barco, a tripulação. Inglês: ship, equip, equipment.\nPortuguês: equipe, equipar, equipamento, esquife (barquinho, da mesma raiz germânica)."
+  ],
+  [
+   "Loisirs et sport",
+   "s'entraîner",
+   "treinar",
+   "Elle s'entraîne pour le marathon.",
+   "Latim: trahere (puxar, arrastar). Inglês: train, trail, tractor.\nPortuguês: trazer (de trahere!), atrair, tração, trator, subtrair."
+  ],
+  [
+   "Loisirs et sport",
+   "le patinage",
+   "a patinação",
+   "En hiver, le patinage est très populaire au Canada.",
+   "Vem de patte (pata, pé), de origem popular. Inglês: patten (tamanco antigo) e o sentido de skating.\nPortuguês: pata, patinar, patim."
+  ],
+  [
+   "Loisirs et sport",
+   "un passe-temps",
+   "um passatempo",
+   "La photographie est mon passe-temps préféré.",
+   "Latim: passus (passo) e tempus (tempo). Inglês: pastime, a tradução literal!\nPortuguês: passatempo (a mesma palavra!), tempo, temporada."
+  ],
+  [
+   "Loisirs et sport",
+   "sédentaire",
+   "sedentário",
+   "Le sport est essentiel pour ceux qui ont un travail sédentaire.",
+   "Latim: sedentarius (que fica sentado), de sedere (sentar). Inglês: sedentary, sediment, seat.\nPortuguês: sedentário, sede, sessão, assento, presidir (de sedere)."
+  ],
+  [
+   "Loisirs et sport",
+   "une sortie culturelle",
+   "um passeio cultural",
+   "Nous organisons une sortie culturelle au musée.",
+   "Latim: sortiri (tirar a sorte), que deu sortir. Cultura: colere (cultivar). Inglês: sort, culture.\nPortuguês: sorte, sortear; cultura, cultivar."
+  ],
+  [
+   "Loisirs et sport",
+   "se dépasser",
+   "superar-se",
+   "Le sport m'apprend à me dépasser.",
+   "Latim: passus (passo): dé-passer = passar além. Inglês: pass, surpass.\nPortuguês: passar, ultrapassar, passo."
+  ],
+  [
+   "Loisirs et sport",
+   "un festival",
+   "um festival",
+   "Montréal accueille de nombreux festivals en été.",
+   "Latim: festivus (festivo), de festum (festa). Inglês: festival, feast, festive.\nPortuguês: festa, festival, festejar, festivo."
+  ],
+  [
+   "Marché du travail",
+   "un emploi / un poste",
+   "um emprego / um cargo",
+   "J'ai postulé à un poste de comptable.",
+   "Latim: implicare (envolver, empregar) e positum (colocado). Inglês: employ, employment, post, position.\nPortuguês: empregar, emprego, implicar; posto, posição, postura."
+  ],
+  [
+   "Marché du travail",
+   "postuler",
+   "candidatar-se",
+   "Je voudrais postuler à votre offre d'emploi.",
+   "Latim: postulare (pedir, reivindicar). Inglês: postulate.\nPortuguês: postular, postulado, postulante."
+  ],
+  [
+   "Marché du travail",
+   "un CV / un curriculum vitae",
+   "um currículo",
+   "Au Canada, le CV ne contient pas de photo.",
+   "Latim: curriculum (corrida, percurso) + vitae (da vida). Inglês: curriculum vitae, curriculum, vital.\nPortuguês: currículo, correr, curso; vida, vital."
+  ],
+  [
+   "Marché du travail",
+   "une lettre de motivation",
+   "uma carta de apresentação",
+   "J'ai joint ma lettre de motivation.",
+   "Latim: littera (letra) e movere (mover): o que move você. Inglês: letter, motivation, motive, move.\nPortuguês: letra, literatura, letrado; motivo, mover, motor, motivação."
+  ],
+  [
+   "Marché du travail",
+   "un entretien d'embauche",
+   "uma entrevista de emprego",
+   "J'ai un entretien d'embauche lundi.",
+   "Latim: inter (entre) + tenere (segurar): manter uma conversa. Inglês: entertain. Embauche: dar trabalho em uma bauche (oficina).\nPortuguês: entreter, manter, deter, tenaz (de tenere)."
+  ],
+  [
+   "Marché du travail",
+   "le salaire",
+   "o salário",
+   "Le salaire est négociable selon l'expérience.",
+   "Latim: salarium, ligado a sal: dinheiro dado aos soldados romanos para comprar sal. Inglês: salary, salt.\nPortuguês: salário, sal, salada (verdura salgada!), saleiro."
+  ],
+  [
+   "Marché du travail",
+   "les avantages sociaux",
+   "os benefícios (plano de saúde, previdência…)",
+   "Le poste offre de bons avantages sociaux.",
+   "Latim: ab ante (de diante) e socius (companheiro). Inglês: advantage, social.\nPortuguês: vantagem, avante; social, sócio, sociedade."
+  ],
+  [
+   "Marché du travail",
+   "à temps plein / à temps partiel",
+   "em tempo integral / meio período",
+   "Je cherche un emploi à temps partiel.",
+   "Latim: tempus (tempo), plenus (cheio) e pars (parte). Inglês: temporary, plenty, partial, part-time.\nPortuguês: tempo, temporário; pleno, plenitude, cheio (de plenus!); parcial, parte."
+  ],
+  [
+   "Marché du travail",
+   "le télétravail",
+   "o teletrabalho",
+   "Le télétravail s'est généralisé depuis 2020.",
+   "Grego tele (longe) + latim tripalium (instrumento de três paus, de tortura). Inglês: telephone, travail (esforço penoso), travel.\nPortuguês: trabalho (do mesmo tripalium!), telefone, televisão."
+  ],
+  [
+   "Marché du travail",
+   "la pénurie de main-d'œuvre",
+   "a falta de mão de obra",
+   "Le Québec fait face à une pénurie de main-d'œuvre.",
+   "Latim: penuria (falta, miséria), manus (mão) e opera (obra). Inglês: penury, manual, opera, operate.\nPortuguês: penúria (a mesma palavra); mão, manual; obra, operário."
+  ],
+  [
+   "Marché du travail",
+   "la reconnaissance des diplômes",
+   "o reconhecimento de diplomas",
+   "La reconnaissance des diplômes est un défi pour les immigrants.",
+   "Latim: recognoscere (reconhecer) e grego diploma (papel dobrado em dois). Inglês: recognize, diploma, diplomat.\nPortuguês: reconhecer, conhecer, reconhecimento; diploma, diplomata."
+  ],
+  [
+   "Marché du travail",
+   "un collègue",
+   "um colega de trabalho",
+   "Mes collègues sont très accueillants.",
+   "Latim: collega (quem foi escolhido junto), de cum + legere. Inglês: colleague, college.\nPortuguês: colega, colégio, eleger, ler (de legere)."
+  ],
+  [
+   "Marché du travail",
+   "démissionner",
+   "pedir demissão",
+   "Elle a démissionné pour créer son entreprise.",
+   "Latim: dimittere (mandar embora, renunciar), de dis + mittere. Inglês: dismiss, dismissal.\nPortuguês: demitir, demissão, missão, remeter (de mittere)."
+  ],
+  [
+   "Marché du travail",
+   "une reconversion professionnelle",
+   "uma mudança de carreira",
+   "Il a fait une reconversion professionnelle à 40 ans.",
+   "Latim: convertere (virar completamente) e profiteri (declarar publicamente). Inglês: conversion, convert, profession.\nPortuguês: converter, conversão, verso, versão; profissão, professor, professar (de profiteri)."
+  ],
+  [
+   "Marché du travail",
+   "le chômage",
+   "o desemprego",
+   "Le taux de chômage a baissé cette année.",
+   "Latim tardio: caumare (descansar no calor), do grego kauma (calor). Inglês: calm vem da mesma raiz!\nPortuguês: calma, calmaria (do mesmo grego kauma!)."
+  ],
+  [
+   "Marché du travail",
+   "l'équilibre vie professionnelle / vie personnelle",
+   "o equilíbrio entre trabalho e vida pessoal",
+   "Le télétravail améliore l'équilibre vie professionnelle / vie personnelle.",
+   "Latim: aequus (igual) + libra (balança) e vita (vida). Inglês: equilibrium, vital, work-life balance.\nPortuguês: equilíbrio, igual; vida, vital; pessoa, pessoal."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "parler",
+   "falar",
+   "Je parle français et portugais.",
+   "Latim popular: parabolare (falar, contar parábolas). Inglês: parlance, parliament, parable.\nPortuguês: palavra e parábola (as duas de parabola!), parlamento, parlar (arcaico).\nModelo do 1º grupo: je parle, nous parlons, ils parlent."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "manger",
+   "comer",
+   "Nous mangeons à midi.",
+   "Latim: manducare (mastigar). Inglês: manger (manjedoura), mandible.\nPortuguês: manjar (a mesma palavra!), manjedoura, mandíbula.\nNous mangeons: o « e » mantém o som do g."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "commencer",
+   "começar",
+   "Nous commençons le cours à 9 h.",
+   "Latim popular: cominitiare, de cum + initium (início). Inglês: commence, initial, initiate.\nPortuguês: começar (do mesmo cominitiare!), início, iniciar.\nNous commençons: o « ç » mantém o som de s."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "acheter",
+   "comprar",
+   "J'achète du pain.",
+   "Latim popular: accaptare (pegar para si), de captare. Inglês: capture, captive.\nPortuguês: captar, capturar, cativo (de captare).\nGanha acento: j'achète, mas nous achetons."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "appeler",
+   "chamar, telefonar",
+   "Je t'appelle ce soir.",
+   "Latim: appellare (chamar, dirigir-se a). Inglês: appeal, appellation.\nPortuguês: apelar, apelo, apelação, apelido.\nDobra o l: j'appelle, mas nous appelons."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "jeter",
+   "jogar fora",
+   "Ne jetez pas vos déchets par terre.",
+   "Latim: iactare (lançar). Inglês: jet, eject, project, reject.\nPortuguês: jato, jeito (de iactus!), projeto, rejeitar, sujeito.\nDobra o t: je jette, mas nous jetons."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "préférer",
+   "preferir",
+   "Je préfère le thé.",
+   "Latim: praeferre (levar à frente), de prae + ferre. Inglês: prefer, preference.\nPortuguês: preferir, preferência, conferir, transferir (de ferre).\nAcento muda: je préfère, nous préférons."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "envoyer",
+   "enviar",
+   "J'envoie un courriel.",
+   "Latim: inviare (pôr a caminho), de in + via (caminho). Inglês: envoy, via, voyage.\nPortuguês: enviar (de in via!), via, viagem, enviado.\nFuturo irregular: j'enverrai."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "payer",
+   "pagar",
+   "Je paie par carte.",
+   "Latim: pacare (apaziguar): pagar acalmava o credor. Inglês: pay, pacify, peace.\nPortuguês: pagar (do mesmo pacare!), paz, pacificar, apaziguar.\nAceita je paie ou je paye."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "essayer",
+   "tentar, experimentar",
+   "J'essaie cette robe.",
+   "Latim: exagium (pesagem, prova). Inglês: essay (tentativa), assay.\nPortuguês: ensaio, ensaiar, exame (da mesma família de exagium).\nEssayer de + verbo = tentar fazer."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "travailler",
+   "trabalhar",
+   "Je travaille à temps plein.",
+   "Latim popular: tripaliare (torturar com o tripalium, instrumento de três paus). Inglês: travail (esforço penoso), travel.\nPortuguês: trabalhar (do mesmo tripaliare!).\nRegular do 1º grupo."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "voyager",
+   "viajar",
+   "Nous voyageons en été.",
+   "Latim: viaticum (provisão para a viagem), de via (caminho). Inglês: voyage, via.\nPortuguês: viagem, via, viático, viajante.\nNous voyageons, como manger."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "habiter",
+   "morar",
+   "J'habite à Montréal.",
+   "Latim: habitare (morar), de habere. Inglês: inhabit, habitat, habitation.\nPortuguês: habitar, habitação, hábito, habitante.\nHabiter à + cidade."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "penser",
+   "pensar",
+   "Je pense que c'est une bonne idée.",
+   "Latim: pensare (pesar, avaliar). Inglês: pensive, compensate.\nPortuguês: pensar e pesar (os dois de pensare!), pensão, compensar.\nPenser à = pensar em. Penser que = achar que."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "écouter",
+   "escutar",
+   "J'écoute la radio.",
+   "Latim: auscultare (escutar com atenção). Inglês: auscultation (o médico escutando o coração).\nPortuguês: escutar (do mesmo auscultare!), auscultar.\nSem preposição: écouter quelqu'un."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "rencontrer",
+   "encontrar, conhecer (alguém)",
+   "J'ai rencontré ma femme à l'université.",
+   "Latim: contra (contra, diante de). Inglês: encounter, counter.\nPortuguês: encontrar, encontro, contra.\nConhecer alguém pela primeira vez."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "arriver",
+   "chegar",
+   "Je suis arrivé hier.",
+   "Latim popular: adripare (chegar à margem), de ripa (margem). Inglês: arrive, river.\nPortuguês: arribar (chegar ao porto), ribeira, ribeirinho (de ripa).\nPassé composé com être."
+  ],
+  [
+   "Verbes du 1er groupe",
+   "se lever",
+   "levantar-se",
+   "Je me lève à 7 h.",
+   "Latim: levare (levantar), de levis (leve). Inglês: lever, elevate, relieve.\nPortuguês: levantar, levar, leve, elevar, relevo.\nPronominal e com acento: je me lève, nous nous levons."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "finir",
+   "terminar",
+   "Nous finissons le travail à 17 h.",
+   "Latim: finire (terminar), de finis (fim). Inglês: finish, final, finite.\nPortuguês: fim, final, finito, definir, finar.\nModelo do 2º grupo: nous finissons, ils finissent."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "choisir",
+   "escolher",
+   "Je choisis le menu du jour.",
+   "Origem germânica (gótico kausjan, provar, escolher). Inglês: choose, choice.\nPortuguês: sem parente latino (origem germânica).\nNous choisissons."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "réussir",
+   "conseguir, ter sucesso",
+   "Elle a réussi son examen.",
+   "Italiano riuscire (sair de novo), do latim exire (sair). Inglês: exit; o sentido é succeed.\nPortuguês: êxito (de exitus, da mesma raiz exire!).\nRéussir à + verbo = conseguir fazer."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "grandir",
+   "crescer",
+   "Les enfants grandissent vite.",
+   "Latim: grandis (grande). Inglês: grand, grandeur.\nPortuguês: grande, grandeza, engrandecer.\nDe grand: ficar grande."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "grossir",
+   "engordar",
+   "Il a grossi pendant les vacances.",
+   "Latim: grossus (grosso). Inglês: gross, grocer (quem vendia por atacado).\nPortuguês: grosso, grossura, engrossar.\nDe gros: ficar gordo."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "maigrir",
+   "emagrecer",
+   "Elle veut maigrir un peu.",
+   "Latim: macer (magro). Inglês: meager, emaciated.\nPortuguês: magro, emagrecer, macérrimo (superlativo culto de magro, de macer!).\nDe maigre: ficar magro."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "réfléchir",
+   "refletir, pensar bem",
+   "Je dois réfléchir avant de répondre.",
+   "Latim: reflectere (dobrar para trás, voltar o pensamento). Inglês: reflect, reflection, flexible.\nPortuguês: refletir, reflexo, reflexão, flexível, flexão.\nRéfléchir à = refletir sobre."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "obéir",
+   "obedecer",
+   "Les enfants obéissent à leurs parents.",
+   "Latim: oboedire (escutar diante de), de ob + audire (ouvir). Inglês: obey, obedience, audio.\nPortuguês: obedecer (de oboedire), ouvir, auditório, áudio (de audire).\nSempre com « à »."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "remplir",
+   "preencher, encher",
+   "Remplissez ce formulaire.",
+   "Latim: plenus (cheio): re + emplir, encher. Inglês: plenty, replenish, complete.\nPortuguês: encher (de implere, a mesma origem de emplir!), pleno, plenitude.\nMuito usado com formulários."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "agir",
+   "agir",
+   "Il faut agir maintenant.",
+   "Latim: agere (agir, conduzir). Inglês: act, agent, agile.\nPortuguês: agir, agente, ágil, ação.\nNous agissons."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "rougir",
+   "corar, ficar vermelho",
+   "Elle rougit quand elle est timide.",
+   "Latim: rubeus (avermelhado). Inglês: rouge (maquiagem), ruby.\nPortuguês: rubro, ruborizar, rubi, rubéola.\nDe rouge: vermelho."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "applaudir",
+   "aplaudir",
+   "Le public applaudit les artistes.",
+   "Latim: applaudere (bater as mãos em direção a), de ad + plaudere. Inglês: applaud, applause, plausible.\nPortuguês: aplaudir, aplauso, plausível.\nNous applaudissons."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "bâtir",
+   "construir",
+   "Ils ont bâti une maison.",
+   "Origem germânica (frâncico bastjan, ligar com cordas). Inglês: bastion, baste (alinhavar).\nPortuguês: bastião (a fortaleza construída), bastilha.\nO acento circunflexo lembra um s antigo (bastir)."
+  ],
+  [
+   "Verbes du 2e groupe",
+   "établir",
+   "estabelecer",
+   "Il faut établir des règles.",
+   "Latim: stabilire (tornar estável), de stabilis. Inglês: establish, stable.\nPortuguês: estabelecer, estável, estabilidade, estábulo (de stabulum).\nNous établissons."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "être",
+   "ser, estar",
+   "Je suis, tu es, il est, nous sommes, vous êtes, ils sont.",
+   "Latim: esse (ser) e stare (estar). Inglês: essence, essential, state.\nPortuguês: ser, essência, essencial; estar (de stare).\nIrregular. Futuro: je serai."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "avoir",
+   "ter",
+   "J'ai, tu as, il a, nous avons, vous avez, ils ont.",
+   "Latim: habere (ter). Inglês: have e habit (o que se tem como costume).\nPortuguês: haver, hábito, habitar, há.\nIrregular. Futuro: j'aurai."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "aller",
+   "ir",
+   "Je vais, nous allons, ils vont.",
+   "Mistura de três verbos latinos: ambulare (andar), vadere (ir: je vais) e ire (ir: j'irai). Inglês: ambulance, amble, invade.\nPortuguês: vou (de vado!), ambulante, ambulância (de ambulare), ir, irei (de ire).\nTermina em -er, mas é do 3º grupo! Futuro: j'irai."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "faire",
+   "fazer",
+   "Je fais, nous faisons, vous faites, ils font.",
+   "Latim: facere (fazer). Inglês: fact, factory, manufacture.\nPortuguês: fazer, feito, fato, efeito.\nVous faites, nunca « vous faisez ». Futuro: je ferai."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "prendre",
+   "pegar, tomar",
+   "Je prends, nous prenons, ils prennent.",
+   "Latim: prehendere (agarrar). Inglês: comprehend, apprehend, prehensile.\nPortuguês: prender, apreender, compreender, presa, empresa.\nParticípio: pris. Comprendre e apprendre seguem o mesmo modelo."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "venir",
+   "vir",
+   "Je viens, nous venons, ils viennent.",
+   "Latim: venire (vir). Inglês: convene, event, adventure, venue.\nPortuguês: vir, advir, porvir, evento, convenção.\nPassé composé com être. Futuro: je viendrai."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "pouvoir",
+   "poder",
+   "Je peux, nous pouvons, ils peuvent.",
+   "Latim popular: potere (poder), de posse. Inglês: power, potent, possible.\nPortuguês: poder, potência, possível, potente.\nCondicional educado: pourriez-vous… ?"
+  ],
+  [
+   "Verbes du 3e groupe",
+   "vouloir",
+   "querer",
+   "Je veux, nous voulons, ils veulent.",
+   "Latim popular: volere (querer), de velle. Inglês: volition, voluntary, volunteer.\nPortuguês: vontade, voluntário, voluntarioso, benévolo.\nEducado: je voudrais."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "devoir",
+   "dever, ter que",
+   "Je dois, nous devons, ils doivent.",
+   "Latim: debere (dever). Inglês: debt, debit, due.\nPortuguês: dever, dívida, débito, devido.\nParticípio: dû."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "savoir",
+   "saber",
+   "Je sais, nous savons, ils savent.",
+   "Latim: sapere (ter sabor, ser sábio). Inglês: savvy, sapient, Homo sapiens.\nPortuguês: saber e sabor (os dois de sapere!), sábio, sapiência.\nSubjuntivo: que je sache."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "voir",
+   "ver",
+   "Je vois, nous voyons, ils voient.",
+   "Latim: videre (ver). Inglês: video, vision, visible, view.\nPortuguês: ver, vista, visão, evidente, vídeo.\nParticípio: vu. Futuro: je verrai."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "mettre",
+   "pôr, colocar",
+   "Je mets, nous mettons, ils mettent.",
+   "Latim: mittere (enviar, soltar). Inglês: permit, mission, transmit, submit.\nPortuguês: meter (de mittere!), remeter, prometer, missão, permitir.\nParticípio: mis."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "dire",
+   "dizer",
+   "Je dis, nous disons, vous dites.",
+   "Latim: dicere (dizer). Inglês: dictate, dictionary, predict, verdict.\nPortuguês: dizer, dito, ditado, dicionário, predizer.\nVous dites, como vous faites."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "sortir",
+   "sair",
+   "Je sors, nous sortons.",
+   "Latim: sortiri (tirar a sorte), que passou a significar sair. Inglês: sort, sortie (saída militar).\nPortuguês: sorte, sortear, sortido.\nPassé composé com être: je suis sorti."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "partir",
+   "partir, ir embora",
+   "Je pars demain.",
+   "Latim: partire (dividir, separar): quem parte se separa do lugar. Inglês: depart, part, party.\nPortuguês: partir, parte, partilha, repartição.\nPassé composé com être."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "lire",
+   "ler",
+   "Je lis, nous lisons.",
+   "Latim: legere (recolher, ler). Inglês: legible, lecture, legend.\nPortuguês: ler, leitura, lição (de lectio), lenda (de legenda: o que deve ser lido).\nParticípio: lu."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "écrire",
+   "escrever",
+   "J'écris, nous écrivons.",
+   "Latim: scribere (escrever). Inglês: scribe, script, describe, inscription.\nPortuguês: escrever, escrita, escriba, escritura, descrever.\nParticípio: écrit."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "connaître",
+   "conhecer",
+   "Je connais bien Québec.",
+   "Latim: cognoscere (conhecer), de cum + (g)noscere. Inglês: recognize, cognition, know (mesma raiz indo-europeia).\nPortuguês: conhecer (do mesmo cognoscere!), reconhecer, cognição, incógnito.\nConnaître = pessoas e lugares. Savoir = fatos."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "croire",
+   "acreditar, achar",
+   "Je crois que tu as raison.",
+   "Latim: credere (acreditar, confiar). Inglês: credit, credible, creed, incredible.\nPortuguês: crer, crença, crédito, credo, incrédulo.\nNous croyons."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "recevoir",
+   "receber",
+   "Je reçois, nous recevons.",
+   "Latim: recipere (receber), de re + capere. Inglês: receive, recipe, reception.\nPortuguês: receber, receita, recepção, recipiente.\nO ç antes de o e u."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "ouvrir",
+   "abrir",
+   "J'ouvre la fenêtre.",
+   "Latim: aperire (abrir), cruzado com cooperire (cobrir). Inglês: aperture, overture (a abertura de uma ópera).\nPortuguês: abrir (de aperire!), abertura, aperitivo.\nTermina em -ir, mas conjuga como um verbo em -er: j'ouvre."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "vivre",
+   "viver",
+   "Je vis, nous vivons.",
+   "Latim: vivere (viver). Inglês: vivid, survive, revive, vital.\nPortuguês: viver, vida, vivo, víveres, sobreviver.\nParticípio: vécu."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "boire",
+   "beber",
+   "Je bois, nous buvons, ils boivent.",
+   "Latim: bibere (beber). Inglês: beverage, imbibe, bib (babador).\nPortuguês: beber, bebida, bebedouro, embeber.\nParticípio: bu."
+  ],
+  [
+   "Verbes du 3e groupe",
+   "courir",
+   "correr",
+   "Je cours tous les matins.",
+   "Latim: currere (correr). Inglês: current, courier, course, occur.\nPortuguês: correr, corrida, corrente, curso, correio, recorrer.\nFuturo com dois r: je courrai."
+  ],
+  [
+   "Prépositions",
+   "à (+ ville)",
+   "em, a (com cidades)",
+   "J'habite à Montréal.",
+   "Latim: ad (para, em direção a). Inglês: ad aparece em advance, adjust, address.\nPortuguês: a (de ad), advérbio, adjacente.\nCidades: à Paris, à Québec."
+  ],
+  [
+   "Prépositions",
+   "en (+ pays féminin)",
+   "em (países femininos)",
+   "Je vis en France, en Italie.",
+   "Latim: in (em). Inglês: in, a mesma palavra.\nPortuguês: em (de in, a mesma palavra).\nPaíses terminados em -e costumam ser femininos: en."
+  ],
+  [
+   "Prépositions",
+   "au / aux (+ pays)",
+   "em, no, nos (países masculinos ou plurais)",
+   "Je vais au Canada, aux États-Unis.",
+   "Latim: ad + illum (a + o), contraído em au. Inglês: the vem de outra raiz, mas ad aparece em adjacent.\nPortuguês: ao, aos (a mesma contração de ad + illum!).\nAu Brésil, au Canada, aux États-Unis."
+  ],
+  [
+   "Prépositions",
+   "chez",
+   "na casa de, em (um profissional)",
+   "Je dîne chez mes parents. Je vais chez le médecin.",
+   "Latim: casa (cabana), que deu « casa » em português. Inglês: sem parente comum; pense em « na casa de ».\nPortuguês: casa (de casa, a mesma palavra latina!).\nSempre com pessoas, nunca com lugares."
+  ],
+  [
+   "Prépositions",
+   "dans",
+   "em, dentro de",
+   "Les clés sont dans mon sac.",
+   "Latim popular: de intus (de dentro). Inglês: intestine, internal (intus = dentro).\nPortuguês: dentro (de de intro, quase a mesma formação), interno, intestino.\nDentro de um espaço."
+  ],
+  [
+   "Prépositions",
+   "sur",
+   "sobre, em cima de",
+   "Le livre est sur la table.",
+   "Latim: super (sobre, acima). Inglês: super, superior, surface.\nPortuguês: sobre (de super), superior, supermercado.\nEm cima, com contato."
+  ],
+  [
+   "Prépositions",
+   "sous",
+   "embaixo de",
+   "Le chat dort sous le lit.",
+   "Latim: subtus (por baixo), de sub. Inglês: sub, submarine, subway.\nPortuguês: sob (de sub), submarino, subterrâneo, subsolo.\nO contrário de sur."
+  ],
+  [
+   "Prépositions",
+   "devant",
+   "na frente de",
+   "Je t'attends devant le cinéma.",
+   "Latim: de + ab ante (de diante). Inglês: advance, advantage, ante (antes, na frente).\nPortuguês: diante (de in ante), antes, avante.\nO contrário de derrière."
+  ],
+  [
+   "Prépositions",
+   "derrière",
+   "atrás de",
+   "Le parc est derrière l'école.",
+   "Latim: de retro (de trás). Inglês: retro, retrospective, retrograde.\nPortuguês: retrovisor, retrógrado, retroceder (de retro, para trás).\nO contrário de devant."
+  ],
+  [
+   "Prépositions",
+   "entre",
+   "entre",
+   "La pharmacie est entre la banque et la poste.",
+   "Latim: inter (entre). Inglês: inter, international, interval.\nPortuguês: entre (de inter, a mesma palavra), intervalo.\nIgual ao português."
+  ],
+  [
+   "Prépositions",
+   "pendant",
+   "durante",
+   "J'ai étudié pendant deux heures.",
+   "Latim: pendere (pender, estar suspenso): enquanto a coisa está pendente. Inglês: pending, pendant, pendulum.\nPortuguês: pender, pendente, pêndulo, pendência.\nDuração de uma ação."
+  ],
+  [
+   "Prépositions",
+   "depuis",
+   "desde, há (ação que continua)",
+   "J'habite ici depuis trois ans.",
+   "Latim: de + post (depois). Inglês: post, postpone, postwar.\nPortuguês: depois (de de post, a mesma formação!).\nA ação continua até hoje."
+  ],
+  [
+   "Prépositions",
+   "il y a (temps)",
+   "há (tempo passado)",
+   "Je suis arrivé il y a deux ans.",
+   "Latim: habere (ter, haver): « aí há ». Inglês: have; o sentido é ago.\nPortuguês: há (de habet!), haver.\nAção terminada no passado."
+  ],
+  [
+   "Prépositions",
+   "pour",
+   "para",
+   "Ce cadeau est pour toi.",
+   "Latim: pro (por, em favor de). Inglês: pro, for (mesma raiz indo-europeia), pros and cons.\nPortuguês: por, pró, prol (« em prol de »).\nFinalidade ou destinatário."
+  ],
+  [
+   "Prépositions",
+   "par",
+   "por",
+   "Il est passé par Paris.",
+   "Latim: per (por, através de). Inglês: per, per cent, permeate.\nPortuguês: por (de per), percorrer, perfurar, perpassar.\nCaminho, meio ou agente."
+  ],
+  [
+   "Prépositions",
+   "avec",
+   "com",
+   "Je voyage avec ma sœur.",
+   "Latim popular: apud hoc (junto com isso). Inglês: sem parente direto; use with.\nPortuguês: sem parente (o português « com » vem de cum).\nCompanhia ou meio."
+  ],
+  [
+   "Prépositions",
+   "sans",
+   "sem",
+   "Un café sans sucre.",
+   "Latim: sine (sem). Inglês: sans (usado em sans serif), sinecure.\nPortuguês: sem (de sine, a mesma palavra), sinecura.\nO contrário de avec."
+  ],
+  [
+   "Prépositions",
+   "vers",
+   "em direção a, por volta de",
+   "Je rentre vers 18 h.",
+   "Latim: versus (voltado para), de vertere (virar). Inglês: versus, reverse, convert.\nPortuguês: verso, versão, verter, converter, reverso (de vertere).\nDireção ou horário aproximado."
+  ],
+  [
+   "Prépositions",
+   "près de",
+   "perto de",
+   "J'habite près du métro.",
+   "Latim: pressus (apertado, próximo), de premere. Inglês: press, pressure.\nPortuguês: pressão, prensa, imprimir (de premere, apertar).\nPrès de + le = près du."
+  ],
+  [
+   "Prépositions",
+   "loin de",
+   "longe de",
+   "L'aéroport est loin du centre-ville.",
+   "Latim: longe (longe), de longus. Inglês: long, longitude.\nPortuguês: longe (de longe, a mesma palavra!), longo, longitude.\nO contrário de près de."
+  ],
+  [
+   "Prépositions",
+   "à côté de",
+   "ao lado de",
+   "La boulangerie est à côté de la banque.",
+   "Latim: costa (costela, lado). Inglês: coast, costal.\nPortuguês: costa, costela, costado (de costa, o lado do corpo).\nCôté = lado."
+  ],
+  [
+   "Prépositions",
+   "en face de",
+   "em frente a",
+   "L'arrêt de bus est en face de l'hôpital.",
+   "Latim: facies (rosto). Inglês: face, facial, facade.\nPortuguês: face, fachada, faceta.\nFace = rosto: de frente."
+  ],
+  [
+   "Prépositions",
+   "jusqu'à",
+   "até",
+   "Le magasin est ouvert jusqu'à 21 h.",
+   "Latim: de usque (desde, até). Inglês: sem parente comum; lembre que até marca um limite.\nPortuguês: sem parente de uso comum.\nLimite no tempo ou no espaço."
+  ],
+  [
+   "Prépositions",
+   "en (+ mois, saison, moyen)",
+   "em (meses, estações, meios de transporte)",
+   "En juillet, en été, en voiture.",
+   "Latim: in (em). Inglês: in, a mesma palavra.\nPortuguês: em (de in).\nMas: au printemps, à pied, à vélo."
+  ]
+ ],
+ "novasPorDia": 15,
+ "acertosSair": 4
+}

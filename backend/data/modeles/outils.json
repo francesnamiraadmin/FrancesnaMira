@@ -1,0 +1,1004 @@
+{
+ "boite": {
+  "agents": [
+   "L'État",
+   "les autorités",
+   "le Gouvernement",
+   "le Ministère",
+   "les Municipalités",
+   "les professeurs",
+   "les responsables",
+   "les parents",
+   "la population",
+   "les citoyens",
+   "les consommateurs",
+   "les utilisateurs",
+   "les professionnels",
+   "les employés",
+   "l'entreprise"
+  ],
+  "actions": [
+   "créer",
+   "mettre en place",
+   "mettre en œuvre",
+   "renforcer",
+   "changer",
+   "prendre conscience",
+   "encadrer",
+   "garantir",
+   "contrôler"
+  ],
+  "complements": [
+   "des politiques",
+   "des normes",
+   "des lois",
+   "des mesures",
+   "des programmes"
+  ],
+  "domaines": [
+   "de fiscalisation",
+   "de sécurité",
+   "de sécurité alimentaire",
+   "de santé",
+   "d'éducation",
+   "d'intégration sociale, culturelle, politique et professionnelle",
+   "mobilité urbaine",
+   "mobilité internationale",
+   "mobilité sociale"
+  ]
+ },
+ "connecteurs": [
+  {
+   "rotulo": "Introduire",
+   "cor": "#94C4EC",
+   "itens": [
+    "Dans un contexte marqué par…",
+    "Dès lors…",
+    "Le débat portant sur…"
+   ]
+  },
+  {
+   "rotulo": "Nuancer / opposer",
+   "cor": "#8FBFA9",
+   "itens": [
+    "Néanmoins…",
+    "Cependant…",
+    "Il convient également de souligner que…"
+   ]
+  },
+  {
+   "rotulo": "Appuyer la thèse",
+   "cor": "#E4C043",
+   "itens": [
+    "À cet égard…",
+    "Il convient de mettre en avant que…",
+    "notamment en matière de…"
+   ]
+  },
+  {
+   "rotulo": "Conclure",
+   "cor": "#D51E28",
+   "itens": [
+    "En conclusion…",
+    "Pour répondre durablement à cet enjeu…",
+    "Parvenant ainsi à…"
+   ]
+  }
+ ],
+ "trames": {
+  "T1": {
+   "titulo": "Entretien dirigé : la trame",
+   "sousTitre": "Se présenter en 2 minutes, sans préparation, de façon naturelle et organisée.",
+   "etapes": [
+    {
+     "rotulo": "Salutation",
+     "cor": "#94C4EC",
+     "texte": "Bonjour Madame / Monsieur. Je m'appelle… , j'ai … ans."
+    },
+    {
+     "rotulo": "Origine et lieu de vie",
+     "cor": "#E4C043",
+     "texte": "Je suis originaire de… Actuellement, j'habite à… , une ville que j'apprécie pour…"
+    },
+    {
+     "rotulo": "Famille",
+     "cor": "#8FBFA9",
+     "texte": "Je suis marié(e) / célibataire. J'ai … enfant(s) / frère(s) et sœur(s)."
+    },
+    {
+     "rotulo": "Études et profession",
+     "cor": "#C9A62E",
+     "texte": "J'ai fait des études de… Je travaille comme… depuis… ans. Ce qui me plaît dans mon métier, c'est…"
+    },
+    {
+     "rotulo": "Loisirs",
+     "cor": "#7FB0DC",
+     "texte": "Pendant mon temps libre, j'aime… parce que… Le week-end, je…"
+    },
+    {
+     "rotulo": "Projets",
+     "cor": "#D51E28",
+     "texte": "J'apprends le français parce que… Mon projet est de… au Canada / en France."
+    }
+   ],
+   "conseil": "Parlez à la première personne, utilisez le présent, le passé composé (parcours) et le futur proche (projets). Développez chaque réponse avec « parce que » + un exemple."
+  },
+  "T2": {
+   "titulo": "Exercice en interaction : la trame",
+   "sousTitre": "2 min de préparation + 3 min 30 d'échange. Objectif : obtenir des informations en posant des questions variées.",
+   "etapes": [
+    {
+     "rotulo": "Ouverture",
+     "cor": "#94C4EC",
+     "texte": "Bonjour Madame / Monsieur, excusez-moi de vous déranger. Je vous appelle / je viens vous voir au sujet de…"
+    },
+    {
+     "rotulo": "Présenter le besoin",
+     "cor": "#E4C043",
+     "texte": "Je suis intéressé(e) par… et j'aimerais avoir quelques renseignements, s'il vous plaît."
+    },
+    {
+     "rotulo": "Questions ouvertes",
+     "cor": "#8FBFA9",
+     "texte": "Pourriez-vous m'expliquer comment… ? En quoi consiste… ? Quelles sont les conditions pour… ?"
+    },
+    {
+     "rotulo": "Questions précises",
+     "cor": "#C9A62E",
+     "texte": "Quel est le prix / le tarif ? Quels sont les horaires ? Où se trouve… ? Combien de temps dure… ?"
+    },
+    {
+     "rotulo": "Rebondir",
+     "cor": "#7FB0DC",
+     "texte": "Ah, c'est intéressant ! Et est-ce que… ? Si j'ai bien compris, … c'est bien ça ?"
+    },
+    {
+     "rotulo": "Conclusion",
+     "cor": "#D51E28",
+     "texte": "Merci beaucoup pour toutes ces informations, c'est très clair. Je vais réfléchir / je vais m'inscrire. Bonne journée !"
+    }
+   ],
+   "conseil": "Visez au moins 10 questions. Variez les structures : intonation (« Vous acceptez les cartes ? »), « est-ce que », inversion (« Proposez-vous… ? ») et mots interrogatifs (où, quand, combien, comment, pourquoi, quel)."
+  },
+  "T3": {
+   "titulo": "Production orale : la trame",
+   "sousTitre": "Un exposé argumenté, de l'ouverture à l'anecdote (4 min 30, sans préparation).",
+   "etapes": [
+    {
+     "rotulo": "Ouverture",
+     "cor": "#94C4EC",
+     "texte": "Bonjour Madame / Monsieur, aujourd'hui je présenterai un sujet très intéressant / polémique / urgent / paradoxal portant sur « [sujet] ». C'est une discussion controversée qui suscite encore de nombreux débats."
+    },
+    {
+     "rotulo": "Thèse",
+     "cor": "#E4C043",
+     "texte": "Selon moi, X occupe une place centrale dans la société contemporaine, notamment dans un contexte a, b, c."
+    },
+    {
+     "rotulo": "Arguments +",
+     "cor": "#8FBFA9",
+     "texte": "À cet égard, il convient de mettre en avant que X présente / constitue / représente des avantages → 3 arguments positifs."
+    },
+    {
+     "rotulo": "Arguments −",
+     "cor": "#C9A62E",
+     "texte": "Cependant, il convient de souligner que X présente / constitue / représente des inconvénients → 3 arguments négatifs."
+    },
+    {
+     "rotulo": "Conclusion",
+     "cor": "#D51E28",
+     "texte": "Pour répondre durablement à cet enjeu, il est crucial que [l'État, les autorités, le Ministère, la famille, les parents, la société] + subjonctif… Parvenant ainsi à une société plus éthique, morale et juste."
+    },
+    {
+     "rotulo": "Anecdote",
+     "cor": "#7FB0DC",
+     "texte": "Terminez par une histoire personnelle qui illustre votre propos."
+    }
+   ],
+   "conseil": "La trame ne change jamais : seul le vocabulaire de l'axe thématique change. Utilisez les arguments +/− de l'axe ci-dessous."
+  },
+  "ET1": {
+   "titulo": "Tâche 1 écrite : la trame",
+   "sousTitre": "Message court (60 à 120 mots) : inviter, informer, demander.",
+   "etapes": [
+    {
+     "rotulo": "Formule d'appel",
+     "cor": "#94C4EC",
+     "texte": "Salut [prénom] ! / Chers amis, / Bonjour Madame, Monsieur,"
+    },
+    {
+     "rotulo": "Objet",
+     "cor": "#E4C043",
+     "texte": "Je t'écris pour t'inviter à… / pour te proposer de… / pour te demander un service."
+    },
+    {
+     "rotulo": "Informations pratiques",
+     "cor": "#8FBFA9",
+     "texte": "Ce sera le [date] à [heure], à [lieu]. Au programme : … Le prix est de… Pour y aller, …"
+    },
+    {
+     "rotulo": "Demande",
+     "cor": "#C9A62E",
+     "texte": "Peux-tu me confirmer ta présence avant le… ? N'hésite pas à me dire si tu as des questions."
+    },
+    {
+     "rotulo": "Formule de fin",
+     "cor": "#D51E28",
+     "texte": "À très bientôt ! / Bises, / Cordialement, + prénom"
+    }
+   ],
+   "conseil": "Respectez le destinataire (tu / vous) du début à la fin et répondez à TOUS les éléments entre parenthèses de la consigne."
+  },
+  "ET2": {
+   "titulo": "Tâche 2 écrite : la trame",
+   "sousTitre": "Récit / article de blog (120 à 150 mots) : raconter une expérience et donner son avis.",
+   "etapes": [
+    {
+     "rotulo": "Titre",
+     "cor": "#94C4EC",
+     "texte": "Un titre court et accrocheur : « Mon week-end inoubliable à… »"
+    },
+    {
+     "rotulo": "Contexte",
+     "cor": "#E4C043",
+     "texte": "Le mois dernier / Samedi dernier, je suis allé(e) à… avec… C'était à l'occasion de…"
+    },
+    {
+     "rotulo": "Déroulement",
+     "cor": "#8FBFA9",
+     "texte": "D'abord, … Ensuite, … Puis, … Enfin, … (passé composé pour les actions, imparfait pour les descriptions)."
+    },
+    {
+     "rotulo": "Impressions",
+     "cor": "#C9A62E",
+     "texte": "J'ai particulièrement apprécié… En revanche, j'ai été déçu(e) par… Selon moi, …"
+    },
+    {
+     "rotulo": "Recommandation",
+     "cor": "#D51E28",
+     "texte": "Je vous conseille vivement de… / Si vous en avez l'occasion, n'hésitez pas ! Et vous, avez-vous déjà… ?"
+    }
+   ],
+   "conseil": "Alternez passé composé / imparfait et terminez toujours par une opinion claire et une recommandation."
+  },
+  "ET3": {
+   "titulo": "Production écrite : la trame",
+   "sousTitre": "Introduction, thèse, antithèse, conclusion (120 à 180 mots : synthèse des 2 documents en 40 à 60 mots, puis votre opinion en 80 à 120 mots).",
+   "etapes": [
+    {
+     "rotulo": "Introduction",
+     "cor": "#94C4EC",
+     "texte": "Dans un contexte marqué par… / les profondes mutations des sociétés contemporaines, X connaît d'importantes transformations. Dès lors, le débat portant sur… suscite aujourd'hui de vives discussions, tant sur le plan économique que social et culturel."
+    },
+    {
+     "rotulo": "Thèse : avantages",
+     "cor": "#E4C043",
+     "texte": "À cet égard, il convient de souligner que X comporte plusieurs avantages, notamment en matière de…, tout en contribuant à…"
+    },
+    {
+     "rotulo": "Antithèse : limites",
+     "cor": "#8FBFA9",
+     "texte": "Néanmoins, il convient également de souligner que Y présente certaines limites, notamment en ce qui concerne a, b et c."
+    },
+    {
+     "rotulo": "Conclusion",
+     "cor": "#D51E28",
+     "texte": "Pour répondre durablement à cet enjeu, il est essentiel que les [AGENT], en coopération avec [AGENT 2] et [AGENT 3], mettent en œuvre des politiques d'accueil adaptées… Parvenant ainsi à une société éthique, morale et respectueuse."
+    }
+   ],
+   "conseil": "Partie 1 : reformulez les deux documents sans les copier. Partie 2 : prenez position avec la thèse/antithèse et la conclusion de la boîte à outils."
+  }
+ },
+ "surlignage": {
+  "categories": {
+   "con": {
+    "nom": "Connecteurs logiques",
+    "cor": "#2E6FB0",
+    "fundo": "#E6F0FA",
+    "desc": "Articulent les idées : cause, conséquence, opposition, addition, conclusion."
+   },
+   "arg": {
+    "nom": "Structures argumentatives",
+    "cor": "#7C4DBA",
+    "fundo": "#F1EAFB",
+    "desc": "Formules soutenues de la trame (introduction, thèse, antithèse, conclusion)."
+   },
+   "pol": {
+    "nom": "Formules d'interaction et de politesse",
+    "cor": "#2E8B62",
+    "fundo": "#E6F4EC",
+    "desc": "Ouvrir, relancer, remercier et conclure un échange ou une lettre."
+   },
+   "cond": {
+    "nom": "Conditionnel de politesse",
+    "cor": "#C27A12",
+    "fundo": "#FBF0DC",
+    "desc": "Le conditionnel adoucit la demande : il est plus poli et plus naturel."
+   },
+   "sub": {
+    "nom": "Subjonctif",
+    "cor": "#C0453C",
+    "fundo": "#FBEBE9",
+    "desc": "Après l'expression d'une nécessité, d'un souhait ou d'une concession, le verbe se met au subjonctif."
+   },
+   "mc": {
+    "nom": "Mots-clés du thème",
+    "cor": "#8A6A00",
+    "fundo": "#FBEFB8",
+    "desc": "Vocabulaire du sujet : réutilisez-le dans votre production."
+   }
+  },
+  "termes": {
+   "con": [
+    [
+     "en effet",
+     "Introduit une explication ou une preuve. (pt: de fato)"
+    ],
+    [
+     "cependant",
+     "Opposition / nuance. (pt: entretanto)"
+    ],
+    [
+     "néanmoins",
+     "Opposition, plus soutenu que « mais ». (pt: no entanto)"
+    ],
+    [
+     "toutefois",
+     "Nuance ou restriction. (pt: todavia)"
+    ],
+    [
+     "par ailleurs",
+     "Ajoute une idée nouvelle. (pt: além disso, por outro lado)"
+    ],
+    [
+     "de plus en plus",
+     "Progression. (pt: cada vez mais)"
+    ],
+    [
+     "de plus",
+     "Addition d'un argument. (pt: além disso)"
+    ],
+    [
+     "en outre",
+     "Addition, registre soutenu. (pt: ademais)"
+    ],
+    [
+     "de surcroît",
+     "Addition qui renforce l'argument précédent. (pt: ainda por cima)"
+    ],
+    [
+     "dès lors",
+     "Conséquence logique. (pt: desde então, portanto)"
+    ],
+    [
+     "ainsi",
+     "Conséquence ou illustration. (pt: assim)"
+    ],
+    [
+     "donc",
+     "Conséquence. (pt: portanto)"
+    ],
+    [
+     "en conclusion",
+     "Annonce la conclusion. (pt: em conclusão)"
+    ],
+    [
+     "à cet égard",
+     "Relie un développement au point précédent. (pt: a esse respeito)"
+    ],
+    [
+     "tout d'abord",
+     "Premier élément d'une énumération. (pt: antes de tudo)"
+    ],
+    [
+     "d'abord",
+     "Premier élément. (pt: primeiro)"
+    ],
+    [
+     "ensuite",
+     "Deuxième élément. (pt: em seguida)"
+    ],
+    [
+     "enfin",
+     "Dernier élément. (pt: enfim, por fim)"
+    ],
+    [
+     "d'une part",
+     "Premier élément d'une paire. (pt: por um lado)"
+    ],
+    [
+     "d'autre part",
+     "Second élément d'une paire. (pt: por outro lado)"
+    ],
+    [
+     "certes",
+     "Concession avant une objection (« certes…, mais / néanmoins… »). (pt: é verdade que)"
+    ],
+    [
+     "en revanche",
+     "Contraste fort. (pt: em contrapartida)"
+    ],
+    [
+     "à l'inverse",
+     "Présente l'idée opposée. (pt: inversamente)"
+    ],
+    [
+     "par contre",
+     "Opposition, registre courant. (pt: por outro lado)"
+    ],
+    [
+     "notamment",
+     "Introduit un exemple précis. (pt: notadamente, principalmente)"
+    ],
+    [
+     "afin de",
+     "But + infinitif. (pt: a fim de)"
+    ],
+    [
+     "étant donné que",
+     "Cause connue de l'interlocuteur. (pt: dado que)"
+    ],
+    [
+     "puisque",
+     "Cause évidente, partagée. (pt: já que)"
+    ],
+    [
+     "compte tenu de",
+     "Cause, registre soutenu. (pt: tendo em conta)"
+    ],
+    [
+     "c'est pourquoi",
+     "Conséquence. (pt: é por isso que)"
+    ],
+    [
+     "alors que",
+     "Opposition entre deux faits. (pt: enquanto que)"
+    ],
+    [
+     "tandis que",
+     "Opposition simultanée. (pt: enquanto)"
+    ],
+    [
+     "grâce à",
+     "Cause positive. (pt: graças a)"
+    ],
+    [
+     "en ce qui concerne",
+     "Introduit un nouveau thème. (pt: no que diz respeito a)"
+    ],
+    [
+     "concernant",
+     "Introduit le thème de la question. (pt: a respeito de)"
+    ],
+    [
+     "quant à",
+     "Change de thème. (pt: quanto a)"
+    ],
+    [
+     "plus précisément",
+     "Précise l'objet de la demande. (pt: mais precisamente)"
+    ],
+    [
+     "par exemple",
+     "Introduit un exemple. (pt: por exemplo)"
+    ],
+    [
+     "dans ce contexte",
+     "Situe le débat. (pt: nesse contexto)"
+    ],
+    [
+     "au-delà de",
+     "Dépasse le premier aspect. (pt: para além de)"
+    ],
+    [
+     "tout en",
+     "Simultanéité ou concession + participe présent. (pt: ao mesmo tempo que)"
+    ],
+    [
+     "non seulement",
+     "Premier terme de « non seulement… mais aussi ». (pt: não só)"
+    ],
+    [
+     "mais aussi",
+     "Second terme de « non seulement… mais aussi ». (pt: mas também)"
+    ],
+    [
+     "en conséquence",
+     "Conséquence. (pt: consequentemente)"
+    ],
+    [
+     "si tout se passe bien",
+     "Condition. (pt: se tudo correr bem)"
+    ]
+   ],
+   "arg": [
+    [
+     "aujourd'hui je présenterai un sujet",
+     "Ouverture T3 orale : annonce le sujet."
+    ],
+    [
+     "c'est une discussion controversée qui suscite encore de nombreux débats",
+     "Ouverture T3 orale : montre que le sujet fait débat."
+    ],
+    [
+     "occupe une place centrale dans la société contemporaine",
+     "Thèse T3 orale : situe le sujet dans la société."
+    ],
+    [
+     "pour répondre durablement à cet enjeu",
+     "Ouverture de la conclusion (boîte à outils)."
+    ],
+    [
+     "il est crucial que",
+     "Conclusion : nécessité + subjonctif."
+    ],
+    [
+     "dans un contexte marqué par",
+     "Ouverture de l'introduction : situe le sujet dans son époque."
+    ],
+    [
+     "dans un contexte où",
+     "Variante de l'ouverture de l'introduction."
+    ],
+    [
+     "suscite aujourd'hui de vifs débats",
+     "Annonce la problématique."
+    ],
+    [
+     "suscite aujourd'hui de nombreux débats",
+     "Annonce la problématique."
+    ],
+    [
+     "fait aujourd'hui l'objet de vifs débats",
+     "Annonce la problématique."
+    ],
+    [
+     "fait aujourd'hui l'objet de nombreux débats",
+     "Annonce la problématique."
+    ],
+    [
+     "suscite de nombreux débats",
+     "Annonce la problématique."
+    ],
+    [
+     "suscite un débat important",
+     "Annonce la problématique."
+    ],
+    [
+     "tant sur le plan",
+     "Élargit le débat à plusieurs domaines (« tant sur le plan X que Y »)."
+    ],
+    [
+     "il convient de s'interroger sur",
+     "Pose la question centrale de façon soutenue."
+    ],
+    [
+     "il convient de souligner que",
+     "Met en valeur un argument."
+    ],
+    [
+     "il convient de mettre en avant que",
+     "Met en valeur un argument (thèse)."
+    ],
+    [
+     "il convient donc de",
+     "Tire une conséquence."
+    ],
+    [
+     "il convient également de",
+     "Ajoute une recommandation."
+    ],
+    [
+     "cette approche mérite d'être nuancée",
+     "Transition vers l'antithèse."
+    ],
+    [
+     "cette approche mérite néanmoins d'être nuancée",
+     "Transition vers l'antithèse."
+    ],
+    [
+     "cette réalité mérite d'être nuancée",
+     "Transition vers l'antithèse."
+    ],
+    [
+     "cette évolution mérite d'être nuancée",
+     "Transition vers l'antithèse."
+    ],
+    [
+     "mérite d'être examiné",
+     "Annonce l'analyse du sujet."
+    ],
+    [
+     "présente plusieurs avantages",
+     "Ouvre la thèse (arguments positifs)."
+    ],
+    [
+     "présente plusieurs atouts",
+     "Ouvre la thèse (arguments positifs)."
+    ],
+    [
+     "présentent plusieurs avantages",
+     "Ouvre la thèse (arguments positifs)."
+    ],
+    [
+     "constitue un enjeu majeur",
+     "Souligne l'importance du sujet."
+    ],
+    [
+     "constitue un facteur essentiel",
+     "Souligne un argument fort."
+    ],
+    [
+     "contribue à",
+     "Montre un effet positif. (pt: contribui para)"
+    ],
+    [
+     "contribuer à",
+     "Montre un effet positif. (pt: contribuir para)"
+    ],
+    [
+     "ne saurait être",
+     "Négation soutenue : « ne peut pas être »."
+    ],
+    [
+     "l'enjeu consiste",
+     "Reformule le vrai problème."
+    ],
+    [
+     "parvenant ainsi à",
+     "Formule finale de la conclusion (boîte à outils)."
+    ],
+    [
+     "en coopération avec",
+     "Ajoute un 2e agent dans la conclusion (boîte à outils)."
+    ],
+    [
+     "mettent en œuvre",
+     "Action de la boîte à outils (conclusion)."
+    ],
+    [
+     "afin de favoriser",
+     "But de la mesure proposée."
+    ],
+    [
+     "permettrait de",
+     "Conditionnel : résultat attendu d'une solution."
+    ],
+    [
+     "depuis la révolution numérique",
+     "Ouverture typique des sujets « technologie »."
+    ],
+    [
+     "dans les sociétés contemporaines",
+     "Ouverture de l'introduction."
+    ],
+    [
+     "à l'heure où",
+     "Ouverture de l'introduction (actualité)."
+    ],
+    [
+     "sont désormais omniprésentes",
+     "Souligne l'importance actuelle du phénomène."
+    ],
+    [
+     "sans compromettre",
+     "Pose une limite à la solution."
+    ],
+    [
+     "à concilier",
+     "Idée d'équilibre entre deux valeurs."
+    ]
+   ],
+   "pol": [
+    [
+     "selon moi",
+     "Donne son opinion. (pt: na minha opinião)"
+    ],
+    [
+     "à mon avis",
+     "Donne son opinion. (pt: a meu ver)"
+    ],
+    [
+     "je pense que",
+     "Donne son opinion (+ indicatif)."
+    ],
+    [
+     "je suis globalement d'accord",
+     "Nuance l'accord."
+    ],
+    [
+     "je suis partiellement d'accord",
+     "Nuance l'accord."
+    ],
+    [
+     "je ne suis pas totalement d'accord",
+     "Nuance le désaccord."
+    ],
+    [
+     "personnellement",
+     "Introduit l'expérience personnelle (anecdote)."
+    ],
+    [
+     "je me souviens",
+     "Introduit l'anecdote au passé."
+    ],
+    [
+     "je fais appel à tes conseils",
+     "Ouverture T2 (tu) : présente la raison de l'échange."
+    ],
+    [
+     "je fais appel à vos conseils",
+     "Ouverture T2 (vous)."
+    ],
+    [
+     "je fais appel à vos services",
+     "Ouverture T2 (vous), avec un professionnel."
+    ],
+    [
+     "je fais appel à ton aide",
+     "Ouverture T2 (tu)."
+    ],
+    [
+     "j'aimerais avoir quelques renseignements",
+     "Annonce la série de questions."
+    ],
+    [
+     "j'aimerais avoir des renseignements",
+     "Annonce la série de questions."
+    ],
+    [
+     "j'aimerais avoir quelques idées",
+     "Annonce la série de questions."
+    ],
+    [
+     "j'aimerais également avoir des précisions",
+     "Relance : demande de détails."
+    ],
+    [
+     "j'aimerais également savoir",
+     "Relance polie."
+    ],
+    [
+     "j'avoue que",
+     "Introduit une confidence : rend l'échange naturel."
+    ],
+    [
+     "une dernière question",
+     "Annonce la fin de l'échange."
+    ],
+    [
+     "c'est exactement ce dont j'ai besoin",
+     "Formule de clôture : montre que l'objectif est atteint."
+    ],
+    [
+     "je te remercie infiniment",
+     "Remerciement chaleureux (tu)."
+    ],
+    [
+     "je vous remercie infiniment",
+     "Remerciement soutenu (vous)."
+    ],
+    [
+     "je te remercie pour",
+     "Remerciement (tu)."
+    ],
+    [
+     "je n'hésiterai pas à",
+     "Clôture : propose de reprendre contact."
+    ],
+    [
+     "n'hésite pas à",
+     "Invitation polie (tu)."
+    ],
+    [
+     "n'hésitez pas à",
+     "Invitation polie (vous)."
+    ],
+    [
+     "je vous souhaite une excellente journée",
+     "Salutation finale (vous)."
+    ],
+    [
+     "je vous prie d'agréer",
+     "Formule finale de lettre formelle."
+    ],
+    [
+     "veuillez agréer",
+     "Formule finale de lettre formelle."
+    ],
+    [
+     "l'expression de mes salutations distinguées",
+     "Formule finale de lettre formelle."
+    ],
+    [
+     "bien cordialement",
+     "Formule finale de courriel formel."
+    ],
+    [
+     "je me permets de",
+     "Ouverture polie d'une lettre formelle."
+    ],
+    [
+     "faisant suite à",
+     "Fait référence à un message précédent."
+    ],
+    [
+     "dans l'attente d'une réponse favorable",
+     "Clôture de lettre de demande."
+    ],
+    [
+     "qu'en pensez-vous",
+     "Invite les destinataires à réagir."
+    ],
+    [
+     "qu'en dites-vous",
+     "Invite les destinataires à réagir."
+    ],
+    [
+     "j'espère que vous allez bien",
+     "Ouverture amicale (vous)."
+    ],
+    [
+     "je vous écris",
+     "Annonce l'objet du message."
+    ],
+    [
+     "je t'écris",
+     "Annonce l'objet du message."
+    ],
+    [
+     "à bientôt",
+     "Salutation finale amicale."
+    ],
+    [
+     "à très bientôt",
+     "Salutation finale amicale."
+    ],
+    [
+     "ça fait plaisir de te voir",
+     "Ouverture chaleureuse."
+    ],
+    [
+     "au revoir",
+     "Salutation finale."
+    ]
+   ],
+   "cond": [
+    [
+     "j'aimerais",
+     "Conditionnel de politesse de « aimer ». (pt: eu gostaria)"
+    ],
+    [
+     "je voudrais",
+     "Conditionnel de politesse de « vouloir ». (pt: eu queria)"
+    ],
+    [
+     "je souhaiterais",
+     "Conditionnel de politesse, registre soutenu."
+    ],
+    [
+     "pourriez-vous",
+     "Demande polie (vous). (pt: poderia)"
+    ],
+    [
+     "pourrais-tu",
+     "Demande polie (tu)."
+    ],
+    [
+     "pourrais-je",
+     "Demande de permission polie."
+    ],
+    [
+     "me conseillerais-tu",
+     "Demande de conseil (tu)."
+    ],
+    [
+     "me conseilleriez-vous",
+     "Demande de conseil (vous)."
+    ],
+    [
+     "conseillerais",
+     "Conditionnel de « conseiller »."
+    ],
+    [
+     "serais-tu disposé",
+     "Demande délicate (tu)."
+    ],
+    [
+     "faudrait-il",
+     "Conditionnel de « falloir » : demande prudente."
+    ],
+    [
+     "serait",
+     "Conditionnel de « être » : hypothèse ou politesse."
+    ],
+    [
+     "seraient",
+     "Conditionnel de « être » (pluriel)."
+    ],
+    [
+     "me semblerait",
+     "Demande d'avis nuancée."
+    ],
+    [
+     "préférerait",
+     "Conditionnel de « préférer »."
+    ],
+    [
+     "choisirais-tu",
+     "Hypothèse : « si tu étais à ma place »."
+    ],
+    [
+     "pourraient",
+     "Conditionnel de « pouvoir » (pluriel)."
+    ],
+    [
+     "devrait",
+     "Conditionnel de « devoir » : conseil."
+    ],
+    [
+     "devraient",
+     "Conditionnel de « devoir » : recommandation."
+    ]
+   ],
+   "sub": [
+    [
+     "mette en place",
+     "Subjonctif de « mettre » (après « il est crucial que l'État… »)."
+    ],
+    [
+     "mettent en place",
+     "Subjonctif de « mettre » (pluriel)."
+    ],
+    [
+     "il est essentiel que",
+     "Nécessité + subjonctif (ex. : que les pouvoirs publics mettent en œuvre)."
+    ],
+    [
+     "il faut que",
+     "Obligation + subjonctif."
+    ],
+    [
+     "il faut absolument que",
+     "Obligation forte + subjonctif."
+    ],
+    [
+     "bien que",
+     "Concession + subjonctif."
+    ],
+    [
+     "pour que",
+     "But + subjonctif."
+    ],
+    [
+     "afin que",
+     "But + subjonctif (soutenu)."
+    ],
+    [
+     "qui corresponde",
+     "Subjonctif après une recherche (« quelque chose qui corresponde »)."
+    ],
+    [
+     "qui permette",
+     "Subjonctif après une recherche."
+    ],
+    [
+     "que tu viennes",
+     "Subjonctif de « venir »."
+    ],
+    [
+     "que tu puisses",
+     "Subjonctif de « pouvoir »."
+    ],
+    [
+     "que vous puissiez",
+     "Subjonctif de « pouvoir »."
+    ],
+    [
+     "soient",
+     "Subjonctif de « être » (pluriel)."
+    ]
+   ]
+  }
+ }
+}

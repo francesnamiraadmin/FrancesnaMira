@@ -2,6 +2,7 @@
  {
   "slug": "a1-me-presenter",
   "titulo": "Je me présente",
+  "eixo": "fam",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",
@@ -75,6 +76,7 @@
  {
   "slug": "a1-ma-famille",
   "titulo": "Ma famille",
+  "eixo": "fam",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",
@@ -148,6 +150,7 @@
  {
   "slug": "a1-invitation-anniversaire",
   "titulo": "Invitation d'anniversaire",
+  "eixo": "relations",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",
@@ -221,6 +224,7 @@
  {
   "slug": "a1-ma-journee",
   "titulo": "Ma journée",
+  "eixo": "soc",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",
@@ -294,6 +298,7 @@
  {
   "slug": "a1-mon-quartier",
   "titulo": "Mon quartier",
+  "eixo": "ville",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",
@@ -367,6 +372,7 @@
  {
   "slug": "a1-au-restaurant",
   "titulo": "Réserver au restaurant",
+  "eixo": "alim",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",
@@ -440,6 +446,7 @@
  {
   "slug": "a1-message-voisin",
   "titulo": "Un message au voisin",
+  "eixo": "relations",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",
@@ -513,6 +520,7 @@
  {
   "slug": "a1-mes-vacances",
   "titulo": "Mes vacances préférées",
+  "eixo": "voyages",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",
@@ -586,6 +594,7 @@
  {
   "slug": "a1-mon-logement",
   "titulo": "Mon logement",
+  "eixo": "log",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",
@@ -659,6 +668,7 @@
  {
   "slug": "a1-mon-sport",
   "titulo": "Mon sport préféré",
+  "eixo": "sport",
   "nivel": "A1",
   "tipoProducao": "Tâche 1 — message simple",
   "dificuldade": "facil",

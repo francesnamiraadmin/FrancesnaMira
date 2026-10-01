@@ -1,0 +1,121 @@
+/* Ajustes do site sobre o CSS portado do app "Modèles TCF" (css/producao-app.css, gerado):
+   barra do app abaixo da navbar do site, hub de escolhas, "Accueil" logo abaixo, "À la une"
+   redesenhado e os blocos novos (envio ao Sistema de Correção, transcrição, ao vivo). */
+
+/* ---------- barra do app: logo abaixo da navbar do site ----------
+   A navbar do site é que fica fixa; --topo-site (altura dela, medida em js) substitui os
+   deslocamentos do script, que contavam com a própria barra de ~58px. */
+.fnm-app .lateral { top: calc(var(--topo-site, 70px) + 12px); }
+.fnm-app .modele-raiz.com-dictee .painel-dictee { top: calc(var(--topo-site, 70px) + 10px); max-height: calc(100vh - var(--topo-site, 70px) - 20px); }
+.fnm-app .modele-raiz.com-reescrita .painel-reescrita { top: calc(var(--topo-site, 70px) + 10px); max-height: calc(100vh - var(--topo-site, 70px) - 20px); }
+.fnm-app .ep-barra, .fnm-app .avisos-globais, .fnm-app .tt-barra { top: calc(var(--topo-site, 70px) + 8px); }
+.fnm-app .fnm-barra { position: relative; top: auto; z-index: 30; margin: 14px auto 0; max-width: 1180px; border-radius: 18px; box-shadow: var(--sombra); border: 1px solid rgba(var(--branco-rgb), .7); }
+.fnm-app .barra-nav { display: flex; flex-wrap: wrap; gap: 2px; justify-content: flex-end; }
+.fnm-app .barra-nav a.sair, .fnm-app .barra-nav button.sair { padding: 8px 12px; border-radius: 999px; font-size: 14px; color: var(--tinta-suave); text-decoration: none; background: none; border: 0; }
+.fnm-app .barra-nav a.sair:hover { background: rgba(var(--branco-rgb), .7); }
+@media (max-width: 960px) { .fnm-app .fnm-barra { position: static; flex-direction: column; align-items: flex-start; } .fnm-app .barra-nav { justify-content: flex-start; } }
+
+/* ---------- hub de escolhas ---------- */
+.fnm-app .hub-escolhas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 22px 0 30px; }
+@media (max-width: 900px) { .fnm-app .hub-escolhas { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .fnm-app .hub-escolhas { grid-template-columns: 1fr; } }
+.fnm-app .hub-escolha {
+  position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; text-align: left; min-height: 188px;
+  padding: 22px 22px 18px; border-radius: 24px; border: 1px solid rgba(var(--branco-rgb), .85); background: var(--vidro-forte);
+  box-shadow: var(--sombra); color: var(--tinta); overflow: hidden; transition: transform .18s, box-shadow .18s;
+}
+.fnm-app .hub-escolha::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--cor); }
+.fnm-app .hub-escolha::after { content: ""; position: absolute; right: -40px; bottom: -40px; width: 140px; height: 140px; border-radius: 50%; background: var(--cor); opacity: .14; transition: transform .25s; }
+.fnm-app .hub-escolha:hover { transform: translateY(-3px); box-shadow: 0 22px 50px -26px rgba(28,43,58,.7); }
+.fnm-app .hub-escolha:hover::after { transform: scale(1.25); }
+.fnm-app .he-ico { width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: var(--cor); color: #1C2B3A; margin-bottom: 6px; }
+.fnm-app .he-ico svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.fnm-app .hub-escolha b { font-family: var(--serifa); font-size: 21px; color: var(--marinho); }
+.fnm-app .hub-escolha small { font-size: 13.5px; color: var(--tinta-suave); line-height: 1.45; }
+.fnm-app .hub-escolha em { margin-top: auto; font-style: normal; font-weight: 700; font-size: 13px; color: var(--marinho); position: relative; z-index: 1; }
+
+/* ---------- Accueil logo abaixo do hub ---------- */
+.fnm-app .acc-secao { display: flex; align-items: center; gap: 12px; margin: 8px 0 16px; }
+.fnm-app .acc-secao::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--linha), transparent); }
+.fnm-app .acc-duas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.fnm-app .acc-duas > div:empty { display: none; }
+.fnm-app .acc-duas:has(> div:empty) { grid-template-columns: 1fr; }
+@media (max-width: 760px) { .fnm-app .acc-duas { grid-template-columns: 1fr; } }
+
+/* ---------- À la une (redesenhado) ---------- */
+.fnm-app .alu2 { padding: 0; overflow: hidden; border-top: 0; background: var(--papel); }
+.fnm-app .alu2 .alu-cab { padding: 22px 26px 16px; margin: 0; background: linear-gradient(120deg, #1C2B3A 0%, #2d4660 60%, #3b5a78 100%); border: 0; color: #fff; }
+.fnm-app .alu2 .alu-cab h2 { color: #fff; }
+.fnm-app .alu2 .alu-cab p { color: #c8d6e3; max-width: 520px; }
+.fnm-app .alu2 .tm-selo { background: var(--dourado); color: #1C2B3A; }
+.fnm-app .alu2 .alu-destaque { margin: 18px 22px 14px; border-radius: 20px; box-shadow: 0 18px 40px -28px rgba(0,0,0,.7); }
+.fnm-app .alu2 .alu-mini { margin: 0 22px 16px; }
+.fnm-app .alu2 .alu-mini article { display: flex; gap: 10px; align-items: center; background: rgba(var(--branco-rgb), .6); }
+.fnm-app .alu-mini-img { position: relative; width: 64px; height: 48px; flex: none; border-radius: 10px; overflow: hidden; }
+.fnm-app .alu-mini-img img, .fnm-app .alu-mini-img svg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.fnm-app .alu2 .alu-sujets { padding: 4px 22px 22px; }
+.fnm-app .alu2 .alu-linha h4 { display: flex; align-items: center; gap: 8px; color: var(--marinho); margin-top: 14px; }
+.fnm-app .alu2 .alu-linha h4 i { width: 10px; height: 10px; border-radius: 50%; background: #94C4EC; }
+.fnm-app .alu2 .alu-linha.ecrit h4 i { background: var(--dourado); }
+.fnm-app .alu2 .alu-card { position: relative; background: var(--papel); border: 1px solid var(--linha); border-left: 5px solid var(--cor, var(--dourado)); min-height: 170px; box-shadow: 0 10px 26px -22px rgba(28,43,58,.8); }
+.fnm-app .alu2 .alu-card:hover { border-color: var(--cor, var(--dourado)); }
+.fnm-app .alu-card-topo { display: flex; align-items: center; gap: 8px; }
+.fnm-app .alu-num { width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; background: var(--cor, var(--dourado)); color: #1C2B3A; }
+.fnm-app .alu-ico { margin-left: auto; font-size: 18px; }
+.fnm-app .alu2 .alu-link { color: var(--marinho); font-weight: 700; }
+
+/* ---------- épreuve: escolha de quem corrige + envio ao Sistema de Correção ---------- */
+.fnm-app .escolha-correcao { border: 1px solid var(--linha); border-radius: 16px; padding: 12px 16px; margin: 12px 0 16px; display: grid; gap: 8px; }
+.fnm-app .escolha-correcao legend { font-weight: 800; color: var(--marinho); padding: 0 6px; }
+.fnm-app .escolha-correcao label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; padding: 8px 10px; border-radius: 12px; }
+.fnm-app .escolha-correcao label:has(input:checked) { background: rgba(228,192,67,.18); }
+.fnm-app .escolha-correcao span { display: flex; flex-direction: column; }
+.fnm-app .escolha-correcao small { color: var(--tinta-suave); }
+.fnm-app .envio-sistema { display: flex; flex-direction: column; gap: 6px; margin: 14px 0; padding: 14px 16px; border-radius: 16px; border: 1px dashed var(--dourado-escuro); background: rgba(228,192,67,.08); }
+.fnm-app .envio-sistema small { color: var(--tinta-suave); }
+.fnm-app .envio-sistema a { color: var(--marinho); font-weight: 700; }
+
+/* ---------- gravação: transcrição ---------- */
+.fnm-app .grav-transcricao { margin-top: 12px; padding: 10px 14px; border-radius: 12px; background: rgba(var(--branco-rgb), .7); border: 1px solid var(--linha); }
+.fnm-app .grav-transcricao small { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); font-weight: 800; }
+.fnm-app .grav-transcricao p { margin: 4px 0 0; font-style: italic; }
+.fnm-app .grav-trans-edit { display: flex; flex-direction: column; gap: 6px; margin: 12px 0; font-size: 13px; color: var(--tinta-suave); }
+.fnm-app .grav-trans-edit textarea { width: 100%; border-radius: 12px; border: 1px solid var(--linha); padding: 10px 12px; font: inherit; font-size: 14.5px; color: var(--tinta); background: var(--papel); resize: vertical; }
+.fnm-app .gl-viva { font-style: italic; color: var(--tinta-suave); margin: 8px 0; }
+.fnm-app .gl-item { border: 1px solid var(--linha); border-radius: 14px; padding: 10px 12px; margin-top: 10px; }
+.fnm-app .gl-cab { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.fnm-app .gl-acoes { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+/* ---------- carnet ↔ caderno da plataforma ---------- */
+.fnm-app .caderno-ponte { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--tinta); border-left: 5px solid var(--dourado); }
+.fnm-app .caderno-ponte .cp-ico svg { width: 28px; height: 28px; }
+.fnm-app .caderno-ponte div { display: flex; flex-direction: column; }
+.fnm-app .caderno-ponte small { color: var(--tinta-suave); }
+.fnm-app .caderno-ponte em { margin-left: auto; font-style: normal; font-weight: 700; color: var(--marinho); }
+.fnm-app .aba-esp.link { text-decoration: none; margin-left: auto; }
+
+/* ---------- espace professeur: atalhos e ao vivo ---------- */
+.fnm-app .atalhos-equipe { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 16px; }
+.fnm-app .atalhos-equipe .chip { text-decoration: none; }
+.fnm-app .av-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.fnm-app .av-card { border: 1px solid var(--linha); border-radius: 16px; padding: 14px; background: var(--papel); display: flex; flex-direction: column; gap: 6px; }
+.fnm-app .av-cab { display: flex; justify-content: space-between; align-items: center; }
+.fnm-app .av-tempo { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 20px; color: var(--marinho); }
+.fnm-app .av-tempo.fim { color: #D51E28; }
+.fnm-app .av-tache summary { display: flex; justify-content: space-between; cursor: pointer; font-weight: 700; padding: 4px 0; }
+.fnm-app .av-tache em { font-style: normal; font-size: 12px; padding: 1px 8px; border-radius: 999px; background: rgba(var(--branco-rgb), .8); border: 1px solid var(--linha); }
+.fnm-app .av-tache em.ok { background: #E6F4EC; color: #1f6b4a; border-color: transparent; }
+.fnm-app .av-tache em.alto { background: #FBEBE9; color: #9b2c24; border-color: transparent; }
+.fnm-app .av-tache .prod-texto { max-height: 220px; overflow: auto; font-size: 13.5px; }
+.fnm-app .av-msg { display: flex; gap: 6px; margin-top: 6px; }
+.fnm-app .av-msg input { flex: 1; border-radius: 999px; border: 1px solid var(--linha); padding: 7px 12px; background: var(--papel); color: var(--tinta); }
+
+/* ---------- temas do curso (hub da Production écrite) ---------- */
+.fnm-app #hub-curso { margin-top: 26px; }
+.fnm-app a.item-modelo, .fnm-app a.hub-acao { text-decoration: none; display: flex; flex-direction: column; }
+
+/* ---------- tema escuro: fundos pastel fixos do script ---------- */
+:root[data-theme="dark"] .fnm-app .alu2 .alu-card, :root[data-theme="dark"] .fnm-app .alu-card { background: #1d2025; }
+:root[data-theme="dark"] .fnm-app .av-tache em.ok, :root[data-theme="dark"] .fnm-app .contador { background: rgba(63,185,80,.16); color: #3fb950; }
+:root[data-theme="dark"] .fnm-app .av-tache em.alto, :root[data-theme="dark"] .fnm-app .contador.alto { background: rgba(255,107,107,.16); color: #ff6b6b; }
+:root[data-theme="dark"] .fnm-app .he-ico, :root[data-theme="dark"] .fnm-app .alu-num { color: #0b0c0e; }

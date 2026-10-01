@@ -2,9 +2,7 @@
 // curso (TCF, DELF, DALF, TEF; A1–B2 no modelo TCF). Mesma API/configuração da correção
 // dos simulados (ANTHROPIC_API_KEY, ANTHROPIC_MODEL, ANTHROPIC_BASE_URL).
 const { grade, avaliar } = require("./gradesProva");
-
-const MODELO_PADRAO = "claude-sonnet-5";
-const iaConfigurada = () => !!process.env.ANTHROPIC_API_KEY;
+const { pedirJson, iaConfigurada } = require("./claude");
 
 const NOME_EXAME = {
   TCF: "TCF (France Éducation international)",
@@ -42,49 +40,24 @@ Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour :
 {"criterios":{${g.criterios.map(c => `"${c.id}":0`).join(",")}},"comentarios":{${g.criterios.map(c => `"${c.id}":"..."`).join(",")}},"comentarioGeral":"...","pontosFortes":["...","..."],"aMelhorar":["...","..."],"correcoes":[{"trecho":"...","correcao":"...","explicacao":"..."}]}`;
 }
 
-function extrairJson(texto) {
-  const ini = texto.indexOf("{");
-  const fim = texto.lastIndexOf("}");
-  if (ini < 0 || fim <= ini) throw new Error("Resposta da IA sem JSON.");
-  return JSON.parse(texto.slice(ini, fim + 1));
-}
-
 const lista = (v, n, tam) => (Array.isArray(v) ? v : []).slice(0, n).map(x => String(x || "").slice(0, tam)).filter(Boolean);
 
 // Devolve o objeto `avaliacao` pronto para gravar na Producao.
 async function corrigirProducaoComIA(tema, texto) {
   if (!iaConfigurada()) throw Object.assign(new Error("Correção por IA não configurada no servidor."), { naoConfigurada: true });
-  const controle = new AbortController();
-  const timer = setTimeout(() => controle.abort(), 120000);
-  try {
-    const res = await fetch(`${process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com"}/v1/messages`, {
-      method: "POST",
-      signal: controle.signal,
-      headers: { "content-type": "application/json", "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
-      body: JSON.stringify({
-        model: process.env.ANTHROPIC_MODEL || MODELO_PADRAO,
-        max_tokens: 4000,
-        messages: [{ role: "user", content: montarPrompt(tema, texto) }]
-      })
-    });
-    if (!res.ok) throw new Error(`API da IA respondeu ${res.status}: ${(await res.text().catch(() => "")).slice(0, 300)}`);
-    const dados = await res.json();
-    const bruto = extrairJson((dados.content || []).filter(b => b.type === "text").map(b => b.text).join(""));
-    const av = avaliar(tema.courseType, "textual", bruto.criterios || {}, { nivelAlvo: tema.nivel, comentarios: bruto.comentarios || {} });
-    return {
-      exame: av.exame, criterios: av.criterios, notaTotal: av.notaTotal, notaMaxima: av.notaMaxima,
-      nivelEstimado: av.nivel, nclc: av.nclc, aprovado: av.aprovado, pontuacaoOficial: av.pontuacaoOficial,
-      comentarioGeral: String(bruto.comentarioGeral || "").slice(0, 5000),
-      pontosFortes: lista(bruto.pontosFortes, 5, 500), aMelhorar: lista(bruto.aMelhorar, 5, 500),
-      correcoes: (Array.isArray(bruto.correcoes) ? bruto.correcoes : []).slice(0, 15).map(c => ({
-        trecho: String(c?.trecho || "").slice(0, 400), correcao: String(c?.correcao || "").slice(0, 400), explicacao: String(c?.explicacao || "").slice(0, 600)
-      })).filter(c => c.trecho),
-      corretor: "ia", corretorNome: "Correção automática (IA)",
-      modelo: process.env.ANTHROPIC_MODEL || MODELO_PADRAO
-    };
-  } finally {
-    clearTimeout(timer);
-  }
+  const { json: bruto, modelo } = await pedirJson({ usuario: montarPrompt(tema, texto), maxTokens: 4000 });
+  const av = avaliar(tema.courseType, "textual", bruto.criterios || {}, { nivelAlvo: tema.nivel, comentarios: bruto.comentarios || {} });
+  return {
+    exame: av.exame, criterios: av.criterios, notaTotal: av.notaTotal, notaMaxima: av.notaMaxima,
+    nivelEstimado: av.nivel, nclc: av.nclc, aprovado: av.aprovado, pontuacaoOficial: av.pontuacaoOficial,
+    comentarioGeral: String(bruto.comentarioGeral || "").slice(0, 5000),
+    pontosFortes: lista(bruto.pontosFortes, 5, 500), aMelhorar: lista(bruto.aMelhorar, 5, 500),
+    correcoes: (Array.isArray(bruto.correcoes) ? bruto.correcoes : []).slice(0, 15).map(c => ({
+      trecho: String(c?.trecho || "").slice(0, 400), correcao: String(c?.correcao || "").slice(0, 400), explicacao: String(c?.explicacao || "").slice(0, 600)
+    })).filter(c => c.trecho),
+    corretor: "ia", corretorNome: "Correção automática (IA)",
+    modelo
+  };
 }
 
 module.exports = { corrigirProducaoComIA, iaConfigurada, montarPrompt };

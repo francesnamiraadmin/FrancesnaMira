@@ -2,6 +2,7 @@
  {
   "slug": "dalf-c1-synthese-lecture-numerique",
   "titulo": "Lire à l'ère des écrans",
+  "eixo": "culture",
   "nivel": "C1",
   "tipoProducao": "DALF C1 — synthèse de documents",
   "dificuldade": "dificil",
@@ -76,6 +77,7 @@
  {
   "slug": "dalf-c1-synthese-teletravail-ville",
   "titulo": "Télétravail et nouvelle géographie des villes",
+  "eixo": "trav",
   "nivel": "C1",
   "tipoProducao": "DALF C1 — synthèse de documents",
   "dificuldade": "dificil",
@@ -150,6 +152,7 @@
  {
   "slug": "dalf-c1-synthese-alimentation-vegetale",
   "titulo": "Vers une alimentation plus végétale ?",
+  "eixo": "alim",
   "nivel": "C1",
   "tipoProducao": "DALF C1 — synthèse de documents",
   "dificuldade": "dificil",
@@ -224,6 +227,7 @@
  {
   "slug": "dalf-c1-essai-animaux",
   "titulo": "Quelle place pour les animaux dans nos sociétés ?",
+  "eixo": "env",
   "nivel": "C1",
   "tipoProducao": "DALF C1 — essai argumenté",
   "dificuldade": "dificil",
@@ -298,6 +302,7 @@
  {
   "slug": "dalf-c1-essai-musees",
   "titulo": "À quoi servent les musées aujourd'hui ?",
+  "eixo": "culture",
   "nivel": "C1",
   "tipoProducao": "DALF C1 — essai argumenté",
   "dificuldade": "dificil",
@@ -372,6 +377,7 @@
  {
   "slug": "dalf-c1-essai-education-medias",
   "titulo": "Éduquer aux médias à l'école",
+  "eixo": "edu",
   "nivel": "C1",
   "tipoProducao": "DALF C1 — essai argumenté",
   "dificuldade": "dificil",
@@ -446,6 +452,7 @@
  {
   "slug": "dalf-c1-essai-surveillance",
   "titulo": "Sécurité ou vie privée : faut-il choisir ?",
+  "eixo": "tech",
   "nivel": "C1",
   "tipoProducao": "DALF C1 — essai argumenté",
   "dificuldade": "dificil",
@@ -520,6 +527,7 @@
  {
   "slug": "dalf-c2-memoire-oubli",
   "titulo": "Le droit à l'oubli à l'ère d'Internet",
+  "eixo": "tech",
   "nivel": "C2",
   "tipoProducao": "DALF C2 — article de fond",
   "dificuldade": "dificil",
@@ -594,6 +602,7 @@
  {
   "slug": "dalf-c2-progres-liberte",
   "titulo": "Le progrès technique nous rend-il plus libres ?",
+  "eixo": "soc",
   "nivel": "C2",
   "tipoProducao": "DALF C2 — éditorial",
   "dificuldade": "dificil",
@@ -668,6 +677,7 @@
  {
   "slug": "dalf-c2-traduction",
   "titulo": "Traduire : trahir ou créer ?",
+  "eixo": "culture",
   "nivel": "C2",
   "tipoProducao": "DALF C2 — article pour une revue littéraire",
   "dificuldade": "dificil",

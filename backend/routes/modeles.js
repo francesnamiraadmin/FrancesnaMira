@@ -1,0 +1,1029 @@
+// Ambiente de Produção no modelo do app "Modèles TCF" (Apps Script). O front (public/js/
+// producaoApp.js) é o App.html do script portado; cada `google.script.run.<função>(email, ...)`
+// vira POST /api/modeles/rpc/<função> { args, courseType } (ver public/js/gasShim.js).
+// As funções abaixo são as do servidor do script (Code.gs, Suivi.gs, Generation.gs…), com o
+// MongoDB no lugar das abas da planilha e o Sistema de Correção do site no lugar dos Docs.
+const express = require("express");
+const router = express.Router();
+const fs = require("fs");
+const crypto = require("crypto");
+const multer = require("multer");
+const mongoose = require("mongoose");
+const User = require("../models/user");
+const Producao = require("../models/producao");
+const CadernoErros = require("../models/cadernoErros");
+const T = require("../models/modelesTCF");
+const M = require("../utils/modelesTCF");
+const { exigirAuth } = require("../middleware/auth");
+const { cursosComAcesso, usuarioTemAcesso } = require("../middleware/acessoCurso");
+const { comTratamentoDeErro, pastaUpload } = require("../middleware/upload");
+const { ehObjectId } = require("../middleware/seguranca");
+const { iaConfigurada, pedirJson } = require("../utils/claude");
+const { garantirTemaSujet, corrigirTreino } = require("../utils/correcaoModelesIA");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
+const canais = require("../utils/sseCanais");
+
+const CANAL_EQUIPE = "modeles:equipe";
+const VERSAO = "site · 2026-09-30";
+const MODULOS = ["PO", "PE", "DICTEE", "MODELES", "VOCAB", "SIMULADOS"];
+const ABANDONO_TREINO_HORAS = 48;
+const ehEquipe = role => role === "professor" || role === "admin";
+const mesAtual = () => new Date().toISOString().slice(0, 7);
+const oid = v => (ehObjectId(String(v || "")) ? new mongoose.Types.ObjectId(String(v)) : null);
+const erro = (msg, status = 400) => Object.assign(new Error(msg), { status });
+
+// ------------------------------------------------------------------ contexto de cada chamada
+async function contexto(req) {
+  const ctx = { userId: req.userId, role: req.userRole, prof: ehEquipe(req.userRole), courseType: null, _cache: {} };
+  const pedido = req.body?.courseType || req.query.courseType;
+  if (pedido && !TIPOS_CURSO.includes(pedido)) throw erro("Curso inválido.");
+  if (ctx.prof) ctx.courseType = pedido || "TCF";
+  else {
+    const cursos = await cursosComAcesso(req.userId, "producao");
+    if (!cursos.length) throw erro("Você não tem acesso ao Ambiente de Produção.", 403);
+    ctx.courseType = pedido && cursos.includes(pedido) ? pedido : cursos[0];
+    if (pedido && !cursos.includes(pedido)) throw erro("Você não tem acesso a este curso no Ambiente de Produção.", 403);
+  }
+  return ctx;
+}
+async function usuario(ctx) {
+  if (!ctx._cache.user) ctx._cache.user = await User.findById(ctx.userId).select("nome email creditosCorrecao role");
+  return ctx._cache.user;
+}
+async function config() {
+  return T.ConfigModelesTCF.findOneAndUpdate({ chave: "geral" }, { $setOnInsert: { chave: "geral" } }, { upsert: true, new: true });
+}
+const alvoDe = alunos => (alunos === "TOUS" || !alunos || !alunos.length ? { todos: true, alunos: [] } : { todos: false, alunos: alunos.map(oid).filter(Boolean) });
+const alvoInclui = (alvo, userId) => !alvo || alvo.todos || (alvo.alunos || []).some(a => String(a) === String(userId));
+const nomeAlvo = (alvo, nomes) => (!alvo || alvo.todos ? "TOUS" : (alvo.alunos || []).map(a => nomes[String(a)] || "élève").join(", "));
+
+async function temasMesIds(ctx) {
+  if (!ctx._cache.temasMes) {
+    const l = await T.TemaMesTCF.find({ mes: mesAtual() }).lean();
+    ctx._cache.temasMesLista = l;
+    ctx._cache.temasMes = Object.fromEntries(l.map(t => [t.sujetId, 1]));
+  }
+  return ctx._cache.temasMes;
+}
+async function partilhasTipos(ctx) {
+  if (ctx._cache.partilhas) return ctx._cache.partilhas;
+  const o = {};
+  if (!ctx.prof) {
+    (await T.PartilhaTCF.find({}).lean()).forEach(p => {
+      if (!alvoInclui(p.alvo, ctx.userId)) return;
+      o[p.sujetId] = o[p.sujetId] || {};
+      o[p.sujetId][p.tipo] = 1;
+    });
+  }
+  return (ctx._cache.partilhas = o);
+}
+async function idsDevoirs(ctx) {
+  if (ctx._cache.devoirs) return ctx._cache.devoirs;
+  const o = {};
+  if (!ctx.prof) (await T.DevoirTCF.find({ ativo: true }).lean()).forEach(d => { if (alvoInclui(d.alvo, ctx.userId)) o[d.modelo] = 1; });
+  return (ctx._cache.devoirs = o);
+}
+// O aluno vê o tema? No site, todos os temas ficam abertos, exceto os que o professor
+// desmarcou no quadro "Thèmes P.O. / P.E." — tema do mês, devoir e partilha abrem sempre.
+async function filtroVisivel(ctx) {
+  if (ctx.prof) return () => true;
+  const [cfg, mes, parts, devs] = await Promise.all([config(), temasMesIds(ctx), partilhasTipos(ctx), idsDevoirs(ctx)]);
+  const ocultos = cfg.ocultos || {};
+  return (t, e, id) => !ocultos[id] || !!mes[id] || !!parts[id] || !!devs[id];
+}
+
+async function statusIA(ctx) {
+  if (!iaConfigurada()) return { ativa: false, motivo: "chave" };
+  const cfg = await config();
+  const limite = cfg.iaDia == null ? 10 : cfg.iaDia;
+  if (limite === 0) return { ativa: false, motivo: "desligada" };
+  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  const usadas = await T.CorrecaoIATCF.countDocuments({ alunoId: ctx.userId, criadoEm: { $gte: hoje }, producaoId: null });
+  return { ativa: true, restantes: ctx.prof ? 99 : Math.max(0, limite - usadas), limite };
+}
+
+// ------------------------------------------------------------------ alunos (visão do professor)
+async function alunosProducao() {
+  const users = await User.find({ role: "aluno" }).select("nome email planos plano legado").lean();
+  const CASC = ["Avancé", "Excellence"];
+  return users.filter(u => (u.plano?.ativo && u.plano?.curso === "Acesso Total") || u.legado?.produtosAvulsos?.producao?.ativo ||
+    (u.planos || []).some(p => (p.ativo && CASC.includes(p.tier)) || p.packPrestige?.ativo))
+    .map(u => ({ id: String(u._id), email: u.email, nome: u.nome || u.email, cursos: [...new Set((u.planos || []).filter(p => p.ativo).map(p => p.courseType))] }))
+    .sort((a, b) => a.nome.localeCompare(b.nome));
+}
+async function mapaNomes(ids) {
+  const us = await User.find({ _id: { $in: ids.filter(Boolean) } }).select("nome email").lean();
+  return Object.fromEntries(us.map(u => [String(u._id), u.nome || u.email]));
+}
+
+// ------------------------------------------------------------------ listas partilhadas (Dictée / Modèles écrits)
+async function listasPartilhadas(ctx) {
+  const vis = await filtroVisivel(ctx);
+  const tipos = await partilhasTipos(ctx);
+  const item = (id, tache, t) => ({ id, tache, titre: t.titre || String(t.t || "").slice(0, 120), e: t.e, c: t.c || "", atelier: !!t.atelier });
+  const dictees = [], modelos = [];
+  // Atelier da professora e modelos escritos à mão: abertos para todos (salvo tema oculto).
+  for (const m of M.MODELES.atelier) if (vis(m.tache, m.e, m.id)) { dictees.push(item(m.id, m.tache, m)); modelos.push(item(m.id, m.tache, m)); }
+  for (const t of ["ET1", "ET2", "ET3"]) for (const m of M.modelosManuais(t)) if (vis(t, m.e, m.id)) { dictees.push(item(m.id, t, m)); modelos.push(item(m.id, t, m)); }
+  for (const t of ["T2", "T3"]) for (const m of M.modelosManuais(t)) if (vis(t, m.e, m.id)) dictees.push(item(m.id, t, m));
+  // Partilhas individuais de sujets (com modelo IA) entram também.
+  for (const id of Object.keys(tipos)) {
+    if (dictees.some(d => d.id === id)) continue;
+    const r = M.temaEmQualquerTache(id); if (!r) continue;
+    if (tipos[id].dictee) dictees.push(item(id, r.tache, r.tema));
+    if (tipos[id].modele && M.ehEscrita(r.tache)) modelos.push(item(id, r.tache, r.tema));
+  }
+  return { dictees, modelos };
+}
+
+// ------------------------------------------------------------------ funções (aluno)
+const F = {};
+const PROF = new Set();
+const prof = (nome, fn) => { F[nome] = fn; PROF.add(nome); };
+
+F.obterBanco = async ctx => {
+  const [u, vis, mes, parts, ia, lp] = await Promise.all([usuario(ctx), filtroVisivel(ctx), temasMesIds(ctx), partilhasTipos(ctx), statusIA(ctx), listasPartilhadas(ctx)]);
+  const filtrar = fonte => Object.fromEntries(Object.keys(fonte).map(t => [t, (fonte[t] || []).filter(m => vis(t, m.e, m.id))]));
+  const pesos = {};
+  for (const t of M.TACHES) for (const m of M.modelosManuais(t)) pesos[m.id] = { w: M.pesoTema(t, m, mes), tr: M.ehTendencia(t, `${m.titre} ${m.c || ""}`) ? 1 : 0 };
+  const contagens = {};
+  for (const t of M.TACHES) contagens[t] = M.modelosManuais(t).concat(M.sujetsDaTache(t)).filter(s => vis(t, s.e, s.id)).length;
+  const todos = Object.fromEntries(M.TACHES.map(t => [t, M.EIXOS.ordem.slice()]));
+  const partilhadasIds = Object.fromEntries(Object.keys(parts).map(k => [k, 1]));
+  return {
+    eixosPermitidos: M.EIXOS.ordem, acesso: todos, modulos: MODULOS, grupo: "", email: u.email, nome: u.nome || "", professor: ctx.prof,
+    temDoc: false, introLink: "", podeEnviar: true, producaoLiberada: true, restantes: null,
+    eixos: M.EIXOS.eixos, ordemEixos: M.EIXOS.ordem, trames: M.OUTILS.trames, boite: M.OUTILS.boite, connecteurs: M.OUTILS.connecteurs, surlignage: M.OUTILS.surlignage,
+    orale: filtrar(M.MODELES.orale), ecrite: filtrar(M.MODELES.ecrite), audios: {}, ttsAtivo: false,
+    atelier: M.MODELES.atelier.filter(m => vis(m.tache, m.e, m.id)), atelierTotal: M.MODELES.atelier.length,
+    partilhadas: lp, partilhadasIds, pesos, prioridadeEixos: M.EIXOS.prioridade, tendMes: M.EIXOS.tendances.mois, contagens,
+    avisos: [], ia, versao: VERSAO, courseType: ctx.courseType, creditos: u.creditosCorrecao || 0, iaCorrecaoSite: iaConfigurada()
+  };
+};
+
+F.obterListaTache = async (ctx, tache) => {
+  if (!M.TACHES.includes(tache)) throw erro("Tâche invalide.");
+  const [vis, mes] = await Promise.all([filtroVisivel(ctx), temasMesIds(ctx)]);
+  const prontos = new Set((await T.ModeleIA.find({ tache }).select("sujetId").lean()).map(x => x.sujetId));
+  return M.sujetsDaTache(tache).filter(s => vis(tache, s.e, s.id)).map(s => ({
+    id: s.id, e: s.e, f: s.f || 1, t: String(s.t || "").slice(0, 280), ia: prontos.has(s.id) ? 1 : 0, d: s.d1 ? 1 : 0,
+    w: M.pesoTema(tache, s, mes), tr: M.ehTendencia(tache, s.t) ? 1 : 0
+  }));
+};
+
+async function lerModeloIA(id) {
+  const x = await T.ModeleIA.findOne({ sujetId: id }).lean();
+  return x ? M.semTravessaoObj(x.modelo) : null;
+}
+
+F.obterModeleIA = async (ctx, tache, id) => {
+  const sujet = M.acharTema(tache, id);
+  if (!sujet) throw erro("Sujet introuvable.", 404);
+  const vis = await filtroVisivel(ctx);
+  if (!vis(tache, sujet.e, id)) return { bloqueado: true, sujet: { id: sujet.id, e: sujet.e, t: M.consigneDe(sujet) } };
+  if (M.ehManual(tache, id)) return { modelo: sujet, sujet };
+  let pronto = await lerModeloIA(id);
+  if (pronto) pronto.e = sujet.e;
+  const cfg = await config();
+  const iaAtiva = iaConfigurada(), podeGerar = ctx.prof || cfg.geracaoAlunos !== false;
+  if (!pronto && !(podeGerar && iaAtiva && (tache === "T3" || tache === "ET3"))) pronto = M.modeloGuia(tache, sujet);
+  return { modelo: pronto, sujet, podeGerar, iaAtiva };
+};
+
+const gerando = new Map();
+async function gerarModelo(tache, sujet, userId) {
+  const p = M.promptModelo(tache, sujet);
+  let ultimo;
+  for (let i = 0; i < 2; i++) {
+    try {
+      const { json } = await pedirJson({ sistema: p.sistema, usuario: p.usuario, maxTokens: 6000 });
+      const m = M.normalizarModelo(tache, sujet, json);
+      await T.ModeleIA.updateOne({ sujetId: sujet.id }, { $setOnInsert: { sujetId: sujet.id, tache, sujet: String(sujet.t || "").slice(0, 300), modelo: m, pedidoPor: userId || null } }, { upsert: true });
+      return m;
+    } catch (e) { ultimo = e; }
+  }
+  throw ultimo;
+}
+
+F.gerarModeloIA = async (ctx, tache, id) => {
+  const sujet = M.acharTema(tache, id);
+  if (!sujet) throw erro("Sujet introuvable.", 404);
+  const vis = await filtroVisivel(ctx);
+  if (!vis(tache, sujet.e, id)) throw erro("Ce sujet est verrouillé. Demandez à votre professeur(e) de l'ouvrir.");
+  const existente = await lerModeloIA(id);
+  if (existente) { existente.e = sujet.e; return existente; }
+  if (!iaConfigurada()) throw erro("L'IA n'est pas configurée sur le serveur.");
+  const cfg = await config();
+  if (!ctx.prof && cfg.geracaoAlunos === false) throw erro("La génération de modèles n'est pas activée. Demandez à votre professeur(e).");
+  // Dois alunos abrindo o mesmo tema ao mesmo tempo esperam a mesma geração.
+  if (!gerando.has(id)) gerando.set(id, gerarModelo(tache, sujet, ctx.userId).finally(() => gerando.delete(id)));
+  const m = await gerando.get(id);
+  m.e = sujet.e;
+  return m;
+};
+
+F.obterSujetsEntrainement = async ctx => {
+  const [vis, mes] = await Promise.all([filtroVisivel(ctx), temasMesIds(ctx)]);
+  const o = {};
+  for (const t of ["ET1", "ET2", "ET3"]) {
+    o[t] = M.sujetsDaTache(t).filter(s => vis(t, s.e, s.id)).map(s => ({ ...s, w: M.pesoTema(t, s, mes), tr: M.ehTendencia(t, s.t) ? 1 : 0 }));
+  }
+  return o;
+};
+
+// ---------------- épreuve écrite de 60 minutes ----------------
+async function sessoesDoAluno(ctx) {
+  const [sessoes, feitas, orais] = await Promise.all([
+    T.SessaoTCF.find({ ativa: true }).sort({ criadoEm: -1 }).lean(),
+    T.EpreuveTCF.find({ alunoId: ctx.userId, sessaoId: { $ne: null } }).select("sessaoId status").lean(),
+    Producao.find({ alunoId: ctx.userId, "origem.sessaoId": { $ne: null }, modalidade: "oral" }).select("origem").lean()
+  ]);
+  const st = Object.fromEntries(feitas.map(e => [String(e.sessaoId), e.status]));
+  const oraisFeitas = new Set(orais.map(o => String(o.origem.sessaoId) + "|" + o.origem.tache));
+  return sessoes.filter(s => alvoInclui(s.alvo, ctx.userId)).map(s => {
+    const escrita = !!(s.ET1 || s.ET2 || s.ET3);
+    const orais2 = ["T1", "T2", "T3"].filter(t => s[t]).map(t => {
+      const sj = M.acharTema(t, s[t]) || { id: s[t], t: s[t] };
+      return { tache: t, sujet: { id: sj.id, t: M.consigneDe(sj) }, feita: oraisFeitas.has(String(s._id) + "|" + t) };
+    });
+    const e = st[String(s._id)];
+    return { id: String(s._id), nome: s.nome, escrita, feita: escrita && !!e && e !== "em_curso", emCurso: e === "em_curso", orais: orais2 };
+  });
+}
+const sujetsCompletos = ids => Object.fromEntries(["ET1", "ET2", "ET3"].map(t => [t, ids[t] ? M.acharTema(t, ids[t]) : null]));
+const fimEfetivo = (e, agora) => (e.sessaoId ? e.fim.getTime() : agora + Math.max(0, M.DURACAO_EPREUVE_MIN * 60 - (e.consumido || 0)) * 1000);
+function expirou(e, agora) {
+  if (e.sessaoId) return agora > e.fim.getTime() + 60 * 1000;
+  const ultimo = (e.ultimoSinal || e.inicio).getTime();
+  return (e.consumido || 0) >= M.DURACAO_EPREUVE_MIN * 60 + 30 || agora - ultimo > ABANDONO_TREINO_HORAS * 3600 * 1000;
+}
+
+function avisarEquipe(evento, dados) { canais.enviar(CANAL_EQUIPE, evento, dados); }
+
+async function estadoEpreuve(ctx) {
+  const agora = Date.now();
+  let emCurso = await T.EpreuveTCF.findOne({ alunoId: ctx.userId, status: "em_curso" }).sort({ inicio: -1 });
+  if (emCurso && expirou(emCurso, agora)) { await finalizar(emCurso, emCurso.textes, true); emCurso = null; }
+  const u = await usuario(ctx);
+  return {
+    agora, sessoes: await sessoesDoAluno(ctx), podeEnviar: true, producaoLiberada: true, restantes: null, temDoc: false, creditos: u.creditosCorrecao || 0,
+    emCurso: emCurso ? {
+      id: String(emCurso._id), inicio: emCurso.inicio.getTime(), fim: fimEfetivo(emCurso, agora), consumido: emCurso.consumido || 0, pausavel: !emCurso.sessaoId,
+      sessao: emCurso.sessaoId ? String(emCurso.sessaoId) : "", sujets: sujetsCompletos(emCurso.sujets || {}), textes: emCurso.textes || {}, correcao: emCurso.correcao
+    } : null
+  };
+}
+F.obterEstadoEpreuve = ctx => estadoEpreuve(ctx);
+
+// pedido = { sessao: id } ou { sujets: {ET1, ET2, ET3}, correcao: "ia"|"professor" }
+F.commencerEpreuve = async (ctx, pedido) => {
+  pedido = pedido || {};
+  const existente = await T.EpreuveTCF.findOne({ alunoId: ctx.userId, status: "em_curso" });
+  if (existente && !expirou(existente, Date.now())) return estadoEpreuve(ctx);
+  if (existente) await finalizar(existente, existente.textes, true);
+  let ids, sessaoId = null;
+  if (pedido.sessao) {
+    const s = (await sessoesDoAluno(ctx)).find(x => x.id === pedido.sessao);
+    if (!s) throw erro("Cette épreuve n'est pas disponible.");
+    if (s.feita) throw erro("Vous avez déjà fait cette épreuve.");
+    if (!s.escrita) throw erro("Cette épreuve n'a pas de partie écrite.");
+    const linha = await T.SessaoTCF.findById(pedido.sessao).lean();
+    ids = { ET1: linha.ET1 || "", ET2: linha.ET2 || "", ET3: linha.ET3 || "" };
+    sessaoId = linha._id;
+  } else ids = pedido.sujets || {};
+  for (const t of ["ET1", "ET2", "ET3"]) {
+    if (sessaoId && !ids[t]) continue;
+    if (!M.acharTema(t, ids[t])) throw erro("Sujet invalide.");
+  }
+  const inicio = new Date();
+  const ep = await T.EpreuveTCF.create({
+    alunoId: ctx.userId, courseType: ctx.courseType, sessaoId, inicio, fim: new Date(inicio.getTime() + M.DURACAO_EPREUVE_MIN * 60000),
+    sujets: ids, status: "em_curso", ultimoSinal: inicio, correcao: sessaoId ? "professor" : (pedido.correcao === "professor" ? "professor" : "ia")
+  });
+  const u = await usuario(ctx);
+  avisarEquipe("epreuve", { id: String(ep._id), alunoId: ctx.userId, nome: u.nome, acao: "inicio" });
+  return estadoEpreuve(ctx);
+};
+
+const limparTextes = textes => Object.fromEntries(["ET1", "ET2", "ET3"].map(t => [t, String((textes || {})[t] || "").slice(0, 6000)]));
+
+F.salvarRascunhoEpreuve = async (ctx, textes, consumido) => {
+  const e = await T.EpreuveTCF.findOne({ alunoId: ctx.userId, status: "em_curso" }).sort({ inicio: -1 });
+  if (!e) return { fechada: true };
+  const agora = Date.now();
+  if (!e.sessaoId) {
+    // O tempo consumido só avança o tempo real decorrido desde o último sinal (sem trapaça).
+    const antes = e.consumido || 0, ultimo = (e.ultimoSinal || e.inicio).getTime();
+    e.consumido = Math.max(antes, Math.min(Number(consumido) || 0, antes + Math.ceil((agora - ultimo) / 1000) + 5));
+  }
+  e.ultimoSinal = new Date(agora);
+  e.textes = limparTextes(textes);
+  await e.save();
+  const u = await usuario(ctx);
+  avisarEquipe("epreuve", { id: String(e._id), alunoId: ctx.userId, nome: u.nome, acao: "rascunho", consumido: e.consumido, fim: fimEfetivo(e, agora), sessao: !!e.sessaoId,
+    textes: e.textes, sujets: e.sujets });
+  if (expirou(e, agora)) { const r = await finalizar(e, e.textes, true); r.fechada = true; return r; }
+  return { ok: true, agora };
+};
+
+F.terminerEpreuve = async (ctx, textes) => {
+  const e = await T.EpreuveTCF.findOne({ alunoId: ctx.userId, status: "em_curso" }).sort({ inicio: -1 });
+  if (!e) throw erro("Aucune épreuve en cours.");
+  if (!e.sessaoId || Date.now() <= e.fim.getTime() + 90000) e.textes = limparTextes(textes);
+  return finalizar(e, e.textes, false);
+};
+
+// Fecha a épreuve. Épreuve do professor (ou treino com correção "professor"): cada tâche escrita
+// vira uma Producao no Sistema de Correção. Treino com correção "ia": a correção é pedida pelo
+// aluno na tela (uma por tâche), e ele ainda pode mandar ao professor depois.
+async function finalizar(e, textes, automatico) {
+  const atual = await T.EpreuveTCF.findOneAndUpdate({ _id: e._id, status: "em_curso" }, { $set: { status: "so_ia", enviadaEm: new Date(), textes: limparTextes(textes) } }, { new: true });
+  if (!atual) return { ok: true, jaEnviada: true };
+  const itens = ["ET1", "ET2", "ET3"].filter(t => String(atual.textes[t] || "").trim() && atual.sujets[t]);
+  let status = !itens.length ? "vazia" : automatico ? "enviada_auto" : "enviada";
+  let quantidade = 0, aviso = "";
+  if (itens.length && (atual.sessaoId || atual.correcao === "professor")) {
+    const r = await enviarTachesAoProfessor(atual, itens, { semCredito: !!atual.sessaoId });
+    quantidade = r.enviadas; aviso = r.aviso;
+  } else if (itens.length) status = "so_ia";
+  atual.status = status;
+  await atual.save();
+  avisarEquipe("epreuve", { id: String(atual._id), alunoId: String(atual.alunoId), acao: "fim", status });
+  return { ok: true, id: String(atual._id), quantidade, aviso: aviso || (!itens.length ? "Aucun texte écrit : rien n'a été envoyé." : ""), status, correcao: atual.correcao, sessao: !!atual.sessaoId };
+}
+
+async function enviarTachesAoProfessor(ep, taches, { semCredito, modoCorrecao = "professor" } = {}) {
+  const { montarNovaProducao, processarCorrecaoIA } = require("./producoes");
+  let enviadas = 0; const erros = [];
+  for (const t of taches) {
+    try {
+      const tema = await garantirTemaSujet(ep.courseType || "TCF", t, ep.sujets[t]);
+      const p = await montarNovaProducao({
+        userId: ep.alunoId, temaId: String(tema._id), textoDigitado: ep.textes[t], pularChecagemAcesso: true, modoCorrecao,
+        origem: { tipo: "modeles", tache: t, sujetId: ep.sujets[t], eixo: (M.acharTema(t, ep.sujets[t]) || {}).e, epreuveId: ep._id, sessaoId: ep.sessaoId || undefined },
+        semCredito, aceitarForaDoLimite: true
+      });
+      ep.producoes.push(p._id);
+      enviadas++;
+    } catch (err) { erros.push(`${t.replace("ET", "Tâche ")} : ${err.msg || err.message}`); }
+  }
+  await ep.save();
+  void processarCorrecaoIA;
+  return { enviadas, aviso: erros.length ? "Non envoyé : " + erros.join(" · ") : "" };
+}
+
+// Depois de uma épreuve de treino: manda ao Sistema de Correção as tâches escolhidas.
+F.enviarEpreuveCorrecao = async (ctx, epreuveId, taches, modo) => {
+  const ep = await T.EpreuveTCF.findOne({ _id: oid(epreuveId), alunoId: ctx.userId });
+  if (!ep || ep.status === "em_curso") throw erro("Épreuve introuvable.");
+  const ja = new Set((await Producao.find({ _id: { $in: ep.producoes } }).select("origem.tache").lean()).map(p => p.origem.tache));
+  const lista = (taches || []).filter(t => ["ET1", "ET2", "ET3"].includes(t) && !ja.has(t) && String(ep.textes[t] || "").trim());
+  if (!lista.length) throw erro("Rien à envoyer (tâches vides ou déjà envoyées).");
+  const r = await enviarTachesAoProfessor(ep, lista, { semCredito: !!ep.sessaoId, modoCorrecao: modo === "ia" ? "ia" : "professor" });
+  const u = await User.findById(ctx.userId).select("creditosCorrecao");
+  return { ...r, creditos: u.creditosCorrecao || 0 };
+};
+
+// Texto livre (réécriture, tâche treinada fora da épreuve) → Sistema de Correção.
+F.enviarTextoCorrecao = async (ctx, dados) => {
+  const t = dados?.tache;
+  if (!["ET1", "ET2", "ET3"].includes(t) || !M.acharTema(t, dados.sujet)) throw erro("Sujet invalide.");
+  const { montarNovaProducao } = require("./producoes");
+  const tema = await garantirTemaSujet(ctx.courseType, t, dados.sujet);
+  const p = await montarNovaProducao({
+    userId: ctx.userId, temaId: String(tema._id), textoDigitado: String(dados.texte || ""), modoCorrecao: dados.modo === "ia" ? "ia" : "professor",
+    origem: { tipo: "modeles", tache: t, sujetId: dados.sujet, eixo: (M.acharTema(t, dados.sujet) || {}).e }, aceitarForaDoLimite: true
+  });
+  const u = await User.findById(ctx.userId).select("creditosCorrecao");
+  return { ok: true, protocolo: p.protocolo, id: String(p._id), creditos: u.creditosCorrecao || 0 };
+};
+
+// ---------------- correção de treino pela IA ----------------
+F.statusIA = ctx => statusIA(ctx);
+F.corrigirComIA = async (ctx, pedido) => {
+  const st = await statusIA(ctx);
+  if (!st.ativa) throw erro("La correction par l'IA n'est pas activée. Demandez à votre professeur(e).");
+  if (st.restantes <= 0) throw erro(`Vous avez utilisé vos ${st.limite} corrections par l'IA aujourd'hui. Revenez demain !`);
+  const texte = String(pedido?.texte || "").trim().slice(0, 6000);
+  if (M.contarPalavras(texte) < 15) throw erro("Écrivez au moins quelques phrases avant de demander une correction.");
+  if (!M.TACHES.includes(pedido.tache)) throw erro("Tâche invalide.");
+  const r = await corrigirTreino({ alunoId: ctx.userId, tache: pedido.tache, sujetId: pedido.sujet, texte, courseType: ctx.courseType });
+  r.restantes = Math.max(0, st.restantes - 1);
+  return r;
+};
+F.obterCorrecoesIA = async ctx => (await T.CorrecaoIATCF.find({ alunoId: ctx.userId }).sort({ criadoEm: -1 }).limit(30).select("-correcao -texte").lean())
+  .map(r => ({ linha: String(r._id), Date: r.criadoEm, "Tâche": r.tache, Sujet: r.sujet, Mots: r.mots, "Note /20": r.note, NCLC: r.nclc }));
+F.obterDetalheCorrecaoIA = async (ctx, id) => {
+  const r = await T.CorrecaoIATCF.findOne({ _id: oid(id), alunoId: ctx.userId }).lean();
+  if (!r) throw erro("Correction introuvable.", 404);
+  return { ...r.correcao, texteEleve: r.texte, tache: r.tache, sujet: r.sujet };
+};
+
+// ---------------- carnet de révision ----------------
+F.obterCarnet = async ctx => (await T.CarnetProducao.find({ alunoId: ctx.userId }).sort({ data: 1 }).lean())
+  .map(r => ({ tipo: r.tipo, tache: r.tache, id: r.tipo === "sujet" ? r.refId : String(r._id), titre: r.titre, detalhe: r.detalhe, e: r.eixo, data: r.data, revisado: r.revisado, producaoId: r.producaoId }));
+F.alternarCarnet = async (ctx, item) => {
+  const ex = await T.CarnetProducao.findOne({ alunoId: ctx.userId, tipo: "sujet", refId: item.id });
+  if (ex) { await ex.deleteOne(); return false; }
+  await T.CarnetProducao.create({ alunoId: ctx.userId, tipo: "sujet", tache: item.tache, refId: item.id, titre: String(item.titre || "").slice(0, 200), eixo: item.e || "", courseType: ctx.courseType });
+  return true;
+};
+F.adicionarPalavrasCarnet = async (ctx, mots) => {
+  const ja = new Set((await T.CarnetProducao.find({ alunoId: ctx.userId, tipo: "mot" }).select("titre").lean()).map(r => M.semAcento(r.titre)));
+  let n = 0;
+  for (const m of (mots || []).slice(0, 30)) {
+    const mot = String(m.mot || "").trim().slice(0, 80);
+    if (!mot || ja.has(M.semAcento(mot))) continue;
+    ja.add(M.semAcento(mot));
+    await T.CarnetProducao.create({ alunoId: ctx.userId, tipo: "mot", tache: m.tache || "", titre: mot, detalhe: String(m.detalhe || "").slice(0, 300), eixo: m.e || "", courseType: ctx.courseType });
+    n++;
+  }
+  return n;
+};
+F.removerDoCarnet = async (ctx, id) => {
+  await T.CarnetProducao.deleteOne({ alunoId: ctx.userId, $or: [{ tipo: "sujet", refId: id }, ...(oid(id) ? [{ _id: oid(id) }] : [])] });
+  return true;
+};
+F.marcarCarnetRevisado = async (ctx, id, revisado) => {
+  await T.CarnetProducao.updateOne({ _id: oid(id), alunoId: ctx.userId }, { revisado: !!revisado });
+  return true;
+};
+// Resumo do Caderno de Revisão da Plataforma de Questões (os dois cadernos se mostram um ao outro).
+F.obterCadernoErros = async ctx => ({
+  questoes: await CadernoErros.countDocuments({ alunoId: ctx.userId, ...(ctx.courseType ? { courseType: ctx.courseType } : {}) }),
+  link: "caderno-revisao.html" + (ctx.courseType ? "?curso=" + ctx.courseType : "")
+});
+
+// ---------------- devoirs, mensagens, avisos ----------------
+async function meusDevoirs(ctx) {
+  const ds = await T.DevoirTCF.find({ ativo: true }).sort({ criadoEm: -1 }).lean();
+  return ds.filter(d => alvoInclui(d.alvo, ctx.userId)).map(d => {
+    const f = (d.feitos || []).find(x => String(x.alunoId) === String(ctx.userId));
+    return { id: String(d._id), titre: d.titre, tache: d.tache, modelo: d.modelo, tipo: d.tipo, tipoNome: M.TIPOS_DEVOIR[d.tipo] || d.tipo, mensagem: d.mensagem, data: d.criadoEm, feito: !!f, score: f ? f.score : "", total: f ? f.total : "" };
+  });
+}
+F.meusDevoirs = ctx => meusDevoirs(ctx);
+F.concluirDevoir = async (ctx, id, score, total) => {
+  const d = await T.DevoirTCF.findById(oid(id));
+  if (!d || !alvoInclui(d.alvo, ctx.userId)) throw erro("Devoir introuvable.");
+  const f = d.feitos.find(x => String(x.alunoId) === String(ctx.userId));
+  const s = score === "" || score == null ? undefined : Number(score), tt = total === "" || total == null ? undefined : Number(total);
+  if (f) { if (s === undefined || s >= (f.score || 0)) { f.score = s; f.total = tt; f.data = new Date(); } }
+  else d.feitos.push({ alunoId: ctx.userId, score: s, total: tt, data: new Date() });
+  await d.save();
+  return true;
+};
+const fmtMsg = m => ({ id: String(m._id), data: m.criadoEm, texto: m.texto, de: m.de, feito: m.feito, atualizado: m.atualizadoEm });
+F.mesMessages = async ctx => (await T.MensagemTCF.find({ alunoId: ctx.userId }).sort({ criadoEm: -1 }).lean()).map(fmtMsg);
+F.marcarMensagem = async (ctx, id, feito) => {
+  const r = await T.MensagemTCF.updateOne({ _id: oid(id), alunoId: ctx.userId }, { feito: !!feito, atualizadoEm: new Date() });
+  if (!r.matchedCount) throw erro("Message introuvable.");
+  return true;
+};
+F.meusAvisos = async ctx => (await T.AvisoTCF.find({ ativo: true, lidos: { $ne: ctx.userId } }).sort({ criadoEm: -1 }).lean())
+  .filter(a => alvoInclui(a.alvo, ctx.userId)).map(a => ({ id: String(a._id), titre: a.titre, message: a.message, data: a.criadoEm, de: a.de }));
+F.marcarAvisoLido = async (ctx, id) => { await T.AvisoTCF.updateOne({ _id: oid(id) }, { $addToSet: { lidos: ctx.userId } }); return true; };
+
+// ---------------- temas do mês e À la une ----------------
+async function temasDoMes(ctx) {
+  await temasMesIds(ctx);
+  return ctx._cache.temasMesLista.map(r => ({ tache: r.tache, id: r.sujetId, titre: r.titre, e: r.eixo, linha: String(r._id) }));
+}
+F.obterTemasDoMes = ctx => temasDoMes(ctx);
+
+F.obterDestaques = async ctx => {
+  const vis = await filtroVisivel(ctx);
+  const posts = await T.PostBlogTCF.find({ visivel: true }).sort({ ordem: 1, criadoEm: -1 }).lean();
+  const postsOut = posts.map(p => {
+    let tema = p.tache && p.sujetId ? M.acharTema(p.tache, p.sujetId) : null;
+    if (tema && !vis(p.tache, tema.e, p.sujetId)) tema = null;
+    return { tache: tema ? p.tache : "", id: tema ? p.sujetId : "", titre: p.titre, texto: p.texto || (tema ? M.consigneDe(tema) : ""), e: tema ? tema.e : "", f: tema ? (tema.f || 1) : 1, imagem: imagemBlog(p.imagem), post: 1 };
+  });
+  const temas = await temasDoMes(ctx), idsMes = await temasMesIds(ctx);
+  const saida = [];
+  for (const t of M.TACHES) {
+    let esc = temas.filter(x => x.tache === t).slice(0, 1).map(x => {
+      const s = M.acharTema(t, x.id) || {};
+      return { tache: t, id: x.id, titre: x.titre, texto: M.consigneDe(s), e: x.e, f: s.f || 1, mes: 1, tr: M.ehTendencia(t, `${s.t || ""} ${s.titre || ""}`) ? 1 : 0 };
+    });
+    if (!esc.length) {
+      const pool = M.modelosManuais(t).concat(M.sujetsDaTache(t)).filter(s => vis(t, s.e, s.id));
+      pool.sort((a, b) => M.pesoTema(t, b, idsMes) - M.pesoTema(t, a, idsMes));
+      esc = pool.slice(0, 1).map(s => ({ tache: t, id: s.id, titre: s.titre || "", texto: M.consigneDe(s), e: s.e, f: s.f || 1, mes: 0, tr: M.ehTendencia(t, `${s.t || ""} ${s.titre || ""} ${s.c || ""}`) ? 1 : 0 }));
+    }
+    saida.push(...esc);
+  }
+  return { posts: postsOut, sujets: saida };
+};
+function imagemBlog(v) {
+  v = String(v || "").trim();
+  if (!v) return "";
+  const m = v.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?.*id=)([-\w]{20,})/);
+  if (m) return "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w1200";
+  return /^https:\/\//.test(v) || /^img\//.test(v) ? v : "";
+}
+
+// ---------------- notas e competências ----------------
+function linhaProducao(p, nomes) {
+  const tache = p.origem?.tache || (p.modalidade === "oral" ? "T" : "ET");
+  return {
+    ID: String(p._id), Date: p.dataEnvio || p.criadoEm, "E-mail": String(p.alunoId), Nom: nomes ? nomes[String(p.alunoId)] || "" : "", "Tâche": tache,
+    Sujet: p.temaId?.titulo || "", Mots: p.contagemPalavras || "", Texte: p.textoDigitado || "", Transcription: p.transcricao || "",
+    "Note /20": p.avaliacao?.notaTotal != null && p.avaliacao.notaMaxima ? Math.round(p.avaliacao.notaTotal / p.avaliacao.notaMaxima * 20 * 2) / 2 : "",
+    Commentaire: p.avaliacao?.comentarioGeral || "", "Corrigé le": p.dataCorrecao || "", Statut: p.status, Protocole: p.protocolo, Correcteur: p.avaliacao?.corretor || p.modoCorrecao,
+    Session: p.origem?.sessaoId ? String(p.origem.sessaoId) : "", "Durée (s)": p.duracaoSegundos || "", Audio: p.arquivoOriginal?.caminho ? "/api/modeles/audio/" + p._id : "", NCLC: p.avaliacao?.nclc || ""
+  };
+}
+F.obterMesNotes = async ctx => {
+  const ps = await Producao.find({ alunoId: ctx.userId, "origem.tipo": "modeles" }).populate("temaId", "titulo").sort({ dataEnvio: -1 }).limit(160).lean();
+  const notasOrais = await T.CompetenciaTCF.find({ alunoId: ctx.userId, epreuve: "PO", producaoId: null }).sort({ criadoEm: -1 }).limit(40).lean();
+  return {
+    pe: ps.filter(p => p.modalidade !== "oral").map(p => linhaProducao(p)),
+    po: ps.filter(p => p.modalidade === "oral").map(p => linhaProducao(p)).concat(notasOrais.map(n => ({ Date: n.criadoEm, "Tâche": n.tache, Sujet: n.sujet, "Note /20": n.total, Commentaire: n.comentario })))
+  };
+};
+async function resumoCompetencias(alunoId) {
+  const linhas = await T.CompetenciaTCF.find({ alunoId }).sort({ criadoEm: -1 }).lean();
+  const o = {};
+  for (const ep of ["PE", "PO"]) {
+    const l = linhas.filter(r => r.epreuve === ep);
+    o[ep] = {
+      n: l.length,
+      criterios: M.CRITERES[ep].map((c, i) => { const v = l.map(r => r.notas[i]).filter(x => typeof x === "number"); return { nome: c, media: v.length ? Math.round(v.reduce((a, b) => a + b, 0) / v.length * 10) / 10 : null }; }),
+      total: l.length ? Math.round(l.reduce((a, r) => a + (r.total || 0), 0) / l.length * 10) / 10 : null,
+      historico: l.slice(0, 20).map(r => ({ data: r.criadoEm, tache: r.tache, sujet: r.sujet, total: r.total, notas: r.notas, comentario: r.comentario }))
+    };
+  }
+  return o;
+}
+F.mesCompetencias = async ctx => ({ resumo: await resumoCompetencias(ctx.userId), criterios: M.CRITERES });
+F.obterCriterios = () => M.CRITERES;
+
+// ---------------- vocabulário ----------------
+const VOCAB = require("../data/modeles/vocab.json");
+const idCarta = (deck, mot) => "V" + crypto.createHash("sha256").update(deck + "|" + mot).digest("hex").slice(0, 10);
+async function cartas() {
+  const extras = await T.CartaVocabTCF.find({ ativo: true }).lean();
+  const base = VOCAB.cartas.map(c => ({ deck: VOCAB.renomear[c[0]] || c[0], mot: c[1], trad: c[2], ex: c[3], dica: c[4] || "" }));
+  return base.concat(extras.map(c => ({ deck: c.deck, mot: c.mot, trad: c.traduction, ex: c.exemple, dica: c.astuce || "", prof: String(c._id) })))
+    .map(c => ({ ...c, id: idCarta(c.deck, c.mot) }));
+}
+F.obterVocab = async ctx => {
+  const [cs, prog] = await Promise.all([cartas(), T.ProgressoVocabTCF.findOne({ alunoId: ctx.userId }).lean()]);
+  return { temas: VOCAB.temas, cartas: cs, progresso: prog?.dados || {}, novasPorDia: VOCAB.novasPorDia, acertosSair: VOCAB.acertosSair };
+};
+async function salvarProgresso(ctx, fn) {
+  const doc = await T.ProgressoVocabTCF.findOne({ alunoId: ctx.userId }) || new T.ProgressoVocabTCF({ alunoId: ctx.userId, dados: {} });
+  const dados = doc.dados || {};
+  fn(dados);
+  doc.dados = dados; doc.markModified("dados"); doc.atualizadoEm = new Date();
+  await doc.save();
+  return dados;
+}
+// lista = [{ id, ok }] — mesma regra do script: acerto sobe a caixa, erro volta para a 1.
+F.salvarQuizVocab = (ctx, lista) => salvarProgresso(ctx, dados => {
+  for (const x of (lista || []).slice(0, 200)) {
+    if (!x || !x.id) continue;
+    const p = dados[x.id] || { c: 0, ok: 0, n: 0 };
+    p.n++; if (x.ok) { p.ok++; p.c = Math.min(5, (p.c || 0) + 1); } else p.c = 0;
+    p.d = Date.now();
+    dados[x.id] = p;
+  }
+});
+F.salvarRevisoes = F.salvarQuizVocab;
+
+// ---------------- recordes (dictée / réécriture) ----------------
+F.obterMelhoresResultados = async ctx => (await T.RecordeTCF.findOne({ alunoId: ctx.userId }).lean())?.dados || {};
+F.salvarMelhorResultado = async (ctx, id, tipo, pct) => {
+  tipo = tipo === "d" ? "d" : "r";
+  pct = Math.max(0, Math.min(100, Math.round(Number(pct) || 0)));
+  if (!id) throw erro("Modèle introuvable.");
+  const doc = await T.RecordeTCF.findOne({ alunoId: ctx.userId }) || new T.RecordeTCF({ alunoId: ctx.userId, dados: {} });
+  const tudo = doc.dados || {}, x = (tudo[id] = tudo[id] || {});
+  let r = x[tipo]; const antes = r ? r.m : null;
+  if (!r) r = x[tipo] = { m: pct, p: pct, n: 0, d: Date.now() };
+  r.n++;
+  if (pct > r.m) { r.m = pct; r.d = Date.now(); }
+  doc.dados = tudo; doc.markModified("dados");
+  await doc.save();
+  return { melhor: r.m, primeiro: r.p, tentativas: r.n, antes, recorde: antes === null || pct > antes, pct };
+};
+
+// ---------------- presença (só a equipe vê quem está online) ----------------
+const presenca = new Map();
+const ROTULOS_TELA = { "tela-accueil": "Accueil", "tela-liste": "Liste des sujets", "tela-modele": "Modèle", "tela-axe": "Axe thématique", "tela-epreuve": "Épreuve",
+  "tela-notes": "Mes notes", "tela-carnet": "Mon cahier", "tela-taches": "Mes devoirs", "tela-atelier": "Atelier dictée", "tela-outils": "Boîte à outils", "tela-hub": "Hub" };
+F.sinalizarPresenca = async (ctx, tela, detalhe) => {
+  if (ctx.prof) return false;
+  const u = await usuario(ctx);
+  const ant = presenca.get(ctx.userId);
+  presenca.set(ctx.userId, { n: u.nome || u.email, email: u.email, curso: ctx.courseType, tela: ROTULOS_TELA[tela] || tela || "", det: String(detalhe || "").slice(0, 120), t: Date.now(), desde: ant ? ant.desde : Date.now() });
+  const [avisos, msgs] = await Promise.all([F.meusAvisos(ctx), T.MensagemTCF.countDocuments({ alunoId: ctx.userId, feito: false })]);
+  return { bloqueado: false, avisos: avisos.length, mensagens: msgs };
+};
+
+// Frases sem áudio Coqui: guardadas para scripts_tts/gerar_audios_modeles.py gerar depois.
+F.registrarAudiosFaltantes = async (ctx, chaves) => {
+  const novas = (Array.isArray(chaves) ? chaves : []).slice(0, 200).map(c => String(c).slice(0, 600)).filter(c => /^[AB]\|./.test(c));
+  if (!novas.length) return 0;
+  const cfg = await config();
+  const f = cfg.audiosFaltantes || {};
+  if (Object.keys(f).length > 20000) return 0;
+  // chave do Mongo não pode ter "." nem começar com "$": guarda o texto como valor, indexado pelo hash
+  for (const c of novas) f[crypto.createHash("sha256").update(c).digest("hex")] = c;
+  cfg.audiosFaltantes = f; cfg.markModified("audiosFaltantes");
+  await cfg.save();
+  return novas.length;
+};
+
+// ------------------------------------------------------------------ funções (professor)
+prof("listarAlunos", async () => (await alunosProducao()).map(a => ({ email: a.id, nome: a.nome, doc: true, ativo: true, grupo: a.cursos.join(" · "), eixos: M.EIXOS.ordem, acesso: {}, emailReal: a.email })));
+
+// Chaves de eixo do script: no site todos os eixos ficam abertos (o professor oculta temas no quadro).
+prof("listarChavesEixos", async () => []);
+
+prof("listarSessoes", async () => {
+  const ss = await T.SessaoTCF.find({}).sort({ criadoEm: -1 }).lean();
+  const nomes = await mapaNomes(ss.flatMap(s => s.alvo?.alunos || []));
+  return ss.map(s => ({
+    ID: String(s._id), Nom: s.nome, "Tâche 1": s.ET1 || "", "Tâche 2": s.ET2 || "", "Tâche 3": s.ET3 || "", "Élèves": nomeAlvo(s.alvo, nomes), Active: s.ativa ? "SIM" : "NÃO",
+    "Créée le": s.criadoEm, "Créée par": s.criadoPorNome, "Oral T1": s.T1 || "", "Oral T2": s.T2 || "", "Oral T3": s.T3 || "",
+    titulos: ["ET1", "ET2", "ET3"].map(t => { const sj = s[t] && M.acharTema(t, s[t]); return sj ? (sj.t || sj.titre) : (s[t] || ""); }),
+    orais: ["T1", "T2", "T3"].map(t => { const sj = s[t] && M.acharTema(t, s[t]); return sj ? (sj.titre || sj.t) : (s[t] || ""); })
+  }));
+});
+prof("criarSessao", async (ctx, dados) => {
+  let algum = false;
+  for (const t of M.TACHES) { if (dados[t]) { if (!M.acharTema(t, dados[t])) throw erro(`Sujet invalide (${t}).`); algum = true; } else dados[t] = ""; }
+  if (!algum) throw erro("Choisissez au moins une tâche (écrite ou orale).");
+  const u = await usuario(ctx);
+  const s = await T.SessaoTCF.create({ nome: dados.nome || "Épreuve du " + new Date().toLocaleDateString("fr-CA"), ET1: dados.ET1, ET2: dados.ET2, ET3: dados.ET3, T1: dados.T1, T2: dados.T2, T3: dados.T3,
+    alvo: alvoDe(dados.alunos), criadoPor: ctx.userId, criadoPorNome: u.nome });
+  return String(s._id);
+});
+prof("alternarSessao", async (ctx, id, ativa) => { await T.SessaoTCF.updateOne({ _id: oid(id) }, { ativa: !!ativa }); return true; });
+prof("apagarSessao", async (ctx, id) => { await T.SessaoTCF.deleteOne({ _id: oid(id) }); return true; });
+
+prof("criarDevoir", async (ctx, dados) => {
+  const tema = M.acharTema(dados.tache, dados.modelo);
+  if (!tema) throw erro("Modèle introuvable.");
+  if (!M.TIPOS_DEVOIR[dados.tipo]) throw erro("Type de devoir invalide.");
+  const u = await usuario(ctx);
+  const d = await T.DevoirTCF.create({ titre: dados.titre || tema.titre || String(tema.t).slice(0, 90), tache: dados.tache, modelo: dados.modelo, tipo: dados.tipo,
+    mensagem: String(dados.mensagem || "").slice(0, 500), eixo: tema.e, alvo: alvoDe(dados.alunos), criadoPor: ctx.userId, criadoPorNome: u.nome });
+  return String(d._id);
+});
+prof("listarDevoirsProf", async () => {
+  const [ds, alunos] = await Promise.all([T.DevoirTCF.find({}).sort({ criadoEm: -1 }).lean(), alunosProducao()]);
+  return ds.map(d => {
+    const alvo = alunos.filter(a => alvoInclui(d.alvo, a.id));
+    const quem = new Set((d.feitos || []).map(f => String(f.alunoId)));
+    return { ID: String(d._id), Titre: d.titre, "Tâche": d.tache, "Modèle": d.modelo, Type: d.tipo, Message: d.mensagem, "Élèves": d.alvo?.todos ? "TOUS" : `${alvo.length} élève(s)`,
+      Active: d.ativo ? "SIM" : "NÃO", "Créé le": d.criadoEm, Par: d.criadoPorNome, Axe: d.eixo, alvo: alvo.length,
+      feitos: alvo.filter(a => quem.has(a.id)).map(a => a.nome), faltam: alvo.filter(a => !quem.has(a.id)).map(a => a.nome), tipoNome: M.TIPOS_DEVOIR[d.tipo] || d.tipo };
+  });
+});
+prof("alternarDevoir", async (ctx, id, ativo) => { await T.DevoirTCF.updateOne({ _id: oid(id) }, { ativo: !!ativo }); return true; });
+prof("apagarDevoir", async (ctx, id) => { await T.DevoirTCF.deleteOne({ _id: oid(id) }); return true; });
+
+prof("adicionarTemaDoMes", async (ctx, item) => {
+  const tema = M.acharTema(item.tache, item.id);
+  if (!tema) throw erro("Sujet introuvable.");
+  if (!(await T.TemaMesTCF.exists({ mes: mesAtual(), sujetId: item.id }))) {
+    const u = await usuario(ctx);
+    await T.TemaMesTCF.create({ mes: mesAtual(), tache: item.tache, sujetId: item.id, titre: tema.titre || String(tema.t).slice(0, 160), eixo: tema.e, por: u.nome });
+  }
+  ctx._cache = {};
+  return temasDoMes(ctx);
+});
+prof("removerTemaDoMes", async (ctx, id) => { await T.TemaMesTCF.deleteOne({ mes: mesAtual(), sujetId: id }); ctx._cache = {}; return temasDoMes(ctx); });
+prof("sugerirTemasDoMes", async (ctx, porTache) => {
+  porTache = Math.min(Number(porTache) || 2, 5);
+  const usados = new Set((await T.TemaMesTCF.find({}).select("sujetId").lean()).map(r => r.sujetId));
+  const sug = [];
+  for (const t of M.TACHES) {
+    M.modelosManuais(t).concat(M.sujetsDaTache(t)).filter(x => !usados.has(x.id)).sort((a, b) => (b.f || 1) - (a.f || 1)).slice(0, porTache)
+      .forEach(x => sug.push({ tache: t, id: x.id, titre: x.titre || String(x.t).slice(0, 160), e: x.e, f: x.f || 1 }));
+  }
+  return sug;
+});
+
+const fmtPost = p => ({ ordem: p.ordem, titre: p.titre, texto: p.texto, imagem: imagemBlog(p.imagem), imagemBruta: p.imagem, tache: p.tache, id: p.sujetId, visivel: p.visivel, ref: String(p._id) });
+prof("listarBlog", async () => (await T.PostBlogTCF.find({}).sort({ ordem: 1, criadoEm: -1 }).lean()).map(fmtPost));
+prof("salvarPostBlog", async (ctx, d) => {
+  if (!String(d.titre || "").trim()) throw erro("Donnez un titre à l'article.");
+  const campos = { ordem: Number(d.ordem) || 1, titre: String(d.titre).slice(0, 160), texto: String(d.texto || "").slice(0, 600), imagem: String(d.imagem || "").slice(0, 600),
+    tache: d.tache || "", sujetId: d.id || "", visivel: d.visivel !== false };
+  if (d.ref && oid(d.ref)) await T.PostBlogTCF.updateOne({ _id: oid(d.ref) }, campos); else await T.PostBlogTCF.create(campos);
+  return F.listarBlog(ctx);
+});
+prof("apagarPostBlog", async (ctx, ref) => { await T.PostBlogTCF.deleteOne({ _id: oid(ref) }); return F.listarBlog(ctx); });
+
+prof("criarAviso", async (ctx, d) => {
+  if (!String(d.message || "").trim()) throw erro("Écrivez le message.");
+  const u = await usuario(ctx);
+  await T.AvisoTCF.create({ titre: String(d.titre || "Avis de votre professeure").slice(0, 120), message: String(d.message).slice(0, 1500), alvo: alvoDe(d.alunos), de: u.nome });
+  return F.listarAvisosProf(ctx);
+});
+prof("listarAvisosProf", async () => {
+  const [as, alunos] = await Promise.all([T.AvisoTCF.find({}).sort({ criadoEm: -1 }).lean(), alunosProducao()]);
+  return as.map(a => {
+    const alvo = alunos.filter(x => alvoInclui(a.alvo, x.id)), lidos = new Set((a.lidos || []).map(String));
+    return { id: String(a._id), data: a.criadoEm, titre: a.titre, message: a.message, ativo: a.ativo, alvo: a.alvo?.todos ? "TOUS" : `${alvo.length} élève(s)`, total: alvo.length, lidos: alvo.filter(x => lidos.has(x.id)).length };
+  });
+});
+prof("apagarAviso", async (ctx, id) => { await T.AvisoTCF.deleteOne({ _id: oid(id) }); return F.listarAvisosProf(ctx); });
+
+prof("enviarMensagem", async (ctx, alunoId, texto) => {
+  texto = String(texto || "").trim().slice(0, 1500);
+  if (!texto) throw erro("Écrivez un message.");
+  if (!oid(alunoId) || !(await User.exists({ _id: oid(alunoId) }))) throw erro("Élève introuvable.");
+  const u = await usuario(ctx);
+  await T.MensagemTCF.create({ alunoId: oid(alunoId), texto, de: u.nome });
+  return true;
+});
+prof("apagarMensagem", async (ctx, id) => { await T.MensagemTCF.deleteOne({ _id: oid(id) }); return true; });
+
+// Quadro "Thèmes P.O. / P.E.": o que está marcado fica visível para os alunos.
+prof("quadroTemas", async (ctx, tache) => {
+  const cfg = await config(), ocultos = cfg.ocultos || {};
+  const prontos = new Set((await T.ModeleIA.find({ tache }).select("sujetId").lean()).map(x => x.sujetId));
+  return M.modelosManuais(tache).map(m => ({ id: m.id, e: m.e, t: m.titre, f: m.f || 1, manual: 1, pub: ocultos[m.id] ? 0 : 1, ia: 1 }))
+    .concat(M.sujetsDaTache(tache).map(s => ({ id: s.id, e: s.e, t: String(s.t || "").slice(0, 200), f: s.f || 1, pub: ocultos[s.id] ? 0 : 1, ia: prontos.has(s.id) ? 1 : 0 })));
+});
+prof("publicarTemas", async (ctx, tache, ids, publicar) => {
+  const cfg = await config();
+  const ocultos = { ...(cfg.ocultos || {}) };
+  for (const id of ids || []) { if (publicar) delete ocultos[id]; else ocultos[id] = 1; }
+  cfg.ocultos = ocultos; cfg.markModified("ocultos");
+  await cfg.save();
+  return { n: (ids || []).length };
+});
+
+prof("listarCartasProf", async () => (await T.CartaVocabTCF.find({}).sort({ criadoEm: -1 }).lean())
+  .map(c => ({ linha: String(c._id), deck: c.deck, mot: c.mot, trad: c.traduction, ex: c.exemple, dica: c.astuce, ativo: c.ativo })));
+prof("adicionarCarta", async (ctx, d) => {
+  if (!String(d.mot || "").trim()) throw erro("Écrivez le mot.");
+  await T.CartaVocabTCF.create({ deck: String(d.deck || "Mots de la semaine").slice(0, 80), mot: String(d.mot).slice(0, 120), traduction: String(d.trad || "").slice(0, 200), exemple: String(d.ex || "").slice(0, 300), astuce: String(d.dica || "").slice(0, 400) });
+  return F.listarCartasProf(ctx);
+});
+prof("apagarCarta", async (ctx, linha) => { await T.CartaVocabTCF.deleteOne({ _id: oid(linha) }); return F.listarCartasProf(ctx); });
+
+prof("listarOnline", async () => {
+  const agora = Date.now(), vivos = [];
+  for (const [id, d] of presenca) {
+    if (agora - d.t > 3 * 60 * 1000) { presenca.delete(id); continue; }
+    vivos.push({ ...d, id, ha: Math.round((agora - d.t) / 1000), min: Math.round((agora - d.desde) / 60000), g: d.curso });
+  }
+  return vivos.sort((a, b) => a.n.localeCompare(b.n));
+});
+
+// Épreuves em andamento agora (acompanhamento ao vivo pela equipe).
+prof("listarEpreuvesAoVivo", async () => {
+  const eps = await T.EpreuveTCF.find({ status: "em_curso", ultimoSinal: { $gte: new Date(Date.now() - 3 * 3600 * 1000) } }).sort({ ultimoSinal: -1 }).lean();
+  const nomes = await mapaNomes(eps.map(e => e.alunoId));
+  const agora = Date.now();
+  return eps.map(e => ({ id: String(e._id), alunoId: String(e.alunoId), nome: nomes[String(e.alunoId)] || "", curso: e.courseType, sessao: !!e.sessaoId, consumido: e.consumido,
+    fim: fimEfetivo(e, agora), inicio: e.inicio, textes: e.textes, sujets: sujetsCompletos(e.sujets || {}), ultimoSinal: e.ultimoSinal }));
+});
+
+// Produções escritas / orais do Ambiente de Produção (ligadas ao Sistema de Correção).
+async function listarProducoesModeles(filtro, modalidade) {
+  const q = { "origem.tipo": "modeles", modalidade };
+  if (filtro?.aluno && oid(filtro.aluno)) q.alunoId = oid(filtro.aluno);
+  if (filtro?.pendentes) q.status = { $in: ["em_fila", "em_correcao", "aguardando_revisao"] };
+  const ps = await Producao.find(q).populate("temaId", "titulo").sort({ dataEnvio: -1 }).limit(120).lean();
+  const nomes = await mapaNomes(ps.map(p => p.alunoId));
+  return ps.map(p => linhaProducao(p, nomes));
+}
+prof("listarProducoes", (ctx, filtro) => listarProducoesModeles(filtro, "textual"));
+prof("listarProducoesOrais", (ctx, filtro) => listarProducoesModeles(filtro, "oral"));
+prof("obterAudioAluno", async (ctx, id) => "/api/modeles/audio/" + id);
+prof("apagarProducao", async (ctx, tipo, id) => {
+  const p = await Producao.findOne({ _id: oid(id), "origem.tipo": "modeles" });
+  if (!p) throw erro("Production introuvable.");
+  p.status = "arquivado"; p.historicoStatus.push({ status: "arquivado", data: new Date() });
+  await p.save();
+  return true;
+});
+
+// Nota por competência (6 critérios 0–10 → /20). Com `ref` (uma Producao), também corrige a
+// produção no Sistema de Correção e manda as correções para o carnet do aluno.
+prof("salvarAvaliacaoCompetencias", async (ctx, dados) => {
+  const crit = M.CRITERES[dados.epreuve];
+  if (!crit) throw erro("Épreuve invalide.");
+  const notas = (dados.notas || []).slice(0, crit.length).map(n => {
+    n = Number(String(n).replace(",", "."));
+    if (isNaN(n) || n < 0 || n > 10) throw erro("Chaque compétence est notée de 0 à 10.");
+    return n;
+  });
+  if (notas.length !== crit.length) throw erro("Notez toutes les compétences.");
+  const alunoId = oid(dados.aluno);
+  if (!alunoId) throw erro("Élève introuvable.");
+  const total = Math.round(notas.reduce((a, n) => a + n, 0) / (notas.length * 10) * 20 * 2) / 2;
+  const comentario = String(dados.comentario || "").trim();
+  const u = await usuario(ctx);
+  const producaoId = oid(dados.ref);
+  await T.CompetenciaTCF.create({ alunoId, epreuve: dados.epreuve, tache: dados.tache || "", sujet: dados.sujet || "", producaoId, notas, total, comentario, professor: u.nome });
+  if (producaoId) {
+    const p = await Producao.findById(producaoId);
+    if (p) {
+      const { avaliar } = require("../utils/gradesProva");
+      const av = avaliar("TCF", p.modalidade === "oral" ? "oral" : "textual", {}, { notaFinal: total });
+      p.avaliacao = { ...av, criterios: crit.map((c, i) => ({ id: "c" + (i + 1), nome: c, max: 10, nota: notas[i] })), comentarioGeral: comentario,
+        corretor: "professor", corretorNome: u.nome, pontosFortes: [], aMelhorar: [], correcoes: [] };
+      p.status = "corrigido"; p.dataCorrecao = new Date(); p.professorId = ctx.userId;
+      p.historicoStatus.push({ status: "corrigido", data: new Date() });
+      await p.save();
+      require("../utils/sse").transmitir("producao-atualizada", { alunoId: String(p.alunoId), producaoId: String(p._id) });
+    }
+  }
+  return { ok: true, total, nclc: M.nclc(total) };
+});
+prof("listarNotasOrais", async (ctx, alunoId) => {
+  const q = { epreuve: "PO" };
+  if (oid(alunoId)) q.alunoId = oid(alunoId);
+  const l = await T.CompetenciaTCF.find(q).sort({ criadoEm: -1 }).limit(60).lean();
+  const nomes = await mapaNomes(l.map(x => x.alunoId));
+  return l.map(r => ({ Date: r.criadoEm, "E-mail": String(r.alunoId), Nom: nomes[String(r.alunoId)] || "", "Tâche": r.tache, Sujet: r.sujet, "Note /20": r.total, Commentaire: r.comentario, Professeur: r.professor, ID: String(r._id) }));
+});
+prof("salvarNotaOral", async (ctx, alunoId, tache, sujet, nota, comentario) => {
+  nota = Number(String(nota).replace(",", "."));
+  if (isNaN(nota) || nota < 0 || nota > 20) throw erro("La note doit être comprise entre 0 et 20.");
+  const u = await usuario(ctx);
+  await T.CompetenciaTCF.create({ alunoId: oid(alunoId), epreuve: "PO", tache, sujet, notas: [], total: nota, comentario, professor: u.nome });
+  return { ok: true, nclc: M.nclc(nota) };
+});
+
+prof("listarSuivi", async () => {
+  const alunos = await alunosProducao();
+  const ids = alunos.map(a => oid(a.id));
+  const [pend, msgs, comp] = await Promise.all([
+    Producao.aggregate([{ $match: { alunoId: { $in: ids }, "origem.tipo": "modeles", status: { $in: ["em_fila", "em_correcao"] } } }, { $group: { _id: "$alunoId", n: { $sum: 1 } } }]),
+    T.MensagemTCF.aggregate([{ $match: { alunoId: { $in: ids }, feito: false } }, { $group: { _id: "$alunoId", n: { $sum: 1 } } }]),
+    T.CompetenciaTCF.aggregate([{ $match: { alunoId: { $in: ids } } }, { $group: { _id: { a: "$alunoId", e: "$epreuve" }, m: { $avg: "$total" } } }])
+  ]);
+  const mp = Object.fromEntries(pend.map(x => [String(x._id), x.n])), mm = Object.fromEntries(msgs.map(x => [String(x._id), x.n]));
+  const media = (id, ep) => { const x = comp.find(c => String(c._id.a) === id && c._id.e === ep); return x ? Math.round(x.m * 10) / 10 : null; };
+  return alunos.map(a => ({ email: a.id, emailReal: a.email, nome: a.nome, grupo: a.cursos.join(" · "), ativo: true, liberados: M.TACHES.length * M.EIXOS.ordem.length, total: M.TACHES.length * M.EIXOS.ordem.length,
+    abonnement: "actif", aCorrigir: mp[a.id] || 0, mensagens: mm[a.id] || 0, mediaPE: media(a.id, "PE"), mediaPO: media(a.id, "PO") }));
+});
+prof("obterFicheEleve", async (ctx, alunoId) => {
+  const u = await User.findById(oid(alunoId)).select("nome email creditosCorrecao").lean();
+  if (!u) throw erro("Élève introuvable.");
+  const actx = { userId: String(u._id), prof: false, _cache: {}, courseType: ctx.courseType };
+  const ps = await Producao.find({ alunoId: u._id, "origem.tipo": "modeles" }).populate("temaId", "titulo").sort({ dataEnvio: -1 }).limit(70).lean();
+  const ia = await T.CorrecaoIATCF.find({ alunoId: u._id }).select("note").lean();
+  const [devoirs, sessoes, msgs, carnet] = await Promise.all([meusDevoirs(actx), sessoesDoAluno(actx), T.MensagemTCF.find({ alunoId: u._id }).sort({ criadoEm: -1 }).lean(), T.CarnetProducao.countDocuments({ alunoId: u._id })]);
+  const nomes = { [String(u._id)]: u.nome };
+  return {
+    aluno: { email: String(u._id), emailReal: u.email, nome: u.nome || u.email, grupo: "", ativo: true, producao: "SIM", doc: false, modulos: MODULOS, intro: "", creditos: u.creditosCorrecao || 0, carnet },
+    acesso: {}, competencias: await resumoCompetencias(u._id), criterios: M.CRITERES,
+    producoesEscritas: ps.filter(p => p.modalidade !== "oral").map(p => linhaProducao(p, nomes)),
+    producoesOrais: ps.filter(p => p.modalidade === "oral").map(p => linhaProducao(p, nomes)),
+    ia: { n: ia.length, media: ia.length ? Math.round(ia.reduce((a, r) => a + (r.note || 0), 0) / ia.length * 10) / 10 : null },
+    devoirs, sessoes, mensagens: msgs.map(fmtMsg), modelosIndiv: []
+  };
+});
+
+prof("partilhar", async (ctx, d) => {
+  if (!d.id) throw erro("Modèle introuvable.");
+  const u = await usuario(ctx);
+  await T.PartilhaTCF.create({ sujetId: d.id, tipo: d.tipo === "dictee" ? "dictee" : "modele", titre: String(d.titre || "").slice(0, 150), alvo: alvoDe(d.alunos), por: u.nome });
+  if (d.tipo === "ambos") await T.PartilhaTCF.create({ sujetId: d.id, tipo: "dictee", titre: String(d.titre || "").slice(0, 150), alvo: alvoDe(d.alunos), por: u.nome });
+  return F.listarPartilhas(ctx, d.id);
+});
+prof("listarPartilhas", async (ctx, id) => {
+  const l = await T.PartilhaTCF.find(id ? { sujetId: id } : {}).sort({ criadoEm: -1 }).lean();
+  const nomes = await mapaNomes(l.flatMap(p => p.alvo?.alunos || []));
+  return l.map(p => ({ id: p.sujetId, tipo: p.tipo, titre: p.titre, alvo: nomeAlvo(p.alvo, nomes), data: p.criadoEm, ref: String(p._id) }));
+});
+prof("removerPartilha", async (ctx, ref) => { await T.PartilhaTCF.deleteOne({ _id: oid(ref) }); return true; });
+
+// ---------------- geração em lote ("Modèles de tous les sujets") ----------------
+let lote = null;
+prof("statusGeracaoApp", async () => {
+  const prontos = await T.ModeleIA.countDocuments({});
+  let total = 0;
+  for (const t of M.TACHES) total += M.sujetsDaTache(t).length;
+  const cfg = await config();
+  return { prontos, total, ativa: !!lote, feitos: lote?.feitos || 0, erros: lote?.erros || 0, iaAtiva: iaConfigurada(), geracaoAlunos: cfg.geracaoAlunos !== false, iaDia: cfg.iaDia };
+});
+prof("iniciarGeracaoApp", async ctx => {
+  if (!iaConfigurada()) throw erro("L'IA n'est pas configurée sur le serveur (ANTHROPIC_API_KEY).");
+  if (lote) return F.statusGeracaoApp(ctx);
+  const prontos = new Set((await T.ModeleIA.find({}).select("sujetId").lean()).map(x => x.sujetId));
+  const fila = [];
+  for (const t of M.TACHES) for (const s of M.sujetsDaTache(t)) if (!prontos.has(s.id)) fila.push({ t, s });
+  fila.sort((a, b) => (b.s.f || 1) - (a.s.f || 1));
+  lote = { feitos: 0, erros: 0, parar: false };
+  const trabalhar = async () => {
+    while (fila.length && !lote.parar) {
+      const { t, s } = fila.shift();
+      try { await gerarModelo(t, s, ctx.userId); lote.feitos++; } catch (e) { lote.erros++; }
+    }
+  };
+  Promise.all([trabalhar(), trabalhar(), trabalhar()]).finally(() => { lote = null; });
+  return F.statusGeracaoApp(ctx);
+});
+prof("pararGeracaoApp", async ctx => { if (lote) lote.parar = true; return F.statusGeracaoApp(ctx); });
+prof("salvarConfigModeles", async (ctx, d) => {
+  const cfg = await config();
+  if (d.iaDia !== undefined) cfg.iaDia = Math.max(0, Math.min(50, Number(d.iaDia) || 0));
+  if (d.geracaoAlunos !== undefined) cfg.geracaoAlunos = !!d.geracaoAlunos;
+  await cfg.save();
+  return F.statusGeracaoApp(ctx);
+});
+
+// ------------------------------------------------------------------ rotas HTTP
+router.use(exigirAuth);
+
+router.post("/rpc/:fn", async (req, res) => {
+  const nome = req.params.fn;
+  const fn = Object.prototype.hasOwnProperty.call(F, nome) ? F[nome] : null;
+  if (!fn) return res.status(404).json({ msg: "Fonction inconnue : " + nome });
+  if (PROF.has(nome) && !ehEquipe(req.userRole)) return res.status(403).json({ msg: "Réservé à l'équipe pédagogique." });
+  try {
+    const ctx = await contexto(req);
+    const args = Array.isArray(req.body?.args) ? req.body.args : [];
+    const r = await fn(ctx, ...args);
+    res.json({ r: r === undefined ? null : r });
+  } catch (err) {
+    if (err.status || err.msg) return res.status(err.status || 400).json({ msg: err.msg || err.message });
+    console.error(`modeles/${nome}:`, err);
+    res.status(500).json({ msg: err.naoConfigurada ? "L'IA n'est pas configurée sur le serveur." : "Erreur du serveur. Réessayez." });
+  }
+});
+
+// Gravação oral (sessão do professor ou treino livre) + transcrição → Producao oral.
+const TIPOS_AUDIO = { "audio/webm": ".webm", "audio/ogg": ".ogg", "audio/mp4": ".m4a", "audio/mpeg": ".mp3", "audio/wav": ".wav" };
+const uploadAudio = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => { try { cb(null, pastaUpload("modeles", req.userId)); } catch (err) { cb(err); } },
+    filename: (req, file, cb) => cb(null, `po-${crypto.randomUUID()}${TIPOS_AUDIO[file.mimetype.split(";")[0]] || ".webm"}`)
+  }),
+  fileFilter: (req, file, cb) => TIPOS_AUDIO[file.mimetype.split(";")[0]] ? cb(null, true) : cb(new Error("Formato de áudio não aceito.")),
+  limits: { fileSize: 25 * 1024 * 1024 }
+});
+router.post("/oral", comTratamentoDeErro(uploadAudio.single("audio")), async (req, res) => {
+  const limpar = () => { if (req.file) fs.unlink(req.file.path, () => {}); };
+  try {
+    const ctx = await contexto(req);
+    const { tache, sujet, sessao, duree, transcricao, modo } = req.body || {};
+    if (!["T1", "T2", "T3"].includes(tache) || !M.acharTema(tache, sujet)) { limpar(); return res.status(400).json({ msg: "Sujet invalide." }); }
+    if (!req.file) return res.status(400).json({ msg: "Enregistrement manquant." });
+    let sessaoId = null;
+    if (sessao) {
+      const s = (await sessoesDoAluno(ctx)).find(x => x.id === sessao);
+      const tarefa = s && s.orais.find(o => o.tache === tache);
+      if (!tarefa || tarefa.sujet.id !== sujet) { limpar(); return res.status(400).json({ msg: "Cette tâche orale n'est pas prévue dans l'épreuve." }); }
+      if (tarefa.feita) { limpar(); return res.status(400).json({ msg: "Vous avez déjà envoyé cette tâche." }); }
+      sessaoId = oid(sessao);
+    }
+    const { montarNovaProducao } = require("./producoes");
+    const tema = await garantirTemaSujet(ctx.courseType, tache, sujet);
+    const file = { ...req.file, originalname: `${tache}-orale${TIPOS_AUDIO[req.file.mimetype.split(";")[0]] || ".webm"}`, mimetype: req.file.mimetype.split(";")[0] };
+    const p = await montarNovaProducao({
+      userId: ctx.userId, temaId: String(tema._id), file, duracaoSegundos: Math.min(Math.round(Number(duree) || 0), 900), transcricao,
+      modoCorrecao: sessaoId ? "professor" : (modo === "ia" ? "ia" : "professor"), pularChecagemAcesso: !!sessaoId, semCredito: !!sessaoId,
+      origem: { tipo: "modeles", tache, sujetId: sujet, eixo: M.acharTema(tache, sujet).e, sessaoId: sessaoId || undefined }
+    });
+    const u = await User.findById(ctx.userId).select("creditosCorrecao nome");
+    avisarEquipe("oral", { alunoId: ctx.userId, nome: u.nome, tache, producaoId: String(p._id) });
+    res.json({ ok: true, protocolo: p.protocolo, id: String(p._id), creditos: u.creditosCorrecao || 0 });
+  } catch (err) {
+    limpar();
+    if (err.status || err.msg) return res.status(err.status || 400).json({ msg: err.msg || err.message });
+    console.error("modeles/oral:", err);
+    res.status(500).json({ msg: "Erreur du serveur. Réessayez." });
+  }
+});
+
+// Áudio de uma produção oral (o próprio aluno ou a equipe).
+router.get("/audio/:id", async (req, res) => {
+  try {
+    if (!ehObjectId(req.params.id)) return res.status(400).end();
+    const p = await Producao.findById(req.params.id).select("alunoId arquivoOriginal modalidade");
+    if (!p || !p.arquivoOriginal?.caminho || (!ehEquipe(req.userRole) && String(p.alunoId) !== req.userId)) return res.status(404).end();
+    res.type(p.arquivoOriginal.mimetype || "audio/webm");
+    res.sendFile(p.arquivoOriginal.caminho, err => { if (err && !res.headersSent) res.status(404).end(); });
+  } catch (err) { res.status(500).end(); }
+});
+
+// Canal ao vivo da equipe (épreuves e gravações em andamento).
+router.get("/equipe/stream", (req, res) => {
+  if (!ehEquipe(req.userRole)) return res.status(403).json({ msg: "Réservé à l'équipe pédagogique." });
+  canais.abrir(req, res, CANAL_EQUIPE);
+});
+
+// Fecha as épreuves de treino abandonadas e as de sessão cujo tempo acabou (a cada 5 min).
+setInterval(async () => {
+  try {
+    if (mongoose.connection.readyState !== 1) return;
+    const agora = Date.now();
+    for (const e of await T.EpreuveTCF.find({ status: "em_curso" })) if (expirou(e, agora)) await finalizar(e, e.textes, true).catch(() => {});
+  } catch (err) { console.error("modeles: fechar épreuves:", err.message); }
+}, 5 * 60 * 1000).unref();
+
+module.exports = router;
+module.exports.funcoes = F;

@@ -1,0 +1,796 @@
+{
+ "eixos": {
+  "imm": {
+   "nome": "Immigration",
+   "cor": "#3b6ea5",
+   "icone": "🧳",
+   "patron": "Presque tous les sujets opposent les OPPORTUNITÉS (ouverture, emploi, qualité de vie) aux DIFFICULTÉS d'adaptation (langue, culture, solitude). Construisez toujours la même balance.",
+   "argumentsPour": [
+    "Enrichissement culturel et personnel : on découvre d'autres modes de vie et on gagne en ouverture d'esprit.",
+    "Meilleures perspectives professionnelles et une qualité de vie souvent plus élevée.",
+    "Apport économique et démographique pour le pays d'accueil (main-d'œuvre, diversité, innovation)."
+   ],
+   "argumentsContre": [
+    "La barrière de la langue et le choc culturel ralentissent l'intégration.",
+    "L'éloignement de la famille provoque solitude et mal du pays.",
+    "La reconnaissance des diplômes et la discrimination à l'embauche compliquent l'insertion professionnelle."
+   ],
+   "agents": [
+    "le Gouvernement",
+    "le Ministère de l'Immigration",
+    "les Municipalités",
+    "les entreprises",
+    "les associations d'accueil"
+   ],
+   "actions": [
+    "mettre en place",
+    "renforcer",
+    "garantir"
+   ],
+   "complements": [
+    "des programmes",
+    "des politiques"
+   ],
+   "domaine": "d'intégration sociale, culturelle et professionnelle",
+   "lexique": "le pays d'accueil · le pays d'origine · s'intégrer · s'adapter · le choc culturel · la barrière linguistique · le mal du pays · la reconnaissance des diplômes · la diversité · le multiculturalisme · un nouvel arrivant"
+  },
+  "mondial": {
+   "nome": "Mondialisation",
+   "cor": "#3a5f8f",
+   "icone": "🌐",
+   "patron": "Les sujets opposent les OPPORTUNITÉS de la mondialisation (échanges, emploi, innovation, ouverture culturelle) à ses EFFETS NÉGATIFS : délocalisations, inégalités entre pays, uniformisation culturelle, dépendance économique.",
+   "argumentsPour": [
+    "Les échanges internationaux font baisser les prix et élargissent le choix des consommateurs.",
+    "La mondialisation favorise la circulation des idées, des technologies et des cultures.",
+    "Elle crée des emplois dans les secteurs tournés vers l'exportation et l'innovation."
+   ],
+   "argumentsContre": [
+    "Les délocalisations suppriment des emplois dans les pays industrialisés.",
+    "Les inégalités se creusent entre les pays et à l'intérieur de chaque pays.",
+    "Les cultures locales risquent de disparaître au profit d'un modèle uniforme."
+   ],
+   "agents": [
+    "les gouvernements",
+    "les organisations internationales",
+    "les entreprises multinationales",
+    "les associations",
+    "les citoyens"
+   ],
+   "actions": [
+    "réguler",
+    "encadrer",
+    "promouvoir"
+   ],
+   "complements": [
+    "des accords",
+    "des politiques"
+   ],
+   "domaine": "de commerce équitable et de protection des cultures locales",
+   "lexique": "la mondialisation · les échanges internationaux · une multinationale · la délocalisation · les inégalités · l'uniformisation culturelle · l'interdépendance · le commerce équitable · un pays émergent · la concurrence mondiale"
+  },
+  "edu": {
+   "nome": "Éducation",
+   "cor": "#7c5cbf",
+   "icone": "🎓",
+   "patron": "Les sujets confrontent la VALEUR de l'apprentissage (autonomie, avenir, égalité des chances) à ses LIMITES (coût, pression, décalage avec la réalité du travail).",
+   "argumentsPour": [
+    "L'apprentissage développe l'autonomie, la curiosité et l'esprit critique.",
+    "Un bon niveau de formation ouvre de meilleures perspectives d'emploi.",
+    "L'école favorise l'égalité des chances et la vie en société."
+   ],
+   "argumentsContre": [
+    "Le coût des études et les inégalités d'accès excluent une partie de la population.",
+    "La pression des notes et des examens génère du stress chez les élèves.",
+    "Il existe un décalage entre la théorie enseignée et les besoins du marché du travail."
+   ],
+   "agents": [
+    "le Ministère de l'Éducation",
+    "les établissements scolaires",
+    "les professeurs",
+    "les parents"
+   ],
+   "actions": [
+    "créer",
+    "mettre en œuvre",
+    "renforcer"
+   ],
+   "complements": [
+    "des programmes",
+    "des mesures"
+   ],
+   "domaine": "d'éducation",
+   "lexique": "l'enseignement · la formation continue · le diplôme · l'expérience professionnelle · l'autonomie · la réussite scolaire · le décrochage · l'égalité des chances · l'apprentissage tout au long de la vie"
+  },
+  "trav": {
+   "nome": "Travail",
+   "cor": "#b8792b",
+   "icone": "💼",
+   "patron": "Les sujets de travail tournent autour d'une même tension : ÉPANOUISSEMENT et SÉCURITÉ financière d'un côté, STRESS et DÉSÉQUILIBRE de vie de l'autre.",
+   "argumentsPour": [
+    "Le travail apporte une sécurité financière et un sentiment d'utilité.",
+    "Les nouvelles formes de travail (télétravail, reconversion) offrent plus de flexibilité.",
+    "Chaque expérience développe des compétences et fait évoluer la carrière."
+   ],
+   "argumentsContre": [
+    "Le stress et l'épuisement professionnel (burn-out) menacent la santé.",
+    "L'équilibre entre vie professionnelle et vie personnelle est difficile à préserver.",
+    "La précarité et les inégalités salariales persistent."
+   ],
+   "agents": [
+    "l'État",
+    "les entreprises",
+    "les employeurs",
+    "les syndicats",
+    "les employés"
+   ],
+   "actions": [
+    "encadrer",
+    "garantir",
+    "mettre en place"
+   ],
+   "complements": [
+    "des normes",
+    "des mesures"
+   ],
+   "domaine": "de santé et de bien-être au travail",
+   "lexique": "l'emploi · le salaire · la reconversion professionnelle · le télétravail · la conciliation travail-famille · l'épuisement professionnel · la retraite · l'employeur · le salarié · la motivation"
+  },
+  "tech": {
+   "nome": "Technologie",
+   "cor": "#2f8f9d",
+   "icone": "💻",
+   "patron": "La technologie est presque toujours un OUTIL À DOUBLE TRANCHANT : accès, communication, efficacité CONTRE dépendance, santé, vie privée, surtout quand le sujet parle d'enfants.",
+   "argumentsPour": [
+    "Accès immédiat à l'information et au savoir.",
+    "La communication à distance est facilitée (famille, amis, travail).",
+    "Gain de temps et d'efficacité au quotidien."
+   ],
+   "argumentsContre": [
+    "Risque de dépendance et d'isolement social.",
+    "Conséquences sur la santé (sommeil, vue, sédentarité), en particulier chez les enfants.",
+    "Menaces pour la vie privée et diffusion de fausses informations."
+   ],
+   "agents": [
+    "les parents",
+    "les écoles",
+    "les autorités",
+    "les plateformes numériques",
+    "les utilisateurs"
+   ],
+   "actions": [
+    "encadrer",
+    "contrôler",
+    "prendre conscience"
+   ],
+   "complements": [
+    "des normes",
+    "des lois"
+   ],
+   "domaine": "de sécurité et d'éducation numérique",
+   "lexique": "les écrans · les réseaux sociaux · la dépendance · la vie privée · les données personnelles · la désinformation · le temps d'écran · l'intelligence artificielle · le contrôle parental"
+  },
+  "medias": {
+   "nome": "Médias",
+   "cor": "#1f6fb2",
+   "icone": "📺",
+   "patron": "Les sujets opposent le rôle d'INFORMATION et d'ouverture des médias (télévision, presse, réseaux sociaux) à leurs DÉRIVES : désinformation, dépendance, influence, stéréotypes.",
+   "argumentsPour": [
+    "Les médias informent un large public et sensibilisent les citoyens aux grandes questions de société.",
+    "Ils démocratisent l'accès à la culture et au divertissement.",
+    "Les réseaux sociaux permettent de s'exprimer et de rester en contact avec ses proches."
+   ],
+   "argumentsContre": [
+    "La désinformation et les fausses nouvelles se diffusent très rapidement.",
+    "Une consommation excessive rend passif et réduit le temps consacré à d'autres activités.",
+    "Certains contenus véhiculent des stéréotypes et une image idéalisée de la réalité."
+   ],
+   "agents": [
+    "les médias",
+    "les plateformes numériques",
+    "les pouvoirs publics",
+    "les écoles",
+    "les familles"
+   ],
+   "actions": [
+    "encadrer",
+    "promouvoir",
+    "renforcer"
+   ],
+   "complements": [
+    "des règles",
+    "des programmes"
+   ],
+   "domaine": "d'éducation aux médias et de lutte contre la désinformation",
+   "lexique": "l'information · la désinformation · une fausse nouvelle · les réseaux sociaux · un influenceur · la presse · une émission · le téléspectateur · l'esprit critique · la liberté d'expression"
+  },
+  "env": {
+   "nome": "Environnement",
+   "cor": "#3f8f4f",
+   "icone": "🌿",
+   "patron": "Le schéma est fixe : BÉNÉFICES écologiques et de santé publique CONTRE COÛT et CONTRAINTES pour les habitants. La conclusion appelle l'État et les municipalités.",
+   "argumentsPour": [
+    "Réduction de la pollution et amélioration de la qualité de l'air.",
+    "Effets positifs sur la santé publique et le cadre de vie.",
+    "Création d'emplois verts et économies à long terme."
+   ],
+   "argumentsContre": [
+    "Le coût de la transition écologique est élevé.",
+    "Les mesures imposent des contraintes aux habitants (déplacements, habitudes).",
+    "Les inégalités entre ville et campagne s'accentuent."
+   ],
+   "agents": [
+    "l'État",
+    "les Municipalités",
+    "les entreprises",
+    "les citoyens"
+   ],
+   "actions": [
+    "mettre en œuvre",
+    "renforcer",
+    "encadrer"
+   ],
+   "complements": [
+    "des politiques",
+    "des mesures"
+   ],
+   "domaine": "de mobilité urbaine et de protection de l'environnement",
+   "lexique": "la pollution · les transports en commun · la mobilité urbaine · le développement durable · les déchets · le recyclage · l'empreinte carbone · les espaces verts · la biodiversité"
+  },
+  "ville": {
+   "nome": "Ville",
+   "cor": "#5a6fa8",
+   "icone": "🏙️",
+   "patron": "Les sujets comparent les AVANTAGES de la vie urbaine (services, emploi, culture) à ses INCONVÉNIENTS (bruit, pollution, coût, stress), souvent face à la vie à la campagne.",
+   "argumentsPour": [
+    "La ville concentre les emplois, les services et les activités culturelles.",
+    "Les transports en commun et les commerces facilitent la vie quotidienne.",
+    "La diversité des habitants favorise les rencontres et l'ouverture d'esprit."
+   ],
+   "argumentsContre": [
+    "Le coût du logement et de la vie y est souvent très élevé.",
+    "Le bruit, la pollution et le rythme de vie provoquent du stress.",
+    "L'anonymat des grandes villes peut renforcer l'isolement."
+   ],
+   "agents": [
+    "les municipalités",
+    "les urbanistes",
+    "le gouvernement",
+    "les habitants",
+    "les associations de quartier"
+   ],
+   "actions": [
+    "aménager",
+    "développer",
+    "améliorer"
+   ],
+   "complements": [
+    "des espaces verts",
+    "des projets urbains"
+   ],
+   "domaine": "de qualité de vie en milieu urbain",
+   "lexique": "la vie urbaine · un quartier · le centre-ville · la banlieue · la campagne · l'urbanisation · un espace vert · une zone piétonne · la qualité de vie · le cadre de vie"
+  },
+  "transports": {
+   "nome": "Transports",
+   "cor": "#2e8b8b",
+   "icone": "🚲",
+   "patron": "Les sujets opposent la LIBERTÉ et le confort de la voiture aux enjeux ÉCOLOGIQUES et urbains : transports en commun, vélo, covoiturage, mobilité douce.",
+   "argumentsPour": [
+    "Les transports en commun réduisent la pollution et les embouteillages.",
+    "Le vélo et la marche sont bons pour la santé et économiques.",
+    "Le covoiturage permet de partager les frais et de créer des liens."
+   ],
+   "argumentsContre": [
+    "La voiture reste indispensable pour beaucoup de personnes, surtout hors des grandes villes.",
+    "Les transports publics sont parfois lents, chers ou peu fréquents.",
+    "Les infrastructures cyclables sont encore insuffisantes dans de nombreuses villes."
+   ],
+   "agents": [
+    "les municipalités",
+    "les sociétés de transport",
+    "le gouvernement",
+    "les entreprises",
+    "les citoyens"
+   ],
+   "actions": [
+    "développer",
+    "financer",
+    "encourager"
+   ],
+   "complements": [
+    "des infrastructures",
+    "des réseaux"
+   ],
+   "domaine": "de mobilité durable et accessible",
+   "lexique": "les transports en commun · la mobilité douce · une piste cyclable · le covoiturage · un embouteillage · les heures de pointe · un abonnement · la voiture électrique · se déplacer · un trajet"
+  },
+  "sante": {
+   "nome": "Santé",
+   "cor": "#c0453c",
+   "icone": "🩺",
+   "patron": "Les sujets santé mettent en balance la PRÉVENTION et le BIEN-ÊTRE contre le COÛT, le MANQUE DE TEMPS et l'influence de l'industrie.",
+   "argumentsPour": [
+    "Prévention des maladies et meilleure espérance de vie.",
+    "Bien-être physique et mental.",
+    "Renforcement du lien social (repas partagés, sport collectif)."
+   ],
+   "argumentsContre": [
+    "Une alimentation saine ou le sport ont un coût.",
+    "Le rythme de vie moderne laisse peu de temps.",
+    "Le marketing de l'industrie alimentaire influence les choix."
+   ],
+   "agents": [
+    "le Ministère de la Santé",
+    "les écoles",
+    "les familles",
+    "les consommateurs",
+    "les professionnels"
+   ],
+   "actions": [
+    "créer",
+    "mettre en place",
+    "prendre conscience"
+   ],
+   "complements": [
+    "des programmes",
+    "des normes"
+   ],
+   "domaine": "de santé et de sécurité alimentaire",
+   "lexique": "l'alimentation équilibrée · la restauration rapide · le végétarisme · la sédentarité · l'activité physique · la prévention · le stress · les produits biologiques · le bien-être"
+  },
+  "alim": {
+   "nome": "Alimentation",
+   "cor": "#d9822b",
+   "icone": "🍎",
+   "patron": "Les sujets opposent le PLAISIR et la praticité (restauration rapide, produits industriels) à une alimentation SAINE, locale et responsable.",
+   "argumentsPour": [
+    "Une alimentation équilibrée prévient de nombreuses maladies.",
+    "Cuisiner soi-même permet de contrôler les ingrédients et de faire des économies.",
+    "Consommer local soutient les producteurs et réduit l'impact environnemental."
+   ],
+   "argumentsContre": [
+    "Le manque de temps pousse vers les plats préparés et la restauration rapide.",
+    "Les produits sains et biologiques restent souvent plus chers.",
+    "La publicité encourage la consommation de produits sucrés et gras."
+   ],
+   "agents": [
+    "les pouvoirs publics",
+    "les écoles",
+    "l'industrie agroalimentaire",
+    "les familles",
+    "les professionnels de santé"
+   ],
+   "actions": [
+    "promouvoir",
+    "encadrer",
+    "sensibiliser"
+   ],
+   "complements": [
+    "des campagnes",
+    "des programmes"
+   ],
+   "domaine": "d'éducation nutritionnelle",
+   "lexique": "une alimentation équilibrée · la restauration rapide · un produit transformé · les produits locaux · le bio · un régime · végétarien · le fait maison · les habitudes alimentaires · l'obésité"
+  },
+  "sport": {
+   "nome": "Sport",
+   "cor": "#2f9e6e",
+   "icone": "⚽",
+   "patron": "Les sujets associent le sport à la SANTÉ et à la cohésion sociale, face à ses LIMITES : coût, manque de temps, pression de la performance, blessures.",
+   "argumentsPour": [
+    "Le sport améliore la condition physique et réduit le stress.",
+    "Il apprend la discipline, le respect des règles et l'esprit d'équipe.",
+    "Les clubs sportifs favorisent l'intégration et luttent contre l'isolement."
+   ],
+   "argumentsContre": [
+    "Le coût des équipements et des inscriptions exclut certaines familles.",
+    "La pression de la performance peut provoquer blessures et découragement.",
+    "Le rythme de vie laisse peu de temps pour une pratique régulière."
+   ],
+   "agents": [
+    "les municipalités",
+    "les écoles",
+    "les associations sportives",
+    "le ministère des Sports",
+    "les entreprises"
+   ],
+   "actions": [
+    "développer",
+    "financer",
+    "rendre accessibles"
+   ],
+   "complements": [
+    "des infrastructures",
+    "des activités"
+   ],
+   "domaine": "de pratique sportive pour tous",
+   "lexique": "l'activité physique · la sédentarité · un club sportif · l'esprit d'équipe · la condition physique · la compétition · un entraînement · se dépasser · le bien-être · une blessure"
+  },
+  "fam": {
+   "nome": "Famille",
+   "cor": "#d0689a",
+   "icone": "👨‍👩‍👧",
+   "patron": "Les sujets de famille opposent SOUTIEN et TRANSMISSION à AUTONOMIE et CONFLITS de générations. Pensez toujours enfants / adultes / personnes âgées.",
+   "argumentsPour": [
+    "La famille et les amis apportent soutien affectif et solidarité.",
+    "Les générations se transmettent valeurs, savoirs et expérience.",
+    "L'entraide entre générations profite à tous."
+   ],
+   "argumentsContre": [
+    "Les conflits de générations sont fréquents.",
+    "Un cadre trop protecteur limite l'autonomie des jeunes.",
+    "L'isolement des personnes âgées reste un problème."
+   ],
+   "agents": [
+    "les parents",
+    "la famille",
+    "l'État",
+    "les Municipalités",
+    "les associations"
+   ],
+   "actions": [
+    "renforcer",
+    "créer",
+    "prendre conscience"
+   ],
+   "complements": [
+    "des programmes",
+    "des mesures"
+   ],
+   "domaine": "d'intégration sociale et de solidarité intergénérationnelle",
+   "lexique": "l'éducation des enfants · l'autorité parentale · l'autonomie · le lien intergénérationnel · les personnes âgées · l'amitié · la solitude · la colocation · l'entraide"
+  },
+  "relations": {
+   "nome": "Relations",
+   "cor": "#c25b7a",
+   "icone": "🤝",
+   "patron": "Les sujets portent sur l'AMITIÉ, le couple, les voisins et les collègues : la valeur des liens humains face à l'individualisme, au numérique et au manque de temps.",
+   "argumentsPour": [
+    "Les liens sociaux solides protègent de la solitude et du stress.",
+    "L'amitié et l'entraide enrichissent la vie personnelle.",
+    "De bonnes relations au travail améliorent l'ambiance et la collaboration."
+   ],
+   "argumentsContre": [
+    "Le rythme de vie et les écrans réduisent les moments partagés.",
+    "Certaines relations créent des conflits ou une dépendance affective.",
+    "Dans les grandes villes, l'anonymat rend les rencontres plus difficiles."
+   ],
+   "agents": [
+    "les municipalités",
+    "les associations",
+    "les entreprises",
+    "les écoles",
+    "les citoyens"
+   ],
+   "actions": [
+    "favoriser",
+    "encourager",
+    "organiser"
+   ],
+   "complements": [
+    "des initiatives",
+    "des espaces de rencontre"
+   ],
+   "domaine": "de lien social",
+   "lexique": "l'amitié · un voisin · un collègue · le lien social · la solitude · l'entraide · la confiance · un conflit · se faire des amis · la vie en couple"
+  },
+  "soc": {
+   "nome": "Société",
+   "cor": "#6d7a8a",
+   "icone": "🏛️",
+   "patron": "Les sujets de société opposent LIBERTÉ et DYNAMISME à INÉGALITÉS et EXCÈS (surconsommation, apparence, contrôle). L'État est souvent l'agent central.",
+   "argumentsPour": [
+    "Liberté de choix et dynamisme économique.",
+    "Solidarité et cohésion sociale.",
+    "Sécurité et protection des citoyens."
+   ],
+   "argumentsContre": [
+    "Surconsommation et endettement des ménages.",
+    "Les inégalités sociales se creusent.",
+    "Risque d'atteinte aux libertés individuelles et à la vie privée."
+   ],
+   "agents": [
+    "l'État",
+    "les autorités",
+    "l'entreprise",
+    "les consommateurs",
+    "les citoyens"
+   ],
+   "actions": [
+    "encadrer",
+    "contrôler",
+    "garantir"
+   ],
+   "complements": [
+    "des lois",
+    "des normes"
+   ],
+   "domaine": "de fiscalisation et de sécurité",
+   "lexique": "la consommation · le pouvoir d'achat · l'apparence · le bonheur · la solidarité · le bénévolat · la sécurité · les inégalités · la liberté d'expression · la société de consommation"
+  },
+  "conso": {
+   "nome": "Consommation",
+   "cor": "#8a5cb8",
+   "icone": "🛍️",
+   "patron": "Les sujets opposent le PLAISIR et la liberté d'acheter à une consommation RESPONSABLE : surconsommation, argent, seconde main, publicité, achats en ligne.",
+   "argumentsPour": [
+    "Les achats en ligne font gagner du temps et offrent un grand choix.",
+    "La seconde main permet d'économiser et de réduire les déchets.",
+    "Bien gérer son budget apporte sécurité et liberté."
+   ],
+   "argumentsContre": [
+    "La publicité et les soldes poussent à la surconsommation et à l'endettement.",
+    "La production de masse a un impact lourd sur l'environnement.",
+    "Le commerce en ligne fragilise les petits commerces de proximité."
+   ],
+   "agents": [
+    "les pouvoirs publics",
+    "les entreprises",
+    "les associations de consommateurs",
+    "les écoles",
+    "les consommateurs"
+   ],
+   "actions": [
+    "encadrer",
+    "promouvoir",
+    "sensibiliser"
+   ],
+   "complements": [
+    "des campagnes",
+    "des règles"
+   ],
+   "domaine": "de consommation responsable",
+   "lexique": "la surconsommation · la seconde main · le pouvoir d'achat · un budget · l'endettement · les soldes · les achats en ligne · un commerce de proximité · la publicité · consommer local"
+  },
+  "loisirs": {
+   "nome": "Loisirs",
+   "cor": "#e0902f",
+   "icone": "🎲",
+   "patron": "Voyages et culture : OUVERTURE, DÉTENTE et retombées économiques CONTRE COÛT, tourisme de masse et impact environnemental.",
+   "argumentsPour": [
+    "Découverte d'autres cultures et ouverture d'esprit.",
+    "Détente, équilibre et plaisir personnel.",
+    "Retombées économiques pour les régions (tourisme, emplois)."
+   ],
+   "argumentsContre": [
+    "Le coût limite l'accès à une partie de la population.",
+    "Le tourisme de masse abîme certains lieux.",
+    "Impact environnemental (transport aérien, déchets)."
+   ],
+   "agents": [
+    "le Ministère de la Culture",
+    "les Municipalités",
+    "les professionnels du tourisme",
+    "les citoyens"
+   ],
+   "actions": [
+    "créer",
+    "mettre en place",
+    "encadrer"
+   ],
+   "complements": [
+    "des programmes",
+    "des politiques"
+   ],
+   "domaine": "de mobilité internationale et d'éducation culturelle",
+   "lexique": "le tourisme · le séjour · le patrimoine · les loisirs · la découverte · le dépaysement · le tourisme durable · l'offre culturelle · les vacances"
+  },
+  "voyages": {
+   "nome": "Voyages",
+   "cor": "#1e9bb8",
+   "icone": "✈️",
+   "patron": "Les sujets présentent le voyage comme une source d'OUVERTURE et de découverte, face à ses LIMITES : coût, sécurité, impact du tourisme de masse.",
+   "argumentsPour": [
+    "Voyager permet de découvrir d'autres cultures et d'élargir ses horizons.",
+    "C'est une occasion de pratiquer une langue étrangère et de gagner en autonomie.",
+    "Le tourisme fait vivre de nombreuses régions et crée des emplois."
+   ],
+   "argumentsContre": [
+    "Les voyages coûtent cher et ne sont pas accessibles à tous.",
+    "Le tourisme de masse abîme certains sites et dérange les habitants.",
+    "L'avion a un impact important sur l'environnement."
+   ],
+   "agents": [
+    "les offices de tourisme",
+    "les agences de voyages",
+    "les gouvernements",
+    "les compagnies de transport",
+    "les voyageurs"
+   ],
+   "actions": [
+    "développer",
+    "encourager",
+    "encadrer"
+   ],
+   "complements": [
+    "des offres",
+    "des politiques"
+   ],
+   "domaine": "de tourisme durable et accessible",
+   "lexique": "un séjour · une destination · le tourisme de masse · un voyageur · une excursion · l'hébergement · un itinéraire · voyager seul · le dépaysement · le tourisme durable"
+  },
+  "culture": {
+   "nome": "Culture",
+   "cor": "#a0522d",
+   "icone": "🎭",
+   "patron": "Les sujets défendent l'ACCÈS à la culture (musées, lecture, spectacles, patrimoine) et s'interrogent sur ses OBSTACLES : prix, écrans, manque d'intérêt, uniformisation.",
+   "argumentsPour": [
+    "La culture développe la curiosité, l'esprit critique et la créativité.",
+    "Le patrimoine transmet l'histoire et l'identité d'un peuple.",
+    "Les festivals et les spectacles rassemblent les habitants."
+   ],
+   "argumentsContre": [
+    "Le prix des sorties culturelles exclut une partie de la population.",
+    "Les écrans détournent les jeunes de la lecture et des musées.",
+    "La mondialisation favorise une certaine uniformisation culturelle."
+   ],
+   "agents": [
+    "le ministère de la Culture",
+    "les municipalités",
+    "les écoles",
+    "les bibliothèques",
+    "les artistes"
+   ],
+   "actions": [
+    "démocratiser",
+    "financer",
+    "promouvoir"
+   ],
+   "complements": [
+    "des programmes",
+    "des événements"
+   ],
+   "domaine": "d'accès à la culture pour tous",
+   "lexique": "le patrimoine · un musée · un spectacle · la lecture · une exposition · un festival · la création artistique · la diversité culturelle · l'uniformisation · démocratiser la culture"
+  },
+  "log": {
+   "nome": "Logement",
+   "cor": "#8a6d4f",
+   "icone": "🏠",
+   "patron": "Vie quotidienne : AUTONOMIE, ÉCONOMIES et CONVIVIALITÉ contre PRIX, manque d'INTIMITÉ et conflits.",
+   "argumentsPour": [
+    "Autonomie et organisation personnelle.",
+    "Économies (partage des frais, colocation).",
+    "Convivialité et proximité des services."
+   ],
+   "argumentsContre": [
+    "Les loyers et le coût de la vie sont élevés.",
+    "Manque d'intimité ou de tranquillité.",
+    "Conflits de voisinage ou de cohabitation."
+   ],
+   "agents": [
+    "l'État",
+    "les Municipalités",
+    "les propriétaires",
+    "la population"
+   ],
+   "actions": [
+    "mettre en place",
+    "garantir",
+    "encadrer"
+   ],
+   "complements": [
+    "des politiques",
+    "des mesures"
+   ],
+   "domaine": "de logement et de mobilité urbaine",
+   "lexique": "le logement · le loyer · la colocation · le quartier · le voisinage · le déménagement · les charges · le cadre de vie · les services de proximité"
+  },
+  "services": {
+   "nome": "Services",
+   "cor": "#607d8b",
+   "icone": "🧾",
+   "patron": "Les sujets de services (agences, administration, commerces, banques) demandent des informations pratiques : prix, horaires, conditions, démarches. Dans les débats, on oppose l'efficacité du NUMÉRIQUE au contact HUMAIN.",
+   "argumentsPour": [
+    "Les services en ligne font gagner du temps et sont accessibles à toute heure.",
+    "Les démarches simplifiées facilitent l'installation des nouveaux arrivants.",
+    "Un bon service client fidélise et rassure."
+   ],
+   "argumentsContre": [
+    "La dématérialisation exclut les personnes peu à l'aise avec le numérique.",
+    "Le manque de contact humain rend certaines démarches plus difficiles.",
+    "Les frais cachés et les conditions complexes créent de la méfiance."
+   ],
+   "agents": [
+    "les administrations",
+    "les entreprises",
+    "les municipalités",
+    "les associations",
+    "le gouvernement"
+   ],
+   "actions": [
+    "simplifier",
+    "améliorer",
+    "garantir"
+   ],
+   "complements": [
+    "des services",
+    "des démarches"
+   ],
+   "domaine": "d'accès aux services pour tous",
+   "lexique": "un renseignement · un tarif · les horaires · une démarche · un formulaire · un rendez-vous · un devis · une réservation · les conditions · le service client"
+  }
+ },
+ "ordem": [
+  "imm",
+  "mondial",
+  "edu",
+  "trav",
+  "tech",
+  "medias",
+  "env",
+  "ville",
+  "transports",
+  "sante",
+  "alim",
+  "sport",
+  "fam",
+  "relations",
+  "soc",
+  "conso",
+  "loisirs",
+  "voyages",
+  "culture",
+  "log",
+  "services"
+ ],
+ "prioridade": {
+  "culture": 1.6,
+  "mondial": 1.5,
+  "env": 1.4,
+  "trav": 1.3
+ },
+ "tendances": {
+  "mois": "2026-09",
+  "source": "Sujets relatés en septembre 2026 (sites et forums de partage de sujets du TCF Canada)",
+  "T2": [
+   "installation|s.installer|démarches administratives",
+   "tomber malade|soins|médecin|hôpital|urgences",
+   "nouvel an",
+   "travailler.{0,30}été|emploi d.été",
+   "végétarien",
+   "fête de l.école|parent d.élève",
+   "louer un logement|grande ville",
+   "club sporti|cours de sport",
+   "agence de voyages?.{0,60}(vacances|destination)",
+   "ludothèque",
+   "habitudes alimentaires|québécois.{0,40}repas",
+   "vend.{0,40}internet|objets.{0,30}n.utilise plus",
+   "festival culturel",
+   "occuper de ma maison|pendant mon absence",
+   "petits travaux|services aux particuliers",
+   "chambre à louer|colocation",
+   "ouverture d.un.{0,20}restaurant",
+   "aéroport",
+   "meubles",
+   "activités du quartier|emménager dans mon immeuble"
+  ],
+  "T3": [
+   "téléphone portable|changer de téléphone",
+   "autoritaire|éduquer un enfant",
+   "immigrés?.{0,40}pays d.accueil",
+   "vie privée.{0,30}réseaux sociaux",
+   "expérience.{0,40}étranger",
+   "animaux en danger|espèces menacées",
+   "heureux au travail|bonheur au travail",
+   "lire.{0,20}perte de temps|lecture",
+   "vivre seul",
+   "manger équilibré|alimentation équilibrée",
+   "sans télévision|devant la télévision|télévision.{0,40}enfants",
+   "homme ou (d.)?une femme|responsabilité d.un homme",
+   "jeux vidéo",
+   "travailler avec un membre de sa famille|famille.{0,20}travail",
+   "fréquenter des gens de son pays|compatriotes",
+   "produits bio"
+  ],
+  "ET1": [],
+  "ET2": [],
+  "ET3": [
+   "télévision",
+   "réseaux sociaux",
+   "produits bio|plastique",
+   "colocation",
+   "lecture"
+  ]
+ }
+}

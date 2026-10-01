@@ -2,6 +2,7 @@
  {
   "slug": "tef-a-chien-300-km",
   "titulo": "Le chien qui avait parcouru 300 kilomètres",
+  "eixo": "fam",
   "nivel": "B1",
   "tipoProducao": "TEF — Section A : suite d'un fait divers",
   "dificuldade": "medio",
@@ -76,6 +77,7 @@
  {
   "slug": "tef-a-tresor-grenier",
   "titulo": "Un trésor dans le grenier",
+  "eixo": "fam",
   "nivel": "B1",
   "tipoProducao": "TEF — Section A : suite d'un fait divers",
   "dificuldade": "medio",
@@ -150,6 +152,7 @@
  {
   "slug": "tef-a-panne-metro",
   "titulo": "Panne géante dans le métro",
+  "eixo": "transports",
   "nivel": "B1",
   "tipoProducao": "TEF — Section A : suite d'un fait divers",
   "dificuldade": "medio",
@@ -224,6 +227,7 @@
  {
   "slug": "tef-a-lettre-50-ans",
   "titulo": "Une lettre arrivée avec cinquante ans de retard",
+  "eixo": "services",
   "nivel": "B2",
   "tipoProducao": "TEF — Section A : suite d'un fait divers",
   "dificuldade": "medio",
@@ -298,6 +302,7 @@
  {
   "slug": "tef-a-grele-ete",
   "titulo": "Un orage de grêle en plein mois d'août",
+  "eixo": "env",
   "nivel": "B2",
   "tipoProducao": "TEF — Section A : suite d'un fait divers",
   "dificuldade": "medio",
@@ -372,6 +377,7 @@
  {
   "slug": "tef-b-coder-primaire",
   "titulo": "Apprendre à coder dès l'école primaire",
+  "eixo": "edu",
   "nivel": "B2",
   "tipoProducao": "TEF — Section B : lettre argumentée",
   "dificuldade": "dificil",
@@ -446,6 +452,7 @@
  {
   "slug": "tef-b-jeux-video-art",
   "titulo": "Les jeux vidéo sont-ils un art ?",
+  "eixo": "loisirs",
   "nivel": "B2",
   "tipoProducao": "TEF — Section B : lettre argumentée",
   "dificuldade": "dificil",
@@ -520,6 +527,7 @@
  {
   "slug": "tef-b-vacances-ete",
   "titulo": "Les vacances d'été sont-elles trop longues ?",
+  "eixo": "edu",
   "nivel": "B2",
   "tipoProducao": "TEF — Section B : lettre argumentée",
   "dificuldade": "dificil",
@@ -594,6 +602,7 @@
  {
   "slug": "tef-b-service-civique",
   "titulo": "Un service civique obligatoire pour les jeunes ?",
+  "eixo": "soc",
   "nivel": "C1",
   "tipoProducao": "TEF — Section B : lettre argumentée",
   "dificuldade": "dificil",
@@ -668,6 +677,7 @@
  {
   "slug": "tef-b-reseaux-moins-15",
   "titulo": "Interdire les réseaux sociaux aux moins de 15 ans ?",
+  "eixo": "medias",
   "nivel": "C1",
   "tipoProducao": "TEF — Section B : lettre argumentée",
   "dificuldade": "dificil",

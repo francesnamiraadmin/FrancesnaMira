@@ -55,7 +55,19 @@ const ProducaoSchema = new mongoose.Schema({
   textoDigitado: { type: String },
   contagemPalavras: { type: Number },
   duracaoSegundos: { type: Number },
+  // Produção oral: transcrição automática do navegador (o aluno pode corrigi-la antes de enviar).
+  transcricao: { type: String },
   observacoesAluno: { type: String },
+  // De onde veio: envio direto de um tema ou um sujet do Ambiente de Produção (modelo "Modèles TCF"),
+  // numa épreuve de 60 min, numa épreuve preparada pelo professor ou numa gravação livre.
+  origem: {
+    tipo: { type: String, enum: ["tema", "modeles"], default: "tema" },
+    tache: { type: String },
+    sujetId: { type: String },
+    eixo: { type: String },
+    epreuveId: { type: mongoose.Schema.Types.ObjectId, ref: "EpreuveTCF" },
+    sessaoId: { type: mongoose.Schema.Types.ObjectId, ref: "SessaoTCF" }
+  },
 
   creditosUtilizados: { type: Number, default: 1 },
   // Quem corrige: professor (fila do Sistema de Correção, alguns dias) ou IA (na hora).
@@ -85,7 +97,9 @@ const ProducaoSchema = new mongoose.Schema({
     aMelhorar: [{ type: String }],
     correcoes: [CorrecaoPontualSchema],
     corretor: { type: String, enum: ["professor", "ia"] },
-    corretorNome: { type: String }
+    corretorNome: { type: String },
+    // Correção no formato do app de modelos: trame, léxico, connecteurs, versão melhorada, conselho.
+    extras: { type: mongoose.Schema.Types.Mixed }
   },
 
   mensagens: [MensagemSchema],

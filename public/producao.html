@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <script src="js/htmlSeguro.js"></script>
@@ -9,10 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/app-shell.css">
-<link rel="stylesheet" href="css/producao.css">
+<link rel="stylesheet" href="css/producao-app.css">
+<link rel="stylesheet" href="css/producao-app-site.css">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Poppins', sans-serif; background: var(--bg-gradient); background-attachment: fixed; min-height: 100vh; color: var(--text); }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg-gradient); background-attachment: fixed; min-height: 100vh; color: var(--text); }
 footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
 </style>
 </head>
@@ -20,74 +21,74 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <script>window.CURSO_CONTEXTO_MODULO = "producao"; window.CURSO_CONTEXTO_HUB = "producao-hub.html";</script>
 <script src="js/cursoContexto.js"></script>
 <script src="js/producaoGate.js"></script>
+<script>
+  // O app começa quando o gate confirma o acesso e o curso escolhido no hub.
+  window.FNM_PRONTO = window.ProducaoGate.pronto.then(function (r) { window.FNM_CURSO = r.curso; return r; });
+</script>
 <div id="app-navbar" class="app-navbar-bar"></div>
 
-<main class="pr-wrap">
-  <a class="pr-voltar" href="producao-hub.html">← Trocar de curso</a>
-  <section class="pr-hero">
-    <div class="eyebrow" id="eyebrow">Ambiente de Produção</div>
-    <h1 id="tituloHub">Ambiente de Produção Oral e Textual</h1>
-    <p id="subHub">Treine as duas provas de produção do seu exame com temas no formato oficial e correção detalhada — pela IA, na hora, ou por um professor.</p>
-    <div class="pr-stats" id="statsHub"></div>
-  </section>
+<div class="fnm-app" id="fnm-raiz">
+  <header class="barra fnm-barra">
+    <button class="marca" type="button" onclick="App.irAccueil()" aria-label="Accueil">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="20" cy="20" r="11" fill="none" stroke="#E4C043" stroke-width="2.5"/><circle cx="20" cy="20" r="4" fill="#D51E28"/></svg>
+      <span><b>Ambiente de Produção</b><small id="fnm-curso-rotulo">Français na Mira</small></span>
+    </button>
+    <nav class="barra-nav" id="barra-nav" hidden>
+      <button type="button" onclick="App.irAccueil()">Accueil</button>
+      <button type="button" onclick="App.abrirEcrit()">Production écrite</button>
+      <button type="button" onclick="App.abrirOral()">Production orale</button>
+      <button type="button" onclick="App.abrirDictee()">Dictée</button>
+      <button type="button" onclick="App.abrirModeles()">Modèles écrits</button>
+      <button type="button" onclick="App.abrirSimulados()">Simulados</button>
+      <button type="button" onclick="App.abrirVocab()">Vocabulaire</button>
+      <button type="button" id="nav-attentes" onclick="App.abrirAttentes()">Attentes du professeur</button>
+      <button type="button" id="nav-intro" onclick="App.abrirIntro()" hidden>Introduction</button>
+      <button type="button" id="nav-taches" onclick="App.abrirTarefas()" hidden>Mon espace <span class="selo-nav" id="selo-tarefas" hidden></span></button>
+      <button type="button" id="nav-prof" onclick="App.abrirProf()" hidden>Espace professeur</button>
+      <button type="button" class="sair" onclick="App.sair()">Changer de cours</button>
+    </nav>
+  </header>
 
-  <div class="pr-escolha">
-    <a class="pr-porta" id="portaTextual" href="producao-textual.html">
-      <img id="imgTextual" src="img/producao/textual.jpg" alt="">
-      <div class="conteudo">
-        <span class="tag-porta">Produção textual</span>
-        <h2>Escrever</h2>
-        <p>Temas no modelo da prova, com uma coletânea de três textos — trecho de livro, reportagem e artigo científico — e duas imagens para inspirar e embasar a sua redação.</p>
-        <div class="rodape" id="rodapeTextual"></div>
-        <span class="cta">Escolher um tema →</span>
-      </div>
-    </a>
-    <a class="pr-porta" id="portaOral" href="producao-oral-exercicios.html">
-      <img id="imgOral" src="img/producao/oral.jpg" alt="">
-      <div class="conteudo">
-        <span class="tag-porta">Produção oral</span>
-        <h2>Ouvir e falar</h2>
-        <p>Exercícios no formato dos simulados: documentos sonoros com questões de múltipla escolha e uma tarefa para falar (ou escrever) sobre o tema — com professor ao vivo, se você quiser.</p>
-        <div class="rodape" id="rodapeOral"></div>
-        <span class="cta">Começar um exercício →</span>
-      </div>
-    </a>
-  </div>
-  <p style="margin-top:14px; font-size:.72rem; opacity:.7;">Imagens: “Woman writing on a notebook with a pen”, Kristin Hardwick (CC0) · “Microphones in SPNN Podcast studio”, Myotus (<a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener" style="color:inherit;">CC BY 4.0</a>), via Wikimedia Commons. As capas dos temas trazem o crédito de cada foto.</p>
-</main>
+  <div id="avisos-globais" class="avisos-globais" hidden></div>
+
+  <main id="app">
+    <section id="tela-accueil" class="tela ativa"><p class="vazio">Chargement de votre espace…</p></section>
+    <section id="tela-liste" class="tela"></section>
+    <section id="tela-modele" class="tela"></section>
+    <section id="tela-axe" class="tela"></section>
+    <section id="tela-outils" class="tela"></section>
+    <section id="tela-epreuve" class="tela"></section>
+    <section id="tela-notes" class="tela"></section>
+    <section id="tela-prof" class="tela"></section>
+    <section id="tela-carnet" class="tela"></section>
+    <section id="tela-taches" class="tela"></section>
+    <section id="tela-atelier" class="tela"></section>
+    <section id="tela-hub" class="tela"></section>
+  </main>
+
+  <div id="dica" class="dica" role="tooltip" hidden></div>
+</div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
 <script>
-(async function () {
-  const { conta, curso } = await window.ProducaoGate.pronto;
-  const token = localStorage.getItem("token");
-  const H = { Authorization: "Bearer " + token };
-  const NOMES = { TCF: "TCF", DELF: "DELF", DALF: "DALF", TEF: "TEF", A1: "Francês A1", A2: "Francês A2", B1: "Francês B1", B2: "Francês B2" };
-  const MODELO = { A1: "no modelo do TCF", A2: "no modelo do TCF", B1: "no modelo do TCF", B2: "no modelo do TCF" };
-  document.getElementById("eyebrow").textContent = "Ambiente de Produção · " + NOMES[curso];
-  document.getElementById("tituloHub").textContent = "O que você quer praticar hoje?";
-  document.getElementById("subHub").textContent = `Temas e exercícios de ${NOMES[curso]} ${MODELO[curso] || "no formato oficial da prova"}, com correção pela grade oficial — pela IA, em poucos minutos, ou por um professor.`;
-  document.getElementById("portaTextual").href = "producao-textual.html?curso=" + encodeURIComponent(curso);
-  document.getElementById("portaOral").href = "producao-oral-exercicios.html?curso=" + encodeURIComponent(curso);
-
-  const [temas, producoes, exercicios] = await Promise.all([
-    fetch("/api/temas?modalidade=textual&courseType=" + encodeURIComponent(curso), { headers: H }).then(r => r.ok ? r.json() : []).catch(() => []),
-    fetch("/api/producoes/minhas?courseType=" + encodeURIComponent(curso), { headers: H }).then(r => r.ok ? r.json() : []).catch(() => []),
-    fetch("/api/simulados/exercicios?curso=" + encodeURIComponent(curso), { headers: H }).then(r => r.ok ? r.json() : { exercicios: [] }).catch(() => ({ exercicios: [] }))
-  ]);
-  const corrigidas = producoes.filter(p => ["corrigido", "devolvido"].includes(p.status)).length;
-  const exs = exercicios.exercicios || [];
-  const feitos = exs.filter(e => e.feito).length;
-  document.getElementById("rodapeTextual").innerHTML = `<span>${temas.length} temas</span><span>${producoes.length} enviada(s)</span><span>${corrigidas} corrigida(s)</span>`;
-  document.getElementById("rodapeOral").innerHTML = `<span>${exs.length} exercícios</span><span>${feitos} feito(s)</span>`;
-  document.getElementById("statsHub").innerHTML = `
-    <div class="pr-stat creditos"><strong>${conta.creditosCorrecao || 0}</strong><span>créditos de correção</span></div>
-    <div class="pr-stat"><strong>${producoes.length}</strong><span>redações enviadas</span></div>
-    <div class="pr-stat"><strong>${corrigidas}</strong><span>corrigidas</span></div>
-    <div class="pr-stat"><strong>${feitos}</strong><span>exercícios orais feitos</span></div>`;
-})();
+  window.FNM_PRONTO.then(function (r) {
+    var NOMES = { TCF: "TCF Canada", DELF: "DELF", DALF: "DALF", TEF: "TEF Canada", A1: "Français A1", A2: "Français A2", B1: "Français B1", B2: "Français B2" };
+    document.getElementById("fnm-curso-rotulo").textContent = NOMES[r.curso] || r.curso;
+  });
 </script>
+<script>
+  // Altura da navbar fixa do site → --topo-site (barras fixas do app ficam logo abaixo dela).
+  (function () {
+    var medir = function () { var n = document.getElementById("app-navbar"); if (n) document.documentElement.style.setProperty("--topo-site", n.getBoundingClientRect().height + "px"); };
+    window.addEventListener("resize", medir);
+    if (window.ResizeObserver) new ResizeObserver(medir).observe(document.getElementById("app-navbar"));
+    medir();
+  })();
+</script>
+<script src="js/gasShim.js"></script>
+<script src="js/simuladoAoVivo.js"></script>
+<script src="js/producaoApp.js"></script>
 <script src="js/appShell.js"></script>
 <script src="js/estudoTimerGlobal.js"></script>
 <script src="js/theme-toggle.js"></script>
