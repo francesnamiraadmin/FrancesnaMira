@@ -24,7 +24,6 @@
   padding: 22px 22px 18px; border-radius: 24px; border: 1px solid rgba(var(--branco-rgb), .85); background: var(--vidro-forte);
   box-shadow: var(--sombra); color: var(--tinta); overflow: hidden; transition: transform .18s, box-shadow .18s;
 }
-.fnm-app .hub-escolha::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--cor); }
 .fnm-app .hub-escolha::after { content: ""; position: absolute; right: -40px; bottom: -40px; width: 140px; height: 140px; border-radius: 50%; background: var(--cor); opacity: .14; transition: transform .25s; }
 .fnm-app .hub-escolha:hover { transform: translateY(-3px); box-shadow: 0 22px 50px -26px rgba(28,43,58,.7); }
 .fnm-app .hub-escolha:hover::after { transform: scale(1.25); }
@@ -39,7 +38,6 @@
 .fnm-app .hub-escolha-espace .he-ico { grid-row: 1 / 3; margin: 0; background: #1C2B3A; color: #E4C043; }
 .fnm-app .hub-escolha-espace small { grid-column: 2; }
 .fnm-app .hub-escolha-espace em { grid-column: 3; grid-row: 1 / 3; margin: 0; }
-.fnm-app .hub-escolha-espace::before { background: linear-gradient(90deg, #94C4EC, #E4C043, #D51E28); }
 :root[data-theme="dark"] .fnm-app .hub-escolha-espace .he-ico { background: #E4C043; color: #0b0c0e; }
 @media (max-width: 560px) { .fnm-app .hub-escolha-espace { grid-template-columns: auto 1fr; } .fnm-app .hub-escolha-espace em { grid-column: 2; grid-row: auto; } }
 
@@ -129,7 +127,8 @@
 
 /* ---------- temas do curso (hub da Production écrite) ---------- */
 .fnm-app #hub-curso { margin-top: 26px; }
-.fnm-app a.item-modelo, .fnm-app a.hub-acao { text-decoration: none; display: flex; flex-direction: column; }
+.fnm-app a.item-modelo { text-decoration: none; display: flex; flex-direction: column; }
+.fnm-app a.hub-acao { text-decoration: none; display: grid; }
 
 /* ---------- tema escuro: fundos pastel fixos do script ---------- */
 :root[data-theme="dark"] .fnm-app .alu2 .alu-card, :root[data-theme="dark"] .fnm-app .alu-card { background: #1d2025; }
@@ -231,18 +230,33 @@
 .fnm-app .ro-bloco li small { display: block; color: var(--tinta-suave); }
 
 /* =================== legibilidade: hub, outils, Mon espace, Espace professeur =================== */
-.fnm-app .hub-acoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 22px 0; }
-.fnm-app .hub-acao { display: grid; grid-template-columns: 48px 1fr; grid-template-rows: auto auto; column-gap: 14px; align-items: center; text-align: left;
-  padding: 16px 18px; border-radius: 20px; border: 1px solid var(--linha); background: var(--vidro-forte); box-shadow: var(--sombra); color: var(--tinta); cursor: pointer; font: inherit; transition: transform .15s; }
-.fnm-app .hub-acao:hover { transform: translateY(-2px); }
-.fnm-app .hub-acao > span { grid-row: 1 / 3; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; background: rgba(60,125,217,.14); }
+/* Ações do hub (prova, caixa de ferramentas, cronômetro): uma por linha, largura total */
+.fnm-app .hub-acoes { display: flex; flex-direction: column; gap: 14px; margin: 26px 0; }
+.fnm-app .hub-acao { --cor: #3C7DD9; position: relative; overflow: hidden; width: 100%; min-height: 96px;
+  display: grid; grid-template-columns: 60px minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 18px; row-gap: 3px; align-items: center; text-align: left;
+  padding: 20px 24px 20px 28px; border-radius: 22px; border: 1px solid var(--linha); background: var(--vidro-forte); box-shadow: var(--sombra);
+  color: var(--tinta); cursor: pointer; font: inherit; transition: transform .18s, box-shadow .18s, border-color .18s; }
+.fnm-app .hub-acao::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--cor); }
+.fnm-app .hub-acao::after { content: "→"; grid-column: 3; grid-row: 1 / 3; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 18px; font-weight: 700; color: var(--cor); background: color-mix(in srgb, var(--cor) 14%, transparent); transition: transform .18s, background .18s, color .18s; }
+.fnm-app .hub-acao:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--cor) 45%, transparent); box-shadow: 0 18px 40px -22px color-mix(in srgb, var(--cor) 70%, transparent); }
+.fnm-app .hub-acao:hover::after { transform: translateX(4px); background: var(--cor); color: #fff; }
+.fnm-app .hub-acao > span, .fnm-app .hub-acao > span:empty { display: grid !important; grid-column: 1; grid-row: 1 / 3; width: 60px; height: 60px; border-radius: 18px; place-items: center; font-size: 28px;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--cor) 26%, transparent), color-mix(in srgb, var(--cor) 10%, transparent)); }
+.fnm-app .hub-acao > b { grid-column: 2; grid-row: 1; align-self: end; font-size: 1.18rem; line-height: 1.3; color: var(--tinta); }
+.fnm-app .hub-acao > small { grid-column: 2; grid-row: 2; align-self: start; font-size: .93rem; line-height: 1.45; color: var(--tinta-suave); }
+.fnm-app .hub-acao > span:empty::before { content: "✦"; }
+.fnm-app .hub-acao[data-hub="epreuve"] { --cor: #E0524A; }
 .fnm-app .hub-acao[data-hub="epreuve"] > span::before { content: "⏱"; }
+.fnm-app .hub-acao[data-hub="outils"] { --cor: #D99A1E; }
 .fnm-app .hub-acao[data-hub="outils"] > span::before { content: "🧰"; }
-.fnm-app .hub-acao[data-hub="outils"] > span { background: rgba(242,179,61,.2); }
+.fnm-app .hub-acao[data-hub="chrono"] { --cor: #3CB179; }
 .fnm-app .hub-acao[data-hub="chrono"] > span::before { content: "🎙"; }
-.fnm-app .hub-acao[data-hub="chrono"] > span { background: rgba(60,177,121,.16); }
-.fnm-app .hub-acao b { font-size: 1.05rem; align-self: end; }
-.fnm-app .hub-acao small { color: var(--tinta-suave); font-size: .88rem; line-height: 1.4; align-self: start; }
+@media (max-width: 560px) {
+  .fnm-app .hub-acao { grid-template-columns: 48px minmax(0, 1fr) auto; column-gap: 14px; padding: 16px 16px 16px 20px; min-height: 0; }
+  .fnm-app .hub-acao > span, .fnm-app .hub-acao > span:empty { width: 48px; height: 48px; font-size: 22px; border-radius: 14px; }
+  .fnm-app .hub-acao::after { width: 34px; height: 34px; font-size: 15px; }
+}
 
 .fnm-app .outils-secao { display: flex; align-items: center; gap: 10px; font-size: 1.35rem; margin: 30px 0 14px; }
 .fnm-app .outils-secao i { width: 10px; height: 28px; border-radius: 6px; background: #3C7DD9; }
@@ -275,3 +289,16 @@
 .fnm-app .tirage > *, .fnm-app .tirage-campos > * { min-width: 0; }
 .fnm-app .tirage-campos select { width: 100%; max-width: 100%; text-overflow: ellipsis; }
 @media (max-width: 480px) { .fnm-app .tirage { padding: 20px 16px; } }
+
+/* ícones e cores das demais ações do mesmo tipo */
+.fnm-app #sm-ep, .fnm-app #esp-epreuves { --cor: #E0524A; }
+.fnm-app #sm-ep > span::before, .fnm-app #esp-epreuves > span::before { content: "⏱"; }
+.fnm-app #sm-chrono { --cor: #3CB179; }
+.fnm-app #sm-chrono > span::before { content: "🎙"; }
+.fnm-app a.hub-acao[href^="simulado-tcf"] { --cor: #7A5AF8; }
+.fnm-app a.hub-acao[href^="simulado-tcf"] > span::before { content: "🎯"; }
+.fnm-app a.hub-acao[href^="producao-oral-exercicios"] { --cor: #3C7DD9; }
+.fnm-app a.hub-acao[href^="producao-oral-exercicios"] > span::before { content: "🎧"; }
+
+/* cards do hub sem a faixa colorida no topo (parecia uma barra de progresso) */
+.fnm-app .hub-tache { border-top: 0; }
