@@ -78,6 +78,9 @@ const ProducaoSchema = new mongoose.Schema({
     modelo: { type: String },
     em: { type: Date }
   },
+  // Correção pedida ao professor: a IA corrige em segundo plano como base de análise para a equipe.
+  // select: false — nenhuma consulta devolve este campo sem pedir « +analiseIA » (o aluno nunca o vê).
+  analiseIA: { type: mongoose.Schema.Types.Mixed, select: false },
   prazoEstimado: { type: Date },
   dataEnvio: { type: Date, default: Date.now },
   dataCorrecao: { type: Date },

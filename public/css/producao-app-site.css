@@ -342,3 +342,38 @@
 .fnm-app .tm-imprensa li a { font-weight: 600; color: var(--tinta); text-decoration: none; }
 .fnm-app .tm-imprensa li a:hover { text-decoration: underline; }
 .fnm-app .tm-imprensa li small { display: block; color: var(--tinta-suave); font-size: .76rem; margin-top: 2px; }
+
+/* créditos de correção ao lado do título do hub */
+.fnm-app .acc-titulo-linha { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.fnm-app .acc-titulo-linha .titulo-pagina { margin: 0; }
+.fnm-app .creditos-pill { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px 10px 12px; border-radius: 999px; text-decoration: none; color: var(--tinta);
+  background: var(--vidro-forte); border: 1px solid var(--linha); box-shadow: var(--sombra); transition: transform .15s, box-shadow .15s; white-space: nowrap; }
+.fnm-app .creditos-pill:hover { transform: translateY(-1px); }
+.fnm-app .creditos-pill .cp-ico { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, #F2B33D, #E4C043); color: #1C2B3A; font-size: 16px; }
+.fnm-app .creditos-pill .cp-num { font-size: 1.5rem; font-weight: 800; line-height: 1; }
+.fnm-app .creditos-pill .cp-rot { font-size: .82rem; color: var(--tinta-suave); line-height: 1.2; }
+.fnm-app .creditos-pill.zero .cp-ico { background: rgba(224,82,74,.15); color: #c0392b; }
+.fnm-app .creditos-pill.zero .cp-num { color: #c0392b; }
+
+/* confirmação de envio (no lugar da caixa do navegador) */
+.fnm-app .fnm-modal-fundo { position: fixed; inset: 0; z-index: 3000; display: grid; place-items: center; padding: 16px; background: rgba(15,23,32,.55); backdrop-filter: blur(3px); opacity: 0; transition: opacity .18s; }
+.fnm-app .fnm-modal-fundo.aberto { opacity: 1; }
+.fnm-app .fnm-modal { width: min(460px, 100%); padding: 28px 26px 22px; border-radius: 24px; background: var(--vidro-forte); border: 1px solid var(--linha); box-shadow: 0 30px 70px -25px rgba(0,0,0,.6);
+  text-align: center; transform: translateY(10px) scale(.98); transition: transform .18s; color: var(--tinta); }
+.fnm-app .fnm-modal-fundo.aberto .fnm-modal { transform: none; }
+.fnm-app .fm-ico { width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 18px; display: grid; place-items: center; font-size: 24px; font-weight: 800; background: rgba(60,125,217,.14); color: #3C7DD9; }
+.fnm-app .fnm-modal h3 { margin: 0 0 8px; font-size: 1.25rem; }
+.fnm-app .fm-texto { margin: 0 0 16px; color: var(--tinta-suave); font-size: .93rem; line-height: 1.5; }
+.fnm-app .fm-creditos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 14px; }
+.fnm-app .fm-creditos > div { padding: 12px 6px; border-radius: 16px; background: rgba(var(--branco-rgb), .6); border: 1px solid var(--linha); display: flex; flex-direction: column; gap: 2px; }
+.fnm-app .fm-creditos span { font-size: .72rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; color: var(--tinta-suave); }
+.fnm-app .fm-creditos b { font-size: 1.7rem; line-height: 1.1; }
+.fnm-app .fm-creditos small { font-size: .74rem; color: var(--tinta-suave); }
+.fnm-app .fm-creditos .pos b { color: #2E8B62; }
+.fnm-app .fm-creditos .neg b, .fnm-app .fm-creditos .neg small { color: #c0392b; }
+.fnm-app .fm-alerta { margin: 0 0 14px; padding: 10px 12px; border-radius: 12px; background: rgba(224,82,74,.1); color: #b7322b; font-size: .88rem; }
+.fnm-app .fm-acoes { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.fnm-app .fm-acoes .botao-principal { text-decoration: none; }
+@media (max-width: 420px) { .fnm-app .fm-creditos b { font-size: 1.35rem; } }
+.fnm-app .fm-acoes > * { flex: 1 1 140px; width: auto; margin: 0; justify-content: center; text-align: center; }
+.fnm-app .fm-acoes .ferramenta { padding: 12px 18px; }

@@ -68,6 +68,9 @@ trocar("if (!ligado) { Voz.parar(); if (raiz._abrirReescrita) raiz._abrirReescri
 trocar("        (oral ? '<button class=\"hub-acao\" type=\"button\" data-hub=\"chrono\"><span></span><b>Chronomètre de l\\'oral</b><small>Préparation et prise de parole, comme à l\\'examen.</small></button>' : '') + '</div>';", "        '</div>';");
 // Ao enviar a produção, a página do tema para o cronômetro.
 trocar("var parar = function () { if (h) { clearInterval(h); h = null; } };", "var parar = function () { if (h) { clearInterval(h); h = null; } };\n      raiz._pararCrono = function () { parar(); desenhar(); el.fase.textContent = 'Production envoyée'; };");
+// Fim da épreuve: confirmação no visual do site, com o custo em créditos quando o professor corrige.
+trocar("        if (!confirm('Terminer l\\'épreuve et envoyer vos textes maintenant ?' + (vazias.length ? '\\nTâche(s) vide(s) : ' + vazias.map(function (t) { return t.slice(-1); }).join(', ') : ''))) return;\n        fecharEpreuve(false);",
+  "        confirmarFimEpreuve(vazias).then(function (ok) { if (ok) fecharEpreuve(false); });");
 // Réécriture: além da correção de treino pela IA, pode ir ao Sistema de Correção.
 trocar("'<div id=\"reescrita-res\" class=\"rs-res\"></div>' + botaoIA('rascunho-ia') + '<div class=\"ia-resultado\" id=\"rascunho-ia-res\"></div></aside>';",
   "'<div id=\"reescrita-res\" class=\"rs-res\"></div>' + botaoIA('rascunho-ia') + '<div class=\"ia-resultado\" id=\"rascunho-ia-res\"></div>' + htmlEnvioSistema('rs') + '</aside>';");

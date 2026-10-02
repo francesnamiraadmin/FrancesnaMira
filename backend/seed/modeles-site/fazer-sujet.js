@@ -78,15 +78,18 @@ function ligarFazer(raiz, tache, m, oral) {
       pedirCorrecaoIA(tache, m.id, texto, res, b, function () { if (!res.querySelector('.alerta')) finalizarFazer(); });
       return;
     }
-    if (!confirm('Envoyer ce texte à un professeur ? 1 crédit sera utilisé (vous en avez ' + (B.creditos || 0) + ').')) return;
-    b.disabled = true; st.textContent = 'Envoi…';
-    google.script.run.withSuccessHandler(function (r) {
-      B.creditos = r.creditos;
-      st.innerHTML = '✓ Envoyé · protocole ' + esc(r.protocolo) + ' · <a href="correcoes.html">suivre la correction</a>';
-      if (SALA && SALA.id) salaEnviar({ texto: texto, fim: true });
-      finalizarFazer();
-      b.disabled = false;
-    }).withFailureHandler(function (er) { b.disabled = false; st.textContent = er.message || er; }).enviarTextoCorrecao(EMAIL, { tache: tache, sujet: m.id, texte: texto, modo: 'professor' });
+    confirmarEnvio({ titulo: 'Envoyer votre texte au professeur', custo: 1, rotulo: 'Envoyer au professeur',
+      texto: 'Votre texte (' + contarPalavras(texto) + ' mots) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l\'examen. Vous suivrez la correction dans « Mes corrections ».' }).then(function (ok) {
+      if (!ok) return;
+      b.disabled = true; st.textContent = 'Envoi…';
+      google.script.run.withSuccessHandler(function (r) {
+        atualizarCreditos(r.creditos);
+        st.innerHTML = '✓ Envoyé · protocole ' + esc(r.protocolo) + ' · <a href="correcoes.html">suivre la correction</a>';
+        if (SALA && SALA.id) salaEnviar({ texto: texto, fim: true });
+        finalizarFazer();
+        b.disabled = false;
+      }).withFailureHandler(function (er) { b.disabled = false; st.textContent = er.message || er; }).enviarTextoCorrecao(EMAIL, { tache: tache, sujet: m.id, texte: texto, modo: 'professor' });
+    });
   });
 }
 
@@ -113,14 +116,17 @@ function enviarEssaiOral(b, d) {
     });
     return;
   }
-  if (!confirm('Envoyer cet enregistrement et sa transcription à un professeur ? 1 crédit de correction sera utilisé (vous en avez ' + (B.creditos || 0) + ').')) return;
-  b.disabled = true; d.st.textContent = 'Envoi…';
-  enviarGravacao({ blob: d.blob, tache: d.tache, sujet: d.m.id, duree: d.duree, transcricao: d.transcricao, modo: 'professor' }).then(function (r) {
-    B.creditos = r.creditos;
-    d.st.innerHTML = '✓ Envoyé (protocole ' + esc(r.protocolo) + ') · <a href="correcoes.html">suivre la correction</a>';
-    if (SALA && SALA.id) salaEnviar({ transcricao: d.transcricao, fim: true });
-    finalizarFazer();
-  }).catch(function (e) { b.disabled = false; d.st.textContent = e.message || e; });
+  confirmarEnvio({ titulo: 'Envoyer votre enregistrement au professeur', custo: 1, rotulo: 'Envoyer au professeur',
+    texto: 'L\'enregistrement (' + formatarTempo(Math.round(d.duree || 0)) + ') et sa transcription entrent dans la file du Sistema de Correção. Vous suivrez la correction dans « Mes corrections ».' }).then(function (ok) {
+    if (!ok) return;
+    b.disabled = true; d.st.textContent = 'Envoi…';
+    enviarGravacao({ blob: d.blob, tache: d.tache, sujet: d.m.id, duree: d.duree, transcricao: d.transcricao, modo: 'professor' }).then(function (r) {
+      atualizarCreditos(r.creditos);
+      d.st.innerHTML = '✓ Envoyé (protocole ' + esc(r.protocolo) + ') · <a href="correcoes.html">suivre la correction</a>';
+      if (SALA && SALA.id) salaEnviar({ transcricao: d.transcricao, fim: true });
+      finalizarFazer();
+    }).catch(function (e) { b.disabled = false; d.st.textContent = e.message || e; });
+  });
 }
 
 // Coletânea do sujet: um texto sobre o eixo e dois sobre o próprio tema (imprensa, artigo científico,

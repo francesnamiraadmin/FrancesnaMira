@@ -128,6 +128,8 @@ async function montarNovaProducao({ userId, temaId, textoDigitado, observacoesAl
 
   transmitir("producao-atualizada", { alunoId: String(userId), producaoId: String(producao._id) });
   if (porIA) setImmediate(() => processarCorrecaoIA(producao._id).catch(err => console.error("Correção IA:", err.message)));
+  // Correção do professor: a IA prepara uma análise só para a equipe (o aluno não a recebe).
+  else setImmediate(() => require("../utils/analiseIA").gerarAnaliseIA(producao._id).catch(err => console.error("Análise IA:", err.message)));
   return producao;
 }
 
@@ -310,7 +312,25 @@ router.get("/:id", exigirAuth, async (req, res) => {
     if (!souDono && !souStaff) {
       return res.status(403).json({ msg: "Você não tem acesso a esta produção." });
     }
-    res.json(producao);
+    // A análise da IA é só da equipe: o aluno recebe a produção sem ela (campo com select: false).
+    if (!souStaff) return res.json(producao);
+    const extra = await Producao.findById(producao._id).select("+analiseIA").lean();
+    res.json({ ...producao.toObject(), analiseIA: extra?.analiseIA || null });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// ===================== ANÁLISE DA IA (só equipe) =====================
+// Gera (ou refaz) na hora a análise da IA que serve de base para o professor.
+router.post("/:id/analise-ia", exigirAuth, exigirProfessor, async (req, res) => {
+  try {
+    if (!/^[a-f0-9]{24}$/i.test(req.params.id)) return res.status(400).json({ msg: "Produção inválida." });
+    const analise = await require("../utils/analiseIA").gerarAnaliseIA(req.params.id);
+    if (analise) return res.json(analise);
+    const p = await Producao.findById(req.params.id).select("+analiseIA").lean();
+    res.json(p?.analiseIA || { status: "indisponivel" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });

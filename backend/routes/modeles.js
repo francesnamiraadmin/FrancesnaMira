@@ -370,7 +370,8 @@ async function enviarTachesAoProfessor(ep, taches, { semCredito, modoCorrecao = 
   }
   await ep.save();
   void processarCorrecaoIA;
-  return { enviadas, aviso: erros.length ? "Non envoyé : " + erros.join(" · ") : "" };
+  const u = await User.findById(ep.alunoId).select("creditosCorrecao").lean();
+  return { enviadas, aviso: erros.length ? "Non envoyé : " + erros.join(" · ") : "", creditos: u?.creditosCorrecao || 0 };
 }
 
 // Depois de uma épreuve de treino: manda ao Sistema de Correção as tâches escolhidas.

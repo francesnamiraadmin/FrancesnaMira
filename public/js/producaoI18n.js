@@ -54,6 +54,12 @@
     [/^Envoyée le (.+) · corrigée le (.+)$/, "Enviada em $1 · corrigida em $2"],
     [/^Envoyée le (.+)$/, "Enviada em $1"],
     [/^Avec (.+)$/, "Com $1"],
+    [/^Votre texte \((\d+) mots\) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l'examen\. Vous suivrez la correction dans « Mes corrections »\.$/, "Seu texto ($1 palavras) entra na fila do Sistema de Correção e será corrigido com a grade da prova. Você acompanha a correção em « Minhas correções »."],
+    [/^L'enregistrement \(([\d:]+)\) et sa transcription entrent dans la file du Sistema de Correção\. Vous suivrez la correction dans « Mes corrections »\.$/, "A gravação ($1) e a transcrição entram na fila do Sistema de Correção. Você acompanha a correção em « Minhas correções »."],
+    [/^Tâche\(s\) ([\d, ]+) : chaque texte entre dans la file du Sistema de Correção \(1 crédit par tâche\)\.$/, "Tarefa(s) $1: cada texto entra na fila do Sistema de Correção (1 crédito por tarefa)."],
+    [/^(?:Tâche\(s\) vide\(s\) : ([\d, ]+)\. )?Vos textes (entrent dans la file du Sistema de Correção \(1 crédit par tâche\)|seront corrigés par l'IA dès la fin de l'épreuve)\.$/, function (m, vazias, resto) {
+      return (vazias ? "Tarefa(s) vazia(s): " + vazias + ". " : "") + (/^entrent/.test(resto) ? "Seus textos entram na fila do Sistema de Correção (1 crédito por tarefa)." : "Seus textos serão corrigidos pela IA no fim da prova.");
+    }],
     [/^(\S+) L'axe thématique : (.+)$/, function (m, ic, e) { return ic + " O eixo temático: " + e; }],
     [/^(\S+) Article de presse$/, "$1 Matéria de jornal"],
     [/^(\S+) Article scientifique$/, "$1 Artigo científico"],

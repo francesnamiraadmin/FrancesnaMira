@@ -20,6 +20,8 @@ function registrar(userId, dados) {
   // O sinal da página lê o que está na tela e tem prioridade; o do app do Ambiente de Produção (que
   // é espaçado e pode estar atrasado) só vale se a página não mandou nada no último minuto e meio.
   if (dados.doApp && continua && ant.tPagina && agora - ant.tPagina < ONLINE_MS) { ant.t = agora; return; }
+  // Várias abas abertas: uma aba em segundo plano não tira o lugar da aba que o aluno está vendo.
+  if (!dados.doApp && dados.oculta && continua && !ant.oculta && agora - ant.t < 45000) { ant.t = agora; return; }
   const novo = {
     area: limpar(dados.area).slice(0, 60) || "Site",
     pagina: limpar(dados.pagina).slice(0, 120),

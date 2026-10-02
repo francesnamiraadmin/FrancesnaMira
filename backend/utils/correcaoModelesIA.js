@@ -96,7 +96,8 @@ async function corrigirTreino({ alunoId, tache, sujetId, texte, courseType, moda
 }
 
 // Avaliação de uma Producao do Ambiente de Produção (formato do Sistema de Correção + extras).
-async function corrigirProducaoModeles(producao, tema) {
+// `registrar: false` (análise para o professor) não grava nada no histórico nem no carnet do aluno.
+async function corrigirProducaoModeles(producao, tema, { registrar = true } = {}) {
   const tache = producao.origem.tache;
   const sujet = M.acharTema(tache, producao.origem.sujetId);
   if (!sujet) throw new Error("Sujet introuvable.");
@@ -112,9 +113,11 @@ async function corrigirProducaoModeles(producao, tema) {
   ids.forEach((id, i) => { notas[id] = nota(cr[i]); comentarios[id] = (cr[i] || {}).commentaire || ""; });
   if (oral) { notas.fluencia = notas.coerencia_oral; comentarios.fluencia = (r.ouviuAudio ? "Évalué à partir de l'enregistrement et de la transcription. " : "Estimé à partir de la transcription (la prononciation n'est pas évaluée par l'IA). ") + (comentarios.coerencia_oral || ""); }
   const av = avaliar("TCF", oral ? "oral" : "textual", notas, { nivelAlvo: tema.nivel, notaFinal: r.note, comentarios });
-  await CorrecaoIATCF.create({ alunoId: producao.alunoId, tache, sujetId: sujet.id, sujet: String(sujet.titre || sujet.t || "").slice(0, 300), modalidade: producao.modalidade,
-    mots: r.mots, note: r.note, nclc: r.nclc, texte: texte.slice(0, 12000), correcao: r, producaoId: producao._id });
-  await registrarNoCarnet(producao.alunoId, tache, r, { courseType: tema.courseType, producaoId: producao._id, eixo: sujet.e });
+  if (registrar) {
+    await CorrecaoIATCF.create({ alunoId: producao.alunoId, tache, sujetId: sujet.id, sujet: String(sujet.titre || sujet.t || "").slice(0, 300), modalidade: producao.modalidade,
+      mots: r.mots, note: r.note, nclc: r.nclc, texte: texte.slice(0, 12000), correcao: r, producaoId: producao._id });
+    await registrarNoCarnet(producao.alunoId, tache, r, { courseType: tema.courseType, producaoId: producao._id, eixo: sujet.e });
+  }
   return {
     exame: av.exame, criterios: av.criterios, notaTotal: av.notaTotal, notaMaxima: av.notaMaxima,
     nivelEstimado: av.nivel, nclc: tema.courseType === "TCF" ? av.nclc : r.nclc, aprovado: av.aprovado, pontuacaoOficial: av.pontuacaoOficial,

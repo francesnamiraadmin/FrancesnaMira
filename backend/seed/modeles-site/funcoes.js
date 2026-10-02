@@ -39,7 +39,7 @@ function irAccueil() {
   var CURSOS = { TCF: 'TCF Canada', DELF: 'DELF', DALF: 'DALF', TEF: 'TEF Canada', A1: 'Français A1', A2: 'Français A2', B1: 'Français B1', B2: 'Français B2' };
   var nomeCurso = CURSOS[B.courseType] || 'TCF Canada';
   var html = '<div class="acc-topo">' + (B.nome ? '<p class="ola">Bonjour, ' + esc(B.nome.split(' ')[0]) + '.</p>' : '') +
-    '<h1 class="titulo-pagina">Ambiente de Produção · ' + esc(nomeCurso) + '</h1>' +
+    '<div class="acc-titulo-linha"><h1 class="titulo-pagina">Ambiente de Produção · ' + esc(nomeCurso) + '</h1>' + (B.professor ? '' : htmlCreditos()) + '</div>' +
     '<p class="intro">Choisissez ce que vous voulez travailler. Les sujets sont classés par tâche et par axe thématique, avec modèles annotés, audio, dictée, épreuves chronométrées et correction par l\'IA ou par un professeur.</p></div>';
   html += htmlHubEscolhas();
   html += '<div id="acc-pendencias"></div>';

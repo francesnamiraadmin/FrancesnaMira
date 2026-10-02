@@ -211,6 +211,22 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .av-msg-linha { display: flex; gap: 8px; } .av-msg-linha input { flex: 1; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--cinza-200, #dde2e8); font: inherit; }
 .av-toast { position: fixed; right: 20px; bottom: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border-radius: 16px; background: #1C2B3A; color: #fff; box-shadow: 0 18px 40px -14px rgba(0,0,0,.5); max-width: 320px; }
 .av-toast span { font-size: .88rem; opacity: .85; }
+/* ----- base de análise da IA (só equipe) ----- */
+.analise-ia { border: 2px dashed #a78bfa; background: linear-gradient(180deg, rgba(124,58,237,.05), transparent 120px); }
+.analise-ia-cab { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.analise-ia-cab h2 { margin: 0; }
+.so-equipe { font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #6d28d9; background: #ede9fe; padding: 4px 10px; border-radius: 20px; }
+.ia-sug-nota { display: flex; align-items: baseline; gap: 8px; margin: 4px 0 12px; }
+.ia-sug-nota b { font-size: 2rem; color: #6d28d9; line-height: 1; }
+.ia-sug-crit { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 8px 0; border-bottom: 1px solid var(--cinza-100, #eef1f5); font-size: .86rem; }
+.ia-sug-crit small { grid-column: 1 / -1; color: var(--cinza-600, #55606d); }
+.ia-sug-lista { font-size: .86rem; margin: 6px 0 12px; padding-left: 18px; }
+.ia-sug-corr { font-size: .84rem; padding: 6px 0; border-bottom: 1px solid var(--cinza-100, #eef1f5); }
+.ia-sug-corr del { color: #b91c1c; } .ia-sug-corr ins { color: #047857; text-decoration: none; font-weight: 600; }
+.ia-sug-acoes { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.ia-sug-espera { display: flex; align-items: center; gap: 10px; font-size: .88rem; color: var(--cinza-600, #55606d); }
+.ia-sug-espera i { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #ddd6fe; border-top-color: #7c3aed; animation: girarIA 1s linear infinite; }
+@keyframes girarIA { to { transform: rotate(360deg); } }
 </style>
 </head>
 
@@ -325,6 +341,10 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
         <div class="card">
           <h2>Produção enviada</h2>
           <div id="producaoEnviadaBox"></div>
+        </div>
+        <div class="card analise-ia" id="analiseIACard" style="display:none;">
+          <div class="analise-ia-cab"><h2>Base de análise da IA</h2><span class="so-equipe">só a equipe vê · o aluno não recebe</span></div>
+          <div id="analiseIABox"></div>
         </div>
       </div>
 

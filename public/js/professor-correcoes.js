@@ -331,6 +331,7 @@ function renderCorrecao(p) {
     producaoHtml = `<div class="texto-enviado-box">${esc(p.textoDigitado)}</div><div style="margin-top:8px; font-size:0.8rem; color:var(--cinza-400);">${p.contagemPalavras} palavras (pedido: ${tema.limitePalavrasMin}–${tema.limitePalavrasMax})</div>`;
   }
   document.getElementById('producaoEnviadaBox').innerHTML = producaoHtml;
+  renderAnaliseIA(p, editavel);
   const baixarBtn = document.getElementById('baixarOriginalBtn');
   if (baixarBtn) baixarBtn.addEventListener('click', () => baixarArquivo(p._id, 'original', p.arquivoOriginal.nome));
   const audioEl = document.getElementById('audioProducaoOriginal');
@@ -367,6 +368,89 @@ function renderCorrecao(p) {
   arquivoCorrigidoSelecionado = null;
   document.getElementById('uploadCorrigidoTexto').textContent = 'Clique para anexar o arquivo corrigido (PDF, DOCX ou ODT)';
   document.getElementById('uploadCorrigidoBox').classList.remove('tem-arquivo');
+}
+
+// ===================== BASE DE ANÁLISE DA IA (só equipe) =====================
+// Quando o aluno pede a correção de um professor, a IA corrige em segundo plano; o professor vê a
+// sugestão aqui e pode usá-la como ponto de partida. O aluno nunca recebe esta análise.
+let esperaAnalise = null;
+function renderAnaliseIA(p, editavel) {
+  clearTimeout(esperaAnalise);
+  const card = document.getElementById('analiseIACard'), box = document.getElementById('analiseIABox');
+  // correção feita pela própria IA (pedido do aluno): não há « base » separada
+  if (p.modoCorrecao === 'ia') { card.style.display = 'none'; return; }
+  card.style.display = 'block';
+  const a = p.analiseIA;
+  const gerar = rotulo => `<button class="btn secundario pequeno" type="button" id="gerarAnaliseBtn">${rotulo}</button>`;
+  if (!a || a.status === 'gerando') {
+    box.innerHTML = '<div class="ia-sug-espera"><i></i>A IA está analisando a produção… (cerca de 10 segundos)</div>';
+    // confere de novo em alguns segundos
+    esperaAnalise = setTimeout(async () => {
+      if (!producaoAtual || producaoAtual._id !== p._id) return;
+      try {
+        const r = await fetch(`/api/producoes/${p._id}`, { headers: H() });
+        if (r.ok) { const novo = await r.json(); producaoAtual.analiseIA = novo.analiseIA; renderAnaliseIA(producaoAtual, editavel); }
+      } catch (e) {}
+    }, 5000);
+    if (!a) fetch(`/api/producoes/${p._id}/analise-ia`, { method: 'POST', headers: H() }).catch(() => {});
+    return;
+  }
+  if (a.status !== 'pronta') {
+    const motivo = { indisponivel: 'A correção por IA não está configurada no servidor.', sem_texto: 'A produção foi enviada como arquivo (sem texto digitado nem transcrição): a IA não tem o que ler.', erro: 'A IA não conseguiu analisar agora' + (a.erro ? ' (' + a.erro + ')' : '') + '.' }[a.status] || 'Análise indisponível.';
+    box.innerHTML = `<p style="font-size:.88rem; color:var(--cinza-600);">${esc(motivo)}</p>${a.status !== 'sem_texto' && a.status !== 'indisponivel' ? '<div class="ia-sug-acoes">' + gerar('Tentar de novo') + '</div>' : ''}`;
+    ligarGerar(p, editavel);
+    return;
+  }
+  const av = a.avaliacao || {};
+  const ex = av.extras || {};
+  box.innerHTML = `
+    <div class="ia-sug-nota"><b>${av.notaTotal ?? '—'}</b><span>/ ${av.notaMaxima || 20}${av.nivelEstimado ? ' · ' + esc(av.nivelEstimado) : ''}${av.nclc ? ' · NCLC ' + esc(av.nclc) : ''}</span></div>
+    ${av.comentarioGeral ? `<p style="font-size:.9rem; margin-bottom:8px;" lang="fr">${esc(av.comentarioGeral)}</p>` : ''}
+    ${(av.criterios || []).map(c => `<div class="ia-sug-crit"><span>${esc(c.nome || c.id)}</span><b>${c.nota ?? '—'} / ${c.max ?? ''}</b>${c.comentario ? `<small lang="fr">${esc(c.comentario)}</small>` : ''}</div>`).join('')}
+    ${(av.pontosFortes || []).length ? `<div style="font-weight:700; margin-top:10px; font-size:.86rem;">Pontos fortes</div><ul class="ia-sug-lista" lang="fr">${av.pontosFortes.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+    ${(av.aMelhorar || []).length ? `<div style="font-weight:700; font-size:.86rem;">A melhorar</div><ul class="ia-sug-lista" lang="fr">${av.aMelhorar.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+    ${(av.correcoes || []).length ? `<div style="font-weight:700; font-size:.86rem;">Correções sugeridas (${av.correcoes.length})</div>${av.correcoes.map(c => `<div class="ia-sug-corr" lang="fr"><del>${esc(c.trecho)}</del> → <ins>${esc(c.correcao)}</ins>${c.explicacao ? `<br><small>${esc(c.explicacao)}</small>` : ''}</div>`).join('')}` : ''}
+    ${ex.version_amelioree ? `<details style="margin-top:10px;"><summary style="cursor:pointer; font-weight:700; font-size:.86rem;">Versão melhorada sugerida pela IA</summary><div class="texto-enviado-box" lang="fr" style="margin-top:6px;">${esc(ex.version_amelioree)}</div></details>` : ''}
+    <div style="font-size:.74rem; color:var(--cinza-400); margin-top:10px;">Gerada em ${new Date(a.em).toLocaleString('pt-BR')}${a.modelo ? ' · ' + esc(a.modelo) : ''}. É só uma sugestão: confira antes de usar.</div>
+    <div class="ia-sug-acoes">
+      ${editavel ? '<button class="btn pequeno" type="button" id="usarAnaliseBtn">Usar como ponto de partida</button>' : ''}
+      ${gerar('Refazer a análise')}
+    </div>`;
+  ligarGerar(p, editavel);
+  const usar = document.getElementById('usarAnaliseBtn');
+  if (usar) usar.addEventListener('click', () => usarAnaliseIA(av));
+}
+function ligarGerar(p, editavel) {
+  const b = document.getElementById('gerarAnaliseBtn');
+  if (!b) return;
+  b.addEventListener('click', async () => {
+    b.disabled = true; b.textContent = 'Analisando…';
+    try {
+      const r = await fetch(`/api/producoes/${p._id}/analise-ia`, { method: 'POST', headers: H() });
+      producaoAtual.analiseIA = r.ok ? await r.json() : { status: 'erro', erro: 'servidor' };
+    } catch (e) { producaoAtual.analiseIA = { status: 'erro', erro: e.message }; }
+    renderAnaliseIA(producaoAtual, editavel);
+  });
+}
+// Copia a sugestão da IA para a grade (só os campos vazios ou zerados; o professor revisa tudo).
+function usarAnaliseIA(av) {
+  const porId = Object.fromEntries((av.criterios || []).filter(c => c.id).map(c => [c.id, c]));
+  document.querySelectorAll('#criteriosLista [data-crit]').forEach(inp => {
+    const c = porId[inp.dataset.crit];
+    if (c && c.nota != null) inp.value = c.nota;
+  });
+  document.querySelectorAll('#criteriosLista [data-crit-coment]').forEach(t => {
+    const c = porId[t.dataset.critComent];
+    if (c && c.comentario && !t.value.trim()) t.value = c.comentario;
+  });
+  const preencher = (id, v) => { const el = document.getElementById(id); if (el && !el.value.trim() && v) el.value = v; };
+  preencher('comentarioGeralInput', av.comentarioGeral || '');
+  preencher('pontosFortesInput', (av.pontosFortes || []).join('\n'));
+  preencher('aMelhorarInput', (av.aMelhorar || []).join('\n'));
+  if (!document.querySelectorAll('#correcoesLista .correcao-linha').length) (av.correcoes || []).forEach(adicionarLinhaCorrecao);
+  atualizarTotal();
+  mostrarCorrecaoMsg('Sugestão da IA copiada para a grade. Revise as notas e os comentários antes de devolver ao aluno.', false);
+  document.getElementById('criteriosLista').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function adicionarLinhaCorrecao(c = {}) {
