@@ -24,7 +24,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .intro p { font-size: 1.15rem; opacity: 0.9; max-width: 720px; margin: 0 auto; }
 
 .hub-wrap { max-width: 1100px; margin: 0 auto; padding: 30px 4% 100px; }
-.hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+.hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); grid-auto-rows: 1fr; gap: 22px; }
 
 .hub-card {
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
@@ -34,6 +34,18 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .hub-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+/* uma cor por card (a do ícone): faixa no topo, fundo levemente tingido e borda no hover */
+.hub-card[style*="--cor"] { position: relative; overflow: hidden;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--cor) 14%, var(--glass-bg)), var(--glass-bg-2) 70%); }
+.hub-card[style*="--cor"]::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--cor); }
+.hub-card[style*="--cor"]::after { content: ""; position: absolute; right: -50px; bottom: -50px; width: 150px; height: 150px; border-radius: 50%;
+  background: var(--cor); opacity: .1; transition: transform .25s; pointer-events: none; }
+.hub-card[style*="--cor"]:hover { border-color: var(--cor); box-shadow: 0 22px 50px -18px color-mix(in srgb, var(--cor) 55%, transparent), var(--glass-shadow); }
+.hub-card[style*="--cor"]:hover::after { transform: scale(1.25); }
+.hub-card[style*="--cor"] h2 { color: color-mix(in srgb, var(--cor) 55%, var(--text)); }
+/* selo no canto: não aumenta a altura do card */
+.hub-card .indicador.canto { position: absolute; top: 14px; right: 14px; margin: 0; z-index: 1; }
+.hub-card[style*="--cor"] .indicador { background: color-mix(in srgb, var(--cor) 16%, transparent); color: color-mix(in srgb, var(--cor) 75%, var(--text)); }
 .hub-card .icone { width: 64px; height: 64px; object-fit: contain; }
 .hub-card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
 .hub-card p { font-size: 0.92rem; opacity: 0.85; line-height: 1.5; }
@@ -71,40 +83,40 @@ window.aoResolverCurso = function (curso) {
 
 <div class="hub-wrap">
   <div class="hub-grid" id="hubGrid">
-    <a class="hub-card" href="praticar.html">
+    <a class="hub-card" href="praticar.html" style="--cor:#F2994A;">
       <img class="icone" src="img/icones/praticar.svg" alt="">
       <h2>Praticar</h2>
       <p>Resolver conjuntos de questões e acompanhar sua evolução.</p>
     </a>
-    <a class="hub-card" href="meus-conjuntos.html">
+    <a class="hub-card" href="meus-conjuntos.html" style="--cor:#27AE60;">
       <img class="icone" src="img/icones/andamento.svg" alt="">
-      <h2>Respondidas</h2>
+      <h2>Respondidos</h2>
       <p>Acompanhar os conjuntos que você já começou e rever o resultado dos que já concluiu.</p>
       <span class="indicador" id="indicadorAndamento" style="display:none;"></span>
     </a>
-    <a class="hub-card" href="questoes-interativas.html">
+    <a class="hub-card" href="questoes-interativas.html" style="--cor:#7E57C2;">
       <img class="icone" src="img/icones/puzzle.svg" alt="">
       <h2>Questões Interativas</h2>
-      <p>Em breve: novos formatos de questões para tornar a prática ainda mais dinâmica.</p>
+      <p>Novos formatos de questões para tornar a prática ainda mais dinâmica.</p>
     </a>
-    <a class="hub-card hub-card-destaque" href="simulado-tcf.html?curso=TCF" id="cardSimuladoCompleto" style="display:none;">
+    <a class="hub-card hub-card-destaque" href="simulado-tcf.html?curso=TCF" id="cardSimuladoCompleto" style="display:none; --cor:#2F80ED;">
       <img class="icone" src="img/icones/simulados.svg" alt="">
       <h2>Simulação Completa de Prova</h2>
-      <p>Provas completas do TCF Canada no tempo real — compreensões oral e escrita, expressões escrita e oral —, com correção por IA ou por um professor ao vivo e notas no formato TCF e NCLC. Escolha o simulado e comece.</p>
-      <span class="indicador">Novo</span>
+      <p>A prova completa do TCF Canada, com correção e notas TCF e NCLC.</p>
+      <span class="indicador canto">Novo</span>
     </a>
-    <a class="hub-card" href="personalizar-conjunto.html">
+    <a class="hub-card" href="personalizar-conjunto.html" style="--cor:#E0457B;">
       <img class="icone" src="img/icones/personalizar.svg" alt="">
       <h2>Personalize</h2>
       <p>Criar conjuntos personalizados, escolhendo níveis, categorias, quantidade de questões e tempo.</p>
     </a>
-    <a class="hub-card" href="caderno-revisao.html">
+    <a class="hub-card" href="caderno-revisao.html" style="--cor:#9B51E0;">
       <img class="icone" src="img/icones/caderno.svg" alt="">
       <h2>Caderno de Revisão</h2>
       <p>Gerenciar todas as questões marcadas para revisão e criar novas sessões de estudo.</p>
       <span class="indicador" id="indicadorCaderno" style="display:none;"></span>
     </a>
-    <a class="hub-card" href="estatisticas-questoes.html">
+    <a class="hub-card" href="estatisticas-questoes.html" style="--cor:#2D9CDB;">
       <img class="icone" src="img/icones/estatisticas.svg" alt="">
       <h2>Estatísticas</h2>
       <p>Visualizar gráficos, desempenho, evolução e histórico completo da Plataforma de Questões.</p>
