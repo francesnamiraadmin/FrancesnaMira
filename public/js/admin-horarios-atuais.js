@@ -27,10 +27,13 @@
     return soOcupados ? horas.filter(h => usadas.has(h)) : horas;
   }
 
+  // Aulas de 1 h: « 18:00 - 19:00 » (e « 23:00 - 00:00 »).
+  const horaSeguinte = h => String((Number(h.slice(0, 2)) + 1) % 24).padStart(2, "0") + ":" + h.slice(3);
+
   function itemHtml(it) {
     const titulo = it.tipo === "turma" ? (it.alunos?.length ? it.alunos.join(", ") : it.detalhe || "") : it.tipo === "manual" ? "Colocado à mão" : "Matrícula confirmada" + (it.curso ? " · " + it.curso : "");
-    return `<span class="ha-item ${it.tipo}" title="${esc(titulo)}"><span class="ha-txt">${esc(it.texto)}${it.tipo === "turma" && it.alunos?.length ? ` <small>· ${it.alunos.length}</small>` : ""}</span>` +
-      `<button type="button" class="ha-x" title="Retirar da grade" data-retirar="${esc(it.chave)}" data-ajuste="${esc(it.ajusteId || "")}" data-tipo="${esc(it.tipo)}" data-nome="${esc(it.texto)}">×</button></span>`;
+    return `<div class="ha-nome ${it.tipo}" title="${esc(titulo)}"><span class="ha-txt">${esc(it.texto)}${it.tipo === "turma" && it.alunos?.length ? ` <small>(${it.alunos.length})</small>` : ""}</span>` +
+      `<button type="button" class="ha-x" title="Retirar da grade" aria-label="Retirar ${esc(it.texto)} da grade" data-retirar="${esc(it.chave)}" data-ajuste="${esc(it.ajusteId || "")}" data-tipo="${esc(it.tipo)}" data-nome="${esc(it.texto)}">×</button></div>`;
   }
 
   function render() {
@@ -42,10 +45,11 @@
     $("haResumo").textContent = total + (total === 1 ? " aula na semana" : " aulas na semana") + " · atualizado às " + new Date(dados.atualizadoEm).toLocaleTimeString("pt-BR");
     if (!horas.length) { $("haGrade").innerHTML = '<tbody><tr><td class="ha-vazio">Nenhum horário ocupado neste período.</td></tr></tbody>'; }
     else $("haGrade").innerHTML = "<thead><tr><th>Horário</th>" + ORDEM.map(d => `<th>${DIAS[d]}</th>`).join("") + "</tr></thead><tbody>" +
-      horas.map(h => "<tr><td class=\"ha-hora\">" + h + "</td>" + ORDEM.map(d => {
+      horas.map(h => "<tr><th class=\"ha-hora\" scope=\"row\">" + h + " - " + horaSeguinte(h) + "</th>" + ORDEM.map(d => {
         const itens = mapa[d + "|" + h] || [];
-        return `<td class="ha-cel${itens.length ? " ocupada" : ""}" data-dia="${d}" data-hora="${h}">${itens.map(itemHtml).join("")}` +
-          `<button type="button" class="ha-add" title="Colocar um nome neste horário" data-add="${d}|${h}">+</button></td>`;
+        const tipos = new Set(itens.map(i => i.tipo));
+        return `<td class="ha-cel ${itens.length ? "ocupada" : "livre"}${tipos.has("turma") ? " tem-turma" : ""}" data-dia="${d}" data-hora="${h}">${itens.map(itemHtml).join("")}` +
+          `<button type="button" class="ha-add" title="Colocar um nome neste horário" aria-label="Colocar um nome: ${DIAS[d]} ${h}" data-add="${d}|${h}">+</button></td>`;
       }).join("") + "</tr>").join("") + "</tbody>";
     const r = dados.retirados || [];
     $("haRetirados").innerHTML = r.length ? `<h3>Retirados da grade (${r.length})</h3><p class="campo-hint">Vêm de matrículas ou turmas e foram tirados à mão. A matrícula continua valendo.</p>` +

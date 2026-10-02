@@ -120,33 +120,63 @@ table.lista td small { color: var(--cinza-400); display: block; }
 .busca { padding: 9px 14px; border-radius: 20px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font-family: 'Poppins', sans-serif; min-width: 220px; }
 .previa-cupom { margin-top: 4px; padding: 12px 14px; border-radius: 12px; background: var(--azul-claro); color: var(--azul-escuro); font-size: 0.85rem; }
 footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
-/* ----- Horários Atuais ----- */
-.ha-filtros { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+/* ----- Horários Atuais: grade no estilo planilha (livre em verde, ocupado em rosa) ----- */
+.secao[data-secao="atuais"] {
+  --ha-livre: #dcf3e2; --ha-livre-hover: #c9ecd3;
+  --ha-ocupado: #fbdcdc; --ha-ocupado-hover: #f7cccc; --ha-nome: #b3261e;
+  --ha-turma: #fde7c8; --ha-turma-nome: #9a4b00;
+  --ha-hora: #fff4d6; --ha-hora-txt: #3d2f12;
+  --ha-linha: #ecdcc4; --ha-cab: #1e3a8a;
+}
+:root[data-theme="dark"] .secao[data-secao="atuais"] {
+  --ha-livre: #12301f; --ha-livre-hover: #173c27;
+  --ha-ocupado: #3a1d22; --ha-ocupado-hover: #47232a; --ha-nome: #ff9f9a;
+  --ha-turma: #3a2a12; --ha-turma-nome: #ffc978;
+  --ha-hora: #2a2414; --ha-hora-txt: #f3e3b8;
+  --ha-linha: #3b3326; --ha-cab: #93b4ff;
+}
+.ha-filtros { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
 .ha-check { display: flex; align-items: center; gap: 6px; font-size: .85rem; color: var(--cinza-600); cursor: pointer; }
-.ha-grade { width: 100%; min-width: 860px; border-collapse: separate; border-spacing: 4px; table-layout: fixed; }
-.ha-grade th { font-size: .78rem; font-weight: 700; color: var(--cinza-600); padding: 6px 4px; text-align: center; }
-.ha-grade th:first-child, .ha-hora { width: 64px; }
-.ha-hora { font-weight: 700; font-size: .82rem; color: var(--cinza-600); text-align: center; }
-.ha-cel { position: relative; vertical-align: top; min-height: 52px; height: 52px; padding: 5px 5px 22px; border-radius: 10px; background: var(--cinza-50); border: 1px solid var(--cinza-100); }
-.ha-cel.ocupada { background: var(--branco); border-color: var(--cinza-300); }
-.ha-item { display: flex; align-items: center; justify-content: space-between; gap: 4px; margin-bottom: 4px; padding: 4px 4px 4px 8px; border-radius: 8px; font-size: .76rem; font-weight: 600; line-height: 1.25; }
-.ha-item .ha-txt { overflow: hidden; text-overflow: ellipsis; }
-.ha-item small { font-weight: 500; opacity: .8; }
-.ha-item.aluno { background: #e3edff; color: #1e40af; }
-.ha-item.turma { background: #fff1d6; color: #92400e; }
-.ha-item.manual { background: #eef1f5; color: #334155; border: 1px dashed #94a3b8; }
-.ha-x { flex: none; width: 18px; height: 18px; border-radius: 50%; border: 0; background: transparent; color: inherit; font-size: 14px; line-height: 1; cursor: pointer; opacity: .55; }
-.ha-x:hover { opacity: 1; background: rgba(0,0,0,.08); }
-.ha-add { position: absolute; right: 4px; bottom: 3px; width: 20px; height: 18px; border-radius: 6px; border: 1px dashed var(--cinza-300); background: transparent; color: var(--cinza-400); font-size: 13px; line-height: 1; cursor: pointer; opacity: 0; transition: opacity .15s; }
-.ha-cel:hover .ha-add, .ha-add:focus { opacity: 1; }
+.secao[data-secao="atuais"] .grade-wrap { border-radius: 16px; border: 1px solid var(--ha-linha); overflow: auto; max-height: 76vh; box-shadow: 0 10px 30px -18px rgba(30,41,59,.35); }
+.ha-grade { width: 100%; min-width: 900px; border-collapse: separate; border-spacing: 0; table-layout: fixed; font-size: .86rem; }
+.ha-grade thead th { position: sticky; top: 0; z-index: 2; background: var(--branco); color: var(--ha-cab); font-weight: 800; font-size: .8rem;
+  letter-spacing: .05em; text-transform: uppercase; padding: 12px 6px; border-bottom: 2px solid var(--ha-linha); text-align: center; }
+.ha-grade thead th:first-child { left: 0; z-index: 3; width: 128px; }
+.ha-grade th.ha-hora { position: sticky; left: 0; z-index: 1; width: 128px; background: var(--ha-hora); color: var(--ha-hora-txt); font-weight: 700; font-size: .84rem;
+  text-align: center; white-space: nowrap; padding: 0 10px; border-right: 2px solid var(--ha-linha); border-bottom: 1px solid var(--ha-linha); font-variant-numeric: tabular-nums; }
+.ha-cel { position: relative; height: 46px; padding: 6px 8px; text-align: center; vertical-align: middle; border-right: 1px solid var(--ha-linha); border-bottom: 1px solid var(--ha-linha);
+  transition: background .15s; }
+.ha-cel.livre { background: var(--ha-livre); }
+.ha-cel.livre:hover { background: var(--ha-livre-hover); }
+.ha-cel.ocupada { background: var(--ha-ocupado); }
+.ha-cel.ocupada:hover { background: var(--ha-ocupado-hover); }
+.ha-cel.tem-turma { background: var(--ha-turma); }
+.ha-cel.tem-turma:hover { background: color-mix(in srgb, var(--ha-turma) 88%, #b45309); }
+.ha-grade tbody tr:hover th.ha-hora { filter: brightness(.96); }
+.ha-grade tbody tr:last-child .ha-cel, .ha-grade tbody tr:last-child th.ha-hora { border-bottom: 0; }
+.ha-grade tbody td:last-child { border-right: 0; }
+/* nome dentro da célula: vermelho e em negrito, centralizado (como na planilha) */
+.ha-nome { position: relative; display: flex; align-items: center; justify-content: center; gap: 4px; min-height: 22px; padding: 1px 4px; line-height: 1.2; }
+.ha-nome + .ha-nome { margin-top: 2px; padding-top: 3px; border-top: 1px dashed color-mix(in srgb, var(--ha-nome) 30%, transparent); }
+.ha-nome .ha-txt { font-family: 'Georgia', 'Times New Roman', serif; font-weight: 700; font-size: .9rem; color: var(--ha-nome); overflow-wrap: anywhere; }
+.ha-nome.turma .ha-txt { color: var(--ha-turma-nome); text-transform: uppercase; letter-spacing: .03em; font-size: .8rem; }
+.ha-nome.turma small { font-weight: 600; opacity: .75; text-transform: none; letter-spacing: 0; }
+.ha-nome.manual .ha-txt { font-style: italic; }
+.ha-x { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; border-radius: 50%; border: 0; background: rgba(255,255,255,.75);
+  color: var(--ha-nome); font-size: 13px; font-weight: 700; line-height: 1; cursor: pointer; opacity: 0; transition: opacity .15s; }
+.ha-cel:hover .ha-x, .ha-x:focus-visible { opacity: 1; }
+.ha-x:hover { background: var(--ha-nome); color: #fff; }
+.ha-add { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 50%; border: 1.5px dashed #3a9d5d;
+  background: rgba(255,255,255,.7); color: #2f7d4a; font-size: 16px; font-weight: 700; line-height: 1; cursor: pointer; opacity: 0; transition: opacity .15s; }
+.ha-cel.livre:hover .ha-add, .ha-add:focus-visible { opacity: 1; }
+.ha-cel.ocupada .ha-add { left: auto; right: 4px; top: auto; bottom: 3px; transform: none; width: 18px; height: 18px; font-size: 12px; border-width: 1px; }
+.ha-cel.ocupada:hover .ha-add { opacity: .85; }
 .ha-vazio { text-align: center; padding: 30px; color: var(--cinza-400); }
-.ha-legenda { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.ha-legenda .ha-item { display: inline-flex; margin: 0; padding: 3px 10px; }
+.ha-legenda { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 14px; font-size: .82rem; color: var(--cinza-600); }
+.ha-legenda span { display: inline-flex; align-items: center; gap: 6px; }
+.ha-legenda i { width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--ha-linha); }
 .ha-retirados h3 { font-size: .95rem; margin: 18px 0 4px; }
 .ha-ret { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--cinza-100); font-size: .85rem; }
-:root[data-theme="dark"] .ha-item.aluno { background: rgba(59,130,246,.18); color: #93c5fd; }
-:root[data-theme="dark"] .ha-item.turma { background: rgba(245,158,11,.18); color: #fcd34d; }
-:root[data-theme="dark"] .ha-item.manual { background: rgba(148,163,184,.14); color: #cbd5e1; }
 </style>
 </head>
 
@@ -236,7 +266,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
         <label class="ha-check"><input type="checkbox" id="haSoOcupados"> Só horários ocupados</label>
       </div>
       <div class="grade-wrap"><table class="ha-grade" id="haGrade"></table></div>
-      <p class="ha-legenda"><span class="ha-item aluno">Aula particular</span><span class="ha-item turma">Turma - CURSO</span><span class="ha-item manual">Colocado à mão</span></p>
+      <p class="ha-legenda"><span><i style="background:var(--ha-livre)"></i>Livre</span><span><i style="background:var(--ha-ocupado)"></i>Aula particular (nome do aluno)</span><span><i style="background:var(--ha-turma)"></i>Turma - CURSO</span><span><i style="background:var(--ha-ocupado)"></i><em>Nome em itálico</em>: colocado à mão</span></p>
       <div id="haRetirados" class="ha-retirados"></div>
     </div>
   </section>
