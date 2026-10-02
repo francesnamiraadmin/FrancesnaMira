@@ -92,6 +92,107 @@ router.get("/admin/matriculas", exigirAuth, exigirAdmin, async (req, res) => {
   }
 });
 
+// ===================== HORÁRIOS ATUAIS (quem tem aula em cada horário) =====================
+// Grade da semana com o nome de quem comprou cada horário (matrículas confirmadas), « Turma - CURSO »
+// para as aulas em turma (e as turmas do sistema antigo), mais os nomes colocados ou retirados à mão.
+const HorarioAtualAjuste = require("../models/horarioAtualAjuste");
+const Turma = require("../models/turma");
+const HORA_OK = /^([01]\d|2[0-3]):[0-5]\d$/;
+const DIAS_TEXTO = [["dom", 0], ["seg", 1], ["ter", 2], ["qua", 3], ["qui", 4], ["sex", 5], ["sab", 6], ["sáb", 6],
+  ["sun", 0], ["mon", 1], ["tue", 2], ["wed", 3], ["thu", 4], ["fri", 5], ["sat", 6]];
+const diaDoTexto = t => { const k = String(t || "").trim().toLowerCase(); const d = DIAS_TEXTO.find(([p]) => k.startsWith(p)); return d ? d[1] : null; };
+const horaDoTexto = t => { const m = String(t || "").match(/(\d{1,2})\s*[:hH]\s*(\d{2})?/); return m ? String(Math.min(23, Number(m[1]))).padStart(2, "0") + ":" + (m[2] || "00") : null; };
+
+router.get("/admin/atuais", exigirAuth, exigirAdmin, async (req, res) => {
+  try {
+    const agora = new Date();
+    const [matriculas, turmas, ajustes] = await Promise.all([
+      Matricula.find({ status: "confirmada", "slotsEscolhidos.0": { $exists: true } })
+        .populate("alunoId", "nome email").select("alunoId dadosPessoais tipo curso slotsEscolhidos").lean(),
+      Turma.find({ ativa: true, dataFim: { $gte: agora } }).select("nome nivel tipoProva dias horario").lean(),
+      HorarioAtualAjuste.find().lean()
+    ]);
+    const ocultos = new Map(ajustes.filter(a => a.tipo === "oculto").map(a => [a.chave, a]));
+    const celulas = {};
+    const celula = (dia, hora) => (celulas[dia + "|" + hora] = celulas[dia + "|" + hora] || { diaSemana: dia, horaInicio: hora, itens: [] });
+    const retirados = [];
+    const por = (dia, hora, item) => {
+      const chave = `${item.chave}|${dia}|${hora}`;
+      const oc = ocultos.get(chave);
+      if (oc) { retirados.push({ ...item, chave, diaSemana: dia, horaInicio: hora, ajusteId: String(oc._id) }); return; }
+      celula(dia, hora).itens.push({ ...item, chave });
+    };
+    // aulas particulares: o nome do aluno; aulas em turma: « Turma - CURSO », com os alunos
+    const turmasNovas = {};
+    matriculas.forEach(m => {
+      const nome = m.alunoId?.nome || m.dadosPessoais?.nome || m.alunoId?.email || "Aluno";
+      m.slotsEscolhidos.forEach(sl => {
+        if (sl.diaSemana == null || !sl.horaInicio) return;
+        if (m.tipo === "turma") {
+          const k = `${sl.diaSemana}|${sl.horaInicio}|${m.curso || ""}`;
+          (turmasNovas[k] = turmasNovas[k] || { dia: sl.diaSemana, hora: sl.horaInicio, curso: m.curso || "", alunos: [] }).alunos.push(nome);
+        } else por(sl.diaSemana, sl.horaInicio, { tipo: "aluno", texto: nome, modalidade: "particular", curso: m.curso || "", chave: "m:" + m._id });
+      });
+    });
+    Object.values(turmasNovas).forEach(t => por(t.dia, t.hora, { tipo: "turma", texto: "Turma - " + (t.curso || "Francês"), modalidade: "turma", curso: t.curso, alunos: t.alunos, chave: "t:" + t.curso }));
+    // turmas do sistema antigo (dias e horário em texto)
+    turmas.forEach(t => {
+      const hora = horaDoTexto(t.horario);
+      if (!hora) return;
+      (t.dias || []).map(diaDoTexto).filter(d => d !== null).forEach(dia =>
+        por(dia, hora, { tipo: "turma", texto: "Turma - " + (t.tipoProva || t.nivel || t.nome), modalidade: "turma", curso: t.tipoProva || t.nivel || "", detalhe: t.nome, chave: "T:" + t._id }));
+    });
+    // nomes colocados à mão
+    ajustes.filter(a => a.tipo === "manual").forEach(a =>
+      celula(a.diaSemana, a.horaInicio).itens.push({ tipo: "manual", texto: a.nome, modalidade: a.modalidade, ajusteId: String(a._id), chave: "a:" + a._id }));
+    res.json({ atualizadoEm: agora, celulas: Object.values(celulas), retirados });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// Colocar um nome num horário.
+router.post("/admin/atuais/manual", exigirAuth, exigirAdmin, async (req, res) => {
+  try {
+    const { diaSemana, horaInicio, nome, modalidade } = req.body || {};
+    const dia = Number(diaSemana);
+    if (!(dia >= 0 && dia <= 6) || !HORA_OK.test(String(horaInicio)) || !String(nome || "").trim()) return res.status(400).json({ msg: "Informe o dia, o horário e o nome." });
+    const a = await HorarioAtualAjuste.create({ tipo: "manual", diaSemana: dia, horaInicio, nome: String(nome).trim().slice(0, 120), modalidade: modalidade === "turma" ? "turma" : "particular", criadoPor: req.userId });
+    res.json({ ok: true, id: a._id });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// Retirar da grade um nome que vem de matrícula/turma (a matrícula não muda).
+router.post("/admin/atuais/retirar", exigirAuth, exigirAdmin, async (req, res) => {
+  try {
+    const { chave } = req.body || {};
+    const m = String(chave || "").match(/^([mtT]:[^|]*)\|([0-6])\|(\d{2}:\d{2})$/);
+    if (!m) return res.status(400).json({ msg: "Item inválido." });
+    const existe = await HorarioAtualAjuste.findOne({ tipo: "oculto", chave });
+    if (!existe) await HorarioAtualAjuste.create({ tipo: "oculto", chave, diaSemana: Number(m[2]), horaInicio: m[3], criadoPor: req.userId });
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
+// Apagar um ajuste: tira um nome colocado à mão, ou devolve à grade um nome retirado.
+router.delete("/admin/atuais/ajuste/:id", exigirAuth, exigirAdmin, async (req, res) => {
+  try {
+    if (!/^[a-f0-9]{24}$/i.test(req.params.id)) return res.status(400).json({ msg: "Ajuste inválido." });
+    await HorarioAtualAjuste.deleteOne({ _id: req.params.id });
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
 router.post("/admin/slots", exigirAuth, exigirAdmin, async (req, res) => {
   try {
     const { modalidade, diaSemana, horaInicio, periodo, capacidadeMaxima, cursos } = req.body;

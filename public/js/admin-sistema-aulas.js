@@ -213,5 +213,5 @@
   const inicial = location.hash.replace("#", "");
   carregarAulas();
   carregarCupons();
-  if (["alunos", "cupons"].includes(inicial)) abrirSecao(inicial);
+  if (["alunos", "cupons", "atuais"].includes(inicial)) abrirSecao(inicial);
 })();

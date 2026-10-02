@@ -120,6 +120,33 @@ table.lista td small { color: var(--cinza-400); display: block; }
 .busca { padding: 9px 14px; border-radius: 20px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font-family: 'Poppins', sans-serif; min-width: 220px; }
 .previa-cupom { margin-top: 4px; padding: 12px 14px; border-radius: 12px; background: var(--azul-claro); color: var(--azul-escuro); font-size: 0.85rem; }
 footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
+/* ----- Horários Atuais ----- */
+.ha-filtros { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.ha-check { display: flex; align-items: center; gap: 6px; font-size: .85rem; color: var(--cinza-600); cursor: pointer; }
+.ha-grade { width: 100%; min-width: 860px; border-collapse: separate; border-spacing: 4px; table-layout: fixed; }
+.ha-grade th { font-size: .78rem; font-weight: 700; color: var(--cinza-600); padding: 6px 4px; text-align: center; }
+.ha-grade th:first-child, .ha-hora { width: 64px; }
+.ha-hora { font-weight: 700; font-size: .82rem; color: var(--cinza-600); text-align: center; }
+.ha-cel { position: relative; vertical-align: top; min-height: 52px; height: 52px; padding: 5px 5px 22px; border-radius: 10px; background: var(--cinza-50); border: 1px solid var(--cinza-100); }
+.ha-cel.ocupada { background: var(--branco); border-color: var(--cinza-300); }
+.ha-item { display: flex; align-items: center; justify-content: space-between; gap: 4px; margin-bottom: 4px; padding: 4px 4px 4px 8px; border-radius: 8px; font-size: .76rem; font-weight: 600; line-height: 1.25; }
+.ha-item .ha-txt { overflow: hidden; text-overflow: ellipsis; }
+.ha-item small { font-weight: 500; opacity: .8; }
+.ha-item.aluno { background: #e3edff; color: #1e40af; }
+.ha-item.turma { background: #fff1d6; color: #92400e; }
+.ha-item.manual { background: #eef1f5; color: #334155; border: 1px dashed #94a3b8; }
+.ha-x { flex: none; width: 18px; height: 18px; border-radius: 50%; border: 0; background: transparent; color: inherit; font-size: 14px; line-height: 1; cursor: pointer; opacity: .55; }
+.ha-x:hover { opacity: 1; background: rgba(0,0,0,.08); }
+.ha-add { position: absolute; right: 4px; bottom: 3px; width: 20px; height: 18px; border-radius: 6px; border: 1px dashed var(--cinza-300); background: transparent; color: var(--cinza-400); font-size: 13px; line-height: 1; cursor: pointer; opacity: 0; transition: opacity .15s; }
+.ha-cel:hover .ha-add, .ha-add:focus { opacity: 1; }
+.ha-vazio { text-align: center; padding: 30px; color: var(--cinza-400); }
+.ha-legenda { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.ha-legenda .ha-item { display: inline-flex; margin: 0; padding: 3px 10px; }
+.ha-retirados h3 { font-size: .95rem; margin: 18px 0 4px; }
+.ha-ret { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--cinza-100); font-size: .85rem; }
+:root[data-theme="dark"] .ha-item.aluno { background: rgba(59,130,246,.18); color: #93c5fd; }
+:root[data-theme="dark"] .ha-item.turma { background: rgba(245,158,11,.18); color: #fcd34d; }
+:root[data-theme="dark"] .ha-item.manual { background: rgba(148,163,184,.14); color: #cbd5e1; }
 </style>
 </head>
 
@@ -157,6 +184,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
   <nav class="secao-nav" id="secaoNav">
     <button class="secao-btn active" data-secao="grade"><img src="img/icones/calendar.svg" alt="">Grade de horários</button>
+    <button class="secao-btn" data-secao="atuais"><img src="img/icones/calendar.svg" alt="">Horários Atuais</button>
     <button class="secao-btn" data-secao="alunos"><img src="img/icones/students.svg" alt="">Alunos matriculados</button>
     <button class="secao-btn" data-secao="cupons"><img src="img/icones/credits.svg" alt="">Cupons de desconto</button>
   </nav>
@@ -190,6 +218,29 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   </div>
   </section>
 
+  <!-- ===================== HORÁRIOS ATUAIS ===================== -->
+  <section class="secao" data-secao="atuais" hidden>
+    <div class="card">
+      <div class="card-head">
+        <div><h2>Horários atuais</h2><p class="campo-hint" id="haResumo" style="margin-top:4px;">Carregando…</p></div>
+        <button class="btn secundario pequeno" id="haAtualizar" type="button">Atualizar agora</button>
+      </div>
+      <p class="campo-hint" style="margin:-4px 0 14px;">Quem tem aula em cada horário da semana: o nome de quem comprou a aula particular e « Turma - CURSO » nas aulas em turma (passe o mouse para ver os alunos). Use <b>+</b> para colocar um nome e <b>×</b> para retirar. A grade se atualiza sozinha a cada 15 segundos.</p>
+      <div class="ha-filtros">
+        <div class="periodo-tabs" style="margin:0;">
+          <button type="button" class="periodo-tab active" data-ha-periodo="todos">Todos</button>
+          <button type="button" class="periodo-tab" data-ha-periodo="diurno">Diurno</button>
+          <button type="button" class="periodo-tab" data-ha-periodo="vespertino">Vespertino</button>
+          <button type="button" class="periodo-tab" data-ha-periodo="noturno">Noturno</button>
+        </div>
+        <label class="ha-check"><input type="checkbox" id="haSoOcupados"> Só horários ocupados</label>
+      </div>
+      <div class="grade-wrap"><table class="ha-grade" id="haGrade"></table></div>
+      <p class="ha-legenda"><span class="ha-item aluno">Aula particular</span><span class="ha-item turma">Turma - CURSO</span><span class="ha-item manual">Colocado à mão</span></p>
+      <div id="haRetirados" class="ha-retirados"></div>
+    </div>
+  </section>
+
   <!-- ===================== ALUNOS MATRICULADOS ===================== -->
   <section class="secao" data-secao="alunos" hidden>
     <div class="card">
@@ -212,6 +263,26 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div class="tabela-wrap"><table class="lista" id="tabelaCupons"></table></div>
     </div>
   </section>
+</div>
+
+<!-- ===================== MODAL: COLOCAR NOME NO HORÁRIO ===================== -->
+<div class="modal-overlay" id="haModal">
+  <div class="modal-box" style="max-width:440px;">
+    <h3 id="haModalTitulo">Colocar um nome</h3>
+    <div class="campo">
+      <label for="haNome">Nome</label>
+      <input type="text" id="haNome" maxlength="120" placeholder="Ex.: Maria Souza ou Turma - TCF">
+    </div>
+    <div class="campo">
+      <label for="haModalidade">Tipo de aula</label>
+      <select id="haModalidade"><option value="particular">Aula particular</option><option value="turma">Aula em turma</option></select>
+    </div>
+    <p class="campo-hint" id="haErro" style="color:var(--vermelho);"></p>
+    <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:8px;">
+      <button type="button" class="btn secundario" id="haCancelar">Cancelar</button>
+      <button type="button" class="btn" id="haSalvar">Colocar na grade</button>
+    </div>
+  </div>
 </div>
 
 <!-- ===================== MODAL CUPOM ===================== -->
@@ -356,6 +427,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
 <script src="js/admin-horarios.js"></script>
 <script src="js/admin-sistema-aulas.js"></script>
+<script src="js/admin-horarios-atuais.js"></script>
 <script src="js/theme-toggle.js"></script>
 </body>
 </html>

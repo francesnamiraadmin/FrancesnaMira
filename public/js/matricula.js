@@ -287,7 +287,8 @@
 
   function entrarEmHorarios() {
     document.getElementById("btnNext").disabled = true;
-    if (!state.periodo) state.periodo = "diurno";
+    // Padrão: horários noturnos (os mais procurados por quem trabalha durante o dia).
+    if (!state.periodo) state.periodo = "noturno";
     document.querySelectorAll(".periodo-tab").forEach(b => b.classList.toggle("active", b.dataset.periodo === state.periodo));
     renderTierGrid();
     renderResumoFlutuante();
@@ -323,7 +324,7 @@
     ultimosSlotsCarregados.forEach(s => {
       (porHora[s.horaInicio] = porHora[s.horaInicio] || {})[s.diaSemana] = s;
     });
-    const horas = HORAS_POR_PERIODO[state.periodo || "diurno"];
+    const horas = HORAS_POR_PERIODO[state.periodo || "noturno"];
 
     let html = '<thead><tr><th>Horário</th>' + ORDEM_DIAS.map(d => '<th>' + DIAS_LABEL[d] + '</th>').join("") + '</tr></thead><tbody>';
     horas.forEach(hora => {
