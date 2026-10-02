@@ -324,3 +324,21 @@
 .fnm-app .ce-titulo { margin: 0; font-size: .95rem; line-height: 1.45; }
 .fnm-app .ce-item small { color: var(--tinta-suave); }
 .fnm-app .ce-item a { align-self: flex-start; text-decoration: none; }
+
+/* coletânea: textos do tema, do eixo e manchetes */
+.fnm-app .tm-sub2 { margin: 16px 0 8px; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
+.fnm-app .tm-leituras.um { grid-template-columns: 1fr; }
+.fnm-app .tm-leitura { border-top: 4px solid #3C7DD9; }
+.fnm-app .tm-leitura.tipo-noticia { border-top-color: #E0524A; }
+.fnm-app .tm-leitura.tipo-cientifico { border-top-color: #7A5AF8; }
+.fnm-app .tm-leitura.tipo-livro { border-top-color: #D99A1E; }
+.fnm-app .tm-leitura.tipo-eixo { border-top-color: #3CB179; }
+.fnm-app .tm-leitura.tipo-noticia .tm-leitura-n { color: #c0392b; }
+.fnm-app .tm-leitura.tipo-cientifico .tm-leitura-n { color: #6a4ae0; }
+.fnm-app .tm-leitura.tipo-livro .tm-leitura-n { color: #a8720e; }
+.fnm-app .tm-leitura.tipo-eixo .tm-leitura-n { color: #2E8B62; }
+.fnm-app .tm-imprensa ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.fnm-app .tm-imprensa li { padding: 10px 14px; border-radius: 12px; background: rgba(var(--branco-rgb), .55); border: 1px solid var(--linha); }
+.fnm-app .tm-imprensa li a { font-weight: 600; color: var(--tinta); text-decoration: none; }
+.fnm-app .tm-imprensa li a:hover { text-decoration: underline; }
+.fnm-app .tm-imprensa li small { display: block; color: var(--tinta-suave); font-size: .76rem; margin-top: 2px; }

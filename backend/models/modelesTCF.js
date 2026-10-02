@@ -202,11 +202,16 @@ const RecordeTCF = mongoose.model("RecordeTCF", new Schema({
 }, { minimize: false }));
 
 // Dossiê de leitura de um sujet: dois textos de referência (Wikipédia em francês, licença livre,
-// com link e crédito) — montado na primeira abertura e guardado.
+// com link e crédito) — montado na primeira abertura e guardado. Versão 2: um texto do eixo e dois do
+// próprio tema (imprensa, artigo científico, livro), mais manchetes recentes.
 const DossierSujetTCF = mongoose.model("DossierSujetTCF", new Schema({
   sujetId: { type: String, required: true, unique: true },
   tache: String,
-  textos: [{ titulo: String, texto: String, url: String, fonte: String, licenca: String, _id: false }],
+  // tipo: eixo | noticia | cientifico | livro | enciclopedia
+  textos: [{ tipo: String, rotulo: String, titulo: String, texto: String, autor: String, data: String, url: String, fonte: String, licenca: String, _id: false }],
+  imprensa: [{ titulo: String, fonte: String, data: String, url: String, _id: false }],
+  requete: String,
+  versao: { type: Number, default: 1 },
   origem: String,
   criadoEm: { type: Date, default: Date.now }
 }));
@@ -220,6 +225,8 @@ const SalaAoVivoTCF = mongoose.model("SalaAoVivoTCF", new Schema({
   sujetId: String,
   titulo: String,
   status: { type: String, enum: ["aguardando", "atendimento", "encerrada"], default: "aguardando", index: true },
+  // "expirou": ninguém aceitou em 3 minutos; "aluno" / "professor": quem encerrou
+  motivoFim: String,
   professorId: { type: Schema.Types.ObjectId, ref: "User" },
   professorNome: String,
   texto: { type: String, default: "" },

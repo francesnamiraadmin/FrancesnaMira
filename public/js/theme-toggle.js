@@ -58,3 +58,13 @@
 
   window.ThemeToggle = { setTema, get tema() { return document.documentElement.getAttribute("data-theme") || "light"; } };
 })();
+
+// Presença do aluno no site (Gestão de Alunos → Acompanhamento ao vivo): carregada em todas as
+// páginas que têm o botão de tema, só para quem está logado.
+(function () {
+  try { if (!localStorage.getItem("token") || window.__fnmPresenca) return; } catch (e) { return; }
+  var s = document.createElement("script");
+  s.src = "js/presencaSite.js";
+  s.defer = true;
+  (document.head || document.documentElement).appendChild(s);
+})();

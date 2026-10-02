@@ -231,6 +231,25 @@ table.acomp tbody tr:hover { background: var(--azul-claro); }
 .dever-progresso { height: 6px; border-radius: 4px; background: var(--cinza-200); overflow: hidden; margin-top: 8px; max-width: 320px; }
 .dever-progresso span { display: block; height: 100%; background: var(--verde); }
 [hidden] { display: none !important; }
+/* ----- presença ao vivo ----- */
+.presenca-card { margin-bottom: 20px; }
+.presenca-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.presenca-busca { padding: 8px 14px; border-radius: 30px; border: 1px solid var(--cinza-300); font-family: inherit; font-size: 0.85rem; background: var(--branco, #fff); color: inherit; }
+.ponto-on { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #2E9E63; margin-right: 8px; vertical-align: middle; box-shadow: 0 0 0 0 rgba(46,158,99,.5); animation: pulsoOn 2s infinite; }
+@keyframes pulsoOn { 0%,100% { box-shadow: 0 0 0 0 rgba(46,158,99,.5); } 50% { box-shadow: 0 0 0 6px rgba(46,158,99,0); } }
+.presenca-areas { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.presenca-areas button { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 30px; border: 1px solid var(--cinza-200, #e2e6ea); background: var(--branco, #fff); color: inherit; font: inherit; font-size: 0.82rem; cursor: pointer; }
+.presenca-areas button b { font-size: 1rem; }
+.presenca-areas button.ativa { background: var(--azul, #1e40af); color: #fff; border-color: transparent; }
+.presenca-areas i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+table.presenca td { vertical-align: middle; }
+.st-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; background: var(--cinza-300, #cfd5dc); }
+.st-dot.on { background: #2E9E63; } .st-dot.ausente { background: #E0A43A; }
+.area-tag { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 20px; font-size: 0.76rem; font-weight: 700; white-space: nowrap; }
+.presenca tr.off td { color: var(--cinza-400); }
+.presenca .ativ { max-width: 380px; font-size: 0.84rem; }
+.presenca .ativ small { display: block; color: var(--cinza-400); font-size: 0.72rem; }
+.presenca .planos-mini { font-size: 0.72rem; color: var(--cinza-600); }
 </style>
 </head>
 
@@ -281,6 +300,18 @@ table.acomp tbody tr:hover { background: var(--azul-claro); }
 
   <!-- ===================== ACOMPANHAMENTO ===================== -->
   <div id="viewAcompanhamento" hidden>
+    <div class="card presenca-card">
+      <div class="presenca-cab">
+        <div><h2 style="margin:0;"><span class="ponto-on"></span>Quem está no site agora</h2>
+          <p style="font-size:0.8rem; color:var(--cinza-400); margin:4px 0 0;">Todos os alunos com plano ativo: em que área do site estão e o que estão fazendo. Atualiza sozinho a cada 15 segundos.</p></div>
+        <input type="text" id="presencaBusca" placeholder="Filtrar por nome..." class="presenca-busca">
+      </div>
+      <div class="presenca-areas" id="presencaAreas"></div>
+      <div class="tabela-wrap"><table class="acomp presenca">
+        <thead><tr><th>Aluno</th><th>Onde está</th><th>O que está fazendo</th><th>Há quanto tempo</th><th>Planos</th></tr></thead>
+        <tbody id="presencaTabela"><tr><td colspan="5">Carregando...</td></tr></tbody>
+      </table></div>
+    </div>
     <div class="kpi-row" id="acompKpis"></div>
     <div class="grid-2">
       <div class="card">

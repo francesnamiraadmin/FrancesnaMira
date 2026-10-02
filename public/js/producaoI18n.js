@@ -54,6 +54,12 @@
     [/^Envoyée le (.+) · corrigée le (.+)$/, "Enviada em $1 · corrigida em $2"],
     [/^Envoyée le (.+)$/, "Enviada em $1"],
     [/^Avec (.+)$/, "Com $1"],
+    [/^(\S+) L'axe thématique : (.+)$/, function (m, ic, e) { return ic + " O eixo temático: " + e; }],
+    [/^(\S+) Article de presse$/, "$1 Matéria de jornal"],
+    [/^(\S+) Article scientifique$/, "$1 Artigo científico"],
+    [/^(\S+) Extrait de livre$/, "$1 Trecho de livro"],
+    [/^(\S+) Encyclopédie$/, "$1 Enciclopédia"],
+    [/^En attente d'un professeur… (\d+:\d\d) · Vous pouvez commencer : il verra tout dès qu'il entrera\.$/, "Aguardando um professor… $1 · Você já pode começar: ele verá tudo assim que entrar."],
     [/^(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre) (\d{4})$/i, function (m, mes, ano) {
       var pt = { janvier: "Janeiro", "février": "Fevereiro", mars: "Março", avril: "Abril", mai: "Maio", juin: "Junho", juillet: "Julho", "août": "Agosto", septembre: "Setembro", octobre: "Outubro", novembre: "Novembro", "décembre": "Dezembro" };
       return pt[mes.toLowerCase()] + " de " + ano;

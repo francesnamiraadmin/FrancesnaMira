@@ -666,11 +666,17 @@ F.salvarMelhorResultado = async (ctx, id, tipo, pct) => {
 const presenca = new Map();
 const ROTULOS_TELA = { "tela-accueil": "Accueil", "tela-liste": "Liste des sujets", "tela-modele": "Modèle", "tela-axe": "Axe thématique", "tela-epreuve": "Épreuve",
   "tela-notes": "Mes notes", "tela-carnet": "Mon cahier", "tela-taches": "Mes devoirs", "tela-atelier": "Atelier dictée", "tela-outils": "Boîte à outils", "tela-hub": "Hub" };
+// Nomes das telas do app em português, para o Acompanhamento da Gestão de Alunos.
+const TELAS_PT = { "tela-accueil": "Início", "tela-liste": "Lista de temas", "tela-modele": "Tema", "tela-axe": "Eixo temático", "tela-epreuve": "Prova escrita de 60 min",
+  "tela-notes": "Minhas notas", "tela-carnet": "Meu caderno", "tela-taches": "Minhas tarefas", "tela-atelier": "Ditado", "tela-outils": "Caixa de ferramentas", "tela-hub": "Hub" };
 F.sinalizarPresenca = async (ctx, tela, detalhe) => {
   if (ctx.prof) return false;
   const u = await usuario(ctx);
   const ant = presenca.get(ctx.userId);
   presenca.set(ctx.userId, { n: u.nome || u.email, email: u.email, curso: ctx.courseType, tela: ROTULOS_TELA[tela] || tela || "", det: String(detalhe || "").slice(0, 120), t: Date.now(), desde: ant ? ant.desde : Date.now() });
+  // presença do site inteiro (Gestão de Alunos → Acompanhamento): a tela exata do app
+  const telaPt = TELAS_PT[tela] || ROTULOS_TELA[tela] || tela || "";
+  require("../utils/presencaSite").registrar(ctx.userId, { area: "Ambiente de Produção", pagina: telaPt, atividade: [telaPt, detalhe].filter(Boolean).join(" · "), doApp: true });
   const [avisos, msgs] = await Promise.all([F.meusAvisos(ctx), T.MensagemTCF.countDocuments({ alunoId: ctx.userId, feito: false })]);
   return { bloqueado: false, avisos: avisos.length, mensagens: msgs };
 };
@@ -696,17 +702,31 @@ F.obterDossierSujet = async (ctx, tache, id) => {
   const modelo = M.ehManual(tache, id) ? sujet : await lerModeloIA(id);
   const { obterDossier } = require("../utils/dossierSujet");
   const d = await obterDossier(tache, sujet, (modelo && modelo.k) || []);
-  return { textos: d.textos || [] };
+  return { textos: d.textos || [], imprensa: d.imprensa || [] };
 };
 
 // ---------------- sala ao vivo (aluno faz o sujet com um professor acompanhando) ----------------
 const canalSala = id => "modeles:sala:" + id;
 const fmtSala = (s, nomes) => ({ id: String(s._id), alunoId: String(s.alunoId), nome: nomes ? nomes[String(s.alunoId)] || "" : "", curso: s.courseType, tache: s.tache, sujetId: s.sujetId,
-  titulo: s.titulo, status: s.status, professorNome: s.professorNome || "", texto: s.texto, transcricao: s.transcricao, mensagens: s.mensagens || [], inicio: s.inicio, atualizadoEm: s.atualizadoEm });
+  titulo: s.titulo, status: s.status, motivoFim: s.motivoFim || "", expiraEm: s.status === "aguardando" ? new Date(new Date(s.inicio).getTime() + PRAZO_SALA_MS) : null, professorNome: s.professorNome || "", texto: s.texto, transcricao: s.transcricao, mensagens: s.mensagens || [], inicio: s.inicio, atualizadoEm: s.atualizadoEm });
 async function salaDoAluno(ctx, id) {
   const s = await T.SalaAoVivoTCF.findOne({ _id: oid(id), alunoId: ctx.userId });
   if (!s) throw erro("Salle introuvable.", 404);
   return s;
+}
+// Pedido de professor ao vivo: se ninguém aceitar em 3 minutos, é cancelado (o aluno é avisado
+// e a sala some das listas da equipe). Vale também depois de um reinício do servidor.
+const PRAZO_SALA_MS = 3 * 60 * 1000;
+async function expirarSala(id) {
+  const s = await T.SalaAoVivoTCF.findOneAndUpdate({ _id: id, status: "aguardando" }, { status: "encerrada", motivoFim: "expirou", atualizadoEm: new Date() }, { new: true });
+  if (!s) return false;
+  canais.enviar(canalSala(s._id), "estado", { status: "encerrada", motivo: "expirou" });
+  avisarEquipe("sala", { id: String(s._id), acao: "fim", motivo: "expirou" });
+  return true;
+}
+async function expirarSalasVencidas() {
+  const vencidas = await T.SalaAoVivoTCF.find({ status: "aguardando", inicio: { $lt: new Date(Date.now() - PRAZO_SALA_MS) } }).select("_id").lean();
+  for (const s of vencidas) await expirarSala(s._id);
 }
 F.chamarProfessorAoVivo = async (ctx, tache, sujetId) => {
   const sujet = M.acharTema(tache, sujetId);
@@ -715,11 +735,14 @@ F.chamarProfessorAoVivo = async (ctx, tache, sujetId) => {
   const u = await usuario(ctx);
   const s = await T.SalaAoVivoTCF.create({ alunoId: ctx.userId, courseType: ctx.courseType, tache, sujetId, titulo: String(sujet.titre || M.temaCurto(M.consigneDe(sujet))).slice(0, 160) });
   avisarEquipe("sala", { ...fmtSala(s, { [ctx.userId]: u.nome }), acao: "nova" });
+  const t = setTimeout(() => expirarSala(s._id).catch(() => {}), PRAZO_SALA_MS);
+  if (t.unref) t.unref();
   return fmtSala(s);
 };
 F.atualizarSalaAoVivo = async (ctx, id, dados) => {
   const s = await salaDoAluno(ctx, id);
-  if (s.status === "encerrada") return { encerrada: true };
+  if (s.status === "aguardando" && Date.now() - new Date(s.inicio).getTime() > PRAZO_SALA_MS) { await expirarSala(s._id); return { encerrada: true, motivo: "expirou" }; }
+  if (s.status === "encerrada") return { encerrada: true, motivo: s.motivoFim || "" };
   if (typeof dados?.texto === "string") s.texto = dados.texto.slice(0, 8000);
   if (typeof dados?.transcricao === "string") s.transcricao = dados.transcricao.slice(0, 8000);
   s.atualizadoEm = new Date();
@@ -744,9 +767,10 @@ F.mensagemSala = async (ctx, id, texto) => {
 F.encerrarSala = async (ctx, id) => {
   const s = ctx.prof ? await T.SalaAoVivoTCF.findById(oid(id)) : await salaDoAluno(ctx, id);
   if (!s) return true;
-  s.status = "encerrada"; s.atualizadoEm = new Date();
+  if (s.status === "encerrada") return true;
+  s.status = "encerrada"; s.motivoFim = ctx.prof ? "professor" : "aluno"; s.atualizadoEm = new Date();
   await s.save();
-  canais.enviar(canalSala(s._id), "estado", { status: "encerrada" });
+  canais.enviar(canalSala(s._id), "estado", { status: "encerrada", motivo: s.motivoFim });
   avisarEquipe("sala", { id: String(s._id), acao: "fim" });
   return true;
 };
@@ -926,12 +950,14 @@ prof("filaCorrecao", async (ctx, filtro) => {
 prof("alunosCorrecao", async () => (await alunosProducao()).map(a => ({ id: a.id, nome: a.nome })));
 
 prof("listarSalasAoVivo", async () => {
+  await expirarSalasVencidas();
   const ss = await T.SalaAoVivoTCF.find({ status: { $ne: "encerrada" }, atualizadoEm: { $gte: new Date(Date.now() - 3 * 3600 * 1000) } }).sort({ inicio: -1 }).lean();
   const nomes = await mapaNomes(ss.map(s => s.alunoId));
   return ss.map(s => fmtSala(s, nomes));
 });
 prof("entrarSala", async (ctx, id) => {
   const s = await T.SalaAoVivoTCF.findById(oid(id));
+  if (s && s.status === "aguardando" && Date.now() - new Date(s.inicio).getTime() > PRAZO_SALA_MS) { await expirarSala(s._id); throw erro("Cette demande a expiré : personne ne l'a acceptée en 3 minutes."); }
   if (!s || s.status === "encerrada") throw erro("Cette salle est fermée.");
   const u = await usuario(ctx);
   s.status = "atendimento"; s.professorId = ctx.userId; s.professorNome = u.nome; s.atualizadoEm = new Date();

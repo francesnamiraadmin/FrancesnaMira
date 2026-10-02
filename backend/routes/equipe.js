@@ -211,4 +211,34 @@ router.get("/alunos/:id", async (req, res) => {
   }
 });
 
+// ===================== PRESENÇA AO VIVO (Acompanhamento) =====================
+// Todos os alunos com algum plano ativo, com a área do site em que estão agora e o que estão
+// fazendo (utils/presencaSite.js). Online primeiro; depois os vistos por último mais recentes.
+router.get("/presenca", async (req, res) => {
+  try {
+    const { obter } = require("../utils/presencaSite");
+    const alunos = await User.find({ role: "aluno" })
+      .select("nome email plano planos produtosAvulsos perfil.foto perfil.provaAlvo ultimoAcessoEm").lean();
+    const porAluno = await matriculasTurmaPorAluno(alunos.map(a => a._id));
+    const lista = [];
+    alunos.forEach(a => {
+      const planos = obterPlanosDoAluno(a, porAluno[String(a._id)] || []).filter(p => p.ativo);
+      if (!planos.length) return;
+      const pr = obter(a._id);
+      lista.push({
+        _id: a._id, nome: a.nome || a.email, email: a.email, foto: a.perfil?.foto || null,
+        planos: planos.map(p => p.nome), cursos: [...new Set(planos.map(p => p.curso).filter(Boolean))],
+        online: !!(pr && pr.online), area: pr?.area || null, pagina: pr?.pagina || null, atividade: pr?.atividade || null, url: pr?.url || null,
+        abaOculta: !!(pr && pr.oculta), onlineDesde: pr?.online ? pr.onlineDesde : null, atividadeDesde: pr?.online ? pr.atividadeDesde : null,
+        vistoEm: pr?.ultimoSinal || a.ultimoAcessoEm || null
+      });
+    });
+    lista.sort((x, y) => (y.online - x.online) || (new Date(y.vistoEm || 0) - new Date(x.vistoEm || 0)) || x.nome.localeCompare(y.nome));
+    res.json({ agora: new Date(), alunos: lista });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
 module.exports = router;

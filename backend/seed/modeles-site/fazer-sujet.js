@@ -123,16 +123,26 @@ function enviarEssaiOral(b, d) {
   }).catch(function (e) { b.disabled = false; d.st.textContent = e.message || e; });
 }
 
-// Dossiê de leitura do sujet: dois textos de referência, com créditos.
+// Coletânea do sujet: um texto sobre o eixo e dois sobre o próprio tema (imprensa, artigo científico,
+// livro), cada um com autor, fonte, data, licença e link; depois, manchetes recentes sobre o tema.
+var ICONES_LEITURA = { eixo: '🧭', noticia: '📰', cientifico: '🔬', livro: '📖', enciclopedia: '📚' };
+function cartaoLeitura(t) {
+  var credito = [t.autor, t.fonte, t.data].filter(Boolean).map(esc).join(' · ');
+  return '<article class="tm-leitura tipo-' + esc(t.tipo || 'enciclopedia') + '"><span class="tm-leitura-n">' + (ICONES_LEITURA[t.tipo] || '📄') + ' ' + esc(t.rotulo || 'Lecture') + '</span>' +
+    '<h4>' + esc(t.titulo) + '</h4>' + String(t.texto || '').split(/\n{2,}/).map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
+    '<small>' + credito + (t.licenca ? ' · ' + esc(t.licenca) : '') + ' · <a href="' + esc(t.url) + '" target="_blank" rel="noopener">lire à la source ↗</a></small></article>';
+}
 function carregarDossier(alvo, tache, m) {
   if (!alvo) return;
   google.script.run.withSuccessHandler(function (d) {
     if (!d || !d.textos.length) { alvo.innerHTML = ''; return; }
-    alvo.innerHTML = '<h3 class="tm-sub">Pour mieux comprendre le thème</h3><div class="tm-leituras">' +
-      d.textos.map(function (t, i) {
-        return '<article class="tm-leitura"><span class="tm-leitura-n">Lecture ' + (i + 1) + '</span><h4>' + esc(t.titulo) + '</h4><p>' + esc(t.texto) + '</p>' +
-          '<small>Extrait de l\'article « ' + esc(t.titulo) + ' » · ' + esc(t.fonte) + ' · ' + esc(t.licenca) + ' · <a href="' + esc(t.url) + '" target="_blank" rel="noopener">lire l\'article complet ↗</a></small></article>';
-      }).join('') + '</div>';
+    var eixoT = d.textos.filter(function (t) { return t.tipo === 'eixo'; }), temaT = d.textos.filter(function (t) { return t.tipo !== 'eixo'; });
+    alvo.innerHTML = '<h3 class="tm-sub">Pour mieux comprendre le thème</h3>' +
+      (temaT.length ? '<p class="tm-sub2">Sur ce sujet</p><div class="tm-leituras">' + temaT.map(cartaoLeitura).join('') + '</div>' : '') +
+      (eixoT.length ? '<p class="tm-sub2">Sur l\'axe thématique</p><div class="tm-leituras um">' + eixoT.map(function (t) { return cartaoLeitura(Object.assign({}, t, { rotulo: 'L\'axe thématique : ' + eixo(m.e).nome })); }).join('') + '</div>' : '') +
+      ((d.imprensa || []).length ? '<div class="tm-imprensa"><p class="tm-sub2">Dans la presse en ce moment</p><ul>' + d.imprensa.map(function (n) {
+        return '<li><a href="' + esc(n.url) + '" target="_blank" rel="noopener">' + esc(n.titulo) + '</a><small>' + [n.fonte, n.data].filter(Boolean).map(esc).join(' · ') + '</small></li>';
+      }).join('') + '</ul></div>' : '');
   }).withFailureHandler(function () { alvo.innerHTML = ''; }).obterDossierSujet(EMAIL, tache, m.id);
 }
 
@@ -140,16 +150,26 @@ function carregarDossier(alvo, tache, m) {
 var SALA = null;   // { id, stream, chamada, ultimoEnvio }
 function salaEnviar(dados) {
   if (!SALA || !SALA.id) return;
-  google.script.run.withSuccessHandler(function (r) { if (r && r.encerrada) salaFim(); }).atualizarSalaAoVivo(EMAIL, SALA.id, dados);
+  google.script.run.withSuccessHandler(function (r) { if (r && r.encerrada) salaFim(r.motivo); }).atualizarSalaAoVivo(EMAIL, SALA.id, dados);
 }
-function salaFim() {
+// Pedido sem resposta em 3 minutos: o servidor cancela (motivo "expirou") e o aluno pode chamar de novo.
+var SALA_CTX = null;   // { tache, m } do último pedido, para « Appeler à nouveau »
+function salaFim(motivo) {
   if (!SALA) return;
   try { SALA.stream && SALA.stream.fechar(); } catch (e) {}
   try { SALA.chamada && SALA.chamada.encerrar(false); } catch (e) {}
+  clearInterval(SALA.relogio);
   SALA = null;
-  var a = $('tm-aovivo'); if (a) a.innerHTML = '<div class="av-sala-fim">La séance en direct est terminée.</div>';
+  var a = $('tm-aovivo'); if (!a) return;
+  if (motivo === 'expirou') {
+    a.innerHTML = '<div class="av-sala-fim expirou"><b>Aucun professeur n\'a accepté votre demande en 3 minutes.</b><span>La demande a été annulée. Vous pouvez continuer seul, choisir une autre correction ou appeler à nouveau.</span>' +
+      '<button class="botao-principal" type="button" id="av-rechamar">Appeler à nouveau</button></div>';
+    $('av-rechamar').addEventListener('click', function () { if (SALA_CTX) { desenharSalaAluno(SALA_CTX.tache, SALA_CTX.m); $('av-chamar').click(); } });
+    avisar({ titulo: 'Demande annulée', texto: 'Aucun professeur disponible en 3 minutes.', icone: '', som: true, duracao: 8 });
+  } else a.innerHTML = '<div class="av-sala-fim">La séance en direct est terminée.</div>';
 }
 function desenharSalaAluno(tache, m) {
+  SALA_CTX = { tache: tache, m: m };
   var a = $('tm-aovivo');
   a.innerHTML = '<div class="av-sala"><div class="av-sala-cab"><span class="av-ponto"></span><div><b>Professeur en direct</b><small id="av-estado">Appelez un professeur : il verra votre ' + (tache.indexOf('ET') === 0 ? 'texte' : 'transcription') + ' en temps réel.</small></div>' +
     '<button class="botao-principal" type="button" id="av-chamar">Appeler un professeur</button></div>' +
@@ -158,9 +178,18 @@ function desenharSalaAluno(tache, m) {
   $('av-chamar').addEventListener('click', function () {
     var b = this; b.disabled = true; b.textContent = 'Appel…';
     google.script.run.withSuccessHandler(function (s) {
-      SALA = { id: s.id };
+      SALA = { id: s.id, aguardando: true };
       b.remove();
-      $('av-estado').textContent = 'En attente d\'un professeur… Vous pouvez commencer : il verra tout dès qu\'il entrera.';
+      // contagem regressiva dos 3 minutos do pedido
+      var fim = s.expiraEm ? new Date(s.expiraEm).getTime() : Date.now() + 180000;
+      var mostrarEspera = function () {
+        if (!SALA || !SALA.aguardando || !$('av-estado')) { if (SALA) clearInterval(SALA.relogio); return; }
+        var resta = Math.max(0, Math.round((fim - Date.now()) / 1000));
+        $('av-estado').textContent = 'En attente d\'un professeur… ' + Math.floor(resta / 60) + ':' + ('0' + resta % 60).slice(-2) + ' · Vous pouvez commencer : il verra tout dès qu\'il entrera.';
+        if (resta <= 0 && !SALA.confirmando) { SALA.confirmando = true; salaEnviar({}); }   // o servidor confirma o cancelamento
+      };
+      mostrarEspera();
+      SALA.relogio = setInterval(mostrarEspera, 1000);
       $('av-chat').hidden = false;
       ligarSalaAluno();
       var ed = document.querySelector('#tm-fazer .editor');
@@ -195,8 +224,8 @@ function ligarSalaAluno() {
   }
   SALA.stream = SimuladoAoVivo.stream('/api/modeles/salas/' + SALA.id + '/stream', function (ev, d) {
     if (ev === 'estado') {
-      if (d.status === 'atendimento') { $('av-estado').textContent = (d.professorNome || 'Un professeur') + ' suit votre production en direct.'; avisar({ titulo: 'Professeur connecté', texto: d.professorNome || '', icone: '', som: true, duracao: 6 }); }
-      if (d.status === 'encerrada') salaFim();
+      if (d.status === 'atendimento') { SALA.aguardando = false; clearInterval(SALA.relogio); $('av-estado').textContent = (d.professorNome || 'Un professeur') + ' suit votre production en direct.'; avisar({ titulo: 'Professeur connecté', texto: d.professorNome || '', icone: '', som: true, duracao: 6 }); }
+      if (d.status === 'encerrada') salaFim(d.motivo);
     } else if (ev === 'msg') { if (d.de === 'professor') { addMsg('professor', d.nome, d.texto); somSuave(); } }
     else if (ev === 'sinal' && SALA && SALA.chamada) SALA.chamada.receber(d);
   });

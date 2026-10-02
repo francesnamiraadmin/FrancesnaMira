@@ -30,11 +30,69 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
+  // ===================== PRESENÇA AO VIVO =====================
+  // Todos os alunos com plano ativo e a área do site em que estão (backend/utils/presencaSite.js).
+  const CORES_AREA = {
+    'Plataforma de Questões': ['#1e40af', '#e3ebff'], 'Simulação Completa': ['#7A5AF8', '#efeaff'], 'Ambiente de Produção': ['#b45309', '#fff1dc'],
+    'Aulas Especializadas': ['#047857', '#dcf5ea'], 'Dever de Casa': ['#be185d', '#fde7f1'], 'Minha conta': ['#475569', '#eef1f5'],
+    'Matrícula e compras': ['#475569', '#eef1f5'], 'Página inicial e cursos': ['#475569', '#eef1f5'], 'Site': ['#475569', '#eef1f5']
+  };
+  const tagArea = a => { const c = CORES_AREA[a] || CORES_AREA.Site; return `<span class="area-tag" style="color:${c[0]}; background:${c[1]};">${esc(a)}</span>`; };
+  const duracao = d => { if (!d) return ''; const min = Math.max(0, Math.round((Date.now() - new Date(d)) / 60000)); return min < 1 ? 'menos de 1 min' : min < 60 ? min + ' min' : Math.floor(min / 60) + ' h ' + (min % 60) + ' min'; };
+  let presenca = null, filtroArea = '', tPresenca = null;
+
+  async function carregarPresenca() {
+    try {
+      const r = await fetch('/api/equipe/presenca', { headers: headers() });
+      presenca = r.ok ? await r.json() : { alunos: [] };
+    } catch (e) { presenca = presenca || { alunos: [] }; }
+    renderPresenca();
+  }
+  function renderPresenca() {
+    if (!presenca) return;
+    const online = presenca.alunos.filter(a => a.online);
+    const contagem = {};
+    online.forEach(a => { contagem[a.area] = (contagem[a.area] || 0) + 1; });
+    const principais = ['Plataforma de Questões', 'Ambiente de Produção', 'Aulas Especializadas', 'Simulação Completa', 'Dever de Casa'];
+    const outras = Object.keys(contagem).filter(a => !principais.includes(a));
+    const botoes = [['', 'Todos com plano ativo', presenca.alunos.length, '#94a3b8'], ['__online', 'Online agora', online.length, '#2E9E63']]
+      .concat(principais.map(a => [a, a, contagem[a] || 0, (CORES_AREA[a] || CORES_AREA.Site)[0]]))
+      .concat(outras.length ? [['__outras', 'Outras páginas', outras.reduce((n, a) => n + contagem[a], 0), '#475569']] : []);
+    $('presencaAreas').innerHTML = botoes.map(([v, r, n, cor]) => `<button type="button" data-area="${esc(v)}" class="${filtroArea === v ? 'ativa' : ''}"><i style="background:${cor}"></i>${esc(r)} <b>${n}</b></button>`).join('');
+    const busca = ($('presencaBusca').value || '').toLowerCase();
+    const lista = presenca.alunos.filter(a => {
+      if (busca && !(a.nome + ' ' + a.email).toLowerCase().includes(busca)) return false;
+      if (!filtroArea) return true;
+      if (filtroArea === '__online') return a.online;
+      if (filtroArea === '__outras') return a.online && !principais.includes(a.area);
+      return a.online && a.area === filtroArea;
+    });
+    $('presencaTabela').innerHTML = lista.length ? lista.map(a => {
+      const st = a.online ? (a.abaOculta ? 'ausente' : 'on') : '';
+      return `<tr data-aluno="${a._id}" class="${a.online ? '' : 'off'}">
+        <td><span class="st-dot ${st}" title="${a.online ? (a.abaOculta ? 'Online, com a aba em segundo plano' : 'Online') : 'Offline'}"></span><strong>${esc(a.nome)}</strong><br><span style="font-size:0.72rem; color:var(--cinza-400);">${esc(a.email)}</span></td>
+        <td>${a.online ? tagArea(a.area) + (a.abaOculta ? '<br><small style="font-size:.72rem; color:var(--cinza-400);">aba em segundo plano</small>' : '') : '<span style="font-size:.8rem;">Offline</span>'}</td>
+        <td class="ativ">${a.online ? esc(a.atividade || a.pagina || '—') : (a.area ? `<small>Última atividade: ${esc(a.area)}${a.atividade ? ' · ' + esc(a.atividade) : ''}</small>` : '—')}</td>
+        <td style="font-size:.82rem;">${a.online ? (a.atividadeDesde ? duracao(a.atividadeDesde) + ' nesta atividade' : '') + (a.onlineDesde ? `<br><small style="color:var(--cinza-400);">online há ${duracao(a.onlineDesde)}</small>` : '') : 'visto ' + quando(a.vistoEm)}</td>
+        <td class="planos-mini">${a.planos.map(esc).join('<br>')}</td>
+      </tr>`;
+    }).join('') : '<tr><td colspan="5" style="text-align:center; color:var(--cinza-400); cursor:default;">Nenhum aluno com estes filtros.</td></tr>';
+  }
+  $('presencaAreas').addEventListener('click', e => { const b = e.target.closest('[data-area]'); if (!b) return; filtroArea = filtroArea === b.dataset.area ? '' : b.dataset.area; renderPresenca(); });
+  $('presencaBusca').addEventListener('input', renderPresenca);
+  // enquanto a aba Acompanhamento estiver aberta, atualiza a cada 15 s
+  function vigiarPresenca() {
+    clearInterval(tPresenca);
+    carregarPresenca();
+    tPresenca = setInterval(() => { if ($('viewAcompanhamento').hidden || document.hidden) return; carregarPresenca(); }, 15000);
+  }
+
   // ===================== ACOMPANHAMENTO =====================
   let dadosAcomp = null, ordem = { campo: 'ultima', dir: -1 };
   const idsFeedVistos = new Set();
 
   async function carregarAcompanhamento() {
+    vigiarPresenca();
     try {
       const [rA, rD] = await Promise.all([
         fetch('/api/deveres/acompanhamento', { headers: headers() }),

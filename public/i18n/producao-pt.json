@@ -1091,5 +1091,15 @@
  "Tâche 1 orale": "Tarefa 1 oral",
  "Tâche 2 orale": "Tarefa 2 oral",
  "Tâche 3 orale": "Tarefa 3 oral",
- "Oral": "Oral"
+ "Oral": "Oral",
+ "Aucun professeur n'a accepté votre demande en 3 minutes.": "Nenhum professor aceitou seu pedido em 3 minutos.",
+ "La demande a été annulée. Vous pouvez continuer seul, choisir une autre correction ou appeler à nouveau.": "O pedido foi cancelado. Você pode continuar sozinho, escolher outra correção ou chamar de novo.",
+ "Appeler à nouveau": "Chamar de novo",
+ "Demande annulée": "Pedido cancelado",
+ "Aucun professeur disponible en 3 minutes.": "Nenhum professor disponível em 3 minutos.",
+ "Cette demande a expiré : personne ne l'a acceptée en 3 minutes.": "Este pedido expirou: ninguém aceitou em 3 minutos.",
+ "Sur ce sujet": "Sobre este tema",
+ "Sur l'axe thématique": "Sobre o eixo temático",
+ "Dans la presse en ce moment": "Na imprensa agora",
+ "lire à la source ↗": "ler na fonte ↗"
 }
