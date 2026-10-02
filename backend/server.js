@@ -41,8 +41,12 @@ app.use(express.urlencoded({ extended: false, limit: "100kb" }));
 app.use(cookieParser());
 app.use("/api", bloquearTraversal);
 app.use("/api", sanitizarEntrada);
+// Sinal de presença (Gestão de Alunos → Acompanhamento): leve e frequente, com limite próprio para
+// não consumir a cota geral da API (alunos atrás do mesmo IP de uma escola ou empresa).
+app.use("/api/presenca", limitarTaxa({ nome: "presenca", janelaMs: 60 * 1000, max: 60 }), require("./routes/presenca"));
 // Teto geral por IP para toda a API (as rotas sensíveis têm limites próprios, mais baixos).
-app.use("/api", limitarTaxa({ nome: "api", janelaMs: 60 * 1000, max: 300 }));
+// LIMITE_API_MIN muda o teto (padrão 300 pedidos por minuto); os testes automáticos usam um valor alto.
+app.use("/api", limitarTaxa({ nome: "api", janelaMs: 60 * 1000, max: Number(process.env.LIMITE_API_MIN) || 300 }));
 
 // Arquivos estáticos do site (index.html, login.html, cadastro.html, etc.)
 app.use(express.static(path.join(__dirname, "../public")));
@@ -76,7 +80,6 @@ app.use("/api/financeiro", require("./routes/financeiro"));
 app.use("/api/exercicios", require("./routes/exercicios"));
 app.use("/api/simulados", require("./routes/simulados"));
 app.use("/api/modeles", require("./routes/modeles"));
-app.use("/api/presenca", require("./routes/presenca"));
 
 app.use("/api", (req, res) => {
   res.setHeader("X-Rota-Inexistente", "1"); // sinaliza ao monitor (sondagem de rotas)

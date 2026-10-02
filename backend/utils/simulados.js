@@ -168,7 +168,8 @@ function criteriosDe(def) {
   return Object.fromEntries(Object.entries(CRITERIOS).map(([p, lista]) => [p, lista.map(c => ({ ...c, nome: nomes[p]?.[c.id] || c.nome }))]));
 }
 
-const limitar = (v, min, max) => Math.min(max, Math.max(min, Number(v) || 0));
+// a nota pode vir da IA como "4/5" ou "3,5": numeroDaIA lê qualquer forma
+const limitar = (v, min, max) => Math.min(max, Math.max(min, require("./gradesProva").numeroDaIA(v)));
 
 // Recebe {tarefas: {t1: {criterios: {tarefa: 0–5, ...}, comentario}}, nota?, comentario}
 // e devolve o resultado normalizado: nota por tarefa (0–20), nota final 0–20 (média das

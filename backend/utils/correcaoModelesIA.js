@@ -19,7 +19,7 @@ function lerAudio(caminho, mime) {
     return { mime: String(mime || "audio/webm").split(";")[0], base64: fs.readFileSync(caminho).toString("base64") };
   } catch (e) { return undefined; }
 }
-const { avaliar } = require("./gradesProva");
+const { avaliar, numeroDaIA } = require("./gradesProva");
 
 const NIVEL_CURSO = { TCF: "B2", DELF: "B2", DALF: "C1", TEF: "B2", A1: "A1", A2: "A2", B1: "B1", B2: "B2" };
 
@@ -66,7 +66,7 @@ async function corrigirTexto(tache, sujet, texte, audio) {
   const p = M.promptCorrecao(tache, sujet, texte, comAudio);
   const { json: r, modelo } = await pedirJson({ sistema: p.sistema, usuario: p.usuario, maxTokens: 4000, audio: comAudio ? audio : undefined });
   r.ouviuAudio = comAudio;
-  r.note = Math.max(0, Math.min(20, Math.round((Number(r.note) || 0) * 2) / 2));
+  r.note = Math.max(0, Math.min(20, Math.round(numeroDaIA(r.note) * 2) / 2));
   r.nclc = M.nclc(r.note);
   r.mots = p.mots;
   r.limites = p.limites;
@@ -105,7 +105,7 @@ async function corrigirProducaoModeles(producao, tema) {
   const audio = oral ? lerAudio(producao.arquivoOriginal?.caminho, producao.arquivoOriginal?.mimetype) : undefined;
   const r = await corrigirTexto(tache, sujet, texte, audio);
   // Critérios do script ("x/5", na ordem da grade) → grade TCF do site.
-  const nota = c => Number(String((c || {}).note || "").split("/")[0].replace(",", ".")) || 0;
+  const nota = c => numeroDaIA((c || {}).note);
   const cr = r.criteres || [];
   const ids = oral ? ["tarefa", "coerencia_oral", "lexico", "gramatica"] : ["tarefa", "coerencia", "lexico", "gramatica"];
   const notas = {}, comentarios = {};

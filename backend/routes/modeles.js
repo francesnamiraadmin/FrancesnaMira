@@ -1150,6 +1150,7 @@ router.post("/rpc/:fn", async (req, res) => {
   } catch (err) {
     if (err.status || err.msg) return res.status(err.status || 400).json({ msg: err.msg || err.message });
     console.error(`modeles/${nome}:`, err);
+    if (err.ia) return res.status(503).json({ msg: "L'IA est momentanément indisponible (forte demande). Réessayez dans un instant ou envoyez votre production à un professeur." });
     res.status(500).json({ msg: err.naoConfigurada ? "L'IA n'est pas configurée sur le serveur." : "Erreur du serveur. Réessayez." });
   }
 });
@@ -1221,7 +1222,7 @@ router.post("/oral-ia", comTratamentoDeErro(uploadAudio.single("audio")), async 
     limpar();
     if (err.status || err.msg) return res.status(err.status || 400).json({ msg: err.msg || err.message });
     console.error("modeles/oral-ia:", err);
-    res.status(500).json({ msg: "La correction par l'IA a échoué. Réessayez dans un instant." });
+    res.status(err.ia ? 503 : 500).json({ msg: err.ia ? "L'IA est momentanément indisponible (forte demande). Réessayez dans un instant ou envoyez votre production à un professeur." : "La correction par l'IA a échoué. Réessayez dans un instant." });
   }
 });
 

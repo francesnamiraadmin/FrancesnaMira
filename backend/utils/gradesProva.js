@@ -104,7 +104,13 @@ function cecrTcfCompreensao(p) {
 }
 
 const arred = (v, casas = 1) => Math.round(v * 10 ** casas) / 10 ** casas;
-const limitar = (v, min, max) => Math.min(max, Math.max(min, Number(v) || 0));
+// Número de uma nota vinda da IA, em qualquer forma: 9, "9", "9/20", "8,5", "8.5 points".
+function numeroDaIA(v) {
+  if (typeof v === "number") return isFinite(v) ? v : 0;
+  const m = String(v ?? "").replace(",", ".").match(/-?\d+(?:\.\d+)?/);
+  return m ? Number(m[0]) : 0;
+}
+const limitar = (v, min, max) => Math.min(max, Math.max(min, numeroDaIA(v)));
 
 function grade(curso, modalidade) {
   const exame = exameDoCurso(curso);
@@ -164,4 +170,4 @@ function resultadoCompreensao(curso, pontos, maximo, nivelAlvo, nivelTeto) {
   return { escala: 699, pontos: p, aprovado: null, nivel: cecrTcfCompreensao(p), nclc: curso === "TCF" ? nclc(NCLC_TCF_CO, p) : null };
 }
 
-module.exports = { GRADES, grade, avaliar, interpretarExpressao, resultadoCompreensao, exameDoCurso };
+module.exports = { numeroDaIA, GRADES, grade, avaliar, interpretarExpressao, resultadoCompreensao, exameDoCurso };
