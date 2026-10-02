@@ -1,0 +1,111 @@
+/* =====================================================================
+   Painel da equipe: as páginas da equipe no padrão visual do site
+   (gradiente céu → areia, cartões de vidro, azul-marinho e dourado)
+   e a barra de navegação de volta ao painel e à aba principal.
+   Carregado DEPOIS do <style> de cada página: os seletores `html:root`
+   ganham das paletas próprias (--azul, --cinza-*, --branco… e as da
+   matrícula: --paper, --ink…), sem reescrever as páginas.
+   ===================================================================== */
+
+html:root,
+html:root[data-theme="light"] {
+  /* paleta administrativa → paleta do site */
+  --branco: rgba(255, 255, 255, 0.66);
+  --cinza-50: rgba(255, 255, 255, 0.38);
+  --cinza-100: rgba(22, 33, 58, 0.07);
+  --cinza-200: rgba(22, 33, 58, 0.14);
+  --cinza-300: rgba(22, 33, 58, 0.24);
+  --cinza-400: rgba(22, 33, 58, 0.52);
+  --cinza-600: rgba(22, 33, 58, 0.76);
+  --cinza-800: #16213a;
+  --azul: #1c2b3a;
+  --azul-hover: #2b3f58;
+  --azul-escuro: #16213a;
+  --azul-claro: rgba(217, 163, 0, 0.16);
+  --sombra: 0 8px 30px rgba(22, 33, 58, 0.14);
+  /* paleta da matrícula (Depoimentos) → paleta do site */
+  --ink: #16213a; --ink-soft: rgba(22, 33, 58, 0.78); --muted: rgba(22, 33, 58, 0.66);
+  --cream: transparent; --paper: rgba(255, 255, 255, 0.5); --surface: rgba(255, 255, 255, 0.66); --surface-2: rgba(255, 255, 255, 0.42);
+  --line: rgba(22, 33, 58, 0.16); --bordeaux: #1c2b3a; --bordeaux-dark: #16213a; --gold: #d9a300; --row-hover: rgba(255, 255, 255, 0.5);
+  /* superfície opaca para modais e menus sobre o conteúdo */
+  --pe-solido: rgba(244, 247, 252, 0.97);
+}
+
+html:root[data-theme="dark"] {
+  --branco: rgba(255, 255, 255, 0.06);
+  --cinza-50: rgba(255, 255, 255, 0.03);
+  --cinza-100: rgba(255, 255, 255, 0.07);
+  --cinza-200: rgba(255, 255, 255, 0.12);
+  --cinza-300: rgba(255, 255, 255, 0.2);
+  --cinza-400: rgba(242, 242, 242, 0.5);
+  --cinza-600: rgba(242, 242, 242, 0.7);
+  --cinza-800: #f2f2f2;
+  --azul: #33415c;
+  --azul-hover: #415273;
+  --azul-escuro: #ffd60a;
+  --azul-claro: rgba(255, 214, 10, 0.14);
+  --sombra: 0 8px 30px rgba(0, 0, 0, 0.45);
+  --ink: #f2f2f2; --ink-soft: rgba(242, 242, 242, 0.8); --muted: rgba(242, 242, 242, 0.62);
+  --cream: transparent; --paper: rgba(255, 255, 255, 0.05); --surface: rgba(255, 255, 255, 0.06); --surface-2: rgba(255, 255, 255, 0.04);
+  --line: rgba(255, 255, 255, 0.12); --bordeaux: #33415c; --bordeaux-dark: #ffd60a; --gold: #ffd60a; --row-hover: rgba(255, 255, 255, 0.05);
+  --pe-solido: rgba(22, 22, 26, 0.98);
+}
+
+html body {
+  background: var(--bg-gradient) !important;
+  background-attachment: fixed !important;
+  color: var(--text);
+}
+body > header:not(.top) {
+  background: var(--header-bg) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+body > header:not(.top) a { color: var(--text) !important; }
+body > footer { background: var(--footer-bg) !important; border-top: 1px solid var(--glass-border) !important; color: var(--text-muted) !important; }
+
+/* cartões de vidro */
+.card, .kpi, .painel-header, .bloco, .secao-card, .dash-card, .filtros, .lista-wrap {
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.card, .kpi { border: 1px solid var(--glass-border); }
+
+/* modais e menus: fundo quase opaco para leitura */
+.modal-box, .modal, .menu-flutuante, .dropdown-menu { background: var(--pe-solido) !important; }
+.modal-overlay { background: var(--overlay) !important; }
+
+/* campos */
+html:root input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), html:root select, html:root textarea { color: var(--text); }
+
+/* ===================== barra de navegação do painel ===================== */
+.pe-barra {
+  position: sticky; top: 0; z-index: 60;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  width: calc(100% - 32px); max-width: 1240px; margin: 12px auto 0; padding: 8px 10px;
+  border-radius: 999px; border: 1px solid var(--glass-border);
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+  font-family: 'Poppins', sans-serif; font-size: .86rem; color: var(--text);
+}
+body.pe-com-navbar .pe-barra { top: calc(var(--topo-site, 70px) + 6px); }
+.pe-barra a, .pe-barra button {
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px;
+  border: 1px solid transparent; background: transparent; color: var(--text); font: inherit; font-weight: 600;
+  text-decoration: none; cursor: pointer; white-space: nowrap; transition: background .15s, border-color .15s;
+}
+.pe-barra a:hover, .pe-barra button:hover { background: var(--glass-hover); border-color: var(--glass-border); }
+.pe-barra a:focus-visible, .pe-barra button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pe-barra .pe-painel { background: var(--azul); color: #fff; }
+.pe-barra .pe-painel:hover { background: var(--azul-hover); color: #fff; }
+.pe-trilha { display: flex; align-items: center; gap: 6px; min-width: 0; flex: 1; color: var(--text-muted); }
+.pe-trilha .pe-sep { opacity: .5; }
+.pe-trilha .pe-pagina { color: var(--text); font-weight: 700; padding: 7px 4px; overflow: hidden; text-overflow: ellipsis; }
+.pe-trilha .pe-aba-atual { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pe-barra .pe-principal { border-color: var(--glass-border); background: var(--glass-bg); }
+.pe-barra .pe-principal[hidden] { display: none; }
+.pe-barra kbd { font: 600 .7rem/1 'Poppins', sans-serif; padding: 3px 5px; border-radius: 5px; border: 1px solid var(--glass-border); opacity: .7; }
+@media (max-width: 640px) {
+  .pe-barra { border-radius: 18px; margin: 8px 10px 0; }
+  .pe-trilha .pe-sep, .pe-trilha .pe-aba-atual, .pe-barra kbd { display: none; }
+}

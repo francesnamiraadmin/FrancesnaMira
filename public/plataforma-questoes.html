@@ -66,9 +66,13 @@ window.aoResolverCurso = function (curso) {
   document.title = 'Plataforma de Questões - ' + curso + ' - Francês na Mira';
   var titulo = document.getElementById('introTitulo');
   if (titulo) titulo.textContent = 'Plataforma de Questões - ' + curso;
-  // Simulação Completa de Prova: por enquanto só existe no formato TCF.
+  // Simulação Completa de Prova: TCF Canada e DELF (A1, A2, B1, B2).
   var simulado = document.getElementById('cardSimuladoCompleto');
-  if (simulado && curso === 'TCF') simulado.style.display = '';
+  if (simulado && (curso === 'TCF' || curso === 'DELF')) {
+    simulado.style.display = '';
+    simulado.href = 'simulado-tcf.html?curso=' + curso;
+    if (curso === 'DELF') simulado.querySelector('p').textContent = 'O DELF completo do A1 ao B2, no formato oficial, com correção e nota /100.';
+  }
 };
 </script>
 <script src="js/cursoContexto.js"></script>

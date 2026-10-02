@@ -1,0 +1,745 @@
+{
+ "slug": "delf-a2-1",
+ "titulo": "Simulado DELF A2 nº 1",
+ "curso": "DELF",
+ "nivel": "A2",
+ "formato": "DELF A2",
+ "descricao": "Vida cotidiana e social: viagens, trabalho, moradia, saúde, lazer e consumo.",
+ "ordem": [
+  "co",
+  "ce",
+  "ee",
+  "eo"
+ ],
+ "provas": {
+  "co": {
+   "nome": "Compréhension de l'oral",
+   "tempoSeg": 1500,
+   "exercicios": [
+    {
+     "id": "co1",
+     "titulo": "Annonces à l'aéroport",
+     "consigne": "Vous allez entendre deux fois des annonces dans un aéroport. Lisez d'abord les questions, écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-a2-1/co01.mp3",
+     "transcricao": "– Mesdames et messieurs, votre attention s'il vous plaît. Le vol AF 4521 à destination de Montréal partira avec quarante-cinq minutes de retard, à cause des conditions météo.\n– L'embarquement se fera porte vingt-trois, à partir de quinze heures dix.\n– Nous rappelons aux passagers que les liquides de plus de cent millilitres sont interdits en cabine. Un bureau d'information est à votre disposition au rez-de-chaussée, à côté de la pharmacie.\n– Pour toute question sur les bagages perdus, adressez-vous au comptoir numéro huit. Merci de votre compréhension."
+    },
+    {
+     "id": "co2",
+     "titulo": "Message sur un répondeur",
+     "consigne": "Vous allez entendre deux fois un message laissé sur votre répondeur. Lisez d'abord les questions, écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-a2-1/co02.mp3",
+     "transcricao": "– Bonjour, ici Marc Lefèvre, de l'agence immobilière Habitat Plus. Je vous appelle au sujet de l'appartement de la rue Victor-Hugo.\n– Le propriétaire accepte votre dossier, mais il demande un garant. Vous pouvez visiter l'appartement une deuxième fois jeudi, à dix-huit heures, si vous voulez.\n– Attention, le loyer a un peu changé : c'est six cent vingt euros par mois, charges comprises, et pas six cents.\n– Merci de me rappeler avant mercredi midi au zéro quatre, soixante-dix-huit, trente-deux, dix, cinquante-cinq. Bonne journée !"
+    },
+    {
+     "id": "co3",
+     "titulo": "Une émission de radio",
+     "consigne": "Vous allez entendre deux fois un extrait d'une émission de radio. Lisez d'abord les questions, écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-a2-1/co03.mp3",
+     "transcricao": "La journaliste : Bonjour Samuel, vous êtes à la tête d'un jardin partagé dans le quartier de Belleville. C'est quoi exactement, un jardin partagé ?\nSamuel : Bonjour ! C'est un jardin que les habitants du quartier cultivent ensemble. Chacun a un petit morceau de terre, mais on partage les outils et l'eau.\nLa journaliste : Et qui vient dans votre jardin ?\nSamuel : Il y a de tout : des retraités, des familles avec enfants, des étudiants. Le mercredi après-midi, on organise des ateliers pour les enfants de l'école d'à côté.\nLa journaliste : Comment est-ce qu'on peut participer ?\nSamuel : C'est simple : il faut habiter le quartier et payer une cotisation de quinze euros par an. Et surtout, venir au moins une fois par semaine pour arroser !"
+    },
+    {
+     "id": "co4",
+     "titulo": "Cinq petits dialogues",
+     "consigne": "Vous allez entendre deux fois cinq petits dialogues. Pour chaque dialogue, choisissez la situation qui correspond.",
+     "audio": "audio/simulados/delf-a2-1/co04.mp3",
+     "transcricao": "– Dialogue numéro un.\n– Tu as vu ? Il pleut encore ! On ne peut pas faire le pique-nique.\n– Ce n'est pas grave, on peut aller au musée à la place.\n– Dialogue numéro deux.\n– Bonjour, j'ai acheté ce pull hier, mais il est trop petit. Je peux l'échanger ?\n– Bien sûr, vous avez votre ticket de caisse ?\n– Dialogue numéro trois.\n– Allô, je voudrais réserver une table pour quatre personnes, samedi soir.\n– Désolée monsieur, nous sommes complets samedi. Dimanche midi, ça vous va ?\n– Dialogue numéro quatre.\n– Félicitations pour ton nouveau poste ! Tu commences quand ?\n– Lundi prochain. Je suis un peu stressé, c'est une grande entreprise.\n– Dialogue numéro cinq.\n– Excusez-moi, le bus numéro douze passe par l'hôpital ?\n– Non, il faut prendre le trois. L'arrêt est en face de la boulangerie."
+    }
+   ],
+   "questoes": [
+    {
+     "n": 1,
+     "exercicio": "co1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Pourquoi le vol pour Montréal est-il en retard ?",
+     "alternativas": [
+      "À cause de la météo.",
+      "À cause d'une grève.",
+      "À cause d'un problème technique."
+     ],
+     "correta": 0,
+     "explicacao": "« À cause des conditions météo » : o atraso é por causa do tempo.",
+     "audio": "audio/simulados/delf-a2-1/co01.mp3"
+    },
+    {
+     "n": 2,
+     "exercicio": "co1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "De combien de temps est le retard ?",
+     "alternativas": [
+      "45 minutes.",
+      "1 heure 10.",
+      "15 minutes."
+     ],
+     "correta": 0,
+     "explicacao": "« Quarante-cinq minutes de retard ».",
+     "audio": "audio/simulados/delf-a2-1/co01.mp3"
+    },
+    {
+     "n": 3,
+     "exercicio": "co1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "L'embarquement se fait…",
+     "alternativas": [
+      "porte 8.",
+      "porte 23.",
+      "porte 15."
+     ],
+     "correta": 1,
+     "explicacao": "« L'embarquement se fera porte vingt-trois ». 8 é o balcão de bagagens.",
+     "audio": "audio/simulados/delf-a2-1/co01.mp3"
+    },
+    {
+     "n": 4,
+     "exercicio": "co1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce qui est interdit en cabine ?",
+     "alternativas": [
+      "Les ordinateurs portables.",
+      "Les sacs à dos.",
+      "Les liquides de plus de 100 ml."
+     ],
+     "correta": 2,
+     "explicacao": "« Les liquides de plus de cent millilitres sont interdits en cabine ».",
+     "audio": "audio/simulados/delf-a2-1/co01.mp3"
+    },
+    {
+     "n": 5,
+     "exercicio": "co1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Pour un bagage perdu, il faut aller…",
+     "alternativas": [
+      "au bureau d'information.",
+      "à la pharmacie.",
+      "au comptoir numéro 8."
+     ],
+     "correta": 2,
+     "explicacao": "« Pour toute question sur les bagages perdus, adressez-vous au comptoir numéro huit ».",
+     "audio": "audio/simulados/delf-a2-1/co01.mp3"
+    },
+    {
+     "n": 6,
+     "exercicio": "co2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Marc Lefèvre travaille…",
+     "alternativas": [
+      "pour une entreprise de déménagement.",
+      "dans une banque.",
+      "dans une agence immobilière."
+     ],
+     "correta": 2,
+     "explicacao": "« Ici Marc Lefèvre, de l'agence immobilière Habitat Plus ».",
+     "audio": "audio/simulados/delf-a2-1/co02.mp3"
+    },
+    {
+     "n": 7,
+     "exercicio": "co2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce que le propriétaire demande ?",
+     "alternativas": [
+      "Une lettre de recommandation.",
+      "Un garant.",
+      "Trois mois de loyer."
+     ],
+     "correta": 1,
+     "explicacao": "« Il demande un garant » (fiador).",
+     "audio": "audio/simulados/delf-a2-1/co02.mp3"
+    },
+    {
+     "n": 8,
+     "exercicio": "co2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "La deuxième visite est possible…",
+     "alternativas": [
+      "jeudi à 18 h.",
+      "vendredi à 8 h.",
+      "mercredi à midi."
+     ],
+     "correta": 0,
+     "explicacao": "« Jeudi, à dix-huit heures ».",
+     "audio": "audio/simulados/delf-a2-1/co02.mp3"
+    },
+    {
+     "n": 9,
+     "exercicio": "co2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Combien coûte le loyer maintenant ?",
+     "alternativas": [
+      "620 € sans les charges.",
+      "600 € avec les charges.",
+      "620 € avec les charges."
+     ],
+     "correta": 2,
+     "explicacao": "« Six cent vingt euros par mois, charges comprises, et pas six cents ».",
+     "audio": "audio/simulados/delf-a2-1/co02.mp3"
+    },
+    {
+     "n": 10,
+     "exercicio": "co2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Il faut rappeler Marc…",
+     "alternativas": [
+      "avant mercredi midi.",
+      "jeudi soir.",
+      "après la visite."
+     ],
+     "correta": 0,
+     "explicacao": "« Merci de me rappeler avant mercredi midi ».",
+     "audio": "audio/simulados/delf-a2-1/co02.mp3"
+    },
+    {
+     "n": 11,
+     "exercicio": "co3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Dans un jardin partagé, les habitants…",
+     "alternativas": [
+      "paient un jardinier.",
+      "cultivent la terre ensemble.",
+      "vendent leurs légumes."
+     ],
+     "correta": 1,
+     "explicacao": "« Un jardin que les habitants du quartier cultivent ensemble ».",
+     "audio": "audio/simulados/delf-a2-1/co03.mp3"
+    },
+    {
+     "n": 12,
+     "exercicio": "co3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce que les jardiniers partagent ?",
+     "alternativas": [
+      "Les légumes et les fruits.",
+      "Les fleurs.",
+      "Les outils et l'eau."
+     ],
+     "correta": 2,
+     "explicacao": "« On partage les outils et l'eau ».",
+     "audio": "audio/simulados/delf-a2-1/co03.mp3"
+    },
+    {
+     "n": 13,
+     "exercicio": "co3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Le mercredi après-midi, il y a…",
+     "alternativas": [
+      "des ateliers pour les enfants.",
+      "une réunion des retraités.",
+      "un marché."
+     ],
+     "correta": 0,
+     "explicacao": "« Le mercredi après-midi, on organise des ateliers pour les enfants ».",
+     "audio": "audio/simulados/delf-a2-1/co03.mp3"
+    },
+    {
+     "n": 14,
+     "exercicio": "co3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Pour participer, il faut…",
+     "alternativas": [
+      "habiter le quartier.",
+      "être étudiant.",
+      "avoir un jardin chez soi."
+     ],
+     "correta": 0,
+     "explicacao": "« Il faut habiter le quartier et payer une cotisation ».",
+     "audio": "audio/simulados/delf-a2-1/co03.mp3"
+    },
+    {
+     "n": 15,
+     "exercicio": "co3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Combien coûte la cotisation ?",
+     "alternativas": [
+      "15 € par an.",
+      "50 € par an.",
+      "15 € par mois."
+     ],
+     "correta": 0,
+     "explicacao": "« Une cotisation de quinze euros par an ».",
+     "audio": "audio/simulados/delf-a2-1/co03.mp3"
+    },
+    {
+     "n": 16,
+     "exercicio": "co4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Dialogue 1 — Les personnes…",
+     "alternativas": [
+      "changent de programme à cause de la pluie.",
+      "préparent un pique-nique au soleil.",
+      "sortent du musée."
+     ],
+     "correta": 0,
+     "explicacao": "Chove, então trocam o piquenique pelo museu.",
+     "audio": "audio/simulados/delf-a2-1/co04.mp3"
+    },
+    {
+     "n": 17,
+     "exercicio": "co4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Dialogue 2 — La cliente veut…",
+     "alternativas": [
+      "échanger un vêtement.",
+      "se faire rembourser un ticket.",
+      "acheter un pull plus grand pour son fils."
+     ],
+     "correta": 0,
+     "explicacao": "« Il est trop petit. Je peux l'échanger ? ».",
+     "audio": "audio/simulados/delf-a2-1/co04.mp3"
+    },
+    {
+     "n": 18,
+     "exercicio": "co4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Dialogue 3 — L'homme…",
+     "alternativas": [
+      "annule une réservation.",
+      "ne peut pas réserver pour samedi soir.",
+      "réserve pour dimanche soir."
+     ],
+     "correta": 1,
+     "explicacao": "O restaurante está lotado no sábado e propõe domingo ao meio-dia.",
+     "audio": "audio/simulados/delf-a2-1/co04.mp3"
+    },
+    {
+     "n": 19,
+     "exercicio": "co4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Dialogue 4 — L'homme…",
+     "alternativas": [
+      "a perdu son travail.",
+      "commence un nouveau travail.",
+      "part en vacances lundi."
+     ],
+     "correta": 1,
+     "explicacao": "« Ton nouveau poste… Lundi prochain ».",
+     "audio": "audio/simulados/delf-a2-1/co04.mp3"
+    },
+    {
+     "n": 20,
+     "exercicio": "co4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Dialogue 5 — Pour aller à l'hôpital, la femme doit prendre…",
+     "alternativas": [
+      "le bus numéro 12.",
+      "le bus numéro 3.",
+      "le métro."
+     ],
+     "correta": 1,
+     "explicacao": "« Il faut prendre le trois ».",
+     "audio": "audio/simulados/delf-a2-1/co04.mp3"
+    }
+   ]
+  },
+  "ce": {
+   "nome": "Compréhension des écrits",
+   "tempoSeg": 1800,
+   "exercicios": [
+    {
+     "id": "ce1",
+     "titulo": "Choisir une activité",
+     "consigne": "Vous cherchez une activité pour votre fils de 10 ans le mercredi après-midi. Il aime la nature et il ne sait pas nager. Lisez les annonces puis répondez aux questions.",
+     "documento": {
+      "titulo": "Activités pour enfants — Maison de quartier",
+      "texto": "A — Club nature : sorties en forêt, observation des oiseaux. Mercredi 14 h–17 h. De 8 à 12 ans. 60 € le trimestre.\n\nB — École de voile : découvrir le bateau sur le lac. Samedi matin. Savoir nager obligatoire. Dès 10 ans.\n\nC — Atelier théâtre : improvisation et petit spectacle en juin. Mercredi 10 h–12 h. De 7 à 11 ans. Gratuit.\n\nD — Jardin des petits : planter, arroser, récolter des légumes. Mercredi 15 h–17 h. De 4 à 7 ans. 30 € l'année."
+     }
+    },
+    {
+     "id": "ce2",
+     "titulo": "Un courriel professionnel",
+     "consigne": "Vous travaillez dans une entreprise. Vous recevez ce courriel. Lisez le document puis répondez aux questions.",
+     "documento": {
+      "titulo": "De : direction@textil-ouest.fr — Objet : Travaux dans les bureaux",
+      "texto": "Bonjour à toutes et à tous,\n\nDu lundi 14 au vendredi 18 octobre, des travaux de peinture auront lieu au deuxième étage. Les personnes qui travaillent à cet étage pourront s'installer dans la salle de réunion du premier étage, ou travailler de chez elles pendant ces cinq jours.\n\nMerci de prévenir votre responsable avant le jeudi 10 octobre pour dire quelle solution vous choisissez.\n\nPendant les travaux, la cafétéria restera ouverte, mais l'ascenseur ne fonctionnera pas.\n\nMerci de votre compréhension,\nLa direction"
+     }
+    },
+    {
+     "id": "ce3",
+     "titulo": "Un mode d'emploi",
+     "consigne": "Vous louez un vélo en libre-service. Lisez les instructions puis répondez aux questions.",
+     "documento": {
+      "titulo": "Vélo'Ville — Comment ça marche ?",
+      "texto": "1. Téléchargez l'application Vélo'Ville et créez votre compte avec une carte bancaire.\n2. Choisissez une station sur la carte et scannez le code du vélo.\n3. Les 30 premières minutes sont gratuites. Ensuite : 1 € par demi-heure.\n4. Pour rendre le vélo, attachez-le dans n'importe quelle station et attendez le signal vert.\n5. Un problème ? Appuyez sur le bouton rouge du vélo : un technicien vous appelle dans les 10 minutes.\n\nAttention : le vélo doit être rendu avant minuit. Après, une pénalité de 15 € est appliquée."
+     }
+    },
+    {
+     "id": "ce4",
+     "titulo": "Un article de journal",
+     "consigne": "Vous lisez cet article dans un journal local. Lisez le document puis répondez aux questions.",
+     "documento": {
+      "titulo": "Une boîte à livres devant la mairie",
+      "texto": "Depuis le mois de mars, une grande boîte en bois est installée devant la mairie de Saint-Malo. Son principe est simple : chacun peut prendre un livre gratuitement, ou en déposer un qu'il a déjà lu.\n\nL'idée vient de Nadia, 35 ans, bibliothécaire : « Beaucoup de gens ont des livres chez eux qu'ils ne lisent plus. Avec la boîte, les livres continuent de vivre. »\n\nLe succès est immédiat : plus de 400 livres ont déjà changé de main. Les romans et les livres pour enfants sont les plus demandés. La mairie pense maintenant installer une deuxième boîte près de la plage, pour l'été."
+     }
+    }
+   ],
+   "questoes": [
+    {
+     "n": 21,
+     "exercicio": "ce1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Quelle activité correspond le mieux à votre fils ?",
+     "alternativas": [
+      "Le jardin des petits (D).",
+      "L'école de voile (B).",
+      "Le club nature (A)."
+     ],
+     "correta": 2,
+     "explicacao": "A: natureza, quarta à tarde, 8 a 12 anos. B exige saber nadar e é no sábado; D é para 4 a 7 anos."
+    },
+    {
+     "n": 22,
+     "exercicio": "ce1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Pourquoi l'école de voile n'est-elle pas possible ?",
+     "alternativas": [
+      "Il faut savoir nager.",
+      "Elle est réservée aux adultes.",
+      "Elle est trop chère."
+     ],
+     "correta": 0,
+     "explicacao": "« Savoir nager obligatoire » — e o menino não sabe nadar."
+    },
+    {
+     "n": 23,
+     "exercicio": "ce1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Quelle activité est gratuite ?",
+     "alternativas": [
+      "Le jardin des petits.",
+      "Le club nature.",
+      "L'atelier théâtre."
+     ],
+     "correta": 2,
+     "explicacao": "C — Atelier théâtre : « Gratuit »."
+    },
+    {
+     "n": 24,
+     "exercicio": "ce1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Le jardin des petits n'est pas adapté parce que…",
+     "alternativas": [
+      "il coûte trop cher.",
+      "il est pour les enfants de 4 à 7 ans.",
+      "il a lieu le samedi."
+     ],
+     "correta": 1,
+     "explicacao": "« De 4 à 7 ans » — o filho tem 10 anos."
+    },
+    {
+     "n": 25,
+     "exercicio": "ce1",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Combien coûte le club nature ?",
+     "alternativas": [
+      "60 € le trimestre.",
+      "30 € le trimestre.",
+      "60 € l'année."
+     ],
+     "correta": 0,
+     "explicacao": "« 60 € le trimestre »."
+    },
+    {
+     "n": 26,
+     "exercicio": "ce2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Les travaux ont lieu…",
+     "alternativas": [
+      "dans tout l'immeuble.",
+      "dans la cafétéria.",
+      "au deuxième étage."
+     ],
+     "correta": 2,
+     "explicacao": "« Des travaux de peinture auront lieu au deuxième étage »."
+    },
+    {
+     "n": 27,
+     "exercicio": "ce2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Combien de temps durent les travaux ?",
+     "alternativas": [
+      "Cinq jours.",
+      "Un jour.",
+      "Deux semaines."
+     ],
+     "correta": 0,
+     "explicacao": "Do 14 ao 18 de outubro: « pendant ces cinq jours »."
+    },
+    {
+     "n": 28,
+     "exercicio": "ce2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Les employés du deuxième étage peuvent…",
+     "alternativas": [
+      "prendre des vacances.",
+      "travailler à la cafétéria.",
+      "travailler de chez eux."
+     ],
+     "correta": 2,
+     "explicacao": "« Ou travailler de chez elles pendant ces cinq jours »."
+    },
+    {
+     "n": 29,
+     "exercicio": "ce2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Avant le 10 octobre, il faut…",
+     "alternativas": [
+      "réserver la salle de réunion.",
+      "prévenir son responsable.",
+      "vider son bureau."
+     ],
+     "correta": 1,
+     "explicacao": "« Merci de prévenir votre responsable avant le jeudi 10 octobre »."
+    },
+    {
+     "n": 30,
+     "exercicio": "ce2",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Pendant les travaux, on ne pourra pas utiliser…",
+     "alternativas": [
+      "l'ascenseur.",
+      "la salle de réunion.",
+      "la cafétéria."
+     ],
+     "correta": 0,
+     "explicacao": "« L'ascenseur ne fonctionnera pas »."
+    },
+    {
+     "n": 31,
+     "exercicio": "ce3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Pour créer un compte, il faut…",
+     "alternativas": [
+      "aller à la mairie.",
+      "une carte bancaire.",
+      "une photo d'identité."
+     ],
+     "correta": 1,
+     "explicacao": "« Créez votre compte avec une carte bancaire »."
+    },
+    {
+     "n": 32,
+     "exercicio": "ce3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Combien coûte une location d'une heure ?",
+     "alternativas": [
+      "2 €.",
+      "1 €.",
+      "C'est gratuit."
+     ],
+     "correta": 1,
+     "explicacao": "30 min grátis + 1 € pela meia hora seguinte = 1 €."
+    },
+    {
+     "n": 33,
+     "exercicio": "ce3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Pour rendre le vélo, on peut aller…",
+     "alternativas": [
+      "au bureau de Vélo'Ville.",
+      "dans n'importe quelle station.",
+      "seulement dans la station de départ."
+     ],
+     "correta": 1,
+     "explicacao": "« Attachez-le dans n'importe quelle station »."
+    },
+    {
+     "n": 34,
+     "exercicio": "ce3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "En cas de problème, il faut…",
+     "alternativas": [
+      "envoyer un courriel.",
+      "laisser le vélo dans la rue.",
+      "appuyer sur le bouton rouge."
+     ],
+     "correta": 2,
+     "explicacao": "« Appuyez sur le bouton rouge du vélo »."
+    },
+    {
+     "n": 35,
+     "exercicio": "ce3",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Si on rend le vélo après minuit…",
+     "alternativas": [
+      "le compte est fermé.",
+      "on paie 15 € de pénalité.",
+      "la location est gratuite."
+     ],
+     "correta": 1,
+     "explicacao": "« Une pénalité de 15 € est appliquée »."
+    },
+    {
+     "n": 36,
+     "exercicio": "ce4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce qu'une boîte à livres ?",
+     "alternativas": [
+      "Une bibliothèque réservée aux enfants.",
+      "Une boîte où on prend et dépose des livres gratuitement.",
+      "Une petite librairie qui vend des livres d'occasion."
+     ],
+     "correta": 1,
+     "explicacao": "« Chacun peut prendre un livre gratuitement, ou en déposer un »."
+    },
+    {
+     "n": 37,
+     "exercicio": "ce4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Qui a eu l'idée de la boîte ?",
+     "alternativas": [
+      "Le maire.",
+      "Un écrivain de la ville.",
+      "Une bibliothécaire."
+     ],
+     "correta": 2,
+     "explicacao": "« L'idée vient de Nadia, 35 ans, bibliothécaire »."
+    },
+    {
+     "n": 38,
+     "exercicio": "ce4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Selon Nadia, la boîte permet…",
+     "alternativas": [
+      "d'apprendre à lire aux enfants.",
+      "de vendre ses vieux livres.",
+      "de donner une nouvelle vie aux livres."
+     ],
+     "correta": 2,
+     "explicacao": "« Avec la boîte, les livres continuent de vivre »."
+    },
+    {
+     "n": 39,
+     "exercicio": "ce4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Quels livres sont les plus demandés ?",
+     "alternativas": [
+      "Les bandes dessinées.",
+      "Les livres de cuisine.",
+      "Les romans et les livres pour enfants."
+     ],
+     "correta": 2,
+     "explicacao": "« Les romans et les livres pour enfants sont les plus demandés »."
+    },
+    {
+     "n": 40,
+     "exercicio": "ce4",
+     "nivel": "A2",
+     "pontos": 1,
+     "pergunta": "Quel est le projet de la mairie ?",
+     "alternativas": [
+      "Installer une autre boîte près de la plage.",
+      "Fermer la boîte en été.",
+      "Ouvrir une nouvelle bibliothèque."
+     ],
+     "correta": 0,
+     "explicacao": "« Installer une deuxième boîte près de la plage, pour l'été »."
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Production écrite",
+   "tempoSeg": 2700,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Exercice 1 — Raconter une expérience",
+     "min": 60,
+     "max": 80,
+     "peso": 12.5,
+     "consigne": "Vous avez passé un week-end dans une ville que vous ne connaissiez pas. Sur votre blog, vous racontez ce week-end : où vous êtes allé(e), avec qui, ce que vous avez fait et ce que vous avez aimé ou pas aimé. (60 à 80 mots)"
+    },
+    {
+     "id": "t2",
+     "titulo": "Exercice 2 — Répondre à une invitation",
+     "min": 60,
+     "max": 80,
+     "peso": 12.5,
+     "consigne": "Vous recevez ce message de votre ami Lucas : « Salut ! Samedi 12, je fête mes 30 ans dans un restaurant au bord du lac. Tu viens ? Tu peux venir avec qui tu veux ! » Vous ne pouvez pas aller à la fête. Vous répondez à Lucas : vous le remerciez, vous vous excusez, vous expliquez pourquoi vous ne pouvez pas venir et vous proposez une autre sortie ensemble. (60 à 80 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Production orale",
+   "tempoSeg": 1080,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Partie 1 — Entretien dirigé",
+     "duracaoSeg": 90,
+     "preparacaoSeg": 0,
+     "peso": 7,
+     "consigne": "Vous répondez aux questions de l'examinateur : vous parlez de vous, de votre famille, de vos activités et de vos goûts.",
+     "perguntasExaminador": [
+      "Bonjour ! Présentez-vous, s'il vous plaît.",
+      "Parlez-moi de votre famille.",
+      "Comment est votre logement ?",
+      "Qu'est-ce que vous faites pendant vos vacances ?"
+     ],
+     "fichaExaminador": "Questions sur la vie quotidienne, la famille, le logement, les loisirs. Le candidat doit répondre avec des phrases simples reliées (et, mais, parce que)."
+    },
+    {
+     "id": "t2",
+     "titulo": "Partie 2 — Monologue suivi",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 300,
+     "peso": 8,
+     "consigne": "Sujet : Parlez d'une personne importante pour vous (un membre de votre famille, un ami, un professeur…). Qui est-ce ? Comment est-elle ? Pourquoi est-elle importante pour vous ?",
+     "perguntasExaminador": [
+      "Je vous écoute. Parlez-moi de cette personne importante pour vous."
+     ],
+     "fichaExaminador": "Le candidat présente la personne (description physique et de caractère), raconte un souvenir et explique pourquoi elle compte. Relances : « Vous la voyez souvent ? », « Qu'est-ce que vous faites ensemble ? »."
+    },
+    {
+     "id": "t3",
+     "titulo": "Partie 3 — Exercice en interaction",
+     "duracaoSeg": 210,
+     "preparacaoSeg": 300,
+     "peso": 10,
+     "consigne": "Vous êtes en vacances en France. Vous allez dans un office de tourisme pour organiser une journée de visite dans la région. Vous demandez des informations (visites, transports, prix, horaires, restaurants) et vous choisissez un programme. L'examinateur joue le rôle de l'employé(e) de l'office de tourisme.",
+     "perguntasExaminador": [
+      "Bonjour, bienvenue à l'office de tourisme ! Je peux vous aider ?",
+      "Vous préférez visiter des monuments ou faire des activités dans la nature ?",
+      "D'accord. Et vous voulez déjeuner sur place ?"
+     ],
+     "fichaExaminador": "Propositions : château de Chambord (entrée 16 €, navette à 9 h 30 depuis la gare, retour 17 h) · balade en canoë sur la Loire (25 €, 2 h) · marché du samedi. Restaurant « Le Moulin », menu 18 €. Le candidat doit poser des questions, comparer et décider, en respectant les codes de politesse."
+    }
+   ]
+  }
+ }
+}

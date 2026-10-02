@@ -13,6 +13,43 @@ const { transmitir } = require("../utils/sse");
 const { validarIds, textoSeguro, ehObjectId } = require("../middleware/seguranca");
 const { grade, avaliar } = require("../utils/gradesProva");
 const { corrigirProducaoComIA, iaConfigurada } = require("../utils/correcaoProducaoIA");
+const CA = require("../utils/correcaoAnotada");
+const { AnotacaoCorrecao } = require("../models/correcaoAnotada");
+
+// Nome de quem age (histórico da correção).
+async function autorDe(req) {
+  const u = await User.findById(req.userId).select("nome").lean();
+  return { autorId: req.userId, autorNome: u?.nome || (req.userRole === "admin" ? "Administração" : "Professor") };
+}
+const linhasDe = (v, n) => (Array.isArray(v) ? v : []).slice(0, n).map(x => textoSeguro(x, 500)).filter(Boolean);
+
+// Avaliação vinda do navegador → avaliação validada na grade oficial da prova (TCF, DELF, DALF, TEF:
+// os critérios são sempre os de gradesProva; o navegador só manda as notas e os comentários).
+async function avaliacaoValidada(producao, corpo, req) {
+  const tema = await Tema.findById(producao.temaId).select("courseType nivel");
+  const g = grade(tema?.courseType, producao.modalidade);
+  const enviados = Object.fromEntries((Array.isArray(corpo?.criterios) ? corpo.criterios : []).filter(c => c && c.id).map(c => [String(c.id), c]));
+  const notas = {}, comentarios = {};
+  for (const c of g.criterios) {
+    const v = enviados[c.id]?.nota;
+    if (v !== undefined && v !== null && v !== "" && !isNaN(Number(v))) notas[c.id] = Number(v);
+    comentarios[c.id] = textoSeguro(enviados[c.id]?.comentario, 2000);
+  }
+  const notaFinal = corpo?.notaFinal === undefined || corpo?.notaFinal === null || corpo?.notaFinal === "" || isNaN(Number(corpo.notaFinal)) ? undefined : Number(corpo.notaFinal);
+  const av = avaliar(tema?.courseType, producao.modalidade, notas, { nivelAlvo: tema?.nivel, comentarios, notaFinal });
+  const professor = await User.findById(req.userId).select("nome").lean();
+  return {
+    exame: av.exame, criterios: av.criterios.map(c => ({ ...c, nota: notas[c.id] === undefined ? undefined : c.nota })), notaTotal: av.notaTotal, notaMaxima: av.notaMaxima,
+    nivelEstimado: av.nivel, nclc: av.nclc, aprovado: av.aprovado, pontuacaoOficial: av.pontuacaoOficial, notaFinal,
+    comentarioGeral: textoSeguro(corpo?.comentarioGeral, 5000),
+    pontosFortes: linhasDe(corpo?.pontosFortes, 8), aMelhorar: linhasDe(corpo?.aMelhorar, 8), recomendacoes: linhasDe(corpo?.recomendacoes, 8),
+    feedbackFinal: textoSeguro(corpo?.feedbackFinal, 5000),
+    correcoes: (Array.isArray(corpo?.correcoes) ? corpo.correcoes : []).slice(0, 20).map(c => ({
+      trecho: textoSeguro(c?.trecho, 400), correcao: textoSeguro(c?.correcao, 400), explicacao: textoSeguro(c?.explicacao, 600)
+    })).filter(c => c.trecho),
+    corretor: "professor", corretorNome: professor?.nome || "Professor"
+  };
+}
 
 const MAX_TEXTO_PRODUCAO = 50000;
 
@@ -202,7 +239,12 @@ router.get("/minhas", exigirAuth, async (req, res) => {
         p.temaId?.titulo?.toLowerCase().includes(termo) || p.protocolo.toLowerCase().includes(termo)
       );
     }
-    res.json(producoes);
+    const reenviadas = new Set((await Producao.find({ origemId: { $in: producoes.map(p => p._id) } }).select("origemId").lean()).map(x => String(x.origemId)));
+    res.json(producoes.map(p => {
+      const o = { ...p.toObject(), estadoCorrecao: CA.estadoCorrecao(p, { reenviada: reenviadas.has(String(p._id)), paraAluno: true }) };
+      if (!CA.STATUS_DEVOLVIDA.includes(p.status)) delete o.avaliacao;
+      return o;
+    }));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -214,13 +256,13 @@ router.get("/professor/fila", exigirAuth, exigirProfessor, async (req, res) => {
   try {
     const { exame, courseType, tema: temaFiltro, status, prioridade, alunoId, modalidade } = req.query;
 
-    let producoes = await Producao.find({ status: { $in: ["em_fila", "em_correcao"] } })
+    let producoes = await Producao.find({ status: { $in: ["em_fila", "em_correcao", "aguardando_revisao"] } })
       .populate("temaId", "titulo exame courseType nivel tempoSugerido")
       .populate("alunoId", "nome email")
       .sort({ dataEnvio: 1 });
 
     producoes = producoes.filter(p => {
-      if (p.status === "em_correcao" && (!p.professorId || p.professorId.toString() !== req.userId)) return false;
+      if (p.status !== "em_fila" && (!p.professorId || p.professorId.toString() !== req.userId)) return false;
       return true;
     });
 
@@ -235,7 +277,7 @@ router.get("/professor/fila", exigirAuth, exigirProfessor, async (req, res) => {
       producoes = producoes.filter(p => p.prazoEstimado && (new Date(p.prazoEstimado).getTime() - agora) < 2 * 24 * 60 * 60 * 1000);
     }
 
-    res.json(producoes);
+    res.json(producoes.map(p => ({ ...p.toObject(), estadoCorrecao: CA.estadoCorrecao(p) })));
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -251,6 +293,7 @@ router.get("/professor/corrigidas", exigirAuth, exigirProfessor, async (req, res
     if (alunoId && /^[a-f0-9]{24}$/i.test(String(alunoId))) filtro.alunoId = alunoId;
     if (modalidade === "oral") filtro.modalidade = "oral";
     else if (modalidade === "textual") filtro.modalidade = { $ne: "oral" };
+    if (req.userRole !== "admin") filtro.professorId = { $in: [req.userId, null] };
     let producoes = await Producao.find(filtro)
       .populate("temaId", "titulo exame courseType nivel")
       .populate("alunoId", "nome email")
@@ -270,7 +313,7 @@ router.get("/professor/corrigidas", exigirAuth, exigirProfessor, async (req, res
 router.get("/professor/stats", exigirAuth, exigirProfessor, async (req, res) => {
   try {
     const pendentes = await Producao.countDocuments({ status: "em_fila" });
-    const emAndamento = await Producao.countDocuments({ status: "em_correcao", professorId: req.userId });
+    const emAndamento = await Producao.countDocuments({ status: { $in: ["em_correcao", "aguardando_revisao"] }, professorId: req.userId });
     const concluidas = await Producao.find({ status: { $in: ["corrigido", "devolvido"] }, professorId: req.userId });
 
     let tempoMedioHoras = null;
@@ -307,15 +350,21 @@ router.get("/:id", exigirAuth, async (req, res) => {
       .populate("alunoId", "nome email");
     if (!producao) return res.status(404).json({ msg: "Produção não encontrada." });
 
-    const souDono = producao.alunoId._id.toString() === req.userId;
     const souStaff = req.userRole === "professor" || req.userRole === "admin";
-    if (!souDono && !souStaff) {
+    // professor: a fila, as produções dele e as corrigidas pela IA; admin: todas; aluno: as próprias
+    if (!CA.podeVer(producao, req)) {
       return res.status(403).json({ msg: "Você não tem acesso a esta produção." });
     }
+    const reenviada = !!(await Producao.exists({ origemId: producao._id }));
+    const base = { ...producao.toObject(), estadoCorrecao: CA.estadoCorrecao(producao, { reenviada, paraAluno: !souStaff }), editavel: CA.podeEditar(producao, req) };
     // A análise da IA é só da equipe: o aluno recebe a produção sem ela (campo com select: false).
-    if (!souStaff) return res.json(producao);
+    if (!souStaff) {
+      // correção reaberta pelo professor: o aluno não vê a avaliação em revisão
+      if (!CA.STATUS_DEVOLVIDA.includes(producao.status)) delete base.avaliacao;
+      return res.json(base);
+    }
     const extra = await Producao.findById(producao._id).select("+analiseIA").lean();
-    res.json({ ...producao.toObject(), analiseIA: extra?.analiseIA || null });
+    res.json({ ...base, analiseIA: extra?.analiseIA || null });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -343,9 +392,7 @@ router.get("/:id/arquivo/:tipo", exigirAuth, async (req, res) => {
     const producao = await Producao.findById(req.params.id);
     if (!producao) return res.status(404).json({ msg: "Produção não encontrada." });
 
-    const souDono = producao.alunoId.toString() === req.userId;
-    const souStaff = req.userRole === "professor" || req.userRole === "admin";
-    if (!souDono && !souStaff) {
+    if (!CA.podeVer(producao, req)) {
       return res.status(403).json({ msg: "Acesso negado." });
     }
 
@@ -369,9 +416,8 @@ router.post("/:id/mensagens", exigirAuth, async (req, res) => {
     const producao = await Producao.findById(req.params.id);
     if (!producao) return res.status(404).json({ msg: "Produção não encontrada." });
 
-    const souDono = producao.alunoId.toString() === req.userId;
     const souStaff = req.userRole === "professor" || req.userRole === "admin";
-    if (!souDono && !souStaff) {
+    if (!CA.podeVer(producao, req)) {
       return res.status(403).json({ msg: "Acesso negado." });
     }
 
@@ -424,6 +470,7 @@ router.post("/:id/assumir", exigirAuth, exigirProfessor, async (req, res) => {
     producao.professorId = req.userId;
     producao.status = "em_correcao";
     producao.historicoStatus.push({ status: "em_correcao", data: new Date() });
+    await CA.registrarHistorico(producao, await autorDe(req), "iniciou", "Correção iniciada", null, { novaVersao: true });
     await producao.save();
     res.json({ msg: "Produção assumida.", producao });
   } catch (err) {
@@ -437,12 +484,20 @@ router.put("/:id/avaliacao", exigirAuth, exigirProfessor, async (req, res) => {
   try {
     const producao = await Producao.findById(req.params.id);
     if (!producao) return res.status(404).json({ msg: "Produção não encontrada." });
-    if (producao.professorId?.toString() !== req.userId && req.userRole !== "admin") {
-      return res.status(403).json({ msg: "Esta produção não está atribuída a você." });
+    if (!CA.podeEditar(producao, req)) {
+      return res.status(403).json({ msg: producao.professorId?.toString() !== req.userId && req.userRole !== "admin" ? "Esta produção não está atribuída a você." : "Esta correção não está aberta para edição." });
     }
-    producao.avaliacao = { ...(producao.avaliacao?.toObject ? producao.avaliacao.toObject() : producao.avaliacao), ...req.body };
+    const antes = producao.avaliacao?.notaTotal;
+    const avaliacao = await avaliacaoValidada(producao, req.body || {}, req);
+    const mudouNota = (antes ?? null) !== (avaliacao.notaTotal ?? null) && avaliacao.criterios.some(c => c.nota !== undefined);
+    producao.avaliacao = avaliacao;
+    producao.correcao = producao.correcao || {};
+    producao.correcao.salvaEm = new Date();
+    const quem = await autorDe(req);
+    if (mudouNota) await CA.registrarHistorico(producao, quem, "alterou_nota", `Nota ${antes ?? "—"} → ${avaliacao.notaTotal}/${avaliacao.notaMaxima}`, { notaTotal: avaliacao.notaTotal }, { novaVersao: true });
+    else if (req.body?.registrar) await CA.registrarHistorico(producao, quem, "salvou_avaliacao", "Avaliação salva", { notaTotal: avaliacao.notaTotal });
     await producao.save();
-    res.json({ msg: "Rascunho salvo.", producao });
+    res.json({ msg: "Rascunho salvo.", salvaEm: producao.correcao.salvaEm, versao: producao.correcao.versao, avaliacao, estado: CA.estadoCorrecao(producao) });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -458,6 +513,10 @@ router.post("/:id/corrigir", exigirAuth, exigirProfessor, validarIds("id"), comT
     if (producao.professorId?.toString() !== req.userId && req.userRole !== "admin") {
       limparArquivo();
       return res.status(403).json({ msg: "Esta produção não está atribuída a você." });
+    }
+    if (!CA.podeEditar(producao, req)) {
+      limparArquivo();
+      return res.status(400).json({ msg: "Esta correção não está aberta (assuma a produção ou reabra a correção)." });
     }
 
     let avaliacao;
@@ -481,27 +540,23 @@ router.post("/:id/corrigir", exigirAuth, exigirProfessor, validarIds("id"), comT
     // Critérios com id = grade da prova (gradesProva): o total, o nível e o NCLC são
     // recalculados aqui. Avaliações no formato antigo (só nome/nota) passam como vieram.
     if (avaliacao.criterios.every(c => c && c.id)) {
-      const tema = await Tema.findById(producao.temaId).select("courseType nivel");
-      const notas = Object.fromEntries(avaliacao.criterios.map(c => [c.id, c.nota]));
-      const comentarios = Object.fromEntries(avaliacao.criterios.map(c => [c.id, c.comentario]));
-      const av = avaliar(tema?.courseType, producao.modalidade, notas, { nivelAlvo: tema?.nivel, comentarios, notaFinal: avaliacao.notaFinal });
-      const professor = await User.findById(req.userId).select("nome");
-      avaliacao = {
-        exame: av.exame, criterios: av.criterios, notaTotal: av.notaTotal, notaMaxima: av.notaMaxima,
-        nivelEstimado: av.nivel, nclc: av.nclc, aprovado: av.aprovado, pontuacaoOficial: av.pontuacaoOficial,
-        comentarioGeral: textoSeguro(avaliacao.comentarioGeral, 5000),
-        pontosFortes: (Array.isArray(avaliacao.pontosFortes) ? avaliacao.pontosFortes : []).slice(0, 5).map(x => textoSeguro(x, 500)).filter(Boolean),
-        aMelhorar: (Array.isArray(avaliacao.aMelhorar) ? avaliacao.aMelhorar : []).slice(0, 5).map(x => textoSeguro(x, 500)).filter(Boolean),
-        correcoes: (Array.isArray(avaliacao.correcoes) ? avaliacao.correcoes : []).slice(0, 20).map(c => ({
-          trecho: textoSeguro(c?.trecho, 400), correcao: textoSeguro(c?.correcao, 400), explicacao: textoSeguro(c?.explicacao, 600)
-        })).filter(c => c.trecho),
-        corretor: "professor", corretorNome: professor?.nome || "Professor"
-      };
+      // anotações com forma correta sugerida também viram « correções pontuais » (caderno de erros,
+      // telas antigas do aluno), sem duplicar as que o professor já escreveu à mão
+      const anot = await AnotacaoCorrecao.find({ producaoId: producao._id, removido: false, sugestao: { $ne: "" }, trecho: { $ne: "" } }).sort({ inicio: 1 }).limit(20).lean();
+      const manuais = Array.isArray(avaliacao.correcoes) ? avaliacao.correcoes : [];
+      avaliacao.correcoes = manuais.concat(anot.filter(a => !manuais.some(m => m && m.trecho === a.trecho))
+        .map(a => ({ trecho: a.trecho, correcao: a.sugestao, explicacao: a.comentario })));
+      avaliacao = await avaliacaoValidada(producao, avaliacao, req);
     }
     producao.avaliacao = avaliacao;
     producao.status = "corrigido";
     producao.dataCorrecao = new Date();
     producao.historicoStatus.push({ status: "corrigido", data: new Date() });
+    producao.correcao = producao.correcao || {};
+    producao.correcao.devolvidaEm = new Date();
+    producao.correcao.anotacoes = await CA.contarAnotacoes(producao._id);
+    await CA.registrarHistorico(producao, await autorDe(req), "devolveu", `Devolvida ao aluno · nota ${avaliacao.notaTotal ?? "—"}/${avaliacao.notaMaxima ?? ""} · ${producao.correcao.anotacoes} anotação(ões)`,
+      { notaTotal: avaliacao.notaTotal, anotacoes: producao.correcao.anotacoes }, { novaVersao: true });
     await producao.save();
     transmitir("producao-atualizada", { alunoId: String(producao.alunoId), producaoId: String(producao._id) });
     // As correções pontuais do professor entram no carnet de erros do aluno (Caderno de Revisão).

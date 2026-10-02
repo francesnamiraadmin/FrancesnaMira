@@ -44,6 +44,9 @@ async function contexto(req) {
     ctx.courseType = pedido && cursos.includes(pedido) ? pedido : cursos[0];
     if (pedido && !cursos.includes(pedido)) throw erro("Você não tem acesso a este curso no Ambiente de Produção.", 403);
   }
+  // DELF: o aluno escolhe o nível (A1 a B2) no app; o perfil traz as tâches, os sujets e os tempos desse nível.
+  ctx.nivel = ctx.courseType === "DELF" ? M.nivelDelf(req.body?.nivel || req.query.nivel) : "";
+  ctx.P = M.perfil(ctx.courseType, ctx.nivel);
   return ctx;
 }
 async function usuario(ctx) {
@@ -123,13 +126,13 @@ async function listasPartilhadas(ctx) {
   const item = (id, tache, t) => ({ id, tache, titre: t.titre || String(t.t || "").slice(0, 120), e: t.e, c: t.c || "", atelier: !!t.atelier });
   const dictees = [], modelos = [];
   // Atelier da professora e modelos escritos à mão: abertos para todos (salvo tema oculto).
-  for (const m of M.MODELES.atelier) if (vis(m.tache, m.e, m.id)) { dictees.push(item(m.id, m.tache, m)); modelos.push(item(m.id, m.tache, m)); }
-  for (const t of ["ET1", "ET2", "ET3"]) for (const m of M.modelosManuais(t)) if (vis(t, m.e, m.id)) { dictees.push(item(m.id, t, m)); modelos.push(item(m.id, t, m)); }
-  for (const t of ["T2", "T3"]) for (const m of M.modelosManuais(t)) if (vis(t, m.e, m.id)) dictees.push(item(m.id, t, m));
+  for (const m of ctx.P.atelier) if (vis(m.tache, m.e, m.id)) { dictees.push(item(m.id, m.tache, m)); modelos.push(item(m.id, m.tache, m)); }
+  for (const t of ["ET1", "ET2", "ET3"]) for (const m of ctx.P.modelosManuais(t)) if (vis(t, m.e, m.id)) { dictees.push(item(m.id, t, m)); modelos.push(item(m.id, t, m)); }
+  for (const t of ["T2", "T3"]) for (const m of ctx.P.modelosManuais(t)) if (vis(t, m.e, m.id)) dictees.push(item(m.id, t, m));
   // Partilhas individuais de sujets (com modelo IA) entram também.
   for (const id of Object.keys(tipos)) {
     if (dictees.some(d => d.id === id)) continue;
-    const r = M.temaEmQualquerTache(id); if (!r) continue;
+    const r = M.temaEmQualquerTache(id); if (!r || M.perfilDoSujet(r.tema) !== ctx.P) continue;
     if (tipos[id].dictee) dictees.push(item(id, r.tache, r.tema));
     if (tipos[id].modele && M.ehEscrita(r.tache)) modelos.push(item(id, r.tache, r.tema));
   }
@@ -146,27 +149,30 @@ F.obterBanco = async ctx => {
   const [u, vis, mes, parts, ia, lp] = await Promise.all([usuario(ctx), filtroVisivel(ctx), temasMesIds(ctx), partilhasTipos(ctx), statusIA(ctx), listasPartilhadas(ctx)]);
   const filtrar = fonte => Object.fromEntries(Object.keys(fonte).map(t => [t, (fonte[t] || []).filter(m => vis(t, m.e, m.id))]));
   const pesos = {};
-  for (const t of M.TACHES) for (const m of M.modelosManuais(t)) pesos[m.id] = { w: M.pesoTema(t, m, mes), tr: M.ehTendencia(t, `${m.titre} ${m.c || ""}`) ? 1 : 0 };
+  const P = ctx.P;
+  for (const t of P.TACHES) for (const m of P.modelosManuais(t)) pesos[m.id] = { w: M.pesoTema(t, m, mes), tr: M.ehTendencia(t, `${m.titre} ${m.c || ""}`) ? 1 : 0 };
   const contagens = {};
-  for (const t of M.TACHES) contagens[t] = M.modelosManuais(t).concat(M.sujetsDaTache(t)).filter(s => vis(t, s.e, s.id)).length;
-  const todos = Object.fromEntries(M.TACHES.map(t => [t, M.EIXOS.ordem.slice()]));
+  for (const t of P.TACHES) contagens[t] = P.modelosManuais(t).concat(P.sujetsDaTache(t)).filter(s => vis(t, s.e, s.id)).length;
+  const todos = Object.fromEntries(P.TACHES.map(t => [t, P.eixos.slice()]));
   const partilhadasIds = Object.fromEntries(Object.keys(parts).map(k => [k, 1]));
   return {
-    eixosPermitidos: M.EIXOS.ordem, acesso: todos, modulos: MODULOS, grupo: "", email: u.email, nome: u.nome || "", professor: ctx.prof,
+    eixosPermitidos: P.eixos, acesso: todos, modulos: MODULOS, grupo: "", email: u.email, nome: u.nome || "", professor: ctx.prof,
     temDoc: false, introLink: "", podeEnviar: true, producaoLiberada: true, restantes: null,
-    eixos: M.EIXOS.eixos, ordemEixos: M.EIXOS.ordem, trames: M.OUTILS.trames, boite: M.OUTILS.boite, connecteurs: M.OUTILS.connecteurs, surlignage: M.OUTILS.surlignage,
-    orale: filtrar(M.MODELES.orale), ecrite: filtrar(M.MODELES.ecrite), audios: {}, ttsAtivo: false,
-    atelier: M.MODELES.atelier.filter(m => vis(m.tache, m.e, m.id)), atelierTotal: M.MODELES.atelier.length,
+    eixos: M.EIXOS.eixos, ordemEixos: P.eixos, trames: P.trames, boite: M.OUTILS.boite, connecteurs: M.OUTILS.connecteurs, surlignage: M.OUTILS.surlignage,
+    orale: filtrar(P.orale), ecrite: filtrar(P.ecrite), audios: {}, ttsAtivo: false,
+    atelier: P.atelier.filter(m => vis(m.tache, m.e, m.id)), atelierTotal: P.atelier.length,
     partilhadas: lp, partilhadasIds, pesos, prioridadeEixos: M.EIXOS.prioridade, tendMes: M.EIXOS.tendances.mois, contagens,
-    avisos: [], ia, versao: VERSAO, admin: ctx.role === "admin", courseType: ctx.courseType, creditos: u.creditosCorrecao || 0, iaCorrecaoSite: iaConfigurada()
+    avisos: [], ia, versao: VERSAO, admin: ctx.role === "admin", courseType: ctx.courseType, creditos: u.creditosCorrecao || 0, iaCorrecaoSite: iaConfigurada(),
+    perfil: { id: P.id, curso: P.curso, nivel: P.nivel, nome: P.nome, delf: P.delf, niveis: P.delf ? M.DELF.NIVEAUX : [], ordem: P.ordem, taches: P.taches, epreuve: P.epreuve,
+      epreuveMin: P.epreuveMin, limites: P.LIMITES_ESCRITA, descricao: P.descricao || "" }
   };
 };
 
 F.obterListaTache = async (ctx, tache) => {
-  if (!M.TACHES.includes(tache)) throw erro("Tâche invalide.");
+  if (!ctx.P.TACHES.includes(tache)) throw erro("Tâche invalide.");
   const [vis, mes] = await Promise.all([filtroVisivel(ctx), temasMesIds(ctx)]);
   const prontos = new Set((await T.ModeleIA.find({ tache }).select("sujetId").lean()).map(x => x.sujetId));
-  return M.sujetsDaTache(tache).filter(s => vis(tache, s.e, s.id)).map(s => ({
+  return ctx.P.sujetsDaTache(tache).filter(s => vis(tache, s.e, s.id)).map(s => ({
     id: s.id, e: s.e, f: s.f || 1, t: String(s.t || "").slice(0, 280), ia: prontos.has(s.id) ? 1 : 0, d: s.d1 ? 1 : 0,
     w: M.pesoTema(tache, s, mes), tr: M.ehTendencia(tache, s.t) ? 1 : 0
   }));
@@ -227,7 +233,7 @@ F.obterSujetsEntrainement = async ctx => {
   const [vis, mes] = await Promise.all([filtroVisivel(ctx), temasMesIds(ctx)]);
   const o = {};
   for (const t of ["ET1", "ET2", "ET3"]) {
-    o[t] = M.sujetsDaTache(t).filter(s => vis(t, s.e, s.id)).map(s => ({ ...s, w: M.pesoTema(t, s, mes), tr: M.ehTendencia(t, s.t) ? 1 : 0 }));
+    o[t] = ctx.P.sujetsDaTache(t).filter(s => vis(t, s.e, s.id)).map(s => ({ ...s, w: M.pesoTema(t, s, mes), tr: M.ehTendencia(t, s.t) ? 1 : 0 }));
   }
   return o;
 };
@@ -252,11 +258,12 @@ async function sessoesDoAluno(ctx) {
   });
 }
 const sujetsCompletos = ids => Object.fromEntries(["ET1", "ET2", "ET3"].map(t => [t, ids[t] ? M.acharTema(t, ids[t]) : null]));
-const fimEfetivo = (e, agora) => (e.sessaoId ? e.fim.getTime() : agora + Math.max(0, M.DURACAO_EPREUVE_MIN * 60 - (e.consumido || 0)) * 1000);
+const duracaoEp = e => e.duracaoMin || M.DURACAO_EPREUVE_MIN;
+const fimEfetivo = (e, agora) => (e.sessaoId ? e.fim.getTime() : agora + Math.max(0, duracaoEp(e) * 60 - (e.consumido || 0)) * 1000);
 function expirou(e, agora) {
   if (e.sessaoId) return agora > e.fim.getTime() + 60 * 1000;
   const ultimo = (e.ultimoSinal || e.inicio).getTime();
-  return (e.consumido || 0) >= M.DURACAO_EPREUVE_MIN * 60 + 30 || agora - ultimo > ABANDONO_TREINO_HORAS * 3600 * 1000;
+  return (e.consumido || 0) >= duracaoEp(e) * 60 + 30 || agora - ultimo > ABANDONO_TREINO_HORAS * 3600 * 1000;
 }
 
 function avisarEquipe(evento, dados) { canais.enviar(CANAL_EQUIPE, evento, dados); }
@@ -293,12 +300,14 @@ F.commencerEpreuve = async (ctx, pedido) => {
     sessaoId = linha._id;
   } else ids = pedido.sujets || {};
   for (const t of ["ET1", "ET2", "ET3"]) {
-    if (sessaoId && !ids[t]) continue;
+    if (!ids[t] && (sessaoId || !ctx.P.TACHES.includes(t))) continue;
     if (!M.acharTema(t, ids[t])) throw erro("Sujet invalide.");
   }
+  const primeiro = ["ET1", "ET2", "ET3"].map(t => ids[t] && M.acharTema(t, ids[t])).find(Boolean);
+  const duracaoMin = M.perfilDoSujet(primeiro).epreuveMin;
   const inicio = new Date();
   const ep = await T.EpreuveTCF.create({
-    alunoId: ctx.userId, courseType: ctx.courseType, sessaoId, inicio, fim: new Date(inicio.getTime() + M.DURACAO_EPREUVE_MIN * 60000),
+    alunoId: ctx.userId, courseType: ctx.courseType, sessaoId, inicio, fim: new Date(inicio.getTime() + duracaoMin * 60000), duracaoMin,
     sujets: ids, status: "em_curso", ultimoSinal: inicio, correcao: sessaoId ? "professor" : (pedido.correcao === "professor" ? "professor" : "ia")
   });
   const u = await usuario(ctx);
@@ -530,13 +539,13 @@ F.obterDestaques = async ctx => {
   const temas = await temasDoMes(ctx), idsMes = await temasMesIds(ctx);
   const ocultosUne = (await config()).ocultosUne || {};
   const saida = [];
-  for (const t of M.TACHES) {
+  for (const t of ctx.P.TACHES) {
     let esc = temas.filter(x => x.tache === t && !ocultosUne[x.id]).slice(0, 1).map(x => {
       const s = M.acharTema(t, x.id) || {};
       return { tache: t, id: x.id, titre: x.titre, texto: M.consigneDe(s), e: x.e, f: s.f || 1, mes: 1, tr: M.ehTendencia(t, `${s.t || ""} ${s.titre || ""}`) ? 1 : 0 };
     });
     if (!esc.length) {
-      const pool = M.modelosManuais(t).concat(M.sujetsDaTache(t)).filter(s => vis(t, s.e, s.id) && !ocultosUne[s.id]);
+      const pool = ctx.P.modelosManuais(t).concat(ctx.P.sujetsDaTache(t)).filter(s => vis(t, s.e, s.id) && !ocultosUne[s.id]);
       pool.sort((a, b) => M.pesoTema(t, b, idsMes) - M.pesoTema(t, a, idsMes));
       esc = pool.slice(0, 1).map(s => ({ tache: t, id: s.id, titre: s.titre || "", texto: M.consigneDe(s), e: s.e, f: s.f || 1, mes: 0, tr: M.ehTendencia(t, `${s.t || ""} ${s.titre || ""} ${s.c || ""}`) ? 1 : 0 }));
     }
@@ -897,8 +906,8 @@ prof("apagarMensagem", async (ctx, id) => { await T.MensagemTCF.deleteOne({ _id:
 prof("quadroTemas", async (ctx, tache) => {
   const cfg = await config(), ocultos = cfg.ocultos || {};
   const prontos = new Set((await T.ModeleIA.find({ tache }).select("sujetId").lean()).map(x => x.sujetId));
-  return M.modelosManuais(tache).map(m => ({ id: m.id, e: m.e, t: m.titre, f: m.f || 1, manual: 1, pub: ocultos[m.id] ? 0 : 1, ia: 1 }))
-    .concat(M.sujetsDaTache(tache).map(s => ({ id: s.id, e: s.e, t: String(s.t || "").slice(0, 200), f: s.f || 1, pub: ocultos[s.id] ? 0 : 1, ia: prontos.has(s.id) ? 1 : 0 })));
+  return ctx.P.modelosManuais(tache).map(m => ({ id: m.id, e: m.e, t: m.titre, f: m.f || 1, manual: 1, pub: ocultos[m.id] ? 0 : 1, ia: 1 }))
+    .concat(ctx.P.sujetsDaTache(tache).map(s => ({ id: s.id, e: s.e, t: String(s.t || "").slice(0, 200), f: s.f || 1, pub: ocultos[s.id] ? 0 : 1, ia: prontos.has(s.id) ? 1 : 0 })));
 });
 prof("publicarTemas", async (ctx, tache, ids, publicar) => {
   const cfg = await config();
@@ -973,7 +982,7 @@ prof("roteiroSujet", async (ctx, tache, id) => {
   const sujet = M.acharTema(tache, id);
   if (!sujet) throw erro("Sujet introuvable.", 404);
   const modelo = M.ehManual(tache, id) ? sujet : (await lerModeloIA(id)) || M.modeloGuia(tache, sujet);
-  return { tache, nomeTache: M.NOMES_TACHE[tache], consigne: M.consigneDe(sujet), d1: sujet.d1 || "", d2: sujet.d2 || "", modelo, trame: M.OUTILS.trames[tache] || null,
+  return { tache, nomeTache: M.nomeTacheDe(tache, sujet), consigne: M.consigneDe(sujet), d1: sujet.d1 || "", d2: sujet.d2 || "", modelo, trame: M.trameDe(tache, sujet),
     eixo: (M.EIXOS.eixos[sujet.e] || {}).nome || sujet.e, argumentos: { pour: (M.EIXOS.eixos[sujet.e] || {}).argumentsPour || [], contre: (M.EIXOS.eixos[sujet.e] || {}).argumentsContre || [] } };
 });
 

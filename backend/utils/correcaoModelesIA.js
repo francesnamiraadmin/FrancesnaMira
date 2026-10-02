@@ -19,7 +19,7 @@ function lerAudio(caminho, mime) {
     return { mime: String(mime || "audio/webm").split(";")[0], base64: fs.readFileSync(caminho).toString("base64") };
   } catch (e) { return undefined; }
 }
-const { avaliar, numeroDaIA } = require("./gradesProva");
+const { avaliar, numeroDaIA, grade } = require("./gradesProva");
 
 const NIVEL_CURSO = { TCF: "B2", DELF: "B2", DALF: "C1", TEF: "B2", A1: "A1", A2: "A2", B1: "B1", B2: "B2" };
 
@@ -30,26 +30,27 @@ async function garantirTemaSujet(courseType, tache, sujetId) {
   const existente = await Tema.findOne({ slug });
   if (existente) return existente;
   const oral = !M.ehEscrita(tache);
-  const lim = M.LIMITES_ESCRITA[tache];
+  const lim = M.limitesDe(tache, sujet);
+  const P = M.perfilDoSujet(sujet);
   const consigne = M.consigneDe(sujet);
   const dados = {
     slug, courseType, catalogo: false, ativo: true, eixo: sujet.e,
     origemModeles: { tache, sujetId },
-    titulo: String(sujet.titre || M.temaCurto(consigne) || consigne).slice(0, 160),
+    titulo: String(sujet.titre || (P.delf ? M.tituloDelf(sujet) : M.temaCurto(consigne)) || consigne).slice(0, 160),
     exame: ["TCF", "DELF", "DALF", "TEF"].includes(courseType) ? courseType : undefined,
-    nivel: NIVEL_CURSO[courseType] || "B2",
+    nivel: P.delf ? P.nivel : NIVEL_CURSO[courseType] || "B2",
     modalidade: oral ? "oral" : "textual",
-    tipoProducao: M.NOMES_TACHE[tache],
-    descricao: `${M.NOMES_TACHE[tache]} · axe ${(M.EIXOS.eixos[sujet.e] || {}).nome || sujet.e}`,
+    tipoProducao: M.nomeTacheDe(tache, sujet),
+    descricao: `${M.nomeTacheDe(tache, sujet)} · axe ${(M.EIXOS.eixos[sujet.e] || {}).nome || sujet.e}`,
     instrucoes: consigne,
-    tempoSugerido: oral ? Math.ceil(M.DURACAO_ORAL[tache] / 60) : { ET1: 10, ET2: 15, ET3: 25 }[tache],
+    tempoSugerido: oral ? Math.ceil(M.duracaoOralDe(tache, sujet) / 60) : M.minutosEscritaDe(tache, sujet),
     creditosNecessarios: 1,
     coletanea: sujet.d1 ? [
       { tipo: "artigo", titulo: "Document 1", conteudo: sujet.d1 },
       { tipo: "artigo", titulo: "Document 2", conteudo: sujet.d2 }
     ] : []
   };
-  if (oral) { dados.tempoMinimoSegundos = 30; dados.tempoMaximoSegundos = M.DURACAO_ORAL[tache] + 60; }
+  if (oral) { dados.tempoMinimoSegundos = 30; dados.tempoMaximoSegundos = M.duracaoOralDe(tache, sujet) + 60; }
   else { dados.limitePalavrasMin = lim[0]; dados.limitePalavrasMax = lim[1]; }
   try {
     return await Tema.create(dados);
@@ -66,8 +67,19 @@ async function corrigirTexto(tache, sujet, texte, audio) {
   const p = M.promptCorrecao(tache, sujet, texte, comAudio);
   const { json: r, modelo } = await pedirJson({ sistema: p.sistema, usuario: p.usuario, maxTokens: 4000, audio: comAudio ? audio : undefined });
   r.ouviuAudio = comAudio;
-  r.note = Math.max(0, Math.min(20, Math.round(numeroDaIA(r.note) * 2) / 2));
-  r.nclc = M.nclc(r.note);
+  const escala = p.escala || 20;
+  r.escala = escala;
+  r.note = Math.max(0, Math.min(escala, Math.round(numeroDaIA(r.note) * 2) / 2));
+  r.nclc = escala === 20 ? M.nclc(r.note) : "";
+  if (escala !== 20) {
+    // DELF: a nota é a soma dos critérios, cada um limitado ao máximo da grade oficial.
+    const g = grade("DELF", M.ehEscrita(tache) ? "textual" : "oral").criterios, cr = r.criteres || [];
+    if (cr.length === g.length) {
+      cr.forEach((c, i) => { const v = Math.max(0, Math.min(g[i].max, numeroDaIA(c.note) || 0)); c.note = v + "/" + g[i].max; });
+      r.note = Math.round(cr.reduce((t, c) => t + numeroDaIA(c.note), 0) * 2) / 2;
+    }
+    r.selo = M.seloDelf(r.note, sujet);
+  }
   r.mots = p.mots;
   r.limites = p.limites;
   if (r.version_amelioree) r.mots_version = M.contarPalavras(r.version_amelioree);
@@ -108,11 +120,13 @@ async function corrigirProducaoModeles(producao, tema, { registrar = true } = {}
   // Critérios do script ("x/5", na ordem da grade) → grade TCF do site.
   const nota = c => numeroDaIA((c || {}).note);
   const cr = r.criteres || [];
-  const ids = oral ? ["tarefa", "coerencia_oral", "lexico", "gramatica"] : ["tarefa", "coerencia", "lexico", "gramatica"];
+  const delf = !!M.perfilDoSujet(sujet).delf;
+  const ids = delf ? grade("DELF", oral ? "oral" : "textual").criterios.map(c => c.id)
+    : oral ? ["tarefa", "coerencia_oral", "lexico", "gramatica"] : ["tarefa", "coerencia", "lexico", "gramatica"];
   const notas = {}, comentarios = {};
   ids.forEach((id, i) => { notas[id] = nota(cr[i]); comentarios[id] = (cr[i] || {}).commentaire || ""; });
-  if (oral) { notas.fluencia = notas.coerencia_oral; comentarios.fluencia = (r.ouviuAudio ? "Évalué à partir de l'enregistrement et de la transcription. " : "Estimé à partir de la transcription (la prononciation n'est pas évaluée par l'IA). ") + (comentarios.coerencia_oral || ""); }
-  const av = avaliar("TCF", oral ? "oral" : "textual", notas, { nivelAlvo: tema.nivel, notaFinal: r.note, comentarios });
+  if (oral && !delf) { notas.fluencia = notas.coerencia_oral; comentarios.fluencia = (r.ouviuAudio ? "Évalué à partir de l'enregistrement et de la transcription. " : "Estimé à partir de la transcription (la prononciation n'est pas évaluée par l'IA). ") + (comentarios.coerencia_oral || ""); }
+  const av = avaliar(delf ? "DELF" : "TCF", oral ? "oral" : "textual", notas, { nivelAlvo: tema.nivel, notaFinal: r.note, comentarios });
   if (registrar) {
     await CorrecaoIATCF.create({ alunoId: producao.alunoId, tache, sujetId: sujet.id, sujet: String(sujet.titre || sujet.t || "").slice(0, 300), modalidade: producao.modalidade,
       mots: r.mots, note: r.note, nclc: r.nclc, texte: texte.slice(0, 12000), correcao: r, producaoId: producao._id });

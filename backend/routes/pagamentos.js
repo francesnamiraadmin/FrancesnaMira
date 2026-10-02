@@ -11,6 +11,7 @@ const HorarioSlot = require("../models/horarioSlot");
 const PagamentoMatricula = require("../models/pagamentoMatricula");
 const HistoricoAluno = require("../models/historicoAluno");
 const { exigirAuth } = require("../middleware/auth");
+const { horariosTomados, tomadoPelaOutra } = require("../utils/conflitoHorario");
 const { transmitir } = require("../utils/sse");
 const { confirmarMatricula, rejeitarMatricula } = require("./pagamentoMatricula");
 const { precoPorTier } = require("../utils/precoMatricula");
@@ -164,9 +165,10 @@ async function validarSlotsDisponiveis(slotsEscolhidos) {
   if (!Array.isArray(slotsEscolhidos) || !slotsEscolhidos.length) return;
   const slots = await HorarioSlot.find({ _id: { $in: slotsEscolhidos.map(s => s.slotId) }, ativo: true });
   if (slots.length !== slotsEscolhidos.length) throw new Error("Um dos horários escolhidos não existe mais. Selecione novamente.");
+  const tomados = await horariosTomados();
   for (const s of slots) {
     const ocupadas = await Matricula.countDocuments({ status: "confirmada", "slotsEscolhidos.slotId": s._id });
-    if (ocupadas >= s.capacidadeMaxima) {
+    if (ocupadas >= s.capacidadeMaxima || tomadoPelaOutra(tomados, s)) {
       throw new Error(`O horário de ${NOMES_DIA[s.diaSemana]} às ${s.horaInicio} acabou de ficar indisponível. Selecione outro.`);
     }
   }
@@ -184,9 +186,10 @@ async function criarMatriculaDeHorarios(userId, curso, plano, tipo, slotsEscolhi
     let matricula = null;
     await session.withTransaction(async () => {
       const slots = await HorarioSlot.find({ _id: { $in: slotsEscolhidos.map(s => s.slotId) } }).session(session);
+      const tomados = await horariosTomados(session);
       for (const s of slots) {
         const ocupadas = await Matricula.countDocuments({ status: "confirmada", "slotsEscolhidos.slotId": s._id }).session(session);
-        if (ocupadas >= s.capacidadeMaxima) {
+        if (ocupadas >= s.capacidadeMaxima || tomadoPelaOutra(tomados, s)) {
           throw new Error(`O horário de ${NOMES_DIA[s.diaSemana]} às ${s.horaInicio} foi ocupado por outro aluno enquanto seu pagamento era processado.`);
         }
       }

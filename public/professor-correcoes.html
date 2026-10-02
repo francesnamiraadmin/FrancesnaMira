@@ -228,6 +228,24 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .ia-sug-espera i { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #ddd6fe; border-top-color: #7c3aed; animation: girarIA 1s linear infinite; }
 @keyframes girarIA { to { transform: rotate(360deg); } }
 </style>
+<link rel="stylesheet" href="css/correcao-anotada.css">
+<style>
+/* correção anotada: contexto recolhível e avaliação em duas colunas */
+.ca-contexto { margin-top: 18px; }
+.ca-contexto summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: 10px; }
+.ca-contexto summary::-webkit-details-marker { display: none; }
+.ca-contexto summary::before { content: "▸"; transition: transform .15s; }
+.ca-contexto[open] summary::before { transform: rotate(90deg); }
+.ca-contexto summary small { color: var(--cinza-400); }
+.ca-contexto-grade { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.4fr); gap: 20px; margin-top: 14px; }
+.ca-contexto h3 { font-size: .95rem; margin-bottom: 8px; }
+.ca-avaliacao { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 18px; margin-top: 18px; align-items: start; }
+.ca-ajuda { font-size: .82rem; color: var(--cinza-400); margin: -4px 0 12px; }
+#viewCorrecao .aviso-leitura:empty { display: none; }
+@media (max-width: 900px) { .ca-contexto-grade, .ca-avaliacao { grid-template-columns: 1fr; } }
+</style>
+<!-- Painel da equipe: padrão visual do site + navegação de volta (depois do estilo da página) -->
+<link rel="stylesheet" href="css/painel-equipe.css">
 </head>
 
 <body style="visibility:hidden;">
@@ -277,10 +295,10 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <div class="kpi-row" id="kpiRow"></div>
     <div class="filtros-card">
       <div class="campo-filtro"><label>Curso</label><select id="filtroCurso"><option value="">Todos</option><option>TCF</option><option>TEF</option><option>DELF</option><option>DALF</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option></select></div>
-      <div class="campo-filtro"><label>Status</label><select id="filtroStatus"><option value="">Todos</option><option value="em_fila">Em fila</option><option value="em_correcao">Em correção (minhas)</option></select></div>
+      <div class="campo-filtro"><label>Status</label><select id="filtroStatus"><option value="">Todos</option><option value="em_fila">Em fila</option><option value="em_correcao">Em correção (minhas)</option><option value="aguardando_revisao">Concluída (revisar e devolver)</option></select></div>
       <div class="campo-filtro"><label>Prioridade</label><select id="filtroPrioridade"><option value="">Todas</option><option value="urgente">Urgente (prazo &lt; 2 dias)</option></select></div>
       <div class="campo-filtro"><label>Tipo</label><select id="filtroModalidade"><option value="">Escrita e oral</option><option value="textual">Produção escrita</option><option value="oral">Produção oral</option></select></div>
-      <div class="campo-filtro"><label>Aluno</label><select id="filtroAluno" class="filtro-aluno"><option value="">Todos os alunos</option></select></div>
+      <div class="campo-filtro"><label>Buscar</label><input type="search" id="filaBusca" placeholder="Aluno, tema ou protocolo"></div><div class="campo-filtro"><label>Ordenar</label><select id="filaOrdem"><option value="antigas">Mais antigas primeiro</option><option value="prazo">Prazo mais próximo</option><option value="recentes">Mais recentes primeiro</option><option value="aluno">Aluno (A–Z)</option></select></div><div class="campo-filtro"><label>Aluno</label><select id="filtroAluno" class="filtro-aluno"><option value="">Todos os alunos</option></select></div>
       <button class="btn secundario" id="atualizarFilaBtn"><img class="titulo-icone-inline pequeno" src="img/icones/repeat.svg" alt="">Atualizar</button>
     </div>
     <div id="filaLista"></div>
@@ -321,81 +339,96 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   </div>
 
   <!-- ===================== TELA DE CORREÇÃO ===================== -->
-  <div id="viewCorrecao" style="display:none;">
-    <span class="voltar-link" id="voltarFilaBtn"><img class="titulo-icone-inline pequeno" src="img/icones/chevron-left.svg" alt="">Voltar</span>
-    <div class="aviso-leitura" id="avisoLeitura">Esta produção já foi corrigida — você está vendo a avaliação enviada ao aluno.</div>
-    <div class="correcao-grid">
-      <div class="coluna-sticky">
-        <div class="card">
-          <h2>Dados do aluno</h2>
-          <div id="dadosAluno"></div>
-        </div>
-        <div class="card">
-          <h2>Consigne</h2>
-          <div class="instrucoes-box" id="instrucaoBox"></div>
-        </div>
-        <div class="card">
-          <h2>Coletânea do tema</h2>
-          <div class="doc-lista" id="coletaneaCorrecao"></div>
-        </div>
-        <div class="card">
-          <h2>Produção enviada</h2>
-          <div id="producaoEnviadaBox"></div>
-        </div>
-        <div class="card analise-ia" id="analiseIACard" style="display:none;">
-          <div class="analise-ia-cab"><h2>Base de análise da IA</h2><span class="so-equipe">só a equipe vê · o aluno não recebe</span></div>
-          <div id="analiseIABox"></div>
-        </div>
+  <div id="viewCorrecao" class="ca" style="display:none;">
+    <!-- Barra de estado: quem, estado da correção, salvamento, navegação e ações -->
+    <div class="ca-barra" id="caBarra">
+      <button type="button" class="ca-btn icone" id="voltarFilaBtn" title="Voltar à lista">‹ Voltar</button>
+      <div class="ca-quem"><b id="caAluno">—</b><small id="caTema"></small></div>
+      <span class="ca-estado" id="caEstado" data-estado="nao_corrigida">Não corrigida</span>
+      <span class="ca-salvo" id="caSalvo" data-s="salvo" role="status" aria-live="polite"><i></i><span>Tudo salvo</span></span>
+      <div class="ca-acoes">
+        <button type="button" class="ca-btn icone" id="caAnterior" title="Produção anterior da lista (Alt+←)" aria-label="Produção anterior">←</button>
+        <button type="button" class="ca-btn icone" id="caProxima" title="Próxima produção da lista (Alt+→)" aria-label="Próxima produção">→</button>
+        <button type="button" class="ca-btn" id="caHistoricoBtn" title="Versões e alterações desta correção">Histórico</button>
+        <button type="button" class="ca-btn editavel" id="salvarRascunhoBtn" title="O salvamento é automático; força agora (Ctrl+S)">Salvar <kbd>Ctrl+S</kbd></button>
+        <button type="button" class="ca-btn editavel" id="caConcluirBtn" title="Marca como concluída, para revisar antes de devolver">Concluir</button>
+        <button type="button" class="ca-btn" id="caReabrirBtn" hidden title="Reabre a correção para editar (o aluno vê « em revisão »)">Reabrir correção</button>
+        <button type="button" class="ca-btn verde editavel" id="devolverBtn">Devolver ao aluno</button>
       </div>
+    </div>
+    <div class="aviso-leitura" id="avisoLeitura"></div>
 
-      <div>
-        <div class="card">
-          <h2 id="tituloGrade">Grade oficial</h2>
-          <div id="criteriosLista"></div>
-          <div class="total-box"><span>Nota final</span><span class="valor-total" id="notaTotalView">0</span><span id="notaMaximaView">/ 20</span></div>
-          <div class="campo editavel">
-            <label>Ajustar a nota final (opcional — em branco usa a soma dos critérios)</label>
-            <input type="number" id="notaFinalInput" min="0" step="0.5" style="max-width:160px;">
-          </div>
-        </div>
-        <div class="card">
-          <h2>Comentários ao aluno</h2>
-          <div class="campo" style="margin-bottom:12px;">
-            <label>Comentário geral</label>
-            <textarea id="comentarioGeralInput" placeholder="Impressão geral sobre a produção…"></textarea>
-          </div>
-          <div class="campo-row" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-            <div class="campo"><label>Pontos fortes (um por linha)</label><textarea id="pontosFortesInput"></textarea></div>
-            <div class="campo"><label>A melhorar (um por linha)</label><textarea id="aMelhorarInput"></textarea></div>
-          </div>
-        </div>
-        <div class="card">
-          <h2>Correções linha a linha</h2>
-          <div id="correcoesLista"></div>
-          <button class="btn secundario pequeno editavel" id="addCorrecaoBtn" type="button">+ Adicionar correção</button>
-        </div>
-        <div class="card editavel">
-          <h2>Arquivo corrigido (opcional)</h2>
-          <div class="upload-corrigido-box" id="uploadCorrigidoBox">
-            <p id="uploadCorrigidoTexto">Clique para anexar o arquivo corrigido (PDF, DOCX ou ODT)</p>
-          </div>
-          <input type="file" id="arquivoCorrigidoInput" accept=".pdf,.docx,.odt" style="display:none;">
-          <div class="acoes-correcao">
-            <button class="btn secundario" id="salvarRascunhoBtn"><img class="titulo-icone-inline pequeno" src="img/icones/save.svg" alt="">Salvar rascunho</button>
-            <button class="btn" id="devolverBtn"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Devolver ao aluno</button>
-          </div>
-          <div class="msg-inline" id="correcaoMsg" style="display:none;"></div>
+    <!-- 1. Texto / áudio com marcações + painel de comentários -->
+    <div class="ca-area">
+      <div id="caFolha"></div>
+      <div id="caPainel"></div>
+    </div>
+
+    <!-- Contexto da produção (recolhível, para não carregar a tela) -->
+    <details class="card ca-contexto" id="caContexto">
+      <summary><h2 style="display:inline;">Contexto da produção</h2> <small>aluno, consigne e coletânea</small></summary>
+      <div class="ca-contexto-grade">
+        <div><h3>Dados do aluno</h3><div id="dadosAluno"></div></div>
+        <div><h3>Consigne</h3><div class="instrucoes-box" id="instrucaoBox"></div>
+          <h3 style="margin-top:14px;">Coletânea do tema</h3><div class="doc-lista" id="coletaneaCorrecao"></div></div>
+      </div>
+    </details>
+
+    <div class="card analise-ia" id="analiseIACard" style="display:none;">
+      <div class="analise-ia-cab"><h2>Base de análise da IA</h2><span class="so-equipe">só a equipe vê · o aluno não recebe</span></div>
+      <div id="analiseIABox"></div>
+    </div>
+
+    <!-- 2. Avaliação por critérios (grade oficial da prova) + 3. feedback global -->
+    <div class="ca-avaliacao">
+      <div class="card">
+        <h2 id="tituloGrade">Grade oficial</h2>
+        <div id="criteriosLista"></div>
+        <div class="total-box"><span>Nota final</span><span class="valor-total" id="notaTotalView">0</span><span id="notaMaximaView">/ 20</span></div>
+        <div class="campo editavel">
+          <label for="notaFinalInput">Ajustar a nota final (opcional — em branco usa a soma dos critérios)</label>
+          <input type="number" id="notaFinalInput" min="0" step="0.5" style="max-width:160px;">
         </div>
       </div>
+      <div class="card">
+        <h2>Feedback global</h2>
+        <p class="ca-ajuda">Separado dos comentários no texto: é a avaliação geral que o aluno lê junto com a nota.</p>
+        <div class="campo"><label for="comentarioGeralInput">Avaliação geral</label>
+          <textarea id="comentarioGeralInput" placeholder="Impressão geral sobre a produção…"></textarea></div>
+        <div class="campo-row" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="campo"><label for="pontosFortesInput">Pontos fortes (um por linha)</label><textarea id="pontosFortesInput"></textarea></div>
+          <div class="campo"><label for="aMelhorarInput">Pontos a melhorar (um por linha)</label><textarea id="aMelhorarInput"></textarea></div>
+        </div>
+        <div class="campo"><label for="recomendacoesInput">Recomendações de estudo (uma por linha)</label>
+          <textarea id="recomendacoesInput" placeholder="Ex.: revisar o passé composé com être"></textarea></div>
+        <div class="campo"><label for="feedbackFinalInput">Mensagem final ao aluno</label>
+          <textarea id="feedbackFinalInput" placeholder="Uma mensagem de encerramento, motivadora e objetiva."></textarea></div>
+      </div>
+    </div>
+
+    <div class="card editavel">
+      <h2>Arquivo corrigido (opcional)</h2>
+      <div class="upload-corrigido-box" id="uploadCorrigidoBox">
+        <p id="uploadCorrigidoTexto">Clique para anexar o arquivo corrigido (PDF, DOCX ou ODT)</p>
+      </div>
+      <input type="file" id="arquivoCorrigidoInput" accept=".pdf,.docx,.odt" style="display:none;">
+      <div class="msg-inline" id="correcaoMsg" style="display:none;"></div>
     </div>
   </div>
 </div>
 
 <footer>© 2026 · Francês na Mira</footer>
 
+<script src="js/correcao/nucleo.js"></script>
+<script src="js/correcao/texto-anotado.js"></script>
+<script src="js/correcao/painel-comentarios.js"></script>
+<script src="js/correcao/player-oral.js"></script>
+<script src="js/correcao/persistencia.js"></script>
+<script src="js/correcao/editor.js"></script>
 <script src="js/professor-correcoes.js"></script>
 <script src="js/simuladoAoVivo.js"></script>
 <script src="js/correcaoAoVivo.js"></script>
 <script src="js/theme-toggle.js"></script>
+<script src="js/painelEquipe.js" defer></script>
 </body>
 </html>

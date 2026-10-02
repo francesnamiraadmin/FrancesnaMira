@@ -29,6 +29,7 @@ const EpreuveTCF = mongoose.model("EpreuveTCF", new Schema({
   sessaoId: { type: Schema.Types.ObjectId, ref: "SessaoTCF", default: null },
   inicio: { type: Date, required: true },
   fim: { type: Date, required: true },
+  duracaoMin: { type: Number, default: 60 },
   sujets: { ET1: String, ET2: String, ET3: String },
   textes: { ET1: { type: String, default: "" }, ET2: { type: String, default: "" }, ET3: { type: String, default: "" } },
   status: { type: String, enum: ["em_curso", "enviada", "enviada_auto", "vazia", "so_ia"], default: "em_curso", index: true },

@@ -17,9 +17,13 @@ const HORAS_POR_PERIODO = {
   vespertino: ["12:00", "13:00", "14:00", "15:00", "16:00", "17:00"],
   noturno: ["18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "00:00"]
 };
+HORAS_POR_PERIODO.todos = HORAS_POR_PERIODO.diurno.concat(HORAS_POR_PERIODO.vespertino, HORAS_POR_PERIODO.noturno);
+const NOME_MODALIDADE = { particular: 'Particular', turma: 'Turma' };
 
-let modalidadeAtual = 'particular';
-let periodoAtual = 'diurno';
+// Grade única: aula particular e aula em turma juntas (um horário só pode ter uma das duas).
+let modalidadeAtual = 'particular';   // padrão do modal « novo horário »
+let periodoAtual = 'todos';
+let verModalidade = 'todas';
 let gradeCompleta = [];
 let slotSelecionado = null;
 
@@ -49,14 +53,13 @@ document.addEventListener('change', e => {
 montarTiposChips('novoCursosGrid');
 montarTiposChips('detalheCursosGrid');
 
-// ===================== TABS =====================
-document.querySelectorAll('.top-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.top-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    modalidadeAtual = tab.dataset.modalidade;
-    carregarGrade();
-  });
+// ===================== FILTROS =====================
+document.getElementById('guModalidade').addEventListener('click', e => {
+  const btn = e.target.closest('[data-ver]');
+  if (!btn) return;
+  document.querySelectorAll('#guModalidade .periodo-tab').forEach(b => b.classList.toggle('active', b === btn));
+  verModalidade = btn.dataset.ver;
+  renderGrade();
 });
 
 document.getElementById('periodoTabsAdmin').addEventListener('click', e => {
@@ -73,7 +76,7 @@ async function carregarGrade() {
   const tabela = document.getElementById('gradeAdmin');
   tabela.innerHTML = '<tr><td class="vazio-aviso">Carregando…</td></tr>';
   try {
-    const res = await fetch('/api/horarios/admin/grade?modalidade=' + modalidadeAtual, { headers: authHeaders() });
+    const res = await fetch('/api/horarios/admin/grade', { headers: authHeaders() });
     gradeCompleta = res.ok ? await res.json() : [];
     renderGrade();
   } catch (e) {
@@ -81,36 +84,55 @@ async function carregarGrade() {
   }
 }
 
+function chaveHorario(dia, hora) { return dia + '|' + hora; }
+
 function renderGrade() {
   const tabela = document.getElementById('gradeAdmin');
-  const slots = gradeCompleta.filter(s => s.periodo === periodoAtual);
-  const porHora = {};
-  slots.forEach(s => { (porHora[s.horaInicio] = porHora[s.horaInicio] || {})[s.diaSemana] = s; });
+  const horas = HORAS_POR_PERIODO[periodoAtual];
+  const porCelula = {};
+  gradeCompleta.forEach(s => { (porCelula[chaveHorario(s.diaSemana, s.horaInicio)] = porCelula[chaveHorario(s.diaSemana, s.horaInicio)] || []).push(s); });
 
+  let conflitos = 0, part = 0, turma = 0;
   let html = '<thead><tr><th>Horário</th>' + ORDEM_DIAS.map(d => '<th>' + DIAS_LABEL[d] + '</th>').join('') + '</tr></thead><tbody>';
-  HORAS_POR_PERIODO[periodoAtual].forEach(hora => {
-    html += '<tr><td class="hora-label">' + hora + '</td>';
+  horas.forEach(hora => {
+    html += '<tr><th class="ha-hora" scope="row">' + hora + ' – ' + proximaHora(hora) + '</th>';
     ORDEM_DIAS.forEach(dia => {
-      const slot = porHora[hora] && porHora[hora][dia];
-      if (!slot) {
-        html += '<td class="slot-cel vazio" data-novo-dia="' + dia + '" data-novo-hora="' + hora + '">+</td>';
-        return;
-      }
-      const classe = slot.ativo === false ? 'inativo' : (slot.ocupadas >= slot.capacidadeMaxima ? 'ocupado' : 'livre');
-      const tituloTipos = slot.cursos && slot.cursos.length ? 'Tipos: ' + slot.cursos.join(', ') : 'Tipos: todos';
-      html += '<td class="slot-cel ' + classe + '" data-slot-id="' + slot._id + '" title="' + tituloTipos + '">' + slot.ocupadas + '/' + slot.capacidadeMaxima + '</td>';
+      const todos = (porCelula[chaveHorario(dia, hora)] || []).slice().sort((a, b) => a.modalidade.localeCompare(b.modalidade));
+      const ativos = todos.filter(s => s.ativo !== false);
+      const conflito = new Set(ativos.map(s => s.modalidade)).size > 1;
+      if (conflito) conflitos++;
+      todos.forEach(s => { if (s.modalidade === 'turma') turma++; else part++; });
+      const visiveis = todos.filter(s => verModalidade === 'todas' || s.modalidade === verModalidade);
+      html += '<td class="gu-cel' + (conflito ? ' conflito' : '') + '"' + (conflito ? ' title="Conflito: aula particular e em turma no mesmo horário. Desative ou remova uma delas."' : '') + '>';
+      html += visiveis.map(s => {
+        const cheio = s.ocupadas >= s.capacidadeMaxima;
+        const tipos = s.cursos && s.cursos.length ? s.cursos.join(', ') : 'todos os cursos';
+        return '<button type="button" class="gu-slot ' + s.modalidade + (cheio ? ' cheio' : '') + (s.ativo === false ? ' inativo' : '') + '" data-slot-id="' + s._id + '"' +
+          ' title="' + NOME_MODALIDADE[s.modalidade] + ' · ' + s.ocupadas + '/' + s.capacidadeMaxima + ' · ' + escapeHtml(tipos) + (s.ativo === false ? ' · inativo' : '') + '">' +
+          '<span>' + NOME_MODALIDADE[s.modalidade] + '<small>' + escapeHtml(tipos) + '</small></span><b>' + s.ocupadas + '/' + s.capacidadeMaxima + '</b></button>';
+      }).join('');
+      if (!todos.length) html += '<button type="button" class="gu-add" data-novo-dia="' + dia + '" data-novo-hora="' + hora + '" aria-label="Criar horário ' + DIAS_LABEL[dia] + ' ' + hora + '">+</button>';
+      html += '</td>';
     });
     html += '</tr>';
   });
   html += '</tbody>';
   tabela.innerHTML = html;
+  const resumo = document.getElementById('guResumo');
+  if (resumo) resumo.innerHTML = part + ' horário(s) de aula particular · ' + turma + ' de aula em turma' +
+    (conflitos ? ' · <b style="color:var(--vermelho);">' + conflitos + ' conflito(s): resolva desativando ou removendo uma das aulas</b>' : ' · sem conflitos');
+}
+
+function proximaHora(h) {
+  const n = (parseInt(h, 10) + 1) % 24;
+  return String(n).padStart(2, '0') + ':00';
 }
 
 document.getElementById('gradeAdmin').addEventListener('click', e => {
-  const ocupado = e.target.closest('.slot-cel:not(.vazio)');
-  if (ocupado) { abrirDetalheHorario(ocupado.dataset.slotId); return; }
-  const vazio = e.target.closest('.slot-cel.vazio');
-  if (vazio) abrirNovoHorario({ dia: vazio.dataset.novoDia, hora: vazio.dataset.novoHora });
+  const slot = e.target.closest('.gu-slot');
+  if (slot) { abrirDetalheHorario(slot.dataset.slotId); return; }
+  const novo = e.target.closest('.gu-add');
+  if (novo) abrirNovoHorario({ dia: novo.dataset.novoDia, hora: novo.dataset.novoHora });
 });
 
 // ===================== MODAL: NOVO HORÁRIO =====================
@@ -126,11 +148,16 @@ document.getElementById('novoModalidade').addEventListener('change', e => {
   document.getElementById('novoCapacidadeWrap').style.display = e.target.value === 'turma' ? 'flex' : 'none';
 });
 
+function periodoDaHora(hora) {
+  if (!hora) return 'noturno';
+  return Object.keys(HORAS_POR_PERIODO).find(p => p !== 'todos' && HORAS_POR_PERIODO[p].includes(hora)) || 'noturno';
+}
+
 function abrirNovoHorario(pre) {
   document.getElementById('novoHorarioErro').style.display = 'none';
   document.getElementById('novoModalidade').value = modalidadeAtual;
   document.getElementById('novoModalidade').dispatchEvent(new Event('change'));
-  document.getElementById('novoPeriodo').value = periodoAtual;
+  document.getElementById('novoPeriodo').value = periodoAtual === 'todos' ? periodoDaHora(pre && pre.hora) : periodoAtual;
   atualizarHorasDisponiveis();
   if (pre?.dia !== undefined) document.getElementById('novoDiaSemana').value = pre.dia;
   if (pre?.hora) document.getElementById('novoHoraInicio').value = pre.hora;
@@ -155,7 +182,8 @@ document.getElementById('salvarNovoHorarioBtn').addEventListener('click', async 
   const data = await res.json();
   if (!res.ok) { erroEl.textContent = data.msg || 'Erro ao criar horário.'; erroEl.style.display = 'block'; return; }
   document.getElementById('modalNovoHorario').classList.remove('show');
-  if (payload.modalidade === modalidadeAtual) await carregarGrade();
+  modalidadeAtual = payload.modalidade;
+  await carregarGrade();
 });
 
 // ===================== MODAL: DETALHE DO HORÁRIO =====================

@@ -15,7 +15,7 @@ function atividadeDoDevoir(devoir) {
   return {
     tipo: "producao_ambiente",
     titulo: `${ROTULO[devoir.tipo] || "Tarefa"} · ${devoir.titre}`.slice(0, 200),
-    descricao: [devoir.mensagem, `Ambiente de Produção · ${M.NOMES_TACHE[devoir.tache] || devoir.tache}`].filter(Boolean).join(" — ").slice(0, 600),
+    descricao: [devoir.mensagem, `Ambiente de Produção · ${M.nomeTacheDe(devoir.tache, M.acharTema(devoir.tache, devoir.modelo)) || devoir.tache}`].filter(Boolean).join(" — ").slice(0, 600),
     obrigatoria: true,
     conteudo: { tache: devoir.tache, sujetId: devoir.modelo, atividadeTcf: devoir.tipo, devoirProducaoId: devoir._id, url: `producao.html#devoir=${devoir._id}` },
     entrega: { status: "pendente" }

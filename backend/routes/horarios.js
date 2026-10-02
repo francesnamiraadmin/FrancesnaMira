@@ -3,6 +3,7 @@ const router = express.Router();
 const HorarioSlot = require("../models/horarioSlot");
 const Matricula = require("../models/matricula");
 const { exigirAuth, exigirAdmin } = require("../middleware/auth");
+const { slotConcorrente, mensagemConflito, horariosTomados, tomadoPelaOutra } = require("../utils/conflitoHorario");
 
 const MODALIDADES = ["particular", "turma"];
 const PERIODOS = ["diurno", "vespertino", "noturno"];
@@ -200,6 +201,8 @@ router.post("/admin/slots", exigirAuth, exigirAdmin, async (req, res) => {
     if (!PERIODOS.includes(periodo)) return res.status(400).json({ msg: "Período inválido." });
     if (diaSemana === undefined || diaSemana < 0 || diaSemana > 6) return res.status(400).json({ msg: "Dia da semana inválido." });
     if (!horaInicio) return res.status(400).json({ msg: "Informe o horário." });
+    const outro = await slotConcorrente({ diaSemana, horaInicio, modalidade });
+    if (outro) return res.status(409).json({ msg: mensagemConflito(outro), conflito: true });
 
     const slot = await HorarioSlot.create({
       modalidade, diaSemana, horaInicio, periodo,
@@ -222,6 +225,10 @@ router.put("/admin/slots/:id", exigirAuth, exigirAdmin, async (req, res) => {
     const { capacidadeMaxima, ativo, cursos } = req.body;
     if (capacidadeMaxima !== undefined) {
       slot.capacidadeMaxima = slot.modalidade === "particular" ? 1 : Math.max(1, Number(capacidadeMaxima) || 1);
+    }
+    if (ativo !== undefined && !!ativo && slot.ativo === false) {
+      const outro = await slotConcorrente(slot, slot._id);
+      if (outro) return res.status(409).json({ msg: mensagemConflito(outro), conflito: true });
     }
     if (ativo !== undefined) slot.ativo = !!ativo;
     if (cursos !== undefined) slot.cursos = normalizarCursos(cursos);
@@ -263,7 +270,7 @@ router.get("/:modalidade/:periodo", exigirAuth, async (req, res) => {
     }
 
     const slots = await HorarioSlot.find(filtro).sort({ diaSemana: 1, horaInicio: 1 });
-    const mapa = await ocupacaoPorSlot(slots.map(s => s._id));
+    const [mapa, tomados] = await Promise.all([ocupacaoPorSlot(slots.map(s => s._id)), horariosTomados()]);
 
     res.json(slots.map(s => {
       const ocupadas = mapa[String(s._id)] || 0;
@@ -272,7 +279,8 @@ router.get("/:modalidade/:periodo", exigirAuth, async (req, res) => {
         diaSemana: s.diaSemana,
         horaInicio: s.horaInicio,
         capacidadeMaxima: s.capacidadeMaxima,
-        disponivel: ocupadas < s.capacidadeMaxima
+        // indisponível também quando o horário já é de um aluno da outra modalidade
+        disponivel: ocupadas < s.capacidadeMaxima && !tomadoPelaOutra(tomados, s)
       };
     }));
   } catch (err) {

@@ -34,11 +34,25 @@
     soc: "Sociedade", conso: "Consumo", loisirs: "Lazer", voyages: "Viagens", culture: "Cultura", log: "Moradia", services: "Serviços"
   };
   var TAREFA = { "Entretien dirigé": "Entrevista dirigida", "Exercice en interaction": "Exercício de interação", "Expression d'un point de vue": "Expressão de um ponto de vista",
-    "Message court": "Mensagem curta", "Récit, article ou lettre": "Relato, artigo ou carta", "Texte argumentatif": "Texto argumentativo" };
+    "Message court": "Mensagem curta", "Récit, article ou lettre": "Relato, artigo ou carta", "Texte argumentatif": "Texto argumentativo",
+    // DELF
+    "Message simple": "Mensagem simples", "Échange d'informations": "Troca de informações", "Dialogue simulé": "Diálogo simulado", "Monologue suivi": "Monólogo contínuo",
+    "Raconter un événement ou une expérience": "Relatar um acontecimento ou uma experiência", "Lettre ou message (inviter, remercier, s'excuser…)": "Carta ou mensagem (convidar, agradecer, desculpar-se…)",
+    "Essai, article ou courrier : donner son opinion": "Ensaio, artigo ou carta: dar a sua opinião", "Texte argumenté (lettre formelle, article, contribution)": "Texto argumentativo (carta formal, artigo, contribuição)",
+    "Exposé et débat à partir d'un document": "Exposição e debate a partir de um documento" };
   var plural = function (n, um, varios) { return Number(n) > 1 ? varios : um; };
 
   // Textos montados com números/nomes: [regex, substituição]. Testadas no texto inteiro do nó.
   var REGRAS = [
+    [/^(\d+) mots minimum · temps conseillé : (\d+) min$/, "$1 palavras no mínimo · tempo recomendado: $2 min"],
+    [/^Correction par l'IA · (DELF [AB][12]) · (.+)$/, function (m, d, x) { return "Correção pela IA · " + d + " · " + ({ "niveau atteint": "nível atingido", "à renforcer (objectif 12,5/25)": "a reforçar (meta 12,5/25)", "sous la note éliminatoire (5/25)": "abaixo da nota eliminatória (5/25)" }[x] || x); }],
+    [/^(DELF [AB][12]) · Expression écrite · réécriture$/, "$1 · Produção escrita · reescrita"],
+    [/^(Oral|Écrit) · (Partie|Exercice|Épreuve orale) ?(\d)?$/, function (m, a, k, n) { return (a === "Oral" ? "Oral" : "Escrita") + " · " + ({ Partie: "Parte", Exercice: "Exercício", "Épreuve orale": "Prova oral" }[k]) + (n ? " " + n : ""); }],
+    [/^(Oral|Écrit) · (Partie|Exercice) (\d) · (.+)$/, function (m, a, k, n, x) { return (a === "Oral" ? "Oral" : "Escrita") + " · " + (k === "Partie" ? "Parte " : "Exercício ") + n + " · " + (TAREFA[x] || x); }],
+    [/^(Oral|Écrit) · Épreuve orale · (.+)$/, function (m, a, x) { return "Oral · Prova oral · " + (TAREFA[x] || x); }],
+    [/^(Partie|Exercice) (\d) · (.+)$/, function (m, k, n, x) { return (k === "Partie" ? "Parte " : "Exercício ") + n + " · " + (TAREFA[x] || x); }],
+    [/^Épreuve orale · (.+)$/, function (m, x) { return "Prova oral · " + (TAREFA[x] || x); }],
+    [/^(Partie|Exercice) (\d)$/, function (m, k, n) { return (k === "Partie" ? "Parte " : "Exercício ") + n; }],
     [/^(Oral|Écrit) · Tâche (\d)$/, function (m, a, n) { return (a === "Oral" ? "Oral" : "Escrita") + " · Tarefa " + n; }],
     [/^(Oral|Écrit) · Tâche (\d) · (.+)$/, function (m, a, n, s) { return (a === "Oral" ? "Oral" : "Escrita") + " · Tarefa " + n + " · " + (TAREFA[s] || s); }],
     [/^Tâche (\d)$/, "Tarefa $1"],

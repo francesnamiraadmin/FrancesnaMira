@@ -346,3 +346,16 @@ textarea.sm-campo { width: 100%; min-height: 70px; resize: vertical; }
 .sm-hub-card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; padding-right: 54px; }
 .sm-hub-card .sm-btn { margin-top: auto; }
 .sm-hub-num { position: absolute; top: 18px; right: 20px; width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; background: var(--accent); color: var(--accent-text); }
+
+/* ===================== DELF (exercícios com documento e várias questões) ===================== */
+.sm-nivel-tit { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 26px 0 10px; }
+.sm-doc-delf { margin: 12px 0 18px; padding: 18px 20px; border-radius: 14px; background: var(--surface-2, rgba(0,0,0,.03)); border: 1px solid var(--line, rgba(0,0,0,.1)); line-height: 1.65; }
+.sm-doc-delf h3 { margin: 0 0 8px; font-size: 1.05rem; }
+.sm-doc-delf p { margin: 0 0 10px; }
+.sm-player.delf { margin: 12px 0 18px; }
+.sm-delf-questoes { display: flex; flex-direction: column; gap: 16px; margin: 6px 0 10px; }
+.sm-delf-q { padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line, rgba(0,0,0,.1)); }
+.sm-delf-q .sm-pergunta { margin: 0 0 10px; }
+.sm-delf-q .num { font-weight: 800; margin-right: 4px; }
+.sm-delf-q .sm-alts { margin: 0; }
+#gradeExercicios button { min-width: 64px; }

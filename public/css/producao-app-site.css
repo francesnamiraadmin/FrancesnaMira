@@ -377,3 +377,12 @@
 @media (max-width: 420px) { .fnm-app .fm-creditos b { font-size: 1.35rem; } }
 .fnm-app .fm-acoes > * { flex: 1 1 140px; width: auto; margin: 0; justify-content: center; text-align: center; }
 .fnm-app .fm-acoes .ferramenta { padding: 12px 18px; }
+
+/* Nível do DELF (A1 a B2): escolhido no topo do Ambiente de Produção */
+.fnm-app .niveis-delf { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin: 4px 0 22px; padding: 12px 16px; border-radius: 14px;
+  background: color-mix(in srgb, #3b6ea5 8%, transparent); border: 1px solid color-mix(in srgb, #3b6ea5 22%, transparent); }
+.fnm-app .niveis-delf > span { font-weight: 700; font-size: .9rem; margin-right: 4px; }
+.fnm-app .niveis-delf .chip { min-width: 52px; font-weight: 700; }
+.fnm-app .niveis-delf .chip[aria-pressed="true"] { background: #3b6ea5; border-color: #3b6ea5; color: #fff; }
+.fnm-app .niveis-delf small { flex-basis: 100%; opacity: .8; line-height: 1.45; }
+.fnm-app .niveis-delf.carregando { opacity: .6; pointer-events: none; }

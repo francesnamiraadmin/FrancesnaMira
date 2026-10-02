@@ -121,14 +121,14 @@ table.lista td small { color: var(--cinza-400); display: block; }
 .previa-cupom { margin-top: 4px; padding: 12px 14px; border-radius: 12px; background: var(--azul-claro); color: var(--azul-escuro); font-size: 0.85rem; }
 footer { text-align: center; padding: 24px; background: var(--branco); border-top: 1px solid var(--cinza-200); margin-top: 30px; font-size: 0.85rem; color: var(--cinza-400); }
 /* ----- Horários Atuais: grade no estilo planilha (livre em verde, ocupado em rosa) ----- */
-.secao[data-secao="atuais"] {
+.secao[data-secao="atuais"], .secao[data-secao="grade"] {
   --ha-livre: #dcf3e2; --ha-livre-hover: #c9ecd3;
   --ha-ocupado: #fbdcdc; --ha-ocupado-hover: #f7cccc; --ha-nome: #b3261e;
   --ha-turma: #fde7c8; --ha-turma-nome: #9a4b00;
   --ha-hora: #fff4d6; --ha-hora-txt: #3d2f12;
   --ha-linha: #ecdcc4; --ha-cab: #1e3a8a;
 }
-:root[data-theme="dark"] .secao[data-secao="atuais"] {
+:root[data-theme="dark"] .secao[data-secao="atuais"], :root[data-theme="dark"] .secao[data-secao="grade"] {
   --ha-livre: #12301f; --ha-livre-hover: #173c27;
   --ha-ocupado: #3a1d22; --ha-ocupado-hover: #47232a; --ha-nome: #ff9f9a;
   --ha-turma: #3a2a12; --ha-turma-nome: #ffc978;
@@ -137,7 +137,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 }
 .ha-filtros { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
 .ha-check { display: flex; align-items: center; gap: 6px; font-size: .85rem; color: var(--cinza-600); cursor: pointer; }
-.secao[data-secao="atuais"] .grade-wrap { border-radius: 16px; border: 1px solid var(--ha-linha); overflow: auto; max-height: 76vh; box-shadow: 0 10px 30px -18px rgba(30,41,59,.35); }
+.secao[data-secao="atuais"] .grade-wrap, .secao[data-secao="grade"] .grade-wrap { border-radius: 16px; border: 1px solid var(--ha-linha); overflow: auto; max-height: 76vh; box-shadow: 0 10px 30px -18px rgba(30,41,59,.35); }
 .ha-grade { width: 100%; min-width: 900px; border-collapse: separate; border-spacing: 0; table-layout: fixed; font-size: .86rem; }
 .ha-grade thead th { position: sticky; top: 0; z-index: 2; background: var(--branco); color: var(--ha-cab); font-weight: 800; font-size: .8rem;
   letter-spacing: .05em; text-transform: uppercase; padding: 12px 6px; border-bottom: 2px solid var(--ha-linha); text-align: center; }
@@ -171,6 +171,30 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .ha-cel.livre:hover .ha-add, .ha-add:focus-visible { opacity: 1; }
 .ha-cel.ocupada .ha-add { left: auto; right: 4px; top: auto; bottom: 3px; transform: none; width: 18px; height: 18px; font-size: 12px; border-width: 1px; }
 .ha-cel.ocupada:hover .ha-add { opacity: .85; }
+/* ----- Grade semanal única: aula particular (azul) e aula em turma (laranja) ----- */
+.gu-cel { position: relative; height: 54px; padding: 5px 6px; vertical-align: middle; border-right: 1px solid var(--ha-linha); border-bottom: 1px solid var(--ha-linha); background: var(--cinza-50); }
+.gu-cel.conflito { background: repeating-linear-gradient(135deg, rgba(220,38,38,.10) 0 8px, rgba(220,38,38,.04) 8px 16px); box-shadow: inset 0 0 0 2px rgba(220,38,38,.55); }
+.gu-slot { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 6px; padding: 5px 8px; border-radius: 9px; border: 1px solid transparent;
+  font: 600 .78rem/1.2 'Poppins', sans-serif; cursor: pointer; text-align: left; transition: transform .12s, box-shadow .12s; }
+.gu-slot + .gu-slot { margin-top: 4px; }
+.gu-slot:hover { transform: translateY(-1px); box-shadow: 0 4px 12px -6px rgba(22,33,58,.5); }
+.gu-slot:focus-visible { outline: 2px solid var(--accent, #d9a300); outline-offset: 1px; }
+.gu-slot b { font-weight: 800; font-variant-numeric: tabular-nums; }
+.gu-slot small { display: block; font-weight: 500; opacity: .75; font-size: .68rem; }
+.gu-slot.particular { background: #dbeafe; border-color: #93c5fd; color: #1e3a8a; }
+.gu-slot.turma { background: var(--ha-turma); border-color: #f5b25b; color: var(--ha-turma-nome); }
+.gu-slot.cheio { box-shadow: inset 4px 0 0 #dc2626; }
+.gu-slot.inativo { opacity: .45; filter: grayscale(.7); }
+:root[data-theme="dark"] .gu-slot.particular { background: #172a4d; border-color: #2c4f8f; color: #bcd3ff; }
+.gu-add { position: absolute; inset: 0; margin: auto; width: 26px; height: 26px; border-radius: 50%; border: 1.5px dashed var(--cinza-400); background: transparent;
+  color: var(--cinza-600); font-size: 16px; font-weight: 700; line-height: 1; cursor: pointer; opacity: 0; transition: opacity .15s; }
+.gu-cel:hover .gu-add, .gu-add:focus-visible { opacity: 1; }
+.gu-leg { display: inline-block; width: 16px; height: 16px; border-radius: 4px; }
+.gu-leg.particular { background: #dbeafe; border: 1px solid #93c5fd; }
+.gu-leg.turma { background: #fde7c8; border: 1px solid #f5b25b; }
+.gu-leg.cheio { background: #fff; box-shadow: inset 4px 0 0 #dc2626; border: 1px solid var(--ha-linha); }
+.gu-leg.inativo { background: #e5e7eb; opacity: .6; }
+.gu-leg.conflito { background: repeating-linear-gradient(135deg, rgba(220,38,38,.25) 0 4px, transparent 4px 8px); border: 1px solid #dc2626; }
 .ha-vazio { text-align: center; padding: 30px; color: var(--cinza-400); }
 .ha-legenda { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 14px; font-size: .82rem; color: var(--cinza-600); }
 .ha-legenda span { display: inline-flex; align-items: center; gap: 6px; }
@@ -178,6 +202,8 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .ha-retirados h3 { font-size: .95rem; margin: 18px 0 4px; }
 .ha-ret { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--cinza-100); font-size: .85rem; }
 </style>
+<!-- Painel da equipe: padrão visual do site + navegação de volta (depois do estilo da página) -->
+<link rel="stylesheet" href="css/painel-equipe.css">
 </head>
 
 <body style="visibility:hidden;">
@@ -222,29 +248,34 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   <div class="kpis" id="kpisAulas"></div>
 
   <section class="secao" data-secao="grade">
-  <div class="top-tabs">
-    <button class="top-tab active" data-modalidade="particular">Aula Particular</button>
-    <button class="top-tab" data-modalidade="turma">Aula em Turma</button>
-  </div>
-
   <div class="card">
     <div class="card-head">
-      <h2>Grade semanal</h2>
+      <div><h2>Grade semanal</h2><p class="campo-hint" id="guResumo" style="margin-top:4px;">Aula particular e aula em turma na mesma grade: um horário só pode ter uma das duas.</p></div>
       <button class="btn pequeno" id="novoHorarioBtn">+ Adicionar horário</button>
     </div>
-    <div class="periodo-tabs" id="periodoTabsAdmin">
-      <button type="button" class="periodo-tab active" data-periodo="diurno">Diurno</button>
-      <button type="button" class="periodo-tab" data-periodo="vespertino">Vespertino</button>
-      <button type="button" class="periodo-tab" data-periodo="noturno">Noturno</button>
+    <div class="ha-filtros">
+      <div class="periodo-tabs" id="periodoTabsAdmin" style="margin:0;">
+        <button type="button" class="periodo-tab active" data-periodo="todos">Todos</button>
+        <button type="button" class="periodo-tab" data-periodo="diurno">Diurno</button>
+        <button type="button" class="periodo-tab" data-periodo="vespertino">Vespertino</button>
+        <button type="button" class="periodo-tab" data-periodo="noturno">Noturno</button>
+      </div>
+      <div class="periodo-tabs" id="guModalidade" style="margin:0;" aria-label="Mostrar">
+        <button type="button" class="periodo-tab active" data-ver="todas">Particular e turma</button>
+        <button type="button" class="periodo-tab" data-ver="particular">Só particular</button>
+        <button type="button" class="periodo-tab" data-ver="turma">Só turma</button>
+      </div>
     </div>
-    <div class="grade-wrap">
-      <table class="grade-admin" id="gradeAdmin"></table>
+    <div class="grade-wrap gu-wrap">
+      <table class="ha-grade gu-grade" id="gradeAdmin"></table>
     </div>
-    <p style="font-size:0.78rem; color:var(--cinza-400); margin-top:10px; display:flex; align-items:center; flex-wrap:wrap; gap:6px;">
-      <span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--verde-bg); border:1px solid var(--verde);"></span> Livre ·
-      <span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--vermelho-bg); border:1px solid var(--vermelho);"></span> Ocupado (clique para ver quem reservou) ·
-      <span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--cinza-100); border:1px solid var(--cinza-300);"></span> Inativo
-    </p>
+    <div class="ha-legenda">
+      <span><i class="gu-leg particular"></i> Aula particular</span>
+      <span><i class="gu-leg turma"></i> Aula em turma</span>
+      <span><i class="gu-leg cheio"></i> Lotado (clique para ver quem reservou)</span>
+      <span><i class="gu-leg inativo"></i> Inativo</span>
+      <span><i class="gu-leg conflito"></i> Conflito: particular e turma no mesmo horário</span>
+    </div>
   </div>
   </section>
 
@@ -459,5 +490,6 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 <script src="js/admin-sistema-aulas.js"></script>
 <script src="js/admin-horarios-atuais.js"></script>
 <script src="js/theme-toggle.js"></script>
+<script src="js/painelEquipe.js" defer></script>
 </body>
 </html>

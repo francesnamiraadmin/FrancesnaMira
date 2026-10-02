@@ -16,7 +16,16 @@
   // Modo exercício (producao-oral-exercicios.html): mesmo motor, mas a galeria é da própria
   // página e as notas saem na escala da prova do curso do exercício.
   const MODO_EXERCICIO = window.SIMULADO_MODO === "exercicio";
-  const urlVoltar = () => MODO_EXERCICIO ? `producao-oral-exercicios.html?curso=${encodeURIComponent(S.def?.curso || "")}` : "simulado-tcf.html";
+  // Curso da Simulação Completa: TCF (padrão) ou DELF (?curso=DELF ou o curso escolhido no site).
+  const CURSOS_SIM = ["TCF", "DELF"];
+  const cursoPagina = () => {
+    const q = new URLSearchParams(location.search).get("curso");
+    if (CURSOS_SIM.includes(q)) return q;
+    const c = window.CursoContexto?.curso;
+    return CURSOS_SIM.includes(c) ? c : "TCF";
+  };
+  const ehDelf = def => !!def && /^DELF/.test(def.formato || "");
+  const urlVoltar = () => MODO_EXERCICIO ? `producao-oral-exercicios.html?curso=${encodeURIComponent(S.def?.curso || "")}` : `simulado-tcf.html?curso=${cursoPagina()}`;
 
   const S = {
     t: null, def: null, meuId: null,
@@ -60,16 +69,20 @@
   // =====================================================================
   async function carregarInicio() {
     let dados;
-    try { dados = await api("/api/simulados"); }
+    const curso = cursoPagina();
+    try { dados = await api("/api/simulados?curso=" + curso); }
     catch (err) { return erroTela(err.message); }
-    if (!dados.simulados.length) return erroTela("Nenhum simulado disponível no momento.");
+    if (!dados.simulados.length) return erroTela(curso === "DELF" ? "Os simulados do DELF estão sendo preparados (os áudios da compreensão oral ainda estão sendo gerados). Volte em breve." : "Nenhum simulado disponível no momento.");
     const tempo = s => `${Math.round(s / 60)} min`;
     const emAndamento = slug => dados.tentativas.find(t => t.status === "em_andamento" && t.simuladoSlug === slug);
 
     const cartao = def => {
       const aberto = emAndamento(def.slug);
       const canada = def.formato === "TCF Canada";
-      const descricao = canada
+      const delf = ehDelf(def);
+      const descricao = delf
+        ? `O ${def.formato} completo, no formato e no tempo da prova oficial: compreensão oral e escrita em exercícios com documentos (questões de múltipla escolha com 3 alternativas, cada documento sonoro ouvido duas vezes), produção escrita e produção oral. Cada épreuve vale 25 pontos; aprovação com 50/100 e no mínimo 5/25 em cada épreuve.`
+        : canada
         ? "O TCF Canada completo, na ordem e no tempo da prova oficial: as quatro épreuves, com notas no formato do TCF (0–699 e 0–20), nível CECR e equivalência NCLC."
         : "No formato do livret d'entraînement do TCF Tout Public: compreensão oral com imagens e propostas faladas, estrutura da língua e compreensão escrita com documentos reais, folha de respostas e corrigé. Correção automática, com score de 0 a 699 e nível CECR.";
       const modos = def.temExpressoes ? `
@@ -78,11 +91,11 @@
         <div class="sm-modos">
           <label class="sm-modo selecionado"><input type="radio" name="modo-${def.slug}" value="ia" checked>
             <strong>Inteligência Artificial</strong>
-            <p>Suas redações e as transcrições da sua fala são avaliadas pela IA com a grade do TCF assim que você termina. Resultado em poucos minutos, com comentários por tarefa.</p>
+            <p>Suas redações e as transcrições da sua fala são avaliadas pela IA com a grade ${delf ? "do " + esc(def.formato) : "do TCF"} assim que você termina. Resultado em poucos minutos, com comentários por tarefa.</p>
           </label>
           <label class="sm-modo"><input type="radio" name="modo-${def.slug}" value="professor">
             <strong>Professor ao vivo</strong>
-            <p>Um professor acompanha seu simulado em tempo real, pode conversar com você, é seu examinador na expressão oral (chamada de voz) e lança as notas no formato TCF.</p>
+            <p>Um professor acompanha seu simulado em tempo real, pode conversar com você, é seu examinador na expressão oral (chamada de voz) e lança as notas no formato ${delf ? "do DELF" : "TCF"}.</p>
           </label>
         </div>
         ${dados.iaDisponivel ? "" : `<div class="sm-aviso">A correção por IA ainda está sendo configurada. Se escolher IA, um professor poderá corrigir no lugar dela.</div>`}` : "";
@@ -90,9 +103,11 @@
         <h2>Formato da prova</h2>
         <p class="sm-muted">${descricao}</p>
         <div class="sm-formato">
-          ${def.provas.map(p => `<div><strong>${esc(p.nome)}</strong><span>${p.id === "eo" ? "3 tarefas · ~12 min + preparação" : p.id === "ee" ? `3 tarefas · ${tempo(p.tempoSeg)}` : `${p.itens} questões · ${tempo(p.tempoSeg)}`}</span></div>`).join("")}
+          ${def.provas.map(p => `<div><strong>${esc(p.nome)}</strong><span>${delf
+            ? (p.id === "eo" ? `${p.itens} partes · ${tempo(p.tempoSeg)} com a preparação` : p.id === "ee" ? `${p.itens} ${p.itens > 1 ? "exercícios" : "exercício"} · ${tempo(p.tempoSeg)}` : `${p.exercicios} exercícios · ${p.itens} questões · ${tempo(p.tempoSeg)}`) + " · 25 pts"
+            : p.id === "eo" ? "3 tarefas · ~12 min + preparação" : p.id === "ee" ? `3 tarefas · ${tempo(p.tempoSeg)}` : `${p.itens} questões · ${tempo(p.tempoSeg)}`}</span></div>`).join("")}
         </div>
-        <p class="sm-muted" style="margin-top:10px;">Como na prova real: as questões vão do A1 ao C2, cada áudio da compreensão oral toca <strong>uma única vez</strong> e não é possível voltar à questão anterior; o relógio continua correndo mesmo se você fechar a página.${def.temExpressoes ? " Para a expressão oral, use fone de ouvido e um navegador com microfone liberado (Chrome ou Edge transcrevem sua fala automaticamente)." : ""}</p>
+        <p class="sm-muted" style="margin-top:10px;">${delf ? "Como na prova real: cada documento sonoro é ouvido <strong>duas vezes</strong>, você lê as questões antes de ouvir e o relógio continua correndo mesmo se você fechar a página." : "Como na prova real: as questões vão do A1 ao C2, cada áudio da compreensão oral toca <strong>uma única vez</strong> e não é possível voltar à questão anterior; o relógio continua correndo mesmo se você fechar a página."}${def.temExpressoes ? " Para a expressão oral, use fone de ouvido e um navegador com microfone liberado (Chrome ou Edge transcrevem sua fala automaticamente)." : ""}</p>
         ${aberto ? `
           <div class="sm-aviso" style="margin-top:14px;">Você tem este simulado em andamento: parou em <strong>${esc(NOMES[aberto.provaAtual] || "")}</strong>.</div>
           <button class="sm-btn" type="button" data-abrir="${aberto._id}">Retomar simulado</button>` : `
@@ -116,7 +131,7 @@
       const selo = aberto ? `<span class="sm-chip alerta">Em andamento — ${esc(NOMES[aberto.provaAtual] || "")}</span>`
         : fim ? `<span class="sm-chip ok">Já realizado · ${fim.resultados && Object.values(fim.resultados).filter(Boolean).map(r => esc(r.nivel)).join(" / ") || "em correção"}</span>`
         : `<span class="sm-chip">Novo</span>`;
-      return `<a class="sm-hub-card" href="?curso=TCF&s=${esc(d.slug)}" data-escolher="${esc(d.slug)}">
+      return `<a class="sm-hub-card" href="?curso=${curso}&s=${esc(d.slug)}" data-escolher="${esc(d.slug)}">
         <span class="sm-hub-num">${i + 1}</span>
         <h2>${esc(d.titulo)}</h2>
         <p class="sm-muted">${esc(d.formato)} · ${siglas(d)}</p>
@@ -130,9 +145,11 @@
       $("vInicio").innerHTML = `
         <div class="sm-hero">
           <h1>Simulação Completa de Prova</h1>
-          <p>Escolha o simulado que você quer fazer. Cada um é uma prova completa do TCF, no tempo e no formato oficiais, com temas diferentes e resultado no formato TCF (0–699, 0–20, nível CECR e NCLC).</p>
+          <p>${curso === "DELF" ? "Escolha o nível do DELF. Cada simulado é uma prova completa, no tempo e no formato oficiais: compreensão oral, compreensão escrita, produção escrita e produção oral, cada uma valendo 25 pontos (total /100)." : "Escolha o simulado que você quer fazer. Cada um é uma prova completa do TCF, no tempo e no formato oficiais, com temas diferentes e resultado no formato TCF (0–699, 0–20, nível CECR e NCLC)."}</p>
         </div>
-        <div class="sm-hub">${dados.simulados.map(cardHub).join("")}</div>
+        ${curso === "DELF"
+          ? ["A1", "A2", "B1", "B2"].filter(n => dados.simulados.some(d => d.nivel === n)).map(n => `<h2 class="sm-nivel-tit">DELF ${n}</h2><div class="sm-hub">${dados.simulados.filter(d => d.nivel === n).map(cardHub).join("")}</div>`).join("")
+          : `<div class="sm-hub">${dados.simulados.map(cardHub).join("")}</div>`}
         <div class="sm-card">
           <h2>Meus simulados</h2>
           ${dados.tentativas.length ? `<div class="sm-hist">${dados.tentativas.map(t => itemHistorico(t, dados.simulados)).join("")}</div>` : `<p class="sm-muted">Você ainda não fez nenhum simulado completo.</p>`}
@@ -147,7 +164,7 @@
     } else {
       const historico = dados.tentativas.filter(t => t.simuladoSlug === def.slug);
       $("vInicio").innerHTML = `
-        <p style="margin:6px 0 4px;"><a class="sm-btn secundario pequeno" href="?curso=TCF" id="btnHub">← Todos os simulados</a></p>
+        <p style="margin:6px 0 4px;"><a class="sm-btn secundario pequeno" href="?curso=${curso}" id="btnHub">← Todos os simulados</a></p>
         <div class="sm-hero" style="padding-top:14px;">
           <h1>${esc(def.titulo)}</h1>
         </div>
@@ -300,7 +317,8 @@
     renderBarra();
     if (e.status === "pendente") return renderIntroProva(p);
     iniciarRelogio();
-    if (p === "co") { S.idx = Math.min(e.questaoAtual || 0, S.def.provas.co.questoes.length - 1); renderCO(); }
+    if (ehDelf(S.def) && (p === "co" || p === "ce")) { S.idx = Math.min(e.questaoAtual || 0, S.def.provas[p].exercicios.length - 1); renderExercicioDelf(p); }
+    else if (p === "co") { S.idx = Math.min(e.questaoAtual || 0, S.def.provas.co.questoes.length - 1); renderCO(); }
     else if (p === "ce" || p === "sl") { S.idx = Math.min(e.questaoAtual || 0, S.def.provas[p].questoes.length - 1); renderLista(p); }
     else if (p === "ee") renderEE();
     else renderEO();
@@ -317,7 +335,14 @@
       ee: `${tarefas.length === 1 ? "1 tarefa" : `${tarefas.length} tarefas`}: ${tarefas.map(t => `${esc(t.titulo)} (${t.min}–${t.max} palavras)`).join("; ")}. Seu texto é salvo automaticamente.`,
       eo: `${tarefas.length === 1 ? "1 tarefa gravada" : `${tarefas.length} tarefas gravadas`}: ${tarefas.map(t => `${esc(t.titulo)} (${t.preparacaoSeg ? `${min(t.preparacaoSeg)} de preparação + ` : ""}${min(t.duracaoSeg)})`).join("; ")}. Use fone de ouvido. Se um professor estiver conectado, ele será seu examinador pela chamada de voz.`
     };
-    const regras = MODO_EXERCICIO && regrasExercicio[p] ? regrasExercicio[p] : {
+    const exs = S.def.provas[p].exercicios || [];
+    const regrasDelf = {
+      co: `${exs.length} exercícios, ${nq} questões de múltipla escolha (3 alternativas). Em cada exercício você tem um tempo para ler as questões, depois ouve o documento <strong>duas vezes</strong> (com uma pausa entre as escutas) e responde.`,
+      ce: `${exs.length} exercícios, ${nq} questões de múltipla escolha (3 alternativas) sobre documentos escritos. Você pode navegar livremente entre os exercícios.`,
+      ee: `${tarefas.length === 1 ? "1 exercício" : tarefas.length + " exercícios"}: ${tarefas.map(t => `${esc(t.titulo)} (${t.max ? t.min + "–" + t.max : "mínimo " + t.min} palavras${t.peso ? " · " + t.peso + " pts" : ""})`).join("; ")}. Seu texto é salvo automaticamente.`,
+      eo: `${tarefas.length} partes gravadas: ${tarefas.map(t => `${esc(t.titulo)} (${t.preparacaoSeg ? min(t.preparacaoSeg) + " de preparação + " : ""}${min(t.duracaoSeg)})`).join("; ")}. Use fone de ouvido. Se um professor estiver conectado, ele será seu examinador pela chamada de voz.`
+    };
+    const regras = ehDelf(S.def) ? regrasDelf[p] : MODO_EXERCICIO && regrasExercicio[p] ? regrasExercicio[p] : {
       co: `${nq} questões de múltipla escolha${MODO_EXERCICIO ? "" : ", do A1 ao C2"}. Cada documento sonoro é ouvido <strong>uma única vez</strong>. ${S.def.provas.co.questoes.some(q => q.alternativasFaladas) ? (MODO_EXERCICIO ? "Em algumas questões" : "Nas primeiras questões") + ", as quatro propostas são apenas faladas: ouça e marque a letra. " : "Leia a pergunta, ouça o áudio e escolha a alternativa. "}Você pode navegar livremente entre as questões pelo painel, mas cada áudio só pode ser ouvido uma vez.`,
       sl: `${nq} frases com uma lacuna: escolha a palavra ou expressão que completa corretamente a frase. Você pode navegar livremente entre as questões.`,
       ce: `${nq} questões de múltipla escolha, do A1 ao C2, sobre documentos escritos (avisos, anúncios, artigos, textos argumentativos)${S.def.provas.ce?.questoes.some(q => q.tipo === "lacuna") ? ", com frases para completar ao longo da prova" : ""}. Você pode navegar livremente entre as questões.`,
@@ -403,6 +428,80 @@
       pararAudioCO();
       const faltam = qs.length - Object.keys(S.t.provas.co.respostas || {}).length;
       confirmarFim(faltam ? `Ainda há ${faltam} questão(ões) sem resposta.` : "Todas as questões foram respondidas.");
+    });
+  }
+
+  // ---------------- DELF: exercício com documento e várias questões ----------------
+  function renderExercicioDelf(prova) {
+    const pr = S.def.provas[prova];
+    const ex = pr.exercicios[S.idx];
+    const qs = pr.questoes.filter(q => q.exercicio === ex.id);
+    const e = S.t.provas[prova];
+    const resp = e.respostas || {};
+    const chave = qs[0].n;
+    const escutas = (e.ouvidos || []).filter(x => x === chave).length;
+    const total = pr.questoes.length, feitas = Object.keys(resp).length;
+    $("barraSub").textContent = `Exercício ${S.idx + 1} de ${pr.exercicios.length} · ${feitas} de ${total} respondidas`;
+    const doc = prova === "co"
+      ? `<div class="sm-player delf" id="player">
+          <button class="sm-btn pequeno" id="btnOuvir" type="button" ${escutas >= 2 ? "disabled" : ""}>${escutas >= 2 ? "Documento já ouvido 2 vezes" : escutas === 1 ? "▶ Segunda escuta" : "▶ Primeira escuta"}</button>
+          <div class="barra"><span id="playerBarra" style="${escutas >= 2 ? "width:100%" : ""}"></span></div>
+          <small>${escutas >= 2 ? "As duas escutas já foram usadas." : `Escutas: ${escutas} de 2. Leia as questões antes de ouvir.`}</small>
+        </div>`
+      : `<div class="sm-doc-delf">${ex.documento?.titulo ? `<h3>${esc(ex.documento.titulo)}</h3>` : ""}${String(ex.documento?.texto || "").split(/\n{2,}/).map(par => `<p>${esc(par).replace(/\n/g, "<br>")}</p>`).join("")}${ex.documento?.fonte ? `<small class="sm-muted">${esc(ex.documento.fonte)}</small>` : ""}</div>`;
+    $("vProva").innerHTML = `<div class="sm-card">
+      <div class="sm-questao-topo"><strong>Exercice ${S.idx + 1}${ex.titulo ? " — " + esc(ex.titulo) : ""}</strong><span class="sm-nivel">${qs.length} questões</span></div>
+      <p class="sm-instrucao">› ${esc(ex.consigne)}</p>
+      ${doc}
+      <div class="sm-delf-questoes">${qs.map((q, i) => `<div class="sm-delf-q" data-q="${q.n}">
+        <p class="sm-pergunta"><span class="num">${q.n}.</span> ${esc(q.pergunta)}</p>
+        <div class="sm-alts">${q.alternativas.map((a, j) => `<button type="button" class="sm-alt ${resp[q.n] === j ? "marcada" : ""}" data-qn="${q.n}" data-alt="${j}"><span class="letra">${LETRAS[j]}</span><span>${esc(a)}</span></button>`).join("")}</div>
+      </div>`).join("")}</div>
+      <div class="sm-nav">
+        <button class="sm-btn secundario" id="btnAnt" type="button" ${S.idx === 0 ? "disabled" : ""}>← Exercício anterior</button>
+        ${S.idx < pr.exercicios.length - 1 ? `<button class="sm-btn" id="btnProx" type="button">Próximo exercício →</button>` : ""}
+      </div>
+      <div class="sm-grade" id="gradeExercicios">${pr.exercicios.map((x, i) => {
+        const qx = pr.questoes.filter(q => q.exercicio === x.id);
+        const ok = qx.every(q => Number.isInteger(resp[q.n]));
+        return `<button type="button" class="${i === S.idx ? "atual" : ""} ${ok ? "respondida" : ""}" data-ir="${i}">Ex. ${i + 1}</button>`;
+      }).join("")}</div>
+      <div style="text-align:right;margin-top:14px;"><button class="sm-btn secundario" id="btnFim" type="button">Terminar: ${esc(NOMES[prova])}</button></div>
+    </div>`;
+    document.querySelectorAll("[data-qn]").forEach(b => b.addEventListener("click", () => {
+      const n = Number(b.dataset.qn), i = Number(b.dataset.alt);
+      e.respostas = { ...(e.respostas || {}), [n]: i };
+      document.querySelectorAll(`[data-qn="${n}"]`).forEach(x => x.classList.toggle("marcada", x === b));
+      salvar({ respostas: { [n]: i }, questaoAtual: S.idx });
+      $("barraSub").textContent = `Exercício ${S.idx + 1} de ${pr.exercicios.length} · ${Object.keys(e.respostas).length} de ${total} respondidas`;
+    }));
+    const ir = i => {
+      if (i < 0 || i >= pr.exercicios.length || i === S.idx) return;
+      pararAudioCO();
+      S.idx = i;
+      e.questaoAtual = i;
+      salvar({ questaoAtual: i });
+      renderExercicioDelf(prova);
+    };
+    $("btnAnt").addEventListener("click", () => ir(S.idx - 1));
+    const prox = $("btnProx");
+    if (prox) prox.addEventListener("click", () => ir(S.idx + 1));
+    $("gradeExercicios").addEventListener("click", ev => { const b = ev.target.closest("[data-ir]"); if (b) ir(Number(b.dataset.ir)); });
+    $("btnFim").addEventListener("click", () => {
+      pararAudioCO();
+      const faltam = total - Object.keys(e.respostas || {}).length;
+      confirmarFim(faltam ? `Ainda há ${faltam} questão(ões) sem resposta.` : "Todas as questões foram respondidas.");
+    });
+    const bo = $("btnOuvir");
+    if (bo) bo.addEventListener("click", () => {
+      bo.disabled = true; bo.textContent = "Tocando…";
+      e.ouvidos = [...(e.ouvidos || []), chave];
+      salvar({ ouvido: chave, questaoAtual: S.idx });
+      pararAudioCO();
+      audioCO = new Audio(ex.audio);
+      audioCO.addEventListener("timeupdate", () => { const b = $("playerBarra"); if (b && audioCO && audioCO.duration) b.style.width = `${(audioCO.currentTime / audioCO.duration) * 100}%`; });
+      audioCO.addEventListener("ended", () => { audioCO = null; renderExercicioDelf(prova); });
+      audioCO.play().catch(() => { bo.textContent = "Erro ao tocar o áudio"; bo.disabled = false; });
     });
   }
 
@@ -819,12 +918,58 @@
   // =====================================================================
   // RESULTADO no formato TCF
   // =====================================================================
+  function renderResultadoDelf() {
+    const t = S.t, def = S.def;
+    const r = p => t.provas[p].resultado;
+    const nota = p => { const x = r(p); return x ? (ehCompreensao(p) ? x.pontos : x.notaProva) : null; };
+    const todas = ordem().every(p => nota(p) != null);
+    const total = todas ? ordem().reduce((s2, p) => s2 + nota(p), 0) : null;
+    const abaixo = ordem().filter(p => nota(p) != null && nota(p) < 5);
+    const admis = todas && total >= 50 && !abaixo.length;
+    let status = "";
+    if (t.status === "corrigindo_ia") status = `<div class="sm-card" style="text-align:center;"><div class="sm-spinner"></div><p>A Inteligência Artificial está corrigindo sua produção escrita e sua produção oral. Isso leva de 1 a 3 minutos — pode ficar nesta página.</p></div>`;
+    else if (t.status === "aguardando_correcao") status = t.modoCorrecao === "ia" && t.ia?.erro
+      ? `<div class="sm-card"><div class="sm-aviso">${esc(t.ia.erro)}</div><div style="display:flex;gap:8px;flex-wrap:wrap;">${t.iaDisponivel ? `<button class="sm-btn" id="btnRefazerIA" type="button">Tentar a correção por IA de novo</button>` : ""}<button class="sm-btn chamar" id="btnChamar2" type="button">Pedir correção a um professor</button></div></div>`
+      : `<div class="sm-card"><p>Suas compreensões já estão corrigidas abaixo. <strong>A produção escrita e a produção oral estão com o professor</strong>; você recebe o resultado completo nesta página assim que ele publicar.</p></div>`;
+    const linha = p => {
+      const v = nota(p);
+      return `<tr><td>${NOMES_DELF[p] || NOMES[p]}</td><td class="score">${v == null ? `<span class="sm-muted">${t.status === "corrigindo_ia" ? "A IA está corrigindo…" : "Aguardando correção"}</span>` : `${v} <small class="sm-muted">/ 25</small>`}</td>
+        <td>${v == null ? "" : v >= 5 ? '<span class="sm-chip ok">acima de 5/25</span>' : '<span class="sm-chip alerta">abaixo de 5/25 (eliminatória)</span>'}</td></tr>`;
+    };
+    $("vResultado").innerHTML = `
+      <div class="sm-hero"><h1>Resultado do simulado</h1><p>${esc(def.titulo)} · ${new Date(t.criadoEm).toLocaleDateString("pt-BR")} · ${{ ia: "correção por Inteligência Artificial", professor: "correção por professor", automatica: "correção automática" }[t.modoCorrecao]}</p></div>
+      ${status}
+      <div class="sm-card">
+        <h2>Relevé de notes (simulação) — ${esc(def.formato)}</h2>
+        <div class="sm-tabela-scroll"><table class="sm-boletim">
+          <thead><tr><th>Épreuve</th><th>Note</th><th>Note minimale</th></tr></thead>
+          <tbody>${ordem().map(linha).join("")}
+            <tr class="global"><td><strong>Note totale</strong></td><td class="score">${total != null ? `${total} <small class="sm-muted">/ 100</small>` : "—"}</td>
+              <td>${total == null ? "" : admis ? `<span class="sm-chip ok">Admis(e) — ${esc(def.formato)}</span>` : `<span class="sm-chip alerta">Non admis(e)</span>`}</td></tr></tbody>
+        </table></div>
+        <p class="sm-muted" style="margin-top:12px;">Como no DELF oficial: cada épreuve vale 25 pontos (total 100). Para obter o diploma é preciso <strong>pelo menos 50/100</strong> e <strong>no mínimo 5/25 em cada épreuve</strong>.${todas && !admis ? (abaixo.length ? ` Abaixo de 5/25 nesta simulação: ${abaixo.map(p => esc(NOMES_DELF[p] || NOMES[p])).join(", ")}.` : " Faltaram " + (50 - total) + " pontos para os 50/100.") : ""}</p>
+      </div>
+      ${ordem().filter(ehCompreensao).map(p => blocoCompreensao(p)).join("")}
+      ${ordem().filter(p => p === "ee" || p === "eo").map(p => blocoExpressao(p)).join("")}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <a class="sm-btn secundario" href="${urlVoltar()}">Voltar aos simulados</a>
+        <a class="sm-btn secundario" href="plataforma-questoes.html?curso=DELF">Plataforma de Questões</a>
+      </div>`;
+    const b1 = $("btnRefazerIA");
+    if (b1) b1.addEventListener("click", async () => { b1.disabled = true; try { await api(`/api/simulados/tentativas/${t._id}/corrigir-ia`, { method: "POST" }); S.t.status = "corrigindo_ia"; renderResultado(); } catch (err) { b1.disabled = false; modal("Erro", `<p>${esc(err.message)}</p>`, [{ texto: "Fechar" }]); } });
+    const b2 = $("btnChamar2");
+    if (b2) b2.addEventListener("click", abrirChamado);
+    document.querySelectorAll("[data-audio-eo]").forEach(el => carregarAudioEO(el));
+  }
+  const NOMES_DELF = { co: "Compréhension de l'oral", ce: "Compréhension des écrits", ee: "Production écrite", eo: "Production orale" };
+
   function renderResultado() {
     clearInterval(S.relogio);
     mostrar("vResultado");
     const t = S.t;
     const def = S.def;
     const r = p => t.provas[p].resultado;
+    if (ehDelf(def)) return renderResultadoDelf();
     const comNclc = def.formato === "TCF Canada" || ordem().some(p => r(p)?.nclc);
     const linha = p => {
       const x = r(p);
@@ -890,7 +1035,32 @@
     </div>`;
   }
 
+  // DELF: revisão por exercício (o documento uma vez, depois as questões dele).
+  function blocoCompreensaoDelf(p) {
+    const x = S.t.provas[p].resultado;
+    if (!x) return "";
+    const pr = S.def.provas[p];
+    return `<div class="sm-card sm-revisao">
+      <h2>${NOMES_DELF[p]} — ${x.acertos}/${x.total} acertos · ${x.pontos}/25</h2>
+      ${pr.exercicios.map((ex, i) => {
+        const qs = pr.questoes.filter(q => q.exercicio === ex.id);
+        const px = x.porExercicio?.[ex.id];
+        return `<details><summary>Exercice ${i + 1}${ex.titulo ? " — " + esc(ex.titulo) : ""} · ${px ? px.acertos + "/" + px.total : ""}</summary><div class="corpo">
+          ${p === "co" ? `<audio controls preload="none" src="${esc(ex.audio)}" style="width:100%;margin-bottom:8px;"></audio>${ex.transcricao ? `<div class="sm-documento">${esc(ex.transcricao)}</div>` : ""}`
+            : `<div class="sm-doc-delf">${ex.documento?.titulo ? `<h3>${esc(ex.documento.titulo)}</h3>` : ""}${String(ex.documento?.texto || "").split(/\n{2,}/).map(par => `<p>${esc(par).replace(/\n/g, "<br>")}</p>`).join("")}</div>`}
+          ${qs.map(q => {
+            const d = x.detalhes.find(y => y.n === q.n) || {};
+            return `<div class="sm-delf-q"><p class="sm-pergunta">${d.certo ? "✅" : d.resposta == null ? "⚪" : "❌"} <span class="num">${q.n}.</span> ${esc(q.pergunta)}</p>
+              <div class="sm-alts">${q.alternativas.map((a, j) => `<button type="button" disabled class="sm-alt ${j === q.correta ? "certa" : j === d.resposta ? "errada" : ""}"><span class="letra">${LETRAS[j]}</span><span>${esc(a)}</span></button>`).join("")}</div>
+              ${q.explicacao ? `<p class="sm-muted">${esc(q.explicacao)}</p>` : ""}</div>`;
+          }).join("")}
+        </div></details>`;
+      }).join("")}
+    </div>`;
+  }
+
   function blocoCompreensao(p) {
+    if (ehDelf(S.def)) return blocoCompreensaoDelf(p);
     const x = S.t.provas[p].resultado;
     if (!x) return "";
     const qs = S.def.provas[p].questoes;
@@ -919,7 +1089,7 @@
     const tarefas = S.def.provas[p].tarefas;
     const resp = S.t.provas[p].respostas || {};
     return `<div class="sm-card">
-      <h2>${NOMES[p]}${x ? ` — ${x.notaProva ?? x.nota}/${x.notaMaximaProva || 20} · ${esc(x.nivel)}${x.nclc ? ` · NCLC ${esc(x.nclc)}` : ""}` : ""}</h2>
+      <h2>${ehDelf(S.def) ? NOMES_DELF[p] : NOMES[p]}${x ? ` — ${x.notaProva ?? x.nota}/${x.notaMaximaProva || 20} · ${esc(x.nivel)}${x.nclc ? ` · NCLC ${esc(x.nclc)}` : ""}` : ""}</h2>
       ${x ? `<p class="sm-muted">Corrigido por ${esc(x.corretorNome || (x.porIA ? "IA" : "professor"))}.</p>` : ""}
       ${tarefas.map(tf => {
         const rt = x?.tarefas?.[tf.id];
@@ -1111,8 +1281,8 @@
   // BOOT (depois do gate liberar a página)
   // =====================================================================
   function iniciar() {
-    if (!MODO_EXERCICIO && window.CursoContexto?.curso && window.CursoContexto.curso !== "TCF") {
-      return erroTela("A Simulação Completa de Prova está disponível para o curso TCF.");
+    if (!MODO_EXERCICIO && window.CursoContexto?.curso && !CURSOS_SIM.includes(window.CursoContexto.curso) && !new URLSearchParams(location.search).get("curso")) {
+      return erroTela("A Simulação Completa de Prova está disponível para os cursos TCF e DELF.");
     }
     const id = new URLSearchParams(location.search).get("t");
     if (id && /^[a-f0-9]{24}$/i.test(id)) abrirTentativa(id);

@@ -94,7 +94,14 @@ function htmlHubEscolhas() {
   var espaco = B.professor
     ? { id: 'prof', titulo: 'Espace professeur', texto: 'Épreuves en direct, corrections, devoirs, suivi des élèves, thèmes du mois et À la une.', cor: '#1C2B3A', extra: 'ouvrir →', svg: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>' }
     : { id: 'espace', titulo: 'Mon espace', texto: 'Mes tâches et messages de la professeure, mes notes, mes corrections et mon cahier d\'erreurs.', cor: '#1C2B3A', extra: '<span id="he-espace-n">devoirs, notes et cahier</span> →', svg: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>' };
-  return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + HUB_ESCOLHAS.concat([espaco]).map(function (h) {
+  // DELF: textos do nível; ditado e modelos escritos à mão são do TCF (somem quando vazios).
+  var escolhas = !ehDelf() ? HUB_ESCOLHAS : HUB_ESCOLHAS.filter(function (h) { return h.id !== 'dictee' && h.id !== 'modeles' || parseInt(extra[h.id], 10) > 0; }).map(function (h) {
+    var x = JSON.parse(JSON.stringify(h));
+    if (h.id === 'ecrit') x.texto = 'Produção escrita do ' + nomeProva() + ' por eixo temático : modelos segundo a trame e prova de ' + minutosEpreuve() + ' minutos.';
+    if (h.id === 'oral') x.texto = 'As ' + TS().length + ' parte' + (TS().length > 1 ? 's' : '') + ' da produção oral do ' + nomeProva() + ' : modelos, gravação e transcrição.';
+    return x;
+  });
+  return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + escolhas.concat([espaco]).map(function (h) {
     return '<button class="hub-escolha' + (h.id === 'espace' || h.id === 'prof' ? ' hub-escolha-espace' : '') + '" type="button" data-hub-ir="' + h.id + '" style="--cor:' + h.cor + '">' +
       '<span class="he-ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + h.svg + '</svg></span>' +
       '<b>' + h.titulo + '</b><small>' + h.texto + '</small><em>' + (h.extra || extra[h.id] + ' →') + '</em></button>';
@@ -125,7 +132,7 @@ abrirHub = function (modo) {
   if (modo === 'oral') {
     bloco.innerHTML = '<h2 class="secao-titulo">Exercices oraux au format de l\'examen</h2><div class="hub-acoes">' +
       '<a class="hub-acao" href="producao-oral-exercicios.html?curso=' + encodeURIComponent(B.courseType) + '"><span></span><b>Compréhension et expression orales</b><small>Documents sonores, questions et une tâche à enregistrer, avec professeur en direct si vous le souhaitez.</small></a>' +
-      '<a class="hub-acao" href="simulado-tcf.html"><span></span><b>Simulation complète de l\'examen</b><small>Les quatre épreuves, dont l\'expression orale enregistrée et transcrite.</small></a></div>';
+      '<a class="hub-acao" href="simulado-tcf.html?curso=' + encodeURIComponent(B.courseType) + '"><span></span><b>Simulation complète de l\'examen</b><small>Les quatre épreuves, dont l\'expression orale enregistrée et transcrite.</small></a></div>';
     return;
   }
   bloco.innerHTML = '<h2 class="secao-titulo">Thèmes du cours avec dossier documentaire</h2><div id="hub-temas-curso"><p class="aviso">Chargement…</p></div>';

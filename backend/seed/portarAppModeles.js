@@ -118,11 +118,55 @@ trocar("          $('esp-epreuves').addEventListener('click', abrirEpreuve);",
 trocar("html += '<div class=\"grade-trames\">';", "html += '<h2 class=\"secao-titulo outils-secao\"><i class=\"oral\"></i>Oral</h2><div class=\"grade-trames\">';");
 trocar("        var tr = B.trames[t]; if (!tr) return;", "        if (t === 'ET1') html += '</div><h2 class=\"secao-titulo outils-secao\"><i class=\"ecrit\"></i>Écrit</h2><div class=\"grade-trames\">';\n        var tr = B.trames[t]; if (!tr) return;");
 
+// ---- perfil do curso: TCF Canada ou DELF de um nível (ver modeles-site/perfil.js) ----
+const R = String.raw;
+trocar("B = banco;", "B = banco; aplicarPerfil();", true);
+trocar("      var nomeCurso = CURSOS[B.courseType] || 'TCF Canada';", "      var nomeCurso = ehDelf() ? B.perfil.nome : CURSOS[B.courseType] || 'TCF Canada';");
+trocar("      html += htmlHubEscolhas();", "      html += htmlNiveisDelf();\n      html += htmlHubEscolhas();");
+trocar(R`'<p class="intro">' + (oral ? 'Les trois tâches de l\'expression orale`, R`'<p class="intro">' + (ehDelf() ? introHubDelf(oral) : oral ? 'Les trois tâches de l\'expression orale`);
+trocar(R`<span class="selo">' + info.nom.slice(-1) + '</span>'`, R`<span class="selo">' + seloTache(t) + '</span>'`);
+trocar(R`(oral ? 'Mes épreuves orales' : 'Épreuve écrite (60 min)')`, R`(oral ? 'Mes épreuves orales' : ehDelf() ? 'Prova escrita (' + minutosEpreuve() + ' min)' : 'Épreuve écrite (60 min)')`);
+trocar(R`(oral ? 'Les enregistrements demandés par votre professeur(e).' : 'Tâches 1, 2 et 3 dans les conditions de l\'examen.')`,
+  R`(oral ? 'Les enregistrements demandés par votre professeur(e).' : ehDelf() ? 'A produção escrita completa, nas condições do ' + esc(nomeProva()) + '.' : 'Tâches 1, 2 et 3 dans les conditions de l\'examen.')`);
+trocar(R`<small class="mira-marca">TCF Canada · Expression écrite · réécriture</small>`, R`<small class="mira-marca">' + esc(nomeProva()) + ' · Expression écrite · réécriture</small>`);
+trocar(R`'<p class="intro">Trois tâches en <b>60 minutes</b>, comme le jour du TCF Canada : Tâche 1 (≈ 10 min), Tâche 2 (≈ 15 min), Tâche 3 (≈ 25 min) et 10 minutes de relecture. ' +`,
+  R`'<p class="intro">' + (ehDelf() ? introEpreuveDelf() : 'Trois tâches en <b>60 minutes</b>, comme le jour du TCF Canada : Tâche 1 (≈ 10 min), Tâche 2 (≈ 15 min), Tâche 3 (≈ 25 min) et 10 minutes de relecture. ') +`);
+trocar(R`if (!confirm('L\'épreuve dure 60 minutes et ne peut pas être mise en pause. Commencer maintenant ?')) return;`,
+  R`if (!confirm(ehDelf() ? 'A prova dura ' + minutosEpreuve() + ' minutos e não pode ser pausada. Começar agora?' : 'L\'épreuve dure 60 minutes et ne peut pas être mise en pause. Commencer maintenant ?')) return;`);
+trocar(R`>Commencer l\'épreuve (60 min)</button>'`, R`>' + (ehDelf() ? 'Começar a prova (' + minutosEpreuve() + ' min)' : 'Commencer l\'épreuve (60 min)') + '</button>'`);
+trocar(R`registrarEixos([livre.ET1.e, livre.ET2.e, livre.ET3.e]); comecar({ sujets: { ET1: livre.ET1.id, ET2: livre.ET2.id, ET3: livre.ET3.id }, correcao: correcaoEscolhida() }`,
+  R`registrarEixos(ETS().map(function (t) { return livre[t].e; })); comecar({ sujets: sujetsLivres(livre), correcao: correcaoEscolhida() }`);
+trocar(R`<span class="tempo" id="ep-tempo">60:00</span>`, R`<span class="tempo" id="ep-tempo">' + minutosEpreuve() + ':00</span>`);
+trocar(R`<span class="selo">' + t.slice(-1) + '</span>`, R`<span class="selo">' + seloTache(t) + '</span>`, true);
+trocar(R`<h2>Tâche ' + t.slice(-1) + ' · ' + TACHES[t].sous + '</h2>'`, R`<h2>' + TACHES[t].nom + ' · ' + TACHES[t].sous + '</h2>'`);
+trocar(R`lim[0] + ' mots minimum · ' + lim[1] + ' mots maximum · temps conseillé : ' + ETAPAS_EPREUVE[Number(t.slice(-1)) - 1].min + ' min</small>`,
+  R`lim[0] + ' mots minimum · ' + (ehDelf() ? '' : lim[1] + ' mots maximum · ') + 'temps conseillé : ' + (MIN_EXAME_ESCRITO[t] || 10) + ' min</small>`);
+trocar(R`<b>' + r.note + '</b><span>/20</span>`, R`<b>' + r.note + '</b><span>/' + (r.escala || 20) + '</span>`);
+trocar(R`'<div><span class="ia-selo">Correction par l\'IA · NCLC estimé ' + r.nclc + '</span>`, R`'<div><span class="ia-selo">Correction par l\'IA · ' + (r.selo ? esc(r.selo) : 'NCLC estimé ' + r.nclc) + '</span>`);
+trocar(R`if (t === 'ET1') html += '</div><h2 class="secao-titulo outils-secao">`, R`if (t === ETS()[0]) html += '</div><h2 class="secao-titulo outils-secao">`);
+// Épreuve escrita: duração do perfil (TCF 60 min; DELF 25 a 60 min) e alertas das etapas do nível.
+{
+  const [a, b] = limitesFuncao(js, "iniciarEpreuveLocal");
+  let f = js.slice(a, b);
+  const i = f.indexOf("      var ALERTAS = [");
+  const j = f.indexOf("      ];\n", i);
+  if (i < 0 || j < 0) throw new Error("ALERTAS não encontrado");
+  f = f.slice(0, i) + "      var ALERTAS = alertasEpreuve(irPara);\n" + f.slice(j + "      ];\n".length);
+  if (!/3600/.test(f)) throw new Error("3600 não encontrado");
+  f = f.replace("{\n", "{\n      var SEG_EP = minutosEpreuve() * 60;\n").split("3600").join("SEG_EP");
+  js = js.slice(0, a) + f + js.slice(b);
+}
+
 // ---- extensões do site (dentro do mesmo escopo do App) ----
-trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("extensoes.js") + "\n" + ler("fazer-sujet.js") + "\n" + ler("correcao-equipe.js")).replace(/^/gm, "    ") +
+trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("perfil.js") + "\n" + ler("extensoes.js") + "\n" + ler("fazer-sujet.js") + "\n" + ler("correcao-equipe.js")).replace(/^/gm, "    ") +
   "\n    // Só começa depois que a página confirmou o acesso e o curso (window.FNM_PRONTO).\n" +
   "    (window.FNM_PRONTO || Promise.resolve()).then(function () { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar(); });");
 trocar("abrirOral: function () { abrirHub('oral'); },", "abrirOral: function () { abrirHub('oral'); }, abrirDestino: abrirDestino,");
+
+// Listas fixas de tâches → as do perfil (no DELF, só as partes do nível, na ordem da prova).
+js = js.split("['ET1', 'ET2', 'ET3', 'T1', 'T2', 'T3']").join("ETS().concat(TS())")
+  .split("['ET1', 'ET2', 'ET3']").join("ETS()").split("['T1', 'T2', 'T3']").join("TS()")
+  .split("['ET3', 'ET2', 'ET1']").join("ETS().reverse()");
 
 const cab = `// =====================================================================
 // Ambiente de Produção — app "Modèles TCF" (Google Apps Script) rodando no site.

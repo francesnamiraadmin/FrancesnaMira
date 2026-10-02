@@ -98,6 +98,11 @@ const ProducaoSchema = new mongoose.Schema({
     comentarioGeral: { type: String },
     pontosFortes: [{ type: String }],
     aMelhorar: [{ type: String }],
+    // feedback global (separado das anotações no texto): recomendações de estudo e mensagem final
+    recomendacoes: [{ type: String }],
+    feedbackFinal: { type: String },
+    // nota final ajustada pelo professor (em branco = soma dos critérios)
+    notaFinal: { type: Number },
     correcoes: [CorrecaoPontualSchema],
     corretor: { type: String, enum: ["professor", "ia"] },
     corretorNome: { type: String },
@@ -105,10 +110,25 @@ const ProducaoSchema = new mongoose.Schema({
     extras: { type: mongoose.Schema.Types.Mixed }
   },
 
+  // Correção anotada (ver models/correcaoAnotada.js): versão atual e marcos do fluxo.
+  correcao: {
+    versao: { type: Number, default: 0 },
+    salvaEm: { type: Date },
+    concluidaEm: { type: Date },
+    devolvidaEm: { type: Date },
+    reabertaEm: { type: Date },
+    anotacoes: { type: Number, default: 0 }
+  },
+
   mensagens: [MensagemSchema],
   historicoStatus: [HistoricoStatusSchema],
 
   criadoEm: { type: Date, default: Date.now }
 });
+
+ProducaoSchema.index({ status: 1, dataEnvio: 1 });
+ProducaoSchema.index({ professorId: 1, status: 1 });
+ProducaoSchema.index({ alunoId: 1, criadoEm: -1 });
+ProducaoSchema.index({ origemId: 1 });
 
 module.exports = mongoose.model("Producao", ProducaoSchema);

@@ -1,0 +1,705 @@
+{
+ "slug": "delf-b2-1",
+ "titulo": "Simulado DELF B2 nº 1",
+ "curso": "DELF",
+ "nivel": "B2",
+ "formato": "DELF B2",
+ "descricao": "Grandes debates de sociedade: trabalho, tecnologia, meio ambiente, educação, cidade e cultura.",
+ "ordem": [
+  "co",
+  "ce",
+  "ee",
+  "eo"
+ ],
+ "provas": {
+  "co": {
+   "nome": "Compréhension de l'oral",
+   "tempoSeg": 1800,
+   "exercicios": [
+    {
+     "id": "co1",
+     "titulo": "Une interview",
+     "consigne": "Vous allez entendre deux fois une interview. Vous avez d'abord le temps de lire les questions. Écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-b2-1/co01.mp3",
+     "transcricao": "La journaliste : Élise Moreau, vous êtes urbaniste et vous défendez la « ville du quart d'heure ». De quoi s'agit-il ?\nÉlise Moreau, urbaniste : L'idée est simple : chaque habitant devrait pouvoir accéder en quinze minutes, à pied ou à vélo, à tout ce dont il a besoin au quotidien : travail, école, commerces, médecin, espaces verts. Aujourd'hui, beaucoup de gens passent plus d'une heure par jour dans les transports, ce qui pèse à la fois sur leur santé et sur l'environnement.\nLa journaliste : Concrètement, comment transforme-t-on une ville existante ?\nÉlise Moreau, urbaniste : On ne détruit pas tout, rassurez-vous. On réutilise ce qui existe : une cour d'école peut devenir un jardin public le week-end, un parking peu utilisé peut accueillir un marché. Il s'agit surtout de mélanger les fonctions dans chaque quartier, au lieu d'avoir des quartiers où l'on dort et d'autres où l'on travaille.\nLa journaliste : Certains critiquent ce modèle. Ils disent qu'il risque d'enfermer les habitants dans leur quartier.\nÉlise Moreau, urbaniste : C'est une crainte que j'entends souvent, mais c'est un malentendu. Personne n'est obligé de rester chez soi ! L'objectif est de rendre les déplacements longs facultatifs, pas de les interdire. En revanche, il existe un vrai risque : si un quartier devient très agréable, les prix des logements augmentent et les familles modestes doivent partir. C'est pourquoi ce projet doit s'accompagner de logements sociaux.\nLa journaliste : Et quel rôle pour les habitants ?\nÉlise Moreau, urbaniste : Un rôle central. Ce sont eux qui connaissent les besoins de leur rue. Dans les villes où l'on a organisé des consultations, les projets ont été mieux acceptés et, surtout, mieux utilisés."
+    },
+    {
+     "id": "co2",
+     "titulo": "Un débat",
+     "consigne": "Vous allez entendre deux fois un débat radiophonique. Vous avez d'abord le temps de lire les questions. Écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-b2-1/co02.mp3",
+     "transcricao": "L'animateur : Bonsoir. L'intelligence artificielle s'invite dans les salles de classe. Faut-il l'autoriser pour les devoirs ? Laura Petit, vous êtes professeure de lettres au lycée.\nLaura Petit, enseignante : Je ne suis pas contre l'outil en lui-même, mais je constate que beaucoup d'élèves l'utilisent pour éviter de réfléchir. Quand une machine rédige la dissertation, l'élève n'apprend ni à construire un raisonnement, ni à écrire. C'est pourquoi, dans mon lycée, nous avons remplacé une partie des devoirs à la maison par des exercices faits en classe.\nL'animateur : Olivier Dumas, vous dirigez une entreprise numérique. Vous voyez les choses autrement ?\nOlivier Dumas, chef d'entreprise : Oui, parce que ces outils font déjà partie du monde professionnel. Mes salariés les utilisent tous les jours. Interdire l'IA à l'école, c'est un peu comme interdire la calculatrice il y a quarante ans : on prépare mal les jeunes à leur futur métier.\nLaura Petit, enseignante : La calculatrice n'écrit pas les idées à la place de l'élève ! Je veux bien qu'on apprenne à utiliser ces outils, mais seulement quand les bases sont acquises.\nOlivier Dumas, chef d'entreprise : Sur ce point, je suis d'accord avec vous. Il faudrait former les enseignants pour qu'ils apprennent aux élèves à vérifier les réponses de la machine, à repérer ses erreurs. L'esprit critique, c'est justement ce qui manque aujourd'hui.\nL'animateur : Vous êtes donc d'accord sur au moins une chose : la formation."
+    },
+    {
+     "id": "co3",
+     "titulo": "Trois courts documents",
+     "consigne": "Vous allez entendre une seule fois trois courts documents radiophoniques. Pour chaque document, répondez aux questions.",
+     "audio": "audio/simulados/delf-b2-1/co03.mp3",
+     "transcricao": "– Document un.\n– Les vols courts en avion sont de plus en plus critiqués. En France, depuis 2023, les lignes intérieures qui peuvent être remplacées par un trajet en train de moins de deux heures trente sont interdites. Une mesure symbolique selon les associations écologistes, qui demandent d'aller plus loin.\n– Document deux.\n– Le bénévolat attire de plus en plus de jeunes. Selon une étude publiée ce matin, un étudiant sur quatre consacre au moins deux heures par semaine à une association. Leur motivation principale : se sentir utiles, mais aussi acquérir des compétences à mettre sur leur CV.\n– Document trois.\n– Bonne nouvelle pour les amateurs de lecture : la fréquentation des bibliothèques municipales augmente. Gratuites et ouvertes le dimanche dans certaines villes, elles sont devenues de véritables lieux de vie, où l'on vient travailler, jouer ou assister à des concerts."
+    }
+   ],
+   "questoes": [
+    {
+     "n": 1,
+     "exercicio": "co1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Selon Élise Moreau, la « ville du quart d'heure » permet…",
+     "alternativas": [
+      "de construire un quartier en quinze mois.",
+      "d'accéder aux services essentiels à moins de 15 minutes.",
+      "de réduire de 15 minutes la journée de travail."
+     ],
+     "correta": 1,
+     "explicacao": "« Accéder en quinze minutes… à tout ce dont il a besoin au quotidien ».",
+     "audio": "audio/simulados/delf-b2-1/co01.mp3"
+    },
+    {
+     "n": 2,
+     "exercicio": "co1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Quel problème actuel l'urbaniste mentionne-t-elle ?",
+     "alternativas": [
+      "Le temps passé dans les transports.",
+      "Le manque d'écoles.",
+      "La fermeture des commerces."
+     ],
+     "correta": 0,
+     "explicacao": "« Beaucoup de gens passent plus d'une heure par jour dans les transports ».",
+     "audio": "audio/simulados/delf-b2-1/co01.mp3"
+    },
+    {
+     "n": 3,
+     "exercicio": "co1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Pour transformer une ville, elle propose surtout de…",
+     "alternativas": [
+      "interdire les voitures partout.",
+      "construire de nouveaux quartiers.",
+      "réutiliser autrement les lieux existants."
+     ],
+     "correta": 2,
+     "explicacao": "« On réutilise ce qui existe : une cour d'école… un parking… ».",
+     "audio": "audio/simulados/delf-b2-1/co01.mp3"
+    },
+    {
+     "n": 4,
+     "exercicio": "co1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "L'objectif principal est de…",
+     "alternativas": [
+      "mélanger les fonctions dans chaque quartier.",
+      "déplacer les entreprises en périphérie.",
+      "séparer les zones de travail et d'habitation."
+     ],
+     "correta": 0,
+     "explicacao": "« Mélanger les fonctions dans chaque quartier ».",
+     "audio": "audio/simulados/delf-b2-1/co01.mp3"
+    },
+    {
+     "n": 5,
+     "exercicio": "co1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Comment répond-elle à la critique sur l'« enfermement » ?",
+     "alternativas": [
+      "Elle reconnaît que les habitants ne doivent plus sortir de leur quartier.",
+      "Elle explique que les longs trajets deviennent facultatifs, pas interdits.",
+      "Elle refuse de répondre."
+     ],
+     "correta": 1,
+     "explicacao": "« Rendre les déplacements longs facultatifs, pas de les interdire ».",
+     "audio": "audio/simulados/delf-b2-1/co01.mp3"
+    },
+    {
+     "n": 6,
+     "exercicio": "co1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Quel risque réel reconnaît-elle ?",
+     "alternativas": [
+      "L'augmentation de la pollution.",
+      "La hausse des prix des logements.",
+      "La baisse de la population."
+     ],
+     "correta": 1,
+     "explicacao": "« Les prix des logements augmentent et les familles modestes doivent partir ».",
+     "audio": "audio/simulados/delf-b2-1/co01.mp3"
+    },
+    {
+     "n": 7,
+     "exercicio": "co1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Selon elle, consulter les habitants permet…",
+     "alternativas": [
+      "que les projets soient mieux acceptés et mieux utilisés.",
+      "d'accélérer les chantiers.",
+      "de réduire le coût des travaux."
+     ],
+     "correta": 0,
+     "explicacao": "« Les projets ont été mieux acceptés et, surtout, mieux utilisés ».",
+     "audio": "audio/simulados/delf-b2-1/co01.mp3"
+    },
+    {
+     "n": 8,
+     "exercicio": "co2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Quel est le sujet du débat ?",
+     "alternativas": [
+      "L'utilisation de l'intelligence artificielle pour les devoirs.",
+      "Le salaire des enseignants.",
+      "L'interdiction des téléphones au lycée."
+     ],
+     "correta": 0,
+     "explicacao": "« Faut-il l'autoriser pour les devoirs ? ».",
+     "audio": "audio/simulados/delf-b2-1/co02.mp3"
+    },
+    {
+     "n": 9,
+     "exercicio": "co2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Selon Laura Petit, le principal problème est que les élèves…",
+     "alternativas": [
+      "n'ont pas accès aux ordinateurs.",
+      "passent trop de temps à l'école.",
+      "évitent de réfléchir par eux-mêmes."
+     ],
+     "correta": 2,
+     "explicacao": "« Beaucoup d'élèves l'utilisent pour éviter de réfléchir ».",
+     "audio": "audio/simulados/delf-b2-1/co02.mp3"
+    },
+    {
+     "n": 10,
+     "exercicio": "co2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Qu'a décidé son lycée ?",
+     "alternativas": [
+      "Interdire totalement les ordinateurs.",
+      "Remplacer une partie des devoirs à la maison par des exercices en classe.",
+      "Supprimer les dissertations."
+     ],
+     "correta": 1,
+     "explicacao": "« Nous avons remplacé une partie des devoirs à la maison par des exercices faits en classe ».",
+     "audio": "audio/simulados/delf-b2-1/co02.mp3"
+    },
+    {
+     "n": 11,
+     "exercicio": "co2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Pour Olivier Dumas, interdire l'IA à l'école…",
+     "alternativas": [
+      "protège les élèves.",
+      "est une bonne chose pour les entreprises.",
+      "prépare mal les jeunes à leur futur métier."
+     ],
+     "correta": 2,
+     "explicacao": "« On prépare mal les jeunes à leur futur métier ».",
+     "audio": "audio/simulados/delf-b2-1/co02.mp3"
+    },
+    {
+     "n": 12,
+     "exercicio": "co2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Pourquoi Laura Petit refuse-t-elle la comparaison avec la calculatrice ?",
+     "alternativas": [
+      "La calculatrice coûte moins cher.",
+      "La calculatrice ne produit pas les idées à la place de l'élève.",
+      "La calculatrice est interdite au lycée."
+     ],
+     "correta": 1,
+     "explicacao": "« La calculatrice n'écrit pas les idées à la place de l'élève ! ».",
+     "audio": "audio/simulados/delf-b2-1/co02.mp3"
+    },
+    {
+     "n": 13,
+     "exercicio": "co2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Sur quel point les deux invités sont-ils d'accord ?",
+     "alternativas": [
+      "Il faut interdire l'IA.",
+      "Il faut former les enseignants.",
+      "Il faut supprimer les devoirs."
+     ],
+     "correta": 1,
+     "explicacao": "Ambos concordam com a formação: « Vous êtes donc d'accord sur au moins une chose : la formation ».",
+     "audio": "audio/simulados/delf-b2-1/co02.mp3"
+    },
+    {
+     "n": 14,
+     "exercicio": "co2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Selon Olivier Dumas, ce qui manque aujourd'hui aux élèves, c'est…",
+     "alternativas": [
+      "la motivation.",
+      "la maîtrise de l'anglais.",
+      "l'esprit critique."
+     ],
+     "correta": 2,
+     "explicacao": "« L'esprit critique, c'est justement ce qui manque aujourd'hui ».",
+     "audio": "audio/simulados/delf-b2-1/co02.mp3"
+    },
+    {
+     "n": 15,
+     "exercicio": "co3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Document 1 — Quelles lignes aériennes sont interdites en France ?",
+     "alternativas": [
+      "Celles qu'un train de moins de 2 h 30 peut remplacer.",
+      "Toutes les lignes intérieures.",
+      "Les vols de plus de deux heures."
+     ],
+     "correta": 0,
+     "explicacao": "« Remplacées par un trajet en train de moins de deux heures trente ».",
+     "audio": "audio/simulados/delf-b2-1/co03.mp3"
+    },
+    {
+     "n": 16,
+     "exercicio": "co3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Document 1 — Que pensent les associations écologistes de cette mesure ?",
+     "alternativas": [
+      "Qu'elle ne va pas assez loin.",
+      "Qu'elle est excessive.",
+      "Qu'elle doit être annulée."
+     ],
+     "correta": 0,
+     "explicacao": "« Une mesure symbolique… qui demandent d'aller plus loin ».",
+     "audio": "audio/simulados/delf-b2-1/co03.mp3"
+    },
+    {
+     "n": 17,
+     "exercicio": "co3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Document 2 — Combien d'étudiants font du bénévolat chaque semaine ?",
+     "alternativas": [
+      "Un sur quatre.",
+      "Un sur deux.",
+      "Deux sur trois."
+     ],
+     "correta": 0,
+     "explicacao": "« Un étudiant sur quatre consacre au moins deux heures par semaine ».",
+     "audio": "audio/simulados/delf-b2-1/co03.mp3"
+    },
+    {
+     "n": 18,
+     "exercicio": "co3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Document 2 — Quelle motivation est citée en plus de se sentir utile ?",
+     "alternativas": [
+      "Acquérir des compétences pour son CV.",
+      "Gagner de l'argent.",
+      "Rencontrer l'âme sœur."
+     ],
+     "correta": 0,
+     "explicacao": "« Acquérir des compétences à mettre sur leur CV ».",
+     "audio": "audio/simulados/delf-b2-1/co03.mp3"
+    },
+    {
+     "n": 19,
+     "exercicio": "co3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Document 3 — Que dit-on de la fréquentation des bibliothèques ?",
+     "alternativas": [
+      "Elle augmente.",
+      "Elle diminue.",
+      "Elle est stable."
+     ],
+     "correta": 0,
+     "explicacao": "« La fréquentation des bibliothèques municipales augmente ».",
+     "audio": "audio/simulados/delf-b2-1/co03.mp3"
+    },
+    {
+     "n": 20,
+     "exercicio": "co3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Document 3 — Les bibliothèques sont devenues…",
+     "alternativas": [
+      "des espaces payants.",
+      "des lieux réservés aux étudiants.",
+      "des lieux de vie."
+     ],
+     "correta": 2,
+     "explicacao": "« Elles sont devenues de véritables lieux de vie ».",
+     "audio": "audio/simulados/delf-b2-1/co03.mp3"
+    }
+   ]
+  },
+  "ce": {
+   "nome": "Compréhension des écrits",
+   "tempoSeg": 3600,
+   "exercicios": [
+    {
+     "id": "ce1",
+     "titulo": "Un texte informatif",
+     "consigne": "Lisez l'article puis répondez aux questions.",
+     "documento": {
+      "titulo": "Le retour discret des métiers manuels",
+      "texto": "Pendant des décennies, les familles ont encouragé leurs enfants à faire de longues études, considérant les métiers manuels comme une voie d'échec. Cette image est en train de changer. Selon le ministère du Travail, le nombre d'apprentis a presque doublé en cinq ans, et une partie croissante d'entre eux sont des adultes en reconversion, souvent diplômés de l'université.\n\nComment expliquer ce mouvement ? D'abord par un besoin de sens. Après quelques années dans un bureau, beaucoup disent souffrir de ne « rien produire de concret ». Devenir ébéniste, boulanger ou électricien permet de voir le résultat de son travail à la fin de la journée. Ensuite, par des perspectives d'emploi solides : dans le bâtiment comme dans la restauration, les entreprises peinent à recruter et les salaires augmentent.\n\nLe tableau n'est cependant pas idyllique. Les horaires sont parfois difficiles, la fatigue physique réelle, et l'apprentissage, qui dure généralement deux ans, impose une baisse de revenus temporaire. Les formateurs rappellent aussi que l'artisanat exige des compétences commerciales : un artisan doit savoir établir un devis, gérer ses clients et sa comptabilité.\n\nPour accompagner cette tendance, plusieurs régions financent désormais des formations courtes destinées aux salariés qui souhaitent tester un métier avant de se lancer. Une manière de transformer une envie en projet réaliste."
+     }
+    },
+    {
+     "id": "ce2",
+     "titulo": "Un texte argumentatif",
+     "consigne": "Lisez cette tribune puis répondez aux questions.",
+     "documento": {
+      "titulo": "Tribune — « Le tourisme de masse menace ce qu'il prétend admirer »",
+      "texto": "Chaque été, des villes comme Venise, Barcelone ou Dubrovnik voient leur population multipliée par dix. Les habitants, eux, partent : les loyers explosent, les commerces de proximité laissent place aux boutiques de souvenirs et les logements se transforment en locations de courte durée. À force d'attirer les visiteurs, ces villes perdent précisément ce qui faisait leur charme : une vie locale authentique.\n\nOn objectera que le tourisme fait vivre des millions de personnes. C'est indéniable. Mais une grande partie des bénéfices profite à de grandes plateformes et à des chaînes internationales, tandis que les coûts — usure des monuments, déchets, embouteillages — sont supportés par les collectivités locales et donc par les habitants.\n\nIl ne s'agit pas d'interdire les voyages, mais de les repenser. Limiter le nombre de visiteurs sur les sites les plus fragiles, comme on le fait déjà pour certaines grottes préhistoriques, n'a rien de scandaleux. Une taxe de séjour plus élevée, réellement réinvestie dans les quartiers, permettrait de rééquilibrer les choses. Enfin, chacun d'entre nous peut voyager autrement : partir hors saison, rester plus longtemps au même endroit, choisir des destinations moins connues.\n\nLe voyage reste une formidable école d'ouverture. Encore faut-il qu'il ne détruise pas ce qu'il prétend célébrer."
+     }
+    },
+    {
+     "id": "ce3",
+     "titulo": "Qui a dit quoi ?",
+     "consigne": "Trois personnes donnent leur avis sur le télétravail. Lisez leurs témoignages puis indiquez, pour chaque affirmation, quelle personne l'exprime : Malika (A), Antoine (B) ou Sylvie (C).",
+     "documento": {
+      "titulo": "Le télétravail, cinq ans après",
+      "texto": "Malika, 34 ans, comptable : « Au début, je travaillais depuis ma cuisine et je n'arrivais plus à séparer ma vie privée de ma vie professionnelle. J'ai fini par louer un bureau dans un espace de coworking près de chez moi. C'est un coût, mais je retrouve des collègues, même s'ils ne travaillent pas pour la même entreprise. »\n\nAntoine, 52 ans, chef de projet : « Je suis plutôt sceptique. Le télétravail convient aux tâches individuelles, mais pour créer, il faut se voir. Les meilleures idées naissent souvent à la machine à café. Et je m'inquiète pour les jeunes recrues : comment apprendre le métier sans observer les plus expérimentés ? »\n\nSylvie, 41 ans, traductrice : « Pour moi, c'est une libération. J'ai quitté Paris pour un village de Bretagne, je gagne deux heures par jour et je vois grandir mes enfants. Bien sûr, il faut de la discipline : je commence à 8 heures pile et je m'impose une vraie pause déjeuner. »"
+     }
+    }
+   ],
+   "questoes": [
+    {
+     "n": 21,
+     "exercicio": "ce1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Autrefois, les métiers manuels étaient souvent considérés comme…",
+     "alternativas": [
+      "une tradition familiale à respecter.",
+      "une voie d'échec.",
+      "un choix prestigieux."
+     ],
+     "correta": 1,
+     "explicacao": "« Considérant les métiers manuels comme une voie d'échec »."
+    },
+    {
+     "n": 22,
+     "exercicio": "ce1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Selon le ministère du Travail, le nombre d'apprentis…",
+     "alternativas": [
+      "a diminué de moitié.",
+      "a presque doublé en cinq ans.",
+      "est resté stable depuis dix ans."
+     ],
+     "correta": 1,
+     "explicacao": "« Le nombre d'apprentis a presque doublé en cinq ans »."
+    },
+    {
+     "n": 23,
+     "exercicio": "ce1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Parmi les nouveaux apprentis, on trouve de plus en plus…",
+     "alternativas": [
+      "de jeunes sans diplôme.",
+      "d'adultes déjà diplômés qui changent de voie.",
+      "de retraités."
+     ],
+     "correta": 1,
+     "explicacao": "« Des adultes en reconversion, souvent diplômés de l'université »."
+    },
+    {
+     "n": 24,
+     "exercicio": "ce1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Quelle première raison explique ce mouvement ?",
+     "alternativas": [
+      "La volonté de travailler moins.",
+      "L'obligation légale de se reconvertir.",
+      "La recherche de sens dans son travail."
+     ],
+     "correta": 2,
+     "explicacao": "« D'abord par un besoin de sens »."
+    },
+    {
+     "n": 25,
+     "exercicio": "ce1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Que dit l'article sur l'emploi dans le bâtiment ?",
+     "alternativas": [
+      "Les entreprises ont du mal à recruter.",
+      "Les postes disparaissent.",
+      "Les salaires baissent."
+     ],
+     "correta": 0,
+     "explicacao": "« Les entreprises peinent à recruter et les salaires augmentent »."
+    },
+    {
+     "n": 26,
+     "exercicio": "ce1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Quel inconvénient de l'apprentissage est mentionné ?",
+     "alternativas": [
+      "Une durée de cinq ans.",
+      "Une baisse de revenus temporaire.",
+      "L'absence de diplôme à la fin."
+     ],
+     "correta": 1,
+     "explicacao": "« Impose une baisse de revenus temporaire »."
+    },
+    {
+     "n": 27,
+     "exercicio": "ce1",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Que financent plusieurs régions ?",
+     "alternativas": [
+      "Des formations courtes pour tester un métier.",
+      "Des bourses pour les études longues.",
+      "L'ouverture d'entreprises artisanales."
+     ],
+     "correta": 0,
+     "explicacao": "« Des formations courtes destinées aux salariés qui souhaitent tester un métier »."
+    },
+    {
+     "n": 28,
+     "exercicio": "ce2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Quel est le constat de départ de l'auteur ?",
+     "alternativas": [
+      "Les touristes préfèrent désormais la campagne.",
+      "Le tourisme diminue dans les grandes villes européennes.",
+      "Certaines villes perdent leurs habitants à cause du tourisme."
+     ],
+     "correta": 2,
+     "explicacao": "« Les habitants, eux, partent : les loyers explosent… »."
+    },
+    {
+     "n": 29,
+     "exercicio": "ce2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Selon l'auteur, ces villes perdent…",
+     "alternativas": [
+      "leurs monuments les plus célèbres.",
+      "leurs aéroports.",
+      "leur vie locale authentique."
+     ],
+     "correta": 2,
+     "explicacao": "« Ces villes perdent précisément ce qui faisait leur charme : une vie locale authentique »."
+    },
+    {
+     "n": 30,
+     "exercicio": "ce2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Comment l'auteur répond-il à l'argument économique du tourisme ?",
+     "alternativas": [
+      "Il dit que le tourisme ne crée aucun emploi.",
+      "Il l'admet mais souligne que les coûts reposent sur les habitants.",
+      "Il le refuse totalement."
+     ],
+     "correta": 1,
+     "explicacao": "« C'est indéniable. Mais… les coûts… sont supportés par les collectivités locales »."
+    },
+    {
+     "n": 31,
+     "exercicio": "ce2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Que pense l'auteur de la limitation du nombre de visiteurs ?",
+     "alternativas": [
+      "Que c'est une atteinte à la liberté.",
+      "Que c'est une mesure acceptable.",
+      "Que c'est inutile."
+     ],
+     "correta": 1,
+     "explicacao": "« N'a rien de scandaleux »."
+    },
+    {
+     "n": 32,
+     "exercicio": "ce2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "La taxe de séjour devrait, selon lui,…",
+     "alternativas": [
+      "être réinvestie dans les quartiers.",
+      "financer de nouveaux hôtels.",
+      "être supprimée."
+     ],
+     "correta": 0,
+     "explicacao": "« Réellement réinvestie dans les quartiers »."
+    },
+    {
+     "n": 33,
+     "exercicio": "ce2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Parmi les conseils aux voyageurs, l'auteur propose de…",
+     "alternativas": [
+      "voyager seulement en avion.",
+      "réserver dans de grandes chaînes.",
+      "partir hors saison."
+     ],
+     "correta": 2,
+     "explicacao": "« Partir hors saison, rester plus longtemps au même endroit… »."
+    },
+    {
+     "n": 34,
+     "exercicio": "ce2",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "Quelle est la position générale de l'auteur sur le voyage ?",
+     "alternativas": [
+      "Il faut voyager autrement, sans renoncer au voyage.",
+      "Le tourisme ne pose aucun problème.",
+      "Il faut arrêter de voyager."
+     ],
+     "correta": 0,
+     "explicacao": "« Il ne s'agit pas d'interdire les voyages, mais de les repenser »."
+    },
+    {
+     "n": 35,
+     "exercicio": "ce3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "« Le télétravail m'a permis de changer de lieu de vie. »",
+     "alternativas": [
+      "Malika",
+      "Antoine",
+      "Sylvie"
+     ],
+     "correta": 2,
+     "explicacao": "Sylvie: « J'ai quitté Paris pour un village de Bretagne »."
+    },
+    {
+     "n": 36,
+     "exercicio": "ce3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "« J'ai eu du mal à séparer vie privée et vie professionnelle. »",
+     "alternativas": [
+      "Malika",
+      "Antoine",
+      "Sylvie"
+     ],
+     "correta": 0,
+     "explicacao": "Malika: « Je n'arrivais plus à séparer ma vie privée de ma vie professionnelle »."
+    },
+    {
+     "n": 37,
+     "exercicio": "ce3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "« La créativité a besoin de rencontres en personne. »",
+     "alternativas": [
+      "Malika",
+      "Antoine",
+      "Sylvie"
+     ],
+     "correta": 1,
+     "explicacao": "Antoine: « Pour créer, il faut se voir »."
+    },
+    {
+     "n": 38,
+     "exercicio": "ce3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "« Je paie pour travailler en dehors de chez moi. »",
+     "alternativas": [
+      "Malika",
+      "Antoine",
+      "Sylvie"
+     ],
+     "correta": 0,
+     "explicacao": "Malika aluga um espaço de coworking: « C'est un coût »."
+    },
+    {
+     "n": 39,
+     "exercicio": "ce3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "« Travailler à distance demande de s'organiser rigoureusement. »",
+     "alternativas": [
+      "Malika",
+      "Antoine",
+      "Sylvie"
+     ],
+     "correta": 2,
+     "explicacao": "Sylvie: « Il faut de la discipline : je commence à 8 heures pile »."
+    },
+    {
+     "n": 40,
+     "exercicio": "ce3",
+     "nivel": "B2",
+     "pontos": 1,
+     "pergunta": "« Les nouveaux salariés risquent d'apprendre moins bien leur métier. »",
+     "alternativas": [
+      "Malika",
+      "Antoine",
+      "Sylvie"
+     ],
+     "correta": 1,
+     "explicacao": "Antoine: « Comment apprendre le métier sans observer les plus expérimentés ? »."
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Production écrite",
+   "tempoSeg": 3600,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production écrite — Texte argumenté",
+     "min": 250,
+     "peso": 25,
+     "consigne": "Le conseil municipal de votre ville envisage de supprimer la gratuité des musées le premier dimanche du mois pour financer la rénovation des bâtiments. Membre d'une association culturelle, vous écrivez une lettre au maire pour exprimer votre désaccord. Vous présentez des arguments précis, appuyés sur des exemples, et vous proposez d'autres solutions de financement. (250 mots minimum)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Production orale",
+   "tempoSeg": 3000,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Présentation et défense d'un point de vue — Exposé",
+     "duracaoSeg": 420,
+     "preparacaoSeg": 1800,
+     "peso": 12.5,
+     "consigne": "Lisez le document ci-dessous. Dégagez le problème qu'il soulève, puis présentez votre opinion sous la forme d'un exposé argumenté et structuré (introduction, développement en deux ou trois parties, conclusion). Document : « De plus en plus d'entreprises proposent à leurs salariés une semaine de quatre jours. Pour ses défenseurs, c'est la clé du bien-être au travail ; pour ses opposants, une mesure impossible à généraliser. »",
+     "perguntasExaminador": [
+      "Je vous écoute. Présentez-nous le problème soulevé par ce document et votre point de vue."
+     ],
+     "fichaExaminador": "Exposé de 5 à 7 minutes. Attendu : dégager une problématique (« La semaine de quatre jours peut-elle devenir la norme ? »), plan annoncé, arguments illustrés d'exemples, conclusion avec ouverture."
+    },
+    {
+     "id": "t2",
+     "titulo": "Présentation et défense d'un point de vue — Débat",
+     "duracaoSeg": 480,
+     "preparacaoSeg": 0,
+     "peso": 12.5,
+     "consigne": "L'examinateur vous pose des questions sur votre exposé et défend parfois un point de vue opposé. Vous défendez, nuancez ou précisez votre position.",
+     "perguntasExaminador": [
+      "Vous parlez de bien-être, mais les salariés ne risquent-ils pas d'être plus stressés en quatre jours ?",
+      "Et dans les hôpitaux ou les écoles, comment faire ?",
+      "Pour finir, est-ce que vous aimeriez vous-même travailler quatre jours par semaine ? Pourquoi ?"
+     ],
+     "fichaExaminador": "Débat de 5 à 8 minutes. L'examinateur joue l'avocat du diable. Évaluer la capacité à défendre, nuancer, reformuler et réagir aux objections."
+    }
+   ]
+  }
+ }
+}

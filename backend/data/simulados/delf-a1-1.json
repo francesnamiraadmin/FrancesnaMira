@@ -1,0 +1,658 @@
+{
+ "slug": "delf-a1-1",
+ "titulo": "Simulado DELF A1 nº 1",
+ "curso": "DELF",
+ "nivel": "A1",
+ "formato": "DELF A1",
+ "descricao": "Situações simples do dia a dia: apresentar-se, compras, horários, transportes e lazer.",
+ "ordem": [
+  "co",
+  "ce",
+  "ee",
+  "eo"
+ ],
+ "provas": {
+  "co": {
+   "nome": "Compréhension de l'oral",
+   "tempoSeg": 1200,
+   "exercicios": [
+    {
+     "id": "co1",
+     "titulo": "Message téléphonique",
+     "consigne": "Vous allez entendre deux fois un message sur un répondeur téléphonique. Lisez d'abord les questions, écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-a1-1/co01.mp3",
+     "transcricao": "– Salut Paul, c'est Julie ! Tu es libre samedi soir ? C'est l'anniversaire de mon frère Thomas.\n– On fait une petite fête chez moi, à partir de sept heures et demie. Mon adresse, c'est 12, rue des Lilas.\n– Tu peux apporter une boisson ? Moi, je prépare des pizzas. Rappelle-moi au 06 45 22 18 30. À bientôt !"
+    },
+    {
+     "id": "co2",
+     "titulo": "Annonce dans un magasin",
+     "consigne": "Vous allez entendre deux fois une annonce dans un supermarché. Lisez d'abord les questions, écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-a1-1/co02.mp3",
+     "transcricao": "– Chers clients, bonjour ! Aujourd'hui, au rayon fruits et légumes, les fraises sont à deux euros le kilo.\n– Au rayon boulangerie, pour l'achat de deux baguettes, la troisième est gratuite.\n– Attention : ce soir, le magasin ferme exceptionnellement à dix-neuf heures. Merci et bonnes courses !"
+    },
+    {
+     "id": "co3",
+     "titulo": "Message à la radio",
+     "consigne": "Vous allez entendre deux fois une information à la radio. Lisez d'abord les questions, écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-a1-1/co03.mp3",
+     "transcricao": "– Bonjour à tous ! Ce week-end, la ville de Lyon organise la fête du vélo.\n– Samedi, de dix heures à dix-sept heures, il y a des balades gratuites dans le parc de la Tête d'Or.\n– Pour les enfants, il y a des cours de vélo. L'inscription se fait sur le site de la mairie. N'oubliez pas votre casque !"
+    },
+    {
+     "id": "co4",
+     "titulo": "Cinq petits dialogues",
+     "consigne": "Vous allez entendre deux fois cinq petits dialogues. Pour chaque dialogue, choisissez la bonne réponse : où sont les personnes ou de quoi elles parlent ?",
+     "audio": "audio/simulados/delf-a1-1/co04.mp3",
+     "transcricao": "– Dialogue numéro un.\n– Bonjour, je voudrais un aller simple pour Marseille, s'il vous plaît.\n– Pour quelle heure, madame ? Il y a un train à quatorze heures.\n– Dialogue numéro deux.\n– Bonjour docteur. J'ai mal à la tête depuis trois jours.\n– Asseyez-vous, je vais vous examiner.\n– Dialogue numéro trois.\n– Elle est à combien, cette robe bleue ?\n– Quarante-cinq euros. Vous voulez l'essayer ? Les cabines sont au fond.\n– Dialogue numéro quatre.\n– Je prends le menu du jour : la soupe et le poisson.\n– Très bien. Et comme boisson ?\n– Dialogue numéro cinq.\n– Pardon monsieur, la poste, c'est loin ?\n– Non, c'est tout droit, puis la deuxième rue à gauche."
+    }
+   ],
+   "questoes": [
+    {
+     "n": 1,
+     "exercicio": "co1",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Julie organise une fête pour…",
+     "alternativas": [
+      "la fin des examens.",
+      "son nouvel appartement.",
+      "l'anniversaire de son frère."
+     ],
+     "correta": 2,
+     "explicacao": "« C'est l'anniversaire de mon frère Thomas » : a festa é para o aniversário do irmão dela.",
+     "audio": "audio/simulados/delf-a1-1/co01.mp3"
+    },
+    {
+     "n": 2,
+     "exercicio": "co1",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "La fête commence à quelle heure ?",
+     "alternativas": [
+      "17 h 30",
+      "19 h 30",
+      "21 h"
+     ],
+     "correta": 1,
+     "explicacao": "« À partir de sept heures et demie » = 19 h 30.",
+     "audio": "audio/simulados/delf-a1-1/co01.mp3"
+    },
+    {
+     "n": 3,
+     "exercicio": "co1",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce que Paul doit apporter ?",
+     "alternativas": [
+      "Des pizzas.",
+      "Une boisson.",
+      "Un gâteau."
+     ],
+     "correta": 1,
+     "explicacao": "Julie pede: « Tu peux apporter une boisson ? ». As pizzas, é ela que prepara.",
+     "audio": "audio/simulados/delf-a1-1/co01.mp3"
+    },
+    {
+     "n": 4,
+     "exercicio": "co1",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Quel est le numéro de téléphone de Julie ?",
+     "alternativas": [
+      "06 54 22 18 30",
+      "06 45 22 18 30",
+      "06 45 12 18 30"
+     ],
+     "correta": 1,
+     "explicacao": "« 06 45 22 18 30 ». Atenção à ordem dos números ditos.",
+     "audio": "audio/simulados/delf-a1-1/co01.mp3"
+    },
+    {
+     "n": 5,
+     "exercicio": "co2",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Combien coûte un kilo de fraises aujourd'hui ?",
+     "alternativas": [
+      "2 €",
+      "12 €",
+      "4 €"
+     ],
+     "correta": 0,
+     "explicacao": "« Les fraises sont à deux euros le kilo ».",
+     "audio": "audio/simulados/delf-a1-1/co02.mp3"
+    },
+    {
+     "n": 6,
+     "exercicio": "co2",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Au rayon boulangerie, quelle est l'offre ?",
+     "alternativas": [
+      "Une baguette gratuite pour tous.",
+      "Les croissants à moitié prix.",
+      "Trois baguettes pour le prix de deux."
+     ],
+     "correta": 2,
+     "explicacao": "« Pour l'achat de deux baguettes, la troisième est gratuite ».",
+     "audio": "audio/simulados/delf-a1-1/co02.mp3"
+    },
+    {
+     "n": 7,
+     "exercicio": "co2",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Aujourd'hui, le magasin ferme à…",
+     "alternativas": [
+      "20 h.",
+      "21 h.",
+      "19 h."
+     ],
+     "correta": 2,
+     "explicacao": "« Le magasin ferme exceptionnellement à dix-neuf heures ».",
+     "audio": "audio/simulados/delf-a1-1/co02.mp3"
+    },
+    {
+     "n": 8,
+     "exercicio": "co2",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Cette annonce s'adresse…",
+     "alternativas": [
+      "aux enfants perdus.",
+      "aux employés du magasin.",
+      "aux clients du supermarché."
+     ],
+     "correta": 2,
+     "explicacao": "« Chers clients » : o anúncio é para os clientes.",
+     "audio": "audio/simulados/delf-a1-1/co02.mp3"
+    },
+    {
+     "n": 9,
+     "exercicio": "co3",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "La fête du vélo a lieu…",
+     "alternativas": [
+      "ce week-end.",
+      "pendant les vacances d'été.",
+      "lundi prochain."
+     ],
+     "correta": 0,
+     "explicacao": "« Ce week-end, la ville de Lyon organise la fête du vélo ».",
+     "audio": "audio/simulados/delf-a1-1/co03.mp3"
+    },
+    {
+     "n": 10,
+     "exercicio": "co3",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Les balades dans le parc sont…",
+     "alternativas": [
+      "gratuites.",
+      "réservées aux enfants.",
+      "à dix euros."
+     ],
+     "correta": 0,
+     "explicacao": "« Des balades gratuites dans le parc ».",
+     "audio": "audio/simulados/delf-a1-1/co03.mp3"
+    },
+    {
+     "n": 11,
+     "exercicio": "co3",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Pour les cours de vélo des enfants, il faut…",
+     "alternativas": [
+      "s'inscrire sur le site de la mairie.",
+      "téléphoner à la radio.",
+      "venir au parc à dix-sept heures."
+     ],
+     "correta": 0,
+     "explicacao": "« L'inscription se fait sur le site de la mairie ».",
+     "audio": "audio/simulados/delf-a1-1/co03.mp3"
+    },
+    {
+     "n": 12,
+     "exercicio": "co3",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce qu'il ne faut pas oublier ?",
+     "alternativas": [
+      "Son billet.",
+      "Son pique-nique.",
+      "Son casque."
+     ],
+     "correta": 2,
+     "explicacao": "« N'oubliez pas votre casque ! » (casque = capacete).",
+     "audio": "audio/simulados/delf-a1-1/co03.mp3"
+    },
+    {
+     "n": 13,
+     "exercicio": "co4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Dialogue 1 — Où sont les personnes ?",
+     "alternativas": [
+      "À la banque.",
+      "À la gare.",
+      "À l'aéroport."
+     ],
+     "correta": 1,
+     "explicacao": "« Un aller simple pour Marseille… un train à quatorze heures » : estão na estação de trem.",
+     "audio": "audio/simulados/delf-a1-1/co04.mp3"
+    },
+    {
+     "n": 14,
+     "exercicio": "co4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Dialogue 2 — Où sont les personnes ?",
+     "alternativas": [
+      "À la pharmacie.",
+      "Chez le médecin.",
+      "À l'école."
+     ],
+     "correta": 1,
+     "explicacao": "« Bonjour docteur… je vais vous examiner » : é uma consulta médica.",
+     "audio": "audio/simulados/delf-a1-1/co04.mp3"
+    },
+    {
+     "n": 15,
+     "exercicio": "co4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Dialogue 3 — De quoi parlent les personnes ?",
+     "alternativas": [
+      "D'un livre.",
+      "D'un appartement.",
+      "D'un vêtement."
+     ],
+     "correta": 2,
+     "explicacao": "« Cette robe bleue… les cabines » : falam de uma roupa (robe = vestido).",
+     "audio": "audio/simulados/delf-a1-1/co04.mp3"
+    },
+    {
+     "n": 16,
+     "exercicio": "co4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Dialogue 4 — Où sont les personnes ?",
+     "alternativas": [
+      "Au restaurant.",
+      "Au supermarché.",
+      "Au cinéma."
+     ],
+     "correta": 0,
+     "explicacao": "« Le menu du jour : la soupe et le poisson » : estão num restaurante.",
+     "audio": "audio/simulados/delf-a1-1/co04.mp3"
+    },
+    {
+     "n": 17,
+     "exercicio": "co4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Dialogue 5 — Que cherche la femme ?",
+     "alternativas": [
+      "Un restaurant.",
+      "La poste.",
+      "La gare."
+     ],
+     "correta": 1,
+     "explicacao": "« Pardon monsieur, la poste, c'est loin ? ».",
+     "audio": "audio/simulados/delf-a1-1/co04.mp3"
+    }
+   ]
+  },
+  "ce": {
+   "nome": "Compréhension des écrits",
+   "tempoSeg": 1800,
+   "exercicios": [
+    {
+     "id": "ce1",
+     "titulo": "Un courriel",
+     "consigne": "Vous recevez ce courriel d'une amie. Lisez le document puis répondez aux questions.",
+     "documento": {
+      "titulo": "De : clara.martin@mail.fr — Objet : Dimanche !",
+      "texto": "Salut Sofia,\n\nDimanche, je vais au marché avec ma sœur Léa. Tu viens avec nous ? On part à 9 heures de chez moi, en bus. Le marché est sur la place de l'Église.\n\nAprès, on mange au restaurant italien « Chez Mario ». C'est moi qui invite, pour mon anniversaire !\n\nN'oublie pas ton sac pour les courses. Réponds-moi avant vendredi.\n\nBises,\nClara"
+     }
+    },
+    {
+     "id": "ce2",
+     "titulo": "Une affiche",
+     "consigne": "Vous lisez cette affiche dans votre immeuble. Lisez le document puis répondez aux questions.",
+     "documento": {
+      "titulo": "FÊTE DES VOISINS",
+      "texto": "Vendredi 30 mai, à partir de 19 heures\nDans la cour de l'immeuble (en cas de pluie : dans la salle du rez-de-chaussée)\n\nChaque voisin apporte un plat ou un dessert.\nLes boissons sont offertes par le syndic.\nMusique et jeux pour les enfants !\n\nInscription auprès de Mme Durand, appartement 4B, avant le 25 mai."
+     }
+    },
+    {
+     "id": "ce3",
+     "titulo": "Des horaires",
+     "consigne": "Vous voulez aller à la piscine. Lisez les horaires puis répondez aux questions.",
+     "documento": {
+      "titulo": "Piscine municipale Jean-Moulin — Horaires",
+      "texto": "Lundi : fermé\nMardi et jeudi : 12 h – 14 h et 17 h – 21 h\nMercredi : 10 h – 19 h (cours pour enfants de 14 h à 16 h)\nVendredi : 12 h – 20 h\nSamedi et dimanche : 9 h – 18 h\n\nTarifs : adulte 4 € · enfant (moins de 12 ans) 2 € · carte 10 entrées : 35 €\nBonnet de bain obligatoire."
+     }
+    },
+    {
+     "id": "ce4",
+     "titulo": "Une petite annonce",
+     "consigne": "Vous lisez cette annonce sur un site internet. Lisez le document puis répondez aux questions.",
+     "documento": {
+      "titulo": "Cherche colocataire — Bordeaux centre",
+      "texto": "Je m'appelle Hugo, j'ai 24 ans, je suis étudiant en musique. Je cherche un ou une colocataire pour mon appartement, près de la gare Saint-Jean.\n\nLa chambre est grande et claire, avec un bureau. La cuisine et la salle de bains sont à partager.\n\nLoyer : 380 € par mois, électricité et internet compris.\nLibre à partir du 1er septembre. Pas d'animaux, s'il vous plaît.\n\nContact : hugo.colloc@mail.fr"
+     }
+    }
+   ],
+   "questoes": [
+    {
+     "n": 18,
+     "exercicio": "ce1",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Dimanche, Clara va…",
+     "alternativas": [
+      "à la piscine.",
+      "au marché.",
+      "au cinéma."
+     ],
+     "correta": 1,
+     "explicacao": "« Dimanche, je vais au marché avec ma sœur Léa »."
+    },
+    {
+     "n": 19,
+     "exercicio": "ce1",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Comment Clara et sa sœur vont-elles au marché ?",
+     "alternativas": [
+      "À pied.",
+      "En voiture.",
+      "En bus."
+     ],
+     "correta": 2,
+     "explicacao": "« On part à 9 heures de chez moi, en bus »."
+    },
+    {
+     "n": 20,
+     "exercicio": "ce1",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Pourquoi Clara invite-t-elle au restaurant ?",
+     "alternativas": [
+      "C'est son anniversaire.",
+      "Sofia part en voyage.",
+      "Elle a un nouveau travail."
+     ],
+     "correta": 0,
+     "explicacao": "« C'est moi qui invite, pour mon anniversaire ! »."
+    },
+    {
+     "n": 21,
+     "exercicio": "ce1",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Sofia doit répondre…",
+     "alternativas": [
+      "avant vendredi.",
+      "dimanche matin.",
+      "après le restaurant."
+     ],
+     "correta": 0,
+     "explicacao": "« Réponds-moi avant vendredi »."
+    },
+    {
+     "n": 22,
+     "exercicio": "ce2",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "La fête des voisins a lieu…",
+     "alternativas": [
+      "le dimanche 4 mai.",
+      "le vendredi 30 mai.",
+      "le samedi 25 mai."
+     ],
+     "correta": 1,
+     "explicacao": "« Vendredi 30 mai, à partir de 19 heures »."
+    },
+    {
+     "n": 23,
+     "exercicio": "ce2",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "S'il pleut, la fête est…",
+     "alternativas": [
+      "dans une salle de l'immeuble.",
+      "annulée.",
+      "dans le parc."
+     ],
+     "correta": 0,
+     "explicacao": "« En cas de pluie : dans la salle du rez-de-chaussée » (andar térreo)."
+    },
+    {
+     "n": 24,
+     "exercicio": "ce2",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce que chaque voisin apporte ?",
+     "alternativas": [
+      "Un plat ou un dessert.",
+      "Un jeu pour les enfants.",
+      "Des boissons."
+     ],
+     "correta": 0,
+     "explicacao": "« Chaque voisin apporte un plat ou un dessert ». As bebidas são oferecidas."
+    },
+    {
+     "n": 25,
+     "exercicio": "ce2",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Pour s'inscrire, il faut…",
+     "alternativas": [
+      "écrire sur l'affiche.",
+      "aller voir Mme Durand.",
+      "téléphoner au syndic."
+     ],
+     "correta": 1,
+     "explicacao": "« Inscription auprès de Mme Durand, appartement 4B »."
+    },
+    {
+     "n": 26,
+     "exercicio": "ce3",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Quel jour la piscine est-elle fermée ?",
+     "alternativas": [
+      "Le lundi.",
+      "Le dimanche.",
+      "Le mercredi."
+     ],
+     "correta": 0,
+     "explicacao": "« Lundi : fermé »."
+    },
+    {
+     "n": 27,
+     "exercicio": "ce3",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Le mercredi, les cours pour enfants sont…",
+     "alternativas": [
+      "de 17 h à 21 h.",
+      "de 10 h à 12 h.",
+      "de 14 h à 16 h."
+     ],
+     "correta": 2,
+     "explicacao": "« Cours pour enfants de 14 h à 16 h »."
+    },
+    {
+     "n": 28,
+     "exercicio": "ce3",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Combien coûte une entrée pour un adulte ?",
+     "alternativas": [
+      "4 €",
+      "2 €",
+      "35 €"
+     ],
+     "correta": 0,
+     "explicacao": "« Adulte 4 € ». 35 € é o preço do cartão de 10 entradas."
+    },
+    {
+     "n": 29,
+     "exercicio": "ce3",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce qui est obligatoire ?",
+     "alternativas": [
+      "Le bonnet de bain.",
+      "La carte 10 entrées.",
+      "Le cours de natation."
+     ],
+     "correta": 0,
+     "explicacao": "« Bonnet de bain obligatoire » (touca de natação)."
+    },
+    {
+     "n": 30,
+     "exercicio": "ce4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Qui est Hugo ?",
+     "alternativas": [
+      "Un professeur de musique.",
+      "Un étudiant.",
+      "Un employé de la gare."
+     ],
+     "correta": 1,
+     "explicacao": "« Je suis étudiant en musique »."
+    },
+    {
+     "n": 31,
+     "exercicio": "ce4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Où est l'appartement ?",
+     "alternativas": [
+      "À la campagne.",
+      "Près de l'université.",
+      "Près de la gare."
+     ],
+     "correta": 2,
+     "explicacao": "« Près de la gare Saint-Jean »."
+    },
+    {
+     "n": 32,
+     "exercicio": "ce4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce qui est compris dans le loyer ?",
+     "alternativas": [
+      "Les repas.",
+      "Le parking.",
+      "L'électricité et internet."
+     ],
+     "correta": 2,
+     "explicacao": "« Électricité et internet compris »."
+    },
+    {
+     "n": 33,
+     "exercicio": "ce4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "La chambre est libre…",
+     "alternativas": [
+      "en décembre.",
+      "à partir du 1er septembre.",
+      "tout de suite."
+     ],
+     "correta": 1,
+     "explicacao": "« Libre à partir du 1er septembre »."
+    },
+    {
+     "n": 34,
+     "exercicio": "ce4",
+     "nivel": "A1",
+     "pontos": 1,
+     "pergunta": "Dans l'appartement, les animaux…",
+     "alternativas": [
+      "sont bienvenus.",
+      "doivent rester dans la chambre.",
+      "ne sont pas acceptés."
+     ],
+     "correta": 2,
+     "explicacao": "« Pas d'animaux, s'il vous plaît »."
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Production écrite",
+   "tempoSeg": 1800,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Exercice 1 — Compléter une fiche",
+     "min": 15,
+     "max": 80,
+     "peso": 10,
+     "consigne": "Vous voulez vous inscrire à un cours de cuisine dans votre ville. Remplissez la fiche d'inscription. Recopiez chaque ligne et complétez-la :\nNom : …\nPrénom : …\nNationalité : …\nÂge : …\nAdresse : …\nProfession : …\nJours et heures où vous êtes libre : …\nPlat que vous aimez cuisiner : …\nPourquoi voulez-vous suivre ce cours ? (une phrase) : …"
+    },
+    {
+     "id": "t2",
+     "titulo": "Exercice 2 — Écrire un message",
+     "min": 40,
+     "max": 60,
+     "peso": 15,
+     "consigne": "Vous êtes en vacances au bord de la mer. Vous écrivez une carte postale à un(e) ami(e) francophone. Vous dites où vous êtes, avec qui, quel temps il fait et ce que vous faites pendant la journée. (40 à 50 mots)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Production orale",
+   "tempoSeg": 900,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Partie 1 — Entretien dirigé",
+     "duracaoSeg": 60,
+     "preparacaoSeg": 0,
+     "peso": 7,
+     "consigne": "Vous répondez aux questions de l'examinateur sur vous, votre famille, vos goûts et vos activités.",
+     "perguntasExaminador": [
+      "Bonjour ! Comment vous appelez-vous ?",
+      "Vous habitez où ?",
+      "Qu'est-ce que vous faites dans la vie ?",
+      "Qu'est-ce que vous aimez faire le week-end ?"
+     ],
+     "fichaExaminador": "Questions simples sur l'identité, la famille, la profession, les loisirs. Le candidat doit pouvoir se présenter et répondre par des phrases simples."
+    },
+    {
+     "id": "t2",
+     "titulo": "Partie 2 — Échange d'informations",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 300,
+     "peso": 8,
+     "consigne": "Vous posez des questions à l'examinateur à partir des mots suivants. Utilisez chaque mot pour poser une question : FAMILLE — SPORT — CINÉMA — VACANCES — PETIT-DÉJEUNER — TRAVAIL.",
+     "perguntasExaminador": [
+      "Maintenant, c'est vous qui posez les questions. Je vous écoute."
+     ],
+     "fichaExaminador": "L'examinateur répond brièvement à chaque question du candidat (ex. : « J'ai deux enfants », « Je fais du vélo »). Évaluer la capacité à poser des questions simples et variées."
+    },
+    {
+     "id": "t3",
+     "titulo": "Partie 3 — Dialogue simulé",
+     "duracaoSeg": 120,
+     "preparacaoSeg": 300,
+     "peso": 10,
+     "consigne": "Vous êtes dans une boulangerie. Vous achetez du pain, des croissants et un gâteau pour un anniversaire. Vous demandez les prix et vous payez. L'examinateur joue le rôle du vendeur.",
+     "perguntasExaminador": [
+      "Bonjour madame, bonjour monsieur ! Qu'est-ce que je vous sers ?",
+      "Et avec ceci ?",
+      "Ça fait douze euros quarante, s'il vous plaît."
+     ],
+     "fichaExaminador": "Prix : baguette 1,20 € · croissant 1,10 € · tarte aux fraises 18 € (6 parts) · éclair 2,50 €. Le candidat doit saluer, demander, s'informer sur les prix, payer et prendre congé."
+    }
+   ]
+  }
+ }
+}

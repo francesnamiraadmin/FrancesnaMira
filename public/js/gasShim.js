@@ -7,12 +7,18 @@
 (function () {
   var EU = "__eu__";
 
+  // Nível do DELF escolhido no Ambiente de Produção (A1 a B2); os outros cursos ignoram.
+  function nivelDelf() {
+    if (window.FNM_NIVEL) return window.FNM_NIVEL;
+    try { return localStorage.getItem("fnm_delf_nivel") || undefined; } catch (e) { return undefined; }
+  }
+
   function chamar(nome, args) {
     if (args.length && args[0] === EU) args = args.slice(1);
     return fetch("/api/modeles/rpc/" + encodeURIComponent(nome), {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: "Bearer " + localStorage.getItem("token") },
-      body: JSON.stringify({ args: args, courseType: window.FNM_CURSO || undefined })
+      body: JSON.stringify({ args: args, courseType: window.FNM_CURSO || undefined, nivel: nivelDelf() })
     }).then(function (res) {
       return res.json().catch(function () { return {}; }).then(function (d) {
         if (res.status === 401) { window.location.href = "login.html"; throw new Error("Session expirée."); }

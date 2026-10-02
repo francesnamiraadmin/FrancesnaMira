@@ -55,6 +55,10 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/pagamentos", require("./routes/pagamentos"));
 app.use("/api/temas", require("./routes/temas"));
+// Correção anotada (marcações, comentários, histórico, concluir/reabrir) antes das rotas gerais de produções.
+const correcaoAnotada = require("./routes/correcaoAnotada");
+app.use("/api/producoes", correcaoAnotada.producoes);
+app.use("/api/correcao", correcaoAnotada.config);
 app.use("/api/producoes", require("./routes/producoes"));
 app.use("/api/admin", require("./routes/admin"));
 app.use("/api/creditos", require("./routes/creditos"));

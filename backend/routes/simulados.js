@@ -201,8 +201,10 @@ async function podeUsar(req, def) {
   if (ehEquipe(req)) return true;
   // Exercício do Ambiente de Produção: liberado pelo módulo "producao" do curso dele.
   if (def && sim.ehExercicio(def)) return usuarioTemAcesso(req.userId, "producao", def.curso);
-  return usuarioTemAcesso(req.userId, "plataforma", "TCF");
+  // Simulado completo: liberado pela Plataforma de Questões do curso do simulado (TCF, DELF…).
+  return usuarioTemAcesso(req.userId, "plataforma", def?.curso || "TCF");
 }
+const CURSOS_SIMULADO = ["TCF", "DELF"];
 
 // EXERCÍCIOS DO AMBIENTE DE PRODUÇÃO ORAL (por curso), com o que o aluno já fez.
 router.get("/exercicios", async (req, res) => {
@@ -233,7 +235,8 @@ router.get("/exercicios", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    if (!(await podeUsar(req))) return res.status(403).json({ msg: "Simulados disponíveis no plano Excellence do TCF." });
+    const curso = CURSOS_SIMULADO.includes(String(req.query.curso || "")) ? String(req.query.curso) : "TCF";
+    if (!(await podeUsar(req, { curso }))) return res.status(403).json({ msg: `Simulados disponíveis no plano da Plataforma de Questões do ${curso}.` });
     const tentativas = await SimuladoTentativa.find({ alunoId: req.userId })
       .select("simuladoSlug modoCorrecao status provaAtual provas conexao criadoEm publicadoEm")
       .sort({ criadoEm: -1 }).limit(30).lean();
@@ -243,10 +246,12 @@ router.get("/", async (req, res) => {
       resultados: t.status === "em_andamento" ? null : Object.fromEntries(sim.ordemDe(sim.obter(t.simuladoSlug)).map(p => {
         const r = t.provas?.[p]?.resultado;
         if (!r || ((p === "ee" || p === "eo") && !t.publicadoEm)) return [p, null];
-        return [p, { pontos: r.pontos, nota: r.nota, nivel: r.nivel, nclc: r.nclc }];
+        return [p, { pontos: r.pontos, nota: r.nota, notaProva: r.notaProva, escala: r.escala, nivel: r.nivel, nclc: r.nclc }];
       }))
     }));
-    res.json({ simulados: sim.listar("TCF").filter(x => audioPronto(sim.obter(x.slug))), tentativas: resumo, iaDisponivel: iaConfigurada() });
+    const lista = sim.listar(curso).filter(x => audioPronto(sim.obter(x.slug)));
+    const slugs = new Set(lista.map(x => x.slug));
+    res.json({ curso, simulados: lista, tentativas: resumo.filter(t => slugs.has(t.simuladoSlug)), iaDisponivel: iaConfigurada() });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
@@ -333,7 +338,9 @@ router.patch("/tentativas/:id/progresso", async (req, res) => {
         const q = def.provas[prova].questoes.find(x => String(x.n) === String(n));
         if (q && Number.isInteger(v) && v >= 0 && v < q.alternativas.length) e.respostas[q.n] = v;
       }
-      if (prova === "co" && Number.isInteger(req.body?.ouvido) && !e.ouvidos.includes(req.body.ouvido)) e.ouvidos.push(req.body.ouvido);
+      // TCF: cada áudio uma única vez. DELF: cada documento duas vezes (o « ouvido » é a 1ª questão do exercício).
+      const limiteEscutas = sim.ehDelf(def) ? 2 : 1;
+      if (prova === "co" && Number.isInteger(req.body?.ouvido) && e.ouvidos.filter(x => x === req.body.ouvido).length < limiteEscutas) e.ouvidos.push(req.body.ouvido);
     } else if (prova === "ee") {
       for (const [id, texto] of Object.entries(resp)) {
         if (tarefaValida(def, "ee", id) && typeof texto === "string") e.respostas[id] = texto.slice(0, 8000);

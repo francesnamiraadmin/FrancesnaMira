@@ -307,7 +307,7 @@
     const av = p.avaliacao || {};
     const corrigida = ["corrigido", "devolvido"].includes(p.status);
     const topo = `<div class="pr-hero" style="padding:24px 28px;"><div class="eyebrow">${esc(t.courseType || curso)} · ${esc(t.nivel || "")} · protocolo ${esc(p.protocolo)}</div><h1 style="font-size:1.9rem;">${esc(t.titulo)}</h1><p>Enviada em ${new Date(p.dataEnvio).toLocaleString("pt-BR")} · ${p.contagemPalavras || "—"} palavras</p></div>`;
-    const texto = `<div class="pr-caixa" style="margin-top:18px;"><h2 style="font-size:1.25rem; margin-bottom:10px;">Sua redação</h2><div class="pr-texto-aluno">${esc(p.textoDigitado || "(arquivo anexado)")}</div></div>`;
+    const texto = `<div class="pr-caixa" id="prTextoSimples" style="margin-top:18px;"><h2 style="font-size:1.25rem; margin-bottom:10px;">Sua redação</h2><div class="pr-texto-aluno">${esc(p.textoDigitado || "(arquivo anexado)")}</div></div>`;
     const msgs = `<div class="pr-caixa pr-msgs" style="margin-top:18px;"><h2 style="font-size:1.25rem; margin-bottom:10px;">Conversa com o professor</h2>
       ${(p.mensagens || []).map(m => `<div class="m ${m.autor === "professor" ? "prof" : ""}"><strong>${m.autor === "professor" ? "Professor" : "Você"}</strong> · ${fmtData(m.data)}<br>${esc(m.texto)}</div>`).join("") || '<p style="font-size:.85rem; opacity:.75;">Nenhuma mensagem ainda.</p>'}
       <textarea class="pr-obs" id="novaMsg" placeholder="Escreva uma dúvida para o professor…" style="margin-top:10px;"></textarea>
@@ -315,7 +315,8 @@
     if (!corrigida) {
       $("resultado").innerHTML = topo + `<div class="pr-caixa pr-esperando">${p.modoCorrecao === "ia"
         ? '<div class="spin"></div><h2>A IA está corrigindo a sua redação…</h2><p>Isso costuma levar menos de um minuto. Esta página se atualiza sozinha.</p>'
-        : `<h2>Sua redação está com o professor</h2><p>Prazo estimado: <strong>${fmtData(p.prazoEstimado)}</strong>. Você será avisado quando a correção chegar.</p>`}</div>` + texto + msgs;
+        : p.estadoCorrecao?.estado === "em_correcao" && p.correcao?.reabertaEm ? `<h2>Sua correção está em revisão</h2><p>O professor reabriu a correção para revisá-la. Você será avisado quando ela voltar.</p>`
+        : `<h2>Sua redação está com o professor</h2><p>${p.estadoCorrecao ? "Estado: <strong>" + esc(p.estadoCorrecao.rotulo) + "</strong> · " : ""}Prazo estimado: <strong>${fmtData(p.prazoEstimado)}</strong>. Você será avisado quando a correção chegar.</p>`}</div>` + texto + msgs;
       return;
     }
     const pct = av.notaMaxima ? Math.round((av.notaTotal / av.notaMaxima) * 100) : 0;
@@ -332,9 +333,17 @@
         ${(av.criterios || []).map(c => `<div class="pr-crit"><div class="topo"><span>${esc(c.nome)}</span><span>${c.nota}${c.max ? " / " + c.max : ""}</span></div><div class="barra"><span style="width:${c.max ? (c.nota / c.max) * 100 : c.nota * 20}%"></span></div>${c.comentario ? `<p>${esc(c.comentario)}</p>` : ""}</div>`).join("")}
         ${av.comentarioGeral ? `<h3 style="margin:16px 0 6px;">Comentário geral</h3><p style="line-height:1.6;">${esc(av.comentarioGeral)}</p>` : ""}
         ${(av.pontosFortes?.length || av.aMelhorar?.length) ? `<div class="pr-duas-col" style="margin-top:14px;"><div><h3 style="font-size:1rem;">Pontos fortes</h3><ul>${(av.pontosFortes || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul></div><div><h3 style="font-size:1rem;">A melhorar</h3><ul>${(av.aMelhorar || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul></div></div>` : ""}
+        ${av.recomendacoes?.length ? `<h3 style="margin:16px 0 6px; font-size:1rem;">Recomendações de estudo</h3><ul>${av.recomendacoes.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+        ${av.feedbackFinal ? `<div style="margin-top:16px; padding:14px 16px; border-radius:14px; background:rgba(217,163,0,.12); line-height:1.6;"><strong>Mensagem do professor</strong><br>${esc(av.feedbackFinal)}</div>` : ""}
       </div>
     </div>
-    ${av.correcoes?.length ? `<div class="pr-caixa" style="margin-top:18px;"><h2 style="font-size:1.25rem; margin-bottom:10px;">Correções linha a linha</h2>${av.correcoes.map(c => `<div class="pr-correcao"><span class="errado">${esc(c.trecho)}</span><span class="certo">${esc(c.correcao)}</span>${c.explicacao ? `<span class="porque">${esc(c.explicacao)}</span>` : ""}</div>`).join("")}</div>` : ""}` + texto + msgs;
+    <div id="caAlunoBox" style="margin-top:18px;" hidden></div>
+    ${av.correcoes?.length ? `<div class="pr-caixa" id="prCorrecoesLinha" style="margin-top:18px;"><h2 style="font-size:1.25rem; margin-bottom:10px;">Correções linha a linha</h2>${av.correcoes.map(c => `<div class="pr-correcao"><span class="errado">${esc(c.trecho)}</span><span class="certo">${esc(c.correcao)}</span>${c.explicacao ? `<span class="porque">${esc(c.explicacao)}</span>` : ""}</div>`).join("")}</div>` : ""}` + texto + msgs;
+    // texto com as marcações e comentários do professor (substitui o texto simples e a lista antiga)
+    if (window.Correcao && Correcao.Aluno) Correcao.Aluno.montar($("caAlunoBox"), p).then(tem => {
+      if (!tem) return;
+      ["prTextoSimples", "prCorrecoesLinha"].forEach(id => { const el = $(id); if (el) el.hidden = true; });
+    });
   }
   $("resultado").addEventListener("click", async e => {
     const r = e.target.closest("[data-reescrever]");

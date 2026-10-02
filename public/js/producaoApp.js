@@ -183,7 +183,7 @@ function iniciar() {
 function entrar() {
       google.script.run
         .withSuccessHandler(function (banco) {
-          B = banco;
+          B = banco; aplicarPerfil();
           if (window.FNM_TRADUZIR_BANCO) window.FNM_TRADUZIR_BANCO(B);   // pt-BR: eixos (js/producaoI18n.js)
           B.audios = B.audios || {};
           B.ttsAtivo = true;   // áudios Coqui pré-gerados (audio/modeles), ver extensões
@@ -239,10 +239,11 @@ function sair() { window.location.href = 'producao-hub.html'; }
 function irAccueil() {
       if (!B) return;
       var CURSOS = { TCF: 'TCF Canada', DELF: 'DELF', DALF: 'DALF', TEF: 'TEF Canada', A1: 'Français A1', A2: 'Français A2', B1: 'Français B1', B2: 'Français B2' };
-      var nomeCurso = CURSOS[B.courseType] || 'TCF Canada';
+      var nomeCurso = ehDelf() ? B.perfil.nome : CURSOS[B.courseType] || 'TCF Canada';
       var html = '<div class="acc-topo">' + (B.nome ? '<p class="ola">Bonjour, ' + esc(B.nome.split(' ')[0]) + '.</p>' : '') +
         '<div class="acc-titulo-linha"><h1 class="titulo-pagina">Ambiente de Produção · ' + esc(nomeCurso) + '</h1>' + (B.professor ? '' : htmlCreditos()) + '</div>' +
         '<p class="intro">Choisissez ce que vous voulez travailler. Les sujets sont classés par tâche et par axe thématique, avec modèles annotés, audio, dictée, épreuves chronométrées et correction par l\'IA ou par un professeur.</p></div>';
+      html += htmlNiveisDelf();
       html += htmlHubEscolhas();
       html += '<div id="acc-pendencias"></div>';
       html += '<h2 class="secao-titulo acc-secao">Accueil</h2>';
@@ -271,19 +272,19 @@ function irAccueil() {
     /** Página "Production orale" ou "Production écrite": tâches, épreuves, tirage, axes, boîte à outils. */
     function abrirHub(modo) {
       if (!B) return;
-      var oral = modo === 'oral', taches = oral ? ['T1', 'T2', 'T3'] : ['ET1', 'ET2', 'ET3'];
+      var oral = modo === 'oral', taches = oral ? TS() : ETS();
       var partes = [PARTE_ACCUEIL(), { rotulo: oral ? 'Production orale' : 'Production écrite' }];
       var html = trilha(partes) + '<h1 class="titulo-pagina">' + (oral ? 'Production orale' : 'Production écrite') + '</h1>' +
-        '<p class="intro">' + (oral ? 'Les trois tâches de l\'expression orale : modèles avec audio, dialogue à deux voix, monologue pas à pas, enregistrement.' :
+        '<p class="intro">' + (ehDelf() ? introHubDelf(oral) : oral ? 'Les trois tâches de l\'expression orale : modèles avec audio, dialogue à deux voix, monologue pas à pas, enregistrement.' :
           'Les trois tâches de l\'expression écrite : modèles annotés selon la trame, épreuve de 60 minutes et correction.') + '</p>';
       html += '<div class="hub-taches">' + taches.map(function (t) {
         var n = (B.contagens && B.contagens[t]) || lista(t).length, info = TACHES[t];
-        return '<button class="hub-tache" type="button" data-tache="' + t + '"' + (n ? '' : ' disabled') + '><span class="selo">' + info.nom.slice(-1) + '</span>' +
+        return '<button class="hub-tache" type="button" data-tache="' + t + '"' + (n ? '' : ' disabled') + '><span class="selo">' + seloTache(t) + '</span>' +
           '<b>' + info.nom + ' · ' + info.sous + '</b><small>' + info.info + '</small><em>' + (n ? n + ' sujets →' : 'bientôt') + '</em></button>';
       }).join('') + '</div>';
       html += '<div class="hub-acoes">' +
-        '<button class="hub-acao" type="button" data-hub="epreuve"><span>' + (oral ? '' : '') + '</span><b>' + (oral ? 'Mes épreuves orales' : 'Épreuve écrite (60 min)') + '</b><small>' +
-          (oral ? 'Les enregistrements demandés par votre professeur(e).' : 'Tâches 1, 2 et 3 dans les conditions de l\'examen.') + '</small></button>' +
+        '<button class="hub-acao" type="button" data-hub="epreuve"><span>' + (oral ? '' : '') + '</span><b>' + (oral ? 'Mes épreuves orales' : ehDelf() ? 'Prova escrita (' + minutosEpreuve() + ' min)' : 'Épreuve écrite (60 min)') + '</b><small>' +
+          (oral ? 'Les enregistrements demandés par votre professeur(e).' : ehDelf() ? 'A produção escrita completa, nas condições do ' + esc(nomeProva()) + '.' : 'Tâches 1, 2 et 3 dans les conditions de l\'examen.') + '</small></button>' +
         '<button class="hub-acao" type="button" data-hub="outils"><span></span><b>Boîte à outils</b><small>Connecteurs, trames et formules à réutiliser.</small></button>' +
         '</div>';
       html += htmlTirage(taches, 'hub-tirage');
@@ -902,7 +903,7 @@ function irAccueil() {
     function painelReescrita(info, tache, m) {
       var min = MIN_EXAME_ESCRITO[tache] || 10;
       return '<aside class="painel-reescrita" id="painel-reescrita" hidden>' +
-        '<div class="rs-cab"><div><small class="mira-marca">TCF Canada · Expression écrite · réécriture</small><h3>' + nomeTache(tache) + ' · ' + esc(info.sous) + '</h3></div>' +
+        '<div class="rs-cab"><div><small class="mira-marca">' + esc(nomeProva()) + ' · Expression écrite · réécriture</small><h3>' + nomeTache(tache) + ' · ' + esc(info.sous) + '</h3></div>' +
         '<div class="rs-relogio"><span class="tempo" id="rs-tempo">' + min + ':00</span><span>temps restant · ' + min + ' min</span></div>' +
         '<button class="fechar" type="button" data-r="fechar" aria-label="Fermer la feuille">✕</button></div>' +
         (m.c ? '<div class="consigne-folha rs-consigne"><p>' + esc(m.c) + '</p></div>' : '') +
@@ -1291,7 +1292,7 @@ function irAccueil() {
     /** Recarrega os dados depois de desbloquear um eixo. */
     function recarregarBanco(cb) {
       google.script.run.withSuccessHandler(function (banco) {
-        B = banco; B.audios = B.audios || {}; LISTAS = {}; prepararDestaques(); cb();
+        B = banco; aplicarPerfil(); B.audios = B.audios || {}; LISTAS = {}; prepararDestaques(); cb();
       }).obterBanco(EMAIL);
     }
 
@@ -1913,7 +1914,7 @@ function irAccueil() {
     /** Tira as 3 tâches com eixos todos diferentes (e diferentes das últimas provas). */
     function tirarProva(filtroEixo) {
       var p = {}, usados = [];
-      ['ET3', 'ET2', 'ET1'].forEach(function (t) { p[t] = sujetAleatorio(t, filtroEixo, null, usados); if (p[t]) usados.push(p[t].e); });
+      ETS().reverse().forEach(function (t) { p[t] = sujetAleatorio(t, filtroEixo, null, usados); if (p[t]) usados.push(p[t].e); });
       return p;
     }
     function pararEpreuveTimers() { if (epTimer) clearInterval(epTimer); if (epSalvar) clearInterval(epSalvar); epTimer = epSalvar = null; }
@@ -1945,7 +1946,7 @@ function irAccueil() {
       var partes = [PARTE_ACCUEIL(), { rotulo: 'Épreuves' }];
       var livre = tirarProva(null);
       var html = trilha(partes) + '<h1 class="titulo-pagina">Épreuve d\'expression écrite</h1>' +
-        '<p class="intro">Trois tâches en <b>60 minutes</b>, comme le jour du TCF Canada : Tâche 1 (≈ 10 min), Tâche 2 (≈ 15 min), Tâche 3 (≈ 25 min) et 10 minutes de relecture. ' +
+        '<p class="intro">' + (ehDelf() ? introEpreuveDelf() : 'Trois tâches en <b>60 minutes</b>, comme le jour du TCF Canada : Tâche 1 (≈ 10 min), Tâche 2 (≈ 15 min), Tâche 3 (≈ 25 min) et 10 minutes de relecture. ') +
         'Une fois commencée, l\'épreuve ne peut pas être mise en pause. À la fin du temps, elle se ferme et vos textes sont envoyés automatiquement, même si vous quittez la page.</p>' + avisoPermissao(st);
 
       var sess = st.sessoes || [];
@@ -1966,19 +1967,19 @@ function irAccueil() {
       html += '<h2 class="secao-titulo">Entraînement libre</h2><div class="bloco"><p class="aviso" style="margin-top:0">Les sujets sont tirés au sort. Vous pouvez en changer avant de commencer.</p>' +
         '<label class="campo-eixo">Axe thématique<select id="ep-eixo"><option value="">Tous les axes</option>' +
         B.ordemEixos.map(function (ch) { return '<option value="' + ch + '">' + eixo(ch).icone + ' ' + esc(eixo(ch).nome) + '</option>'; }).join('') + '</select></label>' +
-        '<div class="previa">' + ['ET1', 'ET2', 'ET3'].map(function (t) {
-          return '<div class="previa-item"><span class="selo">' + t.slice(-1) + '</span><span data-previa="' + t + '"></span><button class="ferramenta" type="button" data-trocar="' + t + '" title="Tirer un autre sujet pour cette tâche">' + ICO.giro + '</button></div>';
+        '<div class="previa">' + ETS().map(function (t) {
+          return '<div class="previa-item"><span class="selo">' + seloTache(t) + '</span><span data-previa="' + t + '"></span><button class="ferramenta" type="button" data-trocar="' + t + '" title="Tirer un autre sujet pour cette tâche">' + ICO.giro + '</button></div>';
         }).join('') + '</div><p class="aviso">Les sujets les plus fréquents et ceux tombés récemment ont plus de chances de sortir, et les trois tâches portent toujours sur des axes différents.</p>' +
-        htmlEscolhaCorrecao(st) + '<div class="ferramentas"><button class="botao-principal" type="button" id="ep-comecar" style="width:auto;padding:13px 30px">Commencer l\'épreuve (60 min)</button>' +
+        htmlEscolhaCorrecao(st) + '<div class="ferramentas"><button class="botao-principal" type="button" id="ep-comecar" style="width:auto;padding:13px 30px">' + (ehDelf() ? 'Começar a prova (' + minutosEpreuve() + ' min)' : 'Commencer l\'épreuve (60 min)') + '</button>' +
         '<button class="botao-sorteio" type="button" id="ep-retirar">Tirer une autre épreuve</button></div></div>';
       html += '<nav class="rodape-nav"><button class="ferramenta" type="button" data-ir="accueil">Accueil</button></nav>';
       var tela = $('tela-epreuve');
       tela.innerHTML = html;
       ligarTrilha(tela, partes);
       var desenharPrevia = function () {
-        var faltam = ['ET1', 'ET2', 'ET3'].filter(function (t) { return !livre[t]; });
+        var faltam = ETS().filter(function (t) { return !livre[t]; });
         $('ep-comecar').disabled = !!faltam.length;
-        ['ET1', 'ET2', 'ET3'].forEach(function (t) {
+        ETS().forEach(function (t) {
           if (!livre[t]) { tela.querySelector('[data-previa="' + t + '"]').innerHTML = '<b>' + TACHES[t].sous + '</b><br>Aucun sujet débloqué pour cette tâche. Votre professeur(e) l\'ouvrira bientôt.'; return; }
           var e = eixo(livre[t].e);
           tela.querySelector('[data-previa="' + t + '"]').innerHTML = '<b>' + TACHES[t].sous + '</b> · <span class="etiqueta eixo" style="--cor:' + e.cor + '">' + e.icone + ' ' + esc(e.nome) + '</span>' +
@@ -1991,19 +1992,19 @@ function irAccueil() {
         b.addEventListener('click', function () {
           var t = b.dataset.trocar;
           if (!livre[t]) return;
-          var outros = ['ET1', 'ET2', 'ET3'].filter(function (x) { return x !== t && livre[x]; }).map(function (x) { return livre[x].e; });
+          var outros = ETS().filter(function (x) { return x !== t && livre[x]; }).map(function (x) { return livre[x].e; });
           livre[t] = sujetAleatorio(t, $('ep-eixo').value || null, livre[t].id, outros.concat([livre[t].e]));
           desenharPrevia();
         });
       });
       var comecar = function (pedido, botao) {
-        if (!confirm('L\'épreuve dure 60 minutes et ne peut pas être mise en pause. Commencer maintenant ?')) return;
+        if (!confirm(ehDelf() ? 'A prova dura ' + minutosEpreuve() + ' minutos e não pode ser pausada. Começar agora?' : 'L\'épreuve dure 60 minutes et ne peut pas être mise en pause. Commencer maintenant ?')) return;
         botao.disabled = true; botao.textContent = 'Préparation…';
         google.script.run.withSuccessHandler(function (st2) { iniciarEpreuveLocal(st2.emCurso, st2.agora); })
           .withFailureHandler(function (e) { botao.disabled = false; botao.textContent = 'Commencer'; alert(e.message || e); })
           .commencerEpreuve(EMAIL, pedido);
       };
-      $('ep-comecar').addEventListener('click', function () { registrarEixos([livre.ET1.e, livre.ET2.e, livre.ET3.e]); comecar({ sujets: { ET1: livre.ET1.id, ET2: livre.ET2.id, ET3: livre.ET3.id }, correcao: correcaoEscolhida() }, $('ep-comecar')); });
+      $('ep-comecar').addEventListener('click', function () { registrarEixos(ETS().map(function (t) { return livre[t].e; })); comecar({ sujets: sujetsLivres(livre), correcao: correcaoEscolhida() }, $('ep-comecar')); });
       tela.querySelectorAll('[data-sessao]').forEach(function (b) { b.addEventListener('click', function () { comecar({ sessao: b.dataset.sessao }, b); }); });
       tela.querySelectorAll('[data-gravar]').forEach(function (b) {
         b.addEventListener('click', function () {
@@ -2019,24 +2020,25 @@ function irAccueil() {
 
     /** Prova em andamento: o tempo vem do servidor (retomar após recarregar a página). */
     function iniciarEpreuveLocal(emCurso, agoraServidor) {
+      var SEG_EP = minutosEpreuve() * 60;
       pararEpreuveTimers();
       var local = lerLocal('fnm_ep_' + EMAIL, null);
       EP = { id: emCurso.id, correcao: emCurso.correcao, inicio: emCurso.inicio, fim: emCurso.fim, sujets: emCurso.sujets, textes: emCurso.textes || {}, sessao: emCurso.sessao, delta: agoraServidor - Date.now(), fechada: false,
         pausavel: !!emCurso.pausavel, consumidoInicial: emCurso.consumido || 0, alertas: {} };
-      var retomada = (emCurso.consumido || 0) > 20 || ['ET1', 'ET2', 'ET3'].some(function (t) { return (emCurso.textes || {})[t]; });
-      if (local && local.inicio === EP.inicio) ['ET1', 'ET2', 'ET3'].forEach(function (t) { if ((local.textes[t] || '').length > (EP.textes[t] || '').length) EP.textes[t] = local.textes[t]; });
+      var retomada = (emCurso.consumido || 0) > 20 || ETS().some(function (t) { return (emCurso.textes || {})[t]; });
+      if (local && local.inicio === EP.inicio) ETS().forEach(function (t) { if ((local.textes[t] || '').length > (EP.textes[t] || '').length) EP.textes[t] = local.textes[t]; });
 
-      var html = '<div class="ep-barra"><div class="ep-relogio"><span class="tempo" id="ep-tempo">60:00</span><span id="ep-fase">Épreuve en cours</span></div>' +
+      var html = '<div class="ep-barra"><div class="ep-relogio"><span class="tempo" id="ep-tempo">' + minutosEpreuve() + ':00</span><span id="ep-fase">Épreuve en cours</span></div>' +
         '<div class="ep-etapas" id="ep-etapas">' + ETAPAS_EPREUVE.map(function (e) { return '<span style="flex:' + e.min + '"><i></i>' + e.t + ' · ' + e.min + ' min</span>'; }).join('') + '<b id="ep-cursor"></b></div>' +
         '<span class="aviso" id="ep-salvo">Brouillon enregistré</span>' +
         '<button class="botao-principal ep-enviar" type="button" id="ep-enviar">Terminer et envoyer</button></div>';
       html += '<h1 class="titulo-pagina" style="margin-top:18px">Épreuve d\'expression écrite</h1>' +
         (EP.sessao ? '<p class="aviso">Épreuve proposée par votre professeur(e).</p>' : '');
-      ['ET1', 'ET2', 'ET3'].forEach(function (t) {
+      ETS().forEach(function (t) {
         var sj = EP.sujets[t], lim = LIMITES[t];
         if (!sj) return;
-        html += '<section class="ep-tache" data-t="' + t + '"><div class="ep-cab"><span class="selo">' + t.slice(-1) + '</span><div><h2>Tâche ' + t.slice(-1) + ' · ' + TACHES[t].sous + '</h2>' +
-          '<small>' + lim[0] + ' mots minimum · ' + lim[1] + ' mots maximum · temps conseillé : ' + ETAPAS_EPREUVE[Number(t.slice(-1)) - 1].min + ' min</small></div></div>' +
+        html += '<section class="ep-tache" data-t="' + t + '"><div class="ep-cab"><span class="selo">' + seloTache(t) + '</span><div><h2>' + TACHES[t].nom + ' · ' + TACHES[t].sous + '</h2>' +
+          '<small>' + lim[0] + ' mots minimum · ' + (ehDelf() ? '' : lim[1] + ' mots maximum · ') + 'temps conseillé : ' + (MIN_EXAME_ESCRITO[t] || 10) + ' min</small></div></div>' +
           '<div class="consigne-folha"><p>' + esc((t === 'ET3' ? 'Sujet : ' : '') + (sj.t || sj.c || sj.titre)) + '</p>' +
           (sj.d1 ? '<p class="aviso">Rédigez un texte argumentatif : résumez les deux points de vue, puis donnez votre opinion en vous appuyant sur les documents.</p><div class="docs"><div class="doc"><h4>Document 1</h4><p>' + esc(sj.d1) + '</p></div><div class="doc"><h4>Document 2</h4><p>' + esc(sj.d2) + '</p></div></div>' : '') +
           '</div>' + htmlMetodo(t, !EP.sessao) + editorHtml(t) + '</section>';
@@ -2057,25 +2059,16 @@ function irAccueil() {
 
       // Alertas: 2 min antes do fim de cada etapa (10, 15 e 25 min), na troca de etapa e no fim da prova.
       var irPara = function (t) { var c = document.querySelector('#tela-epreuve [data-caixa="' + t + '"]'); if (c) { c.scrollIntoView({ behavior: 'smooth', block: 'center' }); c.classList.add('destaque-proximo'); setTimeout(function () { c.classList.remove('destaque-proximo'); }, 4000); var ed = c.querySelector('.editor'); if (ed) ed.focus(); } };
-      var ALERTAS = [
-        { em: 480, titulo: 'Plus que 2 minutes pour la Tâche 1', texto: 'Terminez votre message et vérifiez le nombre de mots.', icone: '' },
-        { em: 600, titulo: 'Temps conseillé écoulé : passez à la Tâche 2', texto: 'Vous avez 15 minutes pour la Tâche 2.', acao: { rotulo: 'Aller à la Tâche 2', fn: function () { irPara('ET2'); } } },
-        { em: 1380, titulo: 'Plus que 2 minutes pour la Tâche 2', texto: 'Concluez votre texte.', icone: '' },
-        { em: 1500, titulo: 'Passez à la Tâche 3', texto: 'Vous avez 25 minutes pour le texte argumentatif.', acao: { rotulo: 'Aller à la Tâche 3', fn: function () { irPara('ET3'); } } },
-        { em: 2880, titulo: 'Plus que 2 minutes pour la Tâche 3', texto: 'Écrivez votre conclusion.', icone: '' },
-        { em: 3000, titulo: 'Relecture : 10 minutes', texto: 'Vérifiez les accords, les accents, la ponctuation et le nombre de mots.', icone: '' },
-        { em: 3300, titulo: 'Plus que 5 minutes', texto: 'Terminez votre relecture.', icone: '' },
-        { em: 3540, titulo: 'Dernière minute !', texto: 'L\'épreuve se ferme et vos textes seront envoyés automatiquement.', icone: '', tipo: 'urgente' }
-      ];
-      var decorridoInicial = 3600 - Math.round((EP.fim - (Date.now() + EP.delta)) / 1000);
+      var ALERTAS = alertasEpreuve(irPara);
+      var decorridoInicial = SEG_EP - Math.round((EP.fim - (Date.now() + EP.delta)) / 1000);
       ALERTAS.forEach(function (a) { if (a.em <= decorridoInicial) EP.alertas[a.em] = true; });
       if (retomada) avisar({ titulo: 'Épreuve reprise là où vous l\'aviez laissée', icone: '↺', som: false,
-        texto: 'Il vous reste ' + formatarTempo(3600 - decorridoInicial) + '. Vos textes ont été restaurés' + (EP.pausavel ? ' (le temps était en pause pendant votre absence).' : '.') });
+        texto: 'Il vous reste ' + formatarTempo(SEG_EP - decorridoInicial) + '. Vos textes ont été restaurés' + (EP.pausavel ? ' (le temps était en pause pendant votre absence).' : '.') });
 
       var relogio = function () {
         var resta = Math.round((EP.fim - (Date.now() + EP.delta)) / 1000);
-        var decorrido = 3600 - resta;
-        EP.consumido = Math.max(0, Math.min(3600, decorrido));
+        var decorrido = SEG_EP - resta;
+        EP.consumido = Math.max(0, Math.min(SEG_EP, decorrido));
         ALERTAS.forEach(function (a) {
           if (!EP.alertas[a.em] && decorrido >= a.em) { EP.alertas[a.em] = true; avisar(a); $('ep-tempo').classList.add('pulsar'); setTimeout(function () { var t = $('ep-tempo'); if (t) t.classList.remove('pulsar'); }, 3000); }
         });
@@ -2084,14 +2077,14 @@ function irAccueil() {
         var acc = 0, etapa = ETAPAS_EPREUVE[0].t;
         for (var i = 0; i < ETAPAS_EPREUVE.length; i++) { acc += ETAPAS_EPREUVE[i].min * 60; if (decorrido < acc) { etapa = ETAPAS_EPREUVE[i].t; break; } }
         $('ep-fase').textContent = resta > 0 ? 'Étape conseillée : ' + etapa : 'Temps écoulé';
-        $('ep-cursor').style.left = Math.min(100, Math.max(0, 100 * decorrido / 3600)) + '%';
+        $('ep-cursor').style.left = Math.min(100, Math.max(0, 100 * decorrido / SEG_EP)) + '%';
         if (resta <= 0) fecharEpreuve(true);
       };
       relogio();
       epTimer = setInterval(relogio, 1000);
       epSalvar = setInterval(function () { if (epSujo) salvarServidor(); }, 20000);
       $('ep-enviar').addEventListener('click', function () {
-        var vazias = ['ET1', 'ET2', 'ET3'].filter(function (t) { return !(EP.textes[t] || '').trim(); });
+        var vazias = ETS().filter(function (t) { return !(EP.textes[t] || '').trim(); });
         confirmarFimEpreuve(vazias).then(function (ok) { if (ok) fecharEpreuve(false); });
       });
     }
@@ -2150,8 +2143,8 @@ function irAccueil() {
 
     function cartaoCorrecaoIA(r, tache) {
       var lista = function (l) { return (l || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join(''); };
-      var html = '<div class="ia-cartao"><div class="ia-topo"><div class="ia-nota"><b>' + r.note + '</b><span>/20</span></div>' +
-        '<div><span class="ia-selo">Correction par l\'IA · NCLC estimé ' + r.nclc + '</span><p class="ia-apreciacao">' + esc(r.appreciation || '') + '</p>' +
+      var html = '<div class="ia-cartao"><div class="ia-topo"><div class="ia-nota"><b>' + r.note + '</b><span>/' + (r.escala || 20) + '</span></div>' +
+        '<div><span class="ia-selo">Correction par l\'IA · ' + (r.selo ? esc(r.selo) : 'NCLC estimé ' + r.nclc) + '</span><p class="ia-apreciacao">' + esc(r.appreciation || '') + '</p>' +
         '<small>' + r.mots + ' mots écrits · attendu : ' + r.limites[0] + ' à ' + r.limites[1] + '</small></div></div>';
       if (r.criteres && r.criteres.length) {
         html += '<div class="ia-criterios">' + r.criteres.map(function (c) {
@@ -2323,7 +2316,7 @@ function irAccueil() {
       // Se o aluno não está autorizado a enviar, a correção começa sozinha; senão, fica disponível num botão.
       ligarEnvioEpreuve(r);
       if (EP && !EP.sessao && EP.correcao !== 'professor') {
-        var comTexto = ['ET1', 'ET2', 'ET3'].filter(function (t) { return EP.sujets[t] && contarPalavras(EP.textes[t] || '') >= 15; });
+        var comTexto = ETS().filter(function (t) { return EP.sujets[t] && contarPalavras(EP.textes[t] || '') >= 15; });
         if (!B.ia || !B.ia.ativa) {
           alvo.innerHTML += '<div class="alerta">La correction automatique par l\'IA n\'est pas encore activée' +
             (B.ia && B.ia.motivo === 'desligada' ? ' (désactivée dans la configuration).' : '.') + ' Parlez-en à votre professeur(e).</div>';
@@ -2711,7 +2704,7 @@ function carregarDestaques() {
               '<span>' + esc(e.nome || '') + (x.f > 1 ? ' · tombé ' + x.f + '×' : '') + '</span></div><b class="alu-link">Lire le modèle →</b></article>';
           }).join('') + '</div></div>';
         };
-        html += '<div class="alu-sujets">' + linha('Expression orale', ['T1', 'T2', 'T3'], 'oral') + linha('Expression écrite', ['ET1', 'ET2', 'ET3'], 'ecrit') + '</div></section>';
+        html += '<div class="alu-sujets">' + linha('Expression orale', TS(), 'oral') + linha('Expression écrite', ETS(), 'ecrit') + '</div></section>';
         alvo.innerHTML = html;
         alvo.querySelectorAll('[data-une-del]').forEach(function (b) {
           b.addEventListener('click', function (ev) {
@@ -3418,7 +3411,7 @@ function abrirJournal() { abrirTarefas(); }
         catalogo[t] = (B.atelier || []).filter(function (m) { return m.tache === t; }).map(function (m) { vistos[m.id] = 1; return { id: m.id, titre: m.titre, atelier: true, busca: semAcento(m.titre + ' ' + (m.c || '')) }; })
           .concat(listaNav(t).filter(function (m) { return !vistos[m.id]; }).map(function (m) { vistos[m.id] = 1; return { id: m.id, titre: m.titre || m.id, e: m.e, busca: semAcento((m.titre || '') + ' ' + (m.resumo || '')) }; }));
       };
-      ['ET1', 'ET2', 'ET3'].forEach(montar);
+      ETS().forEach(montar);
       var completas = {};
       var nomeAlvo = function (v) {
         if (v === 'TOUS') return 'tous les élèves';
@@ -3449,7 +3442,7 @@ function abrirJournal() { abrirTarefas(); }
         caixa.innerHTML = '<div class="lib">' + opcoes +
           (mod.total && mod.com < mod.total ? '<div class="lib-mod">La partie <b>Modèles écrits</b> est fermée pour ' + (mod.total === 1 ? 'cet élève' : (mod.total - mod.com) + ' élève(s) sur ' + mod.total) + ' : les modèles cochés restent invisibles. <button class="ferramenta destaque" type="button" data-pm-mod>Ouvrir la partie Modèles écrits</button></div>' :
             (mod.total ? '<p class="lib-ok">✓ Partie Modèles écrits ouverte' + (mod.total > 1 ? ' pour les ' + mod.total + ' élèves' : '') + '. Elle est indépendante de la Production écrite.</p>' : '')) +
-          '<div class="tg-abas" role="tablist">' + ['ET1', 'ET2', 'ET3'].map(function (t) { var n = catalogo[t].filter(function (x) { return st.estado[x.id]; }).length; return '<button type="button" role="tab" class="tg-aba" data-pm-t="' + t + '" aria-selected="' + (t === PM_TACHE) + '">' + nomeTache(t) + (n ? ' · ' + n : '') + '</button>'; }).join('') + '</div>' +
+          '<div class="tg-abas" role="tablist">' + ETS().map(function (t) { var n = catalogo[t].filter(function (x) { return st.estado[x.id]; }).length; return '<button type="button" role="tab" class="tg-aba" data-pm-t="' + t + '" aria-selected="' + (t === PM_TACHE) + '">' + nomeTache(t) + (n ? ' · ' + n : '') + '</button>'; }).join('') + '</div>' +
           '<p class="lib-cab" style="display:block">Cochez pour faire apparaître le modèle dans les <b>Modèles écrits</b> de ' + esc(nomeAlvo(st.alvo)) + ', décochez pour le retirer. Le sujet reste aussi disponible en Production écrite.</p>' +
           '<h4 class="pm-sub">✓ Modèles choisis (' + marcados.length + ')</h4>' + (marcados.length ? '<div class="pm-lista">' + marcados.map(linha).join('') + '</div>' : '<p class="aviso">Aucun modèle choisi pour cette tâche.</p>') +
           (atelierLivres.length ? '<h4 class="pm-sub">Vos modèles (atelier)</h4><div class="pm-lista">' + atelierLivres.map(linha).join('') + '</div>' : '') +
@@ -3690,7 +3683,7 @@ function abrirSimulados() {
       tela.innerHTML = trilha(partes) + '<h1 class="titulo-pagina">Simulados</h1>' +
         '<p class="intro">Passez les épreuves dans les conditions de l\'examen. L\'épreuve écrite de 60 minutes présente les trois tâches en même temps, avec le chronomètre en haut de l\'écran.</p>' +
         '<div class="hub-acoes"><button class="hub-acao" type="button" id="sm-ep"><span></span><b>Épreuve écrite et enregistrements</b><small>Écrit (60 min, 3 tâches simultanées) et tâches orales, dont les épreuves proposées par votre professeur(e).</small></button>' +
-        '<a class="hub-acao" href="simulado-tcf.html"><span></span><b>Simulation complète de l\'examen</b><small>Compréhension orale et écrite, expression écrite et orale, avec correction et suivi en direct.</small></a></div>';
+        '<a class="hub-acao" href="simulado-tcf.html?curso=' + encodeURIComponent(B.courseType) + '"><span></span><b>Simulation complète de l\'examen</b><small>Compréhension orale et écrite, expression écrite et orale, avec correction et suivi en direct.</small></a></div>';
       ligarTrilha(tela, partes);
       mostrar('tela-hub');
       $('sm-ep').addEventListener('click', abrirEpreuve);
@@ -4130,7 +4123,7 @@ function abrirSimulados() {
       var partes = [PARTE_ACCUEIL(), { rotulo: 'Simulados', fn: abrirSimulados }, { rotulo: 'Chronomètre de l\'oral' }];
       var tela = $('tela-hub');
       tela.innerHTML = trilha(partes) + '<h1 class="titulo-pagina">Chronomètre de l\'oral</h1>' +
-        '<div class="ch-taches">' + ['T1', 'T2', 'T3'].map(function (t) { return '<button type="button" class="chip" data-ch-t="' + t + '" aria-pressed="' + (t === tache) + '">' + CHRONO_TACHES[t].nome + '<small>' + CHRONO_TACHES[t].info + '</small></button>'; }).join('') + '</div>' +
+        '<div class="ch-taches">' + TS().map(function (t) { return '<button type="button" class="chip" data-ch-t="' + t + '" aria-pressed="' + (t === tache) + '">' + CHRONO_TACHES[t].nome + '<small>' + CHRONO_TACHES[t].info + '</small></button>'; }).join('') + '</div>' +
         '<div class="ch-grade"><div class="bloco ch-sujet"><h3>Sujet</h3><div id="ch-sujet-txt">' + (sujet ? '<p class="ch-s">' + esc(sujet.t) + '</p><small>' + esc(sujet.origem || '') + '</small>' : '<p class="aviso">Choisissez un sujet ou tirez-le au sort.</p>') + '</div>' +
         '<div class="ch-fontes"><button class="ferramenta" type="button" id="ch-prof">Sujets de ma professeure</button><button class="ferramenta destaque" type="button" id="ch-sorte">Tirer au hasard</button></div><div id="ch-lista"></div>' +
         (tache === 'T3' ? '<label class="check"><input type="checkbox" id="ch-prep"> Ajouter 1 min de préparation (entraînement)</label>' : '') +
@@ -4569,7 +4562,7 @@ function abasEspace(ativa) {
           'Les modèles choisis par votre professeure pour vous. Lisez-les, écoutez-les, masquez le texte et réécrivez-les : la correction montre chaque erreur et votre meilleur résultat reste enregistré.') + '</p>';
       if (B.professor && !dictee) html += '<div class="bloco lib-bloco"><h3>Choisir les modèles de chaque élève</h3><div id="pm-prof"></div></div>';
       if (B.professor) html += '<p class="aviso">Chaque ' + (dictee ? 'dictée' : 'modèle') + ' reste verrouillé(e) pour les élèves jusqu\'à ce que vous le partagiez (). Pour proposer un autre modèle de l\'application ' + (dictee ? 'en dictée' : '') + ', ouvrez-le et utilisez « Partager ce modèle ».</p>';
-      var grupos = dictee ? ORDEM_TACHES : ['ET1', 'ET2', 'ET3'];
+      var grupos = dictee ? ORDEM_TACHES : ETS();
       var algum = false;
       grupos.forEach(function (t) {
         var l = lista2.filter(function (x) { return x.tache === t; });
@@ -4643,7 +4636,7 @@ function abasEspace(ativa) {
     }
     function recarregarBloqueado() {
       google.script.run.withSuccessHandler(function (banco) {
-        B = banco; B.audios = B.audios || {}; LISTAS = {};
+        B = banco; aplicarPerfil(); B.audios = B.audios || {}; LISTAS = {};
         mostrarAvisosGlobais();
         document.querySelectorAll('#barra-nav button').forEach(function (b) { if (b.id !== 'nav-taches' && !b.classList.contains('sair')) b.hidden = true; });
         $('nav-taches').setAttribute('onclick', 'App.abrirForfait()');
@@ -4757,7 +4750,7 @@ function abasEspace(ativa) {
           var pendentes = 4;
           var um = function () { if (--pendentes === 0) fn(); };
           if (SUJETS) um(); else google.script.run.withSuccessHandler(function (x) { SUJETS = x; um(); }).obterSujetsEntrainement(EMAIL);
-          ['T1', 'T2', 'T3'].forEach(function (t) { carregarLista(t, um); });
+          TS().forEach(function (t) { carregarLista(t, um); });
         });
       };
       carregarTudo(function () {
@@ -4855,7 +4848,7 @@ function abasEspace(ativa) {
             'Tous les élèves choisis recevront les mêmes sujets ; chacun commence quand il veut. Les productions sont envoyées automatiquement.</p>' +
             '<label class="largo campo">Nom de l\'épreuve<input id="ss-nome" placeholder="Ex. : Simulation du 12 octobre"></label>' +
             '<h4 class="ss-secao">Expression écrite (60 minutes)</h4>' +
-            ['ET1', 'ET2', 'ET3', 'T1', 'T2', 'T3'].map(function (t) {
+            ETS().concat(TS()).map(function (t) {
               return (t === 'T1' ? '<h4 class="ss-secao">Expression orale (enregistrement)</h4>' : '') +
                 '<div class="ss-tache"><b>' + (t.indexOf('ET') === 0 ? 'Écrit' : 'Oral') + ' · Tâche ' + t.slice(-1) + ' · ' + TACHES[t].sous + '</b>' +
                 '<div class="ss-linha"><input type="search" class="ss-busca" data-busca="' + t + '" placeholder="Filtrer les sujets…">' +
@@ -5400,7 +5393,7 @@ function abasEspace(ativa) {
         var comp = id && t.indexOf('ET') === 0 ? sujetPorId(t, id) : null;
         document.querySelector('[data-ss-previa="' + t + '"]').textContent = sj ? sj.t + (comp && comp.d1 ? ' (avec documents 1 et 2)' : '') : '';
       };
-      ['ET1', 'ET2', 'ET3', 'T1', 'T2', 'T3'].forEach(function (t) {
+      ETS().concat(TS()).forEach(function (t) {
         preencher(t);
         document.querySelector('[data-busca="' + t + '"]').addEventListener('input', function () { preencher(t); });
         document.querySelector('[data-ss="' + t + '"]').addEventListener('change', function () { previa(t); });
@@ -5440,10 +5433,10 @@ function abasEspace(ativa) {
       };
       $('ss-criar').addEventListener('click', function () {
         var dados = { nome: $('ss-nome').value.trim() };
-        ['ET1', 'ET2', 'ET3', 'T1', 'T2', 'T3'].forEach(function (t) { dados[t] = document.querySelector('[data-ss="' + t + '"]').value; });
+        ETS().concat(TS()).forEach(function (t) { dados[t] = document.querySelector('[data-ss="' + t + '"]').value; });
         dados.alunos = seletor.valor();
         var msg = $('ss-msg');
-        if (!['ET1', 'ET2', 'ET3', 'T1', 'T2', 'T3'].some(function (t) { return dados[t]; })) { msg.textContent = 'Choisissez au moins une tâche.'; return; }
+        if (!ETS().concat(TS()).some(function (t) { return dados[t]; })) { msg.textContent = 'Choisissez au moins une tâche.'; return; }
         if (dados.alunos !== 'TOUS' && !dados.alunos.length) { msg.textContent = 'Choisissez au moins un élève.'; return; }
         msg.textContent = 'Publication…';
         google.script.run.withSuccessHandler(function () { msg.textContent = '✓ Épreuve publiée : elle apparaît maintenant dans la page « Épreuves » des élèves.'; listar(); })
@@ -5567,7 +5560,7 @@ function abasEspace(ativa) {
       html += '<h1 class="titulo-pagina">Boîte à outils</h1><p class="intro">Les trames des six tâches, les connecteurs clés et la formule de conclusion utilisés dans tous les modèles.</p>';
       html += '<h2 class="secao-titulo outils-secao"><i class="oral"></i>Oral</h2><div class="grade-trames">';
       ORDEM_TACHES.forEach(function (t) {
-        if (t === 'ET1') html += '</div><h2 class="secao-titulo outils-secao"><i class="ecrit"></i>Écrit</h2><div class="grade-trames">';
+        if (t === ETS()[0]) html += '</div><h2 class="secao-titulo outils-secao"><i class="ecrit"></i>Écrit</h2><div class="grade-trames">';
         var tr = B.trames[t]; if (!tr) return;
         html += '<div class="bloco"><div class="etiquetas"><span class="etiqueta">' + nomeTache(t) + '</span></div>' +
           '<h3>' + esc(tr.titulo) + '</h3>' + (tr.sousTitre ? '<p class="aviso" style="margin-top:0">' + esc(tr.sousTitre) + '</p>' : '') +
@@ -5593,6 +5586,107 @@ function abasEspace(ativa) {
       mostrar('tela-outils');
     }
 
+    // ================= perfil do curso: TCF Canada ou DELF de um nível =================
+    // O servidor manda B.perfil. No DELF, as tâches existentes, os nomes (Partie / Exercice), os
+    // tempos do oral, os limites de palavras e a épreuve escrita mudam conforme o nível (A1 a B2).
+    // O app continua usando os lugares T1..T3 / ET1..ET3; TS() e ETS() devolvem os do perfil.
+    var TACHES_TCF = JSON.parse(JSON.stringify(TACHES)), ORDEM_TCF = ORDEM_TACHES.slice();
+    var LIMITES_TCF = JSON.parse(JSON.stringify(LIMITES)), TEMPOS_TCF = JSON.parse(JSON.stringify(TEMPOS_EXAME));
+    var MIN_ESCRITO_TCF = JSON.parse(JSON.stringify(MIN_EXAME_ESCRITO)), ETAPAS_TCF = JSON.parse(JSON.stringify(ETAPAS_EPREUVE));
+    var NIVEL_DELF_CHAVE = 'fnm_delf_nivel';
+    
+    function ehDelf() { return !!(B && B.perfil && B.perfil.delf); }
+    function nomeProva() { return ehDelf() ? B.perfil.nome : 'TCF Canada'; }
+    function minutosEpreuve() { return (B && B.perfil && B.perfil.epreuveMin) || 60; }
+    function TS() { return ORDEM_TACHES.filter(function (t) { return t.indexOf('ET') !== 0; }); }
+    function ETS() { return ORDEM_TACHES.filter(function (t) { return t.indexOf('ET') === 0; }); }
+    function seloTache(t) { var i = TACHES[t] || {}; return i.selo || String(i.nom || t).slice(-1); }
+    function sujetsLivres(livre) { var o = {}; ETS().forEach(function (t) { if (livre[t]) o[t] = livre[t].id; }); return o; }
+    
+    function trocarConteudo(alvo, novo) {
+      if (Array.isArray(alvo)) { alvo.length = 0; novo.forEach(function (x) { alvo.push(x); }); return; }
+      Object.keys(alvo).forEach(function (k) { delete alvo[k]; });
+      Object.keys(novo).forEach(function (k) { alvo[k] = novo[k]; });
+    }
+    
+    /** Ajusta as tabelas do app ao perfil recebido do servidor (chamado a cada carga do banco). */
+    function aplicarPerfil() {
+      var copia = function (o) { return JSON.parse(JSON.stringify(o)); };
+      trocarConteudo(TACHES, copia(TACHES_TCF)); trocarConteudo(ORDEM_TACHES, ORDEM_TCF.slice());
+      trocarConteudo(LIMITES, copia(LIMITES_TCF)); trocarConteudo(TEMPOS_EXAME, copia(TEMPOS_TCF));
+      trocarConteudo(MIN_EXAME_ESCRITO, copia(MIN_ESCRITO_TCF)); trocarConteudo(ETAPAS_EPREUVE, copia(ETAPAS_TCF));
+      var p = B && B.perfil;
+      if (!p || !p.delf) return;
+      var taches = {}, limites = {}, tempos = {}, minutos = {};
+      p.ordem.forEach(function (t) {
+        var x = p.taches[t], oral = t.indexOf('ET') !== 0;
+        taches[t] = { modo: oral ? 'orale' : 'ecrite', nom: x.nom, sous: x.sous, info: x.info, fonte: oral ? 'orale' : 'ecrite', selo: x.selo || '' };
+        if (oral) tempos[t] = x.fases;
+        else {
+          taches[t].min = x.min; taches[t].max = x.max;
+          limites[t] = [x.min, x.max]; minutos[t] = x.minutos;
+          tempos[t] = [{ nome: 'Rédaction', seg: x.minutos * 60 }];
+        }
+      });
+      trocarConteudo(TACHES, taches); trocarConteudo(ORDEM_TACHES, p.ordem.slice());
+      trocarConteudo(LIMITES, limites); trocarConteudo(TEMPOS_EXAME, tempos);
+      trocarConteudo(MIN_EXAME_ESCRITO, minutos); trocarConteudo(ETAPAS_EPREUVE, copia(p.epreuve.etapas));
+    }
+    
+    /** Escolha do nível do DELF (A1 a B2) no topo do Ambiente de Produção. */
+    function htmlNiveisDelf() {
+      if (!ehDelf()) return '';
+      return '<div class="niveis-delf" role="group" aria-label="Nível do DELF"><span>Nível do DELF</span>' + B.perfil.niveis.map(function (n) {
+        return '<button type="button" class="chip" data-nivel-delf="' + n + '" aria-pressed="' + (n === B.perfil.nivel) + '">' + n + '</button>';
+      }).join('') + '<small>' + esc(B.perfil.descricao || '') + '</small></div>';
+    }
+    document.addEventListener('click', function (ev) {
+      var b = ev.target.closest && ev.target.closest('[data-nivel-delf]');
+      if (!b || !B || b.dataset.nivelDelf === B.perfil.nivel) return;
+      try { localStorage.setItem(NIVEL_DELF_CHAVE, b.dataset.nivelDelf); } catch (e) {}
+      window.FNM_NIVEL = b.dataset.nivelDelf;
+      b.closest('.niveis-delf').classList.add('carregando');
+      location.hash = '';
+      location.reload();
+    });
+    
+    function introHubDelf(oral) {
+      var n = (oral ? TS() : ETS()).length;
+      return (oral ? 'Produção oral do ' : 'Produção escrita do ') + esc(nomeProva()) + ' : ' + n + (oral ? ' parte' : ' exercício') + (n > 1 ? 's' : '') + ', na ordem da prova. ' +
+        (oral ? 'Modelos, trames e gravação com correção pela IA ou por um professor.' : 'Modelos segundo a trame, prova de ' + minutosEpreuve() + ' minutos e correção na grade do DELF (/25).');
+    }
+    function introEpreuveDelf() {
+      return 'Produção escrita do ' + esc(nomeProva()) + ' em <b>' + minutosEpreuve() + ' minutos</b>, como no dia do exame : ' +
+        ETAPAS_EPREUVE.map(function (e) { return esc(e.t) + ' (≈ ' + e.min + ' min)'; }).join(', ') + '. ';
+    }
+    
+    /** Alertas da épreuve: a lista do TCF ou, no DELF, montada com as etapas do nível. */
+    function alertasEpreuve(irPara) {
+      if (!ehDelf()) return [
+        { em: 480, titulo: 'Plus que 2 minutes pour la Tâche 1', texto: 'Terminez votre message et vérifiez le nombre de mots.', icone: '' },
+        { em: 600, titulo: 'Temps conseillé écoulé : passez à la Tâche 2', texto: 'Vous avez 15 minutes pour la Tâche 2.', acao: { rotulo: 'Aller à la Tâche 2', fn: function () { irPara('ET2'); } } },
+        { em: 1380, titulo: 'Plus que 2 minutes pour la Tâche 2', texto: 'Concluez votre texte.', icone: '' },
+        { em: 1500, titulo: 'Passez à la Tâche 3', texto: 'Vous avez 25 minutes pour le texte argumentatif.', acao: { rotulo: 'Aller à la Tâche 3', fn: function () { irPara('ET3'); } } },
+        { em: 2880, titulo: 'Plus que 2 minutes pour la Tâche 3', texto: 'Écrivez votre conclusion.', icone: '' },
+        { em: 3000, titulo: 'Relecture : 10 minutes', texto: 'Vérifiez les accords, les accents, la ponctuation et le nombre de mots.', icone: '' },
+        { em: 3300, titulo: 'Plus que 5 minutes', texto: 'Terminez votre relecture.', icone: '' },
+        { em: 3540, titulo: 'Dernière minute !', texto: 'L\'épreuve se ferme et vos textes seront envoyés automatiquement.', icone: '', tipo: 'urgente' }
+      ];
+      var l = [], acc = 0, escritas = ETS(), total = minutosEpreuve() * 60;
+      ETAPAS_EPREUVE.forEach(function (e, i) {
+        var fim = acc + e.min * 60, prox = ETAPAS_EPREUVE[i + 1], t = escritas[i];
+        if (t && e.min >= 5) l.push({ em: fim - 120, titulo: 'Faltam 2 minutos para : ' + e.t, texto: 'Conclua o texto e confira o número de palavras.', icone: '' });
+        if (prox && escritas[i + 1]) {
+          var t2 = escritas[i + 1];
+          l.push({ em: fim, titulo: 'Tempo aconselhado esgotado : passe para ' + prox.t, texto: 'Você tem ' + prox.min + ' minutos para ' + prox.t + '.', acao: { rotulo: 'Ir para ' + prox.t, fn: function () { irPara(t2); } } });
+        } else if (prox) l.push({ em: fim, titulo: prox.t + ' : ' + prox.min + ' minutos', texto: 'Confira as concordâncias, os acentos, a pontuação e o número de palavras.', icone: '' });
+        acc = fim;
+      });
+      if (total >= 600) l.push({ em: total - 300, titulo: 'Faltam 5 minutos', texto: 'Termine a revisão.', icone: '' });
+      l.push({ em: total - 60, titulo: 'Último minuto !', texto: 'A prova vai fechar e os seus textos serão enviados automaticamente.', icone: '', tipo: 'urgente' });
+      return l.filter(function (a) { return a.em > 0 && a.em < total; }).sort(function (a, b) { return a.em - b.em; });
+    }
+    
     // ================= extensões do site =================
     
     // ---------- áudios: arquivos Coqui pré-gerados (audio/modeles/<sha256(voz|frase)>.mp3) ----------
@@ -5689,7 +5783,14 @@ function abasEspace(ativa) {
       var espaco = B.professor
         ? { id: 'prof', titulo: 'Espace professeur', texto: 'Épreuves en direct, corrections, devoirs, suivi des élèves, thèmes du mois et À la une.', cor: '#1C2B3A', extra: 'ouvrir →', svg: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>' }
         : { id: 'espace', titulo: 'Mon espace', texto: 'Mes tâches et messages de la professeure, mes notes, mes corrections et mon cahier d\'erreurs.', cor: '#1C2B3A', extra: '<span id="he-espace-n">devoirs, notes et cahier</span> →', svg: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>' };
-      return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + HUB_ESCOLHAS.concat([espaco]).map(function (h) {
+      // DELF: textos do nível; ditado e modelos escritos à mão são do TCF (somem quando vazios).
+      var escolhas = !ehDelf() ? HUB_ESCOLHAS : HUB_ESCOLHAS.filter(function (h) { return h.id !== 'dictee' && h.id !== 'modeles' || parseInt(extra[h.id], 10) > 0; }).map(function (h) {
+        var x = JSON.parse(JSON.stringify(h));
+        if (h.id === 'ecrit') x.texto = 'Produção escrita do ' + nomeProva() + ' por eixo temático : modelos segundo a trame e prova de ' + minutosEpreuve() + ' minutos.';
+        if (h.id === 'oral') x.texto = 'As ' + TS().length + ' parte' + (TS().length > 1 ? 's' : '') + ' da produção oral do ' + nomeProva() + ' : modelos, gravação e transcrição.';
+        return x;
+      });
+      return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + escolhas.concat([espaco]).map(function (h) {
         return '<button class="hub-escolha' + (h.id === 'espace' || h.id === 'prof' ? ' hub-escolha-espace' : '') + '" type="button" data-hub-ir="' + h.id + '" style="--cor:' + h.cor + '">' +
           '<span class="he-ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + h.svg + '</svg></span>' +
           '<b>' + h.titulo + '</b><small>' + h.texto + '</small><em>' + (h.extra || extra[h.id] + ' →') + '</em></button>';
@@ -5720,7 +5821,7 @@ function abasEspace(ativa) {
       if (modo === 'oral') {
         bloco.innerHTML = '<h2 class="secao-titulo">Exercices oraux au format de l\'examen</h2><div class="hub-acoes">' +
           '<a class="hub-acao" href="producao-oral-exercicios.html?curso=' + encodeURIComponent(B.courseType) + '"><span></span><b>Compréhension et expression orales</b><small>Documents sonores, questions et une tâche à enregistrer, avec professeur en direct si vous le souhaitez.</small></a>' +
-          '<a class="hub-acao" href="simulado-tcf.html"><span></span><b>Simulation complète de l\'examen</b><small>Les quatre épreuves, dont l\'expression orale enregistrée et transcrite.</small></a></div>';
+          '<a class="hub-acao" href="simulado-tcf.html?curso=' + encodeURIComponent(B.courseType) + '"><span></span><b>Simulation complète de l\'examen</b><small>Les quatre épreuves, dont l\'expression orale enregistrée et transcrite.</small></a></div>';
         return;
       }
       bloco.innerHTML = '<h2 class="secao-titulo">Thèmes du cours avec dossier documentaire</h2><div id="hub-temas-curso"><p class="aviso">Chargement…</p></div>';
@@ -5779,7 +5880,7 @@ function abasEspace(ativa) {
       if (r.correcao === 'professor') return r.quantidade ? '<div class="bloco envio-sistema"><b>✓ Envoyée au Sistema de Correção</b><small>Suivez la correction de chaque tâche dans <a href="correcoes.html">« Mes corrections »</a>.</small></div>' : '';
       if (!r.id || r.status === 'vazia') return '';
       return '<div class="bloco envio-sistema" id="ep-envio"><b>Envoyer aussi à un professeur</b><small>En plus de la correction par l\'IA ci-dessous, vous pouvez envoyer vos textes au Sistema de Correção (1 crédit par tâche).</small>' +
-        '<div class="ferramentas">' + ['ET1', 'ET2', 'ET3'].map(function (t) { return '<label class="check"><input type="checkbox" data-ep-t="' + t + '" checked> Tâche ' + t.slice(-1) + '</label>'; }).join('') +
+        '<div class="ferramentas">' + ETS().map(function (t) { return '<label class="check"><input type="checkbox" data-ep-t="' + t + '" checked> Tâche ' + t.slice(-1) + '</label>'; }).join('') +
         '<button class="ferramenta destaque" type="button" id="ep-envio-bt">Envoyer au professeur</button></div><span class="aviso" id="ep-envio-st"></span></div>';
     }
     function ligarEnvioEpreuve(r) {
@@ -5843,7 +5944,7 @@ function abasEspace(ativa) {
             var resta = Math.max(0, Math.round((e.fim - Date.now()) / 1000));
             return '<div class="av-card"><div class="av-cab"><b>' + esc(e.nome || '') + '</b><span class="av-tempo' + (resta < 300 ? ' fim' : '') + '">' + formatarTempo(resta) + '</span></div>' +
               '<small>' + (e.sessao ? 'Épreuve du professeur' : 'Entraînement libre') + (e.curso ? ' · ' + esc(e.curso) : '') + '</small>' +
-              ['ET1', 'ET2', 'ET3'].map(function (t) {
+              ETS().map(function (t) {
                 var tx = (e.textes || {})[t] || '', n = contarPalavras(tx), lim = LIMITES[t];
                 return '<details class="av-tache"><summary><span>Tâche ' + t.slice(-1) + '</span><em class="' + (n > lim[1] ? 'alto' : n >= lim[0] ? 'ok' : '') + '">' + n + ' mots</em></summary>' +
                   '<div class="prod-texto">' + (esc(tx).replace(/\n/g, '<br>') || '<span class="aviso">(vide)</span>') + '</div></details>';

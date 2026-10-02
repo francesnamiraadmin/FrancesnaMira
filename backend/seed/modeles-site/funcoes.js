@@ -84,7 +84,7 @@ function abrirSimulados() {
   tela.innerHTML = trilha(partes) + '<h1 class="titulo-pagina">Simulados</h1>' +
     '<p class="intro">Passez les épreuves dans les conditions de l\'examen. L\'épreuve écrite de 60 minutes présente les trois tâches en même temps, avec le chronomètre en haut de l\'écran.</p>' +
     '<div class="hub-acoes"><button class="hub-acao" type="button" id="sm-ep"><span></span><b>Épreuve écrite et enregistrements</b><small>Écrit (60 min, 3 tâches simultanées) et tâches orales, dont les épreuves proposées par votre professeur(e).</small></button>' +
-    '<a class="hub-acao" href="simulado-tcf.html"><span></span><b>Simulation complète de l\'examen</b><small>Compréhension orale et écrite, expression écrite et orale, avec correction et suivi en direct.</small></a></div>';
+    '<a class="hub-acao" href="simulado-tcf.html?curso=' + encodeURIComponent(B.courseType) + '"><span></span><b>Simulation complète de l\'examen</b><small>Compréhension orale et écrite, expression écrite et orale, avec correction et suivi en direct.</small></a></div>';
   ligarTrilha(tela, partes);
   mostrar('tela-hub');
   $('sm-ep').addEventListener('click', abrirEpreuve);

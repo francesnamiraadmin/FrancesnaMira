@@ -20,6 +20,10 @@ let arquivoCorrigidoSelecionado = null;
 let alunos = [];
 let alunoSelecionado = null;
 let voltarPara = 'fila';
+let ultimaFila = [];            // fila carregada (busca e ordenação no navegador)
+let navegacao = [];             // ids da lista de onde a produção foi aberta (← →)
+let editorAtual = null, persistAtual = null;
+const ROTULO_SALVO = { salvo: 'Tudo salvo', salvando: 'Salvando…', pendente: 'Alterações não salvas', erro: 'Erro ao salvar' };
 
 // Tarefa (tâche) das produções do Ambiente de Produção: ET1–ET3 escritas, T1–T3 orais.
 const NOMES_TAREFA = { ET1: 'Tarefa 1 escrita · Mensagem curta', ET2: 'Tarefa 2 escrita · Relato, artigo ou carta', ET3: 'Tarefa 3 escrita · Texto argumentativo',
@@ -47,7 +51,8 @@ document.getElementById('abasSistema').addEventListener('click', e => {
   else if (aba.dataset.aba === 'aovivo') { if (window.CorrecaoAoVivo) CorrecaoAoVivo.carregar(); }
   else { carregarFila(); carregarStats(); }
 });
-document.getElementById('voltarFilaBtn').addEventListener('click', () => {
+document.getElementById('voltarFilaBtn').addEventListener('click', async () => {
+  await fecharEditor();
   mostrarView(voltarPara);
   if (voltarPara === 'alunos') { carregarAlunos(); if (alunoSelecionado) abrirAluno(alunoSelecionado); }
   else if (voltarPara === 'corrigidas') carregarCorrigidas();
@@ -93,15 +98,30 @@ async function carregarFila() {
       lista.innerHTML = '<div class="vazio-box">Nenhuma produção nesta fila no momento.</div>';
       return;
     }
-    lista.innerHTML = producoes.map(renderFilaItem).join('');
+    ultimaFila = producoes;
+    desenharFila();
   } catch (err) {
     lista.innerHTML = '<div class="vazio-box">Erro ao carregar a fila.</div>';
   }
 }
+function desenharFila() {
+  const termo = (document.getElementById('filaBusca').value || '').toLowerCase().trim();
+  const ordem = document.getElementById('filaOrdem').value;
+  let l = ultimaFila.filter(p => !termo || [p.alunoId?.nome, p.alunoId?.email, p.temaId?.titulo, p.protocolo].some(x => String(x || '').toLowerCase().includes(termo)));
+  const data = (p, k) => new Date(p[k] || 0).getTime();
+  l = l.slice().sort(ordem === 'recentes' ? (x, y) => data(y, 'dataEnvio') - data(x, 'dataEnvio')
+    : ordem === 'prazo' ? (x, y) => data(x, 'prazoEstimado') - data(y, 'prazoEstimado')
+    : ordem === 'aluno' ? (x, y) => String(x.alunoId?.nome || '').localeCompare(String(y.alunoId?.nome || ''))
+    : (x, y) => data(x, 'dataEnvio') - data(y, 'dataEnvio'));
+  document.getElementById('filaLista').innerHTML = l.length ? l.map(renderFilaItem).join('') : '<div class="vazio-box">Nenhuma produção encontrada com esta busca.</div>';
+}
+document.getElementById('filaBusca').addEventListener('input', desenharFila);
+document.getElementById('filaOrdem').addEventListener('change', desenharFila);
 
 function renderFilaItem(p) {
   const urgente = p.prazoEstimado && (new Date(p.prazoEstimado).getTime() - Date.now()) < 2 * 24 * 60 * 60 * 1000;
-  const minha = p.status === 'em_correcao';
+  const minha = p.status === 'em_correcao' || p.status === 'aguardando_revisao';
+  const est = p.estadoCorrecao || {};
   const t = p.temaId || {};
   return `<div class="fila-item" data-id="${p._id}" data-status="${p.status}">
     <div>
@@ -114,6 +134,8 @@ function renderFilaItem(p) {
         ${p.ia?.status === 'erro' ? '<span class="tag ia">IA indisponível → professor</span>' : ''}
         ${urgente ? '<span class="tag urgente">Urgente</span>' : ''}
         ${minha ? '<span class="tag minha">Assumida por mim</span>' : ''}
+        ${est.rotulo ? `<span class="ca-estado" data-estado="${esc(est.estado)}">${esc(est.rotulo)}</span>` : ''}
+        ${p.correcao?.anotacoes ? `<span class="tag status">${p.correcao.anotacoes} comentário(s)</span>` : ''}
       </div>
     </div>
     <button class="btn pequeno" data-abrir="${p._id}">${minha ? 'Continuar correção' : 'Assumir e corrigir'}</button>
@@ -121,7 +143,7 @@ function renderFilaItem(p) {
 }
 document.getElementById('filaLista').addEventListener('click', e => {
   const btn = e.target.closest('[data-abrir]');
-  if (btn) { voltarPara = 'fila'; abrirProducao(btn.dataset.abrir, btn.closest('.fila-item')?.dataset.status === 'em_fila'); }
+  if (btn) { voltarPara = 'fila'; navegacao = [...document.querySelectorAll('#filaLista .fila-item')].map(x => x.dataset.id); abrirProducao(btn.dataset.abrir, btn.closest('.fila-item')?.dataset.status === 'em_fila'); }
 });
 
 // ===================== CORRIGIDAS =====================
@@ -160,7 +182,7 @@ async function carregarCorrigidas() {
 }
 document.getElementById('corrLista').addEventListener('click', e => {
   const btn = e.target.closest('[data-ver]');
-  if (btn) { voltarPara = 'corrigidas'; abrirProducao(btn.dataset.ver, false); }
+  if (btn) { voltarPara = 'corrigidas'; navegacao = [...document.querySelectorAll('#corrLista .fila-item')].map(x => x.dataset.id); abrirProducao(btn.dataset.ver, false); }
 });
 
 // Filtros « Aluno » (fila e corrigidas) com a mesma lista da aba Alunos.
@@ -275,6 +297,7 @@ async function adicionarCreditos() {
 async function abrirProducao(id, assumir) {
   try {
     await euPronto;
+    await fecharEditor();
     if (assumir) {
       const r = await fetch(`/api/producoes/${id}/assumir`, { method: 'POST', headers: H() });
       if (!r.ok) { const d = await r.json(); alert(d.msg || 'Não foi possível assumir esta produção.'); carregarFila(); return; }
@@ -322,7 +345,7 @@ function renderCorrecao(p) {
     </div>`).join('') || '<p style="font-size:.85rem; color:var(--cinza-400);">Sem coletânea.</p>';
 
   let producaoHtml = '';
-  if (p.modalidade === 'oral' && p.arquivoOriginal?.nome) {
+  if (false) {
     producaoHtml = `<div style="font-weight:700; margin-bottom:8px;">Gravação do aluno${p.duracaoSegundos ? ' — ' + formatarDuracao(p.duracaoSegundos) : ''}</div><audio controls id="audioProducaoOriginal" style="width:100%;"></audio>` +
       (p.transcricao ? `<div style="font-weight:700; margin:14px 0 6px;">Transcrição automática (revisada pelo aluno)</div><div class="texto-enviado-box" lang="fr">${esc(p.transcricao)}</div>` : '');
   } else if (p.arquivoOriginal?.nome) {
@@ -330,12 +353,9 @@ function renderCorrecao(p) {
   } else if (p.textoDigitado) {
     producaoHtml = `<div class="texto-enviado-box">${esc(p.textoDigitado)}</div><div style="margin-top:8px; font-size:0.8rem; color:var(--cinza-400);">${p.contagemPalavras} palavras (pedido: ${tema.limitePalavrasMin}–${tema.limitePalavrasMax})</div>`;
   }
-  document.getElementById('producaoEnviadaBox').innerHTML = producaoHtml;
+  void producaoHtml;
   renderAnaliseIA(p, editavel);
-  const baixarBtn = document.getElementById('baixarOriginalBtn');
-  if (baixarBtn) baixarBtn.addEventListener('click', () => baixarArquivo(p._id, 'original', p.arquivoOriginal.nome));
-  const audioEl = document.getElementById('audioProducaoOriginal');
-  if (audioEl) carregarAudioPlayer(audioEl, p._id, 'original');
+  abrirEditor(p, editavel);
 
   // Grade da prova
   const av = p.avaliacao || {};
@@ -356,8 +376,9 @@ function renderCorrecao(p) {
   document.getElementById('comentarioGeralInput').value = av.comentarioGeral || '';
   document.getElementById('pontosFortesInput').value = (av.pontosFortes || []).join('\n');
   document.getElementById('aMelhorarInput').value = (av.aMelhorar || []).join('\n');
-  document.getElementById('correcoesLista').innerHTML = '';
-  (av.correcoes || []).forEach(adicionarLinhaCorrecao);
+  document.getElementById('recomendacoesInput').value = (av.recomendacoes || []).join('\n');
+  document.getElementById('feedbackFinalInput').value = av.feedbackFinal || '';
+  if (av.notaFinal != null) document.getElementById('notaFinalInput').value = av.notaFinal;
   atualizarTotal();
   if (['corrigido', 'devolvido'].includes(p.status)) {
     document.getElementById('notaTotalView').textContent = av.notaTotal ?? '—';
@@ -447,13 +468,14 @@ function usarAnaliseIA(av) {
   preencher('comentarioGeralInput', av.comentarioGeral || '');
   preencher('pontosFortesInput', (av.pontosFortes || []).join('\n'));
   preencher('aMelhorarInput', (av.aMelhorar || []).join('\n'));
-  if (!document.querySelectorAll('#correcoesLista .correcao-linha').length) (av.correcoes || []).forEach(adicionarLinhaCorrecao);
   atualizarTotal();
-  mostrarCorrecaoMsg('Sugestão da IA copiada para a grade. Revise as notas e os comentários antes de devolver ao aluno.', false);
+  if (persistAtual) persistAtual.agendar(montarAvaliacao);
+  const importar = editorAtual && (av.correcoes || []).length ? editorAtual.importar(av.correcoes) : Promise.resolve(0);
+  importar.then(n => mostrarCorrecaoMsg('Sugestão da IA copiada para a grade' + (n ? ` e ${n} correção(ões) marcadas no texto` : '') + '. Revise as notas e os comentários antes de devolver ao aluno.', false));
   document.getElementById('criteriosLista').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function adicionarLinhaCorrecao(c = {}) {
+function adicionarLinhaCorrecaoAntiga(c = {}) {
   const div = document.createElement('div');
   div.className = 'correcao-linha';
   div.innerHTML = `<input type="text" data-c="trecho" placeholder="Trecho do aluno" maxlength="400">
@@ -465,10 +487,7 @@ function adicionarLinhaCorrecao(c = {}) {
   div.querySelector('[data-c="explicacao"]').value = c.explicacao || '';
   document.getElementById('correcoesLista').appendChild(div);
 }
-document.getElementById('addCorrecaoBtn').addEventListener('click', () => adicionarLinhaCorrecao());
-document.getElementById('correcoesLista').addEventListener('click', e => {
-  if (e.target.closest('.remover')) e.target.closest('.correcao-linha').remove();
-});
+void adicionarLinhaCorrecaoAntiga;
 document.getElementById('coletaneaCorrecao').addEventListener('click', e => {
   const head = e.target.closest('[data-doc]');
   if (head) document.getElementById('profDocCorpo' + head.dataset.doc).classList.toggle('show');
@@ -532,6 +551,7 @@ arquivoCorrigidoInput.addEventListener('change', () => {
 
 function montarAvaliacao() {
   const notas = lerNotas();
+  document.querySelectorAll('#criteriosLista [data-crit]').forEach(inp => { if (inp.value === '') notas[inp.dataset.crit] = undefined; });
   const linhas = v => v.split('\n').map(x => x.trim()).filter(Boolean);
   return {
     criterios: gradeAtual.criterios.map(c => ({
@@ -543,11 +563,10 @@ function montarAvaliacao() {
     comentarioGeral: document.getElementById('comentarioGeralInput').value,
     pontosFortes: linhas(document.getElementById('pontosFortesInput').value),
     aMelhorar: linhas(document.getElementById('aMelhorarInput').value),
-    correcoes: [...document.querySelectorAll('#correcoesLista .correcao-linha')].map(l => ({
-      trecho: l.querySelector('[data-c="trecho"]').value.trim(),
-      correcao: l.querySelector('[data-c="correcao"]').value.trim(),
-      explicacao: l.querySelector('[data-c="explicacao"]').value.trim()
-    })).filter(c => c.trecho)
+    recomendacoes: linhas(document.getElementById('recomendacoesInput').value),
+    feedbackFinal: document.getElementById('feedbackFinalInput').value,
+    // as correções pontuais agora são as anotações no texto (o servidor as junta ao devolver)
+    correcoes: []
   };
 }
 function mostrarCorrecaoMsg(texto, erro) {
@@ -557,19 +576,15 @@ function mostrarCorrecaoMsg(texto, erro) {
   el.textContent = texto;
 }
 
-document.getElementById('salvarRascunhoBtn').addEventListener('click', async () => {
-  try {
-    const res = await fetch(`/api/producoes/${producaoAtual._id}/avaliacao`, { method: 'PUT', headers: HJ(), body: JSON.stringify(montarAvaliacao()) });
-    const data = await res.json();
-    mostrarCorrecaoMsg(res.ok ? data.msg : (data.msg || 'Erro ao salvar rascunho.'), !res.ok);
-  } catch (err) { mostrarCorrecaoMsg('Erro ao conectar ao servidor.', true); }
-});
+document.getElementById('salvarRascunhoBtn').addEventListener('click', () => salvarAgora());
 
 document.getElementById('devolverBtn').addEventListener('click', async () => {
   const avaliacao = montarAvaliacao();
-  if (!avaliacao.criterios.some(c => c.nota > 0) && !confirm('Todos os critérios estão com nota 0. Devolver mesmo assim?')) return;
-  if (!avaliacao.comentarioGeral.trim()) { mostrarCorrecaoMsg('Escreva um comentário geral para o aluno antes de devolver.', true); return; }
-  if (!confirm('Devolver esta correção ao aluno? Ele verá o resultado imediatamente.')) return;
+  if (avaliacao.criterios.some(c => c.nota === undefined)) { mostrarCorrecaoMsg('Dê uma nota a todos os critérios da grade antes de devolver.', true); document.getElementById('criteriosLista').scrollIntoView({ behavior: 'smooth' }); return; }
+  if (!avaliacao.comentarioGeral.trim()) { mostrarCorrecaoMsg('Escreva a avaliação geral para o aluno antes de devolver.', true); document.getElementById('comentarioGeralInput').focus(); return; }
+  const nAnot = editorAtual ? editorAtual.anotacoes().length : 0;
+  if (!(await confirmar('Devolver ao aluno?', `O aluno verá a nota ${document.getElementById('notaTotalView').textContent}${document.getElementById('notaMaximaView').textContent}, ${nAnot} comentário(s) no texto e o feedback global imediatamente.`, 'Devolver ao aluno'))) return;
+  try { await persistAtual?.descarregar(); } catch (e) { /* o envio abaixo leva a avaliação completa */ }
   const formData = new FormData();
   formData.append('avaliacao', JSON.stringify(avaliacao));
   if (arquivoCorrigidoSelecionado) formData.append('arquivo', arquivoCorrigidoSelecionado);
@@ -579,6 +594,8 @@ document.getElementById('devolverBtn').addEventListener('click', async () => {
     const data = await res.json();
     if (res.ok) {
       mostrarCorrecaoMsg(data.msg, false);
+      persistAtual?.descartarCopiaLocal();
+      await fecharEditor(true);
       setTimeout(() => { mostrarView(voltarPara); if (voltarPara === 'alunos') { carregarAlunos(); abrirAluno(alunoSelecionado); } else { carregarFila(); carregarStats(); } }, 1200);
     } else {
       mostrarCorrecaoMsg(data.msg || 'Erro ao devolver.', true);
@@ -588,6 +605,255 @@ document.getElementById('devolverBtn').addEventListener('click', async () => {
     mostrarCorrecaoMsg('Erro ao conectar ao servidor.', true);
     document.getElementById('devolverBtn').disabled = false;
   }
+});
+
+// ===================== CORREÇÃO ANOTADA (js/correcao/*) =====================
+// Texto/áudio → marcações e comentários → critérios → feedback global → devolver.
+// Tudo salva sozinho (anotações na hora; avaliação após uma pausa na digitação).
+function mostrarEstado(est) {
+  const el = document.getElementById('caEstado');
+  if (!est) return;
+  el.dataset.estado = est.estado;
+  el.textContent = est.rotulo;
+}
+function mostrarSalvo(estado, detalhe) {
+  const el = document.getElementById('caSalvo');
+  el.dataset.s = estado;
+  el.querySelector('span').textContent = estado === 'erro' ? 'Erro ao salvar' + (detalhe ? ': ' + detalhe : '') : ROTULO_SALVO[estado];
+}
+
+async function abrirEditor(p, editavel) {
+  p.editavel = editavel;
+  const t = p.temaId || {};
+  document.getElementById('caAluno').textContent = p.alunoId?.nome || 'Aluno';
+  document.getElementById('caTema').textContent = [t.titulo, tarefaDe(p), `${t.courseType || t.exame || ''} ${t.nivel || ''}`.trim(), p.protocolo].filter(Boolean).join(' · ');
+  mostrarEstado(p.estadoCorrecao);
+  const devolvida = ['corrigido', 'devolvido', 'aguardando_revisao'].includes(p.status);
+  const dono = String(p.professorId?._id || p.professorId || '') === String(window.__eu?._id) || window.__eu?.role === 'admin';
+  document.getElementById('caReabrirBtn').hidden = !(devolvida && dono && p.modoCorrecao !== 'ia' && !editavel);
+  document.getElementById('caConcluirBtn').hidden = !editavel || p.status === 'aguardando_revisao';
+  const i = navegacao.indexOf(String(p._id));
+  document.getElementById('caAnterior').disabled = i <= 0;
+  document.getElementById('caProxima').disabled = i < 0 || i >= navegacao.length - 1;
+  mostrarSalvo('salvo');
+
+  persistAtual = Correcao.Persistencia.criar(p._id, {
+    onEstado: mostrarSalvo,
+    // algo foi gravado: a correção em andamento passa a « Correção salva »
+    onGravado: () => { if (producaoAtual?.status === 'em_correcao') mostrarEstado({ estado: 'salva', rotulo: 'Correção salva' }); },
+    onAvaliacaoSalva: d => { if (d.estado) mostrarEstado(d.estado); if (producaoAtual) producaoAtual.correcao = Object.assign(producaoAtual.correcao || {}, { salvaEm: d.salvaEm }); }
+  });
+  persistAtual.definirDados(montarAvaliacao);
+  // cópia local mais nova que o servidor (queda de conexão, aba fechada): oferece recuperar
+  const copia = editavel && persistAtual.copiaLocal(p.correcao?.salvaEm);
+  if (copia && await confirmar('Recuperar alterações não salvas?', `Há uma versão desta avaliação guardada neste navegador em ${new Date(copia.em).toLocaleString('pt-BR')}, mais nova que a do servidor.`, 'Recuperar', 'Descartar')) {
+    aplicarAvaliacaoNaTela(copia.dados);
+    persistAtual.agendar(montarAvaliacao);
+  } else if (copia) persistAtual.descartarCopiaLocal();
+
+  await Correcao.categorias.carregar();
+  let audio = null;
+  if (p.modalidade === 'oral' && p.arquivoOriginal?.nome) {
+    audio = new Audio();
+    audio.preload = 'metadata';
+    carregarAudioPlayer(audio, p._id, 'original');
+  }
+  const folha = document.getElementById('caFolha'), painel = document.getElementById('caPainel');
+  folha.className = ''; painel.className = '';
+  editorAtual = Correcao.Editor.abrir({
+    producao: p, folha, painel, editavel, persist: persistAtual, audio,
+    onErro: msg => mostrarCorrecaoMsg(msg, true),
+    onAviso: (msg, acao, fn) => avisoRapido(msg, acao, fn)
+  });
+  // arquivo anexo (sem texto digitado): botão de download dentro da folha
+  if (p.modalidade !== 'oral' && p.arquivoOriginal?.nome) {
+    const b = document.createElement('div');
+    b.className = 'ca-dica';
+    b.innerHTML = `Arquivo enviado: <b>${esc(p.arquivoOriginal.nome)}</b> · <button type="button" class="ca-mini" id="baixarOriginalBtn">Baixar</button>`;
+    folha.appendChild(b);
+    b.querySelector('#baixarOriginalBtn').addEventListener('click', () => baixarArquivo(p._id, 'original', p.arquivoOriginal.nome));
+  }
+}
+function aplicarAvaliacaoNaTela(av) {
+  const porId = Object.fromEntries((av.criterios || []).filter(c => c.id).map(c => [c.id, c]));
+  document.querySelectorAll('#criteriosLista [data-crit]').forEach(inp => { const c = porId[inp.dataset.crit]; inp.value = c && c.nota != null ? c.nota : ''; });
+  document.querySelectorAll('#criteriosLista [data-crit-coment]').forEach(tx => { const c = porId[tx.dataset.critComent]; tx.value = (c && c.comentario) || ''; });
+  document.getElementById('notaFinalInput').value = av.notaFinal ?? '';
+  document.getElementById('comentarioGeralInput').value = av.comentarioGeral || '';
+  document.getElementById('pontosFortesInput').value = (av.pontosFortes || []).join('\n');
+  document.getElementById('aMelhorarInput').value = (av.aMelhorar || []).join('\n');
+  document.getElementById('recomendacoesInput').value = (av.recomendacoes || []).join('\n');
+  document.getElementById('feedbackFinalInput').value = av.feedbackFinal || '';
+  atualizarTotal();
+}
+async function fecharEditor(semSalvar) {
+  if (persistAtual && !semSalvar) { try { await persistAtual.descarregar(); } catch (e) { /* a cópia local continua guardada */ } }
+  if (editorAtual) editorAtual.fechar();
+  if (persistAtual) persistAtual.parar();
+  editorAtual = null; persistAtual = null;
+}
+function salvarAgora() {
+  if (!persistAtual || !producaoAtual?.editavel) return;
+  persistAtual.salvarAgora({ registrar: true }).then(() => mostrarCorrecaoMsg('Avaliação salva.', false)).catch(e => mostrarCorrecaoMsg(e.message, true));
+}
+
+// qualquer alteração da avaliação → salvamento automático
+['criteriosLista', 'notaFinalInput', 'comentarioGeralInput', 'pontosFortesInput', 'aMelhorarInput', 'recomendacoesInput', 'feedbackFinalInput'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => { if (persistAtual && producaoAtual?.editavel) persistAtual.agendar(montarAvaliacao); });
+});
+
+// Concluir: pronta para revisão (ainda não vai ao aluno)
+document.getElementById('caConcluirBtn').addEventListener('click', async () => {
+  try {
+    await persistAtual.descarregar();
+    const d = await persistAtual.concluir();
+    producaoAtual.status = d.status;
+    mostrarEstado(d.estado);
+    document.getElementById('caConcluirBtn').hidden = true;
+    mostrarCorrecaoMsg('Correção concluída. Revise quando quiser e devolva ao aluno.', false);
+  } catch (e) { mostrarCorrecaoMsg(e.message, true); }
+});
+// Reabrir: volta a editar uma correção concluída ou já devolvida
+document.getElementById('caReabrirBtn').addEventListener('click', async () => {
+  const devolvida = ['corrigido', 'devolvido'].includes(producaoAtual.status);
+  if (devolvida && !(await confirmar('Reabrir a correção?', 'O aluno passa a ver « correção em revisão » até você devolver de novo. Todas as alterações ficam no histórico.', 'Reabrir'))) return;
+  try {
+    const r = await fetch(`/api/producoes/${producaoAtual._id}/reabrir`, { method: 'POST', headers: H() });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.msg || 'Não foi possível reabrir.');
+    abrirProducao(producaoAtual._id, false);
+  } catch (e) { mostrarCorrecaoMsg(e.message, true); }
+});
+
+// Histórico de versões
+const ROTULO_ACAO = { iniciou: 'Iniciou a correção', anotou: 'Comentou', editou_anotacao: 'Editou um comentário', removeu_anotacao: 'Excluiu um comentário', restaurou_anotacao: 'Restaurou um comentário',
+  salvou_avaliacao: 'Salvou a avaliação', alterou_nota: 'Alterou a nota', concluiu: 'Concluiu', devolveu: 'Devolveu ao aluno', reabriu: 'Reabriu' };
+document.getElementById('caHistoricoBtn').addEventListener('click', async () => {
+  const id = producaoAtual._id;
+  const r = await fetch(`/api/producoes/${id}/historico`, { headers: H() });
+  const d = r.ok ? await r.json() : { historico: [] };
+  const m = document.createElement('div');
+  m.className = 'ca-modal ca';
+  m.innerHTML = `<div role="dialog" aria-label="Histórico da correção"><h3>Histórico da correção <button type="button" class="ca-mini" data-f>Fechar ✕</button></h3>
+    <p style="font-size:.84rem; margin:0 0 10px; opacity:.75;">Versão atual: ${d.versao || 0}. Cada marco (iniciar, mudar a nota, concluir, devolver, reabrir) cria uma nova versão.</p>
+    <div class="ca-historico">${(d.historico || []).map(h => `<div class="ca-hist-item"><span class="v">Versão ${h.versao}</span><div><b>${esc(ROTULO_ACAO[h.acao] || h.acao)}</b>${h.resumo ? ' · ' + esc(h.resumo) : ''}<small>${esc(h.autorNome || '')} · ${new Date(h.em).toLocaleString('pt-BR')}</small></div></div>`).join('') || '<p>Nenhuma alteração registrada ainda.</p>'}</div></div>`;
+  document.body.appendChild(m);
+  const fechar = () => m.remove();
+  m.addEventListener('click', e => { if (e.target === m || e.target.closest('[data-f]')) fechar(); });
+  m.addEventListener('keydown', e => { if (e.key === 'Escape') fechar(); });
+  m.querySelector('[data-f]').focus();
+});
+
+// Navegação entre produções da lista de origem
+function irPara(passo) {
+  const i = navegacao.indexOf(String(producaoAtual?._id));
+  const id = navegacao[i + passo];
+  if (i < 0 || !id) return;
+  abrirProducao(id, false);
+}
+document.getElementById('caAnterior').addEventListener('click', () => irPara(-1));
+document.getElementById('caProxima').addEventListener('click', () => irPara(1));
+document.addEventListener('keydown', e => {
+  if (document.getElementById('viewCorrecao').style.display === 'none') return;
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); salvarAgora(); }
+  else if (e.altKey && e.key === 'ArrowLeft') { e.preventDefault(); irPara(-1); }
+  else if (e.altKey && e.key === 'ArrowRight') { e.preventDefault(); irPara(1); }
+});
+// Nunca perder a correção: avisa ao sair da página com algo pendente
+window.addEventListener('beforeunload', e => { if (persistAtual && persistAtual.temPendencias()) { e.preventDefault(); e.returnValue = ''; } });
+
+// Confirmação no estilo do site (no lugar da caixa do navegador)
+function confirmar(titulo, texto, ok, cancelar) {
+  return new Promise(res => {
+    const m = document.createElement('div');
+    m.className = 'ca-modal ca';
+    m.innerHTML = `<div role="alertdialog" aria-label="${esc(titulo)}"><h3>${esc(titulo)}</h3><p style="line-height:1.55; margin:0 0 16px;">${esc(texto)}</p>
+      <div class="ca-pop-acoes"><button type="button" class="ca-btn" data-r="0">${esc(cancelar || 'Cancelar')}</button><button type="button" class="ca-btn primario" data-r="1">${esc(ok || 'Confirmar')}</button></div></div>`;
+    document.body.appendChild(m);
+    const fim = v => { m.remove(); res(v); };
+    m.addEventListener('click', e => { const b = e.target.closest('[data-r]'); if (b) fim(b.dataset.r === '1'); else if (e.target === m) fim(false); });
+    m.addEventListener('keydown', e => { if (e.key === 'Escape') fim(false); });
+    m.querySelector('[data-r="1"]').focus();
+  });
+}
+// Aviso rápido no rodapé, com ação (ex.: « Desfazer »)
+function avisoRapido(msg, acao, fn) {
+  let el = document.getElementById('caAvisoRapido');
+  if (!el) {
+    el = document.createElement('div'); el.id = 'caAvisoRapido'; el.className = 'ca'; el.setAttribute('role', 'status');
+    el.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:1300;display:flex;gap:12px;align-items:center;padding:10px 16px;border-radius:999px;background:#1c2b3a;color:#fff;font:600 .86rem Poppins,sans-serif;box-shadow:0 12px 30px -10px rgba(0,0,0,.5)';
+    document.body.appendChild(el);
+  }
+  el.innerHTML = esc(msg) + (acao ? ` <button type="button" style="border:0;background:#ffd60a;color:#16213a;border-radius:999px;padding:5px 12px;font:700 .8rem Poppins,sans-serif;cursor:pointer">${esc(acao)}</button>` : '');
+  el.style.display = 'flex';
+  const b = el.querySelector('button'); if (b) b.addEventListener('click', () => { el.style.display = 'none'; fn(); });
+  clearTimeout(el._t); el._t = setTimeout(() => { el.style.display = 'none'; }, 6000);
+}
+
+// ===================== CATEGORIAS DE MARCAÇÃO (admin) =====================
+// Cada cor tem um significado pedagógico. O admin renomeia, recolore, descreve, liga/desliga,
+// escolhe se vale para a escrita e/ou o oral, reordena (a ordem define as teclas 1–9) e cria novas.
+async function abrirConfigCategorias() {
+  const d = await (await fetch('/api/correcao/categorias', { headers: H() })).json();
+  let lista = JSON.parse(JSON.stringify(d.categorias || []));
+  const m = document.createElement('div');
+  m.className = 'ca-modal ca';
+  const linha = (c, i) => `<div class="cat-cfg" data-i="${i}" style="display:grid; grid-template-columns:auto 44px 1fr auto; gap:8px; align-items:start; padding:10px 0; border-bottom:1px solid var(--ca-borda);">
+      <div style="display:flex; flex-direction:column; gap:2px;"><button type="button" class="ca-mini" data-mov="-1" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>▲</button><button type="button" class="ca-mini" data-mov="1" aria-label="Descer" ${i === lista.length - 1 ? 'disabled' : ''}>▼</button></div>
+      <input type="color" data-k="cor" value="${esc(c.cor)}" aria-label="Cor" style="width:44px; height:38px; border:0; background:none; cursor:pointer;">
+      <div><input type="text" data-k="nome" value="${esc(c.nome)}" maxlength="60" aria-label="Nome" style="width:100%; padding:8px 10px; border-radius:10px; border:1px solid var(--ca-borda); font-weight:600;">
+        <input type="text" data-k="descricao" value="${esc(c.descricao || '')}" maxlength="200" placeholder="Significado pedagógico" aria-label="Descrição" style="width:100%; margin-top:6px; padding:7px 10px; border-radius:10px; border:1px solid var(--ca-borda); font-size:.82rem;">
+        <div style="display:flex; gap:14px; margin-top:6px; font-size:.78rem;">
+          <label><input type="checkbox" data-mod="textual" ${!c.modalidades || c.modalidades.includes('textual') ? 'checked' : ''}> Escrita</label>
+          <label><input type="checkbox" data-mod="oral" ${!c.modalidades || c.modalidades.includes('oral') ? 'checked' : ''}> Oral</label>
+          <label><input type="checkbox" data-k="ativa" ${c.ativa !== false ? 'checked' : ''}> Ativa</label>
+          ${i < 9 ? `<span style="opacity:.6;">tecla ${i + 1}</span>` : ''}</div></div>
+      <span style="font:700 .7rem Poppins,sans-serif; opacity:.5;">${esc(c.id)}</span></div>`;
+  const ler = () => {
+    m.querySelectorAll('.cat-cfg').forEach(el => {
+      const c = lista[Number(el.dataset.i)];
+      c.cor = el.querySelector('[data-k="cor"]').value; c.nome = el.querySelector('[data-k="nome"]').value; c.descricao = el.querySelector('[data-k="descricao"]').value;
+      c.ativa = el.querySelector('[data-k="ativa"]').checked;
+      c.modalidades = [...el.querySelectorAll('[data-mod]:checked')].map(x => x.dataset.mod);
+    });
+  };
+  const desenhar = () => {
+    m.innerHTML = `<div role="dialog" aria-label="Categorias de marcação" style="width:min(680px,100%);"><h3>Categorias de marcação <button type="button" class="ca-mini" data-f>Fechar ✕</button></h3>
+      <p style="font-size:.84rem; opacity:.8; margin:0 0 6px;">As cores aparecem para o professor ao corrigir e para o aluno na correção devolvida. Correções já feitas guardam o nome e a cor da época.</p>
+      <div>${lista.map(linha).join('')}</div>
+      <div class="ca-pop-acoes" style="justify-content:space-between;"><button type="button" class="ca-btn" data-nova>+ Nova categoria</button>
+        <span><button type="button" class="ca-btn" data-padrao>Restaurar padrão</button> <button type="button" class="ca-btn primario" data-salvar>Salvar categorias</button></span></div>
+      <p class="msg-inline" data-msg style="display:none;"></p></div>`;
+  };
+  desenhar();
+  document.body.appendChild(m);
+  m.addEventListener('click', async e => {
+    if (e.target === m || e.target.closest('[data-f]')) { m.remove(); return; }
+    const mov = e.target.closest('[data-mov]');
+    if (mov) { ler(); const i = Number(mov.closest('.cat-cfg').dataset.i), j = i + Number(mov.dataset.mov); [lista[i], lista[j]] = [lista[j], lista[i]]; desenhar(); return; }
+    if (e.target.closest('[data-nova]')) { ler(); lista.push({ id: 'cat' + Date.now().toString(36).slice(-5), nome: 'Nova categoria', cor: '#475569', descricao: '', ativa: true, modalidades: ['textual', 'oral'] }); desenhar(); return; }
+    if (e.target.closest('[data-padrao]')) { lista = JSON.parse(JSON.stringify(d.padrao || [])); desenhar(); return; }
+    if (e.target.closest('[data-salvar]')) {
+      ler();
+      const r = await fetch('/api/correcao/categorias', { method: 'PUT', headers: HJ(), body: JSON.stringify({ categorias: lista }) });
+      const out = await r.json();
+      const msg = m.querySelector('[data-msg]');
+      msg.style.display = 'block'; msg.className = 'msg-inline ' + (r.ok ? 'sucesso' : 'erro');
+      msg.textContent = r.ok ? 'Categorias salvas. Elas valem nas próximas correções abertas.' : (out.msg || 'Erro ao salvar.');
+      if (r.ok) Correcao.categorias.definir(out.categorias);
+    }
+  });
+}
+euPronto.then(() => {
+  if (window.__eu?.role !== 'admin') return;
+  const alvo = document.getElementById('atualizarFilaBtn');
+  if (!alvo || document.getElementById('configCategoriasBtn')) return;
+  const b = document.createElement('button');
+  b.className = 'btn secundario'; b.id = 'configCategoriasBtn'; b.type = 'button';
+  b.textContent = 'Cores e categorias';
+  b.title = 'Configurar as categorias de marcação (cores e significados)';
+  b.addEventListener('click', abrirConfigCategorias);
+  alvo.after(b);
 });
 
 // ===================== INIT =====================

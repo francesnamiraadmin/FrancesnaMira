@@ -17,6 +17,11 @@ const temExpressoes = def => ordemDe(def).some(p => p === "ee" || p === "eo");
 // Exercícios do Ambiente de Produção Oral: mesmo motor, mas fora do catálogo de simulados,
 // liberados pelo módulo "producao" do curso e com notas na escala da prova do curso.
 const ehExercicio = def => !!def && def.categoria === "exercicio";
+// Simulado completo do DELF (A1, A2, B1, B2): 4 épreuves de 25 pontos; compreensões em exercícios
+// com documentos (cada um com várias questões de 3 alternativas); aprovado com 50/100 e no mínimo
+// 5/25 em cada épreuve.
+const ehDelf = def => !!def && !ehExercicio(def) && /^DELF/.test(def.formato || "");
+const MINIMO_DELF = 5, APROVACAO_DELF = 50;
 const gradesProva = require("./gradesProva");
 const NIVEIS_CECR = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
@@ -41,7 +46,8 @@ function listar(curso) {
     .sort((a, b) => a.slug.localeCompare(b.slug, "pt", { numeric: true }))
     .map(d => ({
       slug: d.slug, titulo: d.titulo, curso: d.curso, formato: d.formato, temExpressoes: temExpressoes(d),
-      provas: ordemDe(d).map(p => ({ id: p, nome: d.provas[p].nome, tempoSeg: d.provas[p].tempoSeg, itens: (d.provas[p].questoes || d.provas[p].tarefas).length }))
+      nivel: d.nivel || null, descricao: d.descricao || null,
+      provas: ordemDe(d).map(p => ({ id: p, nome: d.provas[p].nome, tempoSeg: d.provas[p].tempoSeg, itens: (d.provas[p].questoes || d.provas[p].tarefas).length, exercicios: (d.provas[p].exercicios || []).length || null }))
     }));
 }
 
@@ -66,6 +72,7 @@ function versaoPublica(def) {
       if (q.alternativasFaladas) q.alternativas = q.alternativas.map(() => "");
     });
   }
+  for (const p of ordemDe(def).filter(ehCompreensao)) (c.provas[p].exercicios || []).forEach(x => { delete x.transcricao; });
   if (c.provas.eo) c.provas.eo.tarefas.forEach(t => { delete t.fichaExaminador; });
   return c;
 }
@@ -114,6 +121,20 @@ function corrigirCompreensao(def, prova, respostas = {}) {
   // TCF Canada: 39 itens somam exatamente 699. Livrets mais curtos (TCF Tout Public)
   // convertem a proporção de pontos obtidos para a mesma escala 0–699.
   // (também por prova: a CE com lacunas de "structure de la langue" tem 49 itens).
+  if (ehDelf(def)) {
+    // pontos de cada questão definidos na prova (somam 25); nota com meio ponto
+    const nota = Math.round((maximo ? (pontos / maximo) * 25 : 0) * 2) / 2;
+    const porExercicio = {};
+    questoes.forEach((q, i) => {
+      const x = porExercicio[q.exercicio] = porExercicio[q.exercicio] || { acertos: 0, total: 0, pontos: 0, maximo: 0 };
+      x.total++; x.maximo += q.pontos;
+      if (detalhes[i].certo) { x.acertos++; x.pontos += q.pontos; }
+    });
+    return {
+      pontos: nota, escala: 25, acertos, total: questoes.length, nivel: `${def.formato} · ${nota >= MINIMO_DELF ? "acima" : "abaixo"} da nota mínima (5/25)`,
+      aprovado: nota >= MINIMO_DELF, nclc: null, porNivel, porExercicio, detalhes
+    };
+  }
   if (ehExercicio(def)) {
     const teto = NIVEIS_CECR.filter(n => questoes.some(q => q.nivel === n)).pop();
     const r = gradesProva.resultadoCompreensao(def.curso, pontos, maximo, def.nivel, teto);
@@ -163,7 +184,7 @@ const NOMES_CRITERIOS = {
   }
 };
 function criteriosDe(def) {
-  const nomes = ehExercicio(def) ? NOMES_CRITERIOS[def.curso] : null;
+  const nomes = ehExercicio(def) || ehDelf(def) ? NOMES_CRITERIOS[def.curso] : null;
   if (!nomes) return CRITERIOS;
   return Object.fromEntries(Object.entries(CRITERIOS).map(([p, lista]) => [p, lista.map(c => ({ ...c, nome: nomes[p]?.[c.id] || c.nome }))]));
 }
@@ -193,6 +214,20 @@ function montarResultadoExpressao(prova, def, entrada = {}, meta = {}) {
   }
   const media = Math.round(notas.reduce((s, n) => s + n, 0) / notas.length);
   const nota = entrada.nota != null && entrada.nota !== "" ? Math.round(limitar(entrada.nota, 0, 20)) : media;
+  if (ehDelf(def)) {
+    // Cada tarefa vale « peso » pontos da prova (somam 25): nota da tarefa /20 → pontos dela.
+    const pesoTotal = tarefasDef.reduce((s, t) => s + (t.peso || 0), 0) || tarefasDef.length;
+    let notaProva = tarefasDef.reduce((s, t) => s + (tarefas[t.id].nota / 20) * (t.peso || pesoTotal / tarefasDef.length), 0) * (25 / pesoTotal);
+    if (entrada.notaProva != null && entrada.notaProva !== "") notaProva = limitar(entrada.notaProva, 0, 25);
+    notaProva = Math.round(notaProva * 2) / 2;
+    return {
+      tarefas, nota: Math.round((notaProva / 25) * 20), media, notaProva, notaMaximaProva: 25, aprovado: notaProva >= MINIMO_DELF,
+      nivel: `${def.formato} · ${notaProva >= MINIMO_DELF ? "acima" : "abaixo"} da nota mínima (5/25)`, nclc: null,
+      comentario: String(entrada.comentario || "").slice(0, 5000),
+      corretor: meta.corretor || null, corretorNome: meta.corretorNome || null, porIA: !!meta.porIA,
+      corrigidoEm: new Date()
+    };
+  }
   if (ehExercicio(def) && def.curso !== "TCF") {
     // Nota interna /20 → escala da prova do curso (DELF/DALF /25, TEF 0–450, A1–B2 modelo TCF).
     const exame = gradesProva.exameDoCurso(def.curso);
@@ -219,7 +254,7 @@ function montarResultadoExpressao(prova, def, entrada = {}, meta = {}) {
 const contarPalavras = t => (String(t || "").match(/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu) || []).length;
 
 module.exports = {
-  PROVAS, TODAS_PROVAS, NOMES_PROVA, CRITERIOS, criteriosDe, ordemDe, ehCompreensao, temExpressoes, ehExercicio,
+  PROVAS, TODAS_PROVAS, NOMES_PROVA, CRITERIOS, criteriosDe, ordemDe, ehCompreensao, temExpressoes, ehExercicio, ehDelf, MINIMO_DELF, APROVACAO_DELF,
   obter, listar, listarExercicios, versaoPublica, corrigirCompreensao,
   montarResultadoExpressao, nivelCompreensao, nivelExpressao, contarPalavras
 };

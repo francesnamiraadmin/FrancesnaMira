@@ -10,7 +10,7 @@ function montarPrompt(def, tentativa) {
   const ee = !tem("ee") ? "" : def.provas.ee.tarefas.map(t => {
     const texto = String(tentativa.provas.ee.respostas?.[t.id] || "").trim();
     const docs = (t.documentos || []).map(d => `${d.titulo}\n${d.texto}`).join("\n\n");
-    return `### EE ${t.id} — ${t.titulo} (${t.min}–${t.max} mots)\nConsigne : ${t.consigne}${docs ? "\n\n" + docs : ""}\n\nProduction du candidat (${sim.contarPalavras(texto)} mots) :\n"""\n${texto || "(aucune réponse)"}\n"""`;
+    return `### EE ${t.id} — ${t.titulo} (${t.max ? `${t.min}–${t.max} mots` : `${t.min} mots minimum`})\nConsigne : ${t.consigne}${docs ? "\n\n" + docs : ""}\n\nProduction du candidat (${sim.contarPalavras(texto)} mots) :\n"""\n${texto || "(aucune réponse)"}\n"""`;
   }).join("\n\n");
   const eo = !tem("eo") ? "" : def.provas.eo.tarefas.map(t => {
     const tr = String(tentativa.provas.eo.respostas?.[t.id]?.transcricao || "").trim();
@@ -19,13 +19,14 @@ function montarPrompt(def, tentativa) {
 
   const crits = sim.criteriosDe(def);
   const crit = p => crits[p].map(c => `"${c.id}" (${c.nome})`).join(", ");
-  const exame = sim.ehExercicio(def) ? ({ DELF: "DELF", DALF: "DALF", TEF: "TEF", TCF: "TCF Canada" }[def.curso] || `français niveau ${def.nivel} (grille du TCF)`) : "TCF Canada";
-  return `Tu es examinateur certifié du ${exame}. Évalue les productions ci-dessous exactement comme lors de l'examen officiel${sim.ehExercicio(def) ? `, pour le niveau visé ${def.nivel}` : ""}.
+  const delf = sim.ehDelf(def);
+  const exame = delf ? def.formato : sim.ehExercicio(def) ? ({ DELF: "DELF", DALF: "DALF", TEF: "TEF", TCF: "TCF Canada" }[def.curso] || `français niveau ${def.nivel} (grille du TCF)`) : "TCF Canada";
+  return `Tu es examinateur certifié du ${exame}. Évalue les productions ci-dessous exactement comme lors de l'examen officiel${sim.ehExercicio(def) || delf ? `, pour le niveau visé ${def.nivel}` : ""}.
 
 Pour CHAQUE tâche, attribue une note de 0 à 5 (demi-points autorisés) à chacun des 4 critères :
 - Expression écrite : ${crit("ee")}
 - Expression orale : ${crit("eo")}
-La somme des 4 critères donne la note de la tâche sur 20. Repères : 20/20 ≈ C2 maîtrisé ; 16 ≈ C2 ; 14 ≈ C1 ; 10–13 ≈ B2 ; 6–9 ≈ B1 ; 4–5 ≈ A2 ; 1–3 ≈ A1.
+La somme des 4 critères donne la note de la tâche sur 20. ${delf ? `Repères du ${def.formato} : une production qui répond aux attentes du niveau ${def.nivel} vaut 10/20 ou plus ; 20/20 = attentes du niveau entièrement dépassées ; une production nettement en dessous du niveau ${def.nivel} vaut moins de 5/20. Ne compare pas au TCF : juge seulement par rapport au niveau ${def.nivel} du CECR.` : "Repères : 20/20 ≈ C2 maîtrisé ; 16 ≈ C2 ; 14 ≈ C1 ; 10–13 ≈ B2 ; 6–9 ≈ B1 ; 4–5 ≈ A2 ; 1–3 ≈ A1."}
 Sanctionne : le non-respect de la consigne, un nombre de mots hors limites (fortement en dessous = pénalité sur "tarefa"), le hors-sujet, l'absence de réponse (0 partout).
 Pour l'oral, tu ne disposes que d'une transcription automatique : juge l'aisance à partir de la continuité et de la longueur du discours, n'invente pas d'erreurs de prononciation ; les petites fautes de transcription ne doivent pas être comptées comme des fautes du candidat.
 

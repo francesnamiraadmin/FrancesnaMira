@@ -97,6 +97,7 @@ function temaCurto(t) {
 }
 
 function modeloGuia(tache, sujet) {
+  if (sujet && sujet.pf) return modeloGuiaDelf(tache, sujet);
   const e = EIXOS.eixos[sujet.e] || EIXOS.eixos.soc || {};
   const pour = (e.argumentsPour || []).slice(0, 3), contre = (e.argumentsContre || []).slice(0, 3), ag = e.agents || ["les pouvoirs publics", "les associations", "les citoyens"];
   const tema = temaCurto(sujet.t).replace(/\s*:\s*$/, "");
@@ -167,6 +168,7 @@ function exemploManual(tache, eixo) {
 }
 
 function promptModelo(tache, sujet) {
+  if (sujet && sujet.pf) return promptModeloDelf(tache, sujet);
   const eixo = (EIXOS.eixos[sujet.e] || {}).nome || sujet.e;
   let sistema = "Tu es professeur de FLE chez Français na Mira et spécialiste du TCF Canada. Tu rédiges des productions modèles de niveau B2-C1, naturelles, " +
     "idiomatiques et adaptées au contexte canadien (québécois quand c'est pertinent), en suivant STRICTEMENT la méthode et la trame Français na Mira. " +
@@ -245,8 +247,9 @@ function normalizarModelo(tache, sujet, r) {
     if (sujet.d1) { m.d1 = sujet.d1; m.d2 = sujet.d2; }
     m.p = s(r.p).replace(/\n{3,}/g, "\n\n");
     const n = contarPalavras(m.p);
-    if (n < LIMITES_ESCRITA[tache][0] * 0.85) throw new Error("Production trop courte.");
-    if (n > LIMITES_ESCRITA[tache][1] + (tache === "ET3" ? 8 : 4)) throw new Error(`Production trop longue (${n} mots).`);
+    const lim = limitesDe(tache, sujet);
+    if (n < lim[0] * 0.85) throw new Error("Production trop courte.");
+    if (n > lim[1] + (tache === "ET3" ? 8 : 4)) throw new Error(`Production trop longue (${n} mots).`);
   }
   const tudo = semAcento(textoDoModelo(tache, m)).replace(/’/g, "'");
   m.k = (r.k || []).map(s).filter(k => k && tudo.includes(semAcento(k).replace(/’/g, "'"))).slice(0, 14);
@@ -263,6 +266,7 @@ function modeloReferencia(tache, eixoAlvo) {
 // automática da gravação, avaliada como production orale; com `comAudio` a IA também ouve a gravação
 // (fluidez e pronúncia entram na avaliação).
 function promptCorrecao(tache, sujet, texte, comAudio) {
+  if (sujet && sujet.pf) return promptCorrecaoDelf(tache, sujet, texte, comAudio);
   const oral = !ehEscrita(tache);
   const lim = LIMITES_ESCRITA[tache];
   const mots = contarPalavras(texte);
@@ -304,8 +308,154 @@ function promptCorrecao(tache, sujet, texte, comAudio) {
   return { sistema, usuario, mots, limites: lim || [0, 0] };
 }
 
+// ================= perfis: TCF ou DELF de um nível =================
+// O app usa os mesmos lugares de tâche (T1..T3, ET1..ET3); o perfil diz quais existem, os nomes,
+// limites, tempos, trames, eixos e sujets. Os sujets do DELF têm `pf` ("DELF-B1"), então quem
+// recebe um sujet sabe o perfil sem precisar do contexto (correção, modelo, Sistema de Correção).
+const DELF = require(path.join(DIR, "delf.js"));
+const NIVEL_DELF_PADRAO = "B1";
+for (const n of DELF.NIVEAUX) for (const t of Object.keys(DELF.SUJETS[n])) for (const s of DELF.SUJETS[n][t]) INDICE.set(t + "|" + s.id, { tache: t, tema: s });
+
+const PERFIL_TCF = {
+  id: "TCF", curso: "TCF", nivel: "", nome: "TCF Canada", delf: false, TACHES, ordem: TACHES,
+  LIMITES_ESCRITA, DURACAO_ORAL, NOMES_TACHE, eixos: EIXOS.ordem, trames: OUTILS.trames, epreuveMin: DURACAO_EPREUVE_MIN, taches: null, epreuve: null,
+  sujetsDaTache, modelosManuais, atelier: MODELES.atelier, orale: MODELES.orale, ecrite: MODELES.ecrite
+};
+const PERFIS = { TCF: PERFIL_TCF };
+for (const n of DELF.NIVEAUX) {
+  const cfg = DELF.NIVEIS[n];
+  const ts = Object.keys(cfg.taches);
+  const lim = {}, dur = {}, nomes = {};
+  for (const t of ts) {
+    const x = cfg.taches[t];
+    nomes[t] = `${cfg.nome} · ${x.nom} · ${x.sous}`;
+    if (ehEscrita(t)) lim[t] = [x.min, x.max];
+    else dur[t] = x.fases.filter(f => !/^Préparation/.test(f.nome)).reduce((s, f) => s + f.seg, 0);
+  }
+  PERFIS["DELF-" + n] = {
+    id: "DELF-" + n, curso: "DELF", nivel: n, nome: cfg.nome, delf: true, TACHES: cfg.ordem.slice(), ordem: cfg.ordem.slice(),
+    LIMITES_ESCRITA: lim, DURACAO_ORAL: dur, NOMES_TACHE: nomes, eixos: DELF.EIXOS[n], trames: DELF.TRAMES[n],
+    epreuveMin: cfg.epreuve.min, epreuve: cfg.epreuve, taches: cfg.taches, descricao: cfg.descricao,
+    sujetsDaTache: t => DELF.SUJETS[n][t] || [], modelosManuais: () => [], atelier: [],
+    orale: Object.fromEntries(ts.filter(t => !ehEscrita(t)).map(t => [t, []])), ecrite: Object.fromEntries(ts.filter(ehEscrita).map(t => [t, []]))
+  };
+}
+const nivelDelf = n => (DELF.NIVEAUX.includes(String(n || "").toUpperCase()) ? String(n).toUpperCase() : NIVEL_DELF_PADRAO);
+// Perfil de quem chama: o DELF tem um nível (escolhido no app); os outros cursos usam o TCF.
+const perfil = (curso, nivel) => (curso === "DELF" ? PERFIS["DELF-" + nivelDelf(nivel)] : PERFIL_TCF);
+const perfilDoSujet = s => (s && s.pf && PERFIS[s.pf]) || PERFIL_TCF;
+const limitesDe = (t, s) => perfilDoSujet(s).LIMITES_ESCRITA[t] || LIMITES_ESCRITA[t];
+const duracaoOralDe = (t, s) => perfilDoSujet(s).DURACAO_ORAL[t] || DURACAO_ORAL[t];
+const nomeTacheDe = (t, s) => perfilDoSujet(s).NOMES_TACHE[t] || NOMES_TACHE[t];
+const minutosEscritaDe = (t, s) => { const p = perfilDoSujet(s); return p.delf ? (p.taches[t] || {}).minutos || 20 : { ET1: 10, ET2: 15, ET3: 25 }[t]; };
+const trameDe = (t, s) => perfilDoSujet(s).trames[t] || null;
+
+// Título curto de um sujet do DELF: o título do documento déclencheur, ou o começo da consigne.
+function tituloDelf(s) {
+  const doc = String(s.t || "").match(/^Document : « (.+?) »/);
+  return doc ? doc[1] : temaCurto(s.t);
+}
+
+// Modèle-guide do DELF: a trame do nível com as lacunas a preencher (sem IA).
+function modeloGuiaDelf(tache, sujet) {
+  const P = perfilDoSujet(sujet), tr = P.trames[tache] || { etapes: [] }, e = EIXOS.eixos[sujet.e] || {};
+  const nivelB = /^B/.test(P.nivel);
+  const m = { id: sujet.id, e: sujet.e, f: 1, gerado: true, guia: true, titre: tituloDelf(sujet).slice(0, 110), c: sujet.t, k: [] };
+  m.pistes = { pour: nivelB ? (e.argumentsPour || []).slice(0, 3) : [], contre: nivelB ? (e.argumentsContre || []).slice(0, 3) : [], docs: [], patron: tr.conseil || "" };
+  const textos = tr.etapes.map(x => x.texte);
+  if (ehEscrita(tache)) m.p = textos.join("\n");
+  else if (tache === "T2") {
+    m.reg = "vous";
+    const mots = (String(sujet.t).split(/mots :/i)[1] || "").split("/").map(x => x.replace(/[?.]/g, "").trim()).filter(Boolean);
+    m.ech = mots.length ? mots.map(w => ({ q: `[Votre question avec « ${w} »] Est-ce que vous… ? / Quel(le)… ?`, r: "[Réponse de l'examinateur]" }))
+      : tr.etapes.slice(0, -1).map(x => ({ q: x.texte, r: "[Réponse de l'examinateur]" }));
+    m.fin = textos[textos.length - 1] || "Merci beaucoup, au revoir !";
+  } else {
+    m.etapes = textos;
+    if (tache === "T1") m.rotulos = tr.etapes.map(x => x.rotulo);
+    m.rel = tache === "T1" ? [] : [
+      { q: "Pouvez-vous me donner un exemple précis ?", r: "Oui, par exemple, [situation vécue ou observée : où, quand, ce qui s'est passé]." },
+      { q: "Et dans votre pays, c'est pareil ?", r: "Pas tout à fait : dans mon pays, [comparaison]. C'est pourquoi je pense que [conclusion]." }];
+    m.ctx = { r: tr.conseil || "", a: [] };
+  }
+  return m;
+}
+
+function trameTextoDe(tr) {
+  if (!tr || !tr.etapes) return "";
+  return tr.titulo + (tr.sousTitre ? " : " + tr.sousTitre : "") + "\n" + tr.etapes.map((e, i) => `${i + 1}. ${e.rotulo} : ${e.texte}`).join("\n") + (tr.conseil ? "\nConseil : " + tr.conseil : "");
+}
+// Extensão do modelo oral (palavras), definida por parte em delf.js; na falta, ≈ 100 por minuto.
+const palavrasOral = (t, s) => { const x = (perfilDoSujet(s).taches || {})[t] || {}, seg = duracaoOralDe(t, s); return x.palavras || [Math.round(seg / 60 * 85), Math.round(seg / 60 * 110)]; };
+
+function promptModeloDelf(tache, sujet) {
+  const P = perfilDoSujet(sujet), x = P.taches[tache], eixo = (EIXOS.eixos[sujet.e] || {}).nome || sujet.e;
+  const sistema = `Tu es professeur de FLE chez Français na Mira et examinateur-correcteur habilité du DELF. Tu rédiges des productions modèles qui obtiendraient la note maximale au ${P.nome} : ` +
+    `une langue naturelle, STRICTEMENT du niveau ${P.nivel} du CECRL (ni plus simple, ni plus difficile : un candidat ${P.nivel} doit pouvoir la reproduire), dans un contexte francophone (France, Belgique, Suisse…), ` +
+    "en suivant la trame Français na Mira de la tâche. Tu réponds UNIQUEMENT avec un objet JSON valide, sans texte autour, sans Markdown. " +
+    "Style : n'utilise jamais de tiret cadratin (—) ni de tiret demi-cadratin (–).";
+  const comum = [`EXAMEN : ${P.nome}, ${x.nom} · ${x.sous} (${x.info}).`, "AXE THÉMATIQUE : " + eixo, "TRAME FRANÇAIS NA MIRA DE LA TÂCHE :\n" + trameTextoDe(P.trames[tache]), "CONSIGNE : " + sujet.t];
+  let formato;
+  if (ehEscrita(tache)) {
+    const lim = limitesDe(tache, sujet);
+    formato = [`Écris la production modèle en suivant la trame, le registre demandé (tu/vous, formules d'appel et de fin) et entre ${lim[0]} et ${lim[1]} mots (vise ${Math.round((lim[0] + lim[1]) / 2)} mots).`,
+      'JSON : {"titre": "titre court du sujet", "c": "la consigne", "p": "la production, paragraphes séparés par \\n", "k": ["8 à 12 mots-clés présents mot pour mot dans la production"]}'];
+  } else if (tache === "T2") {
+    formato = [/mots :/i.test(sujet.t)
+      ? "Écris l'échange modèle : pour CHAQUE mot de la consigne, le candidat pose une question simple et correcte à l'examinateur, qui répond en une phrase."
+      : "Écris le dialogue modèle : le candidat joue son rôle (saluer, expliquer, poser des questions, réagir, négocier ou convaincre, conclure) et l'examinateur répond de façon naturelle, en 1 à 3 phrases.",
+      'JSON : {"titre": "titre court", "reg": "tu" ou "vous", "c": "la consigne", "ech": [{"q": "réplique du candidat", "r": "réponse de l\'examinateur"}] (6 à 8 éléments), "fin": "dernière réplique du candidat", "ctx": "conseil pour réussir cette partie (1 ou 2 phrases)", "k": ["8 à 12 mots-clés présents mot pour mot dans le dialogue"]}'];
+  } else {
+    const n = P.trames[tache].etapes.length, pal = palavrasOral(tache, sujet);
+    formato = [`Écris ce que dirait le candidat (environ ${pal[0]} à ${pal[1]} mots au total), en ${n} étapes, exactement dans l'ordre de la trame.` +
+      (tache === "T3" && /^B/.test(P.nivel) ? " Reprends le problème posé par le document et donne des exemples concrets." : ""),
+      `JSON : {"titre": "titre court", "etapes": ["texte de chaque étape"] (${n} éléments), ${tache === "T1" ? `"rotulos": ${JSON.stringify(P.trames[tache].etapes.map(e => e.rotulo))}, ` : ""}` +
+      `"rel": [{"q": "question ${P.nivel === "B2" ? "du débat" : "de relance"} de l'examinateur", "r": "réponse possible du candidat"}] (${tache === "T1" ? "0" : P.nivel === "B2" ? "3" : "2"} éléments),` +
+      ' "ctx": {"r": "le contexte ou le conseil essentiel en 1 ou 2 phrases", "a": [["aspect", "explication"]] (2 à 4 éléments)}, "k": ["8 à 12 mots-clés présents mot pour mot dans le texte"]}'];
+  }
+  return { sistema, usuario: comum.concat(formato).join("\n\n") };
+}
+
+// Correção na grade do DELF (/25), com as mesmas chaves JSON da correção do TCF.
+function promptCorrecaoDelf(tache, sujet, texte, comAudio) {
+  const { grade } = require("./gradesProva");
+  const P = perfilDoSujet(sujet), x = P.taches[tache] || {}, oral = !ehEscrita(tache);
+  const lim = oral ? null : limitesDe(tache, sujet), mots = contarPalavras(texte);
+  const g = grade("DELF", oral ? "oral" : "textual");
+  const sistema = [
+    `Tu es un correcteur de ${oral ? "productions orales" : "productions écrites"} en français pour des apprenants brésiliens. Tu réponds toujours en tant que correcteur : tu évalues la production de l'élève et tu ne fais rien d'autre.`,
+    `Tu es examinateur-correcteur habilité du DELF et professeur de FLE chez Français na Mira. Tu évalues selon la grille officielle du ${P.nome} (note sur 25), en tenant compte du niveau visé (${P.nivel}) : n'exige pas des structures d'un niveau supérieur, mais sanctionne ce qui manque pour ce niveau.`,
+    oral ? "Tu évalues une TRANSCRIPTION automatique : ne pénalise ni la ponctuation ni les petites erreurs de reconnaissance vocale évidentes" + (comAudio ? ". L'ENREGISTREMENT AUDIO est joint : écoute-le, corrige la transcription si besoin et évalue la prononciation et l'aisance." : ", et estime la phonologie avec prudence.")
+      : "Tu vérifies le type de texte, le destinataire, le registre et le nombre de mots demandé.",
+    "Tu t'appuies sur la trame Français na Mira de la tâche : la version améliorée suit cette trame et garde les idées de l'élève, au niveau " + P.nivel + ".",
+    "Commentaires en français simple (A2-B1), avec une courte explication pour chaque correction. Réponds UNIQUEMENT avec un objet JSON valide, sans Markdown."
+  ].join(" ");
+  const usuario = [
+    `TÂCHE : ${P.nome} · ${x.nom} · ${x.sous} (${x.info}).`,
+    "CONSIGNE : " + consigneDe(sujet),
+    "TRAME FRANÇAIS NA MIRA :\n" + trameTextoDe(P.trames[tache]),
+    "GRILLE DU DELF (critère : points) :\n" + g.criterios.map(c => `- ${c.nome} : ${c.max} pts`).join("\n"),
+    `${oral ? "TRANSCRIPTION DE LA PRODUCTION ORALE" : "TEXTE DE L'ÉLÈVE"} (${mots} mots), entre les balises <texte> :\n<texte>\n${texte}\n</texte>`,
+    "Réponds avec ce JSON exact :",
+    '{"note": nombre sur 25 (demi-points possibles, égal à la somme des critères), "appreciation": "une phrase de synthèse",',
+    ' "criteres": [' + g.criterios.map(c => `{"nom": "${c.nome}", "note": "x/${c.max}", "commentaire": "..."}`).join(", ") + "] (dans cet ordre),",
+    ' "trame": [{"etape": "nom de l\'étape de la trame", "presente": true ou false, "commentaire": "..."}],',
+    ' "points_forts": ["..."], "a_ameliorer": ["..."],',
+    ' "corrections": [{"original": "extrait fautif", "corrige": "version correcte", "explication": "..."}] (les 8 erreurs les plus importantes au maximum),',
+    ' "lexique": [{"mot": "mot ou expression utile au niveau ' + P.nivel + '", "remplace": "mot simple de l\'élève ou vide", "exemple": "phrase d\'exemple"}] (5 à 8 éléments),',
+    ' "connecteurs": ["connecteur à ajouter, et à quel endroit"],',
+    oral ? ' "version_amelioree": "ce que l\'élève aurait pu dire, en suivant la trame, paragraphes séparés par \\n",'
+      : ` "version_amelioree": "le texte réécrit en suivant la trame, entre ${lim[0]} et ${lim[1]} mots, paragraphes séparés par \\n",`,
+    ' "conseil": "le conseil le plus utile pour la prochaine fois"}'
+  ].join("\n\n");
+  return { sistema, usuario, mots, limites: lim || [0, 0], escala: 25 };
+}
+// Leitura do resultado do DELF: seção aprovada com 12,5/25, eliminatória abaixo de 5/25.
+const seloDelf = (nota, s) => `${perfilDoSujet(s).nome} · ${nota >= 12.5 ? "niveau atteint" : nota >= 5 ? "à renforcer (objectif 12,5/25)" : "sous la note éliminatoire (5/25)"}`;
+
 module.exports = {
   EIXOS, OUTILS, SUJETS, MODELES, TACHES, LIMITES_ESCRITA, DURACAO_ORAL, DURACAO_EPREUVE_MIN, NOMES_TACHE, TIPOS_DEVOIR, CRITERES,
   ehEscrita, semAcento, contarPalavras, semTravessaoObj, nclc, sujetsDaTache, modelosManuais, atelierDaTache, acharTema, ehManual,
-  temaEmQualquerTache, consigneDe, ehTendencia, pesoTema, modeloGuia, trameEmTexto, promptModelo, normalizarModelo, promptCorrecao, temaCurto
+  temaEmQualquerTache, consigneDe, ehTendencia, pesoTema, modeloGuia, trameEmTexto, promptModelo, normalizarModelo, promptCorrecao, temaCurto,
+  DELF, PERFIS, perfil, perfilDoSujet, nivelDelf, limitesDe, duracaoOralDe, nomeTacheDe, minutosEscritaDe, trameDe, seloDelf, tituloDelf
 };

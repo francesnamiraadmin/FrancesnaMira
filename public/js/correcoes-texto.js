@@ -469,6 +469,9 @@ function estrelas(nota) {
   return html + '</span>';
 }
 
+// Texto do aluno e do professor sempre escapado antes de entrar no HTML.
+const escTexto = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
 function renderProducaoDetalhe(p) {
   const tema = p.temaId || {};
   const concluida = p.status === 'corrigido' || p.status === 'devolvido';
@@ -476,11 +479,11 @@ function renderProducaoDetalhe(p) {
   let html = `
     <div class="feedback-header">
       <div>
-        <h1 style="font-family:'Playfair Display',serif; font-size:1.7rem; color:var(--cinza-800);">${tema.titulo || 'Tema'}</h1>
+        <h1 style="font-family:'Playfair Display',serif; font-size:1.7rem; color:var(--cinza-800);">${escTexto(tema.titulo || 'Tema')}</h1>
         <p style="color:var(--cinza-400); font-size:0.9rem; margin-top:4px;">Protocolo ${p.protocolo} · ${tema.exame} ${tema.nivel} · Enviado em ${new Date(p.dataEnvio).toLocaleDateString('pt-BR')}</p>
-        <span class="status-badge ${p.status}" style="margin-top:10px; display:inline-block;">${NOMES_STATUS[p.status] || p.status}</span>
+        <span class="status-badge ${p.status}" style="margin-top:10px; display:inline-block;">${escTexto(p.estadoCorrecao?.rotulo || NOMES_STATUS[p.status] || p.status)}</span>
       </div>
-      ${concluida && p.avaliacao?.notaTotal !== undefined ? `<div class="nota-grande"><div class="num">${p.avaliacao.notaTotal}/20</div><div class="nivel">Nível estimado: ${p.avaliacao.nivelEstimado || '—'}</div></div>` : ''}
+      ${concluida && p.avaliacao?.notaTotal !== undefined ? `<div class="nota-grande"><div class="num">${p.avaliacao.notaTotal}/${p.avaliacao.notaMaxima || 20}</div><div class="nivel">Nível estimado: ${escTexto(p.avaliacao.nivelEstimado || '—')}</div></div>` : ''}
     </div>
 
     <div class="arquivos-row">
@@ -490,7 +493,7 @@ function renderProducaoDetalhe(p) {
     </div>
 
     ${p.modalidade === 'oral' && p.arquivoOriginal?.nome ? `<div class="card"><h2>Sua gravação${p.duracaoSegundos ? ' — ' + formatarDuracao(p.duracaoSegundos) : ''}</h2><audio controls id="audioOriginalPlayer" style="width:100%;"></audio></div>` : ''}
-    ${p.textoDigitado ? `<div class="card"><h2>Seu texto enviado</h2><div class="comentario-geral-box" style="white-space:pre-wrap;">${p.textoDigitado}</div></div>` : ''}
+    ${p.textoDigitado ? `<div class="card" id="ctTextoSimples"><h2>Seu texto enviado</h2><div class="comentario-geral-box" style="white-space:pre-wrap;">${escTexto(p.textoDigitado)}</div></div>` : ''}
   `;
 
   if (concluida && p.avaliacao) {
@@ -498,17 +501,22 @@ function renderProducaoDetalhe(p) {
       <h2>Avaliação detalhada</h2>
       ${(p.avaliacao.criterios || []).map(c => `
         <div class="criterio-row">
-          <div class="criterio-head"><span class="criterio-nome">${c.nome}</span>${estrelas(c.nota)}</div>
-          ${c.comentario ? `<div class="comentario">${c.comentario}</div>` : ''}
+          <div class="criterio-head"><span class="criterio-nome">${escTexto(c.nome)}</span>${c.max ? `<b>${c.nota ?? '—'} / ${c.max}</b>` : estrelas(c.nota)}</div>
+          ${c.comentario ? `<div class="comentario">${escTexto(c.comentario)}</div>` : ''}
         </div>`).join('')}
       <h2 style="margin-top:24px;">Comentário geral</h2>
-      <div class="comentario-geral-box">${p.avaliacao.comentarioGeral || 'Sem comentário adicional.'}</div>
+      <div class="comentario-geral-box">${escTexto(p.avaliacao.comentarioGeral || 'Sem comentário adicional.')}</div>
+      ${p.avaliacao.pontosFortes?.length ? `<h2 style="margin-top:20px;">Pontos fortes</h2><ul>${p.avaliacao.pontosFortes.map(x => `<li>${escTexto(x)}</li>`).join('')}</ul>` : ''}
+      ${p.avaliacao.aMelhorar?.length ? `<h2 style="margin-top:20px;">Pontos a melhorar</h2><ul>${p.avaliacao.aMelhorar.map(x => `<li>${escTexto(x)}</li>`).join('')}</ul>` : ''}
+      ${p.avaliacao.recomendacoes?.length ? `<h2 style="margin-top:20px;">Recomendações de estudo</h2><ul>${p.avaliacao.recomendacoes.map(x => `<li>${escTexto(x)}</li>`).join('')}</ul>` : ''}
+      ${p.avaliacao.feedbackFinal ? `<h2 style="margin-top:20px;">Mensagem do professor</h2><div class="comentario-geral-box">${escTexto(p.avaliacao.feedbackFinal)}</div>` : ''}
     </div>
+    <div id="caAlunoBox" style="margin-bottom:22px;" hidden></div>
     <div style="text-align:center; margin-bottom:22px;">
       <button class="btn secundario" id="reenviarBtn"><img class="titulo-icone-inline pequeno" src="img/icones/repeat.svg" alt="">Reenviar novo texto para este tema (consome novo crédito)</button>
     </div>`;
   } else {
-    html += `<div class="card"><p style="color:var(--cinza-600);">Sua produção está com o status <strong>${NOMES_STATUS[p.status]}</strong>. Assim que o professor concluir a correção, o resultado aparecerá aqui.</p>
+    html += `<div class="card"><p style="color:var(--cinza-600);">Sua produção está com o status <strong>${escTexto(p.estadoCorrecao?.rotulo || NOMES_STATUS[p.status])}</strong>. Assim que o professor concluir a correção, o resultado aparecerá aqui.</p>
       ${p.prazoEstimado ? `<p style="margin-top:8px; color:var(--cinza-400); font-size:0.9rem;">Prazo estimado de devolução: ${new Date(p.prazoEstimado).toLocaleDateString('pt-BR')}</p>` : ''}
     </div>`;
   }
@@ -516,7 +524,7 @@ function renderProducaoDetalhe(p) {
   html += `<div class="card">
     <h2>Mensagens com o professor</h2>
     <div class="mensagens-lista" id="mensagensLista" style="flex-direction:column; display:flex;">
-      ${(p.mensagens || []).map(m => `<div class="mensagem-bubble ${m.autor}">${m.texto}<div class="data">${new Date(m.data).toLocaleString('pt-BR')}</div></div>`).join('') || '<p style="color:var(--cinza-400); font-size:0.9rem;">Nenhuma mensagem ainda.</p>'}
+      ${(p.mensagens || []).map(m => `<div class="mensagem-bubble ${m.autor}">${escTexto(m.texto)}<div class="data">${new Date(m.data).toLocaleString('pt-BR')}</div></div>`).join('') || '<p style="color:var(--cinza-400); font-size:0.9rem;">Nenhuma mensagem ainda.</p>'}
     </div>
     <form class="mensagens-form" id="mensagemForm">
       <input type="text" id="mensagemInput" placeholder="Escreva uma mensagem para o professor...">
@@ -525,6 +533,11 @@ function renderProducaoDetalhe(p) {
   </div>`;
 
   document.getElementById('producaoConteudo').innerHTML = html;
+  // marcações e comentários do professor sobre o texto (ou a transcrição e o áudio)
+  if (concluida && window.Correcao && Correcao.Aluno) Correcao.Aluno.montar(document.getElementById('caAlunoBox'), p).then(tem => {
+    const simples = document.getElementById('ctTextoSimples');
+    if (tem && simples) simples.hidden = true;
+  });
 
   document.querySelectorAll('[data-baixar]').forEach(btn => {
     btn.addEventListener('click', () => baixarArquivo(p._id, btn.dataset.baixar, btn.dataset.baixar === 'corrigido' ? p.arquivoCorrigido.nome : p.arquivoOriginal.nome));

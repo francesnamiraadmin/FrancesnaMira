@@ -1,0 +1,707 @@
+{
+ "slug": "delf-b1-1",
+ "titulo": "Simulado DELF B1 nº 1",
+ "curso": "DELF",
+ "nivel": "B1",
+ "formato": "DELF B1",
+ "descricao": "Temas de sociedade próximos do cotidiano: trabalho, estudos, meio ambiente, consumo e vida em comunidade.",
+ "ordem": [
+  "co",
+  "ce",
+  "ee",
+  "eo"
+ ],
+ "provas": {
+  "co": {
+   "nome": "Compréhension de l'oral",
+   "tempoSeg": 1500,
+   "exercicios": [
+    {
+     "id": "co1",
+     "titulo": "Une conversation entre collègues",
+     "consigne": "Vous allez entendre deux fois une conversation. Vous avez d'abord un peu de temps pour lire les questions. Écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-b1-1/co01.mp3",
+     "transcricao": "Inès : Karim, tu as un moment ? Je voulais te parler du déménagement du service.\nKarim : Oui, bien sûr. Alors, c'est confirmé, on part à la Défense ?\nInès : Oui, en janvier. Les nouveaux bureaux sont plus grands et plus lumineux, mais pour moi, le trajet va être beaucoup plus long : presque une heure au lieu de vingt minutes.\nKarim : Ah oui, toi tu habites à Vincennes… Tu as pensé à demander du télétravail ? La direction a dit qu'on pourrait faire deux jours par semaine à la maison.\nInès : Justement, je voulais savoir comment tu as fait ta demande l'année dernière.\nKarim : C'est simple : tu remplis un formulaire sur l'intranet et tu en parles avec ta responsable. Le plus important, c'est de montrer que tu peux travailler en autonomie, avec des objectifs clairs.\nInès : D'accord. Et tu ne te sens pas trop seul chez toi ?\nKarim : Au début, un peu. Maintenant, je viens au bureau le lundi et le jeudi, pour les réunions d'équipe. C'est un bon équilibre."
+    },
+    {
+     "id": "co2",
+     "titulo": "Une chronique sur le monde du travail",
+     "consigne": "Vous allez entendre deux fois une chronique radiophonique. Lisez d'abord les questions, écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-b1-1/co02.mp3",
+     "transcricao": "– Bonjour à tous ! Aujourd'hui, parlons de la semaine de quatre jours. De plus en plus d'entreprises en France la testent : on travaille quatre jours, mais on garde le même salaire.\n– Dans une entreprise de logiciels à Nantes, l'expérience dure depuis un an. Résultat : les salariés sont moins fatigués et presque personne n'a quitté l'entreprise. Le directeur explique que les réunions sont plus courtes et mieux préparées.\n– Mais attention, ce modèle ne convient pas à tout le monde. Dans les hôpitaux ou dans les magasins, il faut quelqu'un sur place tous les jours, et il est difficile de réorganiser les plannings.\n– Pour les spécialistes, la clé du succès, c'est le dialogue : la semaine de quatre jours fonctionne quand elle est construite avec les salariés, et pas imposée par la direction."
+    },
+    {
+     "id": "co3",
+     "titulo": "Un reportage sur l'alimentation",
+     "consigne": "Vous allez entendre deux fois un reportage radiophonique. Lisez d'abord les questions, écoutez le document puis répondez.",
+     "audio": "audio/simulados/delf-b1-1/co03.mp3",
+     "transcricao": "La journaliste : Ici, à la sortie de Lille, le marché paysan du samedi attire chaque semaine près de deux mille personnes. Les producteurs vendent directement leurs fruits, leurs légumes et leurs fromages, sans intermédiaire.\nBertrand, agriculteur : Pour nous, c'est plus juste : on fixe nous-mêmes nos prix et on gagne mieux notre vie. Et puis, on parle avec les clients, on explique comment on travaille. Ça crée de la confiance.\nLa journaliste : Les clients, eux, apprécient la fraîcheur des produits. Mais certains trouvent les prix un peu élevés.\nMme Roux, cliente : C'est vrai que c'est parfois plus cher qu'au supermarché. Mais les tomates ont du goût, et je sais d'où elles viennent. Alors je préfère acheter moins, mais mieux.\nLa journaliste : Selon une enquête récente, un Français sur trois achète désormais au moins une fois par mois en circuit court. Une tendance qui a beaucoup augmenté depuis cinq ans."
+    }
+   ],
+   "questoes": [
+    {
+     "n": 1,
+     "exercicio": "co1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "De quoi parlent les deux collègues ?",
+     "alternativas": [
+      "Du déménagement de leur service.",
+      "D'un nouveau collègue.",
+      "De leurs vacances d'hiver."
+     ],
+     "correta": 0,
+     "explicacao": "« Je voulais te parler du déménagement du service ».",
+     "audio": "audio/simulados/delf-b1-1/co01.mp3"
+    },
+    {
+     "n": 2,
+     "exercicio": "co1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Quel est l'avantage des nouveaux bureaux ?",
+     "alternativas": [
+      "Ils ont une cafétéria.",
+      "Ils sont plus près de chez Inès.",
+      "Ils sont plus grands et plus lumineux."
+     ],
+     "correta": 2,
+     "explicacao": "« Les nouveaux bureaux sont plus grands et plus lumineux ».",
+     "audio": "audio/simulados/delf-b1-1/co01.mp3"
+    },
+    {
+     "n": 3,
+     "exercicio": "co1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Pour Inès, le déménagement pose un problème de…",
+     "alternativas": [
+      "temps de trajet.",
+      "horaires de travail.",
+      "salaire."
+     ],
+     "correta": 0,
+     "explicacao": "« Presque une heure au lieu de vingt minutes ».",
+     "audio": "audio/simulados/delf-b1-1/co01.mp3"
+    },
+    {
+     "n": 4,
+     "exercicio": "co1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Combien de jours de télétravail sont possibles ?",
+     "alternativas": [
+      "Deux jours par semaine.",
+      "Un jour par semaine.",
+      "Tous les jours."
+     ],
+     "correta": 0,
+     "explicacao": "« Deux jours par semaine à la maison ».",
+     "audio": "audio/simulados/delf-b1-1/co01.mp3"
+    },
+    {
+     "n": 5,
+     "exercicio": "co1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Selon Karim, pour obtenir le télétravail, il faut surtout…",
+     "alternativas": [
+      "habiter loin du bureau.",
+      "avoir de l'ancienneté.",
+      "montrer qu'on peut travailler en autonomie."
+     ],
+     "correta": 2,
+     "explicacao": "« Le plus important, c'est de montrer que tu peux travailler en autonomie ».",
+     "audio": "audio/simulados/delf-b1-1/co01.mp3"
+    },
+    {
+     "n": 6,
+     "exercicio": "co1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Pourquoi Karim va-t-il au bureau le lundi et le jeudi ?",
+     "alternativas": [
+      "Parce qu'il n'a pas internet chez lui.",
+      "Pour voir sa responsable en privé.",
+      "Pour les réunions d'équipe."
+     ],
+     "correta": 2,
+     "explicacao": "« Je viens au bureau le lundi et le jeudi, pour les réunions d'équipe ».",
+     "audio": "audio/simulados/delf-b1-1/co01.mp3"
+    },
+    {
+     "n": 7,
+     "exercicio": "co2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Dans la semaine de quatre jours présentée, le salaire…",
+     "alternativas": [
+      "reste le même.",
+      "augmente.",
+      "diminue un peu."
+     ],
+     "correta": 0,
+     "explicacao": "« On travaille quatre jours, mais on garde le même salaire ».",
+     "audio": "audio/simulados/delf-b1-1/co02.mp3"
+    },
+    {
+     "n": 8,
+     "exercicio": "co2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Depuis combien de temps l'entreprise de Nantes fait-elle l'expérience ?",
+     "alternativas": [
+      "Un an.",
+      "Quatre mois.",
+      "Deux ans."
+     ],
+     "correta": 0,
+     "explicacao": "« L'expérience dure depuis un an ».",
+     "audio": "audio/simulados/delf-b1-1/co02.mp3"
+    },
+    {
+     "n": 9,
+     "exercicio": "co2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Quel résultat est observé chez les salariés ?",
+     "alternativas": [
+      "Ils sont moins fatigués.",
+      "Ils travaillent le samedi.",
+      "Ils gagnent plus d'argent."
+     ],
+     "correta": 0,
+     "explicacao": "« Les salariés sont moins fatigués ».",
+     "audio": "audio/simulados/delf-b1-1/co02.mp3"
+    },
+    {
+     "n": 10,
+     "exercicio": "co2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Selon le directeur, les réunions sont…",
+     "alternativas": [
+      "supprimées.",
+      "organisées le vendredi.",
+      "plus courtes et mieux préparées."
+     ],
+     "correta": 2,
+     "explicacao": "« Les réunions sont plus courtes et mieux préparées ».",
+     "audio": "audio/simulados/delf-b1-1/co02.mp3"
+    },
+    {
+     "n": 11,
+     "exercicio": "co2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Pourquoi ce modèle est-il difficile dans les magasins ?",
+     "alternativas": [
+      "Il faut quelqu'un sur place tous les jours.",
+      "Les clients ne sont pas d'accord.",
+      "Les salaires sont trop bas."
+     ],
+     "correta": 0,
+     "explicacao": "« Il faut quelqu'un sur place tous les jours ».",
+     "audio": "audio/simulados/delf-b1-1/co02.mp3"
+    },
+    {
+     "n": 12,
+     "exercicio": "co2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Pour les spécialistes, la semaine de quatre jours réussit quand…",
+     "alternativas": [
+      "elle est construite avec les salariés.",
+      "elle concerne seulement les cadres.",
+      "elle est imposée par la direction."
+     ],
+     "correta": 0,
+     "explicacao": "« Quand elle est construite avec les salariés, et pas imposée par la direction ».",
+     "audio": "audio/simulados/delf-b1-1/co02.mp3"
+    },
+    {
+     "n": 13,
+     "exercicio": "co3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Combien de personnes viennent au marché chaque samedi ?",
+     "alternativas": [
+      "Près de vingt mille.",
+      "Près de deux mille.",
+      "Près de deux cents."
+     ],
+     "correta": 1,
+     "explicacao": "« Près de deux mille personnes ».",
+     "audio": "audio/simulados/delf-b1-1/co03.mp3"
+    },
+    {
+     "n": 14,
+     "exercicio": "co3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Sur ce marché, les producteurs vendent…",
+     "alternativas": [
+      "seulement des produits bio.",
+      "à des supermarchés.",
+      "directement aux clients."
+     ],
+     "correta": 2,
+     "explicacao": "« Les producteurs vendent directement… sans intermédiaire ».",
+     "audio": "audio/simulados/delf-b1-1/co03.mp3"
+    },
+    {
+     "n": 15,
+     "exercicio": "co3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Pour l'agriculteur, un avantage de la vente directe est de…",
+     "alternativas": [
+      "vendre à l'étranger.",
+      "fixer lui-même ses prix.",
+      "travailler moins."
+     ],
+     "correta": 1,
+     "explicacao": "« On fixe nous-mêmes nos prix et on gagne mieux notre vie ».",
+     "audio": "audio/simulados/delf-b1-1/co03.mp3"
+    },
+    {
+     "n": 16,
+     "exercicio": "co3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Selon Bertrand, parler avec les clients permet de…",
+     "alternativas": [
+      "créer de la confiance.",
+      "trouver de nouveaux producteurs.",
+      "vendre plus cher."
+     ],
+     "correta": 0,
+     "explicacao": "« Ça crée de la confiance ».",
+     "audio": "audio/simulados/delf-b1-1/co03.mp3"
+    },
+    {
+     "n": 17,
+     "exercicio": "co3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Que pense Mme Roux des prix ?",
+     "alternativas": [
+      "Ils sont moins chers qu'au supermarché.",
+      "Ils sont parfois plus chers, mais elle accepte.",
+      "Ils sont trop élevés : elle ne revient plus."
+     ],
+     "correta": 1,
+     "explicacao": "« C'est parfois plus cher… je préfère acheter moins, mais mieux ».",
+     "audio": "audio/simulados/delf-b1-1/co03.mp3"
+    },
+    {
+     "n": 18,
+     "exercicio": "co3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Selon l'enquête, combien de Français achètent en circuit court au moins une fois par mois ?",
+     "alternativas": [
+      "Un sur cinq.",
+      "Un sur trois.",
+      "Un sur deux."
+     ],
+     "correta": 1,
+     "explicacao": "« Un Français sur trois ».",
+     "audio": "audio/simulados/delf-b1-1/co03.mp3"
+    },
+    {
+     "n": 19,
+     "exercicio": "co3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Depuis cinq ans, cette tendance…",
+     "alternativas": [
+      "est restée stable.",
+      "a beaucoup augmenté.",
+      "a diminué."
+     ],
+     "correta": 1,
+     "explicacao": "« Une tendance qui a beaucoup augmenté depuis cinq ans ».",
+     "audio": "audio/simulados/delf-b1-1/co03.mp3"
+    }
+   ]
+  },
+  "ce": {
+   "nome": "Compréhension des écrits",
+   "tempoSeg": 2700,
+   "exercicios": [
+    {
+     "id": "ce1",
+     "titulo": "Choisir une formation",
+     "consigne": "Vous voulez suivre une formation en ligne pour améliorer votre anglais professionnel. Vous travaillez toute la journée et vous ne pouvez étudier que le soir. Votre budget est de 300 € maximum et vous voulez un certificat à la fin. Lisez les quatre offres puis répondez aux questions.",
+     "documento": {
+      "titulo": "Formations d'anglais professionnel en ligne",
+      "texto": "1 — Speak & Work : cours individuels en visioconférence avec un professeur, du lundi au vendredi entre 9 h et 17 h. 45 heures. 280 €. Attestation de suivi.\n\n2 — English Evening : cours en petits groupes de 6 personnes, le mardi et le jeudi de 19 h à 21 h. 40 heures. 290 €. Certificat reconnu par les entreprises à la fin de la formation.\n\n3 — BusinessTalk Premium : programme complet avec coach personnel, horaires libres, 60 heures. 650 €. Certificat international.\n\n4 — Easy English App : application à utiliser quand on veut, exercices courts, sans professeur. 49 € par an. Pas de certificat."
+     }
+    },
+    {
+     "id": "ce2",
+     "titulo": "Un article informatif",
+     "consigne": "Lisez l'article puis répondez aux questions.",
+     "documento": {
+      "titulo": "Les « repair cafés » donnent une seconde vie aux objets",
+      "texto": "Un grille-pain qui ne chauffe plus, une lampe cassée, un pantalon déchiré… Avant, on les jetait. Aujourd'hui, de plus en plus de Français les apportent dans un « repair café ». Le principe : une fois par mois, des bénévoles bricoleurs accueillent gratuitement les habitants dans une salle de quartier pour réparer ensemble leurs objets.\n\nLe premier repair café est né à Amsterdam en 2009. En France, on en compte aujourd'hui plus de 400. « Ici, on ne répare pas à la place des gens, on répare avec eux », explique Jacques, 67 ans, ancien électricien et bénévole à Grenoble. « Les visiteurs apprennent des gestes simples et repartent fiers. »\n\nPour les organisateurs, l'objectif n'est pas seulement d'économiser de l'argent. Il s'agit aussi de réduire les déchets et de créer du lien entre les générations : les jeunes apprennent des plus âgés, et les plus âgés découvrent les nouvelles technologies grâce aux jeunes.\n\nSeule limite : certains objets récents sont fabriqués pour ne pas être réparés. Les bénévoles demandent donc aux fabricants de vendre des pièces détachées plus longtemps."
+     }
+    },
+    {
+     "id": "ce3",
+     "titulo": "Un texte d'opinion",
+     "consigne": "Lisez ce texte publié dans la rubrique « Courrier des lecteurs » d'un magazine puis répondez aux questions.",
+     "documento": {
+      "titulo": "Courrier des lecteurs — « Rendons les cours de récréation aux enfants »",
+      "texto": "Je suis enseignante dans une école primaire de Toulouse depuis quinze ans, et je constate un changement : nos élèves jouent de moins en moins dehors. Pendant la récréation, beaucoup restent assis et parlent de jeux vidéo. Le soir, ils rentrent en voiture et passent du temps devant les écrans.\n\nPourtant, jouer dehors n'est pas une perte de temps. Courir, grimper, inventer des jeux à plusieurs : tout cela développe la confiance en soi, la coopération et même la concentration en classe. Depuis que notre école a transformé sa cour en espace végétalisé, avec des arbres, des cabanes et un petit potager, les disputes ont diminué et les enfants reviennent en classe plus calmes.\n\nCertains parents s'inquiètent : les enfants se salissent, ils peuvent se blesser. Je comprends ces peurs, mais quelques genoux écorchés valent mieux qu'une enfance passée à l'intérieur. Je demande donc aux mairies de financer la transformation des cours d'école, et aux familles d'accepter que leurs enfants rentrent un peu sales, mais heureux.\n\nCatherine M., Toulouse"
+     }
+    }
+   ],
+   "questoes": [
+    {
+     "n": 20,
+     "exercicio": "ce1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Quelle formation correspond à toutes vos conditions ?",
+     "alternativas": [
+      "BusinessTalk Premium (3).",
+      "English Evening (2).",
+      "Speak & Work (1)."
+     ],
+     "correta": 1,
+     "explicacao": "Noturno, até 300 € e com certificado: só a 2."
+    },
+    {
+     "n": 21,
+     "exercicio": "ce1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Pourquoi Speak & Work ne vous convient-il pas ?",
+     "alternativas": [
+      "Elle est trop chère.",
+      "Les cours ont lieu pendant la journée.",
+      "Il n'y a pas de professeur."
+     ],
+     "correta": 1,
+     "explicacao": "« Entre 9 h et 17 h » — você trabalha durante o dia."
+    },
+    {
+     "n": 22,
+     "exercicio": "ce1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Quel est le problème de BusinessTalk Premium ?",
+     "alternativas": [
+      "L'absence de certificat.",
+      "Son prix.",
+      "Ses horaires."
+     ],
+     "correta": 1,
+     "explicacao": "650 € ultrapassa o orçamento de 300 €."
+    },
+    {
+     "n": 23,
+     "exercicio": "ce1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Easy English App ne convient pas parce qu'…",
+     "alternativas": [
+      "elle est trop chère.",
+      "elle a des horaires fixes.",
+      "elle ne donne pas de certificat."
+     ],
+     "correta": 2,
+     "explicacao": "« Pas de certificat »."
+    },
+    {
+     "n": 24,
+     "exercicio": "ce1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Combien de personnes y a-t-il par groupe dans English Evening ?",
+     "alternativas": [
+      "Deux.",
+      "Six.",
+      "Quarante."
+     ],
+     "correta": 1,
+     "explicacao": "« En petits groupes de 6 personnes »."
+    },
+    {
+     "n": 25,
+     "exercicio": "ce1",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Quelle formation n'a pas de professeur ?",
+     "alternativas": [
+      "Easy English App.",
+      "Speak & Work.",
+      "English Evening."
+     ],
+     "correta": 0,
+     "explicacao": "« Sans professeur »."
+    },
+    {
+     "n": 26,
+     "exercicio": "ce2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Dans un repair café, les habitants…",
+     "alternativas": [
+      "réparent leurs objets avec des bénévoles.",
+      "achètent des objets d'occasion.",
+      "laissent leurs objets à un réparateur payant."
+     ],
+     "correta": 0,
+     "explicacao": "« Des bénévoles… accueillent gratuitement les habitants… pour réparer ensemble »."
+    },
+    {
+     "n": 27,
+     "exercicio": "ce2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Les repair cafés ont lieu…",
+     "alternativas": [
+      "tous les jours.",
+      "une fois par an.",
+      "une fois par mois."
+     ],
+     "correta": 2,
+     "explicacao": "« Une fois par mois »."
+    },
+    {
+     "n": 28,
+     "exercicio": "ce2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Où le premier repair café a-t-il été créé ?",
+     "alternativas": [
+      "À Paris.",
+      "À Amsterdam.",
+      "À Grenoble."
+     ],
+     "correta": 1,
+     "explicacao": "« Le premier repair café est né à Amsterdam en 2009 »."
+    },
+    {
+     "n": 29,
+     "exercicio": "ce2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Selon Jacques, les bénévoles…",
+     "alternativas": [
+      "réparent à la place des visiteurs.",
+      "vendent des pièces détachées.",
+      "réparent avec les visiteurs."
+     ],
+     "correta": 2,
+     "explicacao": "« On ne répare pas à la place des gens, on répare avec eux »."
+    },
+    {
+     "n": 30,
+     "exercicio": "ce2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Quel est un objectif des repair cafés, en plus d'économiser de l'argent ?",
+     "alternativas": [
+      "Former des électriciens.",
+      "Réduire les déchets.",
+      "Vendre des produits neufs."
+     ],
+     "correta": 1,
+     "explicacao": "« Il s'agit aussi de réduire les déchets et de créer du lien »."
+    },
+    {
+     "n": 31,
+     "exercicio": "ce2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Que permettent les repair cafés entre les générations ?",
+     "alternativas": [
+      "Des emplois pour les jeunes.",
+      "Des cours d'informatique payants.",
+      "Un échange de connaissances."
+     ],
+     "correta": 2,
+     "explicacao": "« Les jeunes apprennent des plus âgés, et les plus âgés découvrent les nouvelles technologies »."
+    },
+    {
+     "n": 32,
+     "exercicio": "ce2",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce que les bénévoles demandent aux fabricants ?",
+     "alternativas": [
+      "De financer les repair cafés.",
+      "De fabriquer moins d'objets.",
+      "De vendre des pièces détachées plus longtemps."
+     ],
+     "correta": 2,
+     "explicacao": "« Vendre des pièces détachées plus longtemps »."
+    },
+    {
+     "n": 33,
+     "exercicio": "ce3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Qui a écrit ce texte ?",
+     "alternativas": [
+      "Une institutrice.",
+      "Une mère d'élève.",
+      "Une journaliste."
+     ],
+     "correta": 0,
+     "explicacao": "« Je suis enseignante dans une école primaire »."
+    },
+    {
+     "n": 34,
+     "exercicio": "ce3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Quel changement l'auteure observe-t-elle ?",
+     "alternativas": [
+      "Les élèves sont plus sportifs.",
+      "Les élèves jouent moins dehors.",
+      "Les élèves lisent davantage."
+     ],
+     "correta": 1,
+     "explicacao": "« Nos élèves jouent de moins en moins dehors »."
+    },
+    {
+     "n": 35,
+     "exercicio": "ce3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Selon elle, jouer dehors développe…",
+     "alternativas": [
+      "la coopération et la concentration.",
+      "la compétition entre les élèves.",
+      "le goût pour les jeux vidéo."
+     ],
+     "correta": 0,
+     "explicacao": "« Développe la confiance en soi, la coopération et même la concentration »."
+    },
+    {
+     "n": 36,
+     "exercicio": "ce3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Qu'est-ce qui a changé dans son école ?",
+     "alternativas": [
+      "Les jeux vidéo sont interdits.",
+      "La cour est devenue un espace avec des arbres et un potager.",
+      "Les récréations sont plus courtes."
+     ],
+     "correta": 1,
+     "explicacao": "« Notre école a transformé sa cour en espace végétalisé, avec des arbres, des cabanes et un petit potager »."
+    },
+    {
+     "n": 37,
+     "exercicio": "ce3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Quelle conséquence de ce changement est mentionnée ?",
+     "alternativas": [
+      "Les enfants se blessent plus souvent.",
+      "Les parents sont mécontents.",
+      "Il y a moins de disputes."
+     ],
+     "correta": 2,
+     "explicacao": "« Les disputes ont diminué et les enfants reviennent en classe plus calmes »."
+    },
+    {
+     "n": 38,
+     "exercicio": "ce3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Quelle est l'inquiétude de certains parents ?",
+     "alternativas": [
+      "Que l'école coûte trop cher.",
+      "Que les enfants travaillent moins.",
+      "Que les enfants se salissent ou se blessent."
+     ],
+     "correta": 2,
+     "explicacao": "« Les enfants se salissent, ils peuvent se blesser »."
+    },
+    {
+     "n": 39,
+     "exercicio": "ce3",
+     "nivel": "B1",
+     "pontos": 1,
+     "pergunta": "Que demande l'auteure aux mairies ?",
+     "alternativas": [
+      "D'interdire les écrans aux enfants.",
+      "D'allonger la récréation.",
+      "De financer la transformation des cours d'école."
+     ],
+     "correta": 2,
+     "explicacao": "« Je demande donc aux mairies de financer la transformation des cours d'école »."
+    }
+   ]
+  },
+  "ee": {
+   "nome": "Production écrite",
+   "tempoSeg": 2700,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Production écrite — Essai / article",
+     "min": 160,
+     "peso": 25,
+     "consigne": "Dans votre ville, la mairie veut interdire les voitures dans le centre-ville le week-end. Vous écrivez un article pour le journal local : vous présentez ce projet, vous donnez votre opinion avec des exemples précis et vous proposez une solution pour les personnes qui ont besoin de leur voiture. (160 mots minimum)"
+    }
+   ]
+  },
+  "eo": {
+   "nome": "Production orale",
+   "tempoSeg": 1500,
+   "tarefas": [
+    {
+     "id": "t1",
+     "titulo": "Partie 1 — Entretien dirigé",
+     "duracaoSeg": 150,
+     "preparacaoSeg": 0,
+     "peso": 6,
+     "consigne": "Vous parlez de vous, de vos activités, de vos centres d'intérêt, de votre passé, de votre présent et de vos projets.",
+     "perguntasExaminador": [
+      "Bonjour. Présentez-vous, s'il vous plaît.",
+      "Pourquoi apprenez-vous le français ?",
+      "Racontez-moi un voyage qui vous a marqué.",
+      "Quels sont vos projets pour l'année prochaine ?"
+     ],
+     "fichaExaminador": "Entretien sans préparation (2 à 3 minutes). Le candidat doit parler de lui en utilisant passé, présent et futur."
+    },
+    {
+     "id": "t2",
+     "titulo": "Partie 2 — Exercice en interaction",
+     "duracaoSeg": 210,
+     "preparacaoSeg": 0,
+     "peso": 8,
+     "consigne": "Vous avez prêté votre appartement à un ami français pendant vos vacances. À votre retour, il y a des problèmes : la plante est morte, la vaisselle n'est pas faite et une fenêtre est cassée. Vous en parlez avec votre ami : vous exprimez votre mécontentement et vous trouvez ensemble une solution. L'examinateur joue le rôle de l'ami.",
+     "perguntasExaminador": [
+      "Salut ! Alors, tu as passé de bonnes vacances ? Tout va bien à l'appartement ?",
+      "Ah… je suis désolé. Mais la fenêtre, elle était déjà fragile, non ?",
+      "D'accord, qu'est-ce que tu proposes ?"
+     ],
+     "fichaExaminador": "L'ami se défend d'abord (« la fenêtre était déjà abîmée », « j'ai dû partir vite »), puis accepte de payer une partie. Le candidat doit exprimer son mécontentement poliment, argumenter et négocier une solution."
+    },
+    {
+     "id": "t3",
+     "titulo": "Partie 3 — Expression d'un point de vue",
+     "duracaoSeg": 360,
+     "preparacaoSeg": 600,
+     "peso": 11,
+     "consigne": "Lisez le document suivant. Dégagez le thème soulevé par ce document, puis présentez votre opinion de manière argumentée. Document : « Selon une étude, les adolescents passent en moyenne 4 heures par jour sur leur téléphone. Plusieurs collèges ont décidé d'interdire les portables pendant toute la journée, même à la récréation. » L'examinateur pourra vous poser quelques questions.",
+     "perguntasExaminador": [
+      "Je vous écoute. Quel est le thème de ce document et qu'en pensez-vous ?",
+      "Et pour les parents, le téléphone n'est-il pas utile pour joindre leurs enfants ?",
+      "Dans votre pays, quelle est la situation ?"
+     ],
+     "fichaExaminador": "Monologue de 3 minutes environ puis échange. Attendu : dégager le thème (place du téléphone dans la vie des adolescents / interdiction à l'école), donner une opinion claire avec 2 ou 3 arguments et exemples, conclure."
+    }
+   ]
+  }
+ }
+}

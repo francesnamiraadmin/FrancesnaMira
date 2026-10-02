@@ -673,6 +673,12 @@ function renderPainelEquipe(dados) {
   document.getElementById('papelEquipeLabel').textContent = admin ? 'administrador(a)' : 'professor(a)';
   document.querySelectorAll('#painelEquipeBox .so-admin').forEach(el => { el.style.display = admin ? '' : 'none'; });
   if (admin) atualizarBadgeSeguranca();
+  // Volta das páginas da equipe (barra « Painel da equipe »): abre o painel e rola até ele.
+  if (location.hash === '#painel-equipe') {
+    const box = document.getElementById('painelEquipeBox');
+    box.open = true;
+    setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+  }
 }
 
 // Quantidade de eventos de segurança graves (alta/crítica) nas últimas 24h.
