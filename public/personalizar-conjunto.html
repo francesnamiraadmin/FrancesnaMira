@@ -88,7 +88,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 
 <section class="intro">
   <h1><img class="titulo-icone" src="img/icones/personalizar.svg" alt="">Personalize seu Conjunto</h1>
-  <p>Escolha níveis, categorias, quantidade de questões e tempo — o sistema monta um conjunto sob medida pra você.</p>
+  <p>Escolha os níveis da prova (A1, A2, B1, B2…), a quantidade de questões e o tempo — o sistema monta um conjunto sob medida pra você.</p>
 </section>
 
 <div class="pagina-wrap">
@@ -97,10 +97,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
       <label class="grupo-label">Níveis</label>
       <div class="chip-grid" id="chipNiveis"></div>
     </div>
-    <div>
-      <label class="grupo-label">Categorias</label>
-      <div class="chip-grid" id="chipMaterias"></div>
-    </div>
+    <div id="chipMaterias" hidden></div>
     <div>
       <label class="grupo-label">Quantidade de questões</label>
       <div class="quantidade-row" id="chipQuantidade"></div>

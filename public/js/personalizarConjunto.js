@@ -22,6 +22,9 @@ function possuiCursoPlataforma(curso) {
 }
 
 function niveisPermitidos() {
+  // curso de prova (TCF, DELF…): todos os níveis da prova, A1 a C2
+  const curso = window.CursoContexto && window.CursoContexto.curso;
+  if (CURSOS_ELEGIVEIS_AVANCADO_EXAME.includes(curso) && possuiCursoPlataforma(curso)) return NIVEIS_FLUENCIA.concat(NIVEIS_AVANCADOS);
   const permitidos = NIVEIS_FLUENCIA.filter(possuiCursoPlataforma);
   const comboCompleto = NIVEIS_FLUENCIA.every(possuiCursoPlataforma);
   const viaExame = CURSOS_ELEGIVEIS_AVANCADO_EXAME.some(possuiCursoPlataforma);
@@ -179,7 +182,6 @@ function initFormularioConjunto() {
     erroEl.classList.remove('show');
 
     if (!filtroForm.niveis.size) return mostrarErroForm('Selecione ao menos um nível.');
-    if (!filtroForm.materias.size) return mostrarErroForm('Selecione ao menos uma categoria.');
 
     const tempoModo = document.querySelector('input[name="tempoModo"]:checked').value;
     const minutos = Number(document.getElementById('tempoMinutos').value);
@@ -189,7 +191,8 @@ function initFormularioConjunto() {
       const res = await fetch('/api/questoes/conjuntos/personalizado', {
         method: 'POST', headers: authHeaders(true),
         body: JSON.stringify({
-          niveis: [...filtroForm.niveis], materias: [...filtroForm.materias], quantidade: filtroForm.quantidade,
+          // sem divisão por conteúdo: o conjunto é montado só pelos níveis escolhidos
+          niveis: [...filtroForm.niveis], materias: TODAS_MATERIAS, quantidade: filtroForm.quantidade,
           tempoLimiteSegundos: tempoModo === 'com' ? minutos * 60 : null,
           courseType: window.CursoContexto ? window.CursoContexto.curso : undefined
         })

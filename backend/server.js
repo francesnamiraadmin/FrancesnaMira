@@ -71,11 +71,14 @@ app.use("/api/pagamento-matricula", require("./routes/pagamentoMatricula"));
 app.use("/api/admin-matricula", require("./routes/matriculaAdmin"));
 app.use("/api/aulas", require("./routes/aulas"));
 app.use("/api/admin-aulas", require("./routes/adminAulas"));
+// Registro de Aulas (Sistema de Aulas) antes da rota genérica /:modalidade/:periodo dos horários.
+app.use("/api/horarios/admin/registro", require("./routes/registroAulas"));
 app.use("/api/horarios", require("./routes/horarios"));
 app.use("/api/reclamacoes", require("./routes/reclamacoes"));
 app.use("/api/depoimentos", require("./routes/depoimentos"));
 app.use("/api/deveres", require("./routes/deveres"));
 app.use("/api/questoes", require("./routes/questoes"));
+app.use("/api/meu-espaco", require("./routes/meuEspaco"));
 app.use("/api/erros-questoes", require("./routes/errosQuestoes"));
 app.use("/api/estudos", require("./routes/estudos"));
 app.use("/api/flashcards", require("./routes/flashcards"));

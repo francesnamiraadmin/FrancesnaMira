@@ -1585,7 +1585,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez louer une salle pour fêter un anniversaire. Vous posez des questions au gérant de la salle pour obtenir des informations (capacité, prix, horaires, équipements, conditions, etc.).",
      "perguntasExaminador": [

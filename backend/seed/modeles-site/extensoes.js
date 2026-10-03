@@ -121,11 +121,50 @@ function abrirDestino(d) {
 }
 window.addEventListener('hashchange', function () { if (B) abrirDestino(location.hash.replace(/^#/, '')); });
 
+// « Vos sujets »: os temas liberados para o aluno, por tâche (o servidor já filtra a lista dele).
+function carregarMeusSujets(taches) {
+  var alvo = $('meus-sujets-lista'); if (!alvo) return;
+  var res = {}, faltam = taches.length;
+  var desenhar = function () {
+    if (--faltam > 0) return;
+    var total = taches.reduce(function (n, t) { return n + (res[t] || []).length; }, 0);
+    if (!total) { alvo.innerHTML = '<p class="aviso">Aucun sujet ouvert pour vous pour le moment.</p>'; return; }
+    alvo.innerHTML = taches.filter(function (t) { return (res[t] || []).length; }).map(function (t) {
+      return '<div class="grupo-eixo meus-sujets-grupo"><h3><i></i>' + esc(TACHES[t].nom + ' · ' + TACHES[t].sous) + ' <small>(' + res[t].length + ')</small></h3><div class="lista-modelos">' +
+        res[t].map(function (x) {
+          var e = eixo(x.e);
+          return '<button class="item-modelo" type="button" style="--cor:' + e.cor + '" data-meu-t="' + t + '" data-meu-id="' + esc(x.id) + '"><b>' + esc(String(x.t || '').slice(0, 150)) + '</b>' +
+            '<small>' + (e.icone || '') + ' ' + esc(e.nome) + '</small></button>';
+        }).join('') + '</div></div>';
+    }).join('');
+    alvo.querySelectorAll('[data-meu-id]').forEach(function (b) { b.addEventListener('click', function () { abrirModelo(b.dataset.meuT, b.dataset.meuId); }); });
+  };
+  taches.forEach(function (t) {
+    // modelos escritos à mão (já filtrados no banco) + sujets de exame liberados
+    var manuais = lista(t).map(function (m) { return { id: m.id, e: m.e, t: m.titre || m.c || '' }; });
+    var juntar = function (l) { res[t] = manuais.concat((l || []).filter(function (x) { return !manuais.some(function (m) { return m.id === x.id; }); })); desenhar(); };
+    google.script.run.withSuccessHandler(juntar).withFailureHandler(function () { juntar([]); }).obterListaTache(EMAIL, t);
+  });
+}
+
 // Production écrite / orale: além das tâches do TCF, os temas e exercícios do curso, por eixo.
 var abrirHubDoScript = abrirHub;
 abrirHub = function (modo) {
   abrirHubDoScript(modo);
   var tela = $('tela-hub');
+  // A tela dos temas por eixo temático é só do administrador; o aluno vê os temas que o
+  // administrador liberou para ele no Sistema de Correção (por padrão, 20 temas).
+  if (!B.admin) {
+    var tit = [].filter.call(tela.querySelectorAll('h2.secao-titulo'), function (h) { return /axe thématique/i.test(h.textContent); })[0];
+    var grade = tela.querySelector('.grade-eixos');
+    var meus = document.createElement('div');
+    meus.id = 'hub-meus-sujets';
+    meus.innerHTML = '<h2 class="secao-titulo">Vos sujets</h2><p class="aviso" style="margin-top:0">Les sujets choisis pour vous par votre équipe pédagogique.</p><div id="meus-sujets-lista"><p class="aviso">Chargement…</p></div>';
+    if (tit) tit.parentNode.insertBefore(meus, tit); else tela.appendChild(meus);
+    if (tit) tit.remove();
+    if (grade) grade.remove();
+    carregarMeusSujets(modo === 'oral' ? TS() : ETS());
+  }
   var bloco = document.createElement('div');
   bloco.id = 'hub-curso';
   tela.appendChild(bloco);
@@ -135,6 +174,7 @@ abrirHub = function (modo) {
       '<a class="hub-acao" href="simulado-tcf.html?curso=' + encodeURIComponent(B.courseType) + '"><span></span><b>Simulation complète de l\'examen</b><small>Les quatre épreuves, dont l\'expression orale enregistrée et transcrite.</small></a></div>';
     return;
   }
+  if (!B.admin) { bloco.remove(); return; }
   bloco.innerHTML = '<h2 class="secao-titulo">Thèmes du cours avec dossier documentaire</h2><div id="hub-temas-curso"><p class="aviso">Chargement…</p></div>';
   fetch('/api/temas?modalidade=textual&courseType=' + encodeURIComponent(B.courseType), { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } })
     .then(function (r) { return r.ok ? r.json() : []; }).then(function (temas) {
@@ -167,13 +207,13 @@ function ligarEnvioSistema(caixa, dadosFn) {
       if (contarPalavras(d.texte) < 15) { st.textContent = 'Écrivez votre texte avant de l\'envoyer.'; return; }
       var porIA = b.dataset.envioModo === 'ia';
       confirmarEnvio({ titulo: porIA ? 'Envoyer à la correction par l\'IA' : 'Envoyer à un professeur', custo: 1,
-        texto: porIA ? 'Correction complète sur la grille de l\'examen, dans « Mes corrections ».' : 'Votre texte entre dans la file du Sistema de Correção. Vous suivrez la correction dans « Mes corrections ».' }).then(function (ok) {
+        texto: porIA ? 'Correction complète sur la grille de l\'examen, dans « Mes notes ».' : 'Votre texte entre dans la file du Sistema de Correção. Vous suivrez la correction dans « Mes notes ».' }).then(function (ok) {
         if (!ok) return;
         d.modo = b.dataset.envioModo;
         b.disabled = true; st.textContent = 'Envoi…';
         google.script.run.withSuccessHandler(function (r) {
           atualizarCreditos(r.creditos);
-          st.innerHTML = '✓ Envoyé · protocole ' + esc(r.protocolo) + ' · <a href="correcoes.html">suivre la correction</a>';
+          st.innerHTML = '✓ Envoyé · protocole ' + esc(r.protocolo) + (r.id ? ' · <a href="' + linkCorrecao(r.id) + '">suivre la correction</a>' : '');
         }).withFailureHandler(function (e) { b.disabled = false; st.textContent = e.message || e; }).enviarTextoCorrecao(EMAIL, d);
       });
     });
@@ -188,7 +228,7 @@ function htmlEscolhaCorrecao(st) {
 }
 function correcaoEscolhida() { var r = document.querySelector('input[name="ep-correcao"]:checked'); return r ? r.value : 'ia'; }
 function htmlEnvioEpreuve(r) {
-  if (r.correcao === 'professor') return r.quantidade ? '<div class="bloco envio-sistema"><b>✓ Envoyée au Sistema de Correção</b><small>Suivez la correction de chaque tâche dans <a href="correcoes.html">« Mes corrections »</a>.</small></div>' : '';
+  if (r.correcao === 'professor') return r.quantidade ? '<div class="bloco envio-sistema"><b>✓ Envoyée au Sistema de Correção</b><small>Suivez la correction de chaque tâche dans « Mon espace › Mes notes ».</small></div>' : '';
   if (!r.id || r.status === 'vazia') return '';
   return '<div class="bloco envio-sistema" id="ep-envio"><b>Envoyer aussi à un professeur</b><small>En plus de la correction par l\'IA ci-dessous, vous pouvez envoyer vos textes au Sistema de Correção (1 crédit par tâche).</small>' +
     '<div class="ferramentas">' + ['ET1', 'ET2', 'ET3'].map(function (t) { return '<label class="check"><input type="checkbox" data-ep-t="' + t + '" checked> Tâche ' + t.slice(-1) + '</label>'; }).join('') +
@@ -205,7 +245,7 @@ function ligarEnvioEpreuve(r) {
       bt.disabled = true; $('ep-envio-st').textContent = 'Envoi…';
       google.script.run.withSuccessHandler(function (x) {
         if (typeof x.creditos === 'number') atualizarCreditos(x.creditos); else atualizarCreditos(Math.max(0, (B.creditos || 0) - (x.enviadas || 0)));
-        $('ep-envio-st').innerHTML = '✓ ' + x.enviadas + ' tâche(s) envoyée(s). ' + esc(x.aviso || '') + ' <a href="correcoes.html">Suivre la correction</a>';
+        $('ep-envio-st').innerHTML = '✓ ' + x.enviadas + ' tâche(s) envoyée(s). ' + esc(x.aviso || '') + ' Suivez la correction dans « Mes notes ».';
       }).withFailureHandler(function (e) { bt.disabled = false; $('ep-envio-st').textContent = e.message || e; }).enviarEpreuveCorrecao(EMAIL, r.id, ts, 'professor');
     });
   });

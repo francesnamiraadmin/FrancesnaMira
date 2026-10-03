@@ -386,3 +386,12 @@
 .fnm-app .niveis-delf .chip[aria-pressed="true"] { background: #3b6ea5; border-color: #3b6ea5; color: #fff; }
 .fnm-app .niveis-delf small { flex-basis: 100%; opacity: .8; line-height: 1.45; }
 .fnm-app .niveis-delf.carregando { opacity: .6; pointer-events: none; }
+
+/* Épreuve orale: as tâches da prova, a barra da tâche em curso e os resultados */
+.fnm-app .eo-taches { display: grid; gap: 10px; margin-bottom: 10px; }
+.fnm-app .eo-tache { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(var(--branco-rgb, 255,255,255), .55); border: 1px solid rgba(22,33,58,.1); }
+.fnm-app .eo-tache b { display: block; }
+.fnm-app .eo-tache small { opacity: .75; }
+.fnm-app .eo-barra { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 10px 16px; border-radius: 999px; background: #1c2b3a; color: #fff; font-weight: 600; width: fit-content; max-width: 100%; }
+.fnm-app .eo-barra span { padding: 3px 10px; border-radius: 999px; background: #ffd60a; color: #16213a; font-size: .8rem; font-weight: 800; }
+.fnm-app .eo-res audio { width: 100%; margin: 6px 0; }

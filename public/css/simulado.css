@@ -97,7 +97,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .sm-nav { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
 .sm-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; margin-top: 14px; }
 .sm-grade button { height: 36px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text); font-family: inherit; font-weight: 600; font-size: 0.8rem; cursor: pointer; }
-.sm-grade button.respondida { background: var(--success-bg); color: var(--success-text); border-color: transparent; }
+.sm-grade button.respondida { background: rgba(37, 99, 235, 0.16); color: #1d4ed8; border-color: transparent; }
+:root[data-theme="dark"] .sm-grade button.respondida { background: rgba(96, 165, 250, 0.18); color: #93c5fd; }
 .sm-grade button.atual { outline: 2px solid var(--accent); }
 .sm-grade button { position: relative; }
 .sm-grade button.ouvida::after { content: "🔊"; position: absolute; top: -7px; right: -5px; font-size: 0.62rem; line-height: 1; }
@@ -359,3 +360,30 @@ textarea.sm-campo { width: 100%; min-height: 70px; resize: vertical; }
 .sm-delf-q .num { font-weight: 800; margin-right: 4px; }
 .sm-delf-q .sm-alts { margin: 0; }
 #gradeExercicios button { min-width: 64px; }
+
+/* ===== Revisão das compreensões: painel das questões (uma por vez) e gabarito comentado ===== */
+.sm-rv-filtros { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; }
+.sm-rv-filtros button { border: 1px solid var(--glass-border); background: var(--glass-bg-2); color: var(--text); border-radius: 999px; padding: 6px 14px; font: 600 .84rem 'Poppins', sans-serif; cursor: pointer; }
+.sm-rv-filtros button[aria-pressed="true"] { background: #1c2b3a; color: #fff; border-color: #1c2b3a; }
+.sm-rv-filtros button.errada[aria-pressed="true"] { background: #dc2626; border-color: #dc2626; }
+.sm-rv-filtros button.certa[aria-pressed="true"] { background: #16a34a; border-color: #16a34a; }
+.sm-rv-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 6px; }
+.sm-rv-q { height: 40px; border-radius: 10px; border: 2px solid transparent; font: 800 .86rem 'Poppins', sans-serif; cursor: pointer; }
+.sm-rv-q.certa { background: rgba(22, 163, 74, .16); color: #15803d; }
+.sm-rv-q.errada { background: rgba(220, 38, 38, .14); color: #b91c1c; }
+.sm-rv-q.branco { background: rgba(100, 116, 139, .15); color: #475569; }
+.sm-rv-q.atual { border-color: var(--text); }
+.sm-rv-q[hidden] { display: none; }
+.sm-rv-legenda i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin: 0 3px 0 8px; vertical-align: -1px; }
+.sm-rv-legenda i.certa { background: #16a34a; } .sm-rv-legenda i.errada { background: #dc2626; } .sm-rv-legenda i.branco { background: #94a3b8; }
+.sm-rv-item { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--glass-border); }
+.sm-rv-status { font-weight: 800; font-size: .82rem; }
+.sm-rv-status.certa { color: #15803d; } .sm-rv-status.errada { color: #b91c1c; }
+.sm-rv-nav { display: flex; justify-content: space-between; margin-top: 12px; }
+.sm-explica { margin-top: 12px; padding: 14px 16px; border-radius: 14px; background: rgba(37, 99, 235, .07); border: 1px solid rgba(37, 99, 235, .22); line-height: 1.55; }
+.sm-explica h4 { margin: 8px 0 4px; font-size: .9rem; color: #1d4ed8; }
+.sm-explica h4:first-child { margin-top: 0; }
+.sm-explica ul { margin: 0; padding-left: 18px; }
+.sm-explica.carregando { opacity: .85; }
+.sm-explica.erro { background: rgba(220, 38, 38, .07); border-color: rgba(220, 38, 38, .25); }
+:root[data-theme="dark"] .sm-explica h4 { color: #93c5fd; }

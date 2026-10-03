@@ -27,6 +27,9 @@ const TentativaSchema = new mongoose.Schema({
   totalQuestoes: { type: Number, required: true },
   totalCorretas: { type: Number, required: true },
   percentualAcertos: { type: Number, required: true }, // denormalizado para listagem sem recomputar
+  // Nota ponderada pelo nível de cada questão (pesos do TCF: A1 3, A2 9, B1 15, B2 21, C1 26, C2 33)
+  pontosObtidos: { type: Number },
+  pontosPossiveis: { type: Number },
 
   expirouPorTempo: { type: Boolean, default: false }, // true quando o auto-envio foi disparado pelo cronômetro
 

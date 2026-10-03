@@ -44,7 +44,9 @@ const NIVEIS_AVANCADOS_SEM_CURSO = new Set(["C1", "C2"]);
 // deste — a mesma questão pode aparecer sorteada em conjuntos diferentes). Só entram
 // questões já respondidas se não houver inéditas suficientes pra completar a quantidade
 // pedida, pra nunca devolver menos questões do que o aluno escolheu.
-async function sortearQuestoes({ niveis, materias, quantidade, alunoId }) {
+async function sortearQuestoes({ niveis, materias, quantidade, alunoId, cursoProva }) {
+  // Curso de prova (TCF, DELF…): as questões da própria prova, filtradas pelo nível marcado em cada uma.
+  if (cursoProva) return sortearDe({ ativo: true, pool: "praticar", courseType: cursoProva, nivel: { $in: niveis || [] } }, quantidade, alunoId);
   const niveisDoCurso = (niveis || []).filter(n => !NIVEIS_AVANCADOS_SEM_CURSO.has(n));
   const niveisAvancados = (niveis || []).filter(n => NIVEIS_AVANCADOS_SEM_CURSO.has(n));
 
@@ -61,7 +63,11 @@ async function sortearQuestoes({ niveis, materias, quantidade, alunoId }) {
   }
   const filtro = condicoes.length === 1 ? condicoes[0] : { $or: condicoes };
   if (materias?.length) filtro.materia = { $in: materias };
+  return sortearDe(filtro, quantidade, alunoId);
+}
 
+// Sorteio a partir de um filtro: questões inéditas primeiro, depois as já respondidas.
+async function sortearDe(filtro, quantidade, alunoId) {
   const candidatas = await Questao.find(filtro).select("_id");
   if (candidatas.length < quantidade) {
     const erro = new Error(`Só há ${candidatas.length} questão(ões) disponível(is) para esses filtros — peça uma quantidade menor ou amplie os filtros.`);

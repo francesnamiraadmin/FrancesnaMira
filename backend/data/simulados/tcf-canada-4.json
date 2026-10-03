@@ -1557,7 +1557,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez adopter un animal dans un refuge. Vous posez des questions au responsable du refuge pour obtenir des informations (animaux disponibles, conditions, prix, démarches, suivi, etc.).",
      "perguntasExaminador": [

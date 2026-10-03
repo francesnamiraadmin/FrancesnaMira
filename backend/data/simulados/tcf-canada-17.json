@@ -1557,7 +1557,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez participer à une soirée d'observation des étoiles dans un observatoire. Vous téléphonez pour obtenir des informations (dates, horaires, prix, public, météo, matériel, accès, etc.).",
      "perguntasExaminador": [

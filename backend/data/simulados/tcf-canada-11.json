@@ -1584,7 +1584,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez suivre des cours de danse. Vous téléphonez à une école de danse pour obtenir des informations (styles, niveaux, horaires, prix, cours d'essai, tenue, etc.).",
      "perguntasExaminador": [

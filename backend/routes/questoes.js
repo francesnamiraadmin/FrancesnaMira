@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+
+// Peso de cada questão pelo nível (pontos da prova do TCF Canada em compreensão oral e escrita).
+const PESO_NIVEL = { A1: 3, A2: 9, B1: 15, B2: 21, C1: 26, C2: 33 };
 const { escaparRegex } = require("../middleware/seguranca");
 const Questao = require("../models/questao");
 const Conjunto = require("../models/conjunto");
@@ -87,6 +90,7 @@ async function montarResultadoTentativa(tentativa) {
     pool: conjunto?.pool || "praticar", numero: tentativa.numero,
     totalQuestoes: tentativa.totalQuestoes, totalCorretas: tentativa.totalCorretas,
     percentualAcertos: tentativa.percentualAcertos, tempoGastoSegundos: tentativa.tempoGastoSegundos,
+    pontosObtidos: tentativa.pontosObtidos, pontosPossiveis: tentativa.pontosPossiveis,
     expirouPorTempo: tentativa.expirouPorTempo, iniciadaEm: tentativa.iniciadaEm, finalizadaEm: tentativa.finalizadaEm,
     respostas: tentativa.respostas.map((r, index) => {
       const q = porId.get(String(r.questaoId));
@@ -290,17 +294,20 @@ router.post("/conjuntos/personalizado", exigirAcessoCurso("plataforma"), async (
     // já que o Personalize agora deixa escolher entre todos os cursos de fluência que a conta
     // possui. C1/C2 têm sua própria checagem (não têm curso próprio, ver acima).
     const cursosComAcessoPlataforma = await cursosComAcesso(req.userId, "plataforma");
-    const niveisForaDeAcesso = niveis.filter(n => NIVEIS_FLUENCIA.includes(n) && !cursosComAcessoPlataforma.includes(n));
+    // Curso de prova (TCF, DELF, DALF, TEF): as questões são do banco da própria prova, divididas por
+    // nível (A1 a C2); não dependem dos cursos de fluência.
+    const cursoDeProva = CURSOS_ELEGIVEIS_AVANCADO_EXAME.includes(req.courseType) && cursosComAcessoPlataforma.includes(req.courseType);
+    const niveisForaDeAcesso = cursoDeProva ? [] : niveis.filter(n => NIVEIS_FLUENCIA.includes(n) && !cursosComAcessoPlataforma.includes(n));
     if (niveisForaDeAcesso.length) {
       return res.status(403).json({ msg: `Você não tem acesso ao(s) curso(s): ${niveisForaDeAcesso.join(", ")}.` });
     }
-    if (niveis.some(n => NIVEIS_AVANCADOS.includes(n)) && !elegivelParaNiveisAvancados(cursosComAcessoPlataforma)) {
+    if (!cursoDeProva && niveis.some(n => NIVEIS_AVANCADOS.includes(n)) && !elegivelParaNiveisAvancados(cursosComAcessoPlataforma)) {
       return res.status(403).json({ msg: "Questões de nível C1/C2 são exclusivas para quem tem os 4 cursos de fluência (A1 ao B2) ou TCF/DELF/DALF/TEF." });
     }
 
     let questoes;
     try {
-      questoes = await sortearQuestoes({ niveis, materias, quantidade, alunoId: req.userId });
+      questoes = await sortearQuestoes({ niveis, materias, quantidade, alunoId: req.userId, cursoProva: cursoDeProva ? req.courseType : null });
     } catch (err) {
       if (err.status === 422) return res.status(422).json({ msg: err.message });
       throw err;
@@ -594,12 +601,16 @@ router.post("/sessoes/:id/finalizar", async (req, res) => {
     const totalQuestoes = respostasTentativa.length;
     const totalCorretas = respostasTentativa.filter(r => r.correta).length;
     const percentualAcertos = Math.round((totalCorretas / totalQuestoes) * 100);
+    // nota ponderada: questão de nível mais alto vale mais (mesmos pesos da prova do TCF)
+    const peso = r => PESO_NIVEL[porId.get(String(r.questaoId))?.nivel] || 1;
+    const pontosPossiveis = respostasTentativa.reduce((t, r) => t + peso(r), 0);
+    const pontosObtidos = respostasTentativa.filter(r => r.correta).reduce((t, r) => t + peso(r), 0);
     const numero = (await Tentativa.countDocuments({ alunoId: req.userId, conjuntoId: conjunto._id })) + 1;
     const tempoGastoSegundos = expirouPorTempo ? conjunto.tempoLimiteSegundos : tempoDecorridoSegundos;
 
     const tentativa = await Tentativa.create({
       alunoId: req.userId, conjuntoId: conjunto._id, courseType: conjunto.courseType, numero,
-      respostas: respostasTentativa, totalQuestoes, totalCorretas, percentualAcertos,
+      respostas: respostasTentativa, totalQuestoes, totalCorretas, percentualAcertos, pontosObtidos, pontosPossiveis,
       expirouPorTempo, tempoGastoSegundos, iniciadaEm: sessao.iniciadoEm
     });
 
@@ -617,6 +628,27 @@ router.post("/sessoes/:id/finalizar", async (req, res) => {
 });
 
 // ===================== ALUNO: RESULTADO/GABARITO DE UMA TENTATIVA =====================
+
+// Gabarito comentado (por que a certa, pegadinhas, dicas): só para quem já fez a questão (ou a equipe).
+router.get("/:id/explicacao-detalhada", async (req, res) => {
+  try {
+    if (!/^[a-f0-9]{24}$/i.test(req.params.id)) return res.status(400).json({ msg: "Questão inválida." });
+    const equipe = req.userRole === "professor" || req.userRole === "admin";
+    if (!equipe && !(await Tentativa.exists({ alunoId: req.userId, "respostas.questaoId": req.params.id }))) return res.status(403).json({ msg: "Responda a questão antes de ver o gabarito." });
+    const q = await Questao.findById(req.params.id).lean();
+    if (!q) return res.status(404).json({ msg: "Questão não encontrada." });
+    const alternativas = q.tipo === "vf" ? ["Vrai", "Faux"] : q.opcoes || [];
+    const correta = q.tipo === "vf" ? (q.respostaVF ? 0 : 1) : q.indiceCorreta || 0;
+    const dados = await require("../utils/explicacaoQuestao").explicar("q:" + q._id, {
+      enunciado: q.tipo === "vf" ? q.enunciado + " — « " + (q.afirmacao || "") + " »" : q.enunciado, texto: q.texto, transcricao: q.audio, alternativas, correta, explicacao: q.explicacao, nivel: q.nivel
+    });
+    res.json(dados);
+  } catch (err) {
+    if (err.status) return res.status(err.status).json({ msg: err.message });
+    console.error("explicacao-detalhada:", err.message);
+    res.status(503).json({ msg: "A explicação detalhada está indisponível agora. Tente de novo em instantes." });
+  }
+});
 
 router.get("/tentativas/:id", async (req, res) => {
   try {

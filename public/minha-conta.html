@@ -770,6 +770,12 @@ async function renderBlocoConjuntos() {
   }
 }
 
+// Atalho colorido para uma seção do « Meu espaço ».
+function ctaMeuEspaco(secao, texto) {
+  return `<a class="dash-btn" href="meu-espaco.html#${secao}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; border-radius:16px; text-decoration:none; background:linear-gradient(120deg,#4f46e5,#db2777); color:#fff;">
+    <span><b style="display:block; font-size:1rem;">Ver no Meu espaço</b><small style="opacity:.9;">${texto}</small></span><span style="font-size:1.4rem;">→</span></a>`;
+}
+
 async function renderPlataforma(dados) {
   const card = document.getElementById('secPlataforma');
   const alvo = document.getElementById('conteudoPlataforma');
@@ -779,73 +785,9 @@ async function renderPlataforma(dados) {
     return;
   }
   card.classList.remove('locked');
-
-  const bloco = await renderBlocoConjuntos();
-  if (bloco.kpis && bloco.kpis.mediaPercentualAcertos !== null) {
-    definirResumo('resumoPlataforma', `${bloco.kpis.mediaPercentualAcertos}% de acertos`);
-  }
-
-  const eventos = carregarEventos();
-  if (eventos.length === 0) {
-    alvo.innerHTML = bloco.html || '<div class="stats-vazio">Comece a praticar para ver suas estatísticas aqui.</div>';
-    return;
-  }
-
-  const total = eventos.length;
-  const acertos = eventos.filter(e => e.ok).length;
-  const taxa = Math.round((acertos / total) * 100);
-  const dias = [...new Set(eventos.map(e => diaDe(e.t)))].sort();
-  const sequencia = calcularSequenciaDiaria(dias);
-  const tempoMs = Number(localStorage.getItem('pq_tempoMs') || 0);
-  if (!bloco.kpis || bloco.kpis.mediaPercentualAcertos === null) definirResumo('resumoPlataforma', `${taxa}% de acerto`);
-
-  const porDia = dias.map(dia => {
-    const doDia = eventos.filter(e => diaDe(e.t) === dia);
-    const okDia = doDia.filter(e => e.ok).length;
-    return { dia, total: doDia.length, taxa: Math.round((okDia / doDia.length) * 100) };
-  });
-  const porNivel = NIVEIS.map(n => {
-    const doN = eventos.filter(e => e.nivel === n);
-    return { rotulo: 'Nível ' + n, total: doN.length, taxa: doN.length ? Math.round((doN.filter(e => e.ok).length / doN.length) * 100) : null };
-  });
-  const porMateria = Object.entries(MATERIAS).map(([k, v]) => {
-    const doM = eventos.filter(e => e.materia === k);
-    return { rotulo: v, total: doM.length, taxa: doM.length ? Math.round((doM.filter(e => e.ok).length / doM.length) * 100) : null };
-  });
-  const ultimasAtividades = eventos.slice(-8).reverse();
-
-  alvo.innerHTML = bloco.html + `
-    <h3 style="margin:26px 0 14px;">Prática livre</h3>
-    <div class="dash-kpi-row">
-      <div class="dash-kpi"><div class="valor">${total}</div><div class="rotulo">Questões resolvidas</div></div>
-      <div class="dash-kpi"><div class="valor">${taxa}%</div><div class="rotulo">Taxa de acerto</div></div>
-      <div class="dash-kpi"><div class="valor">${sequencia}<img src="img/icones/fire.svg" alt="" style="width:0.85em; height:0.85em; vertical-align:-0.05em;"></div><div class="rotulo">Sequência diária</div></div>
-      <div class="dash-kpi"><div class="valor">${fmtTempoEstudado(tempoMs)}</div><div class="rotulo">Tempo estudado</div></div>
-    </div>
-    <div class="chart-card" style="margin-bottom:18px;">
-      <h3>Evolução da taxa de acerto (%)</h3>
-      <div class="chart-scroll">${svgLinha(porDia.map(p => ({ x: rotuloDia(p.dia), y: p.taxa, tooltip: `${rotuloDia(p.dia)}: ${p.taxa}% (${p.total} questões)` })))}</div>
-    </div>
-    <div class="campo-row">
-      <div>
-        <h3 style="margin-bottom:12px;">Desempenho por nível</h3>
-        ${barList(porNivel)}
-      </div>
-      <div>
-        <h3 style="margin-bottom:12px;">Desempenho por competência</h3>
-        ${barList(porMateria)}
-      </div>
-    </div>
-    <h3 style="margin:22px 0 10px;">Últimas atividades</h3>
-    ${ultimasAtividades.map(e => `<div class="dash-atividade-item">
-      <span>${e.mode === 'simulado' ? 'Simulado' : 'Praticar'} · ${esc(MATERIAS[e.materia] || e.materia)} · Nível ${esc(e.nivel)}</span>
-      <span style="color:${e.ok ? 'var(--success-text)' : 'var(--danger-text)'};">${e.ok ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Acertou' : '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">Errou'}</span>
-    </div>`).join('')}
-    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:14px;">Esses dados ficam salvos neste navegador — se você praticar em outro dispositivo, as estatísticas não se somam automaticamente.</p>
-  `;
-
-  document.getElementById('secApagarDados').style.display = 'block';
-  popularSelectDias();
+  // As estatísticas ficam só no « Meu espaço » (pedido da equipe): aqui, o atalho para a seção.
+  definirResumo('resumoPlataforma', 'estatísticas no Meu espaço');
+  alvo.innerHTML = ctaMeuEspaco('questoes', 'Acertos, evolução, conteúdos e o seu caderno de erros completo.');
 }
 
 // svgLinha/barList vêm de js/chartsSvg.js (compartilhado com estatisticas-questoes.html).
@@ -933,36 +875,9 @@ async function renderProducao(dados) {
     return;
   }
   card.classList.remove('locked');
-  try {
-    const res = await fetch('/api/producoes/minhas', { headers: authHeaders() });
-    const producoes = await res.json();
-    if (!Array.isArray(producoes) || producoes.length === 0) {
-      definirResumo('resumoProducao', `${dados.creditosCorrecao ?? 0} crédito(s)`);
-      alvo.innerHTML = `<div class="stats-vazio">Você ainda não enviou nenhuma produção.</div><div style="text-align:center; margin-top:16px;"><a href="correcoes-texto.html" class="dash-btn">Nova Produção</a></div>`;
-      return;
-    }
-    const enviados = producoes.filter(p => p.status !== 'rascunho').length;
-    const aguardando = producoes.filter(p => STATUS_AGUARDANDO.includes(p.status)).length;
-    const corrigidas = producoes.filter(p => p.status === 'corrigido');
-    const ultimaCorrigida = corrigidas.sort((a, b) => new Date(b.criadoEm) - new Date(a.criadoEm))[0];
-    definirResumo('resumoProducao', aguardando ? `${aguardando} aguardando correção` : `${corrigidas.length} corrigida(s)`);
-
-    alvo.innerHTML = `
-      <div class="dash-kpi-row">
-        <div class="dash-kpi"><div class="valor">${enviados}</div><div class="rotulo">Produções enviadas</div></div>
-        <div class="dash-kpi"><div class="valor">${aguardando}</div><div class="rotulo">Aguardando correção</div></div>
-        <div class="dash-kpi"><div class="valor">${corrigidas.length}</div><div class="rotulo">Corrigidas</div></div>
-        <div class="dash-kpi"><div class="valor">${dados.creditosCorrecao ?? 0}</div><div class="rotulo">Créditos disponíveis</div></div>
-      </div>
-      ${ultimaCorrigida ? `<div class="dash-atividade-item" style="flex-direction:column; align-items:flex-start; gap:6px;">
-        <strong>Último feedback recebido${ultimaCorrigida.avaliacao?.notaTotal != null ? ' · Nota ' + esc(ultimaCorrigida.avaliacao.notaTotal) : ''}</strong>
-        <span style="color:var(--text-muted);">${esc(ultimaCorrigida.avaliacao?.comentarioGeral || 'Sem comentário geral.')}</span>
-      </div>` : ''}
-      <div style="margin-top:18px;"><a href="correcoes-texto.html" class="dash-btn">Nova Produção</a></div>
-    `;
-  } catch (err) {
-    alvo.innerHTML = '<p style="color:var(--danger-text);">Não foi possível carregar suas produções.</p>';
-  }
+  // As estatísticas ficam só no « Meu espaço » (pedido da equipe): aqui, o atalho para a seção.
+  definirResumo('resumoProducao', `${dados.creditosCorrecao ?? 0} crédito(s)`);
+  alvo.innerHTML = ctaMeuEspaco('producoes', 'Suas redações, produções orais, notas e correções comentadas.');
 }
 
 // ===================== AULAS ESPECIALIZADAS =====================
@@ -975,62 +890,9 @@ async function renderAulas(dados) {
     return;
   }
   card.classList.remove('locked');
-  try {
-    const [resResumo, resHistorico, resMatriculas] = await Promise.all([
-      fetch('/api/aulas/progresso/resumo', { headers: authHeaders() }),
-      fetch('/api/aulas/progresso/historico', { headers: authHeaders() }),
-      fetch('/api/matricula/minhas', { headers: authHeaders() })
-    ]);
-    const resumo = resResumo.ok ? await resResumo.json() : { totalAulas: 0, concluidas: 0, percentual: 0, ultimaAula: null };
-    const historico = resHistorico.ok ? await resHistorico.json() : [];
-    const matriculas = resMatriculas.ok ? await resMatriculas.json() : [];
-    definirResumo('resumoAulas', `${resumo.percentual}% concluído`);
-
-    const agora = Date.now();
-    const proximas = [];
-    matriculas.filter(m => m.status === 'confirmada').forEach(m => {
-      if (m.tipo === 'particular' && m.horarios?.length) {
-        m.horarios.filter(h => new Date(h.dataHoraInicio).getTime() > agora).forEach(h => {
-          proximas.push({ tipo: 'particular', data: h.dataHoraInicio, professor: m.professorId?.nome || '—', zoomLink: null });
-        });
-      } else if (m.tipo === 'turma' && m.turmaId) {
-        proximas.push({ tipo: 'turma', recorrente: true, nome: m.turmaId.nome, nivel: m.turmaId.nivel, dias: m.turmaId.dias, horario: m.turmaId.horario, zoomLink: m.turmaId.zoomLink });
-      }
-    });
-    proximas.sort((a, b) => (a.data ? new Date(a.data) : 0) - (b.data ? new Date(b.data) : 0));
-
-    const proximasHtml = proximas.slice(0, 4).map(p => {
-      const titulo = p.recorrente ? `${p.nome} — ${p.nivel}` : 'Aula particular';
-      const quando = p.recorrente ? `${(p.dias || []).join(', ')} às ${p.horario || ''}` : new Date(p.data).toLocaleString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
-      const entrar = p.zoomLink
-        ? `<a href="${esc(p.zoomLink)}" target="_blank" rel="noopener" class="dash-btn secundario">Entrar na Aula</a>`
-        : `<span style="font-size:0.82rem; color:var(--text-muted);">Aguarde o contato do professor</span>`;
-      return `<div class="dash-atividade-item">
-        <span><strong>${esc(titulo)}</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">${p.professor ? 'Professor: ' + esc(p.professor) + ' · ' : ''}${esc(quando)}</span></span>
-        ${entrar}
-      </div>`;
-    }).join('') || '<div class="stats-vazio">Nenhuma aula ao vivo agendada.</div>';
-
-    alvo.innerHTML = `
-      <div class="dash-kpi-row">
-        <div class="dash-kpi"><div class="valor">${resumo.percentual}%</div><div class="rotulo">Progresso nas aulas gravadas</div></div>
-        <div class="dash-kpi"><div class="valor">${resumo.concluidas}/${resumo.totalAulas}</div><div class="rotulo">Aulas concluídas</div></div>
-      </div>
-      <h3 style="margin-bottom:12px;">Próximas aulas</h3>
-      ${proximasHtml}
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin:18px 0 24px;">
-        <a href="aulas-especializadas.html" class="dash-btn">${resumo.ultimaAula ? 'Continuar assistindo' : 'Ver aulas gravadas'}</a>
-        <a href="matricula.html" class="dash-btn secundario">Agendar Aula</a>
-      </div>
-      <h3 style="margin-bottom:12px;">Histórico de aulas gravadas</h3>
-      ${historico.slice(0, 6).map(h => `<div class="dash-atividade-item">
-        <span>${h.moduloIcone ? esc(h.moduloIcone) + ' ' : ''}${esc(h.aulaTitulo)}${h.moduloTitulo ? ' · ' + esc(h.moduloTitulo) : ''}</span>
-        <span style="color:${h.concluida ? 'var(--success-text)' : 'var(--text-muted)'};">${h.concluida ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Concluída' : 'Em andamento'}</span>
-      </div>`).join('') || '<div class="stats-vazio">Nenhuma aula assistida ainda.</div>'}
-    `;
-  } catch (err) {
-    alvo.innerHTML = '<p style="color:var(--danger-text);">Não foi possível carregar suas aulas.</p>';
-  }
+  // As estatísticas ficam só no « Meu espaço » (pedido da equipe): aqui, o atalho para a seção.
+  definirResumo('resumoAulas', 'progresso no Meu espaço');
+  alvo.innerHTML = ctaMeuEspaco('aulas', 'Aulas assistidas, aulas particulares, presença e favoritos.');
 }
 
 // ===================== PERFIL =====================

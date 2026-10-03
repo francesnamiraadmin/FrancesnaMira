@@ -347,7 +347,7 @@
       sl: `${nq} frases com uma lacuna: escolha a palavra ou expressão que completa corretamente a frase. Você pode navegar livremente entre as questões.`,
       ce: `${nq} questões de múltipla escolha, do A1 ao C2, sobre documentos escritos (avisos, anúncios, artigos, textos argumentativos)${S.def.provas.ce?.questoes.some(q => q.tipo === "lacuna") ? ", com frases para completar ao longo da prova" : ""}. Você pode navegar livremente entre as questões.`,
       ee: "3 tarefas: uma mensagem (60–120 palavras), um artigo ou relato (120–150 palavras) e um texto argumentativo a partir de dois documentos (120–180 palavras). Seu texto é salvo automaticamente.",
-      eo: "3 tarefas gravadas: entrevista dirigida (2 min), exercício em interação com 2 min de preparação (5 min 30) e expressão de um ponto de vista (4 min 30). Use fone de ouvido. Se um professor estiver conectado, ele será seu examinador pela chamada de voz."
+      eo: "3 tarefas gravadas: entrevista dirigida (2 min), exercício em interação com 2 min de preparação (4 min) e expressão de um ponto de vista (4 min 30). Use fone de ouvido. Se um professor estiver conectado, ele será seu examinador pela chamada de voz."
     }[p];
     $("vProva").innerHTML = `<div class="sm-card" style="text-align:center;">
       <p class="sm-oral-fase">Épreuve ${ordem().indexOf(p) + 1} de ${ordem().length}</p>
@@ -391,7 +391,7 @@
     $("barraSub").textContent = `Questão ${S.idx + 1} de ${qs.length}`;
     $("vProva").innerHTML = `<div class="sm-card">
       ${q.tipo ? `<p class="sm-instrucao">› ${esc(INSTRUCOES[q.tipo])}</p>` : ""}
-      <div class="sm-questao-topo"><strong>Question ${numero(q)}</strong><span class="sm-nivel">${esc(q.nivel)} · ${q.pontos} pts</span></div>
+      <div class="sm-questao-topo"><strong>Question ${numero(q)}</strong></div>
       ${enunciado(q, "co")}
       <div class="sm-player" id="player">
         <button class="sm-btn pequeno" id="btnOuvir" type="button" ${ouvido ? "disabled" : ""}>${ouvido ? "Áudio já ouvido" : "▶ Ouvir o documento"}</button>
@@ -406,12 +406,13 @@
         ${S.idx < qs.length - 1 ? `<button class="sm-btn" id="btnProx" type="button">Próxima →</button>` : ""}
       </div>
       <div class="sm-grade" id="gradeLista"></div>
-      <p class="sm-muted sm-grade-legenda">Verde = respondida · <span class="ouvida-ico">🔊</span> = áudio já ouvido</p>
+      <p class="sm-muted sm-grade-legenda">Azul = respondida · <span class="ouvida-ico">🔊</span> = áudio já ouvido</p>
       <div style="text-align:right;margin-top:14px;"><button class="sm-btn secundario" id="btnFim" type="button">Terminar a compreensão oral</button></div>
     </div>`;
     ligarAlternativas("co", q);
     atualizarGrade("co");
-    $("btnOuvir").addEventListener("click", () => tocarUmaVez(q));
+    $("btnOuvir").addEventListener("click", () => { clearTimeout(autoTimer); tocarUmaVez(q); });
+    if (!ouvido) agendarAutomatico(() => { const b = $("btnOuvir"); if (b && !b.disabled && S.t.provaAtual === "co" && S.def.provas.co.questoes[S.idx] === q) tocarUmaVez(q); }, document.querySelector("#player small"));
     const ir = i => {
       if (i < 0 || i >= qs.length || i === S.idx) return;
       pararAudioCO();
@@ -503,10 +504,18 @@
       audioCO.addEventListener("ended", () => { audioCO = null; renderExercicioDelf(prova); });
       audioCO.play().catch(() => { bo.textContent = "Erro ao tocar o áudio"; bo.disabled = false; });
     });
+    if (bo && !bo.disabled && escutas === 0) agendarAutomatico(() => { const b = $("btnOuvir"); if (b === bo && !b.disabled) b.click(); });
   }
 
-  let audioCO = null;
-  function pararAudioCO() { if (audioCO) { audioCO.pause(); audioCO = null; } }
+  let audioCO = null, autoTimer = null;
+  function pararAudioCO() { clearTimeout(autoTimer); autoTimer = null; if (audioCO) { audioCO.pause(); audioCO = null; } }
+  // Áudios da compreensão oral e tarefas da produção oral começam sozinhos 2 s depois de o aluno
+  // entrar na questão, sem clique. Sair da questão antes cancela.
+  function agendarAutomatico(fn, avisoEl) {
+    clearTimeout(autoTimer);
+    if (avisoEl) avisoEl.textContent = "Começa automaticamente em 2 s…";
+    autoTimer = setTimeout(() => { autoTimer = null; fn(); }, 2000);
+  }
   function tocarUmaVez(q) {
     const btn = $("btnOuvir");
     btn.disabled = true;
@@ -544,7 +553,7 @@
     $("barraSub").textContent = `Questão ${S.idx + 1} de ${qs.length}`;
     $("vProva").innerHTML = `<div class="sm-card">
       <p class="sm-instrucao">› ${esc(lacuna ? INSTRUCOES.sl : INSTRUCOES[prova])}</p>
-      <div class="sm-questao-topo"><strong>Question ${numero(q)}</strong><span class="sm-nivel">${esc(q.nivel)} · ${q.pontos} pts</span></div>
+      <div class="sm-questao-topo"><strong>Question ${numero(q)}</strong></div>
       ${lacuna ? `<p class="sm-lacuna-ini">${esc(q.inicio)}</p>` : `${enunciado(q, prova)}<p class="sm-pergunta">${esc(q.pergunta)}</p>`}
       <div class="sm-alts">${q.alternativas.map((a, i) => `<button type="button" class="sm-alt ${resp[q.n] === i ? "marcada" : ""}" data-alt="${i}"><span class="letra">${LETRAS[i]}</span><span>${esc(a)}</span></button>`).join("")}</div>
       ${lacuna ? `<p class="sm-lacuna-fim">${esc(q.fim)}</p>` : ""}
@@ -774,7 +783,9 @@
     const acoes = $("eoAcoes");
     if (fase === "intro") {
       acoes.innerHTML = `<button class="sm-btn" id="eoComecar" type="button">${t.preparacaoSeg ? "Começar a preparação" : "Começar a falar"}</button>`;
-      $("eoComecar").addEventListener("click", () => t.preparacaoSeg ? iniciarPreparacao(t) : iniciarFala(t));
+      $("eoComecar").addEventListener("click", () => { clearTimeout(autoTimer); t.preparacaoSeg ? iniciarPreparacao(t) : iniciarFala(t); });
+      acoes.insertAdjacentHTML("beforeend", '<p class="sm-muted" id="eoAuto" style="margin-top:8px;"></p>');
+      agendarAutomatico(() => { if (S.eo && S.eo.tarefa === t.id && S.eo.fase === "intro" && $("eoComecar")) $("eoComecar").click(); }, $("eoAuto"));
     } else if (fase === "prep") {
       acoes.innerHTML = `<p class="sm-muted">Anote as perguntas que vai fazer.</p><button class="sm-btn secundario" id="eoPular" type="button" style="margin-top:8px;">Já estou pronto</button>`;
       $("eoPular").addEventListener("click", () => iniciarFala(t));
@@ -960,6 +971,7 @@
     const b2 = $("btnChamar2");
     if (b2) b2.addEventListener("click", abrirChamado);
     document.querySelectorAll("[data-audio-eo]").forEach(el => carregarAudioEO(el));
+    ligarRevisao(document);
   }
   const NOMES_DELF = { co: "Compréhension de l'oral", ce: "Compréhension des écrits", ee: "Production écrite", eo: "Production orale" };
 
@@ -1012,6 +1024,7 @@
     const b2 = $("btnChamar2");
     if (b2) b2.addEventListener("click", abrirChamado);
     document.querySelectorAll("[data-audio-eo]").forEach(el => carregarAudioEO(el));
+    ligarRevisao(document);
   }
 
   function nivelDoScore(v) {
@@ -1064,20 +1077,77 @@
     const x = S.t.provas[p].resultado;
     if (!x) return "";
     const qs = S.def.provas[p].questoes;
-    const niveis = ["A1", "A2", "B1", "B2", "C1", "C2"];
-    return `<div class="sm-card sm-revisao">
+    const det = q => x.detalhes.find(y => y.n === q.n) || {};
+    const erradas = qs.filter(q => !det(q).certo).length;
+    // Painel: as questões em grade (verde = certa, vermelho = errada, cinza = em branco); clicar mostra
+    // só aquela questão, com o gabarito comentado. Nada de questões empilhadas ocupando a página.
+    return `<div class="sm-card sm-revisao" data-rv="${p}">
       <h2>${NOMES[p]} — ${x.acertos}/${x.total} acertos</h2>
-      <div class="sm-nivel-barras">${niveis.map(n => `<div><strong>${x.porNivel[n]?.acertos ?? 0}/${x.porNivel[n]?.total ?? 0}</strong>${n}</div>`).join("")}</div>
+      <div class="sm-rv-filtros"><button type="button" data-rv-filtro="todas">Todas <b>${qs.length}</b></button><button type="button" data-rv-filtro="erradas" class="errada" aria-pressed="true">Erradas <b>${erradas}</b></button><button type="button" data-rv-filtro="certas" class="certa">Certas <b>${qs.length - erradas}</b></button></div>
+      <div class="sm-rv-grade">${qs.map(q => { const d = det(q); return `<button type="button" class="sm-rv-q ${d.certo ? "certa" : d.resposta == null ? "branco" : "errada"}" data-rv-n="${q.n}" aria-label="Questão ${numero(q)}: ${d.certo ? "certa" : d.resposta == null ? "em branco" : "errada"}">${numero(q)}</button>`; }).join("")}</div>
+      <p class="sm-muted sm-rv-legenda"><i class="certa"></i> certa <i class="errada"></i> errada <i class="branco"></i> em branco · clique numa questão para vê-la</p>
       ${qs.map(q => {
-        const d = x.detalhes.find(y => y.n === q.n) || {};
-        return `<details><summary>${d.certo ? "✅" : d.resposta == null ? "⚪" : "❌"} Questão ${numero(q)} · ${q.nivel} — ${esc(p === "sl" || q.tipo === "lacuna" ? `${q.inicio.replace(/…$/, "")} ___ ${q.fim.replace(/^…\s*/, "")}` : q.pergunta)}</summary><div class="corpo">
+        const d = det(q);
+        return `<div class="sm-rv-item" data-rv-item="${q.n}" hidden>
+          <div class="sm-questao-topo"><strong>Questão ${numero(q)}</strong><span class="sm-rv-status ${d.certo ? "certa" : "errada"}">${d.certo ? "✓ Você acertou" : d.resposta == null ? "Em branco" : "✗ Você errou"}</span></div>
           ${p === "co" ? `${enunciado(q, "co")}<audio controls preload="none" src="${esc(q.audio)}" style="width:100%;margin-bottom:8px;"></audio>${q.transcricao ? `<div class="sm-documento">${esc(q.transcricao)}</div>` : ""}` : enunciado(q, p)}
+          ${q.alternativasFaladas || p === "sl" || q.tipo === "lacuna" ? "" : `<p class="sm-pergunta">${esc(q.pergunta)}</p>`}
           <div class="sm-alts">${q.alternativas.map((a, i) => `<button type="button" disabled class="sm-alt ${i === q.correta ? "certa" : i === d.resposta ? "errada" : ""}"><span class="letra">${LETRAS[i]}</span><span>${esc(a)}</span></button>`).join("")}</div>
           ${q.explicacao ? `<p style="margin-top:8px;"><strong>Explicação:</strong> ${esc(q.explicacao)}</p>` : ""}
-        </div></details>`;
+          <div data-rv-explica></div>
+          <div class="sm-rv-nav"><button type="button" class="sm-btn secundario pequeno" data-rv-passo="-1">‹ Anterior</button><button type="button" class="sm-btn secundario pequeno" data-rv-passo="1">Próxima ›</button></div>
+        </div>`;
       }).join("")}
     </div>`;
   }
+  // Painel de revisão (TCF): filtros, clique na questão, anterior/próxima e gabarito comentado.
+  const estadoRevisao = {};   // filtro e questão abertos (o resultado é redesenhado quando a IA termina)
+  function ligarRevisao(raiz) {
+    raiz.querySelectorAll("[data-rv]").forEach(card => {
+      const p = card.dataset.rv;
+      let filtro = (estadoRevisao[p] || {}).filtro || "erradas", atual = null;
+      const todos = [...card.querySelectorAll(".sm-rv-q")];
+      const visiveis = () => todos.filter(b => filtro === "todas" || (filtro === "certas" ? b.classList.contains("certa") : !b.classList.contains("certa")));
+      const mostrar = n => {
+        atual = n;
+        estadoRevisao[p] = { filtro, n };
+        todos.forEach(b => { b.classList.toggle("atual", b.dataset.rvN === String(n)); b.hidden = !visiveis().includes(b); });
+        card.querySelectorAll(".sm-rv-filtros [data-rv-filtro]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.rvFiltro === filtro)));
+        card.querySelectorAll(".sm-rv-item").forEach(it => { it.hidden = it.dataset.rvItem !== String(n); });
+        const item = card.querySelector(`.sm-rv-item[data-rv-item="${n}"]`);
+        if (item) carregarExplicacaoSim(item, p, n);
+      };
+      const primeiro = () => (visiveis()[0] || todos[0]);
+      card.addEventListener("click", ev => {
+        const f = ev.target.closest("[data-rv-filtro]");
+        if (f) { filtro = f.dataset.rvFiltro; const v = visiveis(); const manter = v.find(b => b.dataset.rvN === String(atual)); mostrar(Number((manter || primeiro()).dataset.rvN)); return; }
+        const q = ev.target.closest(".sm-rv-q");
+        if (q) { mostrar(Number(q.dataset.rvN)); return; }
+        const passo = ev.target.closest("[data-rv-passo]");
+        if (passo) { const v = visiveis(), i = v.findIndex(b => b.dataset.rvN === String(atual)) + Number(passo.dataset.rvPasso); if (v[i]) mostrar(Number(v[i].dataset.rvN)); }
+      });
+      if (!visiveis().length) filtro = "todas";
+      const antes = estadoRevisao[p] && todos.find(b => b.dataset.rvN === String(estadoRevisao[p].n));
+      mostrar(Number((antes || primeiro()).dataset.rvN));
+    });
+  }
+  const cacheExplicacaoSim = {};
+  function carregarExplicacaoSim(item, p, n) {
+    const el = item.querySelector("[data-rv-explica]"); if (!el) return;
+    const k = p + ":" + n;
+    const desenhar = d => `<div class="sm-explica"><h4>Por que esta é a resposta certa</h4><p>${esc(d.porque)}</p>` +
+      (d.pegadinhas.length ? `<h4>Pegadinhas</h4><ul>${d.pegadinhas.map(x => `<li><b>${esc(x.alternativa)}</b> ${esc(x.motivo)}</li>`).join("")}</ul>` : "") +
+      (d.dicas.length ? `<h4>Dicas para a prova</h4><ul class="dicas">${d.dicas.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "") + "</div>";
+    if (cacheExplicacaoSim[k]) { el.innerHTML = desenhar(cacheExplicacaoSim[k]); return; }
+    if (el.dataset.carregando) return;
+    el.dataset.carregando = "1";
+    el.innerHTML = '<div class="sm-explica carregando"><span></span>Preparando o gabarito comentado (pegadinhas e dicas)…</div>';
+    api(`/api/simulados/tentativas/${S.t._id}/explicacao/${p}/${n}`).then(d => { cacheExplicacaoSim[k] = d; el.innerHTML = desenhar(d); })
+      .catch(e => { el.innerHTML = `<div class="sm-explica erro">${esc(e.message || "Gabarito comentado indisponível agora.")}</div>`; })
+      .finally(() => { delete el.dataset.carregando; });
+  }
+
+
 
   function tabelaCriterios(p, tarefa) {
     const crit = S.t.criterios[p];

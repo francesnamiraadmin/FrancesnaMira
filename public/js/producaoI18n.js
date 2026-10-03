@@ -61,15 +61,15 @@
     [/^(\d+) \/ (\d+) thèmes cochés · (\d+) affichés$/, "$1 / $2 temas marcados · $3 exibidos"],
     [/^Les trois textes partent dans le Sistema de Correção à la fin de l'épreuve \(1 crédit par tâche · vous avez (\d+) crédits?\)\.$/, "Os três textos vão para o Sistema de Correção no fim da prova (1 crédito por tarefa · você tem $1 crédito(s))."],
     [/^Autres thèmes$/, "Outros temas"],
-    [/^La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l'examen\. Vous la retrouvez dans « Mes corrections »\. 1 crédit · vous en avez (\d+)\.$/, "A produção entra na fila do Sistema de Correção e é corrigida com a grade da prova. Você a encontra em « Minhas correções ». 1 crédito · você tem $1."],
+    [/^La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l'examen\. Vous la retrouvez dans « Mes notes »\. 1 crédit · vous en avez (\d+)\.$/, "A produção entra na fila do Sistema de Correção e é corrigida com a grade da prova. Você a encontra em « Minhas notas ». 1 crédito · você tem $1."],
     [/^Envoyer cet enregistrement et sa transcription à un professeur \? 1 crédit de correction sera utilisé \(vous en avez (\d+)\)\.$/, "Enviar esta gravação e a transcrição a um professor? Será usado 1 crédito de correção (você tem $1)."],
     [/^✓ Envoyé \(protocole (.+)\) ·$/, "✓ Enviado (protocolo $1) ·"],
     [/^Envoyée le (.+) · corrigée le (.+) par (.+)$/, "Enviada em $1 · corrigida em $2 por $3"],
     [/^Envoyée le (.+) · corrigée le (.+)$/, "Enviada em $1 · corrigida em $2"],
     [/^Envoyée le (.+)$/, "Enviada em $1"],
     [/^Avec (.+)$/, "Com $1"],
-    [/^Votre texte \((\d+) mots\) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l'examen\. Vous suivrez la correction dans « Mes corrections »\.$/, "Seu texto ($1 palavras) entra na fila do Sistema de Correção e será corrigido com a grade da prova. Você acompanha a correção em « Minhas correções »."],
-    [/^L'enregistrement \(([\d:]+)\) et sa transcription entrent dans la file du Sistema de Correção\. Vous suivrez la correction dans « Mes corrections »\.$/, "A gravação ($1) e a transcrição entram na fila do Sistema de Correção. Você acompanha a correção em « Minhas correções »."],
+    [/^Votre texte \((\d+) mots\) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l'examen\. Vous suivrez la correction dans « Mes notes »\.$/, "Seu texto ($1 palavras) entra na fila do Sistema de Correção e será corrigido com a grade da prova. Você acompanha a correção em « Minhas notas »."],
+    [/^L'enregistrement \(([\d:]+)\) et sa transcription entrent dans la file du Sistema de Correção\. Vous suivrez la correction dans « Mes notes »\.$/, "A gravação ($1) e a transcrição entram na fila do Sistema de Correção. Você acompanha a correção em « Minhas notas »."],
     [/^Tâche\(s\) ([\d, ]+) : chaque texte entre dans la file du Sistema de Correção \(1 crédit par tâche\)\.$/, "Tarefa(s) $1: cada texto entra na fila do Sistema de Correção (1 crédito por tarefa)."],
     [/^(?:Tâche\(s\) vide\(s\) : ([\d, ]+)\. )?Vos textes (entrent dans la file du Sistema de Correção \(1 crédit par tâche\)|seront corrigés par l'IA dès la fin de l'épreuve)\.$/, function (m, vazias, resto) {
       return (vazias ? "Tarefa(s) vazia(s): " + vazias + ". " : "") + (/^entrent/.test(resto) ? "Seus textos entram na fila do Sistema de Correção (1 crédito por tarefa)." : "Seus textos serão corrigidos pela IA no fim da prova.");
@@ -88,7 +88,7 @@
     [/^avec (.+)$/, "com $1"],
     [/^Élèves qui demandent un professeur en direct : (\d+)$/, "Alunos pedindo um professor ao vivo: $1"],
     [/^(.+) suit votre production en direct\.$/, "$1 está acompanhando sua produção ao vivo."],
-    [/^Correction détaillée sur la grille de l'examen, dans « Mes corrections »\. 1 crédit · vous en avez (\d+)\.$/, "Correção detalhada com a grade do exame, em « Minhas correções ». 1 crédito · você tem $1."],
+    [/^Correction détaillée sur la grille de l'examen, dans « Mes notes »\. 1 crédit · vous en avez (\d+)\.$/, "Correção detalhada com a grade do exame, em « Minhas notas ». 1 crédito · você tem $1."],
     [/^Envoyer ce texte à un professeur \? 1 crédit sera utilisé \(vous en avez (\d+)\)\.$/, "Enviar este texto a um professor? Será usado 1 crédito (você tem $1)."],
     [/^Tâche (\d) · (.+)$/, function (m, n, s) { return "Tarefa " + n + " · " + (TAREFA[s] || s); }],
     [/^T(\d) · (.+)$/, function (m, n, s) { return "T" + n + " · " + (TAREFA[s] || s); }],
@@ -192,10 +192,12 @@
     for (var c = no.firstChild; c; c = c.nextSibling) traduzirNo(c);
   }
 
-  // Eixos e nomes das tarefas: traduzidos nos dados, assim todos os rótulos já saem em pt.
+  // Nomes das tarefas traduzidos nos dados; os eixos temáticos continuam em francês.
   window.FNM_TRADUZIR_BANCO = function (B) {
     if (!B || !B.eixos) return;
-    Object.keys(EIXOS).forEach(function (k) { if (B.eixos[k]) B.eixos[k].nome = EIXOS[k]; });
+    // Os eixos temáticos ficam em francês, como na prova (pedido da equipe): o mapa EIXOS fica só
+    // como referência e não é mais aplicado aos dados.
+    void EIXOS;
   };
 
   window.FNM_I18N_PRONTO = fetch("i18n/producao-pt.json", { cache: "no-cache" })

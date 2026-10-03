@@ -1555,7 +1555,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez faire un stage de voile pendant vos vacances. Vous téléphonez au club nautique pour obtenir des informations (dates, niveaux, prix, équipement, conditions, hébergement, etc.).",
      "perguntasExaminador": [

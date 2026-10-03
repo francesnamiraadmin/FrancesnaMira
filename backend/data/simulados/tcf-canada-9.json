@@ -1585,7 +1585,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez prendre un abonnement dans un théâtre. Vous téléphonez à la billetterie pour obtenir des informations (formules, prix, réductions, horaires, placement, conditions, etc.).",
      "perguntasExaminador": [

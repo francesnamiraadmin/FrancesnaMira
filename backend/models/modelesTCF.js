@@ -237,7 +237,18 @@ const SalaAoVivoTCF = mongoose.model("SalaAoVivoTCF", new Schema({
   atualizadoEm: { type: Date, default: Date.now }
 }));
 
+// Temas do Ambiente de Produção liberados para cada aluno (por perfil: TCF, DELF-B1…), escolhidos pelo
+// administrador no Sistema de Correção. Sem documento: valem os 20 temas padrão (data/modeles/temas-padrao.json).
+const TemasAlunoTCF = mongoose.model("TemasAlunoTCF", new Schema({
+  alunoId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  perfil: { type: String, required: true },
+  sujets: [{ _id: false, tache: String, id: String }],
+  atualizadoPor: { type: Schema.Types.ObjectId, ref: "User" },
+  atualizadoEm: { type: Date, default: Date.now }
+}).index({ alunoId: 1, perfil: 1 }, { unique: true }));
+
 module.exports = {
+  TemasAlunoTCF,
   DossierSujetTCF, SalaAoVivoTCF,
   TACHES, ModeleIA, EpreuveTCF, SessaoTCF, DevoirTCF, CarnetProducao, TemaMesTCF, PostBlogTCF, AvisoTCF,
   MensagemTCF, CompetenciaTCF, CorrecaoIATCF, PartilhaTCF, CartaVocabTCF, ProgressoVocabTCF, ConfigModelesTCF, RecordeTCF

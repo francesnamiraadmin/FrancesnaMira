@@ -147,6 +147,32 @@ async function carregar(req, res) {
   return { t, def };
 }
 
+// ---------------- gabarito comentado (por que a certa, pegadinhas, dicas) ----------------
+// Só depois que o simulado terminou (o aluno já viu o resultado das compreensões).
+router.get("/tentativas/:id/explicacao/:prova/:n", async (req, res) => {
+  try {
+    const c = await carregar(req, res);
+    if (!c) return;
+    const { t, def } = c;
+    const prova = req.params.prova, n = Number(req.params.n);
+    if (!sim.ehCompreensao(prova) || !def.provas[prova]) return res.status(400).json({ msg: "Prova inválida." });
+    if (!ehEquipe(req) && t.status === "em_andamento") return res.status(403).json({ msg: "O gabarito comentado fica disponível no fim do simulado." });
+    const q = (def.provas[prova].questoes || []).find(x => x.n === n);
+    if (!q) return res.status(404).json({ msg: "Questão não encontrada." });
+    const ex = q.exercicio && (def.provas[prova].exercicios || []).find(e => e.id === q.exercicio);
+    const dados = await require("../utils/explicacaoQuestao").explicar(`s:${def.slug}:${prova}:${n}`, {
+      prova: (def.formato || "TCF") + " · " + (prova === "co" ? "compréhension orale" : "compréhension écrite"), nivel: q.nivel,
+      enunciado: q.pergunta, texto: q.texto || q.documento || (ex && ex.documento && (ex.documento.texto || ex.documento)) || "",
+      transcricao: q.transcricao || (ex && ex.transcricao) || "", alternativas: q.alternativas, correta: q.correta, explicacao: q.explicacao
+    });
+    res.json(dados);
+  } catch (err) {
+    if (err.status) return res.status(err.status).json({ msg: err.message });
+    console.error("explicacao simulado:", err.message);
+    res.status(503).json({ msg: "A explicação detalhada está indisponível agora. Tente de novo em instantes." });
+  }
+});
+
 // ---------------- correção por IA ----------------
 const iaEmCurso = new Set();
 async function rodarIA(def, t, { publicar }) {

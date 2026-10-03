@@ -1,0 +1,612 @@
+{
+ "TCF": [
+  {
+   "tache": "T1",
+   "id": "P1-018",
+   "e": "culture",
+   "t": "Aimez-vous lire ? Quel est le dernier livre que vous avez lu ?"
+  },
+  {
+   "tache": "T1",
+   "id": "P1-026",
+   "e": "env",
+   "t": "Qu'est-ce que vous faites pour protéger l'environnement au quotidien ?"
+  },
+  {
+   "tache": "T1",
+   "id": "P1-003",
+   "e": "trav",
+   "t": "Quelle est votre profession ? Décrivez une journée de travail typique."
+  },
+  {
+   "tache": "T2",
+   "id": "P2-089",
+   "e": "culture",
+   "t": "Je suis votre voisin(e). Vous venez d'emménager dans mon immeuble. Vous me posez des questions sur les activités du quar"
+  },
+  {
+   "tache": "T2",
+   "id": "P2-013",
+   "e": "voyages",
+   "t": "Je suis votre ami(e). Vous venez de vous installer dans ma ville. Vous voulez sortir le week-end. Vous me posez des ques"
+  },
+  {
+   "tache": "T2",
+   "id": "P2-014",
+   "e": "sport",
+   "t": "Je travaille à l'accueil d’un club sportif de votre ville. Vous voulez faire du sport. Vous me posez des questions pour "
+  },
+  {
+   "tache": "T3",
+   "id": "P3-011",
+   "e": "trav",
+   "t": "Est-ce que vous préférez travailler sous la responsabilité d’un homme ou d’une femme ? Pourquoi ?"
+  },
+  {
+   "tache": "T3",
+   "id": "P3-112",
+   "e": "mondial",
+   "t": "Pensez-vous que l’expérience de la vie à l’étranger aide à réussir professionnellement ?"
+  },
+  {
+   "tache": "T3",
+   "id": "P3-022",
+   "e": "medias",
+   "t": "De nos jours, peut-on vivre sans télévision ? Pourquoi ?"
+  },
+  {
+   "tache": "T3",
+   "id": "P3-191",
+   "e": "tech",
+   "t": "À votre avis, les jeux vidéo peuvent-ils nuire aux enfants ? Pourquoi ?"
+  },
+  {
+   "tache": "ET1",
+   "id": "S1-015",
+   "e": "culture",
+   "t": "Vous voulez organiser une visite culturelle dans votre ville. Écrivez un message pour inviter vos amis. Vous leurs donne"
+  },
+  {
+   "tache": "ET1",
+   "id": "S1-007",
+   "e": "env",
+   "t": "Votre ami Cédric a accepté de garder votre maison et jardin pendant vos vacances. Écrivez un message pour lui dire ce qu"
+  },
+  {
+   "tache": "ET1",
+   "id": "S1-009",
+   "e": "trav",
+   "t": "Répondre au courriel de votre ami Lucas pour lui donner les informations sur les nouveaux locaux de votre entreprise (li"
+  },
+  {
+   "tache": "ET2",
+   "id": "S2-006",
+   "e": "culture",
+   "t": "Vous venez d'assister au concert de votre artiste préféré. Vous écrivez un article sur votre blog personnel, pour partag"
+  },
+  {
+   "tache": "ET2",
+   "id": "S2-008",
+   "e": "env",
+   "t": "Vous avez assisté à une soirée écologique pour la planète qui avait lieu dans votre université. Racontez-la dans votre b"
+  },
+  {
+   "tache": "ET2",
+   "id": "S2-048",
+   "e": "mondial",
+   "t": "Répondez en commentaire à une publication sur Facebook au sujet des études à l’étranger en citant les avantages et les i"
+  },
+  {
+   "tache": "ET3",
+   "id": "S3-026",
+   "e": "env",
+   "t": "L'utilisation du plastique, pour ou contre"
+  },
+  {
+   "tache": "ET3",
+   "id": "S3-003",
+   "e": "medias",
+   "t": "L’impact de la télévision sur l’éducation des enfants"
+  },
+  {
+   "tache": "ET3",
+   "id": "S3-009",
+   "e": "fam",
+   "t": "Vivre en colocation : pour ou contre ?"
+  },
+  {
+   "tache": "ET3",
+   "id": "S3-017",
+   "e": "edu",
+   "t": "La lecture pour les enfants."
+  }
+ ],
+ "DELF-A1": [
+  {
+   "tache": "T1",
+   "id": "DA1-T1-03",
+   "e": "trav",
+   "t": "Qu'est-ce que vous faites dans la vie ? Où travaillez-vous ou étudiez-vous ?"
+  },
+  {
+   "tache": "T1",
+   "id": "DA1-T1-01",
+   "e": "fam",
+   "t": "Présentez-vous : comment vous appelez-vous ? Quel âge avez-vous ? Où habitez-vous ?"
+  },
+  {
+   "tache": "T1",
+   "id": "DA1-T1-04",
+   "e": "loisirs",
+   "t": "Qu'est-ce que vous aimez faire le week-end ?"
+  },
+  {
+   "tache": "T1",
+   "id": "DA1-T1-05",
+   "e": "alim",
+   "t": "Quel est votre plat préféré ? Est-ce que vous aimez cuisiner ?"
+  },
+  {
+   "tache": "T1",
+   "id": "DA1-T1-06",
+   "e": "log",
+   "t": "Décrivez votre maison ou votre appartement."
+  },
+  {
+   "tache": "T2",
+   "id": "DA1-T2-05",
+   "e": "trav",
+   "t": "Thème : le travail. Posez des questions à l'examinateur à partir des mots : métier ? / horaires ? / collègues ? / transp"
+  },
+  {
+   "tache": "T2",
+   "id": "DA1-T2-01",
+   "e": "fam",
+   "t": "Thème : la famille. Posez des questions à l'examinateur à partir des mots : frères ? / enfants ? / parents ? / âge ? / a"
+  },
+  {
+   "tache": "T2",
+   "id": "DA1-T2-02",
+   "e": "loisirs",
+   "t": "Thème : les loisirs. Posez des questions à l'examinateur à partir des mots : cinéma ? / musique ? / livre ? / week-end ?"
+  },
+  {
+   "tache": "T2",
+   "id": "DA1-T2-03",
+   "e": "alim",
+   "t": "Thème : les repas. Posez des questions à l'examinateur à partir des mots : petit-déjeuner ? / restaurant ? / plat préfér"
+  },
+  {
+   "tache": "T2",
+   "id": "DA1-T2-04",
+   "e": "log",
+   "t": "Thème : le logement. Posez des questions à l'examinateur à partir des mots : maison ? / quartier ? / chambre ? / jardin "
+  },
+  {
+   "tache": "T3",
+   "id": "DA1-T3-01",
+   "e": "conso",
+   "t": "Vous êtes dans une boulangerie. Vous achetez du pain et des gâteaux pour un anniversaire. Vous demandez les prix et vous"
+  },
+  {
+   "tache": "T3",
+   "id": "DA1-T3-03",
+   "e": "voyages",
+   "t": "Vous êtes à l'office de tourisme. Vous demandez un plan de la ville, les horaires du musée et le prix d'une visite. L'ex"
+  },
+  {
+   "tache": "T3",
+   "id": "DA1-T3-04",
+   "e": "transports",
+   "t": "Vous êtes à la gare. Vous achetez un billet aller-retour pour Lyon. Vous demandez l'heure du départ, le quai et le prix."
+  },
+  {
+   "tache": "T3",
+   "id": "DA1-T3-05",
+   "e": "alim",
+   "t": "Vous êtes au marché. Vous achetez des fruits et des légumes pour un repas. Vous demandez les prix et vous payez. L'exami"
+  },
+  {
+   "tache": "T3",
+   "id": "DA1-T3-07",
+   "e": "log",
+   "t": "Vous cherchez une chambre à louer. Vous téléphonez au propriétaire pour demander le prix, la taille de la chambre et le "
+  },
+  {
+   "tache": "ET1",
+   "id": "DA1-ET1-11",
+   "e": "trav",
+   "t": "Vous commencez un nouveau travail. Vous écrivez à un(e) ami(e) pour raconter votre première journée : le lieu, les collè"
+  },
+  {
+   "tache": "ET1",
+   "id": "DA1-ET1-01",
+   "e": "voyages",
+   "t": "Vous êtes en vacances à la mer. Vous écrivez une carte postale à un(e) ami(e) français(e). Vous parlez du temps, de l'hô"
+  },
+  {
+   "tache": "ET1",
+   "id": "DA1-ET1-02",
+   "e": "loisirs",
+   "t": "Vous invitez votre amie Julie au cinéma samedi. Vous lui écrivez un courriel : vous donnez le jour, l'heure, le lieu et "
+  },
+  {
+   "tache": "ET1",
+   "id": "DA1-ET1-03",
+   "e": "fam",
+   "t": "Vous écrivez à votre correspondant(e) pour présenter votre famille : les prénoms, l'âge, le travail et les goûts de chaq"
+  },
+  {
+   "tache": "ET1",
+   "id": "DA1-ET1-04",
+   "e": "log",
+   "t": "Vous avez un nouvel appartement. Vous écrivez un message à un(e) ami(e) pour le décrire (les pièces, le quartier) et vou"
+  }
+ ],
+ "DELF-A2": [
+  {
+   "tache": "T1",
+   "id": "DA2-T1-02",
+   "e": "trav",
+   "t": "Parlez de votre travail ou de vos études : qu'est-ce que vous faites et qu'est-ce que vous aimez ?"
+  },
+  {
+   "tache": "T1",
+   "id": "DA2-T1-01",
+   "e": "fam",
+   "t": "Présentez-vous et parlez de votre famille."
+  },
+  {
+   "tache": "T1",
+   "id": "DA2-T1-03",
+   "e": "loisirs",
+   "t": "Que faites-vous pendant votre temps libre ? Qu'avez-vous fait le week-end dernier ?"
+  },
+  {
+   "tache": "T1",
+   "id": "DA2-T1-04",
+   "e": "voyages",
+   "t": "Parlez de vos dernières vacances : où êtes-vous allé(e) et avec qui ?"
+  },
+  {
+   "tache": "T3",
+   "id": "DA2-T3-11",
+   "e": "culture",
+   "t": "Parlez d'un film, d'un livre ou d'une chanson que vous aimez beaucoup."
+  },
+  {
+   "tache": "T3",
+   "id": "DA2-T3-06",
+   "e": "trav",
+   "t": "Décrivez une journée de travail ou d'études typique."
+  },
+  {
+   "tache": "T3",
+   "id": "DA2-T3-01",
+   "e": "loisirs",
+   "t": "Parlez de votre activité préférée : depuis quand la pratiquez-vous ? Pourquoi l'aimez-vous ?"
+  },
+  {
+   "tache": "T3",
+   "id": "DA2-T3-02",
+   "e": "voyages",
+   "t": "Racontez un voyage qui vous a marqué(e) : où, quand, avec qui et ce que vous avez fait."
+  },
+  {
+   "tache": "T2",
+   "id": "DA2-T2-05",
+   "e": "sante",
+   "t": "Vous êtes chez le médecin. Vous expliquez vos symptômes et vous posez des questions sur le traitement. L'examinateur jou"
+  },
+  {
+   "tache": "T2",
+   "id": "DA2-T2-11",
+   "e": "trav",
+   "t": "Vous cherchez un petit travail pour l'été. Vous répondez à une annonce et vous posez des questions sur le poste (horaire"
+  },
+  {
+   "tache": "T2",
+   "id": "DA2-T2-01",
+   "e": "voyages",
+   "t": "Vous êtes en vacances en France et vous voulez faire une excursion. Vous allez à l'office de tourisme pour vous renseign"
+  },
+  {
+   "tache": "T2",
+   "id": "DA2-T2-02",
+   "e": "conso",
+   "t": "Vous avez acheté un pantalon, mais il est trop petit. Vous retournez au magasin pour l'échanger. L'examinateur joue le r"
+  },
+  {
+   "tache": "ET1",
+   "id": "DA2-ET1-11",
+   "e": "culture",
+   "t": "Vous avez visité une exposition. Vous racontez votre visite sur votre blog et vous donnez votre avis."
+  },
+  {
+   "tache": "ET1",
+   "id": "DA2-ET1-03",
+   "e": "trav",
+   "t": "Vous avez commencé un stage dans une entreprise. Vous écrivez à un(e) ami(e) pour raconter votre première semaine et dir"
+  },
+  {
+   "tache": "ET1",
+   "id": "DA2-ET1-01",
+   "e": "voyages",
+   "t": "Vous avez passé un week-end dans une ville que vous ne connaissiez pas. Sur votre blog, vous racontez ce que vous avez f"
+  },
+  {
+   "tache": "ET1",
+   "id": "DA2-ET1-02",
+   "e": "relations",
+   "t": "Vous êtes allé(e) au mariage d'un(e) ami(e). Vous écrivez à un(e) ami(e) français(e) pour raconter cette journée : le li"
+  },
+  {
+   "tache": "ET2",
+   "id": "DA2-ET2-05",
+   "e": "trav",
+   "t": "Vous ne pouvez pas venir à une réunion de travail demain. Vous écrivez à votre responsable pour vous excuser, expliquer "
+  },
+  {
+   "tache": "ET2",
+   "id": "DA2-ET2-01",
+   "e": "relations",
+   "t": "Votre ami(e) vous a invité(e) à son anniversaire, mais vous ne pouvez pas y aller. Vous lui écrivez pour vous excuser, e"
+  },
+  {
+   "tache": "ET2",
+   "id": "DA2-ET2-02",
+   "e": "fam",
+   "t": "Vous avez passé une semaine chez la famille d'un(e) ami(e) français(e). Vous leur écrivez pour les remercier et dire ce "
+  },
+  {
+   "tache": "ET2",
+   "id": "DA2-ET2-03",
+   "e": "loisirs",
+   "t": "Vous organisez une sortie au parc d'attractions avec des collègues. Vous écrivez un courriel pour les inviter : la date,"
+  }
+ ],
+ "DELF-B1": [
+  {
+   "tache": "T1",
+   "id": "DB1-T1-08",
+   "e": "culture",
+   "t": "Quelles traditions de votre pays aimeriez-vous faire découvrir à des Français ?"
+  },
+  {
+   "tache": "T1",
+   "id": "DB1-T1-02",
+   "e": "trav",
+   "t": "Parlez de votre travail ou de vos études. Pourquoi avez-vous choisi ce domaine ?"
+  },
+  {
+   "tache": "T1",
+   "id": "DB1-T1-01",
+   "e": "fam",
+   "t": "Parlez-moi de vous : votre famille, votre parcours et vos projets."
+  },
+  {
+   "tache": "T1",
+   "id": "DB1-T1-03",
+   "e": "edu",
+   "t": "Pourquoi apprenez-vous le français ? Quels sont vos projets avec cette langue ?"
+  },
+  {
+   "tache": "T1",
+   "id": "DB1-T1-04",
+   "e": "loisirs",
+   "t": "Comment occupez-vous votre temps libre ? Avez-vous une passion ?"
+  },
+  {
+   "tache": "T2",
+   "id": "DB1-T2-11",
+   "e": "alim",
+   "t": "Vous organisez un repas avec des amis et vous voulez un menu végétarien. Votre ami(e) n'est pas d'accord. Vous discutez "
+  },
+  {
+   "tache": "T2",
+   "id": "DB1-T2-10",
+   "e": "env",
+   "t": "Vous proposez à vos collègues d'organiser le tri des déchets au bureau. Un(e) collègue trouve que c'est inutile. Vous es"
+  },
+  {
+   "tache": "T2",
+   "id": "DB1-T2-02",
+   "e": "trav",
+   "t": "Vous voulez prendre une semaine de congé au moment où il y a beaucoup de travail. Vous discutez avec votre responsable p"
+  },
+  {
+   "tache": "T2",
+   "id": "DB1-T2-01",
+   "e": "fam",
+   "t": "Vous voulez adopter un chien. Votre colocataire n'est pas d'accord. Vous essayez de le / la convaincre. L'examinateur jo"
+  },
+  {
+   "tache": "T2",
+   "id": "DB1-T2-03",
+   "e": "voyages",
+   "t": "Vous avez réservé un hôtel pour vos vacances, mais la chambre ne correspond pas à la description (bruit, vue, propreté)."
+  },
+  {
+   "tache": "T3",
+   "id": "DB1-T3-13",
+   "e": "sport",
+   "t": "Document : « L'e-sport, un vrai sport ? » Les compétitions de jeux vidéo attirent des millions de spectateurs et certain"
+  },
+  {
+   "tache": "T3",
+   "id": "DB1-T3-12",
+   "e": "culture",
+   "t": "Document : « Des musées gratuits pour tous ? » Dans plusieurs pays, l'entrée des musées nationaux est gratuite. Pour leu"
+  },
+  {
+   "tache": "T3",
+   "id": "DB1-T3-03",
+   "e": "env",
+   "t": "Document : « Moins de viande pour la planète ? » Pour réduire les émissions de gaz à effet de serre, des cantines scolai"
+  },
+  {
+   "tache": "T3",
+   "id": "DB1-T3-02",
+   "e": "trav",
+   "t": "Document : « La semaine de quatre jours séduit » Plusieurs entreprises testent la semaine de quatre jours, sans baisse d"
+  },
+  {
+   "tache": "T3",
+   "id": "DB1-T3-01",
+   "e": "tech",
+   "t": "Document : « Les écrans, nouveaux baby-sitters ? » Selon une étude récente, les enfants de moins de six ans passent en m"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB1-ET3-01",
+   "e": "tech",
+   "t": "Sur un forum, un internaute écrit : « Les réseaux sociaux nous éloignent de nos vrais amis. » Vous répondez sur le forum"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB1-ET3-06",
+   "e": "medias",
+   "t": "Sur le blog d'un journal, on lit : « Aujourd'hui, les jeunes ne s'informent plus que par les réseaux sociaux. » Vous réa"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB1-ET3-10",
+   "e": "culture",
+   "t": "Votre ville veut réduire le budget de la bibliothèque municipale pour construire un parking. Vous écrivez au courrier de"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB1-ET3-04",
+   "e": "env",
+   "t": "Votre mairie veut interdire les voitures dans le centre-ville le week-end. Vous écrivez au maire pour donner votre opini"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB1-ET3-03",
+   "e": "trav",
+   "t": "Le télétravail se développe dans votre entreprise. Dans le journal interne, vous écrivez un article pour présenter ses a"
+  }
+ ],
+ "DELF-B2": [
+  {
+   "tache": "T3",
+   "id": "DB2-T3-08",
+   "e": "culture",
+   "t": "Document : « Le patrimoine coûte-t-il trop cher ? » Restaurer un château ou une cathédrale coûte des millions d'euros. C"
+  },
+  {
+   "tache": "T3",
+   "id": "DB2-T3-13",
+   "e": "mondial",
+   "t": "Document : « Le monde en anglais ? » Dans les universités et les entreprises, l'anglais s'impose comme langue commune. P"
+  },
+  {
+   "tache": "T3",
+   "id": "DB2-T3-02",
+   "e": "env",
+   "t": "Document : « Faut-il renoncer à l'avion ? » Le transport aérien représente une part croissante des émissions de gaz à ef"
+  },
+  {
+   "tache": "T3",
+   "id": "DB2-T3-04",
+   "e": "trav",
+   "t": "Document : « Le droit à la déconnexion » Courriels le soir, messages le week-end : avec le smartphone, le travail ne s'a"
+  },
+  {
+   "tache": "T3",
+   "id": "DB2-T3-01",
+   "e": "tech",
+   "t": "Document : « L'intelligence artificielle au bureau » Rédiger des courriels, résumer des réunions, traduire des documents"
+  },
+  {
+   "tache": "T3",
+   "id": "DB2-T3-03",
+   "e": "edu",
+   "t": "Document : « Des notes, pour quoi faire ? » Plusieurs écoles ont supprimé les notes chiffrées au profit d'une évaluation"
+  },
+  {
+   "tache": "T3",
+   "id": "DB2-T3-05",
+   "e": "medias",
+   "t": "Document : « Les influenceurs, nouveaux prescripteurs » Vêtements, alimentation, voyages, placements financiers : les in"
+  },
+  {
+   "tache": "T3",
+   "id": "DB2-T3-06",
+   "e": "sante",
+   "t": "Document : « La santé en données » Montres connectées, applications de suivi du sommeil ou de l'alimentation : nous mesu"
+  },
+  {
+   "tache": "T3",
+   "id": "DB2-T3-07",
+   "e": "soc",
+   "t": "Document : « Vivre ensemble entre générations » Des résidences accueillent désormais étudiants et personnes âgées sous l"
+  },
+  {
+   "tache": "T3",
+   "id": "DB2-T3-09",
+   "e": "conso",
+   "t": "Document : « Réparer plutôt que jeter » Pour lutter contre l'obsolescence programmée, les ateliers de réparation se mult"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-02",
+   "e": "env",
+   "t": "Votre municipalité a décidé d'interdire les sacs plastiques et les emballages jetables sur le marché hebdomadaire. Certa"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-08",
+   "e": "culture",
+   "t": "Le conseil municipal veut transformer un vieux cinéma du centre-ville en centre commercial. Vous écrivez une lettre ouve"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-14",
+   "e": "mondial",
+   "t": "Un magazine pose la question : « Faut-il encore apprendre des langues étrangères à l'heure de la traduction automatique "
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-01",
+   "e": "trav",
+   "t": "Votre entreprise envisage de supprimer les bureaux individuels pour créer des espaces de travail partagés (open space). "
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-03",
+   "e": "tech",
+   "t": "Le lycée de votre ville veut interdire totalement les téléphones portables dans l'établissement, même pendant les pauses"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-04",
+   "e": "edu",
+   "t": "Un magazine consacre un dossier à la question : « L'université doit-elle être gratuite pour tous ? » Vous envoyez une co"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-05",
+   "e": "medias",
+   "t": "Sur le site d'un journal, vous lisez un article qui affirme que la publicité devrait être interdite dans les programmes "
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-06",
+   "e": "sante",
+   "t": "Votre entreprise propose de financer un abonnement à une salle de sport pour tous les salariés, mais elle supprimerait e"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-07",
+   "e": "soc",
+   "t": "Le gouvernement envisage de créer un service civique obligatoire de six mois pour tous les jeunes de 18 ans. Vous écrive"
+  },
+  {
+   "tache": "ET3",
+   "id": "DB2-ET3-09",
+   "e": "conso",
+   "t": "Sur un forum, des internautes débattent : « Faut-il taxer davantage les achats en ligne pour protéger les petits commerc"
+  }
+ ]
+}

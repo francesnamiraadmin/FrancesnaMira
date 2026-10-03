@@ -20,7 +20,9 @@
   aspect-ratio: 1; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-bg);
   color: var(--text); font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.85rem; position: relative;
 }
-.qnav-btn.respondida { background: var(--success-bg); border-color: var(--success-text); color: var(--success-text); }
+/* questão já marcada: azul (o verde fica só para « acertou » no resultado) */
+.qnav-btn.respondida { background: rgba(37, 99, 235, 0.16); border-color: #2563eb; color: #1d4ed8; }
+:root[data-theme="dark"] .qnav-btn.respondida { background: rgba(96, 165, 250, 0.18); border-color: #60a5fa; color: #93c5fd; }
 .qnav-btn.atual { outline: 3px solid var(--accent); }
 .qnav-legenda { font-size: 0.78rem; opacity: 0.85; margin-top: 12px; line-height: 1.6; }
 
@@ -102,3 +104,33 @@
 .q-relato-msg { font-size: 0.85rem; margin-top: 8px; }
 .q-relato-msg.sucesso { color: var(--success-text); }
 .q-relato-msg.erro { color: var(--danger-text); }
+
+/* ===== Resultado: painel das questões (uma por vez) e gabarito comentado ===== */
+.res-ponderada { margin-top: 6px; font-size: .92rem; }
+.res-painel { margin: 18px 0; padding: 16px 18px; border-radius: 18px; background: var(--glass-bg); border: 1px solid var(--glass-border); }
+.res-filtros { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.res-filtros button { border: 1px solid var(--glass-border); background: var(--glass-bg-2); color: var(--text); border-radius: 999px; padding: 6px 14px; font: 600 .84rem 'Poppins', sans-serif; cursor: pointer; }
+.res-filtros button b { margin-left: 4px; }
+.res-filtros button[aria-pressed="true"] { background: #1c2b3a; color: #fff; border-color: #1c2b3a; }
+.res-filtros button.errada[aria-pressed="true"] { background: #dc2626; border-color: #dc2626; }
+.res-filtros button.certa[aria-pressed="true"] { background: #16a34a; border-color: #16a34a; }
+.res-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); gap: 6px; }
+.res-q { height: 42px; border-radius: 10px; border: 2px solid transparent; font: 800 .9rem 'Poppins', sans-serif; cursor: pointer; transition: transform .12s; }
+.res-q.certa { background: rgba(22, 163, 74, .16); color: #15803d; }
+.res-q.errada { background: rgba(220, 38, 38, .14); color: #b91c1c; }
+.res-q:hover { transform: translateY(-2px); }
+.res-q.atual { border-color: var(--text); box-shadow: 0 6px 14px -8px rgba(22, 33, 58, .6); }
+.res-legenda { margin: 10px 0 0; font-size: .78rem; opacity: .8; }
+.res-legenda i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; vertical-align: -1px; }
+.res-legenda i.certa { background: #16a34a; } .res-legenda i.errada { background: #dc2626; }
+.res-nav { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; font-size: .86rem; }
+.q-explica { margin-top: 12px; padding: 14px 16px; border-radius: 14px; background: rgba(37, 99, 235, .07); border: 1px solid rgba(37, 99, 235, .22); line-height: 1.55; }
+.q-explica h4 { margin: 8px 0 4px; font-size: .9rem; color: #1d4ed8; }
+.q-explica h4:first-child { margin-top: 0; }
+.q-explica ul { margin: 0; padding-left: 18px; }
+.q-explica ul.dicas li::marker { content: "💡 "; }
+.q-explica.carregando { display: flex; align-items: center; gap: 10px; opacity: .85; }
+.q-explica.carregando span { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #2563eb; border-top-color: transparent; animation: res-gira .8s linear infinite; }
+.q-explica.erro { background: rgba(220, 38, 38, .07); border-color: rgba(220, 38, 38, .25); }
+:root[data-theme="dark"] .q-explica h4 { color: #93c5fd; }
+@keyframes res-gira { to { transform: rotate(360deg); } }

@@ -1585,7 +1585,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez inscrire votre enfant dans une colonie de vacances. Vous téléphonez à l'organisateur pour obtenir des informations (dates, âge, activités, prix, encadrement, contacts avec les parents, etc.).",
      "perguntasExaminador": [

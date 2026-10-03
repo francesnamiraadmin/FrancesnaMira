@@ -1341,7 +1341,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous souhaitez vous inscrire dans un club de sport près de chez vous. Vous posez des questions à l'employé de l'accueil pour obtenir des informations (activités proposées, horaires, prix, conditions d'inscription, etc.).",
      "perguntasExaminador": [

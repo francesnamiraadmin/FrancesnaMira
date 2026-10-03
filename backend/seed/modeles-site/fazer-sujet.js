@@ -7,7 +7,7 @@ function htmlEscolhaFazer(oral) {
   return '<fieldset class="escolha-correcao tm-correcao"><legend>Qui corrige ?</legend>' +
     '<label' + (ia ? '' : ' class="indisponivel"') + '><input type="radio" name="tm-correcao" value="ia"' + (ia ? ' checked' : ' disabled') + '><span><b>L\'IA</b><small>' +
       (ia ? 'Correction immédiate : note sur 20, trame, corrections et version améliorée' + (oral ? ', à partir de l\'enregistrement et de la transcription' : '') + '. Sans crédit.' : 'Indisponible pour le moment.') + '</small></span></label>' +
-    '<label><input type="radio" name="tm-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Attendre la correction d\'un professeur</b><small>La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l\'examen. Vous la retrouvez dans « Mes corrections ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
+    '<label><input type="radio" name="tm-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Attendre la correction d\'un professeur</b><small>La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l\'examen. Vous la retrouvez dans « Mes notes ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
     '<label><input type="radio" name="tm-correcao" value="aovivo"><span><b>Un professeur en direct</b><small>Il suit votre ' + (oral ? 'parole (transcription)' : 'texte pendant que vous écrivez') + ' et peut vous parler par la voix. À l\'envoi, la production lui est envoyée pour la correction (1 crédit).</small></span></label></fieldset>';
 }
 function correcaoFazer() { var r = document.querySelector('input[name="tm-correcao"]:checked'); return r ? r.value : 'professor'; }
@@ -79,12 +79,12 @@ function ligarFazer(raiz, tache, m, oral) {
       return;
     }
     confirmarEnvio({ titulo: 'Envoyer votre texte au professeur', custo: 1, rotulo: 'Envoyer au professeur',
-      texto: 'Votre texte (' + contarPalavras(texto) + ' mots) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l\'examen. Vous suivrez la correction dans « Mes corrections ».' }).then(function (ok) {
+      texto: 'Votre texte (' + contarPalavras(texto) + ' mots) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l\'examen. Vous suivrez la correction dans « Mes notes ».' }).then(function (ok) {
       if (!ok) return;
       b.disabled = true; st.textContent = 'Envoi…';
       google.script.run.withSuccessHandler(function (r) {
         atualizarCreditos(r.creditos);
-        st.innerHTML = '✓ Envoyé · protocole ' + esc(r.protocolo) + ' · <a href="correcoes.html">suivre la correction</a>';
+        st.innerHTML = '✓ Envoyé · protocole ' + esc(r.protocolo) + (r.id ? ' · <a href="' + linkCorrecao(r.id) + '">suivre la correction</a>' : '');
         if (SALA && SALA.id) salaEnviar({ texto: texto, fim: true });
         finalizarFazer();
         b.disabled = false;
@@ -117,12 +117,12 @@ function enviarEssaiOral(b, d) {
     return;
   }
   confirmarEnvio({ titulo: 'Envoyer votre enregistrement au professeur', custo: 1, rotulo: 'Envoyer au professeur',
-    texto: 'L\'enregistrement (' + formatarTempo(Math.round(d.duree || 0)) + ') et sa transcription entrent dans la file du Sistema de Correção. Vous suivrez la correction dans « Mes corrections ».' }).then(function (ok) {
+    texto: 'L\'enregistrement (' + formatarTempo(Math.round(d.duree || 0)) + ') et sa transcription entrent dans la file du Sistema de Correção. Vous suivrez la correction dans « Mes notes ».' }).then(function (ok) {
     if (!ok) return;
     b.disabled = true; d.st.textContent = 'Envoi…';
     enviarGravacao({ blob: d.blob, tache: d.tache, sujet: d.m.id, duree: d.duree, transcricao: d.transcricao, modo: 'professor' }).then(function (r) {
       atualizarCreditos(r.creditos);
-      d.st.innerHTML = '✓ Envoyé (protocole ' + esc(r.protocolo) + ') · <a href="correcoes.html">suivre la correction</a>';
+      d.st.innerHTML = '✓ Envoyé (protocole ' + esc(r.protocolo) + ')' + (r.id ? ' · <a href="' + linkCorrecao(r.id) + '">suivre la correction</a>' : '');
       if (SALA && SALA.id) salaEnviar({ transcricao: d.transcricao, fim: true });
       finalizarFazer();
     }).catch(function (e) { b.disabled = false; d.st.textContent = e.message || e; });

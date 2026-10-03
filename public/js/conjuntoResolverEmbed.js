@@ -110,7 +110,7 @@ const ConjuntoResolverEmbed = (() => {
             <div class="qnav-grid" data-qnav-grid>
               ${sessao.questoes.map((x, i) => `<button class="qnav-btn ${x.respondida ? 'respondida' : ''} ${i === sessao.questaoAtualIndex ? 'atual' : ''}" data-ir="${i}">${i + 1}</button>`).join('')}
             </div>
-            <div class="qnav-legenda"><span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:var(--success-bg); border:1px solid var(--success-text); vertical-align:-1px;"></span> respondida &nbsp; contorno = atual</div>
+            <div class="qnav-legenda"><span style="display:inline-block; width:11px; height:11px; border-radius:3px; background:rgba(37,99,235,.16); border:1px solid #2563eb; vertical-align:-1px;"></span> respondida &nbsp; contorno = atual</div>
           </div>
           <div>
             ${renderQuestaoCard(q)}
@@ -119,7 +119,7 @@ const ConjuntoResolverEmbed = (() => {
                 <button class="q-btn secundario" data-anterior ${sessao.questaoAtualIndex === 0 ? 'disabled' : ''}>‹ Anterior</button>
                 <button class="q-btn secundario" data-proxima ${sessao.questaoAtualIndex === sessao.questoes.length - 1 ? 'disabled' : ''}>Próxima ›</button>
               </div>
-              <button class="q-btn" data-enviar ${todasRespondidas ? '' : 'disabled'}>Enviar Conjunto</button>
+              <button class="q-btn" data-enviar ${todasRespondidas ? '' : 'disabled'}>Finalizar a prova</button>
             </div>
           </div>
         </div>
@@ -150,7 +150,6 @@ const ConjuntoResolverEmbed = (() => {
         <div class="q-head">
           <span class="q-tags">
             <span class="q-tag">${NOMES_TIPO[q.tipo]}</span>
-            <span class="q-pill">${q.nivel}</span>
             <span class="q-pill">${MATERIAS_LABELS[q.materia] || q.materia}</span>
           </span>
         </div>
@@ -243,83 +242,156 @@ const ConjuntoResolverEmbed = (() => {
       renderResultado(await res.json());
     }
 
+    // Resultado: painel com todas as questões (verde = acertou, vermelho = errou); clicar mostra
+    // uma questão por vez, com o gabarito comentado (por que a certa, pegadinhas, dicas).
     function renderResultado(t) {
       const minutos = Math.round(t.tempoGastoSegundos / 60);
       // Simulado saiu da Plataforma de Questões — uma Tentativa antiga com pool="simulado"
       // ainda pode existir (histórico preservado), mas volta pra Praticar como qualquer outra.
       const voltar = !embed ? `<a class="q-btn secundario" href="praticar.html">Voltar aos Conjuntos</a>` : '';
+      const erradas = t.respostas.filter(r => !r.correta).length, certas = t.respostas.length - erradas;
+      const pond = t.pontosPossiveis ? Math.round(t.pontosObtidos / t.pontosPossiveis * 100) : null;
+      let filtro = erradas ? 'erradas' : 'todas';
+      let atual = t.respostas.findIndex(r => !r.correta);
+      if (atual < 0) atual = 0;
       container.innerHTML = `
         <div class="resultado-resumo">
           <h1 style="font-family:'Playfair Display', serif;">Resultado</h1>
           <div class="nota">${t.totalCorretas}/${t.totalQuestoes}</div>
           <p>${t.percentualAcertos}% de aproveitamento — ${minutos} min ${t.expirouPorTempo ? '(tempo esgotado)' : ''}</p>
+          ${pond !== null ? `<p class="res-ponderada" title="Cada questão vale conforme o nível, como na prova do TCF">Nota ponderada pelo nível: <b>${t.pontosObtidos} / ${t.pontosPossiveis} pts</b> (${pond}%)</p>` : ''}
           ${voltar ? `<div class="conjunto-acoes" style="justify-content:center; margin-top:16px;">${voltar}</div>` : ''}
         </div>
-        <div class="resultado-lista">
-          ${t.respostas.map((r, i) => renderItemResultado(r, i, t._id)).join('')}
+        <div class="res-painel">
+          <div class="res-filtros" role="tablist">
+            <button type="button" data-res-filtro="todas">Todas <b>${t.respostas.length}</b></button>
+            <button type="button" data-res-filtro="erradas" class="errada">Erradas <b>${erradas}</b></button>
+            <button type="button" data-res-filtro="certas" class="certa">Certas <b>${certas}</b></button>
+          </div>
+          <div class="res-grade" data-res-grade></div>
+          <p class="res-legenda"><i class="certa"></i> acertou &nbsp; <i class="errada"></i> errou &nbsp; · clique numa questão para vê-la</p>
         </div>
-      `;
-      container.querySelectorAll('[data-caderno-questao]').forEach(btn => {
-        btn.addEventListener('click', async () => {
-          const questaoId = btn.dataset.cadernoQuestao;
-          const idTentativa = btn.dataset.cadernoTentativa;
-          const jaEsta = btn.classList.contains('ativo');
-          const url = jaEsta ? `/api/questoes/caderno/${questaoId}` : `/api/questoes/tentativas/${idTentativa}/questoes/${questaoId}/caderno`;
-          const res = await fetch(url, { method: jaEsta ? 'DELETE' : 'POST', headers: authHeaders() });
-          if (res.ok) {
-            btn.classList.toggle('ativo');
-            btn.innerHTML = jaEsta ? '+ Adicionar ao Caderno de Revisão' : '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">No Caderno de Revisão';
-          }
-        });
+        <div data-res-questao></div>`;
+      const grade = container.querySelector('[data-res-grade]'), alvo = container.querySelector('[data-res-questao]');
+      const visiveis = () => t.respostas.map((r, i) => i).filter(i => filtro === 'todas' || (filtro === 'erradas' ? !t.respostas[i].correta : t.respostas[i].correta));
+      const desenharGrade = () => {
+        container.querySelectorAll('[data-res-filtro]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.resFiltro === filtro)));
+        grade.innerHTML = visiveis().map(i => `<button type="button" class="res-q ${t.respostas[i].correta ? 'certa' : 'errada'} ${i === atual ? 'atual' : ''}" data-res-i="${i}" aria-label="Questão ${i + 1}: ${t.respostas[i].correta ? 'acertou' : 'errou'}">${i + 1}</button>`).join('')
+          || '<p style="opacity:.7;">Nenhuma questão neste filtro.</p>';
+      };
+      const mostrar = (i, rolar) => {
+        atual = i;
+        desenharGrade();
+        const lista = visiveis(), pos = lista.indexOf(i);
+        alvo.innerHTML = renderItemResultado(t.respostas[i], i, t._id) +
+          `<div class="res-nav"><button type="button" class="q-btn secundario" data-res-passo="-1" ${pos <= 0 ? 'disabled' : ''}>‹ Anterior</button>
+           <span>${pos >= 0 ? pos + 1 : '–'} de ${lista.length}</span>
+           <button type="button" class="q-btn secundario" data-res-passo="1" ${pos < 0 || pos >= lista.length - 1 ? 'disabled' : ''}>Próxima ›</button></div>`;
+        ligarItem(alvo);
+        carregarExplicacao(alvo, t.respostas[i]);
+        if (rolar) alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+      container.querySelector('.res-filtros').addEventListener('click', e => {
+        const b = e.target.closest('[data-res-filtro]'); if (!b) return;
+        filtro = b.dataset.resFiltro;
+        const l = visiveis();
+        mostrar(l.includes(atual) ? atual : (l[0] ?? atual), false);
       });
+      grade.addEventListener('click', e => { const b = e.target.closest('[data-res-i]'); if (b) mostrar(Number(b.dataset.resI), true); });
+      alvo.addEventListener('click', e => {
+        const b = e.target.closest('[data-res-passo]'); if (!b) return;
+        const l = visiveis(), pos = l.indexOf(atual) + Number(b.dataset.resPasso);
+        if (l[pos] !== undefined) mostrar(l[pos], false);
+      });
+      mostrar(atual, false);
 
-      container.querySelectorAll('[data-relatar-erro]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const wrap = container.querySelector(`[data-relato-wrap="${btn.dataset.relatarErro}"]`);
-          if (wrap) wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+      function ligarItem(raiz) {
+        raiz.querySelectorAll('[data-caderno-questao]').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const questaoId = btn.dataset.cadernoQuestao;
+            const idTentativa = btn.dataset.cadernoTentativa;
+            const jaEsta = btn.classList.contains('ativo');
+            const url = jaEsta ? `/api/questoes/caderno/${questaoId}` : `/api/questoes/tentativas/${idTentativa}/questoes/${questaoId}/caderno`;
+            const res = await fetch(url, { method: jaEsta ? 'DELETE' : 'POST', headers: authHeaders() });
+            if (res.ok) {
+              btn.classList.toggle('ativo');
+              const r = t.respostas.find(x => String(x.questaoId) === questaoId); if (r) r.noCaderno = !jaEsta;
+              btn.innerHTML = jaEsta ? '+ Adicionar ao Caderno de Revisão' : '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">No Caderno de Revisão';
+            }
+          });
         });
-      });
-      container.querySelectorAll('[data-relato-cancelar]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const wrap = container.querySelector(`[data-relato-wrap="${btn.dataset.relatoCancelar}"]`);
-          if (wrap) wrap.style.display = 'none';
+        raiz.querySelectorAll('[data-relatar-erro]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const wrap = raiz.querySelector(`[data-relato-wrap="${btn.dataset.relatarErro}"]`);
+            if (wrap) wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+          });
         });
-      });
-      container.querySelectorAll('[data-relato-enviar]').forEach(btn => {
-        btn.addEventListener('click', async () => {
-          const questaoId = btn.dataset.relatoEnviar;
-          const idTentativa = btn.dataset.relatoTentativa;
-          const wrap = container.querySelector(`[data-relato-wrap="${questaoId}"]`);
-          const textarea = wrap.querySelector('textarea');
-          const msgEl = wrap.querySelector('[data-relato-msg]');
-          const mensagem = textarea.value.trim();
-          if (!mensagem) {
-            msgEl.textContent = 'Escreva uma mensagem descrevendo o erro.';
-            msgEl.className = 'q-relato-msg erro';
-            return;
-          }
-          btn.disabled = true;
-          try {
-            const res = await fetch('/api/erros-questoes', {
-              method: 'POST', headers: authHeaders(true),
-              body: JSON.stringify({ questaoId, tentativaId: idTentativa, mensagem })
-            });
-            const data = await res.json();
-            if (!res.ok) {
-              msgEl.textContent = data.msg || 'Erro ao enviar o relato.';
+        raiz.querySelectorAll('[data-relato-cancelar]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const wrap = raiz.querySelector(`[data-relato-wrap="${btn.dataset.relatoCancelar}"]`);
+            if (wrap) wrap.style.display = 'none';
+          });
+        });
+        raiz.querySelectorAll('[data-relato-enviar]').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const questaoId = btn.dataset.relatoEnviar;
+            const idTentativa = btn.dataset.relatoTentativa;
+            const wrap = raiz.querySelector(`[data-relato-wrap="${questaoId}"]`);
+            const textarea = wrap.querySelector('textarea');
+            const msgEl = wrap.querySelector('[data-relato-msg]');
+            const mensagem = textarea.value.trim();
+            if (!mensagem) {
+              msgEl.textContent = 'Escreva uma mensagem descrevendo o erro.';
               msgEl.className = 'q-relato-msg erro';
-              btn.disabled = false;
               return;
             }
-            wrap.innerHTML = '<p class="q-relato-msg sucesso"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Relato enviado — obrigado por ajudar a melhorar as questões!</p>';
-          } catch (err) {
-            msgEl.textContent = 'Erro ao conectar ao servidor.';
-            msgEl.className = 'q-relato-msg erro';
-            btn.disabled = false;
-          }
+            btn.disabled = true;
+            try {
+              const res = await fetch('/api/erros-questoes', {
+                method: 'POST', headers: authHeaders(true),
+                body: JSON.stringify({ questaoId, tentativaId: idTentativa, mensagem })
+              });
+              const data = await res.json();
+              if (!res.ok) {
+                msgEl.textContent = data.msg || 'Erro ao enviar o relato.';
+                msgEl.className = 'q-relato-msg erro';
+                btn.disabled = false;
+                return;
+              }
+              wrap.innerHTML = '<p class="q-relato-msg sucesso"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Relato enviado — obrigado por ajudar a melhorar as questões!</p>';
+            } catch (err) {
+              msgEl.textContent = 'Erro ao conectar ao servidor.';
+              msgEl.className = 'q-relato-msg erro';
+              btn.disabled = false;
+            }
+          });
         });
-      });
+      }
     }
+
+    // Gabarito comentado da questão (gerado uma vez e guardado; as próximas aberturas são imediatas).
+    const cacheExplicacao = {};
+    function htmlExplicacao(d) {
+      return `<div class="q-explica"><h4>Por que esta é a resposta certa</h4><p>${escapar(d.porque)}</p>` +
+        (d.pegadinhas.length ? `<h4>Pegadinhas</h4><ul>${d.pegadinhas.map(p => `<li><b>${p.texto ? '« ' + escapar(p.texto) + ' »' : escapar(p.alternativa)}</b> ${escapar(p.motivo)}</li>`).join('')}</ul>` : '') +
+        (d.dicas.length ? `<h4>Dicas para a prova</h4><ul class="dicas">${d.dicas.map(x => `<li>${escapar(x)}</li>`).join('')}</ul>` : '') + '</div>';
+    }
+    function carregarExplicacao(raiz, r) {
+      const el = raiz.querySelector('[data-explica]'); if (!el) return;
+      const id = String(r.questaoId);
+      if (cacheExplicacao[id]) { el.innerHTML = htmlExplicacao(cacheExplicacao[id]); return; }
+      el.innerHTML = '<div class="q-explica carregando"><span></span>Preparando o gabarito comentado (pegadinhas e dicas)…</div>';
+      fetch(`/api/questoes/${id}/explicacao-detalhada`, { headers: authHeaders() })
+        .then(res => res.json().then(d => ({ ok: res.ok, d })))
+        .then(({ ok, d }) => {
+          if (!el.isConnected) return;
+          if (!ok) { el.innerHTML = `<div class="q-explica erro">${escapar(d.msg || 'Gabarito comentado indisponível agora.')} <button type="button" class="q-btn secundario" data-explica-de-novo>Tentar de novo</button></div>`;
+            el.querySelector('[data-explica-de-novo]').addEventListener('click', () => carregarExplicacao(raiz, r)); return; }
+          cacheExplicacao[id] = d;
+          el.innerHTML = htmlExplicacao(d);
+        }).catch(() => { if (el.isConnected) el.innerHTML = '<div class="q-explica erro">Gabarito comentado indisponível agora.</div>'; });
+    }
+    function escapar(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 
     function renderItemResultado(r, i, idTentativa) {
       const textoResposta = valor => {
@@ -330,7 +402,6 @@ const ConjuntoResolverEmbed = (() => {
         <div class="q-head">
           <span class="q-tags">
             <span class="q-tag">${NOMES_TIPO[r.tipo]}</span>
-            <span class="q-pill">${r.nivel}</span>
             <span class="q-pill">${MATERIAS_LABELS[r.materia] || r.materia}</span>
           </span>
           <span class="q-status ${r.correta ? 'correta' : 'incorreta'}">${r.correta ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Acertou' : '<img class="titulo-icone-inline pequeno" src="img/icones/x-mark.svg" alt="">Errou'}</span>
@@ -342,6 +413,7 @@ const ConjuntoResolverEmbed = (() => {
         <p>Sua resposta: ${textoResposta(r.respostaEscolhida)}</p>
         <p>Resposta certa: <strong>${textoResposta(r.respostaCorreta)}</strong></p>
         <div class="q-gabarito"><strong>Explicação:</strong> ${r.explicacao}</div>
+        <div data-explica></div>
         <div class="q-actions">
           <button class="q-btn secundario ${r.noCaderno ? 'ativo' : ''}" data-caderno-questao="${r.questaoId}" data-caderno-tentativa="${idTentativa}">${r.noCaderno ? '<img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">No Caderno de Revisão' : '+ Adicionar ao Caderno de Revisão'}</button>
           <button class="q-btn secundario" data-relatar-erro="${r.questaoId}"><img class="titulo-icone-inline pequeno" src="img/icones/warning.svg" alt="">Relatar erro</button>

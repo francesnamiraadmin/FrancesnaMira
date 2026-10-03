@@ -1,0 +1,91 @@
+/* Sistema de Aulas → Registro de Aulas: linha do tempo das aulas particulares e presença por aluno */
+.ra {
+  --ra-prevista: #64748b; --ra-registrar: #d97706; --ra-realizada: #16a34a; --ra-falta: #dc2626;
+  --ra-justificada: #7c3aed; --ra-cancelada: #0891b2; --ra-remarcada: #2563eb;
+}
+.ra-filtros { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.ra-periodo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ra-nav { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font-size: 1.2rem; cursor: pointer; }
+.ra-nav:hover { border-color: var(--cinza-800); }
+.ra-datas { display: inline-flex; align-items: center; gap: 6px; font-size: .84rem; color: var(--cinza-600); }
+.ra-filtros input[type="date"], .ra-filtros select, .ra-filtros input[type="search"] {
+  padding: 8px 12px; border-radius: 12px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font: 500 .84rem 'Poppins', sans-serif;
+}
+.ra-filtros input[type="search"] { min-width: 200px; flex: 1; }
+
+/* indicadores */
+.ra-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.ra-kpi { position: relative; padding: 12px 14px 12px 16px; border-radius: 14px; background: var(--branco); border: 1px solid var(--cinza-200); overflow: hidden; cursor: pointer; transition: transform .12s, box-shadow .12s; }
+.ra-kpi::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--c); }
+.ra-kpi:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -16px rgba(22,33,58,.6); }
+.ra-kpi.ativo { box-shadow: 0 0 0 2px var(--c); }
+.ra-kpi b { display: block; font: 800 1.6rem 'Poppins', sans-serif; color: var(--c); line-height: 1.1; }
+.ra-kpi span { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--cinza-600); }
+.ra-kpi.anel { display: flex; align-items: center; gap: 12px; cursor: default; }
+.ra-kpi.anel:hover { transform: none; box-shadow: none; }
+.ra-anel { --p: 0; width: 54px; height: 54px; border-radius: 50%; flex: none; display: grid; place-items: center;
+  background: conic-gradient(var(--ra-realizada) calc(var(--p) * 1%), rgba(22,33,58,.1) 0); }
+.ra-anel i { width: 40px; height: 40px; border-radius: 50%; background: var(--branco); display: grid; place-items: center; font: 800 .78rem 'Poppins', sans-serif; font-style: normal; color: var(--cinza-800); }
+
+.ra-alerta { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 12px 16px; margin-bottom: 14px; border-radius: 14px;
+  background: color-mix(in srgb, var(--ra-registrar) 13%, transparent); border: 1px solid color-mix(in srgb, var(--ra-registrar) 45%, transparent); color: var(--cinza-800); font-size: .88rem; }
+.ra-lote { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; position: sticky; top: 70px; z-index: 5; padding: 10px 14px; margin-bottom: 12px; border-radius: 14px; background: #1c2b3a; color: #fff; font-size: .86rem; font-weight: 600; }
+.ra-lote button { border: 0; border-radius: 999px; padding: 6px 12px; font: 700 .78rem 'Poppins', sans-serif; cursor: pointer; background: rgba(255,255,255,.14); color: #fff; }
+.ra-lote button:hover { background: rgba(255,255,255,.26); }
+
+/* linha do tempo por dia */
+.ra-dia { margin-bottom: 18px; }
+.ra-dia-cab { display: flex; align-items: baseline; gap: 10px; margin: 0 0 8px; padding-bottom: 6px; border-bottom: 2px solid var(--cinza-200); }
+.ra-dia-cab h3 { font: 700 1.02rem 'Playfair Display', serif; margin: 0; text-transform: capitalize; }
+.ra-dia-cab small { color: var(--cinza-400); font-size: .78rem; }
+.ra-dia-cab.hoje h3 { color: var(--ra-registrar); }
+.ra-dia-cab.hoje::after { content: "hoje"; font: 800 .66rem 'Poppins', sans-serif; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: var(--ra-registrar); color: #fff; }
+.ra-aulas { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px; }
+.ra-aula { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; padding: 12px 14px 12px 16px; border-radius: 14px;
+  background: var(--branco); border: 1px solid var(--cinza-200); transition: box-shadow .15s; }
+.ra-aula::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 0 4px 4px 0; background: var(--c); }
+.ra-aula:hover { box-shadow: 0 10px 24px -18px rgba(22,33,58,.7); }
+.ra-aula.sel { box-shadow: 0 0 0 2px #1c2b3a; }
+.ra-hora { font: 800 1.05rem 'Poppins', sans-serif; font-variant-numeric: tabular-nums; color: var(--cinza-800); }
+.ra-hora input { margin: 0 0 0 2px; vertical-align: middle; }
+.ra-quem b { display: block; font-size: .92rem; }
+.ra-quem small { color: var(--cinza-400); font-size: .74rem; }
+.ra-estado { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; font: 700 .72rem 'Poppins', sans-serif;
+  color: var(--c); background: color-mix(in srgb, var(--c) 13%, transparent); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); white-space: nowrap; }
+.ra-estado::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.ra-aula-rodape { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.ra-rapidos { display: flex; gap: 4px; flex-wrap: wrap; }
+.ra-rapidos button { border: 1px solid var(--cinza-200); background: var(--cinza-50); color: var(--cinza-800); border-radius: 999px; padding: 4px 9px; font: 600 .72rem 'Poppins', sans-serif; cursor: pointer; }
+.ra-rapidos button:hover { border-color: var(--cinza-800); }
+.ra-rapidos button.ok:hover { border-color: var(--ra-realizada); color: var(--ra-realizada); }
+.ra-rapidos button.no:hover { border-color: var(--ra-falta); color: var(--ra-falta); }
+.ra-nota { grid-column: 1 / -1; font-size: .78rem; color: var(--cinza-600); line-height: 1.4; }
+.ra-nota .ra-clip { font-weight: 700; color: var(--ra-justificada); }
+
+/* por aluno */
+.ra-tabela { width: 100%; border-collapse: collapse; font-size: .86rem; }
+.ra-tabela th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; color: var(--cinza-600); padding: 8px; border-bottom: 2px solid var(--cinza-200); }
+.ra-tabela td { padding: 10px 8px; border-bottom: 1px solid var(--cinza-100); vertical-align: middle; }
+.ra-trilha { display: flex; gap: 3px; flex-wrap: wrap; max-width: 320px; }
+.ra-trilha i { width: 12px; height: 12px; border-radius: 3px; background: var(--c); }
+.ra-barra { height: 8px; border-radius: 4px; background: rgba(22,33,58,.1); overflow: hidden; min-width: 90px; }
+.ra-barra span { display: block; height: 100%; background: var(--ra-realizada); }
+
+.ra-legenda { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 12px; font-size: .78rem; color: var(--cinza-600); }
+.ra-legenda span { display: inline-flex; align-items: center; gap: 5px; }
+.ra-legenda i { width: 11px; height: 11px; border-radius: 3px; background: var(--c); }
+
+/* detalhes da aula */
+.ra-estados { display: flex; flex-wrap: wrap; gap: 6px; }
+.ra-estados label { cursor: pointer; }
+.ra-estados input { position: absolute; opacity: 0; pointer-events: none; }
+.ra-estados input:checked + .ra-estado { background: var(--c); color: #fff; }
+.ra-estados input:focus-visible + .ra-estado { outline: 2px solid var(--c); outline-offset: 2px; }
+.ra-hist { margin-top: 10px; border-left: 2px solid var(--cinza-200); padding-left: 12px; }
+.ra-hist div { position: relative; font-size: .78rem; padding: 3px 0; color: var(--cinza-600); }
+.ra-hist div::before { content: ""; position: absolute; left: -17px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--cinza-400); }
+@media (max-width: 700px) { .ra-aulas { grid-template-columns: 1fr; } .ra-tabela .ra-esconder { display: none; } }
+.ra-lote[hidden] { display: none; }
+.ra-kpi.anel { grid-column: span 2; }
+.ra-kpi.anel small { display: block; max-width: 200px; line-height: 1.3; }
+@media (max-width: 520px) { .ra-kpi.anel { grid-column: auto; } }

@@ -1558,7 +1558,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez louer un piano numérique pour apprendre à jouer. Vous téléphonez à un magasin de musique pour obtenir des informations (modèles, prix, durée, livraison, entretien, achat, cours, etc.).",
      "perguntasExaminador": [

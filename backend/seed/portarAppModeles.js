@@ -121,13 +121,19 @@ trocar("        var tr = B.trames[t]; if (!tr) return;", "        if (t === 'ET1
 // ---- perfil do curso: TCF Canada ou DELF de um nível (ver modeles-site/perfil.js) ----
 const R = String.raw;
 trocar("B = banco;", "B = banco; aplicarPerfil();", true);
+// « Mes épreuves orales » abre a épreuve orale (antes caía na tela da épreuve escrita).
+trocar(R`tela.querySelector('[data-hub="epreuve"]').addEventListener('click', abrirEpreuve);`, R`tela.querySelector('[data-hub="epreuve"]').addEventListener('click', function () { if (oral) abrirEpreuveOral(); else abrirEpreuve(); });`);
+// Mes notes: cada produção leva à correção completa (texto marcado, critérios, feedback).
+trocar(R`'</td><td>' + (temNota ? nclc(nota) : '') + '</td><td>' + esc(r.Commentaire || '') + '</td></tr>';`,
+  R`'</td><td>' + (temNota ? nclc(nota) : '') + '</td><td>' + esc(r.Commentaire || '') + '</td><td>' + (r.ID ? '<a class="ferramenta" href="' + linkCorrecao(r.ID) + '">Voir la correction</a>' : '') + '</td></tr>';`);
+trocar(R`'<th>Note</th><th>NCLC</th><th>Commentaire</th></tr></thead><tbody>'`, R`'<th>Note</th><th>NCLC</th><th>Commentaire</th><th></th></tr></thead><tbody>'`);
 trocar("      var nomeCurso = CURSOS[B.courseType] || 'TCF Canada';", "      var nomeCurso = ehDelf() ? B.perfil.nome : CURSOS[B.courseType] || 'TCF Canada';");
 trocar("      html += htmlHubEscolhas();", "      html += htmlNiveisDelf();\n      html += htmlHubEscolhas();");
 trocar(R`'<p class="intro">' + (oral ? 'Les trois tâches de l\'expression orale`, R`'<p class="intro">' + (ehDelf() ? introHubDelf(oral) : oral ? 'Les trois tâches de l\'expression orale`);
 trocar(R`<span class="selo">' + info.nom.slice(-1) + '</span>'`, R`<span class="selo">' + seloTache(t) + '</span>'`);
 trocar(R`(oral ? 'Mes épreuves orales' : 'Épreuve écrite (60 min)')`, R`(oral ? 'Mes épreuves orales' : ehDelf() ? 'Prova escrita (' + minutosEpreuve() + ' min)' : 'Épreuve écrite (60 min)')`);
 trocar(R`(oral ? 'Les enregistrements demandés par votre professeur(e).' : 'Tâches 1, 2 et 3 dans les conditions de l\'examen.')`,
-  R`(oral ? 'Les enregistrements demandés par votre professeur(e).' : ehDelf() ? 'A produção escrita completa, nas condições do ' + esc(nomeProva()) + '.' : 'Tâches 1, 2 et 3 dans les conditions de l\'examen.')`);
+  R`(oral ? 'Les tâches de l\'oral enregistrées dans les conditions de l\'examen, corrigées par l\'IA ou un professeur.' : ehDelf() ? 'A produção escrita completa, nas condições do ' + esc(nomeProva()) + '.' : 'Tâches 1, 2 et 3 dans les conditions de l\'examen.')`);
 trocar(R`<small class="mira-marca">TCF Canada · Expression écrite · réécriture</small>`, R`<small class="mira-marca">' + esc(nomeProva()) + ' · Expression écrite · réécriture</small>`);
 trocar(R`'<p class="intro">Trois tâches en <b>60 minutes</b>, comme le jour du TCF Canada : Tâche 1 (≈ 10 min), Tâche 2 (≈ 15 min), Tâche 3 (≈ 25 min) et 10 minutes de relecture. ' +`,
   R`'<p class="intro">' + (ehDelf() ? introEpreuveDelf() : 'Trois tâches en <b>60 minutes</b>, comme le jour du TCF Canada : Tâche 1 (≈ 10 min), Tâche 2 (≈ 15 min), Tâche 3 (≈ 25 min) et 10 minutes de relecture. ') +`);
@@ -158,7 +164,7 @@ trocar(R`if (t === 'ET1') html += '</div><h2 class="secao-titulo outils-secao">`
 }
 
 // ---- extensões do site (dentro do mesmo escopo do App) ----
-trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("perfil.js") + "\n" + ler("extensoes.js") + "\n" + ler("fazer-sujet.js") + "\n" + ler("correcao-equipe.js")).replace(/^/gm, "    ") +
+trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("perfil.js") + "\n" + ler("epreuve-orale.js") + "\n" + ler("extensoes.js") + "\n" + ler("fazer-sujet.js") + "\n" + ler("correcao-equipe.js")).replace(/^/gm, "    ") +
   "\n    // Só começa depois que a página confirmou o acesso e o curso (window.FNM_PRONTO).\n" +
   "    (window.FNM_PRONTO || Promise.resolve()).then(function () { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar(); });");
 trocar("abrirOral: function () { abrirHub('oral'); },", "abrirOral: function () { abrirHub('oral'); }, abrirDestino: abrirDestino,");

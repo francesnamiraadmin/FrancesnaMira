@@ -24,7 +24,9 @@
     plataforma: ["Excellence"]
   };
 
+  // Ordem da navbar: Aulas Especializadas → Plataforma de Questões → Ambiente de Produção → Meu espaço.
   const PRODUTOS_NAV = [
+    { chave: "aulasEspecializadas", nome: "Aulas Especializadas", href: "aulas-hub.html", curso: "Aulas Especializadas Online" },
     {
       // href aponta pro hub de seleção de curso (public/plataforma-hub.html) — a página real
       // (plataforma-questoes.html) só resolve qual courseType usar depois disso, ver
@@ -39,7 +41,6 @@
         { nome: "Questões Interativas", href: "questoes-interativas.html", icone: "img/icones/puzzle.svg" },
         { nome: "Personalize", href: "personalizar-conjunto.html", icone: "img/icones/personalizar.svg" },
         { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "img/icones/caderno.svg" },
-        { nome: "Estatísticas", href: "estatisticas-questoes.html", icone: "img/icones/estatisticas.svg" },
         { nome: "Simulação Completa", href: "simulado-tcf.html", icone: "img/icones/simulados.svg" }
       ],
       paginas: ["plataforma-questoes.html", "resolver-conjunto.html"]
@@ -59,7 +60,20 @@
       ],
       paginas: ["producao.html", "producao-textual.html", "producao-oral-exercicios.html"]
     },
-    { chave: "aulasEspecializadas", nome: "Aulas Especializadas", href: "aulas-hub.html", curso: "Aulas Especializadas Online" }
+    {
+      // Painel pessoal do aluno (sempre liberado): deveres, inscrições, matrículas e o resumo de cada módulo.
+      chave: "meuEspaco", nome: "Meu espaço", href: "meu-espaco.html", livre: true,
+      submenu: [
+        { nome: "Visão geral", href: "meu-espaco.html", icone: "img/icones/profile.svg" },
+        { nome: "Estatísticas", href: "meu-espaco.html#questoes", icone: "img/icones/estatisticas.svg" },
+        { nome: "Caderno de erros", href: "meu-espaco.html#erros", icone: "img/icones/caderno.svg" },
+        { nome: "Produções e correções", href: "meu-espaco.html#producoes", icone: "img/icones/writing-hand.svg" },
+        { nome: "Dever de casa", href: "meus-deveres.html", icone: "img/icones/check.svg" },
+        { nome: "Minhas inscrições", href: "minhas-inscricoes.html", icone: "img/icones/document.svg" },
+        { nome: "Minhas matrículas", href: "minhas-matriculas.html", icone: "img/icones/calendar.svg" }
+      ],
+      paginas: ["meu-espaco.html", "meus-deveres.html", "minhas-inscricoes.html", "minhas-matriculas.html"]
+    }
   ];
 
   const token = localStorage.getItem("token");
@@ -207,7 +221,7 @@
   // Link de topo de um produto — cadeado simples se bloqueado, link com submenu
   // expansível se `produto.submenu` existir e o aluno tiver acesso, senão link simples.
   function montarLinkProduto(p) {
-    const liberado = window.AppShell.temAcesso(p.chave);
+    const liberado = p.livre || window.AppShell.temAcesso(p.chave);
     if (!liberado) {
       return `<a class="app-nav-link app-nav-locked" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige" title="Bloqueado — clique para assinar"><img src="img/icones/lock.svg" alt="" style="width:0.85em; height:0.85em; vertical-align:-0.1em; margin-right:4px;">${p.nome}</a>`;
     }

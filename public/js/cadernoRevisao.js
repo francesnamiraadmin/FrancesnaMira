@@ -17,7 +17,6 @@ function renderCadernoItem(item) {
     <div class="q-head">
       <span class="q-tags">
         <span class="q-tag">${NOMES_TIPO[q.tipo]}</span>
-        <span class="q-pill">${q.nivel}</span>
         <span class="q-pill">${MATERIAS_LABELS[q.materia] || q.materia}</span>
       </span>
     </div>

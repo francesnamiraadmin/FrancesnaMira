@@ -1584,7 +1584,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez inscrire votre enfant (ou vous inscrire) à un stage de poterie pendant les vacances. Vous téléphonez à l'atelier pour obtenir des informations (âge, dates, horaires, prix, matériel, niveau, etc.).",
      "perguntasExaminador": [

@@ -1558,7 +1558,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez louer un vélo électrique pour une semaine de vacances. Vous téléphonez à un loueur pour obtenir des informations (modèles, prix, autonomie, caution, assurance, équipement, etc.).",
      "perguntasExaminador": [

@@ -89,7 +89,8 @@ function pedirGemini({ sistema, usuario, maxTokens, audio }) {
 
   return new Promise((resolve, reject) => {
     const controles = [];
-    let proximo = 0, ativos = 0, terminou = false, ultimoErro = null, relogio = null;
+    let proximo = 0, ativos = 0, terminou = false, ultimoErro = null, relogio = null, rodada = 1;
+    const inicio = Date.now();
     const fimGeral = setTimeout(() => acabar(null, ultimoErro || Object.assign(new Error("A IA não respondeu a tempo."), { tipo: "passageiro" })), 150000);
     function acabar(ok, erro) {
       if (terminou) return;
@@ -100,14 +101,20 @@ function pedirGemini({ sistema, usuario, maxTokens, audio }) {
     }
     function iniciar() {
       if (terminou) return;
-      if (proximo >= modelos.length) { if (!ativos) acabar(null, ultimoErro); return; }
+      if (proximo >= modelos.length) {
+        if (ativos) return;
+        // Todos falharam por sobrecarga/tempo: nova rodada pela lista (a demanda costuma passar em segundos),
+        // enquanto houver tempo; erro definitivo já terminou antes.
+        if (rodada < 3 && Date.now() - inicio < 100000) { rodada++; proximo = 0; clearTimeout(relogio); relogio = setTimeout(iniciar, 1500 * rodada); return; }
+        acabar(null, ultimoErro); return;
+      }
       const modelo = modelos[proximo++];
       const ctrl = new AbortController();
       controles.push(ctrl);
       ativos++;
       clearTimeout(relogio);
       relogio = setTimeout(iniciar, GEMINI_PARALELO_MS);   // demorou: o próximo começa em paralelo
-      const limite = setTimeout(() => ctrl.abort(), 90000);
+      const limite = setTimeout(() => ctrl.abort(), 60000);
       chamarGemini(modelo, corpo, ctrl.signal).then(r => { clearTimeout(limite); acabar(r); }, e => {
         clearTimeout(limite);
         ativos--;

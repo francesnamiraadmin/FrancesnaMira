@@ -453,3 +453,6 @@ body.tem-timer-ativo { padding-bottom: 104px; transition: padding-bottom 0.25s e
 }
 .switch input:checked + .slider::before { transform: translateX(22px); }
 .switch input:focus-visible + .slider { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* O último item da navbar (Meu espaço) abre o submenu para a esquerda: não passa da borda da tela. */
+.app-nav-links > .app-nav-submenu-wrap:last-child .app-nav-submenu { left: auto; right: 0; }

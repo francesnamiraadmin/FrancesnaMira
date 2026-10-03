@@ -1557,7 +1557,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez faire garder votre chien pendant vos vacances. Vous téléphonez à une pension pour animaux pour obtenir des informations (prix, durée, repas, promenades, vaccins, horaires, etc.).",
      "perguntasExaminador": [

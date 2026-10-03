@@ -88,11 +88,19 @@ async function idsDevoirs(ctx) {
 }
 // O aluno vê o tema? No site, todos os temas ficam abertos, exceto os que o professor
 // desmarcou no quadro "Thèmes P.O. / P.E." — tema do mês, devoir e partilha abrem sempre.
+const TEMAS_PADRAO = require("../data/modeles/temas-padrao.json");
+// Ids dos temas liberados para o aluno no perfil atual (lista do administrador ou os 20 padrão).
+async function temasLiberados(ctx) {
+  if (ctx._cache.liberados) return ctx._cache.liberados;
+  const doc = await T.TemasAlunoTCF.findOne({ alunoId: ctx.userId, perfil: ctx.P.id }).lean();
+  const lista = doc ? doc.sujets : (TEMAS_PADRAO[ctx.P.id] || []);
+  ctx._cache.liberados = new Set(lista.map(x => x.id));
+  return ctx._cache.liberados;
+}
 async function filtroVisivel(ctx) {
   if (ctx.prof) return () => true;
-  const [cfg, mes, parts, devs] = await Promise.all([config(), temasMesIds(ctx), partilhasTipos(ctx), idsDevoirs(ctx)]);
-  const ocultos = cfg.ocultos || {};
-  return (t, e, id) => !ocultos[id] || !!mes[id] || !!parts[id] || !!devs[id];
+  const [liberados, parts, devs] = await Promise.all([temasLiberados(ctx), partilhasTipos(ctx), idsDevoirs(ctx)]);
+  return (t, e, id) => liberados.has(id) || !!parts[id] || !!devs[id];
 }
 
 async function statusIA(ctx) {
@@ -173,7 +181,7 @@ F.obterListaTache = async (ctx, tache) => {
   const [vis, mes] = await Promise.all([filtroVisivel(ctx), temasMesIds(ctx)]);
   const prontos = new Set((await T.ModeleIA.find({ tache }).select("sujetId").lean()).map(x => x.sujetId));
   return ctx.P.sujetsDaTache(tache).filter(s => vis(tache, s.e, s.id)).map(s => ({
-    id: s.id, e: s.e, f: s.f || 1, t: String(s.t || "").slice(0, 280), ia: prontos.has(s.id) ? 1 : 0, d: s.d1 ? 1 : 0,
+    id: s.id, e: s.e, f: s.f || 1, t: String(s.t || "").slice(0, 1500), ia: prontos.has(s.id) ? 1 : 0, d: s.d1 ? 1 : 0,
     w: M.pesoTema(tache, s, mes), tr: M.ehTendencia(tache, s.t) ? 1 : 0
   }));
 };
@@ -1145,6 +1153,67 @@ prof("salvarConfigModeles", async (ctx, d) => {
 
 // ------------------------------------------------------------------ rotas HTTP
 router.use(exigirAuth);
+
+// ---------------- temas liberados por aluno (administrador) ----------------
+const { exigirAdmin } = require("../middleware/auth");
+// Perfis em que o aluno tem Ambiente de Produção: TCF e/ou os níveis do DELF.
+async function perfisDoAluno(alunoId) {
+  const cursos = await cursosComAcesso(alunoId, "producao");
+  const perfis = [];
+  if (cursos.some(c => c !== "DELF")) perfis.push("TCF");
+  if (cursos.includes("DELF")) M.DELF.NIVEAUX.forEach(n => perfis.push("DELF-" + n));
+  return perfis.length ? perfis : ["TCF"];
+}
+router.get("/temas-aluno/:alunoId", exigirAdmin, async (req, res) => {
+  try {
+    if (!ehObjectId(req.params.alunoId)) return res.status(400).json({ msg: "Aluno inválido." });
+    const aluno = await User.findById(req.params.alunoId).select("nome email").lean();
+    if (!aluno) return res.status(404).json({ msg: "Aluno não encontrado." });
+    const perfis = await perfisDoAluno(aluno._id);
+    const perfil = M.PERFIS[req.query.perfil] && perfis.includes(req.query.perfil) ? req.query.perfil : perfis[0];
+    const P = M.PERFIS[perfil];
+    const doc = await T.TemasAlunoTCF.findOne({ alunoId: aluno._id, perfil }).lean();
+    const padrao = (TEMAS_PADRAO[perfil] || []).map(x => x.id);
+    const catalogo = [];
+    for (const t of P.TACHES) {
+      const vistos = new Set();
+      const manuais = new Set(P.modelosManuais(t).map(m => m.id));
+      for (const s of P.modelosManuais(t).concat(P.sujetsDaTache(t))) {
+        if (vistos.has(s.id)) continue; vistos.add(s.id);
+        catalogo.push({ tache: t, id: s.id, e: s.e, eixo: (M.EIXOS.eixos[s.e] || {}).nome || s.e, t: String(s.titre || s.t || "").slice(0, 220), f: s.f || 1, manual: manuais.has(s.id) ? 1 : 0 });
+      }
+    }
+    res.json({
+      aluno: { id: String(aluno._id), nome: aluno.nome, email: aluno.email }, perfis, perfil, nomePerfil: P.nome,
+      taches: P.TACHES.map(t => ({ id: t, nome: P.NOMES_TACHE[t] })), catalogo,
+      selecionados: doc ? doc.sujets.map(x => x.id) : padrao, padrao, personalizado: !!doc, atualizadoEm: doc?.atualizadoEm || null
+    });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+// Salva a lista (ou, com « padrao: true », volta aos 20 temas padrão).
+router.put("/temas-aluno/:alunoId", exigirAdmin, async (req, res) => {
+  try {
+    if (!ehObjectId(req.params.alunoId)) return res.status(400).json({ msg: "Aluno inválido." });
+    const perfil = String(req.body?.perfil || "");
+    if (!M.PERFIS[perfil]) return res.status(400).json({ msg: "Perfil inválido." });
+    if (!(await perfisDoAluno(req.params.alunoId)).includes(perfil)) return res.status(400).json({ msg: "Este aluno não tem o Ambiente de Produção deste curso." });
+    if (req.body?.padrao) {
+      await T.TemasAlunoTCF.deleteOne({ alunoId: req.params.alunoId, perfil });
+      return res.json({ ok: true, personalizado: false, total: (TEMAS_PADRAO[perfil] || []).length });
+    }
+    const P = M.PERFIS[perfil];
+    const pedidos = Array.isArray(req.body?.sujets) ? req.body.sujets.slice(0, 300) : [];
+    const sujets = [];
+    for (const x of pedidos) {
+      const t = String(x?.tache || ""), id = String(x?.id || "");
+      if (!P.TACHES.includes(t) || !M.acharTema(t, id) || M.perfilDoSujet(M.acharTema(t, id)) !== P) return res.status(400).json({ msg: `Tema inválido: ${id}` });
+      if (!sujets.some(s => s.id === id)) sujets.push({ tache: t, id });
+    }
+    if (!sujets.length) return res.status(400).json({ msg: "Escolha pelo menos um tema." });
+    await T.TemasAlunoTCF.findOneAndUpdate({ alunoId: req.params.alunoId, perfil }, { sujets, atualizadoPor: req.userId, atualizadoEm: new Date() }, { upsert: true });
+    res.json({ ok: true, personalizado: true, total: sujets.length });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
 
 router.post("/rpc/:fn", async (req, res) => {
   const nome = req.params.fn;

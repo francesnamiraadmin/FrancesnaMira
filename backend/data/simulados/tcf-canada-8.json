@@ -1557,7 +1557,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez inscrire vos parents à un cours d'informatique pour seniors. Vous téléphonez à l'association pour obtenir des informations (contenu, horaires, lieu, prix, matériel, inscription, etc.).",
      "perguntasExaminador": [

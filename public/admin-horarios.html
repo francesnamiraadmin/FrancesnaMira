@@ -202,6 +202,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .ha-retirados h3 { font-size: .95rem; margin: 18px 0 4px; }
 .ha-ret { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--cinza-100); font-size: .85rem; }
 </style>
+<link rel="stylesheet" href="css/registro-aulas.css">
 <!-- Painel da equipe: padrão visual do site + navegação de volta (depois do estilo da página) -->
 <link rel="stylesheet" href="css/painel-equipe.css">
 </head>
@@ -241,6 +242,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   <nav class="secao-nav" id="secaoNav">
     <button class="secao-btn active" data-secao="grade"><img src="img/icones/calendar.svg" alt="">Grade de horários</button>
     <button class="secao-btn" data-secao="atuais"><img src="img/icones/calendar.svg" alt="">Horários Atuais</button>
+    <button class="secao-btn" data-secao="registro"><img src="img/icones/check.svg" alt="">Registro de Aulas</button>
     <button class="secao-btn" data-secao="alunos"><img src="img/icones/students.svg" alt="">Alunos matriculados</button>
     <button class="secao-btn" data-secao="cupons"><img src="img/icones/credits.svg" alt="">Cupons de desconto</button>
   </nav>
@@ -303,6 +305,41 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   </section>
 
   <!-- ===================== ALUNOS MATRICULADOS ===================== -->
+  <section class="secao" data-secao="registro" hidden>
+    <div class="card ra">
+      <div class="card-head">
+        <div><h2>Registro de Aulas</h2><p class="campo-hint" style="margin-top:4px;">Todas as aulas particulares da grade, dia a dia: se aconteceram, faltas, justificativas e atestados.</p></div>
+        <button class="btn pequeno" id="raNovaAvulsa" type="button">+ Aula avulsa / reposição</button>
+      </div>
+      <div class="ra-filtros">
+        <div class="ra-periodo">
+          <button type="button" class="ra-nav" id="raAntes" aria-label="Período anterior">‹</button>
+          <div class="periodo-tabs" style="margin:0;" id="raAtalhos">
+            <button type="button" class="periodo-tab active" data-ra-periodo="semana">Esta semana</button>
+            <button type="button" class="periodo-tab" data-ra-periodo="mes">Este mês</button>
+            <button type="button" class="periodo-tab" data-ra-periodo="30">Últimos 30 dias</button>
+          </div>
+          <button type="button" class="ra-nav" id="raDepois" aria-label="Próximo período">›</button>
+          <span class="ra-datas"><input type="date" id="raDe" aria-label="De"> até <input type="date" id="raAte" aria-label="Até"></span>
+        </div>
+        <div class="ra-periodo">
+          <select id="raAluno" aria-label="Aluno"><option value="">Todos os alunos</option></select>
+          <select id="raEstado" aria-label="Estado"><option value="">Todos os estados</option></select>
+          <input type="search" id="raBusca" placeholder="Buscar aluno ou anotação" aria-label="Buscar">
+          <div class="periodo-tabs" style="margin:0;" id="raVisao">
+            <button type="button" class="periodo-tab active" data-ra-visao="dias">Linha do tempo</button>
+            <button type="button" class="periodo-tab" data-ra-visao="alunos">Por aluno</button>
+          </div>
+        </div>
+      </div>
+      <div id="raKpis" class="ra-kpis"></div>
+      <div id="raAlerta"></div>
+      <div id="raLote" class="ra-lote" hidden></div>
+      <div id="raConteudo"><p class="ha-vazio">Carregando…</p></div>
+      <div class="ra-legenda" id="raLegenda"></div>
+    </div>
+  </section>
+
   <section class="secao" data-secao="alunos" hidden>
     <div class="card">
       <div class="card-head">
@@ -489,6 +526,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 <script src="js/admin-horarios.js"></script>
 <script src="js/admin-sistema-aulas.js"></script>
 <script src="js/admin-horarios-atuais.js"></script>
+<script src="js/admin-registro-aulas.js"></script>
 <script src="js/theme-toggle.js"></script>
 <script src="js/painelEquipe.js" defer></script>
 </body>

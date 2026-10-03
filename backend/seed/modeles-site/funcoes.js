@@ -70,7 +70,7 @@ function abasEspace(ativa) {
   var abas = [['taches', 'Mes tâches', 'abrirTarefas'], ['notes', 'Mes notes', 'abrirNotes'], ['cahier', 'Cahier d\'erreurs', 'abrirCarnet']];
   return '<div class="abas-espace" role="tablist">' + abas.map(function (a) {
     return '<button class="aba-esp' + (a[0] === ativa ? ' on' : '') + '" type="button" role="tab" aria-selected="' + (a[0] === ativa) + '" data-esp="' + a[2] + '">' + a[1] + '</button>';
-  }).join('') + '<a class="aba-esp link" href="correcoes.html">Mes corrections ↗</a></div>';
+  }).join('') + '</div>';
 }
 //@@ abrirJournal
 function abrirJournal() { abrirTarefas(); }
@@ -222,7 +222,7 @@ function abrirGravacao(sessao, tarefa) {
     bt.disabled = true; bt.textContent = 'Envoi en cours…';
     enviarGravacao({ blob: blob, tache: t, sujet: tarefa.sujet.id, sessao: sessao.id, duree: duracao, transcricao: $('grav-trans').value, modo: 'professor' }).then(function () {
       pararGravacaoTudo();
-      $('gravador').innerHTML = '<div class="bloco ep-ok"><h3>✓ Enregistrement envoyé</h3><p class="aviso">Votre professeur(e) va l\'écouter et le corriger dans le Sistema de Correção. La note apparaîtra dans « Mes notes » et dans « Mes corrections ».</p>' +
+      $('gravador').innerHTML = '<div class="bloco ep-ok"><h3>✓ Enregistrement envoyé</h3><p class="aviso">Votre professeur(e) va l\'écouter et le corriger dans le Sistema de Correção. La note et la correction apparaîtront dans « Mes notes ».</p>' +
         '<div class="ferramentas"><button class="ferramenta destaque" type="button" id="grav-volta">← Mes épreuves</button></div></div>';
       $('grav-volta').addEventListener('click', abrirEpreuve);
     }).catch(function (e) {

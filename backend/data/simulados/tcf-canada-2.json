@@ -1592,7 +1592,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez louer une voiture pour un week-end. Vous posez des questions à l'employé de l'agence de location pour obtenir des informations (modèles, prix, assurance, conditions, horaires, etc.).",
      "perguntasExaminador": [

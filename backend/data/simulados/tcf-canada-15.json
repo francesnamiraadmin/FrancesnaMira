@@ -1584,7 +1584,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez louer une parcelle dans un jardin partagé de votre ville. Vous téléphonez à l'association qui gère le jardin pour obtenir des informations (taille, prix, règles, outils, eau, disponibilité, etc.).",
      "perguntasExaminador": [

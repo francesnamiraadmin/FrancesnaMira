@@ -1557,7 +1557,7 @@
     {
      "id": "t2",
      "titulo": "Tâche 2 — Exercice en interaction",
-     "duracaoSeg": 330,
+     "duracaoSeg": 240,
      "preparacaoSeg": 120,
      "consigne": "Vous voulez suivre un cours de cuisine. Vous téléphonez à l'école de cuisine pour obtenir des informations (types de cours, horaires, prix, nombre de participants, matériel, etc.).",
      "perguntasExaminador": [
