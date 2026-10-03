@@ -441,7 +441,7 @@ F.obterDetalheCorrecaoIA = async (ctx, id) => {
 
 // ---------------- carnet de révision ----------------
 F.obterCarnet = async ctx => (await T.CarnetProducao.find({ alunoId: ctx.userId }).sort({ data: 1 }).lean())
-  .map(r => ({ tipo: r.tipo, tache: r.tache, id: r.tipo === "sujet" ? r.refId : String(r._id), titre: r.titre, detalhe: r.detalhe, e: r.eixo, data: r.data, revisado: r.revisado, producaoId: r.producaoId }));
+  .map(r => ({ tipo: r.tipo, tache: r.tache, id: r.tipo === "sujet" ? r.refId : String(r._id), titre: r.titre, detalhe: r.detalhe, e: r.eixo, data: r.data, revisado: r.revisado, producaoId: r.producaoId, curso: r.courseType || "" }));
 F.alternarCarnet = async (ctx, item) => {
   const ex = await T.CarnetProducao.findOne({ alunoId: ctx.userId, tipo: "sujet", refId: item.id });
   if (ex) { await ex.deleteOne(); return false; }

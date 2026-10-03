@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<script src="js/htmlSeguro.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="img/logo-mira.png">
+<title>Minha correção - Francês na Mira</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/app-shell.css">
+<link rel="stylesheet" href="css/meu-espaco.css">
+<link rel="stylesheet" href="css/correcao-anotada.css">
+<style>
+* { margin: 0; padding: 0; }
+body { font-family: 'Poppins', sans-serif; background: var(--bg-gradient); background-attachment: fixed; min-height: 100vh; color: var(--text); }
+footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
+.mc-voltar { display: inline-flex; gap: 6px; margin-bottom: 14px; color: var(--text); font-weight: 600; text-decoration: none; font-size: .9rem; }
+.mc-voltar a { color: inherit; }
+.mc-nota { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.mc-nota .me-anel { width: 96px; height: 96px; }
+.mc-nota .me-anel i { width: 74px; height: 74px; font-size: 1.15rem; }
+.mc-lista li { margin: 5px 0 5px 18px; line-height: 1.5; }
+.mc-final { padding: 14px 16px; border-radius: 16px; background: rgba(217, 163, 0, .13); line-height: 1.6; }
+.mc-texto { white-space: pre-wrap; font: 1rem/1.8 Georgia, serif; }
+.mc-msg { padding: 10px 12px; border-radius: 12px; background: var(--glass-bg-2); margin-bottom: 8px; font-size: .88rem; }
+.mc-msg.prof { border-left: 4px solid #2563eb; }
+.mc-msgs textarea { width: 100%; min-height: 70px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--glass-input); color: var(--text); font: 400 .9rem 'Poppins', sans-serif; margin: 8px 0; }
+</style>
+</head>
+<body>
+<div id="app-navbar" class="app-navbar-bar"></div>
+
+<!-- Correção de uma produção (redação ou produção oral): nota, critérios da grade da prova,
+     texto com as marcações do professor, feedback global e conversa com o professor.
+     Substitui a tela de resultado da antiga producao-textual.html. -->
+<main class="me" id="minhaCorrecao"><div class="me-carregando"><div style="text-align:center;"><i style="display:inline-block"></i><p>Carregando a correção…</p></div></div></main>
+
+<footer>© 2026 · Francês na Mira</footer>
+
+<script src="js/correcao/nucleo.js"></script>
+<script src="js/correcao/texto-anotado.js"></script>
+<script src="js/correcao/painel-comentarios.js"></script>
+<script src="js/correcao/player-oral.js"></script>
+<script src="js/correcao/visualizacao-aluno.js"></script>
+<script src="js/minhaCorrecao.js"></script>
+<script src="js/appShell.js"></script>
+<script src="js/estudoTimerGlobal.js"></script>
+<script src="js/theme-toggle.js"></script>
+</body>
+</html>

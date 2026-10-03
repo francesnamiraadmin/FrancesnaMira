@@ -17,7 +17,7 @@ async function carregarIndicadores() {
       el.textContent = `${kpis.conjuntosEmAndamento} em andamento`;
       el.style.display = 'inline-block';
     }
-    if (kpis.tamanhoCaderno > 0) {
+    if (kpis.tamanhoCaderno > 0 && document.getElementById('indicadorCaderno')) { // o card do Caderno saiu (fica no Meu espaço)
       const el = document.getElementById('indicadorCaderno');
       el.textContent = `${kpis.tamanhoCaderno} questõe${kpis.tamanhoCaderno > 1 ? 's' : ''} salva${kpis.tamanhoCaderno > 1 ? 's' : ''}`;
       el.style.display = 'inline-block';

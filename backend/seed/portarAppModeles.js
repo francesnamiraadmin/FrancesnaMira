@@ -164,7 +164,7 @@ trocar(R`if (t === 'ET1') html += '</div><h2 class="secao-titulo outils-secao">`
 }
 
 // ---- extensões do site (dentro do mesmo escopo do App) ----
-trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("perfil.js") + "\n" + ler("epreuve-orale.js") + "\n" + ler("extensoes.js") + "\n" + ler("fazer-sujet.js") + "\n" + ler("correcao-equipe.js")).replace(/^/gm, "    ") +
+trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("perfil.js") + "\n" + ler("epreuve-orale.js") + "\n" + ler("extensoes.js") + "\n" + ler("fazer-sujet.js") + "\n" + ler("correcao-equipe.js") + "\n" + ler("navegacao.js")).replace(/^/gm, "    ") +
   "\n    // Só começa depois que a página confirmou o acesso e o curso (window.FNM_PRONTO).\n" +
   "    (window.FNM_PRONTO || Promise.resolve()).then(function () { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar(); });");
 trocar("abrirOral: function () { abrirHub('oral'); },", "abrirOral: function () { abrirHub('oral'); }, abrirDestino: abrirDestino,");
@@ -173,6 +173,8 @@ trocar("abrirOral: function () { abrirHub('oral'); },", "abrirOral: function () 
 js = js.split("['ET1', 'ET2', 'ET3', 'T1', 'T2', 'T3']").join("ETS().concat(TS())")
   .split("['ET1', 'ET2', 'ET3']").join("ETS()").split("['T1', 'T2', 'T3']").join("TS()")
   .split("['ET3', 'ET2', 'ET1']").join("ETS().reverse()");
+// « Mes notes » / « Mon espace » saíram do app: as notas e correções ficam no « Meu espaço » do site.
+js = js.split("« Mes notes » et dans « Mes corrections »").join("« Meu espaço »").split("« Mon espace › Mes notes »").join("« Meu espaço »").split("« Mes notes »").join("« Meu espaço »");
 
 const cab = `// =====================================================================
 // Ambiente de Produção — app "Modèles TCF" (Google Apps Script) rodando no site.

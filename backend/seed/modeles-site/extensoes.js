@@ -101,7 +101,7 @@ function htmlHubEscolhas() {
     if (h.id === 'oral') x.texto = 'As ' + TS().length + ' parte' + (TS().length > 1 ? 's' : '') + ' da produção oral do ' + nomeProva() + ' : modelos, gravação e transcrição.';
     return x;
   });
-  return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + escolhas.concat([espaco]).map(function (h) {
+  return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + escolhas.concat(B.professor ? [espaco] : []).map(function (h) {
     return '<button class="hub-escolha' + (h.id === 'espace' || h.id === 'prof' ? ' hub-escolha-espace' : '') + '" type="button" data-hub-ir="' + h.id + '" style="--cor:' + h.cor + '">' +
       '<span class="he-ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + h.svg + '</svg></span>' +
       '<b>' + h.titulo + '</b><small>' + h.texto + '</small><em>' + (h.extra || extra[h.id] + ' →') + '</em></button>';
@@ -117,6 +117,9 @@ function abrirDestino(d) {
     epreuve: abrirEpreuve, simulados: abrirSimulados, outils: abrirOutils, prof: function () { abrirProf(); }
   };
   if (/^devoir=/.test(d)) { abrirDevoirPorId(d.slice(7)); return; }
+  // vindo do « Meu espaço » do site: #sujet=<tâche>:<id>[:<foco>] abre um sujet salvo no caderno
+  var sj = /^sujet=([A-Z0-9]+):([^:]+)(?::([a-z]+))?$/.exec(d);
+  if (sj) { abrirModelo(sj[1], decodeURIComponent(sj[2]), { tipo: 'carnet', foco: sj[3] && sj[3] !== 'etude' ? sj[3] : null }); return; }
   if (mapa[d]) mapa[d](); else if (B && B.professor && window.FNM_ABRIR === 'prof') abrirProf(); else irAccueil();
 }
 window.addEventListener('hashchange', function () { if (B) abrirDestino(location.hash.replace(/^#/, '')); });
@@ -174,23 +177,8 @@ abrirHub = function (modo) {
       '<a class="hub-acao" href="simulado-tcf.html?curso=' + encodeURIComponent(B.courseType) + '"><span></span><b>Simulation complète de l\'examen</b><small>Les quatre épreuves, dont l\'expression orale enregistrée et transcrite.</small></a></div>';
     return;
   }
-  if (!B.admin) { bloco.remove(); return; }
-  bloco.innerHTML = '<h2 class="secao-titulo">Thèmes du cours avec dossier documentaire</h2><div id="hub-temas-curso"><p class="aviso">Chargement…</p></div>';
-  fetch('/api/temas?modalidade=textual&courseType=' + encodeURIComponent(B.courseType), { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } })
-    .then(function (r) { return r.ok ? r.json() : []; }).then(function (temas) {
-      var alvo = $('hub-temas-curso'); if (!alvo) return;
-      if (!temas.length) { alvo.innerHTML = '<p class="aviso">Aucun thème pour ce cours pour le moment.</p>'; return; }
-      var grupos = {};
-      temas.forEach(function (t) { var k = t.eixo || 'soc'; (grupos[k] = grupos[k] || []).push(t); });
-      alvo.innerHTML = '<p class="aviso" style="margin-top:0">Sujets au format de votre examen, avec textes et images d\'appui. Correction par l\'IA ou par un professeur.</p>' +
-        B.ordemEixos.concat(Object.keys(grupos).filter(function (k) { return B.ordemEixos.indexOf(k) === -1; })).filter(function (k) { return grupos[k]; }).map(function (k) {
-          var e = eixo(k);
-          return '<div class="grupo-eixo" style="--cor:' + e.cor + '"><h3><i></i>' + (e.icone || '') + ' ' + esc(e.nome) + ' <small>(' + grupos[k].length + ')</small></h3><div class="lista-modelos">' +
-            grupos[k].map(function (t) {
-              return '<a class="item-modelo" style="--cor:' + e.cor + '" href="producao-textual.html?curso=' + encodeURIComponent(B.courseType) + '&tema=' + t._id + '"><b>' + esc(t.titulo) + '</b><small>' + esc(t.tipoProducao || '') + ' · ' + t.limitePalavrasMin + ' à ' + t.limitePalavrasMax + ' mots</small></a>';
-            }).join('') + '</div></div>';
-        }).join('');
-    }).catch(function () { var a = $('hub-temas-curso'); if (a) a.innerHTML = ''; });
+  // « Thèmes du cours » saiu de circulação junto com producao-textual.html.
+  bloco.remove();
 };
 
 // ---------- envio ao Sistema de Correção (texto) ----------
@@ -512,3 +500,12 @@ function confirmarFimEpreuve(vazias) {
     rotulo: 'Terminer et envoyer'
   });
 }
+
+// ---------- « Mon espace » saiu do app: fica no « Meu espaço » do site ----------
+// Tarefas e mensagens do professor, notas/correções e o caderno de erros das produções agora
+// são seções de meu-espaco.html. Para o aluno, estas telas levam para lá; a equipe continua com as do app.
+var MEU_ESPACO_SECAO = { abrirTarefas: 'tarefas', abrirNotes: 'producoes', abrirCarnet: 'revisao' };
+function irMeuEspaco(secao) { location.href = 'meu-espaco.html#' + secao; }
+abrirTarefas = (function (orig) { return function () { if (B && B.professor) return orig.apply(this, arguments); irMeuEspaco(MEU_ESPACO_SECAO.abrirTarefas); }; })(abrirTarefas);
+abrirNotes = (function (orig) { return function () { if (B && B.professor) return orig.apply(this, arguments); irMeuEspaco(MEU_ESPACO_SECAO.abrirNotes); }; })(abrirNotes);
+abrirCarnet = (function (orig) { return function () { if (B && B.professor) return orig.apply(this, arguments); irMeuEspaco(MEU_ESPACO_SECAO.abrirCarnet); }; })(abrirCarnet);

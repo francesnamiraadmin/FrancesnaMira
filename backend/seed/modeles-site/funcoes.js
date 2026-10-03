@@ -16,7 +16,7 @@ function entrar() {
       carregarCarnet();
       $('barra-nav').hidden = false;
       $('nav-prof').hidden = !B.professor;
-      $('nav-taches').hidden = !!B.professor;
+      $('nav-taches').hidden = true; // « Mon espace » agora é o « Meu espaço » do site
       mostrarAvisosGlobais();
       mostrarAvisosCentrais();
       aplicarModulos();
@@ -59,7 +59,7 @@ function irAccueil() {
     var n = devs.filter(function (d) { return !d.feito; }).length + (MENSAGENS || []).filter(function (m) { return !m.feito; }).length;
     if ($('he-espace-n')) $('he-espace-n').textContent = n ? n + ' tâche' + (n > 1 ? 's' : '') + ' à faire' : 'devoirs, notes et cahier';
     if (!n || !$('acc-pendencias')) return;
-    $('acc-pendencias').innerHTML = '<button class="faixa-pend" type="button" id="acc-pend">Vous avez <b>' + n + '</b> tâche' + (n > 1 ? 's' : '') + ' de votre professeur(e) à faire <span>Mon espace →</span></button>';
+    $('acc-pendencias').innerHTML = '<button class="faixa-pend" type="button" id="acc-pend">Vous avez <b>' + n + '</b> tâche' + (n > 1 ? 's' : '') + ' de votre professeur(e) à faire <span>Meu espaço →</span></button>';
     $('acc-pend').addEventListener('click', abrirTarefas);
   });
   mostrar('tela-accueil');

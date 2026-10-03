@@ -395,3 +395,12 @@
 .fnm-app .eo-barra { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 10px 16px; border-radius: 999px; background: #1c2b3a; color: #fff; font-weight: 600; width: fit-content; max-width: 100%; }
 .fnm-app .eo-barra span { padding: 3px 10px; border-radius: 999px; background: #ffd60a; color: #16213a; font-size: .8rem; font-weight: 800; }
 .fnm-app .eo-res audio { width: 100%; margin: 6px 0; }
+
+/* Navegação: « ← Voltar para <tela anterior> » no topo de todas as telas do Ambiente de Produção */
+.fnm-app .volta-tela { display: inline-flex; align-items: center; gap: 8px; margin: 14px 0 0; padding: 8px 16px 8px 12px; border-radius: 999px;
+  border: 1px solid rgba(22, 33, 58, .16); background: rgba(255, 255, 255, .72); color: #16213a; font: 600 .86rem 'Poppins', sans-serif; cursor: pointer;
+  box-shadow: 0 6px 18px -12px rgba(22, 33, 58, .6); transition: transform .12s, background .12s; position: sticky; top: calc(var(--topo-site, 70px) + 8px); z-index: 25; }
+.fnm-app .volta-tela:hover { transform: translateX(-3px); background: #fff; }
+.fnm-app .volta-tela[hidden] { display: none; }
+.fnm-app .volta-tela b { font-weight: 800; }
+:root[data-theme="dark"] .fnm-app .volta-tela { background: rgba(255, 255, 255, .08); color: #f2f2f2; border-color: rgba(255, 255, 255, .14); }

@@ -191,7 +191,7 @@ function entrar() {
           carregarCarnet();
           $('barra-nav').hidden = false;
           $('nav-prof').hidden = !B.professor;
-          $('nav-taches').hidden = !!B.professor;
+          $('nav-taches').hidden = true; // « Mon espace » agora é o « Meu espaço » do site
           mostrarAvisosGlobais();
           mostrarAvisosCentrais();
           aplicarModulos();
@@ -262,7 +262,7 @@ function irAccueil() {
         var n = devs.filter(function (d) { return !d.feito; }).length + (MENSAGENS || []).filter(function (m) { return !m.feito; }).length;
         if ($('he-espace-n')) $('he-espace-n').textContent = n ? n + ' tâche' + (n > 1 ? 's' : '') + ' à faire' : 'devoirs, notes et cahier';
         if (!n || !$('acc-pendencias')) return;
-        $('acc-pendencias').innerHTML = '<button class="faixa-pend" type="button" id="acc-pend">Vous avez <b>' + n + '</b> tâche' + (n > 1 ? 's' : '') + ' de votre professeur(e) à faire <span>Mon espace →</span></button>';
+        $('acc-pendencias').innerHTML = '<button class="faixa-pend" type="button" id="acc-pend">Vous avez <b>' + n + '</b> tâche' + (n > 1 ? 's' : '') + ' de votre professeur(e) à faire <span>Meu espaço →</span></button>';
         $('acc-pend').addEventListener('click', abrirTarefas);
       });
       mostrar('tela-accueil');
@@ -2488,7 +2488,7 @@ function abrirGravacao(sessao, tarefa) {
         bt.disabled = true; bt.textContent = 'Envoi en cours…';
         enviarGravacao({ blob: blob, tache: t, sujet: tarefa.sujet.id, sessao: sessao.id, duree: duracao, transcricao: $('grav-trans').value, modo: 'professor' }).then(function () {
           pararGravacaoTudo();
-          $('gravador').innerHTML = '<div class="bloco ep-ok"><h3>✓ Enregistrement envoyé</h3><p class="aviso">Votre professeur(e) va l\'écouter et le corriger dans le Sistema de Correção. La note et la correction apparaîtront dans « Mes notes ».</p>' +
+          $('gravador').innerHTML = '<div class="bloco ep-ok"><h3>✓ Enregistrement envoyé</h3><p class="aviso">Votre professeur(e) va l\'écouter et le corriger dans le Sistema de Correção. La note et la correction apparaîtront dans « Meu espaço ».</p>' +
             '<div class="ferramentas"><button class="ferramenta destaque" type="button" id="grav-volta">← Mes épreuves</button></div></div>';
           $('grav-volta').addEventListener('click', abrirEpreuve);
         }).catch(function (e) {
@@ -5708,7 +5708,7 @@ function abasEspace(ativa) {
       if (EO.stream) EO.stream.getTracks().forEach(function (tr) { tr.stop(); });
       EO.stream = null;
     }
-    function linkCorrecao(id) { return 'producao-textual.html?curso=' + encodeURIComponent(B.courseType || 'TCF') + '&producao=' + encodeURIComponent(id); }
+    function linkCorrecao(id) { return 'minha-correcao.html?producao=' + encodeURIComponent(id); }
     
     // Sorteio: um sujet por tâche oral, eixos diferentes, entre os liberados para o aluno.
     function tirarEpreuveOral(pools) {
@@ -5873,7 +5873,7 @@ function abasEspace(ativa) {
       var tela = $('tela-epreuve');
       tela.innerHTML = '<h1 class="titulo-pagina">Épreuve orale terminée</h1>' +
         '<div class="bloco ep-ok"><h3>' + (EO.correcao === 'ia' ? 'Correction de vos enregistrements par l\'IA' : 'Envoi au Sistema de Correção') + '</h3><p class="aviso" id="eo-status"></p>' +
-        '<div class="ferramentas"><button class="ferramenta destaque" type="button" id="eo-nova">Nouvelle épreuve orale</button><button class="ferramenta" type="button" id="eo-notas">Mes notes</button><button class="ferramenta" type="button" id="eo-accueil">Accueil</button></div></div>' +
+        '<div class="ferramentas"><button class="ferramenta destaque" type="button" id="eo-nova">Nouvelle épreuve orale</button><button class="ferramenta" type="button" id="eo-notas">Meu espaço</button><button class="ferramenta" type="button" id="eo-accueil">Accueil</button></div></div>' +
         ts.map(function (t) {
           var g = EO.grav[t];
           return '<div class="bloco eo-res" data-eo-t="' + t + '"><h3>' + esc(TACHES[t].nom + ' · ' + TACHES[t].sous) + '</h3><p class="aviso">' + esc(EO.sujets[t].t.slice(0, 220)) + '</p>' +
@@ -6037,7 +6037,7 @@ function abasEspace(ativa) {
         if (h.id === 'oral') x.texto = 'As ' + TS().length + ' parte' + (TS().length > 1 ? 's' : '') + ' da produção oral do ' + nomeProva() + ' : modelos, gravação e transcrição.';
         return x;
       });
-      return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + escolhas.concat([espaco]).map(function (h) {
+      return '<nav class="hub-escolhas" aria-label="Que voulez-vous travailler ?">' + escolhas.concat(B.professor ? [espaco] : []).map(function (h) {
         return '<button class="hub-escolha' + (h.id === 'espace' || h.id === 'prof' ? ' hub-escolha-espace' : '') + '" type="button" data-hub-ir="' + h.id + '" style="--cor:' + h.cor + '">' +
           '<span class="he-ico"><svg viewBox="0 0 24 24" aria-hidden="true">' + h.svg + '</svg></span>' +
           '<b>' + h.titulo + '</b><small>' + h.texto + '</small><em>' + (h.extra || extra[h.id] + ' →') + '</em></button>';
@@ -6053,6 +6053,9 @@ function abasEspace(ativa) {
         epreuve: abrirEpreuve, simulados: abrirSimulados, outils: abrirOutils, prof: function () { abrirProf(); }
       };
       if (/^devoir=/.test(d)) { abrirDevoirPorId(d.slice(7)); return; }
+      // vindo do « Meu espaço » do site: #sujet=<tâche>:<id>[:<foco>] abre um sujet salvo no caderno
+      var sj = /^sujet=([A-Z0-9]+):([^:]+)(?::([a-z]+))?$/.exec(d);
+      if (sj) { abrirModelo(sj[1], decodeURIComponent(sj[2]), { tipo: 'carnet', foco: sj[3] && sj[3] !== 'etude' ? sj[3] : null }); return; }
       if (mapa[d]) mapa[d](); else if (B && B.professor && window.FNM_ABRIR === 'prof') abrirProf(); else irAccueil();
     }
     window.addEventListener('hashchange', function () { if (B) abrirDestino(location.hash.replace(/^#/, '')); });
@@ -6110,23 +6113,8 @@ function abasEspace(ativa) {
           '<a class="hub-acao" href="simulado-tcf.html?curso=' + encodeURIComponent(B.courseType) + '"><span></span><b>Simulation complète de l\'examen</b><small>Les quatre épreuves, dont l\'expression orale enregistrée et transcrite.</small></a></div>';
         return;
       }
-      if (!B.admin) { bloco.remove(); return; }
-      bloco.innerHTML = '<h2 class="secao-titulo">Thèmes du cours avec dossier documentaire</h2><div id="hub-temas-curso"><p class="aviso">Chargement…</p></div>';
-      fetch('/api/temas?modalidade=textual&courseType=' + encodeURIComponent(B.courseType), { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') } })
-        .then(function (r) { return r.ok ? r.json() : []; }).then(function (temas) {
-          var alvo = $('hub-temas-curso'); if (!alvo) return;
-          if (!temas.length) { alvo.innerHTML = '<p class="aviso">Aucun thème pour ce cours pour le moment.</p>'; return; }
-          var grupos = {};
-          temas.forEach(function (t) { var k = t.eixo || 'soc'; (grupos[k] = grupos[k] || []).push(t); });
-          alvo.innerHTML = '<p class="aviso" style="margin-top:0">Sujets au format de votre examen, avec textes et images d\'appui. Correction par l\'IA ou par un professeur.</p>' +
-            B.ordemEixos.concat(Object.keys(grupos).filter(function (k) { return B.ordemEixos.indexOf(k) === -1; })).filter(function (k) { return grupos[k]; }).map(function (k) {
-              var e = eixo(k);
-              return '<div class="grupo-eixo" style="--cor:' + e.cor + '"><h3><i></i>' + (e.icone || '') + ' ' + esc(e.nome) + ' <small>(' + grupos[k].length + ')</small></h3><div class="lista-modelos">' +
-                grupos[k].map(function (t) {
-                  return '<a class="item-modelo" style="--cor:' + e.cor + '" href="producao-textual.html?curso=' + encodeURIComponent(B.courseType) + '&tema=' + t._id + '"><b>' + esc(t.titulo) + '</b><small>' + esc(t.tipoProducao || '') + ' · ' + t.limitePalavrasMin + ' à ' + t.limitePalavrasMax + ' mots</small></a>';
-                }).join('') + '</div></div>';
-            }).join('');
-        }).catch(function () { var a = $('hub-temas-curso'); if (a) a.innerHTML = ''; });
+      // « Thèmes du cours » saiu de circulação junto com producao-textual.html.
+      bloco.remove();
     };
     
     // ---------- envio ao Sistema de Correção (texto) ----------
@@ -6143,7 +6131,7 @@ function abasEspace(ativa) {
           if (contarPalavras(d.texte) < 15) { st.textContent = 'Écrivez votre texte avant de l\'envoyer.'; return; }
           var porIA = b.dataset.envioModo === 'ia';
           confirmarEnvio({ titulo: porIA ? 'Envoyer à la correction par l\'IA' : 'Envoyer à un professeur', custo: 1,
-            texto: porIA ? 'Correction complète sur la grille de l\'examen, dans « Mes notes ».' : 'Votre texte entre dans la file du Sistema de Correção. Vous suivrez la correction dans « Mes notes ».' }).then(function (ok) {
+            texto: porIA ? 'Correction complète sur la grille de l\'examen, dans « Meu espaço ».' : 'Votre texte entre dans la file du Sistema de Correção. Vous suivrez la correction dans « Meu espaço ».' }).then(function (ok) {
             if (!ok) return;
             d.modo = b.dataset.envioModo;
             b.disabled = true; st.textContent = 'Envoi…';
@@ -6164,7 +6152,7 @@ function abasEspace(ativa) {
     }
     function correcaoEscolhida() { var r = document.querySelector('input[name="ep-correcao"]:checked'); return r ? r.value : 'ia'; }
     function htmlEnvioEpreuve(r) {
-      if (r.correcao === 'professor') return r.quantidade ? '<div class="bloco envio-sistema"><b>✓ Envoyée au Sistema de Correção</b><small>Suivez la correction de chaque tâche dans « Mon espace › Mes notes ».</small></div>' : '';
+      if (r.correcao === 'professor') return r.quantidade ? '<div class="bloco envio-sistema"><b>✓ Envoyée au Sistema de Correção</b><small>Suivez la correction de chaque tâche dans « Meu espaço ».</small></div>' : '';
       if (!r.id || r.status === 'vazia') return '';
       return '<div class="bloco envio-sistema" id="ep-envio"><b>Envoyer aussi à un professeur</b><small>En plus de la correction par l\'IA ci-dessous, vous pouvez envoyer vos textes au Sistema de Correção (1 crédit par tâche).</small>' +
         '<div class="ferramentas">' + ETS().map(function (t) { return '<label class="check"><input type="checkbox" data-ep-t="' + t + '" checked> Tâche ' + t.slice(-1) + '</label>'; }).join('') +
@@ -6181,7 +6169,7 @@ function abasEspace(ativa) {
           bt.disabled = true; $('ep-envio-st').textContent = 'Envoi…';
           google.script.run.withSuccessHandler(function (x) {
             if (typeof x.creditos === 'number') atualizarCreditos(x.creditos); else atualizarCreditos(Math.max(0, (B.creditos || 0) - (x.enviadas || 0)));
-            $('ep-envio-st').innerHTML = '✓ ' + x.enviadas + ' tâche(s) envoyée(s). ' + esc(x.aviso || '') + ' Suivez la correction dans « Mes notes ».';
+            $('ep-envio-st').innerHTML = '✓ ' + x.enviadas + ' tâche(s) envoyée(s). ' + esc(x.aviso || '') + ' Suivez la correction dans « Meu espaço ».';
           }).withFailureHandler(function (e) { bt.disabled = false; $('ep-envio-st').textContent = e.message || e; }).enviarEpreuveCorrecao(EMAIL, r.id, ts, 'professor');
         });
       });
@@ -6449,6 +6437,15 @@ function abasEspace(ativa) {
       });
     }
     
+    // ---------- « Mon espace » saiu do app: fica no « Meu espaço » do site ----------
+    // Tarefas e mensagens do professor, notas/correções e o caderno de erros das produções agora
+    // são seções de meu-espaco.html. Para o aluno, estas telas levam para lá; a equipe continua com as do app.
+    var MEU_ESPACO_SECAO = { abrirTarefas: 'tarefas', abrirNotes: 'producoes', abrirCarnet: 'revisao' };
+    function irMeuEspaco(secao) { location.href = 'meu-espaco.html#' + secao; }
+    abrirTarefas = (function (orig) { return function () { if (B && B.professor) return orig.apply(this, arguments); irMeuEspaco(MEU_ESPACO_SECAO.abrirTarefas); }; })(abrirTarefas);
+    abrirNotes = (function (orig) { return function () { if (B && B.professor) return orig.apply(this, arguments); irMeuEspaco(MEU_ESPACO_SECAO.abrirNotes); }; })(abrirNotes);
+    abrirCarnet = (function (orig) { return function () { if (B && B.professor) return orig.apply(this, arguments); irMeuEspaco(MEU_ESPACO_SECAO.abrirCarnet); }; })(abrirCarnet);
+    
     // ================= página do sujet: « Faire ce sujet », dossiê e professor ao vivo =================
     
     // Escolha de quem corrige (aparece dentro de « Faire ce sujet »): IA, professor (fila do Sistema de
@@ -6458,7 +6455,7 @@ function abasEspace(ativa) {
       return '<fieldset class="escolha-correcao tm-correcao"><legend>Qui corrige ?</legend>' +
         '<label' + (ia ? '' : ' class="indisponivel"') + '><input type="radio" name="tm-correcao" value="ia"' + (ia ? ' checked' : ' disabled') + '><span><b>L\'IA</b><small>' +
           (ia ? 'Correction immédiate : note sur 20, trame, corrections et version améliorée' + (oral ? ', à partir de l\'enregistrement et de la transcription' : '') + '. Sans crédit.' : 'Indisponible pour le moment.') + '</small></span></label>' +
-        '<label><input type="radio" name="tm-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Attendre la correction d\'un professeur</b><small>La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l\'examen. Vous la retrouvez dans « Mes notes ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
+        '<label><input type="radio" name="tm-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Attendre la correction d\'un professeur</b><small>La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l\'examen. Vous la retrouvez dans « Meu espaço ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
         '<label><input type="radio" name="tm-correcao" value="aovivo"><span><b>Un professeur en direct</b><small>Il suit votre ' + (oral ? 'parole (transcription)' : 'texte pendant que vous écrivez') + ' et peut vous parler par la voix. À l\'envoi, la production lui est envoyée pour la correction (1 crédit).</small></span></label></fieldset>';
     }
     function correcaoFazer() { var r = document.querySelector('input[name="tm-correcao"]:checked'); return r ? r.value : 'professor'; }
@@ -6530,7 +6527,7 @@ function abasEspace(ativa) {
           return;
         }
         confirmarEnvio({ titulo: 'Envoyer votre texte au professeur', custo: 1, rotulo: 'Envoyer au professeur',
-          texto: 'Votre texte (' + contarPalavras(texto) + ' mots) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l\'examen. Vous suivrez la correction dans « Mes notes ».' }).then(function (ok) {
+          texto: 'Votre texte (' + contarPalavras(texto) + ' mots) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l\'examen. Vous suivrez la correction dans « Meu espaço ».' }).then(function (ok) {
           if (!ok) return;
           b.disabled = true; st.textContent = 'Envoi…';
           google.script.run.withSuccessHandler(function (r) {
@@ -6568,7 +6565,7 @@ function abasEspace(ativa) {
         return;
       }
       confirmarEnvio({ titulo: 'Envoyer votre enregistrement au professeur', custo: 1, rotulo: 'Envoyer au professeur',
-        texto: 'L\'enregistrement (' + formatarTempo(Math.round(d.duree || 0)) + ') et sa transcription entrent dans la file du Sistema de Correção. Vous suivrez la correction dans « Mes notes ».' }).then(function (ok) {
+        texto: 'L\'enregistrement (' + formatarTempo(Math.round(d.duree || 0)) + ') et sa transcription entrent dans la file du Sistema de Correção. Vous suivrez la correction dans « Meu espaço ».' }).then(function (ok) {
         if (!ok) return;
         b.disabled = true; d.st.textContent = 'Envoi…';
         enviarGravacao({ blob: d.blob, tache: d.tache, sujet: d.m.id, duree: d.duree, transcricao: d.transcricao, modo: 'professor' }).then(function (r) {
@@ -6769,6 +6766,139 @@ function abasEspace(ativa) {
     }
     ligarProfEscrita = function () { painelCorrecaoEquipe('textual'); };
     ligarProfOral = function () { painelCorrecaoEquipe('oral'); };
+    
+    // ================= navegação: voltar para a tela anterior =================
+    // Cada tela aberta entra numa pilha. Em todas as telas aparece « ← Retour : <tela anterior> »
+    // (ex.: na Tâche 1, volta para Production écrite), e o botão « voltar » do navegador/celular
+    // também volta para a tela anterior do app em vez de sair dele. A trilha (Accueil › …) ganha
+    // o nível « Production écrite / orale » quando ele faltava.
+    var NAV = { pilha: [], voltando: false, modo: null, botao: null };
+    
+    var NAV_ROTULO = {
+      irAccueil: function () { return 'Accueil'; },
+      abrirHub: function (m) { return m === 'oral' ? 'Production orale' : 'Production écrite'; },
+      abrirLista: function (t) { return TACHES[t] ? nomeTache(t) + ' · ' + TACHES[t].sous : 'Sujets'; },
+      abrirEixo: function (e) { var x = eixo(e); return x && x.nome ? x.nome : 'Axe thématique'; },
+      abrirModelo: function () { return 'Sujet'; },
+      abrirEpreuve: function () { return 'Épreuves'; },
+      abrirEpreuveOral: function () { return 'Épreuve orale'; },
+      abrirOutils: function () { return 'Boîte à outils'; },
+      abrirNotes: function () { return 'Mes notes'; },
+      abrirTarefas: function () { return 'Mes tâches'; },
+      abrirCarnet: function () { return 'Cahier d\'erreurs'; },
+      abrirAtelier: function () { return 'Atelier'; },
+      abrirAttentes: function () { return 'Attentes du professeur'; },
+      abrirCadernoTCF: function () { return 'Révision'; },
+      abrirDicteePage: function () { return 'Dictée'; },
+      abrirModelesEcrits: function () { return 'Modèles écrits'; },
+      abrirVocab: function () { return 'Vocabulaire'; },
+      abrirTeste: function () { return 'Test'; },
+      abrirProf: function () { return 'Espace professeur'; },
+      abrirCorrecaoProf: function () { return 'Correction'; }
+    };
+    
+    function navChave(e) { try { return e.nome + '|' + JSON.stringify(e.args); } catch (x) { return e.nome + '|?'; } }
+    
+    function navegavel(nome, fn) {
+      return function () {
+        if ((nome === 'abrirTarefas' || nome === 'abrirNotes' || nome === 'abrirCarnet') && !(B && B.professor)) return fn.apply(this, arguments);
+        var args = Array.prototype.slice.call(arguments).filter(function (a) { return typeof a !== 'function' && !(a && a.nodeType) && !(typeof Event !== 'undefined' && a instanceof Event); });
+        if (nome === 'abrirHub') NAV.modo = args[0] === 'oral' ? 'oral' : 'ecrit';
+        if (!NAV.voltando) {
+          var e = { nome: nome, args: args, fn: null }, k = navChave(e);
+          // voltou para uma tela que já está na pilha (pela trilha, por ex.): corta a pilha ali
+          var i = -1;
+          for (var j = NAV.pilha.length - 1; j >= 0; j--) if (navChave(NAV.pilha[j]) === k) { i = j; break; }
+          if (i >= 0) NAV.pilha.length = i + 1;
+          else {
+            NAV.pilha.push(e);
+            if (NAV.pilha.length > 40) NAV.pilha.shift();
+            if (nome === 'irAccueil') NAV.pilha = [e];
+            else try { history.pushState({ fnmNav: NAV.pilha.length }, ''); } catch (x) { /* ok */ }
+          }
+        }
+        var r = fn.apply(this, arguments);
+        setTimeout(navAtualizarBotao, 0);
+        return r;
+      };
+    }
+    
+    function navVoltar() {
+      if (NAV.pilha.length < 2) { NAV.voltando = true; try { irAccueil(); } finally { NAV.voltando = false; } NAV.pilha = NAV.pilha.slice(0, 1); navAtualizarBotao(); return; }
+      NAV.pilha.pop();
+      var ant = NAV.pilha[NAV.pilha.length - 1];
+      NAV.voltando = true;
+      try { NAV_FUNCOES[ant.nome].apply(null, ant.args); } finally { NAV.voltando = false; }
+      navAtualizarBotao();
+    }
+    
+    function navAtualizarBotao() {
+      if (!NAV.botao) {
+        var primeira = document.querySelector('.tela');
+        if (!primeira) return;
+        NAV.botao = document.createElement('button');
+        NAV.botao.type = 'button';
+        NAV.botao.className = 'volta-tela';
+        NAV.botao.hidden = true;
+        NAV.botao.innerHTML = '<span aria-hidden="true">←</span> <span class="vt-txt">Retour</span> <b class="vt-dest"></b>';
+        NAV.botao.addEventListener('click', function () {
+          if (history.state && history.state.fnmNav) history.back(); else navVoltar();
+        });
+        primeira.parentNode.insertBefore(NAV.botao, primeira);
+      }
+      var ant = NAV.pilha.length > 1 ? NAV.pilha[NAV.pilha.length - 2] : null;
+      var naInicial = !NAV.pilha.length || NAV.pilha[NAV.pilha.length - 1].nome === 'irAccueil';
+      if (naInicial || !ant) { NAV.botao.hidden = true; return; }
+      var rot = (NAV_ROTULO[ant.nome] || function () { return 'Page précédente'; }).apply(null, ant.args);
+      NAV.botao.querySelector('.vt-dest').textContent = rot;
+      NAV.botao.setAttribute('aria-label', 'Retour : ' + rot);
+      NAV.botao.hidden = false;
+    }
+    
+    // botão « voltar » do navegador / do celular
+    window.addEventListener('popstate', function (ev) {
+      void ev;
+      if (NAV.pilha.length > 1) navVoltar();
+    });
+    
+    // Trilha: acrescenta « Production écrite / orale » entre Accueil e a tâche (ou o eixo).
+    var trilhaDoScript = trilha;
+    trilha = function (partes) {
+      if (partes && partes.length >= 2 && partes[0].rotulo === 'Accueil' && !partes.some(function (p) { return /^Production (écrite|orale)$/.test(p.rotulo); })) {
+        var m = /^Oral\b/.test(partes[1].rotulo) ? 'oral' : /^Écrit\b/.test(partes[1].rotulo) ? 'ecrit' : null;
+        if (!m && NAV.modo && NAV.pilha.some(function (e) { return e.nome === 'abrirEixo' || e.nome === 'abrirLista'; })) m = NAV.modo;
+        if (m) partes.splice(1, 0, { rotulo: m === 'oral' ? 'Production orale' : 'Production écrite', fn: function () { abrirHub(m); } });
+      }
+      return trilhaDoScript(partes);
+    };
+    
+    // Telas que entram na pilha (as funções do app passam a registrar a navegação).
+    irAccueil = navegavel('irAccueil', irAccueil);
+    abrirHub = navegavel('abrirHub', abrirHub);
+    abrirLista = navegavel('abrirLista', abrirLista);
+    abrirEixo = navegavel('abrirEixo', abrirEixo);
+    abrirModelo = navegavel('abrirModelo', abrirModelo);
+    abrirEpreuve = navegavel('abrirEpreuve', abrirEpreuve);
+    abrirEpreuveOral = navegavel('abrirEpreuveOral', abrirEpreuveOral);
+    abrirOutils = navegavel('abrirOutils', abrirOutils);
+    abrirNotes = navegavel('abrirNotes', abrirNotes);
+    abrirTarefas = navegavel('abrirTarefas', abrirTarefas);
+    abrirCarnet = navegavel('abrirCarnet', abrirCarnet);
+    abrirAtelier = navegavel('abrirAtelier', abrirAtelier);
+    abrirAttentes = navegavel('abrirAttentes', abrirAttentes);
+    abrirCadernoTCF = navegavel('abrirCadernoTCF', abrirCadernoTCF);
+    abrirDicteePage = navegavel('abrirDicteePage', abrirDicteePage);
+    abrirModelesEcrits = navegavel('abrirModelesEcrits', abrirModelesEcrits);
+    abrirVocab = navegavel('abrirVocab', abrirVocab);
+    abrirTeste = navegavel('abrirTeste', abrirTeste);
+    abrirProf = navegavel('abrirProf', abrirProf);
+    abrirCorrecaoProf = navegavel('abrirCorrecaoProf', abrirCorrecaoProf);
+    var NAV_FUNCOES = {
+      irAccueil: irAccueil, abrirHub: abrirHub, abrirLista: abrirLista, abrirEixo: abrirEixo, abrirModelo: abrirModelo, abrirEpreuve: abrirEpreuve,
+      abrirEpreuveOral: abrirEpreuveOral, abrirOutils: abrirOutils, abrirNotes: abrirNotes, abrirTarefas: abrirTarefas, abrirCarnet: abrirCarnet,
+      abrirAtelier: abrirAtelier, abrirAttentes: abrirAttentes, abrirCadernoTCF: abrirCadernoTCF, abrirDicteePage: abrirDicteePage,
+      abrirModelesEcrits: abrirModelesEcrits, abrirVocab: abrirVocab, abrirTeste: abrirTeste, abrirProf: abrirProf, abrirCorrecaoProf: abrirCorrecaoProf
+    };
     
     // Só começa depois que a página confirmou o acesso e o curso (window.FNM_PRONTO).
     (window.FNM_PRONTO || Promise.resolve()).then(function () { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar(); });

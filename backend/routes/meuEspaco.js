@@ -160,6 +160,34 @@ async function deveres(alunoId) {
   };
 }
 
+// Caderno de Revisão: as questões que o aluno salvou na tela de resultado (todas as provas).
+async function revisao(alunoId) {
+  const itens = await CadernoErros.find({ alunoId }).sort({ adicionadoEm: -1 }).limit(200).lean();
+  const qs = await Questao.find({ _id: { $in: itens.map(i => i.questaoId) } })
+    .select("tipo nivel materia enunciado texto visual opcoes indiceCorreta respostaVF afirmacao explicacao courseType").lean();
+  const porId = new Map(qs.map(q => [String(q._id), q]));
+  return itens.map(i => {
+    const q = porId.get(String(i.questaoId));
+    if (!q) return null; // questão desativada
+    return {
+      questaoId: String(i.questaoId), adicionadoEm: i.adicionadoEm, curso: i.courseType || q.courseType || "", materia: MATERIAS[q.materia] || q.materia, tipo: q.tipo,
+      enunciado: q.enunciado, texto: q.texto || "", visual: q.visual || null, afirmacao: q.afirmacao || "",
+      respostaCorreta: q.tipo === "vf" ? (q.respostaVF ? "Vrai" : "Faux") : (q.opcoes || [])[q.indiceCorreta], explicacao: q.explicacao || ""
+    };
+  }).filter(Boolean);
+}
+
+// O que era o « Mon espace » do Ambiente de Produção: devoirs e mensagens do professor e o
+// caderno das produções (erros apontados nas correções, palavras e sujets salvos).
+async function ambienteProducao(alunoId) {
+  const F = require("./modeles").funcoes;
+  const ctx = { userId: String(alunoId), _cache: {} };
+  const [devoirs, mensagens, carnet] = await Promise.all([
+    seguro(() => F.meusDevoirs(ctx), []), seguro(() => F.mesMessages(ctx), []), seguro(() => F.obterCarnet(ctx), [])
+  ]);
+  return { devoirs, mensagens, carnet };
+}
+
 async function estudo(alunoId) {
   const ss = await SessaoEstudo.find({ userId: alunoId, status: "finalizada" }).select("materiaId duracaoSegundos iniciadoEm").lean();
   const mats = await MateriaEstudo.find({ _id: { $in: [...new Set(ss.map(s => String(s.materiaId)))] } }).select("nome cor icone").lean();
@@ -187,9 +215,10 @@ router.get("/", async (req, res) => {
   try {
     const u = await User.findById(req.userId).select("nome email perfil creditosCorrecao planos aulasFavoritas criadoEm").lean();
     if (!u) return res.status(404).json({ msg: "Conta não encontrada." });
-    const [q, s, p, a, ap, dv, est] = await Promise.all([
+    const [q, s, p, a, ap, dv, est, rv, amb] = await Promise.all([
       seguro(() => questoes(u._id), null), seguro(() => simulados(u._id), []), seguro(() => producoes(u._id), null),
-      seguro(() => aulas(u._id, u.aulasFavoritas), null), seguro(() => aulasParticulares(u._id), null), seguro(() => deveres(u._id), null), seguro(() => estudo(u._id), null)
+      seguro(() => aulas(u._id, u.aulasFavoritas), null), seguro(() => aulasParticulares(u._id), null), seguro(() => deveres(u._id), null), seguro(() => estudo(u._id), null),
+      seguro(() => revisao(u._id), []), seguro(() => ambienteProducao(u._id), { devoirs: [], mensagens: [], carnet: [] })
     ]);
     // mapa de atividade: um ano de dias com qualquer atividade (questões, produções, simulados, aulas, estudo)
     const todas = [].concat(q?.datas || [], p?.datas || [], s.map(x => x.data), a?.datas || [], ap?.datas || [], est?.datas || []).filter(Boolean).map(dia);
@@ -204,7 +233,7 @@ router.get("/", async (req, res) => {
         creditos: u.creditosCorrecao || 0, desde: u.criadoEm, cursos: [...new Set((u.planos || []).filter(x => x.ativo).map(x => x.courseType))]
       },
       sequencia: sequencias(Object.keys(porDia)), diasAtivos: Object.keys(porDia).length, atividade,
-      questoes: q, simulados: s, producoes: p, aulas: a, aulasParticulares: ap, deveres: dv, estudo: est
+      questoes: q, simulados: s, producoes: p, aulas: a, aulasParticulares: ap, deveres: dv, estudo: est, revisao: rv, ambiente: amb
     });
   } catch (err) {
     console.error(err);

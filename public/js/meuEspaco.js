@@ -1,7 +1,8 @@
 // =====================================================================
 // MEU ESPAÇO — o painel do aluno (GET /api/meu-espaco): herói com sequência de dias,
 // indicadores, mapa de atividade, Plataforma de Questões, caderno de erros (todas as
-// questões erradas), produções e correções, simulados, aulas, favoritos, deveres e estudo.
+// questões erradas), Caderno de Revisão (questões salvas + caderno das produções), produções e
+// correções, tarefas do professor, simulados, aulas, favoritos, deveres e estudo.
 // Gráficos em SVG (sem bibliotecas).
 // =====================================================================
 (function () {
@@ -141,7 +142,7 @@
     const l = d.questoes?.cadernoErros || [];
     const materias = [...new Set(l.map(x => x.materia))];
     return `<section class="me-secao" id="erros" style="--c:${COR.vermelho}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Caderno de erros</h2>
-      <p>Todas as questões que você já errou. Quando você acertar numa próxima vez, ela vai para « resolvidas ».</p></div><a class="me-btn" href="caderno-revisao.html">Revisar no modo treino</a></div>
+      <p>Todas as questões que você já errou. Quando você acertar numa próxima vez, ela vai para « resolvidas ».</p></div><a class="me-btn" href="#revisao">Caderno de Revisão</a></div>
       <div class="me-card c12">${l.length ? `<div class="me-filtros" style="--c:${COR.vermelho}">
           <button type="button" data-ef="pendentes">Pendentes <b>${l.filter(x => !x.resolvida).length}</b></button>
           <button type="button" data-ef="resolvidas">Resolvidas <b>${l.filter(x => x.resolvida).length}</b></button>
@@ -171,7 +172,7 @@
         <div class="me-card c8"><h3>Evolução das notas <small>% da nota máxima</small></h3>${linha(p.evolucao, COR.rosa, { sufixo: "%", rotulo: "Notas das produções" })}</div>
         <div class="me-card c4"><h3>Escrita × oral</h3>${donut([{ nome: "Escritas", valor: p.escritas, cor: COR.rosa, texto: p.escritas }, { nome: "Orais", valor: p.orais, cor: COR.anil, texto: p.orais }], p.total, "produções")}</div>
         <div class="me-card c6"><h3>Média por critério <small>nas correções devolvidas</small></h3>${barras(p.criterios.slice(0, 8).map(c => ({ nome: c.nome, pct: c.pct })))}</div>
-        <div class="me-card c6"><h3>Suas produções e correções</h3><div class="me-lista" style="max-height:420px;overflow:auto;">${p.lista.slice(0, 40).map(x => `<a class="me-item" style="--c:${ESTADO_COR[x.estado.estado] || COR.azul}" href="producao-textual.html?curso=${encodeURIComponent(x.curso || "TCF")}&producao=${esc(x.id)}">
+        <div class="me-card c6"><h3>Suas produções e correções</h3><div class="me-lista" style="max-height:420px;overflow:auto;">${p.lista.slice(0, 40).map(x => `<a class="me-item" style="--c:${ESTADO_COR[x.estado.estado] || COR.azul}" href="minha-correcao.html?producao=${esc(x.id)}">
           <span class="marca">${x.modalidade === "oral" ? "🎙️" : "✍️"}</span><span class="txt"><b>${esc(x.titulo)}</b><small>${fmtData(x.data)}${x.tache ? " · " + esc(TAREFA[x.tache] || x.tache) : ""} · ${esc(x.estado.rotulo)}${x.anotacoes ? " · " + x.anotacoes + " comentário(s)" : ""}</small></span>
           ${x.nota != null ? `<span class="me-pill">${x.nota}/${x.notaMaxima}</span>` : `<span class="me-pill">${esc(x.estado.rotulo)}</span>`}</a>`).join("")}</div></div>
         ${p.treinoIA.length ? `<div class="me-card c12"><h3>Treinos corrigidos pela IA <small>Ambiente de Produção</small></h3><div class="me-lista" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${p.treinoIA.slice(0, 12).map(x => `<div class="me-item" style="--c:${COR.teal}">
@@ -219,13 +220,60 @@
       </div></section>`;
   }
 
+  // Caderno de Revisão: questões salvas na Plataforma + o caderno das produções (erros, palavras, sujets).
+  const linkApp = (curso, hash) => `producao.html${curso ? "?curso=" + encodeURIComponent(curso) : ""}#${hash}`;
+  function secRevisao(d) {
+    const rv = d.revisao || [], carnet = d.ambiente?.carnet || [];
+    const erros = carnet.filter(x => x.tipo === "erreur").reverse(), mots = carnet.filter(x => x.tipo === "mot"), sujets = carnet.filter(x => x.tipo === "sujet");
+    const questoes = rv.length ? `<div class="me-erros">${rv.map((x, i) => `<div class="me-erro" style="--c:${PALETA[i % PALETA.length]}" data-item-caderno="${esc(x.questaoId)}">
+        <div class="topo"><span>${esc(x.materia)}${x.curso ? " · " + esc(x.curso) : ""} · salva em ${fmtData(x.adicionadoEm)}</span><button class="me-btn" type="button" data-rm-caderno="${esc(x.questaoId)}">Remover</button></div>
+        <p>${esc(x.enunciado)}</p>${x.afirmacao ? `<p>Afirmação: « ${esc(x.afirmacao)} »</p>` : ""}
+        <p>Resposta certa: <span class="certa">${esc(x.respostaCorreta)}</span></p>
+        <details data-explicar="${esc(x.questaoId)}"><summary>Ver explicação, pegadinhas e dicas</summary>${x.texto ? `<div class="explica">${esc(x.texto)}</div>` : ""}<div class="explica">${esc(x.explicacao)}</div><div data-ia></div></details>
+      </div>`).join("")}</div>` : '<div class="me-vazio">Nenhuma questão salva ainda. Depois de responder um conjunto, use « Adicionar ao Caderno de Revisão » na tela de resultado.</div>';
+    const prod = `${erros.length ? `<div class="me-lista">${erros.map(x => { const [a, b] = String(x.titre).split(" → ");
+        return `<div class="me-item" style="--c:${COR.vermelho}" data-item-carnet="${esc(x.id)}"><span class="marca">✏️</span><span class="txt"><b><s style="color:${COR.vermelho}">${esc(a)}</s> → <span style="color:${COR.verde}">${esc(b || "")}</span></b>${x.detalhe ? `<small>${esc(x.detalhe)}</small>` : ""}</span><button class="me-btn" type="button" data-rm-carnet="${esc(x.id)}">✓ Aprendido</button></div>`; }).join("")}</div>`
+        : '<div class="me-vazio">Nenhum erro de produção por enquanto. Os erros apontados nas correções aparecem aqui automaticamente.</div>'}
+      ${mots.length ? `<h3 style="margin-top:16px;">Palavras para lembrar</h3><div class="me-chips-mots">${mots.map(x => `<span class="me-mot" data-item-carnet="${esc(x.id)}"><b>${esc(x.titre)}</b>${x.detalhe ? `<small>${esc(x.detalhe)}</small>` : ""}<button type="button" data-rm-carnet="${esc(x.id)}" aria-label="Retirar ${esc(x.titre)}">✕</button></span>`).join("")}</div>` : ""}`;
+    const sj = sujets.length ? `<div class="me-lista">${sujets.map(x => { const oral = !/^ET/.test(x.tache), base = `sujet=${x.tache}:${encodeURIComponent(x.id)}`;
+        return `<div class="me-item" style="--c:${oral ? COR.anil : COR.rosa}" data-item-carnet="${esc(x.id)}"><span class="marca">${oral ? "🎙️" : "✍️"}</span><span class="txt"><b>${esc(x.titre)}</b><small>${esc(TAREFA[x.tache] || x.tache)}${x.curso ? " · " + esc(x.curso) : ""}</small></span>
+          <span class="me-acoes"><a class="me-btn" href="${linkApp(x.curso, base + ":etude")}">Estudar</a><a class="me-btn" href="${linkApp(x.curso, base + ":dictee")}">Ditado</a><a class="me-btn cheio" style="--c:${oral ? COR.anil : COR.rosa}" href="${linkApp(x.curso, base + (oral ? ":oral" : ":ecrit"))}">${oral ? "Oral" : "Escrever"}</a><button class="me-btn" type="button" data-rm-carnet="${esc(x.id)}" aria-label="Retirar">✕</button></span></div>`; }).join("")}</div>`
+      : '<div class="me-vazio">Nenhum sujet salvo. No Ambiente de Produção, abra um modelo e toque em « Enregistrer dans mon cahier ».</div>';
+    return `<section class="me-secao" id="revisao" style="--c:${COR.roxo}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Caderno de Revisão</h2>
+      <p>${rv.length} questão(ões) salva(s) · ${erros.length} erro(s) das produções · ${sujets.length} sujet(s) para revisar</p></div></div>
+      <div class="me-grade">
+        <div class="me-card c12"><h3>Questões salvas <small>Plataforma de Questões</small></h3>${questoes}</div>
+        <div class="me-card c6"><h3>Erros das suas produções <small>correções da IA e dos professores</small></h3>${prod}</div>
+        <div class="me-card c6"><h3>Sujets para revisar <small>Ambiente de Produção</small></h3>${sj}</div>
+      </div></section>`;
+  }
+
+  // Tarefas do professor (antes « Mon espace » do Ambiente de Produção): devoirs, mensagens e provas.
+  function secTarefas(d) {
+    const devs = d.ambiente?.devoirs || [], msgs = d.ambiente?.mensagens || [];
+    const pend = devs.filter(x => !x.feito), feitos = devs.filter(x => x.feito);
+    const item = x => `<a class="me-item" style="--c:${x.feito ? COR.verde : COR.anil}" href="${x.link ? esc(x.link) : "producao.html#devoir=" + encodeURIComponent(x.id)}">
+      <span class="marca">${x.feito ? "✅" : x.tipo === "oral" ? "🎙️" : "✍️"}</span><span class="txt"><b>${esc(x.titre)}</b><small>${esc(x.tipoNome || "")}${x.tache ? " · " + esc(TAREFA[x.tache] || x.tache) : ""} · ${fmtData(x.data)}${x.mensagem ? " · " + esc(x.mensagem) : ""}</small></span>
+      <span class="me-pill">${x.feito ? (x.score !== "" && x.score != null ? `${x.score}${x.total ? "/" + x.total : ""}` : "feito") : "fazer →"}</span></a>`;
+    return `<section class="me-secao" id="tarefas" style="--c:${COR.anil}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Tarefas do professor</h2>
+      <p>${pend.length} tarefa(s) a fazer · ${msgs.filter(m => !m.feito).length} mensagem(ns) a ler</p></div><a class="me-btn cheio" style="--c:${COR.anil}" href="producao.html#epreuve">Minhas provas</a></div>
+      <div class="me-grade">
+        <div class="me-card c6"><h3>A fazer <small>${pend.length}</small></h3>${pend.length ? `<div class="me-lista">${pend.map(item).join("")}</div>` : '<div class="me-vazio">Nenhuma tarefa pendente. 🎉</div>'}
+          ${feitos.length ? `<details style="margin-top:12px;"><summary>✓ Tarefas concluídas (${feitos.length})</summary><div class="me-lista" style="margin-top:8px;">${feitos.map(item).join("")}</div></details>` : ""}</div>
+        <div class="me-card c6"><h3>Mensagens do professor</h3>${msgs.length ? `<div class="me-lista">${msgs.map(m => `<div class="me-item" style="--c:${m.feito ? COR.verde : COR.laranja}">
+          <span class="marca">${m.feito ? "✅" : "💬"}</span><span class="txt" style="white-space:normal;"><small>${esc(m.de || "Professor")} · ${fmtData(m.data)}</small><span style="display:block;font-size:.86rem;line-height:1.5;">${esc(m.texto)}</span></span>
+          <button class="me-btn" type="button" data-msg="${esc(m.id)}" data-feito="${m.feito ? "0" : "1"}">${m.feito ? "Reabrir" : "✓ Feito"}</button></div>`).join("")}</div>` : '<div class="me-vazio">Nenhuma mensagem.</div>'}</div>
+      </div></section>`;
+  }
+  const rpc = (nome, args) => fetch("/api/modeles/rpc/" + nome, { method: "POST", headers: Object.assign(H(), { "Content-Type": "application/json" }), body: JSON.stringify({ args }) });
+
   // ---------------- montagem ----------------
   function montar(d) {
-    const nav = [["geral", "Visão geral", COR.roxo], ["questoes", "Questões", COR.azul], ["erros", "Caderno de erros", COR.vermelho], ["producoes", "Produções", COR.rosa],
+    const nav = [["geral", "Visão geral", COR.roxo], ["questoes", "Questões", COR.azul], ["erros", "Caderno de erros", COR.vermelho], ["revisao", "Caderno de Revisão", COR.roxo], ["producoes", "Produções", COR.rosa], ["tarefas", "Tarefas do professor", COR.anil],
       ["simulados", "Simulados", COR.laranja], ["aulas", "Aulas", COR.verde], ["favoritos", "Favoritos", COR.rosa], ["rotina", "Rotina", COR.teal]];
     raiz.innerHTML = heroi(d) + kpis(d) +
       `<nav class="me-nav" aria-label="Seções do Meu espaço">${nav.map(([id, n, c]) => `<a href="#${id}" style="--c:${c}" data-sec="${id}">${n}</a>`).join("")}</nav>` +
-      visaoGeral(d) + secQuestoes(d) + secErros(d) + secProducoes(d) + secSimulados(d) + secAulas(d) + secFavoritos(d) + secRotina(d);
+      visaoGeral(d) + secQuestoes(d) + secErros(d) + secRevisao(d) + secProducoes(d) + secTarefas(d) + secSimulados(d) + secAulas(d) + secFavoritos(d) + secRotina(d);
     desenharErros(d);
     // barras animadas
     requestAnimationFrame(() => raiz.querySelectorAll("[data-w]").forEach(b => { b.style.width = b.dataset.w + "%"; }));
@@ -233,6 +281,36 @@
     raiz.addEventListener("click", ev => {
       const f = ev.target.closest("[data-ef]");
       if (f) { errosEstado.filtro = f.dataset.ef; desenharErros(d); }
+      // Caderno de Revisão: tirar uma questão salva / um item do caderno das produções
+      const rq = ev.target.closest("[data-rm-caderno]");
+      if (rq) {
+        rq.disabled = true;
+        fetch("/api/questoes/caderno/" + rq.dataset.rmCaderno, { method: "DELETE", headers: H() })
+          .then(r => { if (r.ok) rq.closest("[data-item-caderno]").remove(); else rq.disabled = false; }).catch(() => { rq.disabled = false; });
+      }
+      const rc = ev.target.closest("[data-rm-carnet]");
+      if (rc) {
+        rc.disabled = true;
+        rpc("removerDoCarnet", [rc.dataset.rmCarnet])
+          .then(r => { if (r.ok) rc.closest("[data-item-carnet]").remove(); else rc.disabled = false; }).catch(() => { rc.disabled = false; });
+      }
+      // mensagens do professor: marcar como feita / reabrir
+      const bm = ev.target.closest("[data-msg]");
+      if (bm) {
+        bm.disabled = true;
+        const feito = bm.dataset.feito === "1";
+        rpc("marcarMensagem", [bm.dataset.msg, feito]).then(r => {
+          bm.disabled = false;
+          if (!r.ok) return;
+          const m = (d.ambiente.mensagens || []).find(x => x.id === bm.dataset.msg);
+          if (m) m.feito = feito;
+          const it = bm.closest(".me-item");
+          it.style.setProperty("--c", feito ? COR.verde : COR.laranja);
+          it.querySelector(".marca").textContent = feito ? "✅" : "💬";
+          bm.dataset.feito = feito ? "0" : "1";
+          bm.textContent = feito ? "Reabrir" : "✓ Feito";
+        }).catch(() => { bm.disabled = false; });
+      }
     });
     raiz.addEventListener("change", ev => { if (ev.target.matches("[data-em]")) { errosEstado.materia = ev.target.value; desenharErros(d); } });
     // explicação detalhada (pegadinhas e dicas) ao abrir um erro

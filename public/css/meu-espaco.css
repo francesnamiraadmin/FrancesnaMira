@@ -171,3 +171,14 @@ a.me-item:hover { transform: translateX(3px); border-color: var(--c, var(--me-az
 .me-favs { grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); }
 .me-kpis { grid-template-columns: repeat(auto-fit, minmax(min(175px, 100%), 1fr)); }
 .me-card { overflow: hidden; }
+
+/* Caderno de Revisão e Tarefas do professor */
+.me-acoes { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.me-acoes .me-btn, .me-item > .me-btn { padding: 5px 11px; font-size: .76rem; }
+.me-chips-mots { display: flex; flex-wrap: wrap; gap: 8px; }
+.me-mot { display: inline-flex; align-items: center; gap: 8px; padding: 6px 8px 6px 12px; border-radius: 14px; border: 1px solid var(--me-borda); background: var(--glass-bg-2, rgba(255,255,255,.35)); font-size: .84rem; }
+.me-mot small { display: block; color: var(--me-suave); font-size: .72rem; }
+.me-mot button { border: 0; background: transparent; color: inherit; cursor: pointer; opacity: .6; font-size: .8rem; }
+.me-mot button:hover { opacity: 1; }
+.me-erro .topo .me-btn { padding: 3px 10px; font-size: .72rem; }
+@media (max-width: 640px) { #revisao .me-item, #tarefas .me-item { flex-wrap: wrap; } .me-acoes { width: 100%; justify-content: flex-start; } }

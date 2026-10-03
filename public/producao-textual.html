@@ -2,131 +2,18 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<script src="js/htmlSeguro.js"></script>
+<title>Ambiente de Produção - Francês na Mira</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="img/logo-mira.png">
-<title>Produção Textual — Francês na Mira</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/theme.css">
-<link rel="stylesheet" href="css/app-shell.css">
-<link rel="stylesheet" href="css/producao.css">
-<style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Poppins', sans-serif; background: var(--bg-gradient); background-attachment: fixed; min-height: 100vh; color: var(--text); }
-footer { text-align: center; padding: 28px; background: var(--footer-bg); margin-top: 40px; }
-[data-view][hidden] { display: none !important; }
-</style>
-<link rel="stylesheet" href="css/correcao-anotada.css">
+<!-- Página retirada de circulação: o Ambiente de Produção começa no accueil (producao.html);
+     a correção de uma produção abre em minha-correcao.html. Links antigos são redirecionados. -->
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var producao = q.get("producao"), curso = q.get("curso");
+  location.replace(producao ? "minha-correcao.html?producao=" + encodeURIComponent(producao)
+    : "producao.html" + (curso ? "?curso=" + encodeURIComponent(curso) : ""));
+})();
+</script>
 </head>
-<body style="visibility:hidden;">
-<script>window.CURSO_CONTEXTO_MODULO = "producao"; window.CURSO_CONTEXTO_HUB = "producao-hub.html";</script>
-<script src="js/cursoContexto.js"></script>
-<script src="js/producaoGate.js"></script>
-<div id="app-navbar" class="app-navbar-bar"></div>
-
-<main class="pr-wrap">
-  <!-- ===================== GALERIA ===================== -->
-  <section data-view="temas">
-    <a class="pr-voltar" id="linkHub" href="producao.html">← Ambiente de Produção</a>
-    <div class="pr-hero">
-      <div class="eyebrow" id="eyebrowTemas">Produção textual</div>
-      <h1>Escolha um tema e escreva</h1>
-      <p id="subTemas">Cada tema segue o formato da prova e traz uma coletânea — trecho de livro, reportagem, artigo científico e duas imagens — que você pode consultar enquanto escreve.</p>
-      <div class="pr-stats" id="statsTemas"></div>
-    </div>
-    <nav class="pr-abas">
-      <button class="pr-aba active" data-ir="temas">Temas</button>
-      <button class="pr-aba" data-ir="minhas">Minhas redações</button>
-    </nav>
-    <div class="pr-filtros" id="filtros"></div>
-    <div class="pr-grade" id="gradeTemas"></div>
-  </section>
-
-  <!-- ===================== ESPAÇO DE ESCRITA ===================== -->
-  <section data-view="tema" hidden>
-    <button class="pr-voltar" data-ir="temas">← Todos os temas</button>
-    <div class="pr-topo-tema">
-      <div class="titulo-box">
-        <div class="pr-filtros" id="chipsTema" style="margin-bottom:0;"></div>
-        <h1 id="tituloTema"></h1>
-        <p id="descTema" style="line-height:1.6; opacity:.88;"></p>
-      </div>
-      <div class="pr-duas-imgs" id="imgsTema"></div>
-    </div>
-    <div class="pr-consigne"><span class="rot">Consigne</span><span id="consigneTema"></span></div>
-    <div class="pr-mesa" id="mesa">
-      <div>
-        <div class="pr-caixa">
-          <div class="pr-barra-editor">
-            <span class="pr-contador" id="contador">0 palavras</span>
-            <span class="pr-rascunho" id="infoRascunho"></span>
-            <span style="display:flex; gap:8px;">
-              <span class="pr-chip" id="relogio" title="Tempo desde que você abriu o tema">⏱ 0:00</span>
-              <button class="pr-chip" id="toggleColetanea" type="button">Esconder coletânea</button>
-            </span>
-          </div>
-          <div class="pr-medidor"><span id="medidor"></span></div>
-          <textarea class="pr-editor" id="editor" spellcheck="false" placeholder="Écrivez votre texte ici…"></textarea>
-        </div>
-        <div class="pr-caixa pr-envio">
-          <h2 style="font-size:1.3rem;">Enviar para correção</h2>
-          <div class="pr-modos" id="modos">
-            <label class="pr-modo" data-modo="ia"><input type="radio" name="modo" value="ia"><strong>Inteligência artificial</strong><span>Resultado em poucos minutos, pela grade oficial da prova, com correções linha a linha.</span></label>
-            <label class="pr-modo" data-modo="professor"><input type="radio" name="modo" value="professor"><strong>Professor</strong><span>Um professor corrige pela mesma grade e comenta a sua redação. Pode levar alguns dias (até 5 dias úteis).</span></label>
-          </div>
-          <textarea class="pr-obs" id="obs" maxlength="2000" placeholder="Observação para o professor (opcional)"></textarea>
-          <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-            <button class="pr-btn" id="enviarBtn" type="button">Enviar redação</button>
-            <span id="custo" style="font-size:.85rem; opacity:.85;"></span>
-          </div>
-          <details class="pr-grade-info" id="gradeInfo"><summary>Como a redação será avaliada</summary><ul id="gradeLista"></ul></details>
-          <div class="pr-msg" id="msgEnvio" hidden></div>
-        </div>
-      </div>
-      <aside class="pr-caixa pr-coletanea" id="coletanea">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <strong style="font-family:'Playfair Display',serif; font-size:1.2rem;">Coletânea</strong>
-          <button class="pr-chip" id="fecharColetaneaMobile" type="button" style="display:none;">Fechar</button>
-        </div>
-        <div class="pr-col-abas" id="colAbas"></div>
-        <div class="pr-doc" id="colDoc"></div>
-      </aside>
-    </div>
-    <button class="pr-btn pr-fab" id="fabColetanea" type="button">📚 Coletânea</button>
-  </section>
-
-  <!-- ===================== MINHAS REDAÇÕES ===================== -->
-  <section data-view="minhas" hidden>
-    <a class="pr-voltar" href="#" data-ir="temas">← Temas</a>
-    <div class="pr-hero" style="padding:26px 30px;">
-      <div class="eyebrow">Produção textual</div>
-      <h1 style="font-size:2rem;">Minhas redações</h1>
-    </div>
-    <nav class="pr-abas">
-      <button class="pr-aba" data-ir="temas">Temas</button>
-      <button class="pr-aba active" data-ir="minhas">Minhas redações</button>
-    </nav>
-    <div class="pr-lista-prod" id="listaMinhas"></div>
-  </section>
-
-  <!-- ===================== RESULTADO ===================== -->
-  <section data-view="resultado" hidden>
-    <button class="pr-voltar" data-ir="minhas">← Minhas redações</button>
-    <div id="resultado"></div>
-  </section>
-</main>
-
-<div class="pr-lightbox" id="lightbox"><img alt=""><p></p></div>
-<footer>© 2026 · Francês na Mira</footer>
-
-<script src="js/correcao/nucleo.js"></script>
-<script src="js/correcao/texto-anotado.js"></script>
-<script src="js/correcao/painel-comentarios.js"></script>
-<script src="js/correcao/player-oral.js"></script>
-<script src="js/correcao/visualizacao-aluno.js"></script>
-<script src="js/producaoTextual.js"></script>
-<script src="js/appShell.js"></script>
-<script src="js/estudoTimerGlobal.js"></script>
-<script src="js/theme-toggle.js"></script>
-</body>
+<body><p style="font-family:sans-serif;text-align:center;padding:40px;"><a href="producao.html">Ir para o Ambiente de Produção</a></p></body>
 </html>

@@ -24,7 +24,8 @@
     plataforma: ["Excellence"]
   };
 
-  // Ordem da navbar: Aulas Especializadas → Plataforma de Questões → Ambiente de Produção → Meu espaço.
+  // Ordem da navbar: Aulas Especializadas → Plataforma de Questões → Ambiente de Produção; o Meu espaço
+  // fica numa linha própria, logo abaixo de Plataforma de Questões (ver [data-nav] em app-shell.css).
   const PRODUTOS_NAV = [
     { chave: "aulasEspecializadas", nome: "Aulas Especializadas", href: "aulas-hub.html", curso: "Aulas Especializadas Online" },
     {
@@ -40,7 +41,6 @@
         { nome: "Respondidos", href: "meus-conjuntos.html", icone: "img/icones/andamento.svg" },
         { nome: "Questões Interativas", href: "questoes-interativas.html", icone: "img/icones/puzzle.svg" },
         { nome: "Personalize", href: "personalizar-conjunto.html", icone: "img/icones/personalizar.svg" },
-        { nome: "Caderno de Revisão", href: "caderno-revisao.html", icone: "img/icones/caderno.svg" },
         { nome: "Simulação Completa", href: "simulado-tcf.html", icone: "img/icones/simulados.svg" }
       ],
       paginas: ["plataforma-questoes.html", "resolver-conjunto.html"]
@@ -55,10 +55,9 @@
         { nome: "Ditado", href: "producao.html#dictee", icone: "img/icones/keyboard.svg" },
         { nome: "Modelos escritos", href: "producao.html#modeles", icone: "img/icones/document.svg" },
         { nome: "Vocabulário", href: "producao.html#vocab", icone: "img/icones/book.svg" },
-        { nome: "O que o professor espera", href: "producao.html#attentes", icone: "img/icones/cap.svg" },
-        { nome: "Meu espaço", href: "producao.html#espace", icone: "img/icones/profile.svg" }
+        { nome: "O que o professor espera", href: "producao.html#attentes", icone: "img/icones/cap.svg" }
       ],
-      paginas: ["producao.html", "producao-textual.html", "producao-oral-exercicios.html"]
+      paginas: ["producao.html", "producao-oral-exercicios.html", "minha-correcao.html"]
     },
     {
       // Painel pessoal do aluno (sempre liberado): deveres, inscrições, matrículas e o resumo de cada módulo.
@@ -67,12 +66,14 @@
         { nome: "Visão geral", href: "meu-espaco.html", icone: "img/icones/profile.svg" },
         { nome: "Estatísticas", href: "meu-espaco.html#questoes", icone: "img/icones/estatisticas.svg" },
         { nome: "Caderno de erros", href: "meu-espaco.html#erros", icone: "img/icones/caderno.svg" },
+        { nome: "Caderno de Revisão", href: "meu-espaco.html#revisao", icone: "img/icones/caderno.svg" },
         { nome: "Produções e correções", href: "meu-espaco.html#producoes", icone: "img/icones/writing-hand.svg" },
+        { nome: "Tarefas do professor", href: "meu-espaco.html#tarefas", icone: "img/icones/cap.svg" },
         { nome: "Dever de casa", href: "meus-deveres.html", icone: "img/icones/check.svg" },
         { nome: "Minhas inscrições", href: "minhas-inscricoes.html", icone: "img/icones/document.svg" },
         { nome: "Minhas matrículas", href: "minhas-matriculas.html", icone: "img/icones/calendar.svg" }
       ],
-      paginas: ["meu-espaco.html", "meus-deveres.html", "minhas-inscricoes.html", "minhas-matriculas.html"]
+      paginas: ["meu-espaco.html", "caderno-revisao.html", "meus-deveres.html", "minhas-inscricoes.html", "minhas-matriculas.html"]
     }
   ];
 
@@ -223,9 +224,9 @@
   function montarLinkProduto(p) {
     const liberado = p.livre || window.AppShell.temAcesso(p.chave);
     if (!liberado) {
-      return `<a class="app-nav-link app-nav-locked" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige" title="Bloqueado — clique para assinar"><img src="img/icones/lock.svg" alt="" style="width:0.85em; height:0.85em; vertical-align:-0.1em; margin-right:4px;">${p.nome}</a>`;
+      return `<a class="app-nav-link app-nav-locked" data-nav="${p.chave}" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=Pack%20Prestige" title="Bloqueado — clique para assinar"><img src="img/icones/lock.svg" alt="" style="width:0.85em; height:0.85em; vertical-align:-0.1em; margin-right:4px;">${p.nome}</a>`;
     }
-    if (!p.submenu) return `<a class="app-nav-link" href="${p.href}">${p.nome}</a>`;
+    if (!p.submenu) return `<a class="app-nav-link" data-nav="${p.chave}" href="${p.href}">${p.nome}</a>`;
     return montarNavLinkComSubmenu(p);
   }
 
@@ -245,7 +246,7 @@
       `<a class="app-nav-submenu-item ${ativo(s) ? "active" : ""}" href="${s.href}"><img class="icone" src="${s.icone}" alt=""> ${s.nome}</a>`
     ).join("");
     return `
-      <div class="app-nav-item app-nav-submenu-wrap">
+      <div class="app-nav-item app-nav-submenu-wrap" data-nav="${p.chave}">
         <a class="app-nav-link ${ativoNoModulo ? "app-nav-link-ativo" : ""}" href="${p.href}">${p.nome}</a>
         <div class="app-nav-submenu">${itens}</div>
       </div>`;
