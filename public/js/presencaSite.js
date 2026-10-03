@@ -14,7 +14,7 @@
     [/^simulado-tcf/, 'Simulação Completa'],
     [/^(producao|correcoes)/, 'Ambiente de Produção'],
     [/^(aulas|academia|aula-)/, 'Aulas Especializadas'],
-    [/^meus-deveres/, 'Dever de Casa'],
+    [/^(meus-deveres|dever.html)/, 'Dever de Casa'],
     [/^(minha-conta|minhas-matriculas|minhas-inscricoes|configuracoes)/, 'Minha conta'],
     [/^(matricula|pagina-compras|pagamento)/, 'Matrícula e compras'],
     [/^(index|cursos|tcf|tef|delf|dalf|a1|a2|b1|b2|blog|depoimentos)?(\.html)?$/, 'Página inicial e cursos']

@@ -8,7 +8,7 @@
   const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmt = d => d ? new Date(d).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
   const TAREFA = { T1: "Oral · Tarefa 1", T2: "Oral · Tarefa 2", T3: "Oral · Tarefa 3", ET1: "Escrita · Tarefa 1", ET2: "Escrita · Tarefa 2", ET3: "Escrita · Tarefa 3" };
-  const voltar = '<p class="mc-voltar"><a href="meu-espaco.html#producoes">← Meu espaço</a> · <a href="producao.html">Ambiente de Produção</a></p>';
+  const voltar = '<p class="mc-voltar"><a href="meu-espaco.html#producoes">← Meu Espaço</a> · <a href="producao.html">Ambiente de Produção</a></p>';
   const lista = (tit, l) => l && l.length ? `<h3 style="margin-top:14px;">${tit}</h3><ul class="mc-lista">${l.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
 
   function render(p) {

@@ -149,6 +149,23 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .busca-aluno { width: 100%; padding: 11px 16px; border-radius: 12px; border: 1px solid var(--cinza-300); background: var(--branco); color: var(--cinza-800); font-family: 'Poppins', sans-serif; margin-bottom: 12px; }
 .aluno-item { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; padding: 14px 16px; border: 1px solid var(--cinza-200); border-radius: 14px; background: var(--branco); margin-bottom: 10px; cursor: pointer; box-shadow: var(--sombra); transition: .15s; }
 .aluno-item:hover { border-color: var(--azul); }
+.temas-layout { display: grid; grid-template-columns: minmax(240px, .7fr) minmax(0, 2fr); gap: 20px; align-items: start; }
+.temas-layout .aluno-item { grid-template-columns: 1fr auto; }
+.tm-cab { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.tm-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.tm-col { border: 1px solid var(--cinza-200); border-radius: 14px; padding: 12px; background: var(--branco); }
+.tm-col h3 { font-size: .95rem; margin: 0 0 8px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.tm-lista { max-height: 58vh; overflow: auto; }
+.tm-grupo { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--cinza-400); margin: 10px 0 4px; }
+.tm-tema { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; padding: 7px 4px; border-bottom: 1px solid var(--cinza-200); font-size: .84rem; }
+.tm-tema small { display: block; color: var(--cinza-400); font-size: .74rem; margin-top: 2px; }
+.tm-tema .btn { flex: none; padding: 5px 10px; font-size: .76rem; }
+.tm-tema.liberado b { color: var(--verde, #16a34a); }
+.tm-selo { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: .7rem; font-weight: 700; background: var(--azul-claro); color: var(--azul); margin-left: 4px; }
+.tm-filtros { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.tm-filtros select, .tm-filtros input { padding: 6px 8px; border-radius: 10px; border: 1px solid var(--cinza-200); font: inherit; font-size: .8rem; background: var(--branco); color: inherit; }
+.tm-filtros input { flex: 1; min-width: 120px; }
+@media (max-width: 900px) { .temas-layout, .tm-cols { grid-template-columns: 1fr; } }
 .aluno-item.sel { border-color: var(--azul); box-shadow: 0 0 0 3px var(--azul-claro); }
 .aluno-item .nome { font-weight: 700; }
 .aluno-item .email { font-size: .78rem; color: var(--cinza-400); }
@@ -227,6 +244,10 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .ia-sug-espera { display: flex; align-items: center; gap: 10px; font-size: .88rem; color: var(--cinza-600, #55606d); }
 .ia-sug-espera i { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #ddd6fe; border-top-color: #7c3aed; animation: girarIA 1s linear infinite; }
 @keyframes girarIA { to { transform: rotate(360deg); } }
+.sub-abas-vivo { display: inline-flex; gap: 6px; padding: 6px; margin-bottom: 16px; border-radius: 16px; background: var(--branco, #fff); border: 1px solid var(--cinza-200, #e2e8f0); box-shadow: var(--sombra); }
+.sub-abas-vivo button { display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 9px 18px; border-radius: 12px; font: 700 .88rem 'Poppins', sans-serif; color: var(--cinza-600, #475569); cursor: pointer; }
+.sub-abas-vivo button.on { background: var(--azul, #2563eb); color: #fff; }
+#aoVivoSimulados iframe { border-radius: 18px; }
 </style>
 <link rel="stylesheet" href="css/correcao-anotada.css">
 <style>
@@ -288,6 +309,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <button class="aba" data-aba="aovivo"><span class="ponto-vivo"></span>Ao vivo <span class="contador" id="contAoVivo">0</span></button>
     <button class="aba" data-aba="corrigidas"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Corrigidas <span class="contador" id="contCorrigidas">0</span></button>
     <button class="aba" data-aba="alunos"><img class="titulo-icone-inline pequeno" src="img/icones/students.svg" alt="">Alunos e créditos <span class="contador" id="contAlunos">0</span></button>
+    <button class="aba" data-aba="temas" id="abaTemas" hidden><img class="titulo-icone-inline pequeno" src="img/icones/book.svg" alt="">Temas dos alunos</button>
   </nav>
 
   <!-- ===================== FILA ===================== -->
@@ -306,12 +328,21 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
   <!-- ===================== AO VIVO ===================== -->
   <div id="viewAoVivo" style="display:none;">
+    <!-- Duas frentes ao vivo: a correção com o aluno escrevendo/falando e os Simulados ao Vivo
+         (a antiga página do Painel da equipe, embutida aqui — js/quadroEmbutido.js). -->
+    <div class="sub-abas-vivo" id="aoVivoAbas" role="tablist">
+      <button type="button" class="on" data-sub-vivo="correcao" role="tab" aria-selected="true"><span class="ponto-vivo"></span>Correção ao vivo</button>
+      <button type="button" data-sub-vivo="simulados" role="tab" aria-selected="false">🏆 Simulados ao vivo</button>
+    </div>
+    <div id="aoVivoSimulados" hidden></div>
+    <div id="aoVivoCorrecao">
     <div class="card" style="margin-bottom:16px;">
       <h2 style="margin-bottom:4px;">Correção ao vivo</h2>
       <p style="font-size:.88rem; color:var(--cinza-400);">Alunos que, na página do tema do Ambiente de Produção, escolheram « Professor ao vivo ». Aceite o pedido para acompanhar em tempo real a redação sendo escrita (ou a transcrição da produção oral), com o roteiro do tema, chat e chamada de voz. É a mesma sala do Espace professeur: aceitar aqui ou lá dá no mesmo.</p>
     </div>
     <div id="aoVivoLista"></div>
     <div id="aoVivoSala" style="margin-top:18px;"></div>
+    </div>
   </div>
 
   <!-- ===================== CORRIGIDAS ===================== -->
@@ -335,6 +366,18 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div class="painel-aluno">
         <div class="card" id="painelAluno"><div class="vazio-box" style="border:none;">Selecione um aluno para ver as redações dele e adicionar créditos.</div></div>
       </div>
+    </div>
+  </div>
+
+  <!-- ===================== TEMAS DOS ALUNOS (admin) ===================== -->
+  <!-- Designar temas do Ambiente de Produção a um aluno: o tema designado fica liberado na hora. -->
+  <div id="viewTemas" style="display:none;">
+    <div class="temas-layout">
+      <div>
+        <input type="search" class="busca-aluno" id="buscaTemasAluno" placeholder="Buscar aluno por nome, e-mail ou curso">
+        <div id="listaTemasAlunos"></div>
+      </div>
+      <div class="card" id="temasEditor"><div class="vazio-box" style="border:none;">Escolha um aluno para ver os temas já liberados para ele e designar novos.</div></div>
     </div>
   </div>
 
@@ -419,6 +462,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 
 <footer>© 2026 · Francês na Mira</footer>
 
+<script src="js/quadroEmbutido.js"></script>
 <script src="js/correcao/nucleo.js"></script>
 <script src="js/correcao/texto-anotado.js"></script>
 <script src="js/correcao/painel-comentarios.js"></script>

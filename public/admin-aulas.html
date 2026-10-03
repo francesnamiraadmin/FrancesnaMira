@@ -200,7 +200,12 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   <div class="top-tabs">
     <button class="top-tab active" data-tab="modulos"><img class="titulo-icone-inline pequeno" src="img/icones/puzzle.svg" alt="">Módulos &amp; Aulas</button>
     <button class="top-tab" data-tab="estatisticas"><img class="titulo-icone-inline pequeno" src="img/icones/estatisticas.svg" alt="">Estatísticas</button>
+    <button class="top-tab" data-tab="painel"><img class="titulo-icone-inline pequeno" src="img/icones/settings-gear.svg" alt="">Painel Administrativo</button>
   </div>
+
+  <!-- ===================== PAINEL ADMINISTRATIVO (Ambiente de Produção: professores, temas, créditos,
+       rubricas e estatísticas — a antiga página do Painel da equipe, embutida: js/quadroEmbutido.js) ===================== -->
+  <div id="tabPainel" style="display:none;"></div>
 
   <!-- ===================== MÓDULOS & AULAS ===================== -->
   <div id="tabModulos">
@@ -383,6 +388,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 <footer>© 2026 · Francês na Mira</footer>
 
 <script src="js/moduloIcones.js"></script>
+<script src="js/quadroEmbutido.js"></script>
 <script src="js/admin-aulas.js"></script>
 <script src="js/theme-toggle.js"></script>
 <script src="js/painelEquipe.js" defer></script>

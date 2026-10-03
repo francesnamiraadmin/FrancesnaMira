@@ -89,3 +89,37 @@
 .ra-kpi.anel { grid-column: span 2; }
 .ra-kpi.anel small { display: block; max-width: 200px; line-height: 1.3; }
 @media (max-width: 520px) { .ra-kpi.anel { grid-column: auto; } }
+
+/* calendário do mês */
+.ra-mes { margin: 0 4px; min-width: 190px; text-align: center; font: 700 1.2rem 'Playfair Display', serif; }
+.ra-cal-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, 1fr); gap: 18px; align-items: start; }
+.ra-cal-grade { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.ra-cal-sem { text-align: center; font: 700 .72rem 'Poppins', sans-serif; text-transform: uppercase; letter-spacing: .05em; color: var(--cinza-400); padding-bottom: 2px; }
+.ra-cal-dia { position: relative; min-height: 82px; padding: 6px 7px 10px; border-radius: 14px; border: 1px solid var(--cinza-200); background: var(--branco); color: var(--cinza-800);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0; cursor: pointer; font: inherit; text-align: left; transition: transform .12s, box-shadow .12s, border-color .12s; }
+.ra-cal-dia:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -16px rgba(22,33,58,.6); border-color: var(--cinza-400); }
+.ra-cal-dia.fora { visibility: hidden; cursor: default; }
+.ra-cal-dia:not(.tem) { background: transparent; }
+.ra-cal-dia.tem { background: linear-gradient(160deg, var(--branco), color-mix(in srgb, var(--ra-realizada) 7%, var(--branco))); }
+.ra-cal-dia.hoje { border-color: var(--ra-registrar); box-shadow: inset 0 0 0 1px var(--ra-registrar); }
+.ra-cal-dia.aberto { border-color: var(--azul, #2563eb); box-shadow: 0 0 0 3px color-mix(in srgb, var(--azul, #2563eb) 30%, transparent); }
+.ra-cal-num { font: 700 .8rem 'Poppins', sans-serif; color: var(--cinza-600); }
+.ra-cal-dia.hoje .ra-cal-num { color: var(--ra-registrar); }
+.ra-cal-qtd { font: 800 1.55rem 'Poppins', sans-serif; line-height: 1; margin-top: 4px; color: var(--cinza-800); }
+.ra-cal-dia small { font-size: .68rem; color: var(--cinza-400); }
+.ra-cal-pend { position: absolute; top: 6px; right: 6px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--ra-registrar); color: #fff;
+  font: 800 .66rem/18px 'Poppins', sans-serif; font-style: normal; text-align: center; }
+.ra-cal-barra { position: absolute; left: 7px; right: 7px; bottom: 5px; height: 4px; border-radius: 999px; overflow: hidden; display: flex; background: var(--cinza-200); }
+.ra-cal-barra i { background: var(--c); }
+.ra-cal-painel { border: 1px solid var(--cinza-200); border-radius: 16px; padding: 14px; background: var(--branco); min-height: 180px; }
+.ra-cal-painel.vazio { display: grid; place-items: center; }
+.ra-cal-painel .ra-aulas { grid-template-columns: 1fr; max-height: 70vh; overflow: auto; padding-right: 2px; }
+.ra-fechar-dia { margin-left: auto; border: 0; background: none; font-size: 1.3rem; cursor: pointer; color: var(--cinza-600); line-height: 1; }
+@media (max-width: 900px) { .ra-cal-layout { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+  .ra-cal-grade { gap: 3px; }
+  .ra-cal-dia { min-height: 58px; padding: 4px 4px 9px; border-radius: 10px; }
+  .ra-cal-qtd { font-size: 1.1rem; }
+  .ra-cal-dia small { display: none; }
+  .ra-mes { min-width: 0; font-size: 1.05rem; }
+}

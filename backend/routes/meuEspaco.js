@@ -1,4 +1,4 @@
-// « Meu espaço »: tudo sobre o aluno num lugar só — atividade, estatísticas da Plataforma de Questões,
+// « Meu Espaço »: tudo sobre o aluno num lugar só — atividade, estatísticas da Plataforma de Questões,
 // caderno de erros (todas as questões erradas), simulados, redações e produções orais com as
 // correções, aulas assistidas (gravadas e particulares), favoritos, deveres e tempo de estudo.
 // Uma chamada só; cada parte é calculada à parte (se uma falhar, as outras continuam).
@@ -151,7 +151,30 @@ async function aulasParticulares(alunoId) {
 
 async function deveres(alunoId) {
   const ds = await DeverSemanal.find({ alunoId }).sort({ criadoEm: -1 }).limit(20).lean();
+  // a lista completa dos deveres (os 60 mais recentes), com o andamento real de cada atividade
+  const { enriquecerDever, atualizarSemanasDoAluno } = require("../utils/gerarDeveres");
+  await atualizarSemanasDoAluno(alunoId).catch(() => {});
+  const todos = await DeverSemanal.find({ alunoId }).sort({ dataInicio: -1, criadoEm: -1 }).limit(60);
+  const GRUPO = { questoes_plataforma: "questoes", exercicio_lista: "questoes", simulado: "questoes", producao_textual: "producao", producao_oral: "producao", producao_ambiente: "producao", assistir_aula: "aulas", assistir_modulo: "aulas", exercicio_interativo: "completos" };
+  const lista = [];
+  for (const d of todos) {
+    const e = await enriquecerDever(d);
+    const feitas = e.atividades.filter(a => a.entrega?.status === "enviado").length;
+    const tipos = {};
+    e.atividades.forEach(a => { const g = GRUPO[a.tipo] || "outros"; tipos[g] = (tipos[g] || 0) + 1; });
+    lista.push({ id: String(d._id), titulo: d.titulo, curso: d.curso || "", numeroSemana: d.numeroSemana, dataInicio: d.dataInicio, dataLimite: d.dataLimite, concluidoEm: d.concluidoEm || null,
+      status: e.status, total: e.atividades.length, feitas, tipos, noPrazo: d.concluidoEm ? new Date(d.concluidoEm) <= new Date(d.dataLimite) : null, prioridade: d.prioridade });
+  }
+  // notas dos deveres completos (exercícios corrigidos na hora, feitos dentro do dever)
+  const notas = [];
+  (await DeverSemanal.find({ alunoId, "atividades.tipo": "exercicio_interativo" }).select("atividades.tipo atividades.titulo atividades.entrega").lean()).forEach(d => d.atividades.forEach(a => {
+    const m = a.tipo === "exercicio_interativo" && a.entrega?.status === "enviado" && /Nota automática: [^(]*\((\d+)%\)/.exec(a.entrega.texto || "");
+    if (m) notas.push({ titulo: a.titulo, pct: Number(m[1]), data: a.entrega.enviadoEm });
+  }));
   return {
+    lista,
+    atividadesEntregues: lista.reduce((t, d) => t + d.feitas, 0),
+    deveresCompletos: { feitos: notas.length, media: notas.length ? Math.round(notas.reduce((t, n) => t + n.pct, 0) / notas.length) : null, ultimos: notas.sort((a, b) => new Date(b.data) - new Date(a.data)).slice(0, 6) },
     total: ds.length, concluidos: ds.filter(d => d.concluidoEm).length,
     recentes: ds.slice(0, 6).map(d => {
       const atv = d.atividades || [];
@@ -188,6 +211,36 @@ async function ambienteProducao(alunoId) {
   return { devoirs, mensagens, carnet };
 }
 
+// Assinatura: os planos de cada curso (tier, datas, módulos incluídos, renovação), o Pack Prestige,
+// os acessos avulsos antigos, as matrículas de aulas e os créditos de correção.
+const MODULOS_TIER = { Essentiel: [], "Avancé": ["aulas", "producao"], Excellence: ["aulas", "producao", "plataforma"] };
+async function assinatura(u) {
+  const agora = Date.now(), dias = d => d ? Math.ceil((new Date(d) - agora) / DIA) : null;
+  const planos = (u.planos || []).map(p => {
+    const venc = p.dataVencimento || p.expiraEm || null;
+    const ativo = !!p.ativo && (!venc || new Date(venc).getTime() > agora);
+    const pack = p.packPrestige && p.packPrestige.ativo && (!p.packPrestige.dataVencimento || new Date(p.packPrestige.dataVencimento).getTime() > agora);
+    const modulos = [...new Set([...(MODULOS_TIER[p.tier] || []), ...(pack ? ["aulas", "producao", "plataforma"] : [])])];
+    return { curso: p.courseType, tier: p.tier || null, ativo, dataInicio: p.dataInicio || null, dataVencimento: venc, diasRestantes: dias(venc),
+      totalDias: p.dataInicio && venc ? Math.max(1, Math.round((new Date(venc) - new Date(p.dataInicio)) / DIA)) : null,
+      autoRenovacao: !!p.autoRenovacao, metodoPagamento: p.metodoPagamento || null, cartaoFinal: p.cartaoFinal || null,
+      packPrestige: p.packPrestige && p.packPrestige.dataVencimento ? { ativo: !!pack, dataVencimento: p.packPrestige.dataVencimento, diasRestantes: dias(p.packPrestige.dataVencimento) } : null, modulos };
+  }).sort((a, b) => (b.ativo - a.ativo) || new Date(b.dataVencimento || 0) - new Date(a.dataVencimento || 0));
+  const avulsos = [];
+  [[u.legado && u.legado.produtosAvulsos, "acesso antigo"], [u.produtosAvulsos, "avulso"]].forEach(([obj, origem]) => Object.entries(obj || {}).forEach(([mod, v]) => {
+    if (v && v.ativo && v.dataVencimento) avulsos.push({ modulo: mod, origem, dataVencimento: v.dataVencimento, diasRestantes: dias(v.dataVencimento), ativo: new Date(v.dataVencimento).getTime() > agora });
+  }));
+  const Matricula = require("../models/matricula");
+  const mats = await Matricula.find({ alunoId: u._id, status: { $in: ["confirmada", "concluida", "pendente_pagamento"] } }).populate("turmaId", "nome dataFim").sort({ criadoEm: -1 }).limit(10).lean();
+  const DS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+  return {
+    planos, avulsos, creditos: u.creditosCorrecao || 0,
+    legado: u.plano && u.plano.ativo && u.plano.dataVencimento ? { curso: u.plano.curso || "", tier: u.plano.tier || "", dataVencimento: u.plano.dataVencimento, diasRestantes: dias(u.plano.dataVencimento) } : null,
+    matriculas: mats.map(m => ({ tipo: m.tipo, curso: m.curso || "", status: m.status, turma: m.turmaId ? m.turmaId.nome : "", fim: m.turmaId ? m.turmaId.dataFim : null,
+      horarios: (m.slotsEscolhidos || []).map(s => (DS[s.diaSemana] || "") + " " + (s.horaInicio || "")).filter(x => x.trim()) }))
+  };
+}
+
 async function estudo(alunoId) {
   const ss = await SessaoEstudo.find({ userId: alunoId, status: "finalizada" }).select("materiaId duracaoSegundos iniciadoEm").lean();
   const mats = await MateriaEstudo.find({ _id: { $in: [...new Set(ss.map(s => String(s.materiaId)))] } }).select("nome cor icone").lean();
@@ -213,12 +266,13 @@ function sequencias(dias) {
 
 router.get("/", async (req, res) => {
   try {
-    const u = await User.findById(req.userId).select("nome email perfil creditosCorrecao planos aulasFavoritas criadoEm").lean();
+    const u = await User.findById(req.userId).select("nome email role perfil creditosCorrecao plano planos produtosAvulsos legado aulasFavoritas criadoEm").lean();
     if (!u) return res.status(404).json({ msg: "Conta não encontrada." });
-    const [q, s, p, a, ap, dv, est, rv, amb] = await Promise.all([
+    const [q, s, p, a, ap, dv, est, rv, amb, ass] = await Promise.all([
       seguro(() => questoes(u._id), null), seguro(() => simulados(u._id), []), seguro(() => producoes(u._id), null),
       seguro(() => aulas(u._id, u.aulasFavoritas), null), seguro(() => aulasParticulares(u._id), null), seguro(() => deveres(u._id), null), seguro(() => estudo(u._id), null),
-      seguro(() => revisao(u._id), []), seguro(() => ambienteProducao(u._id), { devoirs: [], mensagens: [], carnet: [] })
+      seguro(() => revisao(u._id), []), seguro(() => ambienteProducao(u._id), { devoirs: [], mensagens: [], carnet: [] }),
+      seguro(() => assinatura(u), null)
     ]);
     // mapa de atividade: um ano de dias com qualquer atividade (questões, produções, simulados, aulas, estudo)
     const todas = [].concat(q?.datas || [], p?.datas || [], s.map(x => x.data), a?.datas || [], ap?.datas || [], est?.datas || []).filter(Boolean).map(dia);
@@ -229,11 +283,11 @@ router.get("/", async (req, res) => {
     if (q) delete q.datas; if (p) delete p.datas; if (a) delete a.datas; if (ap) delete ap.datas; if (est) delete est.datas;
     res.json({
       aluno: {
-        nome: u.nome, email: u.email, foto: u.perfil?.foto || "", provaAlvo: u.perfil?.provaAlvo || "", dataProva: u.perfil?.dataProva || null,
+        nome: u.nome, email: u.email, foto: u.perfil?.foto || "", papel: u.role || "aluno", provaAlvo: u.perfil?.provaAlvo || "", dataProva: u.perfil?.dataProva || null,
         creditos: u.creditosCorrecao || 0, desde: u.criadoEm, cursos: [...new Set((u.planos || []).filter(x => x.ativo).map(x => x.courseType))]
       },
       sequencia: sequencias(Object.keys(porDia)), diasAtivos: Object.keys(porDia).length, atividade,
-      questoes: q, simulados: s, producoes: p, aulas: a, aulasParticulares: ap, deveres: dv, estudo: est, revisao: rv, ambiente: amb
+      questoes: q, simulados: s, producoes: p, aulas: a, aulasParticulares: ap, deveres: dv, estudo: est, revisao: rv, ambiente: amb, assinatura: ass
     });
   } catch (err) {
     console.error(err);

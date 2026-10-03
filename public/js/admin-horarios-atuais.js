@@ -32,7 +32,8 @@
 
   function itemHtml(it) {
     const titulo = it.tipo === "turma" ? (it.alunos?.length ? it.alunos.join(", ") : it.detalhe || "") : it.tipo === "manual" ? "Colocado à mão" : "Matrícula confirmada" + (it.curso ? " · " + it.curso : "");
-    return `<div class="ha-nome ${it.tipo}" title="${esc(titulo)}"><span class="ha-txt">${esc(it.texto)}${it.tipo === "turma" && it.alunos?.length ? ` <small>(${it.alunos.length})</small>` : ""}</span>` +
+    const vinc = it.tipo === "manual" ? `<button type="button" class="ha-vinc ${it.conta ? "on" : ""}" data-vincular="${esc(it.ajusteId)}" title="${it.conta ? esc("Vinculado à conta " + (it.conta.nome || "") + " · " + it.conta.email + " (clique para trocar)") : "Vincular a uma conta do site"}" aria-label="Vincular ${esc(it.texto)} a uma conta">🔗</button>` : "";
+    return `<div class="ha-nome ${it.tipo}" title="${esc(titulo + (it.conta ? " · conta: " + it.conta.email : ""))}">${vinc}<span class="ha-txt">${esc(it.texto)}${it.tipo === "turma" && it.alunos?.length ? ` <small>(${it.alunos.length})</small>` : ""}</span>` +
       `<button type="button" class="ha-x" title="Retirar da grade" aria-label="Retirar ${esc(it.texto)} da grade" data-retirar="${esc(it.chave)}" data-ajuste="${esc(it.ajusteId || "")}" data-tipo="${esc(it.tipo)}" data-nome="${esc(it.texto)}">×</button></div>`;
   }
 
@@ -73,22 +74,82 @@
     relogio = setInterval(() => { if (!secao.hidden && !document.hidden) carregar(); }, 15000);
   }
 
+  // Conta do site vinculada ao nome (opcional): busca por nome ou e-mail
+  let contaSel = null, buscaConta = null;
+  function mostrarConta() {
+    const el = $("haContaSel");
+    el.hidden = !contaSel;
+    el.innerHTML = contaSel ? `<span>🔗 <b>${esc(contaSel.nome || contaSel.email)}</b> · ${esc(contaSel.email)}</span><button type="button" data-conta-limpar aria-label="Tirar o vínculo">×</button>` : "";
+    $("haConta").value = "";
+    $("haContaLista").hidden = true;
+  }
+  $("haConta").addEventListener("input", () => {
+    clearTimeout(buscaConta);
+    const q = $("haConta").value.trim();
+    if (q.length < 2) { $("haContaLista").hidden = true; return; }
+    buscaConta = setTimeout(async () => {
+      const r = await fetch("/api/horarios/admin/atuais/contas?q=" + encodeURIComponent(q), { headers: H() }).catch(() => null);
+      const l = r && r.ok ? await r.json() : [];
+      $("haContaLista").innerHTML = l.length ? l.map(u => `<button type="button" data-conta='${esc(JSON.stringify(u))}'><b>${esc(u.nome || u.email)}</b><small>${esc(u.email)}${u.role && u.role !== "aluno" ? " · " + esc(u.role) : ""}</small></button>`).join("")
+        : '<p class="campo-hint" style="padding:8px 12px; margin:0;">Nenhuma conta encontrada.</p>';
+      $("haContaLista").hidden = false;
+    }, 250);
+  });
+  $("haContaLista").addEventListener("click", e => {
+    const b = e.target.closest("[data-conta]"); if (!b) return;
+    contaSel = JSON.parse(b.dataset.conta);
+    if (!$("haNome").value.trim()) $("haNome").value = contaSel.nome || "";
+    mostrarConta();
+  });
+  $("haContaSel").addEventListener("click", e => { if (e.target.closest("[data-conta-limpar]")) { contaSel = null; mostrarConta(); } });
+
   // Janela para colocar um nome (no visual do painel, sem a caixa do navegador)
   function abrirAdicionar(dia, hora) {
     $("haModalTitulo").textContent = `Colocar um nome · ${DIAS[dia]} às ${hora}`;
     $("haNome").value = "";
     $("haModalidade").value = "particular";
+    delete $("haModal").dataset.ajuste;
+    $("haNomeCampo").hidden = false; $("haModalidadeCampo").hidden = false;
+    $("haSalvar").textContent = "Colocar na grade";
+    contaSel = null; mostrarConta();
     $("haModal").dataset.dia = dia;
     $("haModal").dataset.hora = hora;
     $("haErro").textContent = "";
     $("haModal").classList.add("show");
     setTimeout(() => $("haNome").focus(), 50);
   }
-  function fecharModal() { $("haModal").classList.remove("show"); }
+  // Vincular (ou trocar a conta de) um nome já colocado à mão
+  function abrirVinculo(ajusteId) {
+    let item = null;
+    (dados?.celulas || []).forEach(c => c.itens.forEach(i => { if (i.ajusteId === ajusteId) item = { ...i, diaSemana: c.diaSemana, horaInicio: c.horaInicio }; }));
+    if (!item) return;
+    $("haModalTitulo").textContent = `Vincular « ${item.texto} » · ${DIAS[item.diaSemana]} às ${item.horaInicio}`;
+    $("haModal").dataset.ajuste = ajusteId;
+    $("haNomeCampo").hidden = true; $("haModalidadeCampo").hidden = true;
+    $("haSalvar").textContent = "Salvar vínculo";
+    contaSel = item.conta ? { id: item.conta.id, nome: item.conta.nome, email: item.conta.email } : null;
+    mostrarConta();
+    $("haErro").textContent = "";
+    $("haModal").classList.add("show");
+    setTimeout(() => $("haConta").focus(), 50);
+  }
+  function fecharModal() { $("haModal").classList.remove("show"); $("haContaLista").hidden = true; }
   async function salvarNome() {
+    const ajuste = $("haModal").dataset.ajuste;
+    if (ajuste) {
+      $("haSalvar").disabled = true;
+      try {
+        const res = await fetch(`/api/horarios/admin/atuais/ajuste/${ajuste}/vinculo`, { method: "PUT", headers: H(true), body: JSON.stringify({ alunoId: contaSel ? contaSel.id : null }) });
+        if (!res.ok) throw new Error((await res.json().catch(() => ({}))).msg || "Erro");
+        fecharModal();
+        await carregar();
+      } catch (e) { $("haErro").textContent = e.message; }
+      $("haSalvar").disabled = false;
+      return;
+    }
     const nome = $("haNome").value.trim();
-    if (!nome) { $("haNome").focus(); return; }
-    const corpo = { diaSemana: Number($("haModal").dataset.dia), horaInicio: $("haModal").dataset.hora, nome, modalidade: $("haModalidade").value };
+    if (!nome && !contaSel) { $("haNome").focus(); return; }
+    const corpo = { diaSemana: Number($("haModal").dataset.dia), horaInicio: $("haModal").dataset.hora, nome, modalidade: $("haModalidade").value, alunoId: contaSel ? contaSel.id : undefined };
     $("haSalvar").disabled = true;
     try {
       const res = await fetch("/api/horarios/admin/atuais/manual", { method: "POST", headers: H(true), body: JSON.stringify(corpo) });
@@ -100,6 +161,8 @@
   }
 
   secao.addEventListener("click", async e => {
+    const vi = e.target.closest("[data-vincular]");
+    if (vi) { abrirVinculo(vi.dataset.vincular); return; }
     const add = e.target.closest("[data-add]");
     if (add) { const [d, h] = add.dataset.add.split("|"); abrirAdicionar(Number(d), h); return; }
     const x = e.target.closest("[data-retirar]");

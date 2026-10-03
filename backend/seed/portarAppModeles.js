@@ -173,8 +173,8 @@ trocar("abrirOral: function () { abrirHub('oral'); },", "abrirOral: function () 
 js = js.split("['ET1', 'ET2', 'ET3', 'T1', 'T2', 'T3']").join("ETS().concat(TS())")
   .split("['ET1', 'ET2', 'ET3']").join("ETS()").split("['T1', 'T2', 'T3']").join("TS()")
   .split("['ET3', 'ET2', 'ET1']").join("ETS().reverse()");
-// « Mes notes » / « Mon espace » saíram do app: as notas e correções ficam no « Meu espaço » do site.
-js = js.split("« Mes notes » et dans « Mes corrections »").join("« Meu espaço »").split("« Mon espace › Mes notes »").join("« Meu espaço »").split("« Mes notes »").join("« Meu espaço »");
+// « Mes notes » / « Mon espace » saíram do app: as notas e correções ficam no « Meu Espaço » do site.
+js = js.split("« Mes notes » et dans « Mes corrections »").join("« Meu Espaço »").split("« Mon espace › Mes notes »").join("« Meu Espaço »").split("« Mes notes »").join("« Meu Espaço »");
 
 const cab = `// =====================================================================
 // Ambiente de Produção — app "Modèles TCF" (Google Apps Script) rodando no site.

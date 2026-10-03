@@ -1,8 +1,9 @@
 // ===================== GESTÃO DE ALUNOS — FERRAMENTAS =====================
-// Abas "Acompanhamento" (o que os alunos estão fazendo, ao vivo) e "Atribuir
-// deveres completos" (criar, para um ou vários alunos, um dever de casa com os
-// blocos de questões de backend/data/exercicios). Usa mostrarView/abrirAluno/
-// alunoAtual de js/gestao-alunos.js, carregado antes.
+// Navegação entre as abas (Alunos, Acompanhamento ao vivo, Criar Dever, Atribuir Dever, Deveres
+// Completos) e a aba « Acompanhamento »: quem está no site agora (em cartões, por área), as
+// últimas entregas e quem precisa de atenção. Criar Dever, Atribuir Dever e Deveres Completos
+// moram em js/gestao-criar-dever.js, js/gestao-atribuir-dever.js e js/gestao-deveres-completos.js.
+// Usa mostrarView/abrirAluno/alunoAtual de js/gestao-alunos.js, carregado antes.
 (function () {
   const headers = json => Object.assign({ Authorization: 'Bearer ' + localStorage.getItem('token') }, json ? { 'Content-Type': 'application/json' } : {});
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -26,9 +27,15 @@
     mostrarView(alvo);
     if (alvo === 'lista') carregarAlunos();
     if (alvo === 'acompanhamento') carregarAcompanhamento();
-    if (alvo === 'atribuir') prepararAtribuir();
+    if (alvo === 'criar' && window.CriarDever) CriarDever.abrir();
+    if (alvo === 'atribuirDever' && window.AtribuirDever) AtribuirDever.abrir();
+    if (alvo === 'completos' && window.DeveresCompletos) DeveresCompletos.abrir();
+    try { history.replaceState(null, '', alvo === 'lista' ? location.pathname : '#' + alvo); } catch (x) { /* ok */ }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+  // gestao-alunos.html#criar (#atribuirDever, #completos, #acompanhamento) abre direto a aba
+  const abaInicial = location.hash.slice(1);
+  if (['acompanhamento', 'criar', 'atribuirDever', 'completos'].includes(abaInicial)) setTimeout(() => { const b = document.querySelector(`#navPrincipal [data-nav="${abaInicial}"]`); if (b) b.click(); }, 0);
 
   // ===================== PRESENÇA AO VIVO =====================
   // Todos os alunos com plano ativo e a área do site em que estão (backend/utils/presencaSite.js).
@@ -48,6 +55,8 @@
     } catch (e) { presenca = presenca || { alunos: [] }; }
     renderPresenca();
   }
+  const ICONE_AREA = { 'Plataforma de Questões': '❓', 'Simulação Completa': '🏆', 'Ambiente de Produção': '✍️', 'Aulas Especializadas': '▶️', 'Dever de Casa': '📚' };
+  const iniciais = n => String(n || '?').trim().split(/\s+/).slice(0, 2).map(x => x.charAt(0).toUpperCase()).join('');
   function renderPresenca() {
     if (!presenca) return;
     const online = presenca.alunos.filter(a => a.online);
@@ -55,28 +64,38 @@
     online.forEach(a => { contagem[a.area] = (contagem[a.area] || 0) + 1; });
     const principais = ['Plataforma de Questões', 'Ambiente de Produção', 'Aulas Especializadas', 'Simulação Completa', 'Dever de Casa'];
     const outras = Object.keys(contagem).filter(a => !principais.includes(a));
-    const botoes = [['', 'Todos com plano ativo', presenca.alunos.length, '#94a3b8'], ['__online', 'Online agora', online.length, '#2E9E63']]
-      .concat(principais.map(a => [a, a, contagem[a] || 0, (CORES_AREA[a] || CORES_AREA.Site)[0]]))
-      .concat(outras.length ? [['__outras', 'Outras páginas', outras.reduce((n, a) => n + contagem[a], 0), '#475569']] : []);
-    $('presencaAreas').innerHTML = botoes.map(([v, r, n, cor]) => `<button type="button" data-area="${esc(v)}" class="${filtroArea === v ? 'ativa' : ''}"><i style="background:${cor}"></i>${esc(r)} <b>${n}</b></button>`).join('');
+    $('avOnline').textContent = online.length;
+    $('avAtivos').textContent = presenca.alunos.length;
+    const max = Math.max(1, ...principais.map(a => contagem[a] || 0));
+    const blocos = [['__online', 'Todos online', online.length, '#2E9E63', '🟢']]
+      .concat(principais.map(a => [a, a, contagem[a] || 0, (CORES_AREA[a] || CORES_AREA.Site)[0], ICONE_AREA[a]]))
+      .concat([['__outras', 'Outras páginas', outras.reduce((n, a) => n + contagem[a], 0), '#475569', '🧭']]);
+    $('presencaAreas').innerHTML = blocos.map(([v, r, n, cor, ic]) => {
+      const rostos = online.filter(a => v === '__online' || (v === '__outras' ? !principais.includes(a.area) : a.area === v)).slice(0, 4);
+      return `<button type="button" data-area="${esc(v)}" class="av-area ${filtroArea === v ? 'ativa' : ''} ${n ? '' : 'zero'}" style="--c:${cor}">
+        <span class="av-area-ic">${ic}</span><span class="av-area-n">${n}</span><span class="av-area-nome">${esc(r)}</span>
+        <span class="av-area-barra"><i style="width:${v.startsWith('__') ? 100 : Math.round(n / max * 100)}%"></i></span>
+        <span class="av-rostos">${rostos.map(a => `<i title="${esc(a.nome)}">${esc(iniciais(a.nome))}</i>`).join('')}</span></button>`;
+    }).join('');
     const busca = ($('presencaBusca').value || '').toLowerCase();
-    const lista = presenca.alunos.filter(a => {
-      if (busca && !(a.nome + ' ' + a.email).toLowerCase().includes(busca)) return false;
-      if (!filtroArea) return true;
-      if (filtroArea === '__online') return a.online;
-      if (filtroArea === '__outras') return a.online && !principais.includes(a.area);
-      return a.online && a.area === filtroArea;
-    });
-    $('presencaTabela').innerHTML = lista.length ? lista.map(a => {
-      const st = a.online ? (a.abaOculta ? 'ausente' : 'on') : '';
-      return `<tr data-aluno="${a._id}" class="${a.online ? '' : 'off'}">
-        <td><span class="st-dot ${st}" title="${a.online ? (a.abaOculta ? 'Online, com a aba em segundo plano' : 'Online') : 'Offline'}"></span><strong>${esc(a.nome)}</strong><br><span style="font-size:0.72rem; color:var(--cinza-400);">${esc(a.email)}</span></td>
-        <td>${a.online ? tagArea(a.area) + (a.abaOculta ? '<br><small style="font-size:.72rem; color:var(--cinza-400);">aba em segundo plano</small>' : '') : '<span style="font-size:.8rem;">Offline</span>'}</td>
-        <td class="ativ">${a.online ? esc(a.atividade || a.pagina || '—') : (a.area ? `<small>Última atividade: ${esc(a.area)}${a.atividade ? ' · ' + esc(a.atividade) : ''}</small>` : '—')}</td>
-        <td style="font-size:.82rem;">${a.online ? (a.atividadeDesde ? duracao(a.atividadeDesde) + ' nesta atividade' : '') + (a.onlineDesde ? `<br><small style="color:var(--cinza-400);">online há ${duracao(a.onlineDesde)}</small>` : '') : 'visto ' + quando(a.vistoEm)}</td>
-        <td class="planos-mini">${a.planos.map(esc).join('<br>')}</td>
-      </tr>`;
-    }).join('') : '<tr><td colspan="5" style="text-align:center; color:var(--cinza-400); cursor:default;">Nenhum aluno com estes filtros.</td></tr>';
+    const casa = a => !busca || (a.nome + ' ' + a.email).toLowerCase().includes(busca);
+    const lista = online.filter(a => casa(a) && (!filtroArea || filtroArea === '__online' || (filtroArea === '__outras' ? !principais.includes(a.area) : a.area === filtroArea)))
+      .sort((a, b) => (a.abaOculta ? 1 : 0) - (b.abaOculta ? 1 : 0) || new Date(a.atividadeDesde || 0) - new Date(b.atividadeDesde || 0));
+    $('avTituloLista').textContent = filtroArea && !filtroArea.startsWith('__') ? filtroArea + ' agora' : 'Online agora';
+    $('presencaGrade').innerHTML = lista.length ? lista.map(a => {
+      const cor = (CORES_AREA[a.area] || CORES_AREA.Site);
+      return `<button type="button" class="av-aluno ${a.abaOculta ? 'ausente' : ''}" data-aluno="${a._id}" style="--c:${cor[0]}; --f:${cor[1]}">
+        <span class="av-foto">${a.foto ? `<img src="${esc(a.foto)}" alt="">` : esc(iniciais(a.nome))}<i class="av-st" title="${a.abaOculta ? 'Online, com a aba em segundo plano' : 'Online'}"></i></span>
+        <span class="av-quem"><b>${esc(a.nome)}</b><small>${esc(a.email)}</small></span>
+        <span class="av-onde">${ICONE_AREA[a.area] || '🧭'} ${esc(a.area)}</span>
+        <span class="av-oque">${esc(a.atividade || a.pagina || '—')}</span>
+        <span class="av-tempo">${a.atividadeDesde ? '⏱️ ' + duracao(a.atividadeDesde) + ' nesta atividade' : ''}${a.onlineDesde ? ` · online há ${duracao(a.onlineDesde)}` : ''}${a.abaOculta ? ' · aba em segundo plano' : ''}</span>
+        <span class="av-planos">${(a.planos || []).slice(0, 3).map(x => `<em>${esc(x)}</em>`).join('')}</span></button>`;
+    }).join('') : `<div class="av-ninguem"><span>🌙</span><p>${online.length ? 'Ninguém nesta área agora.' : 'Nenhum aluno online agora.'}</p></div>`;
+    const off = presenca.alunos.filter(a => !a.online && casa(a)).sort((a, b) => new Date(b.vistoEm || 0) - new Date(a.vistoEm || 0));
+    $('avOffN').textContent = off.length;
+    $('presencaOff').innerHTML = off.map(a => `<button type="button" class="av-off-item" data-aluno="${a._id}"><span class="av-foto mini">${esc(iniciais(a.nome))}</span><span><b>${esc(a.nome)}</b>
+      <small>${a.vistoEm ? 'visto ' + quando(a.vistoEm) : 'ainda não entrou'}${a.area ? ' · ' + esc(a.area) + (a.atividade ? ' · ' + esc(a.atividade) : '') : ''}</small></span></button>`).join('') || '<p class="cd-vazio">Todos estão online.</p>';
   }
   $('presencaAreas').addEventListener('click', e => { const b = e.target.closest('[data-area]'); if (!b) return; filtroArea = filtroArea === b.dataset.area ? '' : b.dataset.area; renderPresenca(); });
   $('presencaBusca').addEventListener('input', renderPresenca);
@@ -101,6 +120,7 @@
       dadosAcomp = rA.ok ? await rA.json() : { feed: [], alunos: [] };
       const d = rD.ok ? await rD.json() : {};
       const semana = dadosAcomp.feed.filter(f => f.enviadoEm && Date.now() - new Date(f.enviadoEm) < 7 * 864e5).length;
+      $('avEntregas').textContent = dadosAcomp.feed.filter(f => f.enviadoEm && new Date(f.enviadoEm).toDateString() === new Date().toDateString()).length;
       $('acompKpis').innerHTML = [
         [dadosAcomp.alunos.length, 'Alunos com dever'], [semana, 'Entregas nos últimos 7 dias'],
         [d.atrasados ?? 0, 'Semanas atrasadas'], [(d.taxaMediaConclusao ?? 0) + '%', 'Taxa de conclusão'],
@@ -182,106 +202,17 @@
     }
   });
 
-  // ===================== ATRIBUIR DEVERES COMPLETOS =====================
-  let catalogo = null, alunosLista = null;
-  const escolhidos = new Set(), alunosEscolhidos = new Set();
-  const hojeISO = (dias = 0) => new Date(Date.now() + dias * 864e5).toISOString().slice(0, 10);
-
-  async function prepararAtribuir(preSelecionarAlunoId) {
-    if (!$('atribInicio').value) { $('atribInicio').value = hojeISO(); $('atribPrazo').value = hojeISO(7); }
-    if (preSelecionarAlunoId) { alunosEscolhidos.clear(); alunosEscolhidos.add(preSelecionarAlunoId); }
-    try {
-      if (!catalogo) {
-        const r = await fetch('/api/exercicios', { headers: headers() });
-        catalogo = r.ok ? await r.json() : [];
-      }
-      renderCatalogo();
-      if (!alunosLista) {
-        const r = await fetch('/api/equipe/alunos?status=ativo', { headers: headers() });
-        const d = r.ok ? await r.json() : {};
-        const rE = await fetch('/api/equipe/alunos?status=expirado', { headers: headers() });
-        const dE = rE.ok ? await rE.json() : {};
-        alunosLista = [...(d.alunos || []).map(a => ({ ...a, ativoLista: true })), ...(dE.alunos || [])];
-      }
-      renderAlunos();
-      atualizarResumo();
-    } catch (err) {
-      $('dcGrid').innerHTML = 'Erro ao carregar.';
-    }
-  }
-
-  function renderCatalogo() {
-    $('dcGrid').innerHTML = catalogo.map(x => `
-      <label class="dc-card${escolhidos.has(x.slug) ? ' marcado' : ''}">
-        <input type="checkbox" data-dc="${x.slug}" ${escolhidos.has(x.slug) ? 'checked' : ''}>
-        <span><h4><span class="dc-nivel">${esc(x.nivel || '')}</span>${esc(x.titulo)}</h4>
-          <span class="meta">${x.questoes ? x.questoes + ' questões' : x.regras + ' regras'} · ${x.partes.length} partes${x.modo === 'prova' ? ' · prova' : ''}</span><br>
-          <a class="ver" href="exercicio.html?slug=${encodeURIComponent(x.slug)}" target="_blank" rel="noopener">ver ↗</a></span>
-      </label>`).join('');
-  }
-  $('dcGrid').addEventListener('change', e => {
-    const cb = e.target.closest('[data-dc]'); if (!cb) return;
-    if (cb.checked) escolhidos.add(cb.dataset.dc); else escolhidos.delete(cb.dataset.dc);
-    cb.closest('.dc-card').classList.toggle('marcado', cb.checked);
-    atualizarResumo();
-  });
-
-  function renderAlunos() {
-    const filtro = ($('atribBusca').value || '').toLowerCase();
-    const lista = alunosLista.filter(a => (a.nome + ' ' + a.email).toLowerCase().includes(filtro));
-    $('atribAlunos').innerHTML = lista.length ? lista.map(a => `
-      <label><input type="checkbox" data-al="${a._id}" ${alunosEscolhidos.has(a._id) ? 'checked' : ''}>
-        <span><strong>${esc(a.nome)}</strong> <span style="color:var(--cinza-400); font-size:0.78rem;">${esc(a.email)}${a.ativoLista ? '' : ' · expirado'}</span></span></label>`).join('')
-      : '<p style="padding:14px; color:var(--cinza-400);">Nenhum aluno encontrado.</p>';
-  }
-  $('atribBusca').addEventListener('input', () => alunosLista && renderAlunos());
-  $('atribAlunos').addEventListener('change', e => {
-    const cb = e.target.closest('[data-al]'); if (!cb) return;
-    if (cb.checked) alunosEscolhidos.add(cb.dataset.al); else alunosEscolhidos.delete(cb.dataset.al);
-    atualizarResumo();
-  });
-  $('atribTodos').addEventListener('click', () => { alunosLista.filter(a => a.ativoLista).forEach(a => alunosEscolhidos.add(a._id)); renderAlunos(); atualizarResumo(); });
-  $('atribNenhum').addEventListener('click', () => { alunosEscolhidos.clear(); renderAlunos(); atualizarResumo(); });
-
-  function atualizarResumo() {
-    const n = escolhidos.size, m = alunosEscolhidos.size;
-    $('atribResumo').textContent = n || m
-      ? `${n} dever(es) completo(s) para ${m} aluno(s).`
-      : 'Nenhum dever completo selecionado.';
-    $('atribEnviar').disabled = !n || !m;
-  }
-
-  $('atribEnviar').addEventListener('click', async () => {
-    const btn = $('atribEnviar'), msg = $('atribMsg');
-    btn.disabled = true; msg.textContent = 'Enviando...';
-    try {
-      const res = await fetch('/api/deveres/deveres-completos/atribuir', {
-        method: 'POST', headers: headers(true),
-        body: JSON.stringify({
-          alunoIds: [...alunosEscolhidos], slugs: catalogo.filter(x => escolhidos.has(x.slug)).map(x => x.slug),
-          titulo: $('atribTitulo').value.trim() || 'Deveres completos', descricao: $('atribDescricao').value.trim(),
-          dataInicio: $('atribInicio').value, dataLimite: $('atribPrazo').value, prioridade: $('atribPrioridade').value
-        })
-      });
-      const data = await res.json();
-      msg.textContent = data.msg || (res.ok ? 'Pronto!' : 'Erro ao atribuir.');
-      if (res.ok) {
-        escolhidos.clear(); renderCatalogo();
-        // voltou de uma ficha de aluno? reabre a ficha para ver o dever novo
-        if (voltarParaAluno) { const id = voltarParaAluno; voltarParaAluno = null; alunosEscolhidos.clear(); setTimeout(() => abrirAluno(id), 600); }
-      }
-    } catch (err) { msg.textContent = 'Erro ao conectar ao servidor.'; }
-    finally { atualizarResumo(); }
-  });
-
-  // botão na ficha do aluno: abre a aba já com o aluno marcado
-  let voltarParaAluno = null;
+  // ===================== FICHA DO ALUNO → CRIAR / ATRIBUIR DEVER =====================
   $('atribuirDcAlunoBtn').addEventListener('click', () => {
     if (!alunoAtual) return;
-    voltarParaAluno = alunoAtual._id;
-    mostrarView('atribuir');
-    prepararAtribuir(alunoAtual._id);
-    $('atribMsg').textContent = `Aluno: ${alunoAtual.nome}`;
+    mostrarView('criar');
+    window.CriarDever && CriarDever.abrir({ alunoId: alunoAtual._id });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  $('atribuirDeverAlunoBtn').addEventListener('click', () => {
+    if (!alunoAtual) return;
+    mostrarView('atribuirDever');
+    window.AtribuirDever && AtribuirDever.abrir(alunoAtual._id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();

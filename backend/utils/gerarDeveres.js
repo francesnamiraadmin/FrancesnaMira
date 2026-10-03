@@ -20,21 +20,48 @@ async function dataFimMatricula(atribuicao) {
     const turma = await Turma.findById(atribuicao.turmaId).select("dataFim");
     return turma?.dataFim || null;
   }
-  const user = await User.findById(atribuicao.alunoId).select("plano.dataVencimento");
+  const user = await User.findById(atribuicao.alunoId).select("plano.dataVencimento planos");
+  // atribuição ligada a um curso: termina com o plano daquele curso
+  if (atribuicao.curso) {
+    const p = (user?.planos || []).filter(x => x.courseType === atribuicao.curso).sort((a, b) => new Date(b.expiraEm || b.dataVencimento || 0) - new Date(a.expiraEm || a.dataVencimento || 0))[0];
+    return p ? (p.expiraEm || p.dataVencimento || null) : null;
+  }
   return user?.plano?.dataVencimento || null;
 }
 
+// Copia o conteúdo inteiro de cada atividade (tema, aula, conjunto, sujet do Ambiente, perfil…).
 function copiarAtividades(atividadesTemplate) {
-  return (atividadesTemplate || []).map(a => ({
-    tipo: a.tipo, titulo: a.titulo, descricao: a.descricao, obrigatoria: a.obrigatoria,
-    dependeDe: a.dependeDe ?? null,
-    conteudo: a.conteudo ? {
-      url: a.conteudo.url, texto: a.conteudo.texto, arquivo: a.conteudo.arquivo,
-      temaId: a.conteudo.temaId, aulaId: a.conteudo.aulaId, moduloId: a.conteudo.moduloId,
-      conjuntoId: a.conteudo.conjuntoId, exercicioSlug: a.conteudo.exercicioSlug
-    } : undefined,
-    entrega: { status: "pendente" }
-  }));
+  return (atividadesTemplate || []).map(a => {
+    const c = a.conteudo ? (a.conteudo.toObject ? a.conteudo.toObject() : { ...a.conteudo }) : undefined;
+    return {
+      tipo: a.tipo, titulo: a.titulo, descricao: a.descricao, obrigatoria: a.obrigatoria,
+      dependeDe: a.dependeDe ?? null, conteudo: c, entrega: { status: "pendente" }
+    };
+  });
+}
+
+// Atribuição-base: quem tem plano ativo de um curso com Atribuição-base recebe aquele Plano-Base
+// (uma vez só, a partir do dia em que é aplicada).
+function cursosAtivos(user) {
+  const agora = Date.now();
+  return [...new Set((user?.planos || []).filter(p => p.ativo !== false && (!(p.expiraEm || p.dataVencimento) || new Date(p.expiraEm || p.dataVencimento).getTime() > agora)).map(p => p.courseType).filter(Boolean))];
+}
+async function aplicarAtribuicoesBase(alunoId) {
+  const AtribuicaoBaseCurso = require("../models/atribuicaoBaseCurso");
+  const user = await User.findById(alunoId).select("planos role").lean();
+  if (!user || (user.role && user.role !== "aluno")) return 0;
+  const cursos = cursosAtivos(user);
+  if (!cursos.length) return 0;
+  const bases = await AtribuicaoBaseCurso.find({ curso: { $in: cursos } }).lean();
+  let n = 0;
+  for (const b of bases) {
+    const ja = await AtribuicaoPlanoBase.findOne({ alunoId, origem: "base", curso: b.curso, planoBaseId: b.planoBaseId }).select("_id").lean();
+    if (ja) continue;
+    const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+    await AtribuicaoPlanoBase.create({ alunoId, planoBaseId: b.planoBaseId, dataInicio: hoje, vinculoTipo: "plano_curso", curso: b.curso, origem: "base" });
+    n++;
+  }
+  return n;
 }
 
 // Materializa (cria no banco) toda semana do Plano-Base cuja hora já chegou e
@@ -74,6 +101,7 @@ async function gerarSemanasPendentes(atribuicao) {
       planoBaseId: atribuicao.planoBaseId,
       numeroSemana: semana.numero,
       titulo: semana.titulo,
+      curso: planoBase.curso || atribuicao.curso || null,
       dataInicio, dataLimite,
       atividades: copiarAtividades(semana.atividades)
     });
@@ -86,8 +114,10 @@ async function gerarSemanasPendentes(atribuicao) {
 // Verifica (e materializa, se preciso) as semanas pendentes da atribuição
 // ativa de um aluno — usado no topo das rotas de listagem.
 async function atualizarSemanasDoAluno(alunoId) {
-  const atribuicao = await AtribuicaoPlanoBase.findOne({ alunoId, ativo: true });
-  if (atribuicao) await gerarSemanasPendentes(atribuicao);
+  await aplicarAtribuicoesBase(alunoId);
+  // um aluno pode ter mais de um Plano-Base ativo (ex.: o da Atribuição-base do TCF e um extra)
+  const atribuicoes = await AtribuicaoPlanoBase.find({ alunoId, ativo: true });
+  for (const a of atribuicoes) await gerarSemanasPendentes(a);
 }
 
 function statusDever(dever) {
@@ -175,4 +205,4 @@ async function enriquecerDever(deverDoc) {
   return dever;
 }
 
-module.exports = { gerarSemanasPendentes, atualizarSemanasDoAluno, statusDever, podeConcluir, enriquecerDever };
+module.exports = { gerarSemanasPendentes, atualizarSemanasDoAluno, statusDever, podeConcluir, enriquecerDever, aplicarAtribuicoesBase, copiarAtividades, cursosAtivos };

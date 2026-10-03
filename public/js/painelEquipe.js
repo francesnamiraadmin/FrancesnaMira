@@ -80,6 +80,18 @@
     atualizar();
   }
 
+  // Página da equipe embutida em outra (?embed=1 num iframe — ex.: « Simulados ao Vivo » dentro da aba
+  // « Ao vivo » do Sistema de Correção): sem cabeçalho, navbar, rodapé nem esta barra; a página de
+  // fora recebe a altura do conteúdo para o iframe crescer (ver js/quadroEmbutido.js).
+  var embutida = /[?&]embed=1(&|$)/.test(location.search) && window.parent !== window;
+  if (embutida) {
+    document.documentElement.classList.add("pe-embutida");
+    var medir = function () { try { window.parent.postMessage({ fnmQuadro: true, altura: Math.ceil(document.documentElement.scrollHeight) }, location.origin); } catch (e) { /* ok */ } };
+    window.addEventListener("load", medir);
+    var iniciar = function () { try { new ResizeObserver(medir).observe(document.body); } catch (e) { setInterval(medir, 1000); } medir(); };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciar); else iniciar();
+    return;
+  }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", montar);
   else montar();
 })();

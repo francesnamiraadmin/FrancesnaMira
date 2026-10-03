@@ -40,12 +40,13 @@ function renderSemanaCard(d) {
     <div class="meta">${d.titulo}</div>
     <div class="progress-track"><div class="progress-fill" style="width:${pct}%;"></div></div>
     <div class="meta">${pct}% concluído · Prazo: ${new Date(d.dataLimite).toLocaleDateString('pt-BR')} · ${tempoTexto}</div>
-    <button class="dash-btn pequeno" style="margin-top:12px;" data-abrir="${d._id}">Abrir</button>
+    <a class="dash-btn pequeno" style="margin-top:12px; display:inline-flex;" href="dever.html?id=${d._id}" target="_blank" rel="noopener" data-abrir="${d._id}">Fazer o dever ↗</a>
   </div>`;
 }
 document.getElementById('semanasGrid').addEventListener('click', e => {
+  // cada dever abre numa aba própria (dever.html), com todos os elementos para responder ali
   const btn = e.target.closest('[data-abrir]');
-  if (btn) abrirSemana(btn.dataset.abrir);
+  if (btn && btn.tagName !== 'A') abrirSemana(btn.dataset.abrir);
 });
 
 let semanaAbertaId = null;

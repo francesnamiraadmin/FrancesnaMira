@@ -1186,8 +1186,42 @@ router.get("/temas-aluno/:alunoId", exigirAdmin, async (req, res) => {
     res.json({
       aluno: { id: String(aluno._id), nome: aluno.nome, email: aluno.email }, perfis, perfil, nomePerfil: P.nome,
       taches: P.TACHES.map(t => ({ id: t, nome: P.NOMES_TACHE[t] })), catalogo,
-      selecionados: doc ? doc.sujets.map(x => x.id) : padrao, padrao, personalizado: !!doc, atualizadoEm: doc?.atualizadoEm || null
+      selecionados: doc ? doc.sujets.map(x => x.id) : padrao, padrao, personalizado: !!doc, atualizadoEm: doc?.atualizadoEm || null,
+      // temas que o aluno também vê por serem dever dele (liberados pelo dever, mesmo fora da lista)
+      viaDever: [...new Set((await T.DevoirTCF.find({ ativo: true, modelo: { $ne: "" } }).select("modelo alvo").lean()).filter(dv => alvoInclui(dv.alvo, aluno._id)).map(dv => dv.modelo))]
     });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+// Designar / retirar temas (Sistema de Correção › Temas dos alunos): o tema designado fica liberado
+// na hora para o aluno, que recebe um aviso em « Tarefas do professor ». Enquanto a equipe não mexe,
+// o aluno vê os 20 temas padrão; a primeira designação parte deles.
+router.post("/temas-aluno/:alunoId/designar", exigirAdmin, async (req, res) => {
+  try {
+    if (!ehObjectId(req.params.alunoId)) return res.status(400).json({ msg: "Aluno inválido." });
+    const perfil = String(req.body?.perfil || ""), retirar = req.body?.acao === "retirar";
+    if (!M.PERFIS[perfil]) return res.status(400).json({ msg: "Perfil inválido." });
+    if (!(await perfisDoAluno(req.params.alunoId)).includes(perfil)) return res.status(400).json({ msg: "Este aluno não tem o Ambiente de Produção deste curso." });
+    const P = M.PERFIS[perfil];
+    const pedidos = (Array.isArray(req.body?.sujets) ? req.body.sujets : []).slice(0, 300).map(x => ({ tache: String(x?.tache || ""), id: String(x?.id || "") }));
+    if (!pedidos.length) return res.status(400).json({ msg: "Escolha pelo menos um tema." });
+    for (const x of pedidos) {
+      if (!P.TACHES.includes(x.tache) || !M.acharTema(x.tache, x.id) || M.perfilDoSujet(M.acharTema(x.tache, x.id)) !== P) return res.status(400).json({ msg: `Tema inválido: ${x.id}` });
+    }
+    const doc = await T.TemasAlunoTCF.findOne({ alunoId: req.params.alunoId, perfil }).lean();
+    let lista = (doc ? doc.sujets : (TEMAS_PADRAO[perfil] || [])).map(x => ({ tache: x.tache, id: x.id }));
+    const ja = new Set(lista.map(x => x.id));
+    const novos = [];
+    if (!retirar) pedidos.forEach(x => { if (!ja.has(x.id)) { ja.add(x.id); novos.push(x); } });
+    if (retirar) { const fora = new Set(pedidos.map(x => x.id)); lista = lista.filter(x => !fora.has(x.id)); }
+    else lista = lista.concat(novos);
+    await T.TemasAlunoTCF.findOneAndUpdate({ alunoId: req.params.alunoId, perfil }, { sujets: lista, atualizadoPor: req.userId, atualizadoEm: new Date() }, { upsert: true });
+    if (novos.length) {
+      const quem = await User.findById(req.userId).select("nome").lean();
+      const nomes = novos.slice(0, 5).map(x => `« ${String(M.acharTema(x.tache, x.id).t || M.acharTema(x.tache, x.id).titre || x.id).slice(0, 90)} » (${P.NOMES_TACHE[x.tache] || x.tache})`);
+      await T.MensagemTCF.create({ alunoId: req.params.alunoId, de: quem?.nome || "Equipe Francês na Mira",
+        texto: `${novos.length === 1 ? "Novo tema liberado" : novos.length + " novos temas liberados"} para você no Ambiente de Produção (${P.nome}): ${nomes.join("; ")}${novos.length > 5 ? "…" : ""}.` });
+    }
+    res.json({ ok: true, personalizado: true, total: lista.length, novos: novos.length, selecionados: lista.map(x => x.id) });
   } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
 });
 // Salva a lista (ou, com « padrao: true », volta aos 20 temas padrão).

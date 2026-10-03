@@ -16,7 +16,7 @@ let filtrosOpcoesCarregadas = false;
 // Telas: lista, detalhe (ficha do aluno), acompanhamento e atribuir (as duas
 // últimas em js/gestao-alunos-ferramentas.js). A aba "Alunos" fica marcada
 // também na ficha, já que ela é aberta a partir da lista.
-const VIEWS = { lista: 'viewLista', detalhe: 'viewDetalhe', acompanhamento: 'viewAcompanhamento', atribuir: 'viewAtribuir' };
+const VIEWS = { lista: 'viewLista', detalhe: 'viewDetalhe', acompanhamento: 'viewAcompanhamento', criar: 'viewCriar', atribuirDever: 'viewAtribuirDever', completos: 'viewCompletos' };
 function mostrarView(nome) {
   Object.entries(VIEWS).forEach(([k, id]) => {
     const el = document.getElementById(id);

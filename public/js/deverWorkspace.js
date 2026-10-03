@@ -168,15 +168,37 @@ const DeverWorkspace = (() => {
     }
   }
 
-  // Exercício interativo (exercicio.html): abre numa página própria, que
-  // corrige e registra a entrega sozinha; aqui mostra só o botão e a nota.
-  function renderExercicioInterativo(widgetEl, a, deverId, index) {
-    const url = `exercicio.html?slug=${encodeURIComponent(a.conteudo.exercicioSlug)}&dever=${encodeURIComponent(deverId)}&atividade=${index}`;
+  // Exercício interativo (dever completo): roda embutido aqui mesmo (exercicio.html?embed=1 num
+  // iframe que cresce com o conteúdo); a correção registra a entrega e a nota no dever sozinha.
+  function renderExercicioInterativo(widgetEl, a, deverId, index, onAtualizado) {
+    const url = `exercicio.html?slug=${encodeURIComponent(a.conteudo.exercicioSlug)}&dever=${encodeURIComponent(deverId)}&atividade=${index}&embed=1`;
     const enviado = a.entrega?.status === 'enviado';
     const nota = enviado && a.entrega.texto ? (a.entrega.texto.match(/Nota automática: ([^\n]+)/) || [])[1] : null;
     widgetEl.innerHTML = `
       ${enviado ? `<p class="embed-aviso"><img class="titulo-icone-inline pequeno" src="img/icones/check.svg" alt="">Entregue${nota ? ' · ' + nota : ''}. Você pode refazer para praticar: a nova entrega substitui a anterior.</p>` : ''}
-      <a class="dash-btn pequeno" href="${url}">${enviado ? 'Refazer exercício' : 'Abrir exercício'}</a>`;
+      <button class="dash-btn pequeno" type="button" data-abrir-exercicio>${enviado ? 'Refazer exercício aqui' : 'Fazer o exercício aqui'}</button>
+      <div data-exercicio-embutido></div>`;
+    widgetEl.querySelector('[data-abrir-exercicio]').addEventListener('click', e => {
+      e.currentTarget.remove();
+      const caixa = widgetEl.querySelector('[data-exercicio-embutido]');
+      // criado pelo DOM: o htmlSeguro.js só deixa passar por innerHTML iframes com src http(s) absoluto
+      const frame = document.createElement('iframe');
+      frame.className = 'dever-exercicio-frame';
+      frame.src = url;
+      frame.title = String(a.titulo || 'Exercício');
+      frame.style.cssText = 'width:100%; border:0; min-height:520px; border-radius:14px; display:block;';
+      caixa.appendChild(frame);
+      const ouvir = ev => {
+        if (ev.origin !== location.origin || ev.source !== frame.contentWindow || !ev.data || !ev.data.fnmExercicio) return;
+        if (ev.data.altura) frame.style.height = Math.max(520, ev.data.altura + 8) + 'px';
+        if (ev.data.modal) frame.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (ev.data.entregue && onAtualizado) {
+          // atualiza o status da atividade, mas deixa o exercício aberto para o aluno rever a correção
+          fetch(`/api/deveres/minhas-semanas/${deverId}`, { headers: authHeaders() }).then(r => r.ok ? r.json() : null).then(d => { if (d) onAtualizado(d, { manterAberto: true }); }).catch(() => {});
+        }
+      };
+      window.addEventListener('message', ouvir);
+    });
   }
 
   // container: elemento onde a atividade inteira (título, status, widget) é
@@ -233,7 +255,7 @@ const DeverWorkspace = (() => {
       widgetEl.innerHTML = `<div class="embed-aviso" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;"><span>${feito ? '✓ Feita no Ambiente de Produção' + (atividade.devoirReal?.score != null ? ' · ' + atividade.devoirReal.score + '/' + atividade.devoirReal.total : '') : 'Esta tarefa é feita no Ambiente de Produção: tema, modelo, correção e professor ao vivo.'}</span>` +
         `<a class="btn" href="producao.html${curso}#devoir=${atividade.conteudo.devoirProducaoId}">${feito ? 'Rever no Ambiente de Produção' : 'Abrir no Ambiente de Produção'} →</a></div>`;
     } else if (atividade.tipo === 'exercicio_interativo' && atividade.conteudo?.exercicioSlug) {
-      renderExercicioInterativo(widgetEl, atividade, deverId, index);
+      renderExercicioInterativo(widgetEl, atividade, deverId, index, onAtualizado);
     } else if (['questoes_plataforma', 'exercicio_lista', 'simulado'].includes(atividade.tipo) && atividade.conteudo?.conjuntoId?._id) {
       renderConjuntoEmbutido(widgetEl, atividade, deverId, onAtualizado);
     } else {

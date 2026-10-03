@@ -78,7 +78,7 @@
     const foto = a.foto ? `<img class="me-avatar" src="${esc(a.foto)}" alt="">` : `<div class="me-avatar">${esc(primeiro[0] || "?").toUpperCase()}</div>`;
     const diasProva = a.dataProva ? Math.ceil((new Date(a.dataProva) - Date.now()) / 864e5) : null;
     return `<section class="me-heroi me-surgir"><div class="me-heroi-linha">${foto}
-      <div class="me-ola"><small>Meu espaço</small><h1>Bonjour, ${esc(primeiro)} !</h1>
+      <div class="me-ola"><small>Meu Espaço</small><h1>Bonjour, ${esc(primeiro)} !</h1>
         <div class="me-chips">${a.cursos.map(c => `<span class="me-chip">🎓 ${esc(c)}</span>`).join("")}
           ${a.provaAlvo ? `<span class="me-chip">🎯 ${esc(a.provaAlvo)}</span>` : ""}
           ${diasProva != null && diasProva >= 0 ? `<span class="me-chip">⏳ faltam ${diasProva} dia(s) para a prova</span>` : ""}
@@ -215,8 +215,102 @@
     const dv = d.deveres || { recentes: [] }, e = d.estudo || { porMateria: [] };
     return `<section class="me-secao" id="rotina" style="--c:${COR.teal}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Rotina de estudos</h2><p>Deveres de casa e tempo de estudo por matéria.</p></div></div>
       <div class="me-grade">
-        <div class="me-card c6"><h3>Dever de casa <small>${dv.concluidos || 0}/${dv.total || 0} semana(s) concluída(s)</small></h3>${dv.recentes.length ? barras(dv.recentes.map(x => ({ nome: x.titulo, pct: x.total ? Math.round(x.feitas / x.total * 100) : (x.concluido ? 100 : 0), texto: x.concluido ? "✓" : `${x.feitas}/${x.total}`, cor: x.concluido ? COR.verde : COR.teal }))) + '<p style="margin-top:12px;"><a class="me-link" href="meus-deveres.html">Abrir meus deveres →</a></p>' : '<div class="me-vazio">Nenhum dever de casa atribuído.</div>'}</div>
+        <div class="me-card c6"><h3>Dever de casa <small>${dv.concluidos || 0}/${dv.total || 0} semana(s) concluída(s)</small></h3>${dv.recentes.length ? barras(dv.recentes.map(x => ({ nome: x.titulo, pct: x.total ? Math.round(x.feitas / x.total * 100) : (x.concluido ? 100 : 0), texto: x.concluido ? "✓" : `${x.feitas}/${x.total}`, cor: x.concluido ? COR.verde : COR.teal }))) + (dv.deveresCompletos && dv.deveresCompletos.feitos ? `<p style="margin-top:10px; font-size:.84rem;">🧩 Deveres completos: <b>${dv.deveresCompletos.feitos}</b> feito(s) · média <b>${dv.deveresCompletos.media}%</b></p>` : "") + '<p style="margin-top:12px;"><a class="me-link" href="meus-deveres.html">Abrir meus deveres →</a></p>' : '<div class="me-vazio">Nenhum dever de casa atribuído.</div>'}</div>
         <div class="me-card c6"><h3>Tempo de estudo por matéria <small>${fmtTempo(e.totalSeg)}</small></h3>${e.porMateria.length ? donut(e.porMateria.slice(0, 7).map((m, i) => ({ nome: `${m.icone} ${m.nome}`, valor: m.seg, cor: m.cor || PALETA[i], texto: fmtTempo(m.seg) })), fmtTempo(e.totalSeg), "estudados") : '<div class="me-vazio">Use o cronômetro de estudos para acompanhar seu tempo.</div>'}</div>
+      </div></section>`;
+  }
+
+  // Painel da equipe (administradores e professores): os mesmos atalhos da Minha conta.
+  const EQUIPE = [
+    ["gestao-alunos.html", "👥", "Gestão de Alunos", "Acompanhamento ao vivo, criar e atribuir deveres", COR.azul, false],
+    ["professor-correcoes.html", "✏️", "Sistema de Correção", "Fila, correção ao vivo e simulados ao vivo", COR.rosa, false],
+    ["professor-producao.html", "🗂️", "Espace Professeur", "Ambiente de Produção da equipe", COR.laranja, false],
+    ["admin-aulas.html", "🎬", "Aulas Especializadas", "Módulos, aulas e Painel Administrativo", COR.verde, true],
+    ["admin-horarios.html", "🗓️", "Sistema de Aulas", "Grade, horários atuais e registro de aulas", COR.teal, true],
+    ["admin-financeiro.html", "📈", "Balanço Financeiro", "Receitas e assinaturas", COR.roxo, true],
+    ["admin-depoimentos.html", "💬", "Depoimentos", "Moderação dos depoimentos", COR.anil, true],
+    ["admin-erros-questoes.html", "⚠️", "Erros de Questões", "Questões reportadas pelos alunos", COR.vermelho, true],
+    ["admin-seguranca.html", "🔒", "Segurança", "Acessos e alertas", "#475569", true]
+  ];
+  function secEquipe(d) {
+    const papel = d.aluno.papel;
+    if (papel !== "admin" && papel !== "professor") return "";
+    const l = EQUIPE.filter(x => !x[5] || papel === "admin");
+    return `<section class="me-secao" id="equipe" style="--c:#1c2b3a"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Painel da equipe</h2>
+      <p>Sua conta tem acesso de <b>${papel === "admin" ? "administrador" : "professor"}</b>. As ferramentas da equipe, a um clique.</p></div><a class="me-btn" href="minha-conta.html#painel-equipe">Abrir na Minha conta</a></div>
+      <div class="me-equipe">${l.map(([href, ic, nome, sub, cor]) => `<a class="me-eq" href="${href}" style="--c:${cor}"><span class="ic">${ic}</span><b>${nome}</b><small>${sub}</small></a>`).join("")}</div></section>`;
+  }
+
+  // Minha assinatura: um cartão por plano (tier, vencimento, dias restantes, módulos incluídos),
+  // acessos avulsos, matrículas de aulas e créditos de correção.
+  const TIER_COR = { Excellence: ["#1c2b3a", "#d9a300"], "Avancé": ["#4f46e5", "#db2777"], Essentiel: ["#0d9488", "#2563eb"] };
+  const MODULO_NOME = { aulas: "▶️ Aulas Especializadas", producao: "✍️ Ambiente de Produção", plataforma: "❓ Plataforma de Questões", aulasEspecializadas: "▶️ Aulas Especializadas" };
+  const PAGAMENTO = { cartao_credito: "cartão de crédito", cartao_debito: "cartão de débito", boleto: "boleto", pix: "Pix" };
+  const PROXIMO = { Essentiel: "Avancé", "Avancé": "Excellence" };
+  function secAssinatura(d) {
+    const s = d.assinatura;
+    if (!s) return "";
+    const fmtD = x => x ? new Date(x).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" }) : "—";
+    const restam = n => n == null ? "" : n > 1 ? `faltam ${n} dias` : n === 1 ? "último dia amanhã" : n === 0 ? "vence hoje" : `venceu há ${-n} dia(s)`;
+    const cartao = p => {
+      const [c1, c2] = TIER_COR[p.tier] || ["#475569", "#64748b"];
+      const pct = p.totalDias && p.diasRestantes != null ? Math.max(0, Math.min(100, Math.round(p.diasRestantes / p.totalDias * 100))) : null;
+      const alerta = p.ativo && p.diasRestantes != null && p.diasRestantes <= 15;
+      return `<article class="me-plano ${p.ativo ? "" : "off"}" style="--c1:${c1};--c2:${c2}">
+        <div class="me-plano-topo"><div><small>${esc(p.curso)}</small><h3>${p.tier ? "Plano " + esc(p.tier) : p.packPrestige ? "Pack Prestige" : "Plano"}</h3></div><span class="me-plano-st">${p.ativo ? "● ativo" : "expirado"}</span></div>
+        <div class="me-plano-venc"><b>${p.ativo ? "Válido até" : "Venceu em"} ${fmtD(p.dataVencimento)}</b><span class="${alerta ? "alerta" : ""}">${restam(p.diasRestantes)}</span></div>
+        ${pct != null ? `<div class="me-plano-barra" title="${pct}% do período ainda pela frente"><i style="width:${pct}%"></i></div>` : ""}
+        <ul class="me-plano-mods">${["aulas", "producao", "plataforma"].map(m => `<li class="${p.modulos.includes(m) ? "sim" : "nao"}">${p.modulos.includes(m) ? "✓" : "—"} ${MODULO_NOME[m]}</li>`).join("")}</ul>
+        <div class="me-plano-rod">${p.dataInicio ? `<small>desde ${fmtD(p.dataInicio)}</small>` : ""}
+          ${p.metodoPagamento ? `<small>💳 ${PAGAMENTO[p.metodoPagamento] || esc(p.metodoPagamento)}${p.cartaoFinal ? " final " + esc(p.cartaoFinal) : ""}</small>` : ""}
+          <small>${p.autoRenovacao ? "🔁 renovação automática ligada" : "renovação manual"}</small>
+          ${p.packPrestige ? `<small>✨ Pack Prestige ${p.packPrestige.ativo ? "até " + fmtD(p.packPrestige.dataVencimento) : "vencido"}</small>` : ""}</div>
+        <div class="me-plano-acoes">${!p.ativo || alerta ? `<a class="me-btn cheio" style="--c:${c2}" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=${encodeURIComponent(p.tier || "Excellence")}">Renovar</a>` : ""}
+          ${p.tier && PROXIMO[p.tier] ? `<a class="me-btn" href="matricula.html?curso=${encodeURIComponent(p.curso)}&plano=${encodeURIComponent(PROXIMO[p.tier])}">Fazer upgrade para ${PROXIMO[p.tier]}</a>` : ""}</div>
+      </article>`;
+    };
+    const ativos = s.planos.filter(p => p.ativo).length;
+    return `<section class="me-secao" id="assinatura" style="--c:#d9a300"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Minha assinatura</h2>
+        <p>${ativos ? `${ativos} plano(s) ativo(s)` : "Nenhum plano ativo no momento"} · ${s.creditos} crédito(s) de correção</p></div><a class="me-btn" href="cursos.html">Ver todos os planos</a></div>
+      <div class="me-planos">${s.planos.map(cartao).join("") || `<div class="me-card c12"><div class="me-vazio">Você ainda não tem um plano. <a href="cursos.html">Conhecer os planos</a></div></div>`}
+        ${s.legado ? cartao({ curso: s.legado.curso, tier: s.legado.tier, ativo: s.legado.diasRestantes > 0, dataVencimento: s.legado.dataVencimento, diasRestantes: s.legado.diasRestantes, modulos: ["aulas", "producao", "plataforma"], autoRenovacao: false }) : ""}</div>
+      <div class="me-grade" style="margin-top:14px;">
+        <div class="me-card c4 me-creditos"><h3>Créditos de correção</h3><b class="me-cred-n">${s.creditos}</b><p>Cada redação ou produção oral corrigida por um professor usa 1 crédito.</p><a class="me-btn cheio" style="--c:${COR.rosa}" href="pagamento-correcoes.html">Comprar créditos</a></div>
+        <div class="me-card c8"><h3>Aulas e acessos</h3>
+          ${s.matriculas.length ? `<div class="me-lista">${s.matriculas.map(m => `<div class="me-item" style="--c:${m.status === "confirmada" ? COR.verde : m.status === "pendente_pagamento" ? COR.laranja : "#64748b"}"><span class="marca">${m.tipo === "turma" ? "👥" : "🧑‍🏫"}</span>
+            <span class="txt"><b>${m.tipo === "turma" ? "Aula em turma" + (m.turma ? " · " + esc(m.turma) : "") : "Aulas particulares"}${m.curso ? " · " + esc(m.curso) : ""}</b><small>${m.horarios.length ? esc(m.horarios.join(", ")) : ""}${m.fim ? " · até " + fmtData(m.fim) : ""}</small></span>
+            <span class="me-pill">${{ confirmada: "ativa", concluida: "concluída", pendente_pagamento: "aguardando pagamento" }[m.status] || esc(m.status)}</span></div>`).join("")}</div>` : '<div class="me-vazio" style="padding:10px;">Nenhuma matrícula em aulas. <a href="matricula.html">Conhecer as aulas</a></div>'}
+          ${s.avulsos.length ? `<div class="me-lista" style="margin-top:8px;">${s.avulsos.map(a => `<div class="me-item" style="--c:${a.ativo ? COR.teal : "#64748b"}"><span class="marca">🔑</span><span class="txt"><b>${MODULO_NOME[a.modulo] || esc(a.modulo)}</b><small>${esc(a.origem)} · até ${fmtD(a.dataVencimento)}</small></span><span class="me-pill">${a.ativo ? restam(a.diasRestantes) : "vencido"}</span></div>`).join("")}</div>` : ""}</div>
+      </div></section>`;
+  }
+
+  // Deveres de casa: o que falta fazer e a galeria do que já foi feito (para se orgulhar).
+  const TIPO_DEVER = { questoes: ["❓", "questões"], producao: ["✍️", "produção"], aulas: ["▶️", "aula"], completos: ["🧩", "dever completo"], outros: ["📄", "atividade"] };
+  function secDeveres(d) {
+    const dv = d.deveres || {}, l = dv.lista || [];
+    const fazer = l.filter(x => x.status !== "concluido"), feitos = l.filter(x => x.status === "concluido");
+    const noPrazo = feitos.filter(x => x.noPrazo).length;
+    const dc = dv.deveresCompletos || {};
+    const chips = t => Object.entries(t || {}).map(([k, n]) => `<span>${(TIPO_DEVER[k] || TIPO_DEVER.outros)[0]} ${n}</span>`).join("");
+    const prazo = x => { const n = Math.ceil((new Date(x.dataLimite) - Date.now()) / 864e5); return n > 1 ? `faltam ${n} dias` : n === 1 ? "termina amanhã" : n === 0 ? "termina hoje" : `atrasado há ${-n} dia(s)`; };
+    const medalha = x => x.noPrazo ? (x.feitas === x.total ? "🏆" : "🥇") : "🎖️";
+    return `<section class="me-secao" id="deveres" style="--c:#f59e0b"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Meus deveres de casa</h2>
+        <p>${l.length} dever(es) · ${feitos.length} concluído(s) · ${fazer.length} para fazer</p></div><a class="me-btn" href="meus-deveres.html">Ver todos</a></div>
+      <div class="me-conquistas">
+        <div class="me-conq" style="--c:#f59e0b"><span>🏆</span><b>${feitos.length}</b><small>deveres concluídos</small></div>
+        <div class="me-conq" style="--c:${COR.verde}"><span>✅</span><b>${dv.atividadesEntregues || 0}</b><small>atividades entregues</small></div>
+        <div class="me-conq" style="--c:${COR.azul}"><span>⏰</span><b>${feitos.length ? Math.round(noPrazo / feitos.length * 100) + "%" : "—"}</b><small>entregues no prazo</small></div>
+        <div class="me-conq" style="--c:${COR.anil}"><span>🧩</span><b>${dc.media != null ? dc.media + "%" : "—"}</b><small>média nos deveres completos${dc.feitos ? " (" + dc.feitos + ")" : ""}</small></div>
+      </div>
+      <div class="me-grade" style="margin-top:14px;">
+        <div class="me-card c5"><h3>Para fazer <small>${fazer.length}</small></h3>${fazer.length ? `<div class="me-lista">${fazer.map(x => `<a class="me-dever ${x.status}" href="dever.html?id=${esc(x.id)}" target="_blank" rel="noopener">
+            <div class="me-dever-cab"><b>${esc(x.titulo)}</b><span class="me-pill" style="--c:${x.status === "atrasado" ? COR.vermelho : COR.laranja}">${prazo(x)}</span></div>
+            <div class="me-dever-tipos">${chips(x.tipos)}${x.curso ? `<span>🎓 ${esc(x.curso)}</span>` : ""}</div>
+            <div class="me-dever-barra"><i style="width:${x.total ? Math.round(x.feitas / x.total * 100) : 0}%"></i></div><small>${x.feitas} de ${x.total} feita(s) · fazer agora ↗</small></a>`).join("")}</div>`
+          : '<div class="me-vazio">Nada pendente. Você está em dia! 🎉</div>'}</div>
+        <div class="me-card c7"><h3>Galeria do que você já fez <small>${feitos.length}</small></h3>${feitos.length ? `<div class="me-trofeus">${feitos.map(x => `<a class="me-trofeu" href="dever.html?id=${esc(x.id)}" target="_blank" rel="noopener" title="Rever este dever">
+            <span class="medalha">${medalha(x)}</span><b>${esc(x.titulo)}</b><small>concluído em ${fmtData(x.concluidoEm)}${x.noPrazo ? " · no prazo" : ""}</small><div class="me-dever-tipos">${chips(x.tipos)}</div></a>`).join("")}</div>`
+          : '<div class="me-vazio">Quando você concluir um dever, ele ganha uma medalha aqui. 🏅</div>'}</div>
       </div></section>`;
   }
 
@@ -269,11 +363,12 @@
 
   // ---------------- montagem ----------------
   function montar(d) {
-    const nav = [["geral", "Visão geral", COR.roxo], ["questoes", "Questões", COR.azul], ["erros", "Caderno de erros", COR.vermelho], ["revisao", "Caderno de Revisão", COR.roxo], ["producoes", "Produções", COR.rosa], ["tarefas", "Tarefas do professor", COR.anil],
+    const ehEquipe = ["admin", "professor"].includes(d.aluno.papel);
+    const nav = [...(ehEquipe ? [["equipe", "Painel da equipe", "#1c2b3a"]] : []), ["geral", "Visão geral", COR.roxo], ["assinatura", "Assinatura", "#d9a300"], ["deveres", "Deveres", "#f59e0b"], ["questoes", "Questões", COR.azul], ["erros", "Caderno de erros", COR.vermelho], ["revisao", "Caderno de Revisão", COR.roxo], ["producoes", "Produções", COR.rosa], ["tarefas", "Tarefas do professor", COR.anil],
       ["simulados", "Simulados", COR.laranja], ["aulas", "Aulas", COR.verde], ["favoritos", "Favoritos", COR.rosa], ["rotina", "Rotina", COR.teal]];
     raiz.innerHTML = heroi(d) + kpis(d) +
-      `<nav class="me-nav" aria-label="Seções do Meu espaço">${nav.map(([id, n, c]) => `<a href="#${id}" style="--c:${c}" data-sec="${id}">${n}</a>`).join("")}</nav>` +
-      visaoGeral(d) + secQuestoes(d) + secErros(d) + secRevisao(d) + secProducoes(d) + secTarefas(d) + secSimulados(d) + secAulas(d) + secFavoritos(d) + secRotina(d);
+      `<nav class="me-nav" aria-label="Seções do Meu Espaço">${nav.map(([id, n, c]) => `<a href="#${id}" style="--c:${c}" data-sec="${id}">${n}</a>`).join("")}</nav>` +
+      secEquipe(d) + visaoGeral(d) + secAssinatura(d) + secDeveres(d) + secQuestoes(d) + secErros(d) + secRevisao(d) + secProducoes(d) + secTarefas(d) + secSimulados(d) + secAulas(d) + secFavoritos(d) + secRotina(d);
     desenharErros(d);
     // barras animadas
     requestAnimationFrame(() => raiz.querySelectorAll("[data-w]").forEach(b => { b.style.width = b.dataset.w + "%"; }));

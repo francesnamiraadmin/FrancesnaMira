@@ -20,6 +20,10 @@ const DeverSemanalSchema = new mongoose.Schema({
   // pendentes — decisão do admin por dever, não uma regra global do sistema.
   permiteConclusaoManual: { type: Boolean, default: false },
   atividades: [criarAtividadeSchema(true)],
+  // Criar Dever: curso a que o dever se orienta e o lote (o mesmo dever enviado a vários alunos,
+  // editado de uma vez só pela Gestão de Alunos).
+  curso: { type: String, default: null },
+  loteId: { type: mongoose.Schema.Types.ObjectId, default: null, index: true },
   concluidoEm: { type: Date },
   criadoEm: { type: Date, default: Date.now }
 });

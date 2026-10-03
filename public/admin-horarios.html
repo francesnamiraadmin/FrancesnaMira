@@ -162,6 +162,17 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .ha-nome.turma .ha-txt { color: var(--ha-turma-nome); text-transform: uppercase; letter-spacing: .03em; font-size: .8rem; }
 .ha-nome.turma small { font-weight: 600; opacity: .75; text-transform: none; letter-spacing: 0; }
 .ha-nome.manual .ha-txt { font-style: italic; }
+.ha-vinc { border: 0; background: none; padding: 0; cursor: pointer; font-size: .72rem; line-height: 1; opacity: .35; }
+.ha-vinc.on { opacity: 1; }
+.ha-cel:hover .ha-vinc { opacity: 1; }
+.ha-conta { position: relative; }
+.ha-conta input { width: 100%; box-sizing: border-box; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--cinza-300, #d1d5db); font: inherit; background: var(--branco, #fff); color: inherit; }
+.ha-conta-lista { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 30; background: var(--branco, #fff); border: 1px solid var(--cinza-200, #e5e7eb); border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,.14); max-height: 240px; overflow: auto; }
+.ha-conta-lista button { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 8px 12px; cursor: pointer; font: inherit; color: inherit; }
+.ha-conta-lista button:hover, .ha-conta-lista button:focus-visible { background: var(--azul-claro, #e8f0fe); }
+.ha-conta-lista small { display: block; opacity: .7; font-size: .76rem; }
+.ha-conta-sel { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 6px; padding: 8px 12px; border-radius: 12px; background: var(--azul-claro, #e8f0fe); font-size: .86rem; }
+.ha-conta-sel button { border: 0; background: none; cursor: pointer; font-size: 1rem; color: inherit; }
 .ha-x { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; border-radius: 50%; border: 0; background: rgba(255,255,255,.75);
   color: var(--ha-nome); font-size: 13px; font-weight: 700; line-height: 1; cursor: pointer; opacity: 0; transition: opacity .15s; }
 .ha-cel:hover .ha-x, .ha-x:focus-visible { opacity: 1; }
@@ -308,26 +319,23 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
   <section class="secao" data-secao="registro" hidden>
     <div class="card ra">
       <div class="card-head">
-        <div><h2>Registro de Aulas</h2><p class="campo-hint" style="margin-top:4px;">Todas as aulas particulares da grade, dia a dia: se aconteceram, faltas, justificativas e atestados.</p></div>
+        <div><h2>Registro de Aulas</h2><p class="campo-hint" style="margin-top:4px;">Calendário das aulas particulares: cada dia mostra quantas aulas teve. Clique no dia para ver todas as aulas dele, se aconteceram, faltas, justificativas e atestados.</p></div>
         <button class="btn pequeno" id="raNovaAvulsa" type="button">+ Aula avulsa / reposição</button>
       </div>
       <div class="ra-filtros">
         <div class="ra-periodo">
-          <button type="button" class="ra-nav" id="raAntes" aria-label="Período anterior">‹</button>
-          <div class="periodo-tabs" style="margin:0;" id="raAtalhos">
-            <button type="button" class="periodo-tab active" data-ra-periodo="semana">Esta semana</button>
-            <button type="button" class="periodo-tab" data-ra-periodo="mes">Este mês</button>
-            <button type="button" class="periodo-tab" data-ra-periodo="30">Últimos 30 dias</button>
-          </div>
-          <button type="button" class="ra-nav" id="raDepois" aria-label="Próximo período">›</button>
-          <span class="ra-datas"><input type="date" id="raDe" aria-label="De"> até <input type="date" id="raAte" aria-label="Até"></span>
+          <button type="button" class="ra-nav" id="raAntes" aria-label="Mês anterior">‹</button>
+          <h3 class="ra-mes" id="raMes" aria-live="polite"></h3>
+          <button type="button" class="ra-nav" id="raDepois" aria-label="Próximo mês">›</button>
+          <button type="button" class="btn secundario pequeno" id="raHoje">Hoje</button>
+          <input type="hidden" id="raDe"><input type="hidden" id="raAte">
         </div>
         <div class="ra-periodo">
-          <select id="raAluno" aria-label="Aluno"><option value="">Todos os alunos</option></select>
+          <select id="raAluno" aria-label="Aluno"><option value="">Todas as pessoas</option></select>
           <select id="raEstado" aria-label="Estado"><option value="">Todos os estados</option></select>
           <input type="search" id="raBusca" placeholder="Buscar aluno ou anotação" aria-label="Buscar">
           <div class="periodo-tabs" style="margin:0;" id="raVisao">
-            <button type="button" class="periodo-tab active" data-ra-visao="dias">Linha do tempo</button>
+            <button type="button" class="periodo-tab active" data-ra-visao="dias">Calendário</button>
             <button type="button" class="periodo-tab" data-ra-visao="alunos">Por aluno</button>
           </div>
         </div>
@@ -367,11 +375,17 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 <div class="modal-overlay" id="haModal">
   <div class="modal-box" style="max-width:440px;">
     <h3 id="haModalTitulo">Colocar um nome</h3>
-    <div class="campo">
+    <div class="campo" id="haNomeCampo">
       <label for="haNome">Nome</label>
       <input type="text" id="haNome" maxlength="120" placeholder="Ex.: Maria Souza ou Turma - TCF">
     </div>
     <div class="campo">
+      <label for="haConta">Vincular a uma conta do site <small style="font-weight:400;">(opcional)</small></label>
+      <div class="ha-conta"><input type="search" id="haConta" placeholder="Buscar a conta por nome ou e-mail" autocomplete="off"><div id="haContaLista" class="ha-conta-lista" hidden></div></div>
+      <div id="haContaSel" class="ha-conta-sel" hidden></div>
+      <p class="campo-hint" style="margin-top:4px;">Vinculado a uma conta, no Registro de Aulas este nome aparece junto com os outros horários da mesma pessoa, e ela vê as aulas no Meu Espaço.</p>
+    </div>
+    <div class="campo" id="haModalidadeCampo">
       <label for="haModalidade">Tipo de aula</label>
       <select id="haModalidade"><option value="particular">Aula particular</option><option value="turma">Aula em turma</option></select>
     </div>

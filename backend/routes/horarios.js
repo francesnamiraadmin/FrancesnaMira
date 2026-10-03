@@ -98,6 +98,8 @@ router.get("/admin/matriculas", exigirAuth, exigirAdmin, async (req, res) => {
 // para as aulas em turma (e as turmas do sistema antigo), mais os nomes colocados ou retirados à mão.
 const HorarioAtualAjuste = require("../models/horarioAtualAjuste");
 const Turma = require("../models/turma");
+const User = require("../models/user");
+const { escaparRegex } = require("../middleware/seguranca");
 const HORA_OK = /^([01]\d|2[0-3]):[0-5]\d$/;
 const DIAS_TEXTO = [["dom", 0], ["seg", 1], ["ter", 2], ["qua", 3], ["qui", 4], ["sex", 5], ["sab", 6], ["sáb", 6],
   ["sun", 0], ["mon", 1], ["tue", 2], ["wed", 3], ["thu", 4], ["fri", 5], ["sat", 6]];
@@ -144,8 +146,12 @@ router.get("/admin/atuais", exigirAuth, exigirAdmin, async (req, res) => {
         por(dia, hora, { tipo: "turma", texto: "Turma - " + (t.tipoProva || t.nivel || t.nome), modalidade: "turma", curso: t.tipoProva || t.nivel || "", detalhe: t.nome, chave: "T:" + t._id }));
     });
     // nomes colocados à mão
-    ajustes.filter(a => a.tipo === "manual").forEach(a =>
-      celula(a.diaSemana, a.horaInicio).itens.push({ tipo: "manual", texto: a.nome, modalidade: a.modalidade, ajusteId: String(a._id), chave: "a:" + a._id }));
+    const contas = new Map((await User.find({ _id: { $in: ajustes.filter(a => a.alunoId).map(a => a.alunoId) } }).select("nome email").lean()).map(u => [String(u._id), u]));
+    ajustes.filter(a => a.tipo === "manual").forEach(a => {
+      const c = a.alunoId && contas.get(String(a.alunoId));
+      celula(a.diaSemana, a.horaInicio).itens.push({ tipo: "manual", texto: a.nome, modalidade: a.modalidade, ajusteId: String(a._id), chave: "a:" + a._id,
+        conta: c ? { id: String(c._id), nome: c.nome || "", email: c.email } : null });
+    });
     res.json({ atualizadoEm: agora, celulas: Object.values(celulas), retirados });
   } catch (err) {
     console.error(err);
@@ -156,15 +162,47 @@ router.get("/admin/atuais", exigirAuth, exigirAdmin, async (req, res) => {
 // Colocar um nome num horário.
 router.post("/admin/atuais/manual", exigirAuth, exigirAdmin, async (req, res) => {
   try {
-    const { diaSemana, horaInicio, nome, modalidade } = req.body || {};
+    const { diaSemana, horaInicio, modalidade, alunoId } = req.body || {};
     const dia = Number(diaSemana);
-    if (!(dia >= 0 && dia <= 6) || !HORA_OK.test(String(horaInicio)) || !String(nome || "").trim()) return res.status(400).json({ msg: "Informe o dia, o horário e o nome." });
-    const a = await HorarioAtualAjuste.create({ tipo: "manual", diaSemana: dia, horaInicio, nome: String(nome).trim().slice(0, 120), modalidade: modalidade === "turma" ? "turma" : "particular", criadoPor: req.userId });
+    // vínculo opcional com uma conta do site; sem nome escrito, vale o nome da conta
+    const conta = alunoId ? await contaParaVinculo(alunoId) : null;
+    if (alunoId && !conta) return res.status(400).json({ msg: "Conta não encontrada." });
+    const nome = String(req.body?.nome || "").trim() || conta?.nome || conta?.email || "";
+    if (!(dia >= 0 && dia <= 6) || !HORA_OK.test(String(horaInicio)) || !nome) return res.status(400).json({ msg: "Informe o dia, o horário e o nome." });
+    const a = await HorarioAtualAjuste.create({ tipo: "manual", diaSemana: dia, horaInicio, nome: nome.slice(0, 120), modalidade: modalidade === "turma" ? "turma" : "particular", alunoId: conta?._id || null, criadoPor: req.userId });
     res.json({ ok: true, id: a._id });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
   }
+});
+
+async function contaParaVinculo(id) {
+  if (!/^[a-f0-9]{24}$/i.test(String(id))) return null;
+  return User.findById(id).select("nome email").lean();
+}
+// Contas do site para vincular a um nome dos Horários Atuais (busca por nome ou e-mail).
+router.get("/admin/atuais/contas", exigirAuth, exigirAdmin, async (req, res) => {
+  try {
+    const q = String(req.query.q || "").trim().slice(0, 80);
+    if (q.length < 2) return res.json([]);
+    const rx = { $regex: escaparRegex(q), $options: "i" };
+    const us = await User.find({ $or: [{ nome: rx }, { email: rx }] }).select("nome email role").sort({ nome: 1 }).limit(8).lean();
+    res.json(us.map(u => ({ id: String(u._id), nome: u.nome || "", email: u.email, role: u.role })));
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+// Vincular (ou desvincular, com alunoId vazio) um nome já colocado à mão a uma conta do site.
+router.put("/admin/atuais/ajuste/:id/vinculo", exigirAuth, exigirAdmin, async (req, res) => {
+  try {
+    if (!/^[a-f0-9]{24}$/i.test(req.params.id)) return res.status(400).json({ msg: "Ajuste inválido." });
+    const conta = req.body?.alunoId ? await contaParaVinculo(req.body.alunoId) : null;
+    if (req.body?.alunoId && !conta) return res.status(400).json({ msg: "Conta não encontrada." });
+    const a = await HorarioAtualAjuste.findOneAndUpdate({ _id: req.params.id, tipo: "manual" }, { alunoId: conta?._id || null }, { new: true });
+    if (!a) return res.status(404).json({ msg: "Nome não encontrado." });
+    // aulas já registradas deste nome passam para a conta (aparecem no Meu Espaço do aluno)
+    await require("../models/registroAula").updateMany({ chave: "a:" + a._id }, { alunoId: conta?._id || null });
+    res.json({ ok: true });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
 });
 
 // Retirar da grade um nome que vem de matrícula/turma (a matrícula não muda).

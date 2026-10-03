@@ -65,10 +65,31 @@ router.put("/modulos/:id", async (req, res) => {
   }
 });
 
+// Sem parâmetro: só desativa (some para os alunos, dá para reativar). Com ?definitivo=1: apaga
+// de vez o módulo e as aulas dele, com os arquivos (vídeos, miniaturas, materiais), o progresso
+// dos alunos nessas aulas e os favoritos que apontavam para elas.
 router.delete("/modulos/:id", async (req, res) => {
   try {
-    await Modulo.findByIdAndUpdate(req.params.id, { ativo: false });
-    res.json({ msg: "Módulo desativado." });
+    if (!ehObjectId(req.params.id)) return res.status(400).json({ msg: "Módulo inválido." });
+    if (req.query.definitivo !== "1") {
+      await Modulo.findByIdAndUpdate(req.params.id, { ativo: false });
+      return res.json({ msg: "Módulo desativado." });
+    }
+    const modulo = await Modulo.findById(req.params.id).select("titulo").lean();
+    if (!modulo) return res.status(404).json({ msg: "Módulo não encontrado." });
+    const aulas = await Aula.find({ moduloId: modulo._id }).lean();
+    const ids = aulas.map(a => a._id);
+    aulas.forEach(a => {
+      [a.video && a.video.arquivo, a.thumbnail && a.thumbnail.arquivo, ...(a.materiais || []).map(m => m.arquivo)]
+        .filter(x => x && x.caminho).forEach(x => fs.unlink(x.caminho, () => {}));
+    });
+    await Promise.all([
+      ProgressoAula.deleteMany({ $or: [{ aulaId: { $in: ids } }, { moduloId: modulo._id }] }),
+      User.updateMany({ aulasFavoritas: { $in: ids } }, { $pull: { aulasFavoritas: { $in: ids } } }),
+      Aula.deleteMany({ moduloId: modulo._id })
+    ]);
+    await Modulo.deleteOne({ _id: modulo._id });
+    res.json({ msg: `Módulo « ${modulo.titulo} » apagado com ${ids.length} aula(s).`, aulasApagadas: ids.length });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });

@@ -38,7 +38,9 @@ function mostrarView(nome) {
   document.getElementById('viewAlunos').style.display = nome === 'alunos' ? 'block' : 'none';
   document.getElementById('viewCorrigidas').style.display = nome === 'corrigidas' ? 'block' : 'none';
   document.getElementById('viewAoVivo').style.display = nome === 'aovivo' ? 'block' : 'none';
+  document.getElementById('viewTemas').style.display = nome === 'temas' ? 'block' : 'none';
   document.getElementById('viewCorrecao').style.display = nome === 'correcao' ? 'block' : 'none';
+  if (nome === 'temas') renderTemasAlunos();
   document.getElementById('abasSistema').style.display = nome === 'correcao' ? 'none' : 'flex';
   document.querySelectorAll('#abasSistema .aba').forEach(a => a.classList.toggle('active', a.dataset.aba === nome));
 }
@@ -250,7 +252,7 @@ function renderPainelAluno(a) {
       <button class="btn pequeno" id="addCreditosBtn" type="button">Adicionar</button>
     </div>
     <div class="msg-inline" id="credMsg" style="display:none;"></div>
-    ${window.__eu?.role === 'admin' ? `<button class="btn secundario pequeno" type="button" data-temas-aluno="${a._id}" style="margin-top:12px;">Temas do Ambiente de Produção</button>` : ''}
+    ${window.__eu?.role === 'admin' ? `<button class="btn secundario pequeno" type="button" data-temas-aluno="${a._id}" style="margin-top:12px;">Designar temas ao aluno</button>` : ''}
     <h2 style="margin-top:20px;">Redações e produções (${a.producoes.length})</h2>
     <p style="font-size:.85rem; color:var(--cinza-400); margin-bottom:8px;">${a.producoes.filter(p => ['em_fila', 'em_correcao'].includes(p.status)).length} aguardando correção · ${a.producoes.filter(p => ['corrigido', 'devolvido'].includes(p.status)).length} corrigida(s)
       · <a href="#" data-fila-aluno="${a._id}">ver na fila</a> · <a href="#" data-corr-aluno="${a._id}">ver corrigidas</a></p>
@@ -859,75 +861,123 @@ euPronto.then(() => {
   alvo.after(b);
 });
 
-// ===================== TEMAS DO AMBIENTE DE PRODUÇÃO (admin) =====================
-// O administrador escolhe quais temas cada aluno vê no Ambiente de Produção (por curso/nível).
-// Sem escolha, valem os 20 temas padrão (variedade de eixos e tarefas, os que mais caem na prova).
+// ===================== TEMAS DOS ALUNOS (admin) =====================
+// Aba « Temas dos alunos »: à esquerda os alunos; à direita os temas já liberados para o aluno
+// escolhido (designados pela equipe, os 20 padrão enquanto ninguém mexeu, e os que ele recebeu
+// como dever) e o catálogo do curso. « Designar » libera o tema na hora; « Retirar » tira.
+let temasAlunoAtual = null, temasDados = null;
+const temasFiltro = { tache: '', eixo: '', busca: '', lib: '' };
+function renderTemasAlunos() {
+  const termo = document.getElementById('buscaTemasAluno').value.trim().toLowerCase();
+  const lista = alunos.filter(a => !termo || [a.nome, a.email, ...a.cursos].some(v => String(v || '').toLowerCase().includes(termo)));
+  document.getElementById('listaTemasAlunos').innerHTML = lista.map(a => `
+    <div class="aluno-item ${temasAlunoAtual === a._id ? 'sel' : ''}" data-temas-sel="${a._id}">
+      <div><div class="nome">${esc(a.nome)}</div><div class="email">${esc(a.email)}</div></div>
+      <div class="cursos">${a.cursos.map(c => `<span class="tag exame">${esc(c)}</span>`).join('')}</div>
+    </div>`).join('') || `<div class="vazio-box">${alunos.length ? 'Nenhum aluno encontrado.' : 'Nenhum aluno com o Ambiente de Produção ativo.'}</div>`;
+}
+document.getElementById('buscaTemasAluno').addEventListener('input', renderTemasAlunos);
+document.getElementById('listaTemasAlunos').addEventListener('click', e => {
+  const it = e.target.closest('[data-temas-sel]');
+  if (it) abrirTemasAluno(it.dataset.temasSel);
+});
 async function abrirTemasAluno(alunoId, perfil) {
+  mostrarView('temas');
+  temasAlunoAtual = alunoId;
+  renderTemasAlunos();
+  const ed = document.getElementById('temasEditor');
+  ed.innerHTML = '<div class="vazio-box" style="border:none;">Carregando os temas do aluno…</div>';
   const r = await fetch(`/api/modeles/temas-aluno/${alunoId}${perfil ? '?perfil=' + encodeURIComponent(perfil) : ''}`, { headers: H() });
   const d = await r.json();
-  if (!r.ok) { alert(d.msg || 'Erro ao carregar os temas.'); return; }
-  const sel = new Set(d.selecionados);
-  let filtroTache = '', filtroEixo = '', busca = '', soMarcados = false;
-  const eixos = [...new Map(d.catalogo.map(x => [x.e, x.eixo])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
-  const m = document.createElement('div');
-  m.className = 'ca-modal ca';
-  m.innerHTML = `<div role="dialog" aria-label="Temas do Ambiente de Produção" style="width:min(860px,100%);">
-    <h3>Temas do Ambiente de Produção <button type="button" class="ca-mini" data-f>Fechar ✕</button></h3>
-    <p style="font-size:.86rem; margin:0 0 10px; opacity:.85;"><b>${esc(d.aluno.nome)}</b> · ${esc(d.aluno.email)} · o aluno vê só os temas marcados (mais os que receber como dever). ${d.personalizado ? 'Lista definida pela equipe.' : 'Usando os <b>20 temas padrão</b>.'}</p>
-    <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px;">
-      ${d.perfis.length > 1 ? `<select data-perfil aria-label="Curso / nível">${d.perfis.map(p => `<option value="${esc(p)}" ${p === d.perfil ? 'selected' : ''}>${esc(p === 'TCF' ? 'TCF Canada' : p.replace('-', ' '))}</option>`).join('')}</select>` : `<b>${esc(d.nomePerfil)}</b>`}
-      <select data-ft aria-label="Tarefa"><option value="">Todas as tarefas</option>${d.taches.map(t => `<option value="${t.id}">${esc(t.nome)}</option>`).join('')}</select>
-      <select data-fe aria-label="Eixo"><option value="">Todos os eixos</option>${eixos.map(([k, n]) => `<option value="${esc(k)}">${esc(n)}</option>`).join('')}</select>
-      <input type="search" data-busca placeholder="Buscar tema" style="flex:1; min-width:160px; padding:7px 10px; border-radius:10px; border:1px solid var(--ca-borda);">
-      <label style="font-size:.8rem;"><input type="checkbox" data-so> Só os marcados</label>
-    </div>
-    <div data-lista style="max-height:52vh; overflow:auto; border:1px solid var(--ca-borda); border-radius:12px; padding:6px 10px;"></div>
-    <div class="ca-pop-acoes" style="justify-content:space-between; align-items:center;">
-      <span data-cont style="font-weight:700; font-size:.86rem;"></span>
-      <span><button type="button" class="ca-btn" data-padrao>Usar os 20 padrão</button> <button type="button" class="ca-btn" data-limpar>Desmarcar todos</button> <button type="button" class="ca-btn primario" data-salvar>Salvar temas do aluno</button></span>
-    </div>
-    <p class="msg-inline" data-msg style="display:none;"></p></div>`;
-  document.body.appendChild(m);
-  const $m = s => m.querySelector(s);
-  const desenhar = () => {
-    const l = d.catalogo.filter(x => (!filtroTache || x.tache === filtroTache) && (!filtroEixo || x.e === filtroEixo) && (!soMarcados || sel.has(x.id)) &&
-      (!busca || (x.t + ' ' + x.eixo + ' ' + x.id).toLowerCase().includes(busca)));
-    $m('[data-lista]').innerHTML = d.taches.map(t => {
-      const g = l.filter(x => x.tache === t.id);
-      if (!g.length) return '';
-      return `<h4 style="margin:10px 0 4px; font-size:.86rem;">${esc(t.nome)} <small style="opacity:.6;">(${g.filter(x => sel.has(x.id)).length}/${g.length})</small></h4>` + g.map(x =>
-        `<label style="display:flex; gap:8px; align-items:flex-start; padding:5px 0; border-bottom:1px solid var(--ca-borda); font-size:.84rem; cursor:pointer;">
-          <input type="checkbox" data-id="${esc(x.id)}" ${sel.has(x.id) ? 'checked' : ''} style="margin-top:3px;">
-          <span><b style="font-weight:600;">${esc(x.t)}</b><br><small style="opacity:.7;">${esc(x.eixo)}${d.padrao.includes(x.id) ? ' · padrão' : ''}${x.f > 1 ? ' · caiu ' + x.f + '×' : ''}${x.manual ? ' · modelo escrito da professora' : ''}</small></span></label>`).join('');
-    }).join('') || '<p style="padding:14px; opacity:.7;">Nenhum tema com estes filtros.</p>';
-    $m('[data-cont]').textContent = `${sel.size} tema(s) marcado(s)`;
-  };
-  desenhar();
-  m.addEventListener('change', e => {
-    if (e.target.matches('[data-id]')) { if (e.target.checked) sel.add(e.target.dataset.id); else sel.delete(e.target.dataset.id); $m('[data-cont]').textContent = `${sel.size} tema(s) marcado(s)`; }
-    if (e.target.matches('[data-ft]')) { filtroTache = e.target.value; desenhar(); }
-    if (e.target.matches('[data-fe]')) { filtroEixo = e.target.value; desenhar(); }
-    if (e.target.matches('[data-so]')) { soMarcados = e.target.checked; desenhar(); }
-    if (e.target.matches('[data-perfil]')) { m.remove(); abrirTemasAluno(alunoId, e.target.value); }
-  });
-  $m('[data-busca]').addEventListener('input', e => { busca = e.target.value.toLowerCase().trim(); desenhar(); });
-  const salvar = async corpo => {
-    const r2 = await fetch(`/api/modeles/temas-aluno/${alunoId}`, { method: 'PUT', headers: HJ(), body: JSON.stringify({ perfil: d.perfil, ...corpo }) });
-    const out = await r2.json();
-    const msg = $m('[data-msg]');
-    msg.style.display = 'block'; msg.className = 'msg-inline ' + (r2.ok ? 'sucesso' : 'erro');
-    msg.textContent = r2.ok ? (out.personalizado ? `Salvo: o aluno vê ${out.total} tema(s).` : `Voltou aos ${out.total} temas padrão.`) : (out.msg || 'Erro ao salvar.');
-  };
-  m.addEventListener('click', e => {
-    if (e.target === m || e.target.closest('[data-f]')) { m.remove(); return; }
-    if (e.target.closest('[data-limpar]')) { sel.clear(); desenhar(); return; }
-    if (e.target.closest('[data-padrao]')) { sel.clear(); d.padrao.forEach(id => sel.add(id)); desenhar(); salvar({ padrao: true }); return; }
-    if (e.target.closest('[data-salvar]')) {
-      if (!sel.size) { const msg = $m('[data-msg]'); msg.style.display = 'block'; msg.className = 'msg-inline erro'; msg.textContent = 'Marque pelo menos um tema.'; return; }
-      salvar({ sujets: d.catalogo.filter(x => sel.has(x.id)).map(x => ({ tache: x.tache, id: x.id })) });
-    }
-  });
+  if (!r.ok) { ed.innerHTML = `<div class="vazio-box" style="border:none;">${esc(d.msg || 'Erro ao carregar os temas.')}</div>`; return; }
+  temasDados = d;
+  desenharTemasAluno();
 }
+function filtrarCatalogo(d, sel) {
+  return d.catalogo.filter(x => !sel.has(x.id) && (!temasFiltro.tache || x.tache === temasFiltro.tache) && (!temasFiltro.eixo || x.e === temasFiltro.eixo) &&
+    (!temasFiltro.busca || (x.t + ' ' + x.eixo + ' ' + x.id).toLowerCase().includes(temasFiltro.busca)));
+}
+function desenharTemasAluno(aviso) {
+  const d = temasDados, sel = new Set(d.selecionados), dever = new Set(d.viaDever || []);
+  const eixos = [...new Map(d.catalogo.map(x => [x.e, x.eixo])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
+  const liberados = d.catalogo.filter(x => sel.has(x.id) || dever.has(x.id));
+  const linha = (x, botao) => `<div class="tm-tema ${sel.has(x.id) || dever.has(x.id) ? 'liberado' : ''}"><span><b>${esc(x.t)}</b>
+      <small>${esc(x.eixo)}${d.padrao.includes(x.id) ? ' · padrão' : ''}${x.f > 1 ? ' · caiu ' + x.f + '×' : ''}${x.manual ? ' · modelo da professora' : ''}${dever.has(x.id) ? ' <span class="tm-selo">dever</span>' : ''}</small></span>${botao}</div>`;
+  const porTarefa = (l, fn) => d.taches.map(t => { const g = l.filter(x => x.tache === t.id); return g.length ? `<div class="tm-grupo">${esc(t.nome)} (${g.length})</div>` + g.map(fn).join('') : ''; }).join('');
+  const libFiltrados = liberados.filter(x => !temasFiltro.lib || (x.t + ' ' + x.eixo).toLowerCase().includes(temasFiltro.lib));
+  const cat = filtrarCatalogo(d, sel);
+  const filtrando = temasFiltro.tache || temasFiltro.eixo || temasFiltro.busca;
+  document.getElementById('temasEditor').innerHTML = `
+    <div class="tm-cab"><div><h2 style="margin:0;">${esc(d.aluno.nome)}</h2><small style="color:var(--cinza-400);">${esc(d.aluno.email)} · ${d.personalizado ? 'lista definida pela equipe' + (d.atualizadoEm ? ' em ' + fmtData(d.atualizadoEm) : '') : 'usando os ' + d.padrao.length + ' temas padrão'}</small></div>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        ${d.perfis.length > 1 ? `<select data-tm-perfil aria-label="Curso / nível">${d.perfis.map(p => `<option value="${esc(p)}" ${p === d.perfil ? 'selected' : ''}>${esc(p === 'TCF' ? 'TCF Canada' : p.replace('-', ' '))}</option>`).join('')}</select>` : `<span class="tag exame">${esc(d.nomePerfil || d.perfil)}</span>`}
+        ${d.personalizado ? '<button class="btn secundario pequeno" type="button" data-tm-padrao>Voltar aos 20 padrão</button>' : ''}
+      </div></div>
+    <p class="msg-inline ${aviso && aviso.erro ? 'erro' : 'sucesso'}" id="temasMsg" style="display:${aviso ? 'block' : 'none'};">${aviso ? esc(aviso.texto) : ''}</p>
+    <div class="tm-cols">
+      <div class="tm-col"><h3>Temas liberados para o aluno <span class="tag status" id="tmTotalLiberados">${liberados.length}</span></h3>
+        <div class="tm-filtros"><input type="search" data-tm-lib placeholder="Buscar nos liberados" value="${esc(temasFiltro.lib)}"></div>
+        <div class="tm-lista" id="tmLiberados">${porTarefa(libFiltrados, x => linha(x, sel.has(x.id) ? `<button class="btn secundario pequeno" type="button" data-tm-retirar="${esc(x.id)}" data-tache="${x.tache}">Retirar</button>` : ''))
+          || '<p style="padding:10px; opacity:.7;">Nenhum tema liberado.</p>'}</div></div>
+      <div class="tm-col"><h3>Designar temas <small style="font-weight:400; color:var(--cinza-400);">${cat.length} disponível(is)</small></h3>
+        <div class="tm-filtros">
+          <select data-tm-ft aria-label="Tarefa"><option value="">Todas as tarefas</option>${d.taches.map(t => `<option value="${t.id}" ${temasFiltro.tache === t.id ? 'selected' : ''}>${esc(t.nome)}</option>`).join('')}</select>
+          <select data-tm-fe aria-label="Eixo"><option value="">Todos os eixos</option>${eixos.map(([k, n]) => `<option value="${esc(k)}" ${temasFiltro.eixo === k ? 'selected' : ''}>${esc(n)}</option>`).join('')}</select>
+          <input type="search" data-tm-busca placeholder="Buscar tema" value="${esc(temasFiltro.busca)}">
+        </div>
+        ${cat.length && cat.length <= 60 && filtrando ? `<button class="btn pequeno" type="button" data-tm-todos style="margin-bottom:6px;">Designar os ${cat.length} temas filtrados</button>` : ''}
+        <div class="tm-lista" id="tmCatalogo">${porTarefa(cat.slice(0, 400), x => linha(x, `<button class="btn pequeno" type="button" data-tm-designar="${esc(x.id)}" data-tache="${x.tache}">Designar</button>`)) || '<p style="padding:10px; opacity:.7;">Nenhum tema com estes filtros.</p>'}</div></div>
+    </div>`;
+}
+async function designarTemas(sujets, acao) {
+  const d = temasDados;
+  const r = await fetch(`/api/modeles/temas-aluno/${temasAlunoAtual}/designar`, { method: 'POST', headers: HJ(), body: JSON.stringify({ perfil: d.perfil, sujets, acao }) });
+  const out = await r.json();
+  if (!r.ok) { desenharTemasAluno({ erro: true, texto: out.msg || 'Erro ao salvar.' }); return; }
+  d.selecionados = out.selecionados; d.personalizado = true; d.atualizadoEm = new Date();
+  desenharTemasAluno({ texto: acao === 'retirar' ? 'Tema retirado: o aluno não o vê mais.' : `${out.novos} tema(s) liberado(s) para ${d.aluno.nome}. O aluno foi avisado no Meu Espaço.` });
+}
+document.getElementById('temasEditor').addEventListener('click', async e => {
+  const b = e.target.closest('[data-tm-designar],[data-tm-retirar],[data-tm-todos],[data-tm-padrao]');
+  if (!b || !temasDados) return;
+  b.disabled = true;
+  if (b.dataset.tmDesignar) return designarTemas([{ tache: b.dataset.tache, id: b.dataset.tmDesignar }], 'designar');
+  if (b.dataset.tmRetirar) return designarTemas([{ tache: b.dataset.tache, id: b.dataset.tmRetirar }], 'retirar');
+  if (b.hasAttribute('data-tm-todos')) return designarTemas(filtrarCatalogo(temasDados, new Set(temasDados.selecionados)).map(x => ({ tache: x.tache, id: x.id })), 'designar');
+  if (b.hasAttribute('data-tm-padrao')) {
+    if (!(await confirmar('Voltar aos 20 temas padrão?', 'A lista definida para este aluno será substituída pelos 20 temas padrão.', 'Voltar ao padrão'))) { b.disabled = false; return; }
+    const r = await fetch(`/api/modeles/temas-aluno/${temasAlunoAtual}`, { method: 'PUT', headers: HJ(), body: JSON.stringify({ perfil: temasDados.perfil, padrao: true }) });
+    if (r.ok) await abrirTemasAluno(temasAlunoAtual, temasDados.perfil); else b.disabled = false;
+  }
+});
+document.getElementById('temasEditor').addEventListener('change', e => {
+  if (e.target.matches('[data-tm-perfil]')) { abrirTemasAluno(temasAlunoAtual, e.target.value); return; }
+  if (e.target.matches('[data-tm-ft]')) { temasFiltro.tache = e.target.value; desenharTemasAluno(); }
+  if (e.target.matches('[data-tm-fe]')) { temasFiltro.eixo = e.target.value; desenharTemasAluno(); }
+});
+document.getElementById('temasEditor').addEventListener('input', e => {
+  const campo = e.target.matches('[data-tm-busca]') ? 'busca' : e.target.matches('[data-tm-lib]') ? 'lib' : null;
+  if (!campo) return;
+  temasFiltro[campo] = e.target.value.toLowerCase().trim();
+  const seletor = campo === 'busca' ? '[data-tm-busca]' : '[data-tm-lib]', pos = e.target.selectionStart;
+  desenharTemasAluno();
+  const novo = document.querySelector('#temasEditor ' + seletor);
+  novo.focus(); try { novo.setSelectionRange(pos, pos); } catch (x) { /* ok */ }
+});
+euPronto.then(() => {
+  if (window.__eu?.role !== 'admin') return;
+  document.getElementById('abaTemas').hidden = false;
+  if (location.hash === '#temas') mostrarView('temas');
+});
+
+// ===================== AO VIVO: CORREÇÃO × SIMULADOS =====================
+function mostrarSubVivo(sub) {
+  document.querySelectorAll('#aoVivoAbas [data-sub-vivo]').forEach(b => { const on = b.dataset.subVivo === sub; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
+  document.getElementById('aoVivoCorrecao').hidden = sub !== 'correcao';
+  document.getElementById('aoVivoSimulados').hidden = sub !== 'simulados';
+  if (sub === 'simulados') QuadroEmbutido.criar(document.getElementById('aoVivoSimulados'), 'admin-simulados.html', { titulo: 'Simulados ao vivo' });
+}
+document.getElementById('aoVivoAbas').addEventListener('click', e => { const b = e.target.closest('[data-sub-vivo]'); if (b) mostrarSubVivo(b.dataset.subVivo); });
 
 // ===================== INIT =====================
 carregarStats();
@@ -936,6 +986,7 @@ carregarAlunos();
 if (location.hash === '#alunos') mostrarView('alunos');
 if (location.hash === '#corrigidas') { mostrarView('corrigidas'); carregarCorrigidas(); }
 if (location.hash === '#aovivo') mostrarView('aovivo');
+if (location.hash === '#simulados') { mostrarView('aovivo'); mostrarSubVivo('simulados'); }
 const idPedido = new URLSearchParams(location.search).get('producao');
 if (idPedido) {
   const assumir = new URLSearchParams(location.search).get('assumir') === '1';

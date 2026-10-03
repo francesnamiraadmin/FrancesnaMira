@@ -24,8 +24,7 @@
     plataforma: ["Excellence"]
   };
 
-  // Ordem da navbar: Aulas Especializadas → Plataforma de Questões → Ambiente de Produção; o Meu espaço
-  // fica numa linha própria, logo abaixo de Plataforma de Questões (ver [data-nav] em app-shell.css).
+  // Ordem da navbar: Aulas Especializadas → Plataforma de Questões → Ambiente de Produção → Meu Espaço.
   const PRODUTOS_NAV = [
     { chave: "aulasEspecializadas", nome: "Aulas Especializadas", href: "aulas-hub.html", curso: "Aulas Especializadas Online" },
     {
@@ -61,7 +60,7 @@
     },
     {
       // Painel pessoal do aluno (sempre liberado): deveres, inscrições, matrículas e o resumo de cada módulo.
-      chave: "meuEspaco", nome: "Meu espaço", href: "meu-espaco.html", livre: true,
+      chave: "meuEspaco", nome: "Meu Espaço", href: "meu-espaco.html", livre: true,
       submenu: [
         { nome: "Visão geral", href: "meu-espaco.html", icone: "img/icones/profile.svg" },
         { nome: "Estatísticas", href: "meu-espaco.html#questoes", icone: "img/icones/estatisticas.svg" },
@@ -73,7 +72,7 @@
         { nome: "Minhas inscrições", href: "minhas-inscricoes.html", icone: "img/icones/document.svg" },
         { nome: "Minhas matrículas", href: "minhas-matriculas.html", icone: "img/icones/calendar.svg" }
       ],
-      paginas: ["meu-espaco.html", "caderno-revisao.html", "meus-deveres.html", "minhas-inscricoes.html", "minhas-matriculas.html"]
+      paginas: ["meu-espaco.html", "caderno-revisao.html", "meus-deveres.html", "dever.html", "minhas-inscricoes.html", "minhas-matriculas.html"]
     }
   ];
 
@@ -258,18 +257,41 @@
 
     const primeiroNome = (dadosConta.nome || "").split(" ")[0] || "Aluno";
     const foto = dadosConta.perfil?.foto || AVATAR_PADRAO;
-    const plano = dadosConta.plano || { ativo: false };
+    // Planos ativos: o modelo novo (um plano por curso, planos[]) e o campo antigo (plano), para
+    // quem ainda não migrou. O seletor mostra o melhor deles; o menu lista todos com a validade.
+    const agora = Date.now();
+    const ORDEM_TIER = { Excellence: 3, "Avancé": 2, Essentiel: 1 };
+    const vigente = d => !d || new Date(d).getTime() > agora;
+    const ativos = (dadosConta.planos || []).map(p => {
+      const venc = p.dataVencimento || p.expiraEm;
+      const pack = !!(p.packPrestige && p.packPrestige.ativo && vigente(p.packPrestige.dataVencimento));
+      const tierAtivo = !!(p.ativo && p.tier && vigente(venc));
+      if (!tierAtivo && !pack) return null;
+      return { curso: p.courseType, tier: tierAtivo ? p.tier : null, pack, vencimento: tierAtivo ? venc : p.packPrestige.dataVencimento };
+    }).filter(Boolean);
+    const antigo = dadosConta.plano;
+    if (antigo && antigo.ativo && antigo.tier && vigente(antigo.dataVencimento) && !ativos.some(a => a.curso === antigo.curso && a.tier === antigo.tier)) {
+      ativos.push({ curso: antigo.curso || "", tier: antigo.tier, pack: false, vencimento: antigo.dataVencimento });
+    }
+    ativos.sort((a, b) => (ORDEM_TIER[b.tier] || 0) - (ORDEM_TIER[a.tier] || 0) || new Date(b.vencimento || 0) - new Date(a.vencimento || 0));
+    const plano = ativos[0] ? { ativo: true, tier: ativos[0].tier, curso: ativos[0].curso, pack: ativos[0].pack } : { ativo: false };
 
     const linksProdutos = PRODUTOS_NAV.map(montarLinkProduto).join("");
 
-    let planoDropdown = `<a href="minha-conta.html">Minha Conta</a><a href="minhas-inscricoes.html">Minhas Inscrições</a>`;
+    const fmtVenc = d => d ? new Date(d).toLocaleDateString("pt-BR") : "";
+    let planoDropdown = ativos.length
+      ? ativos.map(a => `<a href="meu-espaco.html#assinatura" class="app-plano-item"><b>${a.curso ? a.curso + " · " : ""}${a.tier || "Pack Prestige"}${a.tier && a.pack ? " + Pack Prestige" : ""}</b>${a.vencimento ? `<small>até ${fmtVenc(a.vencimento)}</small>` : ""}</a>`).join("") + "<hr>"
+      : "";
+    planoDropdown += `<a href="meu-espaco.html#assinatura">Minha assinatura</a><a href="minha-conta.html">Minha Conta</a><a href="minhas-inscricoes.html">Minhas Inscrições</a>`;
     if (plano.ativo && plano.tier && PROXIMO_TIER[plano.tier]) {
       planoDropdown += `<hr><a href="matricula.html?curso=${encodeURIComponent(plano.curso || "")}&plano=${encodeURIComponent(PROXIMO_TIER[plano.tier])}">Faça um upgrade</a>`;
     } else if (!plano.ativo) {
       planoDropdown += `<hr><a href="cursos.html">Ver planos disponíveis</a>`;
     }
 
-    const tierLabel = plano.ativo && plano.tier ? "Plano " + plano.tier : "Nenhum plano";
+    const tierLabel = plano.ativo
+      ? (plano.tier ? "Plano " + plano.tier : "Pack Prestige") + (plano.curso ? " · " + plano.curso : "") + (ativos.length > 1 ? ` +${ativos.length - 1}` : "")
+      : "Nenhum plano";
     const estiloTier = (plano.ativo && ESTILOS_PLANO[plano.tier]) || { background: "var(--glass-bg)", border: "var(--glass-border-strong)", color: "var(--text)" };
 
     root.innerHTML = `

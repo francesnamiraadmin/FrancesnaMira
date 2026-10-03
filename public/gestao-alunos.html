@@ -9,6 +9,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/gestao-dever.css">
 
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -289,7 +290,6 @@ table.presenca td { vertical-align: middle; }
     </div>
     <div class="atalhos">
       <a href="admin-planos-base.html">Planos-Base</a>
-      <a href="exercicios.html">Catálogo de deveres completos</a>
       <a href="professor-correcoes.html">Sistema de Correção</a>
     </div>
   </div>
@@ -297,22 +297,27 @@ table.presenca td { vertical-align: middle; }
   <nav class="nav-principal" id="navPrincipal" aria-label="Seções da gestão">
     <button data-nav="lista" class="ativa"><img class="titulo-icone-inline pequeno" src="img/icones/students.svg" alt="">Alunos</button>
     <button data-nav="acompanhamento"><img class="titulo-icone-inline pequeno" src="img/icones/estatisticas.svg" alt="">Acompanhamento <span class="badge-vivo">ao vivo</span></button>
-    <button data-nav="atribuir"><img class="titulo-icone-inline pequeno" src="img/icones/puzzle.svg" alt="">Atribuir deveres completos</button>
+    <button data-nav="criar"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Criar Dever</button>
+    <button data-nav="atribuirDever"><img class="titulo-icone-inline pequeno" src="img/icones/exercise-list.svg" alt="">Atribuir Dever</button>
+    <button data-nav="completos"><img class="titulo-icone-inline pequeno" src="img/icones/puzzle.svg" alt="">Deveres Completos</button>
   </nav>
 
   <!-- ===================== ACOMPANHAMENTO ===================== -->
   <div id="viewAcompanhamento" hidden>
+    <section class="av-heroi">
+      <div class="av-heroi-txt"><span class="av-ao-vivo"><i></i>AO VIVO</span><h2>Quem está estudando agora</h2>
+        <p>Todos os alunos com plano ativo: em que área do site estão e o que estão fazendo. Atualiza sozinho a cada 15 segundos.</p></div>
+      <div class="av-contadores"><div><b id="avOnline">–</b><span>online agora</span></div><div><b id="avAtivos">–</b><span>com plano ativo</span></div><div><b id="avEntregas">–</b><span>entregas hoje</span></div></div>
+    </section>
+    <div class="av-areas" id="presencaAreas"></div>
     <div class="card presenca-card">
       <div class="presenca-cab">
-        <div><h2 style="margin:0;"><span class="ponto-on"></span>Quem está no site agora</h2>
-          <p style="font-size:0.8rem; color:var(--cinza-400); margin:4px 0 0;">Todos os alunos com plano ativo: em que área do site estão e o que estão fazendo. Atualiza sozinho a cada 15 segundos.</p></div>
+        <div><h2 style="margin:0;"><span class="ponto-on"></span><span id="avTituloLista">Online agora</span></h2>
+          <p style="font-size:0.8rem; color:var(--cinza-400); margin:4px 0 0;">Clique num aluno para abrir a ficha dele.</p></div>
         <input type="text" id="presencaBusca" placeholder="Filtrar por nome..." class="presenca-busca">
       </div>
-      <div class="presenca-areas" id="presencaAreas"></div>
-      <div class="tabela-wrap"><table class="acomp presenca">
-        <thead><tr><th>Aluno</th><th>Onde está</th><th>O que está fazendo</th><th>Há quanto tempo</th><th>Planos</th></tr></thead>
-        <tbody id="presencaTabela"><tr><td colspan="5">Carregando...</td></tr></tbody>
-      </table></div>
+      <div class="av-grade" id="presencaGrade"><p class="cd-vazio">Carregando…</p></div>
+      <details class="av-off" id="presencaOffBox"><summary>Offline <b id="avOffN">0</b></summary><div class="av-off-lista" id="presencaOff"></div></details>
     </div>
     <div class="kpi-row" id="acompKpis"></div>
     <div class="grid-2">
@@ -338,37 +343,14 @@ table.presenca td { vertical-align: middle; }
     </div>
   </div>
 
-  <!-- ===================== ATRIBUIR DEVERES COMPLETOS ===================== -->
-  <div id="viewAtribuir" hidden>
-    <div class="card">
-      <div class="passo"><span class="n">1</span><h2>Escolha os deveres completos</h2></div>
-      <p style="font-size:0.84rem; color:var(--cinza-600); margin-bottom:14px;">Blocos de questões corrigidos na hora, com explicação e áudio. Clique para marcar; use "ver" para abrir como o aluno vê.</p>
-      <div class="dc-grid" id="dcGrid">Carregando...</div>
-    </div>
-    <div class="card">
-      <div class="passo"><span class="n">2</span><h2>Para quais alunos?</h2></div>
-      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
-        <input type="text" id="atribBusca" placeholder="Buscar aluno..." style="flex:1; min-width:200px; padding:9px 14px; border-radius:30px; border:1px solid var(--cinza-300); font-family:inherit; background:var(--branco); color:var(--cinza-800);">
-        <button class="btn secundario pequeno" id="atribTodos">Marcar todos os ativos</button>
-        <button class="btn secundario pequeno" id="atribNenhum">Limpar</button>
-      </div>
-      <div class="alunos-escolha" id="atribAlunos">Carregando...</div>
-    </div>
-    <div class="card">
-      <div class="passo"><span class="n">3</span><h2>Prazo e detalhes</h2></div>
-      <div class="campo-row">
-        <div class="campo"><label>Título do dever</label><input type="text" id="atribTitulo" value="Deveres completos"></div>
-        <div class="campo"><label>Início</label><input type="date" id="atribInicio"></div>
-        <div class="campo"><label>Prazo</label><input type="date" id="atribPrazo"></div>
-        <div class="campo"><label>Prioridade</label><select id="atribPrioridade"><option value="media">Média</option><option value="alta">Alta</option><option value="baixa">Baixa</option></select></div>
-      </div>
-      <div class="campo"><label>Mensagem para o aluno (opcional)</label><textarea id="atribDescricao" placeholder="Ex.: Façam com calma e revisem as explicações antes da próxima aula."></textarea></div>
-    </div>
-    <div class="resumo-atrib">
-      <span id="atribResumo">Nenhum dever completo selecionado.</span>
-      <span style="display:flex; gap:10px; align-items:center;"><span id="atribMsg" style="font-size:0.85rem;"></span><button class="btn" id="atribEnviar">Atribuir</button></span>
-    </div>
-  </div>
+  <!-- ===================== CRIAR DEVER (js/gestao-criar-dever.js) ===================== -->
+  <div id="viewCriar" class="cd" hidden></div>
+
+  <!-- ===================== ATRIBUIR DEVER (js/gestao-atribuir-dever.js) ===================== -->
+  <div id="viewAtribuirDever" class="cd" hidden></div>
+
+  <!-- ===================== DEVERES COMPLETOS (js/gestao-deveres-completos.js) ===================== -->
+  <div id="viewCompletos" class="cd" hidden></div>
 
   <!-- ===================== LISTA ===================== -->
   <div id="viewLista">
@@ -436,7 +418,8 @@ table.presenca td { vertical-align: middle; }
       <div id="deverResumoAluno"></div>
       <div id="deverAtribuicaoBox"></div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 18px;">
-        <button class="btn pequeno" id="atribuirDcAlunoBtn"><img class="titulo-icone-inline pequeno" src="img/icones/puzzle.svg" alt="">Atribuir deveres completos</button>
+        <button class="btn pequeno" id="atribuirDcAlunoBtn"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Criar dever para este aluno</button>
+        <button class="btn secundario pequeno" id="atribuirDeverAlunoBtn"><img class="titulo-icone-inline pequeno" src="img/icones/exercise-list.svg" alt="">Atribuir Dever</button>
         <button class="btn secundario pequeno" id="abrirAtribuirBtn">Atribuir Plano-Base</button>
         <button class="btn secundario pequeno" id="abrirDeverManualBtn">+ Criar dever manual</button>
       </div>
@@ -526,6 +509,9 @@ table.presenca td { vertical-align: middle; }
 <script src="js/deverAtividadeUI.js"></script>
 <script src="js/deverRealtime.js"></script>
 <script src="js/gestao-alunos.js"></script>
+<script src="js/gestao-criar-dever.js"></script>
+<script src="js/gestao-atribuir-dever.js"></script>
+<script src="js/gestao-deveres-completos.js"></script>
 <script src="js/gestao-alunos-ferramentas.js"></script>
 <script src="js/theme-toggle.js"></script>
 <script src="js/painelEquipe.js" defer></script>

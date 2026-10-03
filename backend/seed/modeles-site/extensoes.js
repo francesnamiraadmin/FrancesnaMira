@@ -117,7 +117,7 @@ function abrirDestino(d) {
     epreuve: abrirEpreuve, simulados: abrirSimulados, outils: abrirOutils, prof: function () { abrirProf(); }
   };
   if (/^devoir=/.test(d)) { abrirDevoirPorId(d.slice(7)); return; }
-  // vindo do « Meu espaço » do site: #sujet=<tâche>:<id>[:<foco>] abre um sujet salvo no caderno
+  // vindo do « Meu Espaço » do site: #sujet=<tâche>:<id>[:<foco>] abre um sujet salvo no caderno
   var sj = /^sujet=([A-Z0-9]+):([^:]+)(?::([a-z]+))?$/.exec(d);
   if (sj) { abrirModelo(sj[1], decodeURIComponent(sj[2]), { tipo: 'carnet', foco: sj[3] && sj[3] !== 'etude' ? sj[3] : null }); return; }
   if (mapa[d]) mapa[d](); else if (B && B.professor && window.FNM_ABRIR === 'prof') abrirProf(); else irAccueil();
@@ -501,7 +501,7 @@ function confirmarFimEpreuve(vazias) {
   });
 }
 
-// ---------- « Mon espace » saiu do app: fica no « Meu espaço » do site ----------
+// ---------- « Mon espace » saiu do app: fica no « Meu Espaço » do site ----------
 // Tarefas e mensagens do professor, notas/correções e o caderno de erros das produções agora
 // são seções de meu-espaco.html. Para o aluno, estas telas levam para lá; a equipe continua com as do app.
 var MEU_ESPACO_SECAO = { abrirTarefas: 'tarefas', abrirNotes: 'producoes', abrirCarnet: 'revisao' };

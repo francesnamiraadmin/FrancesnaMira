@@ -18,7 +18,7 @@ router.use(exigirAuth);
 
 // Ids e índices de atividade chegam na URL e são usados para indexar arrays e
 // montar pastas de upload — só aceita ObjectId / inteiro pequeno.
-for (const nome of ["id", "deverId", "alunoId"]) {
+for (const nome of ["id", "deverId", "alunoId", "loteId"]) {
   router.param(nome, (req, res, next, valor) => (ehObjectId(valor) ? next() : res.status(400).json({ msg: "Identificador inválido." })));
 }
 router.param("index", (req, res, next, valor) => (/^\d{1,3}$/.test(valor) ? next() : res.status(400).json({ msg: "Índice inválido." })));
@@ -144,7 +144,8 @@ router.post("/atribuir", exigirProfessor, async (req, res) => {
       if (!turma) return res.status(404).json({ msg: "Turma não encontrada." });
     }
 
-    await AtribuicaoPlanoBase.updateMany({ alunoId, ativo: true }, { ativo: false });
+    // um aluno pode ter vários Planos-Base ativos (ex.: o da Atribuição-base do curso): só substitui o mesmo plano
+    await AtribuicaoPlanoBase.updateMany({ alunoId, planoBaseId, ativo: true }, { ativo: false });
     const atribuicao = await AtribuicaoPlanoBase.create({
       alunoId, planoBaseId, dataInicio: new Date(dataInicio), vinculoTipo, turmaId: turmaId || null
     });
@@ -410,6 +411,280 @@ router.post("/deveres-completos/atribuir", exigirProfessor, async (req, res) => 
     console.error(err);
     res.status(500).json({ msg: "Erro no servidor." });
   }
+});
+
+// ===================== CRIAR DEVER (Gestão de Alunos › Criar Dever) =====================
+// O construtor monta um dever com atividades de todo o site (questões, produções do Ambiente,
+// aulas gravadas, deveres completos) para um curso. Pode ser enviado a alunos (um « lote »: o
+// mesmo dever, uma cópia por aluno, editável de uma vez) ou virar um Plano-Base de várias semanas.
+const criarDever = require("../utils/criarDever");
+const AtribuicaoBaseCurso = require("../models/atribuicaoBaseCurso");
+const { TIPOS_CURSO } = require("../utils/tiposCurso");
+const mongooseLib = require("mongoose");
+const { aplicarAtribuicoesBase, copiarAtividades, cursosAtivos } = require("../utils/gerarDeveres");
+const DIA = 864e5;
+const erroStatus = (res, err) => {
+  if (err && err.status) return res.status(err.status).json({ msg: err.msg || err.message });
+  console.error(err); return res.status(500).json({ msg: "Erro no servidor." });
+};
+const datasValidas = (ini, fim) => ini && fim && !isNaN(new Date(ini)) && !isNaN(new Date(fim)) && new Date(fim) >= new Date(ini);
+
+router.get("/criar/catalogo", exigirProfessor, async (req, res) => {
+  try { res.json(await criarDever.catalogo(String(req.query.curso || "TCF"), String(req.query.nivel || ""))); }
+  catch (err) { erroStatus(res, err); }
+});
+
+// Chave de uma atividade para reaproveitar a entrega quando o dever é editado.
+const chaveAtividade = a => {
+  const c = a.conteudo || {};
+  const ref = c.conjuntoId || c.temaId || c.aulaId || c.moduloId || c.exercicioSlug || c.sujetId || a.titulo;
+  return a.tipo + "|" + String(ref && ref._id ? ref._id : ref);
+};
+
+// Enviar um dever novo a vários alunos.
+router.post("/lotes", exigirProfessor, async (req, res) => {
+  try {
+    const b = req.body || {};
+    const ids = [...new Set((Array.isArray(b.alunoIds) ? b.alunoIds : []).filter(ehObjectId))];
+    if (!ids.length) return res.status(400).json({ msg: "Escolha pelo menos um aluno." });
+    if (!String(b.titulo || "").trim()) return res.status(400).json({ msg: "Dê um título ao dever." });
+    if (!datasValidas(b.dataInicio, b.dataLimite)) return res.status(400).json({ msg: "Informe datas válidas (o prazo não pode ser antes do início)." });
+    const curso = TIPOS_CURSO.includes(b.curso) ? b.curso : null;
+    const atividades = await criarDever.prepararAtividades(b.atividades, { curso, nivel: b.nivel, userId: req.userId });
+    const alunos = await User.find({ _id: { $in: ids } }).select("_id").lean();
+    const loteId = new mongooseLib.Types.ObjectId();
+    for (const a of alunos) {
+      const ultimo = await DeverSemanal.findOne({ alunoId: a._id }).sort({ numeroSemana: -1 }).select("numeroSemana").lean();
+      await DeverSemanal.create({
+        alunoId: a._id, planoBaseId: null, numeroSemana: (ultimo?.numeroSemana || 0) + 1, loteId, curso,
+        titulo: String(b.titulo).trim().slice(0, 150), descricao: b.descricao ? String(b.descricao).slice(0, 4000) : undefined,
+        dataInicio: new Date(b.dataInicio), dataLimite: new Date(b.dataLimite),
+        prioridade: ["baixa", "media", "alta"].includes(b.prioridade) ? b.prioridade : "media",
+        permiteConclusaoManual: !!b.permiteConclusaoManual, professorId: req.userId,
+        atividades: copiarAtividades(atividades)
+      });
+      transmitir("dever-atualizado", { alunoId: String(a._id) });
+    }
+    res.json({ msg: `Dever enviado para ${alunos.length} aluno(s).`, loteId: String(loteId), alunos: alunos.length });
+  } catch (err) { erroStatus(res, err); }
+});
+
+// Deveres já enviados (por lote), do mais novo para o mais antigo.
+router.get("/lotes", exigirProfessor, async (req, res) => {
+  try {
+    const g = await DeverSemanal.aggregate([
+      { $match: { loteId: { $ne: null } } },
+      { $group: { _id: "$loteId", titulo: { $first: "$titulo" }, curso: { $first: "$curso" }, alunos: { $sum: 1 }, concluidos: { $sum: { $cond: [{ $ifNull: ["$concluidoEm", false] }, 1, 0] } },
+        dataInicio: { $first: "$dataInicio" }, dataLimite: { $first: "$dataLimite" }, criadoEm: { $min: "$criadoEm" }, atividades: { $first: { $size: "$atividades" } }, tipos: { $first: "$atividades.tipo" } } },
+      { $sort: { criadoEm: -1 } }, { $limit: 200 }
+    ]);
+    res.json(g.map(x => ({ ...x, loteId: String(x._id) })));
+  } catch (err) { erroStatus(res, err); }
+});
+
+router.get("/lotes/:loteId", exigirProfessor, async (req, res) => {
+  try {
+    const deveres = await DeverSemanal.find({ loteId: req.params.loteId }).populate("alunoId", "nome email").populate(POPULATE_CONTEUDO).sort({ criadoEm: 1 });
+    if (!deveres.length) return res.status(404).json({ msg: "Dever não encontrado." });
+    const d0 = deveres[0];
+    const alunos = await Promise.all(deveres.map(async d => {
+      const e = await enriquecerDever(d);
+      const feitas = e.atividades.filter(a => a.entrega?.status === "enviado").length;
+      return { deverId: String(d._id), alunoId: String(d.alunoId?._id || d.alunoId), nome: d.alunoId?.nome || "", email: d.alunoId?.email || "", feitas, total: e.atividades.length, status: e.status };
+    }));
+    const ref = v => v && v._id ? { _id: v._id, titulo: v.titulo || v.nome } : v;
+    res.json({
+      loteId: req.params.loteId, curso: d0.curso, titulo: d0.titulo, descricao: d0.descricao || "", dataInicio: d0.dataInicio, dataLimite: d0.dataLimite,
+      prioridade: d0.prioridade, permiteConclusaoManual: d0.permiteConclusaoManual,
+      atividades: d0.atividades.map(a => {
+        const c = a.conteudo || {};
+        return { tipo: a.tipo, titulo: a.titulo, descricao: a.descricao || "", obrigatoria: a.obrigatoria, dependeDe: a.dependeDe,
+          conteudo: { conjuntoId: ref(c.conjuntoId), temaId: ref(c.temaId), aulaId: ref(c.aulaId), moduloId: ref(c.moduloId), exercicioSlug: c.exercicioSlug, tache: c.tache, sujetId: c.sujetId, perfil: c.perfil, sorteio: c.sorteio, url: c.url, texto: c.texto } };
+      }),
+      alunos
+    });
+  } catch (err) { erroStatus(res, err); }
+});
+
+// Editar um dever enviado: vale para todos os alunos do lote. As entregas das atividades que
+// continuam no dever são mantidas; alunos novos recebem uma cópia; os retirados perdem a cópia.
+router.put("/lotes/:loteId", exigirProfessor, async (req, res) => {
+  try {
+    const b = req.body || {};
+    const deveres = await DeverSemanal.find({ loteId: req.params.loteId });
+    if (!deveres.length) return res.status(404).json({ msg: "Dever não encontrado." });
+    if (!String(b.titulo || "").trim()) return res.status(400).json({ msg: "Dê um título ao dever." });
+    if (!datasValidas(b.dataInicio, b.dataLimite)) return res.status(400).json({ msg: "Informe datas válidas (o prazo não pode ser antes do início)." });
+    const curso = TIPOS_CURSO.includes(b.curso) ? b.curso : deveres[0].curso;
+    const atividades = await criarDever.prepararAtividades(b.atividades, { curso, nivel: b.nivel, userId: req.userId });
+    const campos = {
+      titulo: String(b.titulo).trim().slice(0, 150), descricao: b.descricao ? String(b.descricao).slice(0, 4000) : undefined, curso,
+      dataInicio: new Date(b.dataInicio), dataLimite: new Date(b.dataLimite),
+      prioridade: ["baixa", "media", "alta"].includes(b.prioridade) ? b.prioridade : "media", permiteConclusaoManual: !!b.permiteConclusaoManual
+    };
+    const querAlunos = Array.isArray(b.alunoIds) ? new Set(b.alunoIds.filter(ehObjectId).map(String)) : null;
+    let atualizados = 0, removidos = 0, novos = 0;
+    for (const d of deveres) {
+      if (querAlunos && !querAlunos.has(String(d.alunoId))) { await d.deleteOne(); removidos++; transmitir("dever-atualizado", { alunoId: String(d.alunoId) }); continue; }
+      const antigas = new Map(d.atividades.map(a => [chaveAtividade(a), a]));
+      Object.assign(d, campos);
+      d.atividades = copiarAtividades(atividades).map(a => {
+        const velha = antigas.get(chaveAtividade(a));
+        return velha && velha.entrega ? { ...a, entrega: velha.entrega.toObject ? velha.entrega.toObject() : velha.entrega } : a;
+      });
+      await d.save(); atualizados++;
+      transmitir("dever-atualizado", { alunoId: String(d.alunoId) });
+    }
+    if (querAlunos) {
+      const ja = new Set(deveres.map(d => String(d.alunoId)));
+      for (const id of querAlunos) {
+        if (ja.has(id)) continue;
+        const ultimo = await DeverSemanal.findOne({ alunoId: id }).sort({ numeroSemana: -1 }).select("numeroSemana").lean();
+        await DeverSemanal.create({ alunoId: id, planoBaseId: null, numeroSemana: (ultimo?.numeroSemana || 0) + 1, loteId: deveres[0].loteId, professorId: req.userId, ...campos, atividades: copiarAtividades(atividades) });
+        novos++; transmitir("dever-atualizado", { alunoId: id });
+      }
+    }
+    res.json({ msg: `Dever atualizado: ${atualizados} aluno(s)${novos ? `, ${novos} novo(s)` : ""}${removidos ? `, ${removidos} retirado(s)` : ""}.`, atualizados, novos, removidos });
+  } catch (err) { erroStatus(res, err); }
+});
+
+router.delete("/lotes/:loteId", exigirProfessor, async (req, res) => {
+  try {
+    const deveres = await DeverSemanal.find({ loteId: req.params.loteId }).select("alunoId").lean();
+    await DeverSemanal.deleteMany({ loteId: req.params.loteId });
+    deveres.forEach(d => transmitir("dever-atualizado", { alunoId: String(d.alunoId) }));
+    res.json({ msg: `Dever apagado de ${deveres.length} aluno(s).` });
+  } catch (err) { erroStatus(res, err); }
+});
+
+// Plano-Base pelo construtor: cada semana passa pela mesma preparação das atividades.
+async function semanasDoConstrutor(semanas, curso, nivel, userId) {
+  if (!Array.isArray(semanas) || !semanas.length) throw Object.assign(new Error("x"), { status: 400, msg: "Crie pelo menos uma semana." });
+  if (semanas.length > 104) throw Object.assign(new Error("x"), { status: 400, msg: "No máximo 104 semanas." });
+  const out = [];
+  for (const [i, s] of semanas.entries()) {
+    try {
+      out.push({ numero: i + 1, titulo: String(s.titulo || `Semana ${i + 1}`).trim().slice(0, 150), atividades: (await criarDever.prepararAtividades(s.atividades, { curso, nivel, userId })).map(({ entrega, ...a }) => a) });
+    } catch (err) { if (err.status) err.msg = `Semana ${i + 1}: ${err.msg}`; throw err; }
+  }
+  return out;
+}
+router.post("/criar/planos-base", exigirProfessor, async (req, res) => {
+  try {
+    const b = req.body || {};
+    if (!String(b.nome || "").trim()) return res.status(400).json({ msg: "Dê um nome ao Plano-Base." });
+    const curso = TIPOS_CURSO.includes(b.curso) ? b.curso : null;
+    const semanas = await semanasDoConstrutor(b.semanas, curso, b.nivel, req.userId);
+    const plano = await PlanoBase.create({ nome: String(b.nome).trim().slice(0, 150), curso, descricao: b.descricao ? String(b.descricao).slice(0, 4000) : undefined, semanas, criadoPor: req.userId });
+    res.json({ msg: `Plano-Base criado com ${semanas.length} semana(s).`, plano });
+  } catch (err) { erroStatus(res, err); }
+});
+router.put("/criar/planos-base/:id", exigirProfessor, async (req, res) => {
+  try {
+    const b = req.body || {};
+    const plano = await PlanoBase.findById(req.params.id);
+    if (!plano || !plano.ativo) return res.status(404).json({ msg: "Plano-Base não encontrado." });
+    if (!String(b.nome || "").trim()) return res.status(400).json({ msg: "Dê um nome ao Plano-Base." });
+    const curso = TIPOS_CURSO.includes(b.curso) ? b.curso : plano.curso;
+    plano.semanas = await semanasDoConstrutor(b.semanas, curso, b.nivel, req.userId);
+    plano.nome = String(b.nome).trim().slice(0, 150); plano.curso = curso; plano.descricao = b.descricao ? String(b.descricao).slice(0, 4000) : undefined;
+    await plano.save();
+    res.json({ msg: "Plano-Base atualizado. As próximas semanas geradas para os alunos já seguem a nova versão.", plano });
+  } catch (err) { erroStatus(res, err); }
+});
+
+// ===================== ATRIBUIR DEVER (Gestão de Alunos › Atribuir Dever) =====================
+// Os Planos-Base ativos de um aluno (manuais e da Atribuição-base) e as ações sobre eles.
+router.get("/alunos/:alunoId/atribuicoes", exigirProfessor, async (req, res) => {
+  try {
+    const l = await AtribuicaoPlanoBase.find({ alunoId: req.params.alunoId, ativo: true }).populate("planoBaseId", "nome curso semanas.numero").sort({ criadoEm: -1 }).lean();
+    res.json(l.map(a => ({ _id: a._id, origem: a.origem || "manual", curso: a.curso || a.planoBaseId?.curso || "", dataInicio: a.dataInicio, plano: a.planoBaseId ? { _id: a.planoBaseId._id, nome: a.planoBaseId.nome, semanas: (a.planoBaseId.semanas || []).length } : null })));
+  } catch (err) { erroStatus(res, err); }
+});
+// Parar um Plano-Base de um aluno (as semanas já geradas continuam; não gera as próximas).
+router.delete("/atribuicoes/:id", exigirProfessor, async (req, res) => {
+  try {
+    const a = await AtribuicaoPlanoBase.findByIdAndUpdate(req.params.id, { ativo: false });
+    if (!a) return res.status(404).json({ msg: "Atribuição não encontrada." });
+    res.json({ msg: "Plano-Base interrompido para este aluno." });
+  } catch (err) { erroStatus(res, err); }
+});
+// Atribuir um modelo do construtor a um aluno: o Plano-Base inteiro (as semanas vão sendo
+// liberadas uma por semana, a partir da data) ou só uma das semanas, como dever avulso.
+router.post("/alunos/:alunoId/atribuir-modelo", exigirProfessor, async (req, res) => {
+  try {
+    const b = req.body || {};
+    if (!ehObjectId(b.planoBaseId)) return res.status(400).json({ msg: "Escolha o Plano-Base." });
+    const plano = await PlanoBase.findById(b.planoBaseId);
+    if (!plano || !plano.ativo) return res.status(404).json({ msg: "Plano-Base não encontrado." });
+    const aluno = await User.findById(req.params.alunoId).select("_id").lean();
+    if (!aluno) return res.status(404).json({ msg: "Aluno não encontrado." });
+    const inicio = b.dataInicio && !isNaN(new Date(b.dataInicio)) ? new Date(b.dataInicio) : new Date();
+    if (b.modo === "semana") {
+      const s = plano.semanas.find(x => x.numero === Number(b.semana));
+      if (!s) return res.status(400).json({ msg: "Semana não encontrada neste Plano-Base." });
+      const fim = b.dataLimite && !isNaN(new Date(b.dataLimite)) ? new Date(b.dataLimite) : new Date(inicio.getTime() + 6 * DIA);
+      if (fim < inicio) return res.status(400).json({ msg: "O prazo não pode ser antes do início." });
+      const ultimo = await DeverSemanal.findOne({ alunoId: aluno._id }).sort({ numeroSemana: -1 }).select("numeroSemana").lean();
+      const d = await DeverSemanal.create({ alunoId: aluno._id, planoBaseId: null, numeroSemana: (ultimo?.numeroSemana || 0) + 1, curso: plano.curso || null,
+        titulo: s.titulo, dataInicio: inicio, dataLimite: fim, professorId: req.userId, atividades: copiarAtividades(s.atividades) });
+      transmitir("dever-atualizado", { alunoId: String(aluno._id) });
+      return res.json({ msg: `« ${s.titulo} » atribuído.`, deverId: d._id });
+    }
+    await AtribuicaoPlanoBase.updateMany({ alunoId: aluno._id, planoBaseId: plano._id, ativo: true }, { ativo: false });
+    const atr = await AtribuicaoPlanoBase.create({ alunoId: aluno._id, planoBaseId: plano._id, dataInicio: inicio, vinculoTipo: "plano_curso", curso: plano.curso || null, origem: "manual" });
+    const criadas = await gerarSemanasPendentes(atr);
+    transmitir("dever-atualizado", { alunoId: String(aluno._id) });
+    res.json({ msg: `Plano-Base « ${plano.nome} » atribuído: ${criadas.length} semana(s) já liberada(s), as outras chegam uma por semana.`, semanasGeradas: criadas.length });
+  } catch (err) { erroStatus(res, err); }
+});
+// Remover um dever atribuído a um aluno.
+router.delete("/deveres/:id", exigirProfessor, async (req, res) => {
+  try {
+    const d = await DeverSemanal.findByIdAndDelete(req.params.id);
+    if (!d) return res.status(404).json({ msg: "Dever não encontrado." });
+    transmitir("dever-atualizado", { alunoId: String(d.alunoId) });
+    res.json({ msg: "Dever removido do aluno." });
+  } catch (err) { erroStatus(res, err); }
+});
+
+// Atribuição-base de cada curso.
+router.get("/atribuicoes-base", exigirProfessor, async (req, res) => {
+  try {
+    const l = await AtribuicaoBaseCurso.find().populate("planoBaseId", "nome curso semanas.numero").lean();
+    const contagem = await AtribuicaoPlanoBase.aggregate([{ $match: { origem: "base", ativo: true } }, { $group: { _id: "$curso", n: { $sum: 1 } } }]);
+    const porCurso = Object.fromEntries(contagem.map(c => [c._id, c.n]));
+    res.json(TIPOS_CURSO.map(curso => {
+      const b = l.find(x => x.curso === curso);
+      return { curso, plano: b && b.planoBaseId ? { _id: b.planoBaseId._id, nome: b.planoBaseId.nome, semanas: (b.planoBaseId.semanas || []).length } : null, alunos: porCurso[curso] || 0, atualizadoEm: b ? b.atualizadoEm : null };
+    }));
+  } catch (err) { erroStatus(res, err); }
+});
+router.put("/atribuicoes-base/:curso", exigirProfessor, async (req, res) => {
+  try {
+    const curso = req.params.curso;
+    if (!TIPOS_CURSO.includes(curso)) return res.status(400).json({ msg: "Curso inválido." });
+    if (!req.body?.planoBaseId) { await AtribuicaoBaseCurso.deleteOne({ curso }); return res.json({ msg: `O curso ${curso} ficou sem Atribuição-base.` }); }
+    if (!ehObjectId(req.body.planoBaseId)) return res.status(400).json({ msg: "Plano-Base inválido." });
+    const plano = await PlanoBase.findById(req.body.planoBaseId).select("nome ativo").lean();
+    if (!plano || !plano.ativo) return res.status(404).json({ msg: "Plano-Base não encontrado." });
+    await AtribuicaoBaseCurso.findOneAndUpdate({ curso }, { planoBaseId: plano._id, atualizadoPor: req.userId, atualizadoEm: new Date() }, { upsert: true });
+    res.json({ msg: `Atribuição-base do ${curso}: « ${plano.nome} ». Quem entrar no plano ${curso} já recebe estes deveres.` });
+  } catch (err) { erroStatus(res, err); }
+});
+// Aplicar já a Atribuição-base a quem tem o plano do curso hoje.
+router.post("/atribuicoes-base/:curso/aplicar", exigirProfessor, async (req, res) => {
+  try {
+    const curso = req.params.curso;
+    if (!TIPOS_CURSO.includes(curso)) return res.status(400).json({ msg: "Curso inválido." });
+    const alunos = await User.find({ role: "aluno", "planos.courseType": curso }).select("_id planos role").lean();
+    let n = 0;
+    for (const u of alunos) {
+      if (!cursosAtivos(u).includes(curso)) continue;
+      if (await aplicarAtribuicoesBase(u._id)) { n++; await atualizarSemanasDoAluno(u._id); transmitir("dever-atualizado", { alunoId: String(u._id) }); }
+    }
+    res.json({ msg: n ? `Atribuição-base aplicada a ${n} aluno(s) do ${curso}.` : `Todos os alunos com plano ${curso} já tinham a Atribuição-base.`, aplicados: n });
+  } catch (err) { erroStatus(res, err); }
 });
 
 // ===================== ALUNO: MINHAS SEMANAS =====================

@@ -109,3 +109,8 @@ body.pe-com-navbar .pe-barra { top: calc(var(--topo-site, 70px) + 6px); }
   .pe-barra { border-radius: 18px; margin: 8px 10px 0; }
   .pe-trilha .pe-sep, .pe-trilha .pe-aba-atual, .pe-barra kbd { display: none; }
 }
+
+/* página da equipe embutida em outra (?embed=1): só o conteúdo */
+.pe-embutida body > header, .pe-embutida #app-navbar, .pe-embutida body > footer, .pe-embutida .pe-barra, .pe-embutida .painel-header { display: none !important; }
+.pe-embutida body { background: transparent !important; min-height: 0 !important; padding-top: 0 !important; }
+.pe-embutida .wrap, .pe-embutida main { padding-top: 0 !important; margin-top: 0 !important; }

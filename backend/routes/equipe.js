@@ -77,7 +77,7 @@ router.get("/alunos", async (req, res) => {
     }
 
     const alunos = await User.find(filtro)
-      .select("nome email telefone whatsapp plano produtosAvulsos creditosCorrecao perfil.provaAlvo perfil.dataProva perfil.foto criadoEm ultimoAcessoEm")
+      .select("nome email telefone whatsapp plano planos legado.produtosAvulsos produtosAvulsos creditosCorrecao perfil.provaAlvo perfil.dataProva perfil.foto criadoEm ultimoAcessoEm")
       .sort({ nome: 1 })
       .lean();
 

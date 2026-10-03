@@ -184,7 +184,7 @@ function resultadoOral() {
   var tela = $('tela-epreuve');
   tela.innerHTML = '<h1 class="titulo-pagina">Épreuve orale terminée</h1>' +
     '<div class="bloco ep-ok"><h3>' + (EO.correcao === 'ia' ? 'Correction de vos enregistrements par l\'IA' : 'Envoi au Sistema de Correção') + '</h3><p class="aviso" id="eo-status"></p>' +
-    '<div class="ferramentas"><button class="ferramenta destaque" type="button" id="eo-nova">Nouvelle épreuve orale</button><button class="ferramenta" type="button" id="eo-notas">Meu espaço</button><button class="ferramenta" type="button" id="eo-accueil">Accueil</button></div></div>' +
+    '<div class="ferramentas"><button class="ferramenta destaque" type="button" id="eo-nova">Nouvelle épreuve orale</button><button class="ferramenta" type="button" id="eo-notas">Meu Espaço</button><button class="ferramenta" type="button" id="eo-accueil">Accueil</button></div></div>' +
     ts.map(function (t) {
       var g = EO.grav[t];
       return '<div class="bloco eo-res" data-eo-t="' + t + '"><h3>' + esc(TACHES[t].nom + ' · ' + TACHES[t].sous) + '</h3><p class="aviso">' + esc(EO.sujets[t].t.slice(0, 220)) + '</p>' +

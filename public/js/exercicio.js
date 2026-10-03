@@ -1,8 +1,10 @@
 // ===================== EXERCÍCIO INTERATIVO (exercicio.html) =====================
 // Carrega /api/exercicios/:slug (sem gabarito), desenha as abas e manda as
 // respostas para POST /api/exercicios/:slug/corrigir. Na URL:
-//   ?slug=<exercício>[&dever=<id>&atividade=<índice>]
+//   ?slug=<exercício>[&dever=<id>&atividade=<índice>][&embed=1]
 // Com dever/atividade, o botão final entrega a atividade do dever de casa.
+// Com embed=1 a página roda dentro da aba do dever (dever.html): sem navbar e rodapé, avisa a
+// página de fora da altura (para o iframe crescer) e da entrega.
 // Modo "treino": cada aba de exercício tem "Corrigir esta parte". Modo "prova":
 // só a correção final, cronômetro por parte e limite de reproduções do áudio.
 // Todo áudio em francês sai de falarFrances() (js/audioFrances.js), que toca
@@ -14,6 +16,14 @@
   const atividadeIndex = params.has('atividade') ? Number(params.get('atividade')) : null;
   const token = localStorage.getItem('token');
   const CHAVE_RASCUNHO = 'exercicio:' + slug + ':' + (deverId || 'livre');
+  const embutido = params.get('embed') === '1' && window.parent !== window;
+  const avisarFora = msg => { if (embutido) try { window.parent.postMessage(Object.assign({ fnmExercicio: true, slug, deverId, atividade: atividadeIndex }, msg), location.origin); } catch (e) { /* ok */ } };
+  if (embutido) {
+    document.documentElement.classList.add('ex-embutido');
+    const medir = () => avisarFora({ altura: Math.ceil(document.documentElement.scrollHeight) });
+    window.addEventListener('load', medir);
+    try { new ResizeObserver(medir).observe(document.body); } catch (e) { setInterval(medir, 1000); }
+  }
 
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const $ = id => document.getElementById(id);
@@ -430,6 +440,7 @@
       def.secoes.forEach(s => { if (s.itens) feitas.add(s.id); });
       renderAbas(); renderSecao();
       mostrarResultado(data);
+      if (data.registrado) avisarFora({ entregue: true, percentual: data.resultado.percentual });
     } catch (e) {
       $('msgEntrega').className = 'ex-msg erro'; $('msgEntrega').textContent = e.message; btn.disabled = false;
     }
@@ -449,8 +460,9 @@
   function abrirModal(titulo, html, mostrarVoltar) {
     $('exModalTitulo').textContent = titulo;
     $('exModalCorpo').innerHTML = html;
-    $('btnVoltarDever').hidden = !mostrarVoltar;
+    $('btnVoltarDever').hidden = !mostrarVoltar || embutido;
     $('exModal').hidden = false;
+    avisarFora({ modal: true });
   }
   $('btnFecharModal').addEventListener('click', () => { $('exModal').hidden = true; });
   $('exModal').addEventListener('click', e => { if (e.target.id === 'exModal') $('exModal').hidden = true; });

@@ -492,11 +492,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     <div class="acordeao-corpo">
       <div class="botoes-equipe">
         <a href="gestao-alunos.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/students.svg" alt="">Gestão de Alunos</a>
-        <a href="exercicios.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/puzzle.svg" alt="">Deveres completos</a>
-        <a href="admin-simulados.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/simulados.svg" alt="">Simulados ao Vivo</a>
         <a href="professor-producao.html" class="dash-btn secundario"><img class="titulo-icone-inline pequeno" src="img/icones/writing-hand.svg" alt="">Espace Professeur</a>
         <a href="professor-correcoes.html" class="dash-btn secundario" id="linkFilaProfessor"><img class="titulo-icone-inline pequeno" src="img/icones/edit-pencil.svg" alt="">Sistema de Correção</a>
-        <a href="admin-correcoes.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/settings-gear.svg" alt="">Painel Administrativo</a>
         <a href="admin-financeiro.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/estatisticas.svg" alt="">Balanço Financeiro</a>
         <a href="admin-aulas.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/video.svg" alt="">Aulas Especializadas</a>
         <a href="admin-horarios.html" class="dash-btn secundario so-admin"><img class="titulo-icone-inline pequeno" src="img/icones/calendar.svg" alt="">Sistema de Aulas</a>
@@ -770,10 +767,10 @@ async function renderBlocoConjuntos() {
   }
 }
 
-// Atalho colorido para uma seção do « Meu espaço ».
+// Atalho colorido para uma seção do « Meu Espaço ».
 function ctaMeuEspaco(secao, texto) {
   return `<a class="dash-btn" href="meu-espaco.html#${secao}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; border-radius:16px; text-decoration:none; background:linear-gradient(120deg,#4f46e5,#db2777); color:#fff;">
-    <span><b style="display:block; font-size:1rem;">Ver no Meu espaço</b><small style="opacity:.9;">${texto}</small></span><span style="font-size:1.4rem;">→</span></a>`;
+    <span><b style="display:block; font-size:1rem;">Ver no Meu Espaço</b><small style="opacity:.9;">${texto}</small></span><span style="font-size:1.4rem;">→</span></a>`;
 }
 
 async function renderPlataforma(dados) {
@@ -785,8 +782,8 @@ async function renderPlataforma(dados) {
     return;
   }
   card.classList.remove('locked');
-  // As estatísticas ficam só no « Meu espaço » (pedido da equipe): aqui, o atalho para a seção.
-  definirResumo('resumoPlataforma', 'estatísticas no Meu espaço');
+  // As estatísticas ficam só no « Meu Espaço » (pedido da equipe): aqui, o atalho para a seção.
+  definirResumo('resumoPlataforma', 'estatísticas no Meu Espaço');
   alvo.innerHTML = ctaMeuEspaco('questoes', 'Acertos, evolução, conteúdos e o seu caderno de erros completo.');
 }
 
@@ -875,7 +872,7 @@ async function renderProducao(dados) {
     return;
   }
   card.classList.remove('locked');
-  // As estatísticas ficam só no « Meu espaço » (pedido da equipe): aqui, o atalho para a seção.
+  // As estatísticas ficam só no « Meu Espaço » (pedido da equipe): aqui, o atalho para a seção.
   definirResumo('resumoProducao', `${dados.creditosCorrecao ?? 0} crédito(s)`);
   alvo.innerHTML = ctaMeuEspaco('producoes', 'Suas redações, produções orais, notas e correções comentadas.');
 }
@@ -890,8 +887,8 @@ async function renderAulas(dados) {
     return;
   }
   card.classList.remove('locked');
-  // As estatísticas ficam só no « Meu espaço » (pedido da equipe): aqui, o atalho para a seção.
-  definirResumo('resumoAulas', 'progresso no Meu espaço');
+  // As estatísticas ficam só no « Meu Espaço » (pedido da equipe): aqui, o atalho para a seção.
+  definirResumo('resumoAulas', 'progresso no Meu Espaço');
   alvo.innerHTML = ctaMeuEspaco('aulas', 'Aulas assistidas, aulas particulares, presença e favoritos.');
 }
 

@@ -31,7 +31,10 @@ const ConteudoAtividadeSchema = new mongoose.Schema({
   tache: { type: String },
   sujetId: { type: String },
   atividadeTcf: { type: String, enum: ["etude", "dictee", "oral", "ecrit"] },
-  devoirProducaoId: { type: mongoose.Schema.Types.ObjectId, ref: "DevoirTCF" }
+  devoirProducaoId: { type: mongoose.Schema.Types.ObjectId, ref: "DevoirTCF" },
+  // Criar Dever: perfil do catálogo do Ambiente (TCF, DELF-B1…) e, nas questões sorteadas, os filtros usados
+  perfil: { type: String },
+  sorteio: { niveis: [{ type: String }], materias: [{ type: String }], quantidade: { type: Number } }
 }, { _id: false });
 
 // `comEntrega: true` para o dever real (instância por aluno) — o Plano-Base

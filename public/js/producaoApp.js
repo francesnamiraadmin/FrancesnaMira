@@ -191,7 +191,7 @@ function entrar() {
           carregarCarnet();
           $('barra-nav').hidden = false;
           $('nav-prof').hidden = !B.professor;
-          $('nav-taches').hidden = true; // « Mon espace » agora é o « Meu espaço » do site
+          $('nav-taches').hidden = true; // « Mon espace » agora é o « Meu Espaço » do site
           mostrarAvisosGlobais();
           mostrarAvisosCentrais();
           aplicarModulos();
@@ -262,7 +262,7 @@ function irAccueil() {
         var n = devs.filter(function (d) { return !d.feito; }).length + (MENSAGENS || []).filter(function (m) { return !m.feito; }).length;
         if ($('he-espace-n')) $('he-espace-n').textContent = n ? n + ' tâche' + (n > 1 ? 's' : '') + ' à faire' : 'devoirs, notes et cahier';
         if (!n || !$('acc-pendencias')) return;
-        $('acc-pendencias').innerHTML = '<button class="faixa-pend" type="button" id="acc-pend">Vous avez <b>' + n + '</b> tâche' + (n > 1 ? 's' : '') + ' de votre professeur(e) à faire <span>Meu espaço →</span></button>';
+        $('acc-pendencias').innerHTML = '<button class="faixa-pend" type="button" id="acc-pend">Vous avez <b>' + n + '</b> tâche' + (n > 1 ? 's' : '') + ' de votre professeur(e) à faire <span>Meu Espaço →</span></button>';
         $('acc-pend').addEventListener('click', abrirTarefas);
       });
       mostrar('tela-accueil');
@@ -2488,7 +2488,7 @@ function abrirGravacao(sessao, tarefa) {
         bt.disabled = true; bt.textContent = 'Envoi en cours…';
         enviarGravacao({ blob: blob, tache: t, sujet: tarefa.sujet.id, sessao: sessao.id, duree: duracao, transcricao: $('grav-trans').value, modo: 'professor' }).then(function () {
           pararGravacaoTudo();
-          $('gravador').innerHTML = '<div class="bloco ep-ok"><h3>✓ Enregistrement envoyé</h3><p class="aviso">Votre professeur(e) va l\'écouter et le corriger dans le Sistema de Correção. La note et la correction apparaîtront dans « Meu espaço ».</p>' +
+          $('gravador').innerHTML = '<div class="bloco ep-ok"><h3>✓ Enregistrement envoyé</h3><p class="aviso">Votre professeur(e) va l\'écouter et le corriger dans le Sistema de Correção. La note et la correction apparaîtront dans « Meu Espaço ».</p>' +
             '<div class="ferramentas"><button class="ferramenta destaque" type="button" id="grav-volta">← Mes épreuves</button></div></div>';
           $('grav-volta').addEventListener('click', abrirEpreuve);
         }).catch(function (e) {
@@ -5873,7 +5873,7 @@ function abasEspace(ativa) {
       var tela = $('tela-epreuve');
       tela.innerHTML = '<h1 class="titulo-pagina">Épreuve orale terminée</h1>' +
         '<div class="bloco ep-ok"><h3>' + (EO.correcao === 'ia' ? 'Correction de vos enregistrements par l\'IA' : 'Envoi au Sistema de Correção') + '</h3><p class="aviso" id="eo-status"></p>' +
-        '<div class="ferramentas"><button class="ferramenta destaque" type="button" id="eo-nova">Nouvelle épreuve orale</button><button class="ferramenta" type="button" id="eo-notas">Meu espaço</button><button class="ferramenta" type="button" id="eo-accueil">Accueil</button></div></div>' +
+        '<div class="ferramentas"><button class="ferramenta destaque" type="button" id="eo-nova">Nouvelle épreuve orale</button><button class="ferramenta" type="button" id="eo-notas">Meu Espaço</button><button class="ferramenta" type="button" id="eo-accueil">Accueil</button></div></div>' +
         ts.map(function (t) {
           var g = EO.grav[t];
           return '<div class="bloco eo-res" data-eo-t="' + t + '"><h3>' + esc(TACHES[t].nom + ' · ' + TACHES[t].sous) + '</h3><p class="aviso">' + esc(EO.sujets[t].t.slice(0, 220)) + '</p>' +
@@ -6053,7 +6053,7 @@ function abasEspace(ativa) {
         epreuve: abrirEpreuve, simulados: abrirSimulados, outils: abrirOutils, prof: function () { abrirProf(); }
       };
       if (/^devoir=/.test(d)) { abrirDevoirPorId(d.slice(7)); return; }
-      // vindo do « Meu espaço » do site: #sujet=<tâche>:<id>[:<foco>] abre um sujet salvo no caderno
+      // vindo do « Meu Espaço » do site: #sujet=<tâche>:<id>[:<foco>] abre um sujet salvo no caderno
       var sj = /^sujet=([A-Z0-9]+):([^:]+)(?::([a-z]+))?$/.exec(d);
       if (sj) { abrirModelo(sj[1], decodeURIComponent(sj[2]), { tipo: 'carnet', foco: sj[3] && sj[3] !== 'etude' ? sj[3] : null }); return; }
       if (mapa[d]) mapa[d](); else if (B && B.professor && window.FNM_ABRIR === 'prof') abrirProf(); else irAccueil();
@@ -6131,7 +6131,7 @@ function abasEspace(ativa) {
           if (contarPalavras(d.texte) < 15) { st.textContent = 'Écrivez votre texte avant de l\'envoyer.'; return; }
           var porIA = b.dataset.envioModo === 'ia';
           confirmarEnvio({ titulo: porIA ? 'Envoyer à la correction par l\'IA' : 'Envoyer à un professeur', custo: 1,
-            texto: porIA ? 'Correction complète sur la grille de l\'examen, dans « Meu espaço ».' : 'Votre texte entre dans la file du Sistema de Correção. Vous suivrez la correction dans « Meu espaço ».' }).then(function (ok) {
+            texto: porIA ? 'Correction complète sur la grille de l\'examen, dans « Meu Espaço ».' : 'Votre texte entre dans la file du Sistema de Correção. Vous suivrez la correction dans « Meu Espaço ».' }).then(function (ok) {
             if (!ok) return;
             d.modo = b.dataset.envioModo;
             b.disabled = true; st.textContent = 'Envoi…';
@@ -6152,7 +6152,7 @@ function abasEspace(ativa) {
     }
     function correcaoEscolhida() { var r = document.querySelector('input[name="ep-correcao"]:checked'); return r ? r.value : 'ia'; }
     function htmlEnvioEpreuve(r) {
-      if (r.correcao === 'professor') return r.quantidade ? '<div class="bloco envio-sistema"><b>✓ Envoyée au Sistema de Correção</b><small>Suivez la correction de chaque tâche dans « Meu espaço ».</small></div>' : '';
+      if (r.correcao === 'professor') return r.quantidade ? '<div class="bloco envio-sistema"><b>✓ Envoyée au Sistema de Correção</b><small>Suivez la correction de chaque tâche dans « Meu Espaço ».</small></div>' : '';
       if (!r.id || r.status === 'vazia') return '';
       return '<div class="bloco envio-sistema" id="ep-envio"><b>Envoyer aussi à un professeur</b><small>En plus de la correction par l\'IA ci-dessous, vous pouvez envoyer vos textes au Sistema de Correção (1 crédit par tâche).</small>' +
         '<div class="ferramentas">' + ETS().map(function (t) { return '<label class="check"><input type="checkbox" data-ep-t="' + t + '" checked> Tâche ' + t.slice(-1) + '</label>'; }).join('') +
@@ -6169,7 +6169,7 @@ function abasEspace(ativa) {
           bt.disabled = true; $('ep-envio-st').textContent = 'Envoi…';
           google.script.run.withSuccessHandler(function (x) {
             if (typeof x.creditos === 'number') atualizarCreditos(x.creditos); else atualizarCreditos(Math.max(0, (B.creditos || 0) - (x.enviadas || 0)));
-            $('ep-envio-st').innerHTML = '✓ ' + x.enviadas + ' tâche(s) envoyée(s). ' + esc(x.aviso || '') + ' Suivez la correction dans « Meu espaço ».';
+            $('ep-envio-st').innerHTML = '✓ ' + x.enviadas + ' tâche(s) envoyée(s). ' + esc(x.aviso || '') + ' Suivez la correction dans « Meu Espaço ».';
           }).withFailureHandler(function (e) { bt.disabled = false; $('ep-envio-st').textContent = e.message || e; }).enviarEpreuveCorrecao(EMAIL, r.id, ts, 'professor');
         });
       });
@@ -6437,7 +6437,7 @@ function abasEspace(ativa) {
       });
     }
     
-    // ---------- « Mon espace » saiu do app: fica no « Meu espaço » do site ----------
+    // ---------- « Mon espace » saiu do app: fica no « Meu Espaço » do site ----------
     // Tarefas e mensagens do professor, notas/correções e o caderno de erros das produções agora
     // são seções de meu-espaco.html. Para o aluno, estas telas levam para lá; a equipe continua com as do app.
     var MEU_ESPACO_SECAO = { abrirTarefas: 'tarefas', abrirNotes: 'producoes', abrirCarnet: 'revisao' };
@@ -6455,7 +6455,7 @@ function abasEspace(ativa) {
       return '<fieldset class="escolha-correcao tm-correcao"><legend>Qui corrige ?</legend>' +
         '<label' + (ia ? '' : ' class="indisponivel"') + '><input type="radio" name="tm-correcao" value="ia"' + (ia ? ' checked' : ' disabled') + '><span><b>L\'IA</b><small>' +
           (ia ? 'Correction immédiate : note sur 20, trame, corrections et version améliorée' + (oral ? ', à partir de l\'enregistrement et de la transcription' : '') + '. Sans crédit.' : 'Indisponible pour le moment.') + '</small></span></label>' +
-        '<label><input type="radio" name="tm-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Attendre la correction d\'un professeur</b><small>La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l\'examen. Vous la retrouvez dans « Meu espaço ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
+        '<label><input type="radio" name="tm-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Attendre la correction d\'un professeur</b><small>La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l\'examen. Vous la retrouvez dans « Meu Espaço ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
         '<label><input type="radio" name="tm-correcao" value="aovivo"><span><b>Un professeur en direct</b><small>Il suit votre ' + (oral ? 'parole (transcription)' : 'texte pendant que vous écrivez') + ' et peut vous parler par la voix. À l\'envoi, la production lui est envoyée pour la correction (1 crédit).</small></span></label></fieldset>';
     }
     function correcaoFazer() { var r = document.querySelector('input[name="tm-correcao"]:checked'); return r ? r.value : 'professor'; }
@@ -6527,7 +6527,7 @@ function abasEspace(ativa) {
           return;
         }
         confirmarEnvio({ titulo: 'Envoyer votre texte au professeur', custo: 1, rotulo: 'Envoyer au professeur',
-          texto: 'Votre texte (' + contarPalavras(texto) + ' mots) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l\'examen. Vous suivrez la correction dans « Meu espaço ».' }).then(function (ok) {
+          texto: 'Votre texte (' + contarPalavras(texto) + ' mots) entre dans la file du Sistema de Correção et sera corrigé sur la grille de l\'examen. Vous suivrez la correction dans « Meu Espaço ».' }).then(function (ok) {
           if (!ok) return;
           b.disabled = true; st.textContent = 'Envoi…';
           google.script.run.withSuccessHandler(function (r) {
@@ -6565,7 +6565,7 @@ function abasEspace(ativa) {
         return;
       }
       confirmarEnvio({ titulo: 'Envoyer votre enregistrement au professeur', custo: 1, rotulo: 'Envoyer au professeur',
-        texto: 'L\'enregistrement (' + formatarTempo(Math.round(d.duree || 0)) + ') et sa transcription entrent dans la file du Sistema de Correção. Vous suivrez la correction dans « Meu espaço ».' }).then(function (ok) {
+        texto: 'L\'enregistrement (' + formatarTempo(Math.round(d.duree || 0)) + ') et sa transcription entrent dans la file du Sistema de Correção. Vous suivrez la correction dans « Meu Espaço ».' }).then(function (ok) {
         if (!ok) return;
         b.disabled = true; d.st.textContent = 'Envoi…';
         enviarGravacao({ blob: d.blob, tache: d.tache, sujet: d.m.id, duree: d.duree, transcricao: d.transcricao, modo: 'professor' }).then(function (r) {

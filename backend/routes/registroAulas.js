@@ -56,8 +56,9 @@ async function fontes() {
       l.push({ chave, alunoId: m.alunoId?._id || null, nome, curso: m.curso || "", diaSemana: sl.diaSemana, hora: sl.horaInicio, inicio: m.criadoEm, fim, finalizada: m.status === "concluida" });
     });
   });
+  // nomes colocados à mão; vinculados a uma conta, contam como a mesma pessoa da conta
   ajustes.filter(a => a.tipo === "manual" && a.modalidade !== "turma").forEach(a =>
-    l.push({ chave: "a:" + a._id, alunoId: null, nome: a.nome, curso: "", diaSemana: a.diaSemana, hora: a.horaInicio, inicio: a.criadoEm, fim: null }));
+    l.push({ chave: "a:" + a._id, alunoId: a.alunoId || null, nome: a.nome, curso: "", diaSemana: a.diaSemana, hora: a.horaInicio, inicio: a.criadoEm, fim: null }));
   return l;
 }
 
@@ -77,10 +78,13 @@ function ocorrencias(fs, de, ate) {
   return out;
 }
 
+// A pessoa da aula: a conta do site (matrícula ou nome vinculado) ou, sem conta, o nome escrito.
+const pessoaDe = r => r.alunoId ? "u:" + r.alunoId : "n:" + String(r.nome || "").trim().toLowerCase();
+const DIAS_CURTOS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
 const publico = (r, agora) => {
   const passou = new Date(r.data).getTime() + (r.duracaoMin || 60) * 60000 < agora;
   return {
-    id: r._id ? String(r._id) : null, chave: r.chave, origem: r.origem || "grade", alunoId: r.alunoId ? String(r.alunoId) : null, nome: r.nome, curso: r.curso || "",
+    id: r._id ? String(r._id) : null, chave: r.chave, origem: r.origem || "grade", alunoId: r.alunoId ? String(r.alunoId) : null, pessoa: pessoaDe(r), nome: r.nome, curso: r.curso || "",
     data: r.data, dia: diaDe(new Date(r.data)), hora: new Date(new Date(r.data).getTime() - FUSO_MIN * 60000).toISOString().slice(11, 16),
     estado: r.estado || "prevista", aRegistrar: (r.estado || "prevista") === "prevista" && passou,
     professor: r.professor || "", conteudo: r.conteudo || "", observacao: r.observacao || "", justificativa: r.justificativa || "",
@@ -105,16 +109,26 @@ router.get("/", async (req, res) => {
     const itens = previstas.map(p => {
       const r = porChave.get(p.chave + "|" + p.data.getTime());
       if (r) porChave.delete(p.chave + "|" + p.data.getTime());
-      return publico(r ? { ...p, ...r } : p, agora);
+      return publico(r ? { ...p, ...r, alunoId: r.alunoId || p.alunoId } : p, agora);
     });
     // registradas que já não estão na grade (aluno saiu, horário mudou) e as avulsas continuam no histórico
     porChave.forEach(r => itens.push(publico(r, agora)));
     itens.sort((a, b) => new Date(a.data) - new Date(b.data) || a.nome.localeCompare(b.nome));
-    // resumo por aluno (no período)
+    // resumo por pessoa (no período): os horários da mesma conta (matrícula e nomes vinculados) juntos
+    const horariosDe = {};
+    fs2.forEach(f => {
+      const k = pessoaDe(f);
+      const h = horariosDe[k] = horariosDe[k] || { nome: f.nome, chaves: [], lista: [] };
+      if (!h.chaves.includes(f.chave)) h.chaves.push(f.chave);
+      const rot = DIAS_CURTOS[f.diaSemana] + " " + f.hora;
+      if (!h.lista.includes(rot)) h.lista.push(rot);
+    });
     const alunos = {};
     itens.forEach(i => {
-      const k = i.chave;
-      const a = alunos[k] = alunos[k] || { chave: k, nome: i.nome, curso: i.curso, total: 0, realizadas: 0, faltas: 0, justificadas: 0, canceladas: 0, aRegistrar: 0, previstas: 0 };
+      const k = i.pessoa;
+      const a = alunos[k] = alunos[k] || { pessoa: k, chave: i.chave, alunoId: i.alunoId, nome: (horariosDe[k] && horariosDe[k].nome) || i.nome, curso: i.curso, horarios: horariosDe[k] ? horariosDe[k].lista : [],
+        total: 0, realizadas: 0, faltas: 0, justificadas: 0, canceladas: 0, aRegistrar: 0, previstas: 0 };
+      if (!a.curso && i.curso) a.curso = i.curso;
       a.total++;
       if (i.estado === "realizada") a.realizadas++;
       else if (i.estado === "falta") a.faltas++;

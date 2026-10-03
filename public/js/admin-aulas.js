@@ -50,9 +50,13 @@ document.querySelectorAll('.top-tab').forEach(tab => {
     tab.classList.add('active');
     document.getElementById('tabModulos').style.display = tab.dataset.tab === 'modulos' ? 'block' : 'none';
     document.getElementById('tabEstatisticas').style.display = tab.dataset.tab === 'estatisticas' ? 'block' : 'none';
+    document.getElementById('tabPainel').style.display = tab.dataset.tab === 'painel' ? 'block' : 'none';
     if (tab.dataset.tab === 'estatisticas') carregarEstatisticas();
+    if (tab.dataset.tab === 'painel') QuadroEmbutido.criar(document.getElementById('tabPainel'), 'admin-correcoes.html', { titulo: 'Painel Administrativo' });
   });
 });
+// admin-aulas.html#painel abre direto o Painel Administrativo
+if (location.hash === '#painel') setTimeout(() => { const t = document.querySelector('.top-tab[data-tab="painel"]'); if (t) t.click(); }, 0);
 
 // ===================== DRAG AND DROP (genérico) =====================
 function ativarDragAndDrop(container, itemSelector, onReordenado) {
@@ -113,7 +117,8 @@ function renderModulos() {
       </div>
       <div class="acoes">
         <button type="button" data-editar-modulo="${m._id}" title="Editar"><img src="img/icones/edit-pencil.svg" alt="" style="width:1em; height:1em;"></button>
-        <button type="button" data-excluir-modulo="${m._id}" title="Excluir"><img src="img/icones/trash.svg" alt="" style="width:1em; height:1em;"></button>
+        ${m.ativo ? `<button type="button" data-excluir-modulo="${m._id}" title="Desativar (some para os alunos; dá para reativar)">⏸</button>` : ''}
+        <button type="button" data-apagar-modulo="${m._id}" title="Apagar de vez (com as aulas)"><img src="img/icones/trash.svg" alt="" style="width:1em; height:1em;"></button>
       </div>`;
     div.addEventListener('click', e => {
       if (e.target.closest('.acoes')) return;
@@ -135,7 +140,30 @@ document.getElementById('modulosLista').addEventListener('click', e => {
   if (editar) return abrirModalModulo(editar.dataset.editarModulo);
   const excluir = e.target.closest('[data-excluir-modulo]');
   if (excluir) return excluirModulo(excluir.dataset.excluirModulo);
+  const apagar = e.target.closest('[data-apagar-modulo]');
+  if (apagar) return apagarModulo(apagar.dataset.apagarModulo);
 });
+
+// Apagar de vez: o módulo, as aulas, os arquivos e o progresso dos alunos (não dá para desfazer).
+async function apagarModulo(id) {
+  const m = modulos.find(x => x._id === id);
+  const nome = m ? m.titulo : 'este módulo';
+  const n = m ? m.totalAulas : 0;
+  if (!confirm(`Apagar « ${nome} » DE VEZ?
+
+O módulo e as ${n} aula(s) dele, com vídeos, miniaturas e materiais, e o progresso dos alunos nessas aulas serão apagados. Não dá para desfazer.
+
+(Para só esconder dos alunos, use ⏸ Desativar.)`)) return;
+  const r = await fetch('/api/admin-aulas/modulos/' + id + '?definitivo=1', { method: 'DELETE', headers: authHeaders() });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) { alert(d.msg || 'Não foi possível apagar o módulo.'); return; }
+  if (moduloSelecionadoId === id) {
+    moduloSelecionadoId = null;
+    document.getElementById('aulasLista').innerHTML = '';
+    document.getElementById('aulasCardTitulo').textContent = 'Selecione um módulo';
+  }
+  carregarModulos();
+}
 
 async function excluirModulo(id) {
   if (!confirm('Desativar este módulo? Ele deixará de aparecer para os alunos.')) return;

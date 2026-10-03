@@ -175,3 +175,8 @@ textarea.ex-input { min-height: 130px; resize: vertical; line-height: 1.6; }
   .ex-cabecalho h1 { font-size: 1.35rem; }
   .ex-associar td:first-child { width: 45%; }
 }
+
+/* dentro da aba do dever (dever.html?…): sem navbar nem rodapé, fundo transparente */
+.ex-embutido #app-navbar, .ex-embutido .ex-footer { display: none !important; }
+.ex-embutido body { background: transparent !important; min-height: 0; }
+.ex-embutido .ex-modal { position: absolute; align-items: flex-start; padding-top: 24px; }
