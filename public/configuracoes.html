@@ -234,9 +234,8 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <script src="js/appShell.js"></script>
 <script src="js/estudoTimerGlobal.js"></script>
 <script>
-const AVATAR_PADRAO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="#3b96ff"/><circle cx="48" cy="38" r="18" fill="#ffffff"/><ellipse cx="48" cy="88" rx="30" ry="24" fill="#ffffff"/></svg>`
-);
+// foto padrão: a inicial do nome (gerada pelo appShell.js, igual à da navbar)
+const avatarPadrao = nome => (window.AppShell && window.AppShell.avatarInicial) ? window.AppShell.avatarInicial(nome) : '';
 const token = localStorage.getItem('token');
 function authHeaders() { return { Authorization: 'Bearer ' + token }; }
 function authHeadersJson() { return { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }; }
@@ -264,7 +263,8 @@ document.addEventListener('i18n:aplicado', () => {
 
 // ===================== PERFIL =====================
 function preencherPerfil(dados) {
-  document.getElementById('dashAvatar').src = dados.perfil?.foto || AVATAR_PADRAO;
+  document.getElementById('dashAvatar').src = dados.perfil?.foto || avatarPadrao(dados.nome);
+  if (window.AppShell && window.AppShell.fotoComReserva) window.AppShell.fotoComReserva(document.getElementById('dashAvatar'), dados.nome);
   document.getElementById('dashAvatar').onclick = () => window.AppShell.abrirModalFoto();
   document.getElementById('nomeInput').value = dados.nome || '';
   document.getElementById('telefoneInput').value = dados.telefone || '';

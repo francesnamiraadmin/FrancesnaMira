@@ -173,6 +173,7 @@ async function deveres(alunoId) {
   }));
   return {
     lista,
+    adiantaveis: await require("../utils/gerarDeveres").semanasAdiantaveis(alunoId).catch(() => []),
     atividadesEntregues: lista.reduce((t, d) => t + d.feitas, 0),
     deveresCompletos: { feitos: notas.length, media: notas.length ? Math.round(notas.reduce((t, n) => t + n.pct, 0) / notas.length) : null, ultimos: notas.sort((a, b) => new Date(b.data) - new Date(a.data)).slice(0, 6) },
     total: ds.length, concluidos: ds.filter(d => d.concluidoEm).length,

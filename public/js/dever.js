@@ -73,8 +73,10 @@
   }
 
   // Atualiza o andamento sem desmontar o que o aluno está fazendo: só redesenha as atividades
-  // que mudaram de estado (a não ser que o widget peça para continuar aberto, como o exercício
-  // embutido, que mostra a correção logo depois de entregar).
+  // que mudaram de estado — inclusive as que acabaram de ser liberadas (ex.: concluir o Règlement
+  // libera as outras na hora, sem recarregar). `opcoes.manterAberto` = índice da atividade que
+  // continua aberta (o exercício embutido mostra a correção logo depois de entregar); `true` =
+  // nenhuma é redesenhada só por ter sido feita (atualização vinda de outra aba).
   async function atualizar(novo, opcoes) {
     if (!novo || !novo.atividades) {
       const r = await fetch(`/api/deveres/minhas-semanas/${id}`, { headers: H() });
@@ -92,8 +94,12 @@
       const [txt, cls] = estadoTexto(a);
       const pill = raiz.querySelector(`[data-estado="${i}"]`);
       if (pill) { pill.textContent = txt; pill.className = "dv-estado " + cls; pill.closest(".dv-card").className = "dv-card " + cls; }
-      const mudou = antes && antes.atividades[i] && (feita(antes.atividades[i]) !== feita(a) || antes.atividades[i].bloqueada !== a.bloqueada);
-      if (mudou && !(opcoes && opcoes.manterAberto)) montarAtividade(a, i);
+      const ant = antes && antes.atividades[i];
+      const liberada = ant && ant.bloqueada !== a.bloqueada;
+      const feitaAgora = ant && feita(ant) !== feita(a);
+      const manter = opcoes && opcoes.manterAberto;
+      const aberta = manter === true || manter === i;
+      if (liberada || (feitaAgora && !aberta)) montarAtividade(a, i);
     });
     const rp = raiz.querySelector("#dvRodape");
     if (rp) rp.innerHTML = rodape(novo);
@@ -106,7 +112,8 @@
       const r = await fetch(`/api/deveres/minhas-semanas/${id}/concluir`, { method: "POST", headers: H() });
       const d = await r.json();
       if (!r.ok) { raiz.querySelector("#dvMsg").textContent = d.msg || "Não foi possível concluir."; b.disabled = false; return; }
-      atualizar(d);
+      // concluído: vai para o Meu Espaço (deveres), onde aparece « Adiantar Dever » se houver próxima semana
+      location.href = "meu-espaco.html?concluido=" + encodeURIComponent(id) + "#deveres";
       return;
     }
     const p = e.target.closest("[data-passo]");

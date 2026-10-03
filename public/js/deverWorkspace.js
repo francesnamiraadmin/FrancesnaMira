@@ -194,7 +194,7 @@ const DeverWorkspace = (() => {
         if (ev.data.modal) frame.scrollIntoView({ behavior: 'smooth', block: 'start' });
         if (ev.data.entregue && onAtualizado) {
           // atualiza o status da atividade, mas deixa o exercício aberto para o aluno rever a correção
-          fetch(`/api/deveres/minhas-semanas/${deverId}`, { headers: authHeaders() }).then(r => r.ok ? r.json() : null).then(d => { if (d) onAtualizado(d, { manterAberto: true }); }).catch(() => {});
+          fetch(`/api/deveres/minhas-semanas/${deverId}`, { headers: authHeaders() }).then(r => r.ok ? r.json() : null).then(d => { if (d) onAtualizado(d, { manterAberto: index }); }).catch(() => {});
         }
       };
       window.addEventListener('message', ouvir);

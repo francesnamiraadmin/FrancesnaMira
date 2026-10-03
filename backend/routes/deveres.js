@@ -772,6 +772,23 @@ router.post("/minhas-semanas/:deverId/atividades/:index/enviar", comTratamentoDe
   }
 });
 
+// « Adiantar Dever »: a próxima semana de um Plano-Base, liberada antes da data.
+router.get("/minhas-semanas-adiantaveis", async (req, res) => {
+  try { res.json(await require("../utils/gerarDeveres").semanasAdiantaveis(req.userId)); }
+  catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+router.post("/minhas-semanas/adiantar", async (req, res) => {
+  try {
+    if (!ehObjectId(req.body?.atribuicaoId)) return res.status(400).json({ msg: "Plano inválido." });
+    const d = await require("../utils/gerarDeveres").adiantarSemana(req.userId, req.body.atribuicaoId);
+    transmitir("dever-atualizado", { alunoId: req.userId });
+    res.json({ msg: `« ${d.titulo} » liberado. Bom trabalho!`, deverId: String(d._id) });
+  } catch (err) {
+    if (err.status) return res.status(err.status).json({ msg: err.msg });
+    console.error(err); res.status(500).json({ msg: "Erro no servidor." });
+  }
+});
+
 router.post("/minhas-semanas/:id/concluir", async (req, res) => {
   try {
     const dever = await DeverSemanal.findOne({ _id: req.params.id, alunoId: req.userId }).populate(POPULATE_CONTEUDO);

@@ -205,4 +205,38 @@ async function enriquecerDever(deverDoc) {
   return dever;
 }
 
-module.exports = { gerarSemanasPendentes, atualizarSemanasDoAluno, statusDever, podeConcluir, enriquecerDever, aplicarAtribuicoesBase, copiarAtividades, cursosAtivos };
+// « Adiantar Dever »: em cada Plano-Base ativo do aluno, se todas as semanas já liberadas estão
+// concluídas e ainda há semanas no plano, a próxima pode ser feita antes da data.
+async function semanasAdiantaveis(alunoId) {
+  const atribuicoes = await AtribuicaoPlanoBase.find({ alunoId, ativo: true }).lean();
+  const out = [];
+  for (const a of atribuicoes) {
+    const plano = await PlanoBase.findById(a.planoBaseId).select("nome curso semanas.numero semanas.titulo semanas.atividades.tipo").lean();
+    if (!plano || !plano.semanas || !plano.semanas.length) continue;
+    const geradas = await DeverSemanal.find({ alunoId, planoBaseId: a.planoBaseId }).select("numeroSemana concluidoEm").lean();
+    if (geradas.some(d => !d.concluidoEm)) continue;
+    const ultima = geradas.reduce((m, d) => Math.max(m, d.numeroSemana || 0), 0);
+    const prox = plano.semanas.slice().sort((x, y) => x.numero - y.numero).find(s => s.numero > ultima);
+    if (!prox) continue;
+    out.push({ atribuicaoId: String(a._id), plano: plano.nome, curso: plano.curso || a.curso || "", numero: prox.numero, titulo: prox.titulo, atividades: (prox.atividades || []).length,
+      dataPrevista: new Date(new Date(a.dataInicio).getTime() + (prox.numero - 1) * 7 * DIA_MS) });
+  }
+  return out;
+}
+async function adiantarSemana(alunoId, atribuicaoId) {
+  const lista = await semanasAdiantaveis(alunoId);
+  const alvo = lista.find(x => x.atribuicaoId === String(atribuicaoId));
+  if (!alvo) throw Object.assign(new Error("x"), { status: 400, msg: "Não há semana para adiantar: conclua as semanas já liberadas primeiro." });
+  const a = await AtribuicaoPlanoBase.findById(atribuicaoId);
+  const plano = await PlanoBase.findById(a.planoBaseId);
+  const semana = plano.semanas.find(s => s.numero === alvo.numero);
+  const agora = new Date();
+  const limitePrevisto = new Date(new Date(a.dataInicio).getTime() + ((semana.numero - 1) * 7 + 6) * DIA_MS);
+  return DeverSemanal.create({
+    alunoId, planoBaseId: a.planoBaseId, numeroSemana: semana.numero, titulo: semana.titulo, curso: plano.curso || a.curso || null,
+    dataInicio: agora, dataLimite: limitePrevisto > agora ? limitePrevisto : new Date(agora.getTime() + 6 * DIA_MS),
+    atividades: copiarAtividades(semana.atividades)
+  });
+}
+
+module.exports = { semanasAdiantaveis, adiantarSemana, gerarSemanasPendentes, atualizarSemanasDoAluno, statusDever, podeConcluir, enriquecerDever, aplicarAtribuicoesBase, copiarAtividades, cursosAtivos };

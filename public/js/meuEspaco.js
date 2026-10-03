@@ -258,7 +258,7 @@
       const alerta = p.ativo && p.diasRestantes != null && p.diasRestantes <= 15;
       return `<article class="me-plano ${p.ativo ? "" : "off"}" style="--c1:${c1};--c2:${c2}">
         <div class="me-plano-topo"><div><small>${esc(p.curso)}</small><h3>${p.tier ? "Plano " + esc(p.tier) : p.packPrestige ? "Pack Prestige" : "Plano"}</h3></div><span class="me-plano-st">${p.ativo ? "● ativo" : "expirado"}</span></div>
-        <div class="me-plano-venc"><b>${p.ativo ? "Válido até" : "Venceu em"} ${fmtD(p.dataVencimento)}</b><span class="${alerta ? "alerta" : ""}">${restam(p.diasRestantes)}</span></div>
+        <div class="me-plano-venc"><b>${p.dataVencimento ? (p.ativo ? "Válido até " : "Venceu em ") + fmtD(p.dataVencimento) : (p.ativo ? "Ativo, sem data de vencimento" : "Inativo")}</b><span class="${alerta ? "alerta" : ""}">${restam(p.diasRestantes)}</span></div>
         ${pct != null ? `<div class="me-plano-barra" title="${pct}% do período ainda pela frente"><i style="width:${pct}%"></i></div>` : ""}
         <ul class="me-plano-mods">${["aulas", "producao", "plataforma"].map(m => `<li class="${p.modulos.includes(m) ? "sim" : "nao"}">${p.modulos.includes(m) ? "✓" : "—"} ${MODULO_NOME[m]}</li>`).join("")}</ul>
         <div class="me-plano-rod">${p.dataInicio ? `<small>desde ${fmtD(p.dataInicio)}</small>` : ""}
@@ -294,8 +294,14 @@
     const chips = t => Object.entries(t || {}).map(([k, n]) => `<span>${(TIPO_DEVER[k] || TIPO_DEVER.outros)[0]} ${n}</span>`).join("");
     const prazo = x => { const n = Math.ceil((new Date(x.dataLimite) - Date.now()) / 864e5); return n > 1 ? `faltam ${n} dias` : n === 1 ? "termina amanhã" : n === 0 ? "termina hoje" : `atrasado há ${-n} dia(s)`; };
     const medalha = x => x.noPrazo ? (x.feitas === x.total ? "🏆" : "🥇") : "🎖️";
+    const recem = new URLSearchParams(location.search).get("concluido");
+    const recemDever = recem && l.find(x => x.id === recem);
+    const adiantar = (dv.adiantaveis || []).map(a => `<div class="me-adiantar"><span class="ic">🚀</span><div><small>${esc(a.plano)}${a.curso ? " · " + esc(a.curso) : ""} · semana ${a.numero}</small><b>${esc(a.titulo)}</b>
+        <small>${a.atividades} atividade(s) · prevista para ${fmtData(a.dataPrevista)}</small></div><button type="button" class="me-btn cheio" style="--c:#16a34a" data-adiantar="${esc(a.atribuicaoId)}">Adiantar Dever →</button></div>`).join("");
     return `<section class="me-secao" id="deveres" style="--c:#f59e0b"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Meus deveres de casa</h2>
         <p>${l.length} dever(es) · ${feitos.length} concluído(s) · ${fazer.length} para fazer</p></div><a class="me-btn" href="meus-deveres.html">Ver todos</a></div>
+      ${recemDever ? `<div class="me-parabens"><span>🎉</span><div><b>Dever concluído: « ${esc(recemDever.titulo)} »</b><small>${recemDever.noPrazo ? "Entregue no prazo. " : ""}Ele já está na sua galeria de conquistas.</small></div></div>` : ""}
+      ${adiantar ? `<div class="me-adiantar-box"><h3>Quer seguir em frente?</h3>${adiantar}</div>` : ""}
       <div class="me-conquistas">
         <div class="me-conq" style="--c:#f59e0b"><span>🏆</span><b>${feitos.length}</b><small>deveres concluídos</small></div>
         <div class="me-conq" style="--c:${COR.verde}"><span>✅</span><b>${dv.atividadesEntregues || 0}</b><small>atividades entregues</small></div>
@@ -311,7 +317,7 @@
         <div class="me-card c7"><h3>Galeria do que você já fez <small>${feitos.length}</small></h3>${feitos.length ? `<div class="me-trofeus">${feitos.map(x => `<a class="me-trofeu" href="dever.html?id=${esc(x.id)}" target="_blank" rel="noopener" title="Rever este dever">
             <span class="medalha">${medalha(x)}</span><b>${esc(x.titulo)}</b><small>concluído em ${fmtData(x.concluidoEm)}${x.noPrazo ? " · no prazo" : ""}</small><div class="me-dever-tipos">${chips(x.tipos)}</div></a>`).join("")}</div>`
           : '<div class="me-vazio">Quando você concluir um dever, ele ganha uma medalha aqui. 🏅</div>'}</div>
-      </div></section>`;
+      </div>${blocoTarefas(d)}</section>`;
   }
 
   // Caderno de Revisão: questões salvas na Plataforma + o caderno das produções (erros, palavras, sujets).
@@ -342,33 +348,35 @@
       </div></section>`;
   }
 
-  // Tarefas do professor (antes « Mon espace » do Ambiente de Produção): devoirs, mensagens e provas.
-  function secTarefas(d) {
+  // Tarefas e mensagens do professor (antes « Mon espace » do Ambiente de Produção): ficam dentro de
+  // « Meus deveres de casa » (âncora #tarefas mantida para os links antigos).
+  function blocoTarefas(d) {
     const devs = d.ambiente?.devoirs || [], msgs = d.ambiente?.mensagens || [];
     const pend = devs.filter(x => !x.feito), feitos = devs.filter(x => x.feito);
     const item = x => `<a class="me-item" style="--c:${x.feito ? COR.verde : COR.anil}" href="${x.link ? esc(x.link) : "producao.html#devoir=" + encodeURIComponent(x.id)}">
       <span class="marca">${x.feito ? "✅" : x.tipo === "oral" ? "🎙️" : "✍️"}</span><span class="txt"><b>${esc(x.titre)}</b><small>${esc(x.tipoNome || "")}${x.tache ? " · " + esc(TAREFA[x.tache] || x.tache) : ""} · ${fmtData(x.data)}${x.mensagem ? " · " + esc(x.mensagem) : ""}</small></span>
       <span class="me-pill">${x.feito ? (x.score !== "" && x.score != null ? `${x.score}${x.total ? "/" + x.total : ""}` : "feito") : "fazer →"}</span></a>`;
-    return `<section class="me-secao" id="tarefas" style="--c:${COR.anil}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Tarefas do professor</h2>
-      <p>${pend.length} tarefa(s) a fazer · ${msgs.filter(m => !m.feito).length} mensagem(ns) a ler</p></div><a class="me-btn cheio" style="--c:${COR.anil}" href="producao.html#epreuve">Minhas provas</a></div>
+    if (!devs.length && !msgs.length) return "";
+    return `<div class="me-tarefas" id="tarefas"><h3 class="me-sub-titulo">📮 Tarefas e mensagens do professor</h3>
+      <p class="me-sub-p">${pend.length} tarefa(s) do Ambiente de Produção a fazer · ${msgs.filter(m => !m.feito).length} mensagem(ns) a ler · <a href="producao.html#epreuve">Minhas provas →</a></p>
       <div class="me-grade">
         <div class="me-card c6"><h3>A fazer <small>${pend.length}</small></h3>${pend.length ? `<div class="me-lista">${pend.map(item).join("")}</div>` : '<div class="me-vazio">Nenhuma tarefa pendente. 🎉</div>'}
           ${feitos.length ? `<details style="margin-top:12px;"><summary>✓ Tarefas concluídas (${feitos.length})</summary><div class="me-lista" style="margin-top:8px;">${feitos.map(item).join("")}</div></details>` : ""}</div>
         <div class="me-card c6"><h3>Mensagens do professor</h3>${msgs.length ? `<div class="me-lista">${msgs.map(m => `<div class="me-item" style="--c:${m.feito ? COR.verde : COR.laranja}">
           <span class="marca">${m.feito ? "✅" : "💬"}</span><span class="txt" style="white-space:normal;"><small>${esc(m.de || "Professor")} · ${fmtData(m.data)}</small><span style="display:block;font-size:.86rem;line-height:1.5;">${esc(m.texto)}</span></span>
           <button class="me-btn" type="button" data-msg="${esc(m.id)}" data-feito="${m.feito ? "0" : "1"}">${m.feito ? "Reabrir" : "✓ Feito"}</button></div>`).join("")}</div>` : '<div class="me-vazio">Nenhuma mensagem.</div>'}</div>
-      </div></section>`;
+      </div></div>`;
   }
   const rpc = (nome, args) => fetch("/api/modeles/rpc/" + nome, { method: "POST", headers: Object.assign(H(), { "Content-Type": "application/json" }), body: JSON.stringify({ args }) });
 
   // ---------------- montagem ----------------
   function montar(d) {
     const ehEquipe = ["admin", "professor"].includes(d.aluno.papel);
-    const nav = [...(ehEquipe ? [["equipe", "Painel da equipe", "#1c2b3a"]] : []), ["geral", "Visão geral", COR.roxo], ["assinatura", "Assinatura", "#d9a300"], ["deveres", "Deveres", "#f59e0b"], ["questoes", "Questões", COR.azul], ["erros", "Caderno de erros", COR.vermelho], ["revisao", "Caderno de Revisão", COR.roxo], ["producoes", "Produções", COR.rosa], ["tarefas", "Tarefas do professor", COR.anil],
+    const nav = [...(ehEquipe ? [["equipe", "Painel da equipe", "#1c2b3a"]] : []), ["geral", "Visão geral", COR.roxo], ["assinatura", "Assinatura", "#d9a300"], ["deveres", "Deveres", "#f59e0b"], ["questoes", "Questões", COR.azul], ["erros", "Caderno de erros", COR.vermelho], ["revisao", "Caderno de Revisão", COR.roxo], ["producoes", "Produções", COR.rosa],
       ["simulados", "Simulados", COR.laranja], ["aulas", "Aulas", COR.verde], ["favoritos", "Favoritos", COR.rosa], ["rotina", "Rotina", COR.teal]];
     raiz.innerHTML = heroi(d) + kpis(d) +
       `<nav class="me-nav" aria-label="Seções do Meu Espaço">${nav.map(([id, n, c]) => `<a href="#${id}" style="--c:${c}" data-sec="${id}">${n}</a>`).join("")}</nav>` +
-      secEquipe(d) + visaoGeral(d) + secAssinatura(d) + secDeveres(d) + secQuestoes(d) + secErros(d) + secRevisao(d) + secProducoes(d) + secTarefas(d) + secSimulados(d) + secAulas(d) + secFavoritos(d) + secRotina(d);
+      secEquipe(d) + visaoGeral(d) + secAssinatura(d) + secDeveres(d) + secQuestoes(d) + secErros(d) + secRevisao(d) + secProducoes(d) + secSimulados(d) + secAulas(d) + secFavoritos(d) + secRotina(d);
     desenharErros(d);
     // barras animadas
     requestAnimationFrame(() => raiz.querySelectorAll("[data-w]").forEach(b => { b.style.width = b.dataset.w + "%"; }));
@@ -406,6 +414,15 @@
           bm.textContent = feito ? "Reabrir" : "✓ Feito";
         }).catch(() => { bm.disabled = false; });
       }
+    });
+    // « Adiantar Dever »: libera a próxima semana do Plano-Base e abre o dever
+    raiz.addEventListener("click", async ev => {
+      const b = ev.target.closest("[data-adiantar]"); if (!b) return;
+      b.disabled = true; b.textContent = "Liberando…";
+      const r = await fetch("/api/deveres/minhas-semanas/adiantar", { method: "POST", headers: Object.assign(H(), { "Content-Type": "application/json" }), body: JSON.stringify({ atribuicaoId: b.dataset.adiantar }) });
+      const out = await r.json().catch(() => ({}));
+      if (r.ok && out.deverId) { location.href = "dever.html?id=" + encodeURIComponent(out.deverId); return; }
+      b.disabled = false; b.textContent = out.msg || "Não foi possível adiantar";
     });
     raiz.addEventListener("change", ev => { if (ev.target.matches("[data-em]")) { errosEstado.materia = ev.target.value; desenharErros(d); } });
     // explicação detalhada (pegadinhas e dicas) ao abrir um erro

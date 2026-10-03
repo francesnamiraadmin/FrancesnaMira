@@ -72,6 +72,45 @@
     return v != null && String(v).trim() !== '';
   }
 
+  // Uma página só está completa com todas as questões respondidas (o regulamento, com todas as
+  // regras confirmadas). Só se avança para a próxima — e só se corrige a parte — com ela completa.
+  function faltamNaSecao(s) {
+    if (!s) return 0;
+    if (s.tipo === 'regulamento') return s.regras.length - confirmacoes.size;
+    return (s.itens || []).filter(i => !temResposta(i)).length;
+  }
+  function primeiraIncompletaAntes(i) {
+    for (let k = 0; k < i; k++) if (faltamNaSecao(def.secoes[k])) return k;
+    return -1;
+  }
+  function atualizarNavegacao() {
+    if (!def) return;
+    const s = def.secoes[atual], faltam = faltamNaSecao(s);
+    const ultima = atual === def.secoes.length - 1;
+    const prox = $('btnProxima');
+    prox.disabled = faltam > 0;
+    prox.title = faltam ? `Responda ${faltam === 1 ? 'a questão que falta' : 'as ' + faltam + ' questões que faltam'} nesta página para ${ultima ? 'concluir' : 'continuar'}.` : '';
+    $('exProgressoTexto').textContent = `Parte ${atual + 1} de ${def.secoes.length}` + (faltam ? ` · falta(m) ${faltam} resposta(s) nesta página` : '');
+    const corr = $('btnCorrigirSecao');
+    if (corr) {
+      corr.disabled = faltam > 0;
+      corr.title = faltam ? 'Responda todas as questões desta parte para poder corrigir.' : '';
+      const placar = $('placarSecao');
+      if (placar && faltam && !placar.dataset.resultado) placar.textContent = `Responda todas as questões para corrigir (faltam ${faltam}).`;
+      if (placar && !faltam && !placar.dataset.resultado) placar.textContent = '';
+    }
+    document.querySelectorAll('#exAbas [data-aba]').forEach(b => {
+      const i = Number(b.dataset.aba), bloq = i > atual && primeiraIncompletaAntes(i) >= 0;
+      b.classList.toggle('bloqueada', bloq); b.disabled = bloq;
+      b.title = bloq ? 'Complete as páginas anteriores primeiro.' : '';
+    });
+  }
+  function avisarFaltando(s) {
+    const box = (s.itens || []).find(i => !temResposta(i));
+    const el = box && document.querySelector(`[data-item-box="${box.id}"]`);
+    if (el) { el.classList.add('ex-falta'); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => el.classList.remove('ex-falta'), 1800); }
+  }
+
   function renderCabecalho() {
     const tot = totalItens();
     const pct = tot ? Math.round((respondidos() / tot) * 100) : 0;
@@ -86,6 +125,7 @@
   }
 
   function renderAbas() {
+    setTimeout(atualizarNavegacao, 0);
     $('exAbas').innerHTML = def.secoes.map((s, i) => `
       <button class="ex-aba${i === atual ? ' ativa' : ''}" data-aba="${i}">
         ${feitas.has(s.id) ? '<span class="ok">✓</span>' : `<span>${ICONES[s.tipo] || '•'}</span>`}${esc(s.titulo || ROTULOS[s.tipo])}
@@ -98,6 +138,16 @@
 
   function irPara(i) {
     if (i < 0 || i >= def.secoes.length) return;
+    // para frente, só com as páginas anteriores completas
+    if (i > atual) {
+      const k = primeiraIncompletaAntes(i);
+      if (k >= 0) {
+        if (k !== atual) { atual = k; renderAbas(); renderSecao(); }
+        avisarFaltando(def.secoes[k]);
+        $('exProgressoTexto').textContent = 'Responda todas as questões desta página antes de continuar.';
+        return;
+      }
+    }
     const saindo = def.secoes[atual];
     if (saindo && (saindo.tipo === 'video' || saindo.tipo === 'aula' || saindo.tipo === 'leitura')) feitas.add(saindo.id);
     pararLeitura();
@@ -131,6 +181,7 @@
     $('btnAnterior').disabled = atual === 0;
     $('btnProxima').textContent = atual === def.secoes.length - 1 ? 'Concluir' : 'Próxima →';
     $('exProgressoTexto').textContent = `Parte ${atual + 1} de ${def.secoes.length}`;
+    atualizarNavegacao();
   }
 
   // leitura com glossário e leitura em voz alta (parágrafo a parágrafo)
@@ -203,7 +254,7 @@
       const i = Number(cb.dataset.regra);
       if (cb.checked) confirmacoes.add(i); else confirmacoes.delete(i);
       cb.closest('.ex-regra').classList.toggle('lida', cb.checked);
-      salvarRascunho(); atualizar();
+      salvarRascunho(); atualizar(); atualizarNavegacao();
     }));
     atualizar();
   }
@@ -328,6 +379,7 @@
   function aoResponder() {
     clearTimeout(tRascunho); tRascunho = setTimeout(salvarRascunho, 400);
     renderCabecalho();
+    atualizarNavegacao();
   }
 
   function limparFeedback(id) {
@@ -356,12 +408,9 @@
 
   async function corrigirSecao(s) {
     const btn = $('btnCorrigirSecao');
-    const faltam = s.itens.filter(i => i.tipo !== 'livre' && !temResposta(i)).length;
-    if (faltam && !btn.dataset.confirmado) {
-      $('placarSecao').textContent = `Faltam ${faltam} resposta(s). Clique de novo para corrigir mesmo assim.`;
-      btn.dataset.confirmado = '1';
-      return;
-    }
+    // só corrige com todas as questões desta parte respondidas
+    const faltam = faltamNaSecao(s);
+    if (faltam) { $('placarSecao').textContent = `Responda todas as questões para corrigir (faltam ${faltam}).`; avisarFaltando(s); return; }
     btn.disabled = true;
     try {
       const res = await fetch(`/api/exercicios/${encodeURIComponent(slug)}/corrigir`, {
@@ -374,11 +423,12 @@
       s.itens.forEach(mostrarFeedback);
       const r = data.resultado.porSecao[s.id];
       $('placarSecao').textContent = r.total ? `${r.pontos} de ${r.total} (${Math.round(r.pontos / r.total * 100)}%)` : '';
+      $('placarSecao').dataset.resultado = '1';
       if (r.total && r.pontos === r.total) feitas.add(s.id);
       renderAbas();
     } catch (e) {
       $('placarSecao').textContent = e.message;
-    } finally { btn.disabled = false; delete btn.dataset.confirmado; }
+    } finally { btn.disabled = false; atualizarNavegacao(); }
   }
 
   // áudio da parte (prova): limita o número de reproduções
@@ -409,6 +459,8 @@
 
   // ---------- entrega final ----------
   async function concluir() {
+    const k = primeiraIncompletaAntes(def.secoes.length);
+    if (k >= 0) { if (k !== atual) { atual = k; renderAbas(); renderSecao(); } avisarFaltando(def.secoes[k]); $('exProgressoTexto').textContent = 'Responda todas as questões antes de concluir.'; return; }
     const secReg = def.secoes.find(s => s.tipo === 'regulamento');
     if (secReg && confirmacoes.size < secReg.regras.length) {
       irPara(def.secoes.indexOf(secReg));

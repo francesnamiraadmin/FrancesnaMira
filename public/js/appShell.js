@@ -4,9 +4,34 @@
 // Especializadas). Faz a guarda de autenticação, busca /api/auth/me uma vez,
 // renderiza a navbar em #app-navbar e avisa a página via evento "appshell:ready".
 (function () {
-  const AVATAR_PADRAO = 'data:image/svg+xml;utf8,' + encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="#3b96ff"/><circle cx="48" cy="38" r="18" fill="#ffffff"/><ellipse cx="48" cy="88" rx="30" ry="24" fill="#ffffff"/></svg>`
-  );
+  // Foto padrão: a inicial do nome num círculo colorido (a cor vem do nome, sempre a mesma para a
+  // mesma pessoa). Gerada como PNG — o htmlSeguro.js só deixa passar imagens data: em PNG/JPG/GIF/WebP.
+  const CORES_AVATAR = ["#2563eb", "#db2777", "#7c3aed", "#0d9488", "#ea580c", "#16a34a", "#4f46e5", "#be185d", "#0891b2", "#b45309"];
+  const cacheAvatar = {};
+  function avatarInicial(nome) {
+    const n = String(nome || "").trim();
+    const letra = (n.charAt(0) || "?").toUpperCase();
+    if (cacheAvatar[n]) return cacheAvatar[n];
+    let h = 0; for (const ch of n) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    try {
+      const c = document.createElement("canvas"); c.width = c.height = 192;
+      const g = c.getContext("2d");
+      const cor = CORES_AVATAR[h % CORES_AVATAR.length];
+      const grad = g.createLinearGradient(0, 0, 192, 192);
+      grad.addColorStop(0, cor); grad.addColorStop(1, CORES_AVATAR[(h + 3) % CORES_AVATAR.length]);
+      g.fillStyle = grad; g.beginPath(); g.arc(96, 96, 96, 0, Math.PI * 2); g.fill();
+      g.fillStyle = "#fff"; g.font = "700 96px Poppins, 'Segoe UI', Arial, sans-serif"; g.textAlign = "center"; g.textBaseline = "middle";
+      g.fillText(letra, 96, 102);
+      return (cacheAvatar[n] = c.toDataURL("image/png"));
+    } catch (e) { return ""; }
+  }
+  const AVATAR_PADRAO = () => avatarInicial(window.AppShell && window.AppShell.dadosConta && window.AppShell.dadosConta.nome);
+  // uma foto que não carrega (arquivo apagado, link quebrado) também volta para a inicial
+  function fotoComReserva(img, nome) {
+    if (!img || img.dataset.reserva) return;
+    img.dataset.reserva = "1";
+    img.addEventListener("error", () => { const r = avatarInicial(nome); if (r && img.src !== r) img.src = r; });
+  }
 
   const ESTILOS_PLANO = {
     Essentiel: { background: "rgba(200,160,0,0.35)", border: "#c8a000", color: "#3a2e00" },
@@ -67,7 +92,6 @@
         { nome: "Caderno de erros", href: "meu-espaco.html#erros", icone: "img/icones/caderno.svg" },
         { nome: "Caderno de Revisão", href: "meu-espaco.html#revisao", icone: "img/icones/caderno.svg" },
         { nome: "Produções e correções", href: "meu-espaco.html#producoes", icone: "img/icones/writing-hand.svg" },
-        { nome: "Tarefas do professor", href: "meu-espaco.html#tarefas", icone: "img/icones/cap.svg" },
         { nome: "Dever de casa", href: "meus-deveres.html", icone: "img/icones/check.svg" },
         { nome: "Minhas inscrições", href: "minhas-inscricoes.html", icone: "img/icones/document.svg" },
         { nome: "Minhas matrículas", href: "minhas-matriculas.html", icone: "img/icones/calendar.svg" }
@@ -85,6 +109,8 @@
 
   window.AppShell = {
     dadosConta: null,
+    avatarInicial,
+    fotoComReserva,
     detalhesAcesso(chave) {
       const d = window.AppShell.dadosConta;
       // Fontes depreciadas (plano/produtosAvulsos únicos, sobrescritos a cada compra) —
@@ -131,7 +157,7 @@
   document.addEventListener("click", fecharTodosDropdowns);
 
   function montarModalFoto() {
-    const foto = window.AppShell.dadosConta.perfil?.foto || AVATAR_PADRAO;
+    const foto = window.AppShell.dadosConta.perfil?.foto || AVATAR_PADRAO();
     const overlay = document.createElement("div");
     overlay.className = "app-modal-overlay";
     overlay.innerHTML = `
@@ -256,7 +282,7 @@
     if (!root) return;
 
     const primeiroNome = (dadosConta.nome || "").split(" ")[0] || "Aluno";
-    const foto = dadosConta.perfil?.foto || AVATAR_PADRAO;
+    const foto = dadosConta.perfil?.foto || AVATAR_PADRAO();
     // Planos ativos: o modelo novo (um plano por curso, planos[]) e o campo antigo (plano), para
     // quem ainda não migrou. O seletor mostra o melhor deles; o menu lista todos com a validade.
     const agora = Date.now();
@@ -305,7 +331,7 @@
           </div>
           <div class="app-nav-item">
             <button class="app-nav-user" id="userDropdownBtn">
-              <img src="${foto}" alt="">
+              <img src="${foto}" alt="" class="app-nav-foto">
               <span>Olá, ${primeiroNome}</span> <img src="img/icones/chevron-down.svg" alt="" style="width:0.7em; height:0.7em; vertical-align:0.05em;">
             </button>
             <div class="app-dropdown" id="userDropdown">
@@ -321,6 +347,7 @@
           </div>
         </div>
       </div>`;
+    fotoComReserva(root.querySelector(".app-nav-foto"), dadosConta.nome);
 
     ligarDropdown("planoDropdownBtn", "planoDropdown");
     ligarDropdown("userDropdownBtn", "userDropdown");

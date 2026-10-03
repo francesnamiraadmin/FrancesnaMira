@@ -180,3 +180,9 @@ textarea.ex-input { min-height: 130px; resize: vertical; line-height: 1.6; }
 .ex-embutido #app-navbar, .ex-embutido .ex-footer { display: none !important; }
 .ex-embutido body { background: transparent !important; min-height: 0; }
 .ex-embutido .ex-modal { position: absolute; align-items: flex-start; padding-top: 24px; }
+
+/* páginas à frente bloqueadas até a atual estar completa; questão que falta pisca */
+.ex-aba.bloqueada { opacity: .45; cursor: not-allowed; }
+.ex-btn:disabled { opacity: .5; cursor: not-allowed; }
+.ex-falta { animation: exFalta 1.6s ease; }
+@keyframes exFalta { 0%, 100% { box-shadow: none; } 20%, 60% { box-shadow: 0 0 0 3px #f59e0b; } }

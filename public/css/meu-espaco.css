@@ -247,3 +247,62 @@ a.me-item:hover { transform: translateX(3px); border-color: var(--c, var(--me-az
 @media (max-width: 900px) { .me-card.c5, .me-card.c7 { grid-column: span 12; } }
 .me-card.c6 { grid-column: span 6; }
 @media (max-width: 900px) { .me-card.c6 { grid-column: span 12; } }
+
+/* barra de seções: no computador quebra em linhas centralizadas (nenhum item cortado na borda); no celular desliza */
+@media (min-width: 701px) {
+  .me-nav { flex-wrap: wrap; justify-content: center; overflow: visible; border-radius: 26px; row-gap: 4px; }
+  .me-nav a { padding: 7px 14px; }
+}
+
+/* ============ Meu Espaço: tudo centralizado (títulos, textos, temas) — só nesta página ============ */
+#meuEspaco { text-align: center; }
+#meuEspaco .me-heroi-linha { justify-content: center; }
+#meuEspaco .me-ola { text-align: center; }
+#meuEspaco .me-chips, #meuEspaco .me-chips-mots, #meuEspaco .me-filtros, #meuEspaco .me-contagem, #meuEspaco .me-dever-tipos, #meuEspaco .me-plano-acoes, #meuEspaco .me-acoes, #meuEspaco .me-favs, #meuEspaco .me-sim-provas { justify-content: center; }
+#meuEspaco .me-secao-cab { flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+#meuEspaco .me-secao-cab h2 { justify-content: center; }
+#meuEspaco .me-card h3 { justify-content: center; text-align: center; flex-wrap: wrap; }
+#meuEspaco .me-kpi { text-align: center; }
+#meuEspaco .me-item .txt { text-align: center; }
+#meuEspaco .me-item .txt b { white-space: normal; }
+#meuEspaco .me-erro, #meuEspaco .me-erro p, #meuEspaco .me-erro .explica, #meuEspaco .me-erro details summary { text-align: center; }
+#meuEspaco .me-erro .topo { justify-content: center; flex-wrap: wrap; }
+#meuEspaco .me-erro .explica ul { display: inline-block; text-align: left; }
+#meuEspaco .me-dever-cab { flex-direction: column; align-items: center; text-align: center; }
+#meuEspaco .me-dever { align-items: center; text-align: center; }
+#meuEspaco .me-dever-barra { align-self: stretch; }
+#meuEspaco .me-conq, #meuEspaco .me-eq { text-align: center; align-items: center; }
+#meuEspaco .me-eq .ic { align-self: center; }
+#meuEspaco .me-plano { text-align: center; align-items: center; }
+#meuEspaco .me-plano-topo { flex-direction: column; align-items: center; gap: 6px; }
+#meuEspaco .me-plano-venc { align-items: center; }
+#meuEspaco .me-plano-venc span.alerta { align-self: center; }
+#meuEspaco .me-plano-barra { align-self: stretch; }
+#meuEspaco .me-plano-mods { align-items: center; }
+#meuEspaco .me-plano-rod { align-items: center; }
+#meuEspaco .me-mot { justify-content: center; }
+#meuEspaco .me-grafico, #meuEspaco .me-barras { text-align: left; }
+/* seções aparecem abaixo da barra de seções (que pode ter duas linhas) */
+#meuEspaco .me-secao { scroll-margin-top: 200px; }
+/* grades com poucos cartões ficam no centro, com cartões de largura limitada */
+#meuEspaco .me-conquistas { grid-template-columns: repeat(auto-fit, minmax(180px, 240px)); justify-content: center; }
+#meuEspaco .me-trofeus { grid-template-columns: repeat(auto-fit, minmax(160px, 200px)); justify-content: center; }
+#meuEspaco .me-planos { grid-template-columns: repeat(auto-fit, minmax(280px, 360px)); justify-content: center; }
+#meuEspaco .me-equipe { grid-template-columns: repeat(auto-fit, minmax(200px, 250px)); justify-content: center; }
+#meuEspaco .me-heat svg { margin: 0 auto; }
+
+/* dever concluído agora e « Adiantar Dever » */
+.me-parabens { display: flex; gap: 14px; align-items: center; justify-content: center; padding: 16px 20px; margin-bottom: 14px; border-radius: 20px; color: #fff; background: linear-gradient(120deg, #16a34a, #0d9488); box-shadow: 0 18px 36px -24px #16a34a; animation: meSobe .5s ease; }
+.me-parabens span { font-size: 2rem; } .me-parabens b { display: block; font-size: 1rem; } .me-parabens small { opacity: .9; }
+@keyframes meSobe { from { transform: translateY(10px); opacity: 0; } to { transform: none; opacity: 1; } }
+.me-adiantar-box { margin-bottom: 14px; padding: 16px; border-radius: 20px; border: 2px dashed rgba(22,163,74,.45); background: rgba(22,163,74,.06); }
+.me-adiantar-box h3 { margin: 0 0 10px; font: 700 1.05rem 'Playfair Display', serif; }
+.me-adiantar { display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; padding: 10px; }
+.me-adiantar .ic { font-size: 1.8rem; }
+.me-adiantar b { display: block; font-size: .95rem; } .me-adiantar small { display: block; font-size: .74rem; color: var(--me-suave); }
+
+/* tarefas e mensagens do professor, dentro de « Meus deveres de casa » */
+#meuEspaco .me-tarefas { margin-top: 18px; scroll-margin-top: 200px; }
+#meuEspaco .me-sub-titulo { margin: 0 0 4px; font: 700 1.15rem 'Playfair Display', serif; }
+#meuEspaco .me-sub-p { margin: 0 0 10px; font-size: .84rem; color: var(--me-suave); }
+#meuEspaco .me-sub-p a { color: var(--me-azul, #2563eb); font-weight: 700; text-decoration: none; }
