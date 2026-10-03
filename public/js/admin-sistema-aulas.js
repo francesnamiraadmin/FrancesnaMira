@@ -78,7 +78,7 @@
   document.getElementById("buscaAlunos").addEventListener("input", renderAlunos);
   document.getElementById("tabelaAlunos").addEventListener("click", async e => {
     const btn = e.target.closest("[data-cancelar]");
-    if (!btn || !confirm("Cancelar esta matrícula e liberar os horários?")) return;
+    if (!btn || !(await Dialogo.confirmar("Cancelar esta matrícula e liberar os horários?"))) return;
     btn.disabled = true;
     await fetch("/api/matricula/" + btn.dataset.cancelar + "/cancelar", { method: "POST", headers: authHeaders() });
     await carregarAulas();
@@ -131,7 +131,7 @@
     const alternar = e.target.closest("[data-alternar]");
     if (alternar) {
       const c = cupons.find(x => x._id === alternar.dataset.alternar);
-      if (c.ativo && !confirm("Desativar o cupom " + c.codigo + "? Ele deixa de valer imediatamente.")) return;
+      if (c.ativo && !(await Dialogo.confirmar("Desativar o cupom " + c.codigo + "? Ele deixa de valer imediatamente."))) return;
       alternar.disabled = true;
       await fetch("/api/cupons/" + c._id, { method: "PUT", headers: authHeaders(true), body: JSON.stringify({ ativo: !c.ativo }) });
       carregarCupons();

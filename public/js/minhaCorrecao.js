@@ -4,6 +4,8 @@
 (function () {
   const raiz = document.getElementById("minhaCorrecao");
   const id = new URLSearchParams(location.search).get("producao");
+  // ?treino=<id>: uma correção de treino feita pela IA no Ambiente de Produção (aberta pelo Meu Espaço)
+  const treino = new URLSearchParams(location.search).get("treino");
   const H = json => Object.assign({ Authorization: "Bearer " + localStorage.getItem("token") }, json ? { "Content-Type": "application/json" } : {});
   const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmt = d => d ? new Date(d).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
@@ -56,7 +58,37 @@
     if (!devolvida && p.modoCorrecao === "ia") setTimeout(carregar, 5000);
   }
 
+  function renderTreino(t) {
+    const c = t.correcao || {}, escala = c.escala || 20, pct = Math.round((t.nota || 0) / escala * 100);
+    const cor = pct >= 70 ? "#16a34a" : pct >= 50 ? "#f59e0b" : "#dc2626";
+    const num = v => { const m = /([\d.,]+)\s*\/\s*([\d.,]+)/.exec(String(v || "")); return m ? [Number(m[1].replace(",", ".")), Number(m[2].replace(",", "."))] : null; };
+    let html = voltar + `<section class="me-heroi" style="padding:24px 28px;"><div class="me-heroi-linha"><div class="me-ola"><small>${esc(TAREFA[t.tache] || t.tache || "")} · treino corrigido pela IA</small>
+      <h1 style="font-size:1.7rem;">${esc(t.sujet || "Treino")}</h1><div class="me-chips"><span class="me-chip">${t.modalidade === "oral" ? "🎙️ Produção oral" : "✍️ Produção escrita"}</span>
+      <span class="me-chip">🤖 Correção pela IA</span><span class="me-chip">📅 ${fmt(t.data)}</span>${t.mots ? `<span class="me-chip">${t.mots} palavras</span>` : ""}</div></div></div></section>
+      <div class="me-grade" style="margin-top:18px;">
+        <div class="me-card c4"><h3>Nota</h3><div class="mc-nota"><div class="me-anel" style="--p:${pct};--c:${cor}"><i>${t.nota ?? "—"}<small>/${escala}</small></i></div>
+          <div>${t.nclc ? "NCLC " + esc(t.nclc) + "<br>" : ""}${c.selo ? esc(c.selo) + "<br>" : ""}<small>${esc(c.appreciation || "")}</small></div></div></div>
+        <div class="me-card c8"><h3>Critérios</h3><div class="me-barras">${(c.criteres || []).map((k, i) => { const n = num(k.note); return `<div class="me-barra-l" style="--c:${["#2563eb", "#db2777", "#f59e0b", "#16a34a", "#7c3aed"][i % 5]}"><span>${esc(k.nom)}</span>
+          <div class="me-barra"><span style="width:${n && n[1] ? Math.round(n[0] / n[1] * 100) : 0}%"></span></div><b>${esc(k.note || "")}</b></div>${k.commentaire ? `<p style="font-size:.8rem;margin:-4px 0 4px;opacity:.85;">${esc(k.commentaire)}</p>` : ""}`; }).join("") || '<p class="me-vazio">Sem critérios.</p>'}</div></div>
+        <div class="me-card c12"><div class="me-duplas"><div>${lista("Pontos fortes", c.points_forts)}</div><div>${lista("A melhorar", c.a_ameliorer)}</div></div>
+          ${(c.trame || []).length ? `<h3 style="margin-top:14px;">Trama Francês na Mira</h3><ul class="mc-lista">${c.trame.map(x => `<li>${x.presente ? "✅" : "❌"} <b>${esc(x.etape)}</b>${x.commentaire ? " · " + esc(x.commentaire) : ""}</li>`).join("")}</ul>` : ""}
+          ${lista("Conectores para usar", c.connecteurs)}</div>
+      </div>
+      ${(c.corrections || []).length ? `<div class="me-card c12" style="margin-top:14px;"><h3>Correções</h3>${c.corrections.map(x => `<p style="margin:6px 0;"><span style="color:#dc2626;text-decoration:line-through;">${esc(x.original)}</span> → <b style="color:#16a34a;">${esc(x.corrige)}</b>${x.explication ? ` <small>· ${esc(x.explication)}</small>` : ""}</p>`).join("")}</div>` : ""}
+      ${(c.lexique || []).length ? `<div class="me-card c12" style="margin-top:14px;"><h3>Vocabulário para enriquecer</h3><ul class="mc-lista">${c.lexique.map(x => `<li><b lang="fr">${esc(x.mot)}</b>${x.remplace ? " (no lugar de « " + esc(x.remplace) + " »)" : ""}${x.exemple ? ` · <i lang="fr">${esc(x.exemple)}</i>` : ""}</li>`).join("")}</ul></div>` : ""}
+      <div class="me-card c12" style="margin-top:14px;"><h3>${t.modalidade === "oral" ? "Sua transcrição" : "Seu texto"}</h3><div class="mc-texto" lang="fr">${esc(t.texte || "")}</div></div>
+      ${c.version_amelioree ? `<div class="me-card c12" style="margin-top:14px;"><h3>Versão melhorada <small>sugestão da IA</small></h3><div class="mc-texto" lang="fr">${esc(c.version_amelioree)}</div>${c.conseil ? `<div class="mc-final" style="margin-top:10px;"><b>Conselho</b><br>${esc(c.conseil)}</div>` : ""}</div>` : (c.conseil ? `<div class="mc-final" style="margin-top:14px;"><b>Conselho</b><br>${esc(c.conseil)}</div>` : "")}`;
+    raiz.innerHTML = html;
+  }
+
   async function carregar() {
+    if (treino) {
+      if (!/^[a-f0-9]{24}$/i.test(treino)) { raiz.innerHTML = voltar + '<div class="me-vazio">Correção não informada.</div>'; return; }
+      const r = await fetch("/api/meu-espaco/treino/" + treino, { headers: H() });
+      if (!r.ok) { raiz.innerHTML = voltar + '<div class="me-vazio">Não foi possível abrir esta correção.</div>'; return; }
+      renderTreino(await r.json());
+      return;
+    }
     if (!id || !/^[a-f0-9]{24}$/i.test(id)) { raiz.innerHTML = voltar + '<div class="me-vazio">Produção não informada.</div>'; return; }
     const r = await fetch("/api/producoes/" + id, { headers: H() });
     if (!r.ok) { raiz.innerHTML = voltar + '<div class="me-vazio">Não foi possível abrir esta correção.</div>'; return; }

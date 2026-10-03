@@ -123,9 +123,9 @@ async function salvarDetalhe() {
 }
 
 async function apagarSessaoSelecionada() {
-  if (!confirm('Apagar esta sessão do histórico? Essa ação não pode ser desfeita.')) return;
+  if (!(await Dialogo.confirmar('Apagar esta sessão do histórico? Essa ação não pode ser desfeita.'))) return;
   const res = await fetch(`/api/estudos/sessoes/${sessaoSelecionada._id}`, { method: 'DELETE', headers: authHeaders() });
-  if (!res.ok) { alert('Erro ao apagar.'); return; }
+  if (!res.ok) { (await Dialogo.aviso('Erro ao apagar.')); return; }
   fecharDetalhe();
   await carregarSessoes();
 }

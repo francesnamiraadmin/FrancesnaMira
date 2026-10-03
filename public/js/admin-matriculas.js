@@ -175,7 +175,7 @@
   });
 
   async function toggleTurma(t) {
-    if (!confirm((t.ativa ? "Desativar" : "Reativar") + " a turma \"" + t.nome + "\"?")) return;
+    if (!(await Dialogo.confirmar((t.ativa ? "Desativar" : "Reativar") + " a turma \"" + t.nome + "\"?"))) return;
     if (t.ativa) {
       await fetch("/api/turmas/" + t._id, { method: "DELETE", headers: authHeaders() });
     } else {
@@ -272,7 +272,7 @@
           const btnDesativar = document.createElement("button");
           btnDesativar.className = "btn-danger btn-small"; btnDesativar.textContent = "Desativar";
           btnDesativar.addEventListener("click", async () => {
-            if (!confirm("Desativar o cupom " + c.codigo + "?")) return;
+            if (!(await Dialogo.confirmar("Desativar o cupom " + c.codigo + "?"))) return;
             await fetch("/api/cupons/" + c._id, { method: "DELETE", headers: authHeaders() });
             carregarCupons();
           });

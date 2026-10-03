@@ -23,7 +23,7 @@ const DeverWorkspace = (() => {
 
   async function baixarArquivo(url, nomeFallback) {
     const res = await fetch(url, { headers: authHeaders() });
-    if (!res.ok) { alert('Não foi possível baixar o arquivo.'); return; }
+    if (!res.ok) { (await Dialogo.aviso('Não foi possível baixar o arquivo.')); return; }
     const blob = await res.blob();
     const objUrl = URL.createObjectURL(blob);
     const a = document.createElement('a');

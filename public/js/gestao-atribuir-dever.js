@@ -97,8 +97,8 @@
         const r = await json(`/api/deveres/alunos/${sel._id}/atribuir-modelo`, { method: 'POST', body: JSON.stringify({ planoBaseId: p, modo: 'semana', semana: Number(s), dataInicio: $('#adSemIni').value, dataLimite: $('#adSemFim').value }) });
         aviso(r.msg); abrirAluno(sel._id); return;
       }
-      if (d.parar) { if (!confirm('Interromper este Plano-Base para o aluno? As semanas já liberadas continuam com ele.')) return; const r = await json('/api/deveres/atribuicoes/' + d.parar, { method: 'DELETE' }); aviso(r.msg); abrirAluno(sel._id); return; }
-      if (d.remover) { if (!confirm(`Remover « ${d.titulo} » deste aluno? As entregas deste dever também somem.`)) return; const r = await json('/api/deveres/deveres/' + d.remover, { method: 'DELETE' }); aviso(r.msg); abrirAluno(sel._id); }
+      if (d.parar) { if (!(await Dialogo.confirmar('Interromper este Plano-Base para o aluno? As semanas já liberadas continuam com ele.'))) return; const r = await json('/api/deveres/atribuicoes/' + d.parar, { method: 'DELETE' }); aviso(r.msg); abrirAluno(sel._id); return; }
+      if (d.remover) { if (!(await Dialogo.confirmar(`Remover « ${d.titulo} » deste aluno? As entregas deste dever também somem.`))) return; const r = await json('/api/deveres/deveres/' + d.remover, { method: 'DELETE' }); aviso(r.msg); abrirAluno(sel._id); }
     } catch (err) { aviso(err.message, true); t.disabled = false; }
   });
   raiz.addEventListener('input', e => { if (e.target.id === 'adBusca') desenharAlunos(); });

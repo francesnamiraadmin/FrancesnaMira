@@ -30,9 +30,9 @@
     speechSynthesis.onvoiceschanged = carregarVoz;
   }
 
-  function falarComVozDoNavegador(texto, botao){
+  async function falarComVozDoNavegador(texto, botao){
     if (!window.speechSynthesis) {
-      if (botao) alert('Seu navegador não é compatível com leitura de áudio.');
+      if (botao) (await Dialogo.aviso('Seu navegador não é compatível com leitura de áudio.'));
       return;
     }
     speechSynthesis.cancel();

@@ -145,7 +145,7 @@
   async function salvar(a, corpo) {
     const r = await fetch("/api/horarios/admin/registro", { method: "PUT", headers: H(true), body: JSON.stringify({ chave: a.chave, data: a.data, ...corpo }) });
     const d = await r.json();
-    if (!r.ok) { alert(d.msg || "Erro ao salvar."); return null; }
+    if (!r.ok) { (await Dialogo.aviso(d.msg || "Erro ao salvar.")); return null; }
     await carregar();
     return d.aula;
   }
@@ -159,7 +159,7 @@
       if (justificativa !== undefined) fd.append("justificativa", justificativa);
       const r = await fetch("/api/horarios/admin/registro/atestado", { method: "POST", headers: H(), body: fd });
       const d = await r.json();
-      if (!r.ok) { alert(d.msg || "Erro ao enviar o atestado."); return; }
+      if (!r.ok) { (await Dialogo.aviso(d.msg || "Erro ao enviar o atestado.")); return; }
       await carregar();
       if ($("raModal")) { fecharModal(); abrirDetalhes(d.aula); }
     });
@@ -167,7 +167,7 @@
   }
   async function baixarAtestado(a) {
     const r = await fetch("/api/horarios/admin/registro/atestado/" + a.id, { headers: H() });
-    if (!r.ok) { alert("Atestado não encontrado."); return; }
+    if (!r.ok) { (await Dialogo.aviso("Atestado não encontrado.")); return; }
     const url = URL.createObjectURL(await r.blob());
     const el = document.createElement("a"); el.href = url; el.download = a.atestado.nome || "atestado"; document.body.appendChild(el); el.click(); el.remove();
     setTimeout(() => URL.revokeObjectURL(url), 2000);
@@ -205,7 +205,7 @@
       if (b.dataset.m === "atestado") escolherArquivo(a, $("raJust").value);
       if (b.dataset.m === "repor") { fecharModal(); abrirAvulsa(a); }
       if (b.dataset.m === "apagar") {
-        if (!confirm("Apagar esta aula avulsa?")) return;
+        if (!(await Dialogo.confirmar("Apagar esta aula avulsa?"))) return;
         await fetch("/api/horarios/admin/registro/avulsa/" + a.id, { method: "DELETE", headers: H() });
         fecharModal(); carregar();
       }
@@ -277,7 +277,7 @@
     if (lote) {
       const itens = [...selecionadas].map(porId).filter(Boolean).map(a => ({ chave: a.chave, data: a.data }));
       const r = await fetch("/api/horarios/admin/registro/lote", { method: "POST", headers: H(true), body: JSON.stringify({ itens, estado: lote.dataset.lote }) });
-      if (!r.ok) { const d = await r.json(); alert(d.msg || "Erro."); return; }
+      if (!r.ok) { const d = await r.json(); (await Dialogo.aviso(d.msg || "Erro.")); return; }
       carregar(); return;
     }
     if (e.target.closest("[data-lote-limpar]")) { selecionadas.clear(); desenhar(); return; }

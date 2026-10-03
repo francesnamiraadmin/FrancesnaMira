@@ -6,7 +6,7 @@ function htmlEscolhaFazer(oral) {
   var ia = !!(B.ia && B.ia.ativa);
   return '<fieldset class="escolha-correcao tm-correcao"><legend>Qui corrige ?</legend>' +
     '<label' + (ia ? '' : ' class="indisponivel"') + '><input type="radio" name="tm-correcao" value="ia"' + (ia ? ' checked' : ' disabled') + '><span><b>L\'IA</b><small>' +
-      (ia ? 'Correction immédiate : note sur 20, trame, corrections et version améliorée' + (oral ? ', à partir de l\'enregistrement et de la transcription' : '') + '. Sans crédit.' : 'Indisponible pour le moment.') + '</small></span></label>' +
+      (ia ? 'Correction immédiate : note sur 20, trame, corrections et version améliorée' + (oral ? ', à partir de l\'enregistrement et de la transcription' : '') + '. 1 crédit · vous en avez ' + (B.creditos || 0) + '.' : 'Indisponible pour le moment.') + '</small></span></label>' +
     '<label><input type="radio" name="tm-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Attendre la correction d\'un professeur</b><small>La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l\'examen. Vous la retrouvez dans « Mes notes ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
     '<label><input type="radio" name="tm-correcao" value="aovivo"><span><b>Un professeur en direct</b><small>Il suit votre ' + (oral ? 'parole (transcription)' : 'texte pendant que vous écrivez') + ' et peut vous parler par la voix. À l\'envoi, la production lui est envoyée pour la correction (1 crédit).</small></span></label></fieldset>';
 }
@@ -154,8 +154,23 @@ function carregarDossier(alvo, tache, m) {
 
 // ---------- professor ao vivo (lado do aluno) ----------
 var SALA = null;   // { id, stream, chamada, ultimoEnvio }
+// Correção por cores ao vivo: o professor grifa trechos do texto; o aluno vê o texto grifado aqui,
+// atualizado quando ele escreve e quando o professor marca.
+function desenharCorrecaoAoVivo() {
+  var box = $('av-correcao'); if (!box || !SALA || !window.MarcasAoVivo) return;
+  var marcas = SALA.marcas || [];
+  box.hidden = !marcas.length;
+  if (!marcas.length) return;
+  var r = MarcasAoVivo.html(SALA.texto || '', marcas, { numeros: true });
+  $('av-corr-texto').innerHTML = r.html;
+  $('av-corr-lista').innerHTML = MarcasAoVivo.lista(r);
+  $('av-corr-n').textContent = marcas.length;
+}
 function salaEnviar(dados) {
   if (!SALA || !SALA.id) return;
+  if (dados && typeof dados.texto === 'string') SALA.texto = dados.texto;
+  if (dados && typeof dados.transcricao === 'string') SALA.texto = dados.transcricao;
+  if (SALA.marcas && SALA.marcas.length) desenharCorrecaoAoVivo();
   google.script.run.withSuccessHandler(function (r) { if (r && r.encerrada) salaFim(r.motivo); }).atualizarSalaAoVivo(EMAIL, SALA.id, dados);
 }
 // Pedido sem resposta em 3 minutos: o servidor cancela (motivo "expirou") e o aluno pode chamar de novo.
@@ -179,7 +194,10 @@ function desenharSalaAluno(tache, m) {
   var a = $('tm-aovivo');
   a.innerHTML = '<div class="av-sala"><div class="av-sala-cab"><span class="av-ponto"></span><div><b>Professeur en direct</b><small id="av-estado">Appelez un professeur : il verra votre ' + (tache.indexOf('ET') === 0 ? 'texte' : 'transcription') + ' en temps réel.</small></div>' +
     '<button class="botao-principal" type="button" id="av-chamar">Appeler un professeur</button></div>' +
-    '<div class="av-chamada" id="av-chamada" hidden></div><div class="av-chat" id="av-chat" hidden><div class="av-msgs" id="av-msgs"></div>' +
+    '<div class="av-chamada" id="av-chamada" hidden></div>' +
+    '<div class="av-correcao" id="av-correcao" hidden><h4>🖍 Correction en direct <em id="av-corr-n">0</em></h4><p class="av-corr-dica">Votre professeur souligne votre ' + (tache.indexOf('ET') === 0 ? 'texte' : 'transcription') + ' en couleurs pendant que vous travaillez.</p>' +
+    '<div class="mav-texto" id="av-corr-texto" lang="fr"></div><div id="av-corr-lista"></div></div>' +
+    '<div class="av-chat" id="av-chat" hidden><div class="av-msgs" id="av-msgs"></div>' +
     '<div class="av-msg-linha"><input id="av-msg" placeholder="Écrire au professeur…"><button class="ferramenta" type="button" id="av-msg-bt">Envoyer</button><button class="ferramenta sutil" type="button" id="av-fim">Terminer la séance</button></div></div></div>';
   $('av-chamar').addEventListener('click', function () {
     var b = this; b.disabled = true; b.textContent = 'Appel…';
@@ -233,6 +251,11 @@ function ligarSalaAluno() {
       if (d.status === 'atendimento') { SALA.aguardando = false; clearInterval(SALA.relogio); $('av-estado').textContent = (d.professorNome || 'Un professeur') + ' suit votre production en direct.'; avisar({ titulo: 'Professeur connecté', texto: d.professorNome || '', icone: '', som: true, duracao: 6 }); }
       if (d.status === 'encerrada') salaFim(d.motivo);
     } else if (ev === 'msg') { if (d.de === 'professor') { addMsg('professor', d.nome, d.texto); somSuave(); } }
+    else if (ev === 'marcas') {
+      var novas = (d.marcas || []).length > ((SALA.marcas || []).length);
+      SALA.marcas = d.marcas || []; desenharCorrecaoAoVivo();
+      if (novas) somSuave();
+    }
     else if (ev === 'sinal' && SALA && SALA.chamada) SALA.chamada.receber(d);
   });
   $('av-msg-bt').addEventListener('click', function () {

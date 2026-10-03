@@ -238,9 +238,9 @@ async function updateNav() {
       wrapper.addEventListener("mouseenter", () => { clearTimeout(timeout); dropdown.classList.add("show"); });
       wrapper.addEventListener("mouseleave", () => { timeout = setTimeout(() => dropdown.classList.remove("show"), 150); });
 
-      dropdown.querySelector("#navSairBtn").addEventListener("click", e => {
+      dropdown.querySelector("#navSairBtn").addEventListener("click", async e => {
         e.preventDefault();
-        if (confirm("Deseja sair da sua conta?")) {
+        if ((await Dialogo.confirmar("Deseja sair da sua conta?"))) {
           localStorage.removeItem("token");
           localStorage.removeItem("nome");
           localStorage.removeItem("plano");

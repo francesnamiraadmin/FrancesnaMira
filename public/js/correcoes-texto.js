@@ -130,7 +130,7 @@ async function abrirTema(id) {
     renderTemaDetalhe(temaAtual);
     mostrarView('tema');
     window.scrollTo(0, 0);
-  } catch (err) { alert('Não foi possível carregar o tema.'); }
+  } catch (err) { (await Dialogo.aviso('Não foi possível carregar o tema.')); }
 }
 
 function renderTemaDetalhe(t) {
@@ -311,10 +311,10 @@ dropzone.addEventListener('drop', e => {
 arquivoInput.addEventListener('change', () => { if (arquivoInput.files[0]) selecionarArquivo(arquivoInput.files[0]); });
 
 const EXTENSOES_ACEITAS = ['.pdf', '.docx', '.odt'];
-function selecionarArquivo(file) {
+async function selecionarArquivo(file) {
   const ext = '.' + file.name.split('.').pop().toLowerCase();
-  if (!EXTENSOES_ACEITAS.includes(ext)) { alert('Formato não aceito. Envie um arquivo PDF, DOCX ou ODT.'); return; }
-  if (file.size > 10 * 1024 * 1024) { alert('O arquivo excede o limite de 10 MB.'); return; }
+  if (!EXTENSOES_ACEITAS.includes(ext)) { (await Dialogo.aviso('Formato não aceito. Envie um arquivo PDF, DOCX ou ODT.')); return; }
+  if (file.size > 10 * 1024 * 1024) { (await Dialogo.aviso('O arquivo excede o limite de 10 MB.')); return; }
   arquivoSelecionado = file;
   document.getElementById('arquivoNome').textContent = file.name;
   document.getElementById('arquivoTamanho').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
@@ -345,7 +345,7 @@ document.getElementById('enviarProducaoBtn').addEventListener('click', async () 
   if (modoEnvio === 'arquivo' && !arquivoSelecionado) { mostrarEnvioMsg('Selecione um arquivo antes de enviar.', true); return; }
   if (modoEnvio === 'texto' && !document.getElementById('textoProducao').value.trim()) { mostrarEnvioMsg('Escreva seu texto antes de enviar.', true); return; }
 
-  if (!confirm(`Confirmar envio? Isso consumirá ${temaAtual.creditosNecessarios} crédito(s) do seu saldo.`)) return;
+  if (!(await Dialogo.confirmar(`Confirmar envio? Isso consumirá ${temaAtual.creditosNecessarios} crédito(s) do seu saldo.`))) return;
 
   const formData = new FormData();
   formData.append('temaId', temaAtual._id);
@@ -460,7 +460,7 @@ async function abrirProducao(id) {
     renderProducaoDetalhe(producaoAtual);
     mostrarView('producao');
     window.scrollTo(0, 0);
-  } catch (err) { alert('Não foi possível carregar esta produção.'); }
+  } catch (err) { (await Dialogo.aviso('Não foi possível carregar esta produção.')); }
 }
 
 function estrelas(nota) {
@@ -578,19 +578,19 @@ async function carregarAudioPlayer(audioEl, producaoId, tipo) {
 async function baixarArquivo(producaoId, tipo, nomeArquivo) {
   try {
     const res = await fetch(`${API}/api/producoes/${producaoId}/arquivo/${tipo}`, { headers: { Authorization: 'Bearer ' + token } });
-    if (!res.ok) { alert('Não foi possível baixar o arquivo.'); return; }
+    if (!res.ok) { (await Dialogo.aviso('Não foi possível baixar o arquivo.')); return; }
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url; a.download = nomeArquivo || 'arquivo';
     document.body.appendChild(a); a.click(); a.remove();
     URL.revokeObjectURL(url);
-  } catch (err) { alert('Erro ao baixar o arquivo.'); }
+  } catch (err) { (await Dialogo.aviso('Erro ao baixar o arquivo.')); }
 }
 
-function abrirReenvio(p) {
+async function abrirReenvio(p) {
   if (creditosDisponiveis() < (p.temaId?.creditosNecessarios || 1)) {
-    alert('Você não tem créditos suficientes para reenviar.');
+    (await Dialogo.aviso('Você não tem créditos suficientes para reenviar.'));
     return;
   }
   temaAtual = p.temaId;
@@ -605,7 +605,7 @@ function abrirReenvio(p) {
   novoBtn.addEventListener('click', async () => {
     if (modoEnvio === 'arquivo' && !arquivoSelecionado) { mostrarEnvioMsg('Selecione um arquivo antes de enviar.', true); return; }
     if (modoEnvio === 'texto' && !document.getElementById('textoProducao').value.trim()) { mostrarEnvioMsg('Escreva seu texto antes de enviar.', true); return; }
-    if (!confirm(`Confirmar reenvio? Isso consumirá ${temaAtual.creditosNecessarios} crédito(s) do seu saldo.`)) return;
+    if (!(await Dialogo.confirmar(`Confirmar reenvio? Isso consumirá ${temaAtual.creditosNecessarios} crédito(s) do seu saldo.`))) return;
 
     const formData = new FormData();
     formData.append('observacoesAluno', document.getElementById('obsInput').value);

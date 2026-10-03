@@ -45,6 +45,7 @@ function irAccueil() {
   html += '<div id="acc-pendencias"></div>';
   html += '<h2 class="secao-titulo acc-secao">Accueil</h2>';
   html += '<div class="acc-duas"><div id="acc-devoirs"></div><div id="acc-msgs"></div></div>';
+  html += '<div id="acc-destaque"></div>';
   html += htmlTirage(ORDEM_TACHES, 'acc-tirage');
   html += '<div id="acc-temas-mes"></div>';
   html += '<div id="acc-cursos"></div>';
@@ -280,18 +281,48 @@ function ligarGravadorLivre(raiz, tache, m) {
   q('parar').addEventListener('click', parar);
 }
 //@@ carregarDestaques
+/** « Em Destaque »: os temas do mês que a administração escolheu para o curso, em cartões grandes
+    (expression orale e écrite), no topo do accueil, acima do sorteio. Já ficam liberados para o aluno. */
+function desenharEmDestaque(r) {
+  var alvo = $('acc-destaque'); if (!alvo) return;
+  var l = (r && r.emDestaque) || [];
+  if (!l.length) { alvo.innerHTML = ''; return; }
+  var mes = new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+  var grupo = function (rotulo, classe, itens) {
+    if (!itens.length) return '';
+    return '<div class="emd-grupo ' + classe + '"><h3 class="emd-grupo-tit"><span class="emd-ico" aria-hidden="true">' + (classe === 'oral' ? '🎙' : '✍') + '</span>' + rotulo + '<em>' + itens.length + '</em></h3><div class="emd-grade">' + itens.map(function (x) {
+      var info = TACHES[x.tache] || { nom: x.tache, sous: '' }, e = eixo(x.e);
+      var titulo = x.titre && x.tache !== 'T2' ? x.titre : tituloCurto(x.texto || x.titre);
+      return '<article class="emd-card" style="--cor:' + (e.cor || '#E4C043') + '" data-emd-t="' + x.tache + '" data-emd-id="' + esc(x.id) + '" tabindex="0" role="button">' +
+        '<div class="emd-card-topo"><span class="emd-tache">' + esc(info.nom) + '</span><span class="emd-sous">' + esc(info.sous || '') + '</span></div>' +
+        '<h4>' + esc(titulo) + '</h4>' + (x.texto && x.texto !== titulo ? '<p>' + esc(String(x.texto).slice(0, 150)) + (String(x.texto).length > 150 ? '…' : '') + '</p>' : '') +
+        '<div class="emd-rodape"><span class="emd-eixo">' + (e.icone ? e.icone + ' ' : '') + esc(e.nome || x.eixo || '') + '</span><b>Travailler ce sujet →</b></div></article>';
+    }).join('') + '</div></div>';
+  };
+  alvo.innerHTML = '<section class="emd"><header class="emd-cab"><div><span class="emd-selo">★ En vedette</span><h2>Les sujets du mois · ' + esc(mes.charAt(0).toUpperCase() + mes.slice(1)) + '</h2>' +
+    (r.automatico ? '<p>Les sujets qui tombent le plus souvent à l\'examen, un par tâche. Commencez par eux.</p>'
+      : '<p>Choisis par l\'équipe pour votre cours. Ils sont déjà ouverts pour vous : commencez par eux.</p>') + '</div></header>' +
+    grupo('Expression orale', 'oral', l.filter(function (x) { return !x.escrita; })) + grupo('Expression écrite', 'ecrit', l.filter(function (x) { return x.escrita; })) + '</section>';
+  alvo.querySelectorAll('[data-emd-id]').forEach(function (c) {
+    var abrir = function () { abrirModelo(c.dataset.emdT, c.dataset.emdId, { tipo: 'liste' }); };
+    c.addEventListener('click', abrir);
+    c.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); abrir(); } });
+  });
+}
 function carregarDestaques() {
   var alvo = $('acc-temas-mes'); if (!alvo) return;
   alvo.innerHTML = '<section class="alu alu2"><p class="aviso">Chargement…</p></section>';
   google.script.run.withSuccessHandler(function (r) {
     if (!$('acc-temas-mes')) return;
+    desenharEmDestaque(r);
     var posts = (r && r.posts) || [], sujets = (r && r.sujets) || [];
-    if (!posts.length && !sujets.length) { alvo.innerHTML = ''; return; }
+    // os temas do mês ficam no « Em Destaque » (acima do sorteio); aqui só os artigos do blog
+    if (!posts.length) { alvo.innerHTML = ''; return; }
     var mes = new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
     // Administrador: ✕ em cada item (artigo apagado; sujet sai do destaque).
     var apagar = function (tipo, ref) { return B.admin ? '<button class="alu-apagar" type="button" data-une-del="' + tipo + '|' + esc(ref) + '" title="Retirer de « À la une »" aria-label="Retirer de « À la une »">✕</button>' : ''; };
     var html = '<section class="alu alu2"><header class="alu-cab"><div><span class="tm-selo">À la une</span><h2>' + esc(mes.charAt(0).toUpperCase() + mes.slice(1)) + '</h2></div>' +
-      '<p>Les sujets à travailler en priorité ce mois-ci : un par tâche, choisis par votre professeure ou parmi ceux qui tombent le plus.' +
+      '<p>Les articles et conseils de votre professeure.' +
       (B.admin && r.ocultos ? ' <button class="alu-restaurar" type="button" id="alu-restaurar">Réafficher ' + r.ocultos + ' sujet' + (r.ocultos > 1 ? 's' : '') + ' retiré' + (r.ocultos > 1 ? 's' : '') + '</button>' : '') + '</p></header>';
     if (posts.length) {
       var p0 = posts[0];
@@ -302,20 +333,7 @@ function carregarDestaques() {
         return '<article ' + (p.tache && p.id ? 'data-bl-t="' + p.tache + '" data-bl-id="' + esc(p.id) + '" tabindex="0" role="button"' : '') + '>' + apagar('post', p.ref) + '<div class="alu-mini-img">' + imagemBlog(p) + '</div><div><b>' + esc(p.titre) + '</b>' + (p.texto ? '<small>' + esc(String(p.texto).slice(0, 110)) + '</small>' : '') + '</div></article>';
       }).join('') + '</div>';
     }
-    var linha = function (rotulo, taches, classe) {
-      var itens = taches.map(function (t) { return sujets.filter(function (x) { return x.tache === t; })[0] || { tache: t, vazio: 1 }; });
-      return '<div class="alu-linha ' + classe + '"><h4><i></i>' + rotulo + '</h4><div class="alu-grade">' + itens.map(function (x) {
-        var info = TACHES[x.tache];
-        if (x.vazio) return '<div class="alu-card vazio"><span class="alu-tache">' + info.nom + ' · ' + info.sous + '</span><p>Aucun sujet ouvert pour cette tâche.</p></div>';
-        var e = eixo(x.e), titulo = x.titre && x.tache !== 'T2' ? x.titre : tituloCurto(x.texto || x.titre);
-        return '<article class="alu-card" style="--cor:' + (e.cor || '#E4C043') + '" data-bl-t="' + x.tache + '" data-bl-id="' + esc(x.id) + '" tabindex="0" role="button">' +
-          apagar('sujet', x.id) + '<div class="alu-card-topo"><span class="alu-num">' + info.nom.slice(-1) + '</span><span class="alu-tache">' + info.sous + '</span><span class="alu-ico">' + (e.icone || '') + '</span></div>' +
-          '<h5>' + esc(titulo) + '</h5>' +
-          '<div class="alu-meta">' + (x.mes ? '<em class="alu-chip mes">Thème du mois</em>' : x.tr ? '<em class="alu-chip tr">Tendance</em>' : '') +
-          '<span>' + esc(e.nome || '') + (x.f > 1 ? ' · tombé ' + x.f + '×' : '') + '</span></div><b class="alu-link">Lire le modèle →</b></article>';
-      }).join('') + '</div></div>';
-    };
-    html += '<div class="alu-sujets">' + linha('Expression orale', ['T1', 'T2', 'T3'], 'oral') + linha('Expression écrite', ['ET1', 'ET2', 'ET3'], 'ecrit') + '</div></section>';
+    html += '</section>';
     alvo.innerHTML = html;
     alvo.querySelectorAll('[data-une-del]').forEach(function (b) {
       b.addEventListener('click', function (ev) {

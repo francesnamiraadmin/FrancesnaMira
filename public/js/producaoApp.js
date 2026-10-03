@@ -248,6 +248,7 @@ function irAccueil() {
       html += '<div id="acc-pendencias"></div>';
       html += '<h2 class="secao-titulo acc-secao">Accueil</h2>';
       html += '<div class="acc-duas"><div id="acc-devoirs"></div><div id="acc-msgs"></div></div>';
+      html += '<div id="acc-destaque"></div>';
       html += htmlTirage(ORDEM_TACHES, 'acc-tirage');
       html += '<div id="acc-temas-mes"></div>';
       html += '<div id="acc-cursos"></div>';
@@ -1072,8 +1073,8 @@ function irAccueil() {
         letras.textContent = l + ' lettre' + (l > 1 ? 's' : '') + ' · ' + t.length + ' caractère' + (t.length > 1 ? 's' : '');
         if (!inicio && t) { inicio = Date.now(); tick = setInterval(mostrarTempo, 1000); }
       });
-      painel.querySelector('[data-r="limpar"]').addEventListener('click', function () {
-        if (texto && !confirm('Effacer votre texte ?')) return;
+      painel.querySelector('[data-r="limpar"]').addEventListener('click', async function () {
+        if (texto && !(await Dialogo.confirmar('Effacer votre texte ?'))) return;
         ed.innerHTML = ''; texto = ''; res.innerHTML = ''; inicio = null; if (tick) { clearInterval(tick); tick = null; } mostrarTempo();
         ed.dispatchEvent(new Event('input')); ed.focus();
       });
@@ -1622,9 +1623,9 @@ function irAccueil() {
         else if (exame() && fases.length > 1 && decorrido === fases[0].seg) bip();
         desenhar();
       };
-      el.play.addEventListener('click', function () {
+      el.play.addEventListener('click', async function () {
         if (h) {
-          if (exame() && !confirm('Arrêter la simulation ? Le temps sera remis à zéro.')) return;
+          if (exame() && !(await Dialogo.confirmar('Arrêter la simulation ? Le temps sera remis à zéro.'))) return;
           parar();
           if (exame()) { decorrido = 0; terminou = false; }
           desenhar(); return;
@@ -1997,11 +1998,11 @@ function irAccueil() {
           desenharPrevia();
         });
       });
-      var comecar = function (pedido, botao) {
-        if (!confirm(ehDelf() ? 'A prova dura ' + minutosEpreuve() + ' minutos e não pode ser pausada. Começar agora?' : 'L\'épreuve dure 60 minutes et ne peut pas être mise en pause. Commencer maintenant ?')) return;
+      var comecar = async function (pedido, botao) {
+        if (!(await Dialogo.confirmar(ehDelf() ? 'A prova dura ' + minutosEpreuve() + ' minutos e não pode ser pausada. Começar agora?' : 'L\'épreuve dure 60 minutes et ne peut pas être mise en pause. Commencer maintenant ?'))) return;
         botao.disabled = true; botao.textContent = 'Préparation…';
         google.script.run.withSuccessHandler(function (st2) { iniciarEpreuveLocal(st2.emCurso, st2.agora); })
-          .withFailureHandler(function (e) { botao.disabled = false; botao.textContent = 'Commencer'; alert(e.message || e); })
+          .withFailureHandler(async function (e) { botao.disabled = false; botao.textContent = 'Commencer'; (await Dialogo.aviso(e.message || e)); })
           .commencerEpreuve(EMAIL, pedido);
       };
       $('ep-comecar').addEventListener('click', function () { registrarEixos(ETS().map(function (t) { return livre[t].e; })); comecar({ sujets: sujetsLivres(livre), correcao: correcaoEscolhida() }, $('ep-comecar')); });
@@ -2093,7 +2094,7 @@ function irAccueil() {
     function botaoIA(id) {
       if (!B.ia || !B.ia.ativa) return '';
       return '<button class="botao-ia" type="button" id="' + id + '"><span class="ia-brilho"></span>Corriger avec l\'IA' +
-        '<small>' + B.ia.restantes + ' correction' + (B.ia.restantes > 1 ? 's' : '') + ' restante' + (B.ia.restantes > 1 ? 's' : '') + ' aujourd\'hui</small></button>';
+        '<small>' + B.ia.restantes + ' correction' + (B.ia.restantes > 1 ? 's' : '') + ' restante' + (B.ia.restantes > 1 ? 's' : '') + ' aujourd\'hui · 1 crédit</small></button>';
     }
 
     /** Corrige as tâches uma depois da outra (sem clique), mostrando cada resultado sob o texto. */
@@ -2109,9 +2110,9 @@ function irAccueil() {
       proxima();
     }
 
-    function pedirCorrecaoIA(tache, sujetId, texto, alvo, botao, depois, rolar) {
+    async function pedirCorrecaoIA(tache, sujetId, texto, alvo, botao, depois, rolar) {
       if (rolar === undefined) rolar = true;
-      if (contarPalavras(texto) < 15) { alert('Écrivez au moins quelques phrases avant de demander une correction.'); if (depois) depois(); return; }
+      if (contarPalavras(texto) < 15) { (await Dialogo.aviso('Écrivez au moins quelques phrases avant de demander une correction.')); if (depois) depois(); return; }
       botao.disabled = true;
       var original = botao.innerHTML;
       botao.innerHTML = '<span class="ia-brilho"></span>Analyse en cours…<small>Environ 20 à 40 secondes</small>';
@@ -2469,13 +2470,13 @@ function abrirGravacao(sessao, tarefa) {
       };
       $('grav-comecar').addEventListener('click', comecar);
       $('grav-pular').addEventListener('click', function () { if (GRAV && GRAV.timer) clearInterval(GRAV.timer); gravar(); });
-      $('grav-parar').addEventListener('click', function () {
-        if (duracao < 10 && !confirm('Votre enregistrement dure moins de 10 secondes. Terminer quand même ?')) return;
+      $('grav-parar').addEventListener('click', async function () {
+        if (duracao < 10 && !(await Dialogo.confirmar('Votre enregistrement dure moins de 10 secondes. Terminer quand même ?'))) return;
         if (GRAV && GRAV.rec && GRAV.rec.state !== 'inactive') GRAV.rec.stop();
         $('gravador').classList.remove('gravando');
       });
-      $('grav-refazer').addEventListener('click', function () {
-        if (!confirm('Effacer cet enregistrement et recommencer ?')) return;
+      $('grav-refazer').addEventListener('click', async function () {
+        if (!(await Dialogo.confirmar('Effacer cet enregistrement et recommencer ?'))) return;
         pararGravacaoTudo();
         $('grav-comecar').hidden = false; $('grav-comecar').disabled = false; $('grav-comecar').textContent = '● Enregistrer à nouveau';
         prep = 0;
@@ -2669,18 +2670,48 @@ function ligarGravadorLivre(raiz, tache, m) {
     }
 
     /** Página inicial: "À la une" — os temas em destaque de cada tâche, em formato de blog. */
-function carregarDestaques() {
+/** « Em Destaque »: os temas do mês que a administração escolheu para o curso, em cartões grandes
+        (expression orale e écrite), no topo do accueil, acima do sorteio. Já ficam liberados para o aluno. */
+    function desenharEmDestaque(r) {
+      var alvo = $('acc-destaque'); if (!alvo) return;
+      var l = (r && r.emDestaque) || [];
+      if (!l.length) { alvo.innerHTML = ''; return; }
+      var mes = new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+      var grupo = function (rotulo, classe, itens) {
+        if (!itens.length) return '';
+        return '<div class="emd-grupo ' + classe + '"><h3 class="emd-grupo-tit"><span class="emd-ico" aria-hidden="true">' + (classe === 'oral' ? '🎙' : '✍') + '</span>' + rotulo + '<em>' + itens.length + '</em></h3><div class="emd-grade">' + itens.map(function (x) {
+          var info = TACHES[x.tache] || { nom: x.tache, sous: '' }, e = eixo(x.e);
+          var titulo = x.titre && x.tache !== 'T2' ? x.titre : tituloCurto(x.texto || x.titre);
+          return '<article class="emd-card" style="--cor:' + (e.cor || '#E4C043') + '" data-emd-t="' + x.tache + '" data-emd-id="' + esc(x.id) + '" tabindex="0" role="button">' +
+            '<div class="emd-card-topo"><span class="emd-tache">' + esc(info.nom) + '</span><span class="emd-sous">' + esc(info.sous || '') + '</span></div>' +
+            '<h4>' + esc(titulo) + '</h4>' + (x.texto && x.texto !== titulo ? '<p>' + esc(String(x.texto).slice(0, 150)) + (String(x.texto).length > 150 ? '…' : '') + '</p>' : '') +
+            '<div class="emd-rodape"><span class="emd-eixo">' + (e.icone ? e.icone + ' ' : '') + esc(e.nome || x.eixo || '') + '</span><b>Travailler ce sujet →</b></div></article>';
+        }).join('') + '</div></div>';
+      };
+      alvo.innerHTML = '<section class="emd"><header class="emd-cab"><div><span class="emd-selo">★ En vedette</span><h2>Les sujets du mois · ' + esc(mes.charAt(0).toUpperCase() + mes.slice(1)) + '</h2>' +
+        (r.automatico ? '<p>Les sujets qui tombent le plus souvent à l\'examen, un par tâche. Commencez par eux.</p>'
+          : '<p>Choisis par l\'équipe pour votre cours. Ils sont déjà ouverts pour vous : commencez par eux.</p>') + '</div></header>' +
+        grupo('Expression orale', 'oral', l.filter(function (x) { return !x.escrita; })) + grupo('Expression écrite', 'ecrit', l.filter(function (x) { return x.escrita; })) + '</section>';
+      alvo.querySelectorAll('[data-emd-id]').forEach(function (c) {
+        var abrir = function () { abrirModelo(c.dataset.emdT, c.dataset.emdId, { tipo: 'liste' }); };
+        c.addEventListener('click', abrir);
+        c.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); abrir(); } });
+      });
+    }
+    function carregarDestaques() {
       var alvo = $('acc-temas-mes'); if (!alvo) return;
       alvo.innerHTML = '<section class="alu alu2"><p class="aviso">Chargement…</p></section>';
       google.script.run.withSuccessHandler(function (r) {
         if (!$('acc-temas-mes')) return;
+        desenharEmDestaque(r);
         var posts = (r && r.posts) || [], sujets = (r && r.sujets) || [];
-        if (!posts.length && !sujets.length) { alvo.innerHTML = ''; return; }
+        // os temas do mês ficam no « Em Destaque » (acima do sorteio); aqui só os artigos do blog
+        if (!posts.length) { alvo.innerHTML = ''; return; }
         var mes = new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
         // Administrador: ✕ em cada item (artigo apagado; sujet sai do destaque).
         var apagar = function (tipo, ref) { return B.admin ? '<button class="alu-apagar" type="button" data-une-del="' + tipo + '|' + esc(ref) + '" title="Retirer de « À la une »" aria-label="Retirer de « À la une »">✕</button>' : ''; };
         var html = '<section class="alu alu2"><header class="alu-cab"><div><span class="tm-selo">À la une</span><h2>' + esc(mes.charAt(0).toUpperCase() + mes.slice(1)) + '</h2></div>' +
-          '<p>Les sujets à travailler en priorité ce mois-ci : un par tâche, choisis par votre professeure ou parmi ceux qui tombent le plus.' +
+          '<p>Les articles et conseils de votre professeure.' +
           (B.admin && r.ocultos ? ' <button class="alu-restaurar" type="button" id="alu-restaurar">Réafficher ' + r.ocultos + ' sujet' + (r.ocultos > 1 ? 's' : '') + ' retiré' + (r.ocultos > 1 ? 's' : '') + '</button>' : '') + '</p></header>';
         if (posts.length) {
           var p0 = posts[0];
@@ -2691,29 +2722,16 @@ function carregarDestaques() {
             return '<article ' + (p.tache && p.id ? 'data-bl-t="' + p.tache + '" data-bl-id="' + esc(p.id) + '" tabindex="0" role="button"' : '') + '>' + apagar('post', p.ref) + '<div class="alu-mini-img">' + imagemBlog(p) + '</div><div><b>' + esc(p.titre) + '</b>' + (p.texto ? '<small>' + esc(String(p.texto).slice(0, 110)) + '</small>' : '') + '</div></article>';
           }).join('') + '</div>';
         }
-        var linha = function (rotulo, taches, classe) {
-          var itens = taches.map(function (t) { return sujets.filter(function (x) { return x.tache === t; })[0] || { tache: t, vazio: 1 }; });
-          return '<div class="alu-linha ' + classe + '"><h4><i></i>' + rotulo + '</h4><div class="alu-grade">' + itens.map(function (x) {
-            var info = TACHES[x.tache];
-            if (x.vazio) return '<div class="alu-card vazio"><span class="alu-tache">' + info.nom + ' · ' + info.sous + '</span><p>Aucun sujet ouvert pour cette tâche.</p></div>';
-            var e = eixo(x.e), titulo = x.titre && x.tache !== 'T2' ? x.titre : tituloCurto(x.texto || x.titre);
-            return '<article class="alu-card" style="--cor:' + (e.cor || '#E4C043') + '" data-bl-t="' + x.tache + '" data-bl-id="' + esc(x.id) + '" tabindex="0" role="button">' +
-              apagar('sujet', x.id) + '<div class="alu-card-topo"><span class="alu-num">' + info.nom.slice(-1) + '</span><span class="alu-tache">' + info.sous + '</span><span class="alu-ico">' + (e.icone || '') + '</span></div>' +
-              '<h5>' + esc(titulo) + '</h5>' +
-              '<div class="alu-meta">' + (x.mes ? '<em class="alu-chip mes">Thème du mois</em>' : x.tr ? '<em class="alu-chip tr">Tendance</em>' : '') +
-              '<span>' + esc(e.nome || '') + (x.f > 1 ? ' · tombé ' + x.f + '×' : '') + '</span></div><b class="alu-link">Lire le modèle →</b></article>';
-          }).join('') + '</div></div>';
-        };
-        html += '<div class="alu-sujets">' + linha('Expression orale', TS(), 'oral') + linha('Expression écrite', ETS(), 'ecrit') + '</div></section>';
+        html += '</section>';
         alvo.innerHTML = html;
         alvo.querySelectorAll('[data-une-del]').forEach(function (b) {
-          b.addEventListener('click', function (ev) {
+          b.addEventListener('click', async function (ev) {
             ev.stopPropagation();
             var p = b.dataset.uneDel.split('|'), tipo = p[0], ref = p.slice(1).join('|');
-            if (!confirm(tipo === 'post' ? 'Supprimer cet article du blog « À la une » ?' : 'Retirer ce sujet de « À la une » ? Le sujet suivant le plus fréquent de cette tâche prendra sa place.')) return;
+            if (!(await Dialogo.confirmar(tipo === 'post' ? 'Supprimer cet article du blog « À la une » ?' : 'Retirer ce sujet de « À la une » ? Le sujet suivant le plus fréquent de cette tâche prendra sa place.'))) return;
             b.disabled = true;
             google.script.run.withSuccessHandler(function () { carregarDestaques(); avisar({ titulo: 'Retiré de « À la une »', icone: '', som: false, duracao: 4 }); })
-              .withFailureHandler(function (e) { b.disabled = false; alert(e.message || e); }).removerDaUne(EMAIL, tipo, ref);
+              .withFailureHandler(async function (e) { b.disabled = false; (await Dialogo.aviso(e.message || e)); }).removerDaUne(EMAIL, tipo, ref);
           });
         });
         if ($('alu-restaurar')) $('alu-restaurar').addEventListener('click', function () {
@@ -2876,7 +2894,7 @@ function carregarDestaques() {
         fundo.querySelector('[data-fechar]').addEventListener('click', function () { fundo.remove(); });
         fundo.addEventListener('click', function (e) { if (e.target === fundo) fundo.remove(); });
         fundo.querySelector('[data-imp]').addEventListener('click', function () { try { fr.contentWindow.focus(); fr.contentWindow.print(); } catch (e) {} });
-      }).withFailureHandler(function (e) { alert(e.message || e); }).obterNotaCompra(EMAIL, linha, alunoEmail || '');
+      }).withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); }).obterNotaCompra(EMAIL, linha, alunoEmail || '');
     }
 
     function htmlSituacao(j) {
@@ -3067,7 +3085,7 @@ function abrirJournal() { abrirTarefas(); }
 
     function ligarNotasJournal(raiz, quem, aluno, depois) {
       if (!raiz) return;
-      var enviar = function (dados) { dados.quem = quem; if (aluno) dados.aluno = aluno; google.script.run.withSuccessHandler(depois).withFailureHandler(function (e) { alert(e.message || e); }).salvarNotaJournal(EMAIL, dados); };
+      var enviar = function (dados) { dados.quem = quem; if (aluno) dados.aluno = aluno; google.script.run.withSuccessHandler(depois).withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); }).salvarNotaJournal(EMAIL, dados); };
       raiz.querySelectorAll('[data-nota]').forEach(function (c) {
         c.addEventListener('change', function () { enviar({ linha: c.dataset.nota, feito: c.checked }); });
       });
@@ -3098,7 +3116,7 @@ function abrirJournal() { abrirTarefas(); }
         ligarNotasJournal(alvo.querySelector('.jp-notas[data-quem="eleve"]'), 'eleve', a.email, recarregar);
         ligarNotasJournal(alvo.querySelector('.jp-notas[data-quem="prof"]'), 'prof', a.email, recarregar);
         $('sm-add').addEventListener('click', function () {
-          google.script.run.withSuccessHandler(recarregar).withFailureHandler(function (e) { alert(e.message || e); })
+          google.script.run.withSuccessHandler(recarregar).withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); })
             .salvarSimulado(EMAIL, { aluno: a.email, nome: $('sm-nome').value, data: $('sm-data').value, ecrit: $('sm-e').value, oral: $('sm-o').value });
         });
         alvo.querySelectorAll('[data-sim-del]').forEach(function (b) { b.addEventListener('click', function () { google.script.run.withSuccessHandler(recarregar).salvarSimulado(EMAIL, { aluno: a.email, linha: b.dataset.simDel, apagar: true }); }); });
@@ -3231,8 +3249,8 @@ function abrirJournal() { abrirTarefas(); }
         });
         $('jp-cours').addEventListener('input', previa);
         ligarEditorHorarios(alvo, previa);
-        $('jp-pedir-renov').addEventListener('click', function () {
-          var m = prompt('Message à l\'élève (affiché en évidence dans son journal et envoyé par e-mail) :', 'Merci de renouveler votre forfait : choisissez-le dans Mon espace → Forfait et cours, et payez par Pix avec le QR code affiché.');
+        $('jp-pedir-renov').addEventListener('click', async function () {
+          var m = (await Dialogo.pedir('Message à l\'élève (affiché en évidence dans son journal et envoyé par e-mail) :', 'Merci de renouveler votre forfait : choisissez-le dans Mon espace → Forfait et cours, et payez par Pix avec le QR code affiché.'));
           if (m === null) return;
           rodar('pedirRenovacao', [a.email, m]);
         });
@@ -3251,15 +3269,15 @@ function abrirJournal() { abrirTarefas(); }
               .salvarDadosJournal(EMAIL, a.email, { horarios: hor, replanejar: false });
           } else rodar('salvarPack', [dadosPack]);
         });
-        alvo.querySelectorAll('[data-pk-pago]').forEach(function (b) { b.addEventListener('click', function () { var nf = prompt('Nota fiscal (n° ou lien), facultatif :', '') || ''; rodar('marcarPackPago', [a.email, b.dataset.pkPago, true, nf, true]); }); });
-        alvo.querySelectorAll('[data-pk-rem]').forEach(function (b) { b.addEventListener('click', function () {
-          var v = prompt('Remise en R$ pour ce forfait (0 pour retirer) :', b.dataset.rem || '0'); if (v === null) return;
-          var mo = Number(String(v).replace(',', '.')) ? (prompt('Motif de la remise (apparaît sur la nota) :', b.dataset.motif || '') || '') : '';
+        alvo.querySelectorAll('[data-pk-pago]').forEach(function (b) { b.addEventListener('click', async function () { var nf = (await Dialogo.pedir('Nota fiscal (n° ou lien), facultatif :', '')) || ''; rodar('marcarPackPago', [a.email, b.dataset.pkPago, true, nf, true]); }); });
+        alvo.querySelectorAll('[data-pk-rem]').forEach(function (b) { b.addEventListener('click', async function () {
+          var v = (await Dialogo.pedir('Remise en R$ pour ce forfait (0 pour retirer) :', b.dataset.rem || '0')); if (v === null) return;
+          var mo = Number(String(v).replace(',', '.')) ? ((await Dialogo.pedir('Motif de la remise (apparaît sur la nota) :', b.dataset.motif || '')) || '') : '';
           rodar('definirRemisePack', [a.email, b.dataset.pkRem, String(v).replace(',', '.'), mo]);
         }); });
         alvo.querySelectorAll('[data-pk-recibo]').forEach(function (b) { b.addEventListener('click', function () { rodar('reenviarRecibo', [a.email, b.dataset.pkRecibo]); }); });
         alvo.querySelectorAll('[data-pk-nota]').forEach(function (b) { b.addEventListener('click', function () { verNotaCompra(b.dataset.pkNota, a.email); }); });
-        alvo.querySelectorAll('[data-pk-del]').forEach(function (b) { b.addEventListener('click', function () { if (confirm('Supprimer ce forfait ?')) rodar('apagarPack', [a.email, b.dataset.pkDel]); }); });
+        alvo.querySelectorAll('[data-pk-del]').forEach(function (b) { b.addEventListener('click', async function () { if ((await Dialogo.confirmar('Supprimer ce forfait ?'))) rodar('apagarPack', [a.email, b.dataset.pkDel]); }); });
         $('jp-agendar-n').addEventListener('click', function () { rodar('agendarAulas', [a.email, $('jp-n').value]); });
         $('jp-c-add').addEventListener('click', function () { rodar('salvarCours', [{ aluno: a.email, data: $('jp-c-data').value, hora: $('jp-c-hora').value, statut: 'prévu' }]); });
         alvo.querySelectorAll('.jr-lin[data-lin]').forEach(function (l) {
@@ -3268,7 +3286,7 @@ function abrirJournal() { abrirTarefas(); }
             rodar('salvarCours', [{ aluno: a.email, linha: l.dataset.lin, data: v('data'), hora: v('hora'), statut: v('statut'), reposition: v('reposition'), certificat: v('certificat'), obs: v('obs') }]);
           });
           l.querySelectorAll('select, input').forEach(function (x) { x.addEventListener('change', function () { l.querySelector('[data-c-salvar]').classList.add('pulsa'); }); });
-          l.querySelector('[data-c-del]').addEventListener('click', function () { if (confirm('Supprimer ce cours ?')) rodar('apagarCours', [a.email, l.dataset.lin]); });
+          l.querySelector('[data-c-del]').addEventListener('click', async function () { if ((await Dialogo.confirmar('Supprimer ce cours ?'))) rodar('apagarCours', [a.email, l.dataset.lin]); });
         });
       };
       google.script.run.withSuccessHandler(desenhar).withFailureHandler(function (e) { alvo.innerHTML = '<p class="aviso">' + esc(e.message || e) + '</p>'; }).obterJournalAluno(EMAIL, a.email);
@@ -3282,7 +3300,7 @@ function abrirJournal() { abrirTarefas(); }
           return '<div class="sessao-prof"><div><b>' + esc(a.titre) + '</b><small>' + esc(String(a.message).slice(0, 160)) + '<br>' + dataFr(a.data) + ' · ' + esc(String(a.alvo)) + ' · <b>lu par ' + a.lidos + ' / ' + a.total + '</b></small></div>' +
             '<button class="ferramenta perigo" type="button" data-av-del="' + esc(a.id) + '">' + ICO.lixo + '</button></div>';
         }).join('') : '<p class="vazio">Aucun avis.</p>';
-        $('av-lista').querySelectorAll('[data-av-del]').forEach(function (b) { b.addEventListener('click', function () { if (confirm('Supprimer cet avis ?')) google.script.run.withSuccessHandler(desenhar).apagarAviso(EMAIL, b.dataset.avDel); }); });
+        $('av-lista').querySelectorAll('[data-av-del]').forEach(function (b) { b.addEventListener('click', async function () { if ((await Dialogo.confirmar('Supprimer cet avis ?'))) google.script.run.withSuccessHandler(desenhar).apagarAviso(EMAIL, b.dataset.avDel); }); });
       };
       $('av-enviar').addEventListener('click', function () {
         var alunos = sel.valor();
@@ -3326,8 +3344,8 @@ function abrirJournal() { abrirTarefas(); }
         b.addEventListener('click', function () { tache = b.dataset.qtT; document.querySelectorAll('[data-qt-t]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); carregar(); });
       });
       ['qt-busca', 'qt-eixo', 'qt-estado'].forEach(function (k) { $(k).addEventListener(k === 'qt-busca' ? 'input' : 'change', desenhar); });
-      $('qt-marcar').addEventListener('click', function () { var l = visiveis(); if (l.length && confirm('Cocher ' + l.length + ' thèmes ?')) enviar(l.map(function (x) { return x.id; }), true); });
-      $('qt-desmarcar').addEventListener('click', function () { var l = visiveis(); if (l.length && confirm('Décocher ' + l.length + ' thèmes ?')) enviar(l.map(function (x) { return x.id; }), false); });
+      $('qt-marcar').addEventListener('click', async function () { var l = visiveis(); if (l.length && (await Dialogo.confirmar('Cocher ' + l.length + ' thèmes ?'))) enviar(l.map(function (x) { return x.id; }), true); });
+      $('qt-desmarcar').addEventListener('click', async function () { var l = visiveis(); if (l.length && (await Dialogo.confirmar('Décocher ' + l.length + ' thèmes ?'))) enviar(l.map(function (x) { return x.id; }), false); });
       carregar();
     }
 
@@ -3379,10 +3397,10 @@ function abrirJournal() { abrirTarefas(); }
             chamar('definirLiberacaoSimulados', [st.alvo, [cb.dataset.libId], cb.checked]);
           });
         });
-        var lote = function (ativo) {
+        var lote = async function (ativo) {
           var ids = casas.filter(function (c) { return c.pronto && c.estado !== 'herdado' && (ativo ? !c.estado : c.estado === 'direto'); }).map(function (c) { return c.id; });
           if (!ids.length) { caixa.querySelector('.lib-st').textContent = 'Rien à changer.'; return; }
-          if (!ativo && !confirm('Fermer ' + ids.length + ' épreuve(s) pour ' + nomeAlvo(st.alvo) + ' ?')) return;
+          if (!ativo && !(await Dialogo.confirmar('Fermer ' + ids.length + ' épreuve(s) pour ' + nomeAlvo(st.alvo) + ' ?'))) return;
           chamar('definirLiberacaoSimulados', [st.alvo, ids, ativo]);
         };
         caixa.querySelector('[data-lib="tudo"]').addEventListener('click', function () { lote(true); });
@@ -3634,7 +3652,7 @@ function abrirJournal() { abrirTarefas(); }
           '<div class="bloco lib-bloco"><h3>Ouvrir les épreuves aux élèves</h3><div id="lib-prof"></div></div>';
         alvo.querySelectorAll('[data-tg-tipo]').forEach(function (b) { b.addEventListener('click', function () { GRADE_TIPO = b.dataset.tgTipo; desenhar(st); }); });
         if ($('lib-prof')) painelLiberacao($('lib-prof'), 'TOUS');
-        if ($('tt-gerar')) $('tt-gerar').addEventListener('click', function () { this.disabled = true; google.script.run.withSuccessHandler(desenhar).withFailureHandler(function (e) { alert(e.message || e); }).iniciarGeracaoTestes(EMAIL); });
+        if ($('tt-gerar')) $('tt-gerar').addEventListener('click', function () { this.disabled = true; google.script.run.withSuccessHandler(desenhar).withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); }).iniciarGeracaoTestes(EMAIL); });
         alvo.querySelectorAll('[data-tgp]').forEach(function (b) {
           b.addEventListener('click', function () {
             var x = st.testes.filter(function (y) { return y.id === b.dataset.tgp; })[0];
@@ -3665,7 +3683,7 @@ function abrirJournal() { abrirTarefas(); }
             return '<div class="vp-linha"><b>' + esc(c.mot) + '</b><span>' + esc(c.trad || '') + '</span><small>' + esc(c.ex || '') + (c.dica ? '<br>' + esc(c.dica) : '') + '</small><button class="ferramenta sutil" type="button" data-vp-del="' + c.linha + '">' + ICO.lixo + '</button></div>';
           }).join('') + '</div></details>';
         }).join('');
-        $('vp-lista').querySelectorAll('[data-vp-del]').forEach(function (b) { b.addEventListener('click', function () { if (confirm('Supprimer cette carte ?')) google.script.run.withSuccessHandler(desenhar).apagarCarta(EMAIL, b.dataset.vpDel); }); });
+        $('vp-lista').querySelectorAll('[data-vp-del]').forEach(function (b) { b.addEventListener('click', async function () { if ((await Dialogo.confirmar('Supprimer cette carte ?'))) google.script.run.withSuccessHandler(desenhar).apagarCarta(EMAIL, b.dataset.vpDel); }); });
       };
       $('vp-add').addEventListener('click', function () {
         $('vp-st').textContent = 'Enregistrement…';
@@ -3788,11 +3806,11 @@ function abrirSimulados() {
       var tela = $('tela-hub');
       tela.innerHTML = '<p class="vazio">Chargement du test…</p>';
       mostrar('tela-hub');
-      google.script.run.withSuccessHandler(function (t) {
+      google.script.run.withSuccessHandler(async function (t) {
         TST = { t: t, resp: {}, i: 0, inicio: Date.now(), escutas: {}, fim: Date.now() + t.duracao * 60000 };
         var pg = t.progresso;
         if (pg && Object.keys(pg.r || {}).length) {
-          if (confirm('Vous avez déjà commencé cette épreuve (' + Object.keys(pg.r).length + ' réponse(s), ' + formatarTempo(pg.s) + ' restantes).\n\nOK = reprendre là où vous vous étiez arrêté(e)\nAnnuler = recommencer à zéro')) {
+          if ((await Dialogo.confirmar('Vous avez déjà commencé cette épreuve (' + Object.keys(pg.r).length + ' réponse(s), ' + formatarTempo(pg.s) + ' restantes).\n\nOK = reprendre là où vous vous étiez arrêté(e)\nAnnuler = recommencer à zéro'))) {
             TST.resp = {}; Object.keys(pg.r).forEach(function (k) { TST.resp[k] = Number(pg.r[k]); });
             TST.i = Math.min(pg.i || 0, t.questoes.length - 1); TST.escutas = pg.e || {};
             TST.fim = Date.now() + Math.max(60, pg.s) * 1000; TST.inicio = Date.now() - (t.duracao * 60 - pg.s) * 1000;
@@ -3823,7 +3841,7 @@ function abrirSimulados() {
             TST.cacheAudio = TST.cacheAudio || {};
             if (TST.cacheAudio[q.n]) tocar(TST.cacheAudio[q.n]);
             else google.script.run.withSuccessHandler(function (url) { if (!TST) return; TST.cacheAudio[q.n] = url; tocar(url); })
-              .withFailureHandler(function (e) { alert(e.message || e); desenhar(); }).obterAudioTeste(EMAIL, t.id, q.n);
+              .withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); desenhar(); }).obterAudioTeste(EMAIL, t.id, q.n);
           });
           $('tt-ant').addEventListener('click', function () { TST.i--; desenhar(); });
           $('tt-prox').addEventListener('click', function () { if (TST.i < t.questoes.length - 1) { TST.i++; desenhar(); } else terminar(); });
@@ -3831,10 +3849,10 @@ function abrirSimulados() {
           relogio();
         };
         var relogio = function () { if (!TST || !$('tt-tempo')) return; var r = Math.round((TST.fim - Date.now()) / 1000); $('tt-tempo').textContent = '' + formatarTempo(Math.max(0, r)); $('tt-tempo').classList.toggle('fim', r <= 300); if (r <= 0) terminar(true); };
-        var terminar = function (auto) {
+        var terminar = async function (auto) {
           if (!TST || TST.enviando) return;
           var falta = t.questoes.filter(function (x) { return TST.resp[x.n] === undefined; }).length;
-          if (!auto && falta && !confirm(falta + ' question(s) sans réponse. Terminer quand même ?')) return;
+          if (!auto && falta && !(await Dialogo.confirmar(falta + ' question(s) sans réponse. Terminer quand même ?'))) return;
           TST.enviando = true; clearInterval(TST.timer); Voz.parar && Voz.parar();
           delete PROG_LOCAL[t.id];
           google.script.run.withSuccessHandler(function (r) {
@@ -3846,7 +3864,7 @@ function abrirSimulados() {
             });
             mostrarResultadoTeste(t, TST ? TST.resp : {}, r); TST = null;
           })
-            .withFailureHandler(function (e) { TST.enviando = false; alert(e.message || e); }).corrigirTeste(EMAIL, t.id, TST.resp, Math.round((Date.now() - TST.inicio) / 1000));
+            .withFailureHandler(async function (e) { TST.enviando = false; (await Dialogo.aviso(e.message || e)); }).corrigirTeste(EMAIL, t.id, TST.resp, Math.round((Date.now() - TST.inicio) / 1000));
         };
         TST.timer = setInterval(relogio, 1000);
         desenhar();
@@ -3906,7 +3924,7 @@ function abrirSimulados() {
           bt.disabled = true; bt.textContent = 'Écoute en cours…';
           if (!q.audio) { tocarScript(q.script || d.script, fim); return; }
           google.script.run.withSuccessHandler(function (url) { var au = new window.Audio(url); au.onended = fim; au.onerror = fim; au.play().catch(fim); })
-            .withFailureHandler(function (e) { alert(e.message || e); fim(); }).obterAudioTeste(EMAIL, t.id, q.n);
+            .withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); fim(); }).obterAudioTeste(EMAIL, t.id, q.n);
         });
       };
       // começa na primeira questão errada (aluno) ou na primeira (professora)
@@ -3950,7 +3968,7 @@ function abrirSimulados() {
           var bt = this; bt.disabled = true; bt.textContent = 'Écoute en cours…';
           var fim = function () { bt.disabled = false; bt.textContent = '▶ Réécouter'; };
           if (!q.audio) { tocarScript(q.script, fim); return; }
-          google.script.run.withSuccessHandler(function (url) { var au = new window.Audio(url); au.onended = fim; au.onerror = fim; au.play().catch(fim); }).withFailureHandler(function (e) { alert(e.message || e); fim(); }).obterAudioTeste(EMAIL, q.id, q.n);
+          google.script.run.withSuccessHandler(function (url) { var au = new window.Audio(url); au.onended = fim; au.onerror = fim; au.play().catch(fim); }).withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); fim(); }).obterAudioTeste(EMAIL, q.id, q.n);
         });
         $('cad-ok').addEventListener('click', function () {
           var bt = this;
@@ -3965,7 +3983,7 @@ function abrirSimulados() {
             $('cad-fb').innerHTML = '<div class="cad-fb ' + (r.ok ? 'ok' : 'ko') + '"><b>' + (r.saiu ? 'Bravo ! Cette question sort de votre cahier.' : r.ok ? '✓ Bonne réponse · ' + r.serie + ' / 4 d\'affilée' : '✗ Pas encore : la série repart à zéro.') + '</b>' +
               (r.x ? '<p>' + esc(r.x) + '</p>' : '') + (r.script && q.tipo === 'CO' ? '<details><summary>Transcription</summary><p>' + esc(r.script).replace(/\n/g, '<br>') + '</p></details>' : '') + '</div>';
             bt.disabled = false; bt.dataset.fase = 'prox'; bt.textContent = fila.length ? 'Question suivante →' : 'Terminer';
-          }).withFailureHandler(function (e) { bt.disabled = false; alert(e.message || e); }).responderCaderno(EMAIL, q.id, q.n, escolha);
+          }).withFailureHandler(async function (e) { bt.disabled = false; (await Dialogo.aviso(e.message || e)); }).responderCaderno(EMAIL, q.id, q.n, escolha);
         });
       };
       mostrarQ();
@@ -4237,7 +4255,7 @@ function abrirSimulados() {
           (!st.iaConfigurada ? '<div class="alerta">La clé de l\'IA n\'est pas configurée : exécutez configurarChaveIA() dans l\'éditeur.</div>' :
             st.ativa ? '<p class="gm-ativa">Génération en cours en arrière-plan…</p><button class="ferramenta perigo" type="button" id="gm-parar">Arrêter</button>' :
             (pr < tot ? '<button class="botao-principal" type="button" id="gm-iniciar" style="width:auto;padding:12px 26px">Rédiger tous les modèles manquants</button>' : '<p class="gm-ativa">Tous les sujets ont un modèle.</p>'));
-        if ($('gm-iniciar')) $('gm-iniciar').addEventListener('click', function () { this.disabled = true; google.script.run.withSuccessHandler(desenhar).withFailureHandler(function (e) { alert(e.message || e); }).iniciarGeracaoApp(EMAIL); });
+        if ($('gm-iniciar')) $('gm-iniciar').addEventListener('click', function () { this.disabled = true; google.script.run.withSuccessHandler(desenhar).withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); }).iniciarGeracaoApp(EMAIL); });
         if ($('gm-parar')) $('gm-parar').addEventListener('click', function () { google.script.run.withSuccessHandler(desenhar).pararGeracaoApp(EMAIL); });
       };
       var atualizar = function () { if ($('gm-conteudo')) google.script.run.withSuccessHandler(function (st) { desenhar(st); if (st.ativa) setTimeout(atualizar, 30000); }).statusGeracaoApp(EMAIL); };
@@ -4245,13 +4263,13 @@ function abrirSimulados() {
     }
 
     /** Envia o comprovante (imagem ou PDF, até 8 Mo) para o pacote da linha indicada. */
-    function enviarComprovante(arq, linha, fim, alunoEmail) {
-      if (arq.size > 8 * 1024 * 1024) { alert('Fichier trop lourd (8 Mo maximum).'); fim(); return; }
+    async function enviarComprovante(arq, linha, fim, alunoEmail) {
+      if (arq.size > 8 * 1024 * 1024) { (await Dialogo.aviso('Fichier trop lourd (8 Mo maximum).')); fim(); return; }
       var lr = new FileReader();
       lr.onload = function () {
         var b64 = String(lr.result).split(',')[1];
         google.script.run.withSuccessHandler(function () { avisar({ titulo: 'Justificatif envoyé', texto: arq.name, icone: '', som: false }); fim(); })
-          .withFailureHandler(function (e) { alert('Le justificatif n\'a pas pu être envoyé : ' + (e.message || e)); fim(); })
+          .withFailureHandler(async function (e) { (await Dialogo.aviso('Le justificatif n\'a pas pu être envoyé : ' + (e.message || e))); fim(); })
           .anexarComprovante(EMAIL, linha, arq.name, arq.type || 'application/octet-stream', b64, alunoEmail || '');
       };
       lr.readAsDataURL(arq);
@@ -4280,26 +4298,26 @@ function abrirSimulados() {
           desenharDatas(p.datas);
           var ed = it.querySelector('.pg-hor');
           if (ed) ligarEditorHorarios(ed, function () { p.horariosNovos = lerEditorHorarios(ed); desenharDatas(proxAulasCli(p.horariosNovos, Date.now() - 86400000, p.cours)); });
-          it.querySelector('[data-ok]').addEventListener('click', function () {
+          it.querySelector('[data-ok]').addEventListener('click', async function () {
             it.classList.add('feito');
             var confirmar = function () { google.script.run.withSuccessHandler(function (r) {
               it.remove();
               avisar({ titulo: 'Forfait confirmé', texto: p.nome + ' · ' + (r.criadas || 0) + ' cours planifiés' + (r.emailEnviado ? ' · nota de compra envoyée' : ''), icone: '', som: false });
               if (r.emailErro) avisar({ titulo: 'Le comprovante n\'a pas été envoyé', texto: r.emailErro, icone: '', tipo: 'urgente', som: false, duracao: 20 });
             })
-              .withFailureHandler(function (e) { it.classList.remove('feito'); alert(e.message || e); })
+              .withFailureHandler(async function (e) { it.classList.remove('feito'); (await Dialogo.aviso(e.message || e)); })
               .marcarPackPago(EMAIL, p.aluno, p.linha, !p.datas.length, it.querySelector('[data-nf]').value, true,
                 p.datas.map(function (d, k) { return { data: it.querySelector('[data-d="' + k + '"]').value, hora: it.querySelector('[data-h="' + k + '"]').value }; })); };
             var comHorario = function () {
-              if (p.horariosNovos) google.script.run.withSuccessHandler(confirmar).withFailureHandler(function (e) { it.classList.remove('feito'); alert(e.message || e); })
+              if (p.horariosNovos) google.script.run.withSuccessHandler(confirmar).withFailureHandler(async function (e) { it.classList.remove('feito'); (await Dialogo.aviso(e.message || e)); })
                 .salvarDadosJournal(EMAIL, p.aluno, { horarios: p.horariosNovos, replanejar: false });
               else confirmar();
             };
             // desconto dado na confirmação: grava antes de marcar como pago (a nota já sai com o desconto)
             var rem = Number(String(it.querySelector('[data-rem]').value).replace(',', '.')) || 0, mot = it.querySelector('[data-motif]').value;
             if (rem !== (Number(p.remise) || 0) || mot !== (p.motif || '')) {
-              if (rem > p.prix) { it.classList.remove('feito'); alert('La remise ne peut pas dépasser le prix.'); return; }
-              google.script.run.withSuccessHandler(comHorario).withFailureHandler(function (e) { it.classList.remove('feito'); alert(e.message || e); }).definirRemisePack(EMAIL, p.aluno, p.linha, rem, mot);
+              if (rem > p.prix) { it.classList.remove('feito'); (await Dialogo.aviso('La remise ne peut pas dépasser le prix.')); return; }
+              google.script.run.withSuccessHandler(comHorario).withFailureHandler(async function (e) { it.classList.remove('feito'); (await Dialogo.aviso(e.message || e)); }).definirRemisePack(EMAIL, p.aluno, p.linha, rem, mot);
             } else comHorario();
           });
         });
@@ -4316,14 +4334,14 @@ function abrirSimulados() {
         alvo.querySelectorAll('.ac-item').forEach(function (it) {
           var c = l[Number(it.dataset.i)];
           it.querySelectorAll('[data-st]').forEach(function (b) {
-            b.addEventListener('click', function () {
+            b.addEventListener('click', async function () {
               var st = b.dataset.st, repo = '';
               if (st === 'absence justifiée' || st === 'annulé (professeur)') {
-                repo = prompt('Date de la reposition (AAAA-MM-JJ). Laissez vide s\'il n\'y a pas de reposition :', '') || '';
+                repo = (await Dialogo.pedir('Date de la reposition (AAAA-MM-JJ). Laissez vide s\'il n\'y a pas de reposition :', '')) || '';
               }
               it.classList.add('feito');
               google.script.run.withSuccessHandler(function () { it.remove(); if (!alvo.children.length) alvo.innerHTML = '<p class="vazio">Tous les cours sont confirmés. </p>'; })
-                .withFailureHandler(function (e) { it.classList.remove('feito'); alert(e.message || e); }).confirmarCours(EMAIL, c.aluno, c.linha, st, repo);
+                .withFailureHandler(async function (e) { it.classList.remove('feito'); (await Dialogo.aviso(e.message || e)); }).confirmarCours(EMAIL, c.aluno, c.linha, st, repo);
             });
           });
         });
@@ -4940,8 +4958,8 @@ function abasEspace(ativa) {
             b.addEventListener('click', function () { google.script.run.withSuccessHandler(listar).alternarDevoir(EMAIL, b.dataset.dvAlt, b.dataset.ativo === '1'); });
           });
           $('dv-lista').querySelectorAll('[data-dv-del]').forEach(function (b) {
-            b.addEventListener('click', function () {
-              if (!confirm('Supprimer définitivement ce devoir ? Il disparaîtra aussi chez les élèves.')) return;
+            b.addEventListener('click', async function () {
+              if (!(await Dialogo.confirmar('Supprimer définitivement ce devoir ? Il disparaîtra aussi chez les élèves.'))) return;
               b.disabled = true;
               google.script.run.withSuccessHandler(listar).apagarDevoir(EMAIL, b.dataset.dvDel);
             });
@@ -5140,20 +5158,20 @@ function abasEspace(ativa) {
                 .salvarAvaliacaoCompetencias(EMAIL, { aluno: a.email, epreuve: x.tipo, tache: r['Tâche'], sujet: r.Sujet, ref: r.ID, notas: cw.notas(), comentario: n.querySelector('textarea').value });
             });
           });
-          c.querySelector('[data-fi-del-prod]').addEventListener('click', function () {
-            if (!confirm('Supprimer définitivement cette production ?')) return;
+          c.querySelector('[data-fi-del-prod]').addEventListener('click', async function () {
+            if (!(await Dialogo.confirmar('Supprimer définitivement cette production ?'))) return;
             google.script.run.withSuccessHandler(function () { c.remove(); }).apagarProducao(EMAIL, x.tipo, r.ID);
           });
         });
         alvo.querySelectorAll('[data-fi-del-dv]').forEach(function (b) {
-          b.addEventListener('click', function () {
-            if (!confirm('Supprimer ce devoir ? Il sera supprimé pour TOUS les élèves qui l\'ont reçu.')) return;
+          b.addEventListener('click', async function () {
+            if (!(await Dialogo.confirmar('Supprimer ce devoir ? Il sera supprimé pour TOUS les élèves qui l\'ont reçu.'))) return;
             google.script.run.withSuccessHandler(function () { abrirFicha(a.email); }).apagarDevoir(EMAIL, b.dataset.fiDelDv);
           });
         });
         alvo.querySelectorAll('[data-fi-del-ss]').forEach(function (b) {
-          b.addEventListener('click', function () {
-            if (!confirm('Supprimer cette épreuve ? Elle sera supprimée pour TOUS les élèves (les productions déjà envoyées sont conservées).')) return;
+          b.addEventListener('click', async function () {
+            if (!(await Dialogo.confirmar('Supprimer cette épreuve ? Elle sera supprimée pour TOUS les élèves (les productions déjà envoyées sont conservées).'))) return;
             google.script.run.withSuccessHandler(function () { abrirFicha(a.email); }).apagarSessao(EMAIL, b.dataset.fiDelSs);
           });
         });
@@ -5214,8 +5232,8 @@ function abasEspace(ativa) {
           alvo.querySelectorAll('.mi-linha').forEach(function (l) { l.hidden = q && l.dataset.busca.indexOf(q) === -1; });
           if (q) alvo.querySelectorAll('.mi-grupo').forEach(function (g) { g.open = true; });
         });
-        if ($('fi-copiar')) $('fi-copiar').addEventListener('click', function () {
-          if (!confirm('Appliquer cet accès à tous les élèves du groupe « ' + a.grupo + ' » ? (Enregistrez d\'abord l\'accès de cet élève.)')) return;
+        if ($('fi-copiar')) $('fi-copiar').addEventListener('click', async function () {
+          if (!(await Dialogo.confirmar('Appliquer cet accès à tous les élèves du groupe « ' + a.grupo + ' » ? (Enregistrez d\'abord l\'accès de cet élève.)'))) return;
           google.script.run.withSuccessHandler(function (n) { $('fi-acesso-st').textContent = '✓ Appliqué à ' + n + ' élève' + (n > 1 ? 's' : ''); })
             .withFailureHandler(function (e) { $('fi-acesso-st').textContent = '' + (e.message || e); }).copiarAcessoParaGrupo(EMAIL, a.email);
         });
@@ -5233,7 +5251,7 @@ function abasEspace(ativa) {
           google.script.run.withSuccessHandler(function () { abrirFicha(a.email); }).withFailureHandler(function (e) { $('fi-msg-st').textContent = '' + (e.message || e); }).enviarMensagem(EMAIL, a.email, t);
         });
         alvo.querySelectorAll('[data-del-msg]').forEach(function (b) {
-          b.addEventListener('click', function () { if (!confirm('Supprimer ce message ?')) return; google.script.run.withSuccessHandler(function () { abrirFicha(a.email); }).apagarMensagem(EMAIL, b.dataset.delMsg); });
+          b.addEventListener('click', async function () { if (!(await Dialogo.confirmar('Supprimer ce message ?'))) return; google.script.run.withSuccessHandler(function () { abrirFicha(a.email); }).apagarMensagem(EMAIL, b.dataset.delMsg); });
         });
       }).withFailureHandler(function (e) { alvo.innerHTML = '<p class="vazio erro">' + esc(e.message || e) + '</p>'; }).obterFicheEleve(EMAIL, alunoEmail);
     }
@@ -5258,7 +5276,7 @@ function abasEspace(ativa) {
             '<small>' + esc(String(p.texto || '').slice(0, 120)) + (p.tache ? ' · lien : ' + nomeTache(p.tache) : '') + (p.imagem ? ' · image' : '') + '</small></div>' +
             '<div class="acoes-linha"><button class="ferramenta" type="button" data-bl-ed="' + i + '">Modifier</button><button class="ferramenta perigo" type="button" data-bl-del="' + esc(p.ref) + '">' + ICO.lixo + '</button></div></div>';
         }).join('') : '<p class="vazio">Aucun article : la page d\'accueil affiche les sujets automatiquement.</p>';
-        $('bl-lista').querySelectorAll('[data-bl-del]').forEach(function (b) { b.addEventListener('click', function () { if (confirm('Supprimer cet article ?')) google.script.run.withSuccessHandler(desenhar).apagarPostBlog(EMAIL, b.dataset.blDel); }); });
+        $('bl-lista').querySelectorAll('[data-bl-del]').forEach(function (b) { b.addEventListener('click', async function () { if ((await Dialogo.confirmar('Supprimer cet article ?'))) google.script.run.withSuccessHandler(desenhar).apagarPostBlog(EMAIL, b.dataset.blDel); }); });
         $('bl-lista').querySelectorAll('[data-bl-ed]').forEach(function (b) {
           b.addEventListener('click', function () {
             var p = l[Number(b.dataset.blEd)];
@@ -5308,7 +5326,7 @@ function abasEspace(ativa) {
       $('tm-busca').addEventListener('input', preencher);
       $('tm-add').addEventListener('click', function () {
         var id = $('tm-sujet').value; if (!id) return;
-        google.script.run.withSuccessHandler(desenhar).withFailureHandler(function (e) { alert(e.message || e); }).adicionarTemaDoMes(EMAIL, { tache: $('tm-tache').value, id: id });
+        google.script.run.withSuccessHandler(desenhar).withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); }).adicionarTemaDoMes(EMAIL, { tache: $('tm-tache').value, id: id });
       });
       $('tm-sugerir').addEventListener('click', function () {
         google.script.run.withSuccessHandler(function (sug) {
@@ -5418,8 +5436,8 @@ function abasEspace(ativa) {
               '<button class="ferramenta perigo" type="button" data-ss-del="' + esc(x.ID) + '">Supprimer</button></div></div>';
           }).join('') : '<p class="vazio">Aucune épreuve publiée.</p>';
           $('ss-lista').querySelectorAll('[data-ss-del]').forEach(function (b) {
-            b.addEventListener('click', function () {
-              if (!confirm('Supprimer définitivement cette épreuve ? (Les productions déjà envoyées sont conservées.)')) return;
+            b.addEventListener('click', async function () {
+              if (!(await Dialogo.confirmar('Supprimer définitivement cette épreuve ? (Les productions déjà envoyées sont conservées.)'))) return;
               b.disabled = true;
               google.script.run.withSuccessHandler(listar).apagarSessao(EMAIL, b.dataset.ssDel);
             });
@@ -5763,7 +5781,7 @@ function abasEspace(ativa) {
         '<p class="aviso">Les sujets sont tirés au sort parmi ceux qui sont ouverts pour vous, sur des axes différents, et découverts au début de chaque tâche.</p>' +
         '<fieldset class="escolha-correcao"><legend>Qui corrige ?</legend>' +
           '<label' + (ia ? '' : ' class="indisponivel"') + '><input type="radio" name="eo-correcao" value="ia"' + (ia ? ' checked' : ' disabled') + '><span><b>L\'IA, dès la fin</b><small>' +
-            (ia ? 'Note, critères, corrections et version améliorée pour chaque tâche, à partir de l\'enregistrement et de la transcription. Sans crédit.' : 'Indisponible pour le moment.') + '</small></span></label>' +
+            (ia ? 'Note, critères, corrections et version améliorée pour chaque tâche, à partir de l\'enregistrement et de la transcription. 1 crédit par tâche.' : 'Indisponible pour le moment.') + '</small></span></label>' +
           '<label><input type="radio" name="eo-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Par un professeur</b><small>Les enregistrements et les transcriptions partent dans le Sistema de Correção (1 crédit par tâche).</small></span></label></fieldset>' +
         '<div class="ferramentas"><button class="botao-principal" type="button" id="eo-comecar" style="width:auto;padding:13px 30px"' + (Object.keys(sorteio).length ? '' : ' disabled') + '>Commencer l\'épreuve orale</button>' +
         '<button class="botao-sorteio" type="button" id="eo-retirar">Tirer d\'autres sujets</button></div>' +
@@ -6006,7 +6024,7 @@ function abasEspace(ativa) {
       ['tache', 'sujet', 'sessao', 'duree', 'transcricao', 'modo'].forEach(function (k) { if (o[k] !== undefined && o[k] !== null) fd.append(k, o[k]); });
       if (window.FNM_CURSO) fd.append('courseType', window.FNM_CURSO);
       return fetch(o.url || '/api/modeles/oral', { method: 'POST', headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }, body: fd })
-        .then(function (res) { return res.json().catch(function () { return {}; }).then(function (d) { if (!res.ok) throw new Error(d.msg || 'Erreur ' + res.status); return d; }); });
+        .then(function (res) { return res.json().catch(function () { return {}; }).then(function (d) { if (!res.ok) throw new Error(d.msg || 'Erreur ' + res.status); if (typeof d.creditos === 'number') atualizarCreditos(d.creditos); return d; }); });
     }
     
     // ---------- hub de escolhas do Ambiente de Produção ----------
@@ -6147,7 +6165,7 @@ function abasEspace(ativa) {
     // ---------- épreuve écrite: escolha de quem corrige ----------
     function htmlEscolhaCorrecao(st) {
       return '<fieldset class="escolha-correcao"><legend>Correction de l\'épreuve</legend>' +
-        '<label><input type="radio" name="ep-correcao" value="ia" checked><span><b>Par l\'IA, dès la fin</b><small>Note sur 20, trame, corrections, lexique et version améliorée pour chaque tâche (entraînement, sans crédit).</small></span></label>' +
+        '<label><input type="radio" name="ep-correcao" value="ia" checked><span><b>Par l\'IA, dès la fin</b><small>Note sur 20, trame, corrections, lexique et version améliorée pour chaque tâche (1 crédit par tâche).</small></span></label>' +
         '<label><input type="radio" name="ep-correcao" value="professor"><span><b>Par un professeur</b><small>Les trois textes partent dans le Sistema de Correção à la fin de l\'épreuve (1 crédit par tâche · vous avez ' + (st.creditos || 0) + ' crédit' + ((st.creditos || 0) > 1 ? 's' : '') + ').</small></span></label></fieldset>';
     }
     function correcaoEscolhida() { var r = document.querySelector('input[name="ep-correcao"]:checked'); return r ? r.value : 'ia'; }
@@ -6232,7 +6250,7 @@ function abasEspace(ativa) {
             if (!inp.value.trim()) return;
             b.disabled = true;
             google.script.run.withSuccessHandler(function () { inp.value = ''; b.disabled = false; avisar({ titulo: 'Message envoyé', icone: '', som: false, duracao: 4 }); })
-              .withFailureHandler(function (er) { b.disabled = false; alert(er.message || er); }).enviarMensagem(EMAIL, b.dataset.avEnv, inp.value);
+              .withFailureHandler(async function (er) { b.disabled = false; (await Dialogo.aviso(er.message || er)); }).enviarMensagem(EMAIL, b.dataset.avEnv, inp.value);
           });
         });
       };
@@ -6279,13 +6297,13 @@ function abasEspace(ativa) {
             else if (ev === 'estado' && d.status === 'encerrada') { $('avp-chamada').textContent = 'L\'élève a terminé la séance.'; if (ch) ch.encerrar(false); }
           });
           salaAberta = { fechar: function () { try { stream.fechar(); } catch (e) {} try { ch && ch.encerrar(false); } catch (e) {} } };
-          $('avp-fim').addEventListener('click', function () {
-            if (!confirm('Terminer la séance en direct ?')) return;
+          $('avp-fim').addEventListener('click', async function () {
+            if (!(await Dialogo.confirmar('Terminer la séance en direct ?'))) return;
             google.script.run.encerrarSala(EMAIL, s.id);
             salaAberta.fechar(); salaAberta = null; delete salas[s.id];
             $('av-sala-aberta').innerHTML = ''; desenharSalas();
           });
-        }).withFailureHandler(function (e) { alert(e.message || e); }).entrarSala(EMAIL, id);
+        }).withFailureHandler(async function (e) { (await Dialogo.aviso(e.message || e)); }).entrarSala(EMAIL, id);
       };
     
       google.script.run.withSuccessHandler(function (l) { (l || []).forEach(function (s) { salas[s.id] = s; }); desenharSalas(); }).listarSalasAoVivo(EMAIL);
@@ -6387,6 +6405,8 @@ function abasEspace(ativa) {
       if (typeof n === 'number') B.creditos = n;
       document.querySelectorAll('[data-creditos]').forEach(function (el) { el.outerHTML = htmlCreditos(); });
     }
+    // a correção pela IA também gasta crédito: o gasShim avisa quando uma resposta traz o saldo novo
+    window.addEventListener('fnm:creditos', function (e) { if (B) atualizarCreditos(e.detail); });
     
     // Confirmação de envio no visual do site (não a caixa do navegador): custo, saldo e saldo depois.
     // o: { titulo, texto, custo, rotulo }. Devolve uma Promise<boolean>.
@@ -6454,7 +6474,7 @@ function abasEspace(ativa) {
       var ia = !!(B.ia && B.ia.ativa);
       return '<fieldset class="escolha-correcao tm-correcao"><legend>Qui corrige ?</legend>' +
         '<label' + (ia ? '' : ' class="indisponivel"') + '><input type="radio" name="tm-correcao" value="ia"' + (ia ? ' checked' : ' disabled') + '><span><b>L\'IA</b><small>' +
-          (ia ? 'Correction immédiate : note sur 20, trame, corrections et version améliorée' + (oral ? ', à partir de l\'enregistrement et de la transcription' : '') + '. Sans crédit.' : 'Indisponible pour le moment.') + '</small></span></label>' +
+          (ia ? 'Correction immédiate : note sur 20, trame, corrections et version améliorée' + (oral ? ', à partir de l\'enregistrement et de la transcription' : '') + '. 1 crédit · vous en avez ' + (B.creditos || 0) + '.' : 'Indisponible pour le moment.') + '</small></span></label>' +
         '<label><input type="radio" name="tm-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Attendre la correction d\'un professeur</b><small>La production entre dans la file du Sistema de Correção et est corrigée sur la grille de l\'examen. Vous la retrouvez dans « Meu Espaço ». 1 crédit · vous en avez ' + (B.creditos || 0) + '.</small></span></label>' +
         '<label><input type="radio" name="tm-correcao" value="aovivo"><span><b>Un professeur en direct</b><small>Il suit votre ' + (oral ? 'parole (transcription)' : 'texte pendant que vous écrivez') + ' et peut vous parler par la voix. À l\'envoi, la production lui est envoyée pour la correction (1 crédit).</small></span></label></fieldset>';
     }
@@ -6602,8 +6622,23 @@ function abasEspace(ativa) {
     
     // ---------- professor ao vivo (lado do aluno) ----------
     var SALA = null;   // { id, stream, chamada, ultimoEnvio }
+    // Correção por cores ao vivo: o professor grifa trechos do texto; o aluno vê o texto grifado aqui,
+    // atualizado quando ele escreve e quando o professor marca.
+    function desenharCorrecaoAoVivo() {
+      var box = $('av-correcao'); if (!box || !SALA || !window.MarcasAoVivo) return;
+      var marcas = SALA.marcas || [];
+      box.hidden = !marcas.length;
+      if (!marcas.length) return;
+      var r = MarcasAoVivo.html(SALA.texto || '', marcas, { numeros: true });
+      $('av-corr-texto').innerHTML = r.html;
+      $('av-corr-lista').innerHTML = MarcasAoVivo.lista(r);
+      $('av-corr-n').textContent = marcas.length;
+    }
     function salaEnviar(dados) {
       if (!SALA || !SALA.id) return;
+      if (dados && typeof dados.texto === 'string') SALA.texto = dados.texto;
+      if (dados && typeof dados.transcricao === 'string') SALA.texto = dados.transcricao;
+      if (SALA.marcas && SALA.marcas.length) desenharCorrecaoAoVivo();
       google.script.run.withSuccessHandler(function (r) { if (r && r.encerrada) salaFim(r.motivo); }).atualizarSalaAoVivo(EMAIL, SALA.id, dados);
     }
     // Pedido sem resposta em 3 minutos: o servidor cancela (motivo "expirou") e o aluno pode chamar de novo.
@@ -6627,7 +6662,10 @@ function abasEspace(ativa) {
       var a = $('tm-aovivo');
       a.innerHTML = '<div class="av-sala"><div class="av-sala-cab"><span class="av-ponto"></span><div><b>Professeur en direct</b><small id="av-estado">Appelez un professeur : il verra votre ' + (tache.indexOf('ET') === 0 ? 'texte' : 'transcription') + ' en temps réel.</small></div>' +
         '<button class="botao-principal" type="button" id="av-chamar">Appeler un professeur</button></div>' +
-        '<div class="av-chamada" id="av-chamada" hidden></div><div class="av-chat" id="av-chat" hidden><div class="av-msgs" id="av-msgs"></div>' +
+        '<div class="av-chamada" id="av-chamada" hidden></div>' +
+        '<div class="av-correcao" id="av-correcao" hidden><h4>🖍 Correction en direct <em id="av-corr-n">0</em></h4><p class="av-corr-dica">Votre professeur souligne votre ' + (tache.indexOf('ET') === 0 ? 'texte' : 'transcription') + ' en couleurs pendant que vous travaillez.</p>' +
+        '<div class="mav-texto" id="av-corr-texto" lang="fr"></div><div id="av-corr-lista"></div></div>' +
+        '<div class="av-chat" id="av-chat" hidden><div class="av-msgs" id="av-msgs"></div>' +
         '<div class="av-msg-linha"><input id="av-msg" placeholder="Écrire au professeur…"><button class="ferramenta" type="button" id="av-msg-bt">Envoyer</button><button class="ferramenta sutil" type="button" id="av-fim">Terminer la séance</button></div></div></div>';
       $('av-chamar').addEventListener('click', function () {
         var b = this; b.disabled = true; b.textContent = 'Appel…';
@@ -6681,6 +6719,11 @@ function abasEspace(ativa) {
           if (d.status === 'atendimento') { SALA.aguardando = false; clearInterval(SALA.relogio); $('av-estado').textContent = (d.professorNome || 'Un professeur') + ' suit votre production en direct.'; avisar({ titulo: 'Professeur connecté', texto: d.professorNome || '', icone: '', som: true, duracao: 6 }); }
           if (d.status === 'encerrada') salaFim(d.motivo);
         } else if (ev === 'msg') { if (d.de === 'professor') { addMsg('professor', d.nome, d.texto); somSuave(); } }
+        else if (ev === 'marcas') {
+          var novas = (d.marcas || []).length > ((SALA.marcas || []).length);
+          SALA.marcas = d.marcas || []; desenharCorrecaoAoVivo();
+          if (novas) somSuave();
+        }
         else if (ev === 'sinal' && SALA && SALA.chamada) SALA.chamada.receber(d);
       });
       $('av-msg-bt').addEventListener('click', function () {
@@ -6690,8 +6733,8 @@ function abasEspace(ativa) {
         google.script.run.mensagemSala(EMAIL, SALA.id, t);
       });
       $('av-msg').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('av-msg-bt').click(); });
-      $('av-fim').addEventListener('click', function () {
-        if (!confirm('Terminer la séance en direct ?')) return;
+      $('av-fim').addEventListener('click', async function () {
+        if (!(await Dialogo.confirmar('Terminer la séance en direct ?'))) return;
         google.script.run.encerrarSala(EMAIL, SALA.id);
         salaFim();
       });

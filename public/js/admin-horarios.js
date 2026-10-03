@@ -222,7 +222,7 @@ function renderOcupantes(ocupantes) {
 document.getElementById('detalheOcupantes').addEventListener('click', async e => {
   const btn = e.target.closest('[data-cancelar-matricula]');
   if (!btn) return;
-  if (!confirm('Cancelar esta matrícula e liberar a vaga?')) return;
+  if (!(await Dialogo.confirmar('Cancelar esta matrícula e liberar a vaga?'))) return;
   btn.disabled = true;
   btn.textContent = 'Cancelando…';
   const res = await fetch('/api/matricula/' + btn.dataset.cancelarMatricula + '/cancelar', { method: 'POST', headers: authHeaders() });
@@ -246,7 +246,7 @@ document.getElementById('salvarDetalheBtn').addEventListener('click', async () =
 
 document.getElementById('removerHorarioBtn').addEventListener('click', async () => {
   if (!slotSelecionado) return;
-  if (!confirm('Remover este horário? Ele deixará de aparecer para os alunos.')) return;
+  if (!(await Dialogo.confirmar('Remover este horário? Ele deixará de aparecer para os alunos.'))) return;
   await fetch('/api/horarios/admin/slots/' + slotSelecionado._id, { method: 'DELETE', headers: authHeaders() });
   document.getElementById('modalDetalheHorario').classList.remove('show');
   await carregarGrade();

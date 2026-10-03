@@ -141,9 +141,9 @@ function svgGraficoVisual(labels, valores, unidade) {
 
 // Delega pro helper compartilhado (js/audioFrances.js) — toca o áudio real
 // gerado com Coqui TTS, com fallback pra Web Speech API se preciso.
-function tocarAudio(texto) {
+async function tocarAudio(texto) {
   if (window.falarFrances) return falarFrances(texto);
-  if (!window.speechSynthesis) { alert('Seu navegador não é compatível com leitura de áudio.'); return; }
+  if (!window.speechSynthesis) { (await Dialogo.aviso('Seu navegador não é compatível com leitura de áudio.')); return; }
   speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(texto);
   utter.lang = 'fr-FR';

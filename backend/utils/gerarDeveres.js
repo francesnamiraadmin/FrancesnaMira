@@ -55,7 +55,8 @@ async function aplicarAtribuicoesBase(alunoId) {
   const bases = await AtribuicaoBaseCurso.find({ curso: { $in: cursos } }).lean();
   let n = 0;
   for (const b of bases) {
-    const ja = await AtribuicaoPlanoBase.findOne({ alunoId, origem: "base", curso: b.curso, planoBaseId: b.planoBaseId }).select("_id").lean();
+    // já recebeu pela Atribuição-base, ou já tem este Plano-Base ativo (atribuído à mão): não duplica
+    const ja = await AtribuicaoPlanoBase.findOne({ alunoId, planoBaseId: b.planoBaseId, $or: [{ origem: "base", curso: b.curso }, { ativo: true }] }).select("_id").lean();
     if (ja) continue;
     const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
     await AtribuicaoPlanoBase.create({ alunoId, planoBaseId: b.planoBaseId, dataInicio: hoje, vinculoTipo: "plano_curso", curso: b.curso, origem: "base" });
@@ -115,9 +116,16 @@ async function gerarSemanasPendentes(atribuicao) {
 // ativa de um aluno — usado no topo das rotas de listagem.
 async function atualizarSemanasDoAluno(alunoId) {
   await aplicarAtribuicoesBase(alunoId);
-  // um aluno pode ter mais de um Plano-Base ativo (ex.: o da Atribuição-base do TCF e um extra)
-  const atribuicoes = await AtribuicaoPlanoBase.find({ alunoId, ativo: true });
-  for (const a of atribuicoes) await gerarSemanasPendentes(a);
+  // um aluno pode ter mais de um Plano-Base ativo (ex.: o da Atribuição-base do TCF e um extra),
+  // mas o mesmo plano só uma vez: duplicatas (base + manual) ficam só com a mais antiga
+  const atribuicoes = await AtribuicaoPlanoBase.find({ alunoId, ativo: true }).sort({ criadoEm: 1, _id: 1 });
+  const vistos = new Set();
+  for (const a of atribuicoes) {
+    const k = String(a.planoBaseId);
+    if (vistos.has(k)) { a.ativo = false; await a.save(); continue; }
+    vistos.add(k);
+    await gerarSemanasPendentes(a);
+  }
 }
 
 function statusDever(dever) {
@@ -208,9 +216,12 @@ async function enriquecerDever(deverDoc) {
 // « Adiantar Dever »: em cada Plano-Base ativo do aluno, se todas as semanas já liberadas estão
 // concluídas e ainda há semanas no plano, a próxima pode ser feita antes da data.
 async function semanasAdiantaveis(alunoId) {
-  const atribuicoes = await AtribuicaoPlanoBase.find({ alunoId, ativo: true }).lean();
-  const out = [];
+  const atribuicoes = await AtribuicaoPlanoBase.find({ alunoId, ativo: true }).sort({ criadoEm: 1, _id: 1 }).lean();
+  const out = [], planosVistos = new Set();
   for (const a of atribuicoes) {
+    // o mesmo Plano-Base atribuído duas vezes aparece uma vez só
+    if (planosVistos.has(String(a.planoBaseId))) continue;
+    planosVistos.add(String(a.planoBaseId));
     const plano = await PlanoBase.findById(a.planoBaseId).select("nome curso semanas.numero semanas.titulo semanas.atividades.tipo").lean();
     if (!plano || !plano.semanas || !plano.semanas.length) continue;
     const geradas = await DeverSemanal.find({ alunoId, planoBaseId: a.planoBaseId }).select("numeroSemana concluidoEm").lean();

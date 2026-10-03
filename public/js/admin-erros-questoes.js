@@ -68,7 +68,7 @@ document.getElementById('relatosLista').addEventListener('click', async e => {
     method: 'PATCH', headers: authHeaders(true), body: JSON.stringify({ status: 'resolvido' })
   });
   if (res.ok) carregarRelatos();
-  else { btn.disabled = false; btn.textContent = 'Marcar como resolvido'; alert('Não foi possível salvar.'); }
+  else { btn.disabled = false; btn.textContent = 'Marcar como resolvido'; (await Dialogo.aviso('Não foi possível salvar.')); }
 });
 
 document.querySelectorAll('.filtro-tab').forEach(tab => {

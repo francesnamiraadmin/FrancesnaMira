@@ -74,7 +74,7 @@ function telaEscolhaOral(st, pools) {
     '<p class="aviso">Les sujets sont tirés au sort parmi ceux qui sont ouverts pour vous, sur des axes différents, et découverts au début de chaque tâche.</p>' +
     '<fieldset class="escolha-correcao"><legend>Qui corrige ?</legend>' +
       '<label' + (ia ? '' : ' class="indisponivel"') + '><input type="radio" name="eo-correcao" value="ia"' + (ia ? ' checked' : ' disabled') + '><span><b>L\'IA, dès la fin</b><small>' +
-        (ia ? 'Note, critères, corrections et version améliorée pour chaque tâche, à partir de l\'enregistrement et de la transcription. Sans crédit.' : 'Indisponible pour le moment.') + '</small></span></label>' +
+        (ia ? 'Note, critères, corrections et version améliorée pour chaque tâche, à partir de l\'enregistrement et de la transcription. 1 crédit par tâche.' : 'Indisponible pour le moment.') + '</small></span></label>' +
       '<label><input type="radio" name="eo-correcao" value="professor"' + (ia ? '' : ' checked') + '><span><b>Par un professeur</b><small>Les enregistrements et les transcriptions partent dans le Sistema de Correção (1 crédit par tâche).</small></span></label></fieldset>' +
     '<div class="ferramentas"><button class="botao-principal" type="button" id="eo-comecar" style="width:auto;padding:13px 30px"' + (Object.keys(sorteio).length ? '' : ' disabled') + '>Commencer l\'épreuve orale</button>' +
     '<button class="botao-sorteio" type="button" id="eo-retirar">Tirer d\'autres sujets</button></div>' +

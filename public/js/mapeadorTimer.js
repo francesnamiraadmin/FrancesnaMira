@@ -199,7 +199,7 @@ async function iniciarConteudo(materiaId, conteudoId, botao) {
       renderAviso();
       renderMateriasGrid();
     } else {
-      alert(resultado.msg || 'Erro ao iniciar sessão.');
+      (await Dialogo.aviso(resultado.msg || 'Erro ao iniciar sessão.'));
       botao.disabled = false;
       botao.innerHTML = '<img src="img/icones/chevron-right.svg" alt="" style="width:0.9em; height:0.9em; vertical-align:-0.05em; margin-right:3px;">Iniciar';
     }
@@ -247,10 +247,10 @@ async function salvarMateria() {
 }
 
 async function apagarMateria(id) {
-  if (!confirm('Apagar esta matéria? Os conteúdos dela também serão apagados. As sessões de estudo já registradas continuam no seu histórico.')) return;
+  if (!(await Dialogo.confirmar('Apagar esta matéria? Os conteúdos dela também serão apagados. As sessões de estudo já registradas continuam no seu histórico.'))) return;
   const res = await fetch(`/api/estudos/materias/${id}`, { method: 'DELETE', headers: authHeaders() });
   const data = await res.json();
-  if (!res.ok) { alert(data.msg || 'Erro ao apagar.'); return; }
+  if (!res.ok) { (await Dialogo.aviso(data.msg || 'Erro ao apagar.')); return; }
   await carregarTudo();
 }
 
@@ -290,10 +290,10 @@ async function salvarConteudo() {
 }
 
 async function apagarConteudo(id) {
-  if (!confirm('Apagar este conteúdo? As sessões de estudo já registradas continuam no seu histórico.')) return;
+  if (!(await Dialogo.confirmar('Apagar este conteúdo? As sessões de estudo já registradas continuam no seu histórico.'))) return;
   const res = await fetch(`/api/estudos/conteudos/${id}`, { method: 'DELETE', headers: authHeaders() });
   const data = await res.json();
-  if (!res.ok) { alert(data.msg || 'Erro ao apagar.'); return; }
+  if (!res.ok) { (await Dialogo.aviso(data.msg || 'Erro ao apagar.')); return; }
   await carregarTudo();
 }
 

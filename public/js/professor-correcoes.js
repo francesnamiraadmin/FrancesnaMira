@@ -39,6 +39,10 @@ function mostrarView(nome) {
   document.getElementById('viewCorrigidas').style.display = nome === 'corrigidas' ? 'block' : 'none';
   document.getElementById('viewAoVivo').style.display = nome === 'aovivo' ? 'block' : 'none';
   document.getElementById('viewTemas').style.display = nome === 'temas' ? 'block' : 'none';
+  document.getElementById('viewCorrecoesIA').style.display = nome === 'correcoesia' ? 'block' : 'none';
+  document.getElementById('viewDestaque').style.display = nome === 'destaque' ? 'block' : 'none';
+  if (nome === 'correcoesia' && window.CorrecoesIA) CorrecoesIA.carregar();
+  if (nome === 'destaque' && window.EmDestaqueAdm) EmDestaqueAdm.carregar();
   document.getElementById('viewCorrecao').style.display = nome === 'correcao' ? 'block' : 'none';
   if (nome === 'temas') renderTemasAlunos();
   document.getElementById('abasSistema').style.display = nome === 'correcao' ? 'none' : 'flex';
@@ -206,6 +210,8 @@ async function carregarAlunos() {
   document.getElementById('contAlunos').textContent = alunos.length;
   preencherFiltrosAluno();
   renderAlunos();
+  // a aba « Temas dos alunos » usa a mesma lista (pode ter sido aberta antes da lista chegar)
+  if (document.getElementById('viewTemas').style.display === 'block') renderTemasAlunos();
 }
 function renderAlunos() {
   const termo = document.getElementById('buscaAluno').value.trim().toLowerCase();
@@ -305,10 +311,10 @@ async function abrirProducao(id, assumir) {
     await fecharEditor();
     if (assumir) {
       const r = await fetch(`/api/producoes/${id}/assumir`, { method: 'POST', headers: H() });
-      if (!r.ok) { const d = await r.json(); alert(d.msg || 'Não foi possível assumir esta produção.'); carregarFila(); return; }
+      if (!r.ok) { const d = await r.json(); (await Dialogo.aviso(d.msg || 'Não foi possível assumir esta produção.')); carregarFila(); return; }
     }
     const res = await fetch(`/api/producoes/${id}`, { headers: H() });
-    if (!res.ok) { alert('Não foi possível abrir esta produção.'); return; }
+    if (!res.ok) { (await Dialogo.aviso('Não foi possível abrir esta produção.')); return; }
     producaoAtual = await res.json();
     const curso = producaoAtual.temaId.courseType || producaoAtual.temaId.exame;
     const rg = await fetch(`/api/producoes/grade/${encodeURIComponent(curso)}?modalidade=${producaoAtual.modalidade || 'textual'}`, { headers: H() });
@@ -316,7 +322,7 @@ async function abrirProducao(id, assumir) {
     renderCorrecao(producaoAtual);
     mostrarView('correcao');
     window.scrollTo(0, 0);
-  } catch (err) { alert('Erro ao abrir a produção.'); }
+  } catch (err) { (await Dialogo.aviso('Erro ao abrir a produção.')); }
 }
 
 // ===================== TELA DE CORREÇÃO =====================
@@ -521,13 +527,13 @@ document.getElementById('notaFinalInput').addEventListener('input', atualizarTot
 async function baixarArquivo(producaoId, tipo, nomeArquivo) {
   try {
     const res = await fetch(`/api/producoes/${producaoId}/arquivo/${tipo}`, { headers: H() });
-    if (!res.ok) { alert('Não foi possível baixar o arquivo.'); return; }
+    if (!res.ok) { (await Dialogo.aviso('Não foi possível baixar o arquivo.')); return; }
     const url = URL.createObjectURL(await res.blob());
     const a = document.createElement('a');
     a.href = url; a.download = nomeArquivo || 'arquivo';
     document.body.appendChild(a); a.click(); a.remove();
     URL.revokeObjectURL(url);
-  } catch (err) { alert('Erro ao baixar o arquivo.'); }
+  } catch (err) { (await Dialogo.aviso('Erro ao baixar o arquivo.')); }
 }
 function formatarDuracao(seg) {
   const m = Math.floor((seg || 0) / 60), s = (seg || 0) % 60;
@@ -544,11 +550,11 @@ async function carregarAudioPlayer(audioEl, producaoId, tipo) {
 const uploadBox = document.getElementById('uploadCorrigidoBox');
 const arquivoCorrigidoInput = document.getElementById('arquivoCorrigidoInput');
 uploadBox.addEventListener('click', () => arquivoCorrigidoInput.click());
-arquivoCorrigidoInput.addEventListener('change', () => {
+arquivoCorrigidoInput.addEventListener('change', async () => {
   const file = arquivoCorrigidoInput.files[0];
   if (!file) return;
   const ext = '.' + file.name.split('.').pop().toLowerCase();
-  if (!['.pdf', '.docx', '.odt'].includes(ext)) { alert('Formato não aceito. Envie PDF, DOCX ou ODT.'); return; }
+  if (!['.pdf', '.docx', '.odt'].includes(ext)) { (await Dialogo.aviso('Formato não aceito. Envie PDF, DOCX ou ODT.')); return; }
   arquivoCorrigidoSelecionado = file;
   document.getElementById('uploadCorrigidoTexto').textContent = '✓ ' + file.name;
   uploadBox.classList.add('tem-arquivo');
@@ -879,7 +885,7 @@ function renderTemasAlunos() {
 document.getElementById('buscaTemasAluno').addEventListener('input', renderTemasAlunos);
 document.getElementById('listaTemasAlunos').addEventListener('click', e => {
   const it = e.target.closest('[data-temas-sel]');
-  if (it) abrirTemasAluno(it.dataset.temasSel);
+  if (it) { temasMarcados.cat.clear(); temasMarcados.lib.clear(); abrirTemasAluno(it.dataset.temasSel); }
 });
 async function abrirTemasAluno(alunoId, perfil) {
   mostrarView('temas');
@@ -897,16 +903,48 @@ function filtrarCatalogo(d, sel) {
   return d.catalogo.filter(x => !sel.has(x.id) && (!temasFiltro.tache || x.tache === temasFiltro.tache) && (!temasFiltro.eixo || x.e === temasFiltro.eixo) &&
     (!temasFiltro.busca || (x.t + ' ' + x.eixo + ' ' + x.id).toLowerCase().includes(temasFiltro.busca)));
 }
+// Seleção múltipla: marque vários temas (de várias tarefas) e designe todos de uma vez; cada envio
+// fica no « Histórico de liberações », de onde dá para retirar exatamente aqueles temas.
+const temasMarcados = { cat: new Set(), lib: new Set() };
+// redesenha mantendo a rolagem das listas (marcar um tema não pode jogar a lista para o topo)
+function guardarRolagem(fn) {
+  const pos = ['tmLiberados', 'tmCatalogo'].map(id => document.getElementById(id)?.scrollTop || 0);
+  fn();
+  ['tmLiberados', 'tmCatalogo'].forEach((id, i) => { const el = document.getElementById(id); if (el) el.scrollTop = pos[i]; });
+}
 function desenharTemasAluno(aviso) {
   const d = temasDados, sel = new Set(d.selecionados), dever = new Set(d.viaDever || []);
   const eixos = [...new Map(d.catalogo.map(x => [x.e, x.eixo])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
   const liberados = d.catalogo.filter(x => sel.has(x.id) || dever.has(x.id));
-  const linha = (x, botao) => `<div class="tm-tema ${sel.has(x.id) || dever.has(x.id) ? 'liberado' : ''}"><span><b>${esc(x.t)}</b>
-      <small>${esc(x.eixo)}${d.padrao.includes(x.id) ? ' · padrão' : ''}${x.f > 1 ? ' · caiu ' + x.f + '×' : ''}${x.manual ? ' · modelo da professora' : ''}${dever.has(x.id) ? ' <span class="tm-selo">dever</span>' : ''}</small></span>${botao}</div>`;
-  const porTarefa = (l, fn) => d.taches.map(t => { const g = l.filter(x => x.tache === t.id); return g.length ? `<div class="tm-grupo">${esc(t.nome)} (${g.length})</div>` + g.map(fn).join('') : ''; }).join('');
+  const porId = new Map(d.catalogo.map(x => [x.id, x]));
+  // marcações de temas que mudaram de lado deixam de valer
+  temasMarcados.cat.forEach(id => { if (sel.has(id)) temasMarcados.cat.delete(id); });
+  temasMarcados.lib.forEach(id => { if (!sel.has(id)) temasMarcados.lib.delete(id); });
+  const linha = (x, lado) => {
+    const marcavel = lado === 'cat' || sel.has(x.id);
+    const caixa = marcavel ? `<input type="checkbox" class="tm-check" data-tm-marca="${lado}" value="${esc(x.id)}" ${temasMarcados[lado].has(x.id) ? 'checked' : ''} aria-label="Marcar ${esc(x.t)}">` : '<span class="tm-check-vazio"></span>';
+    const botao = lado === 'cat' ? `<button class="btn pequeno" type="button" data-tm-designar="${esc(x.id)}" data-tache="${x.tache}">Designar</button>`
+      : sel.has(x.id) ? `<button class="btn secundario pequeno" type="button" data-tm-retirar="${esc(x.id)}" data-tache="${x.tache}">Retirar</button>` : '';
+    return `<label class="tm-tema ${sel.has(x.id) || dever.has(x.id) ? 'liberado' : ''} ${temasMarcados[lado].has(x.id) ? 'marcado' : ''}">${caixa}<span class="tm-tema-txt"><b>${esc(x.t)}</b>
+      <small>${esc(x.eixo)}${d.padrao.includes(x.id) ? ' · padrão' : ''}${x.f > 1 ? ' · caiu ' + x.f + '×' : ''}${x.manual ? ' · modelo da professora' : ''}${dever.has(x.id) ? ' <span class="tm-selo">dever</span>' : ''}</small></span>${botao}</label>`;
+  };
+  const porTarefa = (l, lado) => d.taches.map(t => {
+    const g = l.filter(x => x.tache === t.id); if (!g.length) return '';
+    const marcaveis = g.filter(x => lado === 'cat' || sel.has(x.id)), todos = marcaveis.length && marcaveis.every(x => temasMarcados[lado].has(x.id));
+    return `<div class="tm-grupo">${marcaveis.length ? `<label class="tm-grupo-todos" title="Marcar todos desta tarefa"><input type="checkbox" data-tm-grupo="${lado}" data-tache="${t.id}" ${todos ? 'checked' : ''}> ${esc(t.nome)} (${g.length})</label>` : `<span>${esc(t.nome)} (${g.length})</span>`}</div>` + g.map(x => linha(x, lado)).join('');
+  }).join('');
   const libFiltrados = liberados.filter(x => !temasFiltro.lib || (x.t + ' ' + x.eixo).toLowerCase().includes(temasFiltro.lib));
   const cat = filtrarCatalogo(d, sel);
-  const filtrando = temasFiltro.tache || temasFiltro.eixo || temasFiltro.busca;
+  const nCat = temasMarcados.cat.size, nLib = temasMarcados.lib.size;
+  const nomeTarefa = t => (d.taches.find(x => x.id === t) || {}).nome || t;
+  const resumoTaches = l => { const c = {}; l.forEach(x => { const t = typeof x === 'string' ? porId.get(x)?.tache : x.tache; if (t) c[t] = (c[t] || 0) + 1; }); return d.taches.filter(t => c[t.id]).map(t => `${esc(t.nome)}: ${c[t.id]}`).join(' · '); };
+  const historico = (d.liberacoes || []).map(l => {
+    const ativos = l.sujets.filter(x => sel.has(x.id)).length;
+    return `<div class="tm-hist ${l.retiradoEm ? 'retirado' : ''}"><div class="tm-hist-cab"><div><b>${l.sujets.length} tema(s)</b> em ${fmtData(l.data)}${l.por ? ' · por ' + esc(l.por) : ''}
+        <small>${resumoTaches(l.sujets)}</small></div>
+        ${l.retiradoEm ? `<span class="tag">Retirado em ${fmtData(l.retiradoEm)}</span>` : ativos ? `<button class="btn secundario pequeno" type="button" data-tm-lib-retirar="${l.id}">Retirar este envio (${ativos})</button>` : '<span class="tag">Já retirados</span>'}</div>
+      <details><summary>Ver os temas</summary><ul>${l.sujets.map(x => { const c = porId.get(x.id); return `<li class="${sel.has(x.id) ? '' : 'fora'}">${esc(c ? c.t : x.id)} <small>${esc(nomeTarefa(x.tache))}</small></li>`; }).join('')}</ul></details></div>`;
+  }).join('');
   document.getElementById('temasEditor').innerHTML = `
     <div class="tm-cab"><div><h2 style="margin:0;">${esc(d.aluno.nome)}</h2><small style="color:var(--cinza-400);">${esc(d.aluno.email)} · ${d.personalizado ? 'lista definida pela equipe' + (d.atualizadoEm ? ' em ' + fmtData(d.atualizadoEm) : '') : 'usando os ' + d.padrao.length + ' temas padrão'}</small></div>
       <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
@@ -917,16 +955,20 @@ function desenharTemasAluno(aviso) {
     <div class="tm-cols">
       <div class="tm-col"><h3>Temas liberados para o aluno <span class="tag status" id="tmTotalLiberados">${liberados.length}</span></h3>
         <div class="tm-filtros"><input type="search" data-tm-lib placeholder="Buscar nos liberados" value="${esc(temasFiltro.lib)}"></div>
-        <div class="tm-lista" id="tmLiberados">${porTarefa(libFiltrados, x => linha(x, sel.has(x.id) ? `<button class="btn secundario pequeno" type="button" data-tm-retirar="${esc(x.id)}" data-tache="${x.tache}">Retirar</button>` : ''))
-          || '<p style="padding:10px; opacity:.7;">Nenhum tema liberado.</p>'}</div></div>
+        <div class="tm-barra ${nLib ? 'on' : ''}"><span>${nLib ? `<b>${nLib}</b> marcado(s) · ${resumoTaches([...temasMarcados.lib])}` : 'Marque temas para retirar vários de uma vez.'}</span>
+          ${nLib ? '<button class="btn secundario pequeno" type="button" data-tm-limpar="lib">Desmarcar</button><button class="btn perigo pequeno" type="button" data-tm-retirar-marcados>Retirar ' + nLib + '</button>' : ''}</div>
+        <div class="tm-lista" id="tmLiberados">${porTarefa(libFiltrados, 'lib') || '<p style="padding:10px; opacity:.7;">Nenhum tema liberado.</p>'}</div>
+        <div class="tm-historico"><h3>Histórico de liberações <span class="tag">${(d.liberacoes || []).length}</span></h3>
+          ${historico || '<p style="padding:6px 2px; opacity:.7; font-size:.84rem;">Cada envio de temas feito aqui aparece neste histórico, e você pode retirar exatamente os temas daquele envio.</p>'}</div></div>
       <div class="tm-col"><h3>Designar temas <small style="font-weight:400; color:var(--cinza-400);">${cat.length} disponível(is)</small></h3>
         <div class="tm-filtros">
           <select data-tm-ft aria-label="Tarefa"><option value="">Todas as tarefas</option>${d.taches.map(t => `<option value="${t.id}" ${temasFiltro.tache === t.id ? 'selected' : ''}>${esc(t.nome)}</option>`).join('')}</select>
           <select data-tm-fe aria-label="Eixo"><option value="">Todos os eixos</option>${eixos.map(([k, n]) => `<option value="${esc(k)}" ${temasFiltro.eixo === k ? 'selected' : ''}>${esc(n)}</option>`).join('')}</select>
           <input type="search" data-tm-busca placeholder="Buscar tema" value="${esc(temasFiltro.busca)}">
         </div>
-        ${cat.length && cat.length <= 60 && filtrando ? `<button class="btn pequeno" type="button" data-tm-todos style="margin-bottom:6px;">Designar os ${cat.length} temas filtrados</button>` : ''}
-        <div class="tm-lista" id="tmCatalogo">${porTarefa(cat.slice(0, 400), x => linha(x, `<button class="btn pequeno" type="button" data-tm-designar="${esc(x.id)}" data-tache="${x.tache}">Designar</button>`)) || '<p style="padding:10px; opacity:.7;">Nenhum tema com estes filtros.</p>'}</div></div>
+        <div class="tm-barra ${nCat ? 'on' : ''}"><span>${nCat ? `<b>${nCat}</b> marcado(s) · ${resumoTaches([...temasMarcados.cat])}` : 'Marque vários temas, de qualquer tarefa, e designe todos de uma vez.'}</span>
+          ${nCat ? '<button class="btn secundario pequeno" type="button" data-tm-limpar="cat">Desmarcar</button><button class="btn pequeno" type="button" data-tm-designar-marcados>Designar ' + nCat + ' tema(s)</button>' : (cat.length && cat.length <= 400 ? '<button class="btn secundario pequeno" type="button" data-tm-marcar-filtrados>Marcar os ' + cat.length + ' filtrados</button>' : '')}</div>
+        <div class="tm-lista" id="tmCatalogo">${porTarefa(cat.slice(0, 400), 'cat') || '<p style="padding:10px; opacity:.7;">Nenhum tema com estes filtros.</p>'}</div></div>
     </div>`;
 }
 async function designarTemas(sujets, acao) {
@@ -934,16 +976,36 @@ async function designarTemas(sujets, acao) {
   const r = await fetch(`/api/modeles/temas-aluno/${temasAlunoAtual}/designar`, { method: 'POST', headers: HJ(), body: JSON.stringify({ perfil: d.perfil, sujets, acao }) });
   const out = await r.json();
   if (!r.ok) { desenharTemasAluno({ erro: true, texto: out.msg || 'Erro ao salvar.' }); return; }
-  d.selecionados = out.selecionados; d.personalizado = true; d.atualizadoEm = new Date();
-  desenharTemasAluno({ texto: acao === 'retirar' ? 'Tema retirado: o aluno não o vê mais.' : `${out.novos} tema(s) liberado(s) para ${d.aluno.nome}. O aluno foi avisado no Meu Espaço.` });
+  sujets.forEach(x => { temasMarcados.cat.delete(x.id); temasMarcados.lib.delete(x.id); });
+  // recarrega para trazer o histórico de liberações atualizado
+  await abrirTemasAluno(temasAlunoAtual, d.perfil);
+  desenharTemasAluno({ texto: acao === 'retirar' ? `${sujets.length} tema(s) retirado(s): o aluno não os vê mais.` : `${out.novos} tema(s) liberado(s) para ${d.aluno.nome}. O aluno foi avisado no Meu Espaço e o envio ficou no histórico.` });
 }
 document.getElementById('temasEditor').addEventListener('click', async e => {
-  const b = e.target.closest('[data-tm-designar],[data-tm-retirar],[data-tm-todos],[data-tm-padrao]');
+  const b = e.target.closest('[data-tm-designar],[data-tm-retirar],[data-tm-padrao],[data-tm-designar-marcados],[data-tm-retirar-marcados],[data-tm-limpar],[data-tm-marcar-filtrados],[data-tm-lib-retirar]');
   if (!b || !temasDados) return;
+  e.preventDefault();
+  const porId = new Map(temasDados.catalogo.map(x => [x.id, x]));
+  const lista = ids => [...ids].map(id => ({ tache: porId.get(id)?.tache, id })).filter(x => x.tache);
+  if (b.dataset.tmLimpar) { temasMarcados[b.dataset.tmLimpar].clear(); return desenharTemasAluno(); }
+  if (b.hasAttribute('data-tm-marcar-filtrados')) { filtrarCatalogo(temasDados, new Set(temasDados.selecionados)).slice(0, 400).forEach(x => temasMarcados.cat.add(x.id)); return guardarRolagem(desenharTemasAluno); }
   b.disabled = true;
   if (b.dataset.tmDesignar) return designarTemas([{ tache: b.dataset.tache, id: b.dataset.tmDesignar }], 'designar');
   if (b.dataset.tmRetirar) return designarTemas([{ tache: b.dataset.tache, id: b.dataset.tmRetirar }], 'retirar');
-  if (b.hasAttribute('data-tm-todos')) return designarTemas(filtrarCatalogo(temasDados, new Set(temasDados.selecionados)).map(x => ({ tache: x.tache, id: x.id })), 'designar');
+  if (b.hasAttribute('data-tm-designar-marcados')) return designarTemas(lista(temasMarcados.cat), 'designar');
+  if (b.hasAttribute('data-tm-retirar-marcados')) {
+    if (!(await confirmar('Retirar os temas marcados?', `${temasMarcados.lib.size} tema(s) deixarão de aparecer para ${temasDados.aluno.nome}.`, 'Retirar'))) { b.disabled = false; return; }
+    return designarTemas(lista(temasMarcados.lib), 'retirar');
+  }
+  if (b.dataset.tmLibRetirar) {
+    const lib = (temasDados.liberacoes || []).find(l => l.id === b.dataset.tmLibRetirar);
+    if (!(await confirmar('Retirar este envio?', `Os ${lib.sujets.length} tema(s) liberados em ${fmtData(lib.data)} deixarão de aparecer para ${temasDados.aluno.nome}. Os outros temas continuam.`, 'Retirar envio'))) { b.disabled = false; return; }
+    const r = await fetch(`/api/modeles/temas-aluno/${temasAlunoAtual}/liberacoes/${lib.id}/retirar`, { method: 'POST', headers: HJ() });
+    const out = await r.json();
+    if (!r.ok) { desenharTemasAluno({ erro: true, texto: out.msg || 'Erro ao retirar.' }); return; }
+    await abrirTemasAluno(temasAlunoAtual, temasDados.perfil);
+    return desenharTemasAluno({ texto: `Envio retirado: ${out.retirados} tema(s) não aparecem mais para o aluno.` });
+  }
   if (b.hasAttribute('data-tm-padrao')) {
     if (!(await confirmar('Voltar aos 20 temas padrão?', 'A lista definida para este aluno será substituída pelos 20 temas padrão.', 'Voltar ao padrão'))) { b.disabled = false; return; }
     const r = await fetch(`/api/modeles/temas-aluno/${temasAlunoAtual}`, { method: 'PUT', headers: HJ(), body: JSON.stringify({ perfil: temasDados.perfil, padrao: true }) });
@@ -951,7 +1013,14 @@ document.getElementById('temasEditor').addEventListener('click', async e => {
   }
 });
 document.getElementById('temasEditor').addEventListener('change', e => {
-  if (e.target.matches('[data-tm-perfil]')) { abrirTemasAluno(temasAlunoAtual, e.target.value); return; }
+  if (e.target.matches('[data-tm-marca]')) { const m = temasMarcados[e.target.dataset.tmMarca]; e.target.checked ? m.add(e.target.value) : m.delete(e.target.value); guardarRolagem(desenharTemasAluno); return; }
+  if (e.target.matches('[data-tm-grupo]')) {
+    const lado = e.target.dataset.tmGrupo, m = temasMarcados[lado], sel = new Set(temasDados.selecionados);
+    const l = lado === 'cat' ? filtrarCatalogo(temasDados, sel) : temasDados.catalogo.filter(x => sel.has(x.id));
+    l.filter(x => x.tache === e.target.dataset.tache).forEach(x => e.target.checked ? m.add(x.id) : m.delete(x.id));
+    guardarRolagem(desenharTemasAluno); return;
+  }
+  if (e.target.matches('[data-tm-perfil]')) { temasMarcados.cat.clear(); temasMarcados.lib.clear(); abrirTemasAluno(temasAlunoAtual, e.target.value); return; }
   if (e.target.matches('[data-tm-ft]')) { temasFiltro.tache = e.target.value; desenharTemasAluno(); }
   if (e.target.matches('[data-tm-fe]')) { temasFiltro.eixo = e.target.value; desenharTemasAluno(); }
 });

@@ -196,16 +196,16 @@
     renderCalendario();
   });
   document.getElementById("btnLiberarSlot").addEventListener("click", async () => {
-    if (slotSelecionado.status === "reservado" && !confirm("Este horário está reservado por um aluno. Liberá-lo cancela a reserva. Continuar?")) return;
+    if (slotSelecionado.status === "reservado" && !(await Dialogo.confirmar("Este horário está reservado por um aluno. Liberá-lo cancela a reserva. Continuar?"))) return;
     await fetch("/api/disponibilidade/" + slotSelecionado._id + "/liberar", { method: "POST", headers: authHeaders() });
     document.getElementById("modalAcoesSlot").classList.remove("show");
     renderCalendario();
   });
   document.getElementById("btnExcluirSlot").addEventListener("click", async () => {
-    if (!confirm("Excluir este horário?")) return;
+    if (!(await Dialogo.confirmar("Excluir este horário?"))) return;
     const res = await fetch("/api/disponibilidade/" + slotSelecionado._id, { method: "DELETE", headers: authHeaders() });
     const data = await res.json();
-    if (!res.ok) { alert(data.msg || "Não foi possível excluir."); return; }
+    if (!res.ok) { (await Dialogo.aviso(data.msg || "Não foi possível excluir.")); return; }
     document.getElementById("modalAcoesSlot").classList.remove("show");
     renderCalendario();
   });

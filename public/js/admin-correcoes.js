@@ -68,7 +68,7 @@ document.getElementById('criarProfessorBtn').addEventListener('click', async () 
 document.getElementById('professoresTbody').addEventListener('click', async e => {
   const btn = e.target.closest('[data-remover-prof]');
   if (!btn) return;
-  if (!confirm('Remover este professor? A conta voltará a ser de aluno.')) return;
+  if (!(await Dialogo.confirmar('Remover este professor? A conta voltará a ser de aluno.'))) return;
   try {
     await fetch(`/api/admin/professores/${btn.dataset.removerProf}`, { method: 'DELETE', headers: { Authorization: 'Bearer ' + token } });
     carregarProfessores();
@@ -184,7 +184,7 @@ async function carregarTemas() {
 document.getElementById('temasTbody').addEventListener('click', async e => {
   const btn = e.target.closest('[data-desativar-tema]');
   if (!btn) return;
-  if (!confirm('Desativar este tema? Ele deixará de aparecer no catálogo do aluno.')) return;
+  if (!(await Dialogo.confirmar('Desativar este tema? Ele deixará de aparecer no catálogo do aluno.'))) return;
   try {
     await fetch(`/api/temas/${btn.dataset.desativarTema}`, { method: 'DELETE', headers: { Authorization: 'Bearer ' + token } });
     carregarTemas();

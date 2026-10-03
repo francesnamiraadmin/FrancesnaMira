@@ -149,14 +149,14 @@ async function apagarModulo(id) {
   const m = modulos.find(x => x._id === id);
   const nome = m ? m.titulo : 'este módulo';
   const n = m ? m.totalAulas : 0;
-  if (!confirm(`Apagar « ${nome} » DE VEZ?
+  if (!(await Dialogo.confirmar(`Apagar « ${nome} » DE VEZ?
 
 O módulo e as ${n} aula(s) dele, com vídeos, miniaturas e materiais, e o progresso dos alunos nessas aulas serão apagados. Não dá para desfazer.
 
-(Para só esconder dos alunos, use ⏸ Desativar.)`)) return;
+(Para só esconder dos alunos, use ⏸ Desativar.)`))) return;
   const r = await fetch('/api/admin-aulas/modulos/' + id + '?definitivo=1', { method: 'DELETE', headers: authHeaders() });
   const d = await r.json().catch(() => ({}));
-  if (!r.ok) { alert(d.msg || 'Não foi possível apagar o módulo.'); return; }
+  if (!r.ok) { (await Dialogo.aviso(d.msg || 'Não foi possível apagar o módulo.')); return; }
   if (moduloSelecionadoId === id) {
     moduloSelecionadoId = null;
     document.getElementById('aulasLista').innerHTML = '';
@@ -166,7 +166,7 @@ O módulo e as ${n} aula(s) dele, com vídeos, miniaturas e materiais, e o progr
 }
 
 async function excluirModulo(id) {
-  if (!confirm('Desativar este módulo? Ele deixará de aparecer para os alunos.')) return;
+  if (!(await Dialogo.confirmar('Desativar este módulo? Ele deixará de aparecer para os alunos.'))) return;
   await fetch('/api/admin-aulas/modulos/' + id, { method: 'DELETE', headers: authHeaders() });
   if (moduloSelecionadoId === id) {
     moduloSelecionadoId = null;
@@ -256,7 +256,7 @@ document.getElementById('aulasLista').addEventListener('change', async e => {
 });
 
 async function excluirAula(id) {
-  if (!confirm('Desativar esta aula? Ela deixará de aparecer para os alunos.')) return;
+  if (!(await Dialogo.confirmar('Desativar esta aula? Ela deixará de aparecer para os alunos.'))) return;
   await fetch('/api/admin-aulas/aulas/' + id, { method: 'DELETE', headers: authHeaders() });
   carregarAulasDoModulo(moduloSelecionadoId);
   carregarModulos();
@@ -503,7 +503,7 @@ document.getElementById('enviarVideoBtn').addEventListener('click', async () => 
 document.getElementById('removerVideoBtn').addEventListener('click', async () => {
   const id = document.getElementById('aulaId').value;
   if (!id) return;
-  if (!confirm('Remover o vídeo desta aula?')) return;
+  if (!(await Dialogo.confirmar('Remover o vídeo desta aula?'))) return;
   await fetch(`/api/admin-aulas/aulas/${id}/video`, { method: 'DELETE', headers: authHeaders() });
   document.getElementById('videoAtualInfo').textContent = 'Nenhum vídeo enviado ainda.';
   carregarAulasDoModulo(moduloSelecionadoId);
@@ -578,7 +578,7 @@ document.getElementById('enviarThumbnailBtn').addEventListener('click', async ()
 document.getElementById('removerThumbnailBtn').addEventListener('click', async () => {
   const id = document.getElementById('aulaId').value;
   if (!id) return;
-  if (!confirm('Remover a thumbnail desta aula?')) return;
+  if (!(await Dialogo.confirmar('Remover a thumbnail desta aula?'))) return;
   const res = await fetch(`/api/admin-aulas/aulas/${id}/thumbnail`, { method: 'DELETE', headers: authHeaders() });
   const data = await res.json();
   if (res.ok) await atualizarThumbnailPreview(data);
@@ -674,7 +674,7 @@ document.getElementById('materiaisLista').addEventListener('click', async e => {
   const btn = e.target.closest('[data-remover-material]');
   if (!btn) return;
   const aulaId = document.getElementById('aulaId').value;
-  if (!confirm('Remover este material?')) return;
+  if (!(await Dialogo.confirmar('Remover este material?'))) return;
   const res = await fetch(`/api/admin-aulas/aulas/${aulaId}/materiais/${btn.dataset.removerMaterial}`, { method: 'DELETE', headers: authHeaders() });
   const data = await res.json();
   renderMateriaisModal(data.materiais || []);

@@ -100,14 +100,14 @@
   }
 
   async function cancelarMatricula(id) {
-    if (!confirm("Tem certeza que deseja cancelar esta matrícula?")) return;
+    if (!(await Dialogo.confirmar("Tem certeza que deseja cancelar esta matrícula?"))) return;
     try {
       const res = await fetch("/api/matricula/" + id + "/cancelar", { method: "POST", headers: authHeaders() });
       const data = await res.json();
-      if (!res.ok) { alert(data.msg || "Não foi possível cancelar."); return; }
+      if (!res.ok) { (await Dialogo.aviso(data.msg || "Não foi possível cancelar.")); return; }
       carregar();
     } catch (e) {
-      alert("Erro de conexão.");
+      (await Dialogo.aviso("Erro de conexão."));
     }
   }
 
@@ -138,11 +138,11 @@
               body: JSON.stringify({ horarioAntigoId, horarioNovoId: s._id })
             });
             const data = await r.json();
-            if (!r.ok) { alert(data.msg || "Não foi possível remarcar."); btn.disabled = false; return; }
+            if (!r.ok) { (await Dialogo.aviso(data.msg || "Não foi possível remarcar.")); btn.disabled = false; return; }
             modal.classList.remove("show");
             carregar();
           } catch (e) {
-            alert("Erro de conexão.");
+            (await Dialogo.aviso("Erro de conexão."));
             btn.disabled = false;
           }
         });

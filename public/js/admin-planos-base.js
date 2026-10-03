@@ -69,14 +69,14 @@ document.getElementById('planosLista').addEventListener('click', async e => {
     duplicarBtn.disabled = true;
     const res = await fetch('/api/deveres/planos-base/' + duplicarBtn.dataset.duplicar + '/duplicar', { method: 'POST', headers: authHeaders() });
     if (res.ok) { const copia = await res.json(); await carregarPlanos(); abrirEditor(copia._id); }
-    else { duplicarBtn.disabled = false; alert('Não foi possível duplicar.'); }
+    else { duplicarBtn.disabled = false; (await Dialogo.aviso('Não foi possível duplicar.')); }
     return;
   }
   const editarBtn = e.target.closest('[data-editar]');
   if (editarBtn) return abrirEditor(editarBtn.dataset.editar);
   const excluirBtn = e.target.closest('[data-excluir]');
   if (excluirBtn) {
-    if (!confirm('Remover este Plano-Base? Alunos que já tiverem deveres gerados a partir dele não são afetados.')) return;
+    if (!(await Dialogo.confirmar('Remover este Plano-Base? Alunos que já tiverem deveres gerados a partir dele não são afetados.'))) return;
     await fetch('/api/deveres/planos-base/' + excluirBtn.dataset.excluir, { method: 'DELETE', headers: authHeaders() });
     carregarPlanos();
   }
@@ -157,7 +157,7 @@ function adicionarSemanaBox(semanaData) {
 
 document.getElementById('addSemanaBtn').addEventListener('click', () => adicionarSemanaBox(null));
 
-document.getElementById('semanasWrap').addEventListener('click', e => {
+document.getElementById('semanasWrap').addEventListener('click', async e => {
   if (e.target.closest('[data-recolher]')) {
     const box = e.target.closest('[data-semana-box]');
     atualizarResumoSemana(box);
@@ -189,7 +189,7 @@ document.getElementById('semanasWrap').addEventListener('click', e => {
     return;
   }
   if (e.target.closest('[data-remover-semana]')) {
-    if (!confirm('Remover esta semana do template?')) return;
+    if (!(await Dialogo.confirmar('Remover esta semana do template?'))) return;
     e.target.closest('[data-semana-box]').remove();
     renumerarSemanas();
     return;
@@ -202,7 +202,7 @@ document.getElementById('semanasWrap').addEventListener('click', e => {
     return;
   }
   if (e.target.closest('[data-remover-atividade]')) {
-    if (!confirm('Remover esta atividade?')) return;
+    if (!(await Dialogo.confirmar('Remover esta atividade?'))) return;
     const atBox = e.target.closest('[data-atividade-box]');
     const atividadesWrap = atBox.closest('[data-atividades-wrap]');
     atBox.remove();

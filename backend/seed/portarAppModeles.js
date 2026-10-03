@@ -163,6 +163,9 @@ trocar(R`if (t === 'ET1') html += '</div><h2 class="secao-titulo outils-secao">`
   js = js.slice(0, a) + f + js.slice(b);
 }
 
+// Correção pela IA custa 1 crédito: o botão mostra o custo.
+trocar(R`' aujourd\'hui</small></button>';`, R`' aujourd\'hui · 1 crédit</small></button>';`);
+
 // ---- extensões do site (dentro do mesmo escopo do App) ----
 trocar("    document.addEventListener('DOMContentLoaded', iniciar);", (ler("perfil.js") + "\n" + ler("epreuve-orale.js") + "\n" + ler("extensoes.js") + "\n" + ler("fazer-sujet.js") + "\n" + ler("correcao-equipe.js") + "\n" + ler("navegacao.js")).replace(/^/gm, "    ") +
   "\n    // Só começa depois que a página confirmou o acesso e o curso (window.FNM_PRONTO).\n" +
@@ -175,6 +178,14 @@ js = js.split("['ET1', 'ET2', 'ET3', 'T1', 'T2', 'T3']").join("ETS().concat(TS()
   .split("['ET3', 'ET2', 'ET1']").join("ETS().reverse()");
 // « Mes notes » / « Mon espace » saíram do app: as notas e correções ficam no « Meu Espaço » do site.
 js = js.split("« Mes notes » et dans « Mes corrections »").join("« Meu Espaço »").split("« Mon espace › Mes notes »").join("« Meu Espaço »").split("« Mes notes »").join("« Meu Espaço »");
+
+// Janelas do navegador (alert/confirm/prompt) → janelas do site (public/js/dialogos.js).
+{
+  const r = require("./dialogosSite").transformar(js);
+  js = r.codigo;
+  console.log("janelas do site:", r.n, "convertida(s)");
+  r.revisar.forEach(x => console.log("  revisar " + x));
+}
 
 const cab = `// =====================================================================
 // Ambiente de Produção — app "Modèles TCF" (Google Apps Script) rodando no site.

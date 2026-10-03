@@ -307,7 +307,7 @@ window.EstudoTimerGlobal = (() => {
         btnIniciar.textContent = 'Iniciando...';
         const resultado = await iniciarSessao(materiaSelecionadaId, conteudoSelecionadoId);
         if (!resultado.ok) {
-          alert(resultado.msg || 'Erro ao iniciar sessão.');
+          (await Dialogo.aviso(resultado.msg || 'Erro ao iniciar sessão.'));
           btnIniciar.disabled = false;
           btnIniciar.textContent = 'Iniciar';
         }

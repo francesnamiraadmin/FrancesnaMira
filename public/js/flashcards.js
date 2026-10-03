@@ -125,9 +125,9 @@
     el('fcComecar').onclick = iniciarRodada;
   }
 
-  function iniciarRodada() {
+  async function iniciarRodada() {
     var temas = [].map.call(document.querySelectorAll('#fcTemas input:checked'), function (cb) { return cb.value; });
-    if (!temas.length) { alert('Selecione ao menos um tema.'); return; }
+    if (!temas.length) { (await Dialogo.aviso('Selecione ao menos um tema.')); return; }
     R.temasSelecionados = temas;
 
     var alvo = el('fcViewRodada');

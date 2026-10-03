@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
   <script src="js/htmlSeguro.js"></script>
+  <script src="js/dialogos.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
 <title>Minha Conta - Francês na Mira</title>
@@ -798,10 +799,10 @@ function popularSelectDias() {
   sel.innerHTML = dias.map(d => `<option value="${d}">${rotuloDiaCompleto(d)}</option>`).join('');
   btn.disabled = false;
 }
-document.getElementById('apagarDiaBtn').addEventListener('click', () => {
+document.getElementById('apagarDiaBtn').addEventListener('click', async () => {
   const dia = document.getElementById('diaApagarSelect').value;
   if (!dia) return;
-  if (!confirm(`Apagar todas as estatísticas de ${rotuloDiaCompleto(dia)}? As questões de Praticar respondidas nesse dia voltarão a aparecer como não respondidas.`)) return;
+  if (!(await Dialogo.confirmar(`Apagar todas as estatísticas de ${rotuloDiaCompleto(dia)}? As questões de Praticar respondidas nesse dia voltarão a aparecer como não respondidas.`))) return;
   const eventos = carregarEventos();
   const respostas = carregarRespostas();
   const restantes = [];

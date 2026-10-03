@@ -267,7 +267,7 @@
   };
   async function editarLote(loteId) {
     const r = await fetch('/api/deveres/lotes/' + loteId, { headers: H() });
-    const d = await r.json(); if (!r.ok) { alert(d.msg || 'Erro.'); return; }
+    const d = await r.json(); if (!r.ok) { (await Dialogo.aviso(d.msg || 'Erro.')); return; }
     Object.assign(S, { modo: 'dever', curso: d.curso || 'TCF', semanas: [{ titulo: 'Semana 1', itens: d.atividades.map(deApi) }], semana: 0, painel: null, soDoCurso: false,
       editando: { tipo: 'lote', id: loteId, nome: d.titulo }, alunosSel: new Set(d.alunos.map(a => a.alunoId)),
       dever: { titulo: d.titulo, descricao: d.descricao, dataInicio: String(d.dataInicio).slice(0, 10), dataLimite: String(d.dataLimite).slice(0, 10), prioridade: d.prioridade, permite: d.permiteConclusaoManual } });
@@ -275,7 +275,7 @@
   }
   async function editarPlano(id) {
     const r = await fetch('/api/deveres/planos-base/' + id, { headers: H() });
-    const p = await r.json(); if (!r.ok) { alert(p.msg || 'Erro.'); return; }
+    const p = await r.json(); if (!r.ok) { (await Dialogo.aviso(p.msg || 'Erro.')); return; }
     const perfil = (p.semanas.flatMap(s => s.atividades).map(a => a.conteudo && a.conteudo.perfil).find(Boolean)) || '';
     Object.assign(S, { modo: 'plano', curso: p.curso || 'TCF', nivel: perfil.startsWith('DELF-') ? perfil.slice(5) : S.nivel, painel: null, semana: 0,
       semanas: p.semanas.slice().sort((a, b) => a.numero - b.numero).map(s => ({ titulo: s.titulo, itens: s.atividades.map(deApi) })),
@@ -291,7 +291,7 @@
   raiz.addEventListener('click', async e => {
     const t = e.target.closest('button, [data-add]'); if (!t) return;
     const d = t.dataset;
-    if (d.modo) { lerCampos(); if (S.editando && !confirm('Sair da edição e começar um novo?')) return; novo(d.modo); return; }
+    if (d.modo) { lerCampos(); if (S.editando && !(await Dialogo.confirmar('Sair da edição e começar um novo?'))) return; novo(d.modo); return; }
     if ('biblioteca' in d) { abrirBiblioteca(); return; }
     if ('fecharBib' in d) { $('#cdBiblioteca').hidden = true; return; }
     if ('cancelarEdicao' in d) { novo(S.modo); return; }
@@ -301,7 +301,7 @@
     if (d.add) { const it = guardados.get(d.add); if (it) adicionar(it); return; }
     if ('addSorteio' in d) {
       const niveis = [...raiz.querySelectorAll('#cdSortNiveis .on')].map(b => b.dataset.sn), materias = [...raiz.querySelectorAll('#cdSortMat .on')].map(b => b.dataset.sm);
-      if (!niveis.length) { alert('Escolha pelo menos um nível.'); return; }
+      if (!niveis.length) { (await Dialogo.aviso('Escolha pelo menos um nível.')); return; }
       const q = Number($('#cdSortQtd').value), tit = $('#cdSortTitulo').value.trim();
       adicionar({ tipo: 'questoes_plataforma', titulo: tit || `${q} questões sorteadas · ${niveis.join('+')}`, conteudo: { sorteio: { niveis, materias, quantidade: q } } });
       return;
@@ -310,13 +310,13 @@
     if (d.ft !== undefined) { S.filtros.tache = d.ft; desenharPainel(); return; }
     if ('addOrient' in d) {
       const titulo = $('#cdOriTitulo').value.trim(), texto = $('#cdOriTexto').value.trim(), url = $('#cdOriUrl').value.trim();
-      if (!titulo || (!texto && !url)) { alert('Escreva o título e o texto (ou o link).'); return; }
+      if (!titulo || (!texto && !url)) { (await Dialogo.aviso('Escreva o título e o texto (ou o link).')); return; }
       adicionar({ tipo: url && !texto ? 'link_externo' : 'leitura', titulo, conteudo: { texto, url } }); return;
     }
     if (d.semana) { lerSemana(); S.semana = Number(d.semana); desenharSemanas(); desenharPainel(); desenharResumo(); return; }
     if ('novaSemana' in d) { lerSemana(); S.semanas.push({ titulo: `Semana ${S.semanas.length + 1}`, itens: [] }); S.semana = S.semanas.length - 1; desenharSemanas(); desenharPainel(); desenharResumo(); return; }
     if ('duplicarSemana' in d) { lerSemana(); const s = S.semanas[S.semana]; S.semanas.splice(S.semana + 1, 0, { titulo: s.titulo + ' (cópia)', itens: s.itens.map(i => ({ ...i, conteudo: { ...i.conteudo } })) }); S.semana++; desenharSemanas(); desenharPainel(); desenharResumo(); return; }
-    if ('apagarSemana' in d) { if (!confirm('Apagar a semana ' + (S.semana + 1) + '?')) return; S.semanas.splice(S.semana, 1); S.semana = Math.max(0, S.semana - 1); desenharSemanas(); desenharPainel(); desenharResumo(); return; }
+    if ('apagarSemana' in d) { if (!(await Dialogo.confirmar('Apagar a semana ' + (S.semana + 1) + '?'))) return; S.semanas.splice(S.semana, 1); S.semana = Math.max(0, S.semana - 1); desenharSemanas(); desenharPainel(); desenharResumo(); return; }
     if (d.sobe || d.desce || d.tira) {
       const l = itens(), i = Number(d.sobe || d.desce || d.tira);
       if (d.tira) l.splice(i, 1); else { const j = d.sobe ? i - 1 : i + 1; [l[i], l[j]] = [l[j], l[i]]; }
@@ -327,9 +327,9 @@
     if ('salvar' in d) { salvar(); return; }
     if (d.editarLote) { editarLote(d.editarLote); return; }
     if (d.editarPlano) { editarPlano(d.editarPlano); return; }
-    if (d.apagarLote) { if (!confirm('Apagar este dever de todos os alunos? As entregas dele também somem.')) return; await fetch('/api/deveres/lotes/' + d.apagarLote, { method: 'DELETE', headers: H() }); abrirBiblioteca(); return; }
+    if (d.apagarLote) { if (!(await Dialogo.confirmar('Apagar este dever de todos os alunos? As entregas dele também somem.'))) return; await fetch('/api/deveres/lotes/' + d.apagarLote, { method: 'DELETE', headers: H() }); abrirBiblioteca(); return; }
     if (d.duplicarPlano) { await fetch('/api/deveres/planos-base/' + d.duplicarPlano + '/duplicar', { method: 'POST', headers: H() }); abrirBiblioteca(); return; }
-    if (d.apagarPlano) { if (!confirm('Apagar este Plano-Base? Quem já recebeu as semanas continua com elas.')) return; await fetch('/api/deveres/planos-base/' + d.apagarPlano, { method: 'DELETE', headers: H() }); abrirBiblioteca(); }
+    if (d.apagarPlano) { if (!(await Dialogo.confirmar('Apagar este Plano-Base? Quem já recebeu as semanas continua com elas.'))) return; await fetch('/api/deveres/planos-base/' + d.apagarPlano, { method: 'DELETE', headers: H() }); abrirBiblioteca(); }
   });
   const lerSemana = () => { const i = $('#cdTituloSemana'); if (i) S.semanas[S.semana].titulo = i.value.trim() || `Semana ${S.semana + 1}`; };
   raiz.addEventListener('input', e => {

@@ -199,7 +199,7 @@ document.getElementById('salvarConjuntoBtn').addEventListener('click', async () 
 });
 
 document.getElementById('removerConjuntoBtn').addEventListener('click', async () => {
-  if (!conjuntoEditandoId || !confirm('Remover este conjunto? Ele deixará de ser visível para os alunos.')) return;
+  if (!conjuntoEditandoId || !(await Dialogo.confirmar('Remover este conjunto? Ele deixará de ser visível para os alunos.'))) return;
   await fetch(`/api/questoes/admin/conjuntos/${conjuntoEditandoId}`, { method: 'DELETE', headers: authHeaders() });
   mostrarView('lista');
   carregarConjuntos();

@@ -93,7 +93,7 @@ async function simulados(alunoId) {
 async function producoes(alunoId) {
   const [ps, ia] = await Promise.all([
     Producao.find({ alunoId }).populate("temaId", "titulo courseType nivel").sort({ dataEnvio: -1 }).limit(200).lean(),
-    CorrecaoIATCF.find({ alunoId, producaoId: null }).sort({ criadoEm: -1 }).limit(100).select("tache sujet modalidade note mots criadoEm correcao.escala").lean()
+    CorrecaoIATCF.find({ alunoId, producaoId: null }).sort({ criadoEm: -1 }).limit(100).select("tache sujet modalidade note mots criadoEm correcao.escala correcao.criteres").lean()
   ]);
   const reenviadas = new Set(ps.filter(p => p.origemId).map(p => String(p.origemId)));
   const lista = ps.map(p => {
@@ -101,7 +101,7 @@ async function producoes(alunoId) {
     return {
       id: String(p._id), titulo: p.temaId?.titulo || "Produção", curso: p.temaId?.courseType || "", modalidade: p.modalidade, tache: p.origem?.tache || "",
       estado: CA.estadoCorrecao(p, { reenviada: reenviadas.has(String(p._id)), paraAluno: true }), data: p.dataEnvio,
-      nota: av.notaTotal ?? null, notaMaxima: av.notaMaxima || null, corretor: av.corretor || "", palavras: p.contagemPalavras || null, duracao: p.duracaoSegundos || null,
+      nota: av.notaTotal ?? null, notaMaxima: av.notaMaxima || null, corretor: av.corretor === "ia" || p.modoCorrecao === "ia" ? "ia" : "professor", palavras: p.contagemPalavras || null, duracao: p.duracaoSegundos || null,
       anotacoes: devolvida ? (p.correcao?.anotacoes || 0) : 0, comentario: devolvida ? String(av.comentarioGeral || "").slice(0, 220) : ""
     };
   });
@@ -117,7 +117,18 @@ async function producoes(alunoId) {
     corrigidas: comNota.length, mediaPct: comNota.length ? Math.round(comNota.reduce((s, p) => s + p.nota / p.notaMaxima, 0) / comNota.length * 100) : null,
     evolucao: comNota.slice().reverse().map(p => ({ data: p.data, valor: Math.round(p.nota / p.notaMaxima * 100), rotulo: p.titulo })),
     criterios: Object.values(criterios).map(c => ({ nome: c.nome, pct: Math.round(c.soma / c.n * 100) })).sort((a, b) => b.pct - a.pct),
-    treinoIA: ia.map(x => ({ tache: x.tache, sujet: x.sujet, modalidade: x.modalidade, nota: x.note, escala: x.correcao?.escala || 20, data: x.criadoEm, palavras: x.mots })),
+    treinoIA: ia.map(x => ({ id: String(x._id), tache: x.tache, sujet: x.sujet, modalidade: x.modalidade, nota: x.note, escala: x.correcao?.escala || 20, data: x.criadoEm, palavras: x.mots })),
+    // todas as correções com nota (professor e IA: produções devolvidas e treinos da IA), para os
+    // gráficos com o filtro « professor / IA / ambas » no Meu Espaço
+    correcoes: ps.filter(p => CA.STATUS_DEVOLVIDA.includes(p.status) && p.avaliacao?.notaTotal != null && p.avaliacao?.notaMaxima).map(p => ({
+      id: String(p._id), tipo: "producao", titulo: p.temaId?.titulo || "Produção", modalidade: p.modalidade === "oral" ? "oral" : "textual", tache: p.origem?.tache || "",
+      data: p.dataCorrecao || p.dataEnvio, nota: p.avaliacao.notaTotal, max: p.avaliacao.notaMaxima, corretor: p.avaliacao.corretor === "ia" || p.modoCorrecao === "ia" ? "ia" : "professor",
+      criterios: (p.avaliacao.criterios || []).filter(c => c.nota != null && c.max).map(c => ({ nome: c.nome, pct: c.nota / c.max }))
+    })).concat(ia.filter(x => x.note != null).map(x => ({
+      id: String(x._id), tipo: "treino", titulo: x.sujet || "Treino", modalidade: x.modalidade === "oral" ? "oral" : "textual", tache: x.tache, data: x.criadoEm,
+      nota: x.note, max: x.correcao?.escala || 20, corretor: "ia",
+      criterios: (x.correcao?.criteres || []).map(c => { const m = /([\d.,]+)\s*\/\s*([\d.,]+)/.exec(String(c.note || "")); return m && Number(m[2].replace(",", ".")) ? { nome: c.nom, pct: Number(m[1].replace(",", ".")) / Number(m[2].replace(",", ".")) } : null; }).filter(Boolean)
+    }))).sort((a, b) => new Date(a.data) - new Date(b.data)),
     datas: ps.map(p => p.dataEnvio).concat(ia.map(x => x.criadoEm))
   };
 }
@@ -264,6 +275,16 @@ function sequencias(dias) {
   for (let i = 1; i < ord.length; i++) { cor = (new Date(ord[i]) - new Date(ord[i - 1])) / DIA === 1 ? cor + 1 : 1; rec = Math.max(rec, cor); }
   return { atual, recorde: rec };
 }
+
+// Uma correção de treino feita pela IA (Ambiente de Produção), por inteiro, para a página da correção.
+router.get("/treino/:id", async (req, res) => {
+  try {
+    if (!/^[a-f0-9]{24}$/i.test(req.params.id)) return res.status(400).json({ msg: "Correção inválida." });
+    const c = await CorrecaoIATCF.findOne({ _id: req.params.id, alunoId: req.userId }).lean();
+    if (!c) return res.status(404).json({ msg: "Correção não encontrada." });
+    res.json({ id: String(c._id), tache: c.tache, sujet: c.sujet, modalidade: c.modalidade, nota: c.note, nclc: c.nclc || "", mots: c.mots, texte: c.texte || "", data: c.criadoEm, correcao: c.correcao || {} });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
 
 router.get("/", async (req, res) => {
   try {

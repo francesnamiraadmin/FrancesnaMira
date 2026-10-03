@@ -152,14 +152,14 @@ document.getElementById('alunosLista').addEventListener('click', e => {
 async function abrirAluno(id) {
   try {
     const res = await fetch(`/api/equipe/alunos/${id}`, { headers: { Authorization: 'Bearer ' + token } });
-    if (!res.ok) { alert('Não foi possível carregar este aluno.'); return; }
+    if (!res.ok) { (await Dialogo.aviso('Não foi possível carregar este aluno.')); return; }
     const data = await res.json();
     alunoAtual = data.aluno;
     renderDetalhe(data);
     mostrarView('detalhe');
     window.scrollTo(0, 0);
     carregarDeverDoAluno(id);
-  } catch (err) { alert('Erro ao carregar o aluno.'); }
+  } catch (err) { (await Dialogo.aviso('Erro ao carregar o aluno.')); }
 }
 
 function formatarTempo(segundos) {
@@ -338,14 +338,14 @@ document.getElementById('producoesLista').addEventListener('click', e => {
 async function baixarArquivo(producaoId, tipo, nomeArquivo) {
   try {
     const res = await fetch(`/api/producoes/${producaoId}/arquivo/${tipo}`, { headers: { Authorization: 'Bearer ' + token } });
-    if (!res.ok) { alert('Não foi possível baixar o arquivo.'); return; }
+    if (!res.ok) { (await Dialogo.aviso('Não foi possível baixar o arquivo.')); return; }
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url; a.download = nomeArquivo || 'arquivo';
     document.body.appendChild(a); a.click(); a.remove();
     URL.revokeObjectURL(url);
-  } catch (err) { alert('Erro ao baixar o arquivo.'); }
+  } catch (err) { (await Dialogo.aviso('Erro ao baixar o arquivo.')); }
 }
 
 // ===================== CONCEDER CRÉDITOS =====================
@@ -510,7 +510,7 @@ document.getElementById('deveresLista').addEventListener('click', async e => {
   if (baixarBtn) {
     const [deverId, index, nome] = baixarBtn.dataset.baixarEntrega.split('|');
     const res = await fetch(`/api/deveres/deveres/${deverId}/atividades/${index}/arquivo`, { headers: authHeadersDev() });
-    if (!res.ok) { alert('Não foi possível baixar o arquivo.'); return; }
+    if (!res.ok) { (await Dialogo.aviso('Não foi possível baixar o arquivo.')); return; }
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = url; a.download = decodeURIComponent(nome);

@@ -23,6 +23,8 @@
       return res.json().catch(function () { return {}; }).then(function (d) {
         if (res.status === 401) { window.location.href = "login.html"; throw new Error("Session expirée."); }
         if (!res.ok) throw new Error(d.msg || "Erreur " + res.status);
+        // saldo de créditos novo (ex.: depois de uma correção pela IA): o app atualiza o que mostra
+        if (d.r && typeof d.r.creditos === "number") window.dispatchEvent(new CustomEvent("fnm:creditos", { detail: d.r.creditos }));
         return d.r;
       });
     });

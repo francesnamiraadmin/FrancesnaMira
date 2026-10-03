@@ -178,7 +178,7 @@ function mostrarMsg(id, texto, erro) {
 
 async function bloquear(ip, horas) {
   if (!ip) return;
-  if (!confirm(`Bloquear o IP ${ip} por ${horas} hora(s)?`)) return;
+  if (!(await Dialogo.confirmar(`Bloquear o IP ${ip} por ${horas} hora(s)?`))) return;
   try {
     const r = await api('/api/seguranca/bloqueios', { method: 'POST', body: JSON.stringify({ ip, horas, motivo: 'Bloqueio manual pelo painel' }) });
     mostrarMsg('msgAcoes', r.msg);
@@ -199,7 +199,7 @@ document.addEventListener('click', async e => {
   }
   if (alvo.dataset.desbloquearIp) {
     const ip = alvo.dataset.desbloquearIp;
-    if (!confirm(`Desbloquear o IP ${ip}?`)) return;
+    if (!(await Dialogo.confirmar(`Desbloquear o IP ${ip}?`))) return;
     try {
       const r = await api('/api/seguranca/bloqueios/' + encodeURIComponent(ip), { method: 'DELETE' });
       mostrarMsg('msgAcoes', r.msg);
@@ -214,7 +214,7 @@ document.getElementById('btnBloquear').addEventListener('click', () => {
 
 document.getElementById('btnRevogar').addEventListener('click', async () => {
   const email = document.getElementById('revEmail').value.trim();
-  if (!email || !confirm(`Encerrar TODAS as sessões de ${email}? A pessoa será desconectada em todos os dispositivos.`)) return;
+  if (!email || !(await Dialogo.confirmar(`Encerrar TODAS as sessões de ${email}? A pessoa será desconectada em todos os dispositivos.`))) return;
   try {
     const r = await api('/api/seguranca/revogar-sessoes', { method: 'POST', body: JSON.stringify({ email }) });
     mostrarMsg('msgAcoes', r.msg);

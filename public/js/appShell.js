@@ -232,8 +232,8 @@
     });
   }
 
-  function sair() {
-    if (!confirm("Deseja sair da sua conta?")) return;
+  async function sair() {
+    if (!(await Dialogo.confirmar("Deseja sair da sua conta?"))) return;
     // Revoga o refresh token (cookie httpOnly) no servidor além de limpar o
     // access token local — sem isso, quem marcou "Manter-me conectado" seria
     // relogado silenciosamente na próxima vez que uma página chamasse /refresh.

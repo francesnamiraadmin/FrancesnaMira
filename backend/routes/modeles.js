@@ -62,7 +62,8 @@ const nomeAlvo = (alvo, nomes) => (!alvo || alvo.todos ? "TOUS" : (alvo.alunos |
 
 async function temasMesIds(ctx) {
   if (!ctx._cache.temasMes) {
-    const l = await T.TemaMesTCF.find({ mes: mesAtual() }).lean();
+    // « Em Destaque » do mês para o curso/perfil do aluno (os antigos, sem perfil, valem para o TCF)
+    const l = await T.TemaMesTCF.find({ mes: mesAtual(), $or: [{ perfil: ctx.P.id }, ...(ctx.P.id === "TCF" ? [{ perfil: null }, { perfil: { $exists: false } }] : [])] }).lean();
     ctx._cache.temasMesLista = l;
     ctx._cache.temasMes = Object.fromEntries(l.map(t => [t.sujetId, 1]));
   }
@@ -99,8 +100,9 @@ async function temasLiberados(ctx) {
 }
 async function filtroVisivel(ctx) {
   if (ctx.prof) return () => true;
-  const [liberados, parts, devs] = await Promise.all([temasLiberados(ctx), partilhasTipos(ctx), idsDevoirs(ctx)]);
-  return (t, e, id) => liberados.has(id) || !!parts[id] || !!devs[id];
+  const [liberados, parts, devs, destaque] = await Promise.all([temasLiberados(ctx), partilhasTipos(ctx), idsDevoirs(ctx), temasMesIds(ctx)]);
+  // os temas « Em Destaque » do mês ficam liberados automaticamente para os alunos do curso
+  return (t, e, id) => liberados.has(id) || !!parts[id] || !!devs[id] || !!destaque[id];
 }
 
 async function statusIA(ctx) {
@@ -128,6 +130,24 @@ async function mapaNomes(ids) {
 }
 
 // ------------------------------------------------------------------ listas partilhadas (Dictée / Modèles écrits)
+// Liberados por padrão para todo aluno, além dos 20 temas padrão: 10 textos de ditado e 20 modelos
+// escritos, os que mais caem na prova (modelos escritos à mão da professora e do atelier).
+const EXTRAS_DITADO = 10, EXTRAS_MODELOS = 20;
+const cacheExtras = new Map();
+function extrasPadrao(P) {
+  if (cacheExtras.has(P.id)) return cacheExtras.get(P.id);
+  const jaPadrao = new Set((TEMAS_PADRAO[P.id] || []).map(x => x.id));
+  const cand = [];
+  for (const m of P.atelier || []) cand.push({ id: m.id, tache: m.tache, f: m.f || 1, t: m });
+  for (const t of P.TACHES) for (const m of P.modelosManuais(t)) if (!cand.some(c => c.id === m.id)) cand.push({ id: m.id, tache: t, f: m.f || 1, t: m });
+  const ord = cand.filter(c => !jaPadrao.has(c.id)).sort((a, b) => b.f - a.f || String(a.id).localeCompare(String(b.id)));
+  const modelos = ord.filter(c => /^ET/.test(c.tache)).slice(0, EXTRAS_MODELOS);
+  const nosModelos = new Set(modelos.map(c => c.id));
+  const dictees = ord.filter(c => !nosModelos.has(c.id)).slice(0, EXTRAS_DITADO);
+  const r = { dictees, modelos, ids: new Set([...dictees, ...modelos].map(c => c.id)) };
+  cacheExtras.set(P.id, r);
+  return r;
+}
 async function listasPartilhadas(ctx) {
   const vis = await filtroVisivel(ctx);
   const tipos = await partilhasTipos(ctx);
@@ -143,6 +163,12 @@ async function listasPartilhadas(ctx) {
     const r = M.temaEmQualquerTache(id); if (!r || M.perfilDoSujet(r.tema) !== ctx.P) continue;
     if (tipos[id].dictee) dictees.push(item(id, r.tache, r.tema));
     if (tipos[id].modele && M.ehEscrita(r.tache)) modelos.push(item(id, r.tache, r.tema));
+  }
+  // os extras liberados por padrão (ditado e modelos escritos)
+  if (!ctx.prof) {
+    const ex = extrasPadrao(ctx.P);
+    for (const c of ex.dictees) if (!dictees.some(d => d.id === c.id)) dictees.push(item(c.id, c.tache, c.t));
+    for (const c of ex.modelos) if (!modelos.some(d => d.id === c.id)) modelos.push(item(c.id, c.tache, c.t));
   }
   return { dictees, modelos };
 }
@@ -163,6 +189,7 @@ F.obterBanco = async ctx => {
   for (const t of P.TACHES) contagens[t] = P.modelosManuais(t).concat(P.sujetsDaTache(t)).filter(s => vis(t, s.e, s.id)).length;
   const todos = Object.fromEntries(P.TACHES.map(t => [t, P.eixos.slice()]));
   const partilhadasIds = Object.fromEntries(Object.keys(parts).map(k => [k, 1]));
+  if (!ctx.prof) extrasPadrao(P).ids.forEach(id => { partilhadasIds[id] = 1; });
   return {
     eixosPermitidos: P.eixos, acesso: todos, modulos: MODULOS, grupo: "", email: u.email, nome: u.nome || "", professor: ctx.prof,
     temDoc: false, introLink: "", podeEnviar: true, producaoLiberada: true, restantes: null,
@@ -195,7 +222,7 @@ F.obterModeleIA = async (ctx, tache, id) => {
   const sujet = M.acharTema(tache, id);
   if (!sujet) throw erro("Sujet introuvable.", 404);
   const vis = await filtroVisivel(ctx);
-  if (!vis(tache, sujet.e, id)) return { bloqueado: true, sujet: { id: sujet.id, e: sujet.e, t: M.consigneDe(sujet) } };
+  if (!vis(tache, sujet.e, id) && !extrasPadrao(ctx.P).ids.has(id)) return { bloqueado: true, sujet: { id: sujet.id, e: sujet.e, t: M.consigneDe(sujet) } };
   if (M.ehManual(tache, id)) return { modelo: sujet, sujet };
   let pronto = await lerModeloIA(id);
   if (pronto) pronto.e = sujet.e;
@@ -419,6 +446,20 @@ F.enviarTextoCorrecao = async (ctx, dados) => {
 };
 
 // ---------------- correção de treino pela IA ----------------
+// A correção pela IA também custa 1 crédito de correção (como a do professor). Confere o saldo
+// antes de chamar a IA e só desconta depois que a correção deu certo; a equipe não paga.
+const CUSTO_IA = 1;
+async function conferirCreditoIA(ctx) {
+  if (ctx.prof) return;
+  const u = await User.findById(ctx.userId).select("creditosCorrecao").lean();
+  if ((u?.creditosCorrecao || 0) < CUSTO_IA) throw erro("Vous n'avez plus de crédit de correction. La correction par l'IA coûte 1 crédit : achetez-en dans « Crédits de correction ».", 402);
+}
+async function cobrarCreditoIA(ctx) {
+  if (ctx.prof) return null;
+  await User.updateOne({ _id: ctx.userId, creditosCorrecao: { $gte: CUSTO_IA } }, { $inc: { creditosCorrecao: -CUSTO_IA } });
+  const u = await User.findById(ctx.userId).select("creditosCorrecao").lean();
+  return u?.creditosCorrecao || 0;
+}
 F.statusIA = ctx => statusIA(ctx);
 F.corrigirComIA = async (ctx, pedido) => {
   const st = await statusIA(ctx);
@@ -427,8 +468,11 @@ F.corrigirComIA = async (ctx, pedido) => {
   const texte = String(pedido?.texte || "").trim().slice(0, 6000);
   if (M.contarPalavras(texte) < 15) throw erro("Écrivez au moins quelques phrases avant de demander une correction.");
   if (!M.TACHES.includes(pedido.tache)) throw erro("Tâche invalide.");
+  await conferirCreditoIA(ctx);
   const r = await corrigirTreino({ alunoId: ctx.userId, tache: pedido.tache, sujetId: pedido.sujet, texte, courseType: ctx.courseType });
   r.restantes = Math.max(0, st.restantes - 1);
+  const saldo = await cobrarCreditoIA(ctx);
+  if (saldo != null) { r.creditos = saldo; r.custo = CUSTO_IA; }
   return r;
 };
 F.obterCorrecoesIA = async ctx => (await T.CorrecaoIATCF.find({ alunoId: ctx.userId }).sort({ criadoEm: -1 }).limit(30).select("-correcao -texte").lean())
@@ -559,7 +603,12 @@ F.obterDestaques = async ctx => {
     }
     saida.push(...esc);
   }
-  return { posts: postsOut, sujets: saida, ocultos: Object.keys(ocultosUne).length };
+  // « Em Destaque »: todos os temas do mês definidos pelo administrador para o curso do aluno
+  // sem destaque definido no mês: os temas que mais caem (um por tarefa), escolhidos automaticamente
+  const automatico = !temas.length;
+  const emDestaque = (automatico ? saida : temas).map(x => { const sj = M.acharTema(x.tache, x.id) || {}; const ex = M.EIXOS.eixos[x.e] || {};
+    return { tache: x.tache, id: x.id, titre: x.titre || sj.titre || "", texto: M.consigneDe(sj), e: x.e, eixo: ex.nome || x.e || "", escrita: M.ehEscrita(x.tache), f: sj.f || 1 }; });
+  return { posts: postsOut, sujets: saida, ocultos: Object.keys(ocultosUne).length, emDestaque, automatico, mes: mesAtual(), curso: ctx.P.nome };
 };
 
 // Administrador: tira um item do "À la une". Artigo → apagado do blog; sujet → sai do destaque
@@ -639,9 +688,17 @@ async function cartas() {
   return base.concat(extras.map(c => ({ deck: c.deck, mot: c.mot, trad: c.traduction, ex: c.exemple, dica: c.astuce || "", prof: String(c._id) })))
     .map(c => ({ ...c, id: idCarta(c.deck, c.mot) }));
 }
+// No formato que a tela do app espera: temas { nome, icone, grupo, cartas[] } e o progresso
+// { __err: { id: acertos desde o erro }, __vu: { id: 1 } }; meta = acertos para sair do caderno.
 F.obterVocab = async ctx => {
   const [cs, prog] = await Promise.all([cartas(), T.ProgressoVocabTCF.findOne({ alunoId: ctx.userId }).lean()]);
-  return { temas: VOCAB.temas, cartas: cs, progresso: prog?.dados || {}, novasPorDia: VOCAB.novasPorDia, acertosSair: VOCAB.acertosSair };
+  const dados = prog?.dados || {};
+  const carta = c => ({ id: c.id, mot: c.mot, trad: c.trad, ex: c.ex, dica: c.dica, prof: c.prof });
+  const temas = VOCAB.temas.map(([nome, icone, grupo]) => ({ nome, icone, grupo: grupo || "Vocabulaire", cartas: cs.filter(c => c.deck === nome).map(carta) }));
+  // decks criados pela professora que não estão na lista fixa
+  const conhecidos = new Set(temas.map(t => t.nome));
+  [...new Set(cs.map(c => c.deck))].filter(d => !conhecidos.has(d)).forEach(d => temas.push({ nome: d, icone: "⭐", grupo: "De la professeure", cartas: cs.filter(c => c.deck === d).map(carta) }));
+  return { temas: temas.filter(t => t.cartas.length), progresso: { __err: dados.__err || {}, __vu: dados.__vu || {} }, meta: VOCAB.acertosSair || 4, novasPorDia: VOCAB.novasPorDia };
 };
 async function salvarProgresso(ctx, fn) {
   const doc = await T.ProgressoVocabTCF.findOne({ alunoId: ctx.userId }) || new T.ProgressoVocabTCF({ alunoId: ctx.userId, dados: {} });
@@ -652,15 +709,21 @@ async function salvarProgresso(ctx, fn) {
   return dados;
 }
 // lista = [{ id, ok }] — mesma regra do script: acerto sobe a caixa, erro volta para a 1.
-F.salvarQuizVocab = (ctx, lista) => salvarProgresso(ctx, dados => {
-  for (const x of (lista || []).slice(0, 200)) {
-    if (!x || !x.id) continue;
-    const p = dados[x.id] || { c: 0, ok: 0, n: 0 };
-    p.n++; if (x.ok) { p.ok++; p.c = Math.min(5, (p.c || 0) + 1); } else p.c = 0;
-    p.d = Date.now();
-    dados[x.id] = p;
-  }
-});
+// lista = [{ id, ok }]. Errou: entra no caderno de erros (__err[id] = 0); no caderno, cada acerto
+// conta e, com « acertosSair » acertos, a carta sai. Devolve { __err, __vu } para a tela.
+F.salvarQuizVocab = async (ctx, lista) => {
+  const meta = VOCAB.acertosSair || 4;
+  const dados = await salvarProgresso(ctx, d => {
+    d.__err = d.__err || {}; d.__vu = d.__vu || {};
+    for (const x of (lista || []).slice(0, 200)) {
+      if (!x || !x.id) continue;
+      d.__vu[x.id] = 1;
+      if (!x.ok) d.__err[x.id] = 0;
+      else if (d.__err[x.id] !== undefined) { d.__err[x.id]++; if (d.__err[x.id] >= meta) delete d.__err[x.id]; }
+    }
+  });
+  return { __err: dados.__err || {}, __vu: dados.__vu || {} };
+};
 F.salvarRevisoes = F.salvarQuizVocab;
 
 // ---------------- recordes (dictée / réécriture) ----------------
@@ -726,7 +789,7 @@ F.obterDossierSujet = async (ctx, tache, id) => {
 // ---------------- sala ao vivo (aluno faz o sujet com um professor acompanhando) ----------------
 const canalSala = id => "modeles:sala:" + id;
 const fmtSala = (s, nomes) => ({ id: String(s._id), alunoId: String(s.alunoId), nome: nomes ? nomes[String(s.alunoId)] || "" : "", curso: s.courseType, tache: s.tache, sujetId: s.sujetId,
-  titulo: s.titulo, status: s.status, motivoFim: s.motivoFim || "", expiraEm: s.status === "aguardando" ? new Date(new Date(s.inicio).getTime() + PRAZO_SALA_MS) : null, professorNome: s.professorNome || "", texto: s.texto, transcricao: s.transcricao, mensagens: s.mensagens || [], inicio: s.inicio, atualizadoEm: s.atualizadoEm });
+  titulo: s.titulo, status: s.status, motivoFim: s.motivoFim || "", expiraEm: s.status === "aguardando" ? new Date(new Date(s.inicio).getTime() + PRAZO_SALA_MS) : null, professorNome: s.professorNome || "", texto: s.texto, transcricao: s.transcricao, mensagens: s.mensagens || [], marcas: (s.marcas || []).map(m => ({ id: m.id, trecho: m.trecho, ocorrencia: m.ocorrencia || 0, categoria: m.categoria, nome: m.nome, cor: m.cor, comentario: m.comentario || "", por: m.por || "" })), inicio: s.inicio, atualizadoEm: s.atualizadoEm });
 async function salaDoAluno(ctx, id) {
   const s = await T.SalaAoVivoTCF.findOne({ _id: oid(id), alunoId: ctx.userId });
   if (!s) throw erro("Salle introuvable.", 404);
@@ -986,6 +1049,35 @@ prof("entrarSala", async (ctx, id) => {
   return fmtSala(s, nomes);
 });
 // Roteiro do professor: consigne, documentos, modelo (manual, IA ou guia) e trame da tâche.
+// Correção por cores ao vivo: o professor grifa um trecho com uma categoria (cor) e um comentário;
+// o aluno e a equipe na sala recebem a lista atualizada na hora (evento « marcas »).
+const fmtMarca = m => ({ id: m.id, trecho: m.trecho, ocorrencia: m.ocorrencia || 0, categoria: m.categoria, nome: m.nome, cor: m.cor, comentario: m.comentario || "", por: m.por || "" });
+prof("marcarSala", async (ctx, id, marca) => {
+  const s = await T.SalaAoVivoTCF.findById(oid(id));
+  if (!s || s.status === "encerrada") throw erro("Cette salle est fermée.");
+  const trecho = String(marca?.trecho || "").slice(0, 600);
+  if (!trecho.trim()) throw erro("Sélectionnez un passage du texte.");
+  const cor = /^#[0-9a-f]{6}$/i.test(String(marca?.cor || "")) ? marca.cor : "#dc2626";
+  const u = await usuario(ctx);
+  s.marcas.push({ id: Math.random().toString(36).slice(2, 10), trecho, ocorrencia: Math.max(0, Math.min(500, Number(marca?.ocorrencia) || 0)),
+    categoria: String(marca?.categoria || "").slice(0, 40), nome: String(marca?.nome || "").slice(0, 80), cor, comentario: String(marca?.comentario || "").slice(0, 600), por: u.nome || "" });
+  if (s.marcas.length > 300) s.marcas = s.marcas.slice(-300);
+  s.atualizadoEm = new Date();
+  await s.save();
+  const marcas = s.marcas.map(fmtMarca);
+  canais.enviar(canalSala(s._id), "marcas", { marcas });
+  return marcas;
+});
+prof("desmarcarSala", async (ctx, id, marcaId) => {
+  const s = await T.SalaAoVivoTCF.findById(oid(id));
+  if (!s) throw erro("Salle introuvable.", 404);
+  s.marcas = s.marcas.filter(m => m.id !== String(marcaId || ""));
+  s.atualizadoEm = new Date();
+  await s.save();
+  const marcas = s.marcas.map(fmtMarca);
+  canais.enviar(canalSala(s._id), "marcas", { marcas });
+  return marcas;
+});
 prof("roteiroSujet", async (ctx, tache, id) => {
   const sujet = M.acharTema(tache, id);
   if (!sujet) throw erro("Sujet introuvable.", 404);
@@ -1155,7 +1247,7 @@ prof("salvarConfigModeles", async (ctx, d) => {
 router.use(exigirAuth);
 
 // ---------------- temas liberados por aluno (administrador) ----------------
-const { exigirAdmin } = require("../middleware/auth");
+const { exigirAdmin, exigirProfessor } = require("../middleware/auth");
 // Perfis em que o aluno tem Ambiente de Produção: TCF e/ou os níveis do DELF.
 async function perfisDoAluno(alunoId) {
   const cursos = await cursosComAcesso(alunoId, "producao");
@@ -1187,6 +1279,7 @@ router.get("/temas-aluno/:alunoId", exigirAdmin, async (req, res) => {
       aluno: { id: String(aluno._id), nome: aluno.nome, email: aluno.email }, perfis, perfil, nomePerfil: P.nome,
       taches: P.TACHES.map(t => ({ id: t, nome: P.NOMES_TACHE[t] })), catalogo,
       selecionados: doc ? doc.sujets.map(x => x.id) : padrao, padrao, personalizado: !!doc, atualizadoEm: doc?.atualizadoEm || null,
+      liberacoes: (await T.LiberacaoTemasTCF.find({ alunoId: aluno._id, perfil }).sort({ criadoEm: -1 }).limit(60).lean()).map(l => ({ id: String(l._id), data: l.criadoEm, por: l.porNome || "", retiradoEm: l.retiradoEm, sujets: l.sujets })),
       // temas que o aluno também vê por serem dever dele (liberados pelo dever, mesmo fora da lista)
       viaDever: [...new Set((await T.DevoirTCF.find({ ativo: true, modelo: { $ne: "" } }).select("modelo alvo").lean()).filter(dv => alvoInclui(dv.alvo, aluno._id)).map(dv => dv.modelo))]
     });
@@ -1217,6 +1310,7 @@ router.post("/temas-aluno/:alunoId/designar", exigirAdmin, async (req, res) => {
     await T.TemasAlunoTCF.findOneAndUpdate({ alunoId: req.params.alunoId, perfil }, { sujets: lista, atualizadoPor: req.userId, atualizadoEm: new Date() }, { upsert: true });
     if (novos.length) {
       const quem = await User.findById(req.userId).select("nome").lean();
+      await T.LiberacaoTemasTCF.create({ alunoId: req.params.alunoId, perfil, sujets: novos, porId: req.userId, porNome: quem?.nome || "" });
       const nomes = novos.slice(0, 5).map(x => `« ${String(M.acharTema(x.tache, x.id).t || M.acharTema(x.tache, x.id).titre || x.id).slice(0, 90)} » (${P.NOMES_TACHE[x.tache] || x.tache})`);
       await T.MensagemTCF.create({ alunoId: req.params.alunoId, de: quem?.nome || "Equipe Francês na Mira",
         texto: `${novos.length === 1 ? "Novo tema liberado" : novos.length + " novos temas liberados"} para você no Ambiente de Produção (${P.nome}): ${nomes.join("; ")}${novos.length > 5 ? "…" : ""}.` });
@@ -1224,6 +1318,103 @@ router.post("/temas-aluno/:alunoId/designar", exigirAdmin, async (req, res) => {
     res.json({ ok: true, personalizado: true, total: lista.length, novos: novos.length, selecionados: lista.map(x => x.id) });
   } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
 });
+// Retira exatamente os temas de um envio do histórico (os que ainda estão liberados).
+router.post("/temas-aluno/:alunoId/liberacoes/:libId/retirar", exigirAdmin, async (req, res) => {
+  try {
+    if (!ehObjectId(req.params.alunoId) || !ehObjectId(req.params.libId)) return res.status(400).json({ msg: "Pedido inválido." });
+    const lib = await T.LiberacaoTemasTCF.findOne({ _id: req.params.libId, alunoId: req.params.alunoId });
+    if (!lib) return res.status(404).json({ msg: "Liberação não encontrada." });
+    if (lib.retiradoEm) return res.status(400).json({ msg: "Este envio já foi retirado." });
+    const doc = await T.TemasAlunoTCF.findOne({ alunoId: req.params.alunoId, perfil: lib.perfil });
+    const fora = new Set(lib.sujets.map(x => x.id));
+    let n = 0;
+    if (doc) { const antes = doc.sujets.length; doc.sujets = doc.sujets.filter(x => !fora.has(x.id)); n = antes - doc.sujets.length; doc.atualizadoEm = new Date(); await doc.save(); }
+    lib.retiradoEm = new Date(); await lib.save();
+    res.json({ ok: true, retirados: n, selecionados: doc ? doc.sujets.map(x => x.id) : [] });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+
+// ===================== EM DESTAQUE (Sistema de Correção, administrador) =====================
+// O administrador escolhe, para cada curso/perfil e mês, os temas em destaque de expressão escrita
+// e oral. Eles aparecem no topo do Ambiente de Produção dos alunos e ficam liberados para eles.
+function catalogoPerfil(perfil) {
+  const P = M.PERFIS[perfil], catalogo = [];
+  for (const t of P.TACHES) {
+    const vistos = new Set();
+    for (const s of P.modelosManuais(t).concat(P.sujetsDaTache(t))) {
+      if (vistos.has(s.id)) continue; vistos.add(s.id);
+      catalogo.push({ tache: t, id: s.id, e: s.e, eixo: (M.EIXOS.eixos[s.e] || {}).nome || s.e, t: String(s.titre || s.t || "").slice(0, 220), f: s.f || 1 });
+    }
+  }
+  return catalogo;
+}
+router.get("/destaques-admin", exigirAdmin, async (req, res) => {
+  try {
+    const perfil = M.PERFIS[req.query.perfil] ? req.query.perfil : "TCF";
+    const mes = /^\d{4}-\d{2}$/.test(String(req.query.mes || "")) ? req.query.mes : mesAtual();
+    const P = M.PERFIS[perfil];
+    const itens = await T.TemaMesTCF.find({ mes, $or: [{ perfil }, ...(perfil === "TCF" ? [{ perfil: null }, { perfil: { $exists: false } }] : [])] }).sort({ criadoEm: 1 }).lean();
+    res.json({
+      perfil, mes, nomePerfil: P.nome, perfis: Object.keys(M.PERFIS).map(k => ({ id: k, nome: M.PERFIS[k].nome })),
+      taches: P.TACHES.map(t => ({ id: t, nome: P.NOMES_TACHE[t], escrita: M.ehEscrita(t) })),
+      itens: itens.map(x => ({ id: String(x._id), tache: x.tache, sujetId: x.sujetId, titre: x.titre, eixo: (M.EIXOS.eixos[x.eixo] || {}).nome || x.eixo || "", por: x.por || "" })),
+      catalogo: catalogoPerfil(perfil)
+    });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+router.post("/destaques-admin", exigirAdmin, async (req, res) => {
+  try {
+    const perfil = String(req.body?.perfil || ""), mes = String(req.body?.mes || "");
+    if (!M.PERFIS[perfil] || !/^\d{4}-\d{2}$/.test(mes)) return res.status(400).json({ msg: "Curso ou mês inválido." });
+    const P = M.PERFIS[perfil];
+    const pedidos = (Array.isArray(req.body?.sujets) ? req.body.sujets : []).slice(0, 100);
+    if (!pedidos.length) return res.status(400).json({ msg: "Escolha pelo menos um tema." });
+    const quem = await User.findById(req.userId).select("nome").lean();
+    const ja = new Set((await T.TemaMesTCF.find({ mes, perfil }).select("sujetId").lean()).map(x => x.sujetId));
+    let n = 0;
+    for (const x of pedidos) {
+      const t = String(x?.tache || ""), id = String(x?.id || ""), tema = M.acharTema(t, id);
+      if (!P.TACHES.includes(t) || !tema || M.perfilDoSujet(tema) !== P) return res.status(400).json({ msg: `Tema inválido: ${id}` });
+      if (ja.has(id)) continue; ja.add(id);
+      await T.TemaMesTCF.create({ mes, perfil, tache: t, sujetId: id, titre: String(tema.titre || tema.t || "").slice(0, 200), eixo: tema.e, por: quem?.nome || "" });
+      n++;
+    }
+    res.json({ ok: true, adicionados: n, msg: n ? `${n} tema(s) em destaque em ${mes} para ${P.nome}.` : "Esses temas já estavam em destaque." });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+router.delete("/destaques-admin/:id", exigirAdmin, async (req, res) => {
+  try {
+    if (!ehObjectId(req.params.id)) return res.status(400).json({ msg: "Destaque inválido." });
+    await T.TemaMesTCF.deleteOne({ _id: req.params.id });
+    res.json({ ok: true });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+
+// ===================== CORREÇÕES DE IA (Sistema de Correção) =====================
+// Todas as correções feitas pela IA (treinos e produções corrigidas pela IA): texto, aluno e a correção.
+router.get("/correcoes-ia", exigirProfessor, async (req, res) => {
+  try {
+    const filtro = {};
+    if (req.query.alunoId && ehObjectId(req.query.alunoId)) filtro.alunoId = req.query.alunoId;
+    if (["textual", "oral"].includes(req.query.modalidade)) filtro.modalidade = req.query.modalidade;
+    const l = await T.CorrecaoIATCF.find(filtro).sort({ criadoEm: -1 }).limit(300).select("alunoId tache sujet modalidade note mots criadoEm correcao.escala producaoId").lean();
+    const nomes = await mapaNomes(l.map(x => x.alunoId));
+    const emails = Object.fromEntries((await User.find({ _id: { $in: [...new Set(l.map(x => String(x.alunoId)))] } }).select("email").lean()).map(u => [String(u._id), u.email]));
+    res.json(l.map(x => ({ id: String(x._id), alunoId: String(x.alunoId), aluno: nomes[String(x.alunoId)] || "", email: emails[String(x.alunoId)] || "", tache: x.tache, nomeTache: (M.PERFIS.TCF.NOMES_TACHE || {})[x.tache] || x.tache,
+      sujet: x.sujet || "", modalidade: x.modalidade, nota: x.note, escala: x.correcao?.escala || 20, mots: x.mots, data: x.criadoEm, origem: x.producaoId ? "produção enviada" : "treino" })));
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+router.get("/correcoes-ia/:id", exigirProfessor, async (req, res) => {
+  try {
+    if (!ehObjectId(req.params.id)) return res.status(400).json({ msg: "Correção inválida." });
+    const c = await T.CorrecaoIATCF.findById(req.params.id).lean();
+    if (!c) return res.status(404).json({ msg: "Correção não encontrada." });
+    const u = await User.findById(c.alunoId).select("nome email").lean();
+    res.json({ id: String(c._id), aluno: u ? u.nome : "", email: u ? u.email : "", alunoId: String(c.alunoId), tache: c.tache, sujet: c.sujet, modalidade: c.modalidade, nota: c.note, nclc: c.nclc || "",
+      mots: c.mots, texte: c.texte || "", data: c.criadoEm, correcao: c.correcao || {}, producaoId: c.producaoId ? String(c.producaoId) : null });
+  } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
+});
+
 // Salva a lista (ou, com « padrao: true », volta aos 20 temas padrão).
 router.put("/temas-aluno/:alunoId", exigirAdmin, async (req, res) => {
   try {
@@ -1327,9 +1518,12 @@ router.post("/oral-ia", comTratamentoDeErro(uploadAudio.single("audio")), async 
     const texte = String(transcricao || "").trim().slice(0, 6000);
     const audio = req.file ? lerAudio(req.file.path, req.file.mimetype) : undefined;
     if (M.contarPalavras(texte) < 15 && !audio) { limpar(); return res.status(400).json({ msg: "La transcription est trop courte : parlez un peu plus ou complétez-la avant l'envoi." }); }
+    await conferirCreditoIA(ctx);
     const r = await corrigirTreino({ alunoId: ctx.userId, tache, sujetId: sujet, texte: texte || "(transcription vide : écoute l'enregistrement)", courseType: ctx.courseType, modalidade: "oral", audio });
     limpar();
     r.restantes = Math.max(0, st.restantes - 1);
+    const saldo = await cobrarCreditoIA(ctx);
+    if (saldo != null) { r.creditos = saldo; r.custo = CUSTO_IA; }
     res.json(r);
   } catch (err) {
     limpar();

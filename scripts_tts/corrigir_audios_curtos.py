@@ -35,7 +35,7 @@ from verificacao import Whisper  # noqa: E402
 
 TMP = ROOT / "scripts_tts" / "_tmp_curto.wav"
 MAX_PALAVRAS = 3
-LIMIAR = 0.62
+LIMIAR = 0.75
 
 
 def pedacos(texto):
@@ -75,11 +75,16 @@ def fonetica(s):
 
 
 def nota(texto, ouvido):
-    e = fonetica(" ".join([texto] * 3)).split()
+    """Compara o que o Whisper ouviu (o recorte tocado 3 vezes) com o texto 3 vezes e 1 vez:
+    às vezes ele transcreve a palavra uma vez só, e isso não é erro do áudio."""
     o = fonetica(ouvido).split()
-    letras = difflib.SequenceMatcher(None, " ".join(e), " ".join(o)).ratio()
-    pals = difflib.SequenceMatcher(None, e, o).ratio()
-    return (letras + pals) / 2
+    melhor = 0
+    for vezes in (3, 1):
+        e = fonetica(" ".join([texto] * vezes)).split()
+        letras = difflib.SequenceMatcher(None, " ".join(e), " ".join(o)).ratio()
+        pals = difflib.SequenceMatcher(None, e, o).ratio()
+        melhor = max(melhor, (letras + pals) / 2)
+    return melhor
 
 
 def trechos(y, sr, top_db=32, pausa=0.2):
@@ -93,8 +98,8 @@ def trechos(y, sr, top_db=32, pausa=0.2):
     return out
 
 
-def recorte(y, sr, qual):
-    s = trechos(y, sr)
+def recorte(y, sr, qual, pausa=0.2):
+    s = trechos(y, sr, pausa=pausa)
     if not s:
         return None
     a, b = s[qual] if -len(s) <= qual < len(s) else s[0]
@@ -120,6 +125,8 @@ def main():
         sys.exit(1)
     textos = json.loads(Path(args[0]).read_text(encoding="utf-8"))
     so = set(t.strip() for t in args[args.index("--so") + 1].split(",")) if "--so" in args else None
+    if "--so-arquivo" in args:
+        so = set(json.loads(Path(args[args.index("--so-arquivo") + 1]).read_text(encoding="utf-8")))
     alvo = []
     for t in textos:
         if so is not None and t not in so:
@@ -143,7 +150,9 @@ def main():
 
     relatorio = []
     for i, texto in enumerate(alvo, 1):
-        base = re.sub(r"[.!?…]+$", "", texto).strip()
+        # « ne...pas » se fala « ne pas »: reticências e barras viram espaço (senão o corte para na pausa)
+        base = re.sub(r"\s+", " ", re.sub(r"(\.\.\.|…|/)", " ", re.sub(r"[.!?…]+$", "", texto))).strip()
+        pausa = 0.2 if len(pedacos(texto)) <= 1 else 0.45
         voz0 = escolher_voz(texto)
         modos = [(f"{base}, {base}, {base}.", 0), (f"Écoutez bien : {base}.", -1), (f"{base}.", 0)]
         melhor = None
@@ -152,7 +161,7 @@ def main():
             for falar, qual in modos:
                 tts.tts_to_file(text=falar, speaker=voz, language="fr", file_path=str(TMP), split_sentences=False, temperature=0.3, repetition_penalty=10.0)
                 y, sr = librosa.load(str(TMP), sr=None, mono=True)
-                c = recorte(y, sr, qual)
+                c = recorte(y, sr, qual, pausa)
                 if c is None or len(c) < 0.12 * sr:
                     continue
                 dur = len(c) / sr
@@ -172,6 +181,12 @@ def main():
         passou, n, mdur, c, sr, voz, ouvido, falar = melhor
         destino = OUT_DIR / f"{sha256_hex(texto)}.mp3"
         antes = duracao_mp3(destino) if destino.exists() else 0
+        # nenhum candidato passou: só troca o arquivo se o melhor estiver dentro da duração e perto
+        # do limite de nota; senão fica o áudio atual (melhor não mexer do que gravar algo errado)
+        if not passou and (-mdur > limite_s(texto) or n < LIMIAR - 0.15):
+            relatorio.append({"texto": texto, "antes_s": round(antes, 1), "depois_s": None, "nota": n, "ouvido_x3": ouvido, "ok": False, "mantido": True})
+            print(f"[{i}/{len(alvo)}] ==  {texto!r}: nenhum candidato bom (melhor nota {n}, {-mdur:.2f}s): mantido o áudio atual", flush=True)
+            continue
         gravar(destino, c, sr)
         relatorio.append({"texto": texto, "antes_s": round(antes, 1), "depois_s": round(-mdur, 2), "nota": n, "ouvido_x3": ouvido, "ok": passou, "voz": voz, "modo": falar})
         print(f"[{i}/{len(alvo)}] {'OK ' if passou else '?? '} {texto!r}: {antes:.1f}s -> {-mdur:.2f}s · nota {n} · ouviu {ouvido!r}", flush=True)

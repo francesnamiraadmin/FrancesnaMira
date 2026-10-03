@@ -70,7 +70,7 @@ function enviarGravacao(o) {
   ['tache', 'sujet', 'sessao', 'duree', 'transcricao', 'modo'].forEach(function (k) { if (o[k] !== undefined && o[k] !== null) fd.append(k, o[k]); });
   if (window.FNM_CURSO) fd.append('courseType', window.FNM_CURSO);
   return fetch(o.url || '/api/modeles/oral', { method: 'POST', headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }, body: fd })
-    .then(function (res) { return res.json().catch(function () { return {}; }).then(function (d) { if (!res.ok) throw new Error(d.msg || 'Erreur ' + res.status); return d; }); });
+    .then(function (res) { return res.json().catch(function () { return {}; }).then(function (d) { if (!res.ok) throw new Error(d.msg || 'Erreur ' + res.status); if (typeof d.creditos === 'number') atualizarCreditos(d.creditos); return d; }); });
 }
 
 // ---------- hub de escolhas do Ambiente de Produção ----------
@@ -211,7 +211,7 @@ function ligarEnvioSistema(caixa, dadosFn) {
 // ---------- épreuve écrite: escolha de quem corrige ----------
 function htmlEscolhaCorrecao(st) {
   return '<fieldset class="escolha-correcao"><legend>Correction de l\'épreuve</legend>' +
-    '<label><input type="radio" name="ep-correcao" value="ia" checked><span><b>Par l\'IA, dès la fin</b><small>Note sur 20, trame, corrections, lexique et version améliorée pour chaque tâche (entraînement, sans crédit).</small></span></label>' +
+    '<label><input type="radio" name="ep-correcao" value="ia" checked><span><b>Par l\'IA, dès la fin</b><small>Note sur 20, trame, corrections, lexique et version améliorée pour chaque tâche (1 crédit par tâche).</small></span></label>' +
     '<label><input type="radio" name="ep-correcao" value="professor"><span><b>Par un professeur</b><small>Les trois textes partent dans le Sistema de Correção à la fin de l\'épreuve (1 crédit par tâche · vous avez ' + (st.creditos || 0) + ' crédit' + ((st.creditos || 0) > 1 ? 's' : '') + ').</small></span></label></fieldset>';
 }
 function correcaoEscolhida() { var r = document.querySelector('input[name="ep-correcao"]:checked'); return r ? r.value : 'ia'; }
@@ -451,6 +451,8 @@ function atualizarCreditos(n) {
   if (typeof n === 'number') B.creditos = n;
   document.querySelectorAll('[data-creditos]').forEach(function (el) { el.outerHTML = htmlCreditos(); });
 }
+// a correção pela IA também gasta crédito: o gasShim avisa quando uma resposta traz o saldo novo
+window.addEventListener('fnm:creditos', function (e) { if (B) atualizarCreditos(e.detail); });
 
 // Confirmação de envio no visual do site (não a caixa do navegador): custo, saldo e saldo depois.
 // o: { titulo, texto, custo, rotulo }. Devolve uma Promise<boolean>.

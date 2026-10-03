@@ -89,8 +89,11 @@
         <div class="av-sala-grade">
           <div>
             <h3>${oral ? 'O que o aluno diz (transcrição ao vivo)' : 'O que o aluno escreve (ao vivo)'}</h3>
-            <div class="texto-enviado-box av-ao-vivo" id="avTexto" lang="fr"></div>
-            <div style="font-size:.8rem; color:var(--cinza-400); margin:6px 0 12px;" id="avContagem"></div>
+            <p class="mav-dica">🖍 Selecione um trecho e escolha a cor: o aluno vê o grifo na hora.</p>
+            <div class="texto-enviado-box av-ao-vivo mav-texto" id="avTexto" lang="fr"></div>
+            <div class="mav-paleta" id="avPaleta" hidden></div>
+            <div style="font-size:.8rem; color:var(--cinza-400); margin:6px 0 8px;" id="avContagem"></div>
+            <div id="avMarcas"></div>
             <h3>Conversa</h3>
             <div class="av-msgs" id="avMsgs"></div>
             <div class="av-msg-linha"><input id="avMsg" placeholder="Escrever ao aluno…"><button class="btn secundario pequeno" id="avMsgBt">Enviar</button></div>
@@ -100,8 +103,68 @@
         </div>
       </div>`;
     box.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    const mostrarTexto = t => { document.getElementById('avTexto').innerHTML = esc(t || '').replace(/\n/g, '<br>') || '<span style="opacity:.6;">(nada ainda)</span>'; document.getElementById('avContagem').textContent = contarPalavras(t) + ' palavras'; };
+    // ---- correção por cores ao vivo ----
+    let textoAtual = '', marcas = s.marcas || [], pendente = false, selecao = null;
+    const modalidade = oral ? 'oral' : 'textual';
+    const desenharTexto = () => {
+      const el = document.getElementById('avTexto'); if (!el) return;
+      const r = MarcasAoVivo.html(textoAtual, marcas, { numeros: true });
+      el.innerHTML = textoAtual ? r.html : '<span style="opacity:.6;">(nada ainda)</span>';
+      document.getElementById('avMarcas').innerHTML = marcas.length ? '<h3 style="margin:10px 0 6px;">Marcas ao vivo <span class="tag">' + marcas.length + '</span></h3>' + MarcasAoVivo.lista(r, { remover: 'Tirar a marca' }) : '';
+    };
+    const ocupado = () => !document.getElementById('avPaleta')?.hidden;
+    const mostrarTexto = t => {
+      textoAtual = String(t || '');
+      document.getElementById('avContagem').textContent = contarPalavras(t) + ' palavras';
+      if (ocupado()) { pendente = true; return; }   // não apaga a seleção do professor enquanto ele marca
+      desenharTexto();
+    };
     mostrarTexto(oral ? s.transcricao : s.texto);
+    const fecharPaleta = () => {
+      const p = document.getElementById('avPaleta'); if (p) { p.hidden = true; p.innerHTML = ''; }
+      selecao = null;
+      if (pendente) { pendente = false; desenharTexto(); }
+    };
+    const abrirPaleta = async () => {
+      const el = document.getElementById('avTexto'), sel = window.getSelection();
+      if (!el || !sel || sel.isCollapsed || !sel.rangeCount) return;
+      const rg = sel.getRangeAt(0);
+      if (!el.contains(rg.startContainer) || !el.contains(rg.endContainer)) return;
+      let ini = MarcasAoVivo.deslocamento(el, rg.startContainer, rg.startOffset), fim = MarcasAoVivo.deslocamento(el, rg.endContainer, rg.endOffset);
+      while (ini < fim && /\s/.test(textoAtual[ini])) ini++;
+      while (fim > ini && /\s/.test(textoAtual[fim - 1])) fim--;
+      if (fim <= ini) return;
+      const trecho = textoAtual.slice(ini, fim);
+      selecao = { trecho, ocorrencia: MarcasAoVivo.ocorrenciaEm(textoAtual, trecho, ini) };
+      const cats = (window.Correcao && Correcao.categorias) ? (await Correcao.categorias.carregar(), Correcao.categorias.ativas(modalidade)) : [];
+      const lista = cats.length ? cats : [{ id: 'gramatica', nome: 'Erro', cor: '#dc2626' }, { id: 'sugestao', nome: 'Sugestão', cor: '#2563eb' }, { id: 'positivo', nome: 'Ponto positivo', cor: '#16a34a' }];
+      const p = document.getElementById('avPaleta');
+      p.innerHTML = '<div class="mav-paleta-topo"><b>Grifar</b> <q lang="fr">' + esc(trecho.length > 80 ? trecho.slice(0, 80) + '…' : trecho) + '</q><button type="button" class="mav-fechar" data-mav-fechar aria-label="Fechar">✕</button></div>' +
+        '<div class="mav-cores">' + lista.map(c => '<button type="button" class="mav-cor" data-mav-cat="' + esc(c.id) + '" data-cor="' + esc(c.cor) + '" data-nome="' + esc(c.nome) + '" style="--mav:' + esc(c.cor) + '"><i></i>' + esc(c.nome) + '</button>').join('') + '</div>' +
+        '<input type="text" class="mav-coment" id="avComent" maxlength="600" placeholder="Comentário para o aluno (opcional), depois escolha a cor">';
+      p.hidden = false;
+      // a paleta aparece logo abaixo da seleção
+      const caixa = rg.getBoundingClientRect(), base = p.offsetParent ? p.offsetParent.getBoundingClientRect() : { top: 0, left: 0 };
+      p.style.top = (caixa.bottom - base.top + 8) + 'px';
+      p.style.left = Math.max(0, Math.min(caixa.left - base.left, (p.offsetParent ? p.offsetParent.clientWidth : 600) - 340)) + 'px';
+    };
+    document.getElementById('avTexto').addEventListener('mouseup', () => setTimeout(abrirPaleta, 0));
+    document.getElementById('avTexto').addEventListener('keyup', e => { if (e.shiftKey) abrirPaleta(); });
+    document.getElementById('avPaleta').addEventListener('click', async e => {
+      if (e.target.closest('[data-mav-fechar]')) return fecharPaleta();
+      const b = e.target.closest('[data-mav-cat]'); if (!b || !selecao) return;
+      b.disabled = true;
+      const marca = { ...selecao, categoria: b.dataset.mavCat, cor: b.dataset.cor, nome: b.dataset.nome, comentario: document.getElementById('avComent').value.trim() };
+      try { marcas = await rpc('marcarSala', s.id, marca); } catch (err) { await Dialogo.aviso(err.message); }
+      window.getSelection().removeAllRanges();
+      pendente = true; fecharPaleta();
+    });
+    document.getElementById('avPaleta').addEventListener('keydown', e => { if (e.key === 'Escape') fecharPaleta(); });
+    document.getElementById('avMarcas').addEventListener('click', async e => {
+      const b = e.target.closest('[data-mav-del]'); if (!b) return;
+      b.disabled = true;
+      try { marcas = await rpc('desmarcarSala', s.id, b.dataset.mavDel); desenharTexto(); } catch (err) { b.disabled = false; await Dialogo.aviso(err.message); }
+    });
     const addMsg = (de, texto) => {
       const l = document.getElementById('avMsgs'); if (!l) return;
       l.insertAdjacentHTML('beforeend', `<div class="av-m ${de}"><b>${de === 'aluno' ? esc(s.nome || 'Aluno') : 'Você'}</b><span>${esc(texto)}</span></div>`);
@@ -126,6 +189,7 @@
     const stream = SimuladoAoVivo.stream('/api/modeles/salas/' + s.id + '/stream', (ev, d) => {
       if (!document.getElementById('avTexto')) return;
       if (ev === 'conteudo') mostrarTexto(oral ? d.transcricao : d.texto);
+      else if (ev === 'marcas') { marcas = d.marcas || []; if (ocupado()) pendente = true; else desenharTexto(); }
       else if (ev === 'msg' && d.de === 'aluno') { addMsg('aluno', d.texto); bip(); }
       else if (ev === 'sinal' && chamada) chamada.receber(d);
       else if (ev === 'estado' && d.status === 'encerrada') {
@@ -140,12 +204,12 @@
       const i = document.getElementById('avMsg'); if (!i.value.trim()) return;
       const t = i.value; i.value = '';
       addMsg('professor', t);
-      rpc('mensagemSala', s.id, t).catch(e => alert(e.message));
+      rpc('mensagemSala', s.id, t).catch(async e => (await Dialogo.aviso(e.message)));
     };
     document.getElementById('avMsgBt').addEventListener('click', enviarMsg);
     document.getElementById('avMsg').addEventListener('keydown', e => { if (e.key === 'Enter') enviarMsg(); });
-    document.getElementById('avFim').addEventListener('click', () => {
-      if (!confirm('Encerrar a sessão ao vivo com este aluno?')) return;
+    document.getElementById('avFim').addEventListener('click', async () => {
+      if (!(await Dialogo.confirmar('Encerrar a sessão ao vivo com este aluno?'))) return;
       rpc('encerrarSala', s.id).catch(() => {});
       fecharSala(); delete salas[s.id]; desenharLista();
       document.getElementById('aoVivoSala').innerHTML = '';

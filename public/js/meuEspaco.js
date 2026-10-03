@@ -93,7 +93,7 @@
     const k = (cor, rot, val, sub, visual) => `<div class="me-kpi me-surgir" style="--c:${cor}">${visual}<div><div class="rot">${rot}</div><div class="val">${val}</div><div class="sub">${sub}</div></div></div>`;
     return `<div class="me-kpis">
       ${k(COR.azul, "Questões", q.total || 0, `${q.certas || 0} certas · ${q.tentativas || 0} conjunto(s)`, anel(q.aproveitamento, COR.azul))}
-      ${k(COR.rosa, "Produções", p.total || 0, `${p.corrigidas || 0} corrigida(s) · média`, anel(p.mediaPct, COR.rosa))}
+      ${k(COR.rosa, "Produções", (p.total || 0) + (p.treinoIA || []).length, `${(p.correcoes || []).length} correção(ões) · professor + IA`, anel((p.correcoes || []).length ? Math.round(p.correcoes.reduce((t, c) => t + c.nota / c.max, 0) / p.correcoes.length * 100) : null, COR.rosa))}
       ${k(COR.laranja, "Simulados", (d.simulados || []).length, ultSim ? "último: " + esc(ultSim.titulo) : "nenhum ainda", '<div class="me-ico">🏆</div>')}
       ${k(COR.verde, "Aulas assistidas", (a.assistidas || 0) + (ap.realizadas || 0), `${a.assistidas || 0} gravada(s) · ${ap.realizadas || 0} particular(es)`, '<div class="me-ico">🎬</div>')}
       ${k(COR.roxo, "Tempo de estudo", fmtTempo((e.totalSeg || 0) + (a.tempoSeg || 0)), `${e.sessoes || 0} sessão(ões) + vídeos`, '<div class="me-ico">⏱️</div>')}
@@ -137,7 +137,9 @@
           <span class="marca">📝</span><span class="txt"><b>${esc(t.nome)}</b><small>${fmtData(t.data)} · ${t.certas}/${t.total}</small></span><span class="me-pill">${t.pct}%</span></a>`).join("")}</div></div>
       </div></section>`;
   }
-  let errosEstado = { filtro: "pendentes", materia: "" };
+  // caderno de erros: 9 questões por vez; « Ver mais 9 » abre as próximas
+  const ERROS_POR_VEZ = 9;
+  let errosEstado = { filtro: "pendentes", materia: "", limite: ERROS_POR_VEZ };
   function secErros(d) {
     const l = d.questoes?.cadernoErros || [];
     const materias = [...new Set(l.map(x => x.materia))];
@@ -154,29 +156,44 @@
     const alvo = raiz.querySelector("[data-erros]"); if (!alvo) return;
     raiz.querySelectorAll("[data-ef]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ef === errosEstado.filtro)));
     const l = (d.questoes.cadernoErros || []).filter(x => (errosEstado.filtro === "todas" || (errosEstado.filtro === "resolvidas" ? x.resolvida : !x.resolvida)) && (!errosEstado.materia || x.materia === errosEstado.materia));
-    alvo.innerHTML = l.slice(0, 60).map((x, i) => `<div class="me-erro" style="--c:${x.resolvida ? COR.verde : PALETA[i % PALETA.length]}">
+    alvo.innerHTML = l.slice(0, errosEstado.limite).map((x, i) => `<div class="me-erro" style="--c:${x.resolvida ? COR.verde : PALETA[i % PALETA.length]}">
       <div class="topo"><span>${esc(x.materia)} · ${esc(x.conjunto)}</span><span class="me-pill" style="--c:${x.resolvida ? COR.verde : COR.vermelho}">${x.resolvida ? "resolvida" : "errou " + x.vezesErrada + "×"}</span></div>
       <p>${esc(x.enunciado)}</p>
       ${x.respostaAluno ? `<p>Sua resposta: <span class="sua">${esc(x.respostaAluno)}</span></p>` : ""}
       <p>Resposta certa: <span class="certa">${esc(x.respostaCorreta)}</span></p>
       <details data-explicar="${esc(x.questaoId)}"><summary>Ver explicação, pegadinhas e dicas</summary><div class="explica">${esc(x.explicacao)}</div><div data-ia></div></details>
-    </div>`).join("") + (l.length > 60 ? `<p class="me-vazio">Mostrando 60 de ${l.length}. Use os filtros para ver as outras.</p>` : "") || '<div class="me-vazio">Nada neste filtro.</div>';
+    </div>`).join("") + (l.length > errosEstado.limite ? `<div class="me-mais-erros"><span>Mostrando ${errosEstado.limite} de ${l.length}</span><button type="button" class="me-btn" data-mais-erros>Ver mais ${Math.min(ERROS_POR_VEZ, l.length - errosEstado.limite)} ↓</button></div>` : "") || '<div class="me-vazio">Nada neste filtro.</div>';
   }
+  // Redações e produções: as estatísticas juntam as correções dos professores e as da IA
+  // (produções e treinos), com o filtro « Ambas · Professor · IA ».
+  let prodFiltro = "ambas";
   function secProducoes(d) {
     const p = d.producoes;
-    if (!p || !p.total) return `<section class="me-secao" id="producoes" style="--c:${COR.rosa}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Redações e produções</h2></div></div>
+    if (!p || (!p.total && !(p.treinoIA || []).length)) return `<section class="me-secao" id="producoes" style="--c:${COR.rosa}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Redações e produções</h2></div></div>
       <div class="me-card c12"><div class="me-vazio">Nenhuma produção enviada ainda. <a href="producao-hub.html">Ir ao Ambiente de Produção</a></div></div></section>`;
+    const corr = (p.correcoes || []).filter(c => prodFiltro === "ambas" || c.corretor === prodFiltro);
+    const media = corr.length ? Math.round(corr.reduce((t, c) => t + c.nota / c.max, 0) / corr.length * 100) : null;
+    const crit = {};
+    corr.forEach(c => (c.criterios || []).forEach(k => { const x = crit[k.nome] = crit[k.nome] || { nome: k.nome, soma: 0, n: 0 }; x.soma += k.pct; x.n++; }));
+    const criterios = Object.values(crit).map(x => ({ nome: x.nome, pct: Math.round(x.soma / x.n * 100) })).sort((a, b) => b.pct - a.pct);
+    const evolucao = corr.map(c => ({ data: c.data, valor: Math.round(c.nota / c.max * 100), rotulo: (c.corretor === "ia" ? "IA · " : "Professor · ") + c.titulo }));
+    const escritas = corr.filter(c => c.modalidade !== "oral").length, orais = corr.length - escritas;
+    const nProf = (p.correcoes || []).filter(c => c.corretor === "professor").length, nIA = (p.correcoes || []).filter(c => c.corretor === "ia").length;
+    const lista = p.lista.filter(x => prodFiltro === "ambas" || (prodFiltro === "ia" ? x.corretor === "ia" : x.corretor !== "ia"));
+    const treinos = prodFiltro === "professor" ? [] : (p.treinoIA || []);
+    const chip = (v, rot, n) => `<button type="button" data-pf="${v}" aria-pressed="${prodFiltro === v}">${rot} <b>${n}</b></button>`;
     return `<section class="me-secao" id="producoes" style="--c:${COR.rosa}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Redações e produções</h2>
-      <p>${p.escritas} escrita(s) · ${p.orais} oral(is) · ${p.corrigidas} corrigida(s)${p.mediaPct != null ? ` · média ${p.mediaPct}%` : ""}</p></div><a class="me-btn cheio" style="--c:${COR.rosa}" href="producao-hub.html">Nova produção</a></div>
+      <p>${p.escritas} escrita(s) · ${p.orais} oral(is) · ${(p.correcoes || []).length} correção(ões) com nota${media != null ? ` · média ${media}%${prodFiltro !== "ambas" ? " (" + (prodFiltro === "ia" ? "IA" : "professores") + ")" : ""}` : ""}</p></div><a class="me-btn cheio" style="--c:${COR.rosa}" href="producao-hub.html">Nova produção</a></div>
+      <div class="me-filtros me-filtro-corretor" style="--c:${COR.rosa}" role="group" aria-label="Quem corrigiu">${chip("ambas", "Professores e IA", nProf + nIA)}${chip("professor", "👩‍🏫 Só professores", nProf)}${chip("ia", "🤖 Só IA", nIA)}</div>
       <div class="me-grade">
-        <div class="me-card c8"><h3>Evolução das notas <small>% da nota máxima</small></h3>${linha(p.evolucao, COR.rosa, { sufixo: "%", rotulo: "Notas das produções" })}</div>
-        <div class="me-card c4"><h3>Escrita × oral</h3>${donut([{ nome: "Escritas", valor: p.escritas, cor: COR.rosa, texto: p.escritas }, { nome: "Orais", valor: p.orais, cor: COR.anil, texto: p.orais }], p.total, "produções")}</div>
-        <div class="me-card c6"><h3>Média por critério <small>nas correções devolvidas</small></h3>${barras(p.criterios.slice(0, 8).map(c => ({ nome: c.nome, pct: c.pct })))}</div>
-        <div class="me-card c6"><h3>Suas produções e correções</h3><div class="me-lista" style="max-height:420px;overflow:auto;">${p.lista.slice(0, 40).map(x => `<a class="me-item" style="--c:${ESTADO_COR[x.estado.estado] || COR.azul}" href="minha-correcao.html?producao=${esc(x.id)}">
-          <span class="marca">${x.modalidade === "oral" ? "🎙️" : "✍️"}</span><span class="txt"><b>${esc(x.titulo)}</b><small>${fmtData(x.data)}${x.tache ? " · " + esc(TAREFA[x.tache] || x.tache) : ""} · ${esc(x.estado.rotulo)}${x.anotacoes ? " · " + x.anotacoes + " comentário(s)" : ""}</small></span>
-          ${x.nota != null ? `<span class="me-pill">${x.nota}/${x.notaMaxima}</span>` : `<span class="me-pill">${esc(x.estado.rotulo)}</span>`}</a>`).join("")}</div></div>
-        ${p.treinoIA.length ? `<div class="me-card c12"><h3>Treinos corrigidos pela IA <small>Ambiente de Produção</small></h3><div class="me-lista" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${p.treinoIA.slice(0, 12).map(x => `<div class="me-item" style="--c:${COR.teal}">
-          <span class="marca">🤖</span><span class="txt"><b>${esc(String(x.sujet || "").slice(0, 70))}</b><small>${fmtData(x.data)} · ${esc(TAREFA[x.tache] || x.tache || "")}</small></span><span class="me-pill">${x.nota}/${x.escala}</span></div>`).join("")}</div></div>` : ""}
+        <div class="me-card c8"><h3>Evolução das notas <small>% da nota máxima</small></h3>${linha(evolucao, COR.rosa, { sufixo: "%", rotulo: "Notas das produções" })}</div>
+        <div class="me-card c4"><h3>Escrita × oral <small>corrigidas</small></h3>${donut([{ nome: "Escritas", valor: escritas, cor: COR.rosa, texto: escritas }, { nome: "Orais", valor: orais, cor: COR.anil, texto: orais }], corr.length, "correções")}</div>
+        <div class="me-card c6"><h3>Média por critério <small>${prodFiltro === "ia" ? "nas correções da IA" : prodFiltro === "professor" ? "nas correções dos professores" : "professores e IA"}</small></h3>${criterios.length ? barras(criterios.slice(0, 8).map(c => ({ nome: c.nome, pct: c.pct }))) : '<div class="me-vazio">Ainda sem critérios neste filtro.</div>'}</div>
+        <div class="me-card c6"><h3>Suas produções e correções</h3>${lista.length ? `<div class="me-lista" style="max-height:420px;overflow:auto;">${lista.slice(0, 40).map(x => `<a class="me-item" style="--c:${ESTADO_COR[x.estado.estado] || COR.azul}" href="minha-correcao.html?producao=${esc(x.id)}">
+          <span class="marca">${x.modalidade === "oral" ? "🎙️" : "✍️"}</span><span class="txt"><b>${esc(x.titulo)}</b><small>${fmtData(x.data)}${x.tache ? " · " + esc(TAREFA[x.tache] || x.tache) : ""} · ${esc(x.estado.rotulo)}${x.corretor === "ia" ? " · IA" : ""}${x.anotacoes ? " · " + x.anotacoes + " comentário(s)" : ""}</small></span>
+          ${x.nota != null ? `<span class="me-pill">${x.nota}/${x.notaMaxima}</span>` : `<span class="me-pill">${esc(x.estado.rotulo)}</span>`}</a>`).join("")}</div>` : '<div class="me-vazio">Nenhuma produção neste filtro.</div>'}</div>
+        ${treinos.length ? `<div class="me-card c12"><h3>Treinos corrigidos pela IA <small>Ambiente de Produção · clique para ver a correção</small></h3><div class="me-lista" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${treinos.slice(0, 24).map(x => `<a class="me-item" style="--c:${COR.teal}" href="minha-correcao.html?treino=${esc(x.id)}">
+          <span class="marca">🤖</span><span class="txt"><b>${esc(String(x.sujet || "").slice(0, 70))}</b><small>${fmtData(x.data)} · ${esc(TAREFA[x.tache] || x.tache || "")} · ver correção →</small></span><span class="me-pill">${x.nota}/${x.escala}</span></a>`).join("")}</div></div>` : ""}
       </div></section>`;
   }
   function secSimulados(d) {
@@ -383,7 +400,10 @@
     // filtros do caderno de erros
     raiz.addEventListener("click", ev => {
       const f = ev.target.closest("[data-ef]");
-      if (f) { errosEstado.filtro = f.dataset.ef; desenharErros(d); }
+      if (f) { errosEstado.filtro = f.dataset.ef; errosEstado.limite = ERROS_POR_VEZ; desenharErros(d); }
+      if (ev.target.closest("[data-mais-erros]")) { errosEstado.limite += ERROS_POR_VEZ; desenharErros(d); }
+      const pf = ev.target.closest("[data-pf]");
+      if (pf) { prodFiltro = pf.dataset.pf; const sec = document.getElementById("producoes"); if (sec) sec.outerHTML = secProducoes(d); requestAnimationFrame(() => raiz.querySelectorAll("#producoes [data-w]").forEach(b => { b.style.width = b.dataset.w + "%"; })); }
       // Caderno de Revisão: tirar uma questão salva / um item do caderno das produções
       const rq = ev.target.closest("[data-rm-caderno]");
       if (rq) {
@@ -424,7 +444,7 @@
       if (r.ok && out.deverId) { location.href = "dever.html?id=" + encodeURIComponent(out.deverId); return; }
       b.disabled = false; b.textContent = out.msg || "Não foi possível adiantar";
     });
-    raiz.addEventListener("change", ev => { if (ev.target.matches("[data-em]")) { errosEstado.materia = ev.target.value; desenharErros(d); } });
+    raiz.addEventListener("change", ev => { if (ev.target.matches("[data-em]")) { errosEstado.materia = ev.target.value; errosEstado.limite = ERROS_POR_VEZ; desenharErros(d); } });
     // explicação detalhada (pegadinhas e dicas) ao abrir um erro
     raiz.addEventListener("toggle", ev => {
       const det = ev.target.closest && ev.target.closest("[data-explicar]");

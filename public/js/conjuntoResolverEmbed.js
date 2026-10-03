@@ -215,10 +215,10 @@ const ConjuntoResolverEmbed = (() => {
       const res = await fetch(`/api/questoes/sessoes/${sessao._id}/finalizar`, { method: 'POST', headers: authHeaders() });
       const data = await res.json();
       if (res.status === 400 && data.questoesPendentes) {
-        alert(`Ainda há ${data.questoesPendentes.length} questão(ões) sem resposta. Você será levado até a primeira pendente.`);
+        (await Dialogo.aviso(`Ainda há ${data.questoesPendentes.length} questão(ões) sem resposta. Você será levado até a primeira pendente.`));
         return irParaQuestao(data.questoesPendentes[0]);
       }
-      if (!res.ok) return alert(data.msg || 'Erro ao enviar o conjunto.');
+      if (!res.ok) return (await Dialogo.aviso(data.msg || 'Erro ao enviar o conjunto.'));
       clearInterval(timerInterval);
       renderResultado(data);
       if (onFinalizado) onFinalizado(data);

@@ -89,6 +89,8 @@ const CarnetProducao = mongoose.model("CarnetProducao", new Schema({
 
 const TemaMesTCF = mongoose.model("TemaMesTCF", new Schema({
   mes: { type: String, index: true },
+  // « Em Destaque »: curso/perfil do Ambiente (TCF, DELF-B1…) a que o destaque vale; sem perfil = TCF (antigos)
+  perfil: { type: String, default: null },
   tache: { type: String, enum: TACHES },
   sujetId: String,
   titre: String,
@@ -233,6 +235,9 @@ const SalaAoVivoTCF = mongoose.model("SalaAoVivoTCF", new Schema({
   texto: { type: String, default: "" },
   transcricao: { type: String, default: "" },
   mensagens: [{ de: String, texto: String, data: { type: Date, default: Date.now }, _id: false }],
+  // Correção por cores ao vivo: o professor grifa trechos do texto (ou da transcrição) do aluno.
+  // A marca se ancora no trecho + qual ocorrência dele no texto, para seguir o texto enquanto o aluno escreve.
+  marcas: [{ _id: false, id: String, trecho: String, ocorrencia: Number, categoria: String, nome: String, cor: String, comentario: String, por: String, data: { type: Date, default: Date.now } }],
   inicio: { type: Date, default: Date.now },
   atualizadoEm: { type: Date, default: Date.now }
 }));
@@ -247,7 +252,20 @@ const TemasAlunoTCF = mongoose.model("TemasAlunoTCF", new Schema({
   atualizadoEm: { type: Date, default: Date.now }
 }).index({ alunoId: 1, perfil: 1 }, { unique: true }));
 
+// Histórico das liberações de temas a um aluno (Sistema de Correção › Temas dos alunos): cada envio
+// guarda os temas designados juntos, para poder retirar exatamente aquele envio depois.
+const LiberacaoTemasTCF = mongoose.model("LiberacaoTemasTCF", new Schema({
+  alunoId: { type: Schema.Types.ObjectId, ref: "User", index: true },
+  perfil: String,
+  sujets: [{ _id: false, tache: String, id: String }],
+  porId: { type: Schema.Types.ObjectId, ref: "User" },
+  porNome: String,
+  criadoEm: { type: Date, default: Date.now },
+  retiradoEm: { type: Date, default: null }
+}));
+
 module.exports = {
+  LiberacaoTemasTCF,
   TemasAlunoTCF,
   DossierSujetTCF, SalaAoVivoTCF,
   TACHES, ModeleIA, EpreuveTCF, SessaoTCF, DevoirTCF, CarnetProducao, TemaMesTCF, PostBlogTCF, AvisoTCF,

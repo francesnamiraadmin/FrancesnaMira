@@ -117,16 +117,16 @@ function initMeusPersonalizados() {
     if (!btn) return;
     const item = btn.closest('.conjunto-card');
     const nome = item.querySelector('h3').textContent;
-    if (!confirm(`Excluir o conjunto personalizado "${nome}"? Isso não pode ser desfeito.`)) return;
+    if (!(await Dialogo.confirmar(`Excluir o conjunto personalizado "${nome}"? Isso não pode ser desfeito.`))) return;
     btn.disabled = true;
     try {
       const res = await fetch(`/api/questoes/conjuntos/${btn.dataset.excluirPersonalizado}`, { method: 'DELETE', headers: authHeaders() });
-      if (!res.ok) { btn.disabled = false; alert('Não foi possível excluir este conjunto.'); return; }
+      if (!res.ok) { btn.disabled = false; (await Dialogo.aviso('Não foi possível excluir este conjunto.')); return; }
       item.remove();
       if (!document.getElementById('meusPersonalizadosLista').children.length) carregarMeusPersonalizados();
     } catch (err) {
       btn.disabled = false;
-      alert('Erro ao conectar ao servidor.');
+      (await Dialogo.aviso('Erro ao conectar ao servidor.'));
     }
   });
   carregarMeusPersonalizados();

@@ -255,8 +255,8 @@
         if (btnEspera) {
           btnEspera.addEventListener("click", async ev => {
             ev.preventDefault();
-            const nome = document.getElementById("nome").value.trim() || prompt("Seu nome:");
-            const email = document.getElementById("email").value.trim() || prompt("Seu e-mail:");
+            const nome = document.getElementById("nome").value.trim() || (await Dialogo.pedir("Seu nome:"));
+            const email = document.getElementById("email").value.trim() || (await Dialogo.pedir("Seu e-mail:"));
             if (!nome || !email) return;
             btnEspera.disabled = true;
             btnEspera.textContent = "Enviando…";

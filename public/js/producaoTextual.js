@@ -252,7 +252,7 @@
     if (n < t.limitePalavrasMin) return erro(`Seu texto tem ${n} palavras; o mínimo pedido é ${t.limitePalavrasMin}.`);
     if (n > t.limitePalavrasMax) return erro(`Seu texto tem ${n} palavras; o máximo é ${t.limitePalavrasMax}. Corte um pouco antes de enviar.`);
     const modo = document.querySelector('input[name="modo"]:checked')?.value || "professor";
-    if (!confirm(`Enviar sua redação para correção ${modo === "ia" ? "pela IA" : "por um professor"}? Isso usa ${t.creditosNecessarios || 1} crédito.`)) return;
+    if (!(await Dialogo.confirmar(`Enviar sua redação para correção ${modo === "ia" ? "pela IA" : "por um professor"}? Isso usa ${t.creditosNecessarios || 1} crédito.`))) return;
     $("enviarBtn").disabled = true;
     const form = new FormData();
     form.append("temaId", t._id);
