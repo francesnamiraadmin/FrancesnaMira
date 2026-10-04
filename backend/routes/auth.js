@@ -119,13 +119,13 @@ async function expirarSeVencido(user) {
 }
 
 // Usuário com algum plano de curso ativo (novo modelo por curso, ou o antigo singular
-// pra quem ainda não migrou) tem a área do aluno como página inicial; sem nenhum plano
+// pra quem ainda não migrou) tem o Meu Espaço como página inicial; sem nenhum plano
 // ativo, continua caindo no index — recalculado a cada login e a cada restauração de
 // sessão (refresh), então um plano vencido reverte automaticamente pro index na próxima
 // vez que a sessão for validada.
 function destinoInicial(user) {
   const temPlanoNovo = (user.planos || []).some(p => p.ativo || p.packPrestige?.ativo);
-  return (temPlanoNovo || user.plano?.ativo) ? "minha-conta.html" : "index.html";
+  return (temPlanoNovo || user.plano?.ativo) ? "meu-espaco.html" : "index.html";
 }
 
 async function emitirRefreshToken(user) {

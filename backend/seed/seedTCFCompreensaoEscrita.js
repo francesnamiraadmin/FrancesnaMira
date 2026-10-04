@@ -1,10 +1,13 @@
 // =====================================================================
-// SEED — 8 conjuntos oficiais de Compréhension Écrite (TCF Canada), a partir
+// SEED — conjuntos oficiais de Compréhension Écrite (TCF Canada), a partir
 // de "TCF_Canada_CE_ProvaN_Correcao_Comentada.pdf" (transcrição em
-// backend/seed/dadosTCFProvas/provaN.json). Cada questão tem o texto de
+// backend/seed/dadosTCFProvas/provaN.json — uma prova por arquivo; hoje as
+// Provas 1 a 8, 10, 12, 13 e 16 a 25). Cada questão tem o texto de
 // apoio (materia "ce", tipo "multipla" — mesmo padrão de
-// public/js/questoes2.js), 4 alternativas e a explicação da correção
-// comentada. Conjunto 01 = Prova 1, ..., Conjunto 08 = Prova 8.
+// public/js/questoes2.js), 4 alternativas, a explicação da correção
+// comentada e o nível (A1 a C2) da faixa da correção — o nível fica na
+// questão (filtros, sorteio, estatísticas), não aparece para o aluno.
+// Conjunto NN = Prova N (ex.: « TCF Compréhension Écrite 10 » = Prova 10).
 //
 // Nomes com prefixo "TCF Compréhension Écrite NN" (sem o padrão "Conjunto
 // NN – ") de propósito, pra não colidir com a migração genérica de
@@ -24,8 +27,9 @@ const User = require("../models/user");
 const Questao = require("../models/questao");
 const Conjunto = require("../models/conjunto");
 
-const TOTAL_PROVAS = 8;
 const PASTA_DADOS = path.join(__dirname, "dadosTCFProvas");
+// todas as provas com arquivo provaN.json, em ordem
+const PROVAS = fs.readdirSync(PASTA_DADOS).map(f => /^prova(\d+)\.json$/.exec(f)).filter(Boolean).map(m => Number(m[1])).sort((a, b) => a - b);
 
 function carregarProva(n) {
   const arquivo = path.join(PASTA_DADOS, `prova${n}.json`);
@@ -44,7 +48,7 @@ async function main() {
 
   let questoesCriadas = 0, questoesAtualizadas = 0, conjuntosCriados = 0, conjuntosPulados = 0;
 
-  for (let n = 1; n <= TOTAL_PROVAS; n++) {
+  for (const n of PROVAS) {
     const numeroFormatado = String(n).padStart(2, "0");
     const nomeConjunto = `TCF Compréhension Écrite ${numeroFormatado}`;
 

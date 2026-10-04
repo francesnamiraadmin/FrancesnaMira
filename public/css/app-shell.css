@@ -470,3 +470,7 @@ body.tem-timer-ativo { padding-bottom: 104px; transition: padding-bottom 0.25s e
 /* menu do plano: um item por plano ativo, com a validade */
 .app-dropdown a.app-plano-item { display: flex; flex-direction: column; gap: 1px; }
 .app-dropdown a.app-plano-item small { font-size: .74rem; color: var(--text-muted); font-weight: 500; }
+
+/* Página embutida em outra (?embed=1, ver o início de js/appShell.js): só o conteúdo */
+.app-embutida #app-navbar, .app-embutida body > footer, .app-embutida footer.site-footer, .app-embutida #themeToggleBtn, .app-embutida .estudo-timer-bar { display: none !important; }
+.app-embutida body { background: transparent !important; padding-top: 0 !important; padding-bottom: 0 !important; min-height: 0 !important; }

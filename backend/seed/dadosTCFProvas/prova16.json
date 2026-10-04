@@ -1,0 +1,548 @@
+[
+ {
+  "n": 1,
+  "nivel": "A1",
+  "texto": "Bonjour Anna. Est-ce que vous pouvez vous occuper de Jérôme après l'école vendredi ? Pour le repas, j'ai fait les courses et un gâteau. Il doit se coucher avant 21h. Je rentrerai vers 23h. Merci beaucoup !",
+  "pergunta": "Que demande Agnès à Anna ?",
+  "alternativas": [
+   "D'aller au supermarché.",
+   "De garder son fils.",
+   "De préparer un dessert.",
+   "À de rester dormir."
+  ],
+  "correta": 1,
+  "explicacao": "« vous occuper de Jérôme après l'école » = tomar conta do filho. Ela já fez as compras e o bolo (contra A e C): esses cuidados são o contexto, não o pedido."
+ },
+ {
+  "n": 2,
+  "nivel": "A1",
+  "texto": "Restaurant La bonne fourchette. Formule légère : Salade au choix 9€. Formule express : Plat du jour 12,50€. Formule déjeuner 16€ (1/2 eau minérale et café compris) : Entrée + plat du jour / Plat du jour + dessert. Formule plaisir 20€ : Entrée + plat du jour + dessert.",
+  "pergunta": "Combien coûte la formule avec boisson ?",
+  "alternativas": [
+   "9 euros.",
+   "12,50 euros.",
+   "16 euros.",
+   "20 euros."
+  ],
+  "correta": 2,
+  "explicacao": "Só uma fórmula inclui bebida: a Formule déjeuner a 16€, « 1/2 eau minérale et café compris ». A palavra-chave é « compris »."
+ },
+ {
+  "n": 3,
+  "nivel": "A1",
+  "texto": "Vous souhaitez améliorer votre niveau en langue étrangère ? Le Conseil de l'Europe offre à ses salariés des formations dans les langues des pays de l'Union européenne. Inscrivez-vous dès maintenant pour les cours d'Italien et d'allemand.",
+  "pergunta": "Qu'est-ce que le conseil de l'Europe propose à ses employés ?",
+  "alternativas": [
+   "Des cours gratuits.",
+   "Des postes à l'étranger.",
+   "Des stages en Italie.",
+   "Des voyages en Europe."
+  ],
+  "correta": 0,
+  "explicacao": "« offre à ses salariés des formations » = cursos oferecidos gratuitamente. As demais opções (postos, estágios, viagens) não aparecem no texto."
+ },
+ {
+  "n": 4,
+  "nivel": "A1",
+  "texto": "La comédienne franco-suisse Pascale Rocard part tourner un film à Paris. Actrice et réalisatrice à succès, elle est aussi peintre et photographe. Mère de deux enfants, elle vit à Verbier en Suisse.",
+  "pergunta": "Que va faire Pascale Rocard ?",
+  "alternativas": [
+   "Avoir un bébé.",
+   "Déménager en France.",
+   "Jouer au cinéma.",
+   "Organiser une exposition."
+  ],
+  "correta": 2,
+  "explicacao": "« part tourner un film » = vai atuar no cinema. O resto descreve quem ela é (pintora, mãe de dois filhos), não o que vai fazer agora."
+ },
+ {
+  "n": 5,
+  "nivel": "A2",
+  "texto": "Une société de production RECHERCHE pour faire de la FIGURATION dans un film sur le thème parent/enfants, de jeunes mères confrontées à l'éducation de leurs enfants.",
+  "pergunta": "Que recherche la société de production ?",
+  "alternativas": [
+   "De jeunes enfants.",
+   "Des femmes et des enfants.",
+   "De jeunes mamans.",
+   "Des parents avec leurs enfants."
+  ],
+  "correta": 2,
+  "explicacao": "« de jeunes mères » é reformulado exatamente por « jeunes mamans ». Cuidado com D: o filme é sobre a relação pais/filhos, mas quem se procura são as mães."
+ },
+ {
+  "n": 6,
+  "nivel": "A2",
+  "texto": "1 PLACE. FILM : LES 3 FRÈRES. SÉANCE : 20 h 30. TARIF ÉTUDIANT 6.00€.",
+  "pergunta": "Où peut-on vous donner ce ticket ?",
+  "alternativas": [
+   "À la caisse d'un cinéma.",
+   "À l'accueil d'un opéra.",
+   "À l'entrée d'un musée.",
+   "Au guichet d'un théâtre."
+  ],
+  "correta": 0,
+  "explicacao": "« FILM » + « SÉANCE » são as palavras de cinema. O ingresso de um filme se retira na bilheteria do cinema, não em ópera, museu ou teatro."
+ },
+ {
+  "n": 7,
+  "nivel": "A2",
+  "texto": "Chers parents, Les élèves de l'école du Centre sont heureux de vous inviter à voir la pièce « Vive les vacances » qu'ils ont écrite et qu'ils joueront pour vous le vendredi 9 mars à 19 heures.",
+  "pergunta": "Qu'est-ce qu'on propose aux parents ?",
+  "alternativas": [
+   "De préparer un voyage.",
+   "De regarder un spectacle.",
+   "De venir à une réunion.",
+   "De visiter une classe."
+  ],
+  "correta": 1,
+  "explicacao": "« voir la pièce… qu'ils joueront » = assistir a um espetáculo. « Vive les vacances » é o título da peça, não uma proposta de viagem (armadilha A)."
+ },
+ {
+  "n": 8,
+  "nivel": "A2",
+  "texto": "Chers professeurs. Chers étudiants. Venez rencontrer les nouveaux étudiants de la Semaine ! Ce mardi, de 8 h 30 à 10 h 30. Rendez-vous salle « Les Mimosas ». J. Lebon, directrice, École de langues ABC.",
+  "pergunta": "Pourquoi Madame Lebon écrit-elle cette annonce ?",
+  "alternativas": [
+   "Pour changer un horaire.",
+   "Pour organiser une fête.",
+   "Pour présenter des élèves.",
+   "Pour proposer une sortie."
+  ],
+  "correta": 2,
+  "explicacao": "« Venez rencontrer les nouveaux étudiants » = apresentar os novos alunos. Não há mudança de horário, festa nem passeio."
+ },
+ {
+  "n": 9,
+  "nivel": "A2",
+  "texto": "LA CUISINE DE JEAN-Émile. Jean-Émile Nodier, chef depuis 10 ans, propose DES COURS DE CUISINE A DOMICILE pour une à quatre personnes. Apprenez à cuisiner des recettes de qualité. Pour plus de renseignements : http : www.lacuisinedejeanemile.fr",
+  "pergunta": "Qu'est-ce que cette annonce propose ?",
+  "alternativas": [
+   "D'apprendre à préparer des plats chez soi.",
+   "De devenir un chef cuisinier professionnel.",
+   "De réaliser des repas pour de grands groupes.",
+   "De trouver de bonnes recettes sur internet."
+  ],
+  "correta": 0,
+  "explicacao": "« cours de cuisine a domicile » + « apprenez à cuisiner » = aprender a preparar pratos em casa. É para 1 a 4 pessoas (contra C, « grands groupes ») e não forma chefs profissionais (B)."
+ },
+ {
+  "n": 10,
+  "nivel": "A2",
+  "texto": "Madame, Monsieur, En raison de travaux rue Paul Vaillant, l'accès à la piscine municipale se fera côté boulevard Camélines, du 15 au 25 mars inclus. Veuillez nous excuser pour la gêne occasionnée. Le service municipal.",
+  "pergunta": "Quelle information est donnée au sujet de la piscine ?",
+  "alternativas": [
+   "Elle sera fermée au mois de mars.",
+   "Il y aura des travaux à l'intérieur.",
+   "L'entrée se fera par une autre porte.",
+   "Le service municipal réparera les lieux."
+  ],
+  "correta": 2,
+  "explicacao": "« l'accès… se fera côté boulevard Camélines » = a entrada muda de lado. A piscina não fecha (contra A) e as obras são na rua, não no interior (contra B)."
+ },
+ {
+  "n": 11,
+  "nivel": "A2",
+  "texto": "Cher Jacques, Ce petit mot pour vous dire que Natacha et moi-même allons être dans la région de Toulouse au mois de juillet. Nous voudrions vous rendre visite à cette occasion. Merci de nous dire si cela est possible. Très sincèrement, Ahmed",
+  "pergunta": "Pourquoi Ahmed écrit-il à Jacques ?",
+  "alternativas": [
+   "Pour lui communiquer la date de ses fiançailles.",
+   "Pour lui proposer de passer le voir avec son amie.",
+   "Pour lui annoncer son déménagement à Toulouse.",
+   "Pour lui demander de l'accompagner en voyage."
+  ],
+  "correta": 1,
+  "explicacao": "« Nous voudrions vous rendre visite » (ele + Natacha) = propor uma visita com a companheira. Toulouse é só onde eles estarão de passagem, não uma mudança (contra C)."
+ },
+ {
+  "n": 12,
+  "nivel": "B1",
+  "texto": "La semaine dernière, les écoles de commerce ont organisé leur traditionnel rendez-vous « Avenir jeunesse ». Comme tout les ans, son objectif a été de favoriser la rencontre entre les entreprises qui recrutent et les élèves. Ces derniers ont pu se renseigner sur les différents secteurs d'activité et déposer leur candidature pour les postes qui les intéressent. Des ateliers conseil étaient animés par des professionnels.",
+  "pergunta": "Quel était le but de l'événement « Avenir jeunesse » ?",
+  "alternativas": [
+   "Accueillir les étudiants étrangers.",
+   "Faciliter la recherche d'emploi.",
+   "Préparer la rentrée universitaire.",
+   "Présenter de nouvelles formations."
+  ],
+  "correta": 1,
+  "explicacao": "« favoriser la rencontre entre les entreprises qui recrutent et les élèves » + « déposer leur candidature pour les postes » = ajudar na busca de emprego."
+ },
+ {
+  "n": 13,
+  "nivel": "B1",
+  "texto": "Plusieurs types de cours de natation sont proposés dans les piscines de la ville pour enfants et adultes toute l'année sauf pendant les vacances scolaires. Il n'y a pas besoin de réserver. Les tarifs dépendent des activités mais ils comprennent systématiquement le coût de l'entrée à la piscine et au sauna. Après les cours, vous pourrez nager librement.",
+  "pergunta": "Qu'est-ce que l'on apprend sur les cours de natation proposés ?",
+  "alternativas": [
+   "Ils doivent être réservés à l'avance.",
+   "Ils donnent accès au sauna.",
+   "Ils ont lieu pendant les vacances.",
+   "Ils sont gratuits pour les enfants."
+  ],
+  "correta": 1,
+  "explicacao": "« ils comprennent systématiquement le coût de l'entrée à la piscine et au sauna » = dão acesso à sauna. O texto nega A (« pas besoin de réserver ») e C (« sauf pendant les vacances »)."
+ },
+ {
+  "n": 14,
+  "nivel": "B1",
+  "texto": "Monsieur Lejeune. Je n'ai pas pu dormir de la nuit à cause de la fête que vous avez organisée dans votre appartement. Pour le confort de tous, je vous demande d'être plus discret à partir d'une certaine heure. Mme Quincampoix, La concierge",
+  "pergunta": "Que doit faire M. Lejeune pour sa prochaine fête ?",
+  "alternativas": [
+   "Faire plus attention au bruit.",
+   "Informer Mme Quincampoix.",
+   "Inviter les voisins de l'étage.",
+   "Recevoir ses invités plus tôt."
+  ],
+  "correta": 0,
+  "explicacao": "« je vous demande d'être plus discret » após uma noite sem dormir « à cause de la fête » = prestar mais atenção ao barulho."
+ },
+ {
+  "n": 15,
+  "nivel": "B1",
+  "texto": "Amélie, Pour le concert ce soir, on se retrouve à 19h30 devant le bar rue Daunou. Il y a un grand restaurant à côté, tout près du théâtre de l'Odéon. Le concert commence à 20 h 30. Sarah",
+  "pergunta": "Que vont faire les deux femmes ce soir ?",
+  "alternativas": [
+   "Aller dans un bar.",
+   "Assister à un spectacle.",
+   "Dîner au restaurant.",
+   "Voir une pièce de théâtre."
+  ],
+  "correta": 1,
+  "explicacao": "« Pour le concert ce soir » é o objetivo real: um concerto é um espetáculo. Bar, restaurante e teatro do Odéon são só referências de ponto de encontro (armadilhas A, C, D)."
+ },
+ {
+  "n": 16,
+  "nivel": "B1",
+  "texto": "Pendant tout l'été, votre supermarché organise un concours gratuit pour gagner des milliers d'artistes : livres, places de spectacles pour enfant, diners au restaurant, entrées pour activités en plein air. Complétez votre bulletin et envoyez-le à : special.etc@monsupermarche.com",
+  "pergunta": "Qu'est-ce que ce supermarché propose à ses clients ?",
+  "alternativas": [
+   "Des promotions.",
+   "Des vacances.",
+   "Un jeu.",
+   "Une fête."
+  ],
+  "correta": 2,
+  "explicacao": "« un concours gratuit pour gagner… » + « complétez votre bulletin » = um jogo/sorteio. Não são promoções (preços), nem férias, nem uma festa."
+ },
+ {
+  "n": 17,
+  "nivel": "B1",
+  "texto": "Face à la crise qui touche le secteur automobile depuis plus de deux ans, nous ne pourrons malheureusement pas continuer à employer l'ensemble des techniciens. La direction a décidé de renouveler seulement 80% des contrats. Pour les techniciens licenciés, la procédure débutera le 1er juin prochain et se poursuivra sur l'ensemble de l'année en cours. Les personnels concernés seront informés individuellement par courrier recommandé. Le service de ressources humaines",
+  "pergunta": "Qu'annonce cette lettre d'information ?",
+  "alternativas": [
+   "La délocalisation de l'entreprise.",
+   "La réduction des effectifs de l'entreprise.",
+   "La restructuration des postes de direction.",
+   "La suspension des contrats à durer déterminés."
+  ],
+  "correta": 1,
+  "explicacao": "« ne pourrons plus employer l'ensemble des techniciens » + « renouveler seulement 80% des contrats » + « techniciens licenciés » = corte de pessoal. Não há menção a deslocalização (A) nem à direção (C)."
+ },
+ {
+  "n": 18,
+  "nivel": "B2",
+  "texto": "Pipelettes, soyez fières de l'être ! D'après les psychologues, ce charmant défaut n'en est finalement pas un. S'il irrite parfois notre conjoint, le bavardage peut libérer les tensions et s'avérer aussi efficace qu'une thérapie. Papoter avec sa voisine de table, la gardienne de l'immeuble ou sa coiffeuse, parler de tout et de rien, du beau temps qui s'en va et des vacances qui sont loin, ou encore des dernières tendances de la mode, cela n'a l'air de rien, mais c'est essentiel ! Ces bavardages nous permettent de nous évader du quotidien et d'établir le contact avec les autres. D'autre part, quand les confidences se font plus sérieuses, formuler nos soucis ou nos contrariétés nous aide à les relativiser : cela soulage.",
+  "pergunta": "D'après ce texte, dans quelle mesure le bavardage est-il positif ?",
+  "alternativas": [
+   "Il encourage les initiatives.",
+   "Il favorise le rendement au travail.",
+   "Il permet d'être plus détendu.",
+   "Il rend les gens plus cultivés."
+  ],
+  "correta": 2,
+  "explicacao": "« libérer les tensions », « nous évader du quotidien », « cela soulage » = ficar mais relaxado. O texto não fala de produtividade (B) nem de cultura (D)."
+ },
+ {
+  "n": 19,
+  "nivel": "B2",
+  "texto": "Plus de peur que de mal pour ce petit garçon, près de Lorient, qui, dimanche soir mangeait une part de fromage. « Papa, le fromage, il est dur !!!... » Dimanche, Youenn, 4 ans, mange une portion individuelle de fromage dans la maison familiale. Ses parents, occupés dans la pièce d'à côté, l'entendent tousser. « Comme s'il voulait vomir », raconte Yann, son père. En fait, l'enfant est en train de recracher… un bout de plastique qui aurait pu l'étouffer.",
+  "pergunta": "Qu'est-il arrivé à YOUENN ?",
+  "alternativas": [
+   "Il a avalé un mauvais morceau de fromage.",
+   "Il a trouvé quelque chose dans son fromage.",
+   "Il est tombé malade en mangeant du fromage.",
+   "Il s'est fait mal aux dents avec le fromage."
+  ],
+  "correta": 1,
+  "explicacao": "« un bout de plastique qui aurait pu l'étouffer » = havia algo estranho no queijo. Ele não engoliu o queijo (A) nem ficou doente (C); « le fromage il est dur » era, na verdade, o plástico."
+ },
+ {
+  "n": 20,
+  "nivel": "B2",
+  "texto": "Laissez la voiture au garage ! Que vous soyez un abonné ou non au transport public, un particulier, une entreprise, un cycliste régulier ou occasionnel…, la municipalité met à votre disposition tous les moyens de profiter de la ville à vélo. Les vélos en libre- service, la location longue durée, les vélos-parcs sécurisés ou la location touristique, ces services s'intègre à l'offre Transroch. Ils sont un des modes de transport qui facilitent vos déplacements… Trente stations dans le centre de la ville et bientôt cinquante ! Renseignez-vous auprès de l'Espace Accueil pour savoir quelle offre vous correspond.",
+  "pergunta": "Quel est le but de l'offre Transroch ?",
+  "alternativas": [
+   "Découvrir les sites touristiques hors des sentiers battus.",
+   "Diversifier l'offre d'abonnement aux transports en commun.",
+   "Favoriser la mobilité urbaine grâce aux cycles non motorisés.",
+   "Promouvoir les énergies propres respectant l'environnement."
+  ],
+  "correta": 2,
+  "explicacao": "« profiter de la ville à vélo » + serviços de bicicleta que « facilitent vos déplacements » = promover a mobilidade urbana com bicicletas (ciclos não motorizados). O foco é o deslocamento, não o turismo (A) nem o meio ambiente (D)."
+ },
+ {
+  "n": 21,
+  "nivel": "B2",
+  "texto": "Tony Schlink, l'homme qui aime la laine ! L'histoire ne sera sans doute jamais si ce généticien, enfant, a été traumatisé par le port de vêtements trop petits. Tristement rétrécis après un lavage. Devenu depuis chercheur, il vient d'identifier un gène du mouton responsable de la modification des fibres de laine. C'est une caractéristique qui peut être modifiée en sélectionnant les animaux lors de la reproduction, permettant ainsi aux éleveurs d'identifier, puis de sélectionner les moutons qui produisent naturellement une laine enfin susceptible de supporter le lavage en machine.",
+  "pergunta": "Après quelle découverte le chercheur Tony Schlink est-il devenu célèbre ?",
+  "alternativas": [
+   "Il a découvert une nouvelle race de mouton.",
+   "Il a perfectionné une machine à laver la laine.",
+   "Il a trouvé les causes du rétrécissement de la laine.",
+   "Il a identifié une nouvelle façon de produire de la laine."
+  ],
+  "correta": 2,
+  "explicacao": "« identifier un gène du mouton responsable de la modification des fibres de laine » = achou a causa do encolhimento. Ele não criou uma raça (A) nem uma máquina (B); a seleção genética é consequência, não a descoberta em si."
+ },
+ {
+  "n": 22,
+  "nivel": "B2",
+  "texto": "On dit souvent que, pour avoir un bon moral et résister au stress, il faut une bonne condition physique. C'est encore plus vrai en période d'examen où il faut s'astreindre à quelques règles d'hygiène simples pour une bonne concentration. Le cerveau a besoin plus que jamais d'aliments et de nutriments variés pour être le plus efficace. Personnellement, j'ai arrêté les sandwiches et le café, et privilégié les œufs (vitamine B9), les céréales (vitamine B1), les viandes riches en Fer. L'iode avec les poissons et les Légumes verts.",
+  "pergunta": "Quelle conduite alimentaire a tenu cette étudiante pendant ses examens ?",
+  "alternativas": [
+   "Elle a consommé des sucres lents.",
+   "Elle a diversifié son alimentation.",
+   "Elle a préféré sauter certains repas.",
+   "Elle a privilégié les repas rapides."
+  ],
+  "correta": 1,
+  "explicacao": "« aliments et nutriments variés » + a lista (ovos, cereais, carnes, peixes, verduras) = alimentação variada. Ela abandonou os sanduíches e o café (contra D, « repas rapides »)."
+ },
+ {
+  "n": 23,
+  "nivel": "B2",
+  "texto": "ERASMUS, Le programme d'échange d'étudiants entre les universités européennes a du plomb dans l'aile. Au point qu'en France près de quatre mille bourses n'ont pas trouver preneur. Ce phénomène n'est pas spécifique à la France puisqu'une baisse de dix pour cent aurait été enregistrée dans une dizaine de pays. Toutes les études traduisent une absence de désir de mobilité chez les jeunes. Parmi les explications avancées, le coût mais surtout une préférence marquée pour les stages en entreprise. Voilà le grand concurrent d'Erasmus depuis quelques années : l'attention portée à l'insertion Professionnelle.",
+  "pergunta": "Qu'explique le texte au sujet du programme Erasmus ?",
+  "alternativas": [
+   "Il est financé par des universités publiques.",
+   "Il est remplacé par un autre programme.",
+   "Il facilite l'accès au monde de l'entreprise.",
+   "Son succès auprès des étudiants se dégrade."
+  ],
+  "correta": 3,
+  "explicacao": "« a du plomb dans l'aile », bolsas sem candidatos, « une baisse de dix pour cent » = o sucesso está caindo. O concorrente são os estágios; Erasmus em si não dá acesso à empresa (contra C)."
+ },
+ {
+  "n": 24,
+  "nivel": "B2",
+  "texto": "« Le Capacabana », restaurant brésilien. C'est un grand espace bien insonorisé qui offre l'ambiance et les spécialités gastronomiques du brésil à des prix abordables. La décoration baroque est un des éléments qui permet de créer cette ambiance exotique et originale. Les musiciens, qui viennent directement du Brésil, se produisent ici devant un public toujours aussi nombreux et fidèle. Aussi faut-il réserver une table à l'avance pour éviter la file d'attente à l'entrée de l'établissement. On peut d'ailleurs s'étonner que l'endroit soit si populaire avec un accueil si éloigné de la convivialité latino.",
+  "pergunta": "Quelle critique est faite à ce restaurant ?",
+  "alternativas": [
+   "La salle a besoin d'une rénovation complète.",
+   "Le personnel manque de chaleur et d'amabilité.",
+   "Les artistes jouent trop fort pour le lieu.",
+   "Les tarifs sont élevés une cuisine ordinaire."
+  ],
+  "correta": 1,
+  "explicacao": "A única crítica está na última frase: « un accueil si éloigné de la convivialité latino » = atendimento frio. Tudo o mais é elogio (preços acessíveis, boa acústica, bons músicos)."
+ },
+ {
+  "n": 25,
+  "nivel": "B2",
+  "texto": "Localiser un boucher, trouver un hôtel, calculer son itinéraire, observer sa maison par satellite… les cartes fleurissent sur le web et les internautes y sont accros. Plus de 13 millions de Français consultant régulièrement des sites de localisation sur internet. Sans oublier le succès phénoménal des photos-satellite mises en ligne. Ces services gratuits pour les internautes cachent un véritable business. De grandes sociétés rémunèrent les sites de localisation pour être bien placées sur les cartes. C'est d'autant plus efficace que les utilisateurs ne perçoivent pas immédiatement ces liens sponsorisés comme une publicité, mais comme un service.",
+  "pergunta": "Qu'apprend-on sur les services de localisation sur Internet ?",
+  "alternativas": [
+   "Ce sont des réseaux de commerçants qui les ont créés.",
+   "Ils sont financés discrètement par des entreprises.",
+   "Les prestations qu'ils proposent sont payantes.",
+   "Leur maintenance est assurée par des bénévoles."
+  ],
+  "correta": 1,
+  "explicacao": "« De grandes sociétés rémunèrent les sites… » + os usuários não percebem esses « liens sponsorisés » = financiamento discreto por empresas. Os serviços são gratuitos para o internauta (contra C)."
+ },
+ {
+  "n": 26,
+  "nivel": "B2",
+  "texto": "À l'école de chiens guides d'aveugles de l'Ouest, nos amis à quatre pattes bénéficient depuis juin dernier de conditions d'apprentissage plus propices avec la création d'un parcours permettant de repérer les obstacles présents dans la vie quotidienne. L'association, forte d'une trentaine de salariés, procédé à la remise annuelle de 30 à 40 chiens guides d'aveugles et compte aujourd'hui sur une soixantaine de familles bénévoles pour prééduquer les chiens « C'est toujours insuffisant », estime Christine Vaillant, qui recherche de nouveaux maîtres, en maison ou en appartement, disponible un an minimum et très motivé. Les frais vétérinaires, alimentaires et matériels sont pris en charge par l'établissement.",
+  "pergunta": "De quoi se plaint Christine Vaillant ?",
+  "alternativas": [
+   "Du manque de salariés motivés.",
+   "Du manque de moyens financiers.",
+   "Du manque de chiens à former.",
+   "Du manque de familles d'accueil."
+  ],
+  "correta": 3,
+  "explicacao": "« C'est toujours insuffisant », dito ao « rechercher de nouveaux maîtres »/famílias voluntárias, = faltam famílias de acolhimento. Os salários e as despesas não são o problema."
+ },
+ {
+  "n": 27,
+  "nivel": "C1",
+  "texto": "Ce n'est pas tout de se prétendre festival vert et responsable. Encore faut-il le prouver. C'était le rôle, tout le week-end du festival de musique des Eurockéennes, de quatre enquêteurs missionnés par L'ONG Prioriterre et le bureau de conseil Atemia. « Il s'agit de savoir où le festival en est vraiment, ce qu'il fait bien, ce qu'il doit changer, ce qu'il ne fait pas encore », détaillait Raphaël Bouju, responsable environnement chez Atemia, les « Eurocks » sont souvent un moteur parmi les festivals français, il a donc peu à peu imposé les déplacements en train, le tri sélectif, les gobelets réutilisables.",
+  "pergunta": "Que cherche à mesurer cette enquête ?",
+  "alternativas": [
+   "La proportion de spectateurs écologistes.",
+   "La réelle dimension écologique du festival.",
+   "Le degré de popularité de ce festival en France.",
+   "L'impact négatif du festival sur l'environnement."
+  ],
+  "correta": 1,
+  "explicacao": "« savoir où le festival en est vraiment » em matéria verde = medir a real dimensão ecológica. Não se mede o público (A) nem a popularidade (C); o texto destaca o que já é feito de bom, não só o negativo (D)."
+ },
+ {
+  "n": 28,
+  "nivel": "C1",
+  "texto": "Les publicités vantant les vertus supposées des produits alimentaires sur la santé seront soumises à des règles strictes. Les allégations liées à la santé se multipliant et sont de nature à tromper le public, car des aliments sont présentés comme des antidotes. Ainsi, une marque de yaourts suggère les effets antibactériens de son produit en montrant un enfant qui remet à la bouche son gâteau tombé dans le sable. Ce spot a été interdit d'antenne. Il serait criminel de laisser croire que l'aliment immunise l'enfant alors qu'il vient d'un endroit qui pullule de bactéries.",
+  "pergunta": "Pourquoi une publicité pour le yaourt a-t-elle été interdite ?",
+  "alternativas": [
+   "L'image proposée par la publicité nuisait au fabricant.",
+   "Le produit vendu par la publicité était nocif pour la santé.",
+   "Le message véhiculé par la publicité était inacceptable.",
+   "L'usage du produit promu par la publicité était illicite."
+  ],
+  "correta": 2,
+  "explicacao": "« laisser croire que l'aliment immunise l'enfant » era enganoso = a mensagem era inaceitável. O problema não é o produto em si (contra B), mas a alegação falsa de saúde."
+ },
+ {
+  "n": 29,
+  "nivel": "C1",
+  "texto": "Depuis plus de deux siècles, les violons fabriqués par le célèbre artisan Antonio Stradivari sont réputés pour la supériorité de leur sonorité. Des spécialistes ont voulu le vérifier par une petite expérience ils ont demandé à des participants de fermer les yeux et d'écouter des musiciens jouer sur des violons, trois étaient modernes et trois avaient été fabriqués par Stradivari. Que les participants aient ou non une expérience dans le domaine musical, tous ont préféré la sonorité des premiers.",
+  "pergunta": "À quelle conclusion aboutit cette expérience ?",
+  "alternativas": [
+   "Ce sont les violons récents qui sont les plus estimés.",
+   "Il est difficile de maîtriser les violons anciens.",
+   "La qualité des violons évolue avec le temps.",
+   "Voir le violon modifier l'appréciation de l'auditeur."
+  ],
+  "correta": 0,
+  "explicacao": "De olhos fechados, « tous ont préféré la sonorité des premiers », isto é, dos violinos modernos citados primeiro. Logo, os recentes foram os mais apreciados — o oposto da fama dos Stradivari."
+ },
+ {
+  "n": 30,
+  "nivel": "C1",
+  "texto": "Trouver un logement dans une ville étudiante est un parcours du combattant pour un grand nombre d'inscrits dans l'enseignement supérieur, la barrière est parfois infranchissable. Non seulement les loyers sont élevés mais la sélection des candidats par les propriétaires est très dure, souvent basée sur le niveau de revenus des garants. Pour lever ce frein, la caution locative étudiante (CLE) vient d'être généralisée à l'ensemble du territoire national après avoir été expérimentée dans quatre régions pendant un an. Avec ce dispositif c'est l'Etat qui se porte garant du versement des loyers des étudiants en cas de non paiement.",
+  "pergunta": "Quel est le principal obstacle à l'accès au logement des étudiants selon cette analyse ?",
+  "alternativas": [
+   "La méfiance des propriétaires.",
+   "La rareté des offres de logement.",
+   "L'absence d'engagement de l'Etat.",
+   "Le montant de la caution exigée."
+  ],
+  "correta": 0,
+  "explicacao": "« la sélection des candidats par les propriétaires est très dure, souvent basée sur le niveau de revenus des garants » = desconfiança dos proprietários. É justamente esse « frein » que o Estado tenta remover (contra C)."
+ },
+ {
+  "n": 31,
+  "nivel": "C1",
+  "texto": "Ah ! Le bel été ! Par trente-cinq degrés à l'ombre, les enfants réclament le goûter après la baignade et coup de chance, Le vendeur de Beignets se profile à l'horizon. Résultat : visite aux urgences car les beignets à La crème avait passé la journée au soleil. Des histoires comme celle-là circulent dans toutes les associations de consommateurs. La direction générale de la répression des fraudes dresse tout de même un bilan encourageant. Peu d'endroits publics échappent aux vérifications et les escroqueries ont diminué. Mais tout de même, en matière d'hygiène le bon sens du consommateur doit prévaloir et lui permettre de prévenir tout incident.",
+  "pergunta": "Selon la direction générale de la répression des fraudes…",
+  "alternativas": [
+   "les problèmes liés à l'hygiène sont insolubles.",
+   "tout le monde doit dénoncer les tricheries.",
+   "la sagesse doit l'emporter sur la tentation.",
+   "l'honnêteté des vendeurs est indéniable."
+  ],
+  "correta": 2,
+  "explicacao": "« le bon sens du consommateur doit prévaloir et lui permettre de prévenir tout incident » = a prudência (sabedoria) deve prevalecer. Os problemas não são insolúveis (o balanço é encorajador, contra A)."
+ },
+ {
+  "n": 32,
+  "nivel": "C1",
+  "texto": "Désormais c'est soi, son plaisir et les relations avec son environnement qui comptent. Tel est le nouveau schéma de pensée des jeunes vis-à-vis de la société et de l'entreprise en particulier. Un jeune a appris à d'abord miser sur lui. Ce n'est qu'en accumulant des compétences et des expériences qu'il pense pouvoir tirer son épingle du jeu. L'entreprise peut espérer le séduire en lui proposant un vrai métier et une stratégie d'accroissement de ses compétences mais il sera de toute façon difficile de compter sur ça fidélité : le jour où vous ne lui proposez plus d'évoluer rapidement, il n'hésitera pas à vérifier si l'herbe n'est pas plus verte chez le voisin. Désormais il ne compte plus sur une entreprise pour mener sa carrière. Son objectif sera de développer ses compétences en multipliant ses expériences afin de se valoriser sur le marché de travail. Profitant de toutes les opportunités, il quittera une entreprise sans aucun remords.",
+  "pergunta": "Quel est le comportement des jeunes dans le monde de l'entreprise ?",
+  "alternativas": [
+   "Ils apprennent à être patients.",
+   "Ils évoluent selon l'ancienneté.",
+   "Ils saisissent toutes les occasions.",
+   "Ils tâchent de conserver leur emploi."
+  ],
+  "correta": 2,
+  "explicacao": "« Profitant de toutes les opportunités, il quittera une entreprise sans aucun remords » = aproveitam todas as ocasiões. Não são pacientes (A) nem buscam conservar o emprego (D)."
+ },
+ {
+  "n": 33,
+  "nivel": "C1",
+  "texto": "Dans le monde de l'entreprise, les jeunes et les seniors éprouvent des sentiments analogues d'éviction et de dévalorisation. Pourtant, des actions de mentorat, menées par des seniors pour guider les jeunes sur le marché du travail ou lors de la création de leur entreprise, existent depuis de nombreuses années. Plus étonnant, est apparu récemment le mentorat renversé, où les jeunes habitués aux outils numériques initient les seniors leur usage. Les seniors y gagnent de nouvelles compétences, et les jeunes élargissent leur réseau. En période de crise, cette coopération peut constituer un moyen de désamorcer les tensions sociales. Favoriser les échanges intergénérationnels, c'est contribuer à établir des relations où chacun prend conscience qu'il peut apporter quelque chose à l'autre.",
+  "pergunta": "Quel est l'intérêt des mentorats décrits ?",
+  "alternativas": [
+   "Créer de nouvelles sources d'emploi.",
+   "Éviter la solitude des personnes âgées.",
+   "Instaurer des rapports de réciprocité.",
+   "Répondre à l'allongement de la durée de vie."
+  ],
+  "correta": 2,
+  "explicacao": "« chacun prend conscience qu'il peut apporter quelque chose à l'autre » + o mentorat « renversé » (cada um ensina algo ao outro) = relações de reciprocidade. Não se trata de solidão (B) nem de longevidade (D)."
+ },
+ {
+  "n": 34,
+  "nivel": "C1",
+  "texto": "Une exposition de l'Institut d'Art Contemporain de Villeurbanne est consacrée à l'Américain Jimmie Durham et la Brésilienne Maria Thereza Alvez. Depuis vingt ans, ils parcourent, au fil de leurs déplacements, le territoire méditerranée et sont réunis au sein de cette exposition à la forme inédite. Le parcours se veut éloigné de tout didactisme, laissant assez d'espace au spectateur pour construire son propre récit autour d'une mer connue pour être le berceau fertile des civilisations. Dans un jeu de matières, de couleurs et d'objets, tous tangibles, Durham et Alvez tentent de décrypter une certaine pensée historique et mythologique notamment en déjouant les codes classiques utilisés dans les musées.",
+  "pergunta": "Qu'est-ce qui fait la singularité de cette exposition ?",
+  "alternativas": [
+   "La liberté accordée aux visiteurs.",
+   "La simplicité des moyens artistiques.",
+   "Le classicisme de sa présentation.",
+   "Le discours politique des plasticiens."
+  ],
+  "correta": 0,
+  "explicacao": "« éloigné de tout didactisme, laissant assez d'espace au spectateur pour construire son propre récit » = liberdade dada ao visitante. A mostra rompe justamente os códigos clássicos (contra C)."
+ },
+ {
+  "n": 35,
+  "nivel": "C1",
+  "texto": "Le discours écologique actuel est très factuel, « pratico-pratique », comme si on n'osait pas parler de cette beauté dont nous avons pourtant besoin pour nous épanouir. C'est peut-être l'une des raisons pour laquelle l'écologie politique ne rallie pas tant que ça. Si on n'est pas sensible à la terre, aux végétaux. On devient un technicien de l'écologie, on emploie un langage neutre et rassurant, fait d'« environnement » et de « développement durable ». Mais il faut pouvoir parler de la beauté spécifique de la nature qui nous enchante, qui nous fait vibrer. Nous avons besoin de nous nourrir de sa splendeur, de son mystère, et pas seulement de ses aspects matériels, pratiques, biologiques.",
+  "pergunta": "Selon l'intervenant, qu'est-ce qui caractérise le discours écologique actuel ?",
+  "alternativas": [
+   "Il apaise les tensions de la société.",
+   "Il insiste sur le point de vue matériel.",
+   "Il propose des programmes utopiques.",
+   "Il traite les problèmes liés aux sols."
+  ],
+  "correta": 1,
+  "explicacao": "« très factuel, pratico-pratique », « langage neutre », « seulement de ses aspects matériels, pratiques » = insiste no ponto de vista material. Falta-lhe justamente a beleza e o mistério da natureza."
+ },
+ {
+  "n": 36,
+  "nivel": "C1",
+  "texto": "On connait Cézanne surtout pour ses paysages, mais le Musée d'Orsay montre, pour la première fois, une partie méconnue de l'œuvre de l'artiste. On y croisera ainsi le visage de son épouse, seul motif autant étudié par le peintre que la montagne Sainte- Victoire. Au fil des versions, Hortense Fiquet devient l'objet d'une recherche plastique, de mise en scène et de géométrisation des formes. Mais Cézanne peut aussi avoir le pinceau cruel. Dès ses débuts, les figures de son père et de sa mère sont tourmentées. Lui-même se représente à 27 ans, patibulaire, et le regard injecté de sang. À la fin de sa vie, Cézanne choisit des anonymes du monde rural. Ses tableaux ne sont alors qu'une autre forme de paysage.",
+  "pergunta": "Que souligne cette exposition sur Paul Cézanne ?",
+  "alternativas": [
+   "L'influence de ses contemporains.",
+   "La singularité de ses portraits.",
+   "Son engouement pour la nature.",
+   "Son travail post-impressionniste."
+  ],
+  "correta": 1,
+  "explicacao": "A mostra revela « une partie méconnue » — os rostos (esposa, pais, autorretrato, anônimos): a singularidade dos retratos. Todo o texto opõe esses retratos aos conhecidos paisagens."
+ },
+ {
+  "n": 37,
+  "nivel": "C1",
+  "texto": "On connaissait les vélos en acier, en alliage d'aluminium, en carbone ou même en titane. On peut désormais y ajouter le bambou. Le principal avantage de ce matériau c'est qu'il est léger, sa résistance à la traction serait même sensiblement supérieure à celle de l'acier. Il offre aussi une bonne élasticité qui absorbe mieux les vibrations, un argument qui n'est pas à sous-estimer quand on ambitionne de s'attaquer aux pistes africaines et c'est précisément la vocation de ce projet de fabrication massive de bicyclettes en bambou à destination du continent africain. Pour le promoteur du projet, plus de 600 000 foyers pourraient être intéressés par ce produit dont le prix de vente est estimé à 55 dollars, un coût encore élevé pour le marché local.",
+  "pergunta": "Quelles caractéristiques de ce vélo intéressent les Africains ?",
+  "alternativas": [
+   "Sa longévité.",
+   "Sa rigidité.",
+   "Sa robustesse.",
+   "Son prix d'achat."
+  ],
+  "correta": 2,
+  "explicacao": "Para as « pistes africaines », o argumento é a « bonne élasticité qui absorbe mieux les vibrations » e a resistência superior à do aço = robustez. O preço, ao contrário, é « encore élevé » (contra D)."
+ },
+ {
+  "n": 38,
+  "nivel": "C1",
+  "texto": "NOVECENTO. D'Alessandro Baricco. Compagnie vertigo. Découvrez la vie de Lemon Novecento, un pianiste extraordinaire abandonné à sa naissance sur un paquebot qui fait la liaison entre l'Europe et l'Amérique. Il passera son existence à jouer pour les voyageurs se nourrissant de leurs récits et de sa musique. Sans trouver le courage de descendre à terre. Porté par l'écriture riche, fluide et musicale du texte de Baricco. Le comédien principal nous entraîne avec une étonnante facilite dans un extraordinaire voyage ou résonnent les notes de jazz. (…)",
+  "pergunta": "Quelle est, selon le texte, la qualité principale de ce spectacle ?",
+  "alternativas": [
+   "L'aisance de l'acteur qui tient le rôle principal.",
+   "La finesse de l'humour présent dans la pièce.",
+   "Le mystère qui entoure le personnage.",
+   "Le talent de l'ensemble des musiciens."
+  ],
+  "correta": 0,
+  "explicacao": "« Le comédien principal nous entraîne avec une étonnante facilité » = a desenvoltura do ator principal. Não se elogia o humor (B) nem um conjunto de músicos (D)."
+ },
+ {
+  "n": 39,
+  "nivel": "C1",
+  "texto": "Les entreprises dans les secteurs scientifiques, techniques et numériques ont un besoin crucial de se développer et d'embaucher, et redoublent notamment d'attention envers les femmes. Problème : les femmes, qui furent les premières à programmer, se détournent désormais de ces métiers. Non seulement le nombre de filles s'engageant dans des études scientifiques décroît fortement, mais en plus la grogne s'accroît chez leurs collègues masculins, affolés par le discours sur la parité et la concurrence potentielle. Si les jeunes femmes, un temps attirées par ces métiers, ne les convoitent plus aujourd'hui, c'est bien parce qu'elles trouvent des opportunités dans des secteurs où elles sont mieux acceptées.",
+  "pergunta": "Qu'apprend-on dans ce texte au sujet des femmes ?",
+  "alternativas": [
+   "Elles ont été pionnières en informatique.",
+   "Elles sont victimes d'inégalités salariales.",
+   "Les sociétés craignent de les engager.",
+   "Leurs compétences sont méconnues."
+  ],
+  "correta": 0,
+  "explicacao": "« les femmes, qui furent les premières à programmer » = foram pioneiras na informática. O texto não fala de salários (B); as empresas, ao contrário, querem contratá-las (contra C)."
+ }
+]

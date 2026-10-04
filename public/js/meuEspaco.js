@@ -75,7 +75,10 @@
   // ---------------- seções ----------------
   function heroi(d) {
     const a = d.aluno, primeiro = String(a.nome || "").split(" ")[0] || "aluno";
-    const foto = a.foto ? `<img class="me-avatar" src="${esc(a.foto)}" alt="">` : `<div class="me-avatar">${esc(primeiro[0] || "?").toUpperCase()}</div>`;
+    // a foto é o próprio botão de trocar (sem foto, a inicial do nome); a janela é a do appShell
+    const foto = `<button type="button" class="me-avatar-bt" data-trocar-foto title="${a.foto ? "Alterar" : "Adicionar"} foto de perfil" aria-label="${a.foto ? "Alterar" : "Adicionar"} foto de perfil">` +
+      (a.foto ? `<img class="me-avatar" src="${esc(a.foto)}" alt="">` : `<div class="me-avatar">${esc(primeiro[0] || "?").toUpperCase()}</div>`) +
+      `<span class="me-avatar-cam" aria-hidden="true">📷</span><span class="me-avatar-dica">${a.foto ? "Alterar foto" : "Adicionar foto"}</span></button>`;
     const diasProva = a.dataProva ? Math.ceil((new Date(a.dataProva) - Date.now()) / 864e5) : null;
     return `<section class="me-heroi me-surgir"><div class="me-heroi-linha">${foto}
       <div class="me-ola"><small>Meu Espaço</small><h1>Bonjour, ${esc(primeiro)} !</h1>
@@ -240,8 +243,42 @@
     return `<section class="me-secao" id="rotina" style="--c:${COR.teal}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Rotina de estudos</h2><p>Deveres de casa e tempo de estudo por matéria.</p></div></div>
       <div class="me-grade">
         <div class="me-card c6"><h3>Dever de casa <small>${dv.concluidos || 0}/${dv.total || 0} semana(s) concluída(s)</small></h3>${dv.recentes.length ? barras(dv.recentes.map(x => ({ nome: x.titulo, pct: x.total ? Math.round(x.feitas / x.total * 100) : (x.concluido ? 100 : 0), texto: x.concluido ? "✓" : `${x.feitas}/${x.total}`, cor: x.concluido ? COR.verde : COR.teal }))) + (dv.deveresCompletos && dv.deveresCompletos.feitos ? `<p style="margin-top:10px; font-size:.84rem;">🧩 Deveres completos: <b>${dv.deveresCompletos.feitos}</b> feito(s) · média <b>${dv.deveresCompletos.media}%</b></p>` : "") + '<p style="margin-top:12px;"><a class="me-link" href="meus-deveres.html">Abrir meus deveres →</a></p>' : '<div class="me-vazio">Nenhum dever de casa atribuído.</div>'}</div>
+        ${quadroMapeador()}
         <div class="me-card c6"><h3>Tempo de estudo por matéria <small>${fmtTempo(e.totalSeg)}</small></h3>${e.porMateria.length ? donut(e.porMateria.slice(0, 7).map((m, i) => ({ nome: `${m.icone} ${m.nome}`, valor: m.seg, cor: m.cor || PALETA[i], texto: fmtTempo(m.seg) })), fmtTempo(e.totalSeg), "estudados") : '<div class="me-vazio">Use o cronômetro de estudos para acompanhar seu tempo.</div>'}</div>
       </div></section>`;
+  }
+
+  // Páginas do site dentro do Meu Espaço (Mapeador de Estudos, Depoimentos, Configurações): um quadro
+  // com a página em modo embutido (?embed=1, sem navbar). O iframe é criado pelo DOM depois de desenhar
+  // (o htmlSeguro tira iframes do innerHTML). Altura fixa com rolagem própria: as janelas das páginas
+  // (nova matéria, editar…) aparecem centralizadas no quadro, à vista.
+  const ABAS_MAPEADOR = [["mapeador-timer.html", "⏱️ Timer e matérias"], ["mapeador-historico.html", "📜 Histórico"], ["mapeador-estatisticas.html", "📊 Estatísticas"]];
+  let abaMapeador = ABAS_MAPEADOR[0][0];
+  function quadroMapeador() {
+    return `<div class="me-card c12" id="mapeador"><h3>Mapeador de Estudos <small>crie suas matérias, cronometre e registre seu tempo</small><a class="me-ver-tudo" href="mapeador-estudos.html">Abrir em página inteira ↗</a></h3>
+      <div class="me-quadro-abas" role="tablist" aria-label="Mapeador de Estudos">${ABAS_MAPEADOR.map(([u, n]) => `<button type="button" role="tab" data-aba-mapeador="${u}" aria-selected="${u === abaMapeador}">${n}</button>`).join("")}</div>
+      <div class="me-quadro" data-quadro="${abaMapeador}" data-titulo="Mapeador de Estudos"></div></div>`;
+  }
+  function secDepoimentos() {
+    return `<section class="me-secao" id="depoimentos" style="--c:${COR.anil}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Depoimentos</h2><p>Conte como está sendo a sua preparação e leia o que outros alunos dizem.</p></div><a class="me-btn" href="depoimentos.html">Página inteira ↗</a></div>
+      <div class="me-card c12"><div class="me-quadro" data-quadro="depoimentos.html" data-titulo="Depoimentos"></div></div></section>`;
+  }
+  function secConfiguracoes() {
+    return `<section class="me-secao" id="configuracoes" style="--c:#475569"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Configurações</h2><p>Seus dados, senha, preferências de tema e idioma, notificações e privacidade.</p></div><a class="me-btn" href="configuracoes.html">Página inteira ↗</a></div>
+      <div class="me-card c12"><div class="me-quadro" data-quadro="configuracoes.html" data-titulo="Configurações"></div></div></section>`;
+  }
+  function montarQuadros(raizQ) {
+    raizQ.querySelectorAll("[data-quadro]").forEach(box => {
+      const url = box.dataset.quadro + "?embed=1";
+      let f = box.querySelector("iframe");
+      if (f) { if (!f.src.endsWith(url)) f.src = url; return; }
+      f = document.createElement("iframe");
+      f.className = "me-quadro-frame";
+      f.title = box.dataset.titulo || "";
+      f.loading = "lazy";
+      f.src = url;
+      box.appendChild(f);
+    });
   }
 
   // Painel da equipe (administradores e professores): os mesmos atalhos da Minha conta.
@@ -400,16 +437,18 @@
   function montar(d) {
     const ehEquipe = ["admin", "professor"].includes(d.aluno.papel);
     const nav = [...(ehEquipe ? [["equipe", "Painel da equipe", "#1c2b3a"]] : []), ["geral", "Visão geral", COR.roxo], ["assinatura", "Assinatura", "#d9a300"], ["deveres", "Deveres", "#f59e0b"], ["questoes", "Questões", COR.azul], ["erros", "Caderno de erros", COR.vermelho], ["revisao", "Caderno de Revisão", COR.roxo], ["producoes", "Produções", COR.rosa],
-      ["simulados", "Simulados", COR.laranja], ["aulas", "Aulas", COR.verde], ["favoritos", "Favoritos", COR.rosa], ["rotina", "Rotina", COR.teal]];
+      ["simulados", "Simulados", COR.laranja], ["aulas", "Aulas", COR.verde], ["favoritos", "Favoritos", COR.rosa], ["rotina", "Rotina", COR.teal], ["depoimentos", "Depoimentos", COR.anil], ["configuracoes", "Configurações", "#475569"]];
     raiz.innerHTML = heroi(d) + kpis(d) +
       `<nav class="me-nav" aria-label="Seções do Meu Espaço">${nav.map(([id, n, c]) => `<a href="#${id}" style="--c:${c}" data-sec="${id}">${n}</a>`).join("")}</nav>` +
-      secEquipe(d) + visaoGeral(d) + secAssinatura(d) + secDeveres(d) + secQuestoes(d) + secErros(d) + secRevisao(d) + secProducoes(d) + secSimulados(d) + secAulas(d) + secFavoritos(d) + secRotina(d);
+      secEquipe(d) + visaoGeral(d) + secAssinatura(d) + secDeveres(d) + secQuestoes(d) + secErros(d) + secRevisao(d) + secProducoes(d) + secSimulados(d) + secAulas(d) + secFavoritos(d) + secRotina(d) + secDepoimentos() + secConfiguracoes();
+    montarQuadros(raiz);
     desenharErros(d);
     const SECOES = { questoes: secQuestoes, producoes: secProducoes, simulados: secSimulados, aulas: secAulas, favoritos: secFavoritos, deveres: secDeveres, revisao: secRevisao };
     function redesenharSecao(id) {
       const sec = document.getElementById(id), fn = SECOES[id];
       if (!sec || !fn) return;
       sec.outerHTML = fn(d);
+      montarQuadros(document.getElementById(id));
       requestAnimationFrame(() => raiz.querySelectorAll("#" + id + " [data-w]").forEach(b => { b.style.width = b.dataset.w + "%"; }));
     }
     // barras animadas
@@ -419,6 +458,17 @@
       const f = ev.target.closest("[data-ef]");
       if (f) { errosEstado.filtro = f.dataset.ef; errosEstado.limite = ERROS_POR_VEZ; desenharErros(d); }
       if (ev.target.closest("[data-mais-erros]")) { errosEstado.limite += ERROS_POR_VEZ; desenharErros(d); }
+      // foto de perfil: o próprio avatar abre a janela de troca
+      if (ev.target.closest("[data-trocar-foto]")) { if (window.AppShell && window.AppShell.alterarFoto) window.AppShell.alterarFoto(); return; }
+      // abas do Mapeador de Estudos (o quadro troca de página)
+      const am = ev.target.closest("[data-aba-mapeador]");
+      if (am) {
+        abaMapeador = am.dataset.abaMapeador;
+        raiz.querySelectorAll("[data-aba-mapeador]").forEach(b => b.setAttribute("aria-selected", String(b === am)));
+        const box = raiz.querySelector("#mapeador [data-quadro]");
+        if (box) { box.dataset.quadro = abaMapeador; montarQuadros(box.parentElement); }
+        return;
+      }
       const vt = ev.target.closest("[data-ver-tudo]");
       if (vt) {
         const k = vt.dataset.verTudo, sec = vt.closest(".me-secao");
@@ -488,6 +538,17 @@
     }), { rootMargin: "-40% 0px -55% 0px" });
     raiz.querySelectorAll(".me-secao").forEach(s => obs.observe(s));
     if (location.hash) { const alvo = document.getElementById(location.hash.slice(1)); if (alvo) setTimeout(() => alvo.scrollIntoView({ behavior: "smooth" }), 200); }
+    // links do menu « Olá, nome » para esta mesma página (#mapeador, #configuracoes…)
+    window.addEventListener("hashchange", () => { const alvo = document.getElementById(location.hash.slice(1)); if (alvo) alvo.scrollIntoView({ behavior: "smooth" }); });
+    // foto trocada (no avatar ou no menu): atualiza o herói na hora
+    document.addEventListener("fnm:foto", ev => {
+      d.aluno.foto = ev.detail;
+      const bt = raiz.querySelector("[data-trocar-foto]"); if (!bt) return;
+      const img = document.createElement("img"); img.className = "me-avatar"; img.alt = ""; img.src = ev.detail;
+      bt.querySelector(".me-avatar").replaceWith(img);
+      bt.querySelector(".me-avatar-dica").textContent = "Alterar foto";
+      bt.title = "Alterar foto de perfil"; bt.setAttribute("aria-label", "Alterar foto de perfil");
+    });
   }
 
   raiz.innerHTML = '<div class="me-carregando"><div style="text-align:center;"><i style="display:inline-block"></i><p>Montando o seu espaço…</p></div></div>';

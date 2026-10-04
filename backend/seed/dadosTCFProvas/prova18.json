@@ -1,0 +1,548 @@
+[
+ {
+  "n": 1,
+  "nivel": "A1",
+  "texto": "La bibliothèque de Chatou vous invite à passer un moment parent-enfant mercredi prochain.\nVenez avec votre enfant écrire une histoire avec des dessins. À la fin de la journée, nous imprimerons ces histoires et vous pourrez repartir avec un petit livre !",
+  "pergunta": "Qu'est-ce que la bibliothèque de Chatou organise ?",
+  "alternativas": [
+   "La décoration de ses salles.",
+   "La lecture d'un roman jeunesse.",
+   "Une activité à faire en famille.",
+   "Une rencontre avec un auteur."
+  ],
+  "correta": 2,
+  "explicacao": "« un moment parent-enfant » + « Venez avec votre enfant » = uma atividade em família. Não há leitura de romance (B) nem encontro com autor (D); a impressão do livrinho é só o resultado da oficina."
+ },
+ {
+  "n": 2,
+  "nivel": "A1",
+  "texto": "La société des transports T2C offre plusieurs moyens de transport publics : trente-quatre stations de tramway, de train et de métro en journée, 23 lignes de bus, dont une de nuit.\nPlus de renseignements sur notre site www.t2c.fr !",
+  "pergunta": "Quel transport circule après 23h ?",
+  "alternativas": [
+   "Le bus.",
+   "Le métro.",
+   "Le train.",
+   "Le tramway."
+  ],
+  "correta": 0,
+  "explicacao": "Tram, trem e metrô funcionam « en journée ». Só o ônibus tem « une (ligne) de nuit » = circula à noite, depois das 23h."
+ },
+ {
+  "n": 3,
+  "nivel": "A1",
+  "texto": "Salut Anthony,\nJe t'annonce une bonne nouvelle : j'ai trouvé un poste de vendeur pour cet été ! C'est dans une boutique du centre-ville de Bordeaux. C'est un peu loin de la maison mais en voiture j'y serai en 20 minutes.\nOn fêtera ça samedi !\nSimon",
+  "pergunta": "Qu'est-ce que Simon va faire ?",
+  "alternativas": [
+   "Acheter une voiture.",
+   "Aller chez Anthony.",
+   "Faire des courses samedi.",
+   "Travailler à Bordeaux."
+  ],
+  "correta": 3,
+  "explicacao": "« j'ai trouvé un poste de vendeur… à Bordeaux » = ele vai trabalhar. O carro é só o meio de transporte (contra A) e sábado é a comemoração, não compras (contra C)."
+ },
+ {
+  "n": 4,
+  "nivel": "A2",
+  "texto": "IMAGES\nVous êtes passionné de photographie et vous voulez partager vos créations ?\nInscrivez-vous au prix du « Petit Reporter » : envoyez une photo sur le thème de l'amitié au club « Images » ! Un appareil photo à gagner !\nInscription : www.clubImages.fr/Prix PetitReporter",
+  "pergunta": "Que propose le club « images » ?",
+  "alternativas": [
+   "D'acheter du matériel en soldes.",
+   "De participer à un concours.",
+   "De rencontre des professionnels.",
+   "De suivre des cours débutants."
+  ],
+  "correta": 1,
+  "explicacao": "« Inscrivez-vous au prix », « une photo à envoyer », « un appareil à gagner » = um concurso. Nenhuma venda de material (A) nem curso (D)."
+ },
+ {
+  "n": 5,
+  "nivel": "A2",
+  "texto": "SAMEDI 29 JUIN, VENEZ COURIR 10KM POUR AIDER L'ASSOCIATION « TOUT ENSEMBLE POUR LA PAIX ». RENDEZ-VOUS A 10H, AU PARC DE VINCENNES.\nAMBIANCE SYMPATHIQUE ET REPAS OFFERT POUR LES SPORTIFS, VENEZ NOMBREUX !",
+  "pergunta": "Qu'est-ce que cette annonce propose ?",
+  "alternativas": [
+   "D'aider à organiser une fête.",
+   "De devenir membre d'une association.",
+   "De distribuer des repas gratuits.",
+   "De participer à un événement sportif."
+  ],
+  "correta": 3,
+  "explicacao": "« VENEZ COURIR 10KM » = participar de um evento esportivo (uma corrida). A refeição é oferecida aos corredores, não distribuída por eles (contra C); não se pede para virar sócio (contra B)."
+ },
+ {
+  "n": 6,
+  "nivel": "A2",
+  "texto": "De : cannelle@lilo.com À : Elke@mail.com\nSalut Elke,\nC'est bientôt la fête de nos 20 ans de mariage ! Beaucoup d'invités viendront avec leurs enfants. Comme tu adores les petits, pourrais-tu t'occuper d'eux en journée ? Quand ils seront couchés, nous pourrons danser tous ensemble !\nMerci, bisous.\nCannelle",
+  "pergunta": "Que demande Cannelle à son amie ?",
+  "alternativas": [
+   "D'écrire aux invités.",
+   "D'organiser la fête.",
+   "De garder des enfants.",
+   "De préparer des danses."
+  ],
+  "correta": 2,
+  "explicacao": "O pedido real está no « pourrais-tu t'occuper d'eux ? » = tomar conta das crianças. Dançar é o que farão juntas depois, não uma tarefa a preparar (contra D)."
+ },
+ {
+  "n": 7,
+  "nivel": "A2",
+  "texto": "Chers professeurs, Chers étudiants,\nVenez rencontrer les nouveaux étudiants de la semaine ! Ce mardi, de 8 h 30 à 10 h 30. Rendez-vous salle « Les Mimosas » J. Lebon, directrice. École de langues ABC.",
+  "pergunta": "Pourquoi Madame Lebon écrit-elle cette annonce ?",
+  "alternativas": [
+   "Pour changer un horaire.",
+   "Pour organiser une fête.",
+   "Pour présenter des élèves.",
+   "Pour proposer une sortie."
+  ],
+  "correta": 2,
+  "explicacao": "« Venez rencontrer les nouveaux étudiants » = apresentar os novos alunos. Não há mudança de horário (A) nem passeio (D)."
+ },
+ {
+  "n": 8,
+  "nivel": "A2",
+  "texto": "Madame Chanmont,\nVous avez participé à notre concours et vous avez gagné un séjour d'une semaine tout compris (transport, hébergement, restauration) pour deux personnes en Italie !\nPrenez contact par courriel avec notre service clientèle pour avoir toutes les informations.\nLe service commercial.",
+  "pergunta": "Que doit-faire madame Chanmont ?",
+  "alternativas": [
+   "Écrire un message.",
+   "Prendre un billet d'avion.",
+   "Réserver un hôtel.",
+   "S'inscrire à un jeu."
+  ],
+  "correta": 0,
+  "explicacao": "A instrução é « Prenez contact par courriel » = escrever uma mensagem. Transporte e hospedagem já estão inclusos no prêmio (contra B e C); ela já participou do concurso (contra D)."
+ },
+ {
+  "n": 9,
+  "nivel": "A2",
+  "texto": "Vous avez une expérience dans l'éducation ?\nVous avez du temps libre, et vous avez envie d'aider des élèves en difficulté ? Offrez vos services de soutien scolaire dans notre association de quartier ! Écrivez-nous à avotreservice@mandarine.fr",
+  "pergunta": "Qu'est-ce que cette annonce propose ?",
+  "alternativas": [
+   "De donner des cours.",
+   "De garder des enfants.",
+   "De rencontre des voisins.",
+   "De suivre des formations."
+  ],
+  "correta": 0,
+  "explicacao": "« soutien scolaire » + « aider des élèves » = dar aulas de reforço. Não é guarda de crianças (B) nem seguir formação — aqui a pessoa é quem oferece a ajuda (contra D)."
+ },
+ {
+  "n": 10,
+  "nivel": "A2",
+  "texto": "Marché facile est une application pour téléphone portable qui vous conseille les bons fruits et légumes de saison dans les supermarchés. Elle donne aussi des informations sur le fromage, la viande et le poisson.",
+  "pergunta": "À quoi sert cette application ?",
+  "alternativas": [
+   "À acheter sur internet.",
+   "À choisir ses produits.",
+   "À noter les magasins.",
+   "À trouver des recettes."
+  ],
+  "correta": 1,
+  "explicacao": "« vous conseille les bons fruits et légumes » = ajuda a escolher os produtos. Ela informa, mas não vende (contra A) nem dá receitas (contra D)."
+ },
+ {
+  "n": 11,
+  "nivel": "B1",
+  "texto": "Montréal, la plus grande ville du Québec, figure en tête de liste des métropoles francophones.\nPartons à la découverte de ce morceau du Vieux Continent intégré au Nouveau Monde ! On la décrit comme la cité la plus européenne d'Amérique, mais, surtout, comme la plus américaine des francophones. Et c'est d'abord cet aspect-là qui surprend les Européens tout juste arrivés dans cette ville pleine d'énergie et de caractère.",
+  "pergunta": "Pourquoi cette ville est-elle particulière ?",
+  "alternativas": [
+   "C'est la destination préférée des touristes français.",
+   "De plus en plus de jeunes souhaitent s'y installer.",
+   "Elle réunit les caractéristiques de deux continents.",
+   "On y entend des langues du monde entier."
+  ],
+  "correta": 2,
+  "explicacao": "« un morceau du Vieux Continent intégré au Nouveau Monde », « la plus européenne d'Amérique » + « la plus américaine des francophones » = mistura de dois continentes. As outras opções não aparecem no texto."
+ },
+ {
+  "n": 12,
+  "nivel": "B1",
+  "texto": "SAUVEZ DES VIES\nTous les samedis pendant l'été, vous pouvez donner votre sang pour les malades et les blessés. Où ? Dans un camion spécialisé garé devant la mairie.\nNOUS AVONS BESOIN DE VOUS !",
+  "pergunta": "Que propose cette annonce ?",
+  "alternativas": [
+   "D'aider des malades.",
+   "De faire un don.",
+   "De s'informer à la mairie.",
+   "De travailler l'été."
+  ],
+  "correta": 1,
+  "explicacao": "« donner votre sang » = fazer uma doação (de sangue). Ajudar os doentes (A) é a finalidade, não a ação proposta; a prefeitura é só o local do caminhão (contra C)."
+ },
+ {
+  "n": 13,
+  "nivel": "B1",
+  "texto": "Nous cherchons des acteurs sportifs. Entre 18 et 45 ans. Expérience comme chanteur et danseur souhaitée. Le tournage se fera à Limoges. Si vous êtes intéressé(e), envoyez votre CV à casting@art.com.",
+  "pergunta": "Quelle activité est proposée dans cette annonce ?",
+  "alternativas": [
+   "Écrire une pièce.",
+   "Jouer dans un film.",
+   "Organiser un concert.",
+   "Participer à une course."
+  ],
+  "correta": 1,
+  "explicacao": "« Nous cherchons des acteurs » + « Le tournage se fera à Limoges » = atuar num filme. Canto e dança são só habilidades desejadas, não um concerto a organizar (contra C)."
+ },
+ {
+  "n": 14,
+  "nivel": "B1",
+  "texto": "VOUS MANGEZ ITALIEN, DANSEZ LE FLAMENCO OU APPRENEZ LE SUÉDOIS ?\nPartagez vos images qui montrent que l'Europe fait partie de votre vie. Participez au concours « Fenêtres sur l'Europe ». À gagner : un séjour à Bruxelles ou un atelier cuisine.",
+  "pergunta": "Que propose ce concours ?",
+  "alternativas": [
+   "De découvrir une langue.",
+   "De faire un spectacle.",
+   "D'envoyer des photos.",
+   "D'inventer une recette."
+  ],
+  "correta": 2,
+  "explicacao": "« Partagez vos images » = enviar fotos. Comer italiano, dançar flamenco ou aprender sueco são exemplos de vida europeia, não o objetivo do concurso (contra A e B)."
+ },
+ {
+  "n": 15,
+  "nivel": "B1",
+  "texto": "Lundi prochain, en France, les librairies organisent une soirée du livre de jeunesse. Au programme, des activités pour enfants et des dégustations de desserts. On pourra aussi voir sur grand écran les princes et princesses du cinéma.",
+  "pergunta": "Que pourra-t-on faire aux soirées du livre de jeunesse ?",
+  "alternativas": [
+   "Écouter des chansons.",
+   "Gagner des cadeaux.",
+   "Goûter des recettes.",
+   "Jouer dans un film."
+  ],
+  "correta": 2,
+  "explicacao": "« des dégustations de desserts » = provar/degustar preparações. Ver príncipes e princesas do cinema é assistir, não atuar (contra D); não há canções nem prêmios (contra A e B)."
+ },
+ {
+  "n": 16,
+  "nivel": "B2",
+  "texto": "Et si on partait vivre à la Compagne ?\nBeaucoup d'habitants de la ville rêvent d'une maison, d'un jardin potager. En justement, de plus en plus de régions et de villes s'organisent pour attirer ces candidats et leur famille au départ. Un salon est organisé sur cette question aujourd'hui à Paris. Selon un sondage, 30% des habitants de l'agglomération parisienne seraient prêts à partir. S'ils pouvaient pratiquer une activité professionnelle qui leur plaît, ils partiraient sans hésiter.",
+  "pergunta": "Selon cet article, à quelle condition les gens quitteraient la ville ?",
+  "alternativas": [
+   "Avoir un logement spacieux.",
+   "Exercer un travail satisfaisant.",
+   "Modifier le rythme quotidien.",
+   "Se rapprocher du monde agricole."
+  ],
+  "correta": 1,
+  "explicacao": "A condição está na última frase: « S'ils pouvaient pratiquer une activité professionnelle qui leur plaît » = ter um trabalho que agrada. A casa e o quintal são o sonho, não a condição para partir (contra A e D)."
+ },
+ {
+  "n": 17,
+  "nivel": "B2",
+  "texto": "La ville de Nantes a de quoi séduire grâce à son dynamisme culturel. Son renouveau, débuté il y a plus de deux décennies, est exceptionnel. Elle a retrouvé le goût du risque, un grain de folie et un peu de naïveté. Nantes, la bourgeoise cité des ducs de Bretagne est une vraie boîte à idées, toujours en quête de nouvelles manières de conjuguer le « vivre ensemble ». Pas étonnant qu'elle connaisse une des plus fortes croissances des métropoles de France.",
+  "pergunta": "Qu'est-ce qui attire les gens à Nantes ?",
+  "alternativas": [
+   "Sa position géographique.",
+   "Ses traditions régionales.",
+   "Son ambiance créative.",
+   "Son économie stable."
+  ],
+  "correta": 2,
+  "explicacao": "« dynamisme culturel », « le goût du risque », « une vraie boîte à idées » = um ambiente criativo. A economia é consequência (« forte croissance »), não a atração citada (contra D)."
+ },
+ {
+  "n": 18,
+  "nivel": "B2",
+  "texto": "PEDAGOGIE\nTwitter dès l'école primaire, pour donner le goût d'écrire, de lire et de l'orthographe. Un instituteur raconte : « J'utilise Twitter dans ma classe depuis un an. Les productions d'élèves sont de plus en plus intéressantes. Grâce à Twitter, je peux approfondir les notions de façon concrète.\nLes activités scolaires paraissent artificielles, hors contexte voire dénuées de sens. Pourquoi essayer de maîtriser l'écriture ? Les enfants n'y songent même pas, car leurs travaux sont cantonnés à des cahiers, eux-mêmes enfermés dans des casiers ou des cartables. Ils n'ont pas l'occasion de partager leurs productions, de les confronter, d'argumenter leurs choix. »",
+  "pergunta": "D'après cet article, qu'apporte l'utilisation de Twitter aux élèves ?",
+  "alternativas": [
+   "Ils apprennent à se servir correctement des réseaux sociaux.",
+   "Ils communiquent plus facilement avec l'instituteur.",
+   "Ils comprennent mieux l'intérêt des apprentissages proposés.",
+   "Ils sont attentifs après un moment de détente."
+  ],
+  "correta": 2,
+  "explicacao": "O professor aprofunda « les notions de façon concrète » e o Twitter dá sentido a atividades antes « artificielles… dénuées de sens ». Ou seja, os alunos entendem melhor o porquê do que aprendem. Não é uso das redes por si (A) nem uma pausa relaxante (D)."
+ },
+ {
+  "n": 19,
+  "nivel": "B2",
+  "texto": "Les recherches sur le cerveau et le numérique n'en sont qu'à leurs débuts.\nSi le cerveau reste génétiquement constant, il s'adapte culturellement aux innovations de l'époque. Ainsi, depuis que nous utilisons les objets connectés, notre rapport à la mémoire a changé. Quant à la concentration, trois facteurs perturbent son fonctionnement : le fait de tenter de faire plusieurs tâches à la fois, celui d'être bombardé d'informations, et enfin celui d'être interrompu fréquemment par des notifications. Par conséquent, les apprentissages, l'assimilation des informations et la capacité d'enchaîner les tâches s'en trouvent ralentis.",
+  "pergunta": "Qu'explique ce texte au sujet des outils numériques ?",
+  "alternativas": [
+   "Ils améliorent l'efficacité au travail.",
+   "Ils dérèglent les rythmes biologiques.",
+   "Ils fluidifient les relations sociales.",
+   "Ils modifient les aptitudes mentales."
+  ],
+  "correta": 3,
+  "explicacao": "« notre rapport à la mémoire a changé » + concentração e aprendizagens « ralentis » = as capacidades mentais são alteradas. O texto diz o contrário de A (torna mais lento) e não fala de ritmos biológicos (B) nem de vida social (C)."
+ },
+ {
+  "n": 20,
+  "nivel": "B2",
+  "texto": "Il y a quelque chose de rare dans « Normandie nue » : ce film est résolument léger, tout en ayant du fond. À travers une histoire qui sert de fil conducteur cocasse et insolite – celle d'un artiste américain qui veut photographier des paysans dévêtus –, « Normandie nue » aborde la crise des éleveurs avec beaucoup d'humanité, notamment grâce au maire du village qui voit dans la venue du photographe l'occasion de faire valoir sa cause aux yeux de la planète. Parfois un peu maladroite, cette comédie amuse en caricaturant gentiment les médias, les artistes et les bobos parisiens en mal de verdure.",
+  "pergunta": "Quelle est l'opinion du journaliste sur le film « Normandie nue » ?",
+  "alternativas": [
+   "Il est facile de s'identifier aux personnages.",
+   "Les lieux de tournage sont authentiques.",
+   "On y dresse un portrait juste de la société.",
+   "Son humour fait passer un message sérieux."
+  ],
+  "correta": 3,
+  "explicacao": "« résolument léger, tout en ayant du fond » + « aborde la crise des éleveurs avec beaucoup d'humanité » sob a forma de comédia = o humor carrega uma mensagem séria. As demais opções não são afirmadas pelo crítico."
+ },
+ {
+  "n": 21,
+  "nivel": "B2",
+  "texto": "Mathieu Lagouanère et Élodie Calas, deux journalistes, ont fait un tour du monde avec une idée originale : provoquer des rencontres en faisant goûter le roquefort, un fromage traditionnel, fabriqué dans leur région. « Le roquefort était simplement un moyen de faire connaissance avec les habitants. Ses principales caractéristiques, les taches de moisissure et l'odeur, peuvent faire réagir », explique Mathieu. La société Roquefort leur a fourni les fromages. Ils ont raconté leurs aventures dans un blog de voyage.",
+  "pergunta": "Quel était l'objectif de Mathieu et Élodie ?",
+  "alternativas": [
+   "Découvrir des recettes locales.",
+   "Entrer en contact avec les gens.",
+   "Réaliser une opération publicitaire.",
+   "Vendre des spécialités françaises."
+  ],
+  "correta": 1,
+  "explicacao": "Ele mesmo diz: « Le roquefort était simplement un moyen de faire connaissance avec les habitants » = entrar em contato com as pessoas. O queijo é meio, não fim: não é venda (D) nem publicidade (a empresa só forneceu os queijos)."
+ },
+ {
+  "n": 22,
+  "nivel": "B2",
+  "texto": "Dans le monde de l'éducation, la mode est au « Ludique »\nPas une description d'un nouveau matériel informatique sans l'utilisation de cet adjectif miraculeux. N'ayant rien de mieux à offrir, les publicitaires insistent sur le côté « ludique » et neutre de leur matériel, sous-entendant ainsi que les difficultés des enfants sont liées uniquement au côté poussiéreux de la présentation d'exercices et à l'ennui qu'ils suscitent. En changeant l'apparence, on suscitera l'intérêt et la réussite sera assurée. La rééducation risque d'être perçue comme la modernisation de la pédagogie sans autre questionnement sur l'échec de la pédagogie traditionnelle.",
+  "pergunta": "Que reproche l'auteur du texte à la mode du ludique ?",
+  "alternativas": [
+   "Elle demande des connaissances techniques poussées.",
+   "Elle empêche les jeunes utilisateurs de se concentrer.",
+   "Elle masque les problèmes pédagogiques essentiels.",
+   "Elle sert sans succès d'argument commercial."
+  ],
+  "correta": 2,
+  "explicacao": "Trocar a aparência dá a impressão de « modernisation de la pédagogie sans autre questionnement sur l'échec de la pédagogie traditionnelle » = esconde os problemas pedagógicos de fundo. O « ludique » é argumento comercial, mas o texto não diz que ele é ineficaz nesse papel (contra D)."
+ },
+ {
+  "n": 23,
+  "nivel": "C1",
+  "texto": "Elle devait être démolie et un nouveau lieu de culte reconstruit à l'arrière de l'église actuelle, le long du boulevard. Le projet, qui prévoyait la restructuration complète de l'îlot avec la création de logements sociaux, ne verra finalement pas le jour. La Ville et le diocèse ont pris la décision de conserver l'église Sainte-Madeleine, considérant avec certains experts que sa démolition aurait causé la perte regrettable d'un élément important du patrimoine nantais. Des travaux d'urgence vont être réalisés avant le lancement d'un véritable programme de restauration et de mise en valeur du bâtiment.",
+  "pergunta": "Selon cet article, quelle décision a été prise ?",
+  "alternativas": [
+   "Bâtir une église identique dans le quartier.",
+   "Débuter le réaménagement du boulevard.",
+   "Entreprendre une rénovation du lieu.",
+   "Réhabiliter les logements sociaux existants."
+  ],
+  "correta": 2,
+  "explicacao": "Atenção ao imperfeito de abertura: « Elle devait être démolie » é o plano abandonado. A decisão real é « conserver l'église » + « travaux d'urgence » + « programme de restauration » = reformar o local."
+ },
+ {
+  "n": 24,
+  "nivel": "C1",
+  "texto": "La charte des Jeux olympiques est sans ambiguïté : les deux langues officielles du comité international olympique sont le français et l'anglais. Une étude permettant d'identifier la place et le statut de la langue française dans les organisations sportives internationales a été lancée en 2008 : les francophones sont présents dans les instances des fédérations sportives internationales, mais en nombre insuffisant aux postes de décision, les documents officiels étant rarement rédigés en français. Priorité a donc été accordée à l'aide à la traduction des textes et à la mobilisation des francophones dans leur ensemble, afin qu'ils s'entraident à accéder aux postes décisionnels.",
+  "pergunta": "À quel constat a abouti l'enquête sur la place de la francophonie dans le mouvement sportif mondial ?",
+  "alternativas": [
+   "La langue française et l'anglais jouissent d'un statut équitable.",
+   "Les ligues sportives internationales comptent peu de francophones.",
+   "Les textes officiels et les règlements sont traduits en langue française.",
+   "Très peu de francophones occupent des fonctions à responsabilité."
+  ],
+  "correta": 3,
+  "explicacao": "« en nombre insuffisant aux postes de décision » = pouquíssimos francófonos em cargos de responsabilidade. Há francófonos presentes (contra B); os documentos raramente estão em francês (contra C); o status igual é só teórico na carta, não na prática (contra A)."
+ },
+ {
+  "n": 25,
+  "nivel": "C1",
+  "texto": "Les villes se montrent soucieuses d'améliorer leur qualité de l'air. Une solution : la plantation d'arbres. En effet, les arbres filtrent les particules contenues dans l'atmosphère.\nMais la plantation d'arbres doit être réfléchie. Il est pertinent de mettre des arbres le long des axes de circulation pour protéger les habitations des polluants, mais aussi dans les zones piétonnes. Le choix des arbres a aussi son importance. Les espèces d'arbres plantées il y a 50 ans ne répondent pas aux besoins d'aujourd'hui, car elles forment un couvercle retenant au sol la pollution. En revanche, les arbres aux feuilles poilues sont, eux, efficaces.",
+  "pergunta": "À quelle condition les arbres peuvent-ils aider à combattre la pollution urbaine ?",
+  "alternativas": [
+   "S'ils appartiennent à une espèce adéquate.",
+   "S'ils ont des feuilles persistantes en hiver.",
+   "S'ils ont été plantés il y a longtemps.",
+   "S'ils se trouvent loin des zones de logement."
+  ],
+  "correta": 0,
+  "explicacao": "« Le choix des arbres a aussi son importance »: só « les arbres aux feuilles poilues » são eficazes = depende da espécie adequada. As espécies antigas prendem a poluição (contra C); nada se diz de folhas perenes (B)."
+ },
+ {
+  "n": 26,
+  "nivel": "C1",
+  "texto": "Les bénéfices du bio pour la santé et pour l'environnement sont aujourd'hui prouvés. Mais pour ses détracteurs, ce type de production ne serait pas viable, faute de rendements suffisants pour subvenir aux besoins d'une planète à la démographie galopante. Une idée répandue que réfutent des chercheurs européens qui affirment qu'il est possible de nourrir plus de 9 milliards d'êtres humains en 2050 avec 100% d'agriculture biologique, à deux conditions : réduire le gaspillage alimentaire et limiter la consommation de produits d'origine animale. Un défi de taille, alors que le bio ne représente que 1% de la surface agricole utile dans le monde.",
+  "pergunta": "De quel défi est-il question ?",
+  "alternativas": [
+   "Augmenter la surface des terres agricoles.",
+   "Garantir la qualité des aliments pour animaux.",
+   "Généraliser l'agriculture biologique.",
+   "Lutter contre la démographie galopante."
+  ],
+  "correta": 2,
+  "explicacao": "O « défi de taille » é passar de 1% para 100% de agricultura biológica = generalizar o bio. A demografia galopante é o contexto do debate, não o desafio a vencer (contra D)."
+ },
+ {
+  "n": 27,
+  "nivel": "C1",
+  "texto": "Paris veut réduire de 30% l'exposition aux ondes des antennes-relais pour devenir la métropole la plus protectrice d'Europe. Maîtriser l'exposition des Parisiens aux ondes, tout en continuant à faire de Paris une capitale numérique, c'est le double objectif de la nouvelle charte de téléphonie mobile que la maire soumettra fin mars au Conseil de Paris. Il s'agit de trouver un équilibre entre préoccupations de santé publique et bonne qualité du service de téléphonie mobile.",
+  "pergunta": "Quel est l'objectif de la ville de Paris ?",
+  "alternativas": [
+   "Améliorer la puissance de la réception.",
+   "Diminuer les risques sanitaires.",
+   "Limiter les dépenses de la ville.",
+   "Respecter les normes internationales."
+  ],
+  "correta": 1,
+  "explicacao": "« réduire l'exposition aux ondes » + « préoccupations de santé publique » = diminuir riscos sanitários. Manter a qualidade do serviço é o outro lado do equilíbrio, não melhorar a potência (contra A)."
+ },
+ {
+  "n": 28,
+  "nivel": "C1",
+  "texto": "Les conséquences de l'analphabétisme sont profondes, au point qu'elles peuvent mettre la vie en danger. Elles s'enracinent dans le refus d'un droit humain fondamental : le droit à l'éducation. A l'échelle de la société, dénier le droit à l'éducation s'est hypothéqué le progrès démocratique et social – et par conséquent, la paix et la sécurité internationales. En empêchant les enfants de se développer pleinement, l'analphabétisme sème d'embûches leur chemin vers l'âge adulte et rend encore plus difficile leur compréhension du monde dans sa diversité aussi bien que des valeurs de paix et d'égalité entre les personnes. L'analphabétisme prive également l'individu d'autres joies, comme celles de la culture et de l'art en général.",
+  "pergunta": "Selon ce texte, que favorise le respect du droit à l'éducation ?",
+  "alternativas": [
+   "La constitution d'une culture nationale.",
+   "La stimulation de la croissance économique.",
+   "L'amélioration des comportements sanitaires.",
+   "Le développement d'une conscience civique."
+  ],
+  "correta": 3,
+  "explicacao": "Negar a educação prejudica « le progrès démocratique et social… la paix et la sécurité » e a compreensão « des valeurs de paix et d'égalité ». Respeitá-la, portanto, favorece a consciência cívica. As demais opções não decorrem do texto."
+ },
+ {
+  "n": 29,
+  "nivel": "C1",
+  "texto": "Plus de 40% des espèces d'insectes sont en déclin et un tiers sont menacés. Leur taux de mortalité est huit fois plus rapide que celui des mammifères. A ce rythme, s'inquiètent les scientifiques, les insectes pourraient disparaître d'ici un siècle. Cette prévision est préoccupante, car ils sont essentiels au bon fonctionnement de tous les écosystèmes. Ils pollinisent les plantes, recyclent les nutriments et servent de nourriture aux autres animaux. Leur disparition « aura des conséquences catastrophiques à la fois pour les écosystèmes de la planète et pour la survie de l'humanité ». « Si les modes de production alimentaire ne changent pas, les insectes dans leur ensemble s'engagera sur la voie de l'extinction dans quelques décennies », écrivent les chercheurs.",
+  "pergunta": "D'après l'article, qu'est-ce qui est à l'origine de la disparition des insectes ?",
+  "alternativas": [
+   "Les changements de climat.",
+   "Les méthodes de culture.",
+   "Les oiseaux prédateurs.",
+   "Les politiques publiques."
+  ],
+  "correta": 1,
+  "explicacao": "A causa está na citação final: « Si les modes de production alimentaire ne changent pas… l'extinction » = os métodos de cultivo/produção agrícola. Clima (A) e políticas (D) não são mencionados como origem."
+ },
+ {
+  "n": 30,
+  "nivel": "C1",
+  "texto": "Deux mondes s'affrontent : ceux de l'ancienne agriculture et de la nouvelle. Le productivisme soutenu par la chimie a fait progresser comme jamais les rendements agricoles, nourri la planète et abaissé le prix des denrées. Mais il fait son temps. Les tenants du passé, dont on peut comprendre les motivations, tant les agriculteurs travaillent sous la pression éreintante de la compétitivité, soutiennent qu'il n'existe pas d'autre solution. Notre enquête montre le contraire : l'alliance de la technologie et de l'écologie pour remplacer des substances nocives par une panoplie de techniques inédites, offre une alternative originale, crédible et soutenable à la dispersion incontrôlée de composants chimiques nuisibles à tous. C'est la voie de la sagesse autant que de la modernité.",
+  "pergunta": "Que défend le journaliste ?",
+  "alternativas": [
+   "L'accès universel à des aliments bon marché.",
+   "L'innovation des procédés de production.",
+   "Le développement du commerce équitable.",
+   "Le partage d'expériences traditionnelles."
+  ],
+  "correta": 1,
+  "explicacao": "O jornalista defende « l'alliance de la technologie et de l'écologie » e « une panoplie de techniques inédites » = inovação nos processos de produção. Ele critica tanto o produtivismo químico quanto os « tenants du passé » (contra A e D)."
+ },
+ {
+  "n": 31,
+  "nivel": "B2",
+  "texto": "\"Il faut te le dire en quelle langue ?\" Cette question, que des milliers de mères posent à leur enfant lorsqu'elles veulent se faire écouter, est en fait très sensée (comme tout ce que disent les mères). Des travaux scientifiques récents ont en effet démontré une réalité étonnante : Nous réfléchissons et prenons des décisions différemment lorsque nous traitons l'information dans une autre langue que notre langue maternelle. Nous comprenons tout aussi bien l'idée ou le problème mais, lorsque nous utilisons une autre langue, le résultat est plus réfléchi, moins dicté par les émotions, plus orienté vers l'utilité.",
+  "pergunta": "Que permet l'utilisation d'une langue autre que la langue maternelle ?",
+  "alternativas": [
+   "D'attirer l'attention de l'interlocuteur.",
+   "D'imaginer des solutions originales.",
+   "De solliciter davantage la raison.",
+   "De trouver des réponses rapides."
+  ],
+  "correta": 2,
+  "explicacao": "Numa língua estrangeira, o resultado é « plus réfléchi, moins dicté par les émotions » = recorre mais à razão. Não se fala de soluções originais (B) nem de rapidez (D — pelo contrário, é mais ponderado)."
+ },
+ {
+  "n": 32,
+  "nivel": "B2",
+  "texto": "Depuis un an, l'association du Théâtre de la poudrerie, située à Sevran, à quelques kilomètres de Paris, organisé des représentations gratuites à domicile d'une pièce inédite. Pour cela, l'association a convié une auteure professionnelle à venir en résidence pour l'écrire. Elle a recueilli le témoignage d'une trentaine d'habitants sur le thème du pouvoir féminin, puis écrit son texte à partir de cette matière première. L'enjeu pour cette association est que les spectateurs s'approprient la pièce : quand il y a un phénomène d'identification, la parole se libère lors de la rencontre qui suit la représentation. Ce phénomène est amplifié par ce cadre intimiste qui favorise le rapprochement des spectateurs et des comédiens.",
+  "pergunta": "Quel objectif poursuit cette association avec ce projet ?",
+  "alternativas": [
+   "Encourager le dialogue avec le public.",
+   "Former des acteurs en banlieue.",
+   "Réaliser une œuvre à plusieurs mains.",
+   "Sensibiliser à l'égalité des sexes."
+  ],
+  "correta": 0,
+  "explicacao": "O objetivo (« l'enjeu ») é que « la parole se libère lors de la rencontre qui suit la représentation » = estimular o diálogo com o público. O tema do poder feminino (D) e a escrita a partir de depoimentos (C) são meios, não a finalidade."
+ },
+ {
+  "n": 33,
+  "nivel": "B2",
+  "texto": "Le stress est l'ennemi numéro 1 du bien-être. Quand il prend le dessus, on perd sa motivation et on manque continuellement d'énergie. Les médecins sont formels : le stress est souvent à l'origine de dysfonctionnements physiques. C'est aussi une cause directe du vieillissement prématuré. Une personne stressée se replie sur elle-même et renonce progressivement à profiter de certaines de ses capacités mentales. Voici comment canaliser ce stress pour le transformer en énergie positive : apprendre à bien respirer, ne plus gaspiller ses forces à réfléchir aux actions de passé, changer les mauvaises habitudes et finalement savoir se ménager au quotidien.",
+  "pergunta": "Qu'apprend-on sur le stress dans cet article ?",
+  "alternativas": [
+   "C'est un handicap qui peut se transformer en atout.",
+   "Il décuple l'ensemble des aptitudes cérébrales.",
+   "Il est officiellement reconnu comme une maladie.",
+   "Ses effets touchent plus particulièrement les seniors."
+  ],
+  "correta": 0,
+  "explicacao": "O estresse é « l'ennemi numéro 1 » (um handicap), mas o texto ensina a « le transformer en énergie positive » = pode virar um trunfo. Ele reduz as capacidades mentais (contra B) e não é chamado de doença oficial (contra C)."
+ },
+ {
+  "n": 34,
+  "nivel": "B2",
+  "texto": "Souvent critiquée pour la qualité de son service, la société berlinoise des transports en commun a fait parler d'elle, en proposant 500 paires de « chaussures-billets » aux couleurs des banquettes du métro berlinois. Vendus 180 euros, ces baskets incluent un abonnement annuel métro - bus - tram (hors trains de banlieue), contre 761 euros pour un forfait classique. Les consommateurs séduits par ce concept commercial qui permet de voyager presque gratuitement sur une partie du réseau ont formé une longue file d'attente. Certains ont même tenté de revendre en ligne leur paire « collector », à un tarif de base quintuplé.",
+  "pergunta": "Quel est l'objectif de la société berlinoise des transports ?",
+  "alternativas": [
+   "Attirer l'attention grâce à un coup de publicité.",
+   "Concurrencer les autres moyens de locomotion.",
+   "Multiplier le nombre de souscripteurs par internet.",
+   "Permettre de voyager extramuros à moindres frais."
+  ],
+  "correta": 0,
+  "explicacao": "« Souvent critiquée… a fait parler d'elle » com um produto « collector » chamativo = um golpe publicitário para chamar atenção. O passe exclui os trens de subúrbio, ou seja, não é para viajar fora dos muros (contra D)."
+ },
+ {
+  "n": 35,
+  "nivel": "B2",
+  "texto": "« Un produit qui ne s'userait pas serait une tragédie pour les affaires », lisait-on dans une ancienne revue américaine. Des années plus tard, le concept d'obsolescence programmée n'a pas pris une ride ! Il s'agit pour les fabricants de réduire volontairement la durée de vie ou d'emploi d'un produit afin d'en augmenter le taux de remplacement. Ici se cache le cœur de la course à la consommation. Le bilan écologique est également sans appel : les matières que contiennent nos appareils finissent en grande partie en déchets incinérés ou enfouis. L'exemple du téléphone portable en dit long : dans un rapport, une sénatrice ne souligne que « la conception des téléphones est délibérément défavorable au réemploi et au recyclage ».",
+  "pergunta": "Que constate ce journaliste à propos des articles proposés par les fabricants ?",
+  "alternativas": [
+   "Ils se détériorent après un certain temps.",
+   "Ils sont dangereux pour la santé.",
+   "Ils sont nuisibles pour l'environnement.",
+   "Ils sont vendus à des prix élevés."
+  ],
+  "correta": 0,
+  "explicacao": "A obsolescência programada = « réduire volontairement la durée de vie » para forçar a troca = os produtos se deterioram propositalmente após certo tempo. O impacto ambiental é um dado adicional; a pergunta foca no que os fabricantes fazem com os artigos (contra C)."
+ },
+ {
+  "n": 36,
+  "nivel": "B2",
+  "texto": "Le Sénat a adopté une proposition de loi visant à lutter contre l'exposition précoce des enfants aux écrans. Elle prévoit qu'un message avertissant des dangers des écrans chez les enfants de moins de 3 ans devra apparaître sur les emballages des outils et jeux numériques. Cette initiative salutaire n'a rien d'un gadget : de nombreux psychologues et pédopsychiatres ne considèrent que l'exposition aux écrans avant 3 ans peut être nocive pour un cerveau en construction, notamment parce qu'elle parasite l'interaction avec autrui. Verra-t-on bientôt un autocollant « à utiliser avec modération » ? Sur les consoles de jeu et les tablettes ?",
+  "pergunta": "D'après cet article, quel est l'objectif de cette loi ?",
+  "alternativas": [
+   "Encadrer le marché du numérique.",
+   "Prévenir l'addiction aux jeux vidéo.",
+   "Protéger les enfants des ondes.",
+   "Restreindre l'impact des écrans."
+  ],
+  "correta": 3,
+  "explicacao": "A lei « vise à lutter contre l'exposition précoce des enfants aux écrans » = restringir o impacto das telas. Não se trata de ondas (C) nem de vício em jogos (B); regular o mercado (A) não é o objetivo declarado."
+ },
+ {
+  "n": 37,
+  "nivel": "C1",
+  "texto": "Maintenant elles étaient là. Non plus en éveil, en méfiance, et rassemblées sous l'influence de la crainte par troupes, hardes, files et bandes, selon la race, la tribu, la famille, mais confondues et mêlées au sein d'une sécurité ineffable dans la trêve de l'eau, en paix avec la brousse, elles-mêmes et l'aurore. A la distance où je me trouvais, il n'était pas possible de distinguer l'inflexion des mouvements, ou l'harmonie des couleurs, mais cette distance ne m'empêchait pas de voir que les bêtes se comptaient par centaines et centaines, que toutes les espèces voisinaient, et que cet instant de leur vie ne connaissait pas la peur ou la hâte. Gazelles, antilopes, girafes, gnous, zèbres, rhinocéros, buffles, éléphants- les animaux s'arrêtaient ou se déplaçaient au pas du loisir au gré de la soif, au goût du hasard.",
+  "pergunta": "Quelle phrase résume exactement cet extrait de roman ?",
+  "alternativas": [
+   "Je ressentais pleinement l'anxiété des bêtes.",
+   "Je percevais parfaitement la quiétude de cet instant.",
+   "Je découvrais inopinément un spectacle effrayant et inquiétant.",
+   "J'éprouvais un sentiment de crainte face à ces troupeaux d'animaux sauvages."
+  ],
+  "correta": 1,
+  "explicacao": "« une sécurité ineffable », « en paix », « ne connaissait pas la peur ou la hâte » = a serenidade/quietude do momento. As opções A, C e D introduzem medo, que o texto justamente nega."
+ },
+ {
+  "n": 38,
+  "nivel": "B2",
+  "texto": "Les études le montrent : loin de disparaître, la pause-déjeuner reste un moment sacré pour une très grande majorité du personnel. Et pas seulement pour se restaurer et recharger ses batteries. Cette coupure rituelle est aussi l'occasion de partager un moment avec ses collègues, d'échanger, de nouer des liens de convivialité. Immuable, la pause-déjeuner connait pourtant depuis quelques années d'importantes mutations. La crise économique a évidemment eu ses effets, en pesant sur le budget du consommateur. Mais les bouleversements vont au-delà de ces aspects purement financiers et s'étendent au domaine alimentaire. Autrefois prépondérant, le souci de quantité a laissé la place à la sélection, gage selon les consommateurs de plus de qualité. Dans les restaurants d'entreprises, les salariés vont privilégier une offre moins large, mais mieux choisie.",
+  "pergunta": "Qu'apprend-on sur la pause-déjeuner au travail ?",
+  "alternativas": [
+   "Elle engendre une baisse du rendement du personnel.",
+   "Elle est en partie prise en charge par les entreprises.",
+   "Les employés sont attachés à l'origine des aliments.",
+   "Les salariés ont tendance à la prendre à l'extérieur."
+  ],
+  "correta": 2,
+  "explicacao": "Nota: das opções, a que o texto sustenta é a busca por qualidade — « le souci de quantité a laissé la place à la sélection… plus de qualité ». Os assalariados preferem « une offre moins large, mais mieux choisie », ligando-se à qualidade/procedência dos alimentos. As demais opções não são afirmadas."
+ },
+ {
+  "n": 39,
+  "nivel": "B2",
+  "texto": "La créativité instinctive, qui serait naturelle, est souvent opposée à la créativité plus rationalisée, cérébrale éduquée, notamment en musique. Les musiciens ont tendance à surestimer la première, avec l'idée que moins on en sait, mieux c'est. Comme si la connaissance risquait de mettre des œillères et d'enfermer la créativité dans un cadre, à la manière d'un adulte qui s'autoriserait moins à imaginer des choses fantaisistes qu'on enfant. Ce n'est pas impossible, mais la créativité est la capacité du cerveau à faire des associations mentales originales et cohérentes. Une éducation musicale, associée à l'intelligence, peut faciliter ces associations puisqu'elle nourrit le cerveau d'expériences, notamment esthétiques pour les artistes, et d'idées que l'on peut ensuite lier.",
+  "pergunta": "Que souligne ce journaliste à propos du processus de création musicale ?",
+  "alternativas": [
+   "Il mobilise une zone spécifique du cerveau.",
+   "Il s'avère plus spontané chez les enfants.",
+   "Il s'enrichit des connaissances théoriques.",
+   "Il semble réservé aux esprits imaginatifs."
+  ],
+  "correta": 2,
+  "explicacao": "Contra a ideia de que « moins on en sait, mieux c'est », o autor mostra que « une éducation musicale… peut faciliter ces associations » = a criação se enriquece com conhecimento teórico. B é a opinião comum que o texto relativiza."
+ }
+]

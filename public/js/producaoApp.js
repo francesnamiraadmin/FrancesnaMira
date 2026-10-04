@@ -247,7 +247,8 @@ function irAccueil() {
       html += htmlHubEscolhas();
       html += '<div id="acc-pendencias"></div>';
       html += '<h2 class="secao-titulo acc-secao">Accueil</h2>';
-      html += '<div class="acc-duas"><div id="acc-devoirs"></div><div id="acc-msgs"></div></div>';
+      // « Mes devoirs » e « Messages » ficam só no Meu Espaço do site (os dados continuam carregados abaixo:
+      // os devoirs liberam os temas pedidos e alimentam o selo de tarefas)
       html += '<div id="acc-destaque"></div>';
       html += htmlTirage(ORDEM_TACHES, 'acc-tirage');
       html += '<div id="acc-temas-mes"></div>';

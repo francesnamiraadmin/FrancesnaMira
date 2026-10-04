@@ -1,0 +1,548 @@
+[
+ {
+  "n": 1,
+  "nivel": "A1",
+  "texto": "INFIRMERIE\nJe suis en consultation. Revenez dans quelques minutes.",
+  "pergunta": "Que faire pour rencontrer l'infirmière ?",
+  "alternativas": [
+   "Frapper et entrer",
+   "Prendre rendez-vous",
+   "Revenir plus tard",
+   "Téléphoner"
+  ],
+  "correta": 2,
+  "explicacao": "O aviso dá a instrução literal: « Revenez dans quelques minutes » — voltar em alguns minutos = voltar mais tarde. A é o oposto do pedido (a enfermeira está ocupada, « en consultation », não se deve entrar). B e D inventam agendamento e telefonema que o cartaz nunca menciona. A resposta é a reformulação direta da única ordem dada."
+ },
+ {
+  "n": 2,
+  "nivel": "A1",
+  "texto": "ÉTUDIANTS INTERNATIONAUX : NE RESTEZ PAS SEULS !\nInscrivez-vous dans l'association de l'Université pour :\n• discuter avec des étudiants français ;\n• participer à des groupes de conversation ;\n• faire des activités ensemble : sport, shopping, visite, sorties… ET TOUT EST GRATUIT !",
+  "pergunta": "Que propose cette association ?",
+  "alternativas": [
+   "Des cours particuliers",
+   "Des jobs pendant le week-end",
+   "Des rencontres entre jeunes",
+   "Des voyages à l'étranger"
+  ],
+  "correta": 2,
+  "explicacao": "Todos os itens da lista convergem para o encontro entre estudantes: « discuter avec des étudiants français », « groupes de conversation », « activités ensemble ». Isso é encontro entre jovens. A pesca a ideia de universidade e inventa aulas; B toma « activités » por trabalho remunerado; D transforma « étudiants internationaux » em viagens ao exterior. A resposta é a categoria que resume a lista inteira, não um de seus itens."
+ },
+ {
+  "n": 3,
+  "nivel": "A1",
+  "texto": "Désolé de te le dire si tard ! Je ne peux pas venir ce soir. Pierre",
+  "pergunta": "Pourquoi Pierre a-t-il écrit ce message ?",
+  "alternativas": [
+   "Il annonce son absence",
+   "Il donne un rendez-vous",
+   "Il indique son arrivée",
+   "Il signale son retard"
+  ],
+  "correta": 0,
+  "explicacao": "A frase-núcleo é « Je ne peux pas venir ce soir » — não poder vir = anunciar a ausência. D é o vizinho mais perigoso: chegar atrasado ainda é vir, mas Pierre não virá de todo. C é o oposto exato (não é chegada, é não-comparecimento); B inventa um convite. « Ne pas venir » é ausência total, jamais atraso."
+ },
+ {
+  "n": 4,
+  "nivel": "A1",
+  "texto": "Camille,\nJe ne peux pas te retrouver au concert ce soir, désolé. Mes enfants sont malades et je dois rester avec eux. Viens déjeuner à la maison dimanche. Je pars bientôt en voyage. J'aimerais te voir avant mon départ.\nBises, Driss",
+  "pergunta": "Qu'est-ce Driss propose à son amie ?",
+  "alternativas": [
+   "D'aller à un concert",
+   "D'organiser un voyage",
+   "De déjeuner chez lui",
+   "De garder ses enfants"
+  ],
+  "correta": 2,
+  "explicacao": "A proposta está no imperativo: « Viens déjeuner à la maison dimanche ». É o único convite do bilhete. A é o encontro que Driss cancela (« je ne peux pas te retrouver au concert »), não o que propõe. B pega « voyage », mas a viagem é dele e não é organizada com ela; D toma « mes enfants sont malades » e inventa que ela deve cuidar deles. Isole o verbo no imperativo: ele carrega a proposta."
+ },
+ {
+  "n": 5,
+  "nivel": "A1",
+  "texto": "Bonjour Sophie,\nJe ne pourrais pas venir à notre soirée cinéma. Ma fille est malade, je dois rester à la maison. Si tu veux, Kevin est disponible. Je peux lui donner ma place. Martine",
+  "pergunta": "Pourquoi est-ce que Martine envoie un message à Sophie ?",
+  "alternativas": [
+   "Pour annuler un dîner",
+   "Pour expliquer un problème",
+   "Pour l'inviter chez elle",
+   "Pour lui proposer de sortir"
+  ],
+  "correta": 1,
+  "explicacao": "Martine escreve para justificar por que não vai: « Ma fille est malade, je dois rester à la maison » — expor um problema e suas consequências. A é a armadilha da palavra deslocada: ela cancela uma sessão de cinema (« soirée cinéma »), não um jantar. C e D invertem os papéis: quem convida/propõe sair é Sophie, não Martine, que ao contrário desiste. O motivo do bilhete é a explicação do imprevisto."
+ },
+ {
+  "n": 6,
+  "nivel": "A1",
+  "texto": "Madame et monsieur Mroussi.\nMonsieur l'Ambassadeur de France a le plaisir de vous inviter au dîner qu'il donnera en sa résidence, le jeudi 14 juillet à 20 h. À l'occasion de la Fête nationale. Tenue de soirée exigée.",
+  "pergunta": "À quoi sont invités Mme et M. Mroussi ?",
+  "alternativas": [
+   "À un repas officiel",
+   "À un spectacle musical",
+   "À une fête de fin d'année",
+   "À une soirée dansante"
+  ],
+  "correta": 0,
+  "explicacao": "Três marcas apontam para o mesmo: « dîner » (jantar = refeição), oferecido por um embaixador « à l'occasion de la Fête nationale » com « tenue de soirée exigée » (traje de gala). Jantar oficial de embaixada = refeição oficial. B e D pescam « soirée » e imaginam música e dança, ausentes. C confunde « Fête nationale » (14 de julho) com festa de fim de ano. O substantivo central é « dîner », não « soirée »."
+ },
+ {
+  "n": 7,
+  "nivel": "A2",
+  "texto": "Adèle,\nN'oublie pas l'anniversaire de Raphaël ! On pourrait partir vers 19 h et aller ensemble chez lui : où est-ce qu'on se retrouve ? Si tu ne peux pas venir finalement, appelle-moi ! Bonne journée, Camille",
+  "pergunta": "Pourquoi est-ce que Camille écrit ce message à Adèle ?",
+  "alternativas": [
+   "Pour acheter un cadeau avec elle",
+   "Pour annuler sa venue à une fête",
+   "Pour décider d'un rendez-vous",
+   "Pour inviter son amie à dîner"
+  ],
+  "correta": 2,
+  "explicacao": "A pergunta direta do bilhete é a chave: « où est-ce qu'on se retrouve ? » — combinar o ponto de encontro. B é a inversão de papéis clássica: quem poderia desistir é Adèle (« si tu ne peux pas venir »), não Camille — e é hipótese, não fato. A inventa a compra de presente; D troca aniversário por jantar. Num bilhete, a pergunta direta é sempre o motivo de tê-lo escrito."
+ },
+ {
+  "n": 8,
+  "nivel": "A2",
+  "texto": "« La passion de Gauguin », voici le titre d'un documentaire sur le peintre français. Vous pouvez le regarder demain soir à la télévision. Pour les vrais passionnés, l'exposition « Gauguin en Océanie » commencera lundi prochain au Musée d'Art moderne.",
+  "pergunta": "De quoi parle cette annonce ?",
+  "alternativas": [
+   "De l'ouverture d'un musée parisien",
+   "De voyager en Océanie",
+   "Des derniers jours d'une exposition",
+   "D'une émission de télévision"
+  ],
+  "correta": 3,
+  "explicacao": "O anúncio apresenta primeiro um « documentaire » que se pode ver « demain soir à la télévision » — um programa de TV. B é a armadilha do título lido ao pé da letra: « Gauguin en Océanie » é o nome da exposição, não uma viagem. C inverte o tempo: a exposição « commencera lundi prochain » (vai começar), não está nos últimos dias. A pega « Musée » e inventa inauguração de museu. O suporte anunciado é a televisão."
+ },
+ {
+  "n": 9,
+  "nivel": "A2",
+  "texto": "Madame,\nNous avons bien reçu votre demande de remboursement pour un billet de train (voyage professionnel). Vous nous avez envoyé le ticket de carte bancaire, mais nous avons aussi besoin d'une attestation de votre employeur. Merci de nous l'adresser par courrier postal ou sous format électronique. Cordialement, Le service financier.",
+  "pergunta": "Quel document doit fournir la femme ?",
+  "alternativas": [
+   "Un document professionnel",
+   "Un titre de transport",
+   "Une enveloppe timbrée",
+   "Une somme d'argent"
+  ],
+  "correta": 0,
+  "explicacao": "O que falta é dito literalmente: « nous avons aussi besoin d'une attestation de votre employeur » — atestado do empregador = documento profissional. B é a armadilha do que ela já enviou: o bilhete de trem e o comprovante bancário já foram entregues (« vous nous avez envoyé »), não é o que se pede. C pesca « courrier postal » e inventa o envelope; D confunde o « remboursement » (o que ela receberá) com o que deve fornecer. Verifique sempre o que ainda falta, não o que já foi entregue."
+ },
+ {
+  "n": 10,
+  "nivel": "A2",
+  "texto": "Rendez-vous samedi pour un repas de quartier devant notre immeuble. Apportez vos chaises (il y aura des tables sur place). À boire et un plat salé ou sucré. Mireille et Pierre (3ème étage à gauche) organisent l'événement et peuvent répondre à vos questions.",
+  "pergunta": "Qu'est-ce qui est organisé ?",
+  "alternativas": [
+   "Un atelier de cuisine",
+   "Un déménagement",
+   "Une fête entre voisins",
+   "Une visite d'appartement"
+  ],
+  "correta": 2,
+  "explicacao": "« Un repas de quartier devant notre immeuble » reunindo moradores é uma festa de vizinhos. A é o vizinho perigoso: fala-se de comida (« un plat salé ou sucré »), mas ninguém ensina a cozinhar — cada um traz seu prato pronto. B pega « chaises » e « immeuble » e imagina mudança; D toma « appartement » (que nem aparece diretamente) por visita. Trazer cadeira e comida para comer juntos na rua é confraternização, não aula nem mudança."
+ },
+ {
+  "n": 11,
+  "nivel": "A2",
+  "texto": "Chez Doris\nAu restaurant Chez Doris, si vous prenez un menu complet avec une entrée, un plat et un dessert entre midi et 14h, le café sont offert (seulement du lundi au vendredi).",
+  "pergunta": "Qu'est-ce que ce restaurant propose ?",
+  "alternativas": [
+   "Des cours de cuisine",
+   "Des plats à emporter",
+   "Un repas bon marché",
+   "Une boisson gratuite"
+  ],
+  "correta": 3,
+  "explicacao": "A oferta é precisa: « le café [est] offert » — o café oferecido é uma bebida grátis. C é a armadilha mais sedutora: há uma vantagem, mas o texto não fala em preço baixo, e sim em brinde (só o café é grátis, o menu se paga). A pesca « cuisine » do nome do restaurante e inventa aulas; B inventa comida para viagem. « Offert » aponta para o brinde, não para desconto no valor da refeição."
+ },
+ {
+  "n": 12,
+  "nivel": "B1",
+  "texto": "Fini les souvenirs de voyages trop flous. Pour s'entraîner direction Lyon pour un week-end sur place, une jeune agence spécialisée vous propose un stage pour découvrir la ville autrement. L'objectif : sur une journée travailler la photographie et découvrir en même temps avec un guide les monuments historiques de la ville. Vous profitez toute la journée des conseils d'un professionnel qui vous montre les endroits secrets de Lyon. Il vous explique comment utiliser la lumière naturelle.",
+  "pergunta": "Que propose cette agence ?",
+  "alternativas": [
+   "D'apprendre à s'orienter dans la ville",
+   "De se former au métier de guide",
+   "De visiter des expositions photo",
+   "De voir Lyon d'une façon différente"
+  ],
+  "correta": 3,
+  "explicacao": "O objetivo é dito e reforçado: « découvrir la ville autrement » e « découvrir… les monuments… les endroits secrets ». Descobrir a cidade de outro jeito = vê-la de forma diferente. B é a armadilha da palavra « guide »: há um guia acompanhando, mas ninguém é formado para ser guia. C toma « photographie » por visita a exposições de foto — o estágio ensina a fotografar, não a olhar fotos. A inventa orientação urbana. A síntese do texto (fotografia + monumentos + lugares secretos) é uma nova maneira de ver Lyon."
+ },
+ {
+  "n": 13,
+  "nivel": "B1",
+  "texto": "On savait déjà que le chocolat était bon pour la tension. Les scientifiques affirment maintenant qu'« une consommation de chocolat pourrait être une stratégie efficace de protection contre les rayons du soleil ». Pour cela, il n'est pas nécessaire de recouvrir son corps de cacao : d'après les chercheurs, il suffirait de consommer trois carrés par jour pour bénéficier des bienfaits du chocolat. Cela n'empêche pas de se protéger avec la crème solaire et d'avoir une bonne alimentation.",
+  "pergunta": "Que conseillent ces chercheurs pour se protéger du soleil ?",
+  "alternativas": [
+   "D'utiliser des crèmes solaires à base de chocolat",
+   "De diminuer sa consommation de chocolat",
+   "De manger quotidiennement du chocolat",
+   "De suivre un traitement de pilules au chocolat"
+  ],
+  "correta": 2,
+  "explicacao": "O conselho está na frase: « il suffirait de consommer trois carrés par jour » — três quadradinhos por dia é comer chocolate diariamente. A é a armadilha da mistura de palavras: « crème solaire » e « chocolat » aparecem, mas separados — o texto até diz que não é preciso « recouvrir son corps de cacao ». B é o oposto (aconselha consumir, não reduzir); D inventa comprimidos onde há apenas o alimento. A resposta generaliza « trois carrés par jour » em « quotidiennement »."
+ },
+ {
+  "n": 14,
+  "nivel": "B1",
+  "texto": "Le 21ème festival du film vient de se terminer à l'Alpe d'Huez, le seul endroit en France où l'on peut voir, gratuitement et avant tout le monde, les meilleures comédies de l'année et skier avec les vedettes du grand écran. Pour la 21ème édition, Franck Dubosc a présenté son premier film en tant que réalisateur. Et le lendemain, comme toujours, tout le monde s'est retrouvé sur les pistes ou aux terrasses des cafés, dans une ambiance sportive et décontractée.",
+  "pergunta": "Qu'est-ce que ce festival permet de faire ?",
+  "alternativas": [
+   "Découvrir de jeunes acteurs",
+   "Participer à des tournages",
+   "Rencontrer des stars du cinéma",
+   "Revoir de grands classiques"
+  ],
+  "correta": 2,
+  "explicacao": "A vantagem é dita: « skier avec les vedettes du grand écran » — esquiar com as estrelas do cinema é encontrá-las. D é a inversão temporal e de conteúdo: veem-se « les meilleures comédies de l'année… avant tout le monde », ou seja, novidades em pré-estreia, não clássicos revistos. B toma « réalisateur » e inventa participação em filmagens; A pesca « Franck Dubosc » (que estreia como diretor, não jovem ator). O que o festival permite é o contato com as vedetes, não a revisão de clássicos."
+ },
+ {
+  "n": 15,
+  "nivel": "B1",
+  "texto": "Le Guichet du Savoir\nDe la bibliothèque municipale de Lyon est un service gratuit en ligne. Il permet de poster toute demande de type documentaire. Les bibliothécaires répondent dans un délai de 72 heures maximum.",
+  "pergunta": "Que font les bibliothécaires sur ce site internet ?",
+  "alternativas": [
+   "Ils annoncent des événements culturels lyonnais",
+   "Ils donnent des informations sur leur métier",
+   "Ils proposent de nouveaux livres aux lecteurs",
+   "Ils répondent aux questions des internautes"
+  ],
+  "correta": 3,
+  "explicacao": "A função é literal: os internautas podem « poster toute demande de type documentaire » e « les bibliothécaires répondent » — responder às perguntas dos internautas. B é a armadilha mais fina: eles dão informações documentais aos usuários, não informações « sur leur métier » (sobre a própria profissão). A e C pescam o ambiente de biblioteca (eventos, livros novos) que o texto nunca menciona. O serviço é de resposta a consultas, não de divulgação."
+ },
+ {
+  "n": 16,
+  "nivel": "B1",
+  "texto": "Le guide-interprète travaille dans les musées, châteaux et parcs. Il prépare ses visites en recherchant des documents, pour actualiser ses connaissances. Il s'adresse aux responsables du site pour organiser la sortie et obtenir les autorisations. Pendant la visite il explique l'histoire des lieux ou des œuvres et répond aux questions des participants.",
+  "pergunta": "Que décrit-on dans ce texte ?",
+  "alternativas": [
+   "Un métier",
+   "Un voyage",
+   "Une formation",
+   "Une galerie"
+  ],
+  "correta": 0,
+  "explicacao": "O texto descreve o que um profissional faz no dia a dia: prepara visitas, pede autorizações, explica, responde — é a descrição de uma profissão (« le guide-interprète travaille »). C é a armadilha mais próxima: fala-se de « actualiser ses connaissances », mas isso é parte do ofício, não um curso de formação. B pega « visites/sortie » e imagina viagem; D pesca « musées » e inventa galeria. O verbo de abertura, « travaille », enquadra tudo como métier."
+ },
+ {
+  "n": 17,
+  "nivel": "B1",
+  "texto": "Internet est entré dans les habitudes de consommation et aucun secteur ne semble pouvoir échapper à cette pratique sauf peut-être le milieu pharmaceutique. Aujourd'hui, les trois quarts des Français déclarent ne pas être prêts à acheter un médicament sur Internet. Car le médicament n'est pas une simple marchandise, et la personne qui entre dans une pharmacie n'y cherche pas seulement un remède, mais un accompagnement et une assurance à la fois de sécurité et de santé.",
+  "pergunta": "Qu'apprend-on sur l'achat de médicaments en ligne ?",
+  "alternativas": [
+   "C'est une pratique courante",
+   "Les pharmaciens s'y opposent",
+   "Leur paiement est sécurisé",
+   "On s'en méfie en France"
+  ],
+  "correta": 3,
+  "explicacao": "O dado central é a desconfiança: « les trois quarts des Français déclarent ne pas être prêts à acheter un médicament sur Internet ». Não estar disposto = desconfiar. A é a armadilha do contexto: a internet é prática corrente em geral, mas o texto isola justamente a exceção farmacêutica. B desloca a recusa dos consumidores para os farmacêuticos, que não são citados como oponentes. C inventa segurança de pagamento, tema ausente. A ressalva « sauf peut-être le milieu pharmaceutique » anuncia a exceção que é a resposta."
+ },
+ {
+  "n": 18,
+  "nivel": "B2",
+  "texto": "Sur la bouteille de sa boisson de jus de fruits bio, un fabricant utilise une belle image d'ananas et de noix de coco. À lire de plus près. Vous apprendrez que « des oranges gorgées de soleil et de bananes » viennent s'associer à l'ananas et à la noix de coco. Une jolie manière d'expliquer qu'ananas et noix de coco ne représentent que 30% des fruits de la boisson avec d'autre jus plus communs (et moins coûteux).",
+  "pergunta": "Que dénonce cet article ?",
+  "alternativas": [
+   "L'ajout d'ingrédients malsains",
+   "Le prix des produits exotiques",
+   "Les annonces publicitaires",
+   "Les étiquettes trompeuses"
+  ],
+  "correta": 3,
+  "explicacao": "A denúncia está no contraste entre a imagem e a realidade: o rótulo mostra abacaxi e coco, mas « ananas et noix de coco ne représentent que 30% des fruits » — o resto são sucos comuns e baratos. Rótulo que engana = etiqueta enganosa. C é a armadilha próxima: não é a publicidade em geral que se critica, mas especificamente o rótulo do produto. A inventa ingredientes nocivos (« malsains »), que o texto não menciona; B pesca « moins coûteux » e desloca para preço. A crítica recai sobre a embalagem que ilude, não sobre a saúde nem sobre o preço."
+ },
+ {
+  "n": 19,
+  "nivel": "B2",
+  "texto": "Quelle est la principale ressource qui manque aux chercheurs ? Le temps. « Informatiser les données de l'herbier du Muséum d'histoire naturelle aurait pris cinq cents ans à un chercheur », explique Marc Pignal, botaniste au Muséum. Le Muséum a donc trouvé une alternative : une plate-forme sur laquelle les internautes sont invités à retranscrire les informations répertoriées sur les étiquettes des plantes et que l'apprenti botaniste, après avoir ouvert un compte, retrouve sur une photo d'une page de l'herbier national.",
+  "pergunta": "Qu'a décidé de faire en ligne le Muséum d'histoire naturelle ?",
+  "alternativas": [
+   "Créer un site collaboratif de données",
+   "Mener une enquête sur les plantes",
+   "Organiser des visites de l'herbier",
+   "Proposer des cours de botanique"
+  ],
+  "correta": 0,
+  "explicacao": "A solução é descrita: « une plate-forme sur laquelle les internautes sont invités à retranscrire les informations » — plataforma alimentada por internautas voluntários é um site colaborativo de dados. D é a armadilha do « apprenti botaniste »: o termo evoca aprendizado, mas o internauta transcreve etiquetas, não recebe curso. C pega « herbier » e inventa visitas; B toma « données sur les plantes » por uma pesquisa/enquete. A tarefa dos usuários é digitalizar dados em conjunto, não estudar nem visitar."
+ },
+ {
+  "n": 20,
+  "nivel": "B2",
+  "texto": "Il y a quelque chose de rare dans « Normandie nue » : ce film est résolument léger, tout en ayant du fond. À travers une histoire qui sert de fil conducteur cocasse et insolite - celle d'un artiste américain qui veut photographier des paysans dévêtus - ; « Normandie nue » aborde la crise des éleveurs avec beaucoup d'humanité, notamment grâce au maire du village qui voit dans la venue du photographe l'occasion de faire valoir sa cause aux yeux de la planète. Parfois un peu maladroite, cette comédie amuse en caricaturant gentiment les médias, les artistes et les bobos parisiens en mal de verdure.",
+  "pergunta": "Quelle est l'opinion du journaliste sur le film « Normandie nue » ?",
+  "alternativas": [
+   "Il est facile de s'identifier aux personnages",
+   "Les lieux de tournage sont authentiques",
+   "On y dresse un portrait juste de la société",
+   "Son humour fait passer un message sérieux"
+  ],
+  "correta": 3,
+  "explicacao": "A tese está na primeira frase e se repete: « ce film est résolument léger, tout en ayant du fond » — leve mas com fundo, e « aborde la crise des éleveurs avec beaucoup d'humanité ». Comédia que carrega uma questão séria = o humor veicula uma mensagem. C é a armadilha próxima: o filme « caricature gentiment » os personagens — caricatura não é retrato justo da sociedade. A inventa identificação; B pega « Normandie » e imagina locações autênticas. O elogio central é a mistura de leveza cômica com profundidade temática."
+ },
+ {
+  "n": 21,
+  "nivel": "B2",
+  "texto": "Mathieu Lagouanère et Élodie Calas deux journalistes, ont fait un tour du monde avec une idée originale : provoquer des rencontres en faisant goûter le roquefort, un fromage traditionnel, fabriqué dans leur région. « Le roquefort était simplement un moyen de faire connaissance avec les habitants. Ses principales caractéristiques, les taches de moisissure et l'odeur, peuvent faire réagir ». Explique Mathieu. La société Roquefort leur a fourni les fromages. Ils ont raconté leurs aventures dans un blog de voyage.",
+  "pergunta": "Quel était l'objectif de Mathieu et Élodie ?",
+  "alternativas": [
+   "Découvrir de recettes locales",
+   "Entrer en contact avec les gens",
+   "Réaliser une opération publicitaire",
+   "Vendre des spécialités françaises"
+  ],
+  "correta": 1,
+  "explicacao": "O objetivo é declarado duas vezes: « provoquer des rencontres » e « le roquefort était simplement un moyen de faire connaissance avec les habitants ». O queijo é meio, não fim. C é a armadilha mais perigosa: a empresa forneceu os queijos, o que sugere publicidade — mas o texto diz que era « simplement un moyen », não uma campanha. D toma « fromage »/« société » por venda; A pesca « goûter » e inventa receitas. O queijo serve para conhecer pessoas, não para vender nem para divulgar a marca."
+ },
+ {
+  "n": 22,
+  "nivel": "B2",
+  "texto": "Non, Maupassant n'est pas qu'un écrivain pour cours de français. Comme tout bon auteur culte, ses thématiques sont percutantes, grinçantes, toujours d'actualité et tellement vraies dans le fond : hypocrisie de la bourgeoisie, monde paysan décrit sans artifice, rapports humains aliénés par le contexte social et culturel… Du pain bénit pour les auteurs de « Chez Maupassant » une collection de huit téléfilms tirés des contes et nouvelles du grand Guy.",
+  "pergunta": "Que présente l'auteur de l'article ?",
+  "alternativas": [
+   "Des adaptations télévisées de Maupassant",
+   "Des programmes d'études littéraires",
+   "Une exposition consacrée à Maupassant",
+   "Un ouvrage critique récemment paru"
+  ],
+  "correta": 0,
+  "explicacao": "O objeto do artigo aparece no fim: « une collection de huit téléfilms tirés des contes et nouvelles » — telefilmes tirados de Maupassant são adaptações televisivas. B é a ideia recebida que o texto vem derrubar: « Maupassant n'est pas qu'un écrivain pour cours de français » — a alternativa repete exatamente o clichê negado. C inventa exposição; D toma « auteurs de Chez Maupassant » por um ensaio crítico. Quando o texto abre negando uma imagem, ela está entre as erradas."
+ },
+ {
+  "n": 23,
+  "nivel": "B2",
+  "texto": "Le PDG de la société SEB a avoué « ne plus espérer avoir une croissance importante » sur les marchés occidentaux, arrivés à saturation. Lui qui a toujours défendu la valeur ajoutée et le savoir-faire des usines tricolores, n'a pas pu faire face à l'arrivée des pays émergents dans le petit électroménager : 80% des grille-pains vendus en France coûtent désormais moins de 30€. Résultat, les ventes de l'inventeur de la cocotte-minute ont reculé de 5.6% en France et de 2.6% dans les autres pays de l'Union Européenne.",
+  "pergunta": "Que regrette le PDG de la société SEB ?",
+  "alternativas": [
+   "La faible qualité de la production française",
+   "Le manque d'innovation dans son entreprise",
+   "Les contraintes des contrôles financiers",
+   "L'expansion de la concurrence internationale"
+  ],
+  "correta": 3,
+  "explicacao": "A causa do lamento é dita: « n'a pas pu faire face à l'arrivée des pays émergents » cujos produtos custam menos de 30 €. Chegada de concorrentes estrangeiros = expansão da concorrência internacional. A é o oposto exato: ele « a toujours défendu la valeur ajoutée et le savoir-faire » francês — não lamenta a qualidade, ele a elogia. B inventa falta de inovação; C pesca « financier »/números e imagina controles financeiros. O que ele lamenta é não ter resistido aos emergentes."
+ },
+ {
+  "n": 24,
+  "nivel": "C1",
+  "texto": "Lors de l'inscription à la faculté de médecine de Boston, les professeurs privilégient les candidats… ayant déjà connu des échecs. Ils considèrent en effet que ces erreurs d'orientation permettent de grandir plus vite, de se rapprocher plus rapidement de sa vocation - bref, de mieux se connaître. Plus simplement, ils réduisent aussi le risque de recruter des élèves qui vont se rendre compte au bout de quelques mois qu'ils ne veulent plus devenir médecins : ils ont déjà changé de voie une fois, il est moins probable qu'ils en changent une seconde fois.",
+  "pergunta": "Pourquoi les candidates qui se réorientent sont-ils privilégiés dans cette faculté ?",
+  "alternativas": [
+   "Ils ont plus de facilités d'apprentissage",
+   "Ils ont une idée claire de leur futur métier",
+   "Ils sont déterminés à travailler beaucoup",
+   "Ils sont plus sûrs de leur nouveau choix"
+  ],
+  "correta": 3,
+  "explicacao": "O argumento final é a chave: « ils ont déjà changé de voie une fois, il est moins probable qu'ils en changent une seconde fois » — quem já mudou uma vez tem menos risco de desistir, logo está mais seguro da nova escolha. B é a armadilha próxima: eles se conhecem melhor (« mieux se connaître »), mas o texto insiste na estabilidade da decisão, não numa ideia clara do ofício. A inventa facilidade de aprendizado; C toma « grandir plus vite » por disposição para trabalhar muito. O foco é a menor probabilidade de nova desistência."
+ },
+ {
+  "n": 25,
+  "nivel": "C1",
+  "texto": "Journée « Portes Ouvertes » à Polytech 'Tours. Venez rencontrer les étudiants, Enseignants et Associations de Polytech 'Tours. Le samedi 12 février, de 9h à 16h sans interruption. → Espaces d'information présents sur les trois sites de l'école.\n→ Présentation des études et des métiers d'ingénieur par les responsables des spécialités sur chaque site. → Visites guidées des salles de travaux pratiques, des centres de documentation, des laboratoires de Recherche et de langues. → Démonstration des projets réalisés dans nos cursus.\n→ Présentation des associations étudiantes.",
+  "pergunta": "Quel est l'objectif de cette journée ?",
+  "alternativas": [
+   "Découvrir le travail de recherche en laboratoire",
+   "Faire découvrir les formations pour devenir ingénieur",
+   "Inaugurer l'ouverture d'un campus universitaire",
+   "Obtenir des conseils afin de créer une association"
+  ],
+  "correta": 1,
+  "explicacao": "A finalidade global reúne os itens: « présentation des études et des métiers d'ingénieur », visitas às salas e projetos — tudo para dar a conhecer a formação de engenheiro. A e D são itens isolados da lista promovidos a objetivo: os laboratórios de pesquisa e as associações são apenas duas paradas do dia, não a meta. C confunde « Portes Ouvertes » com inauguração de campus — a escola já existe (« nos cursus »). O objetivo é a soma da lista: apresentar a formação em engenharia."
+ },
+ {
+  "n": 26,
+  "nivel": "C1",
+  "texto": "La rétrospective Mali Twist montre comment, par sa diversité et son éclat, l'œuvre de Malick Sidibé s'inscrit dans le champ contemporain de la photographie. Tour à tour reporter et portraitiste, Malick Sidibé a construit, depuis l'ouverture de son studio à Bamako en 1962, un ensemble photographique en noir et blanc exceptionnel. Mali Twist révèle son regard attentif et son talent pour mettre en lumière le meilleur de chacun, sa singularité. Malick Sidibé a fait de la photographie un art de l'échange. S'il a eu pour règle d'or d'embellir ses modèles. Il témoigne aussi de la joie de vivre de la jeunesse bamakoise, peu après l'indépendance du Mali. Entre visages anonymes et corps en mouvement, poseurs élégants et flâneurs, Mali Twist offre plus de 250 photographies.",
+  "pergunta": "Sur quoi repose le travail photographique de Malick Sidibé ?",
+  "alternativas": [
+   "Un engagement politique",
+   "Une contemplation abstraite",
+   "Une mise en valeur de l'autre",
+   "Une technique de retouche"
+  ],
+  "correta": 2,
+  "explicacao": "Três formulações dizem o mesmo: « mettre en lumière le meilleur de chacun, sa singularité », « un art de l'échange », « embellir ses modèles ». Valorizar o outro é o eixo. A é a armadilha do contexto histórico: « peu après l'indépendance du Mali » evoca política, mas o engajamento é humano, não partidário. D toma « embellir » por retoque técnico — trata-se de olhar, não de manipulação de imagem. B contradiz o texto, que mostra rostos e corpos concretos, não abstração. O trabalho repousa na valorização das pessoas fotografadas."
+ },
+ {
+  "n": 27,
+  "nivel": "C1",
+  "texto": "Dixième anniversaire du musée de l'Europe\nIl y a maintenant près de dix ans, le musée de l'Europe n'était encore qu'un projet lancé par un petit groupe d'historiens et de promoteurs culturels issus de la société civile. Avec pour ambition de faire découvrir aux Européens les racines de leur civilisation commune. Installé dans la ville de Bruxelles siège des institutions européennes, celui-ci sera le « lieu de mémoire » dont l'Europe a besoin. C'est là que le parcours permanent et les expositions temporaires offriront à tous les Européens (et à leurs hôtes) une histoire raisonnée de l'union, entendue comme une civilisation diverse mais unique.",
+  "pergunta": "Quelles sont les personnes à l'origine de ce projet ?",
+  "alternativas": [
+   "Des conservateurs de musée",
+   "Des élus européens",
+   "De simples citoyens",
+   "Des militants associatifs"
+  ],
+  "correta": 2,
+  "explicacao": "A origem é precisada: « un petit groupe d'historiens et de promoteurs culturels issus de la société civile ». « Société civile » é a expressão-chave = cidadãos comuns. B é a armadilha do contexto institucional: o museu fica em Bruxelas, « siège des institutions européennes » — mas o local não é quem lançou o projeto; não foram eleitos. A pega « musée » e inventa curadores; D toma « société civile » por militantes de associação, o que estreita indevidamente. « Issus de la société civile » aponta para simples cidadãos."
+ },
+ {
+  "n": 28,
+  "nivel": "C1",
+  "texto": "La désillusion de la jeunesse française d'aujourd'hui est un fait préoccupant. Elle est surtout due à la crise internationale, qui réduit les offres d'emploi, fait pression sur les salaires et raréfie les possibilités de promotion. Mais on peut également l'attribuer à un conflit de génération larvé : il oppose la classe d'âge des « baby-boomers », devenus aujourd'hui « papy-boomers » triomphants tout au long de leurs parcours, à celle de leurs enfants et maintenant de leurs petits-enfants.",
+  "pergunta": "D'où vient la désillusion des jeunes en France ?",
+  "alternativas": [
+   "De la concurrence des autres générations",
+   "De la course à la compétitive",
+   "De la situation économique tendue",
+   "Des critiques émanant de leurs parents"
+  ],
+  "correta": 2,
+  "explicacao": "A causa principal é marcada por « surtout » : « surtout due à la crise internationale, qui réduit les offres d'emploi » — crise econômica que aperta o emprego = situação econômica tensa. A é a armadilha do fator secundário, introduzido por « également »: o conflito de gerações é apontado como causa acessória, não a principal. D transforma esse conflito em « críticas dos pais », o que o texto não diz; B inventa uma corrida por competitividade. O « surtout » aponta a causa central; o « également » marca o secundário."
+ },
+ {
+  "n": 29,
+  "nivel": "C1",
+  "texto": "Les implants médicaux (prothèses mammaires de hanche. etc.) sont censés vous améliorer la vie. Mais des lacunes dans leur contrôle seraient à l'origine d'incidents en nombre croissant. C'est ce que révèle la dernière enquête du Consortium international des journalistes d'investigation. On y apprend que, en France, le nombre d'incidents liés à ces implants aurait doublé en dix ans. Le problème, souligne l'enquête, c'est que les informations sur les patients restent globalement très incomplètes et leurs données sont souvent confidentielles. Il est donc difficile de dénombrer avec précision le modèle des implants posés, et de retrouver les patients en cas de problème.",
+  "pergunta": "Quel problème révèle cet article à propos des implants médicaux ?",
+  "alternativas": [
+   "Les données des malades sont transmises aux fabricants",
+   "Les incidents dus aux erreurs de diagnostic augmentent",
+   "Les patients se méfient des innovations technologiques",
+   "Les recherches sont limitées par le manque d'informations"
+  ],
+  "correta": 3,
+  "explicacao": "O problema é enunciado por « le problème, souligne l'enquête » : « les informations sur les patients restent globalement très incomplètes… Il est donc difficile de dénombrer… et de retrouver les patients ». Informação incompleta que trava o rastreamento = pesquisa limitada pela falta de informação. B é a armadilha próxima: os incidentes aumentam, mas por lacunas no controle, não por « erros de diagnóstico ». A inverte: os dados são confidenciais, não repassados aos fabricantes; C inventa desconfiança dos pacientes. A frase marcada por « le problème » entrega a resposta."
+ },
+ {
+  "n": 30,
+  "nivel": "C1",
+  "texto": "Quarante terrains de football. C'est la superficie que les forêts perdent chaque minute à travers le monde. La destruction de la forêt tropicale provoque chaque année plus de rejet dans l'atmosphère que l'ensemble du secteur des transports. L'imaginaire collectif rendrait volontiers le commerce du bois principal responsable de la déforestation, alors qu'il n'en est rien. L'acteur majeur de ce phénomène est l'agriculture, responsable à 80% des déboisements dans les zones tropicales. Le marché illégal du bois a aussi sa part de responsabilité. Il est un facteur déclenchant, et s'alimente des autres activités. Quelque 1,6 milliard d'habitants dépendent directement des forêts, et contribuent pourtant à sa raréfaction, voire à sa disparition.",
+  "pergunta": "Selon cet article, sur quoi la déforestation a-t-elle un impact ?",
+  "alternativas": [
+   "Sur l'industrie des bois rares",
+   "Sur la démographie dans ces zones",
+   "Sur la pollution atmosphérique",
+   "Sur la progression des cultures tropicales"
+  ],
+  "correta": 2,
+  "explicacao": "O impacto é medido: « la destruction de la forêt tropicale provoque chaque année plus de rejet dans l'atmosphère que l'ensemble du secteur des transports » — mais emissão na atmosfera = poluição atmosférica. A e D confundem causa com efeito: o comércio de madeira e a agricultura são as causas da desflorestação (a agricultura « responsable à 80% »), não seu impacto. B pega « 1,6 milliard d'habitants » e inventa efeito demográfico. A pergunta é sobre o efeito, e o texto o quantifica em emissões."
+ },
+ {
+  "n": 31,
+  "nivel": "C2",
+  "texto": "Salé, sucré, acide, amer, quatre termes - tels les points cardinaux - qui définissent le territoire d'expression du goût. Nous serions en droit de penser que c'est un peu court pour dépeindre toutes les nuances de la palette aromatique et les émotions qu'elle suscite. Les Japonais y ont d'ailleurs ajouté la notion d'umami, cette saveur qui littéralement signifie « goût délicieux », enrobante, qui tapisse le palais, très addictive. Dans l'imaginaire collectif, le sucre évoque douceur, gourmandise, réconfort. L'on peut cependant imaginer une douceur à la lecture moins immédiate que celle apportée par le sucre, une douceur qui soit synonyme de complexité aromatique, qui joue sur les notes amères, piquantes ou acidulées.",
+  "pergunta": "Quel problème soulevé cet article ?",
+  "alternativas": [
+   "L'addiction liée à certains aliments",
+   "L'inévitable uniformisation du goût",
+   "La difficulté à décrire les saveurs",
+   "La multiplication des termes culinaires"
+  ],
+  "correta": 2,
+  "explicacao": "O problema é posto logo após a lista dos quatro sabores: « c'est un peu court pour dépeindre toutes les nuances de la palette aromatique » — os termos disponíveis são insuficientes para descrever o gosto. A é a armadilha da palavra solta: « addictive » qualifica o umami de passagem, não é o tema. D inverte: o texto não denuncia excesso de termos, mas sua escassez (« un peu court »). B inventa uniformização. O problema levantado é a dificuldade de pôr os sabores em palavras."
+ },
+ {
+  "n": 32,
+  "nivel": "C2",
+  "texto": "Dans le monde de l'entreprise, les jeunes et les seniors éprouvent des sentiments analogues d'éviction et de dévalorisation. Pourtant, des actions de mentorat, menées par des seniors pour guider les jeunes sur le marché du travail ou lors de la création de leur entreprise, existent depuis de nombreuses années. Plus étonnant, est apparu récemment le mentorat renversé, où les jeunes habitués aux outils numériques initient les seniors à leur usage. Les seniors y gagnent de nouvelles compétences, et les jeunes élargissent leur réseau. En période de crise, cette coopération peut constituer un moyen de désamorcer les tensions sociales. Favoriser les échanges intergénérationnels, c'est contribuer à établir des relations ou chacun prend conscience qu'il peut apporter quelque chose à l'autre.",
+  "pergunta": "Quel est l'intérêt des mentorats décrits ?",
+  "alternativas": [
+   "Créer de nouvelles sources d'emploi",
+   "Éviter la solitude des personnes âgées",
+   "Instaurer des rapports de réciprocité",
+   "Répondre à l'allongement de la durée de vie"
+  ],
+  "correta": 2,
+  "explicacao": "A conclusão nomeia a reciprocidade: « chacun prend conscience qu'il peut apporter quelque chose à l'autre » — e o texto mostra a troca dos dois lados (« les seniors y gagnent de nouvelles compétences, et les jeunes élargissent leur réseau »). Cada um dá e recebe = reciprocidade. A pesca « marché du travail » e inventa criação de empregos; B toma o mentorado dos idosos por combate à solidão, tema ausente; D inventa relação com longevidade. O interesse é a relação de mão dupla, martelada na frase final."
+ },
+ {
+  "n": 33,
+  "nivel": "C2",
+  "texto": "Plancher sur la réforme des rythmes scolaires, comme le fera la « conférence » installée aujourd'hui par le ministre de l'éducation, c'est prendre en compte toute une série de paramètres qui n'ont rien à voir, ou si peu, avec l'école primaire. C'est s'intéresser aux évolutions de la famille et à la multiplication des horaires de travail dits « atypiques ». C'est examiner, du point de vue des collectivités locales, les conséquences financières et pratiques (transport scolaire, cantine, centres de loisirs) de tout changement éventuel dans l'organisation de la semaine. C'est encore recueillir l'avis des experts de la circulation routière et entendre les préoccupations des professionnels du tourisme… Autant dire que l'intérêt de l'enfant se trouve plus ou moins sacrifié sur l'autel du compromis.",
+  "pergunta": "Quel constat dresse le journaliste à propos de la réforme des rythmes scolaires ?",
+  "alternativas": [
+   "Les familles sont opposées à toute modification",
+   "Les impacts financiers demeurent insurmontables",
+   "Les intérêts en jeu sont difficilement compatibles",
+   "Les opinions des experts sont en total désaccord"
+  ],
+  "correta": 2,
+  "explicacao": "A frase-conclusão entrega tudo: « l'intérêt de l'enfant se trouve plus ou moins sacrifié sur l'autel du compromis » — tantos interesses (família, coletividades, trânsito, turismo) que só um compromisso os concilia, e mal. Interesses dificilmente compatíveis. A inventa oposição das famílias, que são só um dos parâmetros; B toma o « financières » por obstáculo intransponível; D transforma « recueillir l'avis des experts » em desacordo total. O texto acumula partes interessadas justamente para mostrar sua difícil conciliação."
+ },
+ {
+  "n": 34,
+  "nivel": "C2",
+  "texto": "Une exposition de l'Institut d'Art Contemporain de Villeurbanne est consacrée à l'American Jimmie Durham et la Brésilienne Marie Thereza Alves. Depuis vingt ans, ils parcourent, au fil de leurs déplacements, le territoire méditerranéen et sont réunis au sein de cette exposition à la forme inédite. Le parcours se veut éloigné de tout didactisme, laissant assez d'espace au spectateur pour construire son propre récit autour d'une mer connue pour être le berceau fertile des civilisations. Dans un jeu de matières, de couleurs et d'objets, tous tangibles, Durham et Alves tentent de décrypter une certaine pensée historique et mythologique notamment en déjouant les codes classiques utilisés dans les musées.",
+  "pergunta": "Qu'est-ce qui fait la singularité de cette exposition ?",
+  "alternativas": [
+   "La liberté accordée aux visiteurs",
+   "La simplicité des moyens artistiques",
+   "Le classicisme de sa présentation",
+   "Le discours politique des plasticiens"
+  ],
+  "correta": 0,
+  "explicacao": "A singularidade está no espaço dado ao público: « éloigné de tout didactisme, laissant assez d'espace au spectateur pour construire son propre récit ». Deixar o visitante montar sua própria narrativa = liberdade concedida. C é o oposto exato: a mostra « déjoue les codes classiques utilisés dans les musées » — não é clássica, é anticlássica. B toma « matières, couleurs, objets tangibles » por simplicidade de meios, o que o texto não afirma; D inventa discurso político. O que a distingue é a liberdade interpretativa dada ao espectador."
+ },
+ {
+  "n": 35,
+  "nivel": "C2",
+  "texto": "Je suis persuadée que tous les enfants possèdent en eux la volonté de mettre en route leur imaginaire qui les pousse naturellement vers la littérature. Mais si elle n'est pas stimulée, cette force peut s'éteindre. C'est la mission de l'école que de sensibiliser les élèves aux grands textes classiques. Malheureusement, elle y a renoncé. Trop souvent, les enseignants ont tendance à penser qu'ils sont réservés à l'élite. Alors qu'au contraire, l'école devrait donner un accès à la haute culture aux élèves qui arrivent avec un bagage moins fourni que les autres.",
+  "pergunta": "Selon l'auteur de ce texte, quelle ambition devraient avoir les enseignants ?",
+  "alternativas": [
+   "Aborder des œuvres réputées difficiles avec leurs élèves",
+   "Encourager leurs élèves à écrire des textes littéraires",
+   "Inviter régulièrement des écrivains célèbres dans leur classe",
+   "Monter des pièces de théâtre d'auteurs classiques"
+  ],
+  "correta": 0,
+  "explicacao": "A missão defendida é « sensibiliser les élèves aux grands textes classiques » e dar « accès à la haute culture », mesmo aos que têm menos bagagem — em oposição à ideia de que esses textos são « réservés à l'élite ». Abordar obras tidas por difíceis com todos os alunos. B inverte o papel: os alunos devem ler os clássicos, não escrever literatura; C inventa convite a escritores; D transforma « grands textes » em montagem teatral. A ambição é aproximar todos os alunos das obras clássicas."
+ },
+ {
+  "n": 36,
+  "nivel": "C2",
+  "texto": "Sexistes, Les jeux vidéo ? Peut-être que oui, peut-être que non. En tout cas, à parcourir les allées de la Paris Games Week, L'œil avisé aura lui-même bien du mal à trouver un personnage principal féminin de jeu vidéo. Il y a bien la célébrissime Lara Croft du vidéo Tomb Raider, aux attributs particulièrement imposants, conçus presque sur mesure pour plaire à un certain nombre de joueurs masculins. Pour le reste, circulez, il n'y a - presque - rien d'autre à voir, si l'on bayle d'un coup de manette de jeu, au mieux, les princesses à sauver, au pire les calls girls de mafioso. Pourtant, l'industrie du jeu vidéo a pris conscience ces dernières années du potentiel du marché des joueuses.",
+  "pergunta": "Quel constat est dressé sur les jeux vidéo ?",
+  "alternativas": [
+   "La quasi-absence d'héroïnes",
+   "L'appel constant à la violence",
+   "L'atténuation des clichés",
+   "L'uniformité des scénarios"
+  ],
+  "correta": 0,
+  "explicacao": "O constat é dito e reforçado: « bien du mal à trouver un personnage principal féminin » e « circulez, il n'y a - presque - rien d'autre à voir » além das princesas a salvar. Ausência quase total de heroínas. C é a inversão temporal: os clichês ainda dominam; a tomada de consciência da indústria (« a pris conscience ») é recente e futura, não uma atenuação já ocorrida. B pesca « mafioso » e inventa violência constante; D toma os poucos papéis femininos por uniformidade de roteiros. O foco é a escassez de protagonistas mulheres."
+ },
+ {
+  "n": 37,
+  "nivel": "C2",
+  "texto": "Défenseur.e.s et détracteur.e.s de l'écriture inclusive, qui consiste à féminiser les mots en plaçant entre des point la terminaison du féminin, s'écharpent sur cet épineux sujet. Pour Éliane Viennot, il est important de défendre l'écriture inclusive qui, en remaniant l'orthographe, vise à combattre les stéréotypes sexistes. Selon elle, la langue structure notre représentation du monde. Apprendre aux plus jeunes que le masculin l'emporte sur le féminin ne peut guère contribuer à forger des consciences égalitaristes. Elle rappelle de surcroît que la langue française a longtemps été plus égalitaire qu'elle ne l'est aujourd'hui : il y a eu une masculinisation délibérée du langage à partir du XVII siècle. Ceux qui se piquaient alors de définir le bon usage en ont profité pour renforcer l'ordre masculin.",
+  "pergunta": "Que pense Éliane Viennot de l'écriture inclusive ?",
+  "alternativas": [
+   "Elle favorise l'évolution des mentalités",
+   "Elle incarne une première historique",
+   "Elle permet de moderniser le lexique",
+   "Elle reflète les clivages de la société"
+  ],
+  "correta": 0,
+  "explicacao": "A posição dela liga língua e pensamento: a escrita inclusiva « vise à combattre les stéréotypes sexistes » e « la langue structure notre représentation du monde », rumo a « des consciences égalitaristes ». Mudar a língua para mudar as mentalidades. B é a ideia recebida que o texto refuta: ela lembra que o francês « a longtemps été plus égalitaire » — logo não é uma primeira histórica, mas um retorno. C toma « remaniant l'orthographe » por mera modernização do léxico, esvaziando o objetivo igualitário; D pega « s'écharpent » (a polêmica) e a atribui à opinião dela. Para Viennot, a escrita inclusiva age sobre as consciências."
+ },
+ {
+  "n": 38,
+  "nivel": "C2",
+  "texto": "Non, tous les salariés ne sont pas faits pour le télétravailleur.\nLe rapport Obergo le prouve à travers soixante-quinze entretiens approfondis avec des télétravailleurs. Les autres tordent le cou à une idée reçue : le télétravail serait l'organisation de demain car elle est bonne pour la productivité des entreprises et la qualité de vie des salariés. En effet, tous les métiers et les personnalités ne sont pas adaptés au télétravail. La réussite du télétravail exige des profils de salariés très spécifiques. Parmi les conditions sine qua non : vouloir aimer travailler seul, disposer d'une grande autonomie et posséder un logement pouvant accueillir un bureau isolé. « Autant de conditions difficiles à rassembler » constate Jean-Paul Boucher, commanditaire du rapport.",
+  "pergunta": "Qu'est-ce qui ressort du rapport Obergo concernant le télétravail ?",
+  "alternativas": [
+   "Il donne satisfaction aux employés interrogés",
+   "Il est délicat à mettre en œuvre",
+   "Il impose une restructuration des services",
+   "Il nuit à la performance des cadres"
+  ],
+  "correta": 1,
+  "explicacao": "A conclusão é citada: « Autant de conditions difficiles à rassembler » — o teletrabalho exige perfis muito específicos e condições que raramente se reúnem, logo é delicado de implementar. A é a armadilha do que o relatório refuta: o texto « tord le cou à une idée reçue », a de que o teletrabalho seria bom para todos — não é satisfação geral. C e D inventam reestruturação de serviços e queda de desempenho dos quadros, ausentes. O que ressai é a dificuldade de reunir as condições necessárias."
+ },
+ {
+  "n": 39,
+  "nivel": "C2",
+  "texto": "Mara Maudet, à son arrivée en France, constate que la politique d'insertion des foyers démunis et celle dédiée à la petite enfance sont déconnectées l'une de l'autre. Pour cette Brésilienne « un parent sans emploi doit être prioritaire pour obtenir une place en crèche ». Tout le contraire des critères actuels. Elle crée alors l'IEPC (Institut d'éducation et des pratiques citoyennes) et constitue un réseau de crèches associatives dont le principe est qu'en échange d'une place pour son enfant sur une plage horaire de 13 heures, le parent célibataire - le plus souvent des mères - s'engage à trouver un emploi dans les mois suivants. Il bénéficie alors, dans les locaux de la crèche, d'un accompagnement professionnel personnalisé.",
+  "pergunta": "Quel est l'objectif de l'IEPC ?",
+  "alternativas": [
+   "Embaucher des parents défavorisés",
+   "Faciliter l'intégration professionnelle",
+   "Proposer des tarifs préférentiels en crèche",
+   "Trouver un accueil provisoire pour les enfants"
+  ],
+  "correta": 1,
+  "explicacao": "O mecanismo revela o objetivo: em troca da vaga na creche, o pai/mãe « s'engage à trouver un emploi » e recebe « un accompagnement professionnel personnalisé ». A creche é o meio; o fim é o emprego = integração profissional. A é a armadilha do agente errado: o IEPC não contrata os pais, ele os ajuda a se empregar. D toma a creche (o meio) pelo objetivo — o acolhimento das crianças é a moeda de troca, não a meta. C inventa tarifas reduzidas. O acompanhamento profissional aponta para a inserção no trabalho."
+ }
+]

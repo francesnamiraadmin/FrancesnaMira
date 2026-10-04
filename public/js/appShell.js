@@ -4,6 +4,22 @@
 // Especializadas). Faz a guarda de autenticação, busca /api/auth/me uma vez,
 // renderiza a navbar em #app-navbar e avisa a página via evento "appshell:ready".
 (function () {
+  // Página embutida em outra (?embed=1 dentro de um iframe — ex.: Mapeador, Depoimentos e Configurações
+  // dentro do Meu Espaço): sem navbar, rodapé, botão de tema nem barra do cronômetro; os links internos
+  // continuam embutidos.
+  const EMBUTIDA = /[?&]embed=1(&|$)/.test(location.search) && window.parent !== window;
+  if (EMBUTIDA) {
+    document.documentElement.classList.add("app-embutida");
+    document.addEventListener("click", e => {
+      const a = e.target.closest && e.target.closest("a[href]");
+      if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+      const url = new URL(a.getAttribute("href"), location.href);
+      if (url.origin !== location.origin || !/\.html$/.test(url.pathname) || url.searchParams.get("embed") === "1") return;
+      // páginas da mesma área (mapeador, depoimentos, configurações) ficam no quadro; o resto abre na página de fora
+      if (/(mapeador-|depoimentos|configuracoes)/.test(url.pathname)) { url.searchParams.set("embed", "1"); a.href = url.pathname.split("/").pop() + url.search + url.hash; }
+      else a.target = "_top";
+    }, true);
+  }
   // Foto padrão: a inicial do nome num círculo colorido (a cor vem do nome, sempre a mesma para a
   // mesma pessoa). Gerada como PNG — o htmlSeguro.js só deixa passar imagens data: em PNG/JPG/GIF/WebP.
   const CORES_AVATAR = ["#2563eb", "#db2777", "#7c3aed", "#0d9488", "#ea580c", "#16a34a", "#4f46e5", "#be185d", "#0891b2", "#b45309"];
@@ -38,7 +54,6 @@
     "Avancé": { background: "rgba(203,213,225,0.35)", border: "#cbd5e1", color: "#1e293b" },
     Excellence: { background: "rgba(186,230,253,0.35)", border: "#7dd3fc", color: "#0c4a6e" }
   };
-  const PROXIMO_TIER = { Essentiel: "Avancé", "Avancé": "Excellence" };
 
   // Mesma cascata usada pelas guardas de página (correcoes-texto.html, aulas-especializadas.html,
   // plataforma-questoes.html): um plano de curso ativo já libera esses recursos por tier,
@@ -94,9 +109,12 @@
         { nome: "Produções e correções", href: "meu-espaco.html#producoes", icone: "img/icones/writing-hand.svg" },
         { nome: "Dever de casa", href: "meus-deveres.html", icone: "img/icones/check.svg" },
         { nome: "Minhas inscrições", href: "minhas-inscricoes.html", icone: "img/icones/document.svg" },
-        { nome: "Minhas matrículas", href: "minhas-matriculas.html", icone: "img/icones/calendar.svg" }
+        { nome: "Minhas matrículas", href: "minhas-matriculas.html", icone: "img/icones/calendar.svg" },
+        { nome: "Mapeador de Estudos", href: "meu-espaco.html#mapeador", icone: "img/icones/history-clock.svg" },
+        { nome: "Depoimentos", href: "meu-espaco.html#depoimentos", icone: "img/icones/chat.svg" },
+        { nome: "Configurações", href: "meu-espaco.html#configuracoes", icone: "img/icones/settings-gear.svg" }
       ],
-      paginas: ["meu-espaco.html", "caderno-revisao.html", "meus-deveres.html", "dever.html", "minhas-inscricoes.html", "minhas-matriculas.html"]
+      paginas: ["meu-espaco.html", "caderno-revisao.html", "meus-deveres.html", "dever.html", "minhas-inscricoes.html", "minhas-matriculas.html", "mapeador-estudos.html", "mapeador-timer.html", "mapeador-historico.html", "mapeador-estatisticas.html", "depoimentos.html", "configuracoes.html"]
     }
   ];
 
@@ -109,6 +127,8 @@
 
   window.AppShell = {
     dadosConta: null,
+    // troca da foto de perfil (usada também pelo avatar do Meu Espaço)
+    alterarFoto: () => montarModalFoto(),
     avatarInicial,
     fotoComReserva,
     detalhesAcesso(chave) {
@@ -220,6 +240,7 @@
         if (res.ok) {
           window.AppShell.dadosConta.perfil = data.perfil;
           document.querySelectorAll(".app-nav-user img, .dash-avatar").forEach(img => img.src = novaFoto);
+          document.dispatchEvent(new CustomEvent("fnm:foto", { detail: novaFoto }));
           fechar();
         } else {
           msg.style.color = "var(--danger-text)";
@@ -304,16 +325,8 @@
 
     const linksProdutos = PRODUTOS_NAV.map(montarLinkProduto).join("");
 
-    const fmtVenc = d => d ? new Date(d).toLocaleDateString("pt-BR") : "";
-    let planoDropdown = ativos.length
-      ? ativos.map(a => `<a href="meu-espaco.html#assinatura" class="app-plano-item"><b>${a.curso ? a.curso + " · " : ""}${a.tier || "Pack Prestige"}${a.tier && a.pack ? " + Pack Prestige" : ""}</b>${a.vencimento ? `<small>até ${fmtVenc(a.vencimento)}</small>` : ""}</a>`).join("") + "<hr>"
-      : "";
-    planoDropdown += `<a href="meu-espaco.html#assinatura">Minha assinatura</a><a href="minha-conta.html">Minha Conta</a><a href="minhas-inscricoes.html">Minhas Inscrições</a>`;
-    if (plano.ativo && plano.tier && PROXIMO_TIER[plano.tier]) {
-      planoDropdown += `<hr><a href="matricula.html?curso=${encodeURIComponent(plano.curso || "")}&plano=${encodeURIComponent(PROXIMO_TIER[plano.tier])}">Faça um upgrade</a>`;
-    } else if (!plano.ativo) {
-      planoDropdown += `<hr><a href="cursos.html">Ver planos disponíveis</a>`;
-    }
+    // O selo do plano é só um rótulo: leva à assinatura no Meu Espaço (sem dropdown); sem plano, aos planos.
+    const destinoPlano = plano.ativo ? "meu-espaco.html#assinatura" : "cursos.html";
 
     const tierLabel = plano.ativo
       ? (plano.tier ? "Plano " + plano.tier : "Pack Prestige") + (plano.curso ? " · " + plano.curso : "") + (ativos.length > 1 ? ` +${ativos.length - 1}` : "")
@@ -326,8 +339,7 @@
         <div class="app-nav-links">${linksProdutos}</div>
         <div class="app-nav-right">
           <div class="app-nav-item">
-            <button class="app-nav-pill" id="planoDropdownBtn" style="background:${estiloTier.background}; border-color:${estiloTier.border}; color:${estiloTier.color};">${tierLabel} <img src="img/icones/chevron-down.svg" alt="" style="width:0.7em; height:0.7em; vertical-align:0.05em;"></button>
-            <div class="app-dropdown" id="planoDropdown">${planoDropdown}</div>
+            <a class="app-nav-pill" id="planoSelo" href="${destinoPlano}" title="${plano.ativo ? "Ver minha assinatura" : "Ver os planos"}" style="text-decoration:none; background:${estiloTier.background}; border-color:${estiloTier.border}; color:${estiloTier.color};">${tierLabel}</a>
           </div>
           <div class="app-nav-item">
             <button class="app-nav-user" id="userDropdownBtn">
@@ -335,12 +347,12 @@
               <span>Olá, ${primeiroNome}</span> <img src="img/icones/chevron-down.svg" alt="" style="width:0.7em; height:0.7em; vertical-align:0.05em;">
             </button>
             <div class="app-dropdown" id="userDropdown">
-              <a href="minha-conta.html">Meu Perfil</a>
+              <a href="meu-espaco.html">Meu Espaço</a>
+              <a href="minhas-inscricoes.html">Minhas inscrições</a>
               <a href="meus-deveres.html">Dever de Casa</a>
-              <a href="mapeador-estudos.html">Mapeador de Estudos</a>
-              <button type="button" class="app-dropdown-item" id="alterarFotoBtn">Alterar Foto</button>
-              <a href="configuracoes.html">Configurações</a>
-              <a href="depoimentos.html">Depoimentos</a>
+              <a href="meu-espaco.html#mapeador">Mapeador de Estudos</a>
+              <a href="meu-espaco.html#depoimentos">Depoimentos</a>
+              <a href="meu-espaco.html#configuracoes">Configurações</a>
               <hr>
               <button type="button" class="app-dropdown-item app-dropdown-danger" id="sairBtn">Sair</button>
             </div>
@@ -349,9 +361,7 @@
       </div>`;
     fotoComReserva(root.querySelector(".app-nav-foto"), dadosConta.nome);
 
-    ligarDropdown("planoDropdownBtn", "planoDropdown");
     ligarDropdown("userDropdownBtn", "userDropdown");
-    document.getElementById("alterarFotoBtn").addEventListener("click", e => { e.stopPropagation(); fecharTodosDropdowns(); montarModalFoto(); });
     document.getElementById("sairBtn").addEventListener("click", e => { e.stopPropagation(); sair(); });
   }
 
@@ -365,7 +375,7 @@
       }
       const dadosConta = await res.json();
       window.AppShell.dadosConta = dadosConta;
-      montarNavbar(dadosConta);
+      if (!EMBUTIDA) montarNavbar(dadosConta);
 
       // Restaura tema/idioma salvos na conta — cobre o caso de logar num
       // navegador/computador novo, onde ainda não há nada em localStorage.

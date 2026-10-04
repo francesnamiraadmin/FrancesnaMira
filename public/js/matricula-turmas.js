@@ -108,7 +108,7 @@
     document.getElementById("miraTrack").style.display = "none";
     if (msg) document.getElementById("successMsg").textContent = msg;
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(() => { window.location.href = "minha-conta.html"; }, 1800);
+    setTimeout(() => { window.location.href = "meu-espaco.html"; }, 1800);
   }
 
   // ---------- STEP: DADOS ----------

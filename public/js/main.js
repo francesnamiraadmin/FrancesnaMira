@@ -228,7 +228,7 @@ async function updateNav() {
       const dropdown = document.createElement("div");
       dropdown.className = "dropdown";
       dropdown.innerHTML = `
-        <a href="minha-conta.html">Minha conta</a>
+        <a href="meu-espaco.html">Meu Espaço</a>
         <a href="minhas-inscricoes.html">Minhas inscrições</a>
         <a href="#" id="navSairBtn">Sair</a>
       `;
@@ -263,7 +263,7 @@ async function updateNav() {
     const estilo = ativo ? ESTILOS_PLANO[plano.tier] : ESTILOS_PLANO.nenhum;
 
     cadastroLink.textContent = ativo ? `Plano: ${plano.tier}` : "Nenhum plano";
-    cadastroLink.href = "minha-conta.html";
+    cadastroLink.href = "meu-espaco.html";
     cadastroLink.style.background = estilo.background;
     cadastroLink.style.border = `1.5px solid ${estilo.border}`;
     cadastroLink.style.color = estilo.color;

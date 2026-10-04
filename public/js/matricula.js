@@ -183,10 +183,10 @@
     if (!msg && usaHorarios && !modoPlano) msg = "Sua matrícula foi confirmada. Em instantes você recebe um e-mail de confirmação. À bientôt!";
     if (msg) document.getElementById("successMsg").textContent = msg;
     const link = document.getElementById("successLink");
-    link.href = "minha-conta.html";
-    link.textContent = "Ver minha conta";
+    link.href = "meu-espaco.html";
+    link.textContent = "Ir para o Meu Espaço";
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(() => { window.location.href = "minha-conta.html"; }, 1800);
+    setTimeout(() => { window.location.href = "meu-espaco.html"; }, 1800);
   }
 
   function showFieldError(fieldId, show) {

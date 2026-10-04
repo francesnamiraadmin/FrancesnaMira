@@ -1,0 +1,548 @@
+[
+ {
+  "n": 1,
+  "nivel": "A1",
+  "texto": "L'Association des étudiants de l'École des sciences et techniques VOUS INVITE À LA SOIRÉE DE FIN D'ANNÉE.\nSamedi 15 décembre à partir de 20h.\nVENEZ NOMBREUX !",
+  "pergunta": "Qu'est-ce que les étudiants organisent ?",
+  "alternativas": [
+   "Un anniversaire.",
+   "Un concert.",
+   "Une exposition.",
+   "Une fête."
+  ],
+  "correta": 3,
+  "explicacao": "« soirée de fin d'année » = festa de fim de ano. Nada indica aniversário, música ao vivo ou exposição."
+ },
+ {
+  "n": 2,
+  "nivel": "A1",
+  "texto": "Logement, études ou téléphone portable, tout coûte cher pour les jeunes à l'université. Alors 80 % des parents aident leurs enfants. Le père d'Hamza, 18 ans, calcule combien ça lui coûtera : environ 8 % de son salaire.",
+  "pergunta": "Qu'est-ce que cet article dit sur les jeunes ?",
+  "alternativas": [
+   "Ils ont besoin de l'aide de leur famille.",
+   "Ils travaillent pour payer leur logement.",
+   "Ils veulent finir leurs études rapidement.",
+   "Ils vont à l'université dans une autre ville."
+  ],
+  "correta": 0,
+  "explicacao": "« tout coûte cher » e « 80 % des parents aident leurs enfants » = dependem da família. Quem trabalha e paga é o pai de Hamza, não o jovem (B)."
+ },
+ {
+  "n": 3,
+  "nivel": "A1",
+  "texto": "VOUS AUSSI, VOUS SOUHAITEZ DONNER DE VOTRE TEMPS À DES HOMMES ET DES FEMMES DANS LE BESOIN ?\nL'association « Les Restos du Cœur » de Nice vous propose de participer à la préparation des déjeuners du lundi au samedi, le matin.\nAppelez-nous au 08 44 25 68 79",
+  "pergunta": "Qu'est-ce que cette annonce propose ?",
+  "alternativas": [
+   "D'aider à faire des repas.",
+   "De changer de profession.",
+   "De servir dans une cantine.",
+   "De soigner des habitants."
+  ],
+  "correta": 0,
+  "explicacao": "« participer à la préparation des déjeuners » = ajudar a preparar refeições, como voluntário (« donner de votre temps »). Preparar ≠ servir numa cantina (C)."
+ },
+ {
+  "n": 4,
+  "nivel": "A1",
+  "texto": "Camille,\nJe ne peux pas te retrouver au concert ce soir, désolé. Mes enfants sont malades et je dois rester avec eux. Viens déjeuner à la maison dimanche. Je pars bientôt en voyage, j'aimerais te voir avant mon départ.\nBises,\nDriss",
+  "pergunta": "Qu'est-ce que Driss propose à son amie ?",
+  "alternativas": [
+   "D'aller à un concert.",
+   "D'organiser un voyage.",
+   "De déjeuner chez lui.",
+   "De garder les enfants."
+  ],
+  "correta": 2,
+  "explicacao": "A proposta está no imperativo: « Viens déjeuner à la maison dimanche ». O concerto foi cancelado, e a viagem é dele, sozinho."
+ },
+ {
+  "n": 5,
+  "nivel": "A2",
+  "texto": "Résidence Bellevue — Rue de l'Océan 25013 Mer-sur-l'Isle Facture N° 13 — Entreprise Jolifleur Bruxelles\nDésignation : Nuit + petit-déj. — Quantité : 3 — Prix : 250,00 euros Parking sécurisé : gratuit",
+  "pergunta": "Que doit payer l'entreprise Jolifleur ?",
+  "alternativas": [
+   "Un repas au restaurant.",
+   "Un séjour à l'hôtel.",
+   "Une commande de matériel.",
+   "Une location de voiture."
+  ],
+  "correta": 1,
+  "explicacao": "« Résidence », « 3 nuits + petit-déjeuner » = hospedagem. O café da manhã (A) faz parte da diária; o estacionamento é gratuito, então não há aluguel de carro (D)."
+ },
+ {
+  "n": 6,
+  "nivel": "A2",
+  "texto": "De : cannelle@lilo.com — À : Elke@mail.com\nSalut Elke,\nC'est bientôt la fête de nos 20 ans de mariage ! Beaucoup d'invités viendront avec leurs enfants. Comme tu adores les petits, pourrais-tu t'occuper d'eux en journée ? Quand ils seront couchés, nous pourrons danser tous ensemble !\nMerci, bisous. Cannelle.",
+  "pergunta": "Que demande Cannelle à son amie ?",
+  "alternativas": [
+   "D'écrire aux invités.",
+   "D'organiser la fête.",
+   "De garder des enfants.",
+   "De préparer des danses."
+  ],
+  "correta": 2,
+  "explicacao": "« pourrais-tu t'occuper d'eux » (as crianças) = cuidar delas. A dança acontece depois, com todos (D)."
+ },
+ {
+  "n": 7,
+  "nivel": "A2",
+  "texto": "Adèle,\nN'oublie pas l'anniversaire de Raphaël ! On pourrait partir vers 19h et aller ensemble chez lui : où est-ce qu'on se retrouve ? Si tu ne peux pas venir finalement, appelle-moi !\nBonne journée, Camille",
+  "pergunta": "Pourquoi est-ce que Camille écrit ce message ?",
+  "alternativas": [
+   "Pour acheter un cadeau avec elle.",
+   "Pour annuler sa venue à une fête.",
+   "Pour décider d'un rendez-vous.",
+   "Pour inviter son amie à dîner."
+  ],
+  "correta": 2,
+  "explicacao": "« partir vers 19h… où est-ce qu'on se retrouve ? » = combinar um ponto de encontro. B é armadilha: o cancelamento é só uma hipótese para Adèle (« si tu ne peux pas »)."
+ },
+ {
+  "n": 8,
+  "nivel": "A2",
+  "texto": "Madame Chanmont,\nVous avez participé à notre concours et vous avez gagné un séjour d'une semaine tout compris (transport, hébergement, restauration) pour deux personnes en Italie ! Prenez contact par courriel avec notre service clientèle pour avoir toutes les informations.\nLe service commercial.",
+  "pergunta": "Que doit faire madame Chanmont ?",
+  "alternativas": [
+   "Écrire un message.",
+   "Prendre un billet d'avion.",
+   "Réserver un hôtel.",
+   "S'inscrire à un jeu."
+  ],
+  "correta": 0,
+  "explicacao": "« Prenez contact par courriel » = mandar um e-mail. Transporte e hotel já estão « tout compris »; ela já participou do jogo (D)."
+ },
+ {
+  "n": 9,
+  "nivel": "A2",
+  "texto": "Studio Céline\nL'école de danse « Studio Céline » ouvre ses portes au public le 16 septembre. C'est GRATUIT : venez essayer nos cours toute la journée. Au programme : salsa, tango, danse moderne et un goûter (boissons et gâteaux) !",
+  "pergunta": "Qu'est-ce que cette école de danse propose ?",
+  "alternativas": [
+   "De participer à un concours.",
+   "De s'inscrire à un stage.",
+   "De tester des activités.",
+   "De voir un spectacle."
+  ],
+  "correta": 2,
+  "explicacao": "« portes ouvertes », « GRATUIT », « venez essayer nos cours » = experimentar aulas. Não há inscrição (B) nem apresentação para assistir (D)."
+ },
+ {
+  "n": 10,
+  "nivel": "B1",
+  "texto": "La commune de Saint-Brieuc participe au concours Europan sur le thème « De la gare à la mer ». De jeunes architectes ont imaginé la ville de demain, avec de nouveaux espaces publics, un meilleur partage de l'espace entre piétons, vélos et véhicules. Les gagnants présenteront leur projet aux habitants qui choisiront le plus intéressant.",
+  "pergunta": "Quel est le but du concours Europan ?",
+  "alternativas": [
+   "Dessiner des bâtiments publics originaux.",
+   "Donner le goût du voyage aux habitants.",
+   "Inventer une ville facile à vivre pour tous.",
+   "Prévoir de nouveaux moyens de transport."
+  ],
+  "correta": 2,
+  "explicacao": "« la ville de demain », « meilleur partage de l'espace entre piétons, vélos et véhicules » = cidade mais agradável para todos. São espaços públicos, não prédios (A); os meios de transporte são os mesmos, o que muda é a partilha (D)."
+ },
+ {
+  "n": 11,
+  "nivel": "A2",
+  "texto": "VOS ENFANTS AIMENT MARCHER, COURIR OU NAGER ? NOTRE CENTRE D'ÉTÉ POUR LES 7-17\nANS EST FAIT POUR EUX !\nTarifs à la journée, à la semaine ou au mois. Prix réduits pour les habitants de Paris. Allez sur notre site Soleilpourtous.fr pour plus d'informations.",
+  "pergunta": "Qu'est-ce que cette annonce propose ?",
+  "alternativas": [
+   "Des informations sur les sports.",
+   "Des activités pour l'été.",
+   "Des promotions pour les enfants.",
+   "Des visites de Paris."
+  ],
+  "correta": 1,
+  "explicacao": "« centre d'été » para crianças que gostam de andar, correr e nadar = atividades de verão. O desconto é para moradores de Paris, não para crianças (C)."
+ },
+ {
+  "n": 12,
+  "nivel": "B1",
+  "texto": "Le « ski lent » privilégie le plaisir.\nLe plaisir du ski, ce n'est plus seulement la vitesse et la performance. Certains skieurs cherchent avant tout à prendre leur temps, à vivre une nouvelle expérience : le ski lent répond à ces souhaits. Ainsi, des stations proposent des zones tranquilles, où la vitesse est interdite. On descend sans se presser, on soigne son style, sans nécessairement être débutant. Une discipline qui séduit et qui demande peu d'entraînement.",
+  "pergunta": "Que propose-t-on aux skieurs dans ce texte ?",
+  "alternativas": [
+   "D'améliorer leur niveau de compétence.",
+   "De pratiquer leur sport différemment.",
+   "De se préparer à des compétitions.",
+   "De tester un autre type de matériel."
+  ],
+  "correta": 1,
+  "explicacao": "« ce n'est plus seulement la vitesse », « une nouvelle expérience », « sans se presser » = outra forma de esquiar. A performance e a competição (A, C) são justamente o que se deixa de lado."
+ },
+ {
+  "n": 13,
+  "nivel": "B1",
+  "texto": "Monsieur,\nTitulaire d'une licence en informatique de l'université d'Alger, je souhaiterais poursuivre un cursus à Paris XII dans le cadre d'un master 1 d'informatique. Intégrer votre université devrait me permettre d'atteindre le niveau d'expertise que je souhaite acquérir dans un métier qui est pour moi une vraie passion.\nVous trouverez, ci-joint, mon dossier de candidature complet. En espérant que ma candidature saura retenir votre attention, je vous prie de croire, Monsieur, à l'expression de mes salutations distinguées. Sélim Néri",
+  "pergunta": "Qui est Sélim Néri ?",
+  "alternativas": [
+   "Un candidat à des études supérieures.",
+   "Un étudiant en quête d'un stage.",
+   "Un informaticien en recherche d'emploi.",
+   "Un lycéen en demande d'orientation."
+  ],
+  "correta": 0,
+  "explicacao": "Ele já tem « une licence » e quer « poursuivre un cursus… master 1 » = candidato a estudos superiores. Não pede estágio nem emprego; não é mais « lycéen »."
+ },
+ {
+  "n": 14,
+  "nivel": "B1",
+  "texto": "Un projet surprenant : José, 13 ans, a gagné le Prix du Climat l'an dernier. Il a imaginé une banque écologique dans son pays. Si chaque mois, un enfant ramasse une certaine quantité de déchets (plastique, carton…), on lui donne une monnaie qu'il peut échanger contre de l'argent réel.",
+  "pergunta": "De quoi parle cet article ?",
+  "alternativas": [
+   "D'une banque pour les mineurs.",
+   "D'une idée nouvelle de recyclage.",
+   "Des enfants qui doivent travailler.",
+   "Du problème créé par les déchets."
+  ],
+  "correta": 1,
+  "explicacao": "« projet surprenant », « banque écologique », recolher plástico e papelão = nova ideia de reciclagem. A usa a palavra « banque » literalmente, mas não é um banco financeiro para menores."
+ },
+ {
+  "n": 15,
+  "nivel": "B1",
+  "texto": "Les Français partent moins longtemps, mais plus souvent en vacances qu'il y a 20 ans.\nAvec la réduction du temps de travail, qui est aujourd'hui de trente-cinq heures par semaine, les Français ont des week-ends plus longs. Ils peuvent multiplier les courts séjours et cela, tout au long de l'année. Ainsi, l'activité n'est plus limitée aux saisons d'hiver et d'été : pour les professions du tourisme comme, par exemple, les animateurs de clubs de vacances, il y a maintenant du travail de janvier à décembre.",
+  "pergunta": "Qu'apprend-on sur les métiers du tourisme en France ?",
+  "alternativas": [
+   "Ils s'exercent sans interruption dans l'année.",
+   "Ils sont en difficulté à cause des trente-cinq heures.",
+   "Ils sont inadaptés aux besoins des vacances.",
+   "Ils sont saisonniers et occupés par des étudiants."
+  ],
+  "correta": 0,
+  "explicacao": "« n'est plus limitée aux saisons… du travail de janvier à décembre » = trabalho o ano inteiro. D descreve o passado; B inverte o efeito das 35 horas (que aumentou o trabalho)."
+ },
+ {
+  "n": 16,
+  "nivel": "A2",
+  "texto": "Les titres de transport (ticket, carte, etc.) en carton seront bientôt remplacés par une carte magnétique. Les voyageurs la paieront 2 euros et la rechargeront aux guichets et aux machines automatiques des gares. La carte sera valable dans le métro, les bus et les tramways.",
+  "pergunta": "Qu'est-ce qu'on apprend sur les titres de transport ?",
+  "alternativas": [
+   "Ils servent pour un seul trajet.",
+   "Les gens les jettent dans la rue.",
+   "Leur prix va encore augmenter.",
+   "On va arrêter de les vendre."
+  ],
+  "correta": 3,
+  "explicacao": "« seront bientôt remplacés par une carte magnétique » = os bilhetes de papelão deixarão de ser vendidos. Os 2 € são o preço do novo cartão, não um aumento (C)."
+ },
+ {
+  "n": 17,
+  "nivel": "B1",
+  "texto": "Félicitations !\nVous avez gagné une carte cadeau de 50 €. Vous pouvez l'utiliser pour acheter tous nos produits de beauté. Attention, vous ne pouvez pas l'échanger contre de l'argent ou la donner à une autre personne. Si vous la perdez, vous n'êtes pas remboursé.",
+  "pergunta": "Qu'est-ce qu'on peut faire avec cette carte ?",
+  "alternativas": [
+   "Avoir des réductions sur certains articles.",
+   "Faire des courses dans un magasin.",
+   "Offrir une surprise pour un anniversaire.",
+   "Retirer de l'argent à un distributeur."
+  ],
+  "correta": 1,
+  "explicacao": "« l'utiliser pour acheter tous nos produits » = fazer compras. C e D são proibidas explicitamente; vale para todos os produtos, não é desconto (A)."
+ },
+ {
+  "n": 18,
+  "nivel": "B1",
+  "texto": "Le sport arrive largement en tête des nombreuses activités extrascolaires proposées aux 12-16 ans. Les parents se font une obligation sociale d'inscrire leurs enfants à ces activités et de montrer aux autres qu'ils sont de « bons parents » qui veillent à l'épanouissement global de leurs enfants. Ils leur permettent ainsi de se divertir, de se dépenser, et de s'initier à un sport individuel ou collectif. C'est également l'occasion pour les enfants de découvrir et d'accepter leurs propres limites.",
+  "pergunta": "Qu'est-ce qui incite les parents à inscrire leurs enfants à des activités sportives ?",
+  "alternativas": [
+   "La pression de la société.",
+   "La réputation des clubs.",
+   "Les bienfaits pour la santé.",
+   "Les envies des adolescents."
+  ],
+  "correta": 0,
+  "explicacao": "« obligation sociale » + « montrer aux autres qu'ils sont de bons parents » = pressão social. Os benefícios (diversão, gasto de energia) são consequências, não o motivo; a saúde (C) nem é citada."
+ },
+ {
+  "n": 19,
+  "nivel": "B2",
+  "texto": "PÉDAGOGIE — Twitter dès l'école primaire, pour donner le goût d'écrire, de lire et de l'orthographe. Un instituteur raconte :\n« J'utilise Twitter dans ma classe depuis un an. Les productions d'élèves sont de plus en plus intéressantes. Grâce à Twitter, je peux approfondir les notions de façon concrète. Les activités scolaires paraissent artificielles, hors contexte, voire dénuées de sens. Pourquoi essayer de maîtriser l'écriture ? Les enfants n'y songent même pas, car leurs travaux sont cantonnés à des cahiers, eux-mêmes enfermés dans des casiers ou des cartables. Ils n'ont pas l'occasion de partager leurs productions, de les confronter, d'argumenter leurs choix. »",
+  "pergunta": "D'après cet article, qu'apporte l'utilisation de Twitter aux élèves ?",
+  "alternativas": [
+   "Ils apprennent à se servir correctement des réseaux sociaux.",
+   "Ils communiquent plus facilement avec l'instituteur.",
+   "Ils comprennent mieux l'intérêt des apprentissages proposés.",
+   "Ils sont attentifs après un moment de détente."
+  ],
+  "correta": 2,
+  "explicacao": "O problema das tarefas escolares é serem « dénuées de sens »; com Twitter, a escrita é compartilhada e ganha um propósito = entendem para que serve aprender. O Twitter é meio, não objeto de estudo (A)."
+ },
+ {
+  "n": 20,
+  "nivel": "B2",
+  "texto": "Dora Bruder, publié en 1997, est considéré comme l'un des meilleurs romans de Patrick Modiano. L'écrivain aime fouiller l'histoire de la capitale et fréquente de nombreuses bibliothèques. Un jour, il tombe sur une annonce parue le 31 décembre 1941 dans Paris-Soir : « On recherche une jeune fille, Dora Bruder, 15 ans, 1m55, visage ovale, yeux gris marron, manteau sport gris. Adresser toute indication à M. et Mme Bruder, 41, boulevard Ornano, Paris. »\nModiano va alors s'attacher à lever le mystère de cette disparition en entraînant le lecteur dans les rues du 18e arrondissement.",
+  "pergunta": "Que fait le journaliste dans cet extrait ?",
+  "alternativas": [
+   "Il cite un extrait d'une œuvre de Modiano.",
+   "Il explique l'idée de départ d'un livre de Modiano.",
+   "Il présente le métier de Modiano à ses débuts.",
+   "Il raconte la rencontre entre Modiano et sa femme."
+  ],
+  "correta": 1,
+  "explicacao": "O jornalista conta como nasceu o romance: Modiano « tombe sur une annonce » e decide « lever le mystère ». A citação é de um anúncio de 1941, não de uma obra de Modiano (A)."
+ },
+ {
+  "n": 21,
+  "nivel": "A2",
+  "texto": "Envie de faire le clown ?\nPendant les vacances de Pâques, l'équipe d'animateurs du centre de loisirs dessinera chaque jour sur les joues des enfants des animaux marins : hippocampes, phoques, manchots, poissons-clowns…",
+  "pergunta": "Quelle activité proposera-t-on aux enfants pendant les vacances de Pâques ?",
+  "alternativas": [
+   "Un spectacle de cirque.",
+   "Une activité de maquillage.",
+   "Une rencontre avec un clown.",
+   "Une sortie au zoo."
+  ],
+  "correta": 1,
+  "explicacao": "« dessinera… sur les joues des enfants » = pintura facial. « Clown » e animais marinhos são iscas para C e D."
+ },
+ {
+  "n": 22,
+  "nivel": "B2",
+  "texto": "Les consommateurs du passé acceptaient de manger de la viande en se souvenant que derrière il y avait un animal. Aujourd'hui, on achète du poisson, mais on ne veut pas voir les yeux et les arêtes. On veut un bifteck anonyme. Si l'on nous dit que derrière le steak il y avait une génisse de 18 mois, ça nous coupe l'appétit. Il s'agit de la consommation d'une viande qui n'a plus aucune référence à l'animal. En fait, on ne veut pas savoir ce que l'on mange, bien qu'en même temps, on veuille être sûr de ce que l'on mange.",
+  "pergunta": "Quel est le paradoxe évoqué à propos des consommateurs ?",
+  "alternativas": [
+   "Acheter les meilleurs produits et dépenser le moins possible.",
+   "Avoir la garantie de la qualité du produit.",
+   "Être amateur de viande et militer pour le bien-être animal.",
+   "Privilégier les aliments bio et avoir du mal à s'en procurer."
+  ],
+  "correta": 1,
+  "explicacao": "O paradoxo está na última frase: não querer saber o que se come « bien qu'en même temps, on veuille être sûr de ce que l'on mange ». B retoma a segunda metade (garantia). C é sedutora, mas ninguém « milite » pelos animais: só não se quer lembrar deles."
+ },
+ {
+  "n": 23,
+  "nivel": "B2",
+  "texto": "Nous vous rappelons que la présence d'élèves de moins de seize ans en milieu professionnel est autorisée, dès lors qu'ils restent sous l'autorité de l'établissement d'enseignement scolaire ou de l'école. Tous les stages ou les périodes de formation en milieu professionnel ne peuvent s'adresser qu'à des élèves qui suivent un enseignement alterné ou un enseignement professionnel. Les stages ne peuvent être proposés qu'à des élèves âgés de quatorze ans au moins, comme le précise l'article 8 du décret n° 96-465 du 29 mai 1996 relatif à l'organisation de la formation au collège.",
+  "pergunta": "Quel est l'objectif de cet article adressé aux enseignants ?",
+  "alternativas": [
+   "Définir les conditions d'accueil des élèves en milieu professionnel.",
+   "Expliquer le déroulement des stages en entreprise pour les élèves.",
+   "Informer des mesures de sécurité des élèves lors de visites d'entreprises.",
+   "Lister les différents types de stages professionnels destinés aux élèves."
+  ],
+  "correta": 0,
+  "explicacao": "O texto só enumera condições: autoridade da escola, tipo de ensino, « quatorze ans au moins ». Não explica como o estágio acontece (B) nem lista tipos de estágio (D)."
+ },
+ {
+  "n": 24,
+  "nivel": "B2",
+  "texto": "On réserve trop facilement le covoiturage aux étudiants sans un sou. Les clichés sont tenaces. Pourtant, le temps de la petite annonce papier accrochée près de la machine à café est bel et bien terminé ; les nouveaux moyens de communication ont changé les choses. L'organisation d'un trajet entre plusieurs personnes qui se rendent dans la même direction est devenue si simple et si efficace avec les sites spécialisés que le covoiturage est en train d'élargir son public et de gagner son statut de mode de transport à part entière.",
+  "pergunta": "Quel développement connaît le covoiturage ?",
+  "alternativas": [
+   "Il devient la solution idéale des voyages organisés à la dernière minute.",
+   "Il est accessible à un nombre croissant d'utilisateurs grâce à internet.",
+   "Il occupe une place grandissante dans les petites annonces des journaux.",
+   "Il s'impose comme le moyen de déplacement à la mode chez les jeunes."
+  ],
+  "correta": 1,
+  "explicacao": "« sites spécialisés » + « élargir son public » = mais usuários graças à internet. C inverte (« le temps de la petite annonce papier est terminé »); D repete o clichê que o texto refuta."
+ },
+ {
+  "n": 25,
+  "nivel": "B2",
+  "texto": "SEIS sera le premier sismomètre déployé sur un autre sol que celui de la Terre. Sur Mars, cet instrument français va ausculter les séismes qui secouent la planète rouge et récolter des données qui permettront de déterminer si le noyau de la planète est liquide ou solide. Mars a le même âge que la planète Terre, mais il y a 3 ou 4 milliards d'années, toute vie y a cessé et elle est devenue une planète morte. Si nous savons déjà de quoi sont constituées son atmosphère et sa surface, nous ignorons encore ce qui s'est produit à ce moment-là et ce qu'elle recèle dans son sous-sol.",
+  "pergunta": "Pourquoi SEIS a-t-il été envoyé sur Mars ?",
+  "alternativas": [
+   "Pour comparer son histoire à celle de la Terre.",
+   "Pour évaluer les possibilités d'aller y vivre.",
+   "Pour expliquer son grand nombre de séismes.",
+   "Pour obtenir des données sur sa composition."
+  ],
+  "correta": 3,
+  "explicacao": "« récolter des données… si le noyau est liquide ou solide » + « ce qu'elle recèle dans son sous-sol » = composição interna. Os sismos são o meio de medir, não o objeto a explicar (C)."
+ },
+ {
+  "n": 26,
+  "nivel": "C1",
+  "texto": "Ma conviction est que l'économie collaborative, l'économie du partage, s'installe durablement. Elle repose sur la mise en réseau grâce au numérique et sur la quête de valeurs morales et culturelles. La crise économique en est un accélérateur, car ces pratiques permettent de consommer mieux pour moins cher ou de générer des revenus complémentaires. L'usage de ces services augmente à grande vitesse. Ainsi, 80 % des 18-25 ans préféreraient vivre sans voiture que sans smartphone. Car la voiture, aujourd'hui, est dans le smartphone via le covoiturage, l'autopartage, la location entre particuliers ! L'accès à un bien devient plus pratique que sa possession. La question de demain sera : « Serez-vous assez intelligent pour ne pas posséder ? » (Benjamin Tincq)",
+  "pergunta": "Que constate Benjamin Tincq ?",
+  "alternativas": [
+   "L'essor de nouveaux modes de consommation.",
+   "La stagnation de la dépendance au numérique.",
+   "Le développement des voitures ultraconnectées.",
+   "Le recul des difficultés économiques des ménages."
+  ],
+  "correta": 0,
+  "explicacao": "« l'économie du partage s'installe durablement », « l'usage augmente à grande vitesse », « l'accès… plus pratique que la possession » = novos modos de consumo. C é armadilha: o carro está « dans le smartphone » (compartilhamento), não é um carro conectado."
+ },
+ {
+  "n": 27,
+  "nivel": "C1",
+  "texto": "Faire du bénévolat à l'étranger est souvent sujet à controverse : missions peu claires ou non conformes à des principes éthiques, prix exorbitants, flou artistique et manque de transparence concernant la destination de l'argent récolté. Certaines agences spécialisées dans le domaine profitent de la tendance du tourisme solidaire pour s'enrichir ! D'autres, au contraire, affichent clairement leurs exigences et leurs engagements. C'est le cas de « Travailler à l'étranger », basé au Royaume-Uni et qui envoie des voyageurs volontaires à travers le monde depuis 1997. Ils s'assurent du suivi des stagiaires, visitent toutes les structures et créent de vrais liens avec leurs partenaires.",
+  "pergunta": "Quel est [l'objectif] de l'agence « Travailler à l'étranger » ?",
+  "alternativas": [
+   "Faire découvrir des destinations authentiques.",
+   "Organiser des séjours à vocation humanitaire.",
+   "Recruter des salariés à l'international.",
+   "Reverser ses bénéfices à des associations."
+  ],
+  "correta": 1,
+  "explicacao": "« envoie des voyageurs volontaires » no contexto de « bénévolat à l'étranger » e « tourisme solidaire » = estadias humanitárias. C é a armadilha do nome « Travailler »: são voluntários, não assalariados."
+ },
+ {
+  "n": 28,
+  "nivel": "C1",
+  "texto": "Dans la nuit de samedi à dimanche, il faudra retarder ses montres : à 3 heures, il sera en fait 2 heures. Ce changement est conçu pour économiser de l'énergie en profitant des périodes de jour plus longues l'été. Selon un sondage, les Français seraient majoritairement contre cette pratique. Ils mettent en avant un impact négatif sur « le sommeil, l'alimentation ou l'humeur ». Cependant, un rapport du Sénat de l'année dernière assurait que le monde médical restait partagé sur l'existence de troubles imputables à l'heure d'été, mais que de nombreux pharmaciens faisaient état d'une augmentation de leurs ventes de médicaments au moment du changement d'heure, encore qu'aucune étude scientifique ne puisse l'attribuer à ce seul facteur.",
+  "pergunta": "Qu'apprend-on sur le passage à l'heure d'hiver ?",
+  "alternativas": [
+   "Il est difficile d'en évaluer l'impact sur la santé.",
+   "Il permet la consommation de médicaments.",
+   "Le Sénat a toujours refusé de voter une loi sur le sujet.",
+   "Les Français sont encore attachés à cette tradition."
+  ],
+  "correta": 0,
+  "explicacao": "« le monde médical restait partagé » + « aucune étude scientifique ne puisse l'attribuer à ce seul facteur » = impacto incerto. D inverte (« majoritairement contre »); B transforma uma correlação não provada em fato."
+ },
+ {
+  "n": 29,
+  "nivel": "C1",
+  "texto": "Durant les investigations journalistiques, le recours à la caméra cachée est de plus en plus fréquent. Mais souvent, son utilisation n'est aussi qu'un cache-misère, un moyen de compenser l'absence d'informations dans les reportages, de remplir le vide par des scènes un peu spectaculaires. C'est une manière pour certains aussi de faire des économies. Par ailleurs, cette pratique pose une autre question : celle du statut de la personne filmée à son insu. La filmer en caméra cachée, n'est-ce pas supposer qu'elle a quelque chose à se reprocher avant d'avoir commencé à parler ?",
+  "pergunta": "D'après ce texte, pourquoi les journalistes utilisent-ils des caméras cachées ?",
+  "alternativas": [
+   "Pour améliorer la qualité des documentaires.",
+   "Pour dissimuler la pauvreté des contenus.",
+   "Pour moderniser leurs méthodes de travail.",
+   "Pour piéger les gens visés par les enquêtes."
+  ],
+  "correta": 1,
+  "explicacao": "« cache-misère », « compenser l'absence d'informations », « remplir le vide » = esconder a pobreza do conteúdo. D é a consequência discutida em seguida (« par ailleurs »), não o motivo."
+ },
+ {
+  "n": 30,
+  "nivel": "B2",
+  "texto": "Nouvelle arrestation de pilleurs\nAprès l'arrestation de pilleurs en France, l'UNESCO lance un cri d'alarme pour la protection du patrimoine sous-marin. Au total, selon l'UNESCO, ce serait plus de trois millions d'épaves non explorées qui seraient menacées par les exactions des chasseurs de trésors. Le patrimoine subaquatique est de plus en plus menacé du fait des progrès techniques qui permettent aux chasseurs de trésors de sortir des objets protégés depuis des siècles par les eaux.",
+  "pergunta": "Que dit ce texte ?",
+  "alternativas": [
+   "La faune aquatique est en danger.",
+   "La technologie facilite le pillage des mers.",
+   "Le nombre de voleurs d'épaves augmente.",
+   "Les bateaux en détresse sont laissés à leur sort."
+  ],
+  "correta": 1,
+  "explicacao": "« du fait des progrès techniques qui permettent aux chasseurs de trésors de sortir des objets » = tecnologia facilita o saque. O que aumenta é a ameaça ao patrimônio, não o número de ladrões (C)."
+ },
+ {
+  "n": 31,
+  "nivel": "C1",
+  "texto": "Les chutes d'attention et le relâchement musculaire signalent un besoin des plus naturels : dormir. Interrompre sa journée pour ce moment réparateur, c'est compenser les nuits trop courtes et éviter que ce manque de sommeil ne grignote la santé physique et mentale. Mais pourquoi ce remède ancestral est-il à ce point sous-estimé ? En fait, la sieste n'est pas tant incomprise que redoutée. En effet, travailler exige de répondre à des impératifs extérieurs parfois au détriment des besoins intérieurs ou physiologiques et faire la sieste devient une transgression. Rituel de l'été, le petit somme reste inacceptable au travail où le maître mot est la productivité et pourtant, en aidant à rétablir l'équilibre physique, ne pourrait-il pas y contribuer ?",
+  "pergunta": "Que suggère l'auteur au sujet de la sieste ?",
+  "alternativas": [
+   "Elle devrait être réservée aux périodes de congés.",
+   "Elle est préconisée par la médecine.",
+   "Elle peine à se répandre en milieu professionnel.",
+   "Elle serait néfaste pour le rendement."
+  ],
+  "correta": 2,
+  "explicacao": "« reste inacceptable au travail », « devient une transgression » = não consegue entrar no mundo do trabalho. D é o contrário da pergunta retórica final (a sesta poderia contribuir para a produtividade)."
+ },
+ {
+  "n": 32,
+  "nivel": "C1",
+  "texto": "Théâtre\nJoël Pommerat nous offre un très court spectacle dont à la fois la pureté formelle et le sens nous ont conquis. Le matériau en est constitué par une série de rencontres, auxquelles lui-même et son équipe assistèrent, entre des travailleurs sociaux et des femmes d'origine simple, vivant en cité, et en proie à des problèmes familiaux. De ces confidences relatives aux tensions qu'elles connaissent avec leurs enfants, Pommerat a tiré une suite de brèves séquences qui composent une tragédie intense de la souffrance familiale, et particulièrement de la souffrance de la femme. Son regard sur la détresse humaine est d'une bienveillance et d'une tendresse infinies. Il ne nous livre aucun message moral et à peine un message social : il fait simplement appel à notre sensibilité.",
+  "pergunta": "Dans quel objectif Joël Pommerat a-t-il créé son spectacle ?",
+  "alternativas": [
+   "Aider les femmes à se battre pour améliorer leur situation familiale.",
+   "Amener les spectateurs à s'émouvoir d'un quotidien douloureux.",
+   "Démontrer que la condition de la femme dans les cités est désastreuse.",
+   "Informer des difficultés que peuvent rencontrer les enfants des cités."
+  ],
+  "correta": 1,
+  "explicacao": "A frase final: « aucun message moral et à peine un message social : il fait simplement appel à notre sensibilité » = emocionar. A, C e D atribuem ao espetáculo uma militância ou uma tese que o texto nega."
+ },
+ {
+  "n": 33,
+  "nivel": "C1",
+  "texto": "Il est important d'alimenter l'imagination des enfants. Dans cette perspective, les matériaux les moins finis sont plus intéressants que les jouets sophistiqués, car ils laissent à l'enfant l'espace nécessaire pour tenter de les transformer et pour développer ses capacités créatives. Il importe également de tenir compte du caractère de chaque enfant. Certains sont entreprenants, d'autres plus contemplatifs. Cela ne signifie pas qu'ils ont un monde intérieur moins riche, mais que leur créativité s'exprime davantage dans la rêverie que dans l'action. Alimenter l'imagination des enfants, c'est leur ménager des moments d'ennui où ils auront à se remplir de leur inspiration.",
+  "pergunta": "Selon cet article, que faut-il faire pour stimuler l'imagination des enfants ?",
+  "alternativas": [
+   "Leur donner le goût de l'observation.",
+   "Leur permettre d'inventer des activités.",
+   "Leur procurer des jeux éducatifs.",
+   "Leur proposer des énigmes à résoudre."
+  ],
+  "correta": 1,
+  "explicacao": "Materiais inacabados para « transformer » e « moments d'ennui » para se encher da própria inspiração = deixar a criança inventar. C é o oposto dos « matériaux les moins finis »."
+ },
+ {
+  "n": 34,
+  "nivel": "C1",
+  "texto": "De plus en plus de scientifiques s'intéressent au fonctionnement du cerveau des tout-petits. En effet, comprendre le développement normal du cerveau permettra d'aider les bébés touchés par des troubles. Au-delà, l'ambition est de découvrir les racines de l'intelligence humaine : pourquoi l'homme, à la différence des autres espèces animales, peut parler, compter et même envoyer des fusées dans l'espace.\nPendant longtemps, ces capacités uniques ont été attribuées à la taille de notre encéphale. Une idée finalement battue en brèche : le cerveau du bébé est bien moins gros que le nôtre ou que celui de nombreux animaux. Et pourtant, les tout-petits apprennent beaucoup de choses, bien plus vite et bien plus facilement que n'importe quel animal ou même que les adultes.",
+  "pergunta": "Qu'apprend-on sur le cerveau humain ?",
+  "alternativas": [
+   "Sa structure est identique chez l'homme et l'animal.",
+   "Sa taille influe sur les compétences cognitives.",
+   "Son développement est ralenti les premiers mois.",
+   "Son fonctionnement est encore mystérieux."
+  ],
+  "correta": 3,
+  "explicacao": "Os cientistas ainda buscam « découvrir les racines de l'intelligence », e a antiga explicação caiu. B é a ideia « battue en brèche »; C inverte (os bebês aprendem « bien plus vite »)."
+ },
+ {
+  "n": 35,
+  "nivel": "C1",
+  "texto": "L'homme est de noir vêtu. Son crâne, nu, joue avec la lumière. Tout est dit, tout est là, dans ce jeu d'ombre et de clarté qui fait d'un bâtisseur un poète. Jean Nouvel façonne le mystère pour insuffler du vivant aux édifices au cœur de pierre et bâtit sans dénaturer. Cet architecte éclairé n'érige rien, il convie cette émotion, suscite une apparition : pour sa dernière création, l'œil découvre une ville-musée aux formes douces, un dôme qui semble né des mains d'une dentellière. Le dôme repose sur quatre piliers pour gagner en légèreté et s'allier au paysage, trait d'union avec les nuages.",
+  "pergunta": "Quelle particularité de Jean Nouvel est louée dans cet article ?",
+  "alternativas": [
+   "Sa technique puise dans divers mouvements artistiques.",
+   "Ses œuvres se fondent dans leur environnement.",
+   "Son inspiration provient de ses nombreuses lectures.",
+   "Son savoir-faire met en valeur des procédés connus."
+  ],
+  "correta": 1,
+  "explicacao": "« bâtit sans dénaturer », « s'allier au paysage », « trait d'union avec les nuages » = integração ao ambiente. « poète » é metáfora, não indica leituras (C)."
+ },
+ {
+  "n": 36,
+  "nivel": "C1",
+  "texto": "Imaginez un instant que nos espaces de travail soient inadaptés à la moitié des salariés : vous trouveriez cela pour le moins troublant, voire inacceptable. C'est pourtant le cas pour les personnes introverties qui, selon des recherches, représentent entre un tiers et la moitié de la population mondiale. Travail de groupe, réseaux sociaux, « open space » : l'économie moderne exige d'interagir, faisant de l'aisance en public un avantage non négligeable dans le milieu professionnel. Les cultures d'entreprises qui mettent constamment en avant les échanges avec autrui finissent par dévaloriser l'identité des introvertis dont les capacités ne sont pas suffisamment sollicitées.",
+  "pergunta": "Que dénonce l'auteur de cet article ?",
+  "alternativas": [
+   "La primauté de l'apparence sur les compétences.",
+   "Le corporatisme poussé de certaines sociétés.",
+   "Le manque de formation aux nouvelles technologies.",
+   "Les principes actuels d'organisation du travail."
+  ],
+  "correta": 3,
+  "explicacao": "« espaces de travail inadaptés », « travail de groupe… open space », « cultures d'entreprises » = a organização atual do trabalho. A é tentadora, mas o texto fala de facilidade de interação, não de aparência."
+ },
+ {
+  "n": 37,
+  "nivel": "C1",
+  "texto": "Suite à un accident chimique sur un site minier, les pouvoirs publics ont décidé d'obliger les sociétés minières à financer des programmes de recherche et à replanter les surfaces exploitées. Et de fait, les compagnies minières jouent très bien le jeu. Comme il serait bien naïf de penser que leurs dirigeants soient tout à coup devenus philanthropes, il faut chercher la raison de cet intérêt ailleurs. Il se trouve qu'un scientifique, Anthony Van der Hent, a prouvé que des « super-plantes » avaient la faculté d'extraire du sol des métaux économiquement exploitables. C'est donc la possibilité d'allier la régénération de sites industriels à des assurances de gains financiers supplémentaires qui motive tant les industriels.",
+  "pergunta": "Sur quel point porte le scepticisme du journaliste ?",
+  "alternativas": [
+   "La capacité des plantes à nettoyer les sols.",
+   "La rentabilité d'un nouveau système d'extraction.",
+   "Le résultat des recherches de Mr Van der Hent.",
+   "Les préoccupations écologistes des industriels."
+  ],
+  "correta": 3,
+  "explicacao": "« il serait bien naïf de penser que leurs dirigeants soient devenus philanthropes » = ele duvida da boa vontade ecológica das mineradoras. A pesquisa (C) foi « prouvé » — o jornalista não a contesta."
+ },
+ {
+  "n": 38,
+  "nivel": "C1",
+  "texto": "Une entreprise japonaise a présenté une étude sur une gigantesque structure d'habitation immergée. Futuriste ? Oui, car certaines technologies restent à mettre au point. Mais la recherche a été poussée assez loin et, d'après ses concepteurs, une telle cité de la mer pourrait devenir envisageable à partir de 2030. Une vaste sphère de 500 mètres de diamètre abriterait des appartements, des hôtels, des bureaux et des laboratoires pour 4 000 personnes. Le projet ne consiste pas en un espace aménagé en surface. Il s'agit au contraire d'exploiter le potentiel de l'océan profond et d'assurer la pérennité de l'espèce humaine. L'océan est une source d'énergie, d'eau douce et de nourriture. C'est aussi un très bon endroit pour retraiter notre production de dioxyde de carbone.",
+  "pergunta": "Quel est l'objectif de ce projet ?",
+  "alternativas": [
+   "Concevoir des lieux de vie alternatifs.",
+   "Étudier de nouvelles technologies.",
+   "Proposer des activités futuristes.",
+   "Protéger des espaces marins menacés."
+  ],
+  "correta": 0,
+  "explicacao": "« structure d'habitation immergée », « cité de la mer », « appartements… pour 4 000 personnes » = novo lugar para viver. As tecnologias « restent à mettre au point » — são meio, não objetivo (B)."
+ },
+ {
+  "n": 39,
+  "nivel": "C2",
+  "texto": "Selon la conception de Descartes, le corps est perçu comme séparé de l'esprit à éduquer. Cette idée selon laquelle le corps ne serait que naturel et biologique a été déconstruite par le sociologue Marcel Mauss en 1934. Dans ses travaux, il montre que le corps est le résultat d'une construction sociale, un matériau dans lequel s'impriment les marques d'une culture donnée dans une société donnée. Il n'existerait pas de manière « naturelle » de se développer, de bouger, de se comporter pour le corps humain. La marche ou la nage, qui paraissent ordinaires ou allant de soi, sont en réalité le reflet d'une éducation qui institue les manières dont les êtres humains apprennent à se servir de leur corps.",
+  "pergunta": "Qu'ont montré les travaux de Marcel Mauss sur la façon de se mouvoir ?",
+  "alternativas": [
+   "Elle représenterait l'influence de l'inconscient.",
+   "Elle résulterait de l'observation de normes.",
+   "Elle révélerait la part de l'acquis due au groupe.",
+   "Elle serait issue du patrimoine génétique."
+  ],
+  "correta": 2,
+  "explicacao": "« construction sociale », « marques d'une culture donnée », « reflet d'une éducation » = aprendido com o grupo. D é a visão que Mauss desconstrói (« naturel et biologique »); B supõe regras conscientes que o texto não menciona."
+ }
+]

@@ -1,0 +1,548 @@
+[
+ {
+  "n": 1,
+  "nivel": "A1",
+  "texto": "Chers amis,\nNous sommes heureux de vous annoncer l'arrivée d'un nouveau membre dans notre famille, il se nomme Adnen et a vu le jour le 1er septembre au matin.\nBien à vous, Alina et Paul",
+  "pergunta": "De quel évènement s'agit-il ?",
+  "alternativas": [
+   "D'un anniversaire.",
+   "D'un décès.",
+   "D'un mariage.",
+   "D'une naissance."
+  ],
+  "correta": 3,
+  "explicacao": "« l'arrivée d'un nouveau membre » + « a vu le jour » (= nasceu) = nascimento. A é armadilha: a data de nascimento não é um aniversário."
+ },
+ {
+  "n": 2,
+  "nivel": "A1",
+  "texto": "« DRÔLE ET TRÈS BEAU ! » « DES ACTEURS MAGNIFIQUES ! » « À VOIR ABSOLUMENT ! »",
+  "pergunta": "De quoi parle la critique ?",
+  "alternativas": [
+   "D'un concert.",
+   "D'un film.",
+   "D'un livre.",
+   "D'un tableau."
+  ],
+  "correta": 1,
+  "explicacao": "« des acteurs » + « à voir » = filme. Livro se lê, concerto se escuta, quadro não tem atores."
+ },
+ {
+  "n": 3,
+  "nivel": "A1",
+  "texto": "Évangélisa\nChoux — Paris-Brest — Éclairs au café — Tartes aux pommes Sur place ou à emporter. Faites votre choix !",
+  "pergunta": "Que peut-on acheter à Évangélina ?",
+  "alternativas": [
+   "Des billets de train.",
+   "Des légumes.",
+   "Des pâtisseries.",
+   "Des vêtements."
+  ],
+  "correta": 2,
+  "explicacao": "Choux, éclairs, tartes = doces de confeitaria. « Paris-Brest » é um doce, não um trajeto de trem (A)."
+ },
+ {
+  "n": 4,
+  "nivel": "A1",
+  "texto": "Prière de n'emporter ni les draps de bain, ni les objets appartenant au bar de la chambre. Nous vous remercions de votre compréhension.\nLa direction de l'hôtel",
+  "pergunta": "À qui est destinée cette annonce ?",
+  "alternativas": [
+   "Aux clients de l'hôtel.",
+   "Au service de nettoyage.",
+   "Au directeur de l'hôtel.",
+   "Aux serveurs du bar."
+  ],
+  "correta": 0,
+  "explicacao": "Quem poderia « emporter » (levar embora) toalhas e objetos do frigobar do quarto são os hóspedes. O diretor é quem assina (C)."
+ },
+ {
+  "n": 5,
+  "nivel": "A1",
+  "texto": "Prière de ne pas toucher à la photocopieuse\nLe réparateur arrive demain à la première heure. En attendant, donnez vos documents à ma secrétaire qui les photocopiera au bureau de la comptable.\nMerci, Le directeur.",
+  "pergunta": "Qui va faire les photocopies pendant que la photocopieuse est en réparation ?",
+  "alternativas": [
+   "La comptable.",
+   "La secrétaire.",
+   "Le directeur.",
+   "Le réparateur."
+  ],
+  "correta": 1,
+  "explicacao": "« ma secrétaire qui les photocopiera » — o « qui » retoma a secretária. A contadora só empresta a sala."
+ },
+ {
+  "n": 6,
+  "nivel": "A1",
+  "texto": "ASSOCIATION En route pour l'école\nPour 92 euros, aidez des enfants à aller à l'école ! Pour beaucoup d'entre eux, le collège est très loin : ils se lèvent très tôt et rentrent tard. Avec une bicyclette, ils pourraient y aller plus facilement. Faites un don à notre association pour leur offrir une bicyclette !",
+  "pergunta": "Qu'est-ce que cette association voudrait faire ?",
+  "alternativas": [
+   "Aider des familles en difficulté.",
+   "Donner un vélo à des élèves.",
+   "Ouvrir de nouveaux collèges.",
+   "Réparer de vieilles bicyclettes."
+  ],
+  "correta": 1,
+  "explicacao": "« pour leur offrir une bicyclette » = dar bicicleta aos alunos. O problema é a distância, não a pobreza das famílias (A)."
+ },
+ {
+  "n": 7,
+  "nivel": "A2",
+  "texto": "Chers locataires,\nLa société « Ville propre » nous demande de faire plus attention quand on jette nos déchets. Il faut séparer le plastique et le carton et les mettre dans les poubelles jaunes. Vous pouvez jeter les autres déchets dans les poubelles grises.\nMerci, Votre gardien.",
+  "pergunta": "Pourquoi est-ce que le concierge écrit aux locataires ?",
+  "alternativas": [
+   "Pour annoncer un changement de couleur des poubelles.",
+   "Pour informer de l'ouverture du nouveau local poubelle.",
+   "Pour présenter l'entreprise de tri des poubelles.",
+   "Pour rappeler l'utilisation correcte des poubelles."
+  ],
+  "correta": 3,
+  "explicacao": "« faire plus attention », « il faut séparer… » = relembrar a regra de separação. As cores já existem, não mudam (A); a empresa só é citada, não apresentada (C)."
+ },
+ {
+  "n": 8,
+  "nivel": "A2",
+  "texto": "Votre bibliothèque vous invite à venir écouter une sélection de CD à l'occasion du festival de musique « Le printemps du Jazz » qui commence le mois prochain dans tout le département.",
+  "pergunta": "Que propose la bibliothèque ?",
+  "alternativas": [
+   "De découvrir une sélection de livres.",
+   "De gagner des places pour un festival.",
+   "De participer à une discussion sur le jazz.",
+   "De passer un moment agréable en musique."
+  ],
+  "correta": 3,
+  "explicacao": "« venir écouter une sélection de CD » = ouvir música. A é a armadilha da biblioteca: a seleção é de CDs, não de livros; o festival é só a ocasião."
+ },
+ {
+  "n": 9,
+  "nivel": "A2",
+  "texto": "Le soin d'origine naturelle « Nuit sommeil » est étudié pour les peaux fragiles. Il corrige les signes de fatigue et réveille votre visage. Votre peau est parfaite, même en plein hiver.",
+  "pergunta": "Qu'est-ce que « Nuit Sommeil » ?",
+  "alternativas": [
+   "Un savon pour le corps.",
+   "Un shampoing aux herbes.",
+   "Une boisson pour dormir.",
+   "Une crème de beauté."
+  ],
+  "correta": 3,
+  "explicacao": "« soin », « peaux fragiles », « votre visage » = creme para o rosto. O nome « Nuit sommeil » é a isca de C."
+ },
+ {
+  "n": 10,
+  "nivel": "A2",
+  "texto": "LE SAVIEZ-VOUS ?\nLes Galeries Lafayette sont aujourd'hui le site le plus visité à Paris après le Musée du Louvre ! Vous pouvez y trouver des vêtements à la mode, des objets pour la maison ou encore des articles de cuisine.",
+  "pergunta": "Qu'est-ce qu'on apprend sur ce grand magasin ?",
+  "alternativas": [
+   "Beaucoup de personnes le visitent.",
+   "Il vend des articles bon marché.",
+   "Il y a un célèbre musée à l'intérieur.",
+   "On y donne des cours de cuisine."
+  ],
+  "correta": 0,
+  "explicacao": "« le site le plus visité » (depois do Louvre). O Louvre é termo de comparação (C) e « articles de cuisine » são produtos (D)."
+ },
+ {
+  "n": 11,
+  "nivel": "A2",
+  "texto": "À Perpignan, le vélo est bien pratique. La « Maison de la bicyclette » encourage ce type de transport. Elle a ouvert un atelier où les personnes parlent de vélos et peuvent les réparer gratuitement. Il y a aujourd'hui 800 personnes dans l'association.",
+  "pergunta": "Pourquoi est-ce que les gens vont à la « Maison de la bicyclette » ?",
+  "alternativas": [
+   "Pour échanger des conseils sur le vélo.",
+   "Pour échanger des promenades à vélo.",
+   "Pour s'entraîner aux courses de vélo.",
+   "Pour trouver des vélos bon marché."
+  ],
+  "correta": 0,
+  "explicacao": "« un atelier où les personnes parlent de vélos et peuvent les réparer » = trocar dicas. Gratuito é o conserto, não a venda de bicicletas (D)."
+ },
+ {
+  "n": 12,
+  "nivel": "B1",
+  "texto": "Finis les souvenirs de voyages trop flous. Pour s'entraîner, direction Lyon pour le week-end. Sur place, une jeune agence spécialisée vous propose un stage pour découvrir la ville autrement. L'objectif : sur une journée, travailler la photographie et découvrir en même temps avec un guide les monuments historiques de la ville. Vous profitez toute la journée des conseils d'un professionnel qui vous montre les endroits secrets de Lyon. Il vous explique comment utiliser la lumière naturelle.",
+  "pergunta": "Que propose cette agence ?",
+  "alternativas": [
+   "D'apprendre à s'orienter dans la ville.",
+   "De se former au métier de guide.",
+   "De visiter des expositions photo.",
+   "De voir Lyon d'une façon différente."
+  ],
+  "correta": 3,
+  "explicacao": "« découvrir la ville autrement » (= de outro jeito), por meio da fotografia e de « endroits secrets ». O guia acompanha, mas ninguém vira guia (B); não há exposição (C)."
+ },
+ {
+  "n": 13,
+  "nivel": "A2",
+  "texto": "Clément et Pierre vont participer au tour automobile 4L Trophy au Maroc. Ils vont apporter 40 kg de matériel et 10 kg de nourriture à une école. Les deux amis recherchent des solutions pour payer leur voyage. Vous voulez les aider ? c&p@4Ltrophy.fr",
+  "pergunta": "De quoi Clément et Pierre ont-ils besoin ?",
+  "alternativas": [
+   "D'argent pour la course.",
+   "De livres pour les enfants.",
+   "De produits pour les repas.",
+   "D'une voiture pour le transport."
+  ],
+  "correta": 0,
+  "explicacao": "« recherchent des solutions pour payer leur voyage » = dinheiro para o rali. Material e comida já estão garantidos (« ils vont apporter »)."
+ },
+ {
+  "n": 14,
+  "nivel": "B1",
+  "texto": "La foire internationale de Nantes va fermer ses portes dimanche. L'occasion de ne rien manquer de ce rendez-vous populaire. La foire, c'est une ambiance à part, où se mélangent trois grands univers : maison, loisirs et gastronomie. Cette année, la foire emmène le visiteur au pays du soleil levant, avec une très belle expo consacrée aux traditions japonaises et aussi de nombreuses animations en lien avec ce pays d'Asie.",
+  "pergunta": "Quelle information ce texte donne-t-il sur la foire de Nantes ?",
+  "alternativas": [
+   "Elle accueille plus de visiteurs cette année.",
+   "Pourquoi elle a eu un chèque de réduction.",
+   "Elle propose une découverte du Japon.",
+   "Elle s'est terminée dimanche dernier."
+  ],
+  "correta": 2,
+  "explicacao": "« pays du soleil levant » = Japão, com « expo consacrée aux traditions japonaises ». D erra o tempo verbal: « va fermer » = vai fechar (futuro)."
+ },
+ {
+  "n": 15,
+  "nivel": "B1",
+  "texto": "Une page se tourne ou plutôt ne se tournera plus pour les députés. Des tablettes numériques remplacent désormais les épaisses liasses de papier.\nDepuis leur arrivée en juin, beaucoup de nouveaux députés se sont émus de la quantité de papier utilisée pendant l'examen des textes, avec des amendements systématiquement imprimés. Avec environ 52 000 paquets utilisés chaque année, l'Assemblée est gourmande en feuilles, même si ce chiffre a déjà énormément diminué depuis 5 ans avec la dématérialisation de certains travaux.",
+  "pergunta": "Pourquoi les députés utilisent-ils des tablettes numériques ?",
+  "alternativas": [
+   "Pour diminuer l'empreinte carbone.",
+   "Pour donner une image moderne de l'Assemblée.",
+   "Pour étudier plus rapidement les amendements.",
+   "Pour faire des économies de papier."
+  ],
+  "correta": 3,
+  "explicacao": "« se sont émus de la quantité de papier », « gourmande en feuilles », « 52 000 paquets » = reduzir o papel. Carbono (A) e rapidez (C) não são citados."
+ },
+ {
+  "n": 16,
+  "nivel": "A2",
+  "texto": "Cher client,\nVotre achat en ligne est validé. Vous pourrez aller dans un bureau de poste chercher votre commande dans deux à trois jours. N'oubliez pas votre carte d'identité et votre reçu.\nMerci d'avoir choisi notre site. Le service client.",
+  "pergunta": "Qu'est-ce que ce message annonce ?",
+  "alternativas": [
+   "Un lieu de livraison.",
+   "Un problème de colis.",
+   "Une date d'envoi.",
+   "Une facture à payer."
+  ],
+  "correta": 0,
+  "explicacao": "« aller dans un bureau de poste chercher votre commande » = onde retirar o pedido. « deux à trois jours » é prazo para buscar, não data de envio (C)."
+ },
+ {
+  "n": 17,
+  "nivel": "B1",
+  "texto": "Dans les quartiers populaires de Kinshasa, il crée des tableaux en relief à partir des déchets trouvés dans la ville.\nCertains le prennent pour un fou, d'autres pour un génie. Yeux perçants, mains agiles, jambes déformées par la polio, Emmanuel Botalatala est appelé le « ministre des poubelles ». Ce poste n'est pas officiel, c'est son nom d'artiste. Le documentaire qui lui est consacré présente le rôle qu'un artiste et sa vision peuvent jouer dans une capitale en pleine mutation.",
+  "pergunta": "De quoi est-il question dans cet article ?",
+  "alternativas": [
+   "D'un comédien qui tourne dans les bidonvilles.",
+   "D'un homme qui produit des œuvres originales.",
+   "De la santé d'un membre du gouvernement.",
+   "De mesures écologiques prises par une mairie."
+  ],
+  "correta": 1,
+  "explicacao": "« il crée des tableaux en relief à partir des déchets » = obras originais. C é a armadilha do apelido: « ce poste n'est pas officiel, c'est son nom d'artiste »."
+ },
+ {
+  "n": 18,
+  "nivel": "B2",
+  "texto": "Lors des premiers pas de l'art urbain (connu aussi sous le nom de street art), il y a plus de cinquante ans, personne ne portait vraiment intérêt à cette expression artistique éphémère. Les tags étaient destinés à disparaître, mais avec le temps, cela a changé : désormais on va jusqu'à découper les murs pour les vendre aux enchères et en garder une trace, car la conservation des œuvres d'art urbain dans l'espace public pose de sérieux défis. Il faut les protéger des agressions du temps, de la température, des dégradations humaines. On peut mettre une protection en plexiglas, mais un jour le mur finira aussi peut-être par tomber.",
+  "pergunta": "Qu'explique l'auteur à propos des œuvres d'art urbain ?",
+  "alternativas": [
+   "Des musées sont prêts à les accueillir.",
+   "Le marché voit sa cote grimper.",
+   "Leurs auteurs sont devenus célèbres.",
+   "On veut les préserver durablement."
+  ],
+  "correta": 3,
+  "explicacao": "« en garder une trace », « la conservation… pose de sérieux défis », « il faut les protéger » = preservar. B é tentadora (« vendre aux enchères »), mas o leilão é citado como forma de conservar, não como alta de preço."
+ },
+ {
+  "n": 19,
+  "nivel": "A2",
+  "texto": "L'exposition des sculptures de César s'est terminée hier. Pour la première fois, les visiteurs ont pu voir une centaine d'œuvres de l'artiste, exposées pendant 3 semaines dans un large espace, au dernier étage du Centre Pompidou.",
+  "pergunta": "Qu'est-ce qu'on apprend sur cette exposition ?",
+  "alternativas": [
+   "C'est un succès.",
+   "Elle changera de lieu.",
+   "Elle est déjà finie.",
+   "L'entrée est gratuite."
+  ],
+  "correta": 2,
+  "explicacao": "« s'est terminée hier » = já acabou. Nada sobre sucesso, mudança de local ou preço."
+ },
+ {
+  "n": 20,
+  "nivel": "B2",
+  "texto": "À l'ère des réseaux sociaux, il n'y a pas une table où les convives ne dégainent leur smartphone pour « poster » immédiatement leur assiette. Peu importe qu'elle refroidisse, que ce soit bon ou pas. Sur la toile, la cuisine est devenue l'univers le plus plébiscité avec le voyage.\nEt même si la vue des mets est un avant-goût du plaisir, réduire la cuisine à une galerie de natures mortes, aussi belles soient-elles, n'est pas sans interroger. « Pour moi, la bonne cuisine, c'est quand on soulève le couvercle, que ça fume, que ça sent bon et qu'on peut se resservir », disait le grand cuisinier Paul Bocuse. Pour les réseaux sociaux, c'est un plat qui en met plein la vue et qu'on vous sert sur écran plat.",
+  "pergunta": "Qu'apprend-on dans cet article ?",
+  "alternativas": [
+   "La réputation de restaurants touristiques est menacée par internet.",
+   "La technologie modifie la relation à la gastronomie.",
+   "Les grands chefs livrent leurs secrets sur des sites.",
+   "Les traditions culinaires peuvent se perpétuer grâce au numérique."
+  ],
+  "correta": 1,
+  "explicacao": "Fotografar o prato antes de comer, « peu importe qu'elle refroidisse » = o celular muda a relação com a comida (visual em vez de sabor). A citação de Bocuse mostra o contraste, não segredos (C)."
+ },
+ {
+  "n": 21,
+  "nivel": "B1",
+  "texto": "SOCIÉTÉ\nPlus que jamais peut-être, des lycéens, étudiants, jeunes travailleurs sont nombreux à consacrer une partie de leur activité, souvent bénévolement, aux plus âgés. Tout au long de la semaine, ils passent faire un brin de causette, histoire de tenir compagnie à ces personnes isolées, délaissées par leur famille. Rencontrer des jeunes n'est-il pas le plus sûr moyen de conserver un semblant de vie sociale ?",
+  "pergunta": "Pourquoi certains jeunes consacrent-ils du temps aux personnes âgées ?",
+  "alternativas": [
+   "Pour créer un lien entre générations.",
+   "Pour compléter leurs études.",
+   "Pour améliorer leurs revenus.",
+   "Parce qu'ils ne veulent plus être seuls."
+  ],
+  "correta": 0,
+  "explicacao": "Jovens que conversam com idosos isolados = laço entre gerações. C é negada por « bénévolement »; D inverte: os isolados são os idosos, não os jovens."
+ },
+ {
+  "n": 22,
+  "nivel": "B2",
+  "texto": "En Belgique, un studio de technologie créative propose au public de se livrer à une expérience artistique d'un genre inédit : coiffés d'un casque spécial, les participants doivent se remémorer une histoire personnelle durant trente à soixante secondes. Des données ressortent alors sous forme d'algorithmes et sont analysées par un système de mesure émotionnelle, ce qui permet de leur donner forme et couleur. Ainsi, des peintures virtuelles sont créées à partir des émotions de chacun. Et comme chaque histoire est unique, chaque œuvre l'est aussi !",
+  "pergunta": "Quel est le rôle des participants à cette expérience ?",
+  "alternativas": [
+   "Effectuer un calcul.",
+   "Évoquer un fait divers.",
+   "Fournir un support.",
+   "Sélectionner un souvenir."
+  ],
+  "correta": 3,
+  "explicacao": "« se remémorer une histoire personnelle » = escolher uma lembrança. O cálculo (A) é feito pelo sistema; « fait divers » é notícia, não lembrança pessoal."
+ },
+ {
+  "n": 23,
+  "nivel": "B1",
+  "texto": "Hier soir, lors du dernier concert du Festival de jazz organisé par la ville de Nancy, une chanteuse lorraine, Mell, a enthousiasmé le public lors de la première partie.\nÀ tel point que le groupe prévu ensuite a dû décaler son horaire. En effet, lorsque la chanteuse a quitté la scène, la salle, noire de monde, s'est mise à hurler afin de l'empêcher de partir.",
+  "pergunta": "Comment le public a-t-il réagi lors du concert de Mell ?",
+  "alternativas": [
+   "Il a acclamé de toutes ses forces la chanteuse.",
+   "Il a demandé l'annulation du concert.",
+   "Il a invité le groupe suivant à partir.",
+   "Il l'a retenue prisonnière toute la nuit."
+  ],
+  "correta": 0,
+  "explicacao": "« a enthousiasmé le public », « s'est mise à hurler afin de l'empêcher de partir » = aplausos e gritos de entusiasmo. D literaliza o « empêcher de partir »; o grupo seguinte só atrasou (C)."
+ },
+ {
+  "n": 24,
+  "nivel": "B2",
+  "texto": "Fixer des limites strictes à la pêche, c'est l'action que va mener l'Australie afin de protéger la vie aquatique.\n« Il est temps que la planète franchisse une nouvelle étape dans la protection des océans », a déclaré le ministre australien de l'Environnement. La création d'un réseau de parcs naturels aura un impact sur le secteur de la pêche commerciale qui devrait recevoir 79,2 millions d'euros en contrepartie. La fondation australienne pour la protection de l'environnement a qualifié cette annonce d'« historique », mais elle a souligné que plusieurs zones restaient menacées par l'exploitation humaine des ressources naturelles.",
+  "pergunta": "Que projette le gouvernement australien ?",
+  "alternativas": [
+   "D'aménager des réserves restreignant la pêche.",
+   "D'encourager une politique mondiale de la pêche.",
+   "D'organiser des contrôles pour surveiller la pêche.",
+   "De créer des taxes sur les produits de la pêche."
+  ],
+  "correta": 0,
+  "explicacao": "« La création d'un réseau de parcs naturels » + « limites strictes à la pêche » = reservas. D inverte o dinheiro: os pescadores recebem 79,2 milhões; « la planète » (B) é retórica do ministro."
+ },
+ {
+  "n": 25,
+  "nivel": "B2",
+  "texto": "Comment recruter la bonne personne, baby-sitter ou collaborateur ? Si le bouche-à-oreille ou les tests constituent des méthodes largement répandues, difficile pour autant d'être sûr à 100 % que la personne choisie soit vraiment la bonne. C'est pourquoi, pour une somme modique, une entreprise californienne, Predictim, promet une analyse complète de la personnalité des candidats via les réseaux sociaux : grâce à un algorithme, toutes leurs publications sont étudiées en seulement quelques secondes. Cependant, l'usage de l'intelligence artificielle pour la sélection de candidats a rapidement montré ses limites. L'entreprise Amazon, par exemple, a dû renoncer à son logiciel de recrutement, car celui-ci avait tendance à privilégier les hommes.",
+  "pergunta": "Que devrait permettre l'intelligence artificielle dans le monde professionnel ?",
+  "alternativas": [
+   "De protéger les droits du personnel.",
+   "De vérifier le profil des postulants.",
+   "D'encourager la création d'emplois.",
+   "D'éviter la discrimination à l'embauche."
+  ],
+  "correta": 1,
+  "explicacao": "« une analyse complète de la personnalité des candidats » = checar o perfil dos candidatos. D é o oposto do caso Amazon (« privilégier les hommes »)."
+ },
+ {
+  "n": 26,
+  "nivel": "C1",
+  "texto": "La rétrospective Mali Twist montre comment, par sa diversité et son éclat, l'œuvre de Malick Sidibé s'inscrit dans le champ contemporain de la photographie. Tour à tour reporter et portraitiste, Malick Sidibé a construit, depuis l'ouverture de son studio à Bamako en 1962, un ensemble photographique en noir et blanc exceptionnel. Mali Twist révèle son regard attentif et son talent pour mettre en lumière le meilleur de chacun, sa singularité. Malick Sidibé a fait de la photographie un art de l'échange. S'il a eu pour règle d'or d'embellir ses modèles, il témoigne aussi de la joie de vivre de la jeunesse bamakoise, peu après l'indépendance du Mali. Entre visages anonymes et corps en mouvement, poseurs élégants et flâneurs, Mali Twist offre plus de 250 photographies.",
+  "pergunta": "Sur quoi repose le travail photographique de Malick Sidibé ?",
+  "alternativas": [
+   "Un engagement politique.",
+   "Une contemplation abstraite.",
+   "Une mise en valeur de l'autre.",
+   "Une technique de retouche."
+  ],
+  "correta": 2,
+  "explicacao": "« mettre en lumière le meilleur de chacun », « un art de l'échange », « embellir ses modèles » = valorizar o outro. D é a leitura errada de « embellir »; a independência (A) é só o contexto histórico."
+ },
+ {
+  "n": 27,
+  "nivel": "C1",
+  "texto": "En écrivant à la main, chacun trouve sa manière de tracer, son rythme, et choisit son moment et ses mots. Le monde de la communication par textos, lui, est celui d'une communication homogène. Avec la numérisation des échanges, on ne connaît plus l'attente d'une lettre ou d'une carte postale. Rendez-vous avec un ami : un SMS pour prévenir qu'on arrive dans cinq minutes, un autre dès qu'on est arrivé, un autre si on est en retard. Bienvenue dans un monde sans attente, où tous les vides doivent être comblés.",
+  "pergunta": "Qu'apprend-on sur la communication numérique ?",
+  "alternativas": [
+   "Elle appauvrit le lexique courant.",
+   "Elle modifie le rapport au temps.",
+   "Elle provoque la fin du courrier postal.",
+   "Elle transforme le geste graphique."
+  ],
+  "correta": 1,
+  "explicacao": "« on ne connaît plus l'attente », « un monde sans attente », SMS a cada cinco minutos = nova relação com o tempo. C exagera: perde-se a espera da carta, não o correio em si."
+ },
+ {
+  "n": 28,
+  "nivel": "C1",
+  "texto": "Elle écrivait récemment sa dernière chronique, lancée comme un appel à la résistance. « Je m'en vais et je pense que vous devriez me rejoindre… ». La journaliste Kelly H. annonçait trois choses : qu'elle démissionnait après une longue carrière dans un prestigieux quotidien, qu'elle devenait professeure de mathématiques et qu'elle créait une fondation pour encourager d'anciens entrepreneurs à devenir enseignants. « Vous avez eu une carrière à succès. Maintenant, faites quelque chose de plus important ! Enseignez ! ». En tant que journaliste, elle avait effectué des enquêtes sur la vie des cadres supérieurs en ridiculisant le plus souvent l'engouement pour les concepts managériaux en vogue et en soulignant les crises existentielles des cadres.",
+  "pergunta": "Quelle est la nouvelle priorité de Kelly H. ?",
+  "alternativas": [
+   "Changer la façon de gérer des équipes.",
+   "Compenser le manque de formateurs.",
+   "Réussir au sein d'une société.",
+   "Transmettre des connaissances."
+  ],
+  "correta": 3,
+  "explicacao": "Ela vira professora e exorta « Enseignez ! » = transmitir conhecimento. A é seu passado de jornalista (crítica ao management); B supõe uma falta de professores que o texto não menciona."
+ },
+ {
+  "n": 29,
+  "nivel": "C1",
+  "texto": "Vincent Van Gogh (1853-1890), un fou génial et sans le sou, s'est coupé l'oreille ; il n'a pas été reconnu de son vivant. Voilà à peu près l'image qu'on se fait du célèbre peintre néerlandais, du moins à en croire les livres, les films et les anecdotes dont il est le héros. Un mythe difficile à effacer s'est construit autour du peintre à partir d'une histoire romancée. Or une étude approfondie de l'ensemble de la correspondance de Vincent Van Gogh — échangée essentiellement avec son frère Théo, mais aussi avec Gauguin — donne une impression beaucoup plus nuancée. Van Gogh n'était pas si pauvre, il n'était pas si fou et il a bénéficié d'une certaine notoriété de son vivant, même si ce n'était pas auprès du grand public. Forte personnalité, dans ses lettres il savait raconter merveilleusement et de façon captivante ce qui l'occupait et pourquoi il peignait un sujet de telle ou telle manière.",
+  "pergunta": "Qu'explique ce texte sur Vincent Van Gogh ?",
+  "alternativas": [
+   "Que sa biographie aide à mieux comprendre ses tableaux.",
+   "Que sa correspondance avec ses proches a influencé sa peinture.",
+   "Que ses écrits permettent de mieux cerner qui il était.",
+   "Que ses textes confortent l'image que l'on avait de lui."
+  ],
+  "correta": 2,
+  "explicacao": "« Or » vira o texto: as cartas dão « une impression beaucoup plus nuancée » do homem = mostram quem ele era de verdade. D é o oposto (as cartas desmontam o mito); B inverte a causalidade."
+ },
+ {
+  "n": 30,
+  "nivel": "C1",
+  "texto": "Les chaînes d'information en continu nous montrent la vie en temps réel, comme si nous y étions. Les informations y sont plus vraies que nature, elles palpitent et nous prennent aux tripes, analyse le journaliste Hubert Huertas. Avec le direct, nous pouvons imaginer qu'il peut toujours se passer quelque chose. C'est plus fort que le différé et plus fort que la fiction : nous sommes dans le concret, en contact avec le monde, et cela devient addictif, ajoute Virginie Spies, spécialiste des médias. À cela s'ajoute une impression d'insécurité. Le direct présente dans ces moments un côté hypnotique et tient le téléspectateur en haleine.",
+  "pergunta": "Qu'explique cet article à propos des chaînes d'information en continu ?",
+  "alternativas": [
+   "Elles captivent par l'instantanéité.",
+   "Elles exigent un sens du discernement.",
+   "Elles modifient le rapport au temps.",
+   "Elles nourrissent une curiosité naissante."
+  ],
+  "correta": 0,
+  "explicacao": "« en temps réel », « le direct », « addictif », « hypnotique », « tient en haleine » = prendem pela transmissão ao vivo. C é tentadora, mas o texto fala do efeito de fascínio, não de uma nova relação com o tempo."
+ },
+ {
+  "n": 31,
+  "nivel": "C1",
+  "texto": "Quarante terrains de football. C'est la superficie que les forêts perdent chaque minute à travers le monde. La destruction de la forêt tropicale provoque chaque année plus de rejets dans l'atmosphère que l'ensemble du secteur des transports. L'imaginaire collectif rendrait volontiers le commerce du bois principal responsable de la déforestation, alors qu'il n'en est rien. L'acteur majeur de ce phénomène est l'agriculture, responsable à 80 % des déboisements dans les zones tropicales. Le marché illégal du bois a aussi sa part de responsabilité. Il est un facteur déclenchant, et s'alimente des autres activités. Quelque 1,6 milliard d'habitants dépendent directement des forêts, et contribuent pourtant à leur raréfaction, voire à leur disparition.",
+  "pergunta": "Selon cet article, sur quoi la déforestation a-t-elle un impact ?",
+  "alternativas": [
+   "Sur l'industrie des bois rares.",
+   "Sur la démographie dans ces zones.",
+   "Sur la pollution atmosphérique.",
+   "Sur la progression des cultures tropicales."
+  ],
+  "correta": 2,
+  "explicacao": "O único efeito citado: « plus de rejets dans l'atmosphère que l'ensemble du secteur des transports ». A agricultura (D) é causa, não consequência."
+ },
+ {
+  "n": 32,
+  "nivel": "C1",
+  "texto": "Dans le monde de l'entreprise, les jeunes et les seniors éprouvent des sentiments analogues d'éviction et de dévalorisation.\nPourtant, des actions de mentorat, menées par des seniors pour guider les jeunes sur le marché du travail ou lors de la création de leur entreprise, existent depuis de nombreuses années. Plus étonnant, est apparu récemment le mentorat inversé, où les jeunes habitués aux outils numériques initient les seniors à leur usage. Les seniors y gagnent de nouvelles compétences, et les jeunes élargissent leur réseau.\nEn période de crise, cette coopération peut constituer un moyen de désamorcer les tensions sociales. Favoriser les échanges intergénérationnels, c'est contribuer à établir des relations où chacun prend conscience qu'il peut apporter quelque chose à l'autre.",
+  "pergunta": "Quel est l'intérêt des mentorats décrits ?",
+  "alternativas": [
+   "Créer de nouvelles sources d'emploi.",
+   "Éviter la solitude des personnes âgées.",
+   "Instaurer des rapports de réciprocité.",
+   "Répondre à l'allongement de la durée de vie."
+  ],
+  "correta": 2,
+  "explicacao": "Mentoria nos dois sentidos, « chacun… peut apporter quelque chose à l'autre » = reciprocidade. B desloca o tema: são seniores no mundo do trabalho, não idosos isolados."
+ },
+ {
+  "n": 33,
+  "nivel": "C1",
+  "texto": "Le désintérêt pour la lecture chez un grand nombre d'enfants peut être expliqué par plusieurs facteurs. Tout d'abord, beaucoup d'enfants abandonnent la lecture lorsqu'ils réalisent que d'autres élèves sont plus avancés qu'eux. De plus, lorsqu'on demande à l'enfant non seulement de lire, mais aussi de comprendre, il peut perdre son intérêt. En général, l'absence de compréhension est associée à un manque de plaisir.\nSelon certains psychologues, les enfants ont du mal à comprendre parce qu'ils ont des lacunes en culture générale. Cependant, la culture générale s'acquiert justement en lisant. Cela crée un cercle vicieux difficile à briser.\nPour sortir de ce cercle vicieux, les psychologues recommandent de mettre à la disposition des enfants des livres adaptés à leur niveau de compréhension et à leurs centres d'intérêt. De plus, il est important de proposer des méthodes d'enseignement de la lecture qui encouragent l'interaction entre les élèves et qui renforcent la confiance en soi. Enfin, il est important que les parents et les enseignants encouragent la lecture chez les enfants en leur offrant des livres adaptés à leur âge et à leur niveau de compréhension.",
+  "pergunta": "Selon ce texte, quelle est l'une des raisons qui découragent les enfants de lire ?",
+  "alternativas": [
+   "La difficulté d'accéder au sens.",
+   "La pression exercée par la famille.",
+   "Les méthodes d'enseignement.",
+   "Les moqueries de leurs camarades."
+  ],
+  "correta": 0,
+  "explicacao": "« l'absence de compréhension est associée à un manque de plaisir » + « ont du mal à comprendre » = dificuldade de entender. D exagera: há comparação com colegas mais avançados, mas não zombaria; os métodos (C) são parte da solução."
+ },
+ {
+  "n": 34,
+  "nivel": "C1",
+  "texto": "De plus en plus de scientifiques s'intéressent au fonctionnement du cerveau des tout-petits. En effet, comprendre le développement normal du cerveau permettra d'aider les bébés touchés par des troubles. Au-delà, l'ambition est de découvrir les racines de l'intelligence humaine : pourquoi l'homme, à la différence des autres espèces animales, peut parler, compter et même envoyer des fusées dans l'espace.\nPendant longtemps, ces capacités uniques ont été attribuées à la taille de notre encéphale. Une idée finalement battue en brèche : le cerveau du bébé est bien moins gros que le nôtre ou que celui de nombreux animaux. Et pourtant, les tout-petits apprennent beaucoup de choses, bien plus vite et bien plus facilement que n'importe quel animal ou même que les adultes.",
+  "pergunta": "Qu'apprend-on sur le cerveau humain ?",
+  "alternativas": [
+   "Sa structure est identique chez l'homme et l'animal.",
+   "Sa taille influe sur les compétences cognitives.",
+   "Son développement est ralenti les premiers mois.",
+   "Son fonctionnement est encore mystérieux."
+  ],
+  "correta": 3,
+  "explicacao": "Os cientistas ainda buscam « découvrir les racines de l'intelligence » e a explicação antiga caiu. B é a ideia « battue en brèche »; C inverte (os bebês aprendem « bien plus vite »)."
+ },
+ {
+  "n": 35,
+  "nivel": "C1",
+  "texto": "Il faut se rendre à l'évidence : le « jour » n'est plus l'unité de temps d'un journal. Un quotidien papier ne peut pas rivaliser avec la vitesse à laquelle les sites, les blogs, les réseaux sociaux, les journaux en ligne, les radios et télés, les « news » des grands serveurs diffusent les nouvelles du jour. Aussi, au moment où il est en kiosque, se condamne-t-il à apparaître comme « le journal de la veille », perdant progressivement ses lecteurs qui, bombardés de scoops tous azimuts, sont déçus de n'y trouver que ce qu'ils savent déjà.",
+  "pergunta": "Quelle est la position de l'auteur de l'article ?",
+  "alternativas": [
+   "Il conteste la fiabilité des sources d'internet.",
+   "Il critique la surabondance de l'information.",
+   "Il dénonce la médiocrité de la presse écrite.",
+   "Il doute de l'intérêt des médias traditionnels."
+  ],
+  "correta": 3,
+  "explicacao": "O jornal impresso « ne peut pas rivaliser », vira « le journal de la veille », perde leitores = dúvida sobre sua utilidade. C é forte demais: o problema é a velocidade, não a qualidade."
+ },
+ {
+  "n": 36,
+  "nivel": "C1",
+  "texto": "Il est rare que les journalistes de notre mensuel ou moi-même rentrions de reportage en renonçant à rédiger un article. La plupart du temps, les découvertes que nous faisons sont comme de grands bols d'air : elles annihilent tout défaitisme, font disparaître la fatalité ambiante et ouvrent de nouveaux horizons. Nous rencontrons des hommes et des femmes qui nous expliquent leurs envies, leurs rêves, leur utopie, et comment ils s'y prennent pour, à leur échelle, faire évoluer le monde. C'est simple, c'est lent, c'est « proprement humain ». Il est tellement jouissif de pouvoir se dire que nous allons pouvoir partager tous ces « petits riens » avec nos abonnés !",
+  "pergunta": "Quel est le parti pris de ces journalistes ?",
+  "alternativas": [
+   "Être au plus près de l'actualité.",
+   "Présenter des histoires positives.",
+   "Proposer des anecdotes amusantes.",
+   "Recenser des dérives de la société."
+  ],
+  "correta": 1,
+  "explicacao": "« grands bols d'air », « annihilent tout défaitisme », « ouvrent de nouveaux horizons » = boas notícias. « C'est lent » exclui a atualidade quente (A)."
+ },
+ {
+  "n": 37,
+  "nivel": "C1",
+  "texto": "Défenseur·e·s et détracteur·e·s de l'écriture inclusive, qui consiste à féminiser les mots en plaçant entre des points la terminaison du féminin, s'écharpent sur cet épineux sujet.\nPour Éliane Viennot, il est important de défendre l'écriture inclusive qui, en remaniant l'orthographe, vise à combattre les stéréotypes sexistes. Selon elle, la langue structure notre représentation du monde. Apprendre aux plus jeunes que le masculin l'emporte sur le féminin ne peut guère contribuer à forger des consciences égalitaristes. Elle rappelle de surcroît que la langue française a longtemps été plus égalitaire qu'elle ne l'est aujourd'hui : il y a eu une masculinisation délibérée du langage à partir du XVIIe siècle. Ceux qui se piquaient alors de définir le bon usage en ont profité pour renforcer l'ordre masculin.",
+  "pergunta": "Que pense Éliane Viennot de l'écriture inclusive ?",
+  "alternativas": [
+   "Elle favorise l'évolution des mentalités.",
+   "Elle incarne une première historique.",
+   "Elle permet de moderniser le lexique.",
+   "Elle reflète les clivages de la société."
+  ],
+  "correta": 0,
+  "explicacao": "« combattre les stéréotypes », « forger des consciences égalitaristes » = mudar mentalidades. B é o contrário: o francês já foi mais igualitário antes do século XVII."
+ },
+ {
+  "n": 38,
+  "nivel": "C1",
+  "texto": "Ça pourrait être une tragédie, avec les meilleurs ingrédients du genre : rencontres hasardeuses de personnages abîmés par un lourd passé, malheurs successifs et révélations inattendues… Sauf qu'entre le jeune pompier Roméo et l'infirmière Juliette victime de la cruauté de son compagnon, le chemin tracé par Agnès Ledig dans son roman Pars avec lui est plein de pudeur, riche de personnages ordinaires, mais surprenants, vrais, mais imprévisibles, dans une France provinciale qu'on décrit trop peu. Il y a chez eux une envie de dire, d'avouer ce qui fut trop longtemps caché. Ainsi l'histoire se fait-elle peu à peu libération et rédemption. Avec un art direct et familier de conteuse, l'autrice offre à ses personnages un espoir, un bonheur encore possible.",
+  "pergunta": "D'après la critique, quel est l'atout principal du roman d'Agnès Ledig ?",
+  "alternativas": [
+   "L'alternance entre le comique et le drame.",
+   "L'atmosphère énigmatique et inquiétante.",
+   "La présentation de particularités régionales.",
+   "L'émancipation des héros au cours du récit."
+  ],
+  "correta": 3,
+  "explicacao": "« Sauf que » desfaz a tragédia: a história « se fait peu à peu libération et rédemption », com « un bonheur encore possible » = emancipação dos heróis. A « France provinciale » (C) é só cenário."
+ },
+ {
+  "n": 39,
+  "nivel": "C2",
+  "texto": "La révolution numérique aura, selon le philosophe Michel Serres, des effets au moins aussi considérables qu'en leur temps l'invention de l'écriture, puis celle de l'imprimerie. Les notions de temps et d'espace en sont transformées et les façons d'accéder à la connaissance profondément modifiées.\nÀ cet égard, chaque grande rupture dans l'histoire de l'humanité conduit à priver l'homme de facultés (« il perd »), mais chaque révolution lui en apporte de nouvelles (« il gagne »). Pour chaque perte d'une part de mémoire et de capacité de traitement de l'information liée à la diffusion des technologies numériques, l'homme gagne une possibilité nouvelle de mise en relation (entre les individus et entre les savoirs) ainsi qu'une faculté décuplée d'invention et de création.",
+  "pergunta": "Sur quoi Michel Serres attire-t-il l'attention ?",
+  "alternativas": [
+   "L'évolution des aptitudes mentales.",
+   "La mondialisation de la recherche scientifique.",
+   "La transformation des savoirs fondamentaux.",
+   "Le maintien du patrimoine culturel."
+  ],
+  "correta": 0,
+  "explicacao": "O núcleo: o homem « perd » faculdades (memória, tratamento da informação) e « gagne » outras (relação, invenção) = evolução das capacidades mentais. C é armadilha: muda o acesso ao saber, não os saberes em si."
+ }
+]

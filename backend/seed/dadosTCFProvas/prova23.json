@@ -1,0 +1,548 @@
+[
+ {
+  "n": 1,
+  "nivel": "A1",
+  "texto": "Heures d'ouverture du service consulaire :\nLe service consulaire est ouvert au public les lundis, mercredis et jeudis de 8h30 à 14h et les mardis et vendredis de 14h30 à 18h.",
+  "pergunta": "Quand le service est-il fermé au public ?",
+  "alternativas": [
+   "Le lundi matin.",
+   "Le mardi matin.",
+   "Le mercredi matin.",
+   "Le jeudi matin."
+  ],
+  "correta": 1,
+  "explicacao": "Terça e sexta só abrem « de 14h30 à 18h » = fechado de manhã. Segunda, quarta e quinta abrem às 8h30."
+ },
+ {
+  "n": 2,
+  "nivel": "A1",
+  "texto": "Urgent ! cherche maison à louer pour vacances d'été dans le centre-ville. Laetitia : 07 08 09 80 90",
+  "pergunta": "Qu'est-ce que Laetitia veut faire ?",
+  "alternativas": [
+   "Habiter à la campagne.",
+   "Réserver un hôtel.",
+   "Trouver un logement.",
+   "Vendre un appartement."
+  ],
+  "correta": 2,
+  "explicacao": "« cherche maison à louer » = procurar moradia. A contradiz « centre-ville »; D inverte o papel (ela quer alugar, não vender)."
+ },
+ {
+  "n": 3,
+  "nivel": "A1",
+  "texto": "De : Société BALY INFORMATIQUE — À : Monsieur Lefort\nObjet : Printemps des conférences – Lyon\nMonsieur,\nUne voiture de notre société va vous attendre à votre arrivée à l'aéroport (porte F) pour vous conduire au Palais des Congrès.\nCordialement, Mme Deor",
+  "pergunta": "Comment est-ce que M. Lefort va aller au Palais des Congrès ?",
+  "alternativas": [
+   "Avec Mme Deor.",
+   "Avec un chauffeur.",
+   "En autobus.",
+   "En taxi."
+  ],
+  "correta": 1,
+  "explicacao": "« Une voiture de notre société va vous… conduire » = um motorista da empresa. Não é táxi (D); Mme Deor só assina a mensagem (A)."
+ },
+ {
+  "n": 4,
+  "nivel": "A1",
+  "texto": "Prière de ne pas toucher à la photocopieuse\nLe réparateur arrive demain à la première heure. En attendant, donnez vos documents à ma secrétaire qui les photocopiera au bureau de la comptable.\nMerci, Le directeur.",
+  "pergunta": "Qui va faire les photocopies pendant que la photocopieuse est en réparation ?",
+  "alternativas": [
+   "La comptable.",
+   "La secrétaire.",
+   "Le directeur.",
+   "Le réparateur."
+  ],
+  "correta": 1,
+  "explicacao": "« ma secrétaire qui les photocopiera » — o pronome « qui » retoma a secretária. A contadora só empresta o lugar (« au bureau de la comptable »)."
+ },
+ {
+  "n": 5,
+  "nivel": "A1",
+  "texto": "FÊTE DE LA MUSIQUE À PARIS LE 21 JUIN\nBillet unique, 2,5 €, utilisable sans limite du 21 juin à 20 heures au 22 juin à 7 heures.",
+  "pergunta": "Ce billet est utilisable…",
+  "alternativas": [
+   "Une journée.",
+   "Une semaine.",
+   "Une nuit.",
+   "Un mois."
+  ],
+  "correta": 2,
+  "explicacao": "Das 20h do dia 21 às 7h do dia 22 = uma noite. A é armadilha: cruza duas datas, mas não cobre um dia inteiro."
+ },
+ {
+  "n": 6,
+  "nivel": "A1",
+  "texto": "Fred,\nJe ne pourrai pas venir comme prévu, mais cela sera une prochaine fois… J'ai beaucoup de travail en ce moment. Peut-être dans quinze jours ? J'aurai du temps libre !\nÀ bientôt ! Paul",
+  "pergunta": "Qu'apprend-on sur Paul ?",
+  "alternativas": [
+   "Il est très occupé.",
+   "Il part en vacances.",
+   "Il travaille avec Fred.",
+   "Il veut venir plus tôt."
+  ],
+  "correta": 0,
+  "explicacao": "« J'ai beaucoup de travail en ce moment » = muito ocupado. D inverte: ele adia a visita (« dans quinze jours »)."
+ },
+ {
+  "n": 7,
+  "nivel": "A2",
+  "texto": "Chers tous,\nDemain, c'est la journée sans voiture, alors faites un geste pour la nature et venez donc au bureau à pied, à vélo, en rollers, en bus, en tram, à cheval… !\nPaul, Services généraux",
+  "pergunta": "À qui s'adresse Paul ?",
+  "alternativas": [
+   "À ses amis.",
+   "À ses collègues.",
+   "À ses enfants.",
+   "À ses voisins."
+  ],
+  "correta": 1,
+  "explicacao": "« venez… au bureau » + assinatura « Services généraux » = mensagem interna para os colegas de trabalho."
+ },
+ {
+  "n": 8,
+  "nivel": "A2",
+  "texto": "France 2 – soirée\n20.00 Journal télévisé\n20.40 Météo\n20.55 Mission estivale — Jeu. Première émission de l'été, avec un coureur automobile, un pilote moto, un animateur de télévision. L'équipe jouera au profit d'une association qui aide au développement des villages fleuris historiques.\n22.35 Plus d'humour — Ce magazine divertissant rend compte de la création humoristique actuelle, passée et future, dans tous les domaines (cinéma, télévision, publicité, édition, etc.). 0.40 Journal de la nuit",
+  "pergunta": "D'après ce programme de télévision, quand peut-on regarder les informations ?",
+  "alternativas": [
+   "En cours de soirée.",
+   "En début et en fin de soirée.",
+   "Entre chaque émission.",
+   "Quatre fois dans la soirée."
+  ],
+  "correta": 1,
+  "explicacao": "« 20.00 Journal télévisé » (início) e « 0.40 Journal de la nuit » (fim). A « Météo » não é telejornal, então não há \"quatro vezes\" (D)."
+ },
+ {
+  "n": 9,
+  "nivel": "A2",
+  "texto": "Rendez-vous samedi pour un repas de quartier devant notre immeuble. Apportez vos chaises (il y aura des tables sur place), à boire et un plat salé ou sucré. Mireille et Pierre (3e étage à gauche) organisent l'événement et peuvent répondre à vos questions.",
+  "pergunta": "Qu'est-ce qui est organisé ?",
+  "alternativas": [
+   "Un atelier de cuisine.",
+   "Un déménagement.",
+   "Une fête entre voisins.",
+   "Une visite d'appartement."
+  ],
+  "correta": 2,
+  "explicacao": "« repas de quartier devant notre immeuble » = confraternização entre vizinhos. Cada um leva um prato, mas ninguém ensina a cozinhar (A)."
+ },
+ {
+  "n": 10,
+  "nivel": "A2",
+  "texto": "Information importante\nÀ cause de l'augmentation du nombre de vols de téléphones portables, vous ne pouvez plus les utiliser à l'intérieur du lycée.\nMerci de votre compréhension. Le directeur de l'établissement.",
+  "pergunta": "Que dit ce texte sur l'utilisation des téléphones portables ?",
+  "alternativas": [
+   "Elle est autorisée.",
+   "Elle est dangereuse.",
+   "Elle est interdite.",
+   "Elle est limitée."
+  ],
+  "correta": 2,
+  "explicacao": "« vous ne pouvez plus les utiliser à l'intérieur » = proibido. D seria verdadeiro só se houvesse horários ou exceções; B confunde o motivo (roubos) com perigo do uso."
+ },
+ {
+  "n": 11,
+  "nivel": "A2",
+  "texto": "Le Centre de Relations Client, c'est un numéro de téléphone pour parler avec des conseillers du lundi au vendredi de 8 h à 22 h, le samedi de 8 h à 18 h, et aussi pour accéder à un serveur vocal 7 jours sur 7 et 24 heures sur 24.",
+  "pergunta": "Que faut-il faire pour joindre un conseiller ?",
+  "alternativas": [
+   "Consulter le serveur vocal.",
+   "Prendre rendez-vous par téléphone.",
+   "Téléphoner aux horaires indiqués.",
+   "Demander le service de relation avec la clientèle."
+  ],
+  "correta": 2,
+  "explicacao": "Os conselheiros só atendem nos horários citados; 24h/24 é só o « serveur vocal » (atendimento automático), por isso A é armadilha."
+ },
+ {
+  "n": 12,
+  "nivel": "A2",
+  "texto": "Chère Marie,\nJe t'écris rapidement ce mot pour te prévenir que je ne pourrai, hélas, pas être parmi vous pour l'anniversaire de Théo. Je suis vraiment déçu ! Je pars pour des raisons professionnelles au Japon, à des milliers de kilomètres de toi ! Je serai de retour dans trois semaines et j'espère sincèrement que l'on pourra se voir alors, avec Théo. Nous pourrions également inviter Fred. Tu me manques. Je t'embrasse, Pierre",
+  "pergunta": "Qu'est-ce que Pierre envoie à Marie ?",
+  "alternativas": [
+   "Un message d'excuse.",
+   "Une déclaration d'amour.",
+   "Une invitation à une fête.",
+   "Une lettre de vacances."
+  ],
+  "correta": 0,
+  "explicacao": "« je ne pourrai, hélas, pas être parmi vous », « je suis vraiment déçu » = ele se desculpa pela ausência. A viagem é de trabalho, não férias (D); « Tu me manques » é afeto entre amigos, não o objetivo (B)."
+ },
+ {
+  "n": 13,
+  "nivel": "B1",
+  "texto": "Objet : Entretien de vos locaux\nMonsieur le Directeur,\nConformément au devis (en pièce jointe) qui a reçu votre accord, notre équipe interviendra le 20 juin prochain pour effectuer les opérations nécessaires dans l'aile droite du bâtiment principal de votre société.\nLe chantier nécessite l'utilisation de produits à risque et d'un appareillage bruyant. Pour la sécurité et le confort de votre personnel, il serait préférable que les services du bâtiment concerné soient suspendus la journée du 20.\nMerci par avance de me faire part de votre avis sur ce point.\nCordialement. Jacques Legendre, Chef du service d'entretien",
+  "pergunta": "Que demande Jacques Legendre au directeur ?",
+  "alternativas": [
+   "D'envoyer très rapidement le devis.",
+   "D'interdire l'emploi de produits toxiques.",
+   "De libérer les lieux pendant les travaux.",
+   "De préciser la nature de l'intervention."
+  ],
+  "correta": 2,
+  "explicacao": "« il serait préférable que les services… soient suspendus la journée du 20 » = esvaziar o local. O orçamento já foi aceito e está anexado (A); os produtos tóxicos são da própria equipe dele (B)."
+ },
+ {
+  "n": 14,
+  "nivel": "B1",
+  "texto": "Le Festival Sourd Métrage est accessible à tous : traduction en langue des signes et films sous-titrés. Ce festival de courts métrages présente des réalisateurs sourds. Tous les regards sont permis : fictions, documentaires, films d'animation… Tous les publics sont accueillis. Pendant trois jours, un espace « rencontre » est créé entre des écoles européennes accueillant de jeunes sourds, entre un public sourd et non-sourd ainsi qu'entre le regard du jeune sourd derrière la caméra et des professionnels de l'image.",
+  "pergunta": "Quelle est la particularité de ce festival de cinéma ?",
+  "alternativas": [
+   "Il montre des documentaires sur les conditions de vie des sourds.",
+   "Il organise des conferences sur la langue utilisée par les sourds.",
+   "Il présente des films réalisés par des personnes sourdes.",
+   "Il programme des spectacles destinés à un jeune public sourd."
+  ],
+  "correta": 2,
+  "explicacao": "« présente des réalisateurs sourds » = filmes dirigidos por surdos. D é negada por « tous les publics sont accueillis »; os documentários (A) são só um dos gêneros."
+ },
+ {
+  "n": 15,
+  "nivel": "B1",
+  "texto": "Cher Paul,\nJe suis désolée de t'avoir laissé sans nouvelles. Je pensais t'écrire de Fès, mais notre séjour ne s'est pas déroulé comme nous l'espérions. Nous avons passé trois nuits supplémentaires à Tanger à cause d'un problème technique sur une de nos lignes touristiques.\nNous avons aussi annulé le rendez-vous prévu aujourd'hui avec notre client de Casablanca, car nous avons dû nous rendre à Marrakech pour régler les frais occasionnés par cet incident. Nous rentrons demain à Paris.\nBises, Mathilde",
+  "pergunta": "Dans quelle ville se trouve Mathilde d'après cette lettre ?",
+  "alternativas": [
+   "Casablanca.",
+   "Fès.",
+   "Marrakech.",
+   "Tanger."
+  ],
+  "correta": 2,
+  "explicacao": "Elimine uma a uma: Fès era só um plano (« je pensais »), Tanger ficou para trás, Casablanca foi anulada. O único deslocamento realizado hoje: « nous avons dû nous rendre à Marrakech »."
+ },
+ {
+  "n": 16,
+  "nivel": "B1",
+  "texto": "Chère Andréa,\nHier, j'ai déjeuné avec des célibataires de mon quartier. C'était à 12h30 au restaurant corse près de l'église. On était 7 : on a bien mangé et bien ri. C'est vraiment une bonne idée pour se faire des amis : tu t'inscris sur le site MIAMI et tu consultes les propositions de rendez-vous dans ton quartier. Tu devrais essayer, c'est génial. Léa.",
+  "pergunta": "Qu'est-ce que Léa souhaite faire découvrir à son amie ?",
+  "alternativas": [
+   "Un centre de loisirs pour les habitants de son quartier.",
+   "Un restaurant qui sert des spécialités de sa région.",
+   "Un service municipal d'aide sociale aux jeunes célibataires.",
+   "Une manière originale de rencontrer des gens près de chez elle."
+  ],
+  "correta": 3,
+  "explicacao": "« une bonne idée pour se faire des amis » via o site MIAMI, com encontros « dans ton quartier » = um jeito novo de conhecer gente. O restaurante corso (B) é só o local do almoço de ontem; o site não é municipal (C)."
+ },
+ {
+  "n": 17,
+  "nivel": "B1",
+  "texto": "Draisienne du XXIe siècle\nÀ 88 ans, Jacques Blosseville est le participant le plus âgé de la 110e édition du concours Lépine, qui récompense les inventeurs. Il a choisi de transformer la draisienne, un vélo sans pédale pour enfant inventé au début du XIXe siècle. « Il y a trois ans, j'ai commencé à me déplacer avec peine. On m'a proposé une canne, puis un fauteuil roulant, mais ça ne me convenait pas… La draisienne vous permet de ne pas avoir à supporter votre poids », explique le concurrent.",
+  "pergunta": "Dans quel but Jacques Blosseville a-t-il modernisé la draisienne ?",
+  "alternativas": [
+   "Pour éviter de conduire.",
+   "Pour faire rêver les enfants.",
+   "Pour marcher sans souffrir.",
+   "Pour porter des objets lourds."
+  ],
+  "correta": 2,
+  "explicacao": "« je me déplace avec peine » + « ne pas avoir à supporter votre poids » = locomover-se sem dor. D é a armadilha do « poids »: é o peso do próprio corpo, não de objetos."
+ },
+ {
+  "n": 18,
+  "nivel": "B2",
+  "texto": "On demande rarement aux enfants ce qu'ils préfèrent manger.\n« Beaucoup d'aliments pour enfants sont testés par des adultes », explique le délégué régional du projet « DisMoiGoût ». Leur avis intéresse pourtant ceux qui cherchent à développer des gammes de produits dédiés aux petits. L'école agroalimentaire nantaise a ainsi entrepris de sonder les goûts des bambins et leur perception des aliments. Objectif : cerner plus subtilement leur profil alimentaire. Les résultats de cette étude devraient permettre, à terme, d'élaborer des produits bons pour leur santé, c'est-à-dire conformes aux recommandations du Programme national de nutrition, mais aussi bons pour leur goût.",
+  "pergunta": "Quelle est la vocation du projet « DisMoiGoût » ?",
+  "alternativas": [
+   "Corriger les mauvaises habitudes alimentaires des enfants.",
+   "Faire respecter la législation sur l'alimentation des enfants.",
+   "Mieux comprendre les préférences alimentaires des enfants.",
+   "Permettre aux enfants de découvrir de nouveaux aliments."
+  ],
+  "correta": 2,
+  "explicacao": "« sonder les goûts des bambins », « cerner plus subtilement leur profil alimentaire » = entender as preferências. O Programa nacional de nutrição (B) é referência para os produtos futuros, não objetivo do projeto."
+ },
+ {
+  "n": 19,
+  "nivel": "B2",
+  "texto": "L'action du film se situe en Nouvelle-Angleterre, à la fin du XVIIIe siècle. Un jeune inspecteur de police ne jure que par la science et la logique et ne rate jamais une occasion de le faire savoir. Pour le mettre à l'épreuve, ses supérieurs l'envoient dans un petit village de fermiers d'origine hollandaise, théâtre de plusieurs meurtres étranges.",
+  "pergunta": "Quel est le sujet du film présenté ?",
+  "alternativas": [
+   "L'arrivée d'une troupe de comédiens à la campagne.",
+   "L'enquête policière d'une personne très rationnelle.",
+   "La vie des paysans néerlandais au XVIIIe siècle.",
+   "Les expériences originales d'un scientifique anglais."
+  ],
+  "correta": 1,
+  "explicacao": "« inspecteur de police », « ne jure que par la science et la logique », « meurtres étranges » = investigação de alguém racional. Os fazendeiros holandeses (C) são o cenário; ele não é cientista (D), só acredita na ciência."
+ },
+ {
+  "n": 20,
+  "nivel": "B2",
+  "texto": "Le jour viendra où un fonds de pension ou un groupe alimentaire mondial investira dans l'entreprise d'un cuisinier reconnu pour orchestrer son développement international. Bien sûr, on ne peut qu'avoir de la nostalgie pour les temps héroïques où une bande de copains inventait les codes de la nouvelle cuisine. Aujourd'hui, n'importe quel jeune cuisinier est prêt à payer très cher pour le privilège d'un stage de six mois chez un « grand chef ». Il rentabilisera vite cet investissement en s'autoproclamant « élève de… », car les marques des grands chefs ne cessent de prendre de la valeur.",
+  "pergunta": "Qu'apprend-on sur les grands chefs ?",
+  "alternativas": [
+   "Leur conception de la cuisine est passée de mode.",
+   "Leur créativité leur assure une célébrité mondiale.",
+   "Leur nom s'est transformé en label de prestige.",
+   "Leurs établissements sont cotés en bourse."
+  ],
+  "correta": 2,
+  "explicacao": "« les marques des grands chefs ne cessent de prendre de la valeur » + o jovem que lucra « en s'autoproclamant élève de… » = o nome virou selo. D é previsão (« le jour viendra »), não fato."
+ },
+ {
+  "n": 21,
+  "nivel": "B1",
+  "texto": "Paris, le 13 mars\nMadame, Monsieur,\nCe courrier fait suite à mon achat d'un téléphone le 5 mars dernier. Après réflexion, je souhaiterais le rendre, car j'ai finalement décidé d'acheter un appareil avec messagerie intégrée.\nAinsi, je vous prie de bien vouloir me restituer la somme de 80 euros, correspondant à la somme versée le 5 mars par chèque.\nDans l'attente de votre réponse, je vous transmets, Madame, Monsieur, mes meilleures salutations. André Cellier",
+  "pergunta": "Quel est l'objet de la lettre de monsieur Cellier ?",
+  "alternativas": [
+   "Le remboursement de son article.",
+   "L'échange de son téléphone.",
+   "L'envoi de son téléphone par la poste.",
+   "Une réclamation sur son achat."
+  ],
+  "correta": 0,
+  "explicacao": "« me restituer la somme de 80 euros » = reembolso. B é a armadilha: ele vai comprar outro aparelho, não pede troca; o produto não tem defeito (D)."
+ },
+ {
+  "n": 22,
+  "nivel": "B2",
+  "texto": "L'enfant fréquente le musée par obligation, avec ses parents ou son instituteur. L'adulte le vit par plaisir. Entre les deux, rien. Chez l'ado, la perspective de franchir ses portes, même gratuitement, provoque la nausée. Il préfère le spectacle d'une toile de cinéma ou le plongeon dans la toile du cyberspace. Les jeunes deviennent aujourd'hui pour les musées une cible prioritaire. Mais les inciter à venir n'est pas facile. La culture internet a bouleversé leur relation au savoir. Les musées ne peuvent plus s'accrocher aux réseaux traditionnels de la transmission des connaissances. Le temps est venu de réfléchir à de nouvelles approches adaptées à ce public.",
+  "pergunta": "Que suggère l'auteur pour attirer le jeune public au musée ?",
+  "alternativas": [
+   "D'analyser les moyens de séduire les jeunes.",
+   "De moderniser le contenu des expositions.",
+   "De s'inspirer des approches pédagogiques scolaires.",
+   "De systématiser l'accès gratuit pour les adolescents."
+  ],
+  "correta": 0,
+  "explicacao": "« Le temps est venu de réfléchir à de nouvelles approches adaptées à ce public » = pensar em como atrair. D é negada por « même gratuitement »; C é o oposto de abandonar os « réseaux traditionnels »."
+ },
+ {
+  "n": 23,
+  "nivel": "B2",
+  "texto": "Réparer un véhicule endommagé avec des pièces d'occasion recyclées, c'est désormais possible. Depuis le printemps dernier, l'expert d'une compagnie d'assurances peut en effet proposer à un assuré des pièces de réemploi. Ces pièces, issues de véhicules hors d'usage, accidentés ou arrivés en fin de vie, sont démontées, contrôlées et revendues à des réparateurs par des recycleurs agréés. Cette disposition est une alternative au neuf et répond à de nouvelles attentes. La récupération de pièces valides permet ainsi de prolonger leur longévité ainsi que celle d'autres véhicules avec un bénéfice économique, environnemental et social.",
+  "pergunta": "D'après cet article, quel avantage présente l'utilisation de pièces recyclées ?",
+  "alternativas": [
+   "Elle donne l'assurance d'un dépannage rapide.",
+   "Elle donne lieu à une réduction sur l'assurance.",
+   "Elle offre la possibilité d'une garantie de qualité.",
+   "Elle permet de dépenser moins d'argent."
+  ],
+  "correta": 3,
+  "explicacao": "« alternative au neuf » + « bénéfice économique » = mais barato. B é armadilha de palavra reciclada: a seguradora propõe as peças, mas não há desconto no seguro; « contrôlées » não é garantia (C)."
+ },
+ {
+  "n": 24,
+  "nivel": "B2",
+  "texto": "La Maison de campagne :\nCe restaurant offre à sa clientèle un bel espace articulé en trois salles : cuisine, salle à manger et salon, décorées dans un joli style provençal. On choisit même sa bouteille de vin à la cave, comme à la maison ! Malheureusement, bien que les plats proposés soient élaborés à partir de produits frais sélectionnés au marché, la cuisine reste une cuisine vue et revue, tellement prévisible qu'il vaudra mieux choisir un restaurant en ville plutôt que se perdre dans cette campagne-là.",
+  "pergunta": "Sur quel point porte la critique négative faite à ce restaurant ?",
+  "alternativas": [
+   "L'originalité des plats.",
+   "La qualité des produits.",
+   "Le cadre du restaurant.",
+   "Le prix des menus."
+  ],
+  "correta": 0,
+  "explicacao": "Depois de « Malheureusement »: « une cuisine vue et revue, tellement prévisible » = falta de originalidade. Os produtos são « frais » (B elogiado) e o ambiente é « joli » (C elogiado)."
+ },
+ {
+  "n": 25,
+  "nivel": "B1",
+  "texto": "Monsieur,\nLe règlement de votre facture du mois dernier ne nous est pas encore parvenu. Peut-être avez-vous effectué ce paiement très récemment ? Dans ce cas, nous vous en remercions et nous vous prions de ne pas tenir compte de ce courrier. S'il s'agit d'un simple oubli, adressez-nous votre règlement à l'aide du coupon-réponse. Pour toute autre raison, contactez rapidement votre conseiller clientèle. Il vous renseignera sur votre facture ainsi que sur les moyens de paiement.\nNous vous prions d'agréer, Monsieur, nos sincères salutations. Le responsable clientèle",
+  "pergunta": "Que contient ce courrier ?",
+  "alternativas": [
+   "Un rappel d'un impayé en cours.",
+   "Une facture à payer rapidement.",
+   "Une proposition de paiement différé.",
+   "Une erreur de règlement."
+  ],
+  "correta": 0,
+  "explicacao": "« Le règlement de votre facture du mois dernier ne nous est pas encore parvenu » = lembrete de conta em aberto. A carta não é a fatura (B); ela a lembra."
+ },
+ {
+  "n": 26,
+  "nivel": "C1",
+  "texto": "L'éthique, nouveau critère d'attractivité.\nDiversité, handicap, éthique, développement durable… Autant de grands enjeux sociétaux englobés sous le terme de « responsabilité sociale de l'entreprise » (RSE). Suivant sa définition, la « RSE » repose sur trois piliers : les problématiques sociales, environnementales et économiques. En amont du marché du travail, les écoles n'échappent pas à ces obligations.\nLa RSE couvre les actions en faveur des lycéens issus de zones défavorisées, grâce à un tutorat proposé en classe de première et de terminale. Elle couvre aussi le champ humanitaire. Ses enjeux sont finalement proches des questions chères à la jeunesse. On comprend pourquoi les écoles, bien conscientes de l'attractivité exercée par la RSE, multiplient les initiatives dans le domaine.",
+  "pergunta": "Comment le texte justifie-t-il l'attrait qu'exerce la RSE auprès des écoles ?",
+  "alternativas": [
+   "Elle favorise l'orientation des élèves après l'obtention du baccalauréat.",
+   "Elle permet de renforcer les liens éducatifs entre adultes et élèves.",
+   "Elle répond de manière pertinente aux difficultés et aux aspirations des élèves.",
+   "Elle veille à la concrétisation des projets professionnels des élèves."
+  ],
+  "correta": 2,
+  "explicacao": "« Ses enjeux sont finalement proches des questions chères à la jeunesse » (aspirações) + ações para jovens de « zones défavorisées » (dificuldades). O tutorado (B) é só um exemplo."
+ },
+ {
+  "n": 27,
+  "nivel": "C1",
+  "texto": "L'espoir des enfants\nMarguerite Barankitse est un exemple pour toutes les Burundaises. Pour sauver les enfants de la guerre, elle se bat chaque jour. Ses actions ont d'abord été financées par des organismes allemands. Puis, la renommée mondiale de la fondatrice est devenue le carburant de l'association. Aujourd'hui, elle voyage à travers le monde pour parler de son pays et de ses enfants, dans l'espoir d'obtenir des subventions. Désormais, l'aide extérieure soutient la plupart des projets. Elle a ainsi ouvert deux centres pour enfants et un hôpital. Le travail de cette humanitaire débordante d'énergie a été couronné par de nombreux prix.",
+  "pergunta": "Quel est le but des déplacements à l'étranger de M. Barankitse ?",
+  "alternativas": [
+   "Obtenir de l'argent pour développer des centres d'accueil.",
+   "Convaincre les entreprises étrangères d'investir au Burundi.",
+   "Soutenir les étudiants burundais expatriés pour leurs études.",
+   "Trouver des bénévoles pour s'occuper des enfants à l'hôpital."
+  ],
+  "correta": 0,
+  "explicacao": "« elle voyage… dans l'espoir d'obtenir des subventions », que financiam « deux centres pour enfants et un hôpital ». Subvenção ≠ investimento de empresas (B)."
+ },
+ {
+  "n": 28,
+  "nivel": "B2",
+  "texto": "Écologique par nature, les solutions que nous proposons représentent un atout certain pour lutter contre les émissions de gaz à effet de serre. Audioconférence, visioconférence et messagerie vous évitent des déplacements inutiles, tout en vous permettant de contribuer à la préservation de la planète. En effet, une étude environnementale a calculé qu'en remplaçant 20 % des voyages d'affaires par des visioconférences, on économiserait 22 millions de tonnes de CO2 par an. Ensemble, agissons pour un monde plus vert !",
+  "pergunta": "Que propose cette entreprise ?",
+  "alternativas": [
+   "Des outils de communication.",
+   "Des voyages organisés.",
+   "Une formation à l'écologie.",
+   "Un système d'information."
+  ],
+  "correta": 0,
+  "explicacao": "« Audioconférence, visioconférence et messagerie » = ferramentas de comunicação. A ecologia é o argumento de venda, não o produto (C)."
+ },
+ {
+  "n": 29,
+  "nivel": "C1",
+  "texto": "Aux débuts d'Internet, je me souviens d'avoir lu, éberluée, dans un magazine féminin : « Mon mari était absent, il passait tout son temps sur le chat », et j'en étais à tenter de visualiser ce triste état de fait lorsque je compris ma méprise : avoir confondu le chat, le félidé, avec le chat, la discussion sur Internet. Depuis ce jour, aucun progrès sur cette équivoque terrible de la langue, alors que l'usage informatique du mot souris démultiplie les sources de confusion. Le bon sens voudrait que la phonétique l'emporte et que l'on écrive « tchat ». Au lieu de cette solution évidente, le Petit Larousse a laissé entrer en 2004 dans le dictionnaire le monstrueux mot-valise « clavardage ».",
+  "pergunta": "Qu'est-ce qui dérange l'auteur de ce texte ?",
+  "alternativas": [
+   "L'abus d'anglicismes en langage informatique.",
+   "L'ambiguïté du néologisme « chat » à l'écrit.",
+   "Le laxisme orthographique dans les forums.",
+   "Le manque d'imagination des lexicologues."
+  ],
+  "correta": 1,
+  "explicacao": "« ma méprise », « cette équivoque terrible », e a solução « que l'on écrive tchat » = ambiguidade da grafia. A é tentadora, mas ela não critica o anglicismo — aceita-o, só quer outra ortografia."
+ },
+ {
+  "n": 30,
+  "nivel": "C1",
+  "texto": "Ils sont dix et ils sont « dys ». Comme dyslexiques, dysphasiques… Âgés de 11 à 13 ans, ces enfants souffrant de troubles du langage sont accueillis depuis la rentrée au collège Petite-Lande dans une classe intégrée, entourée d'une équipe de professionnels. « Les enfants ne suivent pas une formation classique, mais, durant quatre ans, ils vont donc acquérir les bases scolaires, de l'autonomie au quotidien, et choisir une orientation professionnelle grâce à des stages en entreprise. » Au sein du collège, ils peuvent fréquenter des jeunes de leur âge, participer à certaines activités et projets en commun (cours de sport, sorties…).",
+  "pergunta": "Que peuvent faire ces jeunes grâce à ce projet ?",
+  "alternativas": [
+   "Guérir de leurs troubles du langage.",
+   "Intégrer une classe traditionnelle.",
+   "Préparer leur entrée au collège.",
+   "Profiter d'un encadrement spécifique."
+  ],
+  "correta": 3,
+  "explicacao": "« classe intégrée, entourée d'une équipe de professionnels » + « ne suivent pas une formation classique » = acompanhamento específico. B é negada; C também — eles já estão « au collège »."
+ },
+ {
+  "n": 31,
+  "nivel": "C1",
+  "texto": "« Il faut te le dire en quelle langue ? » Cette question, que des milliers de mères posent à leur enfant lorsqu'elles veulent se faire écouter, est en fait très sensée (comme tout ce que disent les mères). Des travaux scientifiques récents ont en effet démontré une réalité étonnante : nous réfléchissons et prenons des décisions différemment lorsque nous traitons l'information dans une autre langue que notre langue maternelle. Nous comprenons tout aussi bien l'idée ou le problème, mais, lorsque nous utilisons une autre langue, le résultat est plus réfléchi, moins dicté par les émotions, plus orienté vers l'utilité.",
+  "pergunta": "Que permet l'utilisation d'une langue autre que la langue maternelle ?",
+  "alternativas": [
+   "D'attirer l'attention de l'interlocuteur.",
+   "D'imaginer des solutions originales.",
+   "De solliciter davantage la raison.",
+   "De trouver des réponses rapides."
+  ],
+  "correta": 2,
+  "explicacao": "« plus réfléchi, moins dicté par les émotions, plus orienté vers l'utilité » = mais razão. A é a isca da frase das mães (« se faire écouter »), que é só a introdução."
+ },
+ {
+  "n": 32,
+  "nivel": "C1",
+  "texto": "Les additifs et conservateurs, ces poudres de perlimpinpin, rendent appétissant un produit médiocre afin de mieux le vendre. C'est le cas des colorants si la préparation est terne, des exhausteurs de goût de type glutamate si elle est fade, des agents de texture si elle est sans consistance, ou des arômes si elle est insipide ou a carrément mauvais goût. On vous dit que les conservateurs ou antioxydants (sorbates, nitrites, sulfites…) servent à vous protéger de possibles intoxications bactériennes, mais ils servent surtout à prolonger les dates limites de consommation, afin de laisser plus de temps aux industriels et aux supermarchés pour commercialiser leur marchandise.",
+  "pergunta": "Que critique cet article ?",
+  "alternativas": [
+   "Le dosage des produits chimiques dans les aliments.",
+   "Le manque de lisibilité des étiquettes.",
+   "Les arguments hypocrites avancés par les fabricants.",
+   "Les conséquences sanitaires des ajouts."
+  ],
+  "correta": 2,
+  "explicacao": "« On vous dit que… mais ils servent surtout à… » = o discurso oficial (proteção) esconde o motivo real (vender). « poudres de perlimpinpin » reforça a acusação de enganação. A saúde (D) não é analisada."
+ },
+ {
+  "n": 33,
+  "nivel": "C1",
+  "texto": "En France, entre 200 000 et 500 000 cas de troubles psychiques sont liés au monde du travail. L'apparition de nouvelles méthodes de travail, plus intenses et contraignantes, serait à l'origine de l'épuisement professionnel : c'est le mal du siècle et pourtant, il n'est pas encore reconnu. Les salariés, prisonniers de l'idéologie ambiante, s'imaginent trop souvent, quand ils craquent, qu'un collègue plus solide qu'eux aurait été capable de résister. Mais cela s'avère faux la plupart du temps. Une reconnaissance de la maladie obligerait les entreprises à réfléchir à leur fonctionnement et représenterait une réelle mesure d'utilité publique.\nD'après capital.fr",
+  "pergunta": "Quel constat est dressé à propos de ce syndrome ?",
+  "alternativas": [
+   "Il inquiète les patrons de sociétés.",
+   "Il touche les employés les plus faibles.",
+   "Son existence doit être officialisée.",
+   "Son traitement est peu efficace."
+  ],
+  "correta": 2,
+  "explicacao": "« il n'est pas encore reconnu » + « une reconnaissance… représenterait une réelle mesure d'utilité publique » = deve ser oficializado. B é a crença dos assalariados que o texto desmente (« cela s'avère faux »)."
+ },
+ {
+  "n": 34,
+  "nivel": "C1",
+  "texto": "Des chercheurs mettent en doute l'idée répandue que la langue que nous parlons influence notre façon de penser. Ils présentent une recherche sur l'ordre des mots dans la phrase : sujet, verbe, objet pour certaines langues ; sujet, objet, verbe pour d'autres. Leurs 40 sujets, locuteurs d'anglais, d'espagnol, de mandarin, de turc, ont décrit des séquences vidéo dans leur langue d'abord, puis en utilisant des gestes. Si les descriptions verbales différaient dans l'ordre des mots selon la langue, les descriptions faites avec les mains reprenaient toutes le même ordre (sujet, objet, verbe), suivant celui des langues des signes inventées par des locuteurs sourds.",
+  "pergunta": "Quel est le résultat de l'article présenté par ce texte ?",
+  "alternativas": [
+   "Les gestes révèleraient systématiquement la langue maternelle des locuteurs.",
+   "Il existerait un ordre universel de la pensée, indépendant de l'ordre linguistique.",
+   "Il y aurait autant de façons de penser que de structures de langue différentes.",
+   "Les structures des langues seraient dépendantes de notre expérience du monde."
+  ],
+  "correta": 1,
+  "explicacao": "As falas diferem, mas os gestos « reprenaient toutes le même ordre » = pensamento independente da língua. C é a « idée répandue » que os pesquisadores « mettent en doute »."
+ },
+ {
+  "n": 35,
+  "nivel": "C1",
+  "texto": "Si la télévision est souvent critiquée pour sa distribution d'informations un peu floues, elle est aussi un remarquable éveilleur d'intérêt, quand, en plus d'un embryon de connaissances, elle donne le goût de le développer. Il en est ainsi par exemple de la lecture, dont elle est la plupart du temps un incomparable promoteur. Contrairement à trop d'idées reçues, la concurrence est très rare entre le petit écran et le livre, ne serait-ce que parce que leurs clientèles respectives sont différentes. Ceux qui aiment lire ne sacrifient pas ce vice impuni à l'uniformité des habituels spectacles télévisés. Au contraire, après chaque émission littéraire, les chiffres de la vente des livres évoqués, ou ayant inspiré le spectacle, comblent toujours d'aise les éditeurs.",
+  "pergunta": "Que soutient l'auteur de ce texte concernant la télévision ?",
+  "alternativas": [
+   "C'est un vecteur de diffusion des œuvres littéraires.",
+   "C'est une source de connaissances sûre et fiable.",
+   "L'audience des émissions culturelles est en hausse.",
+   "La concurrence qu'elle mène à la lecture est acharnée."
+  ],
+  "correta": 0,
+  "explicacao": "« un incomparable promoteur » da leitura e as vendas de livros após cada emissão = difusora de obras literárias. D é a « idée reçue » refutada; B contradiz « informations un peu floues »."
+ },
+ {
+  "n": 36,
+  "nivel": "C1",
+  "texto": "Sexistes, les jeux vidéo ? Peut-être que oui, peut-être que non. En tout cas, à parcourir les allées de la Paris Games Week, l'œil avisé aura lui-même bien du mal à trouver un personnage principal féminin de jeu vidéo. Il y a bien la célébrissime Lara Croft du jeu vidéo Tomb Raider, aux attributs particulièrement imposants, conçus presque sur mesure pour plaire à un certain nombre de joueurs masculins. Pour le reste, circulez, il n'y a – presque – rien d'autre à voir, si l'on balaye d'un coup de manette de jeu, au mieux, les princesses à sauver, au pire, les call-girls de mafioso. Pourtant, l'industrie du jeu vidéo a pris conscience ces dernières années du potentiel du marché des joueuses.",
+  "pergunta": "Quel constat est dressé sur les jeux vidéo ?",
+  "alternativas": [
+   "La quasi-absence d'héroïnes.",
+   "L'appel constant à la violence.",
+   "L'atténuation des clichés.",
+   "L'uniformité des scénarios."
+  ],
+  "correta": 0,
+  "explicacao": "« bien du mal à trouver un personnage principal féminin » — só Lara Croft, e « presque rien d'autre ». O « presque » ecoa em « quasi-absence ». C é o oposto: os clichês continuam."
+ },
+ {
+  "n": 37,
+  "nivel": "C1",
+  "texto": "Suite à un accident chimique sur un site minier, les pouvoirs publics ont décidé d'obliger les sociétés minières à financer des programmes de recherche et à replanter les surfaces exploitées. Et de fait, les compagnies minières jouent très bien le jeu. Comme il serait bien naïf de penser que leurs dirigeants soient tout à coup devenus philanthropes, il faut chercher la raison de cet intérêt ailleurs. Il se trouve qu'un scientifique, Anthony Van der Hent, a prouvé que des « super-plantes » avaient la faculté d'extraire du sol des métaux économiquement exploitables. C'est donc la possibilité d'allier la régénération de sites industriels à des assurances de gains financiers supplémentaires qui motive tant les industriels.",
+  "pergunta": "Sur quel point porte le scepticisme du journaliste ?",
+  "alternativas": [
+   "La capacité des plantes à nettoyer les sols.",
+   "La rentabilité d'un nouveau système d'extraction.",
+   "Le résultat des recherches de M. Van der Hent.",
+   "Les préoccupations écologistes des industriels."
+  ],
+  "correta": 3,
+  "explicacao": "« il serait bien naïf de penser que leurs dirigeants soient devenus philanthropes » = ele duvida da boa vontade ecológica. A pesquisa (C) está « prouvé »."
+ },
+ {
+  "n": 38,
+  "nivel": "C1",
+  "texto": "Travailler avec son mari ou son petit ami, sa sœur ou sa mère n'est pas une punition pour tout le monde ! Pour certains, c'est même la condition du bien-être professionnel.\nSi cette idée évoquait jadis une petite entreprise conservatrice, transmise « de père en fils », aujourd'hui, travailler en famille relève de réalités très différentes. Critères retenus : confiance, valeurs et goûts communs ; et surtout, besoin de réaliser ses projets plutôt que ceux des autres. Depuis toujours, la majorité des entreprises en France, toutes tailles confondues, sont familiales ; et de plus en plus de créations sont le fait de femmes. Ce sont d'ailleurs des entreprises où l'on vit mieux et qui durent plus longtemps que les autres. Aujourd'hui, la création d'une entreprise est plus souvent motivée par le désir d'assurer un travail à ses enfants ou d'échapper à des structures jugées déshumanisantes.",
+  "pergunta": "Que permet la structure d'entreprise présentée ?",
+  "alternativas": [
+   "De concrétiser des objectifs personnels.",
+   "De fonctionner dans un cadre innovant.",
+   "De limiter la répartition des gains.",
+   "De renforcer les liens entre les générations."
+  ],
+  "correta": 0,
+  "explicacao": "O critério destacado pelo « et surtout » : « réaliser ses projets plutôt que ceux des autres ». D é sedutora, mas a transmissão « de père en fils » é a visão antiga (« jadis »)."
+ },
+ {
+  "n": 39,
+  "nivel": "C2",
+  "texto": "Panache et arrogance, élégance et futilité, galanterie et gauloiserie : s'il existe, et à condition que cette notion ait encore un sens à l'ère de la mondialisation, l'esprit français tire son essence particulière du fragile équilibre entre ces oppositions. Amateur de grands principes, du coup de sang et de bons mots, c'est l'esprit français. Quoi que nous en disions, il nous obsède. Que nous exaltions le génie national ou l'exception culturelle, les racines ou l'universel, le particularisme local ou l'intérêt général, il ne s'agit toujours, au fond, que de lui. La mondialisation va-t-elle le dissoudre, et nous renvoyer au triste rang de pays ordinaire ?",
+  "pergunta": "Selon l'auteur, qu'est-ce que l'esprit français ?",
+  "alternativas": [
+   "Des attitudes contradictoires forgeant une identité.",
+   "Un égocentrisme désuet au temps de la mondialisation.",
+   "Un ensemble de valeurs partagées par une élite.",
+   "Une aptitude à l'ouverture qui tend à disparaître."
+  ],
+  "correta": 0,
+  "explicacao": "Pares opostos (« panache et arrogance, élégance et futilité ») e « son essence… du fragile équilibre entre ces oppositions » = contradições que formam uma identidade. B e D transformam a pergunta final sobre a mondialização em afirmação."
+ }
+]
