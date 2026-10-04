@@ -1,0 +1,11 @@
+/* Tema completo da produção (página do tema do Ambiente de Produção embutida) */
+.dever-tema { margin: 10px 0 14px; border: 1px solid color-mix(in srgb, #db2777 30%, transparent); border-radius: 16px; background: color-mix(in srgb, #db2777 4%, transparent); overflow: hidden; }
+.dever-tema > summary { display: flex; gap: 12px; align-items: center; padding: 12px 16px; cursor: pointer; list-style: none; }
+.dever-tema > summary::-webkit-details-marker { display: none; }
+.dever-tema > summary::after { content: "▾"; margin-left: auto; transition: transform .15s; opacity: .6; }
+.dever-tema:not([open]) > summary::after { transform: rotate(-90deg); }
+.dever-tema > summary small { display: block; font-size: .78rem; opacity: .7; font-weight: 400; }
+.dever-tema-ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: color-mix(in srgb, #db2777 14%, transparent); flex: none; }
+.dever-tema-corpo { border-top: 1px solid color-mix(in srgb, #db2777 20%, transparent); }
+.dever-tema-quadro { display: block; width: 100%; height: 900px; border: 0; background: transparent; }
+.dever-tema-carregando { padding: 14px 16px; margin: 0; opacity: .7; }

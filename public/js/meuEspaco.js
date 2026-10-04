@@ -133,13 +133,20 @@
         <div class="me-card c8"><h3>Evolução dos acertos <small>últimos ${q.evolucao.length} conjuntos</small></h3>${linha(q.evolucao, COR.azul, { sufixo: "%", rotulo: "Acertos por conjunto" })}</div>
         <div class="me-card c4"><h3>Acertos e erros</h3>${donut([{ nome: "Certas", valor: q.certas, cor: COR.verde, texto: q.certas }, { nome: "Erradas", valor: q.total - q.certas, cor: COR.vermelho, texto: q.total - q.certas }], q.aproveitamento + "%", "de acertos")}</div>
         <div class="me-card c6"><h3>Acertos por conteúdo</h3>${barras(q.porMateria.map(m => ({ nome: m.nome, pct: m.pct, texto: `${m.certas}/${m.total}` })))}</div>
-        <div class="me-card c6"><h3>Conjuntos recentes</h3><div class="me-lista">${q.recentes.map(t => `<a class="me-item" style="--c:${t.pct >= 70 ? COR.verde : t.pct >= 50 ? COR.laranja : COR.vermelho}" href="resolver-conjunto.html?tentativaId=${esc(t.id)}">
+        <div class="me-card c6"><h3>Conjuntos recentes ${verTudo("q-rec", q.recentes.length)}</h3><div class="me-lista">${lim("q-rec", q.recentes).map(t => `<a class="me-item" style="--c:${t.pct >= 70 ? COR.verde : t.pct >= 50 ? COR.laranja : COR.vermelho}" href="resolver-conjunto.html?tentativaId=${esc(t.id)}">
           <span class="marca">📝</span><span class="txt"><b>${esc(t.nome)}</b><small>${fmtData(t.data)} · ${t.certas}/${t.total}</small></span><span class="me-pill">${t.pct}%</span></a>`).join("")}</div></div>
       </div></section>`;
   }
   // caderno de erros: 9 questões por vez; « Ver mais 9 » abre as próximas
   const ERROS_POR_VEZ = 9;
   let errosEstado = { filtro: "pendentes", materia: "", limite: ERROS_POR_VEZ };
+  // Listas que crescem (produções, deveres, mensagens…): mostram só as primeiras; « Ver lista completa »,
+  // ao lado do título, abre todas (e « Mostrar menos » volta). A seção é redesenhada no lugar.
+  const LIMITE_LISTA = 5;
+  const listasAbertas = new Set();
+  const lim = (chave, l, n = LIMITE_LISTA) => listasAbertas.has(chave) ? l : l.slice(0, n);
+  const verTudo = (chave, total, n = LIMITE_LISTA) => total > n
+    ? `<button type="button" class="me-ver-tudo" data-ver-tudo="${chave}">${listasAbertas.has(chave) ? "Mostrar menos" : `Ver lista completa (${total})`}</button>` : "";
   function secErros(d) {
     const l = d.questoes?.cadernoErros || [];
     const materias = [...new Set(l.map(x => x.materia))];
@@ -189,10 +196,10 @@
         <div class="me-card c8"><h3>Evolução das notas <small>% da nota máxima</small></h3>${linha(evolucao, COR.rosa, { sufixo: "%", rotulo: "Notas das produções" })}</div>
         <div class="me-card c4"><h3>Escrita × oral <small>corrigidas</small></h3>${donut([{ nome: "Escritas", valor: escritas, cor: COR.rosa, texto: escritas }, { nome: "Orais", valor: orais, cor: COR.anil, texto: orais }], corr.length, "correções")}</div>
         <div class="me-card c6"><h3>Média por critério <small>${prodFiltro === "ia" ? "nas correções da IA" : prodFiltro === "professor" ? "nas correções dos professores" : "professores e IA"}</small></h3>${criterios.length ? barras(criterios.slice(0, 8).map(c => ({ nome: c.nome, pct: c.pct }))) : '<div class="me-vazio">Ainda sem critérios neste filtro.</div>'}</div>
-        <div class="me-card c6"><h3>Suas produções e correções</h3>${lista.length ? `<div class="me-lista" style="max-height:420px;overflow:auto;">${lista.slice(0, 40).map(x => `<a class="me-item" style="--c:${ESTADO_COR[x.estado.estado] || COR.azul}" href="minha-correcao.html?producao=${esc(x.id)}">
+        <div class="me-card c6"><h3>Suas produções e correções ${verTudo("prod", lista.length)}</h3>${lista.length ? `<div class="me-lista">${lim("prod", lista).map(x => `<a class="me-item" style="--c:${ESTADO_COR[x.estado.estado] || COR.azul}" href="minha-correcao.html?producao=${esc(x.id)}">
           <span class="marca">${x.modalidade === "oral" ? "🎙️" : "✍️"}</span><span class="txt"><b>${esc(x.titulo)}</b><small>${fmtData(x.data)}${x.tache ? " · " + esc(TAREFA[x.tache] || x.tache) : ""} · ${esc(x.estado.rotulo)}${x.corretor === "ia" ? " · IA" : ""}${x.anotacoes ? " · " + x.anotacoes + " comentário(s)" : ""}</small></span>
           ${x.nota != null ? `<span class="me-pill">${x.nota}/${x.notaMaxima}</span>` : `<span class="me-pill">${esc(x.estado.rotulo)}</span>`}</a>`).join("")}</div>` : '<div class="me-vazio">Nenhuma produção neste filtro.</div>'}</div>
-        ${treinos.length ? `<div class="me-card c12"><h3>Treinos corrigidos pela IA <small>Ambiente de Produção · clique para ver a correção</small></h3><div class="me-lista" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${treinos.slice(0, 24).map(x => `<a class="me-item" style="--c:${COR.teal}" href="minha-correcao.html?treino=${esc(x.id)}">
+        ${treinos.length ? `<div class="me-card c12"><h3>Treinos corrigidos pela IA <small>Ambiente de Produção · clique para ver a correção</small> ${verTudo("treinos", treinos.length, 6)}</h3><div class="me-lista" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));">${lim("treinos", treinos, 6).map(x => `<a class="me-item" style="--c:${COR.teal}" href="minha-correcao.html?treino=${esc(x.id)}">
           <span class="marca">🤖</span><span class="txt"><b>${esc(String(x.sujet || "").slice(0, 70))}</b><small>${fmtData(x.data)} · ${esc(TAREFA[x.tache] || x.tache || "")} · ver correção →</small></span><span class="me-pill">${x.nota}/${x.escala}</span></a>`).join("")}</div></div>` : ""}
       </div></section>`;
   }
@@ -200,7 +207,7 @@
     const s = d.simulados || [];
     const sigla = { co: "CO", ce: "CE", ee: "EE", eo: "EO" };
     return `<section class="me-secao" id="simulados" style="--c:${COR.laranja}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Simulados</h2><p>${s.length} simulado(s) feito(s).</p></div><a class="me-btn cheio" style="--c:${COR.laranja}" href="simulado-tcf.html">Fazer um simulado</a></div>
-      <div class="me-card c12">${s.length ? `<div class="me-sims">${s.slice(0, 12).map(x => `<a class="me-sim" style="--c:${COR.laranja}" href="simulado-tcf.html?curso=${encodeURIComponent(x.curso)}&t=${esc(x.id)}">
+      <div class="me-card c12">${s.length > 6 ? `<h3>Seus simulados ${verTudo("sims", s.length, 6)}</h3>` : ""}${s.length ? `<div class="me-sims">${lim("sims", s, 6).map(x => `<a class="me-sim" style="--c:${COR.laranja}" href="simulado-tcf.html?curso=${encodeURIComponent(x.curso)}&t=${esc(x.id)}">
         <h4>${esc(x.titulo)}</h4><small>${fmtData(x.data)} · ${x.status === "corrigido" ? "corrigido" : x.status === "em_andamento" ? "em andamento" : "aguardando correção"}</small>
         <div class="me-sim-provas">${["co", "ce", "ee", "eo"].filter(p => x.provas[p]).map(p => `<div><b>${x.provas[p].valor != null ? x.provas[p].valor : "…"}</b><span>${sigla[p]}${x.provas[p].valor != null ? " /" + x.provas[p].escala : ""}</span></div>`).join("")}</div></a>`).join("")}</div>`
         : '<div class="me-vazio">Nenhum simulado ainda. <a href="simulado-tcf.html">Fazer o primeiro</a></div>'}</div></section>`;
@@ -212,12 +219,12 @@
     const ESTA = { realizada: ["✅", COR.verde, "Realizada"], falta: ["❌", COR.vermelho, "Falta"], falta_justificada: ["📎", COR.roxo, "Falta justificada"], cancelada_professor: ["↩️", COR.teal, "Cancelada"], remarcada: ["🔁", COR.azul, "Remarcada"], prevista: ["🗓️", "#64748b", "Prevista"] };
     return `<section class="me-secao" id="aulas" style="--c:${COR.verde}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Aulas</h2><p>${a.assistidas || 0} aula(s) gravada(s) concluída(s) · ${ap.realizadas || 0} aula(s) particular(es) realizada(s)</p></div><a class="me-btn cheio" style="--c:${COR.verde}" href="aulas-hub.html">Ver aulas</a></div>
       <div class="me-grade">
-        <div class="me-card c6"><h3>Aulas gravadas que você assistiu</h3>${a.historico.length ? `<div class="me-lista" style="max-height:380px;overflow:auto;">${a.historico.map(x => `<a class="me-item" style="--c:${x.concluida ? COR.verde : COR.laranja}" href="aulas-especializadas.html?aula=${esc(x.id)}">
+        <div class="me-card c6"><h3>Aulas gravadas que você assistiu ${verTudo("aulas-g", a.historico.length)}</h3>${a.historico.length ? `<div class="me-lista">${lim("aulas-g", a.historico).map(x => `<a class="me-item" style="--c:${x.concluida ? COR.verde : COR.laranja}" href="aulas-especializadas.html?aula=${esc(x.id)}">
           <span class="marca">${x.concluida ? "✅" : "▶️"}</span><span class="txt"><b>${esc(x.titulo)}</b><small>${esc(x.modulo)} · ${fmtData(x.data)}</small></span><span class="me-pill">${x.concluida ? "concluída" : "continuar"}</span></a>`).join("")}</div>` : '<div class="me-vazio">Nenhuma aula assistida ainda. <a href="aulas-hub.html">Começar</a></div>'}</div>
-        <div class="me-card c6"><h3>Aulas particulares <small>${pres != null ? "presença " + pres + "%" : ""}</small></h3>
+        <div class="me-card c6"><h3>Aulas particulares <small>${pres != null ? "presença " + pres + "%" : ""}</small> ${verTudo("aulas-p", ap.historico.length)}</h3>
           ${presBase || ap.proximas.length ? `${pres != null ? `<div style="display:flex;gap:14px;align-items:center;margin-bottom:10px;">${anel(pres, COR.verde)}<span style="font-size:.84rem;">${ap.realizadas} realizada(s) · ${ap.faltas} falta(s) · ${ap.justificadas} justificada(s)</span></div>` : ""}
           <div class="me-lista">${ap.proximas.map(x => `<div class="me-item" style="--c:${COR.azul}"><span class="marca">🗓️</span><span class="txt"><b>Próxima aula</b><small>${new Date(x.data).toLocaleString("pt-BR", { weekday: "long", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</small></span></div>`).join("")}
-          ${ap.historico.slice(0, 8).map(x => { const e = ESTA[x.estado] || ESTA.prevista; return `<div class="me-item" style="--c:${e[1]}"><span class="marca">${e[0]}</span><span class="txt"><b>${e[2]}</b><small>${new Date(x.data).toLocaleDateString("pt-BR")}${x.conteudo ? " · " + esc(x.conteudo.slice(0, 60)) : ""}</small></span></div>`; }).join("")}</div>`
+          ${lim("aulas-p", ap.historico).map(x => { const e = ESTA[x.estado] || ESTA.prevista; return `<div class="me-item" style="--c:${e[1]}"><span class="marca">${e[0]}</span><span class="txt"><b>${e[2]}</b><small>${new Date(x.data).toLocaleDateString("pt-BR")}${x.conteudo ? " · " + esc(x.conteudo.slice(0, 60)) : ""}</small></span></div>`; }).join("")}</div>`
           : '<div class="me-vazio">Sem aulas particulares registradas. <a href="matricula.html">Conhecer as aulas</a></div>'}</div>
       </div></section>`;
   }
@@ -225,7 +232,7 @@
     const f = d.aulas?.favoritas || [];
     const grad = [[COR.rosa, COR.laranja], [COR.anil, COR.rosa], [COR.teal, COR.azul], [COR.roxo, COR.azul], [COR.laranja, COR.vermelho]];
     return `<section class="me-secao" id="favoritos" style="--c:${COR.rosa}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Favoritos</h2><p>As aulas que você marcou com ⭐.</p></div></div>
-      <div class="me-card c12">${f.length ? `<div class="me-favs">${f.map((x, i) => `<a class="me-fav" style="--c1:${grad[i % grad.length][0]};--c2:${grad[i % grad.length][1]}" href="aulas-especializadas.html?aula=${esc(x.id)}"><span class="estrela">⭐</span><small>${esc(x.modulo)}</small><b>${esc(x.titulo)}</b></a>`).join("")}</div>`
+      <div class="me-card c12">${f.length > 8 ? `<h3>Suas aulas favoritas ${verTudo("favs", f.length, 8)}</h3>` : ""}${f.length ? `<div class="me-favs">${lim("favs", f, 8).map((x, i) => `<a class="me-fav" style="--c1:${grad[i % grad.length][0]};--c2:${grad[i % grad.length][1]}" href="aulas-especializadas.html?aula=${esc(x.id)}"><span class="estrela">⭐</span><small>${esc(x.modulo)}</small><b>${esc(x.titulo)}</b></a>`).join("")}</div>`
         : '<div class="me-vazio">Você ainda não favoritou aulas. Marque ⭐ nas aulas que quiser rever.</div>'}</div></section>`;
   }
   function secRotina(d) {
@@ -326,12 +333,12 @@
         <div class="me-conq" style="--c:${COR.anil}"><span>🧩</span><b>${dc.media != null ? dc.media + "%" : "—"}</b><small>média nos deveres completos${dc.feitos ? " (" + dc.feitos + ")" : ""}</small></div>
       </div>
       <div class="me-grade" style="margin-top:14px;">
-        <div class="me-card c5"><h3>Para fazer <small>${fazer.length}</small></h3>${fazer.length ? `<div class="me-lista">${fazer.map(x => `<a class="me-dever ${x.status}" href="dever.html?id=${esc(x.id)}" target="_blank" rel="noopener">
+        <div class="me-card c5"><h3>Para fazer <small>${fazer.length}</small> ${verTudo("dv-fazer", fazer.length)}</h3>${fazer.length ? `<div class="me-lista">${lim("dv-fazer", fazer).map(x => `<a class="me-dever ${x.status}" href="dever.html?id=${esc(x.id)}" target="_blank" rel="noopener">
             <div class="me-dever-cab"><b>${esc(x.titulo)}</b><span class="me-pill" style="--c:${x.status === "atrasado" ? COR.vermelho : COR.laranja}">${prazo(x)}</span></div>
             <div class="me-dever-tipos">${chips(x.tipos)}${x.curso ? `<span>🎓 ${esc(x.curso)}</span>` : ""}</div>
             <div class="me-dever-barra"><i style="width:${x.total ? Math.round(x.feitas / x.total * 100) : 0}%"></i></div><small>${x.feitas} de ${x.total} feita(s) · fazer agora ↗</small></a>`).join("")}</div>`
           : '<div class="me-vazio">Nada pendente. Você está em dia! 🎉</div>'}</div>
-        <div class="me-card c7"><h3>Galeria do que você já fez <small>${feitos.length}</small></h3>${feitos.length ? `<div class="me-trofeus">${feitos.map(x => `<a class="me-trofeu" href="dever.html?id=${esc(x.id)}" target="_blank" rel="noopener" title="Rever este dever">
+        <div class="me-card c7"><h3>Galeria do que você já fez <small>${feitos.length}</small> ${verTudo("dv-feitos", feitos.length, 6)}</h3>${feitos.length ? `<div class="me-trofeus">${lim("dv-feitos", feitos, 6).map(x => `<a class="me-trofeu" href="dever.html?id=${esc(x.id)}" target="_blank" rel="noopener" title="Rever este dever">
             <span class="medalha">${medalha(x)}</span><b>${esc(x.titulo)}</b><small>concluído em ${fmtData(x.concluidoEm)}${x.noPrazo ? " · no prazo" : ""}</small><div class="me-dever-tipos">${chips(x.tipos)}</div></a>`).join("")}</div>`
           : '<div class="me-vazio">Quando você concluir um dever, ele ganha uma medalha aqui. 🏅</div>'}</div>
       </div>${blocoTarefas(d)}</section>`;
@@ -342,26 +349,26 @@
   function secRevisao(d) {
     const rv = d.revisao || [], carnet = d.ambiente?.carnet || [];
     const erros = carnet.filter(x => x.tipo === "erreur").reverse(), mots = carnet.filter(x => x.tipo === "mot"), sujets = carnet.filter(x => x.tipo === "sujet");
-    const questoes = rv.length ? `<div class="me-erros">${rv.map((x, i) => `<div class="me-erro" style="--c:${PALETA[i % PALETA.length]}" data-item-caderno="${esc(x.questaoId)}">
+    const questoes = rv.length ? `<div class="me-erros">${lim("rv-q", rv).map((x, i) => `<div class="me-erro" style="--c:${PALETA[i % PALETA.length]}" data-item-caderno="${esc(x.questaoId)}">
         <div class="topo"><span>${esc(x.materia)}${x.curso ? " · " + esc(x.curso) : ""} · salva em ${fmtData(x.adicionadoEm)}</span><button class="me-btn" type="button" data-rm-caderno="${esc(x.questaoId)}">Remover</button></div>
         <p>${esc(x.enunciado)}</p>${x.afirmacao ? `<p>Afirmação: « ${esc(x.afirmacao)} »</p>` : ""}
         <p>Resposta certa: <span class="certa">${esc(x.respostaCorreta)}</span></p>
         <details data-explicar="${esc(x.questaoId)}"><summary>Ver explicação, pegadinhas e dicas</summary>${x.texto ? `<div class="explica">${esc(x.texto)}</div>` : ""}<div class="explica">${esc(x.explicacao)}</div><div data-ia></div></details>
       </div>`).join("")}</div>` : '<div class="me-vazio">Nenhuma questão salva ainda. Depois de responder um conjunto, use « Adicionar ao Caderno de Revisão » na tela de resultado.</div>';
-    const prod = `${erros.length ? `<div class="me-lista">${erros.map(x => { const [a, b] = String(x.titre).split(" → ");
+    const prod = `${erros.length ? `<div class="me-lista">${lim("rv-e", erros).map(x => { const [a, b] = String(x.titre).split(" → ");
         return `<div class="me-item" style="--c:${COR.vermelho}" data-item-carnet="${esc(x.id)}"><span class="marca">✏️</span><span class="txt"><b><s style="color:${COR.vermelho}">${esc(a)}</s> → <span style="color:${COR.verde}">${esc(b || "")}</span></b>${x.detalhe ? `<small>${esc(x.detalhe)}</small>` : ""}</span><button class="me-btn" type="button" data-rm-carnet="${esc(x.id)}">✓ Aprendido</button></div>`; }).join("")}</div>`
         : '<div class="me-vazio">Nenhum erro de produção por enquanto. Os erros apontados nas correções aparecem aqui automaticamente.</div>'}
-      ${mots.length ? `<h3 style="margin-top:16px;">Palavras para lembrar</h3><div class="me-chips-mots">${mots.map(x => `<span class="me-mot" data-item-carnet="${esc(x.id)}"><b>${esc(x.titre)}</b>${x.detalhe ? `<small>${esc(x.detalhe)}</small>` : ""}<button type="button" data-rm-carnet="${esc(x.id)}" aria-label="Retirar ${esc(x.titre)}">✕</button></span>`).join("")}</div>` : ""}`;
-    const sj = sujets.length ? `<div class="me-lista">${sujets.map(x => { const oral = !/^ET/.test(x.tache), base = `sujet=${x.tache}:${encodeURIComponent(x.id)}`;
+      ${mots.length ? `<h3 style="margin-top:16px;">Palavras para lembrar ${verTudo("rv-m", mots.length, 12)}</h3><div class="me-chips-mots">${lim("rv-m", mots, 12).map(x => `<span class="me-mot" data-item-carnet="${esc(x.id)}"><b>${esc(x.titre)}</b>${x.detalhe ? `<small>${esc(x.detalhe)}</small>` : ""}<button type="button" data-rm-carnet="${esc(x.id)}" aria-label="Retirar ${esc(x.titre)}">✕</button></span>`).join("")}</div>` : ""}`;
+    const sj = sujets.length ? `<div class="me-lista">${lim("rv-s", sujets).map(x => { const oral = !/^ET/.test(x.tache), base = `sujet=${x.tache}:${encodeURIComponent(x.id)}`;
         return `<div class="me-item" style="--c:${oral ? COR.anil : COR.rosa}" data-item-carnet="${esc(x.id)}"><span class="marca">${oral ? "🎙️" : "✍️"}</span><span class="txt"><b>${esc(x.titre)}</b><small>${esc(TAREFA[x.tache] || x.tache)}${x.curso ? " · " + esc(x.curso) : ""}</small></span>
           <span class="me-acoes"><a class="me-btn" href="${linkApp(x.curso, base + ":etude")}">Estudar</a><a class="me-btn" href="${linkApp(x.curso, base + ":dictee")}">Ditado</a><a class="me-btn cheio" style="--c:${oral ? COR.anil : COR.rosa}" href="${linkApp(x.curso, base + (oral ? ":oral" : ":ecrit"))}">${oral ? "Oral" : "Escrever"}</a><button class="me-btn" type="button" data-rm-carnet="${esc(x.id)}" aria-label="Retirar">✕</button></span></div>`; }).join("")}</div>`
       : '<div class="me-vazio">Nenhum sujet salvo. No Ambiente de Produção, abra um modelo e toque em « Enregistrer dans mon cahier ».</div>';
     return `<section class="me-secao" id="revisao" style="--c:${COR.roxo}"><div class="me-secao-cab"><div><h2><span class="bolinha"></span>Caderno de Revisão</h2>
       <p>${rv.length} questão(ões) salva(s) · ${erros.length} erro(s) das produções · ${sujets.length} sujet(s) para revisar</p></div></div>
       <div class="me-grade">
-        <div class="me-card c12"><h3>Questões salvas <small>Plataforma de Questões</small></h3>${questoes}</div>
-        <div class="me-card c6"><h3>Erros das suas produções <small>correções da IA e dos professores</small></h3>${prod}</div>
-        <div class="me-card c6"><h3>Sujets para revisar <small>Ambiente de Produção</small></h3>${sj}</div>
+        <div class="me-card c12"><h3>Questões salvas <small>Plataforma de Questões</small> ${verTudo("rv-q", rv.length)}</h3>${questoes}</div>
+        <div class="me-card c6"><h3>Erros das suas produções <small>correções da IA e dos professores</small> ${verTudo("rv-e", erros.length)}</h3>${prod}</div>
+        <div class="me-card c6"><h3>Sujets para revisar <small>Ambiente de Produção</small> ${verTudo("rv-s", sujets.length)}</h3>${sj}</div>
       </div></section>`;
   }
 
@@ -369,6 +376,9 @@
   // « Meus deveres de casa » (âncora #tarefas mantida para os links antigos).
   function blocoTarefas(d) {
     const devs = d.ambiente?.devoirs || [], msgs = d.ambiente?.mensagens || [];
+    // mensagens: as que o aluno ainda não marcou como vistas vêm primeiro, em destaque; depois as mais recentes
+    const msgsOrd = [...msgs].sort((a, b) => (a.feito ? 1 : 0) - (b.feito ? 1 : 0) || new Date(b.data) - new Date(a.data));
+    const naoVistas = msgs.filter(m => !m.feito).length;
     const pend = devs.filter(x => !x.feito), feitos = devs.filter(x => x.feito);
     const item = x => `<a class="me-item" style="--c:${x.feito ? COR.verde : COR.anil}" href="${x.link ? esc(x.link) : "producao.html#devoir=" + encodeURIComponent(x.id)}">
       <span class="marca">${x.feito ? "✅" : x.tipo === "oral" ? "🎙️" : "✍️"}</span><span class="txt"><b>${esc(x.titre)}</b><small>${esc(x.tipoNome || "")}${x.tache ? " · " + esc(TAREFA[x.tache] || x.tache) : ""} · ${fmtData(x.data)}${x.mensagem ? " · " + esc(x.mensagem) : ""}</small></span>
@@ -377,11 +387,11 @@
     return `<div class="me-tarefas" id="tarefas"><h3 class="me-sub-titulo">📮 Tarefas e mensagens do professor</h3>
       <p class="me-sub-p">${pend.length} tarefa(s) do Ambiente de Produção a fazer · ${msgs.filter(m => !m.feito).length} mensagem(ns) a ler · <a href="producao.html#epreuve">Minhas provas →</a></p>
       <div class="me-grade">
-        <div class="me-card c6"><h3>A fazer <small>${pend.length}</small></h3>${pend.length ? `<div class="me-lista">${pend.map(item).join("")}</div>` : '<div class="me-vazio">Nenhuma tarefa pendente. 🎉</div>'}
-          ${feitos.length ? `<details style="margin-top:12px;"><summary>✓ Tarefas concluídas (${feitos.length})</summary><div class="me-lista" style="margin-top:8px;">${feitos.map(item).join("")}</div></details>` : ""}</div>
-        <div class="me-card c6"><h3>Mensagens do professor</h3>${msgs.length ? `<div class="me-lista">${msgs.map(m => `<div class="me-item" style="--c:${m.feito ? COR.verde : COR.laranja}">
+        <div class="me-card c6"><h3>A fazer <small>${pend.length}</small> ${verTudo("tf-pend", pend.length)}</h3>${pend.length ? `<div class="me-lista">${lim("tf-pend", pend).map(item).join("")}</div>` : '<div class="me-vazio">Nenhuma tarefa pendente. 🎉</div>'}
+          ${feitos.length ? `<details style="margin-top:12px;"><summary>✓ Tarefas concluídas (${feitos.length})</summary><div class="me-lista" style="margin-top:8px;">${lim("tf-feitos", feitos).map(item).join("")}</div>${verTudo("tf-feitos", feitos.length)}</details>` : ""}</div>
+        <div class="me-card c6"><h3>Mensagens do professor <small>${naoVistas ? naoVistas + " nova(s)" : "todas vistas"}</small> ${verTudo("msgs", msgs.length)}</h3>${msgs.length ? `<div class="me-lista">${lim("msgs", msgsOrd).map(m => `<div class="me-item ${m.feito ? "" : "me-msg-nova"}" style="--c:${m.feito ? COR.verde : COR.laranja}">
           <span class="marca">${m.feito ? "✅" : "💬"}</span><span class="txt" style="white-space:normal;"><small>${esc(m.de || "Professor")} · ${fmtData(m.data)}</small><span style="display:block;font-size:.86rem;line-height:1.5;">${esc(m.texto)}</span></span>
-          <button class="me-btn" type="button" data-msg="${esc(m.id)}" data-feito="${m.feito ? "0" : "1"}">${m.feito ? "Reabrir" : "✓ Feito"}</button></div>`).join("")}</div>` : '<div class="me-vazio">Nenhuma mensagem.</div>'}</div>
+          <button class="me-btn" type="button" data-msg="${esc(m.id)}" data-feito="${m.feito ? "0" : "1"}" title="${m.feito ? "Voltar a destacar esta mensagem" : "Marcar que você viu a mensagem"}">${m.feito ? "Reabrir" : "✓ Vi"}</button></div>`).join("")}</div>` : '<div class="me-vazio">Nenhuma mensagem.</div>'}</div>
       </div></div>`;
   }
   const rpc = (nome, args) => fetch("/api/modeles/rpc/" + nome, { method: "POST", headers: Object.assign(H(), { "Content-Type": "application/json" }), body: JSON.stringify({ args }) });
@@ -395,6 +405,13 @@
       `<nav class="me-nav" aria-label="Seções do Meu Espaço">${nav.map(([id, n, c]) => `<a href="#${id}" style="--c:${c}" data-sec="${id}">${n}</a>`).join("")}</nav>` +
       secEquipe(d) + visaoGeral(d) + secAssinatura(d) + secDeveres(d) + secQuestoes(d) + secErros(d) + secRevisao(d) + secProducoes(d) + secSimulados(d) + secAulas(d) + secFavoritos(d) + secRotina(d);
     desenharErros(d);
+    const SECOES = { questoes: secQuestoes, producoes: secProducoes, simulados: secSimulados, aulas: secAulas, favoritos: secFavoritos, deveres: secDeveres, revisao: secRevisao };
+    function redesenharSecao(id) {
+      const sec = document.getElementById(id), fn = SECOES[id];
+      if (!sec || !fn) return;
+      sec.outerHTML = fn(d);
+      requestAnimationFrame(() => raiz.querySelectorAll("#" + id + " [data-w]").forEach(b => { b.style.width = b.dataset.w + "%"; }));
+    }
     // barras animadas
     requestAnimationFrame(() => raiz.querySelectorAll("[data-w]").forEach(b => { b.style.width = b.dataset.w + "%"; }));
     // filtros do caderno de erros
@@ -402,6 +419,13 @@
       const f = ev.target.closest("[data-ef]");
       if (f) { errosEstado.filtro = f.dataset.ef; errosEstado.limite = ERROS_POR_VEZ; desenharErros(d); }
       if (ev.target.closest("[data-mais-erros]")) { errosEstado.limite += ERROS_POR_VEZ; desenharErros(d); }
+      const vt = ev.target.closest("[data-ver-tudo]");
+      if (vt) {
+        const k = vt.dataset.verTudo, sec = vt.closest(".me-secao");
+        if (listasAbertas.has(k)) listasAbertas.delete(k); else listasAbertas.add(k);
+        if (sec) { redesenharSecao(sec.id); if (!listasAbertas.has(k)) document.getElementById(sec.id)?.scrollIntoView({ block: "nearest" }); }
+        return;
+      }
       const pf = ev.target.closest("[data-pf]");
       if (pf) { prodFiltro = pf.dataset.pf; const sec = document.getElementById("producoes"); if (sec) sec.outerHTML = secProducoes(d); requestAnimationFrame(() => raiz.querySelectorAll("#producoes [data-w]").forEach(b => { b.style.width = b.dataset.w + "%"; })); }
       // Caderno de Revisão: tirar uma questão salva / um item do caderno das produções
@@ -427,11 +451,8 @@
           if (!r.ok) return;
           const m = (d.ambiente.mensagens || []).find(x => x.id === bm.dataset.msg);
           if (m) m.feito = feito;
-          const it = bm.closest(".me-item");
-          it.style.setProperty("--c", feito ? COR.verde : COR.laranja);
-          it.querySelector(".marca").textContent = feito ? "✅" : "💬";
-          bm.dataset.feito = feito ? "0" : "1";
-          bm.textContent = feito ? "Reabrir" : "✓ Feito";
+          // redesenha: a mensagem vista sai do destaque e as próximas não vistas sobem
+          redesenharSecao("deveres");
         }).catch(() => { bm.disabled = false; });
       }
     });

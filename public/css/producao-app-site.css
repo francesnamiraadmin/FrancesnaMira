@@ -454,3 +454,12 @@
 .fnm-app .emd { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); column-gap: 22px; align-items: start; }
 .fnm-app .emd-cab { grid-column: 1 / -1; }
 .fnm-app .emd-grupo .emd-grade { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+
+/* Página do tema embutida no Dever de Casa (?embed=dever): só o conteúdo do tema */
+.fnm-embed-dever body { background: transparent !important; min-height: 0; }
+.fnm-embed-dever #app-navbar, .fnm-embed-dever body > footer, .fnm-embed-dever #themeToggleBtn, .fnm-embed-dever .estudo-timer-bar,
+.fnm-embed-dever .fnm-app .trilha, .fnm-embed-dever .fnm-app .volta-tela, .fnm-embed-dever .fnm-app .rodape-nav,
+.fnm-embed-dever .fnm-app #tm-fazer, .fnm-embed-dever .fnm-app .tm-acoes, .fnm-embed-dever .fnm-app .faixa-devoir,
+.fnm-embed-dever .fnm-app #avisos-globais { display: none !important; }
+.fnm-embed-dever .fnm-app { padding-top: 0 !important; margin-top: 0 !important; }
+.fnm-embed-dever .fnm-app main { padding: 0 !important; max-width: none !important; }

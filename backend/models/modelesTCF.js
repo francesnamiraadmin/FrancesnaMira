@@ -128,6 +128,8 @@ const MensagemTCF = mongoose.model("MensagemTCF", new Schema({
   texto: String,
   de: String,
   feito: { type: Boolean, default: false },
+  // aviso automático de « temas liberados »: some (ou é reescrito) quando os temas são retirados
+  liberacaoId: { type: Schema.Types.ObjectId, default: null, index: true },
   atualizadoEm: Date,
   criadoEm: { type: Date, default: Date.now }
 }));

@@ -26,7 +26,7 @@ router.param("index", (req, res, next, valor) => (/^\d{1,3}$/.test(valor) ? next
 // Preenche as referências dentro de atividades.conteudo (tema/aula/módulo) com
 // um título legível em vez do ObjectId cru, pro aluno/admin verem o nome real.
 const POPULATE_CONTEUDO = [
-  { path: "atividades.conteudo.temaId", select: "titulo" },
+  { path: "atividades.conteudo.temaId", select: "titulo courseType origemModeles" },
   { path: "atividades.conteudo.aulaId", select: "titulo" },
   { path: "atividades.conteudo.moduloId", select: "titulo" },
   { path: "atividades.conteudo.conjuntoId", select: "nome descricao quantidadeQuestoes" }

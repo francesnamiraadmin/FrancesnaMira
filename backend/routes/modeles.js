@@ -11,6 +11,8 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 const User = require("../models/user");
 const Producao = require("../models/producao");
+const DeverSemanal = require("../models/deverSemanal");
+const Tema = require("../models/tema");
 const CadernoErros = require("../models/cadernoErros");
 const T = require("../models/modelesTCF");
 const M = require("../utils/modelesTCF");
@@ -84,8 +86,22 @@ async function partilhasTipos(ctx) {
 async function idsDevoirs(ctx) {
   if (ctx._cache.devoirs) return ctx._cache.devoirs;
   const o = {};
-  if (!ctx.prof) (await T.DevoirTCF.find({ ativo: true }).lean()).forEach(d => { if (alvoInclui(d.alvo, ctx.userId)) o[d.modelo] = 1; });
+  if (!ctx.prof) {
+    (await T.DevoirTCF.find({ ativo: true }).lean()).forEach(d => { if (alvoInclui(d.alvo, ctx.userId)) o[d.modelo] = 1; });
+    // produções pedidas no Dever de Casa do site: o aluno vê o tema inteiro (enunciado, pistas, modelo)
+    Object.assign(o, await sujetsDosDeveres(ctx.userId));
+  }
   return (ctx._cache.devoirs = o);
+}
+async function sujetsDosDeveres(alunoId) {
+  const o = {}, temaIds = [];
+  const devs = await DeverSemanal.find({ alunoId }).select("atividades.tipo atividades.conteudo").lean();
+  for (const d of devs) for (const a of d.atividades || []) {
+    if (!/^producao_(textual|oral)$/.test(a.tipo) || !a.conteudo) continue;
+    if (a.conteudo.sujetId) o[a.conteudo.sujetId] = 1; else if (a.conteudo.temaId) temaIds.push(a.conteudo.temaId);
+  }
+  if (temaIds.length) (await Tema.find({ _id: { $in: temaIds }, "origemModeles.sujetId": { $exists: true } }).select("origemModeles").lean()).forEach(t => { o[t.origemModeles.sujetId] = 1; });
+  return o;
 }
 // O aluno vê o tema? No site, todos os temas ficam abertos, exceto os que o professor
 // desmarcou no quadro "Thèmes P.O. / P.E." — tema do mês, devoir e partilha abrem sempre.
@@ -1288,6 +1304,33 @@ router.get("/temas-aluno/:alunoId", exigirAdmin, async (req, res) => {
 // Designar / retirar temas (Sistema de Correção › Temas dos alunos): o tema designado fica liberado
 // na hora para o aluno, que recebe um aviso em « Tarefas do professor ». Enquanto a equipe não mexe,
 // o aluno vê os 20 temas padrão; a primeira designação parte deles.
+// Aviso ao aluno de « temas liberados » (Meu Espaço › Mensagens do professor).
+const tituloTema = x => String((M.acharTema(x.tache, x.id) || {}).t || (M.acharTema(x.tache, x.id) || {}).titre || x.id).slice(0, 90);
+function textoLiberacao(P, sujets) {
+  const nomes = sujets.slice(0, 5).map(x => `« ${tituloTema(x)} » (${P.NOMES_TACHE[x.tache] || x.tache})`);
+  return `${sujets.length === 1 ? "Novo tema liberado" : sujets.length + " novos temas liberados"} para você no Ambiente de Produção (${P.nome}): ${nomes.join("; ")}${sujets.length > 5 ? "…" : ""}.`;
+}
+// Depois de retirar temas: o aviso de cada envio passa a citar só os temas que continuam liberados;
+// se nenhum continua, o aviso some e o envio fica como retirado no histórico. Avisos antigos (de antes
+// do histórico) são reconhecidos pelos títulos citados no texto.
+async function sincronizarAvisosLiberacao(alunoId, perfil, listaAtual) {
+  const P = M.PERFIS[perfil], ficam = new Set((listaAtual || []).map(x => x.id));
+  const libs = await T.LiberacaoTemasTCF.find({ alunoId, perfil, retiradoEm: null });
+  for (const lib of libs) {
+    const ativos = lib.sujets.filter(x => ficam.has(x.id));
+    if (ativos.length === lib.sujets.length) continue;
+    if (!ativos.length) {
+      lib.retiradoEm = new Date(); await lib.save();
+      await T.MensagemTCF.deleteMany({ alunoId, liberacaoId: lib._id });
+    } else await T.MensagemTCF.updateMany({ alunoId, liberacaoId: lib._id }, { texto: textoLiberacao(P, ativos), atualizadoEm: new Date() });
+  }
+  const titulosFicam = new Set((listaAtual || []).map(tituloTema));
+  const antigas = await T.MensagemTCF.find({ alunoId, liberacaoId: null, texto: new RegExp(`liberados? para você no Ambiente de Produção \\(${P.nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\)`) }).select("texto").lean();
+  for (const m of antigas) {
+    const citados = [...String(m.texto).matchAll(/« (.+?) » \(/g)].map(r => r[1]);
+    if (citados.length && !citados.some(t => titulosFicam.has(t))) await T.MensagemTCF.deleteOne({ _id: m._id });
+  }
+}
 router.post("/temas-aluno/:alunoId/designar", exigirAdmin, async (req, res) => {
   try {
     if (!ehObjectId(req.params.alunoId)) return res.status(400).json({ msg: "Aluno inválido." });
@@ -1310,11 +1353,10 @@ router.post("/temas-aluno/:alunoId/designar", exigirAdmin, async (req, res) => {
     await T.TemasAlunoTCF.findOneAndUpdate({ alunoId: req.params.alunoId, perfil }, { sujets: lista, atualizadoPor: req.userId, atualizadoEm: new Date() }, { upsert: true });
     if (novos.length) {
       const quem = await User.findById(req.userId).select("nome").lean();
-      await T.LiberacaoTemasTCF.create({ alunoId: req.params.alunoId, perfil, sujets: novos, porId: req.userId, porNome: quem?.nome || "" });
-      const nomes = novos.slice(0, 5).map(x => `« ${String(M.acharTema(x.tache, x.id).t || M.acharTema(x.tache, x.id).titre || x.id).slice(0, 90)} » (${P.NOMES_TACHE[x.tache] || x.tache})`);
-      await T.MensagemTCF.create({ alunoId: req.params.alunoId, de: quem?.nome || "Equipe Francês na Mira",
-        texto: `${novos.length === 1 ? "Novo tema liberado" : novos.length + " novos temas liberados"} para você no Ambiente de Produção (${P.nome}): ${nomes.join("; ")}${novos.length > 5 ? "…" : ""}.` });
+      const lib = await T.LiberacaoTemasTCF.create({ alunoId: req.params.alunoId, perfil, sujets: novos, porId: req.userId, porNome: quem?.nome || "" });
+      await T.MensagemTCF.create({ alunoId: req.params.alunoId, de: quem?.nome || "Equipe Francês na Mira", liberacaoId: lib._id, texto: textoLiberacao(P, novos) });
     }
+    if (retirar) await sincronizarAvisosLiberacao(req.params.alunoId, perfil, lista);
     res.json({ ok: true, personalizado: true, total: lista.length, novos: novos.length, selecionados: lista.map(x => x.id) });
   } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
 });
@@ -1330,6 +1372,8 @@ router.post("/temas-aluno/:alunoId/liberacoes/:libId/retirar", exigirAdmin, asyn
     let n = 0;
     if (doc) { const antes = doc.sujets.length; doc.sujets = doc.sujets.filter(x => !fora.has(x.id)); n = antes - doc.sujets.length; doc.atualizadoEm = new Date(); await doc.save(); }
     lib.retiradoEm = new Date(); await lib.save();
+    await T.MensagemTCF.deleteMany({ alunoId: lib.alunoId, liberacaoId: lib._id });   // o aviso deste envio sai junto
+    await sincronizarAvisosLiberacao(req.params.alunoId, lib.perfil, doc ? doc.sujets : []);
     res.json({ ok: true, retirados: n, selecionados: doc ? doc.sujets.map(x => x.id) : [] });
   } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
 });
@@ -1424,6 +1468,7 @@ router.put("/temas-aluno/:alunoId", exigirAdmin, async (req, res) => {
     if (!(await perfisDoAluno(req.params.alunoId)).includes(perfil)) return res.status(400).json({ msg: "Este aluno não tem o Ambiente de Produção deste curso." });
     if (req.body?.padrao) {
       await T.TemasAlunoTCF.deleteOne({ alunoId: req.params.alunoId, perfil });
+      await sincronizarAvisosLiberacao(req.params.alunoId, perfil, TEMAS_PADRAO[perfil] || []);
       return res.json({ ok: true, personalizado: false, total: (TEMAS_PADRAO[perfil] || []).length });
     }
     const P = M.PERFIS[perfil];
@@ -1436,6 +1481,7 @@ router.put("/temas-aluno/:alunoId", exigirAdmin, async (req, res) => {
     }
     if (!sujets.length) return res.status(400).json({ msg: "Escolha pelo menos um tema." });
     await T.TemasAlunoTCF.findOneAndUpdate({ alunoId: req.params.alunoId, perfil }, { sujets, atualizadoPor: req.userId, atualizadoEm: new Date() }, { upsert: true });
+    await sincronizarAvisosLiberacao(req.params.alunoId, perfil, sujets);
     res.json({ ok: true, personalizado: true, total: sujets.length });
   } catch (err) { console.error(err); res.status(500).json({ msg: "Erro no servidor." }); }
 });

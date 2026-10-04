@@ -201,6 +201,39 @@ const DeverWorkspace = (() => {
     });
   }
 
+  // Produção escrita/oral de um tema do Ambiente de Produção: a página do tema inteira (enunciado,
+  // documentos, coletânea, pistas para completar e resposta modelo) aparece aqui mesmo, num quadro
+  // recolhível acima do editor/gravador. O quadro é criado pelo DOM (o htmlSeguro bloqueia iframe no innerHTML).
+  function sujetDaAtividade(atividade) {
+    const c = atividade.conteudo || {}, tema = c.temaId && typeof c.temaId === 'object' ? c.temaId : {};
+    const tache = c.tache || tema.origemModeles?.tache, sujetId = c.sujetId || tema.origemModeles?.sujetId;
+    if (!tache || !sujetId) return null;
+    const perfil = c.perfil || '';
+    return { tache, sujetId, curso: tema.courseType || (/^DELF-/.test(perfil) ? 'DELF' : (window.CursoContexto && window.CursoContexto.curso) || 'TCF'), nivel: /^DELF-(A1|A2|B1|B2)$/.test(perfil) ? perfil.slice(5) : '' };
+  }
+  function renderMaterialTema(alvo, atividade) {
+    const s = sujetDaAtividade(atividade);
+    if (!s) return;
+    const oral = !/^ET/.test(s.tache);
+    const box = document.createElement('details');
+    box.className = 'dever-tema';
+    box.open = true;
+    box.innerHTML = `<summary><span class="dever-tema-ic">${oral ? '🎙️' : '✍️'}</span><span><b>O tema completo</b><small>Enunciado, documentos, coletânea, pistas para completar e resposta modelo — como no Ambiente de Produção</small></span></summary><div class="dever-tema-corpo"><p class="dever-tema-carregando">Carregando o tema…</p></div>`;
+    alvo.appendChild(box);
+    const quadro = document.createElement('iframe');
+    quadro.className = 'dever-tema-quadro';
+    quadro.title = 'Tema da produção';
+    quadro.loading = 'lazy';
+    quadro.src = `producao.html?curso=${encodeURIComponent(s.curso)}${s.nivel ? '&nivel=' + s.nivel : ''}&embed=dever#sujet=${encodeURIComponent(s.tache)}:${encodeURIComponent(s.sujetId)}`;
+    quadro.addEventListener('load', () => { const c = box.querySelector('.dever-tema-carregando'); if (c) c.remove(); });
+    box.querySelector('.dever-tema-corpo').appendChild(quadro);
+    const ouvir = ev => {
+      if (ev.origin !== location.origin || ev.source !== quadro.contentWindow || !ev.data || !ev.data.fnmTemaAltura) return;
+      quadro.style.height = Math.min(Math.max(ev.data.fnmTemaAltura, 300), 20000) + 'px';
+    };
+    window.addEventListener('message', ouvir);
+  }
+
   // container: elemento onde a atividade inteira (título, status, widget) é
   // renderizada. ctx = { deverId, onAtualizado(dadosDeverAtualizado) }.
   async function renderAtividade(container, atividade, index, ctx) {
@@ -224,6 +257,7 @@ const DeverWorkspace = (() => {
     } else if (atividade.tipo === 'assistir_modulo') {
       await renderAssistirModulo(widgetEl, atividade);
     } else if (atividade.tipo === 'producao_textual' && atividade.conteudo?.temaId?._id) {
+      const material = document.createElement('div'); widgetEl.before(material); renderMaterialTema(material, atividade);
       if (atividade.producaoReal) {
         widgetEl.innerHTML = `<p class="embed-aviso">Produção enviada — status: <strong>${NOMES_STATUS_PRODUCAO[atividade.producaoReal.status] || atividade.producaoReal.status}</strong>${atividade.producaoReal.notaTotal != null ? ' · Nota: ' + atividade.producaoReal.notaTotal : ''}</p>`;
       } else {
@@ -232,6 +266,7 @@ const DeverWorkspace = (() => {
         });
       }
     } else if (atividade.tipo === 'producao_oral' && atividade.conteudo?.temaId?._id) {
+      const material = document.createElement('div'); widgetEl.before(material); renderMaterialTema(material, atividade);
       if (atividade.producaoReal) {
         widgetEl.innerHTML = `<p class="embed-aviso">Produção enviada — status: <strong>${NOMES_STATUS_PRODUCAO[atividade.producaoReal.status] || atividade.producaoReal.status}</strong>${atividade.producaoReal.notaTotal != null ? ' · Nota: ' + atividade.producaoReal.notaTotal : ''}</p>`;
       } else {

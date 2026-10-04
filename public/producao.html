@@ -19,6 +19,19 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 </style>
 </head>
 <body style="visibility:hidden;">
+<script>
+  // Dentro do Dever de Casa (dever.html): só a página do tema (enunciado, documentos, coletânea, pistas
+  // e resposta modelo), sem navbar, trilha nem « Faire ce sujet »; a produção é feita na aba do dever.
+  // A altura vai para a página-mãe, que ajusta o quadro.
+  if (/[?&]embed=dever(&|$)/.test(location.search)) {
+    document.documentElement.classList.add('fnm-embed-dever');
+    var nv = /[?&]nivel=(A1|A2|B1|B2)(&|$)/.exec(location.search);
+    if (nv) window.FNM_NIVEL = nv[1];   // DELF: o nível do tema pedido no dever
+    var enviarAltura = function () { try { parent.postMessage({ fnmTemaAltura: document.documentElement.scrollHeight }, location.origin); } catch (e) {} };
+    window.addEventListener('load', function () { if (window.ResizeObserver) new ResizeObserver(enviarAltura).observe(document.body); enviarAltura(); });
+    setInterval(enviarAltura, 1500);
+  }
+</script>
 <script>window.CURSO_CONTEXTO_MODULO = "producao"; window.CURSO_CONTEXTO_HUB = "producao-hub.html";</script>
 <script src="js/cursoContexto.js"></script>
 <script src="js/producaoGate.js"></script>
