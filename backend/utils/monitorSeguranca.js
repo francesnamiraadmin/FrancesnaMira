@@ -44,6 +44,7 @@ const CATALOGO = {
   acao_administrativa:      { severidade: "info",    peso: 0,  alerta: false, descricao: "Ação administrativa registrada para auditoria" },
   privilegio_concedido:     { severidade: "alta",    peso: 0,  alerta: true,  descricao: "Nova conta com privilégio de equipe criada/alterada" },
   ip_bloqueado:             { severidade: "alta",    peso: 0,  alerta: true,  descricao: "IP bloqueado automaticamente por comportamento de ataque" },
+  senha_alterada:           { severidade: "info",    peso: 0,  alerta: false, descricao: "Senha alterada pelo próprio usuário (outras sessões encerradas)" },
   sessoes_revogadas:        { severidade: "alta",    peso: 0,  alerta: true,  descricao: "Todas as sessões de uma conta foram encerradas" }
 };
 

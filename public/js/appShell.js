@@ -394,6 +394,14 @@
     }
   }
 
+  // Senha alterada nas Configurações embutidas (Meu Espaço): o servidor encerra os acessos antigos e
+  // devolve um token novo; a página de fora o guarda e se atualiza para seguir com ele.
+  if (!EMBUTIDA) window.addEventListener("message", ev => {
+    if (ev.origin !== location.origin || !ev.data || typeof ev.data.fnmToken !== "string") return;
+    localStorage.setItem("token", ev.data.fnmToken);
+    setTimeout(() => location.reload(), 2500);
+  });
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", iniciar);
   } else {

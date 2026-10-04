@@ -71,6 +71,9 @@
     aplicar();
   }
 
+  // Idioma trocado em outra aba ou num quadro embutido (Configurações dentro do Meu Espaço): acompanha.
+  window.addEventListener("storage", e => { if (e.key === STORAGE_KEY && e.newValue && e.newValue !== idiomaAtual) setLocale(e.newValue, { sincronizar: false }); });
+
   window.I18n = {
     t,
     aplicar,

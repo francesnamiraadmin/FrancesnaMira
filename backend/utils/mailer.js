@@ -173,6 +173,23 @@ async function enviarEmailRedefinicaoSenha(destinatario, nome, link) {
   });
 }
 
+// Aviso de segurança: a senha da conta foi trocada (pela própria pessoa, nas Configurações).
+async function enviarEmailSenhaAlterada(destinatario, nome, { quando, ip, link }) {
+  const data = new Date(quando || Date.now()).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+  await enviarViaAPI({
+    destinatario,
+    nome,
+    assunto: "Sua senha foi alterada - Francês na Mira",
+    html: casco(`
+      <h2 style="margin-top:0;">Olá, ${esc(nome)}!</h2>
+      <p>A senha da sua conta foi alterada em <b>${esc(data)}</b>${ip ? ` (IP ${esc(ip)})` : ""}. Por segurança, encerramos as sessões abertas nos outros dispositivos.</p>
+      <p>Se foi você, não precisa fazer nada.</p>
+      <p><b>Se não foi você</b>, redefina sua senha agora pelo « Esqueci minha senha » na página de login e fale com a nossa equipe.</p>
+      ${botao(link, "Ir para o login")}
+    `)
+  });
+}
+
 // Encaminha o formulário de "Reclame Aqui" (canal próprio do site) para o e-mail da
 // administração — não tem relação com o serviço externo reclameaqui.com.br.
 async function enviarEmailReclamacao({ nome, email, assunto, mensagem }) {
@@ -194,6 +211,7 @@ async function enviarEmailReclamacao({ nome, email, assunto, mensagem }) {
 module.exports = {
   enviarEmailConfirmacao,
   enviarEmailRedefinicaoSenha,
+  enviarEmailSenhaAlterada,
   enviarEmailMatriculaConfirmada,
   enviarEmailPagamentoAprovado,
   enviarEmailPagamentoRejeitado,

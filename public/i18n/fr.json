@@ -15,7 +15,6 @@
   "nav.minhasInscricoes": "Mes inscriptions",
   "nav.fazerUpgrade": "Passer à un niveau supérieur",
   "nav.verPlanos": "Voir les forfaits disponibles",
-
   "common.salvar": "Enregistrer",
   "common.salvarAlteracoes": "Enregistrer les modifications",
   "common.cancelar": "Annuler",
@@ -30,7 +29,6 @@
   "common.destacar": "Mettre en avant",
   "common.removerDestaque": "Retirer la mise en avant",
   "common.naPlataformaDesde": "Membre depuis",
-
   "config.titulo": "Paramètres",
   "config.subtitulo": "Personnalisez votre expérience sur la plateforme",
   "config.secao.aparencia": "Apparence",
@@ -44,10 +42,6 @@
   "config.perfil.telefone": "Téléphone",
   "config.perfil.whatsapp": "WhatsApp",
   "config.perfil.email": "E-mail",
-  "config.perfil.emailDesc": "Changer l'e-mail exige une confirmation à la nouvelle adresse avant de prendre effet.",
-  "config.perfil.novoEmail": "Nouvel e-mail",
-  "config.perfil.senhaParaTrocarEmail": "Mot de passe actuel",
-  "config.perfil.enviarConfirmacao": "Envoyer la confirmation",
   "config.secao.seguranca": "Sécurité",
   "config.seguranca.senhaAtual": "Mot de passe actuel",
   "config.seguranca.novaSenha": "Nouveau mot de passe",
@@ -66,7 +60,6 @@
   "config.notificacoes.correcoesDisponiveis": "Corrections disponibles",
   "config.notificacoes.novosConteudos": "Nouveaux contenus",
   "config.notificacoes.promocoes": "Promotions et nouveautés",
-
   "depoimentos.titulo": "Témoignages",
   "depoimentos.subtitulo": "Racontez votre expérience avec Francês na Mira",
   "depoimentos.tituloCampo": "Titre",
@@ -80,5 +73,17 @@
   "depoimentos.meusEnvios": "Mes témoignages envoyés",
   "depoimentos.statusPendente": "En attente d'analyse",
   "depoimentos.statusAprovado": "Approuvé",
-  "depoimentos.statusRejeitado": "Rejeté"
+  "depoimentos.statusRejeitado": "Rejeté",
+  "config.perfil.emailFixo": "L'e-mail du compte est votre identifiant et ne peut pas être modifié.",
+  "config.seguranca.trocarSenha": "Modifier le mot de passe",
+  "config.seguranca.confirmarSenha": "Confirmez le nouveau mot de passe",
+  "config.seguranca.mostrar": "Afficher le mot de passe",
+  "config.seguranca.regraTamanho": "Au moins 8 caractères",
+  "config.seguranca.regraLetrasNumeros": "Des lettres et des chiffres",
+  "config.seguranca.regraDiferente": "Différent du mot de passe actuel",
+  "config.seguranca.regraPessoal": "Sans votre nom ni votre e-mail",
+  "config.seguranca.regraIgual": "La confirmation est identique au nouveau mot de passe",
+  "config.seguranca.avisoSessoes": "En modifiant le mot de passe, les sessions ouvertes sur vos autres appareils sont fermées et vous recevez un e-mail d'avertissement.",
+  "config.seguranca.esqueci": "J'ai oublié mon mot de passe actuel",
+  "config.seguranca.linkEnviado": "Nous avons envoyé un lien de réinitialisation à l'e-mail de votre compte. Il est valable 1 heure."
 }

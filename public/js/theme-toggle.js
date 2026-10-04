@@ -56,6 +56,9 @@
     document.addEventListener("DOMContentLoaded", criarBotao);
   }
 
+  // Tema trocado em outra aba ou num quadro embutido (Configurações dentro do Meu Espaço): acompanha na hora.
+  window.addEventListener("storage", e => { if (e.key === STORAGE_KEY && (e.newValue === "light" || e.newValue === "dark")) aplicarTema(e.newValue); });
+
   window.ThemeToggle = { setTema, get tema() { return document.documentElement.getAttribute("data-theme") || "light"; } };
 })();
 

@@ -15,7 +15,6 @@
   "nav.minhasInscricoes": "Minhas Inscrições",
   "nav.fazerUpgrade": "Faça um upgrade",
   "nav.verPlanos": "Ver planos disponíveis",
-
   "common.salvar": "Salvar",
   "common.salvarAlteracoes": "Salvar alterações",
   "common.cancelar": "Cancelar",
@@ -30,7 +29,6 @@
   "common.destacar": "Destacar",
   "common.removerDestaque": "Remover destaque",
   "common.naPlataformaDesde": "Na plataforma desde",
-
   "config.titulo": "Configurações",
   "config.subtitulo": "Personalize sua experiência na plataforma",
   "config.secao.aparencia": "Aparência",
@@ -44,10 +42,6 @@
   "config.perfil.telefone": "Telefone",
   "config.perfil.whatsapp": "WhatsApp",
   "config.perfil.email": "E-mail",
-  "config.perfil.emailDesc": "Alterar o e-mail exige confirmação no novo endereço antes de valer.",
-  "config.perfil.novoEmail": "Novo e-mail",
-  "config.perfil.senhaParaTrocarEmail": "Senha atual",
-  "config.perfil.enviarConfirmacao": "Enviar confirmação",
   "config.secao.seguranca": "Segurança",
   "config.seguranca.senhaAtual": "Senha atual",
   "config.seguranca.novaSenha": "Nova senha",
@@ -66,7 +60,6 @@
   "config.notificacoes.correcoesDisponiveis": "Correções disponíveis",
   "config.notificacoes.novosConteudos": "Novos conteúdos",
   "config.notificacoes.promocoes": "Promoções e novidades",
-
   "depoimentos.titulo": "Depoimentos",
   "depoimentos.subtitulo": "Conte sua experiência com a Francês na Mira",
   "depoimentos.tituloCampo": "Título",
@@ -80,5 +73,17 @@
   "depoimentos.meusEnvios": "Meus depoimentos enviados",
   "depoimentos.statusPendente": "Aguardando análise",
   "depoimentos.statusAprovado": "Aprovado",
-  "depoimentos.statusRejeitado": "Rejeitado"
+  "depoimentos.statusRejeitado": "Rejeitado",
+  "config.perfil.emailFixo": "O e-mail da conta é o seu acesso e não pode ser alterado.",
+  "config.seguranca.trocarSenha": "Alterar senha",
+  "config.seguranca.confirmarSenha": "Confirme a nova senha",
+  "config.seguranca.mostrar": "Mostrar senha",
+  "config.seguranca.regraTamanho": "Pelo menos 8 caracteres",
+  "config.seguranca.regraLetrasNumeros": "Letras e números",
+  "config.seguranca.regraDiferente": "Diferente da senha atual",
+  "config.seguranca.regraPessoal": "Sem o seu nome ou e-mail",
+  "config.seguranca.regraIgual": "A confirmação é igual à nova senha",
+  "config.seguranca.avisoSessoes": "Ao alterar a senha, as sessões abertas nos outros dispositivos são encerradas e você recebe um e-mail de aviso.",
+  "config.seguranca.esqueci": "Esqueci minha senha atual",
+  "config.seguranca.linkEnviado": "Enviamos um link de redefinição para o e-mail da sua conta. Ele vale por 1 hora."
 }

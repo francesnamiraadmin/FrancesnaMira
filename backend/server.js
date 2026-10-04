@@ -53,6 +53,8 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // Rotas
 app.use("/api/auth", require("./routes/auth"));
+// tradução do site para o francês (Configurações › Idioma): limitada por IP, com cache na base
+app.use("/api/traducao", limitarTaxa({ nome: "traducao", janelaMs: 60 * 1000, max: 120 }), require("./routes/traducao"));
 app.use("/api/pagamentos", require("./routes/pagamentos"));
 app.use("/api/temas", require("./routes/temas"));
 // Correção anotada (marcações, comentários, histórico, concluir/reabrir) antes das rotas gerais de produções.

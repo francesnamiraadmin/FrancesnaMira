@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
   <script src="js/htmlSeguro.js"></script>
   <script src="js/dialogos.js"></script>
+  <script src="js/idiomaSite.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="img/logo-mira.png">
 <title>Configurações - Francês na Mira</title>
@@ -34,6 +35,19 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 .campo select option { color: var(--accent-text); }
 .campo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .salvar-msg { margin-top: 12px; font-size: 0.9rem; min-height: 1.3em; }
+.senha-campo { position: relative; }
+.senha-campo input { padding-right: 44px !important; }
+.senha-ver { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: 0; background: none; cursor: pointer; font-size: 1rem; opacity: .65; padding: 6px; }
+.senha-ver[aria-pressed="true"] { opacity: 1; }
+.senha-forca { height: 6px; border-radius: 6px; background: var(--glass-border); margin-top: 8px; overflow: hidden; }
+.senha-forca i { display: block; height: 100%; width: 0; background: #dc2626; transition: width .2s, background .2s; }
+.senha-regras { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .84rem; }
+.senha-regras li { opacity: .7; }
+.senha-regras li::before { content: "○ "; }
+.senha-regras li.ok { opacity: 1; color: var(--success-text); }
+.senha-regras li.ok::before { content: "✓ "; }
+.senha-aviso { font-size: .82rem; color: var(--text-muted); margin: 0 0 12px; }
+.senha-esqueci { margin-left: 14px; font-size: .85rem; color: var(--accent); background: none; border: 0; cursor: pointer; text-decoration: underline; font-family: inherit; }
 
 .tema-opcoes { display: flex; gap: 14px; flex-wrap: wrap; }
 .tema-card {
@@ -148,39 +162,43 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
     <div class="campo">
       <label data-i18n="config.perfil.email">E-mail</label>
       <input type="email" id="emailAtual" disabled>
-      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:6px;" data-i18n="config.perfil.emailDesc">Alterar o e-mail exige confirmação no novo endereço antes de valer.</p>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:6px;" data-i18n="config.perfil.emailFixo">O e-mail da conta é o seu acesso e não pode ser alterado.</p>
     </div>
-    <div class="campo-row">
-      <div class="campo">
-        <label for="novoEmailInput" data-i18n="config.perfil.novoEmail">Novo e-mail</label>
-        <input type="email" id="novoEmailInput">
-      </div>
-      <div class="campo">
-        <label for="senhaTrocaEmailInput" data-i18n="config.perfil.senhaParaTrocarEmail">Senha atual</label>
-        <input type="password" id="senhaTrocaEmailInput" autocomplete="current-password">
-      </div>
-      <div style="display:flex; align-items:flex-end;">
-        <button class="dash-btn secundario" id="trocarEmailBtn" style="width:100%;" data-i18n="config.perfil.enviarConfirmacao">Enviar confirmação</button>
-      </div>
-    </div>
-    <div class="salvar-msg" id="trocarEmailMsg"></div>
   </div>
 
   <!-- ===================== SEGURANÇA ===================== -->
   <div class="dash-section-card" id="secSeguranca">
     <h2><img class="titulo-icone-inline" src="img/icones/lock.svg" alt=""><span data-i18n="config.secao.seguranca">Segurança</span></h2>
-    <div class="campo-row">
+    <h3 style="font-size:1rem; margin-bottom:6px;" data-i18n="config.seguranca.trocarSenha">Alterar senha</h3>
+    <form id="formSenha" autocomplete="on" novalidate>
+      <input type="text" name="username" id="usuarioSenha" autocomplete="username" hidden>
       <div class="campo">
         <label for="senhaAtualInput" data-i18n="config.seguranca.senhaAtual">Senha atual</label>
-        <input type="password" id="senhaAtualInput">
+        <div class="senha-campo"><input type="password" id="senhaAtualInput" autocomplete="current-password" maxlength="128" required><button type="button" class="senha-ver" data-ver="senhaAtualInput" aria-label="Mostrar senha" data-i18n-title="config.seguranca.mostrar" title="Mostrar senha">👁</button></div>
       </div>
-      <div class="campo">
-        <label for="novaSenhaInput" data-i18n="config.seguranca.novaSenha">Nova senha</label>
-        <input type="password" id="novaSenhaInput">
+      <div class="campo-row">
+        <div class="campo">
+          <label for="novaSenhaInput" data-i18n="config.seguranca.novaSenha">Nova senha</label>
+          <div class="senha-campo"><input type="password" id="novaSenhaInput" autocomplete="new-password" maxlength="128" required aria-describedby="senhaRegras"><button type="button" class="senha-ver" data-ver="novaSenhaInput" aria-label="Mostrar senha" data-i18n-title="config.seguranca.mostrar" title="Mostrar senha">👁</button></div>
+          <div class="senha-forca" aria-hidden="true"><i id="senhaForcaBarra"></i></div>
+        </div>
+        <div class="campo">
+          <label for="confirmarSenhaInput" data-i18n="config.seguranca.confirmarSenha">Confirme a nova senha</label>
+          <div class="senha-campo"><input type="password" id="confirmarSenhaInput" autocomplete="new-password" maxlength="128" required><button type="button" class="senha-ver" data-ver="confirmarSenhaInput" aria-label="Mostrar senha" data-i18n-title="config.seguranca.mostrar" title="Mostrar senha">👁</button></div>
+        </div>
       </div>
-    </div>
-    <button class="dash-btn" id="alterarSenhaBtn" data-i18n="config.seguranca.alterarSenha">Alterar senha</button>
-    <div class="salvar-msg" id="senhaMsg"></div>
+      <ul class="senha-regras" id="senhaRegras">
+        <li data-regra="tamanho" data-i18n="config.seguranca.regraTamanho">Pelo menos 8 caracteres</li>
+        <li data-regra="letrasNumeros" data-i18n="config.seguranca.regraLetrasNumeros">Letras e números</li>
+        <li data-regra="diferente" data-i18n="config.seguranca.regraDiferente">Diferente da senha atual</li>
+        <li data-regra="pessoal" data-i18n="config.seguranca.regraPessoal">Sem o seu nome ou e-mail</li>
+        <li data-regra="igual" data-i18n="config.seguranca.regraIgual">A confirmação é igual à nova senha</li>
+      </ul>
+      <p class="senha-aviso" data-i18n="config.seguranca.avisoSessoes">Ao alterar a senha, as sessões abertas nos outros dispositivos são encerradas e você recebe um e-mail de aviso.</p>
+      <button class="dash-btn" id="alterarSenhaBtn" type="submit" data-i18n="config.seguranca.alterarSenha" disabled>Alterar senha</button>
+      <button type="button" class="senha-esqueci" id="esqueciSenhaBtn" data-i18n="config.seguranca.esqueci">Esqueci minha senha atual</button>
+    </form>
+    <div class="salvar-msg" id="senhaMsg" role="status" aria-live="polite"></div>
 
     <hr style="border:none; border-top:1px solid var(--glass-border); margin:22px 0;">
 
@@ -237,7 +255,7 @@ footer { text-align: center; padding: 28px; background: var(--footer-bg); margin
 <script>
 // foto padrão: a inicial do nome (gerada pelo appShell.js, igual à da navbar)
 const avatarPadrao = nome => (window.AppShell && window.AppShell.avatarInicial) ? window.AppShell.avatarInicial(nome) : '';
-const token = localStorage.getItem('token');
+let token = localStorage.getItem('token');   // trocado depois de alterar a senha (o servidor devolve um novo)
 function authHeaders() { return { Authorization: 'Bearer ' + token }; }
 function authHeadersJson() { return { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }; }
 
@@ -255,8 +273,10 @@ marcarTemaSelecionado(window.ThemeToggle.tema);
 
 // ===================== IDIOMA =====================
 document.getElementById('idiomaSelect').value = window.I18n.idioma;
-document.getElementById('idiomaSelect').addEventListener('change', e => {
-  window.I18n.setLocale(e.target.value);
+// trocar o idioma recarrega a página (e, dentro do Meu Espaço, a página de fora também — ver js/idiomaSite.js)
+document.getElementById('idiomaSelect').addEventListener('change', async e => {
+  await window.I18n.setLocale(e.target.value);
+  location.reload();
 });
 document.addEventListener('i18n:aplicado', () => {
   document.getElementById('idiomaSelect').value = window.I18n.idioma;
@@ -266,7 +286,8 @@ document.addEventListener('i18n:aplicado', () => {
 function preencherPerfil(dados) {
   document.getElementById('dashAvatar').src = dados.perfil?.foto || avatarPadrao(dados.nome);
   if (window.AppShell && window.AppShell.fotoComReserva) window.AppShell.fotoComReserva(document.getElementById('dashAvatar'), dados.nome);
-  document.getElementById('dashAvatar').onclick = () => window.AppShell.abrirModalFoto();
+  document.getElementById('dashAvatar').onclick = () => window.AppShell.alterarFoto();
+  document.getElementById('usuarioSenha').value = dados.email || '';
   document.getElementById('nomeInput').value = dados.nome || '';
   document.getElementById('telefoneInput').value = dados.telefone || '';
   document.getElementById('whatsappInput').value = dados.whatsapp || '';
@@ -306,47 +327,72 @@ document.getElementById('salvarPerfilBtn').addEventListener('click', async () =>
   }
 });
 
-document.getElementById('trocarEmailBtn').addEventListener('click', async () => {
-  const btn = document.getElementById('trocarEmailBtn');
-  const msg = document.getElementById('trocarEmailMsg');
-  const novoEmail = document.getElementById('novoEmailInput').value.trim();
-  const senhaAtual = document.getElementById('senhaTrocaEmailInput').value;
-  if (!novoEmail || !senhaAtual) return;
-  btn.disabled = true;
-  msg.style.color = 'var(--text)'; msg.textContent = window.I18n.t('common.enviando');
-  try {
-    const res = await fetch('/api/auth/trocar-email', { method: 'POST', headers: authHeadersJson(), body: JSON.stringify({ novoEmail, senhaAtual }) });
-    document.getElementById('senhaTrocaEmailInput').value = '';
-    const data = await res.json();
-    msg.style.color = res.ok ? 'var(--success-text)' : 'var(--danger-text)';
-    msg.textContent = data.msg;
-  } catch (err) {
-    msg.style.color = 'var(--danger-text)'; msg.textContent = window.I18n.t('common.erroServidor');
-  } finally {
-    btn.disabled = false;
-  }
-});
-
-// ===================== SEGURANÇA =====================
-document.getElementById('alterarSenhaBtn').addEventListener('click', async () => {
-  const btn = document.getElementById('alterarSenhaBtn');
-  const msg = document.getElementById('senhaMsg');
-  const senhaAtual = document.getElementById('senhaAtualInput').value;
-  const novaSenha = document.getElementById('novaSenhaInput').value;
-  if (!senhaAtual || !novaSenha) return;
+// ===================== SEGURANÇA: troca de senha =====================
+// As mesmas regras do servidor, conferidas enquanto a pessoa digita (o servidor confere de novo).
+const campoSenha = id => document.getElementById(id);
+function regrasSenha() {
+  const atual = campoSenha('senhaAtualInput').value, nova = campoSenha('novaSenhaInput').value, conf = campoSenha('confirmarSenhaInput').value;
+  const conta = window.AppShell?.dadosConta || {};
+  const local = String(conta.email || '').split('@')[0].toLowerCase(), nomes = String(conta.nome || '').toLowerCase().split(/\s+/).filter(p => p.length >= 4);
+  const m = nova.toLowerCase();
+  return {
+    tamanho: nova.length >= 8 && nova.length <= 128,
+    letrasNumeros: /[A-Za-zÀ-ÿ]/.test(nova) && /\d/.test(nova),
+    diferente: !!nova && nova !== atual,
+    pessoal: !!nova && !(local.length >= 4 && m.includes(local)) && !nomes.some(p => m.includes(p)),
+    igual: !!nova && nova === conf
+  };
+}
+function atualizarRegras() {
+  const r = regrasSenha();
+  document.querySelectorAll('#senhaRegras [data-regra]').forEach(li => li.classList.toggle('ok', !!r[li.dataset.regra]));
+  const n = campoSenha('novaSenhaInput').value;
+  const pontos = (n.length >= 8) + (n.length >= 12) + (/[a-zà-ÿ]/.test(n) && /[A-ZÀ-Þ]/.test(n)) + /\d/.test(n) + /[^A-Za-zÀ-ÿ0-9]/.test(n);
+  const barra = document.getElementById('senhaForcaBarra');
+  barra.style.width = (n ? Math.max(15, pontos * 20) : 0) + '%';
+  barra.style.background = pontos >= 4 ? '#16a34a' : pontos >= 3 ? '#f59e0b' : '#dc2626';
+  campoSenha('alterarSenhaBtn').disabled = !campoSenha('senhaAtualInput').value || !Object.values(r).every(Boolean);
+}
+['senhaAtualInput', 'novaSenhaInput', 'confirmarSenhaInput'].forEach(id => campoSenha(id).addEventListener('input', atualizarRegras));
+document.querySelectorAll('[data-ver]').forEach(b => b.addEventListener('click', () => {
+  const i = campoSenha(b.dataset.ver), ver = i.type === 'password';
+  i.type = ver ? 'text' : 'password';
+  b.setAttribute('aria-pressed', String(ver));
+  b.setAttribute('aria-label', ver ? 'Ocultar senha' : 'Mostrar senha');
+}));
+document.getElementById('formSenha').addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const btn = campoSenha('alterarSenhaBtn'), msg = document.getElementById('senhaMsg');
+  if (btn.disabled) return;
   btn.disabled = true;
   msg.style.color = 'var(--text)'; msg.textContent = window.I18n.t('common.salvando');
   try {
-    const res = await fetch('/api/auth/senha', { method: 'PUT', headers: authHeadersJson(), body: JSON.stringify({ senhaAtual, novaSenha }) });
+    const res = await fetch('/api/auth/senha', { method: 'PUT', headers: authHeadersJson(), body: JSON.stringify({ senhaAtual: campoSenha('senhaAtualInput').value, novaSenha: campoSenha('novaSenhaInput').value, confirmarSenha: campoSenha('confirmarSenhaInput').value }) });
     const data = await res.json();
     msg.style.color = res.ok ? 'var(--success-text)' : 'var(--danger-text)';
     msg.textContent = data.msg;
-    if (res.ok) { document.getElementById('senhaAtualInput').value = ''; document.getElementById('novaSenhaInput').value = ''; }
+    if (res.ok) {
+      // a sessão continua com um token novo (os acessos antigos dos outros dispositivos foram encerrados)
+      if (data.token) { token = data.token; localStorage.setItem('token', data.token); try { if (window.parent !== window) window.parent.postMessage({ fnmToken: data.token }, location.origin); } catch (e) { /* ok */ } }
+      ['senhaAtualInput', 'novaSenhaInput', 'confirmarSenhaInput'].forEach(id => { campoSenha(id).value = ''; campoSenha(id).type = 'password'; });
+      carregarSessoes();
+    }
   } catch (err) {
     msg.style.color = 'var(--danger-text)'; msg.textContent = window.I18n.t('common.erroServidor');
   } finally {
-    btn.disabled = false;
+    atualizarRegras();
   }
+});
+document.getElementById('esqueciSenhaBtn').addEventListener('click', async () => {
+  const msg = document.getElementById('senhaMsg'), email = window.AppShell?.dadosConta?.email;
+  if (!email) return;
+  msg.style.color = 'var(--text)'; msg.textContent = window.I18n.t('common.enviando');
+  try {
+    const res = await fetch('/api/auth/esqueci-senha', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+    const data = await res.json();
+    msg.style.color = res.ok ? 'var(--success-text)' : 'var(--danger-text)';
+    msg.textContent = res.ok ? window.I18n.t('config.seguranca.linkEnviado') : data.msg;
+  } catch (err) { msg.style.color = 'var(--danger-text)'; msg.textContent = window.I18n.t('common.erroServidor'); }
 });
 
 async function carregarSessoes() {
@@ -404,18 +450,6 @@ document.querySelectorAll('.notif-toggle').forEach(toggle => {
     } catch (err) { /* silencioso */ }
   });
 });
-
-// ===================== E-MAIL DE CONFIRMAÇÃO DE TROCA =====================
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('trocaEmail') === '1') {
-    document.getElementById('trocarEmailMsg').style.color = 'var(--success-text)';
-    document.getElementById('trocarEmailMsg').textContent = 'E-mail atualizado com sucesso!';
-  } else if (params.get('trocaEmail') === 'erro') {
-    document.getElementById('trocarEmailMsg').style.color = 'var(--danger-text)';
-    document.getElementById('trocarEmailMsg').textContent = 'Link de confirmação inválido ou expirado.';
-  }
-})();
 
 // ===================== INIT =====================
 document.addEventListener('appshell:ready', e => {
