@@ -31,6 +31,8 @@
   function traduzivel(t) {
     if (t.length < 2 || !/[A-Za-zÀ-ÿ]{2}/.test(t) || saida[t]) return false;
     if (/^[\w.+-]+@[\w-]+\.[\w.]+$/.test(t) || /^https?:\/\//.test(t)) return false;
+    // marcas que só o português tem: traduz mesmo que a frase comece em francês (« Diplôme… — certificação oficial »)
+    if (/ção|ções|ões|[ãõ]|(não|você|vocês|até|também|então)/i.test(t)) return true;
     var pt = (t.match(PT) || []).length, fr = (t.match(FR) || []).length;
     return !(fr > pt);
   }
