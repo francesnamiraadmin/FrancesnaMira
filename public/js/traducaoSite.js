@@ -15,7 +15,9 @@
   if (idioma !== "fr") return;
   document.documentElement.lang = "fr";
 
-  var CACHE = "fnm-trad-fr-v1", dic = {}, pendentes = {}, semTraducao = {}, timer = null, enviando = false, primeiraVez = true;
+  var CACHE = "fnm-trad-fr-v2", dic = {}, pendentes = {}, semTraducao = {}, timer = null, enviando = false, primeiraVez = true;
+  // v2: o cache antigo (v1) podia ter traduções trocadas de lugar — descartado
+  try { localStorage.removeItem("fnm-trad-fr-v1"); } catch (e) { /* ok */ }
   try { dic = JSON.parse(localStorage.getItem(CACHE) || "{}") || {}; } catch (e) { dic = {}; }
 
   var PULAR = "script,style,noscript,textarea,code,pre,[translate='no'],.notranslate,.fnm-app,[contenteditable=''],[contenteditable='true'],.ql-editor,.editor";

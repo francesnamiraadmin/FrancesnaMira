@@ -25,17 +25,28 @@ const emAndamento = new Map();   // chave → Promise (o mesmo texto pedido por 
 
 const SISTEMA = `Você traduz a interface e os textos de um site brasileiro de preparação para provas de francês (TCF, DELF, DALF, TEF) do português do Brasil para o francês da França.
 Regras:
-- Responda só com JSON: {"t": ["tradução 1", "tradução 2", ...]} — o mesmo número de itens, na mesma ordem.
+- Você recebe {"textos": {"1": "...", "2": "...", ...}}. Responda só com JSON: {"t": {"1": "tradução do 1", "2": "tradução do 2", ...}} — uma tradução para CADA identificador, cada uma correspondendo exatamente ao texto do mesmo identificador (nunca misture nem desloque itens).
+- Nomes de idiomas numa lista de escolha de idioma (« Português (Brasil) », « Français ») ficam como estão.
 - Tradução natural e idiomática, no registro de um site educativo (vouvoiement com o aluno).
 - Mantenha exatamente: números, datas, horários, valores (R$), e-mails, links, emojis, símbolos (→ · ✓ ★ …), espaços nas pontas, maiúsculas de siglas.
 - Não traduza: "Francês na Mira" (nome da escola), nomes de pessoas, siglas (TCF, DELF, DALF, TEF, CO, CE, EE, EO, PO, PE, NCLC, IA → IA vira "IA"), nomes de planos (Essentiel, Avancé, Excellence, Pack Prestige).
 - "Meu Espaço" → "Mon Espace"; "Ambiente de Produção" → "Espace de Production"; "Plataforma de Questões" → "Plateforme de Questions"; "Aulas Especializadas" → "Cours Spécialisés"; "Dever de casa" → "Devoirs".
 - Se o texto já estiver em francês (ou não tiver nada a traduzir), devolva-o igual.`;
 
+// Cada texto vai com um identificador e a resposta volta por identificador: se a IA pular ou juntar um item,
+// só aquele fica sem tradução (com uma lista simples, todos os seguintes sairiam trocados).
 async function traduzirLote(textos) {
-  const { json } = await pedirJson({ sistema: SISTEMA, usuario: JSON.stringify({ textos }), maxTokens: 8000 });
-  const t = Array.isArray(json?.t) ? json.t : [];
-  return textos.map((x, i) => (typeof t[i] === "string" && t[i].trim() ? t[i] : null));
+  const entrada = Object.fromEntries(textos.map((x, i) => [String(i + 1), x]));
+  const { json } = await pedirJson({ sistema: SISTEMA, usuario: JSON.stringify({ textos: entrada }), maxTokens: 8000 });
+  const t = json && json.t && typeof json.t === "object" && !Array.isArray(json.t) ? json.t : {};
+  return textos.map((x, i) => {
+    const v = t[String(i + 1)];
+    if (typeof v !== "string" || !v.trim()) return null;
+    // números do original precisam estar na tradução (sinal de que é a frase certa)
+    const nums = s => (s.match(/\d+/g) || []).map(Number).sort((a, b) => a - b).join(",");
+    if (/\d/.test(x) && nums(x) !== nums(v) && !/\b(1|um|uma)\b/i.test(x)) return null;
+    return v;
+  });
 }
 
 router.post("/fr", async (req, res) => {
