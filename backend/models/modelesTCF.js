@@ -266,7 +266,20 @@ const LiberacaoTemasTCF = mongoose.model("LiberacaoTemasTCF", new Schema({
   retiradoEm: { type: Date, default: null }
 }));
 
+// Textos de um sujet editados por um administrador (página do tema): cada bloco
+// (título, sujet, coletânea, pistas, trame, resposta modelo, legenda) guarda o HTML que
+// substitui o gerado pelo app. Bloco ausente = conteúdo original.
+const EdicaoSujetTCF = mongoose.model("EdicaoSujetTCF", new Schema({
+  perfil: { type: String, required: true },
+  tache: { type: String, required: true },
+  sujetId: { type: String, required: true },
+  blocos: { type: Schema.Types.Mixed, default: {} },
+  atualizadoPor: { type: Schema.Types.ObjectId, ref: "User" },
+  atualizadoEm: Date
+}).index({ perfil: 1, tache: 1, sujetId: 1 }, { unique: true }));
+
 module.exports = {
+  EdicaoSujetTCF,
   LiberacaoTemasTCF,
   TemasAlunoTCF,
   DossierSujetTCF, SalaAoVivoTCF,

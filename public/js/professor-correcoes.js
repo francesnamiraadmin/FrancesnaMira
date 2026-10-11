@@ -633,9 +633,24 @@ function mostrarSalvo(estado, detalhe) {
   el.querySelector('span').textContent = estado === 'erro' ? 'Erro ao salvar' + (detalhe ? ': ' + detalhe : '') : ROTULO_SALVO[estado];
 }
 
+// Página do tema no Ambiente de Produção (sujet, coletânea, pistas, trame e resposta modelo) da produção,
+// quando ela veio de um sujet — direto do app ou de um tema/dever criado a partir dele.
+function linkTemaProducao(p) {
+  const t = p.temaId || {};
+  const tache = (p.origem && p.origem.sujetId && p.origem.tache) || t.origemModeles?.tache;
+  const sujetId = (p.origem && p.origem.sujetId) || t.origemModeles?.sujetId;
+  if (!tache || !sujetId) return '';
+  const curso = t.courseType || t.exame || 'TCF';
+  const nivel = curso === 'DELF' && /^(A1|A2|B1|B2)$/.test(t.nivel || '') ? '&nivel=' + t.nivel : '';
+  return `producao.html?curso=${encodeURIComponent(curso)}${nivel}#sujet=${encodeURIComponent(tache)}:${encodeURIComponent(sujetId)}`;
+}
+
 async function abrirEditor(p, editavel) {
   p.editavel = editavel;
   const t = p.temaId || {};
+  const linkTema = linkTemaProducao(p);
+  document.getElementById('caTemaLink').hidden = !linkTema;
+  if (linkTema) document.getElementById('caTemaLink').href = linkTema;
   document.getElementById('caAluno').textContent = p.alunoId?.nome || 'Aluno';
   document.getElementById('caTema').textContent = [t.titulo, tarefaDe(p), `${t.courseType || t.exame || ''} ${t.nivel || ''}`.trim(), p.protocolo].filter(Boolean).join(' · ');
   mostrarEstado(p.estadoCorrecao);
@@ -1044,7 +1059,10 @@ function mostrarSubVivo(sub) {
   document.querySelectorAll('#aoVivoAbas [data-sub-vivo]').forEach(b => { const on = b.dataset.subVivo === sub; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
   document.getElementById('aoVivoCorrecao').hidden = sub !== 'correcao';
   document.getElementById('aoVivoSimulados').hidden = sub !== 'simulados';
+  document.getElementById('aoVivoEstudando').hidden = sub !== 'estudando';
   if (sub === 'simulados') QuadroEmbutido.criar(document.getElementById('aoVivoSimulados'), 'admin-simulados.html', { titulo: 'Simulados ao vivo' });
+  // o « Acompanhamento ao vivo » da Gestão de alunos, embutido (a Gestão embute este ao vivo do mesmo jeito)
+  if (sub === 'estudando') QuadroEmbutido.criar(document.getElementById('aoVivoEstudando'), 'gestao-alunos.html?vivo=1', { titulo: 'Quem está estudando agora' });
 }
 document.getElementById('aoVivoAbas').addEventListener('click', e => { const b = e.target.closest('[data-sub-vivo]'); if (b) mostrarSubVivo(b.dataset.subVivo); });
 
@@ -1054,7 +1072,7 @@ carregarFila();
 carregarAlunos();
 if (location.hash === '#alunos') mostrarView('alunos');
 if (location.hash === '#corrigidas') { mostrarView('corrigidas'); carregarCorrigidas(); }
-if (location.hash === '#aovivo') mostrarView('aovivo');
+if (location.hash === '#aovivo' || /[?&]vivo=1(&|$)/.test(location.search)) { const b = document.querySelector('#abasSistema [data-aba="aovivo"]'); if (b) b.click(); else mostrarView('aovivo'); }
 if (location.hash === '#simulados') { mostrarView('aovivo'); mostrarSubVivo('simulados'); }
 const idPedido = new URLSearchParams(location.search).get('producao');
 if (idPedido) {

@@ -140,6 +140,8 @@ function cartaoLeitura(t) {
 }
 function carregarDossier(alvo, tache, m) {
   if (!alvo) return;
+  var ed = EDICOES_SUJET[tache + '|' + m.id];
+  if (ed && ed.dossier != null) { alvo.innerHTML = ed.dossier; return; }   // coletânea editada pelo administrador
   google.script.run.withSuccessHandler(function (d) {
     if (!d || !d.textos.length) { alvo.innerHTML = ''; return; }
     var eixoT = d.textos.filter(function (t) { return t.tipo === 'eixo'; }), temaT = d.textos.filter(function (t) { return t.tipo !== 'eixo'; });
@@ -150,6 +152,80 @@ function carregarDossier(alvo, tache, m) {
         return '<li><a href="' + esc(n.url) + '" target="_blank" rel="noopener">' + esc(n.titulo) + '</a><small>' + [n.fonte, n.data].filter(Boolean).map(esc).join(' · ') + '</small></li>';
       }).join('') + '</ul></div>' : '');
   }).withFailureHandler(function () { alvo.innerHTML = ''; }).obterDossierSujet(EMAIL, tache, m.id);
+}
+
+// ---------- textos do sujet editados por um administrador ----------
+// Cada bloco da página do tema (data-ed="…") pode ser reescrito por um administrador no « Mode
+// édition »; o HTML salvo (limpo no servidor) substitui o gerado pelo app para todos.
+var EDICOES_SUJET = {};   // 'tache|id' → { zona: html }
+var ED_FRASES = {};       // id do sujet → { índice da frase: 1 } frases do modelo reescritas (sem o áudio gravado)
+function carregarEdicaoSujet(tache, id, pronto) {
+  var chave = tache + '|' + id;
+  google.script.run.withSuccessHandler(function (r) { EDICOES_SUJET[chave] = (r && r.blocos) || {}; pronto(); })
+    .withFailureHandler(function () { EDICOES_SUJET[chave] = {}; pronto(); }).obterEdicaoSujet(EMAIL, tache, id);
+}
+// Rótulo do bloco no modo edição, com « Restaurer l'original » quando o bloco já foi modificado.
+function edCab(zona, rotulo, edicao, editando) {
+  if (!editando) return '';
+  return '<div class="ed-zona-cab"><span>✎ ' + esc(rotulo) + (edicao[zona] != null ? ' <em>· modifié</em>' : '') + '</span>' +
+    (edicao[zona] != null ? '<button class="ed-restaurar" type="button" data-ed-restaurar="' + zona + '">Restaurer l’original</button>' : '') + '</div>';
+}
+function aplicarEdicaoSujet(tela, m, edicao) {
+  tela.querySelectorAll('[data-ed]').forEach(function (el) {
+    var z = el.getAttribute('data-ed');
+    if (z !== 'dossier' && edicao[z] != null) el.innerHTML = edicao[z];
+  });
+  var fr = {};
+  tela.querySelectorAll('[data-ed="modelo"] .frase[data-editada]').forEach(function (f) { fr[f.dataset.aud] = 1; });
+  ED_FRASES[m.id] = fr;
+}
+function ligarEdicaoSujet(raiz, tache, m, origem) {
+  var chave = tache + '|' + m.id;
+  var zonas = raiz.querySelectorAll('[data-ed]');
+  zonas.forEach(function (el) {
+    el.contentEditable = 'true';
+    el.spellcheck = true;
+    el.classList.add('ed-zona');
+    el.addEventListener('input', function () { el.dataset.edAlterado = '1'; });
+  });
+  // No modo edição os botões do conteúdo (ouvir, mostrar/ocultar…) não executam nada: só o texto muda.
+  raiz.addEventListener('click', function (ev) {
+    if (ev.target.closest('.ed-zona') && ev.target.closest('button, a')) ev.preventDefault();
+  }, true);
+  var sair = function () { estado.editandoSujet = null; renderizarModelo(tache, m, origem); };
+  var salvar = function (blocos, bt, msg) {
+    if (bt) { bt.disabled = true; bt.textContent = 'Enregistrement…'; }
+    google.script.run.withSuccessHandler(function (r) {
+      EDICOES_SUJET[chave] = (r && r.blocos) || {};
+      if (msg === 'restaurer') { renderizarModelo(tache, m, origem); avisar({ titulo: 'Bloc restauré', texto: 'Le texte original est de retour.', icone: '', som: false, duracao: 5 }); return; }
+      sair();
+      avisar({ titulo: 'Modifications enregistrées', texto: m.titre, icone: '', som: false, duracao: 6 });
+    }).withFailureHandler(function (er) {
+      if (bt) { bt.disabled = false; bt.textContent = 'Enregistrer les modifications'; }
+      avisar({ titulo: 'Impossible d’enregistrer', texto: er.message || er, icone: '', som: false, duracao: 10 });
+    }).salvarEdicaoSujet(EMAIL, tache, m.id, blocos);
+  };
+  $('ed-sair').addEventListener('click', sair);
+  $('ed-salvar').addEventListener('click', function () {
+    var blocos = {}, n = 0;
+    zonas.forEach(function (el) {
+      if (!el.dataset.edAlterado) return;
+      var z = el.getAttribute('data-ed');
+      // frase reescrita no modelo: o áudio gravado não corresponde mais, então ela passa a ser lida pela voz do app
+      el.querySelectorAll('.frase').forEach(function (f) {
+        var t = f.textContent.replace(/\s+/g, ' ').trim();
+        if (t !== f.dataset.texto) { f.dataset.texto = t; f.setAttribute('data-editada', '1'); }
+      });
+      var copia = el.cloneNode(true);
+      copia.removeAttribute('contenteditable');
+      blocos[z] = copia.innerHTML; n++;
+    });
+    if (!n) { sair(); return; }
+    salvar(blocos, this);
+  });
+  raiz.querySelectorAll('[data-ed-restaurar]').forEach(function (b) {
+    b.addEventListener('click', function () { var o = {}; o[b.dataset.edRestaurar] = null; b.disabled = true; salvar(o, null, 'restaurer'); });
+  });
 }
 
 // ---------- professor ao vivo (lado do aluno) ----------

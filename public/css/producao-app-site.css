@@ -463,3 +463,21 @@
 .fnm-embed-dever .fnm-app #avisos-globais { display: none !important; }
 .fnm-embed-dever .fnm-app { padding-top: 0 !important; margin-top: 0 !important; }
 .fnm-embed-dever .fnm-app main { padding: 0 !important; max-width: none !important; }
+
+/* ---------- página do tema: modo edição do administrador ----------
+   Cada bloco editável (data-ed) ganha moldura tracejada e um rótulo; a barra fica presa no topo. */
+.fnm-app .ed-barra {
+  position: sticky; top: calc(var(--topo-site, 70px) + 8px); z-index: 25; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  margin: 0 0 18px; padding: 14px 18px; border-radius: 18px; background: var(--marinho); color: var(--papel); box-shadow: var(--sombra);
+}
+.fnm-app .ed-barra > div:first-child { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.fnm-app .ed-barra span { font-size: 13px; opacity: .85; }
+.fnm-app .ed-barra-acoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.fnm-app .ed-barra .botao-principal { width: auto; padding: 10px 20px; }
+.fnm-app .ed-zona-cab { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin: 16px 0 6px; font-size: 12px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: var(--tinta-suave); }
+.fnm-app .ed-zona-cab em { font-style: normal; color: var(--dourado-escuro); }
+.fnm-app .ed-restaurar { border: 1px solid var(--linha); background: var(--vidro-forte); color: var(--tinta); border-radius: 999px; padding: 5px 12px; font-size: 12px; cursor: pointer; text-transform: none; letter-spacing: 0; }
+.fnm-app .ed-zona { outline: 2px dashed var(--dourado); outline-offset: 6px; border-radius: 10px; min-height: 2.4em; cursor: text; transition: outline-color .15s, background .15s; }
+.fnm-app .ed-zona:hover { background: rgba(255, 214, 10, .06); }
+.fnm-app .ed-zona:focus { outline-style: solid; background: rgba(255, 214, 10, .08); }
+.fnm-app .ed-ativo .lateral { position: static; }

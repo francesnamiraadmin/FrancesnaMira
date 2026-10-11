@@ -323,10 +323,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
 .ia-sug-espera { display: flex; align-items: center; gap: 10px; font-size: .88rem; color: var(--cinza-600, #55606d); }
 .ia-sug-espera i { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #ddd6fe; border-top-color: #7c3aed; animation: girarIA 1s linear infinite; }
 @keyframes girarIA { to { transform: rotate(360deg); } }
-.sub-abas-vivo { display: inline-flex; gap: 6px; padding: 6px; margin-bottom: 16px; border-radius: 16px; background: var(--branco, #fff); border: 1px solid var(--cinza-200, #e2e8f0); box-shadow: var(--sombra); }
-.sub-abas-vivo button { display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 9px 18px; border-radius: 12px; font: 700 .88rem 'Poppins', sans-serif; color: var(--cinza-600, #475569); cursor: pointer; }
-.sub-abas-vivo button.on { background: var(--azul, #2563eb); color: #fff; }
-#aoVivoSimulados iframe { border-radius: 18px; }
+#aoVivoSimulados iframe, #aoVivoEstudando iframe { border-radius: 18px; }
 </style>
 <link rel="stylesheet" href="css/correcao-anotada.css">
 <style>
@@ -414,8 +411,10 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
     <div class="sub-abas-vivo" id="aoVivoAbas" role="tablist">
       <button type="button" class="on" data-sub-vivo="correcao" role="tab" aria-selected="true"><span class="ponto-vivo"></span>Correção ao vivo</button>
       <button type="button" data-sub-vivo="simulados" role="tab" aria-selected="false">🏆 Simulados ao vivo</button>
+      <button type="button" data-sub-vivo="estudando" role="tab" aria-selected="false">👥 Quem está estudando</button>
     </div>
     <div id="aoVivoSimulados" hidden></div>
+    <div id="aoVivoEstudando" hidden></div>
     <div id="aoVivoCorrecao">
     <div class="card" style="margin-bottom:16px;">
       <h2 style="margin-bottom:4px;">Correção ao vivo</h2>
@@ -491,6 +490,7 @@ footer { text-align: center; padding: 24px; background: var(--branco); border-to
       <div class="ca-acoes">
         <button type="button" class="ca-btn icone" id="caAnterior" title="Produção anterior da lista (Alt+←)" aria-label="Produção anterior">←</button>
         <button type="button" class="ca-btn icone" id="caProxima" title="Próxima produção da lista (Alt+→)" aria-label="Próxima produção">→</button>
+        <a class="ca-btn" id="caTemaLink" hidden target="_blank" rel="noopener" title="Abre a página do tema (sujet, coletânea, pistas, trame e resposta modelo) em outra aba">Ver o tema ↗</a>
         <button type="button" class="ca-btn" id="caHistoricoBtn" title="Versões e alterações desta correção">Histórico</button>
         <button type="button" class="ca-btn editavel" id="salvarRascunhoBtn" title="O salvamento é automático; força agora (Ctrl+S)">Salvar <kbd>Ctrl+S</kbd></button>
         <button type="button" class="ca-btn editavel" id="caConcluirBtn" title="Marca como concluída, para revisar antes de devolver">Concluir</button>

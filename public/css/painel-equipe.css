@@ -18,15 +18,15 @@ html:root[data-theme="light"] {
   --cinza-400: rgba(22, 33, 58, 0.52);
   --cinza-600: rgba(22, 33, 58, 0.76);
   --cinza-800: #16213a;
-  --azul: #1c2b3a;
-  --azul-hover: #2b3f58;
-  --azul-escuro: #16213a;
+  --azul: #1d4ed8;
+  --azul-hover: #1e40af;
+  --azul-escuro: #0b1f4d;
   --azul-claro: rgba(217, 163, 0, 0.16);
   --sombra: 0 8px 30px rgba(22, 33, 58, 0.14);
   /* paleta da matrícula (Depoimentos) → paleta do site */
   --ink: #16213a; --ink-soft: rgba(22, 33, 58, 0.78); --muted: rgba(22, 33, 58, 0.66);
   --cream: transparent; --paper: rgba(255, 255, 255, 0.5); --surface: rgba(255, 255, 255, 0.66); --surface-2: rgba(255, 255, 255, 0.42);
-  --line: rgba(22, 33, 58, 0.16); --bordeaux: #1c2b3a; --bordeaux-dark: #16213a; --gold: #d9a300; --row-hover: rgba(255, 255, 255, 0.5);
+  --line: rgba(22, 33, 58, 0.16); --bordeaux: #1d4ed8; --bordeaux-dark: #0b1f4d; --gold: #e6ac00; --row-hover: rgba(255, 255, 255, 0.5);
   /* superfície opaca para modais e menus sobre o conteúdo */
   --pe-solido: rgba(244, 247, 252, 0.97);
 }
@@ -114,3 +114,13 @@ body.pe-com-navbar .pe-barra { top: calc(var(--topo-site, 70px) + 6px); }
 .pe-embutida body > header, .pe-embutida #app-navbar, .pe-embutida body > footer, .pe-embutida .pe-barra, .pe-embutida .painel-header { display: none !important; }
 .pe-embutida body { background: transparent !important; min-height: 0 !important; padding-top: 0 !important; }
 .pe-embutida .wrap, .pe-embutida main { padding-top: 0 !important; margin-top: 0 !important; }
+
+/* ---------- « Ao vivo » compartilhado entre Gestão de alunos e Sistema de Correção ----------
+   Cada página mostra o ao vivo da outra embutido (?embed=1&vivo=1); embutida assim, a página
+   abre direto no ao vivo e esconde as próprias abas e a sub-aba que embutiria a de fora. */
+.sub-abas-vivo { display: inline-flex; gap: 6px; padding: 6px; margin-bottom: 16px; border-radius: 16px; background: var(--branco, #fff); border: 1px solid var(--cinza-200, #e2e8f0); box-shadow: var(--sombra); }
+.sub-abas-vivo button { display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 9px 18px; border-radius: 12px; font: 700 .88rem 'Poppins', sans-serif; color: var(--cinza-600, #475569); cursor: pointer; }
+.sub-abas-vivo button.on { background: var(--azul, #2563eb); color: #fff; }
+.pe-embutida.pe-so-vivo #abasSistema, .pe-embutida.pe-so-vivo #navPrincipal,
+.pe-embutida.pe-so-vivo [data-sub-vivo="estudando"], .pe-embutida.pe-so-vivo #avSubAbas { display: none !important; }
+.sub-abas-vivo .ponto-vivo { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #E0524A; vertical-align: middle; }

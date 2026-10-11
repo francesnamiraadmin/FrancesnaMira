@@ -158,15 +158,23 @@ router.post("/atribuir", exigirProfessor, async (req, res) => {
   }
 });
 
+// Título é opcional no envio: sem título, o dever recebe um nome genérico com a data de início.
+const tituloDever = (titulo, dataInicio) => {
+  const t = String(titulo || "").trim().slice(0, 150);
+  if (t) return t;
+  const d = dataInicio && !isNaN(new Date(dataInicio)) ? new Date(dataInicio) : new Date();
+  return `Dever de casa de ${d.toLocaleDateString("pt-BR", { timeZone: "UTC" })}`;
+};
+
 // ===================== ADMIN/PROFESSOR: DEVER MANUAL / EDIÇÃO =====================
 router.post("/alunos/:alunoId/deveres", exigirProfessor, async (req, res) => {
   try {
     const { numeroSemana, titulo, descricao, dataInicio, dataLimite, prioridade, professorId, observacoes, permiteConclusaoManual, atividades } = req.body;
-    if (!numeroSemana || !titulo || !dataInicio || !dataLimite) {
-      return res.status(400).json({ msg: "Preencha número da semana, título, data de início e data limite." });
+    if (!numeroSemana || !dataInicio || !dataLimite) {
+      return res.status(400).json({ msg: "Preencha número da semana, data de início e data limite." });
     }
     const dever = await DeverSemanal.create({
-      alunoId: req.params.alunoId, planoBaseId: null, numeroSemana, titulo, descricao,
+      alunoId: req.params.alunoId, planoBaseId: null, numeroSemana, titulo: tituloDever(titulo, dataInicio), descricao,
       dataInicio: new Date(dataInicio), dataLimite: new Date(dataLimite),
       prioridade, professorId: professorId || null, observacoes, permiteConclusaoManual: !!permiteConclusaoManual,
       atividades: (atividades || []).map(a => ({ ...a, entrega: { status: "pendente" } }))
@@ -184,7 +192,7 @@ router.put("/deveres/:id", exigirProfessor, async (req, res) => {
     const dever = await DeverSemanal.findById(req.params.id).populate(POPULATE_CONTEUDO);
     if (!dever) return res.status(404).json({ msg: "Dever não encontrado." });
 
-    if (titulo !== undefined) dever.titulo = titulo;
+    if (titulo !== undefined) dever.titulo = tituloDever(titulo, dataInicio || dever.dataInicio);
     if (descricao !== undefined) dever.descricao = descricao;
     if (dataInicio !== undefined) dever.dataInicio = new Date(dataInicio);
     if (dataLimite !== undefined) dever.dataLimite = new Date(dataLimite);
@@ -447,7 +455,6 @@ router.post("/lotes", exigirProfessor, async (req, res) => {
     const b = req.body || {};
     const ids = [...new Set((Array.isArray(b.alunoIds) ? b.alunoIds : []).filter(ehObjectId))];
     if (!ids.length) return res.status(400).json({ msg: "Escolha pelo menos um aluno." });
-    if (!String(b.titulo || "").trim()) return res.status(400).json({ msg: "Dê um título ao dever." });
     if (!datasValidas(b.dataInicio, b.dataLimite)) return res.status(400).json({ msg: "Informe datas válidas (o prazo não pode ser antes do início)." });
     const curso = TIPOS_CURSO.includes(b.curso) ? b.curso : null;
     const atividades = await criarDever.prepararAtividades(b.atividades, { curso, nivel: b.nivel, userId: req.userId });
@@ -457,7 +464,7 @@ router.post("/lotes", exigirProfessor, async (req, res) => {
       const ultimo = await DeverSemanal.findOne({ alunoId: a._id }).sort({ numeroSemana: -1 }).select("numeroSemana").lean();
       await DeverSemanal.create({
         alunoId: a._id, planoBaseId: null, numeroSemana: (ultimo?.numeroSemana || 0) + 1, loteId, curso,
-        titulo: String(b.titulo).trim().slice(0, 150), descricao: b.descricao ? String(b.descricao).slice(0, 4000) : undefined,
+        titulo: tituloDever(b.titulo, b.dataInicio), descricao: b.descricao ? String(b.descricao).slice(0, 4000) : undefined,
         dataInicio: new Date(b.dataInicio), dataLimite: new Date(b.dataLimite),
         prioridade: ["baixa", "media", "alta"].includes(b.prioridade) ? b.prioridade : "media",
         permiteConclusaoManual: !!b.permiteConclusaoManual, professorId: req.userId,
@@ -513,12 +520,11 @@ router.put("/lotes/:loteId", exigirProfessor, async (req, res) => {
     const b = req.body || {};
     const deveres = await DeverSemanal.find({ loteId: req.params.loteId });
     if (!deveres.length) return res.status(404).json({ msg: "Dever não encontrado." });
-    if (!String(b.titulo || "").trim()) return res.status(400).json({ msg: "Dê um título ao dever." });
     if (!datasValidas(b.dataInicio, b.dataLimite)) return res.status(400).json({ msg: "Informe datas válidas (o prazo não pode ser antes do início)." });
     const curso = TIPOS_CURSO.includes(b.curso) ? b.curso : deveres[0].curso;
     const atividades = await criarDever.prepararAtividades(b.atividades, { curso, nivel: b.nivel, userId: req.userId });
     const campos = {
-      titulo: String(b.titulo).trim().slice(0, 150), descricao: b.descricao ? String(b.descricao).slice(0, 4000) : undefined, curso,
+      titulo: tituloDever(b.titulo, b.dataInicio), descricao: b.descricao ? String(b.descricao).slice(0, 4000) : undefined, curso,
       dataInicio: new Date(b.dataInicio), dataLimite: new Date(b.dataLimite),
       prioridade: ["baixa", "media", "alta"].includes(b.prioridade) ? b.prioridade : "media", permiteConclusaoManual: !!b.permiteConclusaoManual
     };

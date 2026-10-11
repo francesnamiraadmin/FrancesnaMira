@@ -44,6 +44,8 @@
   background: var(--ca-papel); color: var(--ca-tinta); font: 600 .82rem 'Poppins', sans-serif; cursor: pointer; transition: background .15s, transform .12s, border-color .15s;
 }
 .ca-btn:hover:not(:disabled) { border-color: var(--ca-tinta); transform: translateY(-1px); }
+a.ca-btn { text-decoration: none; }
+.ca-btn[hidden] { display: none; }
 .ca-btn:disabled { opacity: .45; cursor: not-allowed; }
 .ca-btn:focus-visible, .ca-cat:focus-visible, .ca-item:focus-visible { outline: 2px solid var(--ca-realce); outline-offset: 2px; }
 .ca-btn.primario { background: #1c2b3a; color: #fff; border-color: #1c2b3a; }

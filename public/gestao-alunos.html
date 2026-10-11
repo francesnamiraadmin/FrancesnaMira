@@ -306,6 +306,15 @@ table.presenca td { vertical-align: middle; }
 
   <!-- ===================== ACOMPANHAMENTO ===================== -->
   <div id="viewAcompanhamento" hidden>
+    <!-- O ao vivo da equipe é um só: aqui, quem está estudando; na outra sub-aba, a Correção e os
+         Simulados ao vivo do Sistema de Correção, embutidos (js/quadroEmbutido.js). -->
+    <div class="sub-abas-vivo" id="avSubAbas" role="tablist">
+      <button type="button" class="on" data-av-sub="estudando" role="tab" aria-selected="true"><span class="ponto-vivo"></span>Quem está estudando</button>
+      <button type="button" data-av-sub="correcao" role="tab" aria-selected="false">✍️ Correção ao vivo</button>
+      <button type="button" data-av-sub="simulados" role="tab" aria-selected="false">🏆 Simulados ao vivo</button>
+    </div>
+    <div id="avCorrecaoVivo" hidden></div>
+    <div id="avEstudando">
     <section class="av-heroi">
       <div class="av-heroi-txt"><span class="av-ao-vivo"><i></i>AO VIVO</span><h2>Quem está estudando agora</h2>
         <p>Todos os alunos com plano ativo: em que área do site estão e o que estão fazendo. Atualiza sozinho a cada 15 segundos.</p></div>
@@ -342,6 +351,7 @@ table.presenca td { vertical-align: middle; }
         <thead><tr><th data-ord="nome">Aluno</th><th data-ord="semana">Semana atual</th><th data-ord="progresso">Progresso</th><th data-ord="atrasados">Atrasados</th><th data-ord="media">Média deveres completos</th><th data-ord="ultima">Última entrega</th></tr></thead>
         <tbody id="acompTabela"></tbody>
       </table></div>
+    </div>
     </div>
   </div>
 
@@ -450,7 +460,7 @@ table.presenca td { vertical-align: middle; }
       <div id="deverManualForm" style="display:none; border:1px solid var(--cinza-200); border-radius:14px; padding:18px 20px; margin-bottom:18px; background:var(--cinza-50);">
         <div class="campo-row">
           <div class="campo"><label>Número da semana</label><input type="number" id="manualNumeroSemana" min="1"></div>
-          <div class="campo"><label>Título</label><input type="text" id="manualTitulo" placeholder="Ex.: Semana extra de revisão"></div>
+          <div class="campo"><label>Título <small>(opcional)</small></label><input type="text" id="manualTitulo" placeholder="Sem título: « Dever de casa de dd/mm/aaaa »"></div>
         </div>
         <div class="campo-row">
           <div class="campo"><label>Data de início</label><input type="date" id="manualDataInicio"></div>
@@ -514,6 +524,7 @@ table.presenca td { vertical-align: middle; }
 <script src="js/gestao-criar-dever.js"></script>
 <script src="js/gestao-atribuir-dever.js"></script>
 <script src="js/gestao-deveres-completos.js"></script>
+<script src="js/quadroEmbutido.js"></script>
 <script src="js/gestao-alunos-ferramentas.js"></script>
 <script src="js/theme-toggle.js"></script>
 <script src="js/painelEquipe.js" defer></script>

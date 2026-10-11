@@ -587,8 +587,10 @@ function abrirDeverManualForm(deverParaEditar) {
   document.getElementById('manualNumeroSemana').value = d ? d.numeroSemana : (deveresDoAlunoAtual.length + 1);
   document.getElementById('manualNumeroSemana').disabled = !!d;
   document.getElementById('manualTitulo').value = d ? d.titulo : '';
-  document.getElementById('manualDataInicio').value = d ? d.dataInicio.slice(0, 10) : '';
-  document.getElementById('manualDataLimite').value = d ? d.dataLimite.slice(0, 10) : '';
+  // Dever novo: começa hoje e o prazo já vem em 1 semana (o professor pode mudar).
+  const diaLocal = (mais = 0) => { const x = new Date(); x.setDate(x.getDate() + mais); return new Date(x.getTime() - x.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
+  document.getElementById('manualDataInicio').value = d ? d.dataInicio.slice(0, 10) : diaLocal();
+  document.getElementById('manualDataLimite').value = d ? d.dataLimite.slice(0, 10) : diaLocal(7);
   document.getElementById('manualPrioridade').value = d ? d.prioridade : 'media';
   document.getElementById('manualDescricao').value = d ? (d.descricao || '') : '';
   document.getElementById('manualPermiteConclusaoManual').checked = d ? !!d.permiteConclusaoManual : false;
@@ -626,8 +628,8 @@ document.getElementById('salvarDeverManualBtn').addEventListener('click', async 
   const titulo = document.getElementById('manualTitulo').value.trim();
   const dataInicio = document.getElementById('manualDataInicio').value;
   const dataLimite = document.getElementById('manualDataLimite').value;
-  if (!titulo || !dataInicio || !dataLimite) {
-    erroEl.textContent = 'Preencha título, data de início e data limite.'; erroEl.style.display = 'block'; return;
+  if (!dataInicio || !dataLimite) {
+    erroEl.textContent = 'Preencha a data de início e a data limite.'; erroEl.style.display = 'block'; return;
   }
   const payload = {
     numeroSemana: Number(document.getElementById('manualNumeroSemana').value),

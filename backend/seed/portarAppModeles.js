@@ -163,6 +163,10 @@ trocar(R`if (t === 'ET1') html += '</div><h2 class="secao-titulo outils-secao">`
   js = js.slice(0, a) + f + js.slice(b);
 }
 
+// Frase do modelo reescrita por um administrador (ver fazer-sujet.js): sem o áudio gravado, lida pela voz do app.
+trocar("function idAudio(m, i) { var ids = B.audios[m.id]; return ids ? ids[i] : null; }",
+  "function idAudio(m, i) { if (ED_FRASES[m.id] && ED_FRASES[m.id][i]) return null; var ids = B.audios[m.id]; return ids ? ids[i] : null; }");
+
 // Correção pela IA custa 1 crédito: o botão mostra o custo.
 trocar(R`' aujourd\'hui</small></button>';`, R`' aujourd\'hui · 1 crédit</small></button>';`);
 

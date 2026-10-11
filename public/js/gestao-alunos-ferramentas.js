@@ -33,8 +33,27 @@
     try { history.replaceState(null, '', alvo === 'lista' ? location.pathname : '#' + alvo); } catch (x) { /* ok */ }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-  // gestao-alunos.html#criar (#atribuirDever, #completos, #acompanhamento) abre direto a aba
-  const abaInicial = location.hash.slice(1);
+  // Sub-abas do « Acompanhamento »: a Correção e os Simulados ao vivo vêm do Sistema de Correção,
+  // embutido só no ao vivo (?vivo=1) — o mesmo ao vivo que lá, aceitar aqui ou lá dá no mesmo.
+  let quadroVivo = null;
+  $('avSubAbas').addEventListener('click', e => {
+    const b = e.target.closest('[data-av-sub]');
+    if (!b) return;
+    const sub = b.dataset.avSub;
+    document.querySelectorAll('#avSubAbas [data-av-sub]').forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-selected', String(on)); });
+    $('avEstudando').hidden = sub !== 'estudando';
+    $('avCorrecaoVivo').hidden = sub === 'estudando';
+    if (sub === 'estudando') return;
+    quadroVivo = quadroVivo || QuadroEmbutido.criar($('avCorrecaoVivo'), 'professor-correcoes.html?vivo=1', { titulo: 'Correção e Simulados ao vivo' });
+    // escolhe a sub-aba correspondente dentro do quadro (quando ele já carregou; senão, ao carregar)
+    const escolher = () => { try { const x = quadroVivo.contentDocument.querySelector(`#aoVivoAbas [data-sub-vivo="${sub}"]`); if (x) x.click(); } catch (er) { /* ok */ } };
+    escolher();
+    quadroVivo.addEventListener('load', escolher, { once: true });
+  });
+
+  // gestao-alunos.html#criar (#atribuirDever, #completos, #acompanhamento) abre direto a aba;
+  // embutida no Sistema de Correção (?vivo=1), abre direto no « Quem está estudando ».
+  const abaInicial = /[?&]vivo=1(&|$)/.test(location.search) ? 'acompanhamento' : location.hash.slice(1);
   if (['acompanhamento', 'criar', 'atribuirDever', 'completos'].includes(abaInicial)) setTimeout(() => { const b = document.querySelector(`#navPrincipal [data-nav="${abaInicial}"]`); if (b) b.click(); }, 0);
 
   // ===================== PRESENÇA AO VIVO =====================

@@ -1,13 +1,13 @@
 // =====================================================================
 // Painel da equipe: barra de navegação comum a todas as páginas da equipe.
-//  - « Painel da equipe » volta para o painel (minha-conta.html, já aberto);
+//  - « Painel da equipe » volta para o painel da equipe do Meu Espaço (meu-espaco.html#equipe);
 //  - mostra a página e a aba atual;
 //  - « Aba principal » volta para a primeira aba da página (atalho: Alt+Home).
 // Uso: <link rel="stylesheet" href="css/painel-equipe.css"> depois do <style> da página
 //      e <script src="js/painelEquipe.js" defer></script>.
 // =====================================================================
 (function () {
-  var URL_PAINEL = "minha-conta.html#painel-equipe";
+  var URL_PAINEL = "meu-espaco.html#equipe";
   // Grupos de abas, do mais importante ao menos: o primeiro encontrado é o da página.
   var GRUPOS_ABAS = ["#secaoNav", ".secao-nav", ".abas", ".tabs-row", ".top-tabs", "nav.tabs", ".tabs", ".filtro-tabs"];
 
@@ -86,6 +86,7 @@
   var embutida = /[?&]embed=1(&|$)/.test(location.search) && window.parent !== window;
   if (embutida) {
     document.documentElement.classList.add("pe-embutida");
+    if (/[?&]vivo=1(&|$)/.test(location.search)) document.documentElement.classList.add("pe-so-vivo");
     var medir = function () { try { window.parent.postMessage({ fnmQuadro: true, altura: Math.ceil(document.documentElement.scrollHeight) }, location.origin); } catch (e) { /* ok */ } };
     window.addEventListener("load", medir);
     var iniciar = function () { try { new ResizeObserver(medir).observe(document.body); } catch (e) { setInterval(medir, 1000); } medir(); };

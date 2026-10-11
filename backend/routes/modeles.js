@@ -802,6 +802,32 @@ F.obterDossierSujet = async (ctx, tache, id) => {
   return { textos: d.textos || [], imprensa: d.imprensa || [] };
 };
 
+// ---------------- textos do sujet editados por um administrador ----------------
+// A página do tema pede os blocos editados antes de se desenhar; cada bloco salvo
+// substitui o HTML gerado pelo app (ver EdicaoSujetTCF).
+const BLOCOS_EDICAO = ["titulo", "sujet", "dossier", "pistas", "trame", "modelo", "legenda"];
+const LIMITE_BLOCO_EDICAO = 300 * 1024;
+F.obterEdicaoSujet = async (ctx, tache, id) => {
+  const ed = await T.EdicaoSujetTCF.findOne({ perfil: ctx.P.id, tache: String(tache || ""), sujetId: String(id || "") }).lean();
+  return { blocos: (ed && ed.blocos) || {} };
+};
+admin("salvarEdicaoSujet", async (ctx, tache, id, blocos) => {
+  if (!M.acharTema(tache, id)) throw erro("Sujet introuvable.", 404);
+  if (!blocos || typeof blocos !== "object") throw erro("Rien à enregistrer.");
+  const { limparHtmlEdicao } = require("../utils/htmlEdicaoSujet");
+  const filtro = { perfil: ctx.P.id, tache, sujetId: id };
+  const atual = (await T.EdicaoSujetTCF.findOne(filtro).lean()) || {};
+  const novos = Object.assign({}, atual.blocos || {});
+  for (const [zona, html] of Object.entries(blocos)) {
+    if (!BLOCOS_EDICAO.includes(zona)) continue;
+    if (html === null) { delete novos[zona]; continue; }
+    if (String(html).length > LIMITE_BLOCO_EDICAO) throw erro("Texte trop long pour un seul bloc.");
+    novos[zona] = limparHtmlEdicao(html);
+  }
+  await T.EdicaoSujetTCF.findOneAndUpdate(filtro, { blocos: novos, atualizadoPor: ctx.userId, atualizadoEm: new Date() }, { upsert: true });
+  return { blocos: novos };
+});
+
 // ---------------- sala ao vivo (aluno faz o sujet com um professor acompanhando) ----------------
 const canalSala = id => "modeles:sala:" + id;
 const fmtSala = (s, nomes) => ({ id: String(s._id), alunoId: String(s.alunoId), nome: nomes ? nomes[String(s.alunoId)] || "" : "", curso: s.courseType, tache: s.tache, sujetId: s.sujetId,

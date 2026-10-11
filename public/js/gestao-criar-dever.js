@@ -164,7 +164,7 @@
     }
     const d = S.dever || (S.dever = { titulo: '', descricao: '', dataInicio: hoje(), dataLimite: hoje(7), prioridade: 'media', permite: false });
     el.innerHTML = `<div class="passo"><span class="n">${n}</span><h2>Para quais alunos e até quando?</h2></div>
-      <div class="campo-row"><div class="campo" style="flex:2"><label>Título do dever</label><input type="text" id="cdTitulo" maxlength="150" value="${esc(d.titulo)}" placeholder="Ex.: Semana de revisão · Tâche 3"></div>
+      <div class="campo-row"><div class="campo" style="flex:2"><label>Título do dever <small>(opcional)</small></label><input type="text" id="cdTitulo" maxlength="150" value="${esc(d.titulo)}" placeholder="Sem título: « Dever de casa de dd/mm/aaaa »"></div>
         <div class="campo"><label>Início</label><input type="date" id="cdInicio" value="${d.dataInicio}"></div><div class="campo"><label>Prazo</label><input type="date" id="cdPrazo" value="${d.dataLimite}"></div>
         <div class="campo"><label>Prioridade</label><select id="cdPrioridade">${[['media', 'Média'], ['alta', 'Alta'], ['baixa', 'Baixa']].map(([v, r]) => `<option value="${v}" ${d.prioridade === v ? 'selected' : ''}>${r}</option>`).join('')}</select></div></div>
       <div class="campo"><label>Mensagem para o aluno (opcional)</label><textarea id="cdDescricao" placeholder="Ex.: Comecem pelas questões e deixem a produção para o fim.">${esc(d.descricao)}</textarea></div>

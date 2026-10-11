@@ -744,7 +744,7 @@ function irAccueil() {
       });
     }
 
-    function idAudio(m, i) { var ids = B.audios[m.id]; return ids ? ids[i] : null; }
+    function idAudio(m, i) { if (ED_FRASES[m.id] && ED_FRASES[m.id][i]) return null; var ids = B.audios[m.id]; return ids ? ids[i] : null; }
 
     // ================= frases e dictée =================
     /** IDÊNTICA a dividirFrases_ (Audio.gs): a frase N corresponde ao áudio N. */
@@ -1344,6 +1344,11 @@ function irAccueil() {
     // sempre abertos; o ditado não aparece nesta página.
     function renderizarModelo(tache, m, origem) {
       origem = origem || { tipo: 'liste' };
+      // Textos editados por um administrador: chegam antes de desenhar, para o aluno nunca ver o original piscar.
+      var chaveEd = tache + '|' + m.id;
+      if (!EDICOES_SUJET[chaveEd]) { carregarEdicaoSujet(tache, m.id, function () { renderizarModelo(tache, m, origem); }); return; }
+      var edicao = EDICOES_SUJET[chaveEd];
+      var editando = B.admin && estado.editandoSujet === chaveEd;
       if (origem.tipo === 'atelier') origem.tipo = 'modeles-page';
       var pagPart = origem.tipo === 'dictee-page' || origem.tipo === 'modeles-page';
       var noAtelier = pagPart && !!m.atelier;
@@ -1352,7 +1357,7 @@ function irAccueil() {
       itens.forEach(function (x, i) { if (x.id === m.id) pos = i; });
       estado.origem = origem;
       var info = TACHES[tache], e = eixo(m.e), oral = tache.indexOf('ET') !== 0;
-      var sorteio = origem.tipo === 'sorteio';
+      var sorteio = origem.tipo === 'sorteio' && !editando;
     
       var partes = [PARTE_ACCUEIL()];
       if (origem.tipo === 'dictee-page') partes.push({ rotulo: 'Dictée', fn: abrirDicteePage });
@@ -1388,16 +1393,19 @@ function irAccueil() {
           (origem.reiniciou ? ' · tous les sujets avaient déjà été tirés, on recommence' : '') + '</span>' +
           '<button class="botao-sorteio" type="button" data-nav="sortear">Un autre sujet</button></div>';
       }
-      html += '<div class="modele-grade modele-raiz tm-pagina" id="modele-raiz"><div class="coluna-principal">';
+      html += '<div class="modele-grade modele-raiz tm-pagina' + (editando ? ' ed-ativo' : '') + '" id="modele-raiz"><div class="coluna-principal">';
+      if (editando) html += '<div class="ed-barra" role="region" aria-label="Mode édition"><div><b>Mode édition</b><span>Cliquez sur n’importe quel texte encadré pour le modifier. Les élèves verront la nouvelle version dès l’enregistrement.</span></div>' +
+        '<div class="ed-barra-acoes"><button class="ferramenta" type="button" id="ed-sair">Quitter sans enregistrer</button><button class="botao-principal" type="button" id="ed-salvar">Enregistrer les modifications</button></div></div>';
       html += '<header class="tm-cab"><div class="etiquetas"><span class="etiqueta">' + nomeTache(tache) + ' · ' + info.sous + '</span>' +
         '<span class="etiqueta eixo" style="--cor:' + e.cor + '">' + e.icone + ' ' + esc(e.nome) + '</span>' +
         (m.reg ? '<span class="etiqueta">' + (m.reg === 'tu' ? 'Registre familier (tu)' : 'Registre formel (vous)') + '</span>' : '') +
         (m.f > 1 ? '<span class="etiqueta">tombé ' + m.f + ' fois</span>' : '') + '</div>' +
-        '<h1 class="modele-titulo">' + esc(m.titre) + '</h1>' +
+        edCab('titulo', 'Titre', edicao, editando) + '<h1 class="modele-titulo" data-ed="titulo">' + esc(m.titre) + '</h1>' +
         '<div class="tm-acoes"><button class="tm-fazer-bt" type="button" id="tm-fazer-bt"><span class="tm-play">▶</span><span><b>Faire ce sujet</b><small>Lance le chronomètre et ouvre ' + (oral ? 'l\'enregistrement' : 'la feuille de réponse') + '</small></span></button>' +
         '<button class="botao-cahier' + (CARNET_IDS[m.id] ? ' marcado' : '') + '" type="button" id="bt-carnet">' +
         (CARNET_IDS[m.id] ? 'Enregistré dans mon cahier <small>toucher pour retirer</small>' : 'Enregistrer dans mon cahier <small>pour le réviser plus tard (dictée, oral, écrit)</small>') + '</button>' +
-        (B.professor ? '<button class="ferramenta" type="button" id="bt-devoir">Proposer en devoir</button><button class="ferramenta" type="button" id="bt-partilhar">Partager ce modèle</button>' : '') + '</div>' +
+        (B.professor ? '<button class="ferramenta" type="button" id="bt-devoir">Proposer en devoir</button><button class="ferramenta" type="button" id="bt-partilhar">Partager ce modèle</button>' : '') +
+        (B.admin && !editando ? '<button class="ferramenta" type="button" id="bt-editar-sujet">✎ Modifier les textes</button>' : '') + '</div>' +
         (B.professor ? '<div id="painel-partilha" hidden></div>' : '') + '</header>';
       if (origem && origem.tipo === 'devoir') {
         var dv = origem.devoir;
@@ -1413,9 +1421,11 @@ function irAccueil() {
     
       // 1. Sujet
       html += '<section class="tm-bloco tm-sujet"><div class="tm-bloco-cab"><span class="tm-num">1</span><div><h2>' + (tache === 'T3' || tache === 'T1' ? 'Sujet' : 'Consigne') + '</h2><p>Lisez le sujet et les documents pour bien comprendre le thème avant de commencer.</p></div></div>' +
+        edCab('sujet', 'Sujet et documents', edicao, editando) + '<div data-ed="sujet">' +
         (m.c ? '<div class="bloco consigne"><p>' + esc(m.c) + '</p></div>' : '') +
-        (m.d1 ? '<div class="docs"><div class="doc"><h4>Document 1</h4><p>' + destacar(m.d1, m.k) + '</p></div><div class="doc"><h4>Document 2</h4><p>' + destacar(m.d2, m.k) + '</p></div></div>' : htmlDocsModelo) +
-        '<div class="tm-dossier" id="tm-dossier"><p class="aviso">Chargement des lectures sur le thème…</p></div></section>';
+        (m.d1 ? '<div class="docs"><div class="doc"><h4>Document 1</h4><p>' + destacar(m.d1, m.k) + '</p></div><div class="doc"><h4>Document 2</h4><p>' + destacar(m.d2, m.k) + '</p></div></div>' : htmlDocsModelo) + '</div>' +
+        edCab('dossier', 'Pour mieux comprendre le thème · Dans la presse en ce moment', edicao, editando) +
+        '<div class="tm-dossier" id="tm-dossier" data-ed="dossier"><p class="aviso">Chargement des lectures sur le thème…</p></div></section>';
       if (sorteio) html += '<div class="bloco revelar"><p>Préparez-vous avec la consigne et le chronomètre, puis découvrez le modèle.</p><button class="botao-principal" type="button" data-nav="revelar">Voir le modèle</button></div>';
     
       // 2. Pistes (dicas) + trame, ao clicar
@@ -1427,7 +1437,8 @@ function irAccueil() {
       else if (e.argumentsPour) pistas += '<div class="bloco guia-pistes"><p><b>Arguments possibles pour :</b> ' + e.argumentsPour.map(esc).join(' · ') + '</p>' +
         '<p><b>Arguments possibles contre :</b> ' + (e.argumentsContre || []).map(esc).join(' · ') + '</p></div>';
       html += '<section class="tm-bloco tm-dicas" id="tm-dicas"><div class="tm-bloco-cab"><span class="tm-num">2</span><div><h2>Pistes pour compléter</h2><p>Idées, contexte, vocabulaire clé et la trame de la tâche.</p></div></div>' +
-        '<div class="tm-dicas-corpo">' + pistas + htmlContexto + htmlVocab + htmlTrame + '</div></section>';
+        '<div class="tm-dicas-corpo">' + edCab('pistas', 'Pistes pour compléter', edicao, editando) + '<div data-ed="pistas">' + pistas + htmlContexto + htmlVocab + '</div>' +
+        (htmlTrame || editando ? edCab('trame', 'La trame', edicao, editando) + '<div data-ed="trame">' + htmlTrame + '</div>' : '') + '</div></section>';
     
       // 3. Réponse modèle (+ légende ao lado), ao clicar
       // No sorteio o modelo só aparece depois de « Voir le modèle ».
@@ -1437,15 +1448,19 @@ function irAccueil() {
         (B.professor ? ' La version entièrement rédigée apparaîtra ici dès qu\'elle sera générée (Espace professeur → Modèles de tous les sujets).' : '') + '</span>' +
         (B.professor ? '<button class="ferramenta destaque" type="button" id="bt-redigir-ia">Rédiger la version complète</button>' : '') + '</div>';
       else if (m.gerado) html += '<p class="aviso selo-gerado">Modèle rédigé par l\'IA selon la méthode Français na Mira</p>';
-      html += '<div class="tm-modele-grade"><div class="tm-modele-corpo">' + htmlModelo + '</div><aside class="lateral tm-legenda">' + htmlLegenda + '</aside></div></section>';
+      html += edCab('modelo', 'Réponse modèle', edicao, editando) +
+        '<div class="tm-modele-grade"><div class="tm-modele-corpo" data-ed="modelo">' + htmlModelo + '</div><aside class="lateral tm-legenda" data-ed="legenda">' + htmlLegenda + '</aside></div></section>';
     
       html += navegacaoRodape(pos, itens.length);
       html += '</div>' + '<div hidden>' + painelDictee() + '</div>' +(/^ET/.test(tache) ? painelReescrita(info, tache, m) : '') + '</div>';
     
       var tela = $('tela-modele');
       tela.innerHTML = html;
+      aplicarEdicaoSujet(tela, m, edicao);
       ligarTrilha(tela, partes);
       var raiz = $('modele-raiz');
+      if (editando) { ligarEdicaoSujet(raiz, tache, m, origem); carregarDossier($('tm-dossier'), tache, m); mostrar('tela-modele'); return; }
+      if ($('bt-editar-sujet')) $('bt-editar-sujet').addEventListener('click', function () { estado.editandoSujet = chaveEd; renderizarModelo(tache, m, origem); window.scrollTo({ top: 0, behavior: 'smooth' }); });
       ligarDicas(raiz);
       if (!B.professor) protegerConteudo(raiz);
       $('bt-carnet').addEventListener('click', function () {
@@ -6609,6 +6624,8 @@ function abasEspace(ativa) {
     }
     function carregarDossier(alvo, tache, m) {
       if (!alvo) return;
+      var ed = EDICOES_SUJET[tache + '|' + m.id];
+      if (ed && ed.dossier != null) { alvo.innerHTML = ed.dossier; return; }   // coletânea editada pelo administrador
       google.script.run.withSuccessHandler(function (d) {
         if (!d || !d.textos.length) { alvo.innerHTML = ''; return; }
         var eixoT = d.textos.filter(function (t) { return t.tipo === 'eixo'; }), temaT = d.textos.filter(function (t) { return t.tipo !== 'eixo'; });
@@ -6621,6 +6638,80 @@ function abasEspace(ativa) {
       }).withFailureHandler(function () { alvo.innerHTML = ''; }).obterDossierSujet(EMAIL, tache, m.id);
     }
     
+    // ---------- textos do sujet editados por um administrador ----------
+    // Cada bloco da página do tema (data-ed="…") pode ser reescrito por um administrador no « Mode
+    // édition »; o HTML salvo (limpo no servidor) substitui o gerado pelo app para todos.
+    var EDICOES_SUJET = {};   // 'tache|id' → { zona: html }
+    var ED_FRASES = {};       // id do sujet → { índice da frase: 1 } frases do modelo reescritas (sem o áudio gravado)
+    function carregarEdicaoSujet(tache, id, pronto) {
+      var chave = tache + '|' + id;
+      google.script.run.withSuccessHandler(function (r) { EDICOES_SUJET[chave] = (r && r.blocos) || {}; pronto(); })
+        .withFailureHandler(function () { EDICOES_SUJET[chave] = {}; pronto(); }).obterEdicaoSujet(EMAIL, tache, id);
+    }
+    // Rótulo do bloco no modo edição, com « Restaurer l'original » quando o bloco já foi modificado.
+    function edCab(zona, rotulo, edicao, editando) {
+      if (!editando) return '';
+      return '<div class="ed-zona-cab"><span>✎ ' + esc(rotulo) + (edicao[zona] != null ? ' <em>· modifié</em>' : '') + '</span>' +
+        (edicao[zona] != null ? '<button class="ed-restaurar" type="button" data-ed-restaurar="' + zona + '">Restaurer l’original</button>' : '') + '</div>';
+    }
+    function aplicarEdicaoSujet(tela, m, edicao) {
+      tela.querySelectorAll('[data-ed]').forEach(function (el) {
+        var z = el.getAttribute('data-ed');
+        if (z !== 'dossier' && edicao[z] != null) el.innerHTML = edicao[z];
+      });
+      var fr = {};
+      tela.querySelectorAll('[data-ed="modelo"] .frase[data-editada]').forEach(function (f) { fr[f.dataset.aud] = 1; });
+      ED_FRASES[m.id] = fr;
+    }
+    function ligarEdicaoSujet(raiz, tache, m, origem) {
+      var chave = tache + '|' + m.id;
+      var zonas = raiz.querySelectorAll('[data-ed]');
+      zonas.forEach(function (el) {
+        el.contentEditable = 'true';
+        el.spellcheck = true;
+        el.classList.add('ed-zona');
+        el.addEventListener('input', function () { el.dataset.edAlterado = '1'; });
+      });
+      // No modo edição os botões do conteúdo (ouvir, mostrar/ocultar…) não executam nada: só o texto muda.
+      raiz.addEventListener('click', function (ev) {
+        if (ev.target.closest('.ed-zona') && ev.target.closest('button, a')) ev.preventDefault();
+      }, true);
+      var sair = function () { estado.editandoSujet = null; renderizarModelo(tache, m, origem); };
+      var salvar = function (blocos, bt, msg) {
+        if (bt) { bt.disabled = true; bt.textContent = 'Enregistrement…'; }
+        google.script.run.withSuccessHandler(function (r) {
+          EDICOES_SUJET[chave] = (r && r.blocos) || {};
+          if (msg === 'restaurer') { renderizarModelo(tache, m, origem); avisar({ titulo: 'Bloc restauré', texto: 'Le texte original est de retour.', icone: '', som: false, duracao: 5 }); return; }
+          sair();
+          avisar({ titulo: 'Modifications enregistrées', texto: m.titre, icone: '', som: false, duracao: 6 });
+        }).withFailureHandler(function (er) {
+          if (bt) { bt.disabled = false; bt.textContent = 'Enregistrer les modifications'; }
+          avisar({ titulo: 'Impossible d’enregistrer', texto: er.message || er, icone: '', som: false, duracao: 10 });
+        }).salvarEdicaoSujet(EMAIL, tache, m.id, blocos);
+      };
+      $('ed-sair').addEventListener('click', sair);
+      $('ed-salvar').addEventListener('click', function () {
+        var blocos = {}, n = 0;
+        zonas.forEach(function (el) {
+          if (!el.dataset.edAlterado) return;
+          var z = el.getAttribute('data-ed');
+          // frase reescrita no modelo: o áudio gravado não corresponde mais, então ela passa a ser lida pela voz do app
+          el.querySelectorAll('.frase').forEach(function (f) {
+            var t = f.textContent.replace(/\s+/g, ' ').trim();
+            if (t !== f.dataset.texto) { f.dataset.texto = t; f.setAttribute('data-editada', '1'); }
+          });
+          var copia = el.cloneNode(true);
+          copia.removeAttribute('contenteditable');
+          blocos[z] = copia.innerHTML; n++;
+        });
+        if (!n) { sair(); return; }
+        salvar(blocos, this);
+      });
+      raiz.querySelectorAll('[data-ed-restaurar]').forEach(function (b) {
+        b.addEventListener('click', function () { var o = {}; o[b.dataset.edRestaurar] = null; b.disabled = true; salvar(o, null, 'restaurer'); });
+      });
+    }
+
     // ---------- professor ao vivo (lado do aluno) ----------
     var SALA = null;   // { id, stream, chamada, ultimoEnvio }
     // Correção por cores ao vivo: o professor grifa trechos do texto; o aluno vê o texto grifado aqui,
