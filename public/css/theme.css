@@ -3,7 +3,6 @@
    Trocar data-theme="light|dark" na <html> alterna a paleta inteira. */
 
 @import url("navbar.css");
-@import url("destaque-marca.css");
 
 :root,
 :root[data-theme="light"] {
