@@ -12,6 +12,15 @@ function verificarAccessToken(token) {
   return payload;
 }
 
+// Token do cabeçalho Authorization. Sem o formato de um JWT (três partes), conta como ausente:
+// "Bearer null"/"Bearer undefined" é só a página de quem está deslogado chamando a API, não
+// adulteração — antes isso somava pontos de ameaça e bloqueava o IP de quem só abriu o site.
+function lerToken(req) {
+  const h = req.headers.authorization;
+  const token = h && h.startsWith("Bearer ") ? h.slice(7).trim() : "";
+  return /^[\w-]+\.[\w-]+\.[\w-]+$/.test(token) ? token : null;
+}
+
 // Expirado ou revogado é rotina; assinatura inválida/formato estranho é adulteração.
 function tokenAdulterado(err) {
   return err.suspeito || (err.name === "JsonWebTokenError");
@@ -19,8 +28,7 @@ function tokenAdulterado(err) {
 
 // Exige um token válido. Usado em rotas que precisam saber quem é o usuário.
 function exigirAuth(req, res, next) {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const token = lerToken(req);
 
   if (!token) return res.status(401).json({ msg: "Faça login para continuar" });
 
@@ -57,8 +65,7 @@ function exigirAdmin(req, res, next) {
 
 // Não bloqueia se não houver token, mas identifica o usuário se houver.
 function authOpcional(req, res, next) {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const token = lerToken(req);
 
   if (token) {
     try {
