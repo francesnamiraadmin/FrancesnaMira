@@ -1,0 +1,52 @@
+/* ===================== DESTAQUE DA MARCA NOS PAINÉIS (tema claro) =====================
+   As cores próprias de cada página continuam; os painéis é que ganham o azul e o amarelo
+   da marca em evidência: faixa amarela no topo, borda e sombra azuladas, títulos em azul.
+   Importado por theme.css, então vale em todas as páginas com o tema do site. */
+:root[data-theme="light"] {
+  --marca-azul: #1d4ed8;
+  --marca-azul-escuro: #0b2a6f;
+  --marca-amarelo: #f5b800;
+  --marca-amarelo-suave: rgba(245, 184, 0, 0.16);
+  --marca-borda: rgba(29, 78, 216, 0.24);
+  --marca-sombra: 0 16px 36px -20px rgba(29, 78, 216, 0.5);
+}
+
+/* painéis e cartões */
+:root[data-theme="light"] :is(.card, .plan, .me-card, .card-preco, .sm-card, .painel, .dash-section-card, .dash-summary-card,
+  .hub-card, .chart-card, .filtros-card, .auth-card, .conjunto-card, .blog-card, .aula-card, .tema-card, .curso-card, .fnm-app .tm-bloco) {
+  border-color: var(--marca-borda);
+  border-top: 4px solid var(--marca-amarelo);
+  box-shadow: var(--marca-sombra);
+}
+:root[data-theme="light"] :is(.card, .plan, .me-card, .card-preco, .sm-card, .painel, .dash-section-card, .dash-summary-card,
+  .hub-card, .chart-card, .filtros-card, .auth-card, .conjunto-card, .blog-card, .aula-card, .tema-card, .curso-card) > :is(h2, h3) {
+  color: var(--marca-azul-escuro);
+}
+
+/* blocos internos do Ambiente de Produção: só a borda e a sombra azuladas (são muitos, sem faixa) */
+:root[data-theme="light"] .fnm-app .bloco { border: 1px solid var(--marca-borda); box-shadow: var(--marca-sombra); }
+:root[data-theme="light"] .fnm-app .tm-bloco-cab h2, :root[data-theme="light"] .fnm-app .bloco > h3 { color: var(--marca-azul-escuro); }
+:root[data-theme="light"] .fnm-app .tm-num { background: var(--marca-azul); color: #fff; }
+:root[data-theme="light"] .fnm-app .tm-dicas .tm-num, :root[data-theme="light"] .fnm-app .tm-fazer .tm-num { background: var(--marca-amarelo); color: var(--marca-azul-escuro); }
+
+/* seções do Meu Espaço e cabeçalhos de painel */
+:root[data-theme="light"] .me-secao-cab h2, :root[data-theme="light"] .painel-header h1 { color: var(--marca-azul-escuro); }
+:root[data-theme="light"] .kpi, :root[data-theme="light"] .kpis > * { border-color: var(--marca-borda); box-shadow: inset 4px 0 0 var(--marca-azul), var(--marca-sombra); }
+
+/* painéis de destaque (herói do Meu Espaço, do Dever de Casa e da Gestão de Deveres): azul
+   profundo com o alvo da marca em amarelo no canto, em formas nítidas (amarelo misturado ao
+   azul acinzenta), no lugar do roxo e rosa */
+:root[data-theme="light"] :is(.me-heroi, .dv-heroi, .cd-heroi) {
+  background:
+    radial-gradient(circle at 96% 118%, #ffc400 0 70px, transparent 71px),
+    radial-gradient(circle at 96% 118%, transparent 0 96px, rgba(255, 196, 0, 0.75) 97px 108px, transparent 109px),
+    radial-gradient(circle at 96% 118%, transparent 0 138px, rgba(255, 196, 0, 0.45) 139px 147px, transparent 148px),
+    radial-gradient(circle at 96% 118%, transparent 0 182px, rgba(255, 196, 0, 0.22) 183px 189px, transparent 190px),
+    radial-gradient(900px 380px at 0% 0%, rgba(96, 165, 250, 0.55) 0%, transparent 60%),
+    linear-gradient(120deg, #0b2a6f 0%, #1d4ed8 100%);
+  border-bottom: 4px solid var(--marca-amarelo);
+  box-shadow: 0 30px 60px -30px rgba(29, 78, 216, 0.7);
+}
+/* planos e avisos do Meu Espaço em azul com detalhe amarelo */
+:root[data-theme="light"] .me-plano { background: linear-gradient(135deg, #0b2a6f, #1d4ed8); border-top: 4px solid var(--marca-amarelo); box-shadow: 0 20px 40px -26px rgba(29, 78, 216, 0.8); }
+:root[data-theme="light"] .me-parabens { background: linear-gradient(120deg, #1d4ed8, #0b2a6f); border-left: 6px solid var(--marca-amarelo); box-shadow: 0 18px 36px -24px rgba(29, 78, 216, 0.8); }
