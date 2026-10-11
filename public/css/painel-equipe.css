@@ -18,15 +18,15 @@ html:root[data-theme="light"] {
   --cinza-400: rgba(22, 33, 58, 0.52);
   --cinza-600: rgba(22, 33, 58, 0.76);
   --cinza-800: #16213a;
-  --azul: #1d4ed8;
-  --azul-hover: #1e40af;
-  --azul-escuro: #0b1f4d;
+  --azul: #1c2b3a;
+  --azul-hover: #2b3f58;
+  --azul-escuro: #16213a;
   --azul-claro: rgba(217, 163, 0, 0.16);
   --sombra: 0 8px 30px rgba(22, 33, 58, 0.14);
   /* paleta da matrícula (Depoimentos) → paleta do site */
   --ink: #16213a; --ink-soft: rgba(22, 33, 58, 0.78); --muted: rgba(22, 33, 58, 0.66);
   --cream: transparent; --paper: rgba(255, 255, 255, 0.5); --surface: rgba(255, 255, 255, 0.66); --surface-2: rgba(255, 255, 255, 0.42);
-  --line: rgba(22, 33, 58, 0.16); --bordeaux: #1d4ed8; --bordeaux-dark: #0b1f4d; --gold: #e6ac00; --row-hover: rgba(255, 255, 255, 0.5);
+  --line: rgba(22, 33, 58, 0.16); --bordeaux: #1c2b3a; --bordeaux-dark: #16213a; --gold: #d9a300; --row-hover: rgba(255, 255, 255, 0.5);
   /* superfície opaca para modais e menus sobre o conteúdo */
   --pe-solido: rgba(244, 247, 252, 0.97);
 }

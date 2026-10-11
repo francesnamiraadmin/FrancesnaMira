@@ -62,14 +62,6 @@
   window.ThemeToggle = { setTema, get tema() { return document.documentElement.getAttribute("data-theme") || "light"; } };
 })();
 
-// Paleta azul/amarelo/branco do tema claro (js/paletaClara.js), em todas as páginas com o botão de tema.
-(function () {
-  if (window.PaletaClara || document.querySelector('script[src$="paletaClara.js"]')) return;
-  var s = document.createElement("script");
-  s.src = "js/paletaClara.js";
-  (document.head || document.documentElement).appendChild(s);
-})();
-
 // Presença do aluno no site (Gestão de Alunos → Acompanhamento ao vivo): carregada em todas as
 // páginas que têm o botão de tema, só para quem está logado.
 (function () {
